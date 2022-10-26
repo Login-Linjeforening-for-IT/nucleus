@@ -10,15 +10,6 @@ import {
 
   export default function TopMenu( { navigation }) {
 
-{/* ========================= DISPLAY APP START ========================= */}
-const aboutPage = () => {
-  navigation.navigate('AboutScreen');
-}
-const topMenuPage = () => {
-  navigation.navigate('TopMenuScreen');
-}
-
-
   return(
     <View style={MS.top}>
       <StatusBar style="light" />
