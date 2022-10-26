@@ -3,6 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import { GS } from '../styles/globalStyles';
 import { MS } from '../styles/menuStyles';
 import TopMenu from '../shared/topmenu';
+import { T } from '../styles/text';
 import { 
   Text, 
   View, 
@@ -48,13 +49,13 @@ const goBack = () => {
       </View>
 
 {/* ========================= DISPLAY CONTENT ========================= */}
-      <View style={GS.content}>
+      <View style={T.content}>
         
         <ScrollView showsVerticalScrollIndicator={false}>
           
           <View>
-            <Text style={GS.centeredText}>Event nummer:</Text>
-            <Text style={GS.centeredText}>{navigation.getParam('eventID')}</Text>
+            <Text style={T.centeredText}>Event nummer:</Text>
+            <Text style={T.centeredText}>{navigation.getParam('eventID')}</Text>
         </View>
           
         </ScrollView>

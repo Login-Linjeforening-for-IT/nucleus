@@ -4,6 +4,7 @@ import { GS } from '../styles/globalStyles';
 import { MS } from '../styles/menuStyles';
 import TopMenu from '../shared/topmenu';
 import Card from '../shared/card';
+import { T } from '../styles/text';
 import { 
   Text, 
   View, 
@@ -11,6 +12,7 @@ import {
   ScrollView,
   TouchableOpacity
 } from 'react-native';
+import { useState } from 'react';
 
 {/* ========================= APP START ========================= */}
 
@@ -31,6 +33,9 @@ const goBack = () => {
   navigation.goBack()
 }
 
+const [name, setName] = useState('username')
+const [pass, setPass] = useState('password')
+
   return(
     <View style={MS.top}>
       <StatusBar style="light" />
@@ -44,15 +49,23 @@ const goBack = () => {
         
         <ScrollView showsVerticalScrollIndicator={false}>
           
-            <Text style={GS.centeredText}>Internal</Text>
+            <Text style={T.centeredText}>Internal</Text>
             <Text/><Text/><Text/><Text/><Text/><Text/><Text/><Text/><Text/><Text/>
-            <Text style={GS.centeredText}>Brukernavn</Text>
+            <Text style={T.centeredText}>Brukernavn</Text>
             <Text/>
-            <Card></Card>
+            <Card>
+              <View>
+                <Text style={T.centeredText}>brukernavn</Text>
+              </View>
+            </Card>
             <Text/><Text/>
-            <Text style={GS.centeredText}>Passord</Text>
+            <Text style={T.centeredText}>Passord</Text>
             <Text/>
-            <Card></Card>
+            <Card>
+            <View>
+                <Text style={T.centeredText}>passord</Text>
+              </View>
+            </Card>
         </ScrollView>
       </View>   
 

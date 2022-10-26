@@ -1,9 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
-import { GS } from '../styles/globalStyles';
 import { MS } from '../styles/menuStyles';
 import { SS } from '../styles/settingStyles';
 import { CS } from '../styles/contactStyles';
 import { useState } from 'react';
+import { T } from '../styles/text';
 import Card from '../shared/card';
 import { 
   Text, 
@@ -41,12 +41,12 @@ const goBack = () => {
               <View style={SS.bugImage}>
               <Image style={CS.image} source={require('../assets/login-text.png')} />
               </View>
-              <Text style={GS.centeredText}>Varsle</Text>
+              <Text style={T.centeredText}>Varsle</Text>
               <Text></Text>
               
-              <Text style={GS.centeredText}>notification title</Text>
-              <Text style={GS.centeredText}>notification content</Text>
-              <Text style={GS.centeredText}>push / schedule</Text>
+              <Text style={T.centeredText}>notification title</Text>
+              <Text style={T.centeredText}>notification content</Text>
+              <Text style={T.centeredText}>push / schedule</Text>
       </View>    
 
 {/* ========================= DISPLAY BOTTOM MENU ========================= */}

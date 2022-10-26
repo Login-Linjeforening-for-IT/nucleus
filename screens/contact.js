@@ -3,6 +3,7 @@ import { GS } from '../styles/globalStyles';
 import { MS } from '../styles/menuStyles';
 import { SS } from '../styles/settingStyles';
 import { CS } from '../styles/contactStyles';
+import { T } from '../styles/text';
 import { useState } from 'react';
 import Card from '../shared/card';
 import { 
@@ -48,7 +49,7 @@ const goBack = () => {
       </View>
 {/* ========================= DISPLAY CONTENT ========================= */}
       <View style={GS.creditContent}>
-        <Text style={GS.creditText}>Kontakt</Text>
+        <Text style={T.creditText}>Kontakt</Text>
           <FlatList
           scrollEnabled={'false'}
           numColumns={1}

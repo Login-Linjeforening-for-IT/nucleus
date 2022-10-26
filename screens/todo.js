@@ -5,6 +5,7 @@ import { SS } from '../styles/settingStyles';
 import { CS } from '../styles/contactStyles';
 import { useState } from 'react';
 import Card from '../shared/card';
+import { T } from '../styles/text';
 import { 
   Text, 
   View, 
@@ -54,7 +55,7 @@ const goBack = () => {
           renderItem={({item}) => (
             <View style={CS.contactCard}>
               <Card>
-                <Text style={GS.h6}>{item.id}. {item.todo}</Text>
+                <Text style={T.h6}>{item.id}. {item.todo}</Text>
               </Card>
           </View>
           )}

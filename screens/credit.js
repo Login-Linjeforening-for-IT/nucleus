@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { GS } from '../styles/globalStyles';
 import { MS } from '../styles/menuStyles';
+import { T } from '../styles/text';
 import { SS } from '../styles/settingStyles';
 import { CS } from '../styles/contactStyles';
 import { useState } from 'react';
@@ -48,7 +49,7 @@ const goBack = () => {
       </View>
 {/* ========================= DISPLAY CONTENT ========================= */}
       <View style={GS.creditContent}>
-        <Text style={GS.creditText}>Takk for bidrag!</Text>
+        <Text style={T.creditText}>Takk for bidrag!</Text>
           <FlatList
           scrollEnabled={'false'}
           numColumns={1}

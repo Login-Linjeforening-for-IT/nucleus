@@ -3,6 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import { GS } from '../styles/globalStyles';
 import { MS } from '../styles/menuStyles';
 import TopMenu from '../shared/topmenu';
+import { T } from '../styles/text';
 import { 
   Text, 
   View, 
@@ -43,7 +44,7 @@ const goBack = () => {//hoppe over til mail
         
         <ScrollView showsVerticalScrollIndicator={false}>
           
-            <Text style={GS.centeredText}>Varslinger</Text>
+            <Text style={T.centeredText}>Varslinger</Text>
           
         </ScrollView>
       </View>   

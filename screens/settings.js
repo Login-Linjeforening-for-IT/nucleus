@@ -1,10 +1,8 @@
 {/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
 import { StatusBar } from 'expo-status-bar';
-import { GS } from '../styles/globalStyles';
 import { MS } from '../styles/menuStyles';
 import { SS } from '../styles/settingStyles';
 import { useState } from 'react';
-import GreenLight from '../shared/sharedComponents';
 import Card from '../shared/card';
 import { 
   Text, 

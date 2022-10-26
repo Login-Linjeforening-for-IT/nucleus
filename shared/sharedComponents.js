@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import Svg, { Circle, SvgUri } from 'react-native-svg';
 import { GS } from '../styles/globalStyles';
+import { T } from '../styles/text'
 
 export default function GreenLight() {
     return(
@@ -29,16 +30,16 @@ export function Kontakt() {
     return(
     <View>
         <Text/>
-        <Text style={GS.centeredText}>Kontakt</Text>
-        <Text style={GS.centeredText15}>Login - Linjeforeningen for IT</Text>
-        <Text style={GS.centeredText15}>Teknologivegen 22</Text>
-        <Text style={GS.centeredText15}>Bygg A, rom 155</Text>
-        <Text style={GS.centeredText15}>2815 GJØVIK</Text>
+        <Text style={T.centeredText}>Kontakt</Text>
+        <Text style={T.centeredText15}>Login - Linjeforeningen for IT</Text>
+        <Text style={T.centeredText15}>Teknologivegen 22</Text>
+        <Text style={T.centeredText15}>Bygg A, rom 155</Text>
+        <Text style={T.centeredText15}>2815 GJØVIK</Text>
         <Text/>
-        <Text style={GS.centeredText15}>kontakt@logntnu.no</Text>
+        <Text style={T.centeredText15}>kontakt@logntnu.no</Text>
         <Text/>
         <Text/>
-        <Text style={GS.red}>map goes here</Text>
+        <Text style={T.red}>map goes here</Text>
         <Text/><Text/><Text/><Text/>
     </View> 
     )

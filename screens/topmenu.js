@@ -2,7 +2,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { GS } from '../styles/globalStyles';
 import { MS } from '../styles/menuStyles';
-import GreenLight from '../shared/sharedComponents';
+import { T } from '../styles/text';
 import { 
   Text, 
   View, 
@@ -43,9 +43,9 @@ const goBack = () => {
         
         <ScrollView showsVerticalScrollIndicator={false}>
           
-            <Text style={GS.centeredText}>TopMenuRight</Text>
+            <Text style={T.centeredText}>TopMenuRight</Text>
             <Text/><Text/><Text/><Text/><Text/>
-            <Text style={GS.centeredText}>Oi! Her var det tomt...</Text>
+            <Text style={T.centeredText}>Oi! Her var det tomt...</Text>
             
           
         </ScrollView>

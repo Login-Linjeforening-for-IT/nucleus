@@ -1,6 +1,7 @@
 {/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
 import { StatusBar } from 'expo-status-bar';
 import { GS } from '../styles/globalStyles';
+import { T } from '../styles/text';
 import { MS } from '../styles/menuStyles';
 import { 
   Text, 
@@ -47,20 +48,18 @@ const goBack = () => {
         
         <ScrollView showsVerticalScrollIndicator={false}>
           
-          <View style={GS.welcomeText}>
-          </View>
            <View style={GS.small}>
-            <Text style={GS.h2}>Om Login</Text>
-            <Text style={GS.paragraph}>Login er linjeforeningen for IT ved  NTNU i Gjøvik og alle som går de følgene studiene er automatisk medlemmer i foreningen.</Text>
+            <Text style={T.h2}>Om Login</Text>
+            <Text style={T.paragraph}>Login er linjeforeningen for IT ved  NTNU i Gjøvik og alle som går de følgene studiene er automatisk medlemmer i foreningen.</Text>
             <Text></Text>
-            <Text style={GS.h3}>Av studenter, for studenter.</Text>
-            <Text style={GS.paragraph}>Foreningen drives av frivillige studenter som arbeider for at du skal få mest mulig ut av studiene dine ved  NTNU.</Text>
-            <Text style={GS.paragraph}>Vi arrangerer regelmessig sosiale arrangementer og bedriftspresentasjoner. Vi holder kontakt med aktuelle bedrifter og inviterer til blant annet cyberdagene én gang i semesteret slik at du som student skal bli kjent med mulighetene utdanningen din gir deg.</Text>
-            <Text style={GS.paragraph}>Hver uke samler vi studenter til  TekKom- og  CTF-samlinger, der man kan lære seg nye ting eller komme med bidrag til foreningen. Her kan man møte andre studenter som deler gleden for å lære, og å sette kunnskapene man tilegner seg i praksis. Videre jobber EvntKom stadig med nye og spennende arrangementer som f.eks. filmkvelder og vinterball.</Text>
+            <Text style={T.h3}>Av studenter, for studenter.</Text>
+            <Text style={T.paragraph}>Foreningen drives av frivillige studenter som arbeider for at du skal få mest mulig ut av studiene dine ved  NTNU.</Text>
+            <Text style={T.paragraph}>Vi arrangerer regelmessig sosiale arrangementer og bedriftspresentasjoner. Vi holder kontakt med aktuelle bedrifter og inviterer til blant annet cyberdagene én gang i semesteret slik at du som student skal bli kjent med mulighetene utdanningen din gir deg.</Text>
+            <Text style={T.paragraph}>Hver uke samler vi studenter til  TekKom- og  CTF-samlinger, der man kan lære seg nye ting eller komme med bidrag til foreningen. Her kan man møte andre studenter som deler gleden for å lære, og å sette kunnskapene man tilegner seg i praksis. Videre jobber EvntKom stadig med nye og spennende arrangementer som f.eks. filmkvelder og vinterball.</Text>
             <Text></Text>
-            <Text style={GS.h3}>Styret og komiteene</Text>
-            <Text style={GS.paragraph}>Foreningen er satt sammen av et hovedstyret og en rekke komiteer.</Text>
-            <Text style={GS.red}>Knapper mellom de forskjellige komiteene</Text>
+            <Text style={T.h3}>Styret og komiteene</Text>
+            <Text style={T.paragraph}>Foreningen er satt sammen av et hovedstyret og en rekke komiteer.</Text>
+            <Text style={T.red}>Knapper mellom de forskjellige komiteene</Text>
 
         </View>
           

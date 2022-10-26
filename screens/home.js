@@ -2,6 +2,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { GS } from '../styles/globalStyles';
 import { MS } from '../styles/menuStyles';
+import { T } from '../styles/text';
 import { 
   Text, 
   View, 
@@ -42,11 +43,11 @@ const topMenuPage = () => {
 {/* ========================= DISPLAY CONTENT ========================= */}
       <View style={GS.content}>
         <ScrollView showsVerticalScrollIndicator={false}>
-            <Text style={GS.centeredText}>Homescreen</Text>
+            <Text style={T.centeredText}>Homescreen</Text>
             <Text/><Text/><Text/>
-            <Text style={GS.centeredText}>Login har fått app!!!</Text>
+            <Text style={T.centeredText}>Login har fått app!!!</Text>
             <Text/><Text/><Text/>
-            <Text style={GS.red}>Events man er påmeldt på</Text>
+            <Text style={T.red}>Events man er påmeldt på</Text>
 
           
         </ScrollView>
