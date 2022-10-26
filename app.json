@@ -1,5 +1,6 @@
 {
   "expo": {
+    "owner": "loginapp",
     "name": "Login",
     "slug": "Login",
     "version": "1.0.0",
