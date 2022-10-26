@@ -49,7 +49,7 @@ const goBack = () => {
       </View>
 {/* ========================= DISPLAY CONTENT ========================= */}
       <View style={GS.creditContent}>
-        <Text style={T.creditText}>Takk for bidrag!</Text>
+        <Text style={T.credit}>Takk for bidrag!</Text>
           <FlatList
           scrollEnabled={'false'}
           numColumns={1}

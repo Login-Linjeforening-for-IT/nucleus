@@ -2,27 +2,27 @@ import { StyleSheet } from "react-native";
 
 export const ES = StyleSheet.create({
     // ============== EVENT AREA  ==============
-  eventDayText: {
+  day: {
     color: 'white',
     backgroundColor: 'red',
     height: 50,
     width: 50,
     fontSize: 40,
   },
-  eventMonthText: {
+  month: {
     color: 'white',
     fontSize: 24
   },
-  eventTitleText: {
+  title: {
     color: 'white',
   },
-  eventDescText: {
+  desc: {
     color: 'white',
   },
-  eventLocText: {
+  loc: {
     color: 'white',
   },
-  eventTime: {
+  time: {
     color: 'white',
   },
   headerTitle: {

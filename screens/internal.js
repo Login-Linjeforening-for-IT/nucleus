@@ -49,21 +49,21 @@ const [pass, setPass] = useState('password')
         
         <ScrollView showsVerticalScrollIndicator={false}>
           
-            <Text style={T.centeredText}>Internal</Text>
+            <Text style={T.centered}>Internal</Text>
             <Text/><Text/><Text/><Text/><Text/><Text/><Text/><Text/><Text/><Text/>
-            <Text style={T.centeredText}>Brukernavn</Text>
+            <Text style={T.centered}>Brukernavn</Text>
             <Text/>
             <Card>
               <View>
-                <Text style={T.centeredText}>brukernavn</Text>
+                <Text style={T.centered}>brukernavn</Text>
               </View>
             </Card>
             <Text/><Text/>
-            <Text style={T.centeredText}>Passord</Text>
+            <Text style={T.centered}>Passord</Text>
             <Text/>
             <Card>
             <View>
-                <Text style={T.centeredText}>passord</Text>
+                <Text style={T.centered}>passord</Text>
               </View>
             </Card>
         </ScrollView>

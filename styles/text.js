@@ -11,17 +11,17 @@ export const T = StyleSheet.create({
       alignSelf: 'center',
       color: 'white',
     },
-    centeredText: {
+    centered: {
       alignSelf: 'center',
       fontSize: 30,
       color: 'white',
     },
-    centeredText20: {
+    centered20: {
       alignSelf: 'center',
       fontSize: 20,
       color: 'white',
     },
-    centeredText15: {
+    centered15: {
       alignSelf: 'center',
       fontSize: 15,
       color: 'white',
@@ -60,7 +60,7 @@ export const T = StyleSheet.create({
     color: 'white',
     fontSize: 15,
     },
-    creditText: {
+    credit: {
     top: -20,
     alignSelf: 'center',
     fontSize: 30,

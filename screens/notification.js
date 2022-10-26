@@ -44,7 +44,7 @@ const goBack = () => {//hoppe over til mail
         
         <ScrollView showsVerticalScrollIndicator={false}>
           
-            <Text style={T.centeredText}>Varslinger</Text>
+            <Text style={T.centered}>Varslinger</Text>
           
         </ScrollView>
       </View>   

@@ -30,13 +30,13 @@ export function Kontakt() {
     return(
     <View>
         <Text/>
-        <Text style={T.centeredText}>Kontakt</Text>
-        <Text style={T.centeredText15}>Login - Linjeforeningen for IT</Text>
-        <Text style={T.centeredText15}>Teknologivegen 22</Text>
-        <Text style={T.centeredText15}>Bygg A, rom 155</Text>
-        <Text style={T.centeredText15}>2815 GJØVIK</Text>
+        <Text style={T.centered}>Kontakt</Text>
+        <Text style={T.centered15}>Login - Linjeforeningen for IT</Text>
+        <Text style={T.centered15}>Teknologivegen 22</Text>
+        <Text style={T.centered15}>Bygg A, rom 155</Text>
+        <Text style={T.centered15}>2815 GJØVIK</Text>
         <Text/>
-        <Text style={T.centeredText15}>kontakt@logntnu.no</Text>
+        <Text style={T.centered15}>kontakt@logntnu.no</Text>
         <Text/>
         <Text/>
         <Text style={T.red}>map goes here</Text>

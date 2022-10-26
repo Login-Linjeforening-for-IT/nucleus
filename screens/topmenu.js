@@ -43,9 +43,9 @@ const goBack = () => {
         
         <ScrollView showsVerticalScrollIndicator={false}>
           
-            <Text style={T.centeredText}>TopMenuRight</Text>
+            <Text style={T.centered}>TopMenuRight</Text>
             <Text/><Text/><Text/><Text/><Text/>
-            <Text style={T.centeredText}>Oi! Her var det tomt...</Text>
+            <Text style={T.centered}>Oi! Her var det tomt...</Text>
             
           
         </ScrollView>

@@ -71,11 +71,11 @@ getData();
                   <TouchableOpacity onPress={() => navigation.navigate('SpecificEventScreen', item)}>
                     <Card>
                     <View>
-                      <View style = {ES.eventDay}><Text style={ES.eventDayText}>{item.startt[8]}{item.startt[9]}</Text></View>
-                      <View style = {ES.eventMonthText}><Text style={ES.eventMonthText}>{item.startt[5]}{item.startt[6]}</Text></View>
-                      <View style = {ES.eventTitleText}><Text style={ES.eventTitleText}>{item.eventname}</Text></View>
-                      <View style = {ES.eventLocText}><Text style={ES.eventLocText}>{item.startt[11]}{item.startt[12]}:{item.startt[14]}{item.startt[15]} {item.roomno}. {item.campus}</Text></View>
-                      <View style = {ES.eventDay}><Text style={ES.eventImage}>{item.IMAGENOTRENDERED}</Text></View>
+                      <View style = {ES.day}><Text style={ES.day}>{item.startt[8]}{item.startt[9]}</Text></View>
+                      <View style = {ES.month}><Text style={ES.month}>{item.startt[5]}{item.startt[6]}</Text></View>
+                      <View style = {ES.title}><Text style={ES.title}>{item.eventname}</Text></View>
+                      <View style = {ES.loc}><Text style={ES.loc}>{item.startt[11]}{item.startt[12]}:{item.startt[14]}{item.startt[15]} {item.roomno}. {item.campus}</Text></View>
+                      <View><Text style={ES.image}>{item.IMAGENOTRENDERED}</Text></View>
                     </View>
                       
                     </Card>

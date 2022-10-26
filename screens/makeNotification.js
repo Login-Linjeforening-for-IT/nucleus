@@ -41,12 +41,12 @@ const goBack = () => {
               <View style={SS.bugImage}>
               <Image style={CS.image} source={require('../assets/login-text.png')} />
               </View>
-              <Text style={T.centeredText}>Varsle</Text>
+              <Text style={T.centered}>Varsle</Text>
               <Text></Text>
               
-              <Text style={T.centeredText}>notification title</Text>
-              <Text style={T.centeredText}>notification content</Text>
-              <Text style={T.centeredText}>push / schedule</Text>
+              <Text style={T.centered}>notification title</Text>
+              <Text style={T.centered}>notification content</Text>
+              <Text style={T.centered}>push / schedule</Text>
       </View>    
 
 {/* ========================= DISPLAY BOTTOM MENU ========================= */}

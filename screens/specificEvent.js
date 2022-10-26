@@ -49,13 +49,13 @@ const goBack = () => {
       </View>
 
 {/* ========================= DISPLAY CONTENT ========================= */}
-      <View style={T.content}>
+      <View style={GS.content}>
         
         <ScrollView showsVerticalScrollIndicator={false}>
           
           <View>
-            <Text style={T.centeredText}>Event nummer:</Text>
-            <Text style={T.centeredText}>{navigation.getParam('eventID')}</Text>
+            <Text style={T.centered}>Event nummer:</Text>
+            <Text style={T.centered}>{navigation.getParam('eventID')}</Text>
         </View>
           
         </ScrollView>

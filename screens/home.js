@@ -43,9 +43,9 @@ const topMenuPage = () => {
 {/* ========================= DISPLAY CONTENT ========================= */}
       <View style={GS.content}>
         <ScrollView showsVerticalScrollIndicator={false}>
-            <Text style={T.centeredText}>Homescreen</Text>
+            <Text style={T.centered}>Homescreen</Text>
             <Text/><Text/><Text/>
-            <Text style={T.centeredText}>Login har fått app!!!</Text>
+            <Text style={T.centered}>Login har fått app!!!</Text>
             <Text/><Text/><Text/>
             <Text style={T.red}>Events man er påmeldt på</Text>
 
