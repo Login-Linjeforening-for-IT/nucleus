@@ -3,11 +3,21 @@ import { StyleSheet } from "react-native";
 export const ES = StyleSheet.create({
     // ============== EVENT AREA  ==============
   day: {
-    color: 'white',
-    backgroundColor: 'red',
-    height: 50,
+    borderRadius: 10,
+    backgroundColor: '#d62f42',
+    height: 70,
     width: 50,
-    fontSize: 40,
+  },
+  dayText: {
+    left: '15%',
+    color: 'white',
+    fontSize: 30,
+  },
+  monthText: {
+    top: '-7.5%',
+    left: '15%',
+    color: 'white',
+    fontSize: 30,
   },
   month: {
     color: 'white',

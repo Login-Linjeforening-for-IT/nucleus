@@ -54,8 +54,48 @@ const goBack = () => {
         <ScrollView showsVerticalScrollIndicator={false}>
           
           <View>
-            <Text style={T.centered}>Event nummer:</Text>
+
+            <Text style={T.red}>Event nummer:</Text>
             <Text style={T.centered}>{navigation.getParam('eventID')}</Text>
+
+            <Text style={T.red}>Organisert av:</Text>
+            <Text style={T.centered}>{navigation.getParam('organizer')}</Text>
+
+            <Text style={T.red}>Event navn:</Text>
+            <Text style={T.centered}>{navigation.getParam('eventname')}</Text>
+
+            <Text style={T.red}>Dato</Text>
+            <Text style={T.centered}>
+              {navigation.getParam('startt')[8]}
+              {navigation.getParam('startt')[9]}.
+              {navigation.getParam('startt')[5]}
+              {navigation.getParam('startt')[6]}.
+              {navigation.getParam('startt')[2]}
+              {navigation.getParam('startt')[3]}
+            </Text>
+
+            <Text style={T.red}>Tidspunkt</Text>
+            <Text style={T.centered}>
+              {navigation.getParam('startt')[11]}
+              {navigation.getParam('startt')[12]}:
+              {navigation.getParam('startt')[14]}
+              {navigation.getParam('startt')[15]}
+            </Text>
+
+            <Text style={T.red}>Kategori</Text>
+            <Text style={T.centered}>{navigation.getParam('category')}</Text>
+            
+            <Text style={T.red}>Sted</Text>
+            <Text style={T.centered}>
+            {navigation.getParam('roomno')}, {navigation.getParam('campus')}
+            </Text>
+
+            {/* MORE LOGIC NEEDED HERE */}
+            
+            {/* <Text style={T.red}>Beskrivelse</Text>
+            <Text style={T.centered}>
+            {navigation.getParam('roomno')}, {navigation.getParam('description')}
+            </Text> */}
         </View>
           
         </ScrollView>
