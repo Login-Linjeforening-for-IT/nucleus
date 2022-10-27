@@ -49,7 +49,7 @@ export const ES = StyleSheet.create({
     color: 'white',
     backgroundColor: '#777',
   },
-  eventthing: {
+  eventBack: {
     height: 50,
   }
 })

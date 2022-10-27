@@ -8,7 +8,8 @@ import {
   View, 
   Image, 
   ScrollView,
-  TouchableOpacity
+  TouchableOpacity,
+  SafeAreaView
 } from 'react-native';
 
 {/* ========================= APP START ========================= */}
@@ -41,6 +42,7 @@ const topMenuPage = () => {
         </TouchableOpacity>
       </View>
 {/* ========================= DISPLAY CONTENT ========================= */}
+
       <View style={GS.content}>
         <ScrollView showsVerticalScrollIndicator={false}>
             <Text style={T.centered}>Homescreen</Text>
