@@ -18,15 +18,18 @@ import { FlatList } from 'react-native-gesture-handler';
 
 export default function TodoScreen({ navigation }) {
     const [setting] = useState([
-      {id: '1', todo: 'Create mini logos'},
-      {id: '2', todo: 'Logos for each comitee'},
-      {id: '3', todo: 'Make top menu background invisible'},
-      {id: '4', todo: 'Build content drafts for each site (copy from web)'},
-      {id: '5', todo: 'Fix line breaking event text'},
-      {id: '6', todo: 'Implement push notifications'},
-      {id: '7', todo: 'Build all the pages in settings'},
-      {id: '8', todo: 'Page to find our other social media'},
-      {id: '9', todo: 'Fit to all screen sizes'},
+      {id: '0', todo: 'Fix logo placement'},
+      {id: '1', todo: 'Add safe area view'},
+      {id: '2', todo: 'Render everything based on screen size so no buttons are unclickable'},
+      {id: '3', todo: 'Create mini logos'},
+      {id: '4', todo: 'Logos for each comitee'},
+      {id: '5', todo: 'Make top menu background invisible'},
+      {id: '6', todo: 'Build content drafts for each site (copy from web)'},
+      {id: '7', todo: 'Fix line breaking event text'},
+      {id: '8', todo: 'Implement push notifications'},
+      {id: '9', todo: 'Build all the pages in settings'},
+      {id: '10', todo: 'Page to find our other social media'},
+      {id: '11', todo: 'Fit to all screen sizes'},
   ])
 {/* ========================= DISPLAY APP START ========================= */}
 const eventPage = () => {
