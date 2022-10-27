@@ -41,4 +41,14 @@ export const SS = StyleSheet.create ({
         height: 150,
         width: 150,
     },
+    makeNotificationImage: {
+        alignSelf: 'center',
+        height: 110,
+        width: 150,
+    },
+    makeNotification: {
+        flex: 18,
+        backgroundColor: '#181818',
+        paddingHorizontal: 20,
+    },
 });

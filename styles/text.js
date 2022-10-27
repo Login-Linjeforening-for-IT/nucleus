@@ -11,6 +11,26 @@ export const T = StyleSheet.create({
       alignSelf: 'center',
       color: 'white',
     },
+    grey999: {
+      alignSelf: 'center',
+      color: '#999',
+      fontSize: 25,
+    },
+    grey777: {
+      alignSelf: 'center',
+      color: '#777',
+      fontSize: 25,
+    },
+    grey555: {
+      alignSelf: 'center',
+      color: '#555',
+      fontSize: 25,
+    },
+    grey333: {
+      alignSelf: 'center',
+      color: '#333',
+      fontSize: 25,
+    },
     centered: {
       alignSelf: 'center',
       fontSize: 30,

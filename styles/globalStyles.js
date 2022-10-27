@@ -25,10 +25,10 @@ export const GS = StyleSheet.create({
       width: 200,
       height: 80,
     },
-      creditContent: {
-        flex: 18,
-        backgroundColor: '#181818',
-        paddingHorizontal: 20,
+    creditContent: {
+      flex: 18,
+      backgroundColor: '#181818',
+      paddingHorizontal: 20,
     },
     creditImage: {
       top: 20,
@@ -36,4 +36,11 @@ export const GS = StyleSheet.create({
       height: 150,
       width: 150,
   },
+  inputText: {
+    backgroundColor: '#282828',
+    alignItems: 'center',
+    height: 50,
+    borderRadius: 20,
+    color: 'white',
+},
 });

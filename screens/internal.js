@@ -5,12 +5,15 @@ import { MS } from '../styles/menuStyles';
 import TopMenu from '../shared/topmenu';
 import Card from '../shared/card';
 import { T } from '../styles/text';
+import { SS } from '../styles/settingStyles';
+import { CS } from '../styles/contactStyles';
 import { 
   Text, 
   View, 
   Image, 
   ScrollView,
-  TouchableOpacity
+  TouchableOpacity,
+  TextInput
 } from 'react-native';
 import { useState } from 'react';
 
@@ -51,21 +54,36 @@ const [pass, setPass] = useState('password')
           
             <Text style={T.centered}>Internal</Text>
             <Text/><Text/><Text/><Text/><Text/><Text/><Text/><Text/><Text/><Text/>
-            <Text style={T.centered}>Brukernavn</Text>
-            <Text/>
-            <Card>
-              <View>
-                <Text style={T.centered}>brukernavn</Text>
-              </View>
-            </Card>
+            <Text style={T.centered}>Login</Text>
             <Text/><Text/>
-            <Text style={T.centered}>Passord</Text>
-            <Text/>
-            <Card>
-            <View>
-                <Text style={T.centered}>passord</Text>
+
+              <View>
+                <TextInput 
+                style={GS.inputText}
+                placeholder='username'
+                placeholderTextColor={'#555'}
+                textAlign='center'
+                onChangeText={(val) => setName(val)}
+                />
               </View>
-            </Card>
+            <Text/><Text style={T.centered15}>{name}</Text><Text/>
+            <View>
+                <TextInput 
+                style={GS.inputText}
+                placeholder='password'
+                placeholderTextColor={'#555'}
+                textAlign='center'
+                onChangeText={(val) => setPass(val)}
+                />
+                <Text/>
+                <Text style={T.centered15}>{pass}</Text>
+              </View>
+              
+              <Text/><Text/><Text/><Text/><Text/><Text/>
+
+              <View style={SS.makeNotificationImage}>
+                  <Image style={CS.image} source={require('../assets/login-text.png')} />
+                </View>
         </ScrollView>
       </View>   
 

@@ -2,7 +2,8 @@ import { StatusBar } from 'expo-status-bar';
 import { MS } from '../styles/menuStyles';
 import { SS } from '../styles/settingStyles';
 import { CS } from '../styles/contactStyles';
-import React, { useState, useEffect, useRef } from 'react';
+import { GS } from '../styles/globalStyles';
+import React, { useState, useEffect, useRef, replace } from 'react';
 import { T } from '../styles/text';
 import Card from '../shared/card';
 import { 
@@ -11,9 +12,10 @@ import {
   Image, 
   TouchableOpacity,
   Button, 
-  Platform
+  Platform,
+  TextInput
 } from 'react-native';
-import { FlatList } from 'react-native-gesture-handler';
+import { FlatList, ScrollView } from 'react-native-gesture-handler';
 import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
 
@@ -26,6 +28,9 @@ Notifications.setNotificationHandler({
 });
 
 {/* ========================= APP START ========================= */}
+global.nTitle = 'Login 💻'
+global.nBody = 'Varsling'
+global.nDelay = 1
 
 export default function MakeNotificationScreen({ navigation }) {
 {/* ========================= DISPLAY APP START ========================= */}
@@ -38,7 +43,8 @@ const homePage = () => {
 const goBack = () => {
     navigation.goBack()
 }
-
+// const [title, setTitle] = useState('title');
+// const [body, setBody] = useState('body');
 const [expoPushToken, setExpoPushToken] = useState('');
 const [notification, setNotification] = useState(false);
 const notificationListener = useRef();
@@ -70,30 +76,65 @@ useEffect(() => {
         </TouchableOpacity>
       </View>
 {/* ========================= DISPLAY CONTENT ========================= */}
-      <View style={SS.content}>
-              <View style={SS.bugImage}>
-              <Image style={CS.image} source={require('../assets/login-text.png')} />
-              </View>
-              <Text style={T.centered}>Varsle</Text>
-              <Text></Text>
+      <View style={SS.makeNotification}>
+        <ScrollView showsVerticalScrollIndicator={false}>
+              <Text style={T.centered}>Send varsling</Text><Text/><Text/><Text/>
 
+                    <Text style={T.centered20}>Tittel</Text><Text/>
+                    <TextInput 
+                      style={GS.inputText}
+                      placeholder='Login'
+                      placeholderTextColor={'#555'}
+                      textAlign='center'
+                      onChangeText={(val) => nTitle = (val)}
+                    /><Text/>
 
+              <Text style={T.centered20}>Beskrivelse</Text><Text/>
+                    <TextInput 
+                      multiline
+                      style={GS.inputText}
+                      placeholder='Varsling'
+                      placeholderTextColor={'#555'}
+                      textAlign='center'
+                      onChangeText={(val) => nBody = (val)}
+                    />
+                    
+                <Text/>
 
-              {/* <Text style={T.centered15}>Push token: {expoPushToken}</Text> */}
+                <Text style={T.centered20}>Delay (sekunder)</Text><Text/>
+                    <TextInput 
+                      style={GS.inputText}
+                      keyboardType='numeric'
+                      placeholder='1'
+                      placeholderTextColor={'#555'}
+                      textAlign='center'
+                      onChangeText={(val) => nDelay = (val)}
+                    /><Text/>
 
-              <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                <Text style={T.h4}>Title: {notification && notification.request.content.title} </Text>
-                <Text style={T.h5}>Body: {notification && notification.request.content.body}</Text>
+                <Button
+                color={'red'}
+                title="Send varsling"
+                onPress={async () => {
+                await schedulePushNotification();
+                }}
+                /><Text/>
+                
+              {/* <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+                <Text style={T.h5}>Tittel:</Text>
+                <Text style={T.h5}>{notification && notification.request.content.title} </Text>
+                <Text style={T.h5}>Beskrivelse:</Text>
+                <Text style={T.h5}>{notification && notification.request.content.body}</Text><Text/>
+                <Text style={T.h5}>Delay:</Text> */}
+                {/* <Text style={T.h5}>{notification && notification.request.content.trigger} </Text><Text/> */}
                 {/* <Text style={T.h5}>Data: {notification && JSON.stringify(notification.request.content.data)}</Text> */}
-              <Text/><Text/><Text/><Text/><Text/><Text/><Text/><Text/>
-              </View>
-      <Button
-        color={'red'}
-        title="Send Notification"
-        onPress={async () => {
-          await schedulePushNotification();
-        }}
-      />
+               
+                <Text/><Text/><Text/><Text/>
+                <View style={SS.makeNotificationImage}>
+                  <Image style={CS.image} source={require('../assets/login-text.png')} />
+                </View>
+              {/* </View> */}
+              <Text/><Text/><Text/>
+      
 
 
 
@@ -101,7 +142,7 @@ useEffect(() => {
 
 
 
-
+</ScrollView>
       </View>    
 
 {/* ========================= DISPLAY BOTTOM MENU ========================= */}
@@ -124,11 +165,11 @@ useEffect(() => {
 async function schedulePushNotification() {
   await Notifications.scheduleNotificationAsync({
     content: {
-      title: "Husk Tekkom! 💻",
-      body: 'Kl 18, Login Loungen',
+      title: nTitle,
+      body: nBody,
       data: { data: 'goes here' },
     },
-    trigger: { seconds: 2 },
+    trigger: { seconds: nDelay },
   });
 }
 
