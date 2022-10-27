@@ -22,7 +22,7 @@ export default function TodoScreen({ navigation }) {
       {id: '2', todo: 'Logos for each comitee'},
       {id: '3', todo: 'Make top menu background invisible'},
       {id: '4', todo: 'Build content drafts for each site (copy from web)'},
-      {id: '5', todo: 'Fix local notifications'},
+      {id: '5', todo: 'Fix line breaking event text'},
       {id: '6', todo: 'Implement push notifications'},
       {id: '7', todo: 'Build all the pages in settings'},
       {id: '8', todo: 'Page to find our other social media'},

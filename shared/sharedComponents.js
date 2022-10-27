@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, Switch } from 'react-native';
 import Svg, { Circle, SvgUri } from 'react-native-svg';
 import { GS } from '../styles/globalStyles';
 import { T } from '../styles/text'
@@ -63,18 +63,24 @@ const styles = StyleSheet.create({
 });
 
 export function Month(month){
-    switch(month) {
-        case 1: return(<View><Text>'Jan'</Text></View>);
-        case 2: return('Feb');
-        case 3: return('Mar');
-        case 4: return('Apr');
-        case 5: return('Mai');
-        case 6: return('Jun');
-        case 7: return('Jul');
-        case 8: return('Aug');
-        case 9: return('Sep');
-        case 10: return('Oct');
-        case 11: return('Nov');
-        case 12: return('Des');
-    }
+    <View>
+        <Switch
+            month={{
+                    1: 'Jan',
+                    2: 'Feb',
+                    3: 'Mar',
+                    4: 'Apr',
+                    5: 'May',
+                    6: 'Jun',
+                    7: 'Jul',
+                    8: 'Aug',
+                    9: 'Sep',
+                    10: 'Oct',
+                    11: 'Nov',
+                    11: 'Des',
+                }
+            }
+        />
+    </View>
+    
 }

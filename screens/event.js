@@ -7,7 +7,6 @@ import { GS } from '../styles/globalStyles';
 import { MS } from '../styles/menuStyles';
 import { ES } from '../styles/eventStyles';
 import { Month } from '../shared/sharedComponents';
-
 import { 
   Text, 
   View, 
