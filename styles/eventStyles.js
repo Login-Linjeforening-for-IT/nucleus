@@ -3,6 +3,7 @@ import { StyleSheet } from "react-native";
 export const ES = StyleSheet.create({
     // ============== EVENT AREA  ==============
   day: {
+    top: -10,
     borderRadius: 10,
     backgroundColor: '#d62f42',
     height: 70,
@@ -24,12 +25,18 @@ export const ES = StyleSheet.create({
     fontSize: 24
   },
   title: {
+    top: -37,
+    fontSize: 20,
+    left: 30,
     color: 'white',
   },
   desc: {
     color: 'white',
   },
   loc: {
+    top: -32,
+    fontSize: 20,
+    left: 30,
     color: 'white',
   },
   time: {
@@ -42,4 +49,7 @@ export const ES = StyleSheet.create({
     color: 'white',
     backgroundColor: '#777',
   },
+  eventthing: {
+    height: 50,
+  }
 })
