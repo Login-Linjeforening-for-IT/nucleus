@@ -32,9 +32,9 @@ const goBack = () => {//hoppe over til mail
 }
 
   return(
-    <View style={MS.top}>
+    <View style={MS.backGround}>
       <StatusBar style="light" />
-      <View style={MS.top}>
+      <View style={MS.topMenu}>
       <TouchableOpacity onPress={() => goBack()}>
           <Image style={MS.goBack} source={require('../assets/goback777.png')} />
         </TouchableOpacity>

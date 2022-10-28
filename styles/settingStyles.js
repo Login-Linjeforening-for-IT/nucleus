@@ -4,17 +4,6 @@ export const SS = StyleSheet.create ({
     top: {
         top: 50,
       },
-    content: {
-        flex: 18,
-        top: 40,
-        backgroundColor: '#181818',
-        paddingHorizontal: 20,
-    },
-    specificSettingContent: {
-        flex: 18,
-        backgroundColor: '#181818',
-        paddingHorizontal: 20,
-    },
     text: {
         alignSelf: 'center',
         color: 'white',
@@ -43,12 +32,16 @@ export const SS = StyleSheet.create ({
     },
     makeNotificationImage: {
         alignSelf: 'center',
-        height: 110,
-        width: 150,
+        height: 200,
+        width: 200,
     },
     makeNotification: {
-        flex: 18,
         backgroundColor: '#181818',
         paddingHorizontal: 20,
     },
+    creditImage: {
+        alignSelf: 'center',
+        height: 250,
+        width: 250
+      }
 });

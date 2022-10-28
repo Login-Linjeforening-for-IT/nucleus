@@ -18,23 +18,26 @@ import {
 {/* ========================= DISPLAY APP START ========================= */}
 
 const settingsPage = () => {
-  navigation.navigate('SettingScreen');
+  navigation.navigate('SettingScreen')
 }
 const eventPage = () => {
-  navigation.navigate('EventScreen');
+  navigation.navigate('EventScreen')
 }
 const homePage = () => {
-  navigation.navigate('HomeScreen');
+  navigation.navigate('HomeScreen')
+}
+const topMenuPage = () => {
+  navigation.navigate('TopMenuScreen')
 }
 const goBack = () => {
   navigation.goBack()
 }
 
   return(
-    <View style={MS.top}>
+    <View style={MS.backGround}>
       <StatusBar style="light" />
 {/* ========================= DISPLAY TOP MENU ========================= */}
-      <View style={MS.top}>
+      <View style={MS.topMenu}>
       <TouchableOpacity onPress={() => goBack()}>
           <Image style={MS.goBack} source={require('../assets/goback777.png')} />
         </TouchableOpacity>
@@ -48,7 +51,6 @@ const goBack = () => {
         
         <ScrollView showsVerticalScrollIndicator={false}>
           
-           <View style={GS.small}>
             <Text style={T.h2}>Om Login</Text>
             <Text style={T.paragraph}>Login er linjeforeningen for IT ved  NTNU i Gjøvik og alle som går de følgene studiene er automatisk medlemmer i foreningen.</Text>
             <Text></Text>
@@ -60,8 +62,6 @@ const goBack = () => {
             <Text style={T.h3}>Styret og komiteene</Text>
             <Text style={T.paragraph}>Foreningen er satt sammen av et hovedstyret og en rekke komiteer.</Text>
             <Text style={T.red}>Knapper mellom de forskjellige komiteene</Text>
-
-        </View>
           
         </ScrollView>
       </View> 

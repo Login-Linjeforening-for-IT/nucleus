@@ -2,7 +2,6 @@ import { StatusBar } from 'expo-status-bar';
 import { GS } from '../styles/globalStyles';
 import { MS } from '../styles/menuStyles';
 import { SS } from '../styles/settingStyles';
-import { CS } from '../styles/contactStyles';
 import { T } from '../styles/text';
 import { useState } from 'react';
 import Card from '../shared/card';
@@ -10,7 +9,6 @@ import {
   Text, 
   View, 
   Image, 
-  ScrollView,
   TouchableOpacity,
 } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
@@ -40,9 +38,9 @@ const goBack = () => {
 }
 
   return(
-    <View style={MS.top}>
+    <View style={MS.backGround}>
       <StatusBar style="light" />
-      <View style={MS.top}>
+      <View style={MS.topMenu}>
       <TouchableOpacity onPress={() => goBack()}>
           <Image style={MS.goBack} source={require('../assets/goback777.png')} />
         </TouchableOpacity>
@@ -56,7 +54,7 @@ const goBack = () => {
           keyExtractor={(item) => item.id}
           data={setting}
           renderItem={({item}) => (
-            <View style={CS.contactCard}>
+            <View>
               <Card>
                 <Text style={SS.text}>{item.nick} {item.sur}</Text>
                 <Text style={SS.text}>{item.mail}</Text>
@@ -65,8 +63,8 @@ const goBack = () => {
           </View>
           )}
           />
-              <View style={GS.creditImage}>
-              <Image style={CS.image} source={require('../assets/login-text.png')} />
+              <View>
+              <Image style={GS.creditImage} source={require('../assets/login-text.png')} />
               </View>
       </View>    
 

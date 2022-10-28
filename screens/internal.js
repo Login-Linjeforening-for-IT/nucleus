@@ -6,7 +6,6 @@ import TopMenu from '../shared/topmenu';
 import Card from '../shared/card';
 import { T } from '../styles/text';
 import { SS } from '../styles/settingStyles';
-import { CS } from '../styles/contactStyles';
 import { 
   Text, 
   View, 
@@ -40,9 +39,9 @@ const [name, setName] = useState('username')
 const [pass, setPass] = useState('password')
 
   return(
-    <View style={MS.top}>
+    <View style={MS.backGround}>
       <StatusBar style="light" />
-      <View style={MS.top}>
+      <View style={MS.topMenu}>
       <TouchableOpacity onPress={() => goBack()}>
           <Image style={MS.goBack} source={require('../assets/goback777.png')} />
         </TouchableOpacity>
@@ -53,7 +52,7 @@ const [pass, setPass] = useState('password')
         <ScrollView showsVerticalScrollIndicator={false}>
           
             <Text style={T.centered}>Internal</Text>
-            <Text/><Text/><Text/><Text/><Text/><Text/><Text/><Text/><Text/><Text/>
+            <Text/><Text/>
             <Text style={T.centered}>Login</Text>
             <Text/><Text/>
 
@@ -79,10 +78,9 @@ const [pass, setPass] = useState('password')
                 <Text style={T.centered15}>{pass}</Text>
               </View>
               
-              <Text/><Text/><Text/><Text/><Text/><Text/>
 
               <View style={SS.makeNotificationImage}>
-                  <Image style={CS.image} source={require('../assets/login-text.png')} />
+                  <Image style={GS.creditImage} source={require('../assets/login-text.png')} />
                 </View>
         </ScrollView>
       </View>   

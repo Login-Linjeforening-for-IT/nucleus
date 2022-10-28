@@ -1,7 +1,8 @@
 {/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
-import { StatusBar } from 'expo-status-bar';
-import { MS } from '../styles/menuStyles';
-import { SS } from '../styles/settingStyles';
+import { StatusBar } from 'expo-status-bar'
+import { MS } from '../styles/menuStyles'
+import { SS } from '../styles/settingStyles'
+import { GS } from '../styles/globalStyles'
 import { useState } from 'react';
 import Card from '../shared/card';
 import { 
@@ -34,16 +35,16 @@ const homePage = () => {
 }
 
   return(
-    <View style={MS.top}>
+    <View style={MS.backGround}>
       <StatusBar style="light" />
 
 {/* ========================= DISPLAY CONTENT ========================= */}
-      <View style={SS.content}>
+      <View style={GS.contentWhenNoTop}>
           <FlatList
+          showsVerticalScrollIndicator={''}
           numColumns={1}
           keyExtractor={(item) => item.id}
           data={setting}
-          scrollEnabled={'false'}
           renderItem={({item}) => (
             <View>
             <TouchableOpacity onPress={() => navigation.navigate(item.nav, item)}>
@@ -64,7 +65,7 @@ const homePage = () => {
       </View>    
 
 {/* ========================= DISPLAY BOTTOM MENU ========================= */}
-      <View style={MS.bMenuUniversal}>
+      <View style={MS.bMenuWhenNoTop}>
       <TouchableOpacity onPress={() => homePage()}>
           <Image style={MS.bMenu3} source={require('../assets/home777.png')} />
         </TouchableOpacity>

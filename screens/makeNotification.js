@@ -1,7 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { MS } from '../styles/menuStyles';
 import { SS } from '../styles/settingStyles';
-import { CS } from '../styles/contactStyles';
 import { GS } from '../styles/globalStyles';
 import React, { useState, useEffect, useRef, replace } from 'react';
 import { T } from '../styles/text';
@@ -43,6 +42,9 @@ const homePage = () => {
 const goBack = () => {
     navigation.goBack()
 }
+const settingsPage = () => {
+  navigation.navigate('SettingScreen');
+}
 // const [title, setTitle] = useState('title');
 // const [body, setBody] = useState('body');
 const [expoPushToken, setExpoPushToken] = useState('');
@@ -68,15 +70,15 @@ useEffect(() => {
 }, []);
 
   return(
-    <View style={MS.top}>
+    <View style={MS.backGround}>
       <StatusBar style="light" />
-      <View style={MS.top}>
+      <View style={MS.topMenu}>
       <TouchableOpacity onPress={() => goBack()}>
-          <Image style={MS.goBack} source={require('../assets/goback999.png')} />
+          <Image style={MS.goBack} source={require('../assets/goback777.png')} />
         </TouchableOpacity>
       </View>
 {/* ========================= DISPLAY CONTENT ========================= */}
-      <View style={SS.makeNotification}>
+      <View style={GS.creditContent}>
         <ScrollView showsVerticalScrollIndicator={false}>
               <Text style={T.centered}>Send varsling</Text><Text/><Text/><Text/>
 
@@ -128,9 +130,8 @@ useEffect(() => {
                 {/* <Text style={T.h5}>{notification && notification.request.content.trigger} </Text><Text/> */}
                 {/* <Text style={T.h5}>Data: {notification && JSON.stringify(notification.request.content.data)}</Text> */}
                
-                <Text/><Text/><Text/><Text/>
                 <View style={SS.makeNotificationImage}>
-                  <Image style={CS.image} source={require('../assets/login-text.png')} />
+                  <Image style={GS.creditImage} source={require('../assets/login-text.png')} />
                 </View>
               {/* </View> */}
               <Text/><Text/><Text/>
@@ -153,8 +154,9 @@ useEffect(() => {
         <TouchableOpacity onPress={() => eventPage()}>
         <Image style={MS.bMenu2} source={require('../assets/menu777.png')} />
         </TouchableOpacity>
-          <Image style={MS.settingsSelected} source={require('../assets/settings-orange.png')} />
-        
+        <TouchableOpacity onPress={() => settingsPage()}>
+        <Image style={MS.bMenu1} source={require('../assets/settings-orange.png')} />
+        </TouchableOpacity>
       </View>     
     </View>
     

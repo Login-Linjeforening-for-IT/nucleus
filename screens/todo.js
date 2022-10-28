@@ -2,7 +2,6 @@ import { StatusBar } from 'expo-status-bar';
 import { GS } from '../styles/globalStyles';
 import { MS } from '../styles/menuStyles';
 import { SS } from '../styles/settingStyles';
-import { CS } from '../styles/contactStyles';
 import { useState } from 'react';
 import Card from '../shared/card';
 import { T } from '../styles/text';
@@ -42,21 +41,21 @@ const goBack = () => {
   navigation.goBack()
 }
   return(
-    <View style={MS.top}>
+    <View style={MS.backGround}>
       <StatusBar style="light" />
-      <View style={MS.top}>
+      <View style={MS.topMenu}>
       <TouchableOpacity onPress={() => goBack()}>
           <Image style={MS.goBack} source={require('../assets/goback777.png')} />
         </TouchableOpacity>
       </View>
 {/* ========================= DISPLAY CONTENT ========================= */}
-      <View style={SS.specificSettingContent}>
+      <View style={GS.creditContent}>
           <FlatList showsVerticalScrollIndicator={false}
           numColumns={1}
           keyExtractor={(item) => item.id}
           data={setting}
           renderItem={({item}) => (
-            <View style={CS.contactCard}>
+            <View>
               <Card>
                 <Text style={T.h6}>{item.id}. {item.todo}</Text>
               </Card>

@@ -36,10 +36,10 @@ const goBack = () => {
 
 
   return(
-    <View style={MS.top}>
+    <View style={MS.backGround}>
       <StatusBar style="light" />
 {/* ========================= DISPLAY TOP MENU ========================= */}
-<View style={MS.top}>
+<View style={MS.topMenu}>
 <TouchableOpacity onPress={() => goBack()}>
           <Image style={MS.goBack} source={require('../assets/goback777.png')} />
         </TouchableOpacity>
@@ -107,7 +107,7 @@ const goBack = () => {
           <Image style={MS.bMenu3} source={require('../assets/home777.png')} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => eventPage()}>
-        <Image style={MS.bMenu2} source={require('../assets/menu-orange.png')} />
+        <Image style={MS.eventSelected} source={require('../assets/menu-orange.png')} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => settingsPage()}>
           <Image style={MS.bMenu1} source={require('../assets/settings777.png')} />

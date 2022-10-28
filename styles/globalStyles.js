@@ -2,20 +2,17 @@ import { StyleSheet } from "react-native";
 
 export const GS = StyleSheet.create({
 //  =============================== CONTENT STYLES =============================
-    top: {
-      alignSelf: 'center',
-      top: 50,
-    },
     content: {
-    flex: 16,
+    height: '75%',
     backgroundColor: '#181818',
     paddingHorizontal: 20,
     },
-    small: {
-        flex: 1,
-        backgroundColor: '#181818',
-        alignItems: 'center',
-    },
+    contentWhenNoTop: {
+      top: '5%',
+      height: '90%',
+      backgroundColor: '#181818',
+      paddingHorizontal: 20,
+      },
     center: {
       justifyContent: 'center',
       alignItems: 'center',
@@ -26,15 +23,15 @@ export const GS = StyleSheet.create({
       height: 80,
     },
     creditContent: {
-      flex: 18,
+      height: '75%',
       backgroundColor: '#181818',
       paddingHorizontal: 20,
     },
     creditImage: {
-      top: 20,
+      bottom: '15%',
       alignSelf: 'center',
-      height: 150,
-      width: 150,
+      height: 105,
+      width: 200,
   },
   inputText: {
     backgroundColor: '#282828',

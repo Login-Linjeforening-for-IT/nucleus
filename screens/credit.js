@@ -3,7 +3,6 @@ import { GS } from '../styles/globalStyles';
 import { MS } from '../styles/menuStyles';
 import { T } from '../styles/text';
 import { SS } from '../styles/settingStyles';
-import { CS } from '../styles/contactStyles';
 import { useState } from 'react';
 import Card from '../shared/card';
 import { 
@@ -40,9 +39,9 @@ const goBack = () => {
 }
 
   return(
-    <View style={MS.top}>
+    <View style={MS.backGround}>
       <StatusBar style="light" />
-      <View style={MS.top}>
+      <View style={MS.topMenu}>
       <TouchableOpacity onPress={() => goBack()}>
           <Image style={MS.goBack} source={require('../assets/goback777.png')} />
         </TouchableOpacity>
@@ -56,22 +55,21 @@ const goBack = () => {
           keyExtractor={(item) => item.id}
           data={setting}
           renderItem={({item}) => (
-            <View style={CS.contactCard}>
+            <View>
               <Card>
                 <Text style={SS.text}>{item.nick} {item.sur}</Text>
                 <Text style={SS.text}>{item.mail}</Text>
-
               </Card>
           </View>
           )}
           />
-              <View style={GS.creditImage}>
-              <Image style={CS.image} source={require('../assets/login-text.png')} />
+              <View>
+              <Image style={GS.creditImage} source={require('../assets/login-text.png')} />
               </View>
       </View>    
 
 {/* ========================= DISPLAY BOTTOM MENU ========================= */}
-<View style={MS.bMenuUniversal}>
+<View style={MS.bMenuWhenNoTop}>
       <TouchableOpacity onPress={() => homePage()}>
           <Image style={MS.bMenu3} source={require('../assets/home777.png')} />
         </TouchableOpacity>

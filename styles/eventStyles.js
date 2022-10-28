@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 export const ES = StyleSheet.create({
     // ============== EVENT AREA  ==============
   day: {
-    top: -10,
+    top: '-20%',
     borderRadius: 10,
     backgroundColor: '#d62f42',
     height: 70,
