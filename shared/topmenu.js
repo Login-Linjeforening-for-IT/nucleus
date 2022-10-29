@@ -19,7 +19,7 @@ import {
           <Image style={MS.tMenuL} source={require('../assets/login-text.png')} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => topMenuPage()}>
-          <Image style={MS.tMenuR} source={require('../assets/telegram-orange.png')} />
+          <Image style={MS.tMenuR} source={require('../assets/paperplane-orange.png')} />
         </TouchableOpacity>
       </View>
     </View>

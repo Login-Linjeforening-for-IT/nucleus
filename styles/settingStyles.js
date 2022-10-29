@@ -5,6 +5,13 @@ export const SS = StyleSheet.create ({
         top: 50,
       },
     text: {
+        height: 30,
+        alignSelf: 'center',
+        color: 'white',
+        fontSize: 20,
+    },
+    creditText: {
+        height: 22,
         alignSelf: 'center',
         color: 'white',
         fontSize: 20,
@@ -25,9 +32,9 @@ export const SS = StyleSheet.create ({
         color: 'white',
     },
     bugImage: {
-        top: -20,
+        top: -30,
         alignSelf: 'center',
-        height: 150,
+        height: 120,
         width: 150,
     },
     makeNotificationImage: {
@@ -44,5 +51,8 @@ export const SS = StyleSheet.create ({
         alignSelf: 'center',
         height: 250,
         width: 250
-      }
+    },
+    creditCard: {
+        height: 0,
+    }
 });

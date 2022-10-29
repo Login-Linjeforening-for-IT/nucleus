@@ -56,9 +56,9 @@ const goBack = () => {
           data={setting}
           renderItem={({item}) => (
             <View>
-              <Card>
-                <Text style={SS.text}>{item.nick} {item.sur}</Text>
-                <Text style={SS.text}>{item.mail}</Text>
+              <Card style={SS.creditCard}>
+                <Text style={SS.creditText}>{item.nick} {item.sur}</Text>
+                <Text style={SS.creditText}>{item.mail}</Text>
               </Card>
           </View>
           )}

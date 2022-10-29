@@ -29,7 +29,7 @@ export const GS = StyleSheet.create({
       paddingHorizontal: 20,
     },
     creditImage: {
-      bottom: '15%',
+      bottom: '10%',
       alignSelf: 'center',
       height: 105,
       width: 200,
