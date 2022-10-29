@@ -23,6 +23,7 @@ export const GS = StyleSheet.create({
       height: 80,
     },
     creditContent: {
+      top: '-2.5%',
       height: '75%',
       backgroundColor: '#181818',
       paddingHorizontal: 20,

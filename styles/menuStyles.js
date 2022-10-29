@@ -13,20 +13,23 @@ export const MS = StyleSheet.create ({
     backgroundColor: '#181818',
   },
   tMenuL: {
+    top: '10%',
     left: '-10%',
     width: 120,
     height: 120
   },
   goBack: {
-    left: '-20%',
-    width: 120,
-    height: 120
+    top: '25%',
+    left: '-10%',
+    width: 80,
+    height: 80
   },
   goBackContent: {
     width: 45,
     height: 45
   },
   tMenuR: {
+    top: '10%',
     left: '10%',
     width: 120,
     height: 120
@@ -48,26 +51,32 @@ export const MS = StyleSheet.create ({
       alignItems: 'center'
     },
     bMenu1: {
+      bottom: '10%',
       width: 120,
       height: 120
     },
     bMenu2: {
+      bottom: '10%',
       width: 120,
       height: 120
     },
     bMenu3: {
+      bottom: '10%',
       width: 120,
       height: 120
     },
     settingsSelected: {
+      bottom: '10%',
       width: 120,
       height: 120
     },
     eventSelected: {
+      bottom: '10%',
       width: 120,
       height: 120
     },
     homeSelected: {
+      bottom: '10%',
       width: 120,
       height: 120
     },

@@ -38,7 +38,7 @@ const topMenuPage = () => {
           <Image style={MS.tMenuL} source={require('../assets/login-text.png')} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => topMenuPage()}>
-          <Image style={MS.tMenuR} source={require('../assets/telegram777.png')} />
+          <Image style={MS.tMenuR} source={require('../assets/paperplane777.png')} />
         </TouchableOpacity>
       </View>
 {/* ========================= DISPLAY CONTENT ========================= */}
@@ -57,13 +57,15 @@ const topMenuPage = () => {
 
 {/* ========================= DISPLAY BOTTOM MENU ========================= */}
       <View style={MS.bMenuUniversal}>
-      <Image style={MS.bMenu2} source={require('../assets/home-orange.png')} />
-        <TouchableOpacity onPress={() => eventPage()}>
-      <Image style={MS.bMenu2} source={require('../assets/menu777.png')} />
-        </TouchableOpacity >
-        <TouchableOpacity onPress={() => settingsPage()}>
-          <Image style={MS.bMenu1} source={require('../assets/settings777.png')} />
-        </TouchableOpacity>
+      <TouchableOpacity>
+        <Image style={MS.homeSelected} source={require('../assets/house-orange.png')} />
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => eventPage()}>
+        <Image style={MS.bMenu2} source={require('../assets/calendar777.png')} />
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => settingsPage()}>
+        <Image style={MS.bMenu1} source={require('../assets/nsetting777.png')} />
+      </TouchableOpacity>
       </View>     
     </View>
     

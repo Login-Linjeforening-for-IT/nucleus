@@ -31,6 +31,7 @@ export const SS = StyleSheet.create ({
         width: 150,
     },
     makeNotificationImage: {
+        top: 20,
         alignSelf: 'center',
         height: 200,
         width: 200,

@@ -17,18 +17,15 @@ import { FlatList } from 'react-native-gesture-handler';
 
 export default function TodoScreen({ navigation }) {
     const [setting] = useState([
-      {id: '0', todo: 'Fix logo placement'},
-      {id: '1', todo: 'Add safe area view'},
-      {id: '2', todo: 'Render everything based on screen size so no buttons are unclickable'},
-      {id: '3', todo: 'Create mini logos'},
-      {id: '4', todo: 'Logos for each comitee'},
-      {id: '5', todo: 'Make top menu background invisible'},
-      {id: '6', todo: 'Build content drafts for each site (copy from web)'},
-      {id: '7', todo: 'Fix line breaking event text'},
-      {id: '8', todo: 'Implement push notifications'},
-      {id: '9', todo: 'Build all the pages in settings'},
-      {id: '10', todo: 'Page to find our other social media'},
-      {id: '11', todo: 'Fit to all screen sizes'},
+      {id: '1', todo: 'Fix logo placement'},
+      {id: '2', todo: 'Create mini logos'},
+      {id: '3', todo: 'Logos for each comitee'},
+      {id: '4', todo: 'Make top menu background invisible'},
+      {id: '5', todo: 'Build content drafts for each site (copy from web)'},
+      {id: '6', todo: 'Fix line breaking event text'},
+      {id: '7', todo: 'Implement push notifications'},
+      {id: '8', todo: 'Build all the pages in settings'},
+      {id: '9', todo: 'Page to find our other social media'},
   ])
 {/* ========================= DISPLAY APP START ========================= */}
 const eventPage = () => {
@@ -36,6 +33,9 @@ const eventPage = () => {
 }
 const homePage = () => {
   navigation.navigate('HomeScreen');
+}
+const settingsPage = () => {
+  navigation.navigate('SettingScreen');
 }
 const goBack = () => {
   navigation.goBack()
@@ -66,14 +66,15 @@ const goBack = () => {
 
 {/* ========================= DISPLAY BOTTOM MENU ========================= */}
       <View style={MS.bMenuUniversal}>
-      <TouchableOpacity onPress={() => homePage()}>
-          <Image style={MS.bMenu3} source={require('../assets/home777.png')} />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => eventPage()}>
-        <Image style={MS.bMenu2} source={require('../assets/menu777.png')} />
-        </TouchableOpacity>
-          <Image style={MS.settingsSelected} source={require('../assets/settings-orange.png')} />
-        
+          <TouchableOpacity onPress={() => homePage()}>
+            <Image style={MS.bMenu3} source={require('../assets/house777.png')} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => eventPage()}>
+            <Image style={MS.bMenu2} source={require('../assets/calendar777.png')} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => settingsPage()}>
+            <Image style={MS.bMenu2} source={require('../assets/nsetting-orange.png')} />
+          </TouchableOpacity>
       </View>     
     </View>
     

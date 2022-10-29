@@ -54,7 +54,7 @@ getData();
           <Image style={MS.tMenuL} source={require('../assets/login-text.png')} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => topMenuPage()}>
-          <Image style={MS.tMenuR} source={require('../assets/telegram777.png')} />
+          <Image style={MS.tMenuR} source={require('../assets/paperplane777.png')} />
         </TouchableOpacity>
       </View>
 
@@ -90,12 +90,14 @@ getData();
 {/* ========================= DISPLAY BOTTOM MENU ========================= */}
       <View style={MS.bMenuUniversal}>
       <TouchableOpacity onPress={() => homePage()}>
-          <Image style={MS.bMenu3} source={require('../assets/home777.png')} />
-        </TouchableOpacity>
-          <Image style={MS.eventSelected} source={require('../assets/menu-orange.png')} />
-        <TouchableOpacity onPress={() => settingsPage()}>
-          <Image style={MS.bMenu1} source={require('../assets/settings777.png')} />
-        </TouchableOpacity>
+            <Image style={MS.bMenu3} source={require('../assets/house777.png')} />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Image style={MS.eventSelected} source={require('../assets/calendar-orange.png')} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => settingsPage()}>
+            <Image style={MS.bMenu1} source={require('../assets/nsetting777.png')} />
+          </TouchableOpacity>
       </View>     
     </View>
     

@@ -67,13 +67,14 @@ const homePage = () => {
 {/* ========================= DISPLAY BOTTOM MENU ========================= */}
       <View style={MS.bMenuWhenNoTop}>
       <TouchableOpacity onPress={() => homePage()}>
-          <Image style={MS.bMenu3} source={require('../assets/home777.png')} />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => eventPage()}>
-        <Image style={MS.bMenu2} source={require('../assets/menu777.png')} />
-        </TouchableOpacity>
-          <Image style={MS.settingsSelected} source={require('../assets/settings-orange.png')} />
-        
+        <Image style={MS.bMenu3} source={require('../assets/house777.png')} />
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => eventPage()}>
+        <Image style={MS.bMenu2} source={require('../assets/calendar777.png')} />
+      </TouchableOpacity>
+      <TouchableOpacity>
+        <Image style={MS.settingsSelected} source={require('../assets/nsetting-orange.png')} />
+      </TouchableOpacity>
       </View>     
     </View>
     

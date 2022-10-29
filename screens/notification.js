@@ -51,15 +51,15 @@ const goBack = () => {//hoppe over til mail
 
 {/* ========================= DISPLAY BOTTOM MENU ========================= */}
       <View style={MS.bMenuUniversal}>
-      <TouchableOpacity onPress={() => homePage()}>
-          <Image style={MS.bMenu3} source={require('../assets/home777.png')} />
+        <TouchableOpacity onPress={() => homePage()}>
+          <Image style={MS.bMenu3} source={require('../assets/house777.png')} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => eventPage()}>
-          <Image style={MS.bMenu2} source={require('../assets/menu777.png')} />
+          <Image style={MS.bMenu2} source={require('../assets/calendar777.png')} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => settingsPage()}>
-          <Image style={MS.bMenu1} source={require('../assets/settings-orange.png')} />
-        </TouchableOpacity>
+          <Image style={MS.bMenu1} source={require('../assets/nsetting-orange.png')} />
+        </TouchableOpacity>      
       </View>     
     </View>
     
