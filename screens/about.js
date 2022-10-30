@@ -42,7 +42,7 @@ const goBack = () => {
           <Image style={MS.goBack} source={require('../assets/goback777.png')} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => topMenuPage()}>
-          <Image style={MS.tMenuR} source={require('../assets/paperplane777.png')} />
+          <Image style={MS.tMenuR} source={require('../assets/plane777.png')} />
         </TouchableOpacity>
       </View>
 

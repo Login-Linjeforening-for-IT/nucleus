@@ -58,7 +58,7 @@ const homePage = () => {
           <TouchableOpacity onPress={() => navigation.navigate('ContactScreen')}>
               <View style={SS.bug}>
               <Text style={SS.text}>Funnet en bug?</Text>
-              <Image style={SS.bugImage} source={require('../assets/paperplane-orange.png')} />
+              <Image style={SS.bugImage} source={require('../assets/plane-orange.png')} />
               </View>
             </TouchableOpacity>
             <Text style={SS.copyright}>Opphavsrett © 2022 Login - Linjeforeningen for IT, NO 811 940 372</Text>

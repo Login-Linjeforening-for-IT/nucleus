@@ -6,7 +6,7 @@ import Card from '../shared/card';
 import { GS } from '../styles/globalStyles';
 import { MS } from '../styles/menuStyles';
 import { ES } from '../styles/eventStyles';
-import { Month } from '../shared/sharedComponents';
+import GreenLight, { GreenOutline, Check, Month } from '../shared/sharedComponents';
 import { 
   Text, 
   View, 
@@ -54,7 +54,7 @@ getData();
           <Image style={MS.tMenuL} source={require('../assets/login-text.png')} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => topMenuPage()}>
-          <Image style={MS.tMenuR} source={require('../assets/paperplane777.png')} />
+          <Image style={MS.tMenuR} source={require('../assets/plane777.png')} />
         </TouchableOpacity>
       </View>
 
@@ -78,7 +78,8 @@ getData();
                       <View style = {ES.loc}><Text style={ES.loc}>{item.startt[11]}{item.startt[12]}:{item.startt[14]}{item.startt[15]} {item.roomno}. {item.campus}</Text></View>
                       <View><Text style={ES.image}>{item.IMAGENOTRENDERED}</Text></View>
                     </View>
-                      
+                    <View style = {ES.greenLight}><GreenLight/></View>
+                    <View style = {ES.check}><Check/></View>
                     </Card>
                   </TouchableOpacity>
                 </View>

@@ -17,6 +17,7 @@ import { FlatList } from 'react-native-gesture-handler';
 
 export default function TodoScreen({ navigation }) {
     const [setting] = useState([
+      {id: '0', todo: 'Fix enroll button'},
       {id: '1', todo: 'Implement login system'},
       {id: '2', todo: 'Create small color rectangle SVGs for use in events'},
       {id: '3', todo: 'Logos for each comitee'},
