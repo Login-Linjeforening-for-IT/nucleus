@@ -3,52 +3,50 @@ import GreenLight from "../shared/sharedComponents";
 
 export const ES = StyleSheet.create({
     // ============== EVENT AREA  ==============
-  day: {
-    flexDirection: 'column',
-    top: '-20%',
-    borderRadius: 10,
-    backgroundColor: '#d62f42',
-    height: 70,
-    width: 50,
-  },
+    view: {
+      width: '20%',
+      height: '100%',
+      backgroundColor: 'red'
+    },
+    view2: {
+      width: '70%',
+      height: '100%',
+      backgroundColor: 'green'
+    },
+    view3: {
+      width: '10%',
+      height: '100%',
+      backgroundColor: 'blue'
+    },
   dayText: {
-    flexDirection: 'row',
     left: '15%',
     color: 'white',
     fontSize: 30,
   },
   monthText: {
-    flexDirection: 'row',
     top: '-7.5%',
     left: '15%',
     color: 'white',
     fontSize: 30,
   },
   month: {
-    flexDirection: 'row',
     color: 'white',
     fontSize: 24
   },
   title: {
-    flexDirection: 'row',
-    top: -37,
+    top: -5,
     fontSize: 20,
-    left: 30,
     color: 'white',
   },
   desc: {
-    flexDirection: 'row',
     color: 'white',
   },
   loc: {
-    flexDirection: 'row',
-    top: -32,
+    top: -5,
     fontSize: 20,
-    left: 30,
     color: 'white',
   },
   time: {
-    flexDirection: 'row',
     color: 'white',
   },
   headerTitle: {
@@ -60,14 +58,21 @@ export const ES = StyleSheet.create({
     backgroundColor: '#777',
   },
   eventBack: {
-    height: 25,
-  },
-  greenLight: {
-    alignSelf: 'flex-end',
-    justifyContent: 'center',
+    flexDirection: 'row',
+    height: 55,
   },
   check: {
-    alignSelf: 'flex-end',
-    justifyContent: 'center',
-  }
+    flexDirection: 'row',
+    top: '-20%',
+    borderRadius: 10,
+    backgroundColor: 'green',
+    height: 100,
+    width: 100,
+  },
+  greenLight: {
+    color: 'white',
+  },
+  checkContent: {
+    color: 'white',
+  },
 })

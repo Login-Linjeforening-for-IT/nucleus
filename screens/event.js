@@ -70,16 +70,21 @@ getData();
                   <TouchableOpacity onPress={() => navigation.navigate('SpecificEventScreen', item)}>
                     <Card>
                     <View style={ES.eventBack}>
-                      <View style = {ES.day}>
+                      <View style={ES.view}>
                         <Text style={ES.dayText}>{item.startt[8]}{item.startt[9]}</Text>
                         <Text style={ES.monthText}>{item.startt[5]}{item.startt[6]}</Text>
-                        </View>
-                      <View style = {ES.title}><Text style={ES.title}>{item.eventname}</Text></View>
-                      <View style = {ES.loc}><Text style={ES.loc}>{item.startt[11]}{item.startt[12]}:{item.startt[14]}{item.startt[15]} {item.roomno}. {item.campus}</Text></View>
-                      <View><Text style={ES.image}>{item.IMAGENOTRENDERED}</Text></View>
+                      </View>
+                      <View style={ES.view2}>
+                        <View style = {ES.title}><Text style={ES.title}>{item.eventname}</Text></View>
+                        <View style = {ES.loc}><Text style={ES.loc}>{item.startt[11]}{item.startt[12]}:{item.startt[14]}{item.startt[15]} {item.roomno}. {item.campus}</Text></View>
+                        {/* <View><Text style={ES.image}>{item.IMAGENOTRENDERED}</Text></View> */}
+                      </View>
+                      <View style={ES.view3}>
+                        <View style = {ES.greenLight}><GreenLight/></View>
+                        <View style = {ES.checkContent}><Check/></View>
+                      </View>
                     </View>
-                    <View style = {ES.greenLight}><GreenLight/></View>
-                    <View style = {ES.check}><Check/></View>
+                    
                     </Card>
                   </TouchableOpacity>
                 </View>
