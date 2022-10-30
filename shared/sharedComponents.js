@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { StyleSheet, View, Text, Switch } from 'react-native';
 import Svg, { Circle, Path, SvgUri } from 'react-native-svg';
 import { GS } from '../styles/globalStyles';
@@ -64,7 +64,22 @@ export function Kontakt() {
         <Text/><Text/><Text/><Text/>
     </View> 
     )
-    
+}
+
+export function Notification() {
+    const [isEnabled, setIsEnabled] = useState(false);
+    const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+    return(
+        <View>
+          <Switch
+            trackColor={{ true: "#181818" }}
+            thumbColor={isEnabled ? "green" : "red"}
+            ios_backgroundColor="#080808"
+            onValueChange={toggleSwitch}
+            value={isEnabled}
+          />
+        </View>
+    )
 }
 
 const styles = StyleSheet.create({

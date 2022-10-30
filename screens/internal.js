@@ -51,7 +51,7 @@ const [pass, setPass] = useState('password')
         
         <ScrollView showsVerticalScrollIndicator={false}>
           
-            <Text style={T.centered}>Internal</Text>
+            <Text style={T.centered}>Internt</Text>
             <Text/><Text/>
             <Text style={T.centered}>Login</Text>
             <Text/><Text/>

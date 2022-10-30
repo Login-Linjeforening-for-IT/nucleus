@@ -52,7 +52,4 @@ export const SS = StyleSheet.create ({
         height: 250,
         width: 250
     },
-    creditCard: {
-        height: 0,
-    }
 });

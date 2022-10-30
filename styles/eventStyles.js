@@ -1,27 +1,24 @@
 import { StyleSheet } from "react-native";
-import GreenLight from "../shared/sharedComponents";
 
 export const ES = StyleSheet.create({
-    // ============== EVENT AREA  ==============
-    view: {
-      top: '-2%',
-      justifyContent: 'center',
-      width: '15%',
-      height: '120%',
-      backgroundColor: 'red',
-      borderRadius: 10,
-    },
-    view2: {
-      left: 2,
-      justifyContent: 'center',
-      width: '75%',
-      height: '100%',
-    },
-    view3: {
-      justifyContent: 'flex-start',
-      width: '10%',
-      height: '100%',
-    },
+  view: {
+    top: '-2%',
+    justifyContent: 'center',
+    width: '15%',
+    height: '120%',
+    backgroundColor: 'red',
+    borderRadius: 10,
+  },
+  view2: {
+    left: 2,
+    top: '.1%',
+    width: '75%',
+  },
+  view3: {
+    justifyContent: 'flex-start',
+    width: '10%',
+    height: '100%',
+  },
   dayText: {
     left: '15%',
     color: 'white',

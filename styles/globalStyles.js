@@ -13,15 +13,6 @@ export const GS = StyleSheet.create({
       backgroundColor: '#181818',
       paddingHorizontal: 20,
       },
-    center: {
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    welcomeImage: {
-      left: -7,
-      width: 200,
-      height: 80,
-    },
     creditContent: {
       top: '-2.5%',
       height: '75%',
@@ -40,5 +31,32 @@ export const GS = StyleSheet.create({
     height: 50,
     borderRadius: 20,
     color: 'white',
-},
+  },
+  notificationView: {
+    left: '50%',
+    width: '50%',
+    flexDirection: 'row',
+
+  },
+  notificationBack: {
+    flexDirection: 'row',
+    height: 25,
+  },
+  notificationText: {
+    color: 'white',
+    justifyContent: 'center',
+    fontSize: 20
+  },
+  view: {
+    alignSelf: 'center',
+    width: '85%',
+  },
+  view2: {
+    justifyContent: 'center',
+    borderRadius: 10,
+  },
+  card: {
+    height: 10
+  }
+  
 });

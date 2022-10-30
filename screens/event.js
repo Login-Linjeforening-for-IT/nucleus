@@ -1,7 +1,6 @@
 {/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
 import { StatusBar } from 'expo-status-bar';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Card from '../shared/card';
 import { GS } from '../styles/globalStyles';
 import { MS } from '../styles/menuStyles';
@@ -82,7 +81,7 @@ getData();
                         </View>
                         <View style={ES.view3}>
                           <TouchableOpacity onPress={() => eventState = true}>
-                          <View style = {ES.greenLight}><GreenLight/></View>
+                          <View style = {ES.greenLight}><GrayLight/></View>
                           <View style = {ES.checkContent}><Check/></View>
                           </TouchableOpacity>
                           

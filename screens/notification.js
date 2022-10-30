@@ -3,13 +3,17 @@ import { StatusBar } from 'expo-status-bar';
 import { GS } from '../styles/globalStyles';
 import { MS } from '../styles/menuStyles';
 import TopMenu from '../shared/topmenu';
+import { useEffect, useState } from 'react';
+import { Notification } from '../shared/sharedComponents';
+import Card from '../shared/card';
 import { T } from '../styles/text';
 import { 
   Text, 
   View, 
   Image, 
   ScrollView,
-  TouchableOpacity
+  TouchableOpacity,
+  Switch
 } from 'react-native';
 
 {/* ========================= APP START ========================= */}
@@ -41,11 +45,43 @@ const goBack = () => {//hoppe over til mail
       </View>
 {/* ========================= DISPLAY CONTENT ========================= */}
 <View style={GS.content}>
-        
         <ScrollView showsVerticalScrollIndicator={false}>
-          
-            <Text style={T.centered}>Varslinger</Text>
-          
+          <Text style={T.centered}>Varslinger</Text>
+          <Card>
+            <View style={GS.notificationBack}>
+              <View style={GS.view}>
+                <Text style={GS.notificationText}>Viktig informasjon</Text>
+              </View>
+              <View style={GS.view2}><Notification/></View>
+            </View>
+          </Card>
+
+          <Card>
+            <View style={GS.notificationBack}>
+              <View style={GS.view}>
+                <Text style={GS.notificationText}>Events</Text>
+              </View>
+              <View style={GS.view2}><Notification/></View>
+            </View>
+          </Card>
+
+          <Card>
+            <View style={GS.notificationBack}>
+              <View style={GS.view}>
+                <Text style={GS.notificationText}>Bedpres</Text>
+              </View>
+              <View style={GS.view2}><Notification/></View>
+            </View>
+          </Card>
+
+          <Card>
+            <View style={GS.notificationBack}>
+              <View style={GS.view}>
+                <Text style={GS.notificationText}>Påminnelser</Text>
+              </View>
+              <View style={GS.view2}><Notification/></View>
+            </View>
+          </Card>
         </ScrollView>
       </View>   
 
