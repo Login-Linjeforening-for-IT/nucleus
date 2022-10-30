@@ -8,17 +8,17 @@ export default function GreenLight() {
     return(
     <View style={styles.size}>
         <Svg height="100%" width="100%" viewBox="0 0 100 100" >
-        <Circle cx="50" cy="50" r="50" stroke="#181818" strokeWidth=".5" fill="#181818" />
+        <Circle cx="50" cy="50" r="50" stroke="green" strokeWidth=".5" fill="green" />
         </Svg>
     </View>
     );
 };
 
-export function GreenOutline() {
+export function GrayLight() {
     return(
     <View style={styles.size}>
         <Svg height="100%" width="100%" viewBox="0 0 100 100" >
-        <Circle cx="50" cy="50" r="50" stroke="#90ee90" strokeWidth=".5" fill="#90ee90"/>
+        <Circle cx="50" cy="50" r="50" stroke="#181818" strokeWidth=".5" fill="#181818" />
         </Svg>
     </View>
     );
@@ -27,7 +27,7 @@ export function GreenOutline() {
 export function Check() {
     return(
     <View style={styles.size}>
-        <Svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill='green'>
+        <Svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill='#282828'>
             <Path d="M13.788 25.588c.04.032.064.076.106.106.06.04.128.048.192.076.076.036.15.07.23.092.078.02.154.03.234.036.114.012.224.012.336-.004.046-.008.09-.02.136-.032.138-.034.266-.088.392-.164.022-.014.04-.03.062-.044.082-.056.17-.098.24-.174.05-.054.072-.124.112-.184.002-.002.006-.004.006-.006L27.752 6.188a1.4 1.4 0 1 0-2.344-1.532L14.4 22.298l-6.088-5.922a1.398 1.398 0 1 0-1.9 2.054l7.324 7.126c.014.014.034.018.052.032z"/>
         </Svg>
     </View>
@@ -82,25 +82,71 @@ const styles = StyleSheet.create({
       },
 });
 
-export function Month(month){
-    <View>
-        <Switch
-            month={{
-                    1: 'Jan',
-                    2: 'Feb',
-                    3: 'Mar',
-                    4: 'Apr',
-                    5: 'May',
-                    6: 'Jun',
-                    7: 'Jul',
-                    8: 'Aug',
-                    9: 'Sep',
-                    10: 'Oct',
-                    11: 'Nov',
-                    11: 'Des',
-                }
-            }
-        />
-    </View>
+// export function MonthFR(ab){
+//     <View>
+//         <Switch
+//             ab={{
+//                     1: 'Jan',
+//                     2: 'Feb',
+//                     3: 'Mar',
+//                     4: 'Apr',
+//                     5: 'May',
+//                     6: 'Jun',
+//                     7: 'Jul',
+//                     8: 'Aug',
+//                     9: 'Sep',
+//                     10: 'Oct',
+//                     '11': 'Nov',
+//                     11: 'Des',
+//                 }
+//             }
+//         />
+//     </View>
     
+// }
+
+// export function Month(month) {
+//     <Switch month={{
+//              case '1': return 'Jan';
+//             '2': 'Feb',
+//             '3': 'Mar',
+//             '4': 'Apr',
+//             '5': 'May',
+//             6: 'Jun',
+//             7: 'Jul',
+//             8: 'Aug',
+//             9: 'Sep',
+//             10: 'Oct',
+//             11: 'Nov',
+//             11: 'Des',
+//         }}
+//     />
+    
+// }
+
+//    ONE = () => {return(<View><Text>Jan</Text></View>)}
+//    TWO = () => {return(<View><Text>Feb</Text></View>)}
+//  THREE = () => {return(<View><Text>Mar</Text></View>)}
+//   FOUR = () => {return(<View><Text>Apr</Text></View>)}
+//   FIVE = () => {return(<View><Text>May</Text></View>)}
+//    SIX = () => {return(<View><Text>Jun</Text></View>)}
+//  SEVEN = () => {return(<View><Text>Jul</Text></View>)}
+//  EIGHT = () => {return(<View><Text>Aug</Text></View>)}
+//   NINE = () => {return(<View><Text>Sep</Text></View>)}
+//    TEN = () => {return(<View><Text>Oct</Text></View>)}
+// ELEVEN = () => {return(<View><Text>Nov</Text></View>)}
+// TWELVE = () => {return(<View><Text>Des</Text></View>)}
+
+export function CheckState(condition) {
+    if (condition == true) {
+        return(
+            <View style = {ES.greenLight}><GreenLight/></View>,
+            <View style = {ES.checkContent}><Check/></View>
+        ) 
+    } else {
+        return(
+            <View style = {ES.GrayLight}><GrayLight/></View>,
+            <View style = {ES.checkContent}><Check/></View>
+        )
+    }
 }

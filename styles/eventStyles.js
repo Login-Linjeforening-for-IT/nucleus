@@ -4,19 +4,23 @@ import GreenLight from "../shared/sharedComponents";
 export const ES = StyleSheet.create({
     // ============== EVENT AREA  ==============
     view: {
-      width: '20%',
-      height: '100%',
-      backgroundColor: 'red'
+      top: '-2%',
+      justifyContent: 'center',
+      width: '15%',
+      height: '120%',
+      backgroundColor: 'red',
+      borderRadius: 10,
     },
     view2: {
-      width: '70%',
+      left: 2,
+      justifyContent: 'center',
+      width: '75%',
       height: '100%',
-      backgroundColor: 'green'
     },
     view3: {
+      justifyContent: 'flex-start',
       width: '10%',
       height: '100%',
-      backgroundColor: 'blue'
     },
   dayText: {
     left: '15%',
@@ -63,16 +67,21 @@ export const ES = StyleSheet.create({
   },
   check: {
     flexDirection: 'row',
-    top: '-20%',
-    borderRadius: 10,
-    backgroundColor: 'green',
     height: 100,
     width: 100,
   },
   greenLight: {
+    top: '12%',
+    alignSelf: 'center',
     color: 'white',
   },
   checkContent: {
+    left: 2,
+    top: '-30%',
+    alignSelf: 'center',
     color: 'white',
   },
+  eventCard: {
+    justifyContent: 'center'
+  }
 })

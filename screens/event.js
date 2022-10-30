@@ -6,7 +6,7 @@ import Card from '../shared/card';
 import { GS } from '../styles/globalStyles';
 import { MS } from '../styles/menuStyles';
 import { ES } from '../styles/eventStyles';
-import GreenLight, { GreenOutline, Check, Month } from '../shared/sharedComponents';
+import GreenLight, { GrayLight, Check, CheckState } from '../shared/sharedComponents';
 import { 
   Text, 
   View, 
@@ -16,6 +16,7 @@ import {
 } from 'react-native';
 
 {/* ========================= APP START ========================= */}
+global.eventState = false
 
   export default function EventScreen({ navigation }) {
 {/* ========================= DISPLAY APP START ========================= */}
@@ -68,22 +69,25 @@ getData();
           renderItem={({item}) => (
                 <View>
                   <TouchableOpacity onPress={() => navigation.navigate('SpecificEventScreen', item)}>
-                    <Card>
-                    <View style={ES.eventBack}>
-                      <View style={ES.view}>
-                        <Text style={ES.dayText}>{item.startt[8]}{item.startt[9]}</Text>
-                        <Text style={ES.monthText}>{item.startt[5]}{item.startt[6]}</Text>
+                    <Card style={ES.eventCard}>
+                      <View style={ES.eventBack}>
+                        <View style={ES.view}>
+                          <Text style={ES.dayText}>{item.startt[8]}{item.startt[9]}</Text>
+                          <Text style={ES.monthText}>{item.startt[5]}{item.startt[6]}</Text>
+                        </View>
+                        <View style={ES.view2}>
+                          <View style = {ES.title}><Text style={ES.title}>{item.eventname}</Text></View>
+                          <View style = {ES.loc}><Text style={ES.loc}>{item.startt[11]}{item.startt[12]}:{item.startt[14]}{item.startt[15]} {item.roomno}. {item.campus}</Text></View>
+                          {/* <View><Text style={ES.image}>{item.IMAGENOTRENDERED}</Text></View> */}
+                        </View>
+                        <View style={ES.view3}>
+                          <TouchableOpacity onPress={() => eventState = true}>
+                          <View style = {ES.greenLight}><GreenLight/></View>
+                          <View style = {ES.checkContent}><Check/></View>
+                          </TouchableOpacity>
+                          
+                        </View>
                       </View>
-                      <View style={ES.view2}>
-                        <View style = {ES.title}><Text style={ES.title}>{item.eventname}</Text></View>
-                        <View style = {ES.loc}><Text style={ES.loc}>{item.startt[11]}{item.startt[12]}:{item.startt[14]}{item.startt[15]} {item.roomno}. {item.campus}</Text></View>
-                        {/* <View><Text style={ES.image}>{item.IMAGENOTRENDERED}</Text></View> */}
-                      </View>
-                      <View style={ES.view3}>
-                        <View style = {ES.greenLight}><GreenLight/></View>
-                        <View style = {ES.checkContent}><Check/></View>
-                      </View>
-                    </View>
                     
                     </Card>
                   </TouchableOpacity>
