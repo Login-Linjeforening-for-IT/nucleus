@@ -16,12 +16,6 @@ export const SS = StyleSheet.create ({
         color: 'white',
         fontSize: 20,
     },
-    copyright: {
-        top: -50,
-        alignSelf: 'center',
-        color: 'white',
-        fontSize: 18,
-    },
     texth2: {
         alignSelf: 'center',
         color: 'white',

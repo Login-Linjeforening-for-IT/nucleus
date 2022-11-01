@@ -63,9 +63,10 @@ const goBack = () => {
             <Text style={T.h3}>Styret og komiteene</Text>
             <Text style={T.paragraph}>Foreningen er satt sammen av et hovedstyret og en rekke komiteer.</Text>
             <Text style={T.red}>Knapper mellom de forskjellige komiteene</Text>
-   			<Text></Text>
+            <Text></Text>
+            <Text style={T.copyright}>Opphavsrett © 2022 Login - Linjeforeningen for IT, NO 811 940 372</Text>
+
         </ScrollView>
-            <Text style={SS.copyright}>Opphavsrett © 2022 Login - Linjeforeningen for IT, NO 811 940 372</Text>
       </View> 
 
 {/* ========================= DISPLAY BOTTOM MENU ========================= */}

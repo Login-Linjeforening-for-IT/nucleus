@@ -85,5 +85,10 @@ export const T = StyleSheet.create({
     alignSelf: 'center',
     fontSize: 30,
     color: 'white',
-    }
+    },
+    copyright: {
+      alignSelf: 'center',
+      color: 'white',
+      fontSize: 18,
+  },
 })
