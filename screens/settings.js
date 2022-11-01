@@ -73,7 +73,7 @@ const homePage = () => {
         <Image style={MS.bMenu2} source={require('../assets/calendar777.png')} />
       </TouchableOpacity>
       <TouchableOpacity>
-        <Image style={MS.settingsSelected} source={require('../assets/nsetting-orange.png')} />
+        <Image style={MS.settingsSelected} source={require('../assets/menu-orange.png')} />
       </TouchableOpacity>
       </View>     
     </View>

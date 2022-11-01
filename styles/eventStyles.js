@@ -53,11 +53,6 @@ export const ES = StyleSheet.create({
   headerTitle: {
     flexDirection: 'row'
   },
-  headerImage: {
-    flexDirection: 'row',
-    color: 'white',
-    backgroundColor: '#777',
-  },
   eventBack: {
     flexDirection: 'row',
     height: 55,
@@ -78,7 +73,4 @@ export const ES = StyleSheet.create({
     alignSelf: 'center',
     color: 'white',
   },
-  eventCard: {
-    justifyContent: 'center'
-  }
 })

@@ -155,7 +155,7 @@ useEffect(() => {
             <Image style={MS.bMenu2} source={require('../assets/calendar777.png')} />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => settingsPage()}>
-            <Image style={MS.bMenu1} source={require('../assets/nsetting-orange.png')} />
+            <Image style={MS.bMenu1} source={require('../assets/menu-orange.png')} />
           </TouchableOpacity>
       </View>     
     </View>

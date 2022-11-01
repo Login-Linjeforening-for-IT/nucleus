@@ -18,8 +18,9 @@ import {
 global.eventState = false
 
   export default function EventScreen({ navigation }) {
-{/* ========================= DISPLAY APP START ========================= */}
-const settingsPage = () => {
+
+  const settingsPage = () => {
+
   navigation.navigate('SettingScreen');
 }
 const homePage = () => {
@@ -39,7 +40,6 @@ const getData=()=>{
   .then(response=>response.json())
   .then(data=>setUsersData(data));
 }
-
 
 useEffect(() => {
 getData();
@@ -84,10 +84,8 @@ getData();
                           <View style = {ES.greenLight}><GrayLight/></View>
                           <View style = {ES.checkContent}><Check/></View>
                           </TouchableOpacity>
-                          
                         </View>
                       </View>
-                    
                     </Card>
                   </TouchableOpacity>
                 </View>
@@ -105,7 +103,7 @@ getData();
             <Image style={MS.eventSelected} source={require('../assets/calendar-orange.png')} />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => settingsPage()}>
-            <Image style={MS.bMenu1} source={require('../assets/nsetting777.png')} />
+            <Image style={MS.bMenu1} source={require('../assets/menu777.png')} />
           </TouchableOpacity>
       </View>     
     </View>
