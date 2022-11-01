@@ -3,6 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import { GS } from '../styles/globalStyles';
 import { T } from '../styles/text';
 import { MS } from '../styles/menuStyles';
+import { SS } from '../styles/settingStyles';
 import { 
   Text, 
   View, 
@@ -62,8 +63,9 @@ const goBack = () => {
             <Text style={T.h3}>Styret og komiteene</Text>
             <Text style={T.paragraph}>Foreningen er satt sammen av et hovedstyret og en rekke komiteer.</Text>
             <Text style={T.red}>Knapper mellom de forskjellige komiteene</Text>
-          
+   			<Text></Text>
         </ScrollView>
+            <Text style={SS.copyright}>Opphavsrett © 2022 Login - Linjeforeningen for IT, NO 811 940 372</Text>
       </View> 
 
 {/* ========================= DISPLAY BOTTOM MENU ========================= */}

@@ -61,7 +61,6 @@ const homePage = () => {
               <Image style={SS.bugImage} source={require('../assets/plane-orange.png')} />
               </View>
             </TouchableOpacity>
-            <Text style={SS.copyright}>Opphavsrett © 2022 Login - Linjeforeningen for IT, NO 811 940 372</Text>
       </View>    
 
 {/* ========================= DISPLAY BOTTOM MENU ========================= */}
