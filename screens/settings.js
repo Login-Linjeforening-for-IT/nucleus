@@ -5,13 +5,14 @@ import { SS } from '../styles/settingStyles'
 import { GS } from '../styles/globalStyles'
 import { useState } from 'react';
 import Card from '../shared/card';
+
 import { 
   Text, 
   View, 
   Image, 
-  TouchableOpacity,
+  FlatList,
+  TouchableOpacity
 } from 'react-native';
-import { FlatList } from 'react-native-gesture-handler';
 
 {/* ========================= APP START ========================= */}
 
