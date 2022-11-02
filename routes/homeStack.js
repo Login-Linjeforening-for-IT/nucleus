@@ -18,20 +18,20 @@ const screens = {
     EventScreen: {
         screen: EventScreen
     },
-    SpecificEventScreen: {
-        screen: SpecificEventScreen,
+    SettingScreen: {
+        screen: SettingScreen
     },
     HomeScreen: {
         screen: HomeScreen
+    },
+    SpecificEventScreen: {
+        screen: SpecificEventScreen,
     },
     AboutScreen: {
         screen: AboutScreen
     },
     TopMenuScreen: {
         screen: TopMenuScreen
-    },
-    SettingScreen: {
-        screen: SettingScreen
     },
     InternalScreen: {
         screen: InternalScreen

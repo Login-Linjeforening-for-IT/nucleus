@@ -17,10 +17,9 @@ import {
 {/* ========================= APP START ========================= */}
 global.eventState = false
 
-  export default function EventScreen({ navigation }) {
+export default function EventScreen({ navigation }) {
 
   const settingsPage = () => {
-
   navigation.navigate('SettingScreen');
 }
 const homePage = () => {
