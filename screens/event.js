@@ -108,4 +108,4 @@ getData();
     </View>
     
   )
-};
+}; //test
