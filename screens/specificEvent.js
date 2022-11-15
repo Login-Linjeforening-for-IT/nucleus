@@ -27,8 +27,8 @@ const eventPage = () => {
 const homePage = () => {
   navigation.navigate('HomeScreen');
 }
-const topMenuPage = () => {
-  navigation.navigate('TopMenuScreen');
+const lightSwitch = () => {
+  //navigation.navigate('lightSwitch');
 }
 const goBack = () => {
   navigation.goBack()
@@ -43,7 +43,7 @@ const goBack = () => {
 <TouchableOpacity onPress={() => goBack()}>
           <Image style={MS.goBack} source={require('../assets/goback777.png')} />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => topMenuPage()}>
+        <TouchableOpacity onPress={() => lightSwitch()}>
           <Image style={MS.tMenuR} source={require('../assets/plane777.png')} />
         </TouchableOpacity>
       </View>

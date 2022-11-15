@@ -12,7 +12,6 @@ import ContactScreeen from '../screens/contact';
 import TodoScreen from '../screens/todo';
 import MakeNotificationScreen from '../screens/makeNotification';
 import CreditScreen from '../screens/credit';
-import TopMenuScreen from '../screens/topmenu';
 
 const screens = {
     EventScreen: {
@@ -29,9 +28,6 @@ const screens = {
     },
     AboutScreen: {
         screen: AboutScreen
-    },
-    TopMenuScreen: {
-        screen: TopMenuScreen
     },
     InternalScreen: {
         screen: InternalScreen

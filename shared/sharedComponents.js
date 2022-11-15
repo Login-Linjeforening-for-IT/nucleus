@@ -97,61 +97,6 @@ const styles = StyleSheet.create({
       },
 });
 
-// export function MonthFR(ab){
-//     <View>
-//         <Switch
-//             ab={{
-//                     1: 'Jan',
-//                     2: 'Feb',
-//                     3: 'Mar',
-//                     4: 'Apr',
-//                     5: 'May',
-//                     6: 'Jun',
-//                     7: 'Jul',
-//                     8: 'Aug',
-//                     9: 'Sep',
-//                     10: 'Oct',
-//                     '11': 'Nov',
-//                     11: 'Des',
-//                 }
-//             }
-//         />
-//     </View>
-    
-// }
-
-// export function Month(month) {
-//     <Switch month={{
-//              case '1': return 'Jan';
-//             '2': 'Feb',
-//             '3': 'Mar',
-//             '4': 'Apr',
-//             '5': 'May',
-//             6: 'Jun',
-//             7: 'Jul',
-//             8: 'Aug',
-//             9: 'Sep',
-//             10: 'Oct',
-//             11: 'Nov',
-//             11: 'Des',
-//         }}
-//     />
-    
-// }
-
-//    ONE = () => {return(<View><Text>Jan</Text></View>)}
-//    TWO = () => {return(<View><Text>Feb</Text></View>)}
-//  THREE = () => {return(<View><Text>Mar</Text></View>)}
-//   FOUR = () => {return(<View><Text>Apr</Text></View>)}
-//   FIVE = () => {return(<View><Text>May</Text></View>)}
-//    SIX = () => {return(<View><Text>Jun</Text></View>)}
-//  SEVEN = () => {return(<View><Text>Jul</Text></View>)}
-//  EIGHT = () => {return(<View><Text>Aug</Text></View>)}
-//   NINE = () => {return(<View><Text>Sep</Text></View>)}
-//    TEN = () => {return(<View><Text>Oct</Text></View>)}
-// ELEVEN = () => {return(<View><Text>Nov</Text></View>)}
-// TWELVE = () => {return(<View><Text>Des</Text></View>)}
-
 export function CheckState(condition) {
     if (condition == true) {
         return(

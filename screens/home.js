@@ -26,8 +26,8 @@ const eventPage = () => {
 const aboutPage = () => {
   navigation.navigate('AboutScreen');
 }
-const topMenuPage = () => {
-  navigation.navigate('TopMenuScreen');
+const lightSwitch = () => {
+  //navigation.navigate('lightSwitch');
 }
   return(
     <View style={MS.backGround}>
@@ -37,7 +37,7 @@ const topMenuPage = () => {
       <TouchableOpacity onPress={() => aboutPage()}>
           <Image style={MS.tMenuL} source={require('../assets/login-text.png')} />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => topMenuPage()}>
+        <TouchableOpacity onPress={() => lightSwitch()}>
           <Image style={MS.tMenuR} source={require('../assets/plane777.png')} />
         </TouchableOpacity>
       </View>
