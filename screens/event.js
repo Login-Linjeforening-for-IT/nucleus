@@ -53,7 +53,7 @@ getData();
           <Image style={MS.tMenuL} source={require('../assets/login-text.png')} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => lightSwitch()}>
-          <Image style={MS.tMenuR} source={require('../assets/plane777.png')} />
+          <Image style={MS.tMenuR} source={require('../assets/loginperson777.png')} />
         </TouchableOpacity>
       </View>
 
@@ -108,4 +108,4 @@ getData();
     </View>
     
   )
-};  
+};

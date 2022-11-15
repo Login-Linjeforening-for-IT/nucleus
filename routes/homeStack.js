@@ -11,7 +11,6 @@ import NotificationScreen from '../screens/notification';
 import ContactScreeen from '../screens/contact';
 import TodoScreen from '../screens/todo';
 import MakeNotificationScreen from '../screens/makeNotification';
-import CreditScreen from '../screens/credit';
 
 const screens = {
     EventScreen: {
@@ -46,9 +45,6 @@ const screens = {
     },
     MakeNotificationScreen: {
         screen: MakeNotificationScreen
-    },
-    CreditScreen: {
-        screen: CreditScreen
     },
 }
 

@@ -15,7 +15,7 @@ import {
 
 {/* ========================= APP START ========================= */}
 
-  export default function BusinessScreen( { navigation }) {
+export default function BusinessScreen( { navigation }) {
 
 {/* ========================= DISPLAY APP START ========================= */}
 

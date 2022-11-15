@@ -22,9 +22,8 @@ export default function SettingScreen({ navigation }) {
       {id: '2', nav: 'BusinessScreen', title: 'Bedrifter'},
       {id: '3', nav: 'ContactScreen', title: 'Kontakt'},
       {id: '4', nav: 'InternalScreen', title: 'Internt'},
-      {id: '5', nav: 'CreditScreen', title: 'Bidratt'},
-      {id: '6', nav: 'TodoScreen', title: 'Gjøremål'},
-      {id: '7', nav: 'MakeNotificationScreen', title: 'Send Varsling'},
+      {id: '5', nav: 'TodoScreen', title: 'Gjøremål'},
+      {id: '6', nav: 'MakeNotificationScreen', title: 'Send Varsling'},
 
   ])
 {/* ========================= DISPLAY APP START ========================= */}

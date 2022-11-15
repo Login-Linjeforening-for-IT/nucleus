@@ -3,6 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import { GS } from '../styles/globalStyles';
 import { T } from '../styles/text';
 import { MS } from '../styles/menuStyles';
+import TopMenu from '../shared/topmenu';
 import { 
   Text, 
   View, 
@@ -13,7 +14,7 @@ import {
 
 {/* ========================= APP START ========================= */}
 
-  export default function AboutScreen( { navigation }) {
+export default function AboutScreen( { navigation }) {
 
 {/* ========================= DISPLAY APP START ========================= */}
 
@@ -26,47 +27,47 @@ const eventPage = () => {
 const homePage = () => {
   navigation.navigate('HomeScreen')
 }
-const lightSwitch = () => {
-  //navigation.navigate('TopMenuScreen')
-}
 const goBack = () => {
   navigation.goBack()
 }
+const lightSwitch = () => {
+  //navigation.navigate('lightSwitch');
+}
 
-  return(
-    <View style={MS.backGround}>
-      <StatusBar style="light" />
+return(
+  <View style={MS.backGround}>
+    <StatusBar style="light" />
 {/* ========================= DISPLAY TOP MENU ========================= */}
-      <View style={MS.topMenu}>
-      <TouchableOpacity onPress={() => goBack()}>
+<View style={MS.topMenu}>
+        <TouchableOpacity onPress={() => goBack()}>
           <Image style={MS.goBack} source={require('../assets/goback777.png')} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => lightSwitch()}>
-          <Image style={MS.tMenuR} source={require('../assets/plane777.png')} />
+          <Image style={MS.tMenuR} source={require('../assets/loginperson777.png')} />
         </TouchableOpacity>
       </View>
 
 {/* ========================= DISPLAY CONTENT ========================= */}
 <View style={GS.content}>
         
-        <ScrollView showsVerticalScrollIndicator={false}>
-          
-            <Text style={T.h2}>Om Login</Text>
-            <Text style={T.paragraph}>Login er linjeforeningen for IT ved  NTNU i Gjøvik og alle som går de følgene studiene er automatisk medlemmer i foreningen.</Text>
-            <Text></Text>
-            <Text style={T.h3}>Av studenter, for studenter.</Text>
-            <Text style={T.paragraph}>Foreningen drives av frivillige studenter som arbeider for at du skal få mest mulig ut av studiene dine ved  NTNU.</Text>
-            <Text style={T.paragraph}>Vi arrangerer regelmessig sosiale arrangementer og bedriftspresentasjoner. Vi holder kontakt med aktuelle bedrifter og inviterer til blant annet cyberdagene én gang i semesteret slik at du som student skal bli kjent med mulighetene utdanningen din gir deg.</Text>
-            <Text style={T.paragraph}>Hver uke samler vi studenter til  TekKom- og  CTF-samlinger, der man kan lære seg nye ting eller komme med bidrag til foreningen. Her kan man møte andre studenter som deler gleden for å lære, og å sette kunnskapene man tilegner seg i praksis. Videre jobber EvntKom stadig med nye og spennende arrangementer som f.eks. filmkvelder og vinterball.</Text>
-            <Text></Text>
-            <Text style={T.h3}>Styret og komiteene</Text>
-            <Text style={T.paragraph}>Foreningen er satt sammen av et hovedstyret og en rekke komiteer.</Text>
-            <Text style={T.red}>Knapper mellom de forskjellige komiteene</Text>
-            <Text></Text>
-            <Text style={T.copyright}>Opphavsrett © 2022 Login - Linjeforeningen for IT, NO 811 940 372</Text>
+    <ScrollView showsVerticalScrollIndicator={false}>
+      
+        <Text style={T.h2}>Om Login</Text>
+        <Text style={T.paragraph}>Login er linjeforeningen for IT ved  NTNU i Gjøvik og alle som går de følgene studiene er automatisk medlemmer i foreningen.</Text>
+        <Text></Text>
+        <Text style={T.h3}>Av studenter, for studenter.</Text>
+        <Text style={T.paragraph}>Foreningen drives av frivillige studenter som arbeider for at du skal få mest mulig ut av studiene dine ved  NTNU.</Text>
+        <Text style={T.paragraph}>Vi arrangerer regelmessig sosiale arrangementer og bedriftspresentasjoner. Vi holder kontakt med aktuelle bedrifter og inviterer til blant annet cyberdagene én gang i semesteret slik at du som student skal bli kjent med mulighetene utdanningen din gir deg.</Text>
+        <Text style={T.paragraph}>Hver uke samler vi studenter til  TekKom- og  CTF-samlinger, der man kan lære seg nye ting eller komme med bidrag til foreningen. Her kan man møte andre studenter som deler gleden for å lære, og å sette kunnskapene man tilegner seg i praksis. Videre jobber EvntKom stadig med nye og spennende arrangementer som f.eks. filmkvelder og vinterball.</Text>
+        <Text></Text>
+        <Text style={T.h3}>Styret og komiteene</Text>
+        <Text style={T.paragraph}>Foreningen er satt sammen av et hovedstyret og en rekke komiteer.</Text>
+        <Text style={T.red}>Knapper mellom de forskjellige komiteene</Text>
+        <Text></Text>
+        <Text style={T.copyright}>Opphavsrett © 2022 Login - Linjeforeningen for IT, NO 811 940 372</Text>
 
-        </ScrollView>
-      </View> 
+    </ScrollView>
+  </View> 
 
 {/* ========================= DISPLAY BOTTOM MENU ========================= */}
       <View style={MS.bMenuUniversal}>

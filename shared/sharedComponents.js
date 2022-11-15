@@ -34,6 +34,13 @@ export function Check() {
     );
 };
 
+export function bigLogo() {
+    return(
+        <View>
+            {/* WIP good svg for big login logo goes here */}
+        </View>
+    )
+}   
 
 export function EksempelSVG() {
     return(
