@@ -91,8 +91,4 @@ export const T = StyleSheet.create({
     color: 'white',
     fontSize: 18,
   },
-  logo: {
-    fontSize: 30,
-    color: 'white',
-  }
 })

@@ -18,6 +18,12 @@ export const MS = StyleSheet.create ({
     width: 120,
     height: 120
   },
+  tMenuC: {
+    alignSelf: 'center',
+    top: '15%',
+    width: 120,
+    height: 120
+  },
   goBack: {
     top: '25%',
     left: '-10%',
@@ -33,6 +39,11 @@ export const MS = StyleSheet.create ({
     left: '10%',
     width: 120,
     height: 120
+  },
+  logo: {
+    alignSelf: 'center',
+    fontSize: 30,
+    color: '#999',
   },
   
 //  ========================= STYLESHEET BOTTOM MENU =========================

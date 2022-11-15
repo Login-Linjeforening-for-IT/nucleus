@@ -34,8 +34,8 @@ const lightSwitch = () => {
       <StatusBar style="light" />
 {/* ========================= DISPLAY TOP MENU ========================= */}
 <View style={MS.topMenu}>
-      <TouchableOpacity onPress={() => aboutPage()}>
-        <Text style={T.logo}>LOGIN</Text>
+      <TouchableOpacity style={MS.tMenuC} onPress={() => aboutPage()}>
+        <Text style={MS.logo}>LOGIN</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => lightSwitch()}>
           <Image style={MS.tMenuR} source={require('../assets/loginperson777.png')} />
