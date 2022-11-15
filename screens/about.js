@@ -3,7 +3,6 @@ import { StatusBar } from 'expo-status-bar';
 import { GS } from '../styles/globalStyles';
 import { T } from '../styles/text';
 import { MS } from '../styles/menuStyles';
-import { SS } from '../styles/settingStyles';
 import { 
   Text, 
   View, 
