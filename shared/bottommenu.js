@@ -11,7 +11,7 @@ import {
 
   export default function bottomMenu( { navigation }) {
 
-  return(
+  return(test
     <View style={MS.top}>
       <StatusBar style="light" />
 {/* ========================= DISPLAY TOP MENU ========================= */}
