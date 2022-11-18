@@ -169,8 +169,8 @@ const showPass = () => {
                     </TouchableOpacity>
                   :
                   <View>
-                    <View style = {SS.passLight}><GrayLight/></View>
-                    <View style = {SS.passCheck}>
+                    <View style = {SS.noPassLight}><GrayLight/></View>
+                    <View style = {SS.noPassCheck}>
                       <Image style={SS.noPassImage} source={require('../assets/eyeF.png')} />
                     </View>
                   </View>

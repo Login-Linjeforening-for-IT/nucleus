@@ -96,4 +96,16 @@ export const SS = StyleSheet.create ({
         height: 40,
         width: 40,
     },
+    noPassLight: {
+        left: '14%',
+        top: '10%',
+        alignSelf: 'center',
+        color: 'white',
+    },
+    noPassCheck: {
+        left: '25%',
+        top: '-35%',
+        alignSelf: 'center',
+        color: 'white',
+    },
 });

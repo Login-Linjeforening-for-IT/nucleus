@@ -1,10 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
-import { MS } from '../styles/menuStyles';
-import { SS } from '../styles/settingStyles';
-import { GS } from '../styles/globalStyles';
+import { MS } from '../../styles/menuStyles';
+import { SS } from '../../styles/settingStyles';
+import { GS } from '../../styles/globalStyles';
 import React, { useState, useEffect, useRef, replace } from 'react';
-import { T } from '../styles/text';
-import Card from '../shared/card';
+import { T } from '../../styles/text';
 import { 
   Text, 
   View, 
@@ -14,7 +13,7 @@ import {
   Platform,
   TextInput
 } from 'react-native';
-import { FlatList, ScrollView } from 'react-native-gesture-handler';
+import { ScrollView } from 'react-native-gesture-handler';
 import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
 
@@ -45,8 +44,7 @@ const goBack = () => {
 const settingsPage = () => {
   navigation.navigate('SettingScreen');
 }
-// const [title, setTitle] = useState('title');
-// const [body, setBody] = useState('body');
+
 const [expoPushToken, setExpoPushToken] = useState('');
 const [notification, setNotification] = useState(false);
 const notificationListener = useRef();
@@ -74,7 +72,7 @@ useEffect(() => {
       <StatusBar style="light" />
       <View style={MS.topMenu}>
       <TouchableOpacity onPress={() => goBack()}>
-          <Image style={MS.goBack} source={require('../assets/goback777.png')} />
+          <Image style={MS.goBack} source={require('../../assets/goback777.png')} />
         </TouchableOpacity>
       </View>
 {/* ========================= DISPLAY CONTENT ========================= */}
@@ -131,7 +129,7 @@ useEffect(() => {
                 {/* <Text style={T.h5}>Data: {notification && JSON.stringify(notification.request.content.data)}</Text> */}
                
                 <View style={SS.makeNotificationImage}>
-                  <Image style={GS.creditImage} source={require('../assets/login-text.png')} />
+                  <Image style={GS.creditImage} source={require('../../assets/login-text.png')} />
                 </View>
               {/* </View> */}
               <Text/><Text/><Text/>
@@ -149,13 +147,13 @@ useEffect(() => {
 {/* ========================= DISPLAY BOTTOM MENU ========================= */}
       <View style={MS.bMenuUniversal}>
         <TouchableOpacity onPress={() => homePage()}>
-            <Image style={MS.bMenu3} source={require('../assets/house777.png')} />
+            <Image style={MS.bMenu3} source={require('../../assets/house777.png')} />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => eventPage()}>
-            <Image style={MS.bMenu2} source={require('../assets/calendar777.png')} />
+            <Image style={MS.bMenu2} source={require('../../assets/calendar777.png')} />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => settingsPage()}>
-            <Image style={MS.bMenu1} source={require('../assets/menu-orange.png')} />
+            <Image style={MS.bMenu1} source={require('../../assets/menu-orange.png')} />
           </TouchableOpacity>
       </View>     
     </View>

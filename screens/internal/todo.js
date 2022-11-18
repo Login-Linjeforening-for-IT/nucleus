@@ -1,9 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
-import { GS } from '../styles/globalStyles';
-import { MS } from '../styles/menuStyles';
+import { GS } from '../../styles/globalStyles';
+import { MS } from '../../styles/menuStyles';
 import { useState } from 'react';
-import Card from '../shared/card';
-import { T } from '../styles/text';
+import Card from '../../shared/card';
+import { T } from '../../styles/text';
 import { 
   Text, 
   View, 
@@ -47,7 +47,7 @@ const goBack = () => {
       <StatusBar style="light" />
       <View style={MS.topMenu}>
       <TouchableOpacity onPress={() => goBack()}>
-          <Image style={MS.goBack} source={require('../assets/goback777.png')} />
+          <Image style={MS.goBack} source={require('../../assets/goback777.png')} />
         </TouchableOpacity>
       </View>
 {/* ========================= DISPLAY CONTENT ========================= */}
@@ -69,13 +69,13 @@ const goBack = () => {
 {/* ========================= DISPLAY BOTTOM MENU ========================= */}
       <View style={MS.bMenuUniversal}>
           <TouchableOpacity onPress={() => homePage()}>
-            <Image style={MS.bMenu3} source={require('../assets/house777.png')} />
+            <Image style={MS.bMenu3} source={require('../../assets/house777.png')} />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => eventPage()}>
-            <Image style={MS.bMenu2} source={require('../assets/calendar777.png')} />
+            <Image style={MS.bMenu2} source={require('../../assets/calendar777.png')} />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => settingsPage()}>
-            <Image style={MS.bMenu2} source={require('../assets/menu-orange.png')} />
+            <Image style={MS.bMenu2} source={require('../../assets/menu-orange.png')} />
           </TouchableOpacity>
       </View>   
     </View>

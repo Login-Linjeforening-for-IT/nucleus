@@ -9,7 +9,6 @@ import {
   Image, 
   ScrollView,
   TouchableOpacity,
-  SafeAreaView
 } from 'react-native';
 
 {/* ========================= APP START ========================= */}
@@ -34,8 +33,8 @@ const lightSwitch = () => {
       <StatusBar style="light" />
 {/* ========================= DISPLAY TOP MENU ========================= */}
 <View style={MS.topMenu}>
-      <TouchableOpacity style={MS.tMenuC} onPress={() => aboutPage()}>
-        <Text style={MS.logo}>LOGIN</Text>
+<TouchableOpacity onPress={() => aboutPage()}>
+          <Image style={MS.tMenuL} source={require('../assets/login-text.png')} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => lightSwitch()}>
           <Image style={MS.tMenuR} source={require('../assets/loginperson777.png')} />
