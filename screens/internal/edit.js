@@ -7,6 +7,7 @@ import { Internal } from '../../styles/internalStyles'
 import { useState } from 'react';
 import Card from '../../shared/card';
 
+
 import { 
   Text, 
   View, 
@@ -39,6 +40,27 @@ const eventPage = () => {
 const homePage = () => {
   navigation.navigate('HomeScreen');
 }
+const goBack = () => {
+  navigation.goBack()
+}
+const [data, setData] = useState({
+  theme: 0,
+  lang: 0
+}) 
+
+const changeTheme = () => {
+  setData({
+    ...data,
+    theme: !data.theme
+  });
+}
+
+const changeLang = () => {
+  setData({
+    ...data,
+    lang: !data.lang
+  });
+}
 
   return(
     <View style={MS.backGround}>
@@ -46,12 +68,27 @@ const homePage = () => {
 {/* ========================= DISPLAY TOP MENU ========================= */}
       <View style={MS.topMenu}>
       <TouchableOpacity onPress={() => aboutPage()}>
-          <Image style={MS.tMenuL} source={require('../../assets/login-text.png')} />
+          <Image style={MS.tMenuL} source={require('../../assets/goback777.png')} />
         </TouchableOpacity>
-        <Text style={T.grey999}>ENDRE</Text>
-        <TouchableOpacity onPress={() => lightSwitch()}>
-          <Image style={MS.tMenuR} source={require('../../assets/loginperson777.png')} />
-        </TouchableOpacity>
+        <View style={MS.tMenuIcons}>
+      <TouchableOpacity onPress={() => changeLang()}>
+        {data.lang ?
+          <Text style={MS.tMenuR3}>EN</Text>
+        : 
+        <Text style={MS.tMenuR3}>NO</Text>
+        }
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => changeTheme()}>
+        {data.theme ?
+          <Image style={MS.tMenuR2} source={require('../../assets/sun777.png')} />
+        : 
+          <Image style={MS.tMenuR2} source={require('../../assets/moon777.png')} />
+        }
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => lightSwitch()}>
+        <Image style={MS.tMenuR} source={require('../../assets/loginperson777.png')} />
+      </TouchableOpacity>
+    </View>
       </View>
 
 {/* ========================= DISPLAY CONTENT ========================= */}

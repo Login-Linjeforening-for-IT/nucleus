@@ -1,8 +1,10 @@
 {/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
+
 import { StatusBar } from 'expo-status-bar';
 import { GS } from '../styles/globalStyles';
 import { MS } from '../styles/menuStyles';
 import { T } from '../styles/text';
+import { useState } from 'react';
 import { 
   Text, 
   View, 
@@ -19,27 +21,62 @@ export default function HomeScreen({ navigation }) {
 const settingsPage = () => {
   navigation.navigate('SettingScreen');
 }
+
 const eventPage = () => {
   navigation.navigate('EventScreen');
 }
+
 const aboutPage = () => {
   navigation.navigate('AboutScreen');
 }
-const lightSwitch = () => {
-  //navigation.navigate('lightSwitch');
+
+const [data, setData] = useState({
+  theme: 0,
+  lang: 0
+}) 
+
+const changeTheme = () => {
+  setData({
+    ...data,
+    theme: !data.theme
+  });
 }
-  return(
+
+const changeLang = () => {
+  setData({
+    ...data,
+    lang: !data.lang
+  });
+}
+
+return(
     <View style={MS.backGround}>
       <StatusBar style="light" />
 {/* ========================= DISPLAY TOP MENU ========================= */}
-<View style={MS.topMenu}>
-<TouchableOpacity onPress={() => aboutPage()}>
-          <Image style={MS.tMenuL} source={require('../assets/login-text.png')} />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => lightSwitch()}>
-          <Image style={MS.tMenuR} source={require('../assets/loginperson777.png')} />
-        </TouchableOpacity>
-      </View>
+  <View style={MS.topMenu}>
+    <TouchableOpacity onPress={() => aboutPage()}>
+      <Image style={MS.tMenuL} source={require('../assets/login-text.png')} />
+    </TouchableOpacity>
+    <View style={MS.tMenuIcons}>
+      <TouchableOpacity onPress={() => changeLang()}>
+        {data.lang ?
+          <Text style={MS.tMenuR3}>EN</Text>
+        : 
+        <Text style={MS.tMenuR3}>NO</Text>
+        }
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => changeTheme()}>
+        {data.theme ?
+          <Image style={MS.tMenuR2} source={require('../assets/sun777.png')} />
+        : 
+          <Image style={MS.tMenuR2} source={require('../assets/moon777.png')} />
+        }
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => lightSwitch()}>
+        <Image style={MS.tMenuR} source={require('../assets/loginperson777.png')} />
+      </TouchableOpacity>
+    </View>
+  </View>
 {/* ========================= DISPLAY CONTENT ========================= */}
 
       <View style={GS.content}>
@@ -50,7 +87,6 @@ const lightSwitch = () => {
             <Text/><Text/><Text/>
             <Text style={T.red}>Events man er påmeldt på</Text>
 
-          
         </ScrollView>
       </View>    
 

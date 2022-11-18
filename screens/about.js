@@ -4,6 +4,8 @@ import { GS } from '../styles/globalStyles';
 import { T } from '../styles/text';
 import { MS } from '../styles/menuStyles';
 import TopMenu from '../shared/topmenu';
+import { useState } from 'react';
+
 import { 
   Text, 
   View, 
@@ -30,20 +32,53 @@ const homePage = () => {
 const goBack = () => {
   navigation.goBack()
 }
+const [data, setData] = useState({
+  theme: 0,
+  lang: 0
+}) 
+
+const changeTheme = () => {
+  setData({
+    ...data,
+    theme: !data.theme
+  });
+}
+
+const changeLang = () => {
+  setData({
+    ...data,
+    lang: !data.lang
+  });
+}
 
 return(
   <View style={MS.backGround}>
-    <StatusBar style="light" />
+      <StatusBar style="light" />
 {/* ========================= DISPLAY TOP MENU ========================= */}
-<View style={MS.topMenu}>
-        <TouchableOpacity onPress={() => goBack()}>
-          <Image style={MS.goBack} source={require('../assets/goback777.png')} />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => lightSwitch()}>
-          <Image style={MS.tMenuR} source={require('../assets/plane777.png')} />
-        </TouchableOpacity>
-      </View>
-
+  <View style={MS.topMenu}>
+    <TouchableOpacity onPress={() => goBack()}>
+      <Image style={MS.goBack} source={require('../assets/goback777.png')} />
+    </TouchableOpacity>
+    <View style={MS.tMenuIcons}>
+      <TouchableOpacity onPress={() => changeLang()}>
+        {data.lang ?
+          <Text style={MS.tMenu2R3}>EN</Text>
+        : 
+        <Text style={MS.tMenu2R3}>NO</Text>
+        }
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => changeTheme()}>
+        {data.theme ?
+          <Image style={MS.tMenu2R2} source={require('../assets/sun777.png')} />
+        : 
+          <Image style={MS.tMenu2R2} source={require('../assets/moon777.png')} />
+        }
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => lightSwitch()}>
+        <Image style={MS.tMenu2R} source={require('../assets/loginperson777.png')} />
+      </TouchableOpacity>
+    </View>
+  </View>
 {/* ========================= DISPLAY CONTENT ========================= */}
 <View style={GS.content}>
         

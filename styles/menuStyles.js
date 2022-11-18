@@ -12,15 +12,19 @@ export const MS = StyleSheet.create ({
     height: '15%',
     backgroundColor: '#181818',
   },
+  tMenuIcons: {
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    flexDirection: 'row'
+  },
   tMenuL: {
     top: '10%',
-    left: '-10%',
     width: 120,
     height: 120
   },
   tMenuC: {
     alignSelf: 'center',
-    top: '15%',
+    top: '10%',
     width: 120,
     height: 120
   },
@@ -35,8 +39,42 @@ export const MS = StyleSheet.create ({
     height: 45
   },
   tMenuR: {
-    top: '10%',
-    left: '10%',
+    left: '-70%',
+    top: '5%',
+    width: 120,
+    height: 120
+  },
+  tMenuR2: {
+    left: '-20%',
+    top: '5%',
+    width: 120,
+    height: 120
+  },
+  tMenuR3: {
+    color: '#777',
+    fontSize: 35,
+    left: '65%',
+    top: '37.5%',
+    width: 120,
+    height: 120
+  },
+  tMenu2R: {
+    left: '-36.75%',
+    top: '5%',
+    width: 120,
+    height: 120
+  },
+  tMenu2R2: {
+    left: '13.25%',
+    top: '5%',
+    width: 120,
+    height: 120
+  },
+  tMenu2R3: {
+    color: '#777',
+    fontSize: 35,
+    left: '98.25%',
+    top: '37.5%',
     width: 120,
     height: 120
   },

@@ -1,5 +1,6 @@
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
+import { DarkTheme, DefaultTheme } from '@react-navigation/native';
 import HomeScreen from '../screens/home'
 import EventScreen from '../screens/event';
 import AboutScreen from '../screens/about';
@@ -57,6 +58,7 @@ const screens = {
 }
 
 const HomeStack = createStackNavigator(screens, {defaultNavigationOptions: {
+    theme: 0,
     animationEnabled: false,
     title: '',
     headerShown: '',

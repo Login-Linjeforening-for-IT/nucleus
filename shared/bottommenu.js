@@ -1,5 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { MS } from '../styles/menu';
+import { DefaultTheme } from '@react-navigation/native';
 import { 
   View, 
   Image, 

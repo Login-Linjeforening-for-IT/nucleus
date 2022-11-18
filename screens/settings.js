@@ -5,7 +5,7 @@ import { SS } from '../styles/settingStyles'
 import { GS } from '../styles/globalStyles'
 import { useState } from 'react';
 import Card from '../shared/card';
-
+import { DefaultTheme } from '@react-navigation/native';
 import { 
   Text, 
   View, 
@@ -31,19 +31,56 @@ const eventPage = () => {
 const homePage = () => {
   navigation.navigate('HomeScreen');
 }
+const aboutPage = () => {
+  navigation.navigate('AboutScreen');
+}
+const [data, setData] = useState({
+  theme: 0,
+  lang: 0
+}) 
 
-  return(
+const changeTheme = () => {
+  setData({
+    ...data,
+    theme: !data.theme
+  });
+}
+
+const changeLang = () => {
+  setData({
+    ...data,
+    lang: !data.lang
+  });
+}
+
+return(
     <View style={MS.backGround}>
       <StatusBar style="light" />
 {/* ========================= DISPLAY TOP MENU ========================= */}
-      <View style={MS.topMenu}>
-      <TouchableOpacity onPress={() => aboutPage()}>
-          <Image style={MS.tMenuL} source={require('../assets/login-text.png')} />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => lightSwitch()}>
-          <Image style={MS.tMenuR} source={require('../assets/loginperson777.png')} />
-        </TouchableOpacity>
-      </View>
+  <View style={MS.topMenu}>
+    <TouchableOpacity onPress={() => aboutPage()}>
+      <Image style={MS.tMenuL} source={require('../assets/login-text.png')} />
+    </TouchableOpacity>
+    <View style={MS.tMenuIcons}>
+      <TouchableOpacity onPress={() => changeLang()}>
+        {data.lang ?
+          <Text style={MS.tMenuR3}>EN</Text>
+        : 
+        <Text style={MS.tMenuR3}>NO</Text>
+        }
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => changeTheme()}>
+        {data.theme ?
+          <Image style={MS.tMenuR2} source={require('../assets/sun777.png')} />
+        : 
+          <Image style={MS.tMenuR2} source={require('../assets/moon777.png')} />
+        }
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => lightSwitch()}>
+        <Image style={MS.tMenuR} source={require('../assets/loginperson777.png')} />
+      </TouchableOpacity>
+    </View>
+  </View>
 
 {/* ========================= DISPLAY CONTENT ========================= */}
       <View style={GS.content}>

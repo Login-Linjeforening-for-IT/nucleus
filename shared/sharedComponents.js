@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import { StyleSheet, View, Text, Switch } from 'react-native';
 import Svg, { Circle, Path, SvgUri } from 'react-native-svg';
-import { GS } from '../styles/globalStyles';
 import { SS } from '../styles/settingStyles';
 import { T } from '../styles/text'
 
@@ -60,6 +59,17 @@ export function EksempelSVG() {
     width="100%"
     height="100%"
     uri="https://dev.w3.org/SVG/tools/svgweb/samples/svg-files/debian.svg"
+    />
+    </View>
+    )
+}
+export function Moon() {
+    return(
+    <View style={styles.container}>
+    <SvgUri
+    width="100%"
+    height="100%"
+    uri="https://visualpharm.com/assets/564/Crescent%20Moon-595b40b75ba036ed117d5ab1.svg"
     />
     </View>
     )

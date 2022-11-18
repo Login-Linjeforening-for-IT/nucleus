@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
+import { DefaultTheme } from '@react-navigation/native';
 
 export default function Card(props) {
     return(
