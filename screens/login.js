@@ -49,8 +49,8 @@ const [data, setData] = useState({
 }) 
 
 const [database] = useState({
-  name: '',
-  pass: ''
+  name: 'test',
+  pass: 'test'
 }
 )
 
