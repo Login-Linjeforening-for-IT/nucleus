@@ -46,4 +46,54 @@ export const SS = StyleSheet.create ({
         height: 250,
         width: 250
     },
+    button: {
+        borderRadius: 40,
+        backgroundColor: '#fd8738',
+        marginHorizontal: 108, 
+        marginVertical: 6,
+    },
+    buttonContent: {
+        marginVertical: 10
+    },
+    loginView: {
+        height: 50,
+        alignSelf: 'center',
+        flexDirection: 'row'
+    },
+    greenLight: {
+        left: '14%',
+        top: '10%',
+        alignSelf: 'center',
+        color: 'white',
+    },
+    checkContent: {
+        left: '25%',
+        top: '-55%',
+        alignSelf: 'center',
+        color: 'white',
+    },
+    passLight: {
+        left: '14%',
+        top: '6.2%',
+        alignSelf: 'center',
+        color: 'white',
+    },
+    passCheck: {
+        left: '25%',
+        top: '-35%',
+        alignSelf: 'center',
+        color: 'white',
+    },
+    showPassImage: {
+        left: '-11%',
+        top: '-20%',
+        height: 40,
+        width: 40,
+    },
+    noPassImage: {
+        left: '-10%',
+        top: '-46.5%',
+        height: 40,
+        width: 40,
+    },
 });

@@ -26,9 +26,11 @@ export const GS = StyleSheet.create({
   },
   inputText: {
     backgroundColor: '#282828',
+    alignSelf: 'center',
     alignItems: 'center',
+    width: '80%',
     height: 50,
-    borderRadius: 20,
+    borderRadius: 40,
     color: 'white',
   },
   notificationBack: {
@@ -50,6 +52,5 @@ export const GS = StyleSheet.create({
   },
   card: {
     height: 10
-  }
-  
+  },
 });

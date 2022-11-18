@@ -11,6 +11,15 @@ export const T = StyleSheet.create({
     alignSelf: 'center',
     color: 'white',
   },
+  black: {
+    alignSelf: 'center',
+    color: 'black',
+  },
+  black30: {
+    alignSelf: 'center',
+    color: 'black',
+    fontSize: 30,
+  },
   grey999: {
     alignSelf: 'center',
     color: '#999',
@@ -36,14 +45,19 @@ export const T = StyleSheet.create({
     fontSize: 30,
     color: 'white',
   },
+  centered15: {
+    alignSelf: 'center',
+    fontSize: 15,
+    color: 'white',
+  },
   centered20: {
     alignSelf: 'center',
     fontSize: 20,
     color: 'white',
   },
-  centered15: {
+  centered50: {
     alignSelf: 'center',
-    fontSize: 15,
+    fontSize: 50,
     color: 'white',
   },
   h0: {

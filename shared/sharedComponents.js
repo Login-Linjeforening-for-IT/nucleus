@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { StyleSheet, View, Text, Switch } from 'react-native';
 import Svg, { Circle, Path, SvgUri } from 'react-native-svg';
 import { GS } from '../styles/globalStyles';
+import { SS } from '../styles/settingStyles';
 import { T } from '../styles/text'
 
 export default function GreenLight() {
@@ -19,6 +20,16 @@ export function GrayLight() {
     <View style={styles.size}>
         <Svg height="100%" width="100%" viewBox="0 0 100 100" >
         <Circle cx="50" cy="50" r="50" stroke="#181818" strokeWidth=".5" fill="#181818" />
+        </Svg>
+    </View>
+    );
+};
+
+export function RedLight() {
+    return(
+    <View style={styles.size}>
+        <Svg height="100%" width="100%" viewBox="0 0 100 100" >
+        <Circle cx="50" cy="50" r="50" stroke="red" strokeWidth=".5" fill="red" />
         </Svg>
     </View>
     );
@@ -116,4 +127,14 @@ export function CheckState(condition) {
             <View style = {ES.checkContent}><Check/></View>
         )
     }
+}
+
+export function Button(props) {
+    return(
+        <View style={SS.button}>
+            <View style={SS.buttonContent}>
+                { props.children }
+            </View>
+        </View>
+    );
 }

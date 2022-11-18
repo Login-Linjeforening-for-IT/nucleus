@@ -21,9 +21,7 @@ export default function SettingScreen({ navigation }) {
       {id: '1', nav: 'NotificationScreen', title: 'Varslinger'},
       {id: '2', nav: 'BusinessScreen', title: 'Bedrifter'},
       {id: '3', nav: 'ContactScreen', title: 'Kontakt'},
-      {id: '4', nav: 'InternalScreen', title: 'Internt'},
-      {id: '5', nav: 'TodoScreen', title: 'Gjøremål'},
-      {id: '6', nav: 'MakeNotificationScreen', title: 'Send Varsling'},
+      {id: '4', nav: 'LoginScreen', title: 'Innsida'},
 
   ])
 {/* ========================= DISPLAY APP START ========================= */}
@@ -37,9 +35,18 @@ const homePage = () => {
   return(
     <View style={MS.backGround}>
       <StatusBar style="light" />
+{/* ========================= DISPLAY TOP MENU ========================= */}
+      <View style={MS.topMenu}>
+      <TouchableOpacity onPress={() => aboutPage()}>
+          <Image style={MS.tMenuL} source={require('../assets/login-text.png')} />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => lightSwitch()}>
+          <Image style={MS.tMenuR} source={require('../assets/loginperson777.png')} />
+        </TouchableOpacity>
+      </View>
 
 {/* ========================= DISPLAY CONTENT ========================= */}
-      <View style={GS.contentWhenNoTop}>
+      <View style={GS.content}>
           <FlatList
           showsVerticalScrollIndicator={''}
           numColumns={1}

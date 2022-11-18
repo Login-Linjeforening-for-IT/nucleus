@@ -11,6 +11,7 @@ import NotificationScreen from '../screens/notification';
 import ContactScreeen from '../screens/contact';
 import TodoScreen from '../screens/todo';
 import MakeNotificationScreen from '../screens/makeNotification';
+import LoginScreen from '../screens/login';
 
 const screens = {
     EventScreen: {
@@ -28,11 +29,14 @@ const screens = {
     AboutScreen: {
         screen: AboutScreen
     },
+    BusinessScreen: {
+        screen: BusinessScreen
+    },
     InternalScreen: {
         screen: InternalScreen
     },
-    BusinessScreen: {
-        screen: BusinessScreen
+    LoginScreen: {
+        screen: LoginScreen
     },
     NotificationScreen: {
         screen: NotificationScreen
