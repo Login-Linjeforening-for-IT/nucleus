@@ -11,7 +11,7 @@ npm-debug.*
 *.orig.*
 web-build/
 babel.config.js
-login.js
+screens/login.js
 
 # macOS
 .DS_Store
