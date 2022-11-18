@@ -16,18 +16,15 @@ import { FlatList } from 'react-native-gesture-handler';
 
 export default function TodoScreen({ navigation }) {
     const [setting] = useState([
-      {id: '0', todo: 'Fix event button'},
-      {id: '1', todo: 'Implement login system'},
-      {id: '2', todo: 'Create small color rectangle SVGs for use in events'},
-      {id: '3', todo: 'Logos for each comitee'},
-      {id: '4', todo: 'Make top and bottom menu background invisible'},
-      {id: '5', todo: 'Build content drafts for each site (copy from web)'},
-      {id: '6', todo: 'Fix line breaking event text'},
-      {id: '7', todo: 'Implement push notifications'},
-      {id: '8', todo: 'Page to find our other social media'},
-      {id: '9', todo: 'Add events you are enrolled to on homepage'},
-      {id: '10', todo: 'Implement mazemap'},
-      {id: '11', todo: 'Fix logo clipping (transfer png to svg)'},
+      {id: '1', todo: 'Create small color rectangle SVGs for use in events'},
+      {id: '2', todo: 'Logos for each comitee'},
+      {id: '3', todo: 'Make top and bottom menu background invisible'},
+      {id: '4', todo: 'Fix line breaking event text'},
+      {id: '5', todo: 'Implement push notifications'},
+      {id: '6', todo: 'Page to find our other social media'},
+      {id: '7', todo: 'Add events you are enrolled to on homepage'},
+      {id: '8', todo: 'Implement mazemap'},
+      {id: '9', todo: 'Fix logo clipping (transfer png to svg)'},
   ])
 {/* ========================= DISPLAY APP START ========================= */}
 const eventPage = () => {

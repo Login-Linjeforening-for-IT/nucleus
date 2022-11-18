@@ -16,7 +16,6 @@ import {
 } from 'react-native';
 
 {/* ========================= APP START ========================= */}
-global.eventState = false
 
   export default function EventScreen({ navigation }) {
 
@@ -46,12 +45,11 @@ getData();
 },[])
 
 const [data, setData] = useState({
-  events: [
-    {}
-  ],
   theme: 0,
   lang: 0
 }) 
+
+const [relevantEvents, updateEvents] = useState([]) 
 
 const changeTheme = () => {
   setData({
@@ -67,10 +65,10 @@ const changeLang = () => {
   });
 }
 
-const activeEvent = (item) => {
-  setData({
-    ...data
-
+const activeEvent = () => {
+  updateEvents({
+    ...relevantEvents,
+    event: !relevantEvents.event
   })
 }
 
@@ -111,29 +109,36 @@ return(
           keyExtractor={(item) => item.eventID}
           data={usersData}
           renderItem={({item}) => (
-                <View>
-                  <TouchableOpacity onPress={() => navigation.navigate('SpecificEventScreen', item)}>
-                    <Card style={ES.eventCard}>
-                      <View style={ES.eventBack}>
-                        <View style={ES.view}>
-                          <Text style={ES.dayText}>{item.startt[8]}{item.startt[9]}</Text>
-                          <Text style={ES.monthText}>{item.startt[5]}{item.startt[6]}</Text>
-                        </View>
-                        <View style={ES.view2}>
-                          <View style = {ES.title}><Text style={ES.title}>{item.eventname}</Text></View>
-                          <View style = {ES.loc}><Text style={ES.loc}>{item.startt[11]}{item.startt[12]}:{item.startt[14]}{item.startt[15]} {item.roomno}. {item.campus}</Text></View>
-                          {/* <View><Text style={ES.image}>{item.IMAGENOTRENDERED}</Text></View> */}
-                        </View>
-                        <View style={ES.view3}>
-                          <TouchableOpacity onPress={() => activeEvent(item)}>
+            <View>
+              <TouchableOpacity onPress={() => navigation.navigate('SpecificEventScreen', item)}>
+                <Card style={ES.eventCard}>
+                  <View style={ES.eventBack}>
+                    <View style={ES.view}>
+                      <Text style={ES.dayText}>{item.startt[8]}{item.startt[9]}</Text>
+                      <Text style={ES.monthText}>{item.startt[5]}{item.startt[6]}</Text>
+                    </View>
+                    <View style={ES.view2}>
+                      <View style = {ES.title}><Text style={ES.title}>{item.eventname}</Text></View>
+                      <View style = {ES.loc}><Text style={ES.loc}>{item.startt[11]}{item.startt[12]}:{item.startt[14]}{item.startt[15]} {item.roomno}. {item.campus}</Text></View>
+                      {/* <View><Text style={ES.image}>{item.IMAGENOTRENDERED}</Text></View> */}
+                    </View>
+                    <View style={ES.view3}>
+                      {activeEvent.event ?
+                        <TouchableOpacity onPress={() => activeEvent()}>
+                          <View style = {ES.greenLight}><GreenLight/></View>
+                          <View style = {ES.checkContent}><Check/></View>
+                        </TouchableOpacity>
+                      :
+                        <TouchableOpacity onPress={() => activeEvent()}>
                           <View style = {ES.greenLight}><GrayLight/></View>
                           <View style = {ES.checkContent}><Check/></View>
-                          </TouchableOpacity>
-                        </View>
-                      </View>
-                    </Card>
-                  </TouchableOpacity>
-                </View>
+                        </TouchableOpacity>
+                      }
+                    </View>
+                  </View>
+                </Card>
+              </TouchableOpacity>
+            </View>
           )}
           />
           
