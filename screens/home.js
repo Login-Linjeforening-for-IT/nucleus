@@ -15,7 +15,7 @@ import {
 
 {/* ========================= APP START ========================= */}
 
-export default function HomeScreen({ navigation }) {
+export default function HomeScreen({ navigation, events }) {
 
 {/* ========================= DISPLAY APP START ========================= */}
 const settingsPage = () => {
@@ -86,7 +86,9 @@ return(
             <Text style={T.centered}>Login har fått app!!!</Text>
             <Text/><Text/><Text/>
             <Text style={T.red}>Events man er påmeldt på</Text>
-
+            <View>
+            {/* {this.state.events.map((item) => { */}
+            </View>
         </ScrollView>
       </View>    
 

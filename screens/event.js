@@ -23,7 +23,7 @@ import {
   navigation.navigate('SettingScreen');
 }
 const homePage = () => {
-  navigation.navigate('HomeScreen');
+  navigation.navigate('HomeScreen', events);
 }
 const aboutPage = () => {
   navigation.navigate('AboutScreen');
@@ -49,7 +49,7 @@ const [data, setData] = useState({
   lang: 0
 }) 
 
-const [relevantEvents, updateEvents] = useState([]) 
+const [events, updateEvents] = useState([]) 
 
 const changeTheme = () => {
   setData({
@@ -63,13 +63,6 @@ const changeLang = () => {
     ...data,
     lang: !data.lang
   });
-}
-
-const activeEvent = () => {
-  updateEvents({
-    ...relevantEvents,
-    event: !relevantEvents.event
-  })
 }
 
 return(
@@ -110,7 +103,30 @@ return(
           data={usersData}
           renderItem={({item}) => (
             <View>
-              <TouchableOpacity onPress={() => navigation.navigate('SpecificEventScreen', item)}>
+              {events.includes(item) ? (
+                <TouchableOpacity onPress={() => navigation.navigate('SpecificEventScreen', item)}>
+                  <Card style={ES.eventCard}>
+                    <View style={ES.eventBack}>
+                      <View style={ES.view}>
+                        <Text style={ES.dayText}>{item.startt[8]}{item.startt[9]}</Text>
+                        <Text style={ES.monthText}>{item.startt[5]}{item.startt[6]}</Text>
+                      </View>
+                      <View style={ES.view2}>
+                        <View style = {ES.title}><Text style={ES.title}>{item.eventname}</Text></View>
+                        <View style = {ES.loc}><Text style={ES.loc}>{item.startt[11]}{item.startt[12]}:{item.startt[14]}{item.startt[15]} {item.roomno}. {item.campus}</Text></View>
+                        {/* <View><Text style={ES.image}>{item.IMAGENOTRENDERED}</Text></View> */}
+                      </View>
+                      <View style={ES.view3}>
+                          <TouchableOpacity onPress={() => updateEvents(events.filter((x) => x.eventID !== item.eventID))}>
+                            <View style = {ES.greenLight}><GreenLight/></View>
+                            <View style = {ES.checkContent}><Check/></View>
+                          </TouchableOpacity>
+                      </View>
+                    </View>
+                  </Card>
+                </TouchableOpacity>
+              ):(
+                <TouchableOpacity onPress={() => navigation.navigate('SpecificEventScreen', item)}>
                 <Card style={ES.eventCard}>
                   <View style={ES.eventBack}>
                     <View style={ES.view}>
@@ -123,21 +139,16 @@ return(
                       {/* <View><Text style={ES.image}>{item.IMAGENOTRENDERED}</Text></View> */}
                     </View>
                     <View style={ES.view3}>
-                      {activeEvent.event ?
-                        <TouchableOpacity onPress={() => activeEvent()}>
-                          <View style = {ES.greenLight}><GreenLight/></View>
-                          <View style = {ES.checkContent}><Check/></View>
-                        </TouchableOpacity>
-                      :
-                        <TouchableOpacity onPress={() => activeEvent()}>
+                        <TouchableOpacity onPress={() => updateEvents([...events, item])}>
                           <View style = {ES.greenLight}><GrayLight/></View>
                           <View style = {ES.checkContent}><Check/></View>
                         </TouchableOpacity>
-                      }
                     </View>
                   </View>
                 </Card>
               </TouchableOpacity>
+              )
+            }
             </View>
           )}
           />
