@@ -1,19 +1,30 @@
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
-import { DarkTheme, DefaultTheme } from '@react-navigation/native';
+
 import HomeScreen from '../screens/home'
 import EventScreen from '../screens/event';
 import AboutScreen from '../screens/about';
 import SettingScreen from '../screens/settings';
 import SpecificEventScreen from '../screens/specificEvent';
 import InternalScreen from '../screens/internal/internal';
-import BusinessScreen from '../screens/business';
+import BusinessScreen from '../screens/contact/business';
 import NotificationScreen from '../screens/notification';
-import ContactScreeen from '../screens/contact';
 import TodoScreen from '../screens/internal/todo';
 import MakeNotificationScreen from '../screens/internal/makeNotification';
 import LoginScreen from '../screens/login';
 import EditScreen from '../screens/internal/edit';
+import ProfileScreen from '../screens/profile';
+import ReportScreen from '../screens/contact/report';
+import ContactScreen from '../screens/contact/contactTekKom';
+import ContactMenuScreen from '../screens/contact/contactMenu';
+import SocialMediaScreen from '../screens/contact/socialmedia';
+import CommitteeMenuScreen from '../screens/contact/committeeMenu';
+import ContactStyretScreen from '../screens/contact/contactStyret';
+import ContactEventKomScreen from '../screens/contact/contactEventKom';
+import ContactTekKomScreen from '../screens/contact/contactTekKom';
+import ContactPRScreen from '../screens/contact/contactPR';
+import ContactCTFkomScreen from '../screens/contact/contactCTFkom';
+import ContactSATkomScreen from '../screens/contact/contactSATkom';
 
 const screens = {
     EventScreen: {
@@ -24,6 +35,9 @@ const screens = {
     },
     HomeScreen: {
         screen: HomeScreen
+    },
+    ProfileScreen: {
+        screen: ProfileScreen
     },
     SpecificEventScreen: {
         screen: SpecificEventScreen,
@@ -44,7 +58,10 @@ const screens = {
         screen: NotificationScreen
     },
     ContactScreen: {
-        screen: ContactScreeen
+        screen: ContactScreen
+    },
+    ContactMenuScreen: {
+        screen: ContactMenuScreen
     },
     TodoScreen: {
         screen: TodoScreen
@@ -54,6 +71,33 @@ const screens = {
     },
     EditScreen: {
         screen: EditScreen
+    },
+    SocialMediaScreen: {
+        screen: SocialMediaScreen
+    },
+    ReportScreen: {
+        screen: ReportScreen
+    },
+    CommitteeMenuScreen: {
+        screen: CommitteeMenuScreen
+    },
+    ContactStyretScreen: {
+        screen: ContactStyretScreen
+    },
+    ContactEventKomScreen: {
+        screen: ContactEventKomScreen
+    },
+    ContactTekKomScreen: {
+        screen: ContactTekKomScreen
+    },
+    ContactPRScreen: {
+        screen: ContactPRScreen
+    },
+    ContactCTFkomScreen: {
+        screen: ContactCTFkomScreen
+    },
+    ContactSATkomScreen: {
+        screen: ContactSATkomScreen
     }
 }
 

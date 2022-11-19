@@ -28,8 +28,8 @@ const eventPage = () => {
 const homePage = () => {
   navigation.navigate('HomeScreen');
 }
-const lightSwitch = () => {
-  //navigation.navigate('lightSwitch');
+const ProfilePage = () => {
+  navigation.navigate('ProfileScreen')
 }
 const goBack = () => {
   navigation.goBack()
@@ -62,22 +62,8 @@ const changeLang = () => {
       <Image style={MS.goBack} source={require('../assets/goback777.png')} />
     </TouchableOpacity>
     <View style={MS.tMenuIcons}>
-      <TouchableOpacity onPress={() => changeLang()}>
-        {data.lang ?
-          <Text style={MS.tMenu2R3}>EN</Text>
-        : 
-        <Text style={MS.tMenu2R3}>NO</Text>
-        }
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => changeTheme()}>
-        {data.theme ?
-          <Image style={MS.tMenu2R2} source={require('../assets/sun777.png')} />
-        : 
-          <Image style={MS.tMenu2R2} source={require('../assets/moon777.png')} />
-        }
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => lightSwitch()}>
-        <Image style={MS.tMenu2R} source={require('../assets/loginperson777.png')} />
+      <TouchableOpacity onPress={() => ProfilePage()}>
+        <Image style={MS.tMenuL} source={require('../assets/loginperson777.png')} />
       </TouchableOpacity>
     </View>
   </View>

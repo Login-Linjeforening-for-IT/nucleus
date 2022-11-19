@@ -33,23 +33,8 @@ const eventPage = () => {
 const homePage = () => {
   navigation.navigate('HomeScreen');
 }
-const [data, setData] = useState({
-  theme: 0,
-  lang: 0
-}) 
-
-const changeTheme = () => {
-  setData({
-    ...data,
-    theme: !data.theme
-  });
-}
-
-const changeLang = () => {
-  setData({
-    ...data,
-    lang: !data.lang
-  });
+const ProfilePage = () => {
+  navigation.navigate('ProfileScreen')
 }
 
   return(
@@ -61,23 +46,11 @@ const changeLang = () => {
           <Image style={MS.tMenuL} source={require('../../assets/login-text.png')} />
         </TouchableOpacity>
         <View style={MS.tMenuIcons}>
-      <TouchableOpacity onPress={() => changeLang()}>
-        {data.lang ?
-          <Text style={MS.tMenuR3}>EN</Text>
-        : 
-        <Text style={MS.tMenuR3}>NO</Text>
-        }
+        <View style={MS.tMenuIcons}>
+      <TouchableOpacity onPress={() => ProfilePage()}>
+        <Image style={MS.tMenuL} source={require('../../assets/loginperson777.png')} />
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => changeTheme()}>
-        {data.theme ?
-          <Image style={MS.tMenuR2} source={require('../../assets/sun777.png')} />
-        : 
-          <Image style={MS.tMenuR2} source={require('../../assets/moon777.png')} />
-        }
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => lightSwitch()}>
-        <Image style={MS.tMenuR} source={require('../../assets/loginperson777.png')} />
-      </TouchableOpacity>
+    </View>
     </View>
       </View>
 

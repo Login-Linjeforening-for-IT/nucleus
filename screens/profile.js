@@ -15,11 +15,14 @@ import {
 
 {/* ========================= APP START ========================= */}
 
-export default function SettingScreen({ navigation }) {
+export default function ProfileScreen({ navigation }) {
     const [setting] = useState([
-      {id: '1', nav: 'EventScreen', title: 'Arbeid pågår'},
+        {id: '1', nav: 'NotificationScreen', title: 'Innstillinger'},
+        {id: '2', nav: 'ContactMenuScreen', title: 'Kontakt Login'},
+        {id: '3', nav: 'LoginScreen', title: 'Innsida (verv)'},
 
-  ])
+    ])
+
 {/* ========================= DISPLAY APP START ========================= */}
 const eventPage = () => {
   navigation.navigate('EventScreen');
@@ -30,21 +33,27 @@ const homePage = () => {
 const aboutPage = () => {
   navigation.navigate('AboutScreen');
 }
-const ProfilePage = () => {
-  navigation.navigate('ProfileScreen')
+const settingsPage = () => {
+    navigation.navigate('SettingScreen')
 }
+const ProfilePage = () => {
+    navigation.navigate('ProfileScreen')
+}
+const goBack = () => {
+    navigation.goBack()
+  }
 
 return(
     <View style={MS.backGround}>
       <StatusBar style="light" />
 {/* ========================= DISPLAY TOP MENU ========================= */}
   <View style={MS.topMenu}>
-    <TouchableOpacity onPress={() => aboutPage()}>
-      <Image style={MS.tMenuL} source={require('../assets/login-text.png')} />
+    <TouchableOpacity onPress={() => goBack()}>
+      <Image style={MS.goBack} source={require('../assets/goback777.png')} />
     </TouchableOpacity>
     <View style={MS.tMenuIcons}>
       <TouchableOpacity onPress={() => ProfilePage()}>
-        <Image style={MS.tMenuL} source={require('../assets/loginperson777.png')} />
+        <Image style={MS.tMenuL} source={require('../assets/loginperson-orange.png')} />
       </TouchableOpacity>
     </View>
   </View>
@@ -68,7 +77,8 @@ return(
           />
           <TouchableOpacity onPress={() => navigation.navigate('ContactScreen')}>
               <View style={SS.bug}>
-                <Image style={SS.bugImage} source={require('../assets/login-text.png')} />
+              <Text style={SS.text}>Funnet en bug?</Text>
+              <Image style={SS.bugImage} source={require('../assets/plane-orange.png')} />
               </View>
             </TouchableOpacity>
       </View>    
@@ -81,8 +91,8 @@ return(
       <TouchableOpacity onPress={() => eventPage()}>
         <Image style={MS.bMenu2} source={require('../assets/calendar777.png')} />
       </TouchableOpacity>
-      <TouchableOpacity>
-        <Image style={MS.settingsSelected} source={require('../assets/menu-orange.png')} />
+      <TouchableOpacity onPress={() => settingsPage()}>
+        <Image style={MS.settingsSelected} source={require('../assets/menu777.png')} />
       </TouchableOpacity>
       </View>     
     </View>

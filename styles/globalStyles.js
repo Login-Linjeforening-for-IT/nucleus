@@ -39,7 +39,6 @@ export const GS = StyleSheet.create({
   },
   notificationText: {
     color: 'white',
-    justifyContent: 'center',
     fontSize: 20
   },
   view: {
@@ -48,7 +47,6 @@ export const GS = StyleSheet.create({
   },
   view2: {
     justifyContent: 'center',
-    borderRadius: 10,
   },
   card: {
     height: 10

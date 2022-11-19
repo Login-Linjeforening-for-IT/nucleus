@@ -3,7 +3,6 @@ import { StatusBar } from 'expo-status-bar';
 import { GS } from '../styles/globalStyles';
 import { T } from '../styles/text';
 import { MS } from '../styles/menuStyles';
-import TopMenu from '../shared/topmenu';
 import { useState } from 'react';
 
 import { 
@@ -29,26 +28,11 @@ const eventPage = () => {
 const homePage = () => {
   navigation.navigate('HomeScreen')
 }
+const ProfilePage = () => {
+  navigation.navigate('ProfileScreen')
+}
 const goBack = () => {
   navigation.goBack()
-}
-const [data, setData] = useState({
-  theme: 0,
-  lang: 0
-}) 
-
-const changeTheme = () => {
-  setData({
-    ...data,
-    theme: !data.theme
-  });
-}
-
-const changeLang = () => {
-  setData({
-    ...data,
-    lang: !data.lang
-  });
 }
 
 return(
@@ -60,22 +44,8 @@ return(
       <Image style={MS.goBack} source={require('../assets/goback777.png')} />
     </TouchableOpacity>
     <View style={MS.tMenuIcons}>
-      <TouchableOpacity onPress={() => changeLang()}>
-        {data.lang ?
-          <Text style={MS.tMenu2R3}>EN</Text>
-        : 
-        <Text style={MS.tMenu2R3}>NO</Text>
-        }
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => changeTheme()}>
-        {data.theme ?
-          <Image style={MS.tMenu2R2} source={require('../assets/sun777.png')} />
-        : 
-          <Image style={MS.tMenu2R2} source={require('../assets/moon777.png')} />
-        }
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => lightSwitch()}>
-        <Image style={MS.tMenu2R} source={require('../assets/loginperson777.png')} />
+      <TouchableOpacity onPress={() => ProfilePage()}>
+        <Image style={MS.tMenuL} source={require('../assets/loginperson777.png')} />
       </TouchableOpacity>
     </View>
   </View>
@@ -101,18 +71,17 @@ return(
     </ScrollView>
   </View> 
 
-{/* ========================= DISPLAY BOTTOM MENU ========================= */}
-      <View style={MS.bMenuUniversal}>
-          <TouchableOpacity onPress={() => homePage()}>
-            <Image style={MS.bMenu3} source={require('../assets/house777.png')} />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => eventPage()}>
-            <Image style={MS.bMenu2} source={require('../assets/calendar777.png')} />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => settingsPage()}>
-            <Image style={MS.bMenu1} source={require('../assets/menu777.png')} />
-          </TouchableOpacity>
-      </View>     
+  <View style={MS.bMenuUniversal}>
+      <TouchableOpacity onPress={() => homePage()}>
+        <Image style={MS.homeSelected} source={require('../assets/house-orange.png')} />
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => eventPage()}>
+        <Image style={MS.bMenu2} source={require('../assets/calendar777.png')} />
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => settingsPage()}>
+        <Image style={MS.bMenu1} source={require('../assets/menu777.png')} />
+      </TouchableOpacity>
+      </View> 
     </View>
     
   )

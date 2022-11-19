@@ -1,10 +1,10 @@
 {/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
 import { StatusBar } from 'expo-status-bar'
-import { MS } from '../styles/menuStyles'
-import { SS } from '../styles/settingStyles'
-import { GS } from '../styles/globalStyles'
+import { MS } from '../../styles/menuStyles'
+import { SS } from '../../styles/settingStyles'
+import { GS } from '../../styles/globalStyles'
 import { useState } from 'react';
-import Card from '../shared/card';
+import Card from '../../shared/card';
 import { 
   Text, 
   View, 
@@ -15,9 +15,9 @@ import {
 
 {/* ========================= APP START ========================= */}
 
-export default function SettingScreen({ navigation }) {
+export default function ReportScreen({ navigation }) {
     const [setting] = useState([
-      {id: '1', nav: 'EventScreen', title: 'Arbeid pågår'},
+      {id: '1', nav: 'EventScreen', title: 'Rapporteringsskjema kommer her'},
 
   ])
 {/* ========================= DISPLAY APP START ========================= */}
@@ -27,11 +27,11 @@ const eventPage = () => {
 const homePage = () => {
   navigation.navigate('HomeScreen');
 }
-const aboutPage = () => {
-  navigation.navigate('AboutScreen');
-}
 const ProfilePage = () => {
   navigation.navigate('ProfileScreen')
+}
+const goBack = () => {
+    navigation.goBack()
 }
 
 return(
@@ -39,12 +39,12 @@ return(
       <StatusBar style="light" />
 {/* ========================= DISPLAY TOP MENU ========================= */}
   <View style={MS.topMenu}>
-    <TouchableOpacity onPress={() => aboutPage()}>
-      <Image style={MS.tMenuL} source={require('../assets/login-text.png')} />
+    <TouchableOpacity onPress={() => goBack()}>
+      <Image style={MS.goBack} source={require('../../assets/goback777.png')} />
     </TouchableOpacity>
     <View style={MS.tMenuIcons}>
       <TouchableOpacity onPress={() => ProfilePage()}>
-        <Image style={MS.tMenuL} source={require('../assets/loginperson777.png')} />
+        <Image style={MS.tMenuL} source={require('../../assets/loginperson-orange.png')} />
       </TouchableOpacity>
     </View>
   </View>
@@ -68,7 +68,7 @@ return(
           />
           <TouchableOpacity onPress={() => navigation.navigate('ContactScreen')}>
               <View style={SS.bug}>
-                <Image style={SS.bugImage} source={require('../assets/login-text.png')} />
+                <Image style={SS.bugImage} source={require('../../assets/login-text.png')} />
               </View>
             </TouchableOpacity>
       </View>    
@@ -76,13 +76,13 @@ return(
 {/* ========================= DISPLAY BOTTOM MENU ========================= */}
       <View style={MS.bMenuWhenNoTop}>
       <TouchableOpacity onPress={() => homePage()}>
-        <Image style={MS.bMenu3} source={require('../assets/house777.png')} />
+        <Image style={MS.bMenu3} source={require('../../assets/house777.png')} />
       </TouchableOpacity>
       <TouchableOpacity onPress={() => eventPage()}>
-        <Image style={MS.bMenu2} source={require('../assets/calendar777.png')} />
+        <Image style={MS.bMenu2} source={require('../../assets/calendar777.png')} />
       </TouchableOpacity>
       <TouchableOpacity>
-        <Image style={MS.settingsSelected} source={require('../assets/menu-orange.png')} />
+        <Image style={MS.settingsSelected} source={require('../../assets/menu-orange.png')} />
       </TouchableOpacity>
       </View>     
     </View>

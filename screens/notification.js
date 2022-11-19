@@ -2,9 +2,8 @@
 import { StatusBar } from 'expo-status-bar';
 import { GS } from '../styles/globalStyles';
 import { MS } from '../styles/menuStyles';
-import TopMenu from '../shared/topmenu';
-import { useEffect, useState } from 'react';
-import { Notification } from '../shared/sharedComponents';
+import { useState } from 'react';
+import { Notification, Theme, Language } from '../shared/sharedComponents';
 import Card from '../shared/card';
 import { T } from '../styles/text';
 import { 
@@ -13,7 +12,6 @@ import {
   Image, 
   ScrollView,
   TouchableOpacity,
-  Switch
 } from 'react-native';
 
 {/* ========================= APP START ========================= */}
@@ -31,26 +29,11 @@ const eventPage = () => {
 const homePage = () => {
   navigation.navigate('HomeScreen');
 }
+const ProfilePage = () => {
+  navigation.navigate('ProfileScreen')
+}
 const goBack = () => {//hoppe over til mail 
   navigation.goBack()
-}
-const [data, setData] = useState({
-  theme: 0,
-  lang: 0
-}) 
-
-const changeTheme = () => {
-  setData({
-    ...data,
-    theme: !data.theme
-  });
-}
-
-const changeLang = () => {
-  setData({
-    ...data,
-    lang: !data.lang
-  });
 }
 
   return(
@@ -62,29 +45,36 @@ const changeLang = () => {
       <Image style={MS.goBack} source={require('../assets/goback777.png')} />
     </TouchableOpacity>
     <View style={MS.tMenuIcons}>
-      <TouchableOpacity onPress={() => changeLang()}>
-        {data.lang ?
-          <Text style={MS.tMenu2R3}>EN</Text>
-        : 
-        <Text style={MS.tMenu2R3}>NO</Text>
-        }
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => changeTheme()}>
-        {data.theme ?
-          <Image style={MS.tMenu2R2} source={require('../assets/sun777.png')} />
-        : 
-          <Image style={MS.tMenu2R2} source={require('../assets/moon777.png')} />
-        }
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => lightSwitch()}>
-        <Image style={MS.tMenu2R} source={require('../assets/loginperson777.png')} />
+      <TouchableOpacity onPress={() => ProfilePage()}>
+        <Image style={MS.tMenuL} source={require('../assets/loginperson-orange.png')} />
       </TouchableOpacity>
     </View>
   </View>
 {/* ========================= DISPLAY CONTENT ========================= */}
 <View style={GS.content}>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <Text style={T.centered}>Varslinger</Text>
+          <Text style={T.centered}>Innstillinger</Text><Text/>
+
+          <Card>
+            <View style={GS.notificationBack}>
+              <View style={GS.view}>
+                <Text style={GS.notificationText}>Lysbryter</Text>
+              </View>
+              <View style={GS.view2}><Theme/></View>
+            </View>
+          </Card>
+
+          <Card>
+            <View style={GS.notificationBack}>
+              <View style={GS.view}>
+                <Text style={GS.notificationText}>Språk</Text>
+              </View>
+              <View style={GS.langView}><Language/></View>
+            </View>
+          </Card>
+
+          <Text style={T.centered}>Varslinger</Text><Text/>
+
           <Card>
             <View style={GS.notificationBack}>
               <View style={GS.view}>
@@ -132,7 +122,7 @@ const changeLang = () => {
           <Image style={MS.bMenu2} source={require('../assets/calendar777.png')} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => settingsPage()}>
-          <Image style={MS.bMenu1} source={require('../assets/menu-orange.png')} />
+          <Image style={MS.bMenu1} source={require('../assets/menu777.png')} />
         </TouchableOpacity>      
       </View>     
     </View>

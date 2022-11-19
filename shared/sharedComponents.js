@@ -1,5 +1,12 @@
 import React, {useState} from 'react';
-import { StyleSheet, View, Text, Switch } from 'react-native';
+import { 
+    StyleSheet, 
+    View, 
+    Text, 
+    Switch, 
+    TouchableOpacity,
+    Image
+} from 'react-native';
 import Svg, { Circle, Path, SvgUri } from 'react-native-svg';
 import { SS } from '../styles/settingStyles';
 import { T } from '../styles/text'
@@ -106,6 +113,56 @@ export function Notification() {
             onValueChange={toggleSwitch}
             value={isEnabled}
           />
+        </View>
+    )
+}
+
+export function Theme() {
+    const changeTheme = () => {
+        setData({
+          ...data,
+          theme: !data.theme
+        });
+      }
+      
+    const [data, setData] = useState({
+        theme: 0,
+    }) 
+
+    return(
+        <View>
+            <TouchableOpacity onPress={() => changeTheme()}>
+                {data.theme ?
+                    <Image style={SS.lightSwitchImage} source={require('../assets/sun.png')} />
+                : 
+                    <Image style={SS.lightSwitchImage} source={require('../assets/moon.png')} />
+                }
+            </TouchableOpacity>
+        </View>
+    )
+}
+
+export function Language() {
+    const changeLang = () => {
+        setData({
+          ...data,
+          lang: !data.lang
+        });
+      }
+      
+    const [data, setData] = useState({
+        lang: 0
+    }) 
+      
+    return(
+        <View>
+          <TouchableOpacity onPress={() => changeLang()}>
+        {data.lang ?
+            <Text style={SS.langSwitch}>EN</Text>
+        : 
+            <Text style={SS.langSwitch}>NO</Text>
+        }
+      </TouchableOpacity>
         </View>
     )
 }

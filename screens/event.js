@@ -17,10 +17,10 @@ import {
 
 {/* ========================= APP START ========================= */}
 
-  export default function EventScreen({ navigation }) {
+export default function EventScreen({ navigation }) {
 
-  const settingsPage = () => {
-  navigation.navigate('SettingScreen');
+const settingsPage = () => {
+navigation.navigate('SettingScreen');
 }
 const homePage = () => {
   navigation.navigate('HomeScreen', events);
@@ -28,8 +28,8 @@ const homePage = () => {
 const aboutPage = () => {
   navigation.navigate('AboutScreen');
 }
-const lightSwitch = () => {
-  //navigation.navigate('lightSwitch');
+const ProfilePage = () => {
+  navigation.navigate('ProfileScreen')
 }
 
 const [usersData,setUsersData]=useState([])
@@ -44,26 +44,7 @@ useEffect(() => {
 getData();
 },[])
 
-const [data, setData] = useState({
-  theme: 0,
-  lang: 0
-}) 
-
 const [events, updateEvents] = useState([]) 
-
-const changeTheme = () => {
-  setData({
-    ...data,
-    theme: !data.theme
-  });
-}
-
-const changeLang = () => {
-  setData({
-    ...data,
-    lang: !data.lang
-  });
-}
 
 return(
     <View style={MS.backGround}>
@@ -74,22 +55,8 @@ return(
       <Image style={MS.tMenuL} source={require('../assets/login-text.png')} />
     </TouchableOpacity>
     <View style={MS.tMenuIcons}>
-      <TouchableOpacity onPress={() => changeLang()}>
-        {data.lang ?
-          <Text style={MS.tMenuR3}>EN</Text>
-        : 
-        <Text style={MS.tMenuR3}>NO</Text>
-        }
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => changeTheme()}>
-        {data.theme ?
-          <Image style={MS.tMenuR2} source={require('../assets/sun777.png')} />
-        : 
-          <Image style={MS.tMenuR2} source={require('../assets/moon777.png')} />
-        }
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => lightSwitch()}>
-        <Image style={MS.tMenuR} source={require('../assets/loginperson777.png')} />
+      <TouchableOpacity onPress={() => ProfilePage()}>
+        <Image style={MS.tMenuL} source={require('../assets/loginperson777.png')} />
       </TouchableOpacity>
     </View>
   </View>

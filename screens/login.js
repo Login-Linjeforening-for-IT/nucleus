@@ -31,6 +31,9 @@ const eventPage = () => {
 const homePage = () => {
   navigation.navigate('HomeScreen');
 }
+const ProfilePage = () => {
+  navigation.navigate('ProfileScreen')
+}
 const internalPage = () => {
   if (data.name === database.name && data.pass === database.pass) {
     navigation.navigate('InternalScreen');
@@ -41,25 +44,9 @@ const internalPage = () => {
 const goBack = () => {
   navigation.goBack()
 }
-
-const changeTheme = () => {
-  setData({
-    ...data,
-    theme: !data.theme
-  });
-}
-
-const changeLang = () => {
-  setData({
-    ...data,
-    lang: !data.lang
-  });
-}
 const [data, setData] = useState({
   name: '',
   pass: '',
-  theme: 0,
-  lang: 0,
   check_textInputChange: false,
   check_passInputChange: false,
   secureTextEntry: true
@@ -119,22 +106,8 @@ const showPass = () => {
       <Image style={MS.goBack} source={require('../assets/goback777.png')} />
     </TouchableOpacity>
     <View style={MS.tMenuIcons}>
-      <TouchableOpacity onPress={() => changeLang()}>
-        {data.lang ?
-          <Text style={MS.tMenu2R3}>EN</Text>
-        : 
-        <Text style={MS.tMenu2R3}>NO</Text>
-        }
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => changeTheme()}>
-        {data.theme ?
-          <Image style={MS.tMenu2R2} source={require('../assets/sun777.png')} />
-        : 
-          <Image style={MS.tMenu2R2} source={require('../assets/moon777.png')} />
-        }
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => lightSwitch()}>
-        <Image style={MS.tMenu2R} source={require('../assets/loginperson777.png')} />
+      <TouchableOpacity onPress={() => ProfilePage()}>
+        <Image style={MS.tMenuL} source={require('../assets/loginperson-orange.png')} />
       </TouchableOpacity>
     </View>
   </View>

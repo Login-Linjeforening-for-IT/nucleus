@@ -1,6 +1,16 @@
 import { StyleSheet } from "react-native";
 
 export const SS = StyleSheet.create ({
+    lightSwitchImage: {
+        left: '-27.5%',
+        width: 120,
+        height: 120
+    },
+    langSwitch: {
+        left: 12.5,
+        fontSize: 20,
+        color: 'white',
+    },
     top: {
         top: 50,
       },
