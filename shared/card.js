@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { DefaultTheme } from '@react-navigation/native';
 
 export default function Card(props) {
     return(
@@ -15,7 +14,7 @@ export default function Card(props) {
 export function CardSmaller(props) {
     return(
         <View style={styles.cardSmaller}>
-            <View style={styles.cardContentSmaller}>
+            <View>
                 { props.children }
             </View>
         </View>

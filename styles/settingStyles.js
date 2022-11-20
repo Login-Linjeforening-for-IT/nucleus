@@ -70,6 +70,11 @@ export const SS = StyleSheet.create ({
         alignSelf: 'center',
         flexDirection: 'row'
     },
+    reportContentView: {
+        height: 200,
+        alignSelf: 'center',
+        flexDirection: 'row'
+    },
     greenLight: {
         left: '14%',
         top: '10%',
@@ -79,6 +84,18 @@ export const SS = StyleSheet.create ({
     checkContent: {
         left: '25%',
         top: '-55%',
+        alignSelf: 'center',
+        color: 'white',
+    },
+    reportGreenLight: {
+        left: '14%',
+        top: '40%',
+        alignSelf: 'center',
+        color: 'white',
+    },
+    reportCheckContent: {
+        left: '25%',
+        top: '23%',
         alignSelf: 'center',
         color: 'white',
     },

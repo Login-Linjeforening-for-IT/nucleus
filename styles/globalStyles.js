@@ -33,6 +33,15 @@ export const GS = StyleSheet.create({
     borderRadius: 40,
     color: 'white',
   },
+  reportInputContentText: {
+    backgroundColor: '#282828',
+    alignSelf: 'center',
+    alignItems: 'center',
+    width: '80%',
+    height: '90%',
+    borderRadius: 40,
+    color: 'white',
+  },
   notificationBack: {
     flexDirection: 'row',
     height: 25,

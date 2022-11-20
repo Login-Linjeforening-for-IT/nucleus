@@ -4,6 +4,7 @@ import { MS } from '../styles/menuStyles'
 import { SS } from '../styles/settingStyles'
 import { GS } from '../styles/globalStyles'
 import { useState } from 'react';
+import { T } from '../styles/text'
 import Card from '../shared/card';
 import { 
   Text, 
@@ -17,7 +18,7 @@ import {
 
 export default function SettingScreen({ navigation }) {
     const [setting] = useState([
-      {id: '1', nav: 'EventScreen', title: 'Arbeid pågår'},
+      {id: '1', nav: 'EventScreen', title: 'Arbeid pågår', content: 'Ikke bestemt hva som kommer her'},
 
   ])
 {/* ========================= DISPLAY APP START ========================= */}
@@ -61,6 +62,7 @@ return(
             <TouchableOpacity onPress={() => navigation.navigate(item.nav, item)}>
               <Card style={SS.creditCard}>
                 <Text style={SS.text}>{item.title}</Text>
+                <Text style={T.red}>{item.content}</Text>
               </Card>
             </TouchableOpacity>
           </View>
