@@ -1,5 +1,6 @@
 {/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
 import { StatusBar } from 'expo-status-bar';
+import { useEffect, useState } from 'react';
 import { GS } from '../styles/globalStyles';
 import { MS } from '../styles/menuStyles';
 import { T } from '../styles/text';
@@ -8,12 +9,26 @@ import {
   View, 
   Image, 
   ScrollView,
-  TouchableOpacity
+  TouchableOpacity,
+  FlatList
 } from 'react-native';
 
 {/* ========================= APP START ========================= */}
 
 export default function SpecificEventScreen( { navigation }) {
+
+  const [usersData,setUsersData]=useState([])
+
+  const getData=()=>{
+    fetch('https://api.login.no/events/'+(navigation.getParam('eventID')))
+    .then(response=>response.json())
+    .then(console.log(usersData))
+    .then(data=>setUsersData(data));
+  }
+
+  useEffect(() => {
+    getData();
+    },[])
 
   const settingsPage = () => {
     navigation.navigate('SettingScreen');
@@ -88,6 +103,8 @@ export default function SpecificEventScreen( { navigation }) {
             {navigation.getParam('roomno')}, {navigation.getParam('campus')}
             </Text>
 
+            <Text style={T.red}>Beskrivelse</Text>
+            
             {/* MORE LOGIC NEEDED HERE */}
             
             {/* <Text style={T.red}>Beskrivelse</Text>
@@ -97,6 +114,21 @@ export default function SpecificEventScreen( { navigation }) {
         </View>
           
         </ScrollView>
+
+        <FlatList
+              showsVerticalScrollIndicator={false}
+              numColumns={1}
+              keyExtractor={(item) => item.eventID}
+              data={usersData}
+              renderItem={({usersData}) => (
+                <View>
+                  <Card style={SS.creditCard}>
+                    <Text style={SS.text}>{usersData.description}</Text>
+                  </Card>
+              </View>
+              )}
+            />
+
       </View>    
 
 {/* ========================= DISPLAY BOTTOM MENU ========================= */}

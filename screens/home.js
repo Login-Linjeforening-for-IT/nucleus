@@ -60,7 +60,7 @@ return(
           showsVerticalScrollIndicator={''}
           numColumns={1}
           keyExtractor={(item) => item.eventID}
-          data={navigation.getParam('events')}
+          data={navigation.getParam('eventID')}
           renderItem={({item}) => (
             <View>
             <TouchableOpacity onPress={() => navigation.navigate(item.nav, item)}>
