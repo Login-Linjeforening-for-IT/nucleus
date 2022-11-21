@@ -36,24 +36,7 @@ const settingPage = () => {
 const goBack = () => {
     navigation.goBack()
 }
-const [data, setData] = useState({
-  theme: 0,
-  lang: 0
-}) 
 
-const changeTheme = () => {
-  setData({
-    ...data,
-    theme: !data.theme
-  });
-}
-
-const changeLang = () => {
-  setData({
-    ...data,
-    lang: !data.lang
-  });
-}
   return(
     <View style={MS.backGround}>
       <StatusBar style="light" />

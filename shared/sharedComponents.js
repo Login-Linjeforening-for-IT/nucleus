@@ -167,21 +167,6 @@ export function Language() {
     )
 }
 
-const styles = StyleSheet.create({
-    size: {
-        height: 40,
-        width: 40
-    },
-    container: {
-        height: 50,
-        width: 50,
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-      },
-});
-
 export function CheckState(condition) {
     if (condition == true) {
         return(
@@ -205,3 +190,18 @@ export function Button(props) {
         </View>
     );
 }
+
+const styles = StyleSheet.create({
+    size: {
+        height: 40,
+        width: 40
+    },
+    container: {
+        height: 50,
+        width: 50,
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+});

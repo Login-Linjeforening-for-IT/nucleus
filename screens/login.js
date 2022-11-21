@@ -18,9 +18,7 @@ import { CardSmaller } from '../shared/card';
 
 {/* ========================= APP START ========================= */}
 
-  export default function LoginScreen( { navigation }) {
-
-{/* ========================= DISPLAY APP START ========================= */}
+export default function LoginScreen( { navigation }) {
 
 const settingsPage = () => {
   navigation.navigate('SettingScreen');

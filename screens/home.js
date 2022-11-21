@@ -34,7 +34,10 @@ const aboutPage = () => {
 const ProfilePage = () => {
   navigation.navigate('ProfileScreen')
 }
-
+const settingsPage = () => {
+  navigation.navigate('SettingScreen');
+}
+console.log(navigation.getParam((events[0])))
 return(
     <View style={MS.backGround}>
       <StatusBar style="light" />
@@ -52,11 +55,12 @@ return(
 
 {/* ========================= DISPLAY CONTENT ========================= */}
       <View style={GS.content}>
-          <FlatList
+        <Text>{navigation.getParam('title')}</Text>
+           <FlatList
           showsVerticalScrollIndicator={''}
           numColumns={1}
-          keyExtractor={(item) => item.id}
-          data={setting}
+          keyExtractor={(item) => item.eventID}
+          data={navigation.getParam('events')}
           renderItem={({item}) => (
             <View>
             <TouchableOpacity onPress={() => navigation.navigate(item.nav, item)}>
@@ -68,11 +72,6 @@ return(
           </View>
           )}
           />
-          <TouchableOpacity onPress={() => navigation.navigate('ContactScreen')}>
-              <View style={SS.bug}>
-                <Image style={SS.bugImage} source={require('../assets/login-text.png')} />
-              </View>
-            </TouchableOpacity>
       </View>    
 
 {/* ========================= DISPLAY BOTTOM MENU ========================= */}
@@ -83,7 +82,7 @@ return(
       <TouchableOpacity onPress={() => eventPage()}>
         <Image style={MS.bMenu2} source={require('../assets/calendar777.png')} />
       </TouchableOpacity>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => settingsPage()}>
         <Image style={MS.settingsSelected} source={require('../assets/menu777.png')} />
       </TouchableOpacity>
       </View>     

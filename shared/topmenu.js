@@ -1,5 +1,4 @@
 import { MS } from '../styles/menuStyles';
-import { DefaultTheme } from '@react-navigation/native';
 import { 
   View, 
   Image, 

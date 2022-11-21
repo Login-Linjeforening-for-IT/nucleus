@@ -2,9 +2,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { GS } from '../styles/globalStyles';
 import { MS } from '../styles/menuStyles';
-import TopMenu from '../shared/topmenu';
 import { T } from '../styles/text';
-import { useState } from 'react';
 import { 
   Text, 
   View, 
@@ -15,43 +13,23 @@ import {
 
 {/* ========================= APP START ========================= */}
 
-  export default function SpecificEventScreen( { navigation }) {
+export default function SpecificEventScreen( { navigation }) {
 
-{/* ========================= DISPLAY APP START ========================= */}
-
-const settingsPage = () => {
-  navigation.navigate('SettingScreen');
-}
-const eventPage = () => {
-  navigation.navigate('EventScreen');
-}
-const homePage = () => {
-  navigation.navigate('HomeScreen');
-}
-const ProfilePage = () => {
-  navigation.navigate('ProfileScreen')
-}
-const goBack = () => {
-  navigation.goBack()
-}
-const [data, setData] = useState({
-  theme: 0,
-  lang: 0
-}) 
-
-const changeTheme = () => {
-  setData({
-    ...data,
-    theme: !data.theme
-  });
-}
-
-const changeLang = () => {
-  setData({
-    ...data,
-    lang: !data.lang
-  });
-}
+  const settingsPage = () => {
+    navigation.navigate('SettingScreen');
+  }
+  const eventPage = () => {
+    navigation.navigate('EventScreen');
+  }
+  const homePage = () => {
+    navigation.navigate('HomeScreen');
+  }
+  const ProfilePage = () => {
+    navigation.navigate('ProfileScreen')
+  }
+  const goBack = () => {
+    navigation.goBack()
+  }
 
   return(
     <View style={MS.backGround}>

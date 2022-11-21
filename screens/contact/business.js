@@ -16,8 +16,6 @@ import {
 
 export default function BusinessScreen( { navigation }) {
 
-{/* ========================= DISPLAY APP START ========================= */}
-
 const settingsPage = () => {
   navigation.navigate('SettingScreen');
 }

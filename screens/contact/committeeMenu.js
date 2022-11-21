@@ -24,8 +24,8 @@ export default function CommitteeMenuScreen({ navigation }) {
         {id: '5', nav: 'ContactCTFkomScreen', title: 'CTFkom'},
         {id: '6', nav: 'ContactSATkomScreen', title: 'SATkom'},
       ])
-{/* ========================= DISPLAY APP START ========================= */}
-const eventPage = () => {
+
+      const eventPage = () => {
   navigation.navigate('EventScreen');
 }
 const homePage = () => {

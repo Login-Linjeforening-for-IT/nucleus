@@ -48,7 +48,7 @@ const ProfilePage = () => {
         <View style={MS.tMenuIcons}>
         <View style={MS.tMenuIcons}>
       <TouchableOpacity onPress={() => ProfilePage()}>
-        <Image style={MS.tMenuL} source={require('../../assets/loginperson777.png')} />
+        <Image style={MS.tMenuL} source={require('../../assets/loginperson-orange.png')} />
       </TouchableOpacity>
     </View>
     </View>
@@ -82,7 +82,7 @@ const ProfilePage = () => {
         <Image style={MS.bMenu2} source={require('../../assets/calendar777.png')} />
       </TouchableOpacity>
       <TouchableOpacity>
-        <Image style={MS.settingsSelected} source={require('../../assets/menu-orange.png')} />
+        <Image style={MS.settingsSelected} source={require('../../assets/menu777.png')} />
       </TouchableOpacity>
       </View>     
     </View>

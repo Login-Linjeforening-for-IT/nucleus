@@ -16,9 +16,8 @@ import {
 
 {/* ========================= APP START ========================= */}
 
-  export default function NotificationScreen( { navigation }) {
+export default function NotificationScreen( { navigation }) {
 
-{/* ========================= DISPLAY APP START ========================= */}
 
 const settingsPage = () => {
   navigation.navigate('SettingScreen');

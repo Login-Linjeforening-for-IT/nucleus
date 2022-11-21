@@ -5,7 +5,7 @@ import Card from '../shared/card';
 import { GS } from '../styles/globalStyles';
 import { MS } from '../styles/menuStyles';
 import { ES } from '../styles/eventStyles';
-import GreenLight, { GrayLight, Check, CheckState } from '../shared/sharedComponents';
+import GreenLight, { GrayLight, Check } from '../shared/sharedComponents';
 
 import { 
   Text, 
@@ -23,6 +23,7 @@ const settingsPage = () => {
 navigation.navigate('SettingScreen');
 }
 const homePage = () => {
+  JSON.stringify(events),
   navigation.navigate('HomeScreen', events);
 }
 const aboutPage = () => {
@@ -45,6 +46,7 @@ getData();
 },[])
 
 const [events, updateEvents] = useState([]) 
+console.log(events)
 
 return(
     <View style={MS.backGround}>
