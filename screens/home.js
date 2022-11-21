@@ -37,7 +37,7 @@ const ProfilePage = () => {
 const settingsPage = () => {
   navigation.navigate('SettingScreen');
 }
-console.log(navigation.getParam((events[0])))
+
 return(
     <View style={MS.backGround}>
       <StatusBar style="light" />
