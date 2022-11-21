@@ -30,14 +30,14 @@ const screens = {
     EventScreen: {
         screen: EventScreen
     },
-    SettingScreen: {
-        screen: SettingScreen
+    ProfileScreen: {
+        screen: ProfileScreen
     },
     HomeScreen: {
         screen: HomeScreen
     },
-    ProfileScreen: {
-        screen: ProfileScreen
+    SettingScreen: {
+        screen: SettingScreen
     },
     SpecificEventScreen: {
         screen: SpecificEventScreen,
