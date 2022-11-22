@@ -55,7 +55,6 @@ return(
 
 {/* ========================= DISPLAY CONTENT ========================= */}
       <View style={GS.content}>
-        <Text>{navigation.getParam('title')}</Text>
            <FlatList
           showsVerticalScrollIndicator={''}
           numColumns={1}
