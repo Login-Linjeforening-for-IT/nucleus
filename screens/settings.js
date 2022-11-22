@@ -18,7 +18,7 @@ import {
 
 export default function SettingScreen({ navigation }) {
     const [setting] = useState([
-      {id: '1', nav: 'EventScreen', title: 'Arbeid pågår', content: 'Ikke bestemt hva som kommer her'},
+      {id: '1', nav: 'EventScreen', title: 'Arbeid pågår', content: 'Jobbannonser?'},
 
   ])
 {/* ========================= DISPLAY APP START ========================= */}

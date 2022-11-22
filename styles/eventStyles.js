@@ -1,6 +1,36 @@
 import { StyleSheet } from "react-native";
 
 export const ES = StyleSheet.create({
+  specificEventInfoView: {
+    flexDirection: 'row'
+  },
+  specificEventParentView: {
+    flex: 1,
+    flexDirection: 'column',
+  },
+  specificEventView1: {
+    alignItems: 'center',
+    width: '100%',
+    height: '15%',
+  },
+  specificEventView2: {
+    width: '100%',
+    height: '8.4%',
+    backgroundColor: '#111',
+    borderRadius: 20
+  },
+  specificEventView3: {
+    width: '100%',
+    height: '20.5%',
+    backgroundColor: '#222',
+    borderRadius: 20
+  },
+  specificEventView4: {
+    width: '100%',
+    height: '56.1%',
+    backgroundColor: '#111',
+    borderRadius: 20
+  },
   view: {
     top: '-2%',
     justifyContent: 'center',
@@ -73,4 +103,9 @@ export const ES = StyleSheet.create({
     alignSelf: 'center',
     color: 'white',
   },
+  specificEventImage: {
+    width: '376%',
+    height: '100%',
+    aspectRatio: 2.5,
+  }
 })

@@ -5,7 +5,7 @@ import Card from '../shared/card';
 import { GS } from '../styles/globalStyles';
 import { MS } from '../styles/menuStyles';
 import { ES } from '../styles/eventStyles';
-import GreenLight, { GrayLight, Check } from '../shared/sharedComponents';
+import GreenLight, { GrayLight, Check, DateDisplay } from '../shared/sharedComponents';
 
 import { 
   Text, 
@@ -76,10 +76,10 @@ return(
                 <TouchableOpacity onPress={() => navigation.navigate('SpecificEventScreen', item)}>
                   <Card style={ES.eventCard}>
                     <View style={ES.eventBack}>
-                      <View style={ES.view}>
+                    <View style={ES.view}>
                         <Text style={ES.dayText}>{item.startt[8]}{item.startt[9]}</Text>
                         <Text style={ES.monthText}>{item.startt[5]}{item.startt[6]}</Text>
-                      </View>
+                    </View>
                       <View style={ES.view2}>
                         <View style = {ES.title}><Text style={ES.title}>{item.eventname}</Text></View>
                         <View style = {ES.loc}><Text style={ES.loc}>{item.startt[11]}{item.startt[12]}:{item.startt[14]}{item.startt[15]} {item.roomno}. {item.campus}</Text></View>

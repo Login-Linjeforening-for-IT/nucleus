@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { GS } from '../styles/globalStyles';
 import { MS } from '../styles/menuStyles';
 import { T } from '../styles/text';
+import { ES } from '../styles/eventStyles';
 import { 
   Text, 
   View, 
@@ -63,72 +64,105 @@ export default function SpecificEventScreen( { navigation }) {
 
 {/* ========================= DISPLAY CONTENT ========================= */}
       <View style={GS.content}>
-        
         <ScrollView showsVerticalScrollIndicator={false}>
-          
-          <View>
+          <View style={ES.specificEventParentView}>
+            <View style={ES.specificEventView1}>
+              <View>
+                <Image style={ES.specificEventImage} source={require('../assets/TekKom.png')} />
+              </View>
+            </View>
 
-            <Text style={T.red}>Event nummer:</Text>
-            <Text style={T.centered}>{navigation.getParam('eventID')}</Text>
+            <Text/>
 
-            <Text style={T.red}>Organisert av:</Text>
-            <Text style={T.centered}>{navigation.getParam('organizer')}</Text>
+            <View style={ES.specificEventView2}>
+            <View style={ES.specificEventInfoView}>
+                <View>
+                  <Text style={ES.dayText}>
+                        {navigation.getParam('startt')[8]}
+                        {navigation.getParam('startt')[9]}
+                  </Text>
 
-            <Text style={T.red}>Event navn:</Text>
-            <Text style={T.centered}>{navigation.getParam('eventname')}</Text>
+                  <Text style={ES.dayText}>
+                    {navigation.getParam('startt')[5]}
+                    {navigation.getParam('startt')[6]}
+                  </Text>
+                </View>
+              <Text style={T.red}>    Hvor lenge til eventet logikk</Text>
+            </View>
+            </View>
 
-            <Text style={T.red}>Dato</Text>
-            <Text style={T.centered}>
-              {navigation.getParam('startt')[8]}
-              {navigation.getParam('startt')[9]}.
-              {navigation.getParam('startt')[5]}
-              {navigation.getParam('startt')[6]}.
-              {navigation.getParam('startt')[2]}
-              {navigation.getParam('startt')[3]}
-            </Text>
+            <Text/>
 
-            <Text style={T.red}>Tidspunkt</Text>
-            <Text style={T.centered}>
-              {navigation.getParam('startt')[11]}
-              {navigation.getParam('startt')[12]}:
-              {navigation.getParam('startt')[14]}
-              {navigation.getParam('startt')[15]}
-            </Text>
+            <View style={ES.specificEventView3}>
+              <View style={ES.specificEventInfoView}>
+                <Text style={T.centered20}>Starter: </Text>
+                <Text style={T.centered20}>
+                  {navigation.getParam('startt')[11]}
+                  {navigation.getParam('startt')[12]}:
+                  {navigation.getParam('startt')[14]}
+                  {navigation.getParam('startt')[15]}
+                </Text>
+              </View>
 
-            <Text style={T.red}>Kategori</Text>
-            <Text style={T.centered}>{navigation.getParam('category')}</Text>
-            
-            <Text style={T.red}>Sted</Text>
-            <Text style={T.centered}>
-            {navigation.getParam('roomno')}, {navigation.getParam('campus')}
-            </Text>
+              <Text/>
 
-            <Text style={T.red}>Beskrivelse</Text>
-            
-            {/* MORE LOGIC NEEDED HERE */}
-            
-            {/* <Text style={T.red}>Beskrivelse</Text>
-            <Text style={T.centered}>
-            {navigation.getParam('roomno')}, {navigation.getParam('description')}
-            </Text> */}
-        </View>
+              <View style={ES.specificEventInfoView}>
+              <Text style={T.centered20}>Slutter: </Text>
+                <Text style={T.red}>
+                  annen api call mangler her
+                </Text>
+              </View>
+
+              <Text/>
+
+              <View style={ES.specificEventInfoView}>
+                <Text style={T.centered20}>Lokasjon: </Text>
+                <Text style={T.centered20}>
+                  {navigation.getParam('roomno')}, {navigation.getParam('campus')}
+                </Text>
+              </View>
+
+              <Text/>
+
+              <View style={ES.specificEventInfoView}>
+                <Text style={T.centered20}>Kategori: </Text>
+                <Text style={T.red}>fargesirkel</Text>
+                <Text style={T.centered20}>
+                  {navigation.getParam('category')}
+                </Text>
+              </View>
+
+              <Text/>
+
+              <View style={ES.specificEventInfoView}>
+                <Text style={T.centered20}>Arrangør: </Text>
+                <Text style={T.centered20}>
+                  {navigation.getParam('organizer')}
+                </Text>
+              </View>
+            </View>
+
+            <Text/>
+
+            <View style={ES.specificEventView4}>
+              <View>
+                <Text style={T.centered20}>{navigation.getParam('eventname')}</Text>
+              </View>
+
+              <Text/>
+
+              <View>
+              <Text style={T.centered20}>Beskrivelse: </Text>
+              <Text style={T.red}>
+                  annen api call mangler her
+                </Text>
+              </View>
+            </View>
+          </View>
+
+          <Text/><Text/><Text/><Text/>
           
         </ScrollView>
-
-        <FlatList
-              showsVerticalScrollIndicator={false}
-              numColumns={1}
-              keyExtractor={(item) => item.eventID}
-              data={usersData}
-              renderItem={({usersData}) => (
-                <View>
-                  <Card style={SS.creditCard}>
-                    <Text style={SS.text}>{usersData.description}</Text>
-                  </Card>
-              </View>
-              )}
-            />
-
       </View>    
 
 {/* ========================= DISPLAY BOTTOM MENU ========================= */}
