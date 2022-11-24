@@ -32,6 +32,74 @@ export function GrayLight() {
     );
 };
 
+export function CategoryLight(condition) {
+    if (condition === 'TEKKOM') {
+        return(
+            <View style={styles.smallSize}>
+                <Svg height="100%" width="100%" viewBox="0 0 100 100" >
+                <Circle cx="50" cy="50" r="50" stroke="#A206C9" strokeWidth=".5" fill="#A206C9" />
+                </Svg>
+            </View>
+            );
+    }else if (condition === 'SOCIAL') {
+        return(
+            <View style={styles.smallSize}>
+                <Svg height="100%" width="100%" viewBox="0 0 100 100" >
+                <Circle cx="50" cy="50" r="50" stroke="#D62F43" strokeWidth=".5" fill="#D62F43" />
+                </Svg>
+            </View>
+            );
+    }else if (condition === 'CTF') {
+        return(
+            <View style={styles.smallSize}>
+                <Svg height="100%" width="100%" viewBox="0 0 100 100" >
+                <Circle cx="50" cy="50" r="50" stroke="#2DA62B" strokeWidth=".5" fill="#2DA62B" />
+                </Svg>
+            </View>
+            );
+    }else if (condition === 'KARRIEREDAG') {
+        return(
+            <View style={styles.smallSize}>
+                <Svg height="100%" width="100%" viewBox="0 0 100 100" >
+                <Circle cx="50" cy="50" r="50" stroke="#02DEDE" strokeWidth=".5" fill="#02DEDE" />
+                </Svg>
+            </View>
+            );
+    }else if (condition === 'FADDERUKA') {
+        return(
+            <View style={styles.smallSize}>
+                <Svg height="100%" width="100%" viewBox="0 0 100 100" >
+                <Circle cx="50" cy="50" r="50" stroke="#FA75A6" strokeWidth=".5" fill="#FA75A6" />
+                </Svg>
+            </View>
+            );
+    }else if (condition === 'BEDPRES') {
+        return(
+            <View style={styles.smallSize}>
+                <Svg height="100%" width="100%" viewBox="0 0 100 100" >
+                <Circle cx="50" cy="50" r="50" stroke="#4060E3" strokeWidth=".5" fill="#4060E3" />
+                </Svg>
+            </View>
+            );
+    }else if (condition === 'LOGIN') {
+        return(
+            <View style={styles.smallSize}>
+                <Svg height="100%" width="100%" viewBox="0 0 100 100" >
+                <Circle cx="50" cy="50" r="50" stroke="#FD8738" strokeWidth=".5" fill="#FD8738" />
+                </Svg>
+            </View>
+            );
+    }else{
+        return(
+            <View style={styles.smallSize}>
+                <Svg height="100%" width="100%" viewBox="0 0 100 100" >
+                <Circle cx="50" cy="50" r="50" stroke="#FD8738" strokeWidth=".5" fill="#FD8738" />
+                </Svg>
+            </View>
+            );
+    }
+};
+
 export function RedLight() {
     return(
     <View style={styles.size}>
@@ -196,6 +264,10 @@ const styles = StyleSheet.create({
     size: {
         height: 40,
         width: 40
+    },
+    smallSize: {
+        height: 20,
+        width: 20
     },
     container: {
         height: 50,

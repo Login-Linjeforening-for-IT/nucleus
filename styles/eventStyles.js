@@ -2,7 +2,8 @@ import { StyleSheet } from "react-native";
 
 export const ES = StyleSheet.create({
   specificEventInfoView: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    alignItems: 'center'
   },
   specificEventParentView: {
     flex: 1,
@@ -11,7 +12,7 @@ export const ES = StyleSheet.create({
   specificEventView1: {
     alignItems: 'center',
     width: '100%',
-    height: '15%',
+    height: '10%',
   },
   specificEventView2: {
     width: '100%',
@@ -27,7 +28,7 @@ export const ES = StyleSheet.create({
   },
   specificEventView4: {
     width: '100%',
-    height: '56.1%',
+    height: '61.1%',
     backgroundColor: '#111',
     borderRadius: 20
   },

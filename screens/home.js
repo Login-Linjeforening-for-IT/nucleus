@@ -11,16 +11,17 @@ import {
   View, 
   Image, 
   FlatList,
-  TouchableOpacity
+  TouchableOpacity,
+  ScrollView
 } from 'react-native';
 
 {/* ========================= APP START ========================= */}
 
 export default function HomeScreen({ navigation }) {
     const [setting] = useState([
-      {id: '1', nav: 'EventScreen', title: 'Arbeid pågår', content: 'Events man har meldt seg på'},
-
-  ])
+      {id: '1', nav: 'EventScreen', title: 'Arbeid pågår', content: 'Viktig informasjon / random innlegg', info: ' Feed:'},
+    ])
+    const [abc] = useState({id: '1', nav: 'Arbeid pågår', title: 'Events man har meldt seg på', content: 'Events man har meldt seg på', info: ' Neste event:'})
 {/* ========================= DISPLAY APP START ========================= */}
 const eventPage = () => {
   navigation.navigate('EventScreen');
@@ -55,22 +56,31 @@ return(
 
 {/* ========================= DISPLAY CONTENT ========================= */}
       <View style={GS.content}>
-           <FlatList
+        <ScrollView>
+          <Card>
+            <Text style={T.red}>{abc.title}</Text>
+            <Text style={SS.text}>{abc.info}</Text>
+            <Text style={SS.text}>{abc.content}</Text>
+          </Card>
+
+          <FlatList
           showsVerticalScrollIndicator={''}
           numColumns={1}
-          keyExtractor={(item) => item.eventID}
+          keyExtractor={(setting) => setting.id}
           data={setting}
           renderItem={({item}) => (
             <View>
             <TouchableOpacity onPress={() => navigation.navigate(item.nav, item)}>
-              <Card style={SS.creditCard}>
-                <Text style={SS.text}>{item.title}</Text>
-                <Text style={T.red}>{item.content}</Text>
+              <Card>
+                <Text style={T.red}>{item.title}</Text>
+                <Text style={SS.text}>{item.info}</Text>
+                <Text style={SS.text}>{item.content}</Text>
               </Card>
             </TouchableOpacity>
           </View>
           )}
           />
+          </ScrollView>
       </View>    
 
 {/* ========================= DISPLAY BOTTOM MENU ========================= */}

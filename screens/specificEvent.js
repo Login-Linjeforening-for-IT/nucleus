@@ -5,6 +5,7 @@ import { GS } from '../styles/globalStyles';
 import { MS } from '../styles/menuStyles';
 import { T } from '../styles/text';
 import { ES } from '../styles/eventStyles';
+import { CategoryLight } from '../shared/sharedComponents';
 import { 
   Text, 
   View, 
@@ -18,18 +19,22 @@ import {
 
 export default function SpecificEventScreen( { navigation }) {
 
-  const [usersData,setUsersData]=useState([])
+  const [usersData,setUsersData]=useState({})
 
   const getData=()=>{
     fetch('https://api.login.no/events/'+(navigation.getParam('eventID')))
-    .then(response=>response.json())
-    .then(console.log(usersData))
-    .then(data=>setUsersData(data));
+    .then(response => response.json())
+    .then(data=>setUsersData(data))
   }
 
   useEffect(() => {
     getData();
     },[])
+
+  console.log(usersData)
+  console.log(usersData['description'])
+
+
 
   const settingsPage = () => {
     navigation.navigate('SettingScreen');
@@ -67,9 +72,7 @@ export default function SpecificEventScreen( { navigation }) {
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={ES.specificEventParentView}>
             <View style={ES.specificEventView1}>
-              <View>
-                <Image style={ES.specificEventImage} source={require('../assets/TekKom.png')} />
-              </View>
+              <Image style={ES.specificEventImage} source={require('../assets/tekkom.png')} />
             </View>
 
             <Text/>
@@ -87,7 +90,7 @@ export default function SpecificEventScreen( { navigation }) {
                     {navigation.getParam('startt')[6]}
                   </Text>
                 </View>
-              <Text style={T.red}>    Hvor lenge til eventet logikk</Text>
+              <Text style={T.red}>   Hvor lenge til eventet logikk</Text>
             </View>
             </View>
 
@@ -109,8 +112,11 @@ export default function SpecificEventScreen( { navigation }) {
               <View style={ES.specificEventInfoView}>
               <Text style={T.centered20}>Slutter: </Text>
                 <Text style={T.red}>
-                  annen api call mangler her
+                  {usersData.endt}
                 </Text>
+                
+                
+              
               </View>
 
               <Text/>
@@ -126,7 +132,7 @@ export default function SpecificEventScreen( { navigation }) {
 
               <View style={ES.specificEventInfoView}>
                 <Text style={T.centered20}>Kategori: </Text>
-                <Text style={T.red}>fargesirkel</Text>
+                {CategoryLight(navigation.getParam('category'))}
                 <Text style={T.centered20}>
                   {navigation.getParam('category')}
                 </Text>
@@ -152,9 +158,9 @@ export default function SpecificEventScreen( { navigation }) {
               <Text/>
 
               <View>
-              <Text style={T.centered20}>Beskrivelse: </Text>
-              <Text style={T.red}>
-                  annen api call mangler her
+                <Text style={T.centered20}>Beskrivelse: </Text>
+                <Text style={T.centered15}>
+                    {usersData.description}
                 </Text>
               </View>
             </View>
