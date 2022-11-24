@@ -32,6 +32,16 @@ export function GrayLight() {
     );
 };
 
+export function CategoryImage(condition) {
+    if(!condition) {
+        return(
+            <View>
+                <Image style={ES.specificEventImage} source={require('../assets/default.png')} />
+            </View>
+        )
+    }
+}
+
 export function CategoryLight(condition) {
     if (condition === 'TEKKOM') {
         return(

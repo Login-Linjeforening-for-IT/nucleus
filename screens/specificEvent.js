@@ -34,7 +34,7 @@ export default function SpecificEventScreen( { navigation }) {
   console.log(usersData)
   console.log(usersData['description'])
 
-
+  //Check if image exists
 
   const settingsPage = () => {
     navigation.navigate('SettingScreen');
