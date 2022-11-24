@@ -43,6 +43,9 @@ return(
     <TouchableOpacity onPress={() => goBack()}>
       <Image style={MS.goBack} source={require('../assets/goback777.png')} />
     </TouchableOpacity>
+
+    <Text style={MS.screenTitle}>    Om Login</Text>
+
     <View style={MS.tMenuIcons}>
       <TouchableOpacity onPress={() => ProfilePage()}>
         <Image style={MS.tMenuL} source={require('../assets/loginperson777.png')} />

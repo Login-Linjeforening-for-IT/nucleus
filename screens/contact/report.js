@@ -4,7 +4,6 @@ import { GS } from '../../styles/globalStyles';
 import { MS } from '../../styles/menuStyles';
 import { T } from '../../styles/text';
 import { SS } from '../../styles/settingStyles';
-import sendEmail from '../../shared/sendMail';
 import GreenLight, { Button, Check, GrayLight, RedLight } from '../../shared/sharedComponents';
 import { 
   Text, 
@@ -35,14 +34,6 @@ const ProfilePage = () => {
 }
 const sendForm = () => {
   if (data.name === data.name) {
-    
-    sendEmail(
-        'eirik.hanasand@gmail.com',
-        'Testing if mail works',
-        'UserName, we need 2 minutes of your time to fill this quick survey [https://google.com]',
-    ).then(() => {
-        console.log('Your message was successfully sent!');
-    });
 
     Alert.alert('Takk for beskjed.')
     setData({
@@ -132,6 +123,9 @@ const inputContent = (val) => {
     <TouchableOpacity onPress={() => goBack()}>
       <Image style={MS.goBack} source={require('../../assets/goback777.png')} />
     </TouchableOpacity>
+
+    <Text style={MS.screenTitle}>     Varsle</Text>
+
     <View style={MS.tMenuIcons}>
       <TouchableOpacity onPress={() => ProfilePage()}>
         <Image style={MS.tMenuL} source={require('../../assets/loginperson-orange.png')} />
@@ -142,8 +136,7 @@ const inputContent = (val) => {
 <View style={GS.content}>
         
         <View>
-          <Text style={T.centered50}>Varsle</Text><Text/>
-          <Text style={T.centered20}>Anonymt og sikkert. Alltid.</Text>
+          <Text style={T.centered}>Anonymt og sikkert. Alltid.</Text>
           <Text/><Text/>
 
           <View style={SS.loginView}>

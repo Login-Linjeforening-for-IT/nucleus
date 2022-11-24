@@ -5,7 +5,7 @@ import Card from '../shared/card';
 import { GS } from '../styles/globalStyles';
 import { MS } from '../styles/menuStyles';
 import { ES } from '../styles/eventStyles';
-import GreenLight, { GrayLight, Check, DateDisplay } from '../shared/sharedComponents';
+import GreenLight, { GrayLight, Check, DateDisplay, CategoryLight } from '../shared/sharedComponents';
 
 import { 
   Text, 
@@ -46,7 +46,6 @@ getData();
 },[])
 
 const [events, updateEvents] = useState([]) 
-console.log(events)
 
 return(
     <View style={MS.backGround}>
@@ -56,6 +55,9 @@ return(
     <TouchableOpacity onPress={() => aboutPage()}>
       <Image style={MS.tMenuL} source={require('../assets/login-text.png')} />
     </TouchableOpacity>
+
+    <Text style={MS.screenTitle}>Events</Text>
+    
     <View style={MS.tMenuIcons}>
       <TouchableOpacity onPress={() => ProfilePage()}>
         <Image style={MS.tMenuL} source={require('../assets/loginperson777.png')} />
@@ -76,21 +78,25 @@ return(
                 <TouchableOpacity onPress={() => navigation.navigate('SpecificEventScreen', item)}>
                   <Card style={ES.eventCard}>
                     <View style={ES.eventBack}>
-                    <View style={ES.view}>
-                        <Text style={ES.dayText}>{item.startt[8]}{item.startt[9]}</Text>
-                        <Text style={ES.monthText}>{item.startt[5]}{item.startt[6]}</Text>
-                    </View>
-                      <View style={ES.view2}>
-                        <View style = {ES.title}><Text style={ES.title}>{item.eventname}</Text></View>
-                        <View style = {ES.loc}><Text style={ES.loc}>{item.startt[11]}{item.startt[12]}:{item.startt[14]}{item.startt[15]} {item.roomno}. {item.campus}</Text></View>
-                        {/* <View><Text style={ES.image}>{item.IMAGENOTRENDERED}</Text></View> */}
+                      <View style={ES.view}>
+                        <View>
+
+                        </View>
+                        <View>
+                          <Text style={ES.dayText}>{item.startt[8]}{item.startt[9]}</Text>
+                          <Text style={ES.monthText}>{item.startt[5]}{item.startt[6]}</Text>
+                        </View>
                       </View>
-                      <View style={ES.view3}>
-                          <TouchableOpacity onPress={() => updateEvents(events.filter((x) => x.eventID !== item.eventID))}>
-                            <View style = {ES.greenLight}><GreenLight/></View>
-                            <View style = {ES.checkContent}><Check/></View>
-                          </TouchableOpacity>
-                      </View>
+                        <View style={ES.view2}>
+                          <View style = {ES.title}><Text style={ES.title}>{item.eventname}</Text></View>
+                          <View style = {ES.loc}><Text style={ES.loc}>{item.startt[11]}{item.startt[12]}:{item.startt[14]}{item.startt[15]} {item.roomno}. {item.campus}</Text></View>
+                        </View>
+                        <View style={ES.view3}>
+                            <TouchableOpacity onPress={() => updateEvents(events.filter((x) => x.eventID !== item.eventID))}>
+                              <View style = {ES.greenLight}><GreenLight/></View>
+                              <View style = {ES.checkContent}><Check/></View>
+                            </TouchableOpacity>
+                        </View>
                     </View>
                   </Card>
                 </TouchableOpacity>

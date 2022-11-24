@@ -43,6 +43,9 @@ const goBack = () => {//hoppe over til mail
     <TouchableOpacity onPress={() => goBack()}>
       <Image style={MS.goBack} source={require('../assets/goback777.png')} />
     </TouchableOpacity>
+
+    <Text style={MS.screenTitle}>  Innstillinger</Text>
+
     <View style={MS.tMenuIcons}>
       <TouchableOpacity onPress={() => ProfilePage()}>
         <Image style={MS.tMenuL} source={require('../assets/loginperson-orange.png')} />
@@ -52,8 +55,6 @@ const goBack = () => {//hoppe over til mail
 {/* ========================= DISPLAY CONTENT ========================= */}
 <View style={GS.content}>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <Text style={T.centered}>Innstillinger</Text><Text/>
-
           <Card>
             <View style={GS.notificationBack}>
               <View style={GS.view}>

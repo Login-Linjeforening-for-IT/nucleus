@@ -62,6 +62,14 @@ export const SS = StyleSheet.create ({
         marginHorizontal: 108, 
         marginVertical: 6,
     },
+    notifyButton: {
+        alignSelf: 'center',
+        width: 200,
+        borderRadius: 40,
+        backgroundColor: 'red',
+        marginHorizontal: 108, 
+        marginVertical: 6,
+    },
     buttonContent: {
         marginVertical: 10
     },

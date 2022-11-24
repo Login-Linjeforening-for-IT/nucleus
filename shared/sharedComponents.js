@@ -270,6 +270,16 @@ export function Button(props) {
     );
 }
 
+export function NotifyButton(props) {
+    return(
+        <View style={SS.notifyButton}>
+            <View style={SS.buttonContent}>
+                { props.children }
+            </View>
+        </View>
+    );
+}
+
 const styles = StyleSheet.create({
     size: {
         height: 40,

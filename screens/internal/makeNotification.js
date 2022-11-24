@@ -2,14 +2,14 @@ import { StatusBar } from 'expo-status-bar';
 import { MS } from '../../styles/menuStyles';
 import { SS } from '../../styles/settingStyles';
 import { GS } from '../../styles/globalStyles';
-import React, { useState, useEffect, useRef, replace } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { NotifyButton } from '../../shared/sharedComponents';
 import { T } from '../../styles/text';
 import { 
   Text, 
   View, 
   Image, 
   TouchableOpacity,
-  Button, 
   Platform,
   TextInput
 } from 'react-native';
@@ -77,6 +77,8 @@ useEffect(() => {
       <TouchableOpacity onPress={() => goBack()}>
       <Image style={MS.goBack} source={require('../../assets/goback777.png')} />
     </TouchableOpacity>
+
+    
         <View style={MS.tMenuIcons}>
       <TouchableOpacity onPress={() => ProfilePage()}>
         <Image style={MS.tMenuL} source={require('../../assets/loginperson-orange.png')} />
@@ -119,13 +121,19 @@ useEffect(() => {
                       onChangeText={(val) => nDelay = (val)}
                     /><Text/>
 
-                <Button
+            <TouchableOpacity onPress={async () => {await schedulePushNotification();}}>
+                <NotifyButton>
+                  <Text style={T.centered20}>SEND VARSLING</Text>
+                </NotifyButton>
+              </TouchableOpacity>
+
+                {/* <Button
                 color={'red'}
                 title="Send varsling"
                 onPress={async () => {
                 await schedulePushNotification();
                 }}
-                /><Text/>
+                /><Text/> */}
                 
               {/* <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                 <Text style={T.h5}>Tittel:</Text>

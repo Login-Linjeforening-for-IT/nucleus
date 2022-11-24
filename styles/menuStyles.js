@@ -2,6 +2,11 @@ import { StyleSheet } from "react-native";
 
 export const MS = StyleSheet.create ({
 //  ========================= STYLESHEET TOP MENU =========================
+  screenTitle: {
+    top: '14.5%',
+    color: '#777',
+    fontSize: 35,
+  },
   backGround: {
     height: '100%',
     backgroundColor: '#181818'

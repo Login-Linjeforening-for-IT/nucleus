@@ -122,7 +122,7 @@ const showPass = () => {
                 <View style={SS.loginView}>
                   <TextInput 
                   style={GS.inputText}
-                  placeholder='brukernavn'
+                  placeholder='         brukernavn'
                   placeholderTextColor={'#555'}
                   textAlign='center'
                   onChangeText={(val) => inputName(val)}
@@ -150,7 +150,7 @@ const showPass = () => {
                 <View style={SS.loginView}>
                   <TextInput 
                   style={GS.inputText}
-                  placeholder='passord'
+                  placeholder='         passord'
                   placeholderTextColor={'#555'}
                   secureTextEntry = {data.secureTextEntry ? true : false}
                   textAlign='center'

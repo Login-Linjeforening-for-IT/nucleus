@@ -40,6 +40,9 @@ const goBack = () => {
     <TouchableOpacity onPress={() => goBack()}>
       <Image style={MS.goBack} source={require('../../assets/goback777.png')} />
     </TouchableOpacity>
+
+    <Text style={MS.screenTitle}>     Bedrift</Text>
+
     <View style={MS.tMenuIcons}>
       <TouchableOpacity onPress={() => ProfilePage()}>
         <Image style={MS.tMenuL} source={require('../../assets/loginperson-orange.png')} />
@@ -50,7 +53,6 @@ const goBack = () => {
 <View style={GS.content}>
         
         <ScrollView showsVerticalScrollIndicator={true}>
-            <Text style={T.centered}>For bedrifter</Text>
             <Text style={T.h5}>Er din bedrift på utskikk etter skarpe IT-studenter? Sjekk ut alt vi har å tilby din bedrift.</Text>
             <Text/><Text/>
             
@@ -76,7 +78,7 @@ const goBack = () => {
               <Text style={T.centered}>Utlysning / Profilering</Text>
               <Text style={T.paragraph}>PR komiteen tilbyr også deling av stillingsutlysninger, jobbannonser, og annen type profilering på våre aktive sosiale kanaler (Discord, Instagram, Facebook, Login.no). Dersom bedriften har arrangert en bedpres, workshop/fagpres eller CTF med oss det gjeldene semesteret vil profilering være inkludert (uten ekstra kostnad).</Text>
             </View>
-            
+
             <Kontakt/>
             </ScrollView>
       </View>   

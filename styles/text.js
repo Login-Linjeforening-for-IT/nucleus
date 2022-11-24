@@ -105,4 +105,16 @@ export const T = StyleSheet.create({
     color: 'white',
     fontSize: 18,
   },
+  margin20: {
+    alignSelf: 'center',
+    color: 'white',
+    fontSize: 20,
+    margin: 20
+  },
+  margin15: {
+    alignSelf: 'center',
+    color: 'white',
+    fontSize: 15,
+    margin: 15
+  }
 })

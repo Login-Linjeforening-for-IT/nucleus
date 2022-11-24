@@ -34,7 +34,7 @@ export function CardSmall(props) {
 const styles = StyleSheet.create({
     card: {
         borderRadius: 20,
-        backgroundColor: '#282828',
+        backgroundColor: '#111',
         marginHorizontal: 4, 
         marginVertical: 6,
     },

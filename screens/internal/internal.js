@@ -42,17 +42,18 @@ const ProfilePage = () => {
       <StatusBar style="light" />
 {/* ========================= DISPLAY TOP MENU ========================= */}
       <View style={MS.topMenu}>
-      <TouchableOpacity onPress={() => aboutPage()}>
-          <Image style={MS.tMenuL} source={require('../../assets/login-text.png')} />
-        </TouchableOpacity>
-        <View style={MS.tMenuIcons}>
-        <View style={MS.tMenuIcons}>
-      <TouchableOpacity onPress={() => ProfilePage()}>
-        <Image style={MS.tMenuL} source={require('../../assets/loginperson-orange.png')} />
-      </TouchableOpacity>
-    </View>
-    </View>
-      </View>
+          <TouchableOpacity>
+            <Image style={MS.tMenuL} source={require('../../assets/login-text.png')} />
+          </TouchableOpacity>
+
+          <Text style={MS.screenTitle}>Innsida</Text>
+          
+          <View style={MS.tMenuIcons}>
+            <TouchableOpacity onPress={() => ProfilePage()}>
+              <Image style={MS.tMenuL} source={require('../../assets/loginperson-orange.png')} />
+            </TouchableOpacity>
+          </View>
+        </View>
 
 {/* ========================= DISPLAY CONTENT ========================= */}
       <View style={GS.content}>

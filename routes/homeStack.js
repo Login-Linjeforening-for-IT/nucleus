@@ -25,6 +25,7 @@ import ContactTekKomScreen from '../screens/contact/contactTekKom';
 import ContactPRScreen from '../screens/contact/contactPR';
 import ContactCTFkomScreen from '../screens/contact/contactCTFkom';
 import ContactSATkomScreen from '../screens/contact/contactSATkom';
+import SpecificJobScreen from '../screens/specificJobScreen';
 
 const screens = {
     EventScreen: {
@@ -98,11 +99,13 @@ const screens = {
     },
     ContactSATkomScreen: {
         screen: ContactSATkomScreen
+    },
+    SpecificJobScreen: {
+        screen: SpecificJobScreen
     }
 }
 
 const HomeStack = createStackNavigator(screens, {defaultNavigationOptions: {
-    theme: 0,
     animationEnabled: false,
     title: '',
     headerShown: '',

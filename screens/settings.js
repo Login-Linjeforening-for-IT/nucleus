@@ -18,8 +18,9 @@ import {
 
 export default function SettingScreen({ navigation }) {
     const [setting] = useState([
-      {id: '1', nav: 'EventScreen', title: 'Arbeid pågår', content: 'Jobbannonser?'},
-
+      {id: '1', nav: 'EventScreen', title: 'Hagearbeid hos Login', content: 'A still more glorious dawn awaits cosmic fugue gathered by gravity tesseract muse about two ghostly white figures in coveralls and helmets are softly dancing. Rich in heavy atoms permanence of the stars descended from astronomers invent...'},
+      {id: '2', nav: 'EventScreen', title: 'Lage nettside for zebracompany.com', content: 'The sky calls to us rogue Orions sword decipherment venture the only home weve ever known. Cambrian explosion white dwarf something incredible is waiting to be known astonishment great turbulent clouds the only home weve ever known. '},
+      {id: '3', nav: 'EventScreen', title: 'Datasikkerhet hos dogs.zoo', content: 'Euclid vanquish the impossible muse about intelligent beings paroxysm of global death something incredible is waiting to be known. The carbon in our apple pies two ghostly white figures in coveralls and helmets are softly dancing realm of the spine... '},
   ])
 {/* ========================= DISPLAY APP START ========================= */}
 const eventPage = () => {
@@ -43,6 +44,9 @@ return(
     <TouchableOpacity onPress={() => aboutPage()}>
       <Image style={MS.tMenuL} source={require('../assets/login-text.png')} />
     </TouchableOpacity>
+
+    <Text style={MS.screenTitle}>Stillinger</Text>
+
     <View style={MS.tMenuIcons}>
       <TouchableOpacity onPress={() => ProfilePage()}>
         <Image style={MS.tMenuL} source={require('../assets/loginperson777.png')} />
@@ -59,20 +63,15 @@ return(
           data={setting}
           renderItem={({item}) => (
             <View>
-            <TouchableOpacity onPress={() => navigation.navigate(item.nav, item)}>
+            <TouchableOpacity onPress={() => navigation.navigate('SpecificJobScreen', item)}>
               <Card style={SS.creditCard}>
-                <Text style={SS.text}>{item.title}</Text>
-                <Text style={T.red}>{item.content}</Text>
+                <Text style={T.centered20}>{item.title}</Text><Text/>
+                <Text style={T.centered15}>{item.content}</Text>
               </Card>
             </TouchableOpacity>
           </View>
           )}
           />
-          <TouchableOpacity onPress={() => navigation.navigate('ContactScreen')}>
-              <View style={SS.bug}>
-                <Image style={SS.bugImage} source={require('../assets/login-text.png')} />
-              </View>
-            </TouchableOpacity>
       </View>    
 
 {/* ========================= DISPLAY BOTTOM MENU ========================= */}

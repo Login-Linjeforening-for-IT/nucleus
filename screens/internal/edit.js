@@ -24,14 +24,13 @@ export default function EditScreen({ navigation }) {
       {id: '2', nav: 'HomeScreen', title: 'HomeScreen'},
       {id: '3', nav: 'AboutScreen', title: 'AboutScreen'},
       {id: '4', nav: 'SettingScreen', title: 'SettingScreen'},
-      {id: '5', nav: 'SpecificEventScreen', title: 'SpecificEventScreen'},
-      {id: '6', nav: 'InternalScreen', title: 'InternalScreen'},
-      {id: '7', nav: 'BusinessScreen', title: 'BusinessScreen'},
-      {id: '8', nav: 'NotificationScreen', title: 'NotificationScreen'},
-      {id: '9', nav: 'ContactScreeen', title: 'ContactScreeen'},
-      {id: '10', nav: 'TodoScreen', title: 'Gjøremål'},
-      {id: '11', nav: 'MakeNotificationScreen', title: 'MakeNotificationScreen'},
-      {id: '12', nav: 'LoginScreen', title: 'LoginScreen'},
+      {id: '5', nav: 'InternalScreen', title: 'InternalScreen'},
+      {id: '6', nav: 'BusinessScreen', title: 'BusinessScreen'},
+      {id: '7', nav: 'NotificationScreen', title: 'NotificationScreen'},
+      {id: '8', nav: 'ContactScreeen', title: 'ContactScreeen'},
+      {id: '9', nav: 'TodoScreen', title: 'Gjøremål'},
+      {id: '10', nav: 'MakeNotificationScreen', title: 'MakeNotificationScreen'},
+      {id: '11', nav: 'LoginScreen', title: 'LoginScreen'},
   ])
 {/* ========================= DISPLAY APP START ========================= */}
 const eventPage = () => {
@@ -55,6 +54,9 @@ const goBack = () => {
       <TouchableOpacity onPress={() => goBack()}>
       <Image style={MS.goBack} source={require('../../assets/goback777.png')} />
     </TouchableOpacity>
+
+    <Text style={MS.screenTitle}>     Change</Text>
+
         <View style={MS.tMenuIcons}>
       <TouchableOpacity onPress={() => ProfilePage()}>
         <Image style={MS.tMenuL} source={require('../../assets/loginperson-orange.png')} />
@@ -64,9 +66,6 @@ const goBack = () => {
 
 {/* ========================= DISPLAY CONTENT ========================= */}
       <View style={GS.content}>
-        <Text style={T.grey999}>
-          Change starts here
-        </Text><Text/>
           <FlatList
           showsVerticalScrollIndicator={''}
           numColumns={1}
