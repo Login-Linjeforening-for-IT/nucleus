@@ -1,36 +1,36 @@
-module.exports = {
-    LIGHT: {
-        BACKGROUND: 'white',
-        DARKER: '#E1D9D1',
-        ORANGE: '#fd8738',
-        TEXTCOLOR: 'black',
-        TITLETEXTCOLOR: 'black'
+module.exports = {  //Global theme settings
+    LIGHT: {    //Light theme
+        BACKGROUND: 'white',        //Background of the app
+        DARKER: '#E1D9D1',          //Contentcolor of the app
+        ORANGE: '#fd8738',          //Logins color
+        TEXTCOLOR: 'black',         //Textcolor of the app
+        TITLETEXTCOLOR: 'black'     //ScreenTitleColor of the app
     },
-    DARK: {
-        BACKGROUND: '#181818',
-        DARKER: '#111',
-        ORANGE: '#fd8738',
-        TEXTCOLOR: 'white',
-        TITLETEXTCOLOR: '#777'
+    DARK: { //Dark theme
+        BACKGROUND: '#181818',      //Background of the app
+        DARKER: '#111',             //Contentcolor of the app
+        ORANGE: '#fd8738',          //Logins color
+        TEXTCOLOR: 'white',         //Textcolor of the app
+        TITLETEXTCOLOR: '#777'      //ScreenTitleColor of the app
     },
-    CHRISTMAS: {
-        BACKGROUND: 'beige',
-        DARKER: '#ecffdc',
-        ORANGE: '#fd8738',
-        TEXTCOLOR: 'black',
-        TITLETEXTCOLOR: 'black'
+    CHRISTMAS: { //Christmas theme
+        BACKGROUND: 'beige',        //Background of the app
+        DARKER: '#ecffdc',          //Contentcolor of the app
+        ORANGE: '#fd8738',          //Logins color
+        TEXTCOLOR: 'black',         //Textcolor of the app
+        TITLETEXTCOLOR: 'black'     //ScreenTitleColor of the app
     },
-    HALLOWEEN: {
+    HALLOWEEN: { //Halloween theme
         //Coming soon
     },
-    EASTER: {
-        BACKGROUND: '#98FB98',
-        DARKER: '#ffd700',
-        ORANGE: '#fd8738',
-        TEXTCOLOR: 'black',
-        TITLETEXTCOLOR: 'black'
+    EASTER: { //Easter theme
+        BACKGROUND: '#98FB98',      //Background of the app
+        DARKER: '#ffd700',          //Contentcolor of the app
+        ORANGE: '#fd8738',          //Logins color
+        TEXTCOLOR: 'black',         //Textcolor of the app
+        TITLETEXTCOLOR: 'black'     //ScreenTitleColor of the app
     },
-    SUMMER: {
+    SUMMER: { //Summer theme
         //Coming soon
     },
   };

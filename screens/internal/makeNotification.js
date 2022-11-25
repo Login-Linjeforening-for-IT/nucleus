@@ -71,7 +71,7 @@ useEffect(() => {
 }, []);
 
   return(
-    <View style={MS.backGround}>
+    <View>
       <StatusBar style="light" />
       <View style={MS.topMenu}>
       <TouchableOpacity onPress={() => goBack()}>
@@ -81,12 +81,12 @@ useEffect(() => {
     
         <View style={MS.tMenuIcons}>
       <TouchableOpacity onPress={() => ProfilePage()}>
-        <Image style={MS.tMenuL} source={require('../../assets/loginperson-orange.png')} />
+        <Image style={MS.tMenuIcon} source={require('../../assets/loginperson-orange.png')} />
       </TouchableOpacity>
     </View>
       </View>
 {/* ========================= DISPLAY CONTENT ========================= */}
-      <View style={GS.creditContent}>
+      <View style={GS.content}>
         <ScrollView showsVerticalScrollIndicator={false}>
         <Text/><Text style={T.centered}>Send varsling</Text><Text/><Text/>
 
@@ -127,24 +127,23 @@ useEffect(() => {
                 </NotifyButton>
               </TouchableOpacity>
 
-                <View style={SS.makeNotificationImage}>
-                  <Image style={GS.creditImage} source={require('../../assets/login-text.png')} />
+                <View><Text/><Text/><Text/>
+                  <Image style={GS.smallImage} source={require('../../assets/login-text.png')} />
                 </View>
-              {/* </View> */}
               <Text/><Text/><Text/>
 </ScrollView>
       </View>    
 
 {/* ========================= DISPLAY BOTTOM MENU ========================= */}
-      <View style={MS.bMenuUniversal}>
-        <TouchableOpacity onPress={() => homePage()}>
-            <Image style={MS.bMenu3} source={require('../../assets/house777.png')} />
+    <View style={MS.bMenu}>
+      <TouchableOpacity onPress={() => homePage()}>
+            <Image style={MS.bMenuIcon} source={require('../../assets/house777.png')} />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => eventPage()}>
-            <Image style={MS.bMenu2} source={require('../../assets/calendar777.png')} />
+          <TouchableOpacity>
+            <Image style={MS.bMenuIcon} source={require('../../assets/calendar777.png')} />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => settingsPage()}>
-            <Image style={MS.bMenu1} source={require('../../assets/menu777.png')} />
+            <Image style={MS.bMenuIcon} source={require('../../assets/menu777.png')} />
           </TouchableOpacity>
       </View>     
     </View>

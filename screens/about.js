@@ -37,7 +37,7 @@ const goBack = () => {
 }
 
 return(
-  <View style={MS.backGround}>
+  <View>
       <StatusBar style="light" />
 {/* ========================= DISPLAY TOP MENU ========================= */}
   <View style={MS.topMenu}>
@@ -49,7 +49,7 @@ return(
 
     <View style={MS.tMenuIcons}>
       <TouchableOpacity onPress={() => profilePage()}>
-        <Image style={MS.tMenuL} source={require('../assets/loginperson777.png')} />
+        <Image style={MS.tMenuIcon} source={require('../assets/loginperson777.png')} />
       </TouchableOpacity>
     </View>
   </View>
@@ -76,15 +76,15 @@ return(
     </ScrollView>
   </View> 
 
-  <View style={MS.bMenuUniversal}>
+  <View style={MS.bMenu}>
       <TouchableOpacity onPress={() => homePage()}>
-        <Image style={MS.homeSelected} source={require('../assets/house-orange.png')} />
+        <Image style={MS.bMenuIcon} source={require('../assets/house-orange.png')} />
       </TouchableOpacity>
       <TouchableOpacity onPress={() => eventPage()}>
-        <Image style={MS.bMenu2} source={require('../assets/calendar777.png')} />
+        <Image style={MS.bMenuIcon} source={require('../assets/calendar777.png')} />
       </TouchableOpacity>
       <TouchableOpacity onPress={() => settingsPage()}>
-        <Image style={MS.bMenu1} source={require('../assets/menu777.png')} />
+        <Image style={MS.bMenuIcon} source={require('../assets/menu777.png')} />
       </TouchableOpacity>
       </View> 
     </View>

@@ -2,68 +2,23 @@ import { StyleSheet } from "react-native";
 const GLOBAL = require('../styles/theme');
 
 export const SS = StyleSheet.create ({
-    lightSwitchImage: {
+    lightSwitchImage: { //lightSwitchImage in notificationScreen
         left: '-27.5%',
         width: 120,
         height: 120
     },
-    langSwitch: {
+    langSwitch: {   //langSwitch text style in notificationScreen
         left: 12.5,
         fontSize: 20,
         color: GLOBAL.DARK.TEXTCOLOR,
     },
-    top: {
-        top: 50,
-      },
-    text: {
-        height: 30,
-        alignSelf: 'center',
-        color: GLOBAL.DARK.TEXTCOLOR,
-        fontSize: 20,
-    },
-    creditText: {
-        height: 22,
-        alignSelf: 'center',
-        color: GLOBAL.DARK.TEXTCOLOR,
-        fontSize: 20,
-    },
-    texth2: {
-        alignSelf: 'center',
-        color: GLOBAL.DARK.TEXTCOLOR,
-        fontSize: 40,
-    },
-    bug: {
-        height: -25,
-        color: GLOBAL.DARK.TEXTCOLOR,
-    },
-    bugImage: {
-        top: -30,
-        alignSelf: 'center',
-        height: 120,
-        width: 150,
-    },
-    makeNotificationImage: {
-        top: 20,
-        alignSelf: 'center',
-        height: 200,
-        width: 200,
-    },
-    makeNotification: {
-        backgroundColor: GLOBAL.DARK.BACKGROUND,
-        paddingHorizontal: 20,
-    },
-    creditImage: {
-        alignSelf: 'center',
-        height: 250,
-        width: 250
-    },
-    button: {
+    button: {   //Login button on loginScreen
         borderRadius: 40,
         backgroundColor: GLOBAL.DARK.ORANGE,
         marginHorizontal: 108, 
         marginVertical: 6,
     },
-    notifyButton: {
+    notifyButton: { //Notifybutton in sharedComponents
         alignSelf: 'center',
         width: 200,
         borderRadius: 40,
@@ -71,79 +26,68 @@ export const SS = StyleSheet.create ({
         marginHorizontal: 108, 
         marginVertical: 6,
     },
-    inputField: {
-        alignSelf: 'flex-end',
-        position: 'absolute',
-        top: 2000
-    },
-    buttonContent: {
+    buttonContent: {    //Button margin 
         marginVertical: 10
     },
-    loginView: {
+    loginView: {    //Views on login screen
         height: 50,
         alignSelf: 'center',
         flexDirection: 'row'
     },
-    reportContentView: {
+    reportContentView: {    //Secures the dimensions of the reportViews
         height: 200,
         alignSelf: 'center',
         flexDirection: 'row'
     },
-    greenLight: {
+    greenLight: {   //Light position on loginScreen
         left: '14%',
         top: '10%',
         alignSelf: 'center',
-        color: GLOBAL.DARK.TEXTCOLOR,
     },
-    checkContent: {
+    checkContent: { //Check position on loginScreen
         left: '25%',
         top: '-55%',
         alignSelf: 'center',
-        color: GLOBAL.DARK.TEXTCOLOR,
     },
-    reportGreenLight: {
+    reportGreenLight: { //Light position on reportScreen
         left: '14%',
         top: '40%',
         alignSelf: 'center',
-        color: GLOBAL.DARK.TEXTCOLOR,
     },
-    reportCheckContent: {
+    reportCheckContent: {   //Check position on reportScreen
         left: '25%',
         top: '23%',
         alignSelf: 'center',
-        color: GLOBAL.DARK.TEXTCOLOR,
     },
-    passLight: {
+    passLight: {    //PassLight position on loginScreen
         left: '14%',
         top: '6.2%',
         alignSelf: 'center',
-        color: GLOBAL.DARK.TEXTCOLOR,
     },
-    passCheck: {
+    passCheck: {    //PassCheckIcon position on loginScreen
         left: '25%',
         top: '-35%',
         alignSelf: 'center',
         color: GLOBAL.DARK.TEXTCOLOR,
     },
-    showPassImage: {
+    showPassImage: {    //ShowPassIcon position on loginScreen
         left: '-11%',
         top: '-20%',
         height: 40,
         width: 40,
     },
-    noPassImage: {
+    noPassImage: {  //PassIcon position on loginScreen
         left: '-10%',
         top: '-46.5%',
         height: 40,
         width: 40,
     },
-    noPassLight: {
+    noPassLight: {  //PassLight position on loginScreen
         left: '14%',
         top: '10%',
         alignSelf: 'center',
-        color: GLOBAL.DARK.TEXTCOLOR,
     },
-    noPassCheck: {
+    noPassCheck: {  //PassCheck position on loginScreen
         left: '25%',
         top: '-35%',
         alignSelf: 'center',

@@ -1,33 +1,14 @@
-import { StyleSheet } from "react-native";
-const GLOBAL = require('../styles/theme');
+import { StyleSheet } from "react-native";  //Stylesheet file
+const GLOBAL = require('../styles/theme');  //App theme
 
 export const GS = StyleSheet.create({
-  content: {
+//========================= EventScreen =========================
+  content: { //Main view of every screen
   height: '75%',
   backgroundColor: GLOBAL.DARK.BACKGROUND,
   paddingHorizontal: 20,
   },
-  creditContent: {
-    top: '-2.5%',
-    height: '75%',
-    backgroundColor: GLOBAL.DARK.BACKGROUND,
-    paddingHorizontal: 20,
-  },
-  creditImage: {
-    bottom: '10%',
-    alignSelf: 'center',
-    height: 105,
-    width: 200,
-  },
-  inputText: {
-    alignSelf: 'center',
-    alignItems: 'center',
-    width: '80%',
-    height: 50,
-    borderRadius: 40,
-    color: GLOBAL.DARK.TEXTCOLOR,
-  },
-  reportInputContentText: {
+  reportInputContentText: { //reportScreen description text
     alignSelf: 'center',
     alignItems: 'center',
     width: '80%',
@@ -35,22 +16,15 @@ export const GS = StyleSheet.create({
     borderRadius: 40,
     color: GLOBAL.DARK.TEXTCOLOR,
   },
-  notificationBack: {
+  notificationBack: { //The horizontal card views on notificationScreen
     flexDirection: 'row',
     height: 25,
   },
-  notificationText: {
+  notificationText: { //The text on notificationScreen
     color: GLOBAL.DARK.TEXTCOLOR,
     fontSize: 20
   },
-  view: {
-    alignSelf: 'center',
-    width: '85%',
-  },
-  view2: {
-    justifyContent: 'center',
-  },
-  inputText: {
+  inputText: {  //reportScreen name and notifier text
     backgroundColor: GLOBAL.DARK.DARKER,
     alignSelf: 'center',
     alignItems: 'center',
@@ -59,4 +33,17 @@ export const GS = StyleSheet.create({
     borderRadius: 40,
     color: 'white',
   },
+  view: { //Left view of notificationScreen
+    alignSelf: 'center',
+    width: '85%',
+  },
+  view2: { //Right view of notificationScreen
+    justifyContent: 'center',
+  },
+  smallImage: { //Used anywhere there is a small image
+    top: -30,
+    alignSelf: 'center',
+    height: 120,
+    width: 150,
+},
 });

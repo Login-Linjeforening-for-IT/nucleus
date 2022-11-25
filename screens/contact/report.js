@@ -116,7 +116,7 @@ const inputContent = (val) => {
 }
 
   return(
-    <View style={MS.backGround}>
+    <View>
       <StatusBar style="light" />
 {/* ========================= DISPLAY TOP MENU ========================= */}
   <View style={MS.topMenu}>
@@ -128,7 +128,7 @@ const inputContent = (val) => {
 
     <View style={MS.tMenuIcons}>
       <TouchableOpacity onPress={() => profilePage()}>
-        <Image style={MS.tMenuL} source={require('../../assets/loginperson-orange.png')} />
+        <Image style={MS.tMenuIcon} source={require('../../assets/loginperson-orange.png')} />
       </TouchableOpacity>
     </View>
   </View>
@@ -237,15 +237,15 @@ const inputContent = (val) => {
       </View>   
 
 {/* ========================= DISPLAY BOTTOM MENU ========================= */}
-      <View style={MS.bMenuUniversal}>
+      <View style={MS.bMenu}>
           <TouchableOpacity onPress={() => homePage()}>
-            <Image style={MS.bMenu3} source={require('../../assets/house777.png')} />
+            <Image style={MS.bMenuIcon} source={require('../../assets/house777.png')} />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => eventPage()}>
-            <Image style={MS.bMenu2} source={require('../../assets/calendar777.png')} />
+            <Image style={MS.bMenuIcon} source={require('../../assets/calendar777.png')} />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => settingsPage()}>
-            <Image style={MS.bMenu1} source={require('../../assets/menu777.png')} />
+            <Image style={MS.bMenuIcon} source={require('../../assets/menu777.png')} />
           </TouchableOpacity>
       </View>     
     </View>

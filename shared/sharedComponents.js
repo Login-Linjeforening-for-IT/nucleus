@@ -10,7 +10,7 @@ import {
     TouchableOpacity,
     Image
 } from 'react-native';
-import Svg, { Circle, Path, SvgUri } from 'react-native-svg';
+import Svg, { Circle, Path } from 'react-native-svg';
 import { SS } from '../styles/settingStyles';
 import { T } from '../styles/text'
 
@@ -130,15 +130,7 @@ export function Check() {
         </Svg>
     </View>
     );
-};
-
-export function bigLogo() {
-    return(
-        <View>
-            {/* WIP good svg for big login logo goes here */}
-        </View>
-    )
-}   
+};  
 
 export function Copyright() {
     return(

@@ -3,7 +3,6 @@ import { StatusBar } from 'expo-status-bar'
 import { MS } from '../../styles/menuStyles'
 import { GS } from '../../styles/globalStyles'
 import { T } from '../../styles/text'
-import { Internal } from '../../styles/internalStyles'
 import { useState } from 'react';
 import Card from '../../shared/card';
 
@@ -46,7 +45,7 @@ const goBack = () => {
 }
 
   return(
-    <View style={MS.backGround}>
+    <View>
       <StatusBar style="light" />
 {/* ========================= DISPLAY TOP MENU ========================= */}
       <View style={MS.topMenu}>
@@ -58,7 +57,7 @@ const goBack = () => {
 
         <View style={MS.tMenuIcons}>
       <TouchableOpacity onPress={() => ProfilePage()}>
-        <Image style={MS.tMenuL} source={require('../../assets/loginperson-orange.png')} />
+        <Image style={MS.tMenuIcon} source={require('../../assets/loginperson-orange.png')} />
       </TouchableOpacity>
     </View>
       </View>
@@ -73,8 +72,8 @@ const goBack = () => {
           renderItem={({item}) => (
             <View>
             <TouchableOpacity onPress={() => navigation.navigate(item.nav, item)}>
-              <Card style={Internal.creditCard}>
-                <Text style={Internal.text}>{item.title}</Text>
+              <Card>
+                <Text style={T.centered20}>{item.title}</Text>
               </Card>
             </TouchableOpacity>
           </View>
@@ -83,15 +82,15 @@ const goBack = () => {
       </View>    
 
 {/* ========================= DISPLAY BOTTOM MENU ========================= */}
-      <View style={MS.bMenuWhenNoTop}>
+      <View style={MS.bMenu}>
       <TouchableOpacity onPress={() => homePage()}>
-        <Image style={MS.bMenu3} source={require('../../assets/house777.png')} />
+        <Image style={MS.bMenuIcon} source={require('../../assets/house777.png')} />
       </TouchableOpacity>
       <TouchableOpacity onPress={() => eventPage()}>
-        <Image style={MS.bMenu2} source={require('../../assets/calendar777.png')} />
+        <Image style={MS.bMenuIcon} source={require('../../assets/calendar777.png')} />
       </TouchableOpacity>
       <TouchableOpacity>
-        <Image style={MS.settingsSelected} source={require('../../assets/menu777.png')} />
+        <Image style={MS.bMenuIcon} source={require('../../assets/menu777.png')} />
       </TouchableOpacity>
       </View>     
     </View>

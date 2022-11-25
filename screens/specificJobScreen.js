@@ -36,7 +36,7 @@ export default function SpecificJobScreen( { navigation }) {
   }
 
   return(
-    <View style={MS.backGround}>
+    <View>
       <StatusBar style="light" />
 {/* ========================= DISPLAY TOP MENU ========================= */}
   <View style={MS.topMenu}>
@@ -48,7 +48,7 @@ export default function SpecificJobScreen( { navigation }) {
 
     <View style={MS.tMenuIcons}>
       <TouchableOpacity onPress={() => profilePage()}>
-        <Image style={MS.tMenuL} source={require('../assets/loginperson777.png')} />
+        <Image style={MS.tMenuIcon} source={require('../assets/loginperson777.png')} />
       </TouchableOpacity>
     </View>
   </View>
@@ -91,15 +91,15 @@ export default function SpecificJobScreen( { navigation }) {
       </View>    
 
 {/* ========================= DISPLAY BOTTOM MENU ========================= */}
-      <View style={MS.bMenuUniversal}>
+      <View style={MS.bMenu}>
         <TouchableOpacity onPress={() => homePage()}>
-            <Image style={MS.bMenu3} source={require('../assets/house777.png')} />
+            <Image style={MS.bMenuIcon} source={require('../assets/house777.png')} />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => eventPage()}>
-            <Image style={MS.eventSelected} source={require('../assets/calendar-orange.png')} />
+            <Image style={MS.bMenuIcon} source={require('../assets/calendar-orange.png')} />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => settingsPage()}>
-            <Image style={MS.bMenu1} source={require('../assets/menu777.png')} />
+            <Image style={MS.bMenuIcon} source={require('../assets/menu777.png')} />
           </TouchableOpacity>
       </View>     
     </View>

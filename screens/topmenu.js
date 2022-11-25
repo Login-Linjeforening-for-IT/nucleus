@@ -16,14 +16,14 @@ export default function TopMenu({navigation}) {
   return(
     <View style={MS.topMenu}>
     <TouchableOpacity onPress={() => aboutPage()}>
-      <Image style={MS.tMenuL} source={require('../assets/login-text.png')} />
+      <Image style={MS.tMenuIcon} source={require('../assets/login-text.png')} />
     </TouchableOpacity>
 
     <Text style={MS.screenTitle}>Events</Text>
 
     <View style={MS.tMenuIcons}>
       <TouchableOpacity onPress={() => profilePage()}>
-        <Image style={MS.tMenuL} source={require('../assets/loginperson777.png')} />
+        <Image style={MS.tMenuIcon} source={require('../assets/loginperson777.png')} />
       </TouchableOpacity>
     </View>
   </View>
