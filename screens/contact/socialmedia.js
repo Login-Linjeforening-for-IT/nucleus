@@ -27,7 +27,7 @@ const eventPage = () => {
 const homePage = () => {
   navigation.navigate('HomeScreen');
 }
-const ProfilePage = () => {
+const profilePage = () => {
   navigation.navigate('ProfileScreen')
 }
 const goBack = () => {
