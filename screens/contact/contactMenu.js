@@ -30,9 +30,6 @@ const eventPage = () => {
 const homePage = () => {
   navigation.navigate('HomeScreen');
 }
-const aboutPage = () => {
-  navigation.navigate('AboutScreen');
-}
 const ProfilePage = () => {
   navigation.navigate('ProfileScreen')
 }
@@ -52,7 +49,7 @@ return(
     <Text style={MS.screenTitle}>     Kontakt</Text>
 
     <View style={MS.tMenuIcons}>
-      <TouchableOpacity onPress={() => ProfilePage()}>
+      <TouchableOpacity onPress={() => profilePage()}>
         <Image style={MS.tMenuL} source={require('../../assets/loginperson-orange.png')} />
       </TouchableOpacity>
     </View>

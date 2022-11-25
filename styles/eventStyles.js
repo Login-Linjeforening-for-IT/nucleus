@@ -1,43 +1,21 @@
 import { StyleSheet } from "react-native";
+const GLOBAL = require('../styles/theme');
 
 export const ES = StyleSheet.create({
   specificEventInfoView: {
     flexDirection: 'row',
     alignItems: 'center'
   },
-  specificEventParentView: {
-    flex: 1,
-    flexDirection: 'column',
-  },
   specificEventView1: {
     alignItems: 'center',
-    width: '100%',
     height: '10%',
-  },
-  specificEventView2: {
-    width: '100%',
-    height: '8.4%',
-    backgroundColor: '#111',
-    borderRadius: 20
-  },
-  specificEventView3: {
-    width: '100%',
-    height: '20.5%',
-    backgroundColor: '#222',
-    borderRadius: 20
-  },
-  specificEventView4: {
-    width: '100%',
-    height: '61.1%',
-    backgroundColor: '#111',
-    borderRadius: 20
   },
   view: {
     top: '-2%',
     justifyContent: 'center',
     width: '15%',
     height: '120%',
-    backgroundColor: 'blue',
+    backgroundColor: 'blue', //Needs to be rendered based on event
     borderRadius: 10,
   },
   view2: {
@@ -53,34 +31,34 @@ export const ES = StyleSheet.create({
   },
   dayText: {
     left: '15%',
-    color: 'white',
+    color: GLOBAL.DARK.TEXTCOLOR,
     fontSize: 30,
   },
   monthText: {
     top: '-7.5%',
     left: '15%',
-    color: 'white',
+    color: GLOBAL.DARK.TEXTCOLOR,
     fontSize: 30,
   },
   month: {
-    color: 'white',
+    color: GLOBAL.DARK.TEXTCOLOR,
     fontSize: 24
   },
   title: {
     top: -5,
     fontSize: 20,
-    color: 'white',
+    color: GLOBAL.DARK.TEXTCOLOR,
   },
   desc: {
-    color: 'white',
+    color: GLOBAL.DARK.TEXTCOLOR,
   },
   loc: {
     top: -5,
     fontSize: 20,
-    color: 'white',
+    color: GLOBAL.DARK.TEXTCOLOR,
   },
   time: {
-    color: 'white',
+    color: GLOBAL.DARK.TEXTCOLOR,
   },
   headerTitle: {
     flexDirection: 'row'
@@ -97,17 +75,15 @@ export const ES = StyleSheet.create({
   greenLight: {
     top: '12%',
     alignSelf: 'center',
-    color: 'white',
+    color: GLOBAL.DARK.TEXTCOLOR,
   },
   checkContent: {
     left: 2,
     top: '-30%',
     alignSelf: 'center',
-    color: 'white',
+    color: GLOBAL.DARK.TEXTCOLOR,
   },
   specificEventImage: {
-    width: '376%',
     height: '100%',
-    aspectRatio: 2.5,
   }
 })

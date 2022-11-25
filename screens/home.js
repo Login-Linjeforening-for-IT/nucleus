@@ -34,8 +34,8 @@ const homePage = () => {
 const aboutPage = () => {
   navigation.navigate('AboutScreen');
 }
-const ProfilePage = () => {
-  navigation.navigate('ProfileScreen')
+const profilePage = () => {
+  navigation.navigate('ProfileScreen');
 }
 const settingsPage = () => {
   navigation.navigate('SettingScreen');
@@ -53,7 +53,7 @@ return(
     <Text style={MS.screenTitle}>Hjem</Text>
 
     <View style={MS.tMenuIcons}>
-      <TouchableOpacity onPress={() => ProfilePage()}>
+      <TouchableOpacity onPress={() => profilePage()}>
         <Image style={MS.tMenuL} source={require('../assets/loginperson777.png')} />
       </TouchableOpacity>
     </View>

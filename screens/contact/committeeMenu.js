@@ -34,6 +34,9 @@ const homePage = () => {
 const settingPage = () => {
   navigation.navigate('SettingScreen');
 }
+const profilePage = () => {
+  navigation.navigate('ProfileScreen');
+}
 const goBack = () => {
     navigation.goBack()
 }
@@ -50,7 +53,7 @@ const goBack = () => {
     <Text style={MS.screenTitle}> Velg Komité</Text>
 
     <View style={MS.tMenuIcons}>
-      <TouchableOpacity onPress={() => ProfilePage()}>
+      <TouchableOpacity onPress={() => profilePage()}>
         <Image style={MS.tMenuL} source={require('../../assets/loginperson-orange.png')} />
       </TouchableOpacity>
     </View>

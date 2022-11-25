@@ -32,8 +32,8 @@ const homePage = () => {
 const aboutPage = () => {
   navigation.navigate('AboutScreen');
 }
-const ProfilePage = () => {
-  navigation.navigate('ProfileScreen')
+const profilePage = () => {
+  navigation.navigate('ProfileScreen');
 }
 
 return(
@@ -48,7 +48,7 @@ return(
     <Text style={MS.screenTitle}>Stillinger</Text>
 
     <View style={MS.tMenuIcons}>
-      <TouchableOpacity onPress={() => ProfilePage()}>
+      <TouchableOpacity onPress={() => profilePage()}>
         <Image style={MS.tMenuL} source={require('../assets/loginperson777.png')} />
       </TouchableOpacity>
     </View>

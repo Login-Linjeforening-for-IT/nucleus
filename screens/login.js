@@ -29,8 +29,8 @@ const eventPage = () => {
 const homePage = () => {
   navigation.navigate('HomeScreen');
 }
-const ProfilePage = () => {
-  navigation.navigate('ProfileScreen')
+const profilePage = () => {
+  navigation.navigate('ProfileScreen');
 }
 const internalPage = () => {
   if (data.name === database.name && data.pass === database.pass) {
@@ -104,7 +104,7 @@ const showPass = () => {
       <Image style={MS.goBack} source={require('../assets/goback777.png')} />
     </TouchableOpacity>
     <View style={MS.tMenuIcons}>
-      <TouchableOpacity onPress={() => ProfilePage()}>
+      <TouchableOpacity onPress={() => profilePage()}>
         <Image style={MS.tMenuL} source={require('../assets/loginperson-orange.png')} />
       </TouchableOpacity>
     </View>
@@ -118,7 +118,7 @@ const showPass = () => {
             <Text/><Text/>
 
             <View style={SS.loginView}>
-              <CardSmaller style={SS.inputField}>
+              <CardSmaller>
                 <View style={SS.loginView}>
                   <TextInput 
                   style={GS.inputText}
@@ -146,7 +146,7 @@ const showPass = () => {
             <Text/><Text/>
 
             <View style={SS.loginView}>
-              <CardSmaller style={SS.inputField}>
+              <CardSmaller>
                 <View style={SS.loginView}>
                   <TextInput 
                   style={GS.inputText}

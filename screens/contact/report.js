@@ -29,8 +29,8 @@ const eventPage = () => {
 const homePage = () => {
   navigation.navigate('HomeScreen');
 }
-const ProfilePage = () => {
-  navigation.navigate('ProfileScreen')
+const profilePage = () => {
+  navigation.navigate('ProfileScreen');
 }
 const sendForm = () => {
   if (data.name === data.name) {
@@ -127,7 +127,7 @@ const inputContent = (val) => {
     <Text style={MS.screenTitle}>     Varsle</Text>
 
     <View style={MS.tMenuIcons}>
-      <TouchableOpacity onPress={() => ProfilePage()}>
+      <TouchableOpacity onPress={() => profilePage()}>
         <Image style={MS.tMenuL} source={require('../../assets/loginperson-orange.png')} />
       </TouchableOpacity>
     </View>

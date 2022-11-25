@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+const GLOBAL = require('../styles/theme');
 
 export const T = StyleSheet.create({
 //  =============================== CONTENT STYLES =============================
@@ -9,111 +10,57 @@ export const T = StyleSheet.create({
   },
   white: {
     alignSelf: 'center',
-    color: 'white',
+    color: GLOBAL.DARK.TEXTCOLOR,
   },
-  black: {
-    alignSelf: 'center',
-    color: 'black',
-  },
-  black30: {
-    alignSelf: 'center',
-    color: 'black',
-    fontSize: 30,
-  },
-  grey999: {
-    alignSelf: 'center',
-    color: '#999',
-    fontSize: 25,
-  },
-  grey777: {
-    alignSelf: 'center',
-    color: '#777',
-    fontSize: 25,
-  },
-  grey555: {
-    alignSelf: 'center',
-    color: '#555',
-    fontSize: 25,
-  },
-  grey333: {
-    alignSelf: 'center',
-    color: '#333',
-    fontSize: 25,
+  text15: {
+    fontSize: 15,
+    color: GLOBAL.DARK.TEXTCOLOR,
   },
   centered: {
     alignSelf: 'center',
     fontSize: 30,
-    color: 'white',
+    color: GLOBAL.DARK.TEXTCOLOR,
   },
   centered15: {
     alignSelf: 'center',
     fontSize: 15,
-    color: 'white',
+    color: GLOBAL.DARK.TEXTCOLOR,
   },
   centered20: {
     alignSelf: 'center',
     fontSize: 20,
-    color: 'white',
+    color: GLOBAL.DARK.TEXTCOLOR,
+  },
+  centered25: {
+    alignSelf: 'center',
+    fontSize: 25,
+    color: GLOBAL.DARK.TEXTCOLOR,
   },
   centered50: {
     alignSelf: 'center',
     fontSize: 50,
-    color: 'white',
-  },
-  h0: {
-      color: 'white',
-      fontSize: 60,
-  },
-  h1: {
-  color: 'white',
-  fontSize: 50,
-  },
-  h2: {
-  color: 'white',
-  fontSize: 40,
-  },
-  h3: {
-  color: 'white',
-  fontSize: 30,
-  },
-  h4: {
-  color: 'white',
-  fontSize: 25,
-  },
-  h5: {
-  color: 'white',
-  fontSize: 20,
-  },
-  h6: {
-  color: 'white',
-  fontSize: 15,
+    color: GLOBAL.DARK.TEXTCOLOR,
   },
   paragraph: {
-  marginVertical: 8,
-  lineHeight: 20,
-  color: 'white',
-  fontSize: 15,
-  },
-  credit: {
-  top: -20,
-  alignSelf: 'center',
-  fontSize: 30,
-  color: 'white',
+    alignSelf: 'center',
+    fontSize: 15,
+    color: GLOBAL.DARK.TEXTCOLOR,
   },
   copyright: {
+    textAlign: 'center',
     alignSelf: 'center',
-    color: 'white',
-    fontSize: 18,
+    color: GLOBAL.DARK.TEXTCOLOR,
+    fontSize: 17,
   },
-  margin20: {
+  specificEventInfo: {
     alignSelf: 'center',
-    color: 'white',
+    color: GLOBAL.DARK.TEXTCOLOR,
     fontSize: 20,
-    margin: 20
+    left: 10
   },
   margin15: {
     alignSelf: 'center',
-    color: 'white',
+    color: GLOBAL.DARK.TEXTCOLOR,
     fontSize: 15,
     margin: 15
   }

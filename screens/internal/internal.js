@@ -7,7 +7,6 @@ import { Internal } from '../../styles/internalStyles'
 import { useState } from 'react';
 import Card from '../../shared/card';
 
-
 import { 
   Text, 
   View, 

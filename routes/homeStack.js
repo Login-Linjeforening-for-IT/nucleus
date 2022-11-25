@@ -1,5 +1,6 @@
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
+const GLOBAL = require('../styles/theme'); 
 
 import HomeScreen from '../screens/home'
 import EventScreen from '../screens/event';
@@ -109,11 +110,7 @@ const HomeStack = createStackNavigator(screens, {defaultNavigationOptions: {
     animationEnabled: false,
     title: '',
     headerShown: '',
-    headerTintColor: '#fd8738',
     headerBackTitleVisible: '',
-    headerStyle: {
-        backgroundColor: '#111',
-    },
 }});
 
 export default createAppContainer(HomeStack);

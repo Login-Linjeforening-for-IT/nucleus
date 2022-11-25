@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import { ES } from '../styles/eventStyles';
+const GLOBAL = require('../styles/theme');
+
 import { 
     StyleSheet, 
     View, 
@@ -26,7 +28,7 @@ export function GrayLight() {
     return(
     <View style={styles.size}>
         <Svg height="100%" width="100%" viewBox="0 0 100 100" >
-        <Circle cx="50" cy="50" r="50" stroke="#181818" strokeWidth=".5" fill="#181818" />
+        <Circle cx="50" cy="50" r="50" fill={GLOBAL.DARK.BACKGROUND} />
         </Svg>
     </View>
     );
@@ -45,65 +47,65 @@ export function CategoryImage(condition) {
 export function CategoryLight(condition) {
     if (condition === 'TEKKOM') {
         return(
-            <View style={styles.smallSize}>
+            <View style={styles.specificEventLight}>
                 <Svg height="100%" width="100%" viewBox="0 0 100 100" >
-                <Circle cx="50" cy="50" r="50" stroke="#A206C9" strokeWidth=".5" fill="#A206C9" />
+                <Circle cx="50" cy="50" r="50" fill="#A206C9" />
                 </Svg>
             </View>
             );
     }else if (condition === 'SOCIAL') {
         return(
-            <View style={styles.smallSize}>
+            <View style={styles.specificEventLight}>
                 <Svg height="100%" width="100%" viewBox="0 0 100 100" >
-                <Circle cx="50" cy="50" r="50" stroke="#D62F43" strokeWidth=".5" fill="#D62F43" />
+                <Circle cx="50" cy="50" r="50" fill="#D62F43" />
                 </Svg>
             </View>
             );
     }else if (condition === 'CTF') {
         return(
-            <View style={styles.smallSize}>
+            <View style={styles.specificEventLight}>
                 <Svg height="100%" width="100%" viewBox="0 0 100 100" >
-                <Circle cx="50" cy="50" r="50" stroke="#2DA62B" strokeWidth=".5" fill="#2DA62B" />
+                <Circle cx="50" cy="50" r="50" fill="#2DA62B" />
                 </Svg>
             </View>
             );
     }else if (condition === 'KARRIEREDAG') {
         return(
-            <View style={styles.smallSize}>
+            <View style={styles.specificEventLight}>
                 <Svg height="100%" width="100%" viewBox="0 0 100 100" >
-                <Circle cx="50" cy="50" r="50" stroke="#02DEDE" strokeWidth=".5" fill="#02DEDE" />
+                <Circle cx="50" cy="50" r="50" fill="#02DEDE" />
                 </Svg>
             </View>
             );
     }else if (condition === 'FADDERUKA') {
         return(
-            <View style={styles.smallSize}>
+            <View style={styles.specificEventLight}>
                 <Svg height="100%" width="100%" viewBox="0 0 100 100" >
-                <Circle cx="50" cy="50" r="50" stroke="#FA75A6" strokeWidth=".5" fill="#FA75A6" />
+                <Circle cx="50" cy="50" r="50" fill="#FA75A6" />
                 </Svg>
             </View>
             );
     }else if (condition === 'BEDPRES') {
         return(
-            <View style={styles.smallSize}>
+            <View style={styles.specificEventLight}>
                 <Svg height="100%" width="100%" viewBox="0 0 100 100" >
-                <Circle cx="50" cy="50" r="50" stroke="#4060E3" strokeWidth=".5" fill="#4060E3" />
+                <Circle cx="50" cy="50" r="50" fill="#4060E3" />
                 </Svg>
             </View>
             );
     }else if (condition === 'LOGIN') {
         return(
-            <View style={styles.smallSize}>
+            <View style={styles.specificEventLight}>
                 <Svg height="100%" width="100%" viewBox="0 0 100 100" >
-                <Circle cx="50" cy="50" r="50" stroke="#FD8738" strokeWidth=".5" fill="#FD8738" />
+                <Circle cx="50" cy="50" r="50" fill="#FD8738" />
                 </Svg>
             </View>
             );
     }else{
         return(
-            <View style={styles.smallSize}>
+            <View style={styles.specificEventLight}>
                 <Svg height="100%" width="100%" viewBox="0 0 100 100" >
-                <Circle cx="50" cy="50" r="50" stroke="#FD8738" strokeWidth=".5" fill="#FD8738" />
+                <Circle cx="50" cy="50" r="50" fill="#FD8738" />
                 </Svg>
             </View>
             );
@@ -114,7 +116,7 @@ export function RedLight() {
     return(
     <View style={styles.size}>
         <Svg height="100%" width="100%" viewBox="0 0 100 100" >
-        <Circle cx="50" cy="50" r="50" stroke="red" strokeWidth=".5" fill="red" />
+        <Circle cx="50" cy="50" r="50" fill="red" />
         </Svg>
     </View>
     );
@@ -123,7 +125,7 @@ export function RedLight() {
 export function Check() {
     return(
     <View style={styles.size}>
-        <Svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill='#282828'>
+        <Svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill={GLOBAL.DARK.DARKER}>
             <Path d="M13.788 25.588c.04.032.064.076.106.106.06.04.128.048.192.076.076.036.15.07.23.092.078.02.154.03.234.036.114.012.224.012.336-.004.046-.008.09-.02.136-.032.138-.034.266-.088.392-.164.022-.014.04-.03.062-.044.082-.056.17-.098.24-.174.05-.054.072-.124.112-.184.002-.002.006-.004.006-.006L27.752 6.188a1.4 1.4 0 1 0-2.344-1.532L14.4 22.298l-6.088-5.922a1.398 1.398 0 1 0-1.9 2.054l7.324 7.126c.014.014.034.018.052.032z"/>
         </Svg>
     </View>
@@ -138,34 +140,18 @@ export function bigLogo() {
     )
 }   
 
-export function EksempelSVG() {
+export function Copyright() {
     return(
-    <View style={styles.container}>
-    <SvgUri
-    width="100%"
-    height="100%"
-    uri="https://dev.w3.org/SVG/tools/svgweb/samples/svg-files/debian.svg"
-    />
-    </View>
+        <View>
+            <Text style={T.copyright}>Opphavsrett © 2022 Login - Linjeforeningen for IT, NO 811 940 372</Text>
+        </View>
     )
 }
-export function Moon() {
-    return(
-    <View style={styles.container}>
-    <SvgUri
-    width="100%"
-    height="100%"
-    uri="https://visualpharm.com/assets/564/Crescent%20Moon-595b40b75ba036ed117d5ab1.svg"
-    />
-    </View>
-    )
-}
-
 export function Kontakt() {
     return(
     <View>
         <Text/>
-        <Text style={T.centered}>Kontakt</Text>
+        <Text style={T.centered25}>Kontakt</Text>
         <Text style={T.centered15}>Login - Linjeforeningen for IT</Text>
         <Text style={T.centered15}>Teknologivegen 22</Text>
         <Text style={T.centered15}>Bygg A, rom 155</Text>
@@ -289,12 +275,9 @@ const styles = StyleSheet.create({
         height: 20,
         width: 20
     },
-    container: {
-        height: 50,
-        width: 50,
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-      },
+    specificEventLight: {
+        left: 8,
+        height: 20,
+        width: 20
+    },
 });

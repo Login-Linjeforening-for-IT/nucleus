@@ -1,11 +1,10 @@
 {/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
 import { StatusBar } from 'expo-status-bar';
-import { useEffect, useState } from 'react';
 import { GS } from '../styles/globalStyles';
 import { MS } from '../styles/menuStyles';
 import { T } from '../styles/text';
 import { ES } from '../styles/eventStyles';
-import { CategoryLight } from '../shared/sharedComponents';
+import Card from '../shared/card';
 import { 
   Text, 
   View, 
@@ -29,8 +28,8 @@ export default function SpecificJobScreen( { navigation }) {
   const homePage = () => {
     navigation.navigate('HomeScreen');
   }
-  const ProfilePage = () => {
-    navigation.navigate('ProfileScreen')
+  const profilePage = () => {
+    navigation.navigate('ProfileScreen');
   }
   const goBack = () => {
     navigation.goBack()
@@ -48,7 +47,7 @@ export default function SpecificJobScreen( { navigation }) {
     <Text style={MS.screenTitle}>      Annonse</Text>
 
     <View style={MS.tMenuIcons}>
-      <TouchableOpacity onPress={() => ProfilePage()}>
+      <TouchableOpacity onPress={() => profilePage()}>
         <Image style={MS.tMenuL} source={require('../assets/loginperson777.png')} />
       </TouchableOpacity>
     </View>
@@ -64,16 +63,11 @@ export default function SpecificJobScreen( { navigation }) {
 
             <Text/>
 
-            <View style={ES.specificEventView2}>
-            <View>
-              <Text/>
-              <Text style={T.centered20}>{navigation.getParam('title')}</Text>
-            </View>
-            </View>
-
-            <Text/>
-
-            <Text/>
+            <Card>
+              <View>
+                <Text style={T.centered20}>{navigation.getParam('title')}</Text>
+              </View>
+            </Card>
 
             <View style={ES.specificEventView4}>
               <View>
@@ -82,12 +76,12 @@ export default function SpecificJobScreen( { navigation }) {
 
               <Text/>
 
-              <View>
+              <Card>
                 <Text style={T.centered20}>Stillingsbeskrivelse: </Text>
                 <Text style={T.margin15}>
                 Bacon ipsum dolor amet beef ribs kevin pastrami shank, t-bone flank ribeye porchetta swine pancetta. Shankle short ribs tail, shoulder fatback pastrami leberkas pig pork chop pork belly kielbasa short loin. Meatball jowl fatback corned beef. Pork belly swine leberkas pork tri-tip jowl.
                 </Text>
-              </View>
+              </Card>
             </View>
           </View>
 

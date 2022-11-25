@@ -6,6 +6,7 @@ import { GS } from '../styles/globalStyles';
 import { MS } from '../styles/menuStyles';
 import { ES } from '../styles/eventStyles';
 import GreenLight, { GrayLight, Check, DateDisplay, CategoryLight } from '../shared/sharedComponents';
+import TopMenu from './topmenu';
 
 import { 
   Text, 
@@ -29,8 +30,8 @@ const homePage = () => {
 const aboutPage = () => {
   navigation.navigate('AboutScreen');
 }
-const ProfilePage = () => {
-  navigation.navigate('ProfileScreen')
+const profilePage = () => {
+  navigation.navigate('ProfileScreen');
 }
 
 const [usersData,setUsersData]=useState([])
@@ -57,9 +58,9 @@ return(
     </TouchableOpacity>
 
     <Text style={MS.screenTitle}>Events</Text>
-    
+
     <View style={MS.tMenuIcons}>
-      <TouchableOpacity onPress={() => ProfilePage()}>
+      <TouchableOpacity onPress={() => profilePage()}>
         <Image style={MS.tMenuL} source={require('../assets/loginperson777.png')} />
       </TouchableOpacity>
     </View>

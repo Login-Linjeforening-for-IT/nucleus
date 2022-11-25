@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+const GLOBAL = require('../styles/theme');
 
 export const Internal = StyleSheet.create({
 top: {
@@ -7,23 +8,23 @@ top: {
 text: {
     height: 30,
     alignSelf: 'center',
-    color: 'white',
+    color: GLOBAL.DARK.TEXTCOLOR,
     fontSize: 20,
 },
 creditText: {
     height: 22,
     alignSelf: 'center',
-    color: 'white',
+    color: GLOBAL.DARK.TEXTCOLOR,
     fontSize: 20,
 },
 texth2: {
     alignSelf: 'center',
-    color: 'white',
+    color: GLOBAL.DARK.TEXTCOLOR,
     fontSize: 40,
 },
 bug: {
     height: -25,
-    color: 'white',
+    color: GLOBAL.DARK.TEXTCOLOR,
 },
 bugImage: {
     top: -30,
@@ -38,7 +39,7 @@ makeNotificationImage: {
     width: 200,
 },
 makeNotification: {
-    backgroundColor: '#181818',
+    backgroundColor: GLOBAL.DARK.BACKGROUND,
     paddingHorizontal: 20,
 },
 creditImage: {
@@ -48,7 +49,7 @@ creditImage: {
 },
 button: {
     borderRadius: 40,
-    backgroundColor: '#fd8738',
+    backgroundColor: GLOBAL.DARK.ORANGE,
     marginHorizontal: 108, 
     marginVertical: 6,
 },
@@ -64,25 +65,25 @@ greenLight: {
     left: '14%',
     top: '10%',
     alignSelf: 'center',
-    color: 'white',
+    color: GLOBAL.DARK.TEXTCOLOR,
 },
 checkContent: {
     left: '25%',
     top: '-55%',
     alignSelf: 'center',
-    color: 'white',
+    color: GLOBAL.DARK.TEXTCOLOR,
 },
 passLight: {
     left: '14%',
     top: '6.2%',
     alignSelf: 'center',
-    color: 'white',
+    color: GLOBAL.DARK.TEXTCOLOR,
 },
 passCheck: {
     left: '25%',
     top: '-35%',
     alignSelf: 'center',
-    color: 'white',
+    color: GLOBAL.DARK.TEXTCOLOR,
 },
 showPassImage: {
     left: '-11%',

@@ -28,8 +28,8 @@ const eventPage = () => {
 const homePage = () => {
   navigation.navigate('HomeScreen');
 }
-const ProfilePage = () => {
-  navigation.navigate('ProfileScreen')
+const profilePage = () => {
+  navigation.navigate('ProfileScreen');
 }
 const goBack = () => {//hoppe over til mail 
   navigation.goBack()
@@ -47,7 +47,7 @@ const goBack = () => {//hoppe over til mail
     <Text style={MS.screenTitle}>  Innstillinger</Text>
 
     <View style={MS.tMenuIcons}>
-      <TouchableOpacity onPress={() => ProfilePage()}>
+      <TouchableOpacity onPress={() => profilePage()}>
         <Image style={MS.tMenuL} source={require('../assets/loginperson-orange.png')} />
       </TouchableOpacity>
     </View>

@@ -36,8 +36,8 @@ const homePage = () => {
 const settingsPage = () => {
   navigation.navigate('SettingScreen');
 }
-const ProfilePage = () => {
-  navigation.navigate('ProfileScreen')
+const profilePage = () => {
+  navigation.navigate('ProfileScreen');
 }
 const goBack = () => {
   navigation.goBack()
@@ -55,7 +55,7 @@ const goBack = () => {
     <Text style={MS.screenTitle}>    Gjøremål</Text>
     
     <View style={MS.tMenuIcons}>
-      <TouchableOpacity onPress={() => ProfilePage()}>
+      <TouchableOpacity onPress={() => profilePage()}>
         <Image style={MS.tMenuL} source={require('../../assets/loginperson-orange.png')} />
       </TouchableOpacity>
     </View>
@@ -69,7 +69,7 @@ const goBack = () => {
           renderItem={({item}) => (
             <View>
               <Card>
-                <Text style={T.h6}>{item.id}. {item.todo}</Text>
+                <Text style={T.text15}>{item.id}. {item.todo}</Text>
               </Card>
           </View>
           )}

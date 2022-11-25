@@ -6,6 +6,7 @@ import { MS } from '../styles/menuStyles';
 import { T } from '../styles/text';
 import { ES } from '../styles/eventStyles';
 import { CategoryLight } from '../shared/sharedComponents';
+import Card, { CardSmaller } from '../shared/card';
 import { 
   Text, 
   View, 
@@ -42,8 +43,8 @@ export default function SpecificEventScreen( { navigation }) {
   const homePage = () => {
     navigation.navigate('HomeScreen');
   }
-  const ProfilePage = () => {
-    navigation.navigate('ProfileScreen')
+  const profilePage = () => {
+    navigation.navigate('ProfileScreen');
   }
   const goBack = () => {
     navigation.goBack()
@@ -58,7 +59,7 @@ export default function SpecificEventScreen( { navigation }) {
       <Image style={MS.goBack} source={require('../assets/goback777.png')} />
     </TouchableOpacity>
     <View style={MS.tMenuIcons}>
-      <TouchableOpacity onPress={() => ProfilePage()}>
+      <TouchableOpacity onPress={() => profilePage()}>
         <Image style={MS.tMenuL} source={require('../assets/loginperson777.png')} />
       </TouchableOpacity>
     </View>
@@ -67,36 +68,39 @@ export default function SpecificEventScreen( { navigation }) {
 {/* ========================= DISPLAY CONTENT ========================= */}
       <View style={GS.content}>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <View style={ES.specificEventParentView}>
+          
+            <Text/>
+
             <View style={ES.specificEventView1}>
               <Image style={ES.specificEventImage} source={require('../assets/tekkom.png')} />
             </View>
 
             <Text/>
+          
+            <CardSmaller>
+              <View style={ES.specificEventInfoView}>
+                  <Card>
+                    <Text style={ES.dayText}>
+                          {navigation.getParam('startt')[8]}
+                          {navigation.getParam('startt')[9]}
+                    </Text>
 
-            <View style={ES.specificEventView2}>
-            <View style={ES.specificEventInfoView}>
-                <View>
-                  <Text style={ES.dayText}>
-                        {navigation.getParam('startt')[8]}
-                        {navigation.getParam('startt')[9]}
-                  </Text>
-
-                  <Text style={ES.dayText}>
-                    {navigation.getParam('startt')[5]}
-                    {navigation.getParam('startt')[6]}
-                  </Text>
-                </View>
-              <Text style={T.red}>   Hvor lenge til eventet logikk</Text>
-            </View>
-            </View>
+                    <Text style={ES.dayText}>
+                      {navigation.getParam('startt')[5]}
+                      {navigation.getParam('startt')[6]}
+                    </Text>
+                  </Card>
+                  <Card>
+                <Text style={T.red}>   Hvor lenge til eventet logikk</Text>
+                </Card>
+              </View>
+            </CardSmaller>
 
             <Text/>
-
-            <View style={ES.specificEventView3}>
+            <Card>
               <View style={ES.specificEventInfoView}>
-                <Text style={T.centered20}>Starter: </Text>
-                <Text style={T.centered20}>
+                <Text style={T.specificEventInfo}>Starter: </Text>
+                <Text style={T.specificEventInfo}>
                   {navigation.getParam('startt')[11]}
                   {navigation.getParam('startt')[12]}:
                   {navigation.getParam('startt')[14]}
@@ -107,8 +111,8 @@ export default function SpecificEventScreen( { navigation }) {
               <Text/>
 
               <View style={ES.specificEventInfoView}>
-              <Text style={T.centered20}>Slutter: </Text>
-                <Text style={T.red}>
+              <Text style={T.specificEventInfo}>Slutter: </Text>
+                <Text style={T.specificEventInfo}>
                   {usersData.endt}
                 </Text>
                 
@@ -119,8 +123,8 @@ export default function SpecificEventScreen( { navigation }) {
               <Text/>
 
               <View style={ES.specificEventInfoView}>
-                <Text style={T.centered20}>Lokasjon: </Text>
-                <Text style={T.centered20}>
+                <Text style={T.specificEventInfo}>Lokasjon: </Text>
+                <Text style={T.specificEventInfo}>
                   {navigation.getParam('roomno')}, {navigation.getParam('campus')}
                 </Text>
               </View>
@@ -128,9 +132,9 @@ export default function SpecificEventScreen( { navigation }) {
               <Text/>
 
               <View style={ES.specificEventInfoView}>
-                <Text style={T.centered20}>Kategori: </Text>
+                <Text style={T.specificEventInfo}>Kategori: </Text>
                 {CategoryLight(navigation.getParam('category'))}
-                <Text style={T.centered20}>
+                <Text style={T.specificEventInfo}>
                   {navigation.getParam('category')}
                 </Text>
               </View>
@@ -138,17 +142,16 @@ export default function SpecificEventScreen( { navigation }) {
               <Text/>
 
               <View style={ES.specificEventInfoView}>
-                <Text style={T.centered20}>Arrangør: </Text>
-                <Text style={T.centered20}>
+                <Text style={T.specificEventInfo}>Arrangør: </Text>
+                <Text style={T.specificEventInfo}>
                   {navigation.getParam('organizer')}
                 </Text>
               </View>
-            </View>
+           </Card>
 
             <Text/>
-
-            <View style={ES.specificEventView4}>
-              <View>
+            <Card>
+              <View><Text/>
                 <Text style={T.centered20}>{navigation.getParam('eventname')}</Text>
               </View>
 
@@ -156,15 +159,9 @@ export default function SpecificEventScreen( { navigation }) {
 
               <View>
                 <Text style={T.centered20}>Beskrivelse: </Text>
-                <Text style={T.centered15}>
-                    {usersData.description}
-                </Text>
+                <Text style={T.margin15}>{usersData.description}</Text>
               </View>
-            </View>
-          </View>
-
-          <Text/><Text/><Text/><Text/>
-          
+            </Card><Text/><Text/><Text/><Text/><Text/><Text/>
         </ScrollView>
       </View>    
 

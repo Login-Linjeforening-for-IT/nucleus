@@ -1,21 +1,16 @@
 import { StyleSheet } from "react-native";
+const GLOBAL = require('../styles/theme');
 
 export const GS = StyleSheet.create({
   content: {
   height: '75%',
-  backgroundColor: '#181818',
+  backgroundColor: GLOBAL.DARK.BACKGROUND,
   paddingHorizontal: 20,
   },
-  contentWhenNoTop: {
-    top: '5%',
-    height: '90%',
-    backgroundColor: '#181818',
-    paddingHorizontal: 20,
-    },
   creditContent: {
     top: '-2.5%',
     height: '75%',
-    backgroundColor: '#181818',
+    backgroundColor: GLOBAL.DARK.BACKGROUND,
     paddingHorizontal: 20,
   },
   creditImage: {
@@ -25,29 +20,27 @@ export const GS = StyleSheet.create({
     width: 200,
   },
   inputText: {
-    backgroundColor: '#282828',
     alignSelf: 'center',
     alignItems: 'center',
     width: '80%',
     height: 50,
     borderRadius: 40,
-    color: 'white',
+    color: GLOBAL.DARK.TEXTCOLOR,
   },
   reportInputContentText: {
-    backgroundColor: '#282828',
     alignSelf: 'center',
     alignItems: 'center',
     width: '80%',
     height: '90%',
     borderRadius: 40,
-    color: 'white',
+    color: GLOBAL.DARK.TEXTCOLOR,
   },
   notificationBack: {
     flexDirection: 'row',
     height: 25,
   },
   notificationText: {
-    color: 'white',
+    color: GLOBAL.DARK.TEXTCOLOR,
     fontSize: 20
   },
   view: {
@@ -57,7 +50,13 @@ export const GS = StyleSheet.create({
   view2: {
     justifyContent: 'center',
   },
-  card: {
-    height: 10
+  inputText: {
+    backgroundColor: GLOBAL.DARK.DARKER,
+    alignSelf: 'center',
+    alignItems: 'center',
+    width: '80%',
+    height: 50,
+    borderRadius: 40,
+    color: 'white',
   },
 });

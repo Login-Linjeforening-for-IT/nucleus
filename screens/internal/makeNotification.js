@@ -88,7 +88,7 @@ useEffect(() => {
 {/* ========================= DISPLAY CONTENT ========================= */}
       <View style={GS.creditContent}>
         <ScrollView showsVerticalScrollIndicator={false}>
-              <Text style={T.centered}>Send varsling</Text><Text/><Text/><Text/>
+        <Text/><Text style={T.centered}>Send varsling</Text><Text/><Text/>
 
                     <Text style={T.centered20}>Tittel</Text><Text/>
                     <TextInput 
@@ -127,36 +127,11 @@ useEffect(() => {
                 </NotifyButton>
               </TouchableOpacity>
 
-                {/* <Button
-                color={'red'}
-                title="Send varsling"
-                onPress={async () => {
-                await schedulePushNotification();
-                }}
-                /><Text/> */}
-                
-              {/* <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                <Text style={T.h5}>Tittel:</Text>
-                <Text style={T.h5}>{notification && notification.request.content.title} </Text>
-                <Text style={T.h5}>Beskrivelse:</Text>
-                <Text style={T.h5}>{notification && notification.request.content.body}</Text><Text/>
-                <Text style={T.h5}>Delay:</Text> */}
-                {/* <Text style={T.h5}>{notification && notification.request.content.trigger} </Text><Text/> */}
-                {/* <Text style={T.h5}>Data: {notification && JSON.stringify(notification.request.content.data)}</Text> */}
-               
                 <View style={SS.makeNotificationImage}>
                   <Image style={GS.creditImage} source={require('../../assets/login-text.png')} />
                 </View>
               {/* </View> */}
               <Text/><Text/><Text/>
-      
-
-
-
-
-
-
-
 </ScrollView>
       </View>    
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
+const GLOBAL = require('../styles/theme');
 
 export default function Card(props) {
     return(
@@ -21,20 +22,10 @@ export function CardSmaller(props) {
     );
 };
 
-export function CardSmall(props) {
-    return(
-        <View style={styles.cardSmall}>
-            <View style={styles.cardContentSmall}>
-                { props.children }
-            </View>
-        </View>
-    );
-};
-
 const styles = StyleSheet.create({
     card: {
         borderRadius: 20,
-        backgroundColor: '#111',
+        backgroundColor: GLOBAL.DARK.DARKER,
         marginHorizontal: 4, 
         marginVertical: 6,
     },
@@ -43,17 +34,7 @@ const styles = StyleSheet.create({
         marginVertical: 18
     },
     cardSmaller: {
-        borderRadius: 40,
-        backgroundColor: '#282828',
-    },
-    cardSmall: {
         borderRadius: 20,
-        backgroundColor: '#282828',
-        marginHorizontal: 4, 
-        marginVertical: 6,
-    },
-    cardContentSmall: {
-        marginHorizontal: 18,
-        marginVertical: 18
-    },
+        backgroundColor: GLOBAL.DARK.DARKER,
+    }
 });
