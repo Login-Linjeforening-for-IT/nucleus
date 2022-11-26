@@ -2,7 +2,7 @@
 import CategoryCircle from '../shared/categoryCircle';
 import CategorySquare from '../shared/categorySquare';
 import CleanDescription from '../shared/cleanDescription';
-import { getEndTime, Month } from '../shared/sharedComponents';
+import { getEndTime, Month, EventLocation } from '../shared/sharedComponents';
 import { useEffect, useState } from 'react';
 import Card, { CardSmaller } from '../shared/card';
 import { StatusBar } from 'expo-status-bar';
@@ -118,15 +118,10 @@ export default function SpecificEventScreen( { navigation }) {
                 
               
               </View>
-
+              
               <Text/>
 
-              <View style={ES.specificEventInfoView}>
-                <Text style={T.specificEventInfo}>Lokasjon: </Text>
-                <Text style={T.specificEventInfo}>
-                  {navigation.getParam('roomno')}, {navigation.getParam('campus')}
-                </Text>
-              </View>
+              {EventLocation(usersData.roomno, usersData.campus)}
 
               <Text/>
 

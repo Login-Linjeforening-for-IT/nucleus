@@ -46,6 +46,32 @@ export function getEndTime(input){
 
     }
 }
+
+export function EventLocation(room, campus) {
+    if(room != null && campus != null) {
+        if (room.length == 0 && campus.length == 0 ) {
+            return(
+            <View style={ES.specificEventInfoView}>
+                <Text style={T.specificEventInfo}>Lokasjon: </Text>
+                <Text style={T.specificEventInfo}>TBA!</Text>
+            </View>)
+        } else {
+            return(
+                <View style={ES.specificEventInfoView}>
+                <Text style={T.specificEventInfo}>Lokasjon: </Text>
+                <Text style={T.specificEventInfo}>
+                  {room},{campus}
+                </Text>
+              </View>
+            )
+        }
+    }else{
+        <View style={ES.specificEventInfoView}>
+            <Text style={T.red}>Feil ved henting av event sted.</Text>
+        </View>
+    }
+}
+
 export function CategoryImage(condition) {  //Doesnt work
     if(!condition) {
         return(
