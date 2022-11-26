@@ -1,20 +1,24 @@
 {/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
-import { StatusBar } from 'expo-status-bar';
+import CategoryCircle from '../shared/categoryCircle';
+import CategorySquare from '../shared/categorySquare';
+import CleanDescription from '../shared/cleanDescription';
+import { getEndTime, Month } from '../shared/sharedComponents';
 import { useEffect, useState } from 'react';
+import Card, { CardSmaller } from '../shared/card';
+import { StatusBar } from 'expo-status-bar';
+import EventTime from '../shared/eventTime';
 import { GS } from '../styles/globalStyles';
 import { MS } from '../styles/menuStyles';
 import { T } from '../styles/text';
 import { ES } from '../styles/eventStyles';
-import { CategoryLight } from '../shared/sharedComponents';
-import Card, { CardSmaller } from '../shared/card';
 import { 
   Text, 
   View, 
   Image, 
   ScrollView,
   TouchableOpacity,
-  FlatList
 } from 'react-native';
+
 
 {/* ========================= APP START ========================= */}
 
@@ -27,11 +31,9 @@ export default function SpecificEventScreen( { navigation }) {
     .then(response => response.json())
     .then(data=>setUsersData(data))
   }
-
   useEffect(() => {
     getData();
     },[])
-
   //Check if image exists
 
   const settingsPage = () => {
@@ -60,7 +62,7 @@ export default function SpecificEventScreen( { navigation }) {
     </TouchableOpacity>
     <View style={MS.tMenuIcons}>
       <TouchableOpacity onPress={() => profilePage()}>
-        <Image style={MS.tMenuIcon} source={require('../assets/loginperson777.png')} />
+        <Image style={MS.tMenuIcon} source={require('../assets/loginperson.png')} />
       </TouchableOpacity>
     </View>
   </View>
@@ -80,19 +82,19 @@ export default function SpecificEventScreen( { navigation }) {
             <CardSmaller>
               <View style={ES.specificEventInfoView}>
                   <Card>
+                    {CategorySquare(navigation.getParam('category'))} 
                     <Text style={ES.dayText}>
-                          {navigation.getParam('startt')[8]}
-                          {navigation.getParam('startt')[9]}
+                        {navigation.getParam('startt')[8]}
+                        {navigation.getParam('startt')[9]}
                     </Text>
 
-                    <Text style={ES.dayText}>
-                      {navigation.getParam('startt')[5]}
-                      {navigation.getParam('startt')[6]}
+                    <Text style={ES.monthText}>
+                    {Month(navigation.getParam('startt')[5] + navigation.getParam('startt')[6])}
                     </Text>
                   </Card>
                   <Card>
-                <Text style={T.red}>   Hvor lenge til eventet logikk</Text>
-                </Card>
+                    <Text>{EventTime(navigation.getParam('startt'))}</Text>
+                  </Card>
               </View>
             </CardSmaller>
 
@@ -112,10 +114,7 @@ export default function SpecificEventScreen( { navigation }) {
 
               <View style={ES.specificEventInfoView}>
               <Text style={T.specificEventInfo}>Slutter: </Text>
-                <Text style={T.specificEventInfo}>
-                  {usersData.endt}
-                </Text>
-                
+                {getEndTime(usersData.endt)}
                 
               
               </View>
@@ -133,7 +132,7 @@ export default function SpecificEventScreen( { navigation }) {
 
               <View style={ES.specificEventInfoView}>
                 <Text style={T.specificEventInfo}>Kategori: </Text>
-                {CategoryLight(navigation.getParam('category'))}
+                {CategoryCircle(navigation.getParam('category'))}
                 <Text style={T.specificEventInfo}>
                   {navigation.getParam('category')}
                 </Text>
@@ -154,14 +153,8 @@ export default function SpecificEventScreen( { navigation }) {
               <View><Text/>
                 <Text style={T.centered20}>{navigation.getParam('eventname')}</Text>
               </View>
-
-              <Text/>
-
-              <View>
-                <Text style={T.centered20}>Beskrivelse: </Text>
-                <Text style={T.margin15}>{usersData.description}</Text>
-              </View>
-            </Card><Text/><Text/><Text/><Text/><Text/><Text/>
+              {CleanDescription(usersData.description)}
+            </Card><Text/><Text/><Text/><Text/><Text/><Text/><Text/><Text/>
         </ScrollView>
       </View>    
 
@@ -174,7 +167,7 @@ export default function SpecificEventScreen( { navigation }) {
             <Image style={MS.bMenuIcon} source={require('../assets/calendar-orange.png')} />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => settingsPage()}>
-            <Image style={MS.bMenuIcon} source={require('../assets/menu777.png')} />
+            <Image style={MS.bMenuIcon} source={require('../assets/business.png')} />
           </TouchableOpacity>
       </View>     
     </View>

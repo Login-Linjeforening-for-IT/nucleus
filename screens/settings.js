@@ -48,7 +48,7 @@ return(
 
     <View style={MS.tMenuIcons}>
       <TouchableOpacity onPress={() => profilePage()}>
-        <Image style={MS.tMenuIcon} source={require('../assets/loginperson777.png')} />
+        <Image style={MS.tMenuIcon} source={require('../assets/loginperson.png')} />
       </TouchableOpacity>
     </View>
   </View>
@@ -82,7 +82,7 @@ return(
         <Image style={MS.bMenuIcon} source={require('../assets/calendar777.png')} />
       </TouchableOpacity>
       <TouchableOpacity>
-        <Image style={MS.bMenuIcon} source={require('../assets/menu-orange.png')} />
+        <Image style={MS.bMenuIcon} source={require('../assets/business-orange.png')} />
       </TouchableOpacity>
       </View>     
     </View>

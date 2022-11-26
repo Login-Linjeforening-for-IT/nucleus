@@ -27,23 +27,38 @@ export const ES = StyleSheet.create({
     flexDirection: 'row',
     height: 55,
   },
-  dayText: { //Eventday text on eventScreen
+  dayText: { //Eventday text on specificEventScreen
     left: '15%',
     color: GLOBAL.DARK.TEXTCOLOR,
     fontSize: 30,
   },
-  monthText: { //Eventmonth text on eventScreen
+  monthText: { //Eventmonth text on specificEventScreen
+    alignSelf: 'flex-start',
     top: '-7.5%',
+    left: '10%',
+    color: GLOBAL.DARK.TEXTCOLOR,
+    fontSize: 20,
+  },
+  eventCardDayText: { //Eventday text on eventScreen
     left: '15%',
     color: GLOBAL.DARK.TEXTCOLOR,
     fontSize: 30,
+  },
+  eventCardMonthText: { //Eventmonth text on eventScreen
+    alignSelf: 'flex-start',
+    top: '-7.5%',
+    left: '10%',
+    color: GLOBAL.DARK.TEXTCOLOR,
+    fontSize: 20,
   },
   title: { //Eventname text on eventScreen
+    left: 5,
     top: -5,
     fontSize: 20,
     color: GLOBAL.DARK.TEXTCOLOR,
   },
   loc: { //Eventlocation text on eventScreen
+    left: 5,
     top: -5,
     fontSize: 20,
     color: GLOBAL.DARK.TEXTCOLOR,
@@ -68,5 +83,24 @@ export const ES = StyleSheet.create({
   },
   specificEventImage: { //The header image on specificEventScreen
     height: '100%',
-  }
+  },
+//======================== EventComponentStyles ===================
+  size: { //Middle sized icons
+    height: 40,
+    width: 40
+},
+smallSize: { //Small icons
+    height: 20,
+    width: 20
+},
+eventLight: { //Position of specific event color circle
+    top: -10,
+    height: 0,
+    width: 10,
+},
+specificEventLight: { //Position of specific event color circle
+  left: 8,
+  height: 20,
+  width: 20,
+},
 })

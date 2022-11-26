@@ -14,7 +14,7 @@ import Svg, { Circle, Path } from 'react-native-svg';
 import { SS } from '../styles/settingStyles';
 import { T } from '../styles/text'
 
-export default function GreenLight() {
+export default function GreenLight() {  //Green colored light svg
     return(
     <View style={styles.size}>
         <Svg height="100%" width="100%" viewBox="0 0 100 100" >
@@ -24,7 +24,7 @@ export default function GreenLight() {
     );
 };
 
-export function GrayLight() {
+export function GrayLight() {   //Gray colored light svg
     return(
     <View style={styles.size}>
         <Svg height="100%" width="100%" viewBox="0 0 100 100" >
@@ -34,7 +34,19 @@ export function GrayLight() {
     );
 };
 
-export function CategoryImage(condition) {
+export function getEndTime(input){
+    if(input != null){
+        const hour1     = (input)[11]    //Fetching endtime cipher 1 from api
+        const hour2     = (input)[12]    //Fetching endtime cipher 2 from api
+        const minute1   = (input)[14]    //Fetching endtime cipher 3 from api
+        const minute2   = (input)[15]    //Fetching endtime cipher 4 from api
+        return(<View><Text style={T.specificEventInfo}>{hour1}{hour2}:{minute1}{minute2}</Text></View>)
+    }else{
+        return(<View><Text style={T.red}>Feil</Text></View>)
+
+    }
+}
+export function CategoryImage(condition) {  //Doesnt work
     if(!condition) {
         return(
             <View>
@@ -44,75 +56,14 @@ export function CategoryImage(condition) {
     }
 }
 
-export function CategoryLight(condition) {
-    if (condition === 'TEKKOM') {
-        return(
-            <View style={styles.specificEventLight}>
-                <Svg height="100%" width="100%" viewBox="0 0 100 100" >
-                <Circle cx="50" cy="50" r="50" fill="#A206C9" />
-                </Svg>
-            </View>
-            );
-    }else if (condition === 'SOCIAL') {
-        return(
-            <View style={styles.specificEventLight}>
-                <Svg height="100%" width="100%" viewBox="0 0 100 100" >
-                <Circle cx="50" cy="50" r="50" fill="#D62F43" />
-                </Svg>
-            </View>
-            );
-    }else if (condition === 'CTF') {
-        return(
-            <View style={styles.specificEventLight}>
-                <Svg height="100%" width="100%" viewBox="0 0 100 100" >
-                <Circle cx="50" cy="50" r="50" fill="#2DA62B" />
-                </Svg>
-            </View>
-            );
-    }else if (condition === 'KARRIEREDAG') {
-        return(
-            <View style={styles.specificEventLight}>
-                <Svg height="100%" width="100%" viewBox="0 0 100 100" >
-                <Circle cx="50" cy="50" r="50" fill="#02DEDE" />
-                </Svg>
-            </View>
-            );
-    }else if (condition === 'FADDERUKA') {
-        return(
-            <View style={styles.specificEventLight}>
-                <Svg height="100%" width="100%" viewBox="0 0 100 100" >
-                <Circle cx="50" cy="50" r="50" fill="#FA75A6" />
-                </Svg>
-            </View>
-            );
-    }else if (condition === 'BEDPRES') {
-        return(
-            <View style={styles.specificEventLight}>
-                <Svg height="100%" width="100%" viewBox="0 0 100 100" >
-                <Circle cx="50" cy="50" r="50" fill="#4060E3" />
-                </Svg>
-            </View>
-            );
-    }else if (condition === 'LOGIN') {
-        return(
-            <View style={styles.specificEventLight}>
-                <Svg height="100%" width="100%" viewBox="0 0 100 100" >
-                <Circle cx="50" cy="50" r="50" fill="#FD8738" />
-                </Svg>
-            </View>
-            );
-    }else{
-        return(
-            <View style={styles.specificEventLight}>
-                <Svg height="100%" width="100%" viewBox="0 0 100 100" >
-                <Circle cx="50" cy="50" r="50" fill="#FD8738" />
-                </Svg>
-            </View>
-            );
-    }
-};
+export function Month(month) {
+    const monthsNO = ['jan', 'feb', 'mar', 'apr', 'mai', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'des']
+    const monthsEN = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Des']
 
-export function RedLight() {
+    return(<View><Text style={ES.monthText}>{monthsNO[month-1]}</Text></View>)
+}
+
+export function RedLight() {    //Red colored light svg
     return(
     <View style={styles.size}>
         <Svg height="100%" width="100%" viewBox="0 0 100 100" >
@@ -122,7 +73,7 @@ export function RedLight() {
     );
 };
 
-export function Check() {
+export function Check() {   //Checkmark svg
     return(
     <View style={styles.size}>
         <Svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill={GLOBAL.DARK.DARKER}>
@@ -132,14 +83,14 @@ export function Check() {
     );
 };  
 
-export function Copyright() {
+export function Copyright() {   //Copyright info
     return(
         <View>
             <Text style={T.copyright}>Opphavsrett © 2022 Login - Linjeforeningen for IT, NO 811 940 372</Text>
         </View>
     )
 }
-export function Kontakt() {
+export function Kontakt() { //Contact info
     return(
     <View>
         <Text/>
@@ -158,7 +109,7 @@ export function Kontakt() {
     )
 }
 
-export function Notification() {
+export function Notification() {    //Notification enabled/disabled color
     const [isEnabled, setIsEnabled] = useState(false);
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
     return(
@@ -174,7 +125,7 @@ export function Notification() {
     )
 }
 
-export function Theme() {
+export function Theme() {   //Choose the theme
     const changeTheme = () => {
         setData({
           ...data,
@@ -199,7 +150,7 @@ export function Theme() {
     )
 }
 
-export function Language() {
+export function Language() {    //Choose the language
     const changeLang = () => {
         setData({
           ...data,
@@ -224,7 +175,7 @@ export function Language() {
     )
 }
 
-export function CheckState(condition) {
+export function CheckState(condition) { //Choose the state green/gray
     if (condition == true) {
         return(
             <View style = {ES.greenLight}><GreenLight/></View>,
@@ -238,7 +189,7 @@ export function CheckState(condition) {
     }
 }
 
-export function Button(props) {
+export function Button(props) { //Button, Login colored
     return(
         <View style={SS.button}>
             <View style={SS.buttonContent}>
@@ -248,7 +199,7 @@ export function Button(props) {
     );
 }
 
-export function NotifyButton(props) {
+export function NotifyButton(props) {   //Button, red
     return(
         <View style={SS.notifyButton}>
             <View style={SS.buttonContent}>
@@ -258,7 +209,7 @@ export function NotifyButton(props) {
     );
 }
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create({  //Styles for the above - THIS NEEDS TO BE MOVED
     size: {
         height: 40,
         width: 40

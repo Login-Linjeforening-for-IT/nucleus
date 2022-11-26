@@ -95,7 +95,7 @@ const goBack = () => {
             <Image style={MS.bMenuIcon} source={require('../../assets/calendar777.png')} />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => settingsPage()}>
-            <Image style={MS.bMenuIcon} source={require('../../assets/menu-orange.png')} />
+            <Image style={MS.bMenuIcon} source={require('../../assets/business-orange.png')} />
           </TouchableOpacity>
       </View>     
     </View>

@@ -5,7 +5,8 @@ import Card from '../shared/card';
 import { GS } from '../styles/globalStyles';
 import { MS } from '../styles/menuStyles';
 import { ES } from '../styles/eventStyles';
-import GreenLight, { GrayLight, Check } from '../shared/sharedComponents';
+import GreenLight, { GrayLight, Check, Month } from '../shared/sharedComponents';
+import CategorySquare from '../shared/categorySquare';
 
 import { 
   Text, 
@@ -23,7 +24,6 @@ const settingsPage = () => {
 navigation.navigate('SettingScreen');
 }
 const homePage = () => {
-  JSON.stringify(events),
   navigation.navigate('HomeScreen', events);
 }
 const aboutPage = () => {
@@ -60,7 +60,7 @@ return(
 
     <View style={MS.tMenuIcons}>
       <TouchableOpacity onPress={() => profilePage()}>
-        <Image style={MS.tMenuIcon} source={require('../assets/loginperson777.png')} />
+        <Image style={MS.tMenuIcon} source={require('../assets/loginperson.png')} />
       </TouchableOpacity>
     </View>
   </View>
@@ -78,16 +78,13 @@ return(
                 <TouchableOpacity onPress={() => navigation.navigate('SpecificEventScreen', item)}>
                   <Card style={ES.eventCard}>
                     <View style={ES.eventBack}>
-                      <View style={ES.view}>
-                        <View>
-
-                        </View>
-                        <View>
-                          <Text style={ES.dayText}>{item.startt[8]}{item.startt[9]}</Text>
-                          <Text style={ES.monthText}>{item.startt[5]}{item.startt[6]}</Text>
-                        </View>
+                      <View>
+                          {CategorySquare(item.category)}
+                          <Text style={ES.eventCardDayText}>{item.startt[8]}{item.startt[9]}</Text>
+                          <Text style={ES.eventCardMonthText}>{Month(item.startt[5] + item.startt[6])}</Text>
                       </View>
                         <View style={ES.view2}>
+                        
                           <View style = {ES.title}><Text style={ES.title}>{item.eventname}</Text></View>
                           <View style = {ES.loc}><Text style={ES.loc}>{item.startt[11]}{item.startt[12]}:{item.startt[14]}{item.startt[15]} {item.roomno}. {item.campus}</Text></View>
                         </View>
@@ -104,14 +101,14 @@ return(
                 <TouchableOpacity onPress={() => navigation.navigate('SpecificEventScreen', item)}>
                 <Card style={ES.eventCard}>
                   <View style={ES.eventBack}>
-                    <View style={ES.view}>
-                      <Text style={ES.dayText}>{item.startt[8]}{item.startt[9]}</Text>
-                      <Text style={ES.monthText}>{item.startt[5]}{item.startt[6]}</Text>
+                    <View>
+                      {CategorySquare(item.category)}
+                      <Text style={ES.eventCardDayText}>{item.startt[8]}{item.startt[9]}</Text>
+                      <Text style={ES.eventCardMonthText}>{Month(item.startt[5] + item.startt[6])}</Text>
                     </View>
                     <View style={ES.view2}>
                       <View style = {ES.title}><Text style={ES.title}>{item.eventname}</Text></View>
                       <View style = {ES.loc}><Text style={ES.loc}>{item.startt[11]}{item.startt[12]}:{item.startt[14]}{item.startt[15]} {item.roomno}. {item.campus}</Text></View>
-                      {/* <View><Text style={ES.image}>{item.IMAGENOTRENDERED}</Text></View> */}
                     </View>
                     <View style={ES.view3}>
                         <TouchableOpacity onPress={() => updateEvents([...events, item])}>
@@ -139,7 +136,7 @@ return(
             <Image style={MS.bMenuIcon} source={require('../assets/calendar-orange.png')} />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => settingsPage()}>
-            <Image style={MS.bMenuIcon} source={require('../assets/menu777.png')} />
+            <Image style={MS.bMenuIcon} source={require('../assets/business.png')} />
           </TouchableOpacity>
       </View>     
     </View>

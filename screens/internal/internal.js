@@ -81,7 +81,7 @@ const ProfilePage = () => {
         <Image style={MS.bMenuIcon} source={require('../../assets/calendar777.png')} />
       </TouchableOpacity>
       <TouchableOpacity>
-        <Image style={MS.bMenuIcon} source={require('../../assets/menu777.png')} />
+        <Image style={MS.bMenuIcon} source={require('../../assets/business.png')} />
       </TouchableOpacity>
       </View>     
     </View>

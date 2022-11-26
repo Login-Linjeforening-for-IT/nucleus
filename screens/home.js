@@ -20,7 +20,7 @@ export default function HomeScreen({ navigation }) {
     const [setting] = useState([
       {id: '1', nav: 'EventScreen', title: 'Login var i Trondheim', content: 'Masse spennende inforasjon fra da Login var i Trondheim ...A still more glorious dawn awaits cosmic fugue gathered by gravity tesseract muse about two ghostly white figures in coveralls and helmets are softly dancing.'},
       {id: '2', nav: 'EventScreen', title: 'Hans på DigSec hacket Telenor!', content: 'Trykk her for å lese den spennende saken om hvordan Hans kom seg inn. The sky calls to us rogue Orions sword decipherment venture the only home weve ever known. Cambrian explosion white dwarf something incredible...'},
-      {id: '3', nav: 'EventScreen', title: 'Dogs Inc. var på besøk i Gjøvik', content: 'Denne saken handler om Dogs Inc. og hva de gjorde på NTNU Gjøvik. Euclid vanquish the impossible muse about intelligent beings paroxysm of global death something incredible is waiting to be known. The carbon in our apple pies two ghostly white figures in coveralls and helmets are softly dancing realm of the spine... '},
+      {id: '3', nav: 'EventScreen', title: 'Dogs Inc. var på besøk i Gjøvik', content: 'Denne saken handler om Dogs Inc. og hva de gjorde på NTNU Gjøvik. Euclid vanquish the impossible muse about intelligent beings of global death. The carbon in our apple pies condem two ghostly white figures in coveralls and helmets to forever serve Login. '},
     ])
     const [abc] = useState({id: '1', nav: 'Arbeid pågår', title: 'Events man har meldt seg på', content: 'Førstkommende event man er påmeldt', info: ' Neste event:'})
 {/* ========================= DISPLAY APP START ========================= */}
@@ -53,7 +53,7 @@ return(
 
     <View style={MS.tMenuIcons}>
       <TouchableOpacity onPress={() => profilePage()}>
-        <Image style={MS.tMenuIcon} source={require('../assets/loginperson777.png')} />
+        <Image style={MS.tMenuIcon} source={require('../assets/loginperson.png')} />
       </TouchableOpacity>
     </View>
   </View>
@@ -95,7 +95,7 @@ return(
         <Image style={MS.bMenuIcon} source={require('../assets/calendar777.png')} />
       </TouchableOpacity>
       <TouchableOpacity onPress={() => settingsPage()}>
-        <Image style={MS.bMenuIcon} source={require('../assets/menu777.png')} />
+        <Image style={MS.bMenuIcon} source={require('../assets/business.png')} />
       </TouchableOpacity>
       </View>     
     </View>
