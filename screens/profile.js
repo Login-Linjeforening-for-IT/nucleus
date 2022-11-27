@@ -17,7 +17,7 @@ import { T } from '../styles/text';
 
 export default function ProfileScreen({ navigation }) {
     const [setting] = useState([
-        {id: '1', nav: 'NotificationScreen', title: 'Innstillinger'},
+        {id: '1', nav: 'SettingScreen', title: 'Innstillinger'},
         {id: '2', nav: 'ContactMenuScreen', title: 'Kontakt Login'},
         {id: '3', nav: 'LoginScreen', title: 'Innsida (verv)'},
 

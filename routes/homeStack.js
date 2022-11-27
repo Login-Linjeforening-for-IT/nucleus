@@ -9,7 +9,7 @@ import ListingScreen from '../screens/listings';
 import SpecificEventScreen from '../screens/specificEvent';
 import InternalScreen from '../screens/internal/internal';
 import BusinessScreen from '../screens/contact/business';
-import NotificationScreen from '../screens/notification';
+import SettingScreen from '../screens/settings';
 import TodoScreen from '../screens/internal/todo';
 import MakeNotificationScreen from '../screens/internal/makeNotification';
 import LoginScreen from '../screens/login';
@@ -56,8 +56,8 @@ const screens = {
     LoginScreen: {
         screen: LoginScreen
     },
-    NotificationScreen: {
-        screen: NotificationScreen
+    SettingScreen: {
+        screen: SettingScreen
     },
     ContactScreen: {
         screen: ContactScreen

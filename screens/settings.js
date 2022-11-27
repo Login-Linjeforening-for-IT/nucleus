@@ -15,7 +15,7 @@ import {
 
 {/* ========================= APP START ========================= */}
 
-export default function NotificationScreen( { navigation }) {
+export default function SettingScreen( { navigation }) {
 
 
 const listingPage = () => {

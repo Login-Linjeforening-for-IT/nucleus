@@ -61,7 +61,7 @@ const goBack = () => {
     </View>
   </View>
 {/* ========================= DISPLAY CONTENT ========================= */}
-      <View style={GS.creditContent}>
+      <View style={GS.content}>
           <FlatList showsVerticalScrollIndicator={false}
           numColumns={1}
           keyExtractor={(item) => item.id}
