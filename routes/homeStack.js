@@ -1,6 +1,5 @@
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
-const GLOBAL = require('../styles/theme'); 
 
 import HomeScreen from '../screens/home'
 import EventScreen from '../screens/event';

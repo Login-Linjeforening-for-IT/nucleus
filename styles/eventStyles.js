@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";  //Stylesheet file
-const GLOBAL = require('../styles/theme');  //App theme
+const GLOBAL = require('./themes/dark')
 
 export const ES = StyleSheet.create({
 
@@ -9,7 +9,6 @@ export const ES = StyleSheet.create({
     justifyContent: 'center',
     width: '15%',
     height: '120%',
-    backgroundColor: 'blue', //Needs to be rendered based on event
     borderRadius: 10,
   },
   view2: { //Middle card view
@@ -29,39 +28,39 @@ export const ES = StyleSheet.create({
   },
   dayText: { //Eventday text on specificEventScreen
     left: '15%',
-    color: GLOBAL.DARK.TEXTCOLOR,
+    color: GLOBAL.THEME.TEXTCOLOR,
     fontSize: 30,
   },
   monthText: { //Eventmonth text on specificEventScreen
     alignSelf: 'flex-start',
     top: '-7.5%',
     left: '10%',
-    color: GLOBAL.DARK.TEXTCOLOR,
+    color: GLOBAL.THEME.TEXTCOLOR,
     fontSize: 20,
   },
   eventCardDayText: { //Eventday text on eventScreen
     left: '15%',
-    color: GLOBAL.DARK.TEXTCOLOR,
+    color: GLOBAL.THEME.TEXTCOLOR,
     fontSize: 30,
   },
   eventCardMonthText: { //Eventmonth text on eventScreen
     alignSelf: 'flex-start',
     top: '-7.5%',
     left: '10%',
-    color: GLOBAL.DARK.TEXTCOLOR,
+    color: GLOBAL.THEME.TEXTCOLOR,
     fontSize: 20,
   },
   title: { //Eventname text on eventScreen
     left: 5,
     top: -5,
     fontSize: 20,
-    color: GLOBAL.DARK.TEXTCOLOR,
+    color: GLOBAL.THEME.TEXTCOLOR,
   },
   loc: { //Eventlocation text on eventScreen
     left: 5,
     top: -5,
     fontSize: 20,
-    color: GLOBAL.DARK.TEXTCOLOR,
+    color: GLOBAL.THEME.TEXTCOLOR,
   },
   greenLight: { //Position of checklight on eventScreen
     top: '12%',

@@ -10,9 +10,9 @@ import {
   Image, 
   TouchableOpacity,
   Platform,
-  TextInput
+  TextInput,
+  ScrollView
 } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
 import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
 

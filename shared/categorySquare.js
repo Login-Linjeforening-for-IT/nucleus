@@ -1,7 +1,6 @@
 import React from 'react';
-const GLOBAL = require('../styles/theme');
 import { View } from 'react-native';
-import Svg, { Rect, Path } from 'react-native-svg';
+import Svg, { Rect } from 'react-native-svg';
 import { ES } from '../styles/eventStyles';
 
 export default function CategorySquare(condition) {  //SVG showing the color of the category

@@ -19,7 +19,6 @@ import {
 {/* ========================= APP START ========================= */}
 
 export default function EventScreen({ navigation }) {
-
 const listingPage = () => {
 navigation.navigate('ListingScreen');
 }

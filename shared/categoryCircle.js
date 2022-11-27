@@ -1,5 +1,4 @@
 import React from 'react';
-const GLOBAL = require('../styles/theme');
 import { View } from 'react-native';
 import Svg, { Circle } from 'react-native-svg';
 import { ES } from '../styles/eventStyles';

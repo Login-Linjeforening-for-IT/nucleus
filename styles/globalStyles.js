@@ -1,11 +1,11 @@
 import { StyleSheet } from "react-native";  //Stylesheet file
-const GLOBAL = require('../styles/theme');  //App theme
+const GLOBAL = require('./themes/dark')
 
 export const GS = StyleSheet.create({
 //========================= EventScreen =========================
   content: { //Main view of every screen
   height: '75%',
-  backgroundColor: GLOBAL.DARK.BACKGROUND,
+  backgroundColor: GLOBAL.THEME.BACKGROUND,
   paddingHorizontal: 20,
   },
   reportInputContentText: { //reportScreen description text
@@ -14,18 +14,18 @@ export const GS = StyleSheet.create({
     width: '80%',
     height: '90%',
     borderRadius: 40,
-    color: GLOBAL.DARK.TEXTCOLOR,
+    color: GLOBAL.THEME.TEXTCOLOR,
   },
   notificationBack: { //The horizontal card views on notificationScreen
     flexDirection: 'row',
     height: 25,
   },
   notificationText: { //The text on notificationScreen
-    color: GLOBAL.DARK.TEXTCOLOR,
+    color: GLOBAL.THEME.TEXTCOLOR,
     fontSize: 20
   },
   inputText: {  //reportScreen name and notifier text
-    backgroundColor: GLOBAL.DARK.DARKER,
+    backgroundColor: GLOBAL.THEME.DARKER,
     alignSelf: 'center',
     alignItems: 'center',
     width: '80%',
