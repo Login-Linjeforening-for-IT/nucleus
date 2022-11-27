@@ -180,20 +180,13 @@ export function NewTheme() {
     };
 
     
-    // useEffect(() => {
-    //     readData();
-    //   }, []);
+    useEffect(() => {
+        readData();
+      }, []);
 
     const [data, setData] = useState({
         theme: "0",
     }) 
-
-    // const onSubmitEditing = () => {
-    //     if (!input) return;
-      
-    //     saveData(input);
-    //     setInput('');
-    //   };
 
     const changeTheme = () => {
 
