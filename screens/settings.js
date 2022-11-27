@@ -2,7 +2,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { GS } from '../styles/globalStyles';
 import { MS } from '../styles/menuStyles';
-import { Notification, Theme, Language } from '../shared/sharedComponents';
+import { Notification, Theme, NewTheme, Language } from '../shared/sharedComponents';
 import Card from '../shared/card';
 import { T } from '../styles/text';
 import { 
@@ -59,7 +59,7 @@ const goBack = () => {//hoppe over til mail
               <View style={GS.view}>
                 <Text style={GS.notificationText}>Lysbryter</Text>
               </View>
-              <View style={GS.view2}><Theme/></View>
+              <View style={GS.view2}><NewTheme/></View>
             </View>
           </Card>
 
