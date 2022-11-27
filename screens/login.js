@@ -20,8 +20,8 @@ import { CardSmaller } from '../shared/card';
 
 export default function LoginScreen( { navigation }) {
 
-const settingsPage = () => {
-  navigation.navigate('SettingScreen');
+const listingPage = () => {
+  navigation.navigate('ListingScreen');
 }
 const eventPage = () => {
   navigation.navigate('EventScreen');
@@ -215,7 +215,7 @@ const showPass = () => {
           <TouchableOpacity onPress={() => eventPage()}>
             <Image style={MS.bMenuIcon} source={require('../assets/calendar777.png')} />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => settingsPage()}>
+          <TouchableOpacity onPress={() => listingPage()}>
             <Image style={MS.bMenuIcon} source={require('../assets/business.png')} />
           </TouchableOpacity>
       </View>     

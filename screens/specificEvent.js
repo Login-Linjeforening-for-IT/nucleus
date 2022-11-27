@@ -36,8 +36,8 @@ export default function SpecificEventScreen( { navigation }) {
     },[])
   //Check if image exists
 
-  const settingsPage = () => {
-    navigation.navigate('SettingScreen');
+  const listingPage = () => {
+    navigation.navigate('ListingScreen');
   }
   const eventPage = () => {
     navigation.navigate('EventScreen');
@@ -118,7 +118,7 @@ export default function SpecificEventScreen( { navigation }) {
                 
               
               </View>
-              
+
               <Text/>
 
               {EventLocation(usersData.roomno, usersData.campus)}
@@ -161,7 +161,7 @@ export default function SpecificEventScreen( { navigation }) {
           <TouchableOpacity onPress={() => eventPage()}>
             <Image style={MS.bMenuIcon} source={require('../assets/calendar-orange.png')} />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => settingsPage()}>
+          <TouchableOpacity onPress={() => listingPage()}>
             <Image style={MS.bMenuIcon} source={require('../assets/business.png')} />
           </TouchableOpacity>
       </View>     

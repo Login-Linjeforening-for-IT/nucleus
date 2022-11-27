@@ -15,12 +15,12 @@ import {
 
 {/* ========================= APP START ========================= */}
 
-export default function SpecificJobScreen( { navigation }) {
+export default function SpecificListingScreen( { navigation }) {
 
   //Check if image exists
 
-  const settingsPage = () => {
-    navigation.navigate('SettingScreen');
+  const listingPage = () => {
+    navigation.navigate('ListingScreen');
   }
   const eventPage = () => {
     navigation.navigate('EventScreen');
@@ -56,7 +56,7 @@ export default function SpecificJobScreen( { navigation }) {
 {/* ========================= DISPLAY CONTENT ========================= */}
       <View style={GS.content}>
         <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={ES.specificEventParentView}>
+        <View>
             <View style={ES.specificEventView1}>
               <Image style={ES.specificEventImage} source={require('../assets/mnemonic.png')} />
             </View>
@@ -69,7 +69,7 @@ export default function SpecificJobScreen( { navigation }) {
               </View>
             </Card>
 
-            <View style={ES.specificEventView4}>
+            <View>
               <View>
                 <Text style={T.centered20}>{navigation.getParam('eventname')}</Text>
               </View>
@@ -98,7 +98,7 @@ export default function SpecificJobScreen( { navigation }) {
           <TouchableOpacity onPress={() => eventPage()}>
             <Image style={MS.bMenuIcon} source={require('../assets/calendar777.png')} />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => settingsPage()}>
+          <TouchableOpacity onPress={() => listingPage()}>
             <Image style={MS.bMenuIcon} source={require('../assets/business-orange.png')} />
           </TouchableOpacity>
       </View>     

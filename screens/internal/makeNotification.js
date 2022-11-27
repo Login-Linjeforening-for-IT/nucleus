@@ -43,8 +43,8 @@ const ProfilePage = () => {
 const goBack = () => {
     navigation.goBack()
 }
-const settingsPage = () => {
-  navigation.navigate('SettingScreen');
+const listingPage = () => {
+  navigation.navigate('ListingScreen');
 }
 
 const [expoPushToken, setExpoPushToken] = useState('');
@@ -138,10 +138,10 @@ useEffect(() => {
       <TouchableOpacity onPress={() => homePage()}>
             <Image style={MS.bMenuIcon} source={require('../../assets/house777.png')} />
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => eventPage()}>
             <Image style={MS.bMenuIcon} source={require('../../assets/calendar777.png')} />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => settingsPage()}>
+          <TouchableOpacity onPress={() => listingPage()}>
             <Image style={MS.bMenuIcon} source={require('../../assets/business.png')} />
           </TouchableOpacity>
       </View>     

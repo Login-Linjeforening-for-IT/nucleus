@@ -30,8 +30,8 @@ export default function CommitteeMenuScreen({ navigation }) {
 const homePage = () => {
   navigation.navigate('HomeScreen');
 }
-const settingPage = () => {
-  navigation.navigate('SettingScreen');
+const listingPage = () => {
+  navigation.navigate('ListingScreen');
 }
 const profilePage = () => {
   navigation.navigate('ProfileScreen');
@@ -90,7 +90,7 @@ const goBack = () => {
       <TouchableOpacity onPress={() => eventPage()}>
         <Image style={MS.bMenuIcon} source={require('../../assets/calendar777.png')} />
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => settingPage()}>
+      <TouchableOpacity onPress={() => listingPage()}>
         <Image style={MS.bMenuIcon} source={require('../../assets/business.png')} />
       </TouchableOpacity>
     </View>     

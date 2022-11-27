@@ -11,7 +11,6 @@ import {
   Image, 
   FlatList,
   TouchableOpacity,
-  ScrollView
 } from 'react-native';
 
 {/* ========================= APP START ========================= */}
@@ -27,8 +26,8 @@ export default function HomeScreen({ navigation }) {
 const eventPage = () => {
   navigation.navigate('EventScreen');
 }
-const homePage = () => {
-  navigation.navigate('HomeScreen');
+const listingPage = () => {
+  navigation.navigate('ListingScreen');
 }
 const aboutPage = () => {
   navigation.navigate('AboutScreen');
@@ -36,9 +35,7 @@ const aboutPage = () => {
 const profilePage = () => {
   navigation.navigate('ProfileScreen');
 }
-const settingsPage = () => {
-  navigation.navigate('SettingScreen');
-}
+
 
 return(
     <View>
@@ -81,13 +78,13 @@ return(
 
 {/* ========================= DISPLAY BOTTOM MENU ========================= */}
       <View style={MS.bMenu}>
-      <TouchableOpacity onPress={() => homePage()}>
+      <TouchableOpacity>
         <Image style={MS.bMenuIcon} source={require('../assets/house-orange.png')} />
       </TouchableOpacity>
       <TouchableOpacity onPress={() => eventPage()}>
         <Image style={MS.bMenuIcon} source={require('../assets/calendar777.png')} />
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => settingsPage()}>
+      <TouchableOpacity onPress={() => listingPage()}>
         <Image style={MS.bMenuIcon} source={require('../assets/business.png')} />
       </TouchableOpacity>
       </View>     

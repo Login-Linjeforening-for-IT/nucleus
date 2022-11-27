@@ -32,6 +32,9 @@ const homePage = () => {
 const profilePage = () => {
   navigation.navigate('ProfileScreen')
 }
+const listingPage = () => {
+  navigation.navigate('ListingScreen')
+}
 const goBack = () => {
   navigation.goBack()
 }
@@ -87,7 +90,7 @@ return(
       <TouchableOpacity onPress={() => eventPage()}>
         <Image style={MS.bMenuIcon} source={require('../../assets/calendar777.png')} />
       </TouchableOpacity>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => listingPage()}>
         <Image style={MS.bMenuIcon} source={require('../../assets/business.png')} />
       </TouchableOpacity>
       </View>     

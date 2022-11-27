@@ -5,7 +5,7 @@ const GLOBAL = require('../styles/theme');
 import HomeScreen from '../screens/home'
 import EventScreen from '../screens/event';
 import AboutScreen from '../screens/about';
-import SettingScreen from '../screens/settings';
+import ListingScreen from '../screens/listings';
 import SpecificEventScreen from '../screens/specificEvent';
 import InternalScreen from '../screens/internal/internal';
 import BusinessScreen from '../screens/contact/business';
@@ -26,7 +26,7 @@ import ContactTekKomScreen from '../screens/contact/contactTekKom';
 import ContactPRScreen from '../screens/contact/contactPR';
 import ContactCTFkomScreen from '../screens/contact/contactCTFkom';
 import ContactSATkomScreen from '../screens/contact/contactSATkom';
-import SpecificJobScreen from '../screens/specificJobScreen';
+import SpecificListingScreen from '../screens/specificListing';
 
 const screens = {
     EventScreen: {
@@ -38,8 +38,8 @@ const screens = {
     HomeScreen: {
         screen: HomeScreen
     },
-    SettingScreen: {
-        screen: SettingScreen
+    ListingScreen: {
+        screen: ListingScreen
     },
     SpecificEventScreen: {
         screen: SpecificEventScreen,
@@ -101,8 +101,8 @@ const screens = {
     ContactSATkomScreen: {
         screen: ContactSATkomScreen
     },
-    SpecificJobScreen: {
-        screen: SpecificJobScreen
+    SpecificListingScreen: {
+        screen: SpecificListingScreen
     }
 }
 

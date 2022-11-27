@@ -30,14 +30,8 @@ const eventPage = () => {
 const homePage = () => {
   navigation.navigate('HomeScreen');
 }
-const aboutPage = () => {
-  navigation.navigate('AboutScreen');
-}
-const settingsPage = () => {
-    navigation.navigate('SettingScreen')
-}
-const profilePage = () => {
-  navigation.navigate('ProfileScreen');
+const listingPage = () => {
+    navigation.navigate('ListingScreen')
 }
 const goBack = () => {
     navigation.goBack()
@@ -55,7 +49,7 @@ return(
     <Text style={MS.screenTitle}>    Profil</Text>
 
     <View style={MS.tMenuIcons}>
-      <TouchableOpacity onPress={() => profilePage()}>
+      <TouchableOpacity>
         <Image style={MS.tMenuIcon} source={require('../assets/loginperson-orange.png')} />
       </TouchableOpacity>
     </View>
@@ -94,7 +88,7 @@ return(
       <TouchableOpacity onPress={() => eventPage()}>
         <Image style={MS.bMenuIcon} source={require('../assets/calendar777.png')} />
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => settingsPage()}>
+      <TouchableOpacity onPress={() => listingPage()}>
         <Image style={MS.bMenuIcon} source={require('../assets/business.png')} />
       </TouchableOpacity>
       </View>     

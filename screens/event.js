@@ -20,8 +20,8 @@ import {
 
 export default function EventScreen({ navigation }) {
 
-const settingsPage = () => {
-navigation.navigate('SettingScreen');
+const listingPage = () => {
+navigation.navigate('ListingScreen');
 }
 const homePage = () => {
   navigation.navigate('HomeScreen', events);
@@ -135,7 +135,7 @@ return(
           <TouchableOpacity>
             <Image style={MS.bMenuIcon} source={require('../assets/calendar-orange.png')} />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => settingsPage()}>
+          <TouchableOpacity onPress={() => listingPage()}>
             <Image style={MS.bMenuIcon} source={require('../assets/business.png')} />
           </TouchableOpacity>
       </View>     

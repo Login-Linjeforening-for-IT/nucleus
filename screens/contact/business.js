@@ -17,8 +17,8 @@ import {
 
 export default function BusinessScreen( { navigation }) {
 
-const settingsPage = () => {
-  navigation.navigate('SettingScreen');
+const listingPage = () => {
+  navigation.navigate('ListingScreen');
 }
 const eventPage = () => {
   navigation.navigate('EventScreen');
@@ -94,7 +94,7 @@ const goBack = () => {
           <TouchableOpacity onPress={() => eventPage()}>
             <Image style={MS.bMenuIcon} source={require('../../assets/calendar777.png')} />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => settingsPage()}>
+          <TouchableOpacity onPress={() => listingPage()}>
             <Image style={MS.bMenuIcon} source={require('../../assets/business-orange.png')} />
           </TouchableOpacity>
       </View>     

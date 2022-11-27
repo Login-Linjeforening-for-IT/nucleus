@@ -15,7 +15,7 @@ import {
 
 {/* ========================= APP START ========================= */}
 
-export default function SettingScreen({ navigation }) {
+export default function ListingScreen({ navigation }) {
     const [setting] = useState([
       {id: '1', nav: 'EventScreen', title: 'Hagearbeid hos Login', content: 'A still more glorious dawn awaits cosmic fugue gathered by gravity tesseract muse about two ghostly white figures in coveralls and helmets are softly dancing. Rich in heavy atoms permanence of the stars descended from astronomers invent...'},
       {id: '2', nav: 'EventScreen', title: 'Lage nettside for zebracompany.com', content: 'The sky calls to us rogue Orions sword decipherment venture the only home weve ever known. Cambrian explosion white dwarf something incredible is waiting to be known astonishment great turbulent clouds the only home weve ever known. '},
@@ -62,7 +62,7 @@ return(
           data={setting}
           renderItem={({item}) => (
             <View>
-            <TouchableOpacity onPress={() => navigation.navigate('SpecificJobScreen', item)}>
+            <TouchableOpacity onPress={() => navigation.navigate('SpecificListingScreen', item)}>
               <Card>
                 <Text style={T.centered20}>{item.title}</Text><Text/>
                 <Text style={T.centered15}>{item.content}</Text>

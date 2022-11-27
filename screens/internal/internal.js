@@ -31,6 +31,9 @@ const eventPage = () => {
 const homePage = () => {
   navigation.navigate('HomeScreen');
 }
+const listingPage = () => {
+  navigation.navigate('ListingScreen')
+}
 const ProfilePage = () => {
   navigation.navigate('ProfileScreen')
 }
@@ -80,7 +83,7 @@ const ProfilePage = () => {
       <TouchableOpacity onPress={() => eventPage()}>
         <Image style={MS.bMenuIcon} source={require('../../assets/calendar777.png')} />
       </TouchableOpacity>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => listingPage()}>
         <Image style={MS.bMenuIcon} source={require('../../assets/business.png')} />
       </TouchableOpacity>
       </View>     
