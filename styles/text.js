@@ -60,11 +60,3 @@ export const T = StyleSheet.create({
     margin: 15
   }
 })
-
-//    "react-native-reanimated": "~2.9.1",
-//    "react-native-safe-area-context": "4.3.1",
-//    "@react-native-community/masked-view": "^0.1.11",
-//    "react-native-gesture-handler": "~2.5.0",
-//    "qs": "^6.11.0",
-//    "@react-native-community/push-notification-ios": "^1.10.1",
-//    "react-native-screens": "~3.15.0",
