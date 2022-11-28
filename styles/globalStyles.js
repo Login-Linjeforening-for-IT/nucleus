@@ -4,7 +4,7 @@ const GLOBAL = require('./themes/dark')
 export const GS = StyleSheet.create({
 //========================= EventScreen =========================
   content: { //Main view of every screen
-  height: '75%',
+  height: '78%',
   backgroundColor: GLOBAL.THEME.BACKGROUND,
   paddingHorizontal: 20,
   },

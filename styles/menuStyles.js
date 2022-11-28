@@ -11,7 +11,7 @@ export const MS = StyleSheet.create ({
   topMenu: {  //Top menu background view
     flexDirection: 'row',
     justifyContent: 'space-between',
-    height: '15%',
+    height: '12%',
     backgroundColor: GLOBAL.THEME.DARKER,
   },
   tMenuIcon: {  //Size of icons
