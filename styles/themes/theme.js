@@ -10,25 +10,8 @@ export default function Theme() {
     }) 
     
     useEffect(() => {
-        changeTheme();
+        changeTheme(); //Needs to use display theme not change
       }, []);
-
-    // useEffect({
-    //     theme: AsyncStorage.getItem("theme")
-    // })
-    // const GetTheme = async () => {
-    //     console.log(foo)
-    //     try {
-    //       const value = await AsyncStorage.getItem("theme")
-    //       if(value !== null) {
-    //         //something
-    //       }else{
-    //         //something
-    //       }
-    //     } catch(e) {
-    //       console.log(e)
-    //     }
-    //   }
     
     const changeTheme = async() => {
         const value = await AsyncStorage.getItem("theme")

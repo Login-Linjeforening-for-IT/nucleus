@@ -58,11 +58,9 @@ const goBack = () => {
 
     <Text style={MS.screenTitle}>     Change</Text>
 
-        <View style={MS.tMenuIcons}>
       <TouchableOpacity onPress={() => ProfilePage()}>
         <Image style={MS.tMenuIcon} source={require('../../assets/loginperson-orange.png')} />
       </TouchableOpacity>
-    </View>
       </View>
 
 {/* ========================= DISPLAY CONTENT ========================= */}

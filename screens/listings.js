@@ -46,11 +46,9 @@ return(
 
     <Text style={MS.screenTitle}>Stillinger</Text>
 
-    <View style={MS.tMenuIcons}>
       <TouchableOpacity onPress={() => profilePage()}>
         <Image style={MS.tMenuIcon} source={require('../assets/loginperson.png')} />
       </TouchableOpacity>
-    </View>
   </View>
 
 {/* ========================= DISPLAY CONTENT ========================= */}

@@ -103,11 +103,9 @@ const showPass = () => {
     <TouchableOpacity onPress={() => goBack()}>
       <Image style={MS.goBack} source={require('../assets/goback777.png')} />
     </TouchableOpacity>
-    <View style={MS.tMenuIcons}>
       <TouchableOpacity onPress={() => profilePage()}>
         <Image style={MS.tMenuIcon} source={require('../assets/loginperson-orange.png')} />
       </TouchableOpacity>
-    </View>
   </View>
 {/* ========================= DISPLAY CONTENT ========================= */}
 <View style={GS.content}>

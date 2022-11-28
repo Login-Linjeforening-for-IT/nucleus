@@ -46,11 +46,9 @@ export default function SpecificListingScreen( { navigation }) {
 
     <Text style={MS.screenTitle}>      Annonse</Text>
 
-    <View style={MS.tMenuIcons}>
       <TouchableOpacity onPress={() => profilePage()}>
         <Image style={MS.tMenuIcon} source={require('../assets/loginperson.png')} />
       </TouchableOpacity>
-    </View>
   </View>
 
 {/* ========================= DISPLAY CONTENT ========================= */}

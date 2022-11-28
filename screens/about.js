@@ -50,11 +50,9 @@ return(
 
     <Text style={MS.screenTitle}>    Om Login</Text>
 
-    <View style={MS.tMenuIcons}>
       <TouchableOpacity onPress={() => profilePage()}>
         <Image style={MS.tMenuIcon} source={require('../assets/loginperson.png')} />
       </TouchableOpacity>
-    </View>
   </View>
 {/* ========================= DISPLAY CONTENT ========================= */}
 <View style={GS.content}>

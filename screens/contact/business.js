@@ -44,11 +44,9 @@ const goBack = () => {
 
     <Text style={MS.screenTitle}>     Bedrift</Text>
 
-    <View style={MS.tMenuIcons}>
       <TouchableOpacity onPress={() => profilePage()}>
         <Image style={MS.tMenuIcon} source={require('../../assets/loginperson-orange.png')} />
       </TouchableOpacity>
-    </View>
   </View>
 {/* ========================= DISPLAY CONTENT ========================= */}
 <View style={GS.content}>

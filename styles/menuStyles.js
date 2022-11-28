@@ -14,13 +14,8 @@ export const MS = StyleSheet.create ({
     height: '15%',
     backgroundColor: GLOBAL.THEME.DARKER,
   },
-  tMenuIcons: { //Right side icons
-    justifyContent: 'space-evenly',
-    alignItems: 'center',
-    flexDirection: 'row'
-  },
   tMenuIcon: {  //Size of icons
-    top: '10%',
+    top: '5%',
     width: 120,
     height: 120
   },
