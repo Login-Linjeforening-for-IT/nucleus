@@ -4,7 +4,6 @@ import { ES } from '../styles/eventStyles';
 import { SS } from '../styles/settingStyles';
 const GLOBAL = require('../styles/themes/dark')
 import { T } from '../styles/text'
-import AsyncStorage from '@react-native-async-storage/async-storage'
 import { 
     StyleSheet, 
     View, 
@@ -12,7 +11,6 @@ import {
     Switch, 
     TouchableOpacity,
     Image,
-    Alert
 } from 'react-native';
 
 export default function GreenLight() {  //Green colored light svg
@@ -142,112 +140,12 @@ export function Notification() {    //Notification enabled/disabled color
     return(
         <View>
           <Switch
-            trackColor={{ true: "#181818" }}
-            thumbColor={isEnabled ? "green" : "red"}
-            ios_backgroundColor="#080808"
+            trackColor={{ true: GLOBAL.THEME.TRACKCOLOR }}
+            thumbColor={isEnabled ? GLOBAL.THEME.SWITCHOFFSTATE : GLOBAL.THEME.SWITCHONSTATE}
+            ios_backgroundColor={GLOBAL.THEME.TRACKBACKGROUNDCOLOR}
             onValueChange={toggleSwitch}
             value={isEnabled}
           />
-        </View>
-    )
-}
-
-export function NewTheme() {
-    let STORAGE_KEY = "0";
-    
-    const [input, setInput] = useState('');
-
-    const saveData = async () => {
-        try {
-          await AsyncStorage.setItem(STORAGE_KEY, data.theme)
-          alert('Data successfully saved')
-        } catch (e) {
-          alert('Failed to save the data to the storage')
-          console.log(e)
-        }
-      }
-
-    const readData = async () => {
-        try {
-            const value = await AsyncStorage.getItem(STORAGE_KEY);
-
-            if (value !== null) {
-            setInput(value);
-            }
-        } catch (e) {
-            alert('Failed to fetch the input from storage');
-        }
-    };
-
-    
-    useEffect(() => {
-        readData();
-      }, []);
-
-    const [data, setData] = useState({
-        theme: "0",
-    }) 
-
-    const changeTheme = () => {
-
-        if (data.theme == "0" || !data.theme) {
-
-            setData({
-                ...data,
-                theme: "1"
-              });
-              saveData(data.theme);
-        }else if (data.theme == 1){
-            setData({
-                ...data,
-                theme: "2"
-              });
-              saveData(data.theme);
-        }else{
-            setData({
-                ...data,
-                theme: "0",
-            });
-            saveData(data.theme);
-        }
-      }
-
-    return(
-        <View>
-            <TouchableOpacity onPress={() => changeTheme()}>
-                {data.theme == 0 ? <Image style={SS.lightSwitchImage} source={require('../assets/sun.png')} />: null}
-                {data.theme == 1 ? <Image style={SS.lightSwitchImage} source={require('../assets/moon.png')} />: null}
-                {data.theme == 2 ? <Image style={SS.lightSwitchImage} source={require('../assets/christmas.png')} />: null}
-
-            </TouchableOpacity>
-        </View>
-    )
-}
-
-export function Theme() {   //Choose the theme
-    // global.foo = ['foo']; //this can be changed
-    // global.foo[0] = 'foofoo';
-    // console.log(global.foo[0]); //foofoo
-    const changeTheme = () => {
-        setData({
-          ...data,
-          theme: !data.theme
-        });
-      }
-      
-    const [data, setData] = useState({
-        theme: 0,
-    }) 
-
-    return(
-        <View>
-            <TouchableOpacity onPress={() => changeTheme()}>
-                {data.theme ?
-                    <Image style={SS.lightSwitchImage} source={require('../assets/sun.png')} />
-                : 
-                    <Image style={SS.lightSwitchImage} source={require('../assets/moon.png')} />
-                }
-            </TouchableOpacity>
         </View>
     )
 }

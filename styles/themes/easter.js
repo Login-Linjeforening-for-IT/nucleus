@@ -1,13 +1,15 @@
-module.exports = {  //Global easter theme settings
-    THEME: { //Easter theme
-        BACKGROUND: '#98FB98',      //Background of the app
-        DARKER: '#ffd700',          //Contentcolor of the app
-        ORANGE: '#fd8738',          //Logins color
-        TEXTCOLOR: 'black',         //Textcolor of the app
-        TITLETEXTCOLOR: 'black'     //ScreenTitleColor of the app
-    }
-  };
+ export function hei() {
+ if (true) {
+    BACKGROUND: '#98FB98';
+    DARKER: '#ffd700';
+    ORANGE: '#fd8738';
+    TEXTCOLOR: 'black';
+    TITLETEXTCOLOR: 'black'; //ScreenTitleColor of the app
 
+ }else{
+  null
+ }
+ }
 //  Notes:
 //  Dark background:    #181818
 //  Darker background:  #111

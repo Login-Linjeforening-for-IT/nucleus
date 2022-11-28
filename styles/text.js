@@ -17,6 +17,11 @@ export const T = StyleSheet.create({
     fontSize: 30,
     color: GLOBAL.THEME.TEXTCOLOR,
   },
+  centeredOppositeColor: { //Centered text of size 30
+    alignSelf: 'center',
+    fontSize: 30,
+    color: GLOBAL.THEME.OPPOSITETEXTCOLOR,
+  },
   centered15: { //Centered text of size 15
     alignSelf: 'center',
     fontSize: 15,
@@ -58,5 +63,10 @@ export const T = StyleSheet.create({
     color: GLOBAL.THEME.TEXTCOLOR,
     fontSize: 15,
     margin: 15
+  }, 
+  r: {
+    top: 60,
+    right: 100,
+    color: GLOBAL.THEME.TEXTCOLOR,
   }
 })

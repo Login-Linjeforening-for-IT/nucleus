@@ -1,6 +1,5 @@
 import { StyleSheet } from "react-native";  //Stylesheet file
 const GLOBAL = require('./themes/dark')
-
 export const ES = StyleSheet.create({
 
 //========================= EventScreen =========================

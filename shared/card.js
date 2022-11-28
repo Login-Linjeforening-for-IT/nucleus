@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 const GLOBAL = require('../styles/themes/dark')
 
+
 export default function Card(props) {
     return(
         <View style={styles.card}>
