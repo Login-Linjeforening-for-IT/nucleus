@@ -1,20 +1,22 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-var hei = 1
+var hei = 0
 
 async function myFunction(){
   hei = await AsyncStorage.getItem('event')
-  if (hei) {
-    return( hei ) 
+  console.log('hei ', hei)
+  if (hei < 5) {
+    console.log( "her", hei ) 
+
   } else {
-    console.log('hei', hei)
+    console.log('null')
 return 0
   }
 }
 myFunction()
 console.log(hei)
 
-if (hei == 0){
+if (hei == 1){
   module.exports = {  //Global light theme settings
     THEME: { //Light theme
       BACKGROUND: 'white',              //Background of the app
