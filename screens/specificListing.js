@@ -4,7 +4,7 @@ import { GS } from '../styles/globalStyles';
 import { MS } from '../styles/menuStyles';
 import { T } from '../styles/text';
 import { ES } from '../styles/eventStyles';
-import Card from '../shared/card';
+import Card from '../shared/sharedComponents';
 import React from 'react';
 import { 
   Text, 

@@ -2,15 +2,15 @@ import { StatusBar } from 'expo-status-bar';
 import { GS } from '../../styles/globalStyles';
 import { MS } from '../../styles/menuStyles';
 import React, { useState } from 'react';
-import Card from '../../shared/card';
+import Card from '../../shared/sharedComponents';
 import { T } from '../../styles/text';
 import { 
   Text, 
   View, 
   Image, 
   TouchableOpacity,
+  FlatList
 } from 'react-native';
-import { FlatList } from 'react-native-gesture-handler';
 
 {/* ========================= APP START ========================= */}
 

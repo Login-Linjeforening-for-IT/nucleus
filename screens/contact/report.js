@@ -4,7 +4,7 @@ import { GS } from '../../styles/globalStyles';
 import { MS } from '../../styles/menuStyles';
 import { T } from '../../styles/text';
 import { SS } from '../../styles/settingStyles';
-import React from 'react';
+import React, { useState } from 'react';
 import GreenLight, { Button, Check, GrayLight } from '../../shared/sharedComponents';
 import { 
   Text, 
@@ -14,8 +14,7 @@ import {
   TextInput,
   Alert,
 } from 'react-native';
-import { useState } from 'react';
-import { CardSmaller } from '../../shared/card';
+import { CardSmaller } from '../../shared/sharedComponents';
 
 {/* ========================= APP START ========================= */}
 

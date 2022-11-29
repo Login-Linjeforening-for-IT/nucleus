@@ -3,7 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import { GS } from '../styles/globalStyles';
 import { T } from '../styles/text';
 import { MS } from '../styles/menuStyles';
-import Card from '../shared/card';
+import Card from '../shared/sharedComponents';
 import { Copyright } from '../shared/sharedComponents';
 import React from 'react';
 import { 
@@ -20,9 +20,6 @@ export default function AboutScreen( { navigation }) {
 
 {/* ========================= DISPLAY APP START ========================= */}
 
-const settingsPage = () => {
-  navigation.navigate('SettingScreen')
-}
 const eventPage = () => {
   navigation.navigate('EventScreen')
 }

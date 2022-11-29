@@ -1,5 +1,6 @@
 import React, {useState } from 'react';
 import { SS } from '../styles/settingStyles';
+import { ES } from '../styles/eventStyles';
 const GLOBAL = require('../styles/themes/dark')
 import { T } from '../styles/text'
 import { 
@@ -8,6 +9,26 @@ import {
     Switch, 
     TouchableOpacity,
 } from 'react-native';
+
+export default function Card(props) {
+    return(
+        <View style={ES.card}>
+            <View style={ES.cardContent}>
+                { props.children }
+            </View>
+        </View>
+    );
+};
+
+export function CardSmaller(props) {
+    return(
+        <View style={ES.cardSmaller}>
+            <View>
+                { props.children }
+            </View>
+        </View>
+    );
+};
 
 export function Copyright() {   //Copyright info
     return(

@@ -5,7 +5,7 @@ import React from 'react';
 import { GS } from '../../styles/globalStyles'
 import { T } from '../../styles/text'
 import { useState } from 'react';
-import Card from '../../shared/card';
+import Card from '../../shared/sharedComponents';
 import { 
   Text, 
   View, 

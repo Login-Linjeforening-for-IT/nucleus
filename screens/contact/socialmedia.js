@@ -4,7 +4,7 @@ import { MS } from '../../styles/menuStyles'
 import { SS } from '../../styles/settingStyles'
 import { GS } from '../../styles/globalStyles'
 import React, { useState } from 'react';
-import Card from '../../shared/card';
+import Card from '../../shared/sharedComponents';
 import { 
   Text, 
   View, 

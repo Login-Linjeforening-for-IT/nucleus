@@ -5,7 +5,6 @@ const GLOBAL = require('../../styles/themes/dark')
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { T } from '../../styles/text'
 import { View, Text, Image } from 'react-native';
-import { GS } from '../../styles/globalStyles';
 
 export default function GreenLight() {  //Green colored light svg
     return(

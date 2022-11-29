@@ -4,14 +4,14 @@ import { GS } from '../../styles/globalStyles';
 import { MS } from '../../styles/menuStyles';
 import { T } from '../../styles/text';
 import { useState } from 'react';
-import Card from '../../shared/card';
+import Card from '../../shared/sharedComponents';
 import { 
   Text, 
   View, 
   Image, 
   TouchableOpacity,
+  Flatlist
 } from 'react-native';
-import { FlatList } from 'react-native-gesture-handler';
 
 {/* ========================= APP START ========================= */}
 
@@ -59,7 +59,7 @@ const goBack = () => {
 {/* ========================= DISPLAY CONTENT ========================= */}
 <View style={GS.content}>
 
-          <FlatList
+          <Flatlist
           showsVerticalScrollIndicator={''}
           numColumns={1}
           keyExtractor={(item) => item.id}

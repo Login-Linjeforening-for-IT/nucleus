@@ -4,14 +4,14 @@ import React from 'react';
 import { MS } from '../../styles/menuStyles';
 import { T } from '../../styles/text';
 import { useState } from 'react';
-import Card from '../../shared/card';
+import Card from '../../shared/sharedComponents';
 import { 
   Text, 
   View, 
   Image, 
   TouchableOpacity,
+  FlatList
 } from 'react-native';
-import { FlatList } from 'react-native-gesture-handler';
 
 {/* ========================= APP START ========================= */}
 

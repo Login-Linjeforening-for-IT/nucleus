@@ -4,7 +4,7 @@ import CategorySquare from '../shared/eventComponents/categorySquare';
 import CleanDescription from '../shared/eventComponents/cleanDescription';
 import { GetEndTime, Month, EventLocation } from '../shared/eventComponents/otherComponents';
 import React, { useEffect, useState } from 'react';
-import Card, { CardSmaller } from '../shared/card';
+import Card, { CardSmaller } from '../shared/sharedComponents';
 import { StatusBar } from 'expo-status-bar';
 import EventTime from '../shared/eventComponents/eventTime';
 import { GS } from '../styles/globalStyles';

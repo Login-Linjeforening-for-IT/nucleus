@@ -4,14 +4,13 @@ import { StatusBar } from 'expo-status-bar';
 import { GS } from '../../styles/globalStyles';
 import { T } from '../../styles/text';
 import { MS } from '../../styles/menuStyles';
-import { Kontakt } from '../../shared/sharedComponents';
-import Card from '../../shared/card';
+import Card, { Kontakt } from '../../shared/sharedComponents';
 import { 
   Text, 
   View, 
   Image, 
   ScrollView,
-  TouchableOpacity
+  TouchableOpacity,
 } from 'react-native';
 
 {/* ========================= APP START ========================= */}

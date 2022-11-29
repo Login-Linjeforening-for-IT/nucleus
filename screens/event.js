@@ -5,7 +5,7 @@ import { StatusBar } from 'expo-status-bar';
 import { GS } from '../styles/globalStyles';
 import { ES } from '../styles/eventStyles';
 import { MS } from '../styles/menuStyles';
-import Card from '../shared/card';
+import Card from '../shared/sharedComponents';
 import { 
   Text, 
   View, 

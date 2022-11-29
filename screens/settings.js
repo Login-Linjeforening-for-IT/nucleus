@@ -4,7 +4,7 @@ import { GS } from '../styles/globalStyles';
 import { MS } from '../styles/menuStyles';
 import { Notification, Language } from '../shared/sharedComponents';
 import Theme from '../styles/themes/theme';
-import Card from '../shared/card';
+import Card from '../shared/sharedComponents';
 import { T } from '../styles/text';
 import React from 'react';
 import { 

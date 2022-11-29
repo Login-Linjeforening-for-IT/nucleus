@@ -14,7 +14,7 @@ import {
   Alert
 } from 'react-native';
 import React, { useState } from 'react';
-import { CardSmaller } from '../shared/card';
+import { CardSmaller } from '../shared/sharedComponents';
 
 {/* ========================= APP START ========================= */}
 
