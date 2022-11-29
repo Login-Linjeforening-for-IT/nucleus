@@ -4,7 +4,7 @@ const GLOBAL = require('./themes/dark')
 export const MS = StyleSheet.create ({
 //  ========================= STYLESHEET TOP MENU =========================
   screenTitle: { //Header title of every page
-    top: '14.5%',
+    top: '12%',
     color: GLOBAL.THEME.TITLETEXTCOLOR,
     fontSize: 35,
   },
