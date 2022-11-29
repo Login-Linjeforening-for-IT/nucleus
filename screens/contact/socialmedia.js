@@ -1,8 +1,8 @@
 {/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
 import { StatusBar } from 'expo-status-bar'
 import { MS } from '../../styles/menuStyles'
-import { SS } from '../../styles/settingStyles'
 import { GS } from '../../styles/globalStyles'
+import { T } from '../../styles/text';
 import React, { useState } from 'react';
 import Card from '../../shared/sharedComponents';
 import { 
@@ -64,7 +64,7 @@ return(
             <View>
             <TouchableOpacity onPress={() => navigation.navigate(item.nav, item)}>
               <Card>
-                <Text style={SS.text}>{item.title}</Text>
+                <Text style={T.centered20}>{item.title}</Text>
               </Card>
             </TouchableOpacity>
           </View>

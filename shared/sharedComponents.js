@@ -57,6 +57,7 @@ export function Kontakt() { //Contact info
 }
 
 export function Notification() {    //Notification enabled/disabled color
+    const theme = async()
     const [isEnabled, setIsEnabled] = useState(false);
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
     return(

@@ -5,7 +5,8 @@ import { MS } from '../../styles/menuStyles';
 import { T } from '../../styles/text';
 import { SS } from '../../styles/settingStyles';
 import React, { useState } from 'react';
-import GreenLight, { Button, Check, GrayLight } from '../../shared/sharedComponents';
+import GreenLight, { Check, GrayLight } from '../../shared/eventComponents/otherComponents';
+import { Button, CardSmaller } from '../../shared/sharedComponents';
 import { 
   Text, 
   View, 
@@ -14,7 +15,6 @@ import {
   TextInput,
   Alert,
 } from 'react-native';
-import { CardSmaller } from '../../shared/sharedComponents';
 
 {/* ========================= APP START ========================= */}
 

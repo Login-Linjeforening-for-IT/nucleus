@@ -1,31 +1,30 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
 import { GS } from '../../styles/globalStyles';
 import { MS } from '../../styles/menuStyles';
 import { T } from '../../styles/text';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Card from '../../shared/sharedComponents';
 import { 
   Text, 
   View, 
   Image, 
   TouchableOpacity,
-  Flatlist
+  FlatList
 } from 'react-native';
 
 {/* ========================= APP START ========================= */}
 
 export default function CommitteeMenuScreen({ navigation }) {
     const [setting] = useState([
-        {id: '1', nav: 'ContactStyretScreen', title: 'Styret'},
+        {id: '1', nav: 'ContactStyretScreen',   title: 'Styret'},
         {id: '2', nav: 'ContactEventKomScreen', title: 'EventKom'},
-        {id: '3', nav: 'ContactTekKomScreen', title: 'TekKom'},
-        {id: '4', nav: 'ContactPRScreen', title: 'PR'},
-        {id: '5', nav: 'ContactCTFkomScreen', title: 'CTFkom'},
-        {id: '6', nav: 'ContactSATkomScreen', title: 'SATkom'},
+        {id: '3', nav: 'ContactTekKomScreen',   title: 'TekKom'},
+        {id: '4', nav: 'ContactPRScreen',       title: 'PR'},
+        {id: '5', nav: 'ContactCTFkomScreen',   title: 'CTFkom'},
+        {id: '6', nav: 'ContactSATkomScreen',   title: 'SATkom'},
       ])
 
-      const eventPage = () => {
+const eventPage = () => {
   navigation.navigate('EventScreen');
 }
 const homePage = () => {
@@ -59,7 +58,7 @@ const goBack = () => {
 {/* ========================= DISPLAY CONTENT ========================= */}
 <View style={GS.content}>
 
-          <Flatlist
+          <FlatList
           showsVerticalScrollIndicator={''}
           numColumns={1}
           keyExtractor={(item) => item.id}

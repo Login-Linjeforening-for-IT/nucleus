@@ -1,9 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { useState } from 'react';
 import { GS } from '../../styles/globalStyles';
 import { MS } from '../../styles/menuStyles';
 import { T } from '../../styles/text';
-import { useState } from 'react';
 import Card from '../../shared/sharedComponents';
 import { 
   Text, 

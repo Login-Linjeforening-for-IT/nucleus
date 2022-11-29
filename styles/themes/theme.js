@@ -15,33 +15,21 @@ export default function Theme() {
     
     const changeTheme = async() => {
         const value = await AsyncStorage.getItem("theme")
-            if (value == "0" || !value) {
+            if (value === "0" || !value) {
                 setData({
                     theme: await AsyncStorage.getItem("theme")
                 })
-                try {
-                    await AsyncStorage.setItem("theme", "1")
-                } catch (e) {
-                    console.log(e)
-                }
-            }else if (value == "1"){
+                await AsyncStorage.setItem("theme", "1")
+            }else if (value === "1"){
                 setData({
                     theme: await AsyncStorage.getItem("theme")
                 })
-                try {
-                    await AsyncStorage.setItem("theme", "2")
-                } catch (e) {
-                    console.log(e)
-                }
+                await AsyncStorage.setItem("theme", "2")
             }else{
                 setData({
                     theme: await AsyncStorage.getItem("theme")
                 })
-                try {
-                    await AsyncStorage.setItem("theme", "0")
-                } catch (e) {
-                    console.log(e)
-                }
+                await AsyncStorage.setItem("theme", "0")
             }
         
       }
