@@ -3,6 +3,7 @@ import React, {useState, useEffect } from 'react';
 import { ES } from '../styles/eventStyles';
 import { SS } from '../styles/settingStyles';
 const GLOBAL = require('../styles/themes/dark')
+import ThemeContext from '../styles/themes/dark';
 import { T } from '../styles/text'
 import { 
     StyleSheet, 
@@ -15,11 +16,11 @@ import {
 
 export default function GreenLight() {  //Green colored light svg
     return(
-    <View style={styles.size}>
-        <Svg height="100%" width="100%" viewBox="0 0 100 100" >
-        <Circle cx="50" cy="50" r="50" stroke="green" strokeWidth=".5" fill="green" />
-        </Svg>
-    </View>
+        <View style={styles.size}>
+            <Svg height="100%" width="100%" viewBox="0 0 100 100" >
+            <Circle cx="50" cy="50" r="50" stroke="green" strokeWidth=".5" fill="green" />
+            </Svg>
+        </View>
     );
 };
 
