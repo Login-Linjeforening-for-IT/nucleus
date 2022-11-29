@@ -1,4 +1,5 @@
 import React from 'react';
+import * as ReactDOM from 'react-dom';
 import Navigator from './routes/homeStack';
 //import registerNNPushToken from 'native-notify';  - temporarily disabled due to bug
 
@@ -8,3 +9,5 @@ export default function App() {
         <Navigator/>
     )
 };
+
+//ReactDOM.render(<App />, document.querySelector('#App'))

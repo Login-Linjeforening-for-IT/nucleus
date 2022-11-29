@@ -9,6 +9,7 @@ import {
     Switch, 
     TouchableOpacity,
 } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Card(props) {
     return(
@@ -57,20 +58,69 @@ export function Kontakt() { //Contact info
 }
 
 export function Notification() {    //Notification enabled/disabled color
-    const theme = async()
     const [isEnabled, setIsEnabled] = useState(false);
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
-    return(
-        <View>
-          <Switch
-            trackColor={{ true: GLOBAL.DARK.TRACKCOLOR }}
-            thumbColor={isEnabled ? GLOBAL.DARK.SWITCHOFFSTATE : GLOBAL.DARK.SWITCHONSTATE}
-            ios_backgroundColor={GLOBAL.DARK.TRACKBACKGROUNDCOLOR}
-            onValueChange={toggleSwitch}
-            value={isEnabled}
-          />
-        </View>
-    )
+    const theme = async() => {
+        const hei = await AsyncStorage.getItem("theme")
+        switch (hei) {
+            case 1:     console.log("her funka det", hei); return 1;
+            case 2:     console.log("her funka det", hei); return 2;
+            case 3:     console.log("her funka det", hei); return 3;
+            default:    console.log("her funka det", hei); return 0;
+        }
+    }
+    console.log('theme er', theme())
+    let num = 0
+    switch (num) {
+        case 1:
+            return(
+                <View>
+                  <Switch
+                    trackColor={{ true: GLOBAL.LIGHT.TRACKCOLOR }}
+                    thumbColor={isEnabled ? GLOBAL.LIGHT.SWITCHOFFSTATE : GLOBAL.LIGHT.SWITCHONSTATE}
+                    ios_backgroundColor={GLOBAL.LIGHT.TRACKBACKGROUNDCOLOR}
+                    onValueChange={toggleSwitch}
+                    value={isEnabled}
+                  />
+                </View>
+            )
+        case 2: 
+            return(
+                <View>
+                <Switch
+                    trackColor={{ true: GLOBAL.CHRISTMAS.TRACKCOLOR }}
+                    thumbColor={isEnabled ? GLOBAL.CHRISTMAS.SWITCHOFFSTATE : GLOBAL.CHRISTMAS.SWITCHONSTATE}
+                    ios_backgroundColor={GLOBAL.CHRISTMAS.TRACKBACKGROUNDCOLOR}
+                    onValueChange={toggleSwitch}
+                    value={isEnabled}
+                />
+                </View>
+            )
+        case 3: 
+        return(
+            <View>
+            <Switch
+                trackColor={{ true: GLOBAL.EASTER.TRACKCOLOR }}
+                thumbColor={isEnabled ? GLOBAL.EASTER.SWITCHOFFSTATE : GLOBAL.EASTER.SWITCHONSTATE}
+                ios_backgroundColor={GLOBAL.EASTER.TRACKBACKGROUNDCOLOR}
+                onValueChange={toggleSwitch}
+                value={isEnabled}
+            />
+            </View>
+        )
+        default:
+            return(
+                <View>
+                <Switch
+                    trackColor={{ true: GLOBAL.DARK.TRACKCOLOR }}
+                    thumbColor={isEnabled ? GLOBAL.DARK.SWITCHOFFSTATE : GLOBAL.DARK.SWITCHONSTATE}
+                    ios_backgroundColor={GLOBAL.DARK.TRACKBACKGROUNDCOLOR}
+                    onValueChange={toggleSwitch}
+                    value={isEnabled}
+                />
+                </View>
+            )
+    }
 }
 
 export function Language() {    //Choose the language

@@ -32,10 +32,20 @@ const homePage = () => {
 const profilePage = () => {
   navigation.navigate('ProfileScreen');
 }
-const sendForm = () => {
+const sendForm = async() => {
   if (data.name === data.name) {
-
+    //Mail må sendes her
+    const options = {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    }
+    const req = await fetch('/mail/feedback', options)
+    const res = await req.json()
     Alert.alert('Takk for beskjed.')
+    console.log(res)
     setData({
       ...data,
       name: '',

@@ -57,7 +57,7 @@ const goBack = () => {//hoppe over til mail
           <Card>
             <View style={GS.notificationBack}>
               <View style={GS.view}>
-                <Text style={GS.notificationText}>Lysbryter</Text>
+                <Text style={GS.notificationText}>Tema</Text>
               </View>
               <View style={GS.view2}><Theme/></View>
             </View>
