@@ -5,14 +5,14 @@ export const MS = StyleSheet.create ({
 //  ========================= STYLESHEET TOP MENU =========================
   screenTitle: { //Header title of every page
     top: '12%',
-    color: GLOBAL.THEME.TITLETEXTCOLOR,
+    color: GLOBAL.DARK.TITLETEXTCOLOR, //Maybe buttons are clickable if not percentage value?
     fontSize: 35,
   },
   topMenu: {  //Top menu background view
     flexDirection: 'row',
     justifyContent: 'space-between',
     height: '12%',
-    backgroundColor: GLOBAL.THEME.DARKER,
+    backgroundColor: GLOBAL.DARK.DARKER,
   },
   tMenuIcon: {  //Size of icons
     top: '5%',
@@ -29,7 +29,7 @@ export const MS = StyleSheet.create ({
 //  ========================= STYLESHEET BOTTOM MENU =========================
     bMenu: { //Bottom menu background view
         height: '10%',
-        backgroundColor: GLOBAL.THEME.DARKER,
+        backgroundColor: GLOBAL.DARK.DARKER,
         flexDirection: 'row',
         justifyContent: 'space-evenly',
         alignItems: 'center'

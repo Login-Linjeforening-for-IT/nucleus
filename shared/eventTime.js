@@ -52,9 +52,9 @@ export default function EventTime(startTime) {
                     }else if(eventHour < hour){ //Event was x hours ago
                         return(<View><Text style={T.centered25}>{hour-eventHour-1} timer siden</Text></View>)
                     }else if(eventHour == hour+1){ //Event is the next hour
-                        return(<View><Text style={T.centered25}>Om 1 time og {59-eventMinute-minute} min</Text></View>)
+                        return(<View><Text style={T.centered25}>1t {59-eventMinute-minute} min</Text></View>)
                     }else{ //Event starts in x hours
-                        return(<View><Text style={T.centered25}>{eventHour-hour-1} timer og {59-eventMinute-minute} min til</Text></View>)
+                        return(<View><Text style={T.centered25}>{eventHour-hour-1}t {59-eventMinute-minute} min</Text></View>)
                     }
                 }else if(eventDay == day-1){ //Event was yesterday
                     return(<View><Text style={T.centered25}>I går</Text></View>)
@@ -62,7 +62,7 @@ export default function EventTime(startTime) {
                     return(<View><Text style={T.centered25}>{day-eventDay} dager siden</Text></View>)
                 }else if(eventDay == day+1){ //Event is tomorrow
                     if (eventHour <= hour) { //Event is in less than 24 hours
-                        return(<View><Text style={T.centered25}>{24-hour+eventHour} timer til</Text></View>)
+                        return(<View><Text style={T.centered25}>{24-hour+eventHour}t til</Text></View>)
                     }else{ //Event is tomorrow but in more than 24 hours
                         return(<View><Text style={T.centered25}>I morgen</Text></View>)
                     }

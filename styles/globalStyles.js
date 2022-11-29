@@ -5,7 +5,7 @@ export const GS = StyleSheet.create({
 //========================= EventScreen =========================
   content: { //Main view of every screen
   height: '78%',
-  backgroundColor: GLOBAL.THEME.BACKGROUND,
+  backgroundColor: GLOBAL.DARK.BACKGROUND,
   paddingHorizontal: 20,
   },
   reportInputContentText: { //reportScreen description text
@@ -14,18 +14,18 @@ export const GS = StyleSheet.create({
     width: '80%',
     height: '90%',
     borderRadius: 40,
-    color: GLOBAL.THEME.TEXTCOLOR,
+    color: GLOBAL.DARK.TEXTCOLOR,
   },
   notificationBack: { //The horizontal card views on notificationScreen
     flexDirection: 'row',
     height: 25,
   },
   notificationText: { //The text on notificationScreen
-    color: GLOBAL.THEME.TEXTCOLOR,
+    color: GLOBAL.DARK.TEXTCOLOR,
     fontSize: 20
   },
   inputText: {  //reportScreen name and notifier text
-    backgroundColor: GLOBAL.THEME.DARKER,
+    backgroundColor: GLOBAL.DARK.DARKER,
     alignSelf: 'center',
     alignItems: 'center',
     width: '80%',
