@@ -1,5 +1,5 @@
 import React from 'react';
-import * as ReactDOM from 'react-dom';
+//import * as ReactDOMServer from 'react-dom/server';
 import Navigator from './routes/homeStack';
 //import registerNNPushToken from 'native-notify';  - temporarily disabled due to bug
 
@@ -10,4 +10,4 @@ export default function App() {
     )
 };
 
-//ReactDOM.render(<App />, document.querySelector('#App'))
+//ReactDOMServer.renderToString(<App />)
