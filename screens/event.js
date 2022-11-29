@@ -1,12 +1,11 @@
-import { StatusBar } from 'expo-status-bar';
+import GreenLight, { GrayLight, Check, Month } from '../shared/eventComponents/otherComponents';
+import CategorySquare from '../shared/eventComponents/categorySquare';
 import React, { useEffect, useState } from 'react';
-import Card from '../shared/card';
+import { StatusBar } from 'expo-status-bar';
 import { GS } from '../styles/globalStyles';
-import { MS } from '../styles/menuStyles';
 import { ES } from '../styles/eventStyles';
-import GreenLight, { GrayLight, Check, Month } from '../shared/sharedComponents';
-import CategorySquare from '../shared/categorySquare';
-
+import { MS } from '../styles/menuStyles';
+import Card from '../shared/card';
 import { 
   Text, 
   View, 

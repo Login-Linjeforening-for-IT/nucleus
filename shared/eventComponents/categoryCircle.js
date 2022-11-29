@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import Svg, { Circle } from 'react-native-svg';
-import { ES } from '../styles/eventStyles';
+import { ES } from '../../styles/eventStyles';
 
 export default function CategoryCircle(condition) {  //SVG showing the color of the category
     if (condition === 'TEKKOM') {

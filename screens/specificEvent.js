@@ -1,12 +1,12 @@
 {/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
-import CategoryCircle from '../shared/categoryCircle';
-import CategorySquare from '../shared/categorySquare';
-import CleanDescription from '../shared/cleanDescription';
-import { getEndTime, Month, EventLocation } from '../shared/sharedComponents';
+import CategoryCircle from '../shared/eventComponents/categoryCircle';
+import CategorySquare from '../shared/eventComponents/categorySquare';
+import CleanDescription from '../shared/eventComponents/cleanDescription';
+import { GetEndTime, Month, EventLocation } from '../shared/eventComponents/otherComponents';
 import React, { useEffect, useState } from 'react';
 import Card, { CardSmaller } from '../shared/card';
 import { StatusBar } from 'expo-status-bar';
-import EventTime from '../shared/eventTime';
+import EventTime from '../shared/eventComponents/eventTime';
 import { GS } from '../styles/globalStyles';
 import { MS } from '../styles/menuStyles';
 import { T } from '../styles/text';
@@ -34,7 +34,6 @@ export default function SpecificEventScreen( { navigation }) {
   useEffect(() => {
     getData();
     },[])
-  //Check if image exists
 
   const listingPage = () => {
     navigation.navigate('ListingScreen');
@@ -112,9 +111,8 @@ export default function SpecificEventScreen( { navigation }) {
 
               <View style={ES.specificEventInfoView}>
               <Text style={T.specificEventInfo}>Slutter: </Text>
-                {getEndTime(usersData.endt)}
+                {GetEndTime(usersData.endt)}
                 
-              
               </View>
 
               <Text/>

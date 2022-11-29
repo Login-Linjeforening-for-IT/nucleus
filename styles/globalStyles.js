@@ -6,7 +6,6 @@ export const GS = StyleSheet.create({
   content: { //Main view of every screen
   height: '78%',
   backgroundColor: GLOBAL.DARK.BACKGROUND,
-  paddingHorizontal: 20,
   },
   reportInputContentText: { //reportScreen description text
     alignSelf: 'center',

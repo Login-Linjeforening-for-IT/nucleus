@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import { T } from '../styles/text'
-import { A } from '@expo/html-elements';
+import { T } from '../../styles/text'
+import { A } from '@expo/html-elements'; //Doesnt work in the commented lines below
 
 export default function CleanDescription(string) {
     if (string != null) {

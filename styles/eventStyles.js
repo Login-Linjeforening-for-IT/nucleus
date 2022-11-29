@@ -6,7 +6,6 @@ export const ES = StyleSheet.create({
   view: { //Left side card view
     top: '-2%',
     justifyContent: 'center',
-    width: '15%',
     height: '120%',
     borderRadius: 10,
   },
@@ -15,10 +14,10 @@ export const ES = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'flex-start',
     left: 10,
-    width: '75%',
+    width: '70%',
   },
   view3: { //Right side card view
-    width: '10%',
+    width: '25%',
     height: '100%',
   },
   eventBack: { //Card height and direction on eventscreen
@@ -100,5 +99,32 @@ specificEventLight: { //Position of specific event color circle
   left: 8,
   height: 20,
   width: 20,
+},
+card: {
+  borderRadius: 20,
+  backgroundColor: GLOBAL.DARK.DARKER,
+  marginHorizontal: 10,
+  marginTop: 10,
+},
+cardContent: {
+  marginHorizontal: 18,
+  marginVertical: 18
+},
+cardSmaller: {
+  borderRadius: 20,
+  backgroundColor: GLOBAL.DARK.DARKER,
+},
+size: {
+  height: 40,
+  width: 40
+},
+smallSize: {
+  height: 20,
+  width: 20
+},
+specificEventLight: {
+  left: 8,
+  height: 20,
+  width: 20
 },
 })

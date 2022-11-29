@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import { T } from '../styles/text'
+import { T } from '../../styles/text'
 
 export default function EventTime(startTime) {
 
