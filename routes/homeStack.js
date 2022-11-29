@@ -1,7 +1,6 @@
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
 
-import BottomMenu from '../shared/bottomMenu';
 import HomeScreen from '../screens/home'
 import EventScreen from '../screens/event';
 import AboutScreen from '../screens/about';
@@ -29,9 +28,6 @@ import ContactSATkomScreen from '../screens/contact/contactSATkom';
 import SpecificListingScreen from '../screens/specificListing';
 
 const screens = {
-    BottomMenu: {
-        screen: BottomMenu
-    },
     EventScreen: {
         screen: EventScreen
     },
