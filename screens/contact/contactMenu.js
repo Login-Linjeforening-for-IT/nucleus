@@ -1,6 +1,7 @@
 {/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
 import { StatusBar } from 'expo-status-bar'
 import { MS } from '../../styles/menuStyles'
+import React from 'react';
 import { GS } from '../../styles/globalStyles'
 import { T } from '../../styles/text'
 import { useState } from 'react';

@@ -5,6 +5,7 @@ import { MS } from '../styles/menuStyles';
 import { T } from '../styles/text';
 import { ES } from '../styles/eventStyles';
 import Card from '../shared/card';
+import React from 'react';
 import { 
   Text, 
   View, 

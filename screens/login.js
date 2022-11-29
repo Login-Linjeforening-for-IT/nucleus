@@ -13,7 +13,7 @@ import {
   TextInput,
   Alert
 } from 'react-native';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { CardSmaller } from '../shared/card';
 
 {/* ========================= APP START ========================= */}

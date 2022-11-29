@@ -3,7 +3,7 @@ import CategoryCircle from '../shared/categoryCircle';
 import CategorySquare from '../shared/categorySquare';
 import CleanDescription from '../shared/cleanDescription';
 import { getEndTime, Month, EventLocation } from '../shared/sharedComponents';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Card, { CardSmaller } from '../shared/card';
 import { StatusBar } from 'expo-status-bar';
 import EventTime from '../shared/eventTime';

@@ -6,6 +6,7 @@ import { Notification, Language } from '../shared/sharedComponents';
 import Theme from '../styles/themes/theme';
 import Card from '../shared/card';
 import { T } from '../styles/text';
+import React from 'react';
 import { 
   Text, 
   View, 

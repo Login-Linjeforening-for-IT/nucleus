@@ -1,4 +1,5 @@
 {/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
+import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { GS } from '../../styles/globalStyles';
 import { T } from '../../styles/text';

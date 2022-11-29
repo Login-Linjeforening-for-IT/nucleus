@@ -3,7 +3,7 @@ import { StatusBar } from 'expo-status-bar'
 import { MS } from '../../styles/menuStyles'
 import { SS } from '../../styles/settingStyles'
 import { GS } from '../../styles/globalStyles'
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Card from '../../shared/card';
 import { 
   Text, 

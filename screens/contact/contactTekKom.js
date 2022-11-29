@@ -3,6 +3,7 @@ import { GS } from '../../styles/globalStyles';
 import { MS } from '../../styles/menuStyles';
 import { T } from '../../styles/text';
 import { useState } from 'react';
+import React from 'react';
 import Card from '../../shared/card';
 import { 
   Text, 

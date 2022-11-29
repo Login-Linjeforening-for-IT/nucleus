@@ -5,7 +5,7 @@ import { T } from '../styles/text';
 import { MS } from '../styles/menuStyles';
 import Card from '../shared/card';
 import { Copyright } from '../shared/sharedComponents';
-
+import React from 'react';
 import { 
   Text, 
   View, 

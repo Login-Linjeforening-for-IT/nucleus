@@ -4,7 +4,8 @@ import { GS } from '../../styles/globalStyles';
 import { MS } from '../../styles/menuStyles';
 import { T } from '../../styles/text';
 import { SS } from '../../styles/settingStyles';
-import GreenLight, { Button, Check, GrayLight, RedLight } from '../../shared/sharedComponents';
+import React from 'react';
+import GreenLight, { Button, Check, GrayLight } from '../../shared/sharedComponents';
 import { 
   Text, 
   View, 

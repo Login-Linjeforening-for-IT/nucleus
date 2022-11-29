@@ -1,5 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { GS } from '../../styles/globalStyles';
+import React from 'react';
 import { MS } from '../../styles/menuStyles';
 import { T } from '../../styles/text';
 import { useState } from 'react';

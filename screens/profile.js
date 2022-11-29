@@ -2,7 +2,7 @@
 import { StatusBar } from 'expo-status-bar'
 import { MS } from '../styles/menuStyles'
 import { GS } from '../styles/globalStyles'
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Card from '../shared/card';
 import { 
   Text, 
@@ -24,19 +24,19 @@ export default function ProfileScreen({ navigation }) {
     ])
 
 {/* ========================= DISPLAY APP START ========================= */}
-const eventPage = () => {
-  navigation.navigate('EventScreen');
-}
-const homePage = () => {
-  navigation.navigate('HomeScreen');
-}
-const listingPage = () => {
-    navigation.navigate('ListingScreen')
-}
+
 const goBack = () => {
     navigation.goBack()
   }
-
+  const eventPage = () => {
+    navigation.navigate('EventScreen');
+  }
+  const listingPage = () => {
+  navigation.navigate('ListingScreen');
+  }
+  const homePage = () => {
+    navigation.navigate('HomeScreen');
+  }
 return(
   <View>
   <StatusBar style="light" />
@@ -80,17 +80,16 @@ return(
 
 {/* ========================= DISPLAY BOTTOM MENU ========================= */}
       <View style={MS.bMenu}>
-      <TouchableOpacity onPress={() => homePage()}>
-        <Image style={MS.bMenuIcon} source={require('../assets/house777.png')} />
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => eventPage()}>
-        <Image style={MS.bMenuIcon} source={require('../assets/calendar777.png')} />
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => listingPage()}>
-        <Image style={MS.bMenuIcon} source={require('../assets/business.png')} />
-      </TouchableOpacity>
+        <TouchableOpacity onPress={() => homePage()}>
+          <Image style={MS.bMenuIcon} source={require('../assets/house777.png')} />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => eventPage()}>
+          <Image style={MS.bMenuIcon} source={require('../assets/calendar777.png')} />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => listingPage()}>
+          <Image style={MS.bMenuIcon} source={require('../assets/business.png')} />
+        </TouchableOpacity>
       </View>     
     </View>
-    
   )
 };
