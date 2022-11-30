@@ -13,6 +13,7 @@ import {
   FlatList,
   TouchableOpacity,
 } from 'react-native';
+import { T } from '../styles/text';
 
 {/* ========================= APP START ========================= */}
 
@@ -38,6 +39,9 @@ const getData=()=>{
   .then(data=>setUsersData(data));
 }
 
+console.log(usersData.length)
+console.log(usersData)
+
 useEffect(() => {
 getData();
 },[])
@@ -62,6 +66,7 @@ return(
 
 {/* ========================= DISPLAY CONTENT ========================= */}
       <View style={GS.content}>
+        {usersData.length ? 
           <FlatList
           showsVerticalScrollIndicator={false}
           numColumns={1}
@@ -119,6 +124,14 @@ return(
             </View>
           )}
           />
+          
+          : 
+          <View><Text/><Text/><Text/><Text/><Text/><Text/><Text/><Text/><Text/><Text/><Text/><Text/><Text/><Text/><Text/><Text/><Text/><Text/><Text/>
+            <Text style={T.centeredOppositeColor}>God eksamensperiode!</Text><Text/>
+            <Text style={T.centeredOppositeColor}>Hilsen Login</Text>
+          </View>
+        }
+        
           
       </View>    
 

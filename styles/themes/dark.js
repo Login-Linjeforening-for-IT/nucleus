@@ -4,7 +4,7 @@ module.exports = {
     DARKER: '#111',                 //Contentcolor of the app
     ORANGE: '#fd8738',              //Logins color
     TEXTCOLOR: 'white',             //Textcolor of the app
-    OPPOSITETEXTCOLOR: 'white',     //Opposite of the background color
+    OPPOSITETEXTCOLOR: '#999',     //Opposite of the background color
     TITLETEXTCOLOR: '#777',         //ScreenTitleColor of the app
     SWITCHONSTATE: "#f1f1f1",       //Switch off state
     SWITCHOFFSTATE: "#fd8738",      //Switch on state
