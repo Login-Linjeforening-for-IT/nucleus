@@ -9,30 +9,14 @@ export default function EventTime(startTime) {
     var day = new Date().getDate()
     var hour = new Date().getHours()
     var minute = new Date().getMinutes()
-    var second = new Date().getSeconds()
+    //var second = new Date().getSeconds()
 
     if(startTime != null){
-        const eventYear1 = (startTime)[0]    //Fetching year cipher 1 from api
-        const eventYear2 = (startTime)[1]    //Fetching year cipher 2 from api
-        const eventYear3 = (startTime)[2]    //Fetching year cipher 3 from api
-        const eventYear4 = (startTime)[3]    //Fetching year cipher 4 from api
-        const eventYear = eventYear1 + eventYear2 + eventYear3 + eventYear4  //Concatenating year
-
-        const eventMonth1 = (startTime)[5]   //Fetching month cipher 1 from api
-        const eventMonth2 = (startTime)[6]   //Fetching month cipher 1 from api
-        const eventMonth = eventMonth1 + eventMonth2     //Concatenating month
-
-        const eventDay1 = (startTime)[8]     //Fetching day cipher 1 from api
-        const eventDay2 = (startTime)[9]     //Fetching day cipher 1 from api
-        const eventDay = eventDay1 + eventDay2   //Concatenating day
-
-        const eventHour1 = (startTime)[11]   //Fetching hour cipher 1 from api
-        const eventHour2 = (startTime)[12]   //Fetching hour cipher 2 from api
-        const eventHour = eventHour1 + eventHour2    //Concatenating hour
-
-        const eventMinute1 = (startTime)[14]     //Fetching minute cipher 1 from api
-        const eventMinute2 = (startTime)[15]     //Fetching minute cipher 2 from api
-        const eventMinute = eventMinute1 + eventMinute2  //Concatenating minute
+        const eventYear = (startTime)[0] + (startTime)[1] + (startTime)[2] + (startTime)[3]  //Concatenating year
+        const eventMonth = (startTime)[5] + (startTime)[6]     //Concatenating month
+        const eventDay = (startTime)[8] + (startTime)[9]   //Concatenating day
+        const eventHour = (startTime)[11] + (startTime)[12]    //Concatenating hour
+        const eventMinute = (startTime)[14] + (startTime)[15]  //Concatenating minute
 
         if(eventYear == year) { //Event is this year
             if (eventMonth == month+1) { //Event is this month
@@ -54,7 +38,7 @@ export default function EventTime(startTime) {
                     }else if(eventHour == hour+1){ //Event is the next hour
                         return(<View><Text style={T.centered25}>1t {59-eventMinute-minute} min</Text></View>)
                     }else{ //Event starts in x hours
-                        return(<View><Text style={T.centered25}>{eventHour-hour-1}t {59-eventMinute-minute} min</Text></View>)
+                        return(<View><Text style={T.centered25}>{eventHour-hour-1}t {60-eventMinute-minute+eventMinute*2} min</Text></View>)
                     }
                 }else if(eventDay == day-1){ //Event was yesterday
                     return(<View><Text style={T.centered25}>I går</Text></View>)
@@ -112,7 +96,7 @@ export default function EventTime(startTime) {
             return(<View><Text style={T.centered25}>{eventYear-year} år til</Text></View>)
         }
     }else{
-        return(<View><Text style={T.red}>Feil</Text></View>)
+        return(<View><Text style={T.red}>Feil ved henting av tid.</Text></View>)
     }
 }
 
@@ -122,23 +106,14 @@ export function leapYear(year){
 
 export function lastDayOfMonth(month) { //Checks for leap year
     var year = new Date().getFullYear()
-    if (leapYear(year) == true) { //If leap year
-        switch (month) {
-            case 2:     return 29;
-            case 4:     return 30;
-            case 6:     return 30;
-            case 9:     return 30;
-            case 11:    return 30;
-            default:    return 31;
-        }
-    }else{ //If not a leap year
-        switch (month) {
-            case 2:     return 28;
-            case 4:     return 30;
-            case 6:     return 30;
-            case 9:     return 30;
-            case 11:    return 30;
-            default:    return 31;
-        }
+    switch (month) {
+        case 2:     
+            if(leapYear(year) == true){return 29}
+            else{return 28}
+        case 4:     return 30;
+        case 6:     return 30;
+        case 9:     return 30;
+        case 11:    return 30;
+        default:    return 31;
     }
 }

@@ -111,6 +111,7 @@ cardContent: {
   marginVertical: 18
 },
 cardSmaller: {
+  marginHorizontal: 10,
   borderRadius: 20,
   backgroundColor: GLOBAL.DARK.DARKER,
 },
