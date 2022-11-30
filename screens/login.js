@@ -53,8 +53,7 @@ const [data, setData] = useState({
 const [database] = useState({
   name: 'admin',
   pass: 'admin'
-}
-)
+})
 
 const inputName = (val) => {
   if(val.length > 0) {

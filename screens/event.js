@@ -1,6 +1,7 @@
 import GreenLight, { GrayLight, Check, Month } from '../shared/eventComponents/otherComponents';
 import CategorySquare from '../shared/eventComponents/categorySquare';
 import React, { useEffect, useState } from 'react';
+import EventFilter from '../shared/eventComponents/filter';
 import { StatusBar } from 'expo-status-bar';
 import { GS } from '../styles/globalStyles';
 import { ES } from '../styles/eventStyles';
@@ -66,6 +67,7 @@ return(
 
 {/* ========================= DISPLAY CONTENT ========================= */}
       <View style={GS.content}>
+        {usersData.length ? <EventFilter/>:null}
         {usersData.length ? 
           <FlatList
           showsVerticalScrollIndicator={false}

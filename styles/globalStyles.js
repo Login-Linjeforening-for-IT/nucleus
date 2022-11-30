@@ -29,7 +29,7 @@ export const GS = StyleSheet.create({
     alignItems: 'center',
     width: '80%',
     height: 50,
-    borderRadius: 40,
+    borderRadius: 20,
     color: 'white',
   },
   view: { //Left view of notificationScreen

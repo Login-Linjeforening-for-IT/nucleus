@@ -128,4 +128,15 @@ specificEventLight: {
   height: 20,
   width: 20
 },
+filterText: {  //eventScreen filter text
+  backgroundColor: GLOBAL.DARK.DARKER,
+  alignSelf: 'center',
+  alignItems: 'center',
+  marginTop: 10,
+  width: '95%',
+  marginHorizontal: 10,
+  height: 50,
+  borderRadius: 15,
+  color: 'white',
+},
 })
