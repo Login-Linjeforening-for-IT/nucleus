@@ -32,7 +32,7 @@ export const ES = StyleSheet.create({
   monthText: { //Eventmonth text on specificEventScreen
     alignSelf: 'flex-start',
     top: '-7.5%',
-    left: '10%',
+    left: '15%',
     color: GLOBAL.DARK.TEXTCOLOR,
     fontSize: 20,
   },
@@ -44,7 +44,7 @@ export const ES = StyleSheet.create({
   eventCardMonthText: { //Eventmonth text on eventScreen
     alignSelf: 'flex-start',
     top: '-7.5%',
-    left: '10%',
+    left: '15%',
     color: GLOBAL.DARK.TEXTCOLOR,
     fontSize: 20,
   },

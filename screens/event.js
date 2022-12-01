@@ -32,22 +32,22 @@ const profilePage = () => {
   navigation.navigate('ProfileScreen');
 }
 
-const [usersData,setUsersData]=useState([])
+const [events, setEvents] = useState([]) 
+const [filter, updateFilter] = useState([])
 
 const getData=()=>{
   fetch('https://api.login.no/events')
   .then(response=>response.json())
-  .then(data=>setUsersData(data));
+  .then(data=>setEvents(data));
 }
 
-console.log(usersData.length)
-console.log(usersData)
+console.log(filter.length)
+console.log(filter)
 
 useEffect(() => {
-getData();
+  getData();
 },[])
 
-const [events, updateEvents] = useState([]) 
 
 return(
     <View>
@@ -67,13 +67,13 @@ return(
 
 {/* ========================= DISPLAY CONTENT ========================= */}
       <View style={GS.content}>
-        {usersData.length ? <EventFilter/>:null}
-        {usersData.length ? 
+        {events.length ? <EventFilter/>:null}
+        {events.length ? 
           <FlatList
           showsVerticalScrollIndicator={false}
           numColumns={1}
           keyExtractor={(item) => item.eventID}
-          data={usersData}
+          data={events}
           renderItem={({item}) => (
             <View>
               {events.includes(item) ? (
@@ -128,9 +128,9 @@ return(
           />
           
           : 
-          <View><Text/><Text/><Text/><Text/><Text/><Text/><Text/><Text/><Text/><Text/><Text/><Text/><Text/><Text/><Text/><Text/><Text/><Text/><Text/>
-            <Text style={T.centeredOppositeColor}>God eksamensperiode!</Text><Text/>
-            <Text style={T.centeredOppositeColor}>Hilsen Login</Text>
+          <View><Text/><Text/><Text/><Text/><Text/><Text/><Text/><Text/><Text/>
+          <Text/><Text/><Text/><Text/><Text/><Text/><Text/><Text/><Text/><Text/>
+            <Text style={T.centeredOppositeColor}>Ingen events</Text><Text/>
           </View>
         }
         

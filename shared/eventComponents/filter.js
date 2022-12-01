@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput } from 'react-native';
-import { T } from '../../styles/text';
+import { View, TextInput } from 'react-native';
 import { ES } from '../../styles/eventStyles'
 
-export default function EventFilter() {
+export default function Filter(data, title) {
 
     const [filter, setFilter] = useState({
         input: '',

@@ -51,6 +51,9 @@ export default function SpecificEventScreen( { navigation }) {
     navigation.goBack()
   }
 
+  //Logs correctly
+  console.log('https://cdn.login.no/img/events/' + usersData.image)
+
   return(
     <View>
       <StatusBar style="light" />
@@ -71,7 +74,8 @@ export default function SpecificEventScreen( { navigation }) {
             <Text/>
 
             <View style={ES.specificEventView1}>
-              <Image style={ES.specificEventImage} source={require('../assets/tekkom.png')} />
+              {/* Doesnt work */}
+              <Image style={ES.specificEventImage} source={{uri: 'https://cdn.login.no/img/events/' + usersData.image}} />
             </View>
 
             <Text/>

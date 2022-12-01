@@ -9,20 +9,20 @@ export default function EventTime(startTime) {
     var day = new Date().getDate()
     var hour = new Date().getHours()
     var minute = new Date().getMinutes()
-    //var second = new Date().getSeconds()
+    //var second = new Date().getSeconds() MAKE COUNTDOWN FUNCTION BASED ON HOURS AND MINUTES
 
     if(startTime != null){
         const eventYear = (startTime)[0] + (startTime)[1] + (startTime)[2] + (startTime)[3]  //Concatenating year
-        const eventMonth = (startTime)[5] + (startTime)[6]     //Concatenating month
-        const eventDay = (startTime)[8] + (startTime)[9]   //Concatenating day
-        const eventHour = (startTime)[11] + (startTime)[12]    //Concatenating hour
-        const eventMinute = (startTime)[14] + (startTime)[15]  //Concatenating minute
+        const eventMonth = (startTime)[5] + (startTime)[6]      //Concatenating month
+        const eventDay = (startTime)[8] + (startTime)[9]        //Concatenating day
+        const eventHour = (startTime)[11] + (startTime)[12]     //Concatenating hour
+        const eventMinute = (startTime)[14] + (startTime)[15]   //Concatenating minute
 
-        if(eventYear == year) { //Event is this year
-            if (eventMonth == month+1) { //Event is this month
-                if (eventDay == day) { //Event is today
-                    if (eventHour == hour) { //Eventet is this hour
-                        if (eventMinute == minute) { //Event is now
+        if(eventYear == year) {                                 //Event is this year
+            if (eventMonth == month+1) {                        //Event is this month
+                if (eventDay == day) {                          //Event is today
+                    if (eventHour == hour) {                    //Eventet is this hour
+                        if (eventMinute == minute) {            //Event is now
                             return(<View><Text style={T.centered25}>Nå</Text></View>)
                         }else if(eventMinute < minute){ //Event started x minutes ago
                             return(<View><Text style={T.centered25}>Pågått i {minute-eventMinute} min</Text></View>)
@@ -79,28 +79,28 @@ export default function EventTime(startTime) {
         }else if(eventYear < year){ //Event was x years ago
             return(<View><Text style={T.centered25}>{year-eventYear} år siden</Text></View>)
         }else if(eventYear == year+1){ //Event is next year
-            if (eventMonth == 1) { //Event is in january of next year
-                if (eventDay == 1 && eventMonth == 1 && day == lastDayOfMonth(month+1)) { //Event is 1st of january and current date is last of December the previous year
-                    return(<View><Text style={T.centered25}>I morgen</Text></View>)
-                }else if(month != 11){ //You are not on the last month of the year
-                    return(<View><Text style={T.centered25}>Neste år</Text></View>)
-                }else if(eventDay != lastDayOfMonth(12)){ //You are not on the last day of the year
-                    return(<View><Text style={T.centered25}>Neste år</Text></View>)
-                }else{ //Event is in january, but not 1st of january
-                    return(<View><Text style={T.centered25}>{lastDayOfMonth(month-1)-eventDay} dager til</Text></View>)
+            if(12+eventMonth*2-eventMonth-month+1 <= 12){ //Event is in less than 12 months
+                if(12+eventMonth*2-eventMonth-month+1 == 1){    //Event is in January
+                    if (31+eventDay*2-eventDay-day <= 31) { //Less than one month till event
+                        return(<View><Text style={T.centered25}>{31+eventDay*2-eventDay-day} dager</Text></View>)
+                    } else {    //More than one month till event
+                        return(<View><Text style={T.centered25}>Om 1 måned</Text></View>)
+                    }
+                }else{   //Event is not in January
+                    return(<View><Text style={T.centered25}>Om {12-month+1} måneder</Text></View>)
                 }
-            }else{ //Event is not in january
+            }else{  //Event is in more than 12 months
                 return(<View><Text style={T.centered25}>Neste år</Text></View>)
             }
         }else{  //Event is in x years
             return(<View><Text style={T.centered25}>{eventYear-year} år til</Text></View>)
         }
-    }else{
+    }else{  //Error occured
         return(<View><Text style={T.red}>Feil ved henting av tid.</Text></View>)
     }
 }
 
-export function leapYear(year){
+export function leapYear(year){ //Bool for leapyear
     return (year % 100 === 0) ? (year % 400 === 0) : (year % 4 === 0);
 }
 
@@ -108,7 +108,7 @@ export function lastDayOfMonth(month) { //Checks for leap year
     var year = new Date().getFullYear()
     switch (month) {
         case 2:     
-            if(leapYear(year) == true){return 29}
+            if(leapYear(year)){return 29} //29 days in february if true
             else{return 28}
         case 4:     return 30;
         case 6:     return 30;
