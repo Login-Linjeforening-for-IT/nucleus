@@ -91,7 +91,7 @@ return(
                           <View style = {ES.loc}><Text style={ES.loc}>{item.startt[11]}{item.startt[12]}:{item.startt[14]}{item.startt[15]} {item.roomno}. {item.campus}</Text></View>
                         </View>
                         <View style={ES.view3}>
-                            <TouchableOpacity onPress={() => updateEvents(events.filter((x) => x.eventID !== item.eventID))}>
+                            <TouchableOpacity onPress={() => setEvents(events.filter((x) => x.eventID !== item.eventID))}>
                               <View style = {ES.greenLight}><GreenLight/></View>
                               <View style = {ES.checkContent}><Check/></View>
                             </TouchableOpacity>
@@ -113,7 +113,7 @@ return(
                       <View style = {ES.loc}><Text style={ES.loc}>{item.startt[11]}{item.startt[12]}:{item.startt[14]}{item.startt[15]} {item.roomno}. {item.campus}</Text></View>
                     </View>
                     <View style={ES.view3}>
-                        <TouchableOpacity onPress={() => updateEvents([...events, item])}>
+                        <TouchableOpacity onPress={() => setEvents([...events, item])}>
                           <View style = {ES.greenLight}><GrayLight/></View>
                           <View style = {ES.checkContent}><Check/></View>
                         </TouchableOpacity>
