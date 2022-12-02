@@ -28,6 +28,7 @@ export default function SpecificEventScreen( { navigation }) {
 
   const getData=()=>{
     fetch('https://api.login.no/events/'+(navigation.getParam('eventID')))
+    // fetch('https://tekkom:rottejakt45@api.login.no:8443') //TESTING
     .then(response => response.json())
     .then(data=>setUsersData(data))
   }
@@ -52,7 +53,7 @@ export default function SpecificEventScreen( { navigation }) {
   }
 
   //Logs correctly
-  console.log('https://cdn.login.no/img/events/' + usersData.image)
+  // console.log('https://cdn.login.no/img/events/' + usersData.image)
 
   return(
     <View>
@@ -94,7 +95,7 @@ export default function SpecificEventScreen( { navigation }) {
                     </Text>
                   </Card>
                   <Card>
-                    <Text>{EventTime(navigation.getParam('startt'))}</Text>
+                    <Text>{EventTime(navigation.getParam('startt'), usersData.endt)}</Text>
                   </Card>
               </View>
             </CardSmaller>

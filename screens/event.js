@@ -36,11 +36,13 @@ const [events, setEvents] = useState([])
 const [filter, updateFilter] = useState([])
 
 const getData=()=>{
-  fetch('https://api.login.no/events')
+  fetch('https://api.login.no/events') //PRODUCTION
+  // fetch('https://tekkom:rottejakt45@api.login.no:8443') //TESTING
   .then(response=>response.json())
-  .then(data=>setEvents(data));
+  .then(data=>setEvents(data))
 }
 
+console.log(events)
 console.log(filter.length)
 console.log(filter)
 
