@@ -32,7 +32,7 @@ export const ES = StyleSheet.create({
   monthText: { //Eventmonth text on specificEventScreen
     alignSelf: 'flex-start',
     top: '-7.5%',
-    left: '15%',
+    left: '10%',
     color: GLOBAL.DARK.TEXTCOLOR,
     fontSize: 20,
   },
