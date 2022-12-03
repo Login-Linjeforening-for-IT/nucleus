@@ -32,7 +32,19 @@ const profilePage = () => {
   navigation.navigate('ProfileScreen');
 }
 
+const toggleSearchBar = () => {
+  toggleSearch({
+    ...search,
+    status: !search.status
+  });
+}
+
+const [search, toggleSearch] = useState({
+  status: 0
+}) 
+
 const [events, setEvents] = useState([]) 
+const [clickedEvents, setClickedEvents] = useState([])
 const [filter, updateFilter] = useState([])
 
 const getData=()=>{
@@ -60,16 +72,20 @@ return(
       <Image style={MS.tMenuIcon} source={require('../assets/login-text.png')} />
     </TouchableOpacity>
 
-    <Text style={MS.screenTitle}>Events</Text>
+    <Text style={MS.screenTitle}>    Events</Text>
+    
+      <TouchableOpacity onPress={() => toggleSearchBar()}>
+        <Image style={MS.searchIcon} source={require('../assets/filter.png')} />
+      </TouchableOpacity>
 
       <TouchableOpacity onPress={() => profilePage()}>
-        <Image style={MS.tMenuIcon} source={require('../assets/loginperson.png')} />
+        <Image style={MS.tMenuIconWithExtra} source={require('../assets/loginperson.png')} />
       </TouchableOpacity>
   </View>
 
 {/* ========================= DISPLAY CONTENT ========================= */}
       <View style={GS.content}>
-        {events.length ? <EventFilter/>:null}
+        {search.status ? <EventFilter/>:null}
         {events.length ? 
           <FlatList
           showsVerticalScrollIndicator={false}
@@ -78,14 +94,14 @@ return(
           data={events}
           renderItem={({item}) => (
             <View>
-              {events.includes(item) ? (
+              {clickedEvents.includes(item) ? (
                 <TouchableOpacity onPress={() => navigation.navigate('SpecificEventScreen', item)}>
                   <Card style={ES.eventCard}>
                     <View style={ES.eventBack}>
                       <View>
                           {CategorySquare(item.category)}
                           <Text style={ES.eventCardDayText}>{item.startt[8]}{item.startt[9]}</Text>
-                          <Text style={ES.eventCardMonthText}>{Month(item.startt[5] + item.startt[6])}</Text>
+                          {Month(item.startt[5] + item.startt[6])}
                       </View>
                         <View style={ES.view2}>
                         
@@ -93,7 +109,7 @@ return(
                           <View style = {ES.loc}><Text style={ES.loc}>{item.startt[11]}{item.startt[12]}:{item.startt[14]}{item.startt[15]} {item.roomno}. {item.campus}</Text></View>
                         </View>
                         <View style={ES.view3}>
-                            <TouchableOpacity onPress={() => setEvents(events.filter((x) => x.eventID !== item.eventID))}>
+                            <TouchableOpacity onPress={() => setClickedEvents(clickedEvents.filter((x) => x.eventID !== item.eventID))}>
                               <View style = {ES.greenLight}><GreenLight/></View>
                               <View style = {ES.checkContent}><Check/></View>
                             </TouchableOpacity>
@@ -108,14 +124,14 @@ return(
                     <View>
                       {CategorySquare(item.category)}
                       <Text style={ES.eventCardDayText}>{item.startt[8]}{item.startt[9]}</Text>
-                      <Text style={ES.eventCardMonthText}>{Month(item.startt[5] + item.startt[6])}</Text>
+                      {Month(item.startt[5] + item.startt[6])}
                     </View>
                     <View style={ES.view2}>
                       <View style = {ES.title}><Text style={ES.title}>{item.eventname}</Text></View>
                       <View style = {ES.loc}><Text style={ES.loc}>{item.startt[11]}{item.startt[12]}:{item.startt[14]}{item.startt[15]} {item.roomno}. {item.campus}</Text></View>
                     </View>
                     <View style={ES.view3}>
-                        <TouchableOpacity onPress={() => setEvents([...events, item])}>
+                        <TouchableOpacity onPress={() => setClickedEvents([...clickedEvents, item])}>
                           <View style = {ES.greenLight}><GrayLight/></View>
                           <View style = {ES.checkContent}><Check/></View>
                         </TouchableOpacity>

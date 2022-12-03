@@ -19,11 +19,22 @@ export const MS = StyleSheet.create ({
     width: 120,
     height: 120
   },
+  tMenuIconWithExtra: {  //Placement when extra icons are added
+    top: '5%',
+    left: '-26%',
+    width: 120,
+    height: 120
+  },
   goBack: {   //Size of goBack icon 
     top: '25%',
     left: '-10%',
     width: 80,
-    height: 80
+    height: 80,
+  },
+  searchIcon: {  //Size of icons
+    top: '40%',
+    width: 50,
+    height: 50
   },
   
 //  ========================= STYLESHEET BOTTOM MENU =========================

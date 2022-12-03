@@ -28,7 +28,7 @@ export default function Filter(data, title) {
     <View>
         <TextInput
             style={ES.filterText}
-            placeholder='category'
+            placeholder='Search'
             placeholderTextColor={'#555'}
             textAlign='center'
             onChangeText={(val) => filterInput(val)}

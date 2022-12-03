@@ -123,7 +123,7 @@ export function Month(month) {
     const monthsNO = ['jan', 'feb', 'mar', 'apr', 'mai', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'des']
     const monthsEN = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Des']
 
-    return(<View><Text style={ES.monthText}>{monthsNO[month-1]}</Text></View>)
+    return(<Text style={ES.monthText}>{monthsNO[month-1]}</Text>)
 }
 
 export function RedLight() {    //Red colored light svg

@@ -17,7 +17,8 @@ export const ES = StyleSheet.create({
     width: '70%',
   },
   view3: { //Right side card view
-    width: '25%',
+    position: 'absolute',
+    right: 0,
     height: '100%',
   },
   eventBack: { //Card height and direction on eventscreen
@@ -25,14 +26,14 @@ export const ES = StyleSheet.create({
     height: 55,
   },
   dayText: { //Eventday text on specificEventScreen
-    left: '15%',
+    left: '20%',
     color: GLOBAL.DARK.TEXTCOLOR,
     fontSize: 30,
   },
   monthText: { //Eventmonth text on specificEventScreen
     alignSelf: 'flex-start',
     top: '-7.5%',
-    left: '10%',
+    left: '20%',
     color: GLOBAL.DARK.TEXTCOLOR,
     fontSize: 20,
   },
