@@ -1,4 +1,5 @@
 import React, {useState } from 'react';
+import Svg, {Rect} from 'react-native-svg';
 import { SS } from '../styles/settingStyles';
 import { ES } from '../styles/eventStyles';
 const GLOBAL = require('../styles/themes/dark')
@@ -164,6 +165,26 @@ export function NotifyButton(props) {   //Button, red
             <View style={SS.buttonContent}>
                 { props.children }
             </View>
+        </View>
+    );
+}
+
+export function CheckBox() {
+    return(
+        <View style={ES.checkBox}>
+            <Svg width={24} height={24} stroke={GLOBAL.DARK.ORANGE} strokeWidth={1}>
+                <Rect x='1' y='1' width={22} height={22} ry={7.5}/>
+            </Svg>
+        </View>
+    );
+}
+
+export function CheckedBox() {
+    return(
+        <View style={ES.checkBox}>
+            <Svg width="24" height="24" fill={GLOBAL.DARK.ORANGE} stroke={GLOBAL.DARK.ORANGE} strokeWidth={1}>
+            <Rect x='1' y='1' width={22} height={22} ry={7.5}/>
+            </Svg>
         </View>
     );
 }

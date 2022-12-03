@@ -17,9 +17,8 @@ export default function GreenLight() {  //Green colored light svg
 };
 
 export function GrayLight() {   //Background colored light svg
-    const actualThemetheme = AsyncStorage.getItem('event')
-    let actualTheme;
-    switch (actualThemetheme) {
+    let actualTheme = AsyncStorage.getItem('event')
+    switch (actualTheme) {
         case 1:     actualTheme = 1; break;
         case 2:     actualTheme = 2; break;
         case 3:     actualTheme = 3; break;

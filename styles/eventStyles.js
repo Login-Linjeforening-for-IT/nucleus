@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";  //Stylesheet file
+import { T } from "./text";
 const GLOBAL = require('./themes/dark')
 export const ES = StyleSheet.create({
 
@@ -135,9 +136,28 @@ filterText: {  //eventScreen filter text
   alignItems: 'center',
   marginTop: 10,
   width: '95%',
+  paddingTop: 5,
   marginHorizontal: 10,
-  height: 50,
-  borderRadius: 15,
+  height: 30,
+  borderTopRightRadius: 15,
+  borderTopLeftRadius: 15,
   color: 'white',
 },
+filterView: {
+  flexDirection: 'row',
+  backgroundColor: GLOBAL.DARK.DARKER,
+  marginHorizontal: 10,
+  borderBottomLeftRadius: 15,
+  borderBottomRightRadius: 15,
+},
+checkBox: { //Position of specific event color circle
+  top: '-50%',
+  right: 20,
+},
+categoryView: {
+  flexDirection: 'row',
+  left: 30,
+  top: 10,
+  width: 130,
+}
 })

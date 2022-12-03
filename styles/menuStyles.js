@@ -20,9 +20,9 @@ export const MS = StyleSheet.create ({
     height: 120
   },
   tMenuIconWithExtra: {  //Placement when extra icons are added
+    right: '70%',
     top: '5%',
-    left: '-26%',
-    width: 120,
+    width: 50,
     height: 120
   },
   goBack: {   //Size of goBack icon 
@@ -32,8 +32,9 @@ export const MS = StyleSheet.create ({
     height: 80,
   },
   searchIcon: {  //Size of icons
+    right: 18,
     top: '40%',
-    width: 50,
+    width: 36,
     height: 50
   },
   

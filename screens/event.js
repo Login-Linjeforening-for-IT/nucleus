@@ -54,9 +54,9 @@ const getData=()=>{
   .then(data=>setEvents(data))
 }
 
-console.log(events)
-console.log(filter.length)
-console.log(filter)
+// console.log(events)
+// console.log(filter.length)
+// console.log(filter)
 
 useEffect(() => {
   getData();
@@ -72,10 +72,14 @@ return(
       <Image style={MS.tMenuIcon} source={require('../assets/login-text.png')} />
     </TouchableOpacity>
 
-    <Text style={MS.screenTitle}>    Events</Text>
+    <Text style={MS.screenTitle}> Events</Text>
     
       <TouchableOpacity onPress={() => toggleSearchBar()}>
-        <Image style={MS.searchIcon} source={require('../assets/filter.png')} />
+        {search.status ? 
+          <Image style={MS.searchIcon} source={require('../assets/filter-orange.png')} />
+        :
+          <Image style={MS.searchIcon} source={require('../assets/filter.png')} />
+      }
       </TouchableOpacity>
 
       <TouchableOpacity onPress={() => profilePage()}>

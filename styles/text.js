@@ -71,9 +71,11 @@ export const T = StyleSheet.create({
     fontSize: 15,
     margin: 15
   }, 
-  r: {
-    top: 60,
-    right: 100,
+  filterCategoryText: {
+    left: 10,
+    color: GLOBAL.DARK.TITLETEXTCOLOR,
+  },
+  actualCategoryText: {
     color: GLOBAL.DARK.TEXTCOLOR,
   }
 })

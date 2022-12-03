@@ -18,8 +18,8 @@ import {
 export default function ListingScreen({ navigation }) {
     const [setting] = useState([
       {id: '1', nav: 'EventScreen', title: 'Hagearbeid hos Login', content: 'A still more glorious dawn awaits cosmic fugue gathered by gravity tesseract muse about two ghostly white figures in coveralls and helmets are softly dancing. Rich in heavy atoms permanence of the stars descended from astronomers invent...'},
-      {id: '2', nav: 'EventScreen', title: 'Lage nettside for zebracompany.com', content: 'The sky calls to us rogue Orions sword decipherment venture the only home weve ever known. Cambrian explosion white dwarf something incredible is waiting to be known astonishment great turbulent clouds the only home weve ever known. '},
-      {id: '3', nav: 'EventScreen', title: 'Datasikkerhet hos dogs.zoo', content: 'Euclid vanquish the impossible muse about intelligent beings paroxysm of global death something incredible is waiting to be known. The carbon in our apple pies two ghostly white figures in coveralls and helmets are softly dancing realm of the spine... '},
+      {id: '2', nav: 'EventScreen', title: 'Lage nettside for Zebra Company', content: 'The sky calls to us rogue Orions sword decipherment venture the only home weve ever known. Cambrian explosion white dwarf something incredible is waiting to be known astonishment great turbulent clouds the only home weve ever known. '},
+      {id: '3', nav: 'EventScreen', title: 'Datasikkerhet hos Dogs Inc.', content: 'Euclid vanquish the impossible muse about intelligent beings paroxysm of global death something incredible is waiting to be known. The carbon in our apple pies two ghostly white figures in coveralls and helmets are softly dancing realm of the spine... '},
   ])
 {/* ========================= DISPLAY APP START ========================= */}
 const eventPage = () => {
