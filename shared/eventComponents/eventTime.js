@@ -10,6 +10,7 @@ export default function EventTime(startTime, endTime) {
     var hour     = new Date().getHours()
     var minute   = new Date().getMinutes()
     var second   = new Date().getSeconds() 
+
     if(startTime != null && endTime != null){                                                   //Concatenating start:
         const startYear   = (startTime)[0] + (startTime)[1] + (startTime)[2] + (startTime)[3]   //  year
         const startMonth  = (startTime)[5] + (startTime)[6]                                     //  month
@@ -29,7 +30,7 @@ export default function EventTime(startTime, endTime) {
                     if (endDay == day) {
                         if (endHour == hour) {
                             if (endMinute == minute) {
-                                return(<View><Text style={T.centered25}>Slutter nå</Text></View>)
+                                return(<View><Text style={T.centered25}>Slutt</Text></View>)
                             } else {
                                 return(<View><Text style={T.centered25}>{endMinute-minute} min gjenstår</Text></View>)
                             }
@@ -38,7 +39,7 @@ export default function EventTime(startTime, endTime) {
                         }
                     } else {
                         if (endDay-day == 1) {
-                            return(<View><Text style={T.centered25}>Ferdig i morgen.</Text></View>)
+                            return(<View><Text style={T.centered25}>Ferdig i morgen</Text></View>)
                         } else {
                             return(<View><Text style={T.centered25}>{endDay-day} dager gjenstår</Text></View>)
                         }                    
@@ -69,18 +70,18 @@ export default function EventTime(startTime, endTime) {
                         }else if(startMinute < minute){ //Event started x minutes ago
                             return(<View><Text style={T.centered25}>Pågått i {minute-startMinute} min</Text></View>)
                         }else{  //Event starts in x minutes
-                            return(<View><Text style={T.centered25}>Starter om {startMinute-minute} min</Text></View>)
+                            return(<View><Text style={T.centered25}>{startMinute-minute} min til</Text></View>)
                         }
                     }else if(startHour == hour-1){ //Event started less than 1 hour ago
-                        return(<View><Text style={T.centered25}>Startet for {59-startMinute-minute} min siden</Text></View>)
+                        return(<View><Text style={T.centered25}>Pågått i {59-startMinute-minute} min</Text></View>)
                     }else if(startHour == hour-2){ //Event started between 1 and 2 hours ago
                         return(<View><Text style={T.centered25}>{hour-startHour-1} time siden</Text></View>)
                     }else if(startHour < hour){ //Event was x hours ago
                         return(<View><Text style={T.centered25}>{hour-startHour-1} timer siden</Text></View>)
                     }else if(startHour == hour+1){ //Event is the next hour
-                        return(<View><Text style={T.centered25}>1t {59-startMinute-minute} min</Text></View>)
+                        return(<View><Text style={T.centered25}>1t {59-startMinute-minute} min til</Text></View>)
                     }else{ //Event starts in x hours
-                        return(<View><Text style={T.centered25}>{startHour-hour-1}t {60-startMinute-minute+startMinute*2} min</Text></View>)
+                        return(<View><Text style={T.centered25}>{startHour-hour-1}t {60-startMinute-minute+startMinute*2} min til</Text></View>)
                     }
                 }else if(startDay == day-1){ //Event was yesterday
                     return(<View><Text style={T.centered25}>I går</Text></View>)
@@ -124,18 +125,18 @@ export default function EventTime(startTime, endTime) {
             if(12+startMonth*2-startMonth-month <= 12){ //Event is in less than 12 months
                 if(12+startMonth*2-startMonth-month == 1){    //Event is in January
                     if (31+startDay*2-startDay-day <= 31) { //Less than one month till event
-                        return(<View><Text style={T.centered25}>{31+startDay*2-startDay-day} dager</Text></View>)
+                        return(<View><Text style={T.centered25}>{31+startDay*2-startDay-day} dager til</Text></View>)
                     } else {    //More than one month till event
-                        return(<View><Text style={T.centered25}>Om 1 måned</Text></View>)
+                        return(<View><Text style={T.centered25}>1 måned</Text></View>)
                     }
                 }else{   //Event is not in January
-                    return(<View><Text style={T.centered25}>Om {12+startMonth*2-startMonth-month} måneder</Text></View>)
+                    return(<View><Text style={T.centered25}>{12+startMonth*2-startMonth-month} måneder til</Text></View>)
                 }
             }else{  //Event is in more than 12 months
                 return(<View><Text style={T.centered25}>Neste år</Text></View>)
             }
         }else{  //Event is in x years
-            return(<View><Text style={T.centered25}>{startYear-year} år til</Text></View>)
+            return(<View><Text style={T.centered25}>{startYear-year} år</Text></View>)
         }
     }else{  //Error occured
         return(<View><Text style={T.red}>Feil ved henting av tid.</Text></View>)
@@ -162,7 +163,7 @@ export function lastDayOfMonth(month) { //Checks for leap year
     }
 }
 
-export function beyondTime(endTime) {
+export function beyondTime(eventTime) {
     var year     = new Date().getFullYear()
     var month    = 1 + new Date().getMonth()
     var day      = new Date().getDate()
@@ -170,18 +171,22 @@ export function beyondTime(endTime) {
     var minute   = new Date().getMinutes()
     var second   = new Date().getSeconds() 
 
-    const endYear     = (endTime)[0]  + (endTime)[1] + (endTime)[2] + (endTime)[3]          //  year
-    const endMonth    = (endTime)[5]  + (endTime)[6]                                        //  month
-    const endDay      = (endTime)[8]  + (endTime)[9]                                        //  day
-    const endHour     = (endTime)[11] + (endTime)[12]                                       //  hour
-    const endMinute   = (endTime)[14] + (endTime)[15]                                       //  minute
-        
-    if (endYear >= year) {
-        if (endMonth >= month) {
-            if (endDay >= day) {
-                if (endHour >= hour) {
-                    if (endMinute > minute) { return false
-                    } else {return true}
+    const eventYear     = (eventTime)[0]  + (eventTime)[1] + (eventTime)[2] + (eventTime)[3]      //  year
+    const eventMonth    = (eventTime)[5]  + (eventTime)[6]                                        //  month
+    const eventDay      = (eventTime)[8]  + (eventTime)[9]                                        //  day
+    const eventHour     = (eventTime)[11] + (eventTime)[12]                                       //  hour
+    const eventMinute   = (eventTime)[14] + (eventTime)[15]                                       //  minute
+    
+    if (eventYear >= year) {
+        if(eventYear > year) return false
+        if (eventMonth >= month) {
+            if(eventMonth > month) return false
+            if (eventDay >= day) {
+                if(eventDay > day) return false
+                if (eventHour >= hour) {
+                    if(eventHour > hour) return false
+                    if (eventMinute >= minute) { return false} 
+                    else {return true}
                 } else {return true}
             } else {return true}
         } else {return true}
