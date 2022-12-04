@@ -4,7 +4,7 @@ import { GS } from '../styles/globalStyles';
 import { MS } from '../styles/menuStyles';
 import { T } from '../styles/text';
 import { ES } from '../styles/eventStyles';
-import Card from '../shared/sharedComponents';
+import Card, { Space } from '../shared/sharedComponents';
 import React from 'react';
 import { 
   Text, 
@@ -60,7 +60,7 @@ export default function SpecificListingScreen( { navigation }) {
               <Image style={ES.specificEventImage} source={require('../assets/mnemonic.png')} />
             </View>
 
-            <Text/>
+            {Space(5)}
 
             <Card>
               <View>
@@ -73,7 +73,7 @@ export default function SpecificListingScreen( { navigation }) {
                 <Text style={T.centered20}>{navigation.getParam('eventname')}</Text>
               </View>
 
-              <Text/>
+              {Space(5)}
 
               <Card>
                 <Text style={T.centered20}>Stillingsbeskrivelse: </Text>
@@ -84,7 +84,7 @@ export default function SpecificListingScreen( { navigation }) {
             </View>
           </View>
 
-          <Text/><Text/><Text/><Text/>
+          {Space(20)}
           
         </ScrollView>
       </View>    

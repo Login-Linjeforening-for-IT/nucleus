@@ -4,7 +4,7 @@ import { GS } from '../styles/globalStyles';
 import { MS } from '../styles/menuStyles';
 import { T } from '../styles/text';
 import { SS } from '../styles/settingStyles';
-import GreenLight, { Check, GrayLight, RedLight, } from '../shared/eventComponents/otherComponents';
+import GreenLight, { Check, GrayLight, RedLight, Space } from '../shared/eventComponents/otherComponents';
 import { Button, CardSmaller } from '../shared/sharedComponents';
 import { 
   Text, 
@@ -110,9 +110,9 @@ const showPass = () => {
 <View style={GS.content}>
         
         <View>
-      
+          {Space(80)}
             <Text style={T.centered50}>Innsida</Text>
-            <Text/><Text/>
+            {Space(20)}
 
             <View style={SS.loginView}>
               <CardSmaller>
@@ -135,12 +135,11 @@ const showPass = () => {
                   <View style = {SS.checkContent}><Check/></View>
                   </View>
                   }
-                  <Text/>
                 </View>
               </CardSmaller>
             </View>
 
-            <Text/><Text/>
+            {Space(10)}
 
             <View style={SS.loginView}>
               <CardSmaller>
@@ -186,7 +185,7 @@ const showPass = () => {
             </View>
 
             <View>
-              <Text/><Text/><Text/>
+              {Space(20)}
               <TouchableOpacity 
               disabled ={!data.name || !data.pass}
               onPress={() => internalPage()}>
@@ -194,12 +193,12 @@ const showPass = () => {
                   <Text style={T.centered20}>LOGIN</Text>
                 </Button>
               </TouchableOpacity>
-              <Text/><Text/><Text/><Text/>
             </View>
-              
+            {Space(40)}
+
 
               <View style={SS.makeNotificationImage}>
-                  <Image style={GS.creditImage} source={require('../assets/login-text.png')} />
+                  <Image style={GS.smallImage} source={require('../assets/login-text.png')} />
                 </View>
         </View>
       </View>   

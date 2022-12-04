@@ -9,8 +9,11 @@ import {
     Text, 
     Switch, 
     TouchableOpacity,
+    Image,
+    Linking
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { GS } from '../styles/globalStyles';
 
 export default function Card(props) {
     return(
@@ -187,4 +190,73 @@ export function CheckedBox() {
             </Svg>
         </View>
     );
+}
+
+export function Line(height, width) {
+    return(
+        <View style={ES.checkBox}>
+            <Svg width={width} height={height} fill={GLOBAL.DARK.ORANGE}>
+            <Rect x='1' y='1' width={width} height={height}/>
+            </Svg>
+        </View>
+    );
+}
+
+export function Space(height) {
+    return(
+        <View style={ES.checkBox}>
+            <Svg width={1} height={height}>
+            <Rect x='1' y='1' width={1} height={height}/>
+            </Svg>
+        </View>
+    );
+}
+
+export function Social() {
+    return(
+        <View>
+            <Image style={GS.socialBigImage} source={require('../assets/loginBig-white.png')} />
+            {Space(10)}
+            <View style={GS.socialView}>
+                <View style={GS.socialPartView}>
+                <TouchableOpacity onPress={() => Linking.openURL('https://discord.com/invite/login-ntnu')}>
+                        <Image style={GS.medium} source={require('../assets/discord-white.png')} />
+                    </TouchableOpacity>
+                </View>
+                
+                <View style={GS.socialPartView}>
+                <TouchableOpacity onPress={() => Linking.openURL('https://www.instagram.com/login_linjeforening/')}>
+                        <Image style={GS.medium} source={require('../assets/instagram-white.png')} />
+                    </TouchableOpacity>
+                </View>
+
+                <View style={GS.socialPartView}>
+                <TouchableOpacity onPress={() => Linking.openURL('https://facebook.com/LogNTNU')}>
+                        <Image style={GS.medium} source={require('../assets/facebook-white.png')} />
+                    </TouchableOpacity>
+                </View>
+            </View>
+            {Space(10)}
+            <View style={GS.socialView}>
+                <View style={GS.socialPartView}>
+                    <TouchableOpacity onPress={() => Linking.openURL('https://linkedin.com/company/linjeforeningen-login/about')}>
+                        <Image style={GS.medium} source={require('../assets/linkedin-white.png')} />
+                    </TouchableOpacity>
+                </View>
+                
+                <View style={GS.socialPartView}>
+                <TouchableOpacity onPress={() => Linking.openURL('https://git.logntnu.no')}>
+                        <Image style={GS.medium} source={require('../assets/gitlab-white.png')} />
+                    </TouchableOpacity>
+                </View>
+
+                <View style={GS.socialPartView}>
+                <TouchableOpacity onPress={() => Linking.openURL('https://redmine.login.no')}>
+                        <Image style={GS.medium} source={require('../assets/redmine-white.png')} />
+                    </TouchableOpacity>
+                </View>
+            </View>
+            {Space(10)}
+        </View>
+    )
 }

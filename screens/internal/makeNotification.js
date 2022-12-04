@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { MS } from '../../styles/menuStyles';
 import { GS } from '../../styles/globalStyles';
 import React, { useState, useEffect, useRef } from 'react';
-import { NotifyButton } from '../../shared/sharedComponents';
+import { NotifyButton, Space } from '../../shared/sharedComponents';
 import { T } from '../../styles/text';
 import { 
   Text, 
@@ -73,63 +73,76 @@ useEffect(() => {
     <View>
       <StatusBar style="light" />
       <View style={MS.topMenu}>
-      <TouchableOpacity onPress={() => goBack()}>
-      <Image style={MS.goBack} source={require('../../assets/goback777.png')} />
-    </TouchableOpacity>
+        <TouchableOpacity onPress={() => goBack()}>
+          <Image style={MS.goBack} source={require('../../assets/goback777.png')} />
+        </TouchableOpacity>
 
-    
-      <TouchableOpacity onPress={() => ProfilePage()}>
-        <Image style={MS.tMenuIcon} source={require('../../assets/loginperson-orange.png')} />
-      </TouchableOpacity>
-      </View>
+        <TouchableOpacity onPress={() => ProfilePage()}>
+          <Image style={MS.tMenuIcon} source={require('../../assets/loginperson-orange.png')} />
+        </TouchableOpacity>
+    </View>
 {/* ========================= DISPLAY CONTENT ========================= */}
-      <View style={GS.content}>
-        <ScrollView showsVerticalScrollIndicator={false}>
-        <Text/><Text style={T.centered}>Send varsling</Text><Text/><Text/>
+  <View style={GS.content}>
+    <ScrollView showsVerticalScrollIndicator={false}>
 
-                    <Text style={T.centered20}>Tittel</Text><Text/>
-                    <TextInput 
-                      style={GS.inputText}
-                      placeholder='Login'
-                      placeholderTextColor={'#555'}
-                      textAlign='center'
-                      onChangeText={(val) => nTitle = (val)}
-                    /><Text/>
+      {Space(5)}
 
-              <Text style={T.centered20}>Beskrivelse</Text><Text/>
-                    <TextInput 
-                      multiline
-                      style={GS.inputText}
-                      placeholder='Varsling'
-                      placeholderTextColor={'#555'}
-                      textAlign='center'
-                      onChangeText={(val) => nBody = (val)}
-                    />
-                    
-                <Text/>
+      <Text style={T.centered}>Send varsling</Text>{Space(10)}
 
-                <Text style={T.centered20}>Delay (sekunder)</Text><Text/>
-                    <TextInput 
-                      style={GS.inputText}
-                      keyboardType='numeric'
-                      placeholder='1'
-                      placeholderTextColor={'#555'}
-                      textAlign='center'
-                      onChangeText={(val) => nDelay = (val)}
-                    /><Text/>
+      <Text style={T.centered20}>Tittel</Text>
 
-            <TouchableOpacity onPress={async () => {await schedulePushNotification();}}>
-                <NotifyButton>
-                  <Text style={T.centered20}>SEND VARSLING</Text>
-                </NotifyButton>
-              </TouchableOpacity>
+      {Space(5)}
 
-                <View><Text/><Text/><Text/>
-                  <Image style={GS.smallImage} source={require('../../assets/login-text.png')} />
-                </View>
-              <Text/><Text/><Text/>
-</ScrollView>
-      </View>    
+      <TextInput 
+        style={GS.inputText}
+        placeholder='Login'
+        placeholderTextColor={'#555'}
+        textAlign='center'
+        onChangeText={(val) => nTitle = (val)}
+      />
+      {Space(5)}
+
+      <Text style={T.centered20}>Beskrivelse</Text>{Space(5)}
+      <TextInput 
+        multiline
+        style={GS.inputText}
+        placeholder='Varsling'
+        placeholderTextColor={'#555'}
+        textAlign='center'
+        onChangeText={(val) => nBody = (val)}
+      />
+
+      {Space(5)}
+
+      <Text style={T.centered20}>Delay (sekunder)</Text>
+
+      {Space(5)}
+
+      <TextInput 
+        style={GS.inputText}
+        keyboardType='numeric'
+        placeholder='1'
+        placeholderTextColor={'#555'}
+        textAlign='center'
+        onChangeText={(val) => nDelay = (val)}
+      />
+
+      {Space(5)}
+
+      <TouchableOpacity onPress={async () => {await schedulePushNotification();}}>
+        <NotifyButton>
+          <Text style={T.centered20}>SEND VARSLING</Text>
+        </NotifyButton>
+      </TouchableOpacity>
+
+      <View>
+        {Space(15)}
+        <Image style={GS.smallImage} source={require('../../assets/login-text.png')} />
+      </View>
+
+      {Space(15)}
+    </ScrollView>
+  </View>    
 
 {/* ========================= DISPLAY BOTTOM MENU ========================= */}
     <View style={MS.bMenu}>

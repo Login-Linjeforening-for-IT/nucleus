@@ -6,7 +6,7 @@ import { StatusBar } from 'expo-status-bar';
 import { GS } from '../styles/globalStyles';
 import { ES } from '../styles/eventStyles';
 import { MS } from '../styles/menuStyles';
-import Card from '../shared/sharedComponents';
+import Card, { Space } from '../shared/sharedComponents';
 import { 
   Text, 
   View, 
@@ -150,9 +150,9 @@ return(
           />
           
           : 
-          <View><Text/><Text/><Text/><Text/><Text/><Text/><Text/><Text/><Text/>
-          <Text/><Text/><Text/><Text/><Text/><Text/><Text/><Text/><Text/><Text/>
-            <Text style={T.centeredOppositeColor}>Ingen events</Text><Text/>
+          <View>
+            {Space(275)}
+            <Text style={T.centeredOppositeColor}>Ingen events</Text>
           </View>
         }
         

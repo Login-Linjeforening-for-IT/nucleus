@@ -4,7 +4,7 @@ import CategorySquare from '../shared/eventComponents/categorySquare';
 import CleanDescription from '../shared/eventComponents/cleanDescription';
 import { GetEndTime, Month, EventLocation } from '../shared/eventComponents/otherComponents';
 import React, { useEffect, useState } from 'react';
-import Card, { CardSmaller } from '../shared/sharedComponents';
+import Card, { CardSmaller, Space } from '../shared/sharedComponents';
 import { StatusBar } from 'expo-status-bar';
 import EventTime from '../shared/eventComponents/eventTime';
 import { GS } from '../styles/globalStyles';
@@ -72,14 +72,14 @@ export default function SpecificEventScreen( { navigation }) {
       <View style={GS.content}>
         <ScrollView showsVerticalScrollIndicator={false}>
           
-            <Text/>
+          {Space(5)}
 
             <View style={ES.specificEventView1}>
               {/* Doesnt work */}
               <Image style={ES.specificEventImage} source={{uri: 'https://cdn.login.no/img/events/' + usersData.image}} />
             </View>
 
-            <Text/>
+            {Space(5)}
           
             <CardSmaller>
               <View style={ES.specificEventInfoView}>
@@ -100,7 +100,7 @@ export default function SpecificEventScreen( { navigation }) {
               </View>
             </CardSmaller>
 
-            <Text/>
+            {Space(5)}
             <Card>
               <View style={ES.specificEventInfoView}>
                 <Text style={T.specificEventInfo}>Starter: </Text>
@@ -112,7 +112,7 @@ export default function SpecificEventScreen( { navigation }) {
                 </Text>
               </View>
 
-              <Text/>
+              {Space(5)}
 
               <View style={ES.specificEventInfoView}>
               <Text style={T.specificEventInfo}>Slutter: </Text>
@@ -120,11 +120,11 @@ export default function SpecificEventScreen( { navigation }) {
                 
               </View>
 
-              <Text/>
+              {Space(5)}
 
               {EventLocation(usersData.roomno, usersData.campus)}
 
-              <Text/>
+              {Space(5)}
 
               <View style={ES.specificEventInfoView}>
                 <Text style={T.specificEventInfo}>Kategori: </Text>
@@ -134,7 +134,7 @@ export default function SpecificEventScreen( { navigation }) {
                 </Text>
               </View>
 
-              <Text/>
+              {Space(5)}
 
               <View style={ES.specificEventInfoView}>
                 <Text style={T.specificEventInfo}>Arrangør: </Text>
@@ -144,15 +144,16 @@ export default function SpecificEventScreen( { navigation }) {
               </View>
            </Card>
 
-            <Text/>
+           {Space(5)}
             <Card>
-              <View><Text/>
+              <View>{Space(5)}
                 <Text style={T.centered20}>{navigation.getParam('eventname')}</Text>
               </View>
               {CleanDescription(usersData.description)}
-            </Card><Text/><Text/><Text/><Text/><Text/><Text/><Text/><Text/>
+            </Card>{Space(130)}
         </ScrollView>
-      </View>    
+      </View>   
+       
 
 {/* ========================= DISPLAY BOTTOM MENU ========================= */}
       <View style={MS.bMenu}>

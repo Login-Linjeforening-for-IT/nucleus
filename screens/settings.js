@@ -2,9 +2,8 @@
 import { StatusBar } from 'expo-status-bar';
 import { GS } from '../styles/globalStyles';
 import { MS } from '../styles/menuStyles';
-import { Notification, Language } from '../shared/sharedComponents';
+import Card, { Notification, Language, Space } from '../shared/sharedComponents';
 import Theme from '../styles/themes/theme';
-import Card from '../shared/sharedComponents';
 import { T } from '../styles/text';
 import React from 'react';
 import { 
@@ -72,7 +71,9 @@ const goBack = () => {//hoppe over til mail
             </View>
           </Card>
 
-          <Text style={T.centeredOppositeColor}>Varslinger</Text><Text/>
+          {Space(5)}
+          <Text style={T.centeredOppositeColor}>Varslinger</Text>              
+          
 
           <Card>
             <View style={GS.notificationBack}>

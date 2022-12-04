@@ -3,15 +3,17 @@ import { StatusBar } from 'expo-status-bar';
 import { GS } from '../styles/globalStyles';
 import { T } from '../styles/text';
 import { MS } from '../styles/menuStyles';
-import Card from '../shared/sharedComponents';
+import Card, { Line, Space , Social } from '../shared/sharedComponents';
 import { Copyright } from '../shared/sharedComponents';
 import React, {useState} from 'react';
+import Dropdown from '../shared/dropdown';
 import { 
   Text, 
   View, 
   Image, 
   ScrollView,
-  TouchableOpacity
+  TouchableOpacity,
+  Linking
 } from 'react-native';
 
 {/* ========================= APP START ========================= */}
@@ -75,18 +77,28 @@ return(
         
     <ScrollView showsVerticalScrollIndicator={false}>
       <Card>
-        <Text style={T.text40}>Hvem er vi?</Text><Text/>
-        <Text style={T.paragraph}>Login er linjeforeningen for IT ved  NTNU i Gjøvik og alle som går de følgene studiene er automatisk medlemmer i foreningen.</Text>
-        <Text></Text>
-        <Text style={T.red}>Dropdown for bachelor, master og phd</Text>
-        <Text style={T.centered25}>Av studenter, for studenter.</Text><Text/>
-        <Text style={T.paragraph}>Foreningen drives av frivillige studenter som arbeider for at du skal få mest mulig ut av studiene dine ved  NTNU.</Text><Text/>
-        <Text style={T.paragraph}>Vi arrangerer regelmessig sosiale arrangementer og bedriftspresentasjoner. Vi holder kontakt med aktuelle bedrifter og inviterer til blant annet cyberdagene én gang i semesteret slik at du som student skal bli kjent med mulighetene utdanningen din gir deg.</Text><Text/>
+        <Text style={T.bold40}>Hvem er vi?</Text>{Space(5)}
+        <View style={GS.row}>
+          <Text>{Line(60,5)}</Text>
+          <View>
+            <Text style={T.boldWithLine}>Login er linjeforeningen for IT ved NTNU i Gjøvik og alle som går de følgene studiene er automatisk medlemmer i foreningen.</Text>
+          </View>
+        </View>
+        {Space(5)}
+        <Dropdown/>
+        {Space(10)}
+        <Image style={GS.aboutImage} source={require('../assets/aboutimage.png')} />
+        {Space(5)}
+        <Text style={T.centeredBold25}>Av studenter, for studenter.</Text>
+        {Space(5)}
+        <Text style={T.boldParagraph}>Foreningen drives av frivillige studenter som arbeider for at du skal få mest mulig ut av studiene dine ved  NTNU.</Text>
+        {Space(5)}
+        <Text style={T.paragraph}>Vi arrangerer regelmessig sosiale arrangementer og bedriftspresentasjoner. Vi holder kontakt med aktuelle bedrifter og inviterer til blant annet cyberdagene én gang i semesteret slik at du som student skal bli kjent med mulighetene utdanningen din gir deg.</Text>
+        {Space(5)}
         <Text style={T.paragraph}>Hver uke samler vi studenter til  TekKom- og  CTF-samlinger, der man kan lære seg nye ting eller komme med bidrag til foreningen. Her kan man møte andre studenter som deler gleden for å lære, og å sette kunnskapene man tilegner seg i praksis. Videre jobber EvntKom stadig med nye og spennende arrangementer som f.eks. filmkvelder og vinterball.</Text>
-        <Text></Text>
+        {Space(5)}
         <Text style={T.centered25}>Styret og komiteene</Text>
-        <Text style={T.paragraph}>Foreningen er satt sammen av et hovedstyret og en rekke komiteer.</Text>
-        <Text style={T.red}>Knapper mellom de forskjellige komiteene</Text>
+        <Text style={T.boldParagraph}>Foreningen er satt sammen av et hovedstyret og en rekke komiteer.</Text>
         <View style={GS.parentComitteeView}>
           <View style={GS.comittee1}>
             <TouchableOpacity onPress={() => selectedComittee(0)}>
@@ -145,26 +157,166 @@ return(
             </TouchableOpacity>
           </View>
         </View>
-        
-        <View>
-          {
+        {
             info.map((relevantComittee) => {
               if (relevantComittee.id == comittee.selected) {
                 return(
                   <View>
-                    <Text style={T.text30}>{relevantComittee.title}</Text>{relevantComittee.quote ? <Text/>:null}
-                    <Text style={T.text20}>{relevantComittee.quote}</Text>{relevantComittee.quote ? <Text/>:null}
-                    <Text style={T.paragraph}>{relevantComittee.description}</Text><Text/>
+                    <Text style={T.text30}>
+                      {relevantComittee.id == 0 ? <Image style={GS.small} source={require('../assets/styret-white.png')} />:null}
+                      {relevantComittee.id == 1 ? <Image style={GS.small} source={require('../assets/eventkom-white.png')} />:null}{relevantComittee.id == 2 ? <Image style={GS.small} source={require('../assets/tekkom-white.png')} />:null}{relevantComittee.id == 3 ? <Image style={GS.small} source={require('../assets/pr-white.png')} />:null}{relevantComittee.id == 4 ? <Image style={GS.small} source={require('../assets/ctfkom-white.png')} />:null}{relevantComittee.id == 5 ? <Image style={GS.small} source={require('../assets/satkom-white.png')} />:null}{relevantComittee.title}</Text>{relevantComittee.quote ? Space(5):null}
+                    <Text style={T.boldParagraph}>{relevantComittee.quote}</Text>{relevantComittee.quote ? Space(5):null}
+                    <Text style={T.paragraph}>{relevantComittee.description}</Text>
+                    {Space(15)}
                   </View>
                 )
               }
             })
           }
+        {comittee.selected == 0 ? 
+        <View>
+          <Image style={GS.personImage} source={require('../assets/leder.png')} />
+          {Space(10)}
+          <Text style={T.leaderTitle}>Leder</Text>
+          {Space(5)}
+          <Text style={T.leaderName}>Anders Eiken</Text>
+          {Space(5)}
+          <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}Eiken#6059</Text>
+          {Space(25)}
+          <Image style={GS.personImage} source={require('../assets/nestleder.png')} />
+          {Space(10)}
+          <Text style={T.leaderTitle}>Nestleder</Text>
+          {Space(5)}
+          <Text style={T.leaderName}>Mads Halland</Text>
+          {Space(5)}
+          <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}¬.¬#6719</Text>
+          {Space(25)}
+          <Image style={GS.personImage} source={require('../assets/sekreter.png')} />
+          {Space(10)}
+          <Text style={T.leaderTitle}>Sekretær</Text>
+          {Space(5)}
+          <Text style={T.leaderName}>Celina Brynildsen</Text>
+          {Space(5)}
+          <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}Celina#6955</Text>
+          {Space(25)}
+          <Image style={GS.personImage} source={require('../assets/eventkomleder.png')} />
+          {Space(10)}
+          <Text style={T.leaderTitle}>EventKom leder</Text>
+          {Space(5)}
+          <Text style={T.leaderName}>Sofie Hagen</Text>
+          {Space(5)}
+          <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}sofiee#9763</Text>
+          {Space(25)}
+          <Image style={GS.personImage} source={require('../assets/prleder.png')} />
+          {Space(10)}
+          <Text style={T.leaderTitle}>PR leder</Text>
+          {Space(5)}
+          <Text style={T.leaderName}>Kristina Kataki</Text>
+          {Space(5)}
+          <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}Kataki#7254</Text>
+          {Space(25)}
+          <Image style={GS.personImage} source={require('../assets/tekkomleder.png')} />
+          {Space(10)}
+          <Text style={T.leaderTitle}>TekKom leder</Text>
+          {Space(5)}
+          <Text style={T.leaderName}>Simon Edna</Text>
+          {Space(5)}
+          <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}Sim#3909</Text>
+          {Space(25)}
+          <Image style={GS.personImage} source={require('../assets/ctfkomleder.png')} />
+          {Space(10)}
+          <Text style={T.leaderTitle}>CTF leder</Text>
+          {Space(5)}
+          <Text style={T.leaderName}>Eskil Refsgaard</Text>
+          {Space(5)}
+          <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}refsgaard#9067</Text>
+          {Space(25)}
+          <Image style={GS.personImage} source={require('../assets/satkomleder.png')} />
+          {Space(10)}
+          <Text style={T.leaderTitle}>SatKom leder</Text>
+          {Space(5)}
+          <Text style={T.leaderName}>Sebastian Hestsveen</Text>
+          {Space(5)}
+          <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}stubbe#8694</Text>
+          {Space(25)}
+        </View>: null}
+        
+        {comittee.selected == 1 ? 
+        <View>
+          <Image style={GS.personImage} source={require('../assets/eventkomleder.png')} />
+          {Space(10)}
+          <Text style={T.leaderTitle}>EventKom leder</Text>
+          {Space(5)}
+          <Text style={T.leaderName}>Sofie Hagen</Text>
+          {Space(5)}
+          <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}sofiee#9763</Text>
+          {Space(25)}
+        </View>: null}
+
+        {comittee.selected == 2 ? 
+        <View>
+          <Image style={GS.personImage} source={require('../assets/tekkomleder.png')} />
+          {Space(10)}
+          <Text style={T.leaderTitle}>TekKom leder</Text>
+          {Space(5)}
+          <Text style={T.leaderName}>Simon Edna</Text>
+          {Space(5)}
+          <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}Sim#3909</Text>
+          {Space(25)}
+        </View>: null}
+
+        {comittee.selected == 3 ? 
+          <View>
+            <Image style={GS.personImage} source={require('../assets/prleder.png')} />
+            {Space(10)}
+            <Text style={T.leaderTitle}>PR leder</Text>
+            {Space(5)}
+            <Text style={T.leaderName}>Kristina Kataki</Text>
+            {Space(5)}
+            <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}Kataki#7254</Text>
+            {Space(25)}
+          </View>: null}
+
+        {comittee.selected == 4 ? 
+          <View>
+            <Image style={GS.personImage} source={require('../assets/ctfkomleder.png')} />
+            {Space(10)}
+            <Text style={T.leaderTitle}>CTF leder</Text>
+            {Space(5)}
+            <Text style={T.leaderName}>Eskil Refsgaard</Text>
+            {Space(5)}
+            <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}refsgaard#9067</Text>
+            {Space(25)}
+          </View>: null}
+
+        {comittee.selected == 5 ? 
+          <View>
+            <Image style={GS.personImage} source={require('../assets/satkomleder.png')} />
+            {Space(10)}
+            <Text style={T.leaderTitle}>SatKom leder</Text>
+            {Space(5)}
+            <Text style={T.leaderName}>Sebastian Hestsveen</Text>
+            {Space(5)}
+            <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}stubbe#8694</Text>
+            {Space(25)}
+          </View>: null}
+
+        {Space(10)}
+        <Text style={T.text25}>Offentlige dokumenter</Text>
+        <View>
+          <Text style={T.paragraph}>For mer informasjon og offentlige dokumenter kan du besøke 
+            {<Text style={T.orange15} onPress={() => Linking.openURL('https://redmine.login.no/projects/wiki/wiki')}> Redmine
+            {
+              <Image style={GS.redMine} source={require('../assets/redmine-orange.png')} />
+            }</Text>}
+          </Text>
+          
         </View>
-        <Text></Text>
+        {Space(10)}
+        <Social/>
         <Copyright/>
       </Card>
-
+      {Space(10)}
     </ScrollView>
   </View> 
 

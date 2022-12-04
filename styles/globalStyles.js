@@ -69,5 +69,71 @@ export const GS = StyleSheet.create({
     alignSelf: 'center',
     height: 80,
     width: 80
+  },
+  dropdown: {
+    flexDirection: 'row',
+    paddingLeft: 5,
+    alignItems: 'center',
+    backgroundColor: '#222',
+    height: 40,
+  },
+  dropdownContent: {
+    flexDirection: 'row',
+    paddingLeft: 10,
+    alignItems: 'center',
+    backgroundColor: '#222',
+    height: 36,
+  },
+  dropImage: {
+    alignSelf: 'center',
+    height: 60,
+    width: 40
+  },
+  smallDropImage: {
+    alignSelf: 'center',
+    height: 40,
+    width: 25
+  },
+  row: {
+    flexDirection: 'row',
+  },
+  aboutImage: {
+      width: '100%',
+      height: 220
+  },
+  redMine: {
+    height: 15,
+    width: 20
+  },
+  tiny: {
+    height: 15,
+    width: 25
+  },
+  medium: {
+    height: 50,
+    width: 50
+  },
+  small: {
+    height: 25,
+    width: 35,
+  },
+  personImage: {
+    alignSelf: 'center',
+    width: 220,
+    height: 220,
+  },
+  socialView: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  socialPartView: {
+    width: '30%',
+    alignItems: 'center',
+  },
+  socialBigImage: {
+    alignSelf: 'center',
+    height: 100,
+    width: 200
   }
 });

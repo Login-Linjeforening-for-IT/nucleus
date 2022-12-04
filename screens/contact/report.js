@@ -6,7 +6,7 @@ import { T } from '../../styles/text';
 import { SS } from '../../styles/settingStyles';
 import React, { useState } from 'react';
 import GreenLight, { Check, GrayLight } from '../../shared/eventComponents/otherComponents';
-import { Button, CardSmaller } from '../../shared/sharedComponents';
+import { Button, CardSmaller, Space } from '../../shared/sharedComponents';
 import { 
   Text, 
   View, 
@@ -145,7 +145,7 @@ const inputContent = (val) => {
         
         <View>
           <Text style={T.centered}>Anonymt og sikkert. Alltid.</Text>
-          <Text/><Text/>
+          {Space(10)}
 
           <View style={SS.loginView}>
             <CardSmaller>
@@ -168,12 +168,12 @@ const inputContent = (val) => {
                 <View style = {SS.checkContent}><Check/></View>
                 </View>
                 }
-                <Text/>
+                {Space(5)}
               </View>
             </CardSmaller>
           </View>
 
-          <Text/><Text/>
+          {Space(10)}
 
           <View style={SS.loginView}>
             <CardSmaller>
@@ -196,12 +196,12 @@ const inputContent = (val) => {
                 <View style = {SS.checkContent}><Check/></View>
                 </View>
                 }
-                <Text/>
+                {Space(5)}
               </View>
             </CardSmaller>
           </View>
 
-          <Text/><Text/>
+          {Space(10)}
 
           <View style={SS.reportContentView}>
             <CardSmaller>
@@ -225,13 +225,13 @@ const inputContent = (val) => {
                 <View style = {SS.reportCheckContent}><Check/></View>
                 </View>
                 }
-                <Text/>
+                {Space(5)}
               </View>
             </CardSmaller>  
           </View>
 
           <View>
-            <Text/><Text/><Text/>
+          {Space(15)}
             <TouchableOpacity 
             disabled ={!data.check_contentInputChange}
             onPress={() => sendForm()}>
@@ -239,7 +239,7 @@ const inputContent = (val) => {
                 <Text style={T.centered20}>SEND</Text>
               </Button>
             </TouchableOpacity>
-            <Text/><Text/><Text/><Text/>
+            {Space(20)}
           </View>
         </View>
       </View>   
