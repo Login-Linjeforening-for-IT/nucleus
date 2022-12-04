@@ -19,6 +19,18 @@ export const T = StyleSheet.create({
     fontSize: 15,
     color: GLOBAL.DARK.TEXTCOLOR,
   },
+  text40: { //Text of size 40
+    fontSize: 40,
+    color: GLOBAL.DARK.TEXTCOLOR,
+  },
+  text30: { //Text of size 30
+    fontSize: 30,
+    color: GLOBAL.DARK.TEXTCOLOR,
+  },
+  text20: { //Text of size 20
+    fontSize: 20,
+    color: GLOBAL.DARK.TEXTCOLOR,
+  },
   centered: { //Centered text of size 30
     alignSelf: 'center',
     fontSize: 30,

@@ -44,5 +44,30 @@ export const GS = StyleSheet.create({
     alignSelf: 'center',
     height: 120,
     width: 150,
-},
+  },
+  parentComitteeView: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginVertical: 10,
+  },
+  comittee1: {
+    borderRadius: 10,
+    backgroundColor: '#222',
+    width: '30%'
+  },
+  comittee2: {
+    borderRadius: 10,
+    backgroundColor: '#222',
+    width: '30%'
+  },
+  comittee3: {
+    borderRadius: 10,
+    backgroundColor: '#222',
+    width: '30%'
+  },
+  image80: {
+    alignSelf: 'center',
+    height: 80,
+    width: 80
+  }
 });
