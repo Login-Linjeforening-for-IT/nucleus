@@ -181,7 +181,9 @@ return(
           {Space(5)}
           <Text style={T.leaderName}>Anders Eiken</Text>
           {Space(5)}
-          <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}Eiken#6059</Text>
+          <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/199580276823818240')}>
+            <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}Eiken#6059</Text>
+          </TouchableOpacity>
           {Space(25)}
           <Image style={GS.personImage} source={require('../assets/nestleder.png')} />
           {Space(10)}
@@ -189,7 +191,9 @@ return(
           {Space(5)}
           <Text style={T.leaderName}>Mads Halland</Text>
           {Space(5)}
+          <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/193774211242655746')}>
           <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}¬.¬#6719</Text>
+          </TouchableOpacity>
           {Space(25)}
           <Image style={GS.personImage} source={require('../assets/sekreter.png')} />
           {Space(10)}
@@ -197,7 +201,9 @@ return(
           {Space(5)}
           <Text style={T.leaderName}>Celina Brynildsen</Text>
           {Space(5)}
-          <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}Celina#6955</Text>
+          <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/745317481190785126')}>
+            <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}Celina#6955</Text>
+          </TouchableOpacity>
           {Space(25)}
           <Image style={GS.personImage} source={require('../assets/eventkomleder.png')} />
           {Space(10)}
@@ -205,7 +211,9 @@ return(
           {Space(5)}
           <Text style={T.leaderName}>Sofie Hagen</Text>
           {Space(5)}
-          <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}sofiee#9763</Text>
+          <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/877183922021216256')}>
+            <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}sofiee#9763</Text>
+          </TouchableOpacity>
           {Space(25)}
           <Image style={GS.personImage} source={require('../assets/prleder.png')} />
           {Space(10)}
@@ -213,7 +221,9 @@ return(
           {Space(5)}
           <Text style={T.leaderName}>Kristina Kataki</Text>
           {Space(5)}
-          <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}Kataki#7254</Text>
+          <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/877108421772582962')}>
+            <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}Kataki#7254</Text>
+          </TouchableOpacity>
           {Space(25)}
           <Image style={GS.personImage} source={require('../assets/tekkomleder.png')} />
           {Space(10)}
@@ -221,7 +231,9 @@ return(
           {Space(5)}
           <Text style={T.leaderName}>Simon Edna</Text>
           {Space(5)}
-          <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}Sim#3909</Text>
+          <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/298525088914079745')}>
+            <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}Sim#3909</Text>
+          </TouchableOpacity>
           {Space(25)}
           <Image style={GS.personImage} source={require('../assets/ctfkomleder.png')} />
           {Space(10)}
@@ -229,7 +241,9 @@ return(
           {Space(5)}
           <Text style={T.leaderName}>Eskil Refsgaard</Text>
           {Space(5)}
-          <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}refsgaard#9067</Text>
+          <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/522483274933731331')}>
+            <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}refsgaard#9067</Text>
+          </TouchableOpacity>
           {Space(25)}
           <Image style={GS.personImage} source={require('../assets/satkomleder.png')} />
           {Space(10)}
@@ -237,7 +251,9 @@ return(
           {Space(5)}
           <Text style={T.leaderName}>Sebastian Hestsveen</Text>
           {Space(5)}
-          <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}stubbe#8694</Text>
+          <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/119120560931340290')}>
+            <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}stubbe#8694</Text>
+          </TouchableOpacity>
           {Space(25)}
         </View>: null}
         
@@ -249,7 +265,9 @@ return(
           {Space(5)}
           <Text style={T.leaderName}>Sofie Hagen</Text>
           {Space(5)}
-          <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}sofiee#9763</Text>
+          <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/877183922021216256')}>
+            <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}sofiee#9763</Text>
+          </TouchableOpacity>
           {Space(25)}
         </View>: null}
 
@@ -261,7 +279,9 @@ return(
           {Space(5)}
           <Text style={T.leaderName}>Simon Edna</Text>
           {Space(5)}
-          <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}Sim#3909</Text>
+          <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/298525088914079745')}>
+            <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}Sim#3909</Text>
+          </TouchableOpacity>
           {Space(25)}
         </View>: null}
 
@@ -273,7 +293,9 @@ return(
             {Space(5)}
             <Text style={T.leaderName}>Kristina Kataki</Text>
             {Space(5)}
-            <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}Kataki#7254</Text>
+            <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/877108421772582962')}>
+              <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}Kataki#7254</Text>
+            </TouchableOpacity>
             {Space(25)}
           </View>: null}
 
@@ -285,7 +307,9 @@ return(
             {Space(5)}
             <Text style={T.leaderName}>Eskil Refsgaard</Text>
             {Space(5)}
-            <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}refsgaard#9067</Text>
+            <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/522483274933731331')}>
+              <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}refsgaard#9067</Text>
+          </TouchableOpacity>
             {Space(25)}
           </View>: null}
 
@@ -297,7 +321,9 @@ return(
             {Space(5)}
             <Text style={T.leaderName}>Sebastian Hestsveen</Text>
             {Space(5)}
-            <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}stubbe#8694</Text>
+            <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/119120560931340290')}>
+              <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}stubbe#8694</Text>
+            </TouchableOpacity>
             {Space(25)}
           </View>: null}
 
