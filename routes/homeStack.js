@@ -17,7 +17,6 @@ import ProfileScreen from '../screens/profile';
 import ReportScreen from '../screens/contact/report';
 import ContactScreen from '../screens/contact/contactTekKom';
 import ContactMenuScreen from '../screens/contact/contactMenu';
-import SocialMediaScreen from '../screens/contact/socialmedia';
 import CommitteeMenuScreen from '../screens/contact/committeeMenu';
 import ContactStyretScreen from '../screens/contact/contactStyret';
 import ContactEventKomScreen from '../screens/contact/contactEventKom';
@@ -43,7 +42,6 @@ const screens = {
     TodoScreen:             {screen: TodoScreen},
     MakeNotificationScreen: {screen: MakeNotificationScreen},
     EditScreen:             {screen: EditScreen},
-    SocialMediaScreen:      {screen: SocialMediaScreen},
     ReportScreen:           {screen: ReportScreen},
     CommitteeMenuScreen:    {screen: CommitteeMenuScreen},
     ContactStyretScreen:    {screen: ContactStyretScreen},

@@ -4,7 +4,7 @@ import { MS } from '../../styles/menuStyles'
 import React, { useState } from 'react';
 import { GS } from '../../styles/globalStyles'
 import { T } from '../../styles/text'
-import Card from '../../shared/sharedComponents';
+import Card, { Social, Space } from '../../shared/sharedComponents';
 import { 
   Text, 
   View, 
@@ -20,7 +20,6 @@ export default function ContactMenuScreen({ navigation }) {
     {id: '1', nav: 'ReportScreen', title: 'Varsle'},
     {id: '2', nav: 'CommitteeMenuScreen', title: 'Komité'},
     {id: '3', nav: 'BusinessScreen', title: 'Bedrift'},
-    {id: '4', nav: 'SocialMediaScreen', title: 'Sosiale Media'},
   ])
 {/* ========================= DISPLAY APP START ========================= */}
 const eventPage = () => {
@@ -57,27 +56,24 @@ return(
 
 {/* ========================= DISPLAY CONTENT ========================= */}
       <View style={GS.content}>
-
+        <View>
           <FlatList
-          showsVerticalScrollIndicator={''}
-          numColumns={1}
-          keyExtractor={(item) => item.id}
-          data={setting}
-          renderItem={({item}) => (
-            <View>
-            <TouchableOpacity onPress={() => navigation.navigate(item.nav, item)}>
-              <Card>
-                <Text style={T.centered20}>{item.title}</Text>
-              </Card>
-            </TouchableOpacity>
-          </View>
-          )}
-          />
-          <TouchableOpacity onPress={() => navigation.navigate('ContactScreen')}>
+            scrollEnabled={false}
+            showsVerticalScrollIndicator={''}
+            numColumns={1}
+            keyExtractor={(item) => item.id}
+            data={setting}
+            renderItem={({item}) => (
               <View>
-                <Image style={GS.smallImage} source={require('../../assets/login-text.png')} />
-              </View>
-            </TouchableOpacity>
+              <TouchableOpacity onPress={() => navigation.navigate(item.nav, item)}>
+                <Card><Text style={T.centered20}>{item.title}</Text></Card>
+              </TouchableOpacity>
+            </View>
+            )}
+            />
+        </View>
+          {Space('25%')}
+            <Social/>
       </View>    
 
 {/* ========================= DISPLAY BOTTOM MENU ========================= */}
