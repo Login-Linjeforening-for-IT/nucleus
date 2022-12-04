@@ -88,6 +88,9 @@ export const ES = StyleSheet.create({
     height: 40,
     width: 40
 },
+absoluteView: { //Middle sized icons
+  flexDirection: 'row',
+},
 smallSize: { //Small icons
     height: 20,
     width: 20
@@ -117,10 +120,6 @@ cardSmaller: {
   borderRadius: 20,
   backgroundColor: GLOBAL.DARK.DARKER,
 },
-size: {
-  height: 40,
-  width: 40
-},
 smallSize: {
   height: 20,
   width: 20
@@ -136,7 +135,7 @@ filterText: {  //eventScreen filter text
   alignItems: 'center',
   marginTop: 10,
   width: '95%',
-  paddingTop: 5,
+  paddingTop: 10,
   marginHorizontal: 10,
   height: 30,
   borderTopRightRadius: 15,
@@ -144,6 +143,7 @@ filterText: {  //eventScreen filter text
   color: 'white',
 },
 filterView: {
+  paddingTop: 10,
   flexDirection: 'row',
   backgroundColor: GLOBAL.DARK.DARKER,
   marginHorizontal: 10,
@@ -159,5 +159,17 @@ categoryView: {
   left: 30,
   top: 10,
   width: 130,
-}
+},
+card: {
+  borderRadius: 20,
+  backgroundColor: GLOBAL.DARK.DARKER,
+  marginHorizontal: 10,
+  marginTop: 10,
+},
+filterResetIcon: { 
+    left: -60,
+    top: 10,
+    height: 40,
+    width: 40
+},
 })

@@ -16,7 +16,7 @@ export default function Filter(data, title, categories) {
         {id: '4', category: 'KARRIEREDAG'}, 
         {id: '5', category: 'FADDERUKA'},
         {id: '6', category: 'BEDPRES'},
-        {id: '7', category: 'LOGIN'}
+        {id: '7', category: 'LOGIN'},
     ])
 
     const [filter, setFilter] = useState({
@@ -25,29 +25,29 @@ export default function Filter(data, title, categories) {
       }) 
 
     const filterInput = (val) => {
-    if(val.length > 0) {
-        setFilter({
-        ...filter,
-        input: val,
-        check_textInputChange: true
-        })
-    }else{
-        setFilter({
-        ...filter,
-        input: val,
-        check_textInputChange: false
-        })
-    }}
+            setFilter({
+            ...filter,
+            input: val,
+            check_textInputChange: true
+            })
+    }
 
     return(
         <View>
-            <TextInput
-                style={ES.filterText}
-                placeholder='Søk..'
-                placeholderTextColor={GLOBAL.DARK.TITLETEXTCOLOR}
-                textAlign='center'
-                onChangeText={(val) => filterInput(val)}
-            />
+            <View style={ES.absoluteView}>
+                <TextInput ref={val => { this.textInput = val }}
+                    style={ES.filterText}
+                    maxLength={40}
+                    placeholder='Søk..'
+                    placeholderTextColor={GLOBAL.DARK.TITLETEXTCOLOR}
+                    textAlign='center'
+                    onChangeText={(val) => filterInput(val)}
+                />
+                <TouchableOpacity onPress={() => this.textInput.clear()}>
+                    <Image style={ES.filterResetIcon} source={require('../../assets/reset.png')} />
+                </TouchableOpacity>
+            </View>
+            
             <View style={ES.filterView}>
                 <FlatList
                         scrollEnabled={false}
