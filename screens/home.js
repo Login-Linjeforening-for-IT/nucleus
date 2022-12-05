@@ -49,7 +49,8 @@ const [storedEvent, getEvent] = useState(null);
 
 useEffect(() => {
 (async () => {
-let foundEvent = await AsyncStorage.getItem("event");
+let foundEvent = await AsyncStorage.getItem("firstEvent");
+console.log('found ' + foundEvent)
 getEvent(foundEvent);
 })();
 
@@ -135,4 +136,3 @@ return(
     
   )
 };
-

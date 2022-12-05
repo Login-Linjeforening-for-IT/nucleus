@@ -57,39 +57,32 @@ export default function EventScreen({ navigation }) {
 
   if (clickedEvents.length > 0) {
     (async() => {
-      await AsyncStorage.setItem("event", JSON.stringify(clickedEvents[0]))
-
       let firstEvent = 0;
 
       for (let i = 0; i < clickedEvents.length; i++) {
-        if (CompareDates(clickedEvents[i].startt, clickedEvents[firstEvent].startt)) {
+        if (CompareDates((clickedEvents)[i].startt, (clickedEvents)[firstEvent].startt) == true) {
           firstEvent = i
         }
       }
-      await AsyncStorage.setItem("firstEvent", JSON.stringify(clickedEvents[firstEvent]))
+      await AsyncStorage.setItem("firstEvent", JSON.stringify((clickedEvents)[firstEvent]))
       console.log('i er: ', firstEvent)
     })();
     console.log(clickedEvents)
   }else{
     (async() => {
-      await AsyncStorage.setItem("event", "")
+      await AsyncStorage.setItem("firstEvent", "")
     })();
   }
  
   useEffect(() => {
     getData();
-    // (async () => {
-    //   let foundEvents = await AsyncStorage.getItem("clickedEvents");
-    //   setClickedEvents(foundEvents);
-    // })
   },[])
 
 if (clickedEvents > 0) {
   console.log('clicked: ' + clickedEvents)
 }
 
-console.log('HERE' + clickedEvents)
-  return(
+return(
       <View>
         <StatusBar style="light" />
   {/* ========================= DISPLAY TOP MENU ========================= */}

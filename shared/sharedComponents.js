@@ -260,7 +260,7 @@ export function Social() {
     )
 }
 
-export function CompareDates(firstDate, secondDate) { // True if seconddate is bigger than firstdate
+export function CompareDates(firstDate, secondDate) { // True if firstdate is newer than seconddate
     if(firstDate != null && secondDate != null){                                                    //Concatenating start:
         const firstYear   = (firstDate)[0] + (firstDate)[1] + (firstDate)[2] + (firstDate)[3]       //  year
         const firstMonth  = (firstDate)[5] + (firstDate)[6]                                         //  month
