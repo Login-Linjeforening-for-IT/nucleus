@@ -135,5 +135,12 @@ export const GS = StyleSheet.create({
     alignSelf: 'center',
     height: 100,
     width: 200
-  }
+  },
+  specificArticleView: { //Layout for the image on specificEventView
+    alignItems: 'center',
+  },
+  articleImage: { //The header image on specificEventScreen
+    width: '94%',
+    height: 400
+  },
 });

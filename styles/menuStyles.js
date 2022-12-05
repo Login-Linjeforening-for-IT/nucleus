@@ -8,6 +8,13 @@ export const MS = StyleSheet.create ({
     color: GLOBAL.DARK.TITLETEXTCOLOR, //Maybe buttons are clickable if not percentage value?
     fontSize: 35,
   },
+  smallTitle: { //Header title of every page
+    maxWidth: 200,
+    left: 15,
+    top: '12%',
+    color: GLOBAL.DARK.TITLETEXTCOLOR, //Maybe buttons are clickable if not percentage value?
+    fontSize: 20,
+  },
   topMenu: {  //Top menu background view
     flexDirection: 'row',
     justifyContent: 'space-between',

@@ -25,7 +25,6 @@ export function GrayLight() {   //Background colored light svg
         default:    actualTheme = 0; break;
     }
 
-    console.log('theme', actualTheme)
     if(actualTheme == 0 && !actualTheme) {
         return(
             <View style={ES.size}>

@@ -158,10 +158,10 @@ return(
           </View>
         </View>
         {
-            info.map((relevantComittee) => {
+            info.map((relevantComittee, index) => {
               if (relevantComittee.id == comittee.selected) {
                 return(
-                  <View>
+                  <View key={index}>
                     <Text style={T.text30}>
                       {relevantComittee.id == 0 ? <Image style={GS.small} source={require('../assets/styret-white.png')} />:null}
                       {relevantComittee.id == 1 ? <Image style={GS.small} source={require('../assets/eventkom-white.png')} />:null}{relevantComittee.id == 2 ? <Image style={GS.small} source={require('../assets/tekkom-white.png')} />:null}{relevantComittee.id == 3 ? <Image style={GS.small} source={require('../assets/pr-white.png')} />:null}{relevantComittee.id == 4 ? <Image style={GS.small} source={require('../assets/ctfkom-white.png')} />:null}{relevantComittee.id == 5 ? <Image style={GS.small} source={require('../assets/satkom-white.png')} />:null}{relevantComittee.title}</Text>{relevantComittee.quote ? Space(5):null}

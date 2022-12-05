@@ -4,8 +4,8 @@ import { GS } from '../styles/globalStyles';
 import { MS } from '../styles/menuStyles';
 import { T } from '../styles/text';
 import { SS } from '../styles/settingStyles';
-import GreenLight, { Check, GrayLight, RedLight, Space } from '../shared/eventComponents/otherComponents';
-import { Button, CardSmaller } from '../shared/sharedComponents';
+import GreenLight, { Check, GrayLight, RedLight } from '../shared/eventComponents/otherComponents';
+import { Button, CardSmaller, Space } from '../shared/sharedComponents';
 import { 
   Text, 
   View, 

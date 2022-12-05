@@ -17,10 +17,8 @@ import {
 
 export default function InternalScreen({ navigation }) {
     const [setting] = useState([
-      {id: '1', nav: 'EditScreen', title: 'Endre'},
-      {id: '2', nav: 'NotificationScreen', title: 'Varslinger'},
-      {id: '3', nav: 'TodoScreen', title: 'Gjøremål'},
-      {id: '4', nav: 'MakeNotificationScreen', title: 'Send Varsling'},
+      {id: '0', nav: 'TodoScreen', title: 'Gjøremål'},
+      {id: '1', nav: 'MakeNotificationScreen', title: 'Send Varsling'},
 
   ])
 {/* ========================= DISPLAY APP START ========================= */}

@@ -12,7 +12,6 @@ import SettingScreen from '../screens/settings';
 import TodoScreen from '../screens/internal/todo';
 import MakeNotificationScreen from '../screens/internal/makeNotification';
 import LoginScreen from '../screens/login';
-import EditScreen from '../screens/internal/edit';
 import ProfileScreen from '../screens/profile';
 import ReportScreen from '../screens/contact/report';
 import ContactScreen from '../screens/contact/contactTekKom';
@@ -25,6 +24,7 @@ import ContactPRScreen from '../screens/contact/contactPR';
 import ContactCTFkomScreen from '../screens/contact/contactCTFkom';
 import ContactSATkomScreen from '../screens/contact/contactSATkom';
 import SpecificListingScreen from '../screens/specificListing';
+import SpecificArticleScreen from '../screens/specificarticle';
 
 const screens = {
     EventScreen:            {screen: EventScreen},
@@ -41,7 +41,6 @@ const screens = {
     ContactMenuScreen:      {screen: ContactMenuScreen},
     TodoScreen:             {screen: TodoScreen},
     MakeNotificationScreen: {screen: MakeNotificationScreen},
-    EditScreen:             {screen: EditScreen},
     ReportScreen:           {screen: ReportScreen},
     CommitteeMenuScreen:    {screen: CommitteeMenuScreen},
     ContactStyretScreen:    {screen: ContactStyretScreen},
@@ -51,6 +50,7 @@ const screens = {
     ContactCTFkomScreen:    {screen: ContactCTFkomScreen},
     ContactSATkomScreen:    {screen: ContactSATkomScreen},
     SpecificListingScreen:  {screen: SpecificListingScreen},
+    SpecificArticleScreen:  {screen: SpecificArticleScreen},
 }
 
 const HomeStack = createStackNavigator(screens, {defaultNavigationOptions: {
