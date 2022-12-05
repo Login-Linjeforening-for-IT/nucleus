@@ -169,10 +169,10 @@ export function DropdownBachelor() {
 
             <View>
                 { course.selected ? 
-                    courses.map((selectedCourse) => {
+                    courses.map((selectedCourse, index) => {
                         return(
                             <TouchableOpacity onPress={() => Linking.openURL(selectedCourse.link)}>
-                                <View style={GS.dropdownContent}>
+                                <View key={index} style={GS.dropdownContent}>
                                     <Text style={T.text15}>{selectedCourse.title}</Text>
                                 </View>
                             </TouchableOpacity>

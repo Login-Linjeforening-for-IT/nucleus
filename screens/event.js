@@ -50,24 +50,22 @@ export default function EventScreen({ navigation }) {
 
   const getData=()=>{
     fetch('https://api.login.no/events') //PRODUCTION
-    // fetch('https://tekkom:rottejakt45@api.login.no:8443') //TESTING
+    // fetch('https://tekkom:rottejakt45@api.login.no:8443/events') //TESTING
     .then(response=>response.json())
     .then(data=>setEvents(data))
   }
 
   if (clickedEvents.length > 0) {
     (async() => {
-      let firstEvent = 0;
+      let storedID = 0;
 
       for (let i = 0; i < clickedEvents.length; i++) {
-        if (CompareDates((clickedEvents)[i].startt, (clickedEvents)[firstEvent].startt) == true) {
-          firstEvent = i
+        if (CompareDates((clickedEvents)[i].startt, (clickedEvents)[storedID].startt) == true) {
+          storedID = i
         }
       }
-      await AsyncStorage.setItem("firstEvent", JSON.stringify((clickedEvents)[firstEvent]))
-      console.log('i er: ', firstEvent)
+      await AsyncStorage.setItem("firstEvent", JSON.stringify((clickedEvents)[storedID]))
     })();
-    console.log(clickedEvents)
   }else{
     (async() => {
       await AsyncStorage.setItem("firstEvent", "")
@@ -77,10 +75,6 @@ export default function EventScreen({ navigation }) {
   useEffect(() => {
     getData();
   },[])
-
-if (clickedEvents > 0) {
-  console.log('clicked: ' + clickedEvents)
-}
 
 return(
       <View>

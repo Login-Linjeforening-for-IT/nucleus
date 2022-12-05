@@ -8,30 +8,60 @@ export default function Theme() {
     const [data, setData] = useState({
         theme: "0"
     }) 
-    
+
+    const fetchState = async() => {
+        let foundState = await AsyncStorage.getItem('theme');
+        switch (foundState) {
+            case "1":
+                setData({
+                    ...data,
+                    theme: "1"
+                    });
+                break;
+
+            case "2":
+                setData({
+                    ...data,
+                    theme: "2"
+                  });
+                break;
+
+            default:
+                setData({
+                    ...data,
+                    theme: "0"
+                  });
+                break;
+        }
+    }
+
     useEffect(() => {
-        changeTheme(); //Needs to use display theme not change
-      }, []);
+        fetchState();
+    },[])
     
     const changeTheme = async() => {
-        const value = await AsyncStorage.getItem("theme")
-            if (value === "0" || !value) {
-                setData({
-                    theme: await AsyncStorage.getItem("theme")
-                })
-                await AsyncStorage.setItem("theme", "1")
-            }else if (value === "1"){
-                setData({
-                    theme: await AsyncStorage.getItem("theme")
-                })
+        switch (data.theme) {
+            case "1":
                 await AsyncStorage.setItem("theme", "2")
-            }else{
                 setData({
-                    theme: await AsyncStorage.getItem("theme")
+                    theme: "2"
                 })
+                break;
+
+            case "2":
                 await AsyncStorage.setItem("theme", "0")
-            }
-        
+                setData({
+                    theme: "0"
+                })
+                break;
+
+            default:
+                await AsyncStorage.setItem("theme", "1")
+                setData({
+                    theme: "1"
+                })
+                break;
+        }
       }
       
       return (

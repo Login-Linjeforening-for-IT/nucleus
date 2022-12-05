@@ -71,9 +71,11 @@ return(
             </View>
             )}
             />
+            {Space('25%')}
         </View>
-          {Space('25%')}
-            <Social/>
+        
+        <Social/>
+      
       </View>    
 
 {/* ========================= DISPLAY BOTTOM MENU ========================= */}

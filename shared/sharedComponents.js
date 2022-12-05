@@ -1,4 +1,4 @@
-import React, {useState } from 'react';
+import React, {useEffect, useState } from 'react';
 import Svg, {Rect} from 'react-native-svg';
 import { SS } from '../styles/settingStyles';
 import { ES } from '../styles/eventStyles';
@@ -61,82 +61,87 @@ export function Kontakt() { //Contact info
     )
 }
 
-export function Notification() {    //Notification enabled/disabled color
-    const [isEnabled, setIsEnabled] = useState(false);
-    const toggleSwitch = () => setIsEnabled(previousState => !previousState);
-    const theme = async() => {
-        const hei = await AsyncStorage.getItem("theme")
-        switch (hei) {
-            case 1:     console.log("her funka det", hei); return 1;
-            case 2:     console.log("her funka det", hei); return 2;
-            case 3:     console.log("her funka det", hei); return 3;
-            default:    console.log("her funka det", hei); return 0;
+export function Notification(index) {    //Notification button
+    const [isEnabled, setState] = useState(false);
+
+    const toggleSwitch = async() => {
+        if (isEnabled == true) {
+            await AsyncStorage.setItem('notification'+index, "0")
+            .then(setState(!isEnabled))
+        }else{
+            await AsyncStorage.setItem('notification'+index, "1")
+            .then(setState(!isEnabled))
         }
     }
-    let num = 0
-    switch (num) {
-        case 1:
-            return(
-                <View>
-                  <Switch
-                    trackColor={{ true: GLOBAL.LIGHT.TRACKCOLOR }}
-                    thumbColor={isEnabled ? GLOBAL.LIGHT.SWITCHOFFSTATE : GLOBAL.LIGHT.SWITCHONSTATE}
-                    ios_backgroundColor={GLOBAL.LIGHT.TRACKBACKGROUNDCOLOR}
-                    onValueChange={toggleSwitch}
-                    value={isEnabled}
-                  />
-                </View>
-            )
-        case 2: 
-            return(
-                <View>
-                <Switch
-                    trackColor={{ true: GLOBAL.CHRISTMAS.TRACKCOLOR }}
-                    thumbColor={isEnabled ? GLOBAL.CHRISTMAS.SWITCHOFFSTATE : GLOBAL.CHRISTMAS.SWITCHONSTATE}
-                    ios_backgroundColor={GLOBAL.CHRISTMAS.TRACKBACKGROUNDCOLOR}
-                    onValueChange={toggleSwitch}
-                    value={isEnabled}
-                />
-                </View>
-            )
-        case 3: 
-        return(
-            <View>
+    
+    const fetchState = async() => {
+        let foundState = await AsyncStorage.getItem('notification'+index);
+        console.log('found ' + foundState)
+        if(foundState === "1"){setState(true)}else{setState(false)}
+    }
+
+    useEffect(() => {
+        fetchState();
+    })
+
+    return(
+        <View>
             <Switch
-                trackColor={{ true: GLOBAL.EASTER.TRACKCOLOR }}
-                thumbColor={isEnabled ? GLOBAL.EASTER.SWITCHOFFSTATE : GLOBAL.EASTER.SWITCHONSTATE}
-                ios_backgroundColor={GLOBAL.EASTER.TRACKBACKGROUNDCOLOR}
+                trackColor={{ true: GLOBAL.DARK.TRACKCOLOR }}
+                thumbColor={isEnabled ? GLOBAL.DARK.SWITCHOFFSTATE : GLOBAL.DARK.SWITCHONSTATE}
+                ios_backgroundColor={GLOBAL.DARK.TRACKBACKGROUNDCOLOR}
                 onValueChange={toggleSwitch}
                 value={isEnabled}
             />
-            </View>
-        )
-        default:
-            return(
-                <View>
-                <Switch
-                    trackColor={{ true: GLOBAL.DARK.TRACKCOLOR }}
-                    thumbColor={isEnabled ? GLOBAL.DARK.SWITCHOFFSTATE : GLOBAL.DARK.SWITCHONSTATE}
-                    ios_backgroundColor={GLOBAL.DARK.TRACKBACKGROUNDCOLOR}
-                    onValueChange={toggleSwitch}
-                    value={isEnabled}
-                />
-                </View>
-            )
-    }
+        </View>
+    )
 }
 
 export function Language() {    //Choose the language
-    const changeLang = () => {
-        setData({
-          ...data,
-          lang: !data.lang
-        });
-      }
-      
+
     const [data, setData] = useState({
         lang: 0
     }) 
+
+    const changeLang = async() => {
+        if (data.lang == 1) {
+            await AsyncStorage.setItem('lang', "0")
+            .then(
+                setData({
+                    ...data,
+                    lang: !data.lang
+                  })
+            )
+        } else {
+            await AsyncStorage.setItem('lang', "1")
+            .then(
+                setData({
+                    ...data,
+                    lang: !data.lang
+                  })
+            )
+        }
+        
+      }
+    
+    const fetchState = async() => {
+        let foundState = await AsyncStorage.getItem('lang');
+        if(foundState === "1"){
+            setData({
+                ...data,
+                lang: 1
+              });
+        }else{
+            setData({
+                ...data,
+                lang: 0
+              });
+        }
+    }
+
+    useEffect(() => {
+        fetchState();
+    },[])
       
     return(
         <View>

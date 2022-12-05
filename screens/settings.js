@@ -80,25 +80,7 @@ const goBack = () => {//hoppe over til mail
               <View style={GS.view}>
                 <Text style={GS.notificationText}>Viktig informasjon</Text>
               </View>
-              <View style={GS.view2}><Notification/></View>
-            </View>
-          </Card>
-
-          <Card>
-            <View style={GS.notificationBack}>
-              <View style={GS.view}>
-                <Text style={GS.notificationText}>Events</Text>
-              </View>
-              <View style={GS.view2}><Notification/></View>
-            </View>
-          </Card>
-
-          <Card>
-            <View style={GS.notificationBack}>
-              <View style={GS.view}>
-                <Text style={GS.notificationText}>Bedpres</Text>
-              </View>
-              <View style={GS.view2}><Notification/></View>
+              <View style={GS.view2}>{Notification(0)}</View>
             </View>
           </Card>
 
@@ -107,9 +89,46 @@ const goBack = () => {//hoppe over til mail
               <View style={GS.view}>
                 <Text style={GS.notificationText}>Påminnelser</Text>
               </View>
-              <View style={GS.view2}><Notification/></View>
+              <View style={GS.view2}>{Notification(1)}</View>
             </View>
           </Card>
+
+          <Card>
+            <View style={GS.notificationBack}>
+              <View style={GS.view}>
+                <Text style={GS.notificationText}>Events</Text>
+              </View>
+              <View style={GS.view2}>{Notification(2)}</View>
+            </View>
+          </Card>
+
+          <Card>
+            <View style={GS.notificationBack}>
+              <View style={GS.view}>
+                <Text style={GS.notificationText}>Bedpres</Text>
+              </View>
+              <View style={GS.view2}>{Notification(4)}</View>
+            </View>
+          </Card>
+
+          <Card>
+            <View style={GS.notificationBack}>
+              <View style={GS.view}>
+                <Text style={GS.notificationText}>TekKom</Text>
+              </View>
+              <View style={GS.view2}>{Notification(5)}</View>
+            </View>
+          </Card>
+
+          <Card>
+            <View style={GS.notificationBack}>
+              <View style={GS.view}>
+                <Text style={GS.notificationText}>CTF</Text>
+              </View>
+              <View style={GS.view2}>{Notification(6)}</View>
+            </View>
+          </Card>
+
         </ScrollView>
       </View>   
 

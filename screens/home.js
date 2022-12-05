@@ -42,7 +42,7 @@ const profilePage = () => {
 
 const reset = () => {
   (async() => {
-    await AsyncStorage.setItem("event", "")
+    await AsyncStorage.setItem("firstEvent", "")
   })();
 }
 const [storedEvent, getEvent] = useState(null);
@@ -50,7 +50,6 @@ const [storedEvent, getEvent] = useState(null);
 useEffect(() => {
 (async () => {
 let foundEvent = await AsyncStorage.getItem("firstEvent");
-console.log('found ' + foundEvent)
 getEvent(foundEvent);
 })();
 
@@ -106,7 +105,7 @@ return(
             setting.map((article, index) => {
               return(
                 <View key={index}>
-                  <TouchableOpacity onPress={() => navigation.navigate('SpecificArticleScreen', item)}>
+                  <TouchableOpacity onPress={() => navigation.navigate('SpecificArticleScreen', article)}>
                     <Card>
                       <Text style={T.centered20}>{article.title}</Text>
                       <Text style={T.centered15}>{article.info}</Text>

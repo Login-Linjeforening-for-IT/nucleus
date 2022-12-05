@@ -35,7 +35,7 @@ export default function Filter(data, title, categories) {
     return(
         <View>
             <View style={ES.absoluteView}>
-                <TextInput ref={val => { this.textInput = val }}
+                <TextInput useRef={val => { this.textInput = val }}
                     style={ES.filterText}
                     maxLength={40}
                     placeholder='Søk..'
