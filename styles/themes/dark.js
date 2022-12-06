@@ -69,17 +69,17 @@ switch (storedTheme) {
   module.exports = {
     DARK:{    //Dark high contrast
       BACKGROUND: '#000020',                //Background of the app
-      DARKER: '#000',                    //Contentcolor of the app
+      DARKER: '#000',                       //Contentcolor of the app
       CONTRAST: '#081334',                  //Contrast to background and darker
       ORANGE: '#fd8738',                    //Logins color
       TEXTCOLOR: 'white',                   //Textcolor of the app
       TITLETEXTCOLOR: 'white',              //ScreenTitleColor of the app
       OPPOSITETEXTCOLOR: 'white',           //Opposite of the background color
       TITLETEXTCOLOR: 'white',              //ScreenTitleColor of the app
-      SWITCHONSTATE: "white",               //Switch off state
-      SWITCHOFFSTATE: "#ffe66b",            //Switch on state
-      TRACKCOLOR: "#FFFFE020",              //Track color of switch
-      TRACKBACKGROUNDCOLOR: "#FFFFE010"     //Background color of switch
+      SWITCHONSTATE: "#000020",               //Switch off state
+      SWITCHOFFSTATE: "#fd8738",            //Switch on state
+      TRACKCOLOR: "#181818",                   //Track color of switch
+      TRACKBACKGROUNDCOLOR: "#000000"          //Background color of switch
     }
   }
   break;
