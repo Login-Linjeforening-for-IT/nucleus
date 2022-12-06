@@ -72,6 +72,11 @@ export const T = StyleSheet.create({
     fontSize: 20,
     color: GLOBAL.DARK.TEXTCOLOR,
   },
+  contact: { //Centered text of size 20, opposite color
+    alignSelf: 'center',
+    fontSize: 20,
+    color: GLOBAL.DARK.OPPOSITETEXTCOLOR,
+  },
   centered25: { //Centered text of size 25
     alignSelf: 'center',
     fontSize: 25,

@@ -73,7 +73,7 @@ return(
           />
           <TouchableOpacity onPress={() => Linking.openURL('mailto:kontakt@login.no')}>
               <View>
-              <Text style={T.centered20}>Funnet en bug?</Text>
+              <Text style={T.contact}>Funnet en bug?</Text>
               <Image style={GS.smallImage} source={require('../assets/plane-orange.png')} />
               </View>
             </TouchableOpacity>
