@@ -6,8 +6,10 @@ const GLOBAL = require('../../styles/themes/dark')
 import { T } from '../../styles/text';
 import { CheckBox, CheckedBox } from '../sharedComponents';
 
-export default function Filter(data, title, categories) {
-
+export default function Filter(props) {
+    let events = props.events
+    events = JSON.stringify(events)
+    
     const [clickedCategory, setClickedCategory] = useState([])
     const [category] = useState([
         {id: '1', category: 'TEKKOM'}, 
@@ -25,12 +27,36 @@ export default function Filter(data, title, categories) {
       }) 
 
     const filterInput = (val) => {
+        console.log(val)
             setFilter({
             ...filter,
             input: val,
             check_textInputChange: true
             })
     }
+    if (filter.input.length > 0) {
+        if(clickedCategory.length > 0) {
+            //  What to do if they have selected category and input text
+            console.log('id: 1 - What to do if they have selected category and input text')
+        }else{
+            //  What to do if they have only input text
+            console.log('id: 2 - What to do if they have only input text')
+        }
+    } else {
+        if(clickedCategory.length > 0) {
+            // What to do if they have only clicked categories
+            console.log('id: 3 - What to do if they have only clicked categories')
+        }else{
+            // What to do if they have done nothing
+            console.log('id: 4 - What to do if they have done nothing')
+        }
+    }
+    //console.log('stringified' + events)
+    // console.log('clicked' + JSON.stringify(clickedCategory))
+    //console.log('clicked length: ' + clickedCategory.length)
+
+    //let filtered = events.filter(element => element.eventID !== event.eventID)
+    //parsed = parsed.filter(element => element.eventID !== event.eventID)
 
     return(
         <View>

@@ -80,6 +80,7 @@ export default function EventScreen({ navigation }) {
   }else{
     (async() => { //Sets it to "" if there are no clicked events
       await AsyncStorage.setItem("firstEvent", "")
+      await AsyncStorage.setItem("clickedEvents", "")
     })();
   }
  
@@ -114,7 +115,7 @@ return(
 
   {/* ========================= DISPLAY CONTENT ========================= */}
         <View style={GS.content}>
-          {search.status ? <EventFilter/>:null}
+          {search.status ? <EventFilter events={events}/>:null}
           {events.length ? 
             <FlatList
             showsVerticalScrollIndicator={false}

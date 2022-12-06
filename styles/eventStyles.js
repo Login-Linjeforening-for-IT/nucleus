@@ -1,6 +1,12 @@
 import { StyleSheet } from "react-native";  //Stylesheet file
 import { T } from "./text";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 const GLOBAL = require('./themes/dark')
+
+// const getTheme = async() => {
+  //  WIP ID: 5, GOING TO BE USED FOR THEMES
+// } 
+
 export const ES = StyleSheet.create({
 
 //========================= EventScreen =========================

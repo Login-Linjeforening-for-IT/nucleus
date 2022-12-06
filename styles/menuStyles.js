@@ -40,9 +40,9 @@ export const MS = StyleSheet.create ({
   },
   searchIcon: {  //Size of icons
     right: 18,
-    top: '40%',
+    top: '45%',
     width: 36,
-    height: 50
+    height: 40
   },
   
 //  ========================= STYLESHEET BOTTOM MENU =========================
