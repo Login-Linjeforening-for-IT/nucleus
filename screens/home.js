@@ -13,10 +13,9 @@ import {
   Text, 
   View, 
   Image, 
-  FlatList,
   TouchableOpacity,
+  ScrollView,
 } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
 
 {/* ========================= APP START ========================= */}
 
@@ -26,112 +25,113 @@ export default function HomeScreen({ navigation }) {
       {id: '1', title: 'Hans på DigSec hacket Dogs Inc!', content: 'Trykk her for å lese den spennende saken om hvordan Hans kom seg inn. The sky calls to us rogue Orions sword decipherment venture the only home weve ever known. Cambrian explosion white dwarf something incredible...'},
       {id: '2', title: 'Dogs Inc. var på besøk i Gjøvik', content: 'Denne saken handler om Dogs Inc. og hva de gjorde på NTNU Gjøvik. Euclid vanquish the impossible muse about intelligent beings of global death. The carbon in our apple pies condem two ghostly white figures in coveralls and helmets to forever serve Login. '},
     ])
-{/* ========================= DISPLAY APP START ========================= */}
-const eventPage = () => {
-  navigation.navigate('EventScreen');
-}
-const listingPage = () => {
-  navigation.navigate('ListingScreen');
-}
-const aboutPage = () => {
-  navigation.navigate('AboutScreen');
-}
-const profilePage = () => {
-  navigation.navigate('ProfileScreen');
-}
+  {/* ========================= DISPLAY APP START ========================= */}
+  const eventPage = () => {
+    navigation.navigate('EventScreen');
+  }
+  const listingPage = () => {
+    navigation.navigate('ListingScreen');
+  }
+  const aboutPage = () => {
+    navigation.navigate('AboutScreen');
+  }
+  const profilePage = () => {
+    navigation.navigate('ProfileScreen');
+  }
 
-const reset = () => {
-  (async() => {
-    await AsyncStorage.setItem("firstEvent", "")
-  })();
-}
-const [storedEvent, getEvent] = useState(null);
+  const reset = () => {
+    (async() => {
+      await AsyncStorage.setItem("firstEvent", "")
+      let clickedEvents = await AsyncStorage.getItem('clickedEvents')
+      let parsed = JSON.parse(clickedEvents)
+      parsed = parsed.filter(element => element.eventID !== event.eventID)
+      await AsyncStorage.setItem('clickedEvents', JSON.stringify(parsed))
+    })();
+  }
+  const [storedEvent, getEvent] = useState(null);
 
-useEffect(() => {
-(async () => {
-let foundEvent = await AsyncStorage.getItem("firstEvent");
-getEvent(foundEvent);
-})();
+  useEffect(() => {
+    (async () => {
+      let foundEvent = await AsyncStorage.getItem("firstEvent"); //Fetches the firstcoming event from storage
+      getEvent(foundEvent); //  Updates the array to include the firstcoming array
+    })();
+  }, []);
+  
+  const event = storedEvent ? JSON.parse(storedEvent) : null; //  Parses the firstcoming event object
+  
+    return(
+      <View>
+          <StatusBar style="light" />
+          {/* ========================= DISPLAY TOP MENU ========================= */}
+          <View style={MS.topMenu}>
+          <TouchableOpacity onPress={() => aboutPage()}>
+          <Image style={MS.tMenuIcon} source={require('../assets/login-text.png')} />
+          </TouchableOpacity>
 
-}, []);
+          <Text style={MS.screenTitle}>Hjem</Text>
 
-const event = storedEvent ? JSON.parse(storedEvent) : null;
+          <TouchableOpacity onPress={() => profilePage()}>
+            <Image style={MS.tMenuIcon} source={require('../assets/loginperson.png')} />
+          </TouchableOpacity>
+          </View>
 
-return(
-    <View>
-
-      <StatusBar style="light" />
-{/* ========================= DISPLAY TOP MENU ========================= */}
-  <View style={MS.topMenu}>
-    <TouchableOpacity onPress={() => aboutPage()}>
-      <Image style={MS.tMenuIcon} source={require('../assets/login-text.png')} />
-    </TouchableOpacity>
-
-    <Text style={MS.screenTitle}>Hjem</Text>
-
-      <TouchableOpacity onPress={() => profilePage()}>
-        <Image style={MS.tMenuIcon} source={require('../assets/loginperson.png')} />
-      </TouchableOpacity>
-  </View>
-
-{/* ========================= DISPLAY CONTENT ========================= */}
-      <View style={GS.content}>
-        <ScrollView>
-        {event != null ? (
-                  <TouchableOpacity onPress={() => navigation.navigate('SpecificEventScreen', event)}>
-                    <Card style={ES.eventCard}>
-                      <View style={ES.eventBack}>
-                        <View>
-                            {CategorySquare(event.category)}
-                            <Text style={ES.eventCardDayText}>{event.startt[8]}{event.startt[9]}</Text>
-                            {Month(event.startt[5] + event.startt[6])}
-                        </View>
-                          <View style={ES.view2}>
-                          
-                            <View style = {ES.title}><Text style={ES.title}>{event.eventname}</Text></View>
-                            <View style = {ES.loc}><Text style={ES.loc}>{event.startt[11]}{event.startt[12]}:{event.startt[14]}{event.startt[15]} {event.roomno}. {event.campus}</Text></View>
+          {/* ========================= DISPLAY CONTENT ========================= */}
+          <View style={GS.content}>
+            <ScrollView>
+            {event != null ? (
+                      <TouchableOpacity onPress={() => navigation.navigate('SpecificEventScreen', event)}>
+                        <Card style={ES.eventCard}>
+                          <View style={ES.eventBack}>
+                            <View>
+                                {CategorySquare(event.category)}
+                                <Text style={ES.eventCardDayText}>{event.startt[8]}{event.startt[9]}</Text>
+                                {Month(event.startt[5] + event.startt[6])}
+                            </View>
+                              <View style={ES.view2}>
+                              
+                                <View style = {ES.title}><Text style={ES.title}>{event.eventname}</Text></View>
+                                <View style = {ES.loc}><Text style={ES.loc}>{event.startt[11]}{event.startt[12]}:{event.startt[14]}{event.startt[15]} {event.roomno}. {event.campus}</Text></View>
+                              </View>
+                              <View style={ES.view3}>
+                                  <TouchableOpacity onPress={() => reset() + getEvent(null)}>
+                                    <View style = {ES.greenLight}><GreenLight/></View>
+                                    <View style = {ES.checkContent}><Check/></View>
+                                  </TouchableOpacity>
+                              </View>
                           </View>
-                          <View style={ES.view3}>
-                              <TouchableOpacity onPress={() => reset() + getEvent(null)}>
-                                <View style = {ES.greenLight}><GreenLight/></View>
-                                <View style = {ES.checkContent}><Check/></View>
-                              </TouchableOpacity>
-                          </View>
-                      </View>
-                    </Card>
-                  </TouchableOpacity>
-                ):null}
-          {
-            setting.map((article, index) => {
-              return(
-                <View key={index}>
-                  <TouchableOpacity onPress={() => navigation.navigate('SpecificArticleScreen', article)}>
-                    <Card>
-                      <Text style={T.centered20}>{article.title}</Text>
-                      <Text style={T.centered15}>{article.info}</Text>
-                      <Text style={T.centered15}>{article.content}</Text>
-                    </Card>
-                  </TouchableOpacity>
-                </View>
-              )
-            })
-          }
-        </ScrollView>
-      </View>    
+                        </Card>
+                      </TouchableOpacity>
+                    ):null}
+              {
+                setting.map((article, index) => {
+                  return(
+                    <View key={index}>
+                      <TouchableOpacity onPress={() => navigation.navigate('SpecificArticleScreen', article)}>
+                        <Card>
+                          <Text style={T.centered20}>{article.title}</Text>
+                          <Text style={T.centered15}>{article.info}</Text>
+                          <Text style={T.centered15}>{article.content}</Text>
+                        </Card>
+                      </TouchableOpacity>
+                    </View>
+                  )
+                })
+              }
+            </ScrollView>
+          </View>    
 
-{/* ========================= DISPLAY BOTTOM MENU ========================= */}
-      <View style={MS.bMenu}>
-      <TouchableOpacity>
-        <Image style={MS.bMenuIcon} source={require('../assets/house-orange.png')} />
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => eventPage()}>
-        <Image style={MS.bMenuIcon} source={require('../assets/calendar777.png')} />
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => listingPage()}>
-        <Image style={MS.bMenuIcon} source={require('../assets/business.png')} />
-      </TouchableOpacity>
-      </View>     
-    </View>
-    
+          {/* ========================= DISPLAY BOTTOM MENU ========================= */}
+          <View style={MS.bMenu}>
+          <TouchableOpacity>
+            <Image style={MS.bMenuIcon} source={require('../assets/house-orange.png')} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => eventPage()}>
+            <Image style={MS.bMenuIcon} source={require('../assets/calendar777.png')} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => listingPage()}>
+            <Image style={MS.bMenuIcon} source={require('../assets/business.png')} />
+          </TouchableOpacity>
+          </View>     
+          </View>      
   )
 };

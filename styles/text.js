@@ -28,6 +28,13 @@ export const T = StyleSheet.create({
     color: GLOBAL.DARK.TEXTCOLOR,
     fontWeight: 'bold',
   },
+  bold28: {
+    maxWidth: '89%',
+    alignSelf: 'center',
+    fontSize: 28,
+    color: GLOBAL.DARK.TEXTCOLOR,
+    fontWeight: 'bold',
+  },
   text30: { //Text of size 30
     fontSize: 30,
     color: GLOBAL.DARK.TEXTCOLOR,
@@ -54,6 +61,11 @@ export const T = StyleSheet.create({
     alignSelf: 'center',
     fontSize: 15,
     color: GLOBAL.DARK.TEXTCOLOR,
+  },
+  orangeCentered15: { //Centered text of size 15
+    alignSelf: 'center',
+    fontSize: 15,
+    color: GLOBAL.DARK.ORANGE,
   },
   centered20: { //Centered text of size 20
     alignSelf: 'center',

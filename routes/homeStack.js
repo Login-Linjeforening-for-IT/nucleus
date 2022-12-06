@@ -14,22 +14,15 @@ import MakeNotificationScreen from '../screens/internal/makeNotification';
 import LoginScreen from '../screens/login';
 import ProfileScreen from '../screens/profile';
 import ReportScreen from '../screens/contact/report';
-import ContactScreen from '../screens/contact/contactTekKom';
 import ContactMenuScreen from '../screens/contact/contactMenu';
 import CommitteeMenuScreen from '../screens/contact/committeeMenu';
-import ContactStyretScreen from '../screens/contact/contactStyret';
-import ContactEventKomScreen from '../screens/contact/contactEventKom';
-import ContactTekKomScreen from '../screens/contact/contactTekKom';
-import ContactPRScreen from '../screens/contact/contactPR';
-import ContactCTFkomScreen from '../screens/contact/contactCTFkom';
-import ContactSATkomScreen from '../screens/contact/contactSATkom';
 import SpecificListingScreen from '../screens/specificListing';
 import SpecificArticleScreen from '../screens/specificarticle';
 
 const screens = {
+    HomeScreen:             {screen: HomeScreen},
     EventScreen:            {screen: EventScreen},
     ProfileScreen:          {screen: ProfileScreen},
-    HomeScreen:             {screen: HomeScreen},
     ListingScreen:          {screen: ListingScreen},
     SpecificEventScreen:    {screen: SpecificEventScreen},
     AboutScreen:            {screen: AboutScreen},
@@ -37,18 +30,11 @@ const screens = {
     InternalScreen:         {screen: InternalScreen},
     LoginScreen:            {screen: LoginScreen},
     SettingScreen:          {screen: SettingScreen},
-    ContactScreen:          {screen: ContactScreen},
     ContactMenuScreen:      {screen: ContactMenuScreen},
     TodoScreen:             {screen: TodoScreen},
     MakeNotificationScreen: {screen: MakeNotificationScreen},
     ReportScreen:           {screen: ReportScreen},
     CommitteeMenuScreen:    {screen: CommitteeMenuScreen},
-    ContactStyretScreen:    {screen: ContactStyretScreen},
-    ContactEventKomScreen:  {screen: ContactEventKomScreen},
-    ContactTekKomScreen:    {screen: ContactTekKomScreen},
-    ContactPRScreen:        {screen: ContactPRScreen},
-    ContactCTFkomScreen:    {screen: ContactCTFkomScreen},
-    ContactSATkomScreen:    {screen: ContactSATkomScreen},
     SpecificListingScreen:  {screen: SpecificListingScreen},
     SpecificArticleScreen:  {screen: SpecificArticleScreen},
 }

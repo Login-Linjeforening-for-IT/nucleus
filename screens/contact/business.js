@@ -4,7 +4,7 @@ import { StatusBar } from 'expo-status-bar';
 import { GS } from '../../styles/globalStyles';
 import { T } from '../../styles/text';
 import { MS } from '../../styles/menuStyles';
-import Card, { Kontakt, Space } from '../../shared/sharedComponents';
+import Card, { Kontakt, Space, Line } from '../../shared/sharedComponents';
 import { 
   Text, 
   View, 
@@ -53,34 +53,63 @@ const goBack = () => {
         
         <ScrollView showsVerticalScrollIndicator={false}>
           <Card>
-            <Text style={T.centered20}>Er din bedrift på utskikk etter skarpe IT-studenter? Sjekk ut alt vi har å tilby din bedrift.</Text>
+            <Text style={T.bold40}>For bedrifter</Text>{Space(5)}
+
+            <View style={GS.row}>
+              <Text>{Line(60,5)}</Text>
+              <View>
+              <Text style={T.boldWithLine}>Er din bedrift på utskikk etter skarpe IT-studenter? Sjekk ut alt vi har å tilby din bedrift.</Text>
+              </View>
+            </View>
             {Space(10)}
             
             <View>
-              <Text style={T.centered25}>Bedpres</Text>
+              <View style={GS.row}>
+                <Image style={GS.medium} source={require('../../assets/bedpres-white.png')} />
+                <Text style={T.bold28}>Bedpres</Text>
+              </View>
               <Text style={T.paragraph}>Login sin PR komite arrangerer bedriftspresentasjoner hvor bedriften din får mulighet til å presentere til studentene hva dere jobber med, hvilke tjenester dere tilbyr, hvordan dere jobber osv. På denne måten blir studentene bevisst på hva dere tilbyr, og ikke minst arbeidsmiljøet deres. Vi tilbyr tilrettelegging for matservering (Pizza) under presentasjonen, men det er mest vanlig å rusle ned til en restaurant i byen for bespisning og mingling mellom studenter og bedriftsrepresentanter.</Text>
               {Space(5)}
             </View>
 
             <View>
-              <Text style={T.centered25}>Cyberdagene</Text>
+              <View style={GS.row}>
+                <Image style={GS.medium} source={require('../../assets/pr-white.png')} />
+                <Text style={T.bold28}>Cyberdagene</Text>
+              </View>
               <Text style={T.paragraph}>Cyberdagene er vår karrieredag! Den arrangeres en gang per semester, og er en super arena for å rekruttere og promotere seg selv mot studentene våre. Her blir det mulighet til å ta en prat med studenter, markedsføre dere, og ikke minst annonsere sommerjobber til ivrige studenter! Bedriften får en stand og bestemmer selv hva dere ønsker å gjennomføre under selve karrieredagen. Her tilrettelegger vi også for speed intervjuer dersom det er ønskelig. På kvelden blir det lagt opp for mingling med studenter på Huset med en pils og noe mat.</Text>
               {Space(5)}
             </View>
 
             <View>
-              <Text style={T.centered25}>Workshop / Fagpres</Text>
+              <View style={GS.row}>
+                <Image style={GS.medium} source={require('../../assets/ctfkom-white.png')} />
+                <Text style={T.bold28}>CTF</Text>
+              </View>
+              <Text style={T.paragraph}>Capture the Flag er en perfekt arena for å både bli kjent med, og å utvikle studentene sine info-sec ferdigheter. Her kan dere som bedrift utfordre studentene våre til å løse oppgaver sammen! Vi oppfordrer til at dere har en egenlaget CTF som studentene kan leke seg med. Etter selve CTF'en er det vanlig å ta med alle deltagerne ned til en restaurant for bespising og mingling med bedriftsrepresentantene.</Text>
+              {Space(5)}
+            </View>
+
+            <View>
+              <View style={GS.row}>
+                <Image style={GS.medium} source={require('../../assets/ctfkom-white.png')} />
+                <Text style={T.bold28}>Workshop & Fagpres</Text>
+              </View>
               <Text style={T.paragraph}>Login arrangerer også workshops og fagpresentasjoner. Workshops går ut på at bedriften får litt tid hvor de kan presentere seg selv, etterfulgt av at studenter jobber med diverse prosjekter de har samtidig som bedriftsrepresentanter mingler og gir tips til studenter. Med en fagpresentasjon vil bedriften igjen kunne kort presentere seg selv før det blir holdt en faglig fokusert presentasjon av bedriften. Her kan det være formidling av teknologier eller prinsipp som deres bedrift jobber med.</Text>
               {Space(5)}
             </View>
             
             <View>
-              <Text style={T.centered25}>Utlysning / Profilering</Text>
+              <View style={GS.row}>
+                <Image style={GS.medium} source={require('../../assets/ctfkom-white.png')} />
+                <Text style={T.bold28}>Utlysning & Profilering</Text>
+              </View>
               <Text style={T.paragraph}>PR komiteen tilbyr også deling av stillingsutlysninger, jobbannonser, og annen type profilering på våre aktive sosiale kanaler (Discord, Instagram, Facebook, Login.no). Dersom bedriften har arrangert en bedpres, workshop/fagpres eller CTF med oss det gjeldene semesteret vil profilering være inkludert (uten ekstra kostnad).</Text>
             </View>
 
             <Kontakt/>
             </Card>
+            {Space(10)}
             </ScrollView>
       </View>   
 

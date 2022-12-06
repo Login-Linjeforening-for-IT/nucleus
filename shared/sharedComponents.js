@@ -46,17 +46,17 @@ export function Kontakt() { //Contact info
     return(
     <View>
         <Text/>
-        <Text style={T.centered25}>Kontakt</Text>
+        <Text style={T.centeredBold25}>Kontakt</Text>
         <Text style={T.centered15}>Login - Linjeforeningen for IT</Text>
         <Text style={T.centered15}>Teknologivegen 22</Text>
         <Text style={T.centered15}>Bygg A, rom 155</Text>
         <Text style={T.centered15}>2815 GJØVIK</Text>
         <Text/>
-        <Text style={T.centered15}>kontakt@logntnu.no</Text>
+        <Text style={T.orangeCentered15} onPress={() => Linking.openURL('mailto:kontakt@login.no')}>kontakt@login.no</Text>
         <Text/>
         <Text/>
         <Text style={T.red}>map goes here</Text>
-        <Text/><Text/><Text/><Text/>
+        <Text/>{Space(15)}
     </View> 
     )
 }
@@ -76,7 +76,6 @@ export function Notification(index) {    //Notification button
     
     const fetchState = async() => {
         let foundState = await AsyncStorage.getItem('notification'+index);
-        console.log('found ' + foundState)
         if(foundState === "1"){setState(true)}else{setState(false)}
     }
 
@@ -299,4 +298,91 @@ export function CompareDates(firstDate, secondDate) { // True if firstdate is ne
     }else{
         return -1
     }
+}
+
+export function AllComitees() {
+    return(
+        <View>
+          <Image style={GS.personImage} source={require('../assets/leder.png')} />
+          {Space(10)}
+          <Text style={T.leaderTitle}>Leder</Text>
+          {Space(5)}
+          <Text style={T.leaderName}>Anders Eiken</Text>
+          {Space(5)}
+          <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/199580276823818240')}>
+            <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}Eiken#6059</Text>
+          </TouchableOpacity>
+          {Space(25)}
+          <Image style={GS.personImage} source={require('../assets/nestleder.png')} />
+          {Space(10)}
+          <Text style={T.leaderTitle}>Nestleder</Text>
+          {Space(5)}
+          <Text style={T.leaderName}>Mads Halland</Text>
+          {Space(5)}
+          <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/193774211242655746')}>
+          <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}¬.¬#6719</Text>
+          </TouchableOpacity>
+          {Space(25)}
+          <Image style={GS.personImage} source={require('../assets/sekreter.png')} />
+          {Space(10)}
+          <Text style={T.leaderTitle}>Sekretær</Text>
+          {Space(5)}
+          <Text style={T.leaderName}>Celina Brynildsen</Text>
+          {Space(5)}
+          <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/745317481190785126')}>
+            <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}Celina#6955</Text>
+          </TouchableOpacity>
+          {Space(25)}
+          <Image style={GS.personImage} source={require('../assets/eventkomleder.png')} />
+          {Space(10)}
+          <Text style={T.leaderTitle}>EventKom leder</Text>
+          {Space(5)}
+          <Text style={T.leaderName}>Sofie Hagen</Text>
+          {Space(5)}
+          <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/877183922021216256')}>
+            <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}sofiee#9763</Text>
+          </TouchableOpacity>
+          {Space(25)}
+          <Image style={GS.personImage} source={require('../assets/prleder.png')} />
+          {Space(10)}
+          <Text style={T.leaderTitle}>PR leder</Text>
+          {Space(5)}
+          <Text style={T.leaderName}>Kristina Kataki</Text>
+          {Space(5)}
+          <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/877108421772582962')}>
+            <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}Kataki#7254</Text>
+          </TouchableOpacity>
+          {Space(25)}
+          <Image style={GS.personImage} source={require('../assets/tekkomleder.png')} />
+          {Space(10)}
+          <Text style={T.leaderTitle}>TekKom leder</Text>
+          {Space(5)}
+          <Text style={T.leaderName}>Simon Edna</Text>
+          {Space(5)}
+          <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/298525088914079745')}>
+            <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}Sim#3909</Text>
+          </TouchableOpacity>
+          {Space(25)}
+          <Image style={GS.personImage} source={require('../assets/ctfkomleder.png')} />
+          {Space(10)}
+          <Text style={T.leaderTitle}>CTF leder</Text>
+          {Space(5)}
+          <Text style={T.leaderName}>Eskil Refsgaard</Text>
+          {Space(5)}
+          <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/522483274933731331')}>
+            <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}refsgaard#9067</Text>
+          </TouchableOpacity>
+          {Space(25)}
+          <Image style={GS.personImage} source={require('../assets/satkomleder.png')} />
+          {Space(10)}
+          <Text style={T.leaderTitle}>SatKom leder</Text>
+          {Space(5)}
+          <Text style={T.leaderName}>Sebastian Hestsveen</Text>
+          {Space(5)}
+          <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/119120560931340290')}>
+            <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}stubbe#8694</Text>
+          </TouchableOpacity>
+          {Space(20)}
+        </View>
+    )
 }

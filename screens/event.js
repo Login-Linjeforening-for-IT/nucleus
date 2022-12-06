@@ -20,6 +20,7 @@ import {
 {/* ========================= APP START ========================= */}
 
 export default function EventScreen({ navigation }) {
+  //Declaring screens you can navigate to from this screen
   const listingPage = () => {
   navigation.navigate('ListingScreen');
   }
@@ -33,52 +34,63 @@ export default function EventScreen({ navigation }) {
     navigation.navigate('ProfileScreen');
   }
 
-  const toggleSearchBar = () => {
+  //  Search bar items
+  const [search, toggleSearch] = useState({ //  Stores the search bars visiblity
+    status: 0
+  }) 
+
+  const toggleSearchBar = () => { //Toggle if the search option should be visible
     toggleSearch({
       ...search,
       status: !search.status
     });
   }
+  const [filter, updateFilter] = useState([]) // Not used at this time, to define what to search for
 
-  const [search, toggleSearch] = useState({
-    status: 0
-  }) 
+  const [events, setEvents] = useState([]) // Stores events gathered from api
+  const [clickedEvents, setClickedEvents] = useState([]) // Stores clicked events
 
-  const [events, setEvents] = useState([]) 
-  const [clickedEvents, setClickedEvents] = useState([])
-  const [filter, updateFilter] = useState([])
-
-  const getData=()=>{
+  const getData=()=>{ //  Fetches data from API
     fetch('https://api.login.no/events') //PRODUCTION
     // fetch('https://tekkom:rottejakt45@api.login.no:8443/events') //TESTING
     .then(response=>response.json())
     .then(data=>setEvents(data))
   }
 
-  if (clickedEvents.length > 0) {
+  const fetchState = async() => { //Fetches the state of every object
+    let foundState = await AsyncStorage.getItem('clickedEvents');
+    if (foundState != null) {
+      let parsed = JSON.parse(foundState)
+      setClickedEvents(parsed)
+    } 
+}
+  
+  if (clickedEvents.length > 0) { // Checks if there are any stored events
     (async() => {
       let storedID = 0;
 
-      for (let i = 0; i < clickedEvents.length; i++) {
+      for (let i = 0; i < clickedEvents.length; i++) { // Finds the firstcoming event
         if (CompareDates((clickedEvents)[i].startt, (clickedEvents)[storedID].startt) == true) {
           storedID = i
         }
-      }
+      } //  Stores the firstcoming event
+      await AsyncStorage.setItem("clickedEvents", JSON.stringify(clickedEvents))
       await AsyncStorage.setItem("firstEvent", JSON.stringify((clickedEvents)[storedID]))
     })();
   }else{
-    (async() => {
+    (async() => { //Sets it to "" if there are no clicked events
       await AsyncStorage.setItem("firstEvent", "")
     })();
   }
  
-  useEffect(() => {
+  useEffect(() => { //  Renders instantly when the screen is loaded
+    fetchState();
     getData();
   },[])
 
 return(
       <View>
-        <StatusBar style="light" />
+        <StatusBar style="light" /> 
   {/* ========================= DISPLAY TOP MENU ========================= */}
     <View style={MS.topMenu}>
       <TouchableOpacity onPress={() => aboutPage()}>
@@ -111,7 +123,7 @@ return(
             data={events}
             renderItem={({item}) => (
               <View>
-                {clickedEvents.includes(item) ? (
+                {clickedEvents.some(event => event.eventID === item.eventID) ? (
                   <TouchableOpacity onPress={() => navigation.navigate('SpecificEventScreen', item)}>
                     <Card style={ES.eventCard}>
                       <View style={ES.eventBack}>
@@ -148,7 +160,7 @@ return(
                         <View style = {ES.loc}><Text style={ES.loc}>{item.startt[11]}{item.startt[12]}:{item.startt[14]}{item.startt[15]} {item.roomno}. {item.campus}</Text></View>
                       </View>
                       <View style={ES.view3}>
-                          <TouchableOpacity onPress={async() => await AsyncStorage.setItem("clickedEvents", JSON.stringify(clickedEvents)).then(setClickedEvents([...clickedEvents, item]))}>
+                          <TouchableOpacity onPress={() => setClickedEvents([...clickedEvents, item])}>
                             <View style = {ES.greenLight}><GrayLight/></View>
                             <View style = {ES.checkContent}><Check/></View>
                           </TouchableOpacity>

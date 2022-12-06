@@ -3,13 +3,14 @@ import { GS } from '../../styles/globalStyles';
 import { MS } from '../../styles/menuStyles';
 import { T } from '../../styles/text';
 import React, { useState } from 'react';
-import Card from '../../shared/sharedComponents';
+import Card, { Space, AllComitees, Line } from '../../shared/sharedComponents';
 import { 
   Text, 
   View, 
   Image, 
   TouchableOpacity,
-  FlatList
+  ScrollView,
+  Linking
 } from 'react-native';
 
 {/* ========================= APP START ========================= */}
@@ -49,36 +50,35 @@ const goBack = () => {
       <Image style={MS.goBack} source={require('../../assets/goback777.png')} />
     </TouchableOpacity>
 
-    <Text style={MS.screenTitle}> Velg Komité</Text>
+    <Text style={MS.screenTitle}>Komité</Text>
 
       <TouchableOpacity onPress={() => profilePage()}>
         <Image style={MS.tMenuIcon} source={require('../../assets/loginperson-orange.png')} />
       </TouchableOpacity>
   </View>
 {/* ========================= DISPLAY CONTENT ========================= */}
-<View style={GS.content}>
-
-          <FlatList
-          showsVerticalScrollIndicator={''}
-          numColumns={1}
-          keyExtractor={(item) => item.id}
-          data={setting}
-          renderItem={({item}) => (
-            <View>
-            <TouchableOpacity onPress={() => navigation.navigate(item.nav, item)}>
-              <Card>
-              <Text style={T.centered20}>{item.title}</Text>
-              </Card>
-            </TouchableOpacity>
-          </View>
-          )}
-          />
-          <TouchableOpacity onPress={() => navigation.navigate('ContactScreen')}>
+  <View style={GS.content}>
+    <ScrollView>
+      <View>
+        <Card>
+            <TouchableOpacity onPress={() => Linking.openURL('mailto:kontakt@login.no')}>
               <View>
-                <Image style={GS.smallImage} source={require('../../assets/login-text.png')} />
+              <View style={GS.row}>
+              <Text>{Line(60,5)}</Text>
+              <View>
+              <Text style={T.boldWithLine}>Trykk på flyet for henvendelser angående app, nettside, eller som ikke skal til en konkret komite.</Text>
+              </View>
+            </View>
+            {Space(10)}
+                <Image style={GS.image200} source={require('../../assets/plane-orange.png')} />
               </View>
             </TouchableOpacity>
-      </View>    
+          <AllComitees/>
+        </Card>
+        {Space(10)}
+      </View>
+    </ScrollView>
+  </View>    
 
 {/* ========================= DISPLAY BOTTOM MENU ========================= */}
     <View style={MS.bMenu}>

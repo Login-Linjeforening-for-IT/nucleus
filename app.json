@@ -10,7 +10,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#000000"
     },
     "updates": {
       "fallbackToCacheTimeout": 0,
@@ -21,7 +21,7 @@
         "expo-notifications",
         {
           "icon": "./assets/login-text.png",
-          "color": "#ffffff",
+          "color": "#000000",
           "sounds": [
             "./local/assets/notification-sound.wav",
             "./local/assets/notification-sound-other.wav"
@@ -39,7 +39,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
+        "backgroundColor": "#000000"
       },
       "package": "com.eirikhanasand.Login"
     },

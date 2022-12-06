@@ -71,9 +71,8 @@ return(
             </View>
             )}
             />
-            {Space('25%')}
         </View>
-        
+        <View><Text>{Space(150)}</Text></View>
         <Social/>
       
       </View>    

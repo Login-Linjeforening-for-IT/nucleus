@@ -45,6 +45,12 @@ export const GS = StyleSheet.create({
     height: 120,
     width: 150,
   },
+  image200: { //Used anywhere there is a image with height of 200
+    top: -30,
+    alignSelf: 'center',
+    height: 100,
+    width: 200,
+  },
   parentComitteeView: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -110,6 +116,7 @@ export const GS = StyleSheet.create({
     width: 25
   },
   medium: {
+    alignSelf: 'center',
     height: 50,
     width: 50
   },

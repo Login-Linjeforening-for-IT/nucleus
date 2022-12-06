@@ -7,6 +7,7 @@ import { SS } from '../../styles/settingStyles';
 import React, { useState } from 'react';
 import GreenLight, { Check, GrayLight } from '../../shared/eventComponents/otherComponents';
 import { Button, CardSmaller, Space } from '../../shared/sharedComponents';
+//import nodemailer from 'nodemailer';
 import { 
   Text, 
   View, 
@@ -19,7 +20,6 @@ import {
 {/* ========================= APP START ========================= */}
 
 export default function ReportScreen( { navigation }) {
-
 const listingPage = () => {
   navigation.navigate('ListingScreen');
 }
@@ -32,33 +32,41 @@ const homePage = () => {
 const profilePage = () => {
   navigation.navigate('ProfileScreen');
 }
-const sendForm = async() => {
-  if (data.name === data.name) {
-    //Mail må sendes her
-    const options = {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data)
+// sendEmail = () => {
+//   const transporter = nodemailer.createTransport({
+//     host: 'email.server.com',
+//     port: '587',
+//     secure: 'false',
+//     auth: {
+//       user: 'hanasandeirik@gmail.com',
+//       pass: 'Eirik2002-2002'
+//     }
+//   })
+  
+//   const mailOptions = {
+//     from: 'hanasandeirik@gmail.com',
+//     to: 'eirik.hanasand@gmail.com',
+//     subject: 'Hello from React Native',
+//     text: 'This is a test email from my React Native app.'
+//     };
+  
+//     transporter.sendMail(mailOptions, (error, info) => {
+//       if (error) {
+//       console.log(error);
+//       } else {
+//       console.log('Email sent: ' + info.response);
+//       }
+//       });
+  
+  const sendForm = () => {
+    if (data.name === data.name) {
+      //sendEmail();
+      Alert.alert('Takk for beskjed.')
+    } else {
+      Alert.alert('Feil brukernavn eller passord')
     }
-    const req = await fetch('/mail/feedback', options)
-    const res = await req.json()
-    Alert.alert('Takk for beskjed.')
-    console.log(res)
-    setData({
-      ...data,
-      name: '',
-      contact: '',
-      content: '',
-      check_nameInputChange: false,
-      check_contactInputChange: false,
-      check_contentInputChange: false,
-    })
-  } else {
-    Alert.alert('Feil brukernavn eller passord')
   }
-}
+
 const goBack = () => {
   navigation.goBack()
 }
@@ -144,8 +152,9 @@ const inputContent = (val) => {
 <View style={GS.content}>
         
         <View>
+          {Space(40)}
           <Text style={T.centered}>Anonymt og sikkert. Alltid.</Text>
-          {Space(10)}
+          {Space(30)}
 
           <View style={SS.loginView}>
             <CardSmaller>
@@ -168,12 +177,11 @@ const inputContent = (val) => {
                 <View style = {SS.checkContent}><Check/></View>
                 </View>
                 }
-                {Space(5)}
               </View>
             </CardSmaller>
           </View>
 
-          {Space(10)}
+          {Space(20)}
 
           <View style={SS.loginView}>
             <CardSmaller>
@@ -196,12 +204,11 @@ const inputContent = (val) => {
                 <View style = {SS.checkContent}><Check/></View>
                 </View>
                 }
-                {Space(5)}
               </View>
             </CardSmaller>
           </View>
 
-          {Space(10)}
+          {Space(20)}
 
           <View style={SS.reportContentView}>
             <CardSmaller>
@@ -225,13 +232,12 @@ const inputContent = (val) => {
                 <View style = {SS.reportCheckContent}><Check/></View>
                 </View>
                 }
-                {Space(5)}
               </View>
             </CardSmaller>  
           </View>
 
           <View>
-          {Space(15)}
+          {Space(40)}
             <TouchableOpacity 
             disabled ={!data.check_contentInputChange}
             onPress={() => sendForm()}>
