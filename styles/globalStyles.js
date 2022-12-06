@@ -30,7 +30,7 @@ export const GS = StyleSheet.create({
     width: '80%',
     height: 50,
     borderRadius: 20,
-    color: 'white',
+    color: GLOBAL.DARK.TEXTCOLOR,
   },
   view: { //Left view of notificationScreen
     alignSelf: 'center',
@@ -58,17 +58,17 @@ export const GS = StyleSheet.create({
   },
   comittee1: {
     borderRadius: 10,
-    backgroundColor: '#222',
+    backgroundColor: GLOBAL.DARK.CONTRAST,
     width: '30%'
   },
   comittee2: {
     borderRadius: 10,
-    backgroundColor: '#222',
+    backgroundColor: GLOBAL.DARK.CONTRAST,
     width: '30%'
   },
   comittee3: {
     borderRadius: 10,
-    backgroundColor: '#222',
+    backgroundColor: GLOBAL.DARK.CONTRAST,
     width: '30%'
   },
   image80: {
@@ -80,14 +80,14 @@ export const GS = StyleSheet.create({
     flexDirection: 'row',
     paddingLeft: 5,
     alignItems: 'center',
-    backgroundColor: '#222',
+    backgroundColor: GLOBAL.DARK.CONTRAST,
     height: 40,
   },
   dropdownContent: {
     flexDirection: 'row',
     paddingLeft: 10,
     alignItems: 'center',
-    backgroundColor: '#222',
+    backgroundColor: GLOBAL.DARK.CONTRAST,
     height: 36,
   },
   dropImage: {

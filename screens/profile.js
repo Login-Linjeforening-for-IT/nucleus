@@ -9,7 +9,8 @@ import {
   View, 
   Image, 
   FlatList,
-  TouchableOpacity
+  TouchableOpacity,
+  Linking
 } from 'react-native';
 import { T } from '../styles/text';
 
@@ -70,7 +71,7 @@ return(
           </View>
           )}
           />
-          <TouchableOpacity onPress={() => navigation.navigate('ContactScreen')}>
+          <TouchableOpacity onPress={() => Linking.openURL('mailto:kontakt@login.no')}>
               <View>
               <Text style={T.centered20}>Funnet en bug?</Text>
               <Image style={GS.smallImage} source={require('../assets/plane-orange.png')} />

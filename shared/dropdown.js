@@ -89,9 +89,9 @@ export default function Dropdown() {
 
             <View>
                 { course.selected == 2 ? 
-                    mcourses.map((selectedCourse) => {
+                    mcourses.map((selectedCourse, index) => {
                         return(
-                            <TouchableOpacity onPress={() => Linking.openURL(selectedCourse.link)}>
+                            <TouchableOpacity key={index} onPress={() => Linking.openURL(selectedCourse.link)}>
                                 <View style={GS.dropdownContent}>
                                     <Text style={T.text15}>{selectedCourse.title}</Text>
                                     <Image style={GS.smallDropImage} source={require('../assets/linkicon-white.png')} />
@@ -117,9 +117,9 @@ export default function Dropdown() {
 
             <View>
                 { course.selected == 3 ? 
-                    pcourses.map((selectedCourse) => {
+                    pcourses.map((selectedCourse, index) => {
                         return(
-                            <TouchableOpacity onPress={() => Linking.openURL(selectedCourse.link)}>
+                            <TouchableOpacity key={index} onPress={() => Linking.openURL(selectedCourse.link)}>
                                 <View style={GS.dropdownContent}>
                                     <Text style={T.text15}>{selectedCourse.title}</Text>
                                     <Image style={GS.smallDropImage} source={require('../assets/linkicon-white.png')} />

@@ -16,9 +16,9 @@ import {
 
 export default function TodoScreen({ navigation }) {
     const [setting] = useState([
-      {id: '1', todo: 'Add first enrolled event to homepage'},
-      {id: '2', todo: 'Build event search function'},
-      {id: '3', todo: 'Implement mazemap'},
+      {id: '1', todo: 'Build event search function'},
+      {id: '2', todo: 'Implement mazemap - seems every library is deprecated'},
+      {id: '3', todo: 'Implement mail sending service'}
   ])
 {/* ========================= DISPLAY APP START ========================= */}
 const eventPage = () => {

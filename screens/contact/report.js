@@ -7,7 +7,6 @@ import { SS } from '../../styles/settingStyles';
 import React, { useState } from 'react';
 import GreenLight, { Check, GrayLight } from '../../shared/eventComponents/otherComponents';
 import { Button, CardSmaller, Space } from '../../shared/sharedComponents';
-//import nodemailer from 'nodemailer';
 import { 
   Text, 
   View, 
@@ -32,38 +31,12 @@ const homePage = () => {
 const profilePage = () => {
   navigation.navigate('ProfileScreen');
 }
-// sendEmail = () => {
-//   const transporter = nodemailer.createTransport({
-//     host: 'email.server.com',
-//     port: '587',
-//     secure: 'false',
-//     auth: {
-//       user: 'hanasandeirik@gmail.com',
-//       pass: 'Eirik2002-2002'
-//     }
-//   })
-  
-//   const mailOptions = {
-//     from: 'hanasandeirik@gmail.com',
-//     to: 'eirik.hanasand@gmail.com',
-//     subject: 'Hello from React Native',
-//     text: 'This is a test email from my React Native app.'
-//     };
-  
-//     transporter.sendMail(mailOptions, (error, info) => {
-//       if (error) {
-//       console.log(error);
-//       } else {
-//       console.log('Email sent: ' + info.response);
-//       }
-//       });
   
   const sendForm = () => {
     if (data.name === data.name) {
-      //sendEmail();
       Alert.alert('Takk for beskjed.')
     } else {
-      Alert.alert('Feil brukernavn eller passord')
+      Alert.alert('Feil ved sending av skjema.')
     }
   }
 
