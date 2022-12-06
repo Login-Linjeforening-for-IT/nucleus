@@ -100,62 +100,66 @@ return(
         <Text style={T.centered25}>Styret og komiteene</Text>
         <Text style={T.boldParagraph}>Foreningen er satt sammen av et hovedstyret og en rekke komiteer.</Text>
         <View style={GS.parentComitteeView}>
-          <View style={GS.comittee1}>
             <TouchableOpacity onPress={() => selectedComittee(0)}>
-            {comittee.selected == 0 ? 
-                <Image style={GS.image80} source={require('../assets/styret-orange.png')} />
-              : 
-                <Image style={GS.image80} source={require('../assets/styret555.png')} />
-            }
+              <View style={GS.comittee1}>
+                {comittee.selected == 0 ? 
+                    <Image style={GS.image80} source={require('../assets/styret-orange.png')} />
+                  : 
+                    <Image style={GS.image80} source={require('../assets/styret555.png')} />
+                }
+              </View>
             </TouchableOpacity>
-          </View>
-          <View style={GS.comittee2}>
+
             <TouchableOpacity onPress={() => selectedComittee(1)}>
-            {comittee.selected == 1 ? 
-                <Image style={GS.image80} source={require('../assets/eventkom-orange.png')} />
-              : 
-                <Image style={GS.image80} source={require('../assets/eventkom555.png')} />
-            }
+              <View style={GS.comittee2}>
+                {comittee.selected == 1 ? 
+                    <Image style={GS.image80} source={require('../assets/eventkom-orange.png')} />
+                  : 
+                    <Image style={GS.image80} source={require('../assets/eventkom555.png')} />
+                }
+              </View>
             </TouchableOpacity>
-          </View>
-          <View style={GS.comittee3}>
+
             <TouchableOpacity onPress={() => selectedComittee(2)}>
-            {comittee.selected == 2 ? 
-                <Image style={GS.image80} source={require('../assets/tekkom-orange.png')} />
-              : 
-                <Image style={GS.image80} source={require('../assets/tekkom555.png')} />
-            }
+              <View style={GS.comittee3}>
+                {comittee.selected == 2 ? 
+                    <Image style={GS.image80} source={require('../assets/tekkom-orange.png')} />
+                  : 
+                    <Image style={GS.image80} source={require('../assets/tekkom555.png')} />
+                }
+              </View>
             </TouchableOpacity>
-          </View>
         </View>
         <View style={GS.parentComitteeView}>
-          <View style={GS.comittee1}>
-            <TouchableOpacity onPress={() => selectedComittee(3)}>
+          <TouchableOpacity onPress={() => selectedComittee(3)}>
+            <View style={GS.comittee1}>
               {comittee.selected == 3 ? 
                 <Image style={GS.image80} source={require('../assets/pr-orange.png')} />
               : 
                 <Image style={GS.image80} source={require('../assets/pr555.png')} />
               }
-            </TouchableOpacity>
-          </View>
-          <View style={GS.comittee2}>
-            <TouchableOpacity onPress={() => selectedComittee(4)}>
-            {comittee.selected == 4 ? 
-                <Image style={GS.image80} source={require('../assets/ctfkom-orange.png')} />
-              : 
-                <Image style={GS.image80} source={require('../assets/ctfkom555.png')} />
-            }
-            </TouchableOpacity>
-          </View>
-          <View style={GS.comittee3}>
-            <TouchableOpacity onPress={() => selectedComittee(5)}>
-            {comittee.selected == 5 ? 
-                <Image style={GS.image80} source={require('../assets/satkom-orange.png')} />
-              : 
-                <Image style={GS.image80} source={require('../assets/satkom555.png')} />
-            }
-            </TouchableOpacity>
-          </View>
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={() => selectedComittee(4)}>
+            <View style={GS.comittee2}>
+              {comittee.selected == 4 ? 
+                  <Image style={GS.image80} source={require('../assets/ctfkom-orange.png')} />
+                : 
+                  <Image style={GS.image80} source={require('../assets/ctfkom555.png')} />
+              }
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={() => selectedComittee(5)}>
+            <View style={GS.comittee3}>
+              {comittee.selected == 5 ? 
+                  <Image style={GS.image80} source={require('../assets/satkom-orange.png')} />
+                : 
+                  <Image style={GS.image80} source={require('../assets/satkom555.png')} />
+              }
+            </View>
+          </TouchableOpacity>
         </View>
         {
             info.map((relevantComittee, index) => {

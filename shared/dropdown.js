@@ -61,9 +61,9 @@ export default function Dropdown() {
 
             <View>
                 { course.selected == 1 ? 
-                    bcourses.map((selectedCourse) => {
+                    bcourses.map((selectedCourse, index) => {
                         return(
-                            <TouchableOpacity onPress={() => Linking.openURL(selectedCourse.link)}>
+                            <TouchableOpacity key={index} onPress={() => Linking.openURL(selectedCourse.link)}>
                                 <View style={GS.dropdownContent}>
                                     <Text style={T.text15}>{selectedCourse.title}</Text>
                                     <Image style={GS.smallDropImage} source={require('../assets/linkicon-white.png')} />
@@ -171,8 +171,8 @@ export function DropdownBachelor() {
                 { course.selected ? 
                     courses.map((selectedCourse, index) => {
                         return(
-                            <TouchableOpacity onPress={() => Linking.openURL(selectedCourse.link)}>
-                                <View key={index} style={GS.dropdownContent}>
+                            <TouchableOpacity key={index} onPress={() => Linking.openURL(selectedCourse.link)}>
+                                <View style={GS.dropdownContent}>
                                     <Text style={T.text15}>{selectedCourse.title}</Text>
                                 </View>
                             </TouchableOpacity>
@@ -220,9 +220,9 @@ export function DropdownMaster() {
 
             <View>
                 { course.selected ? 
-                    courses.map((selectedCourse) => {
+                    courses.map((selectedCourse, index) => {
                         return(
-                            <TouchableOpacity onPress={() => Linking.openURL(selectedCourse.link)}>
+                            <TouchableOpacity key={index} onPress={() => Linking.openURL(selectedCourse.link)}>
                                 <View style={GS.dropdownContent}>
                                     <Text style={T.text15}>{selectedCourse.title}</Text>
                                 </View>
@@ -271,9 +271,9 @@ export function DropdownPHD() {
 
             <View>
                 { course.selected ? 
-                    courses.map((selectedCourse) => {
+                    courses.map((selectedCourse, index) => {
                         return(
-                            <TouchableOpacity onPress={() => Linking.openURL(selectedCourse.link)}>
+                            <TouchableOpacity key={index} onPress={() => Linking.openURL(selectedCourse.link)}>
                                 <View style={GS.dropdownContent}>
                                     <Text style={T.text15}>{selectedCourse.title}</Text>
                                 </View>
