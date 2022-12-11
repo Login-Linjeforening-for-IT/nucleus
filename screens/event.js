@@ -58,11 +58,17 @@ export default function EventScreen({ navigation }) {
   }
 
   const fetchState = async() => { //Fetches the state of every object
-    let foundState = await AsyncStorage.getItem('clickedEvents');
-    if (foundState != null) {
-      let parsed = JSON.parse(foundState)
-      setClickedEvents(parsed)
-    } 
+    let filtered = await AsyncStorage.getItem('filteredEvents');
+    if(filtered != null){
+      filtered = JSON.parse(filtered)
+      setEvents(filtered)
+    }else{
+      let foundState = await AsyncStorage.getItem('clickedEvents');
+      if (foundState != null) {
+        let parsed = JSON.parse(foundState)
+        setClickedEvents(parsed)
+      } 
+    }
 }
   
   if (clickedEvents.length > 0) { // Checks if there are any stored events
