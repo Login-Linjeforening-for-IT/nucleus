@@ -57,6 +57,13 @@ export default function HomeScreen({ navigation }) {
     })();
   }, []);
   
+  // useEffect(() => { //Fetches the API every 10 seconds
+  //   const interval = setInterval(() => {
+  //     //getData();
+  //   }, 10000);
+  //   return () => clearInterval(interval);
+  // }, []);
+
   const event = storedEvent ? JSON.parse(storedEvent) : null; //  Parses the firstcoming event object
   
     return(

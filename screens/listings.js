@@ -2,7 +2,7 @@
 import { StatusBar } from 'expo-status-bar'
 import { MS } from '../styles/menuStyles'
 import { GS } from '../styles/globalStyles'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { T } from '../styles/text'
 import Card from '../shared/sharedComponents';
 import { 
@@ -34,6 +34,13 @@ const aboutPage = () => {
 const profilePage = () => {
   navigation.navigate('ProfileScreen');
 }
+
+// useEffect(() => { //Fetches the API every 10 seconds
+//   const interval = setInterval(() => {
+//     //getData();
+//   }, 10000);
+//   return () => clearInterval(interval);
+// }, []);
 
 return(
   <View>

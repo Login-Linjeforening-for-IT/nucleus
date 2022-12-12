@@ -90,7 +90,7 @@ export const T = StyleSheet.create({
   },
   centeredBold20: { //Centered bold text of size 20
     fontWeight: 'bold',
-    alignSelf: 'center',
+    textAlign: 'center',
     fontSize: 20,
     color: GLOBAL.DARK.TEXTCOLOR,
   },
@@ -151,6 +151,7 @@ export const T = StyleSheet.create({
   }, 
   filterCategoryText: {
     left: 10,
+    fontSize: '13%',
     color: GLOBAL.DARK.TITLETEXTCOLOR,
   },
   actualCategoryText: {

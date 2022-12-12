@@ -164,7 +164,7 @@ categoryView: {
   flexDirection: 'row',
   left: 30,
   top: 10,
-  width: 130,
+  width: 122,
 },
 card: {
   borderRadius: 20,

@@ -24,6 +24,7 @@
     "expo-updates": "~0.14.7",
     "express": "4.18.2",
     "git": "^0.1.5",
+    "lodash": "^4.17.21",
     "mailgun-js": "^0.22.0",
     "native-notify": "^3.0.2",
     "node": "^19.1.0",
