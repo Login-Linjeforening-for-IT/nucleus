@@ -12,6 +12,8 @@ import {
   View, 
   Image, 
   TouchableOpacity,
+  TouchableWithoutFeedback,
+  Keyboard,
   TextInput,
   Alert,
 } from 'react-native';
@@ -107,23 +109,23 @@ const inputContent = (val) => {
 }
 
   return(
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
     <View>
       <StatusBar style="light" />
-{/* ========================= DISPLAY TOP MENU ========================= */}
-  <View style={MS.topMenu}>
-    <TouchableOpacity onPress={() => goBack()}>
-      <Image style={MS.goBack} source={require('../../assets/goback777.png')} />
-    </TouchableOpacity>
+      {/* ========================= DISPLAY TOP MENU ========================= */}
+      <View style={MS.topMenu}>
+        <TouchableOpacity onPress={() => goBack()}>
+          <Image style={MS.goBack} source={require('../../assets/goback777.png')} />
+        </TouchableOpacity>
 
-    <Text style={MS.screenTitle}>     Varsle</Text>
+        <Text style={MS.screenTitle}>     Varsle</Text>
 
-      <TouchableOpacity onPress={() => profilePage()}>
-        <Image style={MS.tMenuIcon} source={require('../../assets/loginperson-orange.png')} />
-      </TouchableOpacity>
-  </View>
-{/* ========================= DISPLAY CONTENT ========================= */}
-<View style={GS.content}>
-        
+        <TouchableOpacity onPress={() => profilePage()}>
+          <Image style={MS.tMenuIcon} source={require('../../assets/loginperson-orange.png')} />
+        </TouchableOpacity>
+      </View>
+      {/* ========================= DISPLAY CONTENT ========================= */}
+      <View style={GS.content}>
         <View>
           {Space(40)}
           <Text style={T.centered}>Anonymt og sikkert. Alltid.</Text>
@@ -182,32 +184,32 @@ const inputContent = (val) => {
           </View>
 
           {Space(20)}
-
-          <View style={SS.reportContentView}>
-            <CardSmaller>
-              <View style={SS.reportContentView}>
-                <TextInput 
-                multiline={true}
-                style={GS.reportInputContentText}
-                placeholder='Hva vil du rapportere?'
-                placeholderTextColor={'#555'}
-                textAlign='center'
-                onChangeText={(val) => inputContent(val)}
-                />
-                  {data.check_contentInputChange ?
-                <View>
-                <View style = {SS.reportGreenLight}><GreenLight/></View>
-                <View style = {SS.reportCheckContent}><Check/></View>
+          
+            <View style={SS.reportContentView}>
+              <CardSmaller>
+                <View style={SS.reportContentView}>
+                  <TextInput 
+                  multiline={true}
+                  style={GS.reportInputContentText}
+                  placeholder='Hva vil du rapportere?'
+                  placeholderTextColor={'#555'}
+                  textAlign='center'
+                  onChangeText={(val) => inputContent(val)}
+                  />
+                    {data.check_contentInputChange ?
+                  <View>
+                  <View style = {SS.reportGreenLight}><GreenLight/></View>
+                  <View style = {SS.reportCheckContent}><Check/></View>
+                  </View>
+                  :
+                  <View>
+                  <View style = {SS.reportGreenLight}><GrayLight/></View>
+                  <View style = {SS.reportCheckContent}><Check/></View>
+                  </View>
+                  }
                 </View>
-                :
-                <View>
-                <View style = {SS.reportGreenLight}><GrayLight/></View>
-                <View style = {SS.reportCheckContent}><Check/></View>
-                </View>
-                }
-              </View>
-            </CardSmaller>  
-          </View>
+              </CardSmaller>  
+            </View>
 
           <View>
           {Space(40)}
@@ -221,21 +223,22 @@ const inputContent = (val) => {
             {Space(20)}
           </View>
         </View>
-      </View>   
+    </View>   
 
-{/* ========================= DISPLAY BOTTOM MENU ========================= */}
-      <View style={MS.bMenu}>
-          <TouchableOpacity onPress={() => homePage()}>
-            <Image style={MS.bMenuIcon} source={require('../../assets/house777.png')} />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => eventPage()}>
-            <Image style={MS.bMenuIcon} source={require('../../assets/calendar777.png')} />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => listingPage()}>
-            <Image style={MS.bMenuIcon} source={require('../../assets/business.png')} />
-          </TouchableOpacity>
-      </View>     
-    </View>
-    
+      {/* ========================= DISPLAY BOTTOM MENU ========================= */}
+        <View style={MS.bMenu}>
+            <TouchableOpacity onPress={() => homePage()}>
+              <Image style={MS.bMenuIcon} source={require('../../assets/house777.png')} />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => eventPage()}>
+              <Image style={MS.bMenuIcon} source={require('../../assets/calendar777.png')} />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => listingPage()}>
+              <Image style={MS.bMenuIcon} source={require('../../assets/business.png')} />
+            </TouchableOpacity>
+        </View>     
+      </View>
+    </TouchableWithoutFeedback>
+
   )
 };

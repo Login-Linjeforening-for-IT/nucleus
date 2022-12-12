@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useState, useEffect } from "react";
 
-let storedTheme = 4
+let storedTheme = 0
 
 // (async () => {
 //   let foundEvent = await AsyncStorage.getItem('theme');

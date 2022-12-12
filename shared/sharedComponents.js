@@ -207,11 +207,7 @@ export function Line(height, width) {
 
 export function Space(height) {
     return(
-        <View style={ES.checkBox}>
-            <Svg width={1} height={height}>
-            <Rect x='1' y='1' width={1} height={height}/>
-            </Svg>
-        </View>
+        <View style={{height: height}}/>
     );
 }
 

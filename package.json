@@ -39,6 +39,8 @@
     "react-native-svg": "12.3.0",
     "react-navigation": "^4.4.4",
     "react-navigation-stack": "^2.10.4",
+    "react-redux": "^8.0.5",
+    "redux": "^4.2.0",
     "url-polyfill": "^1.1.12"
   },
   "devDependencies": {
