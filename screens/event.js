@@ -17,37 +17,36 @@ import {                                                            // React nat
   TouchableOpacity,
 } from 'react-native';
 
-const GLOBAL = require('../styles/themes/dark');                    // Theme
+const GLOBAL = require('../styles/themes/dark');                      //  Theme
 
 export default function EventScreen({ navigation }) {
   //Declaring screens you can navigate to from this screen
-  const listingPage = () => {navigation.navigate('ListingScreen')}  // Job screen
-  const homePage = () => {navigation.navigate('HomeScreen')}        // Home screen
-  const aboutPage = () => {navigation.navigate('AboutScreen')}      // About screen
-  const profilePage = () => {navigation.navigate('ProfileScreen')}  // Profile screen
+  const listingPage = () => {navigation.navigate('ListingScreen')}    //  Job screen
+  const homePage = () => {navigation.navigate('HomeScreen')}          //  Home screen
+  const aboutPage = () => {navigation.navigate('AboutScreen')}        //  About screen
+  const profilePage = () => {navigation.navigate('ProfileScreen')}    //  Profile screen
 
-  // --- FETCHING DATA ---
-  const getData=()=>{                                               // Fetches data from API
+  const getData=()=>{                                                 //  --- FETCHING DATA FROM API ---
     fetch('https://api.login.no/events')                            // PRODUCTION
     // fetch('https://tekkom:rottejakt45@api.login.no:8443/events') // TESTING
     .then(response=>response.json())                                // Formatting the response
     .then(data=>setEvents(data))                                    // Setting the response
   }
 
-  const [search, toggleSearch] = useState({status: 0})              // Search bar visibility boolean
-  const toggleSearchBar = () => {                                   // Toggle search bar visiblity
+  const [search, toggleSearch] = useState({status: 0})                //  Search bar visibility boolean
+  const toggleSearchBar = () => {                                     //  Toggle search bar visiblity
     toggleSearch({
       ...search,
       status: !search.status
     });
   }
 
-  // --- ARRAY DECLARATION ---
-  const [events, setEvents] = useState([]);                         // Stores events from api
-  const [renderedArray, setRenderedArray] = useState([]);           // Events currently displayed
-  const [clickedEvents, setClickedEvents] = useState([]);           // Stores clicked events
-  const [clickedCategory, setClickedCategory] = useState([]);       // Stores clicked categories
-  const [category] = useState([                                     // All categories to filter
+                                                                      //  --- ARRAY DECLARATION ---
+  const [events, setEvents] = useState([]);                           //  Events from api
+  const [renderedArray, setRenderedArray] = useState([]);             //  Events currently displayed
+  const [clickedEvents, setClickedEvents] = useState([]);             //  Clicked events
+  const [clickedCategory, setClickedCategory] = useState([]);         //  Clicked categories
+  const [category] = useState([                                       //  All categories to filter
     {id: '1', category: 'PÅMELDT'},  
     {id: '2', category: 'TEKKOM'}, 
     {id: '3', category: 'SOCIAL'},
@@ -58,46 +57,44 @@ export default function EventScreen({ navigation }) {
     {id: '8', category: 'LOGIN'},
   ]);
 
-  const [filter, setFilter] = useState({input: null});               // Filter text input declaration
-  const textInputRef = useRef(null);                                 // Reference to clear input
-  const filterInput = (val) => {                                     // Filter text input updating
+  const [filter, setFilter] = useState({input: null});                //  Filter text input declaration
+  const textInputRef = useRef(null);                                  //  Reference to clear input
+  const filterInput = (val) => {                                      //  Filter text input updating
       setFilter({ 
       ...filter,
       input: val,
       });
   }
 
-  // --- FILTER FUNCTION DECLARATION ---
-  const filterBoth = () => {        // Filters first by category, then by text
-    let filtered = renderedArray.filter(event => clickedCategory.some(category => category.category === event.category));
+  const filterBoth = () => {                                          //  Filters first by category, then by text
+    let filtered = events.filter(event => clickedCategory.some(category => category.category === event.category));
     filtered = filtered.filter(event => event.eventname.toLowerCase().includes(filter.input.toLowerCase()));
     setRenderedArray([...filtered]);
   }
   
-  const filterText = () => {        //  Only text is filtered
-    let textFiltered = renderedArray.filter(event => event.eventname.toLowerCase().includes(filter.input.toLowerCase()));
+  const filterText = () => {                                          //  Only text is filtered
+    let textFiltered = events.filter(event => event.eventname.toLowerCase().includes(filter.input.toLowerCase()));
     setRenderedArray([...textFiltered]);
   }
 
-  const filterCategories = () => {  //  Only categories are filtered
-    const categoryFiltered = renderedArray.filter(event => clickedCategory.some(category => category.category === event.category));    
+  const filterCategories = () => {                                    //  Only categories are filtered
+    const categoryFiltered = events.filter(event => clickedCategory.some(category => category.category === event.category)); 
     setRenderedArray([...categoryFiltered])
   }
   
-  // --- PARENT FILTER FUNCTION ---
-  const Filter = () => {            // Function for deciding what to filter
+  const Filter = () => {                                              //  --- PARENT FILTER FUNCTION ---
     if (filter.input != null) {
-      if (clickedCategory != null){
-        if(clickedCategory.length > 0 && filter.input.length > 0){
-          filterBoth()
-        }else{filter.input.length > 0 ? filterText() : setRenderedArray([...events])}
+      if (clickedCategory.length > 0){
+        if(filter.input.length > 0){  filterBoth()}
+        else{setRenderedArray([...events])}
+      }else{
+        filterText()
       }
-    } else {
-      clickedCategory.length > 0 ? filterCategories() : null
-    }
+    } else if (clickedCategory.length > 0) {filterCategories()}
+    else{setRenderedArray([...events])}
   }
     
-  const fetchState = async() => { //Fetches clicked events
+  const fetchState = async() => {                                     //  --- FETCHES CLICKED EVENTS ---
     let foundState = await AsyncStorage.getItem('clickedEvents');
     if (foundState != null) {
       let parsed = JSON.parse(foundState)
@@ -105,17 +102,16 @@ export default function EventScreen({ navigation }) {
     } 
   }
 
-  // --- FETCHING STORED EVENTS IF NO WIFI
-  const fetchStoredEvents = async() => { //Uses cache if no wifi
-    let tempArray = await AsyncStorage.getItem('cachedArray')   //  Fetches cache
+  const fetchStoredEvents = async() => {                              //  --- FETCHING STORED EVENTS IF NO WIFI ---
+    let tempArray = await AsyncStorage.getItem('cachedArray')         //  Fetches cache
     if(tempArray != null){
       let parsed = JSON.parse(tempArray)
       setRenderedArray([...parsed])
+      setEvents([...parsed])
     }
   }
 
-  // --- STORING FIRSTCOMING CLICKED EVENT ---
-  if (clickedEvents.length > 0) { // Checks if there are any stored clicked events
+  if (clickedEvents.length > 0) {                                     //  --- STORING FIRSTCOMING CLICKED EVENT ---
     (async() => {
       let storedID = 0;
 
@@ -134,47 +130,51 @@ export default function EventScreen({ navigation }) {
     })();
   }
 
-  // --- FETCHING EVENTS TO RENDER ---
-  function renderArray() {
+  function renderArray() {                                            //  --- FETCHING EVENTS TO RENDER ---
     if (renderedArray.length == 0) {
-      if (events.length > 0) {
-        setRenderedArray([...events]) // Sends the array to be rendered
+      if(clickedCategory.length == 0 && filter.input == null){
+        if (events.length > 0) {
           (async () => {
             await AsyncStorage.setItem('cachedArray', JSON.stringify(events));
           });
-      } else {
-        fetchStoredEvents(); // Fetches cache if no wifi
+          setRenderedArray([...events])                               //  Sends the array to be rendered
+        } else {
+          fetchStoredEvents();                                        //  Fetches cache if no wifi
+        }
       }
     }
   }
 
-  // --- LOADING FILTERED DATA ---
-  useEffect(() => { // Renders when the state of the filter changes
+  useEffect(() => {if(search.status == 0) setRenderedArray([...events]), setClickedCategory([]) }, [search]);
+  useEffect(() => {                                                   //  --- LOADING FILTERED DATA WHEN FILTER CHANGES ---
     if (filter.input != null || clickedCategory.length > 0) {
-      if(filter.input != null)  if (filter.input.length > 0) Filter();
+      if(filter.input != null && clickedCategory.length == 0)  if (filter.input.length == 0) setRenderedArray([...events]);
       Filter();
       
+    }else{
+      if(filter.input != null && clickedCategory.length == 0 ) {
+        if(filter.input.length == 0) setRenderedArray([...events])
+      }else{
+        setRenderedArray([...events])
+      }
     }
-    console.log('these are events' + events)
-    if(filter.input != null && clickedCategory.length == 0 ) if(filter.input.length == 0) setRenderedArray([...events])
 
-  }, [filter, clickedCategory]); // Listens to changes in these arrays
+  }, [filter, clickedCategory]);                                      //  Listens to changes in these arrays
 
-  // --- LOADING DATA ---
-  useEffect(() => { //  Renders when the screen is loaded
+  useEffect(() => {                                                   //  --- LOADING INITIAL DATA ---
     getData();
     fetchState();
-  },[])
+  },[])                                                               //  Renders when the screen is loaded
 
-  useEffect(() => { //Fetches the API every 10 seconds
+  useEffect(() => {                                                   //  Fetches the API every 10 seconds
     const interval = setInterval(() => {
       getData();
     }, 10000);
     return () => clearInterval(interval)
   }, []);
 
-  renderArray();
-  return(
+  renderArray();                                                      //  Decides which events to display
+  return(                                                             //  --- DISPLAYS THE EVENTSCREEN ---
     <View>
       <StatusBar style="light" /> 
       {/* ========================= DISPLAY TOP MENU ========================= */}
@@ -186,7 +186,7 @@ export default function EventScreen({ navigation }) {
         <Text style={MS.screenTitle}>Events</Text>
         
         {renderedArray != null ? 
-          renderArray.length > 0 ? 
+          renderedArray.length > 0 || clickedCategory.length > 0 || filter.input != null ? 
           <TouchableOpacity onPress={() => toggleSearchBar()}>
             {search.status ? 
               <Image style={MS.searchIcon} source={require('../assets/filter-orange.png')} />
@@ -216,7 +216,7 @@ export default function EventScreen({ navigation }) {
                       textAlign='center'
                       onChangeText={(val) => filterInput(val)}
                   />
-                  <TouchableOpacity onPress={() => setClickedCategory([]) + filterInput(null) + textInputRef.current.clear()}>
+                  <TouchableOpacity onPress={() => filterInput(null) + setClickedCategory([]) + textInputRef.current.clear()}>
                       <Image style={ES.filterResetIcon} source={require('../assets/reset.png')} />
                   </TouchableOpacity>
               </View>

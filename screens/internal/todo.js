@@ -16,7 +16,7 @@ import {
 
 export default function TodoScreen({ navigation }) {
     const [setting] = useState([
-      {id: '1', todo: 'Build event search function'},
+      {id: '1', todo: 'Fine tune resetting of filter function'},
       {id: '2', todo: 'Implement mazemap - seems every library is deprecated'},
       {id: '3', todo: 'Implement mail sending service'},
       {id: '4', todo: 'Implement refresh function on all screens with api content'},

@@ -32,16 +32,16 @@ export default function EventTime(startTime, endTime) {
                             if (endMinute == minute) {
                                 return(<View><Text style={T.centered25}>Slutt</Text></View>)
                             } else {
-                                return(<View><Text style={T.centered25}>{endMinute-minute} min gjenstår</Text></View>)
+                                return(<View><Text style={T.centered25}>Ferdig om {endMinute-minute} min</Text></View>)
                             }
                         } else {
-                                return(<View><Text style={T.centered25}>{endHour-hour}t {endMinute-minute} min gjenstår</Text></View>)
+                                return(<View><Text style={T.centered25}>Ferdig om {endHour-hour}t {endMinute-minute} min</Text></View>)
                         }
                     } else {
                         if (endDay-day == 1) {
                             return(<View><Text style={T.centered25}>Ferdig i morgen</Text></View>)
                         } else {
-                            return(<View><Text style={T.centered25}>{endDay-day} dager gjenstår</Text></View>)
+                            return(<View><Text style={T.centered25}>Ferdig om {endDay-day} dager</Text></View>)
                         }                    
                     }
                 } else {
@@ -49,14 +49,14 @@ export default function EventTime(startTime, endTime) {
                     if (endMonth-month == 1) {
                         return(<View><Text style={T.centered25}>Ferdig neste måned</Text></View>)
                     } else {
-                        return(<View><Text style={T.centered25}>{endMonth-month} måneder gjenstår</Text></View>)
+                        return(<View><Text style={T.centered25}>Ferdig om {endMonth-month} måneder</Text></View>)
                     }
                 }
             } else {
                 if (endYear-year == 1) {
                     return(<View><Text style={T.centered25}>Ferdig neste år</Text></View>)
                 } else {
-                    return(<View><Text style={T.centered25}>{endYear-year} år gjenstår</Text></View>)
+                    return(<View><Text style={T.centered25}>Ferdig om {endYear-year} år</Text></View>)
                 }
             }
         }
