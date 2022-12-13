@@ -280,6 +280,5 @@ return(
       </TouchableOpacity>
       </View> 
     </View>
-    
   )
 };
