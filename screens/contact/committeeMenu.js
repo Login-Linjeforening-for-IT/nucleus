@@ -16,30 +16,11 @@ import {
 {/* ========================= APP START ========================= */}
 
 export default function CommitteeMenuScreen({ navigation }) {
-    const [setting] = useState([
-        {id: '1', nav: 'ContactStyretScreen',   title: 'Styret'},
-        {id: '2', nav: 'ContactEventKomScreen', title: 'EventKom'},
-        {id: '3', nav: 'ContactTekKomScreen',   title: 'TekKom'},
-        {id: '4', nav: 'ContactPRScreen',       title: 'PR'},
-        {id: '5', nav: 'ContactCTFkomScreen',   title: 'CTFkom'},
-        {id: '6', nav: 'ContactSATkomScreen',   title: 'SATkom'},
-      ])
-
-const eventPage = () => {
-  navigation.navigate('EventScreen');
-}
-const homePage = () => {
-  navigation.navigate('HomeScreen');
-}
-const listingPage = () => {
-  navigation.navigate('ListingScreen');
-}
-const profilePage = () => {
-  navigation.navigate('ProfileScreen');
-}
-const goBack = () => {
-    navigation.goBack()
-}
+const eventPage = () => {navigation.navigate('EventScreen')}
+const homePage = () => {navigation.navigate('HomeScreen')}
+const listingPage = () => {navigation.navigate('ListingScreen')}
+const profilePage = () => {navigation.navigate('ProfileScreen')}
+const goBack = () => {navigation.goBack()}
 
   return(
     <View>
