@@ -27,10 +27,10 @@ export default function EventScreen({ navigation }) {
   const profilePage = () => {navigation.navigate('ProfileScreen')}    //  Profile screen
 
   const getData=()=>{                                                 //  --- FETCHING DATA FROM API ---
-    fetch('https://api.login.no/events')                            // PRODUCTION
-    // fetch('https://tekkom:rottejakt45@api.login.no:8443/events') // TESTING
-    .then(response=>response.json())                                // Formatting the response
-    .then(data=>setEvents(data))                                    // Setting the response
+    fetch('https://api.login.no/events')                              // PRODUCTION
+    // fetch('https://tekkom:rottejakt45@api.login.no:8443/events')   // TESTING
+    .then(response=>response.json())                                  // Formatting the response
+    .then(data=>setEvents(data))                                      // Setting the response
   }
 
   const storeCache = async() => {
@@ -72,19 +72,49 @@ export default function EventScreen({ navigation }) {
   }
 
   const filterBoth = () => {                                          //  Filters first by category, then by text
-    let filtered = events.filter(event => clickedCategory.some(category => category.category === event.category));
-    filtered = filtered.filter(event => event.eventname.toLowerCase().includes(filter.input.toLowerCase()));
-    setRenderedArray([...filtered]);
+    const clickedFound = category.find(item => item.category === 'PÅMELDT');
+    if(clickedFound) {
+      if(clickedCategory.length > 1){
+        let filtered = clickedEvents.filter(event => clickedCategory.some(category => category.category === event.category));
+        filtered = filtered.filter(event => event.eventname.toLowerCase().includes(filter.input.toLowerCase()));
+        setRenderedArray([...filtered]);
+      }else{
+        let filtered = clickedEvents.filter(event => clickedCategory.some(category => event.category === event.category));
+        filtered = filtered.filter(event => event.eventname.toLowerCase().includes(filter.input.toLowerCase()));
+        setRenderedArray([...filtered]);
+      }
+    }else{
+      let filtered = events.filter(event => clickedCategory.some(category => category.category === event.category));
+      filtered = filtered.filter(event => event.eventname.toLowerCase().includes(filter.input.toLowerCase()));
+      setRenderedArray([...filtered]);
+    }
   }
   
   const filterText = () => {                                          //  Only text is filtered
-    let textFiltered = events.filter(event => event.eventname.toLowerCase().includes(filter.input.toLowerCase()));
+    const clickedFound = category.find(item => item.category === 'PÅMELDT');
+    if(clickedFound) {
+      let textFiltered = clickedEvents.filter(event => event.eventname.toLowerCase().includes(filter.input.toLowerCase()));
+      setRenderedArray([...textFiltered]);
+    }else{
+      let textFiltered = events.filter(event => event.eventname.toLowerCase().includes(filter.input.toLowerCase()));
     setRenderedArray([...textFiltered]);
+    }
   }
 
   const filterCategories = () => {                                    //  Only categories are filtered
-    const categoryFiltered = events.filter(event => clickedCategory.some(category => category.category === event.category)); 
-    setRenderedArray([...categoryFiltered])
+    const clickedFound = category.find(item => item.category === 'PÅMELDT');
+    if (clickedFound) {
+      if(clickedCategory.length > 1){
+        const categoryFiltered = clickedEvents.filter(event => clickedCategory.some(category => category.category === event.category)); 
+        setRenderedArray([...categoryFiltered])
+      }else{
+        const categoryFiltered = clickedEvents.filter(event => clickedCategory.some(category => event.category === event.category)); 
+        setRenderedArray([...categoryFiltered])
+      }
+    }else{
+      const categoryFiltered = events.filter(event => clickedCategory.some(category => category.category === event.category)); 
+      setRenderedArray([...categoryFiltered])
+    }
   }
   
   const Filter = () => {                                              //  --- PARENT FILTER FUNCTION ---
@@ -150,14 +180,28 @@ export default function EventScreen({ navigation }) {
   useEffect(() => {if(search.status == 0) setRenderedArray([...events]), setClickedCategory([]) }, [search]);
   useEffect(() => {                                                   //  --- LOADING FILTERED DATA WHEN FILTER CHANGES ---
     if (filter.input != null || clickedCategory.length > 0) {
-      if(filter.input != null && clickedCategory.length == 0)  if (filter.input.length == 0) setRenderedArray([...events]);
-      Filter();
-      
+      if(filter.input != null && clickedCategory.length == 0)  {
+        if (filter.input.length == 0) {
+          filterInput(null);
+          setClickedCategory([]);
+          setRenderedArray([...events])
+        }
+        Filter();
+      }else{
+        if(filter.input != null && clickedCategory.length > 0){
+          if(filter.input.length > 0) {filterBoth();}
+          else{filterCategories()}
+        }
+        else{filterCategories()}}
     }else{
       if(filter.input != null && clickedCategory.length == 0 ) {
-        if(filter.input.length == 0) setRenderedArray([...events])
+        if(filter.input.length == 0) {
+          setRenderedArray([...events]);
+          filterInput(null);
+          setClickedCategory([]);
+        }
       }else{
-        setRenderedArray([...events])
+        setRenderedArray([...events]);
       }
     }
 
@@ -219,7 +263,7 @@ export default function EventScreen({ navigation }) {
                       textAlign='center'
                       onChangeText={(val) => filterInput(val)}
                   />
-                  <TouchableOpacity onPress={() => filterInput(null) + setClickedCategory([]) + textInputRef.current.clear()}>
+                  <TouchableOpacity onPress={() => filterInput(null) + setRenderedArray([...events]) + setClickedCategory([]) + textInputRef.current.clear()}>
                       <Image style={ES.filterResetIcon} source={require('../assets/reset.png')} />
                   </TouchableOpacity>
               </View>
