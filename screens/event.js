@@ -33,6 +33,11 @@ export default function EventScreen({ navigation }) {
     .then(data=>setEvents(data))                                    // Setting the response
   }
 
+  const storeCache = async() => {
+    if(events.length > 0){
+      await AsyncStorage.setItem('cachedEvents', JSON.stringify(events))
+    }
+  }
   const [search, toggleSearch] = useState({status: 0})                //  Search bar visibility boolean
   const toggleSearchBar = () => {                                     //  Toggle search bar visiblity
     toggleSearch({
@@ -103,11 +108,11 @@ export default function EventScreen({ navigation }) {
   }
 
   const fetchStoredEvents = async() => {                              //  --- FETCHING STORED EVENTS IF NO WIFI ---
-    let tempArray = await AsyncStorage.getItem('cachedArray')         //  Fetches cache
+    let tempArray = await AsyncStorage.getItem('cachedEvents')        //  Fetches cache
     if(tempArray != null){
-      let parsed = JSON.parse(tempArray)
-      setRenderedArray([...parsed])
-      setEvents([...parsed])
+      let parsed = JSON.parse(tempArray);
+      setRenderedArray([...parsed]);
+      setEvents([...parsed]);
     }
   }
 
@@ -134,9 +139,6 @@ export default function EventScreen({ navigation }) {
     if (renderedArray.length == 0) {
       if(clickedCategory.length == 0 && filter.input == null){
         if (events.length > 0) {
-          (async () => {
-            await AsyncStorage.setItem('cachedArray', JSON.stringify(events));
-          });
           setRenderedArray([...events])                               //  Sends the array to be rendered
         } else {
           fetchStoredEvents();                                        //  Fetches cache if no wifi
@@ -166,9 +168,10 @@ export default function EventScreen({ navigation }) {
     fetchState();
   },[])                                                               //  Renders when the screen is loaded
 
-  useEffect(() => {                                                   //  Fetches the API every 10 seconds
+  useEffect(() => {                                                   //  Fetches the API and updated the cache every 10 seconds
     const interval = setInterval(() => {
       getData();
+      storeCache();
     }, 10000);
     return () => clearInterval(interval)
   }, []);
