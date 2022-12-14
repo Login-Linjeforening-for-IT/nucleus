@@ -2,13 +2,13 @@ import GreenLight, { GrayLight, Check, Month } from '../shared/eventComponents/o
 import Card, { CompareDates, CheckBox, CheckedBox } from '../shared/sharedComponents';  // Components used to display event
 import CategorySquare from '../shared/eventComponents/categorySquare';  // Left side square on eventcard
 import AsyncStorage from '@react-native-async-storage/async-storage'; // Localstorage
-import React, { useEffect, useState, useRef } from 'react';         // React imports
-import { StatusBar } from 'expo-status-bar';                        // Status bar
-import { GS } from '../styles/globalStyles';                        // Global styles
-import { ES } from '../styles/eventStyles';                         // Event styles
-import { MS } from '../styles/menuStyles';                          // Menu styles
-import { T } from '../styles/text';                                 // Text styles
-import {                                                            // React native components
+import React, { useEffect, useState, useRef } from 'react';           // React imports
+import { StatusBar } from 'expo-status-bar';                          // Status bar
+import { GS } from '../styles/globalStyles';                          // Global styles
+import { ES } from '../styles/eventStyles';                           // Event styles
+import { MS } from '../styles/menuStyles';                            // Menu styles
+import { T } from '../styles/text';                                   // Text styles
+import {                                                              // React native components
   Text, 
   View, 
   Image, 
@@ -27,8 +27,8 @@ export default function EventScreen({ navigation }) {
   const profilePage = () => {navigation.navigate('ProfileScreen')}    //  Profile screen
 
   const getData=()=>{                                                 //  --- FETCHING DATA FROM API ---
-    //fetch('https://api.login.no/events')                              // PRODUCTION
-    fetch('https://tekkom:rottejakt45@api.login.no:8443/events')   // TESTING
+    fetch('https://api.login.no/events')                              // PRODUCTION
+    //fetch('https://tekkom:rottejakt45@api.login.no:8443/events')    // TESTING
     .then(response=>response.json())                                  // Formatting the response
     .then(data=>setEvents(data))                                      // Setting the response
   }
@@ -51,7 +51,7 @@ export default function EventScreen({ navigation }) {
   const [renderedArray, setRenderedArray] = useState([]);             //  Events currently displayed
   const [clickedEvents, setClickedEvents] = useState([]);             //  Clicked events
   const [clickedCategory, setClickedCategory] = useState([]);         //  Clicked categories
-  const [relevantCategories, setRelevantCategories] = useState([]);   //  Relevant categories
+  const [relevantCategories, setRelevantCategories] = useState([]);   //  Relevant categories to filter
   const [category] = useState([                                       //  All categories to filter
     {id: '2', category: 'TEKKOM'}, 
     {id: '3', category: 'SOCIAL'},
@@ -101,7 +101,7 @@ export default function EventScreen({ navigation }) {
     setRenderedArray([...textFiltered]);
   }
 
-  const filterCategories = () => {                                    //  --- FILTERS CATEGORIES
+  const filterCategories = () => {                                    //  --- FILTERS CATEGORIES ---
     const clickedFound = clickedCategory.find(object => object.category === 'PÅMELDT');
     if (clickedFound) {
       if(clickedCategory.length > 1){ 
@@ -196,6 +196,7 @@ export default function EventScreen({ navigation }) {
     }
   }
 
+  // Only updates the events displayed if the filter is closed to prevent bugs
   useEffect(() => {if(search.status == 0) setRenderedArray([...events]), setClickedCategory([]) }, [search]);
   useEffect(() => {                                                   //  --- LOADING FILTERED DATA WHEN FILTER CHANGES ---
     if (filter.input != null || clickedCategory.length > 0) {
