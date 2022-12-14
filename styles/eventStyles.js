@@ -90,7 +90,7 @@ export const ES = StyleSheet.create({
   specificEventImage: { //The header image on specificEventScreen
     width: '100%',
     height: 100,
-    aspectRatio: 3,
+    aspectRatio: 3, // Note: resizeMode: 'contain' may work here
   },
   //======================== EventComponentStyles ===================
   size: { //Middle sized icons
