@@ -19,25 +19,18 @@ export default function TodoScreen({ navigation }) {
       {id: '1', todo: 'Implement mazemap - seems every library is deprecated'},
       {id: '2', todo: 'Implement mail sending service'},
       {id: '3', todo: 'Center title position'},
-      {id: '3', todo: 'Theme'},
-      {id: '3', todo: 'Language'},
+      {id: '4', todo: 'Bug: event storage'},
+      {id: '4', todo: 'Bug: missing photo SES'},
+      {id: '4', todo: 'Bug: SES eventtext'},
+      {id: '5', todo: 'Theme'},
+      {id: '6', todo: 'Language'},
   ])
 {/* ========================= DISPLAY APP START ========================= */}
-const eventPage = () => {
-  navigation.navigate('EventScreen');
-}
-const homePage = () => {
-  navigation.navigate('HomeScreen');
-}
-const listingPage = () => {
-  navigation.navigate('ListingScreen');
-}
-const profilePage = () => {
-  navigation.navigate('ProfileScreen');
-}
-const goBack = () => {
-  navigation.goBack()
-}
+function eventPage()   { navigation.navigate('EventScreen')   }
+function homePage()    { navigation.navigate('HomeScreen')    }
+function listingPage() { navigation.navigate('ListingScreen') }
+function profilePage() { navigation.navigate('ProfileScreen') }
+function goBack()      { navigation.goBack()                  }
 
   return(
     <View>
