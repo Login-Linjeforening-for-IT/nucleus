@@ -76,7 +76,8 @@ export default function SpecificEventScreen( { navigation }) {
 
             <View style={ES.specificEventView1}>
               {/* Doesnt work */}
-              <Image style={ES.specificEventImage} source={{uri: 'https://cdn.login.no/img/events/' + usersData.image}} />
+              <Image style={ES.specificEventImage} source={require('../assets/default.png')}/>
+              {/* <Image style={ES.specificEventImage} source={{uri: 'https://cdn.login.no/img/events/' + usersData.image}} /> */}
             </View>
 
             {Space(5)}

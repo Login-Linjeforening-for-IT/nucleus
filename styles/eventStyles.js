@@ -84,98 +84,101 @@ export const ES = StyleSheet.create({
   },
   specificEventView1: { //Layout for the image on specificEventView
     alignItems: 'center',
-    height: '10%',
+    height: 100,
+    overflow: 'hidden'
   },
   specificEventImage: { //The header image on specificEventScreen
-    height: '100%',
+    width: '100%',
+    height: 100,
+    aspectRatio: 3,
   },
-//======================== EventComponentStyles ===================
+  //======================== EventComponentStyles ===================
   size: { //Middle sized icons
     height: 40,
     width: 40
-},
-absoluteView: { //Middle sized icons
-  flexDirection: 'row',
-},
-smallSize: { //Small icons
+  },
+  absoluteView: { //Middle sized icons
+    flexDirection: 'row',
+  },
+  smallSize: { //Small icons
+      height: 20,
+      width: 20
+  },
+  eventLight: { //Position of specific event color circle
+      top: -10,
+      height: 0,
+      width: 10,
+  },
+  specificEventLight: { //Position of specific event color circle
+    left: 8,
+    height: 20,
+    width: 20,
+  },
+  card: {
+    borderRadius: 20,
+    backgroundColor: GLOBAL.DARK.DARKER,
+    marginHorizontal: 10,
+    marginTop: 10,
+  },
+  cardContent: {
+    marginHorizontal: 18,
+    marginVertical: 18
+  },
+  cardSmaller: {
+    marginHorizontal: 10,
+    borderRadius: 20,
+    backgroundColor: GLOBAL.DARK.DARKER,
+  },
+  smallSize: {
     height: 20,
     width: 20
-},
-eventLight: { //Position of specific event color circle
-    top: -10,
-    height: 0,
-    width: 10,
-},
-specificEventLight: { //Position of specific event color circle
-  left: 8,
-  height: 20,
-  width: 20,
-},
-card: {
-  borderRadius: 20,
-  backgroundColor: GLOBAL.DARK.DARKER,
-  marginHorizontal: 10,
-  marginTop: 10,
-},
-cardContent: {
-  marginHorizontal: 18,
-  marginVertical: 18
-},
-cardSmaller: {
-  marginHorizontal: 10,
-  borderRadius: 20,
-  backgroundColor: GLOBAL.DARK.DARKER,
-},
-smallSize: {
-  height: 20,
-  width: 20
-},
-specificEventLight: {
-  left: 8,
-  height: 20,
-  width: 20
-},
-filterText: {  //eventScreen filter text
-  backgroundColor: GLOBAL.DARK.DARKER,
-  alignSelf: 'center',
-  alignItems: 'center',
-  marginTop: 10,
-  width: '95%',
-  paddingTop: 10,
-  marginHorizontal: 10,
-  height: 30,
-  borderTopRightRadius: 15,
-  borderTopLeftRadius: 15,
-  color: 'white',
-},
-filterView: {
-  paddingTop: 10,
-  flexDirection: 'row',
-  backgroundColor: GLOBAL.DARK.DARKER,
-  marginHorizontal: 10,
-  borderBottomLeftRadius: 15,
-  borderBottomRightRadius: 15,
-},
-checkBox: { //Position of specific event color circle
-  top: '-50%',
-  right: 20,
-},
-categoryView: {
-  flexDirection: 'row',
-  left: 30,
-  top: 10,
-  width: 122,
-},
-card: {
-  borderRadius: 20,
-  backgroundColor: GLOBAL.DARK.DARKER,
-  marginHorizontal: 10,
-  marginTop: 10,
-},
-filterResetIcon: { 
-    left: -60,
+  },
+  specificEventLight: {
+    left: 8,
+    height: 20,
+    width: 20
+  },
+  filterText: {  //eventScreen filter text
+    backgroundColor: GLOBAL.DARK.DARKER,
+    alignSelf: 'center',
+    alignItems: 'center',
+    marginTop: 10,
+    width: '95%',
+    paddingTop: 10,
+    marginHorizontal: 10,
+    height: 30,
+    borderTopRightRadius: 15,
+    borderTopLeftRadius: 15,
+    color: 'white',
+  },
+  filterView: {
+    paddingTop: 10,
+    flexDirection: 'row',
+    backgroundColor: GLOBAL.DARK.DARKER,
+    marginHorizontal: 10,
+    borderBottomLeftRadius: 15,
+    borderBottomRightRadius: 15,
+  },
+  checkBox: { //Position of specific event color circle
+    top: '-50%',
+    right: 20,
+  },
+  categoryView: {
+    flexDirection: 'row',
+    left: 30,
     top: 10,
-    height: 40,
-    width: 40
-},
+    width: 122,
+  },
+  card: {
+    borderRadius: 20,
+    backgroundColor: GLOBAL.DARK.DARKER,
+    marginHorizontal: 10,
+    marginTop: 10,
+  },
+  filterResetIcon: { 
+      left: -60,
+      top: 10,
+      height: 40,
+      width: 40
+  },
 })
