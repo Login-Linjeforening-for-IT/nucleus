@@ -27,8 +27,8 @@ export default function EventScreen({ navigation }) {
   const profilePage = () => {navigation.navigate('ProfileScreen')}    //  Profile screen
 
   const getData=()=>{                                                 //  --- FETCHING DATA FROM API ---
-    fetch('https://api.login.no/events')                              // PRODUCTION
-    // fetch('https://tekkom:rottejakt45@api.login.no:8443/events')   // TESTING
+    //fetch('https://api.login.no/events')                              // PRODUCTION
+    fetch('https://tekkom:rottejakt45@api.login.no:8443/events')   // TESTING
     .then(response=>response.json())                                  // Formatting the response
     .then(data=>setEvents(data))                                      // Setting the response
   }
@@ -51,8 +51,8 @@ export default function EventScreen({ navigation }) {
   const [renderedArray, setRenderedArray] = useState([]);             //  Events currently displayed
   const [clickedEvents, setClickedEvents] = useState([]);             //  Clicked events
   const [clickedCategory, setClickedCategory] = useState([]);         //  Clicked categories
+  const [relevantCategories, setRelevantCategories] = useState([]);   //  Relevant categories
   const [category] = useState([                                       //  All categories to filter
-    {id: '1', category: 'PÅMELDT'},  
     {id: '2', category: 'TEKKOM'}, 
     {id: '3', category: 'SOCIAL'},
     {id: '4', category: 'CTF'},
@@ -63,20 +63,26 @@ export default function EventScreen({ navigation }) {
   ]);
 
   const [filter, setFilter] = useState({input: null});                //  Filter text input declaration
-  const textInputRef = useRef(null);                                  //  Reference to clear input
-  const filterInput = (val) => {                                      //  Filter text input updating
+  const textInputRef = useRef(null);                                  //  Clears text input
+  const filterInput = (val) => {                                      //  --- UPDATES FILTER TEXT INPUT ---
       setFilter({ 
       ...filter,
       input: val,
       });
   }
 
-  const filterBoth = () => {                                          //  Filters first by category, then by text
-    const clickedFound = category.find(item => item.category === 'PÅMELDT');
+  const filterBoth = () => {                                          //  --- FILTERS CATEGORIES AND TEXT ---
+    const clickedFound = clickedCategory.find(item => item.category === 'PÅMELDT');
     if(clickedFound) {
       if(clickedCategory.length > 1){
-        let filtered = clickedEvents.filter(event => clickedCategory.some(category => category.category === event.category));
-        filtered = filtered.filter(event => event.eventname.toLowerCase().includes(filter.input.toLowerCase()));
+        let categoryFiltered = events.filter(event => clickedCategory.some(category => category.category === event.category));
+        let concatenatedArray = [];
+        clickedEvents.forEach(event => {
+          let duplicateExists = categoryFiltered.some(catEvent => catEvent.eventID === event.eventID);
+          if (!duplicateExists) { concatenatedArray.push(event) }
+        });
+        concatenatedArray = categoryFiltered.concat(concatenatedArray);
+        const filtered = concatenatedArray.filter(event => event.eventname.toLowerCase().includes(filter.input.toLowerCase()));
         setRenderedArray([...filtered]);
       }else{
         let filtered = clickedEvents.filter(event => clickedCategory.some(category => event.category === event.category));
@@ -90,23 +96,23 @@ export default function EventScreen({ navigation }) {
     }
   }
   
-  const filterText = () => {                                          //  Only text is filtered
-    const clickedFound = category.find(item => item.category === 'PÅMELDT');
-    if(clickedFound) {
-      let textFiltered = clickedEvents.filter(event => event.eventname.toLowerCase().includes(filter.input.toLowerCase()));
-      setRenderedArray([...textFiltered]);
-    }else{
-      let textFiltered = events.filter(event => event.eventname.toLowerCase().includes(filter.input.toLowerCase()));
+  const filterText = () => {                                          //  --- FILTERS TEXT ---
+    let textFiltered = events.filter(event => event.eventname.toLowerCase().includes(filter.input.toLowerCase()));
     setRenderedArray([...textFiltered]);
-    }
   }
 
-  const filterCategories = () => {                                    //  Only categories are filtered
-    const clickedFound = category.find(item => item.category === 'PÅMELDT');
+  const filterCategories = () => {                                    //  --- FILTERS CATEGORIES
+    const clickedFound = clickedCategory.find(object => object.category === 'PÅMELDT');
     if (clickedFound) {
-      if(clickedCategory.length > 1){
-        const categoryFiltered = clickedEvents.filter(event => clickedCategory.some(category => category.category === event.category)); 
-        setRenderedArray([...categoryFiltered])
+      if(clickedCategory.length > 1){ 
+        let categoryFiltered = events.filter(event => clickedCategory.some(category => category.category === event.category));
+        let concatenatedArray = [];
+        clickedEvents.forEach(event => {
+          let duplicateExists = categoryFiltered.some(catEvent => catEvent.eventID === event.eventID);
+          if (!duplicateExists) { concatenatedArray.push(event) }
+        });
+        concatenatedArray = categoryFiltered.concat(concatenatedArray);
+        setRenderedArray([...concatenatedArray])
       }else{
         const categoryFiltered = clickedEvents.filter(event => clickedCategory.some(category => event.category === event.category)); 
         setRenderedArray([...categoryFiltered])
@@ -128,7 +134,20 @@ export default function EventScreen({ navigation }) {
     } else if (clickedCategory.length > 0) {filterCategories()}
     else{setRenderedArray([...events])}
   }
-    
+  
+  const fetchRelevantCategories = () => {                             //  --- FETCHES RELEVANT CATEGORIES TO FILTER ---
+    if(clickedEvents.length > 0) {                                    // Adding enrolled option if > 0 enrolled events
+      if(search.status == 0) {                                        // Not updating filter while open, due to unintended behavior
+        const relevantCategories = category.filter(category => events.some(events => events.category === category.category)); 
+        relevantCategories.unshift({id: '1', category: 'PÅMELDT'})
+        setRelevantCategories([...relevantCategories])
+      }
+    }else{
+      const relevantCategories = category.filter(category => events.some(events => events.category === category.category)); 
+      setRelevantCategories([...relevantCategories])
+    }
+  }
+
   const fetchState = async() => {                                     //  --- FETCHES CLICKED EVENTS ---
     let foundState = await AsyncStorage.getItem('clickedEvents');
     if (foundState != null) {
@@ -210,9 +229,14 @@ export default function EventScreen({ navigation }) {
   useEffect(() => {                                                   //  --- LOADING INITIAL DATA ---
     getData();
     fetchState();
+    fetchRelevantCategories();
   },[])                                                               //  Renders when the screen is loaded
 
-  useEffect(() => {                                                   //  Fetches the API and updated the cache every 10 seconds
+  useEffect(() => {                                                   //  --- UPDATES FILTER ON EVENT CHANGE ---
+    fetchRelevantCategories();
+  }, [events, clickedEvents]);                                        //  Listens for changes in these arrays
+
+  useEffect(() => {                                                   //  --- FETCHES API AND UPDATES CACHE EVERY 10 SECONDS ---
     const interval = setInterval(() => {
       getData();
       storeCache();
@@ -220,7 +244,7 @@ export default function EventScreen({ navigation }) {
     return () => clearInterval(interval)
   }, []);
 
-  renderArray();                                                      //  Decides which events to display
+  renderArray();                                                      //  --- WHICH EVENTS TO DISPLAY ---
   return(                                                             //  --- DISPLAYS THE EVENTSCREEN ---
     <View>
       <StatusBar style="light" /> 
@@ -274,7 +298,7 @@ export default function EventScreen({ navigation }) {
                           showsVerticalScrollIndicator={false}
                           numColumns={3}
                           keyExtractor={(item) => item.id}
-                          data={category}
+                          data={relevantCategories}
                           renderItem={({item}) => (
                               <View style={ES.categoryView}>
                                   {clickedCategory.includes(item) ?
