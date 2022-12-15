@@ -136,7 +136,7 @@ useEffect(() => {
 
       <View>
         {Space(15)}
-        <Image style={GS.smallImage} source={require('../../assets/login-text.png')} />
+        <Image style={GS.smallImage} source={require('../../assets/loginText.png')} />
       </View>
 
       {Space(15)}

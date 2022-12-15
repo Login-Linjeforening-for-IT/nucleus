@@ -48,7 +48,7 @@ return(
 {/* ========================= DISPLAY TOP MENU ========================= */}
   <View style={MS.topMenu}>
     <TouchableOpacity onPress={() => aboutPage()}>
-      <Image style={MS.tMenuIcon} source={require('../assets/login-text.png')} />
+      <Image style={MS.tMenuIcon} source={require('../assets/loginText.png')} />
     </TouchableOpacity>
 
     <Text style={MS.screenTitle}>Stillinger</Text>

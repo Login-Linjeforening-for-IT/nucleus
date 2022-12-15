@@ -198,7 +198,7 @@ const showPass = () => {
 
 
               <View style={SS.makeNotificationImage}>
-                  <Image style={GS.smallImage} source={require('../assets/login-text.png')} />
+                  <Image style={GS.smallImage} source={require('../assets/loginText.png')} />
                 </View>
         </View>
       </View>   

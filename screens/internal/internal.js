@@ -41,7 +41,7 @@ const ProfilePage = () => {
 {/* ========================= DISPLAY TOP MENU ========================= */}
       <View style={MS.topMenu}>
           <TouchableOpacity>
-            <Image style={MS.tMenuIcon} source={require('../../assets/login-text.png')} />
+            <Image style={MS.tMenuIcon} source={require('../../assets/loginText.png')} />
           </TouchableOpacity>
 
           <Text style={MS.screenTitle}>Innsida</Text>

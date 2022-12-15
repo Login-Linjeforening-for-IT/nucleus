@@ -20,11 +20,11 @@
       [
         "expo-notifications",
         {
-          "icon": "./assets/login-text.png",
+          "icon": "./assets/loginText.png",
           "color": "#000000",
           "sounds": [
-            "./assets/notification-one.wav",
-            "./assets/notification-two.wav"
+            "./assets/notificationLogin.wav",
+            "./assets/notificationSound.wav"
           ]
         }
       ]
@@ -38,7 +38,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/adaptiveIcon.png",
         "backgroundColor": "#000000"
       },
       "package": "com.eirikhanasand.Login"

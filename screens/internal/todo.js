@@ -25,6 +25,7 @@ export default function TodoScreen({ navigation }) {
       {id: '7', todo: 'Theme'},
       {id: '8', todo: 'Language'},
       {id: '9', todo: 'Push notifications need to be revisited'},
+      {id: '10', todo: 'Local notification event reminders'},
   ])
 {/* ========================= DISPLAY APP START ========================= */}
 function eventPage()   { navigation.navigate('EventScreen')   }
