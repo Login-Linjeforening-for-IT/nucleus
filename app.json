@@ -23,8 +23,8 @@
           "icon": "./assets/login-text.png",
           "color": "#000000",
           "sounds": [
-            "./local/assets/notification-sound.wav",
-            "./local/assets/notification-sound-other.wav"
+            "./assets/notification-one.wav",
+            "./assets/notification-two.wav"
           ]
         }
       ]
