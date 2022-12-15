@@ -20,10 +20,11 @@ export default function TodoScreen({ navigation }) {
       {id: '2', todo: 'Implement mail sending service'},
       {id: '3', todo: 'Center title position'},
       {id: '4', todo: 'Bug: event storage'},
-      {id: '4', todo: 'Bug: missing photo SES'},
-      {id: '4', todo: 'Bug: SES eventtext'},
-      {id: '5', todo: 'Theme'},
-      {id: '6', todo: 'Language'},
+      {id: '5', todo: 'Bug: missing photo SES'},
+      {id: '6', todo: 'Bug: SES eventtext'},
+      {id: '7', todo: 'Theme'},
+      {id: '8', todo: 'Language'},
+      {id: '9', todo: 'Push notifications need to be revisited'},
   ])
 {/* ========================= DISPLAY APP START ========================= */}
 function eventPage()   { navigation.navigate('EventScreen')   }
