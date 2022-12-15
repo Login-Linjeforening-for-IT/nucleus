@@ -53,10 +53,7 @@ export function Kontakt() { //Contact info
         <Text style={T.centered15}>2815 GJØVIK</Text>
         <Text/>
         <Text style={T.orangeCentered15} onPress={() => Linking.openURL('mailto:kontakt@login.no')}>kontakt@login.no</Text>
-        <Text/>
-        <Text/>
-        <Text style={T.red}>map goes here</Text>
-        <Text/>{Space(15)}
+        <Text/>{Space(12)}
     </View> 
     )
 }
