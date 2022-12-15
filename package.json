@@ -8,6 +8,8 @@
     "ios": "expo start --ios"
   },
   "dependencies": {
+    "@expo/html-elements": "^0.2.2",
+    "@react-native-async-storage/async-storage": "^1.17.11",
     "@react-native-community/masked-view": "^0.1.11",
     "@react-native-community/push-notification-ios": "^1.10.1",
     "@react-navigation/native": "^6.0.13",
@@ -21,10 +23,12 @@
     "expo-status-bar": "~1.4.0",
     "expo-updates": "~0.14.7",
     "git": "^0.1.5",
+    "mailgun-js": "^0.22.0",
     "native-notify": "^3.0.2",
     "node": "^19.1.0",
     "openvpn": "^0.1.5",
     "react": "18.0.0",
+    "react-dom": "18.0.0",
     "react-native": "^0.69.6",
     "react-native-event-listeners": "^1.0.7",
     "react-native-gesture-handler": "~2.5.0",
@@ -37,6 +41,7 @@
     "react-redux": "^8.0.5",
     "redux": "^4.2.0",
     "url-polyfill": "^1.1.12"
+
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
