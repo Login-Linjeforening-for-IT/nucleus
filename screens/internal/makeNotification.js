@@ -24,9 +24,9 @@ Notifications.setNotificationHandler({
 });
 
 {/* ========================= APP START ========================= */}
-global.nTitle = 'Login 💻'
-global.nBody = 'Varsling'
-global.nDelay = 1
+global.nTitle = "Login 💻"       // not being used, use array instead
+global.nBody = "Varsling"       // not being used, use array instead
+global.nDelay = 1               // not being used, use array instead
 
 export default function MakeNotificationScreen({ navigation }) {
 {/* ========================= DISPLAY APP START ========================= */}
@@ -50,6 +50,31 @@ const [expoPushToken, setExpoPushToken] = useState('');
 const [notification, setNotification] = useState(false);
 const notificationListener = useRef();
 const responseListener = useRef();
+
+// --- THIS SECTION IS FOR WHEN THIS SCREEN IS REVISITIED --- 
+// const [comittee, selectComittee] = useState({
+//   selected: 0
+// }) 
+
+// const selectedComittee = (val) => {
+//   selectComittee({
+//     ...comittee,
+//     selected: val,
+//   });
+// }
+//
+// const [filter, setFilter] = useState({input: null});                //  Filter text input declaration
+//   const textInputRef = useRef(null);                                  //  Clears text input
+//   const filterInput = (val) => {                                      //  --- UPDATES FILTER TEXT INPUT ---
+//       setFilter({ 
+//       ...filter,
+//       input: val,
+//       });
+//   }
+//  ref={textInputRef}
+//  maxLength={40}
+//  onPress={() => filterInput(null) + setRenderedArray([...events]) + setClickedCategory([]) + textInputRef.current.clear()}
+// --- THIS SECTION IS FOR WHEN THIS SCREEN IS REVISITIED --- 
 
 useEffect(() => {
   registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
