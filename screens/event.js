@@ -137,11 +137,9 @@ export default function EventScreen({ navigation }) {
   
   const fetchRelevantCategories = () => {                             //  --- FETCHES RELEVANT CATEGORIES TO FILTER ---
     if(clickedEvents.length > 0) {                                    // Adding enrolled option if > 0 enrolled events
-      if(search.status == 0) {                                        // Not updating filter while open, due to unintended behavior
-        const relevantCategories = category.filter(category => events.some(events => events.category === category.category)); 
-        relevantCategories.unshift({id: '1', category: 'PÅMELDT'})
-        setRelevantCategories([...relevantCategories])
-      }
+      const relevantCategories = category.filter(category => events.some(events => events.category === category.category)); 
+      relevantCategories.unshift({id: '1', category: 'PÅMELDT'})
+      setRelevantCategories([...relevantCategories])
     }else{
       const relevantCategories = category.filter(category => events.some(events => events.category === category.category)); 
       setRelevantCategories([...relevantCategories])
