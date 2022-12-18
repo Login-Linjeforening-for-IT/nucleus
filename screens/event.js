@@ -332,7 +332,7 @@ export default function EventScreen({ navigation }) {
               data={renderedArray}
               renderItem={({item}) => (
                 <View> 
-                  <TouchableOpacity onPress={() => navigation.navigate('SpecificEventScreen', item)}>
+                  <TouchableOpacity onPress={() => navigation.navigate('SpecificEventScreen', { item: item })}>
                       <Card style={ES.eventCard}>
                         <View style={ES.eventBack}>
                           <View>

@@ -1,5 +1,5 @@
 import React from 'react';
-import Navigator from './routes/homeStack';
+import Navigator from './routes/stack';
 //import registerNNPushToken from 'native-notify';  
 
 export default function App() {

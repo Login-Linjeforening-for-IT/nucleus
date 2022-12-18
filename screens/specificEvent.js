@@ -23,11 +23,12 @@ import {
 {/* ========================= APP START ========================= */}
 
 export default function SpecificEventScreen( { navigation }) {
-
+  const item = navigation.params;
+  console.log('item' + item)
   const [usersData,setUsersData]=useState({})
 
   const getData=()=>{
-    fetch('https://api.login.no/events/'+(navigation.getParam('eventID')))
+    fetch('https://api.login.no/events/') //(item.eventID)
     // fetch('https://tekkom:rottejakt45@api.login.no:8443') //TESTING
     .then(response => response.json())
     .then(data=>setUsersData(data))
