@@ -8,6 +8,7 @@ const Tab = createBottomTabNavigator();
 import HomeScreen from '../screens/home'
 import EventScreen from '../screens/event';
 import AboutScreen from '../screens/about';
+import ProfileScreen from '../screens/profile';
 import ListingScreen from '../screens/listings';
 import SpecificEventScreen from '../screens/specificEvent';
 import InternalScreen from '../screens/internal/internal';
@@ -16,7 +17,6 @@ import SettingScreen from '../screens/settings';
 import TodoScreen from '../screens/internal/todo';
 import MakeNotificationScreen from '../screens/internal/makeNotification';
 import LoginScreen from '../screens/login';
-import ProfileScreen from '../screens/profile';
 import ReportScreen from '../screens/contact/report';
 import ContactMenuScreen from '../screens/contact/contactMenu';
 import CommitteeMenuScreen from '../screens/contact/committeeMenu';
@@ -30,6 +30,7 @@ function Navigator() {
                 <Tab.Screen name='HomeScreen'               options={{tabBarStyle: { display: "none" }}} component={HomeScreen} />
                 <Tab.Screen name='EventScreen'              options={{tabBarStyle: { display: "none" }}} component={EventScreen} />
                 <Tab.Screen name='AboutScreen'              options={{tabBarStyle: { display: "none" }}} component={AboutScreen} />
+                <Tab.Screen name='ProfileScreen'            options={{tabBarStyle: { display: "none" }}} component={ProfileScreen} />
                 <Tab.Screen name='ListingScreen'            options={{tabBarStyle: { display: "none" }}} component={ListingScreen} />
                 <Tab.Screen name='SpecificEventScreen'      options={{tabBarStyle: { display: "none" }}} component={SpecificEventScreen} />
                 <Tab.Screen name='InternalScreen'           options={{tabBarStyle: { display: "none" }}} component={InternalScreen} />
@@ -38,7 +39,6 @@ function Navigator() {
                 <Tab.Screen name='TodoScreen'               options={{tabBarStyle: { display: "none" }}} component={TodoScreen} />
                 <Tab.Screen name='MakeNotificationScreen'   options={{tabBarStyle: { display: "none" }}} component={MakeNotificationScreen} />
                 <Tab.Screen name='LoginScreen'              options={{tabBarStyle: { display: "none" }}} component={LoginScreen} />
-                <Tab.Screen name='ProfileScreen'            options={{tabBarStyle: { display: "none" }}} component={ProfileScreen} />
                 <Tab.Screen name='ReportScreen'             options={{tabBarStyle: { display: "none" }}} component={ReportScreen} />
                 <Tab.Screen name='ContactMenuScreen'        options={{tabBarStyle: { display: "none" }}} component={ContactMenuScreen} />
                 <Tab.Screen name='CommitteeMenuScreen'      options={{tabBarStyle: { display: "none" }}} component={CommitteeMenuScreen} />
