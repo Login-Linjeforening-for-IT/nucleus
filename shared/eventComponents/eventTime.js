@@ -144,12 +144,10 @@ export default function EventTime(startTime, endTime) {
 }
 
 export function leapYear(year){ //Bool for leapyear
-    console.log(78)
     return (year % 100 === 0) ? (year % 400 === 0) : (year % 4 === 0);
 }
 
 export function lastDayOfMonth(month) { //Checks for leap year
-    console.log(79)
     var year = new Date().getFullYear()
     switch (month) {
         case 2:     
@@ -169,7 +167,6 @@ export function beyondTime(eventTime) {
     var day      = new Date().getDate()
     var hour     = new Date().getHours()
     var minute   = new Date().getMinutes()
-    var second   = new Date().getSeconds() 
 
     const eventYear     = (eventTime)[0]  + (eventTime)[1] + (eventTime)[2] + (eventTime)[3]      //  year
     const eventMonth    = (eventTime)[5]  + (eventTime)[6]                                        //  month
