@@ -23,8 +23,8 @@
           "icon": "./assets/loginText.png",
           "color": "#000000",
           "sounds": [
-            "./assets/notificationLogin.wav",
-            "./assets/notificationSound.wav"
+            "./assets/notificationlogin.wav",
+            "./assets/notificationsound.wav"
           ]
         }
       ]
@@ -34,7 +34,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.eirikhanasand.Login",
+      "bundleIdentifier": "com.login.Login",
       "buildNumber": "6"
     },
     "android": {
@@ -42,7 +42,8 @@
         "foregroundImage": "./assets/adaptiveIcon.png",
         "backgroundColor": "#000000"
       },
-      "package": "com.eirikhanasand.Login"
+      "package": "com.login.Login",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"
