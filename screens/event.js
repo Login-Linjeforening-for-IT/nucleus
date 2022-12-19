@@ -33,7 +33,7 @@ export default function EventScreen({ navigation }) {
     .then(data=>setEvents(data))                                      // Setting the response
   }
 
-  const storeCache = async() => {
+  const storeCache = async() => {                                     // --- SAVING EVENTS IN LOCALSTORAGE ---
     if(events.length > 0){
       await AsyncStorage.setItem('cachedEvents', JSON.stringify(events))
     }
