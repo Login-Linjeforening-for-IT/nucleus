@@ -4,13 +4,12 @@ const GLOBAL = require('./themes/dark')
 export const MS = StyleSheet.create ({
 //  ========================= STYLESHEET TOP MENU =========================
   screenTitle: { //Header title of every page
-    justifyContent: 'center',
     top: '12%',
     color: GLOBAL.DARK.TITLETEXTCOLOR, //Maybe buttons are clickable if not percentage value?
     fontSize: 35,
   },
   smallTitle: { //Header title of every page
-    maxWidth: 200,
+    maxWidth: 190,
     left: 15,
     top: '12%',
     color: GLOBAL.DARK.TITLETEXTCOLOR, //Maybe buttons are clickable if not percentage value?

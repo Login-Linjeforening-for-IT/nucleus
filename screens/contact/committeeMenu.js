@@ -16,11 +16,12 @@ import {
 {/* ========================= APP START ========================= */}
 
 export default function CommitteeMenuScreen({ navigation }) {
-const eventPage = () => {navigation.navigate('EventScreen')}
-const homePage = () => {navigation.navigate('HomeScreen')}
-const listingPage = () => {navigation.navigate('ListingScreen')}
-const profilePage = () => {navigation.navigate('ProfileScreen')}
-const goBack = () => {navigation.goBack()}
+
+  const eventPage   = () => { navigation.navigate('EventScreen')       }
+  const homePage    = () => { navigation.navigate('HomeScreen')        }
+  const listingPage = () => { navigation.navigate('ListingScreen')     }
+  const profilePage = () => { navigation.navigate('ProfileScreen')     }
+  const goBack      = () => { navigation.navigate('ContactMenuScreen') }
 
   return(
     <View>
@@ -31,7 +32,7 @@ const goBack = () => {navigation.goBack()}
       <Image style={MS.goBack} source={require('../../assets/goback777.png')} />
     </TouchableOpacity>
 
-    <Text style={MS.screenTitle}>Komité</Text>
+    <Text style={MS.screenTitle}>     Komité</Text>
 
       <TouchableOpacity onPress={() => profilePage()}>
         <Image style={MS.tMenuIcon} source={require('../../assets/loginperson-orange.png')} />

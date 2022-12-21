@@ -16,25 +16,14 @@ import {
 
 {/* ========================= APP START ========================= */}
 
-export default function SpecificArticleScreen( { navigation }) {
+export default function SpecificArticleScreen( { route, navigation }) {
+  const { item } = route.params
 
-  //Check if image exists
-
-  const listingPage = () => {
-    navigation.navigate('ListingScreen');
-  }
-  const eventPage = () => {
-    navigation.navigate('EventScreen');
-  }
-  const homePage = () => {
-    navigation.navigate('HomeScreen');
-  }
-  const profilePage = () => {
-    navigation.navigate('ProfileScreen');
-  }
-  const goBack = () => {
-    navigation.goBack()
-  }
+  const listingPage = () => { navigation.navigate('ListingScreen') }
+  const eventPage   = () => { navigation.navigate('EventScreen')   }
+  const homePage    = () => { navigation.navigate('HomeScreen')    }
+  const profilePage = () => { navigation.navigate('ProfileScreen') }
+  const goBack      = () => { navigation.goBack()                  }
 
   return(
     <View>
@@ -45,7 +34,7 @@ export default function SpecificArticleScreen( { navigation }) {
       <Image style={MS.goBack} source={require('../assets/goback777.png')} />
     </TouchableOpacity>
 
-    <Text style={MS.smallTitle}>{navigation.getParam('title')}</Text>
+    <Text style={MS.smallTitle}>{item.title}</Text>
 
       <TouchableOpacity onPress={() => profilePage()}>
         <Image style={MS.tMenuIcon} source={require('../assets/loginperson.png')} />
@@ -62,8 +51,8 @@ export default function SpecificArticleScreen( { navigation }) {
               <Image style={GS.articleImage} source={require('../assets/hans.png')} />
             </View>
               <Card>
-                <Text style={T.centered20}>{navigation.getParam('title')}</Text>
-                  <Text style={T.margin15}>{navigation.getParam('content')}</Text>
+                <Text style={T.centered20}>{item.title}</Text>
+                  <Text style={T.margin15}>{item.content}</Text>
               </Card> 
           </View>
 

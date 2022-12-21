@@ -17,21 +17,11 @@ import {
 
 export default function BusinessScreen( { navigation }) {
 
-const listingPage = () => {
-  navigation.navigate('ListingScreen');
-}
-const eventPage = () => {
-  navigation.navigate('EventScreen');
-}
-const homePage = () => {
-  navigation.navigate('HomeScreen');
-}
-const profilePage = () => {
-  navigation.navigate('ProfileScreen');
-}
-const goBack = () => {
-  navigation.goBack()
-}
+  const eventPage   = () => { navigation.navigate('EventScreen')       }
+  const homePage    = () => { navigation.navigate('HomeScreen')        }
+  const listingPage = () => { navigation.navigate('ListingScreen')     }
+  const profilePage = () => { navigation.navigate('ProfileScreen')     }
+  const goBack      = () => { navigation.navigate('ContactMenuScreen') }
 
   return(
     <View>

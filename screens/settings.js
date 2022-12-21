@@ -18,22 +18,11 @@ import {
 
 export default function SettingScreen( { navigation }) {
 
-
-const listingPage = () => {
-  navigation.navigate('ListingScreen');
-}
-const eventPage = () => {
-  navigation.navigate('EventScreen');
-}
-const homePage = () => {
-  navigation.navigate('HomeScreen');
-}
-const profilePage = () => {
-  navigation.navigate('ProfileScreen');
-}
-const goBack = () => {//hoppe over til mail 
-  navigation.goBack()
-}
+  const eventPage   = () => { navigation.navigate('EventScreen')   }
+  const listingPage = () => { navigation.navigate('ListingScreen') }
+  const homePage    = () => { navigation.navigate('HomeScreen')    }
+  const profilePage = () => { navigation.navigate('ProfileScreen') }
+  const goBack      = () => { navigation.navigate('ProfileScreen') }
 
   return(
     <View>

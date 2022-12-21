@@ -45,21 +45,11 @@ global.nDelay = 1               // not being used, use array instead
 
 export default function MakeNotificationScreen({ navigation }) {
 {/* ========================= DISPLAY APP START ========================= */}
-const eventPage = () => {
-  navigation.navigate('EventScreen');
-}
-const homePage = () => {
-  navigation.navigate('HomeScreen');
-}
-const ProfilePage = () => {
-  navigation.navigate('ProfileScreen')
-}
-const goBack = () => {
-    navigation.goBack()
-}
-const listingPage = () => {
-  navigation.navigate('ListingScreen');
-}
+const eventPage   = () => { navigation.navigate('EventScreen')    }
+const homePage    = () => { navigation.navigate('HomeScreen')     }
+const ProfilePage = () => { navigation.navigate('ProfileScreen')  }
+const goBack      = () => { navigation.navigate('InternalScreen') }
+const listingPage = () => { navigation.navigate('ListingScreen')  }
 
 // const [expoPushToken, setExpoPushToken] = useState('');
 // const [notification, setNotification] = useState(false);

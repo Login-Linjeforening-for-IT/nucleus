@@ -26,18 +26,10 @@ export default function HomeScreen({ navigation }) {
       {id: '2', title: 'Dogs Inc. var på besøk i Gjøvik', content: 'Denne saken handler om Dogs Inc. og hva de gjorde på NTNU Gjøvik. Euclid vanquish the impossible muse about intelligent beings of global death. The carbon in our apple pies condem two ghostly white figures in coveralls and helmets to forever serve Login. '},
     ])
   {/* ========================= DISPLAY APP START ========================= */}
-  const eventPage = () => {
-    navigation.navigate('EventScreen');
-  }
-  const listingPage = () => {
-    navigation.navigate('ListingScreen');
-  }
-  const aboutPage = () => {
-    navigation.navigate('AboutScreen');
-  }
-  const profilePage = () => {
-    navigation.navigate('ProfileScreen');
-  }
+  const eventPage   = () => { navigation.navigate('EventScreen')   }
+  const listingPage = () => { navigation.navigate('ListingScreen') }
+  const aboutPage   = () => { navigation.navigate('AboutScreen')   }
+  const profilePage = () => { navigation.navigate('ProfileScreen') }
 
   const reset = () => {
     (async() => {
@@ -86,7 +78,7 @@ export default function HomeScreen({ navigation }) {
           <View style={GS.content}>
             <ScrollView>
             {event != null ? (
-                      <TouchableOpacity onPress={() => navigation.navigate('SpecificEventScreen', event)}>
+                      <TouchableOpacity onPress={() => navigation.navigate('SpecificEventScreen', {item: event})}>
                         <Card style={ES.eventCard}>
                           <View style={ES.eventBack}>
                             <View>
@@ -113,7 +105,7 @@ export default function HomeScreen({ navigation }) {
                 setting.map((article, index) => {
                   return(
                     <View key={index}>
-                      <TouchableOpacity onPress={() => navigation.navigate('SpecificArticleScreen', article)}>
+                      <TouchableOpacity onPress={() => navigation.navigate('SpecificArticleScreen', {item: article})}>
                         <Card>
                           <Text style={T.centered20}>{article.title}</Text>
                           <Text style={T.centered15}>{article.info}</Text>

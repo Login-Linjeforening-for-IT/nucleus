@@ -1,6 +1,6 @@
 import GreenLight, { GrayLight, Check, Month } from '../shared/eventComponents/otherComponents';  // Components used to display event
 import Card, { CompareDates, CheckBox, CheckedBox } from '../shared/sharedComponents';  // Components used to display event
-import CategorySquare from '../shared/eventComponents/categorySquare';  // Left side square on eventcard
+import CategorySquare from '../shared/eventComponents/categorySquare'; // Left side square on eventcard
 import AsyncStorage from '@react-native-async-storage/async-storage'; // Localstorage
 import React, { useEffect, useState, useRef } from 'react';           // React imports
 import { StatusBar } from 'expo-status-bar';                          // Status bar
@@ -21,18 +21,31 @@ const GLOBAL = require('../styles/themes/dark');                      //  Theme
 
 export default function EventScreen({ navigation }) {
   //Declaring screens you can navigate to from this screen
-  const listingPage = () => {navigation.navigate('ListingScreen')}    //  Job screen
-  const homePage = () => {navigation.navigate('HomeScreen')}          //  Home screen
-  const aboutPage = () => {navigation.navigate('AboutScreen')}        //  About screen
-  const profilePage = () => {navigation.navigate('ProfileScreen')}    //  Profile screen
+  const listingPage = () => { navigation.navigate('ListingScreen') }  //  Job screen
+  const homePage    = () => { navigation.navigate('HomeScreen')    }  //  Home screen
+  const aboutPage   = () => { navigation.navigate('AboutScreen')   }  //  About screen
+  const profilePage = () => { navigation.navigate('ProfileScreen') }  //  Profile screen
 
   const getData=()=>{                                                 //  --- FETCHING DATA FROM API ---
-    fetch('https://api.login.no/events')                              // PRODUCTION
-    //fetch('https://tekkom:rottejakt45@api.login.no:8443/events')    // TESTING
-    .then(response=>response.json())                                  // Formatting the response
-    .then(data=>setEvents(data))                                      // Setting the response
-  }
+    try {
+      fetch('https://api.login.no/events')                            // PRODUCTION
+      //fetch('https://tekkom:rottejakt45@api.login.no:8443/events')  // TESTING
+      .then(response=>response.json())                                // Formatting the response
+      .then(data=>setEvents(data))                                    // Setting the response
+    } catch (e) {
+      (async() => {
+        try {
+          let cache = await AsyncStorage.getItem('cachedEvents')
+          console.warn('cache' + cache)
+          if(cache) cache = JSON.parse(cache); setEvents([...cache])
+        } catch (e) {console.warn('Failed to fetch cache: ' + e)}
+      })
 
+      if (events) {if(events.length > 0) renderArray();}else{console.warn('didnt find cache')}
+      
+    }
+  }
+  
   const storeCache = async() => {                                     // --- SAVING EVENTS IN LOCALSTORAGE ---
     if(events.length > 0){
       await AsyncStorage.setItem('cachedEvents', JSON.stringify(events))
@@ -45,7 +58,6 @@ export default function EventScreen({ navigation }) {
       status: !search.status
     });
   }
-
                                                                       //  --- ARRAY DECLARATION ---
   const [events, setEvents] = useState([]);                           //  Events from api
   const [renderedArray, setRenderedArray] = useState([]);             //  Events currently displayed
@@ -319,7 +331,6 @@ export default function EventScreen({ navigation }) {
               </View>
           </View>
         :null}
-
         {/* ----- RENDERS EVENTS ----- */}
         {renderedArray != null ? 
           renderedArray.length > 0 ?
@@ -330,7 +341,7 @@ export default function EventScreen({ navigation }) {
               data={renderedArray}
               renderItem={({item}) => (
                 <View> 
-                  <TouchableOpacity onPress={() => navigation.navigate('SpecificEventScreen', { item: item })}>
+                  <TouchableOpacity onPress={() => navigation.navigate('SpecificEventScreen', {item: item})}>
                       <Card style={ES.eventCard}>
                         <View style={ES.eventBack}>
                           <View>

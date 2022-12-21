@@ -21,7 +21,7 @@ import ReportScreen from '../screens/contact/report';
 import ContactMenuScreen from '../screens/contact/contactMenu';
 import CommitteeMenuScreen from '../screens/contact/committeeMenu';
 import SpecificListingScreen from '../screens/specificListing';
-import SpecificArticleScreen from '../screens/specificarticle';
+import SpecificArticleScreen from '../screens/specificArticle';
 
 function Navigator() {
     return(

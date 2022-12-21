@@ -17,23 +17,15 @@ import {
 
 export default function ListingScreen({ navigation }) {
     const [setting] = useState([
-      {id: '1', nav: 'EventScreen', title: 'Hagearbeid hos Login', content: 'A still more glorious dawn awaits cosmic fugue gathered by gravity tesseract muse about two ghostly white figures in coveralls and helmets are softly dancing. Rich in heavy atoms permanence of the stars descended from astronomers invent...'},
-      {id: '2', nav: 'EventScreen', title: 'Lage nettside for Zebra Company', content: 'The sky calls to us rogue Orions sword decipherment venture the only home weve ever known. Cambrian explosion white dwarf something incredible is waiting to be known astonishment great turbulent clouds the only home weve ever known. '},
-      {id: '3', nav: 'EventScreen', title: 'Datasikkerhet hos Dogs Inc.', content: 'Euclid vanquish the impossible muse about intelligent beings paroxysm of global death something incredible is waiting to be known. The carbon in our apple pies two ghostly white figures in coveralls and helmets are softly dancing realm of the spine... '},
+      {id: '1', title: 'Hagearbeid hos Login', content: 'A still more glorious dawn awaits cosmic fugue gathered by gravity tesseract muse about two ghostly white figures in coveralls and helmets are softly dancing. Rich in heavy atoms permanence of the stars descended from astronomers invent...'},
+      {id: '2', title: 'Lage nettside for Zebra Company', content: 'The sky calls to us rogue Orions sword decipherment venture the only home weve ever known. Cambrian explosion white dwarf something incredible is waiting to be known astonishment great turbulent clouds the only home weve ever known. '},
+      {id: '3', title: 'Datasikkerhet hos Dogs Inc.', content: 'Euclid vanquish the impossible muse about intelligent beings paroxysm of global death something incredible is waiting to be known. The carbon in our apple pies two ghostly white figures in coveralls and helmets are softly dancing realm of the spine... '},
   ])
-{/* ========================= DISPLAY APP START ========================= */}
-const eventPage = () => {
-  navigation.navigate('EventScreen');
-}
-const homePage = () => {
-  navigation.navigate('HomeScreen');
-}
-const aboutPage = () => {
-  navigation.navigate('AboutScreen');
-}
-const profilePage = () => {
-  navigation.navigate('ProfileScreen');
-}
+
+const eventPage   = () => { navigation.navigate('EventScreen')   }
+const homePage    = () => { navigation.navigate('HomeScreen')    }
+const aboutPage   = () => { navigation.navigate('AboutScreen')   }
+const profilePage = () => { navigation.navigate('ProfileScreen') }
 
 // useEffect(() => { //Fetches the API every 10 seconds
 //   const interval = setInterval(() => {
@@ -67,7 +59,7 @@ return(
           data={setting}
           renderItem={({item}) => (
             <View>
-            <TouchableOpacity onPress={() => navigation.navigate('SpecificListingScreen', item)}>
+            <TouchableOpacity onPress={() => navigation.navigate('SpecificListingScreen', {item: item})}>
               <Card>
                 <Text style={T.centered20}>{item.title}</Text><Text/>
                 <Text style={T.centered15}>{item.content}</Text>

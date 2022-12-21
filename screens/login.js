@@ -20,18 +20,11 @@ import React, { useState } from 'react';
 
 export default function LoginScreen( { navigation }) {
 
-const listingPage = () => {
-  navigation.navigate('ListingScreen');
-}
-const eventPage = () => {
-  navigation.navigate('EventScreen');
-}
-const homePage = () => {
-  navigation.navigate('HomeScreen');
-}
-const profilePage = () => {
-  navigation.navigate('ProfileScreen');
-}
+const goBack       = () => { navigation.navigate('ProfileScreen') }
+const listingPage  = () => { navigation.navigate('ListingScreen') }
+const eventPage    = () => { navigation.navigate('EventScreen')   }
+const homePage     = () => { navigation.navigate('HomeScreen')    }
+const profilePage  = () => { navigation.navigate('ProfileScreen') }
 const internalPage = () => {
   if (data.name === database.name && data.pass === database.pass) {
     navigation.navigate('InternalScreen');
@@ -39,9 +32,7 @@ const internalPage = () => {
     Alert.alert('Feil brukernavn eller passord')
   }
 }
-const goBack = () => {
-  navigation.goBack()
-}
+
 const [data, setData] = useState({
   name: '',
   pass: '',
@@ -98,11 +89,14 @@ const showPass = () => {
     <View>
       <StatusBar style="light" />
 {/* ========================= DISPLAY TOP MENU ========================= */}
-  <View style={MS.topMenu}>
+<View style={MS.topMenu}>
     <TouchableOpacity onPress={() => goBack()}>
       <Image style={MS.goBack} source={require('../assets/goback777.png')} />
     </TouchableOpacity>
-      <TouchableOpacity onPress={() => profilePage()}>
+
+    <Text style={MS.screenTitle}>    Innsida</Text>
+
+      <TouchableOpacity>
         <Image style={MS.tMenuIcon} source={require('../assets/loginperson-orange.png')} />
       </TouchableOpacity>
   </View>

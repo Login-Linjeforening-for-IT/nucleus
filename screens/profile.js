@@ -17,27 +17,18 @@ import { T } from '../styles/text';
 {/* ========================= APP START ========================= */}
 
 export default function ProfileScreen({ navigation }) {
-    const [setting] = useState([
-        {id: '1', nav: 'SettingScreen', title: 'Innstillinger'},
-        {id: '2', nav: 'ContactMenuScreen', title: 'Kontakt Login'},
-        {id: '3', nav: 'LoginScreen', title: 'Innsida (verv)'},
 
+    const [setting] = useState([
+        {id: '1', nav: 'SettingScreen',     title: 'Innstillinger'  },
+        {id: '2', nav: 'ContactMenuScreen', title: 'Kontakt Login'  },
+        {id: '3', nav: 'LoginScreen',       title: 'Innsida (verv)' },
     ])
 
-{/* ========================= DISPLAY APP START ========================= */}
+const goBack      = () => { navigation.goBack()                  }
+const eventPage   = () => { navigation.navigate('EventScreen')   }
+const listingPage = () => { navigation.navigate('ListingScreen') }
+const homePage    = () => { navigation.navigate('HomeScreen')    }
 
-const goBack = () => {
-    navigation.goBack()
-  }
-  const eventPage = () => {
-    navigation.navigate('EventScreen');
-  }
-  const listingPage = () => {
-  navigation.navigate('ListingScreen');
-  }
-  const homePage = () => {
-    navigation.navigate('HomeScreen');
-  }
 return(
   <View>
   <StatusBar style="light" />
@@ -47,7 +38,7 @@ return(
       <Image style={MS.goBack} source={require('../assets/goback777.png')} />
     </TouchableOpacity>
 
-    <Text style={MS.screenTitle}>    Profil</Text>
+    <Text style={MS.screenTitle}>      Profil</Text>
 
       <TouchableOpacity>
         <Image style={MS.tMenuIcon} source={require('../assets/loginperson-orange.png')} />

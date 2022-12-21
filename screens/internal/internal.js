@@ -22,18 +22,10 @@ export default function InternalScreen({ navigation }) {
 
   ])
 {/* ========================= DISPLAY APP START ========================= */}
-const eventPage = () => {
-  navigation.navigate('EventScreen');
-}
-const homePage = () => {
-  navigation.navigate('HomeScreen');
-}
-const listingPage = () => {
-  navigation.navigate('ListingScreen')
-}
-const ProfilePage = () => {
-  navigation.navigate('ProfileScreen')
-}
+const eventPage   = () => { navigation.navigate('EventScreen')   }
+const homePage    = () => { navigation.navigate('HomeScreen')    }
+const listingPage = () => { navigation.navigate('ListingScreen') }
+const ProfilePage = () => { navigation.navigate('ProfileScreen') }
 
   return(
     <View>

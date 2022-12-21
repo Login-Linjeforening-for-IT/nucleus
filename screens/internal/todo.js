@@ -28,11 +28,11 @@ export default function TodoScreen({ navigation }) {
       {id: '10', todo: 'Local notification event reminders'},
   ])
 {/* ========================= DISPLAY APP START ========================= */}
-function eventPage()   { navigation.navigate('EventScreen')   }
-function homePage()    { navigation.navigate('HomeScreen')    }
-function listingPage() { navigation.navigate('ListingScreen') }
-function profilePage() { navigation.navigate('ProfileScreen') }
-function goBack()      { navigation.goBack()                  }
+function eventPage()   { navigation.navigate('EventScreen')    }
+function homePage()    { navigation.navigate('HomeScreen')     }
+function listingPage() { navigation.navigate('ListingScreen')  }
+function profilePage() { navigation.navigate('ProfileScreen')  }
+function goBack()      { navigation.navigate('InternalScreen') }
 
   return(
     <View>

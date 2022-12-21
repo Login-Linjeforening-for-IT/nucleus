@@ -21,18 +21,12 @@ import {
 {/* ========================= APP START ========================= */}
 
 export default function ReportScreen( { navigation }) {
-const listingPage = () => {
-  navigation.navigate('ListingScreen');
-}
-const eventPage = () => {
-  navigation.navigate('EventScreen');
-}
-const homePage = () => {
-  navigation.navigate('HomeScreen');
-}
-const profilePage = () => {
-  navigation.navigate('ProfileScreen');
-}
+ 
+  const eventPage   = () => { navigation.navigate('EventScreen')       }
+  const homePage    = () => { navigation.navigate('HomeScreen')        }
+  const listingPage = () => { navigation.navigate('ListingScreen')     }
+  const profilePage = () => { navigation.navigate('ProfileScreen')     }
+  const goBack      = () => { navigation.navigate('ContactMenuScreen') }
   
   const sendForm = () => {
     if (data.name === data.name) {
@@ -42,9 +36,6 @@ const profilePage = () => {
     }
   }
 
-const goBack = () => {
-  navigation.goBack()
-}
 const [data, setData] = useState({
   name: '',
   contact: '',

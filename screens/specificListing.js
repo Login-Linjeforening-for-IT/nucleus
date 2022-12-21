@@ -16,25 +16,15 @@ import {
 
 {/* ========================= APP START ========================= */}
 
-export default function SpecificListingScreen( { navigation }) {
-
+export default function SpecificListingScreen( { route, navigation }) {
+  const { item } = route.params
   //Check if image exists
 
-  const listingPage = () => {
-    navigation.navigate('ListingScreen');
-  }
-  const eventPage = () => {
-    navigation.navigate('EventScreen');
-  }
-  const homePage = () => {
-    navigation.navigate('HomeScreen');
-  }
-  const profilePage = () => {
-    navigation.navigate('ProfileScreen');
-  }
-  const goBack = () => {
-    navigation.goBack()
-  }
+  const listingPage = () => { navigation.navigate('ListingScreen') }
+  const eventPage   = () => { navigation.navigate('EventScreen')   }
+  const homePage    = () => { navigation.navigate('HomeScreen')    }
+  const profilePage = () => { navigation.navigate('ProfileScreen') }
+  const goBack      = () => { navigation.navigate('ListingScreen') }
 
   return(
     <View>
@@ -45,7 +35,7 @@ export default function SpecificListingScreen( { navigation }) {
       <Image style={MS.goBack} source={require('../assets/goback777.png')} />
     </TouchableOpacity>
 
-    <Text style={MS.screenTitle}>      Annonse</Text>
+    <Text style={MS.smallTitle}>{item.title}</Text>
 
       <TouchableOpacity onPress={() => profilePage()}>
         <Image style={MS.tMenuIcon} source={require('../assets/loginperson.png')} />
@@ -64,22 +54,20 @@ export default function SpecificListingScreen( { navigation }) {
 
             <Card>
               <View>
-                <Text style={T.centered20}>{navigation.getParam('title')}</Text>
+                <Text style={T.centered20}>{item.title}</Text>
               </View>
             </Card>
 
             <View>
               <View>
-                <Text style={T.centered20}>{navigation.getParam('eventname')}</Text>
+                <Text style={T.centered20}>{item.eventname}</Text>
               </View>
 
               {Space(5)}
 
               <Card>
                 <Text style={T.centered20}>Stillingsbeskrivelse: </Text>
-                <Text style={T.margin15}>
-                Bacon ipsum dolor amet beef ribs kevin pastrami shank, t-bone flank ribeye porchetta swine pancetta. Shankle short ribs tail, shoulder fatback pastrami leberkas pig pork chop pork belly kielbasa short loin. Meatball jowl fatback corned beef. Pork belly swine leberkas pork tri-tip jowl.
-                </Text>
+                <Text style={T.margin15}>{item.content}</Text>
               </Card>
             </View>
           </View>

@@ -16,27 +16,18 @@ import {
 {/* ========================= APP START ========================= */}
 
 export default function ContactMenuScreen({ navigation }) {
+  
   const [setting] = useState([
-    {id: '1', nav: 'ReportScreen', title: 'Varsle'},
+    {id: '1', nav: 'ReportScreen',        title: 'Varsle'},
     {id: '2', nav: 'CommitteeMenuScreen', title: 'Komité'},
-    {id: '3', nav: 'BusinessScreen', title: 'Bedrift'},
+    {id: '3', nav: 'BusinessScreen',      title: 'Bedrift'},
   ])
-{/* ========================= DISPLAY APP START ========================= */}
-const eventPage = () => {
-  navigation.navigate('EventScreen');
-}
-const homePage = () => {
-  navigation.navigate('HomeScreen');
-}
-const profilePage = () => {
-  navigation.navigate('ProfileScreen')
-}
-const listingPage = () => {
-  navigation.navigate('ListingScreen')
-}
-const goBack = () => {
-  navigation.goBack()
-}
+
+const eventPage   = () => { navigation.navigate('EventScreen')   }
+const listingPage = () => { navigation.navigate('ListingScreen') }
+const homePage    = () => { navigation.navigate('HomeScreen')    }
+const profilePage = () => { navigation.navigate('ProfileScreen') }
+const goBack      = () => { navigation.navigate('ProfileScreen') }
 
 return(
   <View>

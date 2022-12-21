@@ -22,13 +22,12 @@ import {
 
 {/* ========================= APP START ========================= */}
 
-export default function SpecificEventScreen( { navigation }) {
-  const item = navigation.params;
-  console.log('item' + item)
+export default function SpecificEventScreen({ route, navigation}) {
+  const { item } = route.params
   const [usersData,setUsersData]=useState({})
 
   const getData=()=>{
-    fetch('https://api.login.no/events/') //(item.eventID)
+    fetch('https://api.login.no/events/' + item.eventID)
     // fetch('https://tekkom:rottejakt45@api.login.no:8443') //TESTING
     .then(response => response.json())
     .then(data=>setUsersData(data))
@@ -37,21 +36,11 @@ export default function SpecificEventScreen( { navigation }) {
     getData();
     },[])
 
-  const listingPage = () => {
-    navigation.navigate('ListingScreen');
-  }
-  const eventPage = () => {
-    navigation.navigate('EventScreen');
-  }
-  const homePage = () => {
-    navigation.navigate('HomeScreen');
-  }
-  const profilePage = () => {
-    navigation.navigate('ProfileScreen');
-  }
-  const goBack = () => {
-    navigation.goBack()
-  }
+  const listingPage = () => { navigation.navigate('ListingScreen') }
+  const eventPage   = () => { navigation.navigate('EventScreen')   }
+  const homePage    = () => { navigation.navigate('HomeScreen')    }
+  const profilePage = () => { navigation.navigate('ProfileScreen') }
+  const goBack      = () => { navigation.navigate('EventScreen')   }
 
   //Logs correctly
   // console.log('https://cdn.login.no/img/events/' + usersData.image)
@@ -86,18 +75,18 @@ export default function SpecificEventScreen( { navigation }) {
             <CardSmaller>
               <View style={ES.specificEventInfoView}>
                   <Card>
-                    {CategorySquare(navigation.getParam('category'))} 
+                    {CategorySquare(item.category)} 
                     <Text style={ES.dayText}>
-                        {navigation.getParam('startt')[8]}
-                        {navigation.getParam('startt')[9]}
+                        {item.startt[8]}
+                        {item.startt[9]}
                     </Text>
 
                     <Text style={ES.monthText}>
-                    {Month(navigation.getParam('startt')[5] + navigation.getParam('startt')[6])}
+                    {Month(item.startt[5] + item.startt[6])}
                     </Text>
                   </Card>
                   <Card>
-                    <Text>{EventTime(navigation.getParam('startt'), usersData.endt)}</Text>
+                    <Text>{EventTime(item.startt, usersData.endt)}</Text>
                   </Card>
               </View>
             </CardSmaller>
@@ -107,10 +96,10 @@ export default function SpecificEventScreen( { navigation }) {
               <View style={ES.specificEventInfoView}>
                 <Text style={T.specificEventInfo}>Starter: </Text>
                 <Text style={T.specificEventInfo}>
-                  {navigation.getParam('startt')[11]}
-                  {navigation.getParam('startt')[12]}:
-                  {navigation.getParam('startt')[14]}
-                  {navigation.getParam('startt')[15]}
+                  {item.startt[11]}
+                  {item.startt[12]}:
+                  {item.startt[14]}
+                  {item.startt[15]}
                 </Text>
               </View>
 
@@ -130,9 +119,9 @@ export default function SpecificEventScreen( { navigation }) {
 
               <View style={ES.specificEventInfoView}>
                 <Text style={T.specificEventInfo}>Kategori: </Text>
-                {CategoryCircle(navigation.getParam('category'))}
+                {CategoryCircle(item.category)}
                 <Text style={T.specificEventInfo}>
-                  {navigation.getParam('category')}
+                  {item.category}
                 </Text>
               </View>
 
@@ -141,7 +130,7 @@ export default function SpecificEventScreen( { navigation }) {
               <View style={ES.specificEventInfoView}>
                 <Text style={T.specificEventInfo}>Arrangør: </Text>
                 <Text style={T.specificEventInfo}>
-                  {navigation.getParam('organizer')}
+                  {item.organizer}
                 </Text>
               </View>
            </Card>
@@ -149,14 +138,13 @@ export default function SpecificEventScreen( { navigation }) {
            {Space(5)}
             <Card>
               <View>{Space(5)}
-                <Text style={T.centered20}>{navigation.getParam('eventname')}</Text>
+                <Text style={T.centered20}>{item.eventname}</Text>
               </View>
               {CleanDescription(usersData.description)}
-            </Card>{Space(130)}
+            </Card>
         </ScrollView>
       </View>   
        
-
 {/* ========================= DISPLAY BOTTOM MENU ========================= */}
       <View style={MS.bMenu}>
         <TouchableOpacity onPress={() => homePage()}>
@@ -170,6 +158,5 @@ export default function SpecificEventScreen( { navigation }) {
           </TouchableOpacity>
       </View>     
     </View>
-    
   )
 };
