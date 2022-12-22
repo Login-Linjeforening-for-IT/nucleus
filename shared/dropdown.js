@@ -9,12 +9,16 @@ import {
     Image,
 } from 'react-native';
 import { GS } from '../styles/globalStyles';
+import { useSelector } from 'react-redux';
 
 export default function Dropdown() {
+    
+    const { lang  } = useSelector( (state) => state.lang  )
+
     const [bcourses] = useState([
-        {id: '0', title: 'Dataingeniør', link: 'https://www.ntnu.no/studier/bidata'},
-        {id: '1', title: 'Digital infrastruktur og cybersikkerhet', link: 'https://www.ntnu.no/studier/bdigsec'},
-        {id: '2', title: 'Programmering', link: 'https://www.ntnu.no/studier/bprog'}
+        {id: '0', titleNO: 'Dataingeniør', titleEN: 'Computer Science', link: 'https://www.ntnu.no/studier/bidata'},
+        {id: '1', titleNO: 'Digital infrastruktur og cybersikkerhet', titleEN: 'Digital Infrastructure and Cyber Security', link: 'https://www.ntnu.no/studier/bdigsec'},
+        {id: '2', titleNO: 'Programmering', titleEN: 'Programming', link: 'https://www.ntnu.no/studier/bprog'}
     ])
     const [mcourses] = useState([
         {id: '0', title: 'Information Security', link: 'https://www.ntnu.no/studier/mis'},
@@ -23,9 +27,9 @@ export default function Dropdown() {
     ])
 
     const [pcourses] = useState([
-        {id: '0', title: 'Informasjonsikkerhet og kommunikasjonsteknologi', link: 'https://www.ntnu.no/studier/phisct'},
-        {id: '1', title: 'Datateknologi og informatikk', link: 'https://www.ntnu.no/studier/phcos'},
-        {id: '2', title: 'Elektronikk og telekommunikasjon', link: 'https://www.ntnu.no/studier/phet'}
+        {id: '0', titleNO: 'Informasjonsikkerhet og kommunikasjonsteknologi', titleEN: 'Information Security and Communication Technology', link: 'https://www.ntnu.no/studier/phisct'},
+        {id: '1', titleNO: 'Datateknologi og informatikk', titleEN: 'Computer Science', link: 'https://www.ntnu.no/studier/phcos'},
+        {id: '2', titleNO: 'Elektronikk og telekommunikasjon', titleEN: 'Electronics and Telecommunication', link: 'https://www.ntnu.no/studier/phet'}
     ])
 
     const [course, selectCourse] = useState({
@@ -65,7 +69,7 @@ export default function Dropdown() {
                         return(
                             <TouchableOpacity key={index} onPress={() => Linking.openURL(selectedCourse.link)}>
                                 <View style={GS.dropdownContent}>
-                                    <Text style={T.text15}>{selectedCourse.title}</Text>
+                                    <Text style={T.text15}>{lang ? selectedCourse.titleNO : selectedCourse.titleEN}</Text>
                                     <Image style={GS.smallDropImage} source={require('../assets/linkicon-white.png')} />
                                 </View>
                             </TouchableOpacity>
@@ -121,7 +125,7 @@ export default function Dropdown() {
                         return(
                             <TouchableOpacity key={index} onPress={() => Linking.openURL(selectedCourse.link)}>
                                 <View style={GS.dropdownContent}>
-                                    <Text style={T.text15}>{selectedCourse.title}</Text>
+                                    <Text style={T.text15}>{lang ? selectedCourse.titleNO : selectCourse.titleEN}</Text>
                                     <Image style={GS.smallDropImage} source={require('../assets/linkicon-white.png')} />
                                 </View>
                             </TouchableOpacity>
@@ -137,10 +141,13 @@ export default function Dropdown() {
 }
 
 export function DropdownBachelor() {
+
+    const { lang  } = useSelector( (state) => state.lang  )
+
     const [courses] = useState([
-        {id: '0', title: 'Dataingeniør', link: 'https://www.ntnu.no/studier/bidata'},
-        {id: '1', title: 'Digital infrastruktur og cybersikkerhet', link: 'https://www.ntnu.no/studier/bdigsec'},
-        {id: '2', title: 'Programmering', link: 'https://www.ntnu.no/studier/bprog'}
+        {id: '0', titleNO: 'Dataingeniør', titleEN: 'Computer Science', link: 'https://www.ntnu.no/studier/bidata'},
+        {id: '1', titleNO: 'Digital infrastruktur og cybersikkerhet', titleEN: 'Digital Infrastructure and Cyber Security', link: 'https://www.ntnu.no/studier/bdigsec'},
+        {id: '2', titleNO: 'Programmering', titleEN: 'Programming', link: 'https://www.ntnu.no/studier/bprog'}
     ])
 
     const [course, selectCourse] = useState({
@@ -173,7 +180,7 @@ export function DropdownBachelor() {
                         return(
                             <TouchableOpacity key={index} onPress={() => Linking.openURL(selectedCourse.link)}>
                                 <View style={GS.dropdownContent}>
-                                    <Text style={T.text15}>{selectedCourse.title}</Text>
+                                    <Text style={T.text15}>{lang ? selectedCourse.titleNO : selectCourse.titleEN}</Text>
                                 </View>
                             </TouchableOpacity>
                             
@@ -239,10 +246,13 @@ export function DropdownMaster() {
 }
 
 export function DropdownPHD() {
+
+    const { lang  } = useSelector( (state) => state.lang  )
+
     const [courses] = useState([
-        {id: '0', title: 'Informasjonsikkerhet og kommunikasjonsteknologi', link: 'https://www.ntnu.no/studier/phisct'},
-        {id: '1', title: 'Datateknologi og informatikk', link: 'https://www.ntnu.no/studier/phcos'},
-        {id: '2', title: 'Elektronikk og telekommunikasjon', link: 'https://www.ntnu.no/studier/phet'}
+        {id: '0', titleNO: 'Informasjonsikkerhet og kommunikasjonsteknologi', titleEN: 'Information Security and Communication Technology', link: 'https://www.ntnu.no/studier/phisct'},
+        {id: '1', titleNO: 'Datateknologi og informatikk', titleEN: 'Computer Science', link: 'https://www.ntnu.no/studier/phcos'},
+        {id: '2', titleNO: 'Elektronikk og telekommunikasjon', titleEN: 'Electronics and Telecommunication', link: 'https://www.ntnu.no/studier/phet'}
     ])
 
     const [course, selectCourse] = useState({
@@ -275,7 +285,7 @@ export function DropdownPHD() {
                         return(
                             <TouchableOpacity key={index} onPress={() => Linking.openURL(selectedCourse.link)}>
                                 <View style={GS.dropdownContent}>
-                                    <Text style={T.text15}>{selectedCourse.title}</Text>
+                                    <Text style={T.text15}>{lang ? selectedCourse.titleNO : selectedCourse.titleEN}</Text>
                                 </View>
                             </TouchableOpacity>
                             

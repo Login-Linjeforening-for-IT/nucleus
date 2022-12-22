@@ -1,16 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useState, useEffect } from "react";
+import { useSelector } from 'react-redux';
 
-let storedTheme = 0
-
-// (async () => {
-//   let foundEvent = await AsyncStorage.getItem('theme');
-//   storedTheme = foundEvent;
-// })();
-
-//Need to check what the theme is here
-
-switch (storedTheme) {
+switch (0) {
   case 1:
     module.exports = {
       DARK: {    //Light theme

@@ -4,6 +4,7 @@ import { MS } from '../../styles/menuStyles';
 import { T } from '../../styles/text';
 import React, { useState } from 'react';
 import Card, { Space, AllComitees, Line } from '../../shared/sharedComponents';
+import { useSelector } from 'react-redux';
 import { 
   Text, 
   View, 
@@ -16,6 +17,8 @@ import {
 {/* ========================= APP START ========================= */}
 
 export default function CommitteeMenuScreen({ navigation }) {
+
+  const { lang  } = useSelector( (state) => state.lang  )
 
   const eventPage   = () => { navigation.navigate('EventScreen')       }
   const homePage    = () => { navigation.navigate('HomeScreen')        }
@@ -32,7 +35,7 @@ export default function CommitteeMenuScreen({ navigation }) {
       <Image style={MS.goBack} source={require('../../assets/goback777.png')} />
     </TouchableOpacity>
 
-    <Text style={MS.screenTitle}>     Komité</Text>
+    <Text style={MS.screenTitle}>{lang ? 'Komité' : 'Committee'}</Text>
 
       <TouchableOpacity onPress={() => profilePage()}>
         <Image style={MS.tMenuIcon} source={require('../../assets/loginperson-orange.png')} />
@@ -48,7 +51,7 @@ export default function CommitteeMenuScreen({ navigation }) {
               <View style={GS.row}>
               <Text>{Line(60,5)}</Text>
               <View>
-              <Text style={T.boldWithLine}>Trykk på flyet for henvendelser angående app, nettside, eller som ikke skal til en konkret komite.</Text>
+              <Text style={T.boldWithLine}>{lang ? 'Trykk på flyet for henvendelser angående app, nettside, eller som ikke skal til en konkret komite.' : 'Press the plane for inquiries regarding app, website, or not for a specific committee'}</Text>
               </View>
             </View>
             {Space(10)}

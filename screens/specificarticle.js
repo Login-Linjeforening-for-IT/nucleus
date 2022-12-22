@@ -5,6 +5,7 @@ import { MS } from '../styles/menuStyles';
 import { T } from '../styles/text';
 import { ES } from '../styles/eventStyles';
 import Card, { Space } from '../shared/sharedComponents';
+import { useSelector } from 'react-redux';
 import React from 'react';
 import { 
   Text, 
@@ -17,6 +18,9 @@ import {
 {/* ========================= APP START ========================= */}
 
 export default function SpecificArticleScreen( { route, navigation }) {
+
+  const { lang  } = useSelector( (state) => state.lang  )
+
   const { item } = route.params
 
   const listingPage = () => { navigation.navigate('ListingScreen') }

@@ -2,11 +2,12 @@
 import CategoryCircle from '../shared/eventComponents/categoryCircle';
 import CategorySquare from '../shared/eventComponents/categorySquare';
 import CleanDescription from '../shared/eventComponents/cleanDescription';
-import { GetEndTime, Month, EventLocation } from '../shared/eventComponents/otherComponents';
+import { GetEndTime, MonthNO, MonthEN, EventLocation } from '../shared/eventComponents/otherComponents';
 import React, { useEffect, useState } from 'react';
 import Card, { CardSmaller, Space } from '../shared/sharedComponents';
 import { StatusBar } from 'expo-status-bar';
 import EventTime from '../shared/eventComponents/eventTime';
+import { useSelector } from 'react-redux';
 import { GS } from '../styles/globalStyles';
 import { MS } from '../styles/menuStyles';
 import { T } from '../styles/text';
@@ -23,6 +24,9 @@ import {
 {/* ========================= APP START ========================= */}
 
 export default function SpecificEventScreen({ route, navigation}) {
+
+  const { lang  } = useSelector( (state) => state.lang  )
+
   const { item } = route.params
   const [usersData,setUsersData]=useState({})
 
@@ -82,19 +86,17 @@ export default function SpecificEventScreen({ route, navigation}) {
                     </Text>
 
                     <Text style={ES.monthText}>
-                    {Month(item.startt[5] + item.startt[6])}
+                    {lang ? MonthNO(item.startt[5] + item.startt[6]) : MonthEN(item.startt[5] + item.startt[6])}
                     </Text>
                   </Card>
-                  <Card>
                     <Text>{EventTime(item.startt, usersData.endt)}</Text>
-                  </Card>
               </View>
             </CardSmaller>
 
             {Space(5)}
             <Card>
               <View style={ES.specificEventInfoView}>
-                <Text style={T.specificEventInfo}>Starter: </Text>
+                <Text style={T.specificEventInfo}>{lang ? 'Starter:\t\t' : 'Starts:\t\t'}</Text>
                 <Text style={T.specificEventInfo}>
                   {item.startt[11]}
                   {item.startt[12]}:
@@ -106,7 +108,7 @@ export default function SpecificEventScreen({ route, navigation}) {
               {Space(5)}
 
               <View style={ES.specificEventInfoView}>
-              <Text style={T.specificEventInfo}>Slutter: </Text>
+              <Text style={T.specificEventInfo}>{lang ? 'Slutter:\t\t' : 'Ends:\t\t\t'}</Text>
                 {GetEndTime(usersData.endt)}
                 
               </View>
@@ -118,7 +120,7 @@ export default function SpecificEventScreen({ route, navigation}) {
               {Space(5)}
 
               <View style={ES.specificEventInfoView}>
-                <Text style={T.specificEventInfo}>Kategori: </Text>
+                <Text style={T.specificEventInfo}>{lang ? 'Kategori:\t\t' : 'Category:\t'}</Text>
                 {CategoryCircle(item.category)}
                 <Text style={T.specificEventInfo}>
                   {item.category}
@@ -128,7 +130,7 @@ export default function SpecificEventScreen({ route, navigation}) {
               {Space(5)}
 
               <View style={ES.specificEventInfoView}>
-                <Text style={T.specificEventInfo}>Arrangør: </Text>
+                <Text style={T.specificEventInfo}>{lang ? 'Arrangør:\t\t' : 'Organizer:\t'}</Text>
                 <Text style={T.specificEventInfo}>
                   {item.organizer}
                 </Text>

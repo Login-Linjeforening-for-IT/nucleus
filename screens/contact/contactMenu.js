@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import { GS } from '../../styles/globalStyles'
 import { T } from '../../styles/text'
 import Card, { Social, Space } from '../../shared/sharedComponents';
+import { useSelector } from 'react-redux';
 import { 
   Text, 
   View, 
@@ -17,10 +18,12 @@ import {
 
 export default function ContactMenuScreen({ navigation }) {
   
+  const { lang  } = useSelector( (state) => state.lang  )
+
   const [setting] = useState([
-    {id: '1', nav: 'ReportScreen',        title: 'Varsle'},
-    {id: '2', nav: 'CommitteeMenuScreen', title: 'Komité'},
-    {id: '3', nav: 'BusinessScreen',      title: 'Bedrift'},
+    {id: '1', nav: 'ReportScreen',        titleNO: 'Varsle', titleEN: 'Report'},
+    {id: '2', nav: 'CommitteeMenuScreen', titleNO: 'Komité', titleEN: 'Committee'}, 
+    {id: '3', nav: 'BusinessScreen',      titleNO: 'Bedrift', titleEN: 'Company'},
   ])
 
 const eventPage   = () => { navigation.navigate('EventScreen')   }
@@ -38,7 +41,7 @@ return(
       <Image style={MS.goBack} source={require('../../assets/goback777.png')} />
     </TouchableOpacity>
 
-    <Text style={MS.screenTitle}>     Kontakt</Text>
+    <Text style={MS.screenTitle}>{lang ? 'Kontakt' : 'Contact'}</Text>
 
       <TouchableOpacity onPress={() => profilePage()}>
         <Image style={MS.tMenuIcon} source={require('../../assets/loginperson-orange.png')} />
@@ -57,7 +60,7 @@ return(
             renderItem={({item}) => (
               <View>
               <TouchableOpacity onPress={() => navigation.navigate(item.nav, item)}>
-                <Card><Text style={T.centered20}>{item.title}</Text></Card>
+                <Card><Text style={T.centered20}>{lang ? item.titleNO : item.titleEN}</Text></Card>
               </TouchableOpacity>
             </View>
             )}

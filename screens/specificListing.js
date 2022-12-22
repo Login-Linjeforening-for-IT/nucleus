@@ -5,6 +5,7 @@ import { MS } from '../styles/menuStyles';
 import { T } from '../styles/text';
 import { ES } from '../styles/eventStyles';
 import Card, { Space } from '../shared/sharedComponents';
+import { useSelector } from 'react-redux';
 import React from 'react';
 import { 
   Text, 
@@ -17,6 +18,9 @@ import {
 {/* ========================= APP START ========================= */}
 
 export default function SpecificListingScreen( { route, navigation }) {
+
+  const { lang  } = useSelector( (state) => state.lang  )
+
   const { item } = route.params
   //Check if image exists
 
@@ -66,7 +70,7 @@ export default function SpecificListingScreen( { route, navigation }) {
               {Space(5)}
 
               <Card>
-                <Text style={T.centered20}>Stillingsbeskrivelse: </Text>
+                <Text style={T.centered20}>{lang ? 'Stillingsbeskrivelse:' : 'Job description:'}</Text>
                 <Text style={T.margin15}>{item.content}</Text>
               </Card>
             </View>

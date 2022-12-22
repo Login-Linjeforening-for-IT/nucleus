@@ -4,6 +4,7 @@ import { GS } from '../../styles/globalStyles';
 import React, { useState, useEffect, useRef } from 'react';
 import { NotifyButton, Space } from '../../shared/sharedComponents';
 import { T } from '../../styles/text';
+import { useSelector } from 'react-redux';
 import { 
   Text, 
   View, 
@@ -44,12 +45,14 @@ global.nBody = "Varsling"       // not being used, use array instead
 global.nDelay = 1               // not being used, use array instead
 
 export default function MakeNotificationScreen({ navigation }) {
-{/* ========================= DISPLAY APP START ========================= */}
-const eventPage   = () => { navigation.navigate('EventScreen')    }
-const homePage    = () => { navigation.navigate('HomeScreen')     }
-const ProfilePage = () => { navigation.navigate('ProfileScreen')  }
-const goBack      = () => { navigation.navigate('InternalScreen') }
-const listingPage = () => { navigation.navigate('ListingScreen')  }
+
+  const { lang  } = useSelector( (state) => state.lang  )
+
+  const eventPage   = () => { navigation.navigate('EventScreen')    }
+  const homePage    = () => { navigation.navigate('HomeScreen')     }
+  const ProfilePage = () => { navigation.navigate('ProfileScreen')  }
+  const goBack      = () => { navigation.navigate('InternalScreen') }
+  const listingPage = () => { navigation.navigate('ListingScreen')  }
 
 // const [expoPushToken, setExpoPushToken] = useState('');
 // const [notification, setNotification] = useState(false);
@@ -118,9 +121,9 @@ const listingPage = () => { navigation.navigate('ListingScreen')  }
 
       {Space(5)}
 
-      <Text style={T.centered}>Send varsling</Text>{Space(10)}
+      <Text style={T.centered}>{lang ? 'Send varsling' : 'Send notification'}</Text>{Space(10)}
 
-      <Text style={T.centered20}>Tittel</Text>
+      <Text style={T.centered20}>{lang ? 'Tittel' : 'Title'}</Text>
 
       {Space(5)}
 
@@ -133,7 +136,7 @@ const listingPage = () => { navigation.navigate('ListingScreen')  }
       />
       {Space(5)}
 
-      <Text style={T.centered20}>Beskrivelse</Text>{Space(5)}
+      <Text style={T.centered20}>{lang ? 'Beskrivelse' : 'Description'}</Text>{Space(5)}
       <TextInput 
         multiline
         style={GS.inputText}
@@ -145,7 +148,7 @@ const listingPage = () => { navigation.navigate('ListingScreen')  }
 
       {Space(5)}
 
-      <Text style={T.centered20}>Delay (sekunder)</Text>
+      <Text style={T.centered20}>Delay ({lang ? 'Sekunder': 'Seconds'})</Text>
 
       {Space(5)}
 
@@ -163,7 +166,7 @@ const listingPage = () => { navigation.navigate('ListingScreen')  }
       {/* onPress={async () => {await schedulePushNotification();}} */}
       <TouchableOpacity> 
         <NotifyButton>
-          <Text style={T.centered20}>SEND VARSLING</Text>
+          <Text style={T.centered20}>{lang ? 'SEND VARSLING' : 'SEND NOTIFICATION'}</Text>
         </NotifyButton>
       </TouchableOpacity>
 

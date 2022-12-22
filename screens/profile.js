@@ -4,6 +4,7 @@ import { MS } from '../styles/menuStyles'
 import { GS } from '../styles/globalStyles'
 import React, { useState } from 'react';
 import Card from '../shared/sharedComponents';
+import { useSelector } from 'react-redux';
 import { 
   Text, 
   View, 
@@ -18,11 +19,13 @@ import { T } from '../styles/text';
 
 export default function ProfileScreen({ navigation }) {
 
-    const [setting] = useState([
-        {id: '1', nav: 'SettingScreen',     title: 'Innstillinger'  },
-        {id: '2', nav: 'ContactMenuScreen', title: 'Kontakt Login'  },
-        {id: '3', nav: 'LoginScreen',       title: 'Innsida (verv)' },
-    ])
+  const { lang  } = useSelector( (state) => state.lang  )
+
+  const [setting] = useState([
+      {id: '1', nav: 'SettingScreen',     titleNO: 'Innstillinger',  titleEN: 'Settings'       },
+      {id: '2', nav: 'ContactMenuScreen', titleNO: 'Kontakt Login',  titleEN: 'Contact Login'  },
+      {id: '3', nav: 'LoginScreen',       titleNO: 'Innsida (verv)', titleEN: 'Intranet (verv)'},
+  ])
 
 const goBack      = () => { navigation.goBack()                  }
 const eventPage   = () => { navigation.navigate('EventScreen')   }
@@ -38,7 +41,7 @@ return(
       <Image style={MS.goBack} source={require('../assets/goback777.png')} />
     </TouchableOpacity>
 
-    <Text style={MS.screenTitle}>      Profil</Text>
+    <Text style={MS.screenTitle}>{lang ? '      Profil' : '      Profile'}</Text>
 
       <TouchableOpacity>
         <Image style={MS.tMenuIcon} source={require('../assets/loginperson-orange.png')} />
@@ -56,7 +59,7 @@ return(
             <View>
             <TouchableOpacity onPress={() => navigation.navigate(item.nav, item)}>
               <Card>
-                <Text style={T.centered20}>{item.title}</Text>
+                <Text style={T.centered20}>{lang ? item.titleNO : item.titleEN}</Text>
               </Card>
             </TouchableOpacity>
           </View>
@@ -64,7 +67,7 @@ return(
           />
           <TouchableOpacity onPress={() => Linking.openURL('mailto:kontakt@login.no')}>
               <View>
-              <Text style={T.contact}>Funnet en bug?</Text>
+              <Text style={T.contact}>{lang ? 'Funnet en bug?' : 'Found a bug?'}</Text>
               <Image style={GS.smallImage} source={require('../assets/plane-orange.png')} />
               </View>
             </TouchableOpacity>

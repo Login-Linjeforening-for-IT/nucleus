@@ -4,6 +4,7 @@ import { MS } from '../../styles/menuStyles';
 import React, { useState } from 'react';
 import Card from '../../shared/sharedComponents';
 import { T } from '../../styles/text';
+import { useSelector } from 'react-redux';
 import { 
   Text, 
   View, 
@@ -15,17 +16,20 @@ import {
 {/* ========================= APP START ========================= */}
 
 export default function TodoScreen({ navigation }) {
-    const [setting] = useState([
-      {id: '1', todo: 'Implement mazemap - seems every library is deprecated'},
-      {id: '2', todo: 'Implement mail sending service'},
-      {id: '3', todo: 'Center title position'},
-      {id: '4', todo: 'Bug: event storage'},
-      {id: '5', todo: 'Bug: missing photo SES'},
-      {id: '6', todo: 'Bug: SES eventtext'},
-      {id: '7', todo: 'Theme'},
-      {id: '8', todo: 'Language'},
-      {id: '9', todo: 'Push notifications need to be revisited'},
-      {id: '10', todo: 'Local notification event reminders'},
+
+  const { lang  } = useSelector( (state) => state.lang  )
+
+  const [setting] = useState([
+    {id: '1', todo: 'Implement mazemap - seems every library is deprecated'},
+    {id: '2', todo: 'Implement mail sending service'},
+    {id: '3', todo: 'Center title position'},
+    {id: '4', todo: 'Bug: event storage'},
+    {id: '5', todo: 'Bug: missing photo SES'},
+    {id: '6', todo: 'Bug: SES eventtext'},
+    {id: '7', todo: 'Theme'},
+    {id: '8', todo: 'Language'},
+    {id: '9', todo: 'Push notifications need to be revisited'},
+    {id: '10', todo: 'Local notification event reminders'},
   ])
 {/* ========================= DISPLAY APP START ========================= */}
 function eventPage()   { navigation.navigate('EventScreen')    }
@@ -43,7 +47,7 @@ function goBack()      { navigation.navigate('InternalScreen') }
       <Image style={MS.goBack} source={require('../../assets/goback777.png')} />
     </TouchableOpacity>
 
-    <Text style={MS.screenTitle}>    Gjøremål</Text>
+    <Text style={MS.screenTitle}>{lang ? 'Gjøremål' : 'Todo'}</Text>
     
       <TouchableOpacity onPress={() => profilePage()}>
         <Image style={MS.tMenuIcon} source={require('../../assets/loginperson-orange.png')} />

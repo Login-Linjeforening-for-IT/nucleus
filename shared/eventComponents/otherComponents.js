@@ -5,6 +5,7 @@ const GLOBAL = require('../../styles/themes/dark')
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { T } from '../../styles/text'
 import { View, Text, Image } from 'react-native';
+import { useSelector } from 'react-redux';
 
 export default function GreenLight() {  //Green colored light svg
     return(
@@ -70,6 +71,9 @@ export function GrayLight() {   //Background colored light svg
 };
 
 export function GetEndTime(input){
+
+    const { lang  } = useSelector( (state) => state.lang  )
+
     if(input != null){
         const hour1     = (input)[11]    //Fetching endtime cipher 1 from api
         const hour2     = (input)[12]    //Fetching endtime cipher 2 from api
@@ -77,23 +81,26 @@ export function GetEndTime(input){
         const minute2   = (input)[15]    //Fetching endtime cipher 4 from api
         return(<View><Text style={T.specificEventInfo}>{hour1}{hour2}:{minute1}{minute2}</Text></View>)
     }else{
-        return(<View><Text style={T.locationError}>Feil ved henting av sluttid.</Text></View>)
+        return(<View><Text style={T.locationError}>{lang ? 'Feil ved henting av sluttid.' : 'Error fetching endtime.'}</Text></View>)
 
     }
 }
 
 export function EventLocation(room, campus) {
+
+    const { lang  } = useSelector( (state) => state.lang  )
+
     if(room != null && campus != null) {
         if (room.length == 0 && campus.length == 0 ) {
             return(
             <View style={ES.specificEventInfoView}>
-                <Text style={T.specificEventInfo}>Lokasjon: </Text>
+                <Text style={T.specificEventInfo}>{lang ? 'Lokasjon:\t\t' : 'Location:\t\t'}</Text>
                 <Text style={T.specificEventInfo}>TBA!</Text>
             </View>)
         } else {
             return(
                 <View style={ES.specificEventInfoView}>
-                <Text style={T.specificEventInfo}>Lokasjon: </Text>
+                <Text style={T.specificEventInfo}>{lang ? 'Lokasjon:\t\t' : 'Location:\t\t'}</Text>
                 <Text style={T.specificEventInfo}>
                   {room},{campus}
                 </Text>
@@ -102,7 +109,7 @@ export function EventLocation(room, campus) {
         }
     }else{
         <View style={ES.specificEventInfoView}>
-            <Text style={T.red}>Feil ved henting av event sted.</Text>
+            <Text style={T.red}>{lang ? 'Feil ved henting av sted.' : 'Error fetching location'}</Text>
         </View>
     }
 }
@@ -116,13 +123,16 @@ export function CategoryImage(condition) {  //Doesnt work
         )
     }
 }
-
-export function Month(month) {
-    const monthsNO = ['jan', 'feb', 'mar', 'apr', 'mai', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'des']
-    const monthsEN = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Des']
-
-    return(<Text style={ES.monthText}>{monthsNO[month-1]}</Text>)
+  
+export function MonthNO(month) {
+const monthsNO = ['jan', 'feb', 'mar', 'apr', 'mai', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'des'];
+return <Text style={ES.monthText}>{monthsNO[month - 1]}</Text>;
 }
+
+export function MonthEN(month) {
+    const monthsEN = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Des'];  
+    return <Text style={ES.monthText}>{monthsEN[month - 1]}</Text>;
+  }
 
 export function RedLight() {    //Red colored light svg
     return(

@@ -2,8 +2,10 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { T } from '../../styles/text'
 import { A } from '@expo/html-elements'; //Doesnt work in the commented lines below
+import { useSelector } from 'react-redux';
 
 export default function CleanDescription(string) {
+    const { lang  } = useSelector( (state) => state.lang  )
     if (string != null) {
         const removePtag = string.replaceAll('<p>', '')
         const hTag = removePtag.replaceAll('<h2>', '')
@@ -19,6 +21,6 @@ export default function CleanDescription(string) {
         const removePtag2 = removehT.replaceAll('<p>', '\n\n')
         return(<View><Text style={T.paragraph}>{removePtag2}</Text></View>)
     } else {
-        return(<View><Text style={T.red}>Feil under cleanup av beskrivelse.</Text></View>)
+        return(<View><Text style={T.red}>{lang ? 'Feil ved henting av beskrivelse' : 'Error fetching description'}</Text></View>)
     }
 }

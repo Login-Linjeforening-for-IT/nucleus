@@ -7,6 +7,7 @@ import { SS } from '../../styles/settingStyles';
 import React, { useState } from 'react';
 import GreenLight, { Check, GrayLight } from '../../shared/eventComponents/otherComponents';
 import { Button, CardSmaller, Space } from '../../shared/sharedComponents';
+import { useSelector } from 'react-redux';
 import { 
   Text, 
   View, 
@@ -22,6 +23,8 @@ import {
 
 export default function ReportScreen( { navigation }) {
  
+  const { lang  } = useSelector( (state) => state.lang  )
+
   const eventPage   = () => { navigation.navigate('EventScreen')       }
   const homePage    = () => { navigation.navigate('HomeScreen')        }
   const listingPage = () => { navigation.navigate('ListingScreen')     }
@@ -30,9 +33,9 @@ export default function ReportScreen( { navigation }) {
   
   const sendForm = () => {
     if (data.name === data.name) {
-      Alert.alert('Takk for beskjed.')
+      lang ? Alert.alert('Takk for beskjed.') : Alert.alert('Thanks for letting us know.')
     } else {
-      Alert.alert('Feil ved sending av skjema.')
+      lang ? Alert.alert('Feil! Vennligst send varslingen som anonym epost til kontakt@login.no') : Alert.alert('Error! Please send the report as an anonymous email to kontakt@login.no')
     }
   }
 
@@ -109,7 +112,7 @@ const inputContent = (val) => {
           <Image style={MS.goBack} source={require('../../assets/goback777.png')} />
         </TouchableOpacity>
 
-        <Text style={MS.screenTitle}>     Varsle</Text>
+        <Text style={MS.screenTitle}>{lang ? 'Varsle' : 'Report'}</Text>
 
         <TouchableOpacity onPress={() => profilePage()}>
           <Image style={MS.tMenuIcon} source={require('../../assets/loginperson-orange.png')} />
@@ -119,7 +122,7 @@ const inputContent = (val) => {
       <View style={GS.content}>
         <View>
           {Space(40)}
-          <Text style={T.centered}>Anonymt og sikkert. Alltid.</Text>
+          <Text style={T.centered}>{lang ? 'Anonymt og sikkert. Alltid.' : 'Anonymous and secure. Always.'}</Text>
           {Space(30)}
 
           <View style={SS.loginView}>
@@ -127,7 +130,7 @@ const inputContent = (val) => {
               <View style={SS.loginView}>
                 <TextInput 
                 style={GS.inputText}
-                placeholder='Kontaktinformasjon varsler (frivillig)'
+                placeholder = {lang ? 'Kontaktinformasjon varsler (frivillig)' : 'Contact info reporter (voluntary)'}
                 placeholderTextColor={'#555'}
                 textAlign='center'
                 onChangeText={(val) => inputName(val)}
@@ -154,7 +157,7 @@ const inputContent = (val) => {
               <View style={SS.loginView}>
                 <TextInput 
                 style={GS.inputText}
-                placeholder='Hvem angår hendelsen? (frivillig)'
+                placeholder = {lang ? 'Hvem angår hendelsen? (frivillig)' : 'Who is affected? (voluntary'}
                 placeholderTextColor={'#555'}
                 textAlign='center'
                 onChangeText={(val) => inputContact(val)}
@@ -182,7 +185,7 @@ const inputContent = (val) => {
                   <TextInput 
                   multiline={true}
                   style={GS.reportInputContentText}
-                  placeholder='Hva vil du rapportere?'
+                  placeholder = {lang ? 'Hva vil du rapportere?' : 'What would you like to report?'}
                   placeholderTextColor={'#555'}
                   textAlign='center'
                   onChangeText={(val) => inputContent(val)}

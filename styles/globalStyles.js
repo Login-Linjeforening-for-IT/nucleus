@@ -2,6 +2,7 @@ import { StyleSheet } from "react-native";  //Stylesheet file
 const GLOBAL = require('./themes/dark')
 
 export const GS = StyleSheet.create({
+  
 //========================= EventScreen =========================
   content: { //Main view of every screen
   height: '78%',

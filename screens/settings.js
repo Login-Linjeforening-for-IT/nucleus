@@ -3,6 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import { GS } from '../styles/globalStyles';
 import { MS } from '../styles/menuStyles';
 import Card, { Notification, Language, Space } from '../shared/sharedComponents';
+import { useSelector } from 'react-redux';
 import Theme from '../styles/themes/theme';
 import { T } from '../styles/text';
 import React from 'react';
@@ -17,6 +18,9 @@ import {
 {/* ========================= APP START ========================= */}
 
 export default function SettingScreen( { navigation }) {
+
+  const { theme } = useSelector( (state) => state.theme ) 
+  const { lang  } = useSelector( (state) => state.lang  )
 
   const eventPage   = () => { navigation.navigate('EventScreen')   }
   const listingPage = () => { navigation.navigate('ListingScreen') }
@@ -33,7 +37,7 @@ export default function SettingScreen( { navigation }) {
       <Image style={MS.goBack} source={require('../assets/goback777.png')} />
     </TouchableOpacity>
 
-    <Text style={MS.screenTitle}>  Innstillinger</Text>
+    <Text style={MS.screenTitle}>{lang ? 'Innstillinger' : 'Settings'}</Text>
 
       <TouchableOpacity onPress={() => profilePage()}>
         <Image style={MS.tMenuIcon} source={require('../assets/loginperson-orange.png')} />
@@ -45,7 +49,7 @@ export default function SettingScreen( { navigation }) {
           <Card>
             <View style={GS.notificationBack}>
               <View style={GS.view}>
-                <Text style={GS.notificationText}>Tema</Text>
+                <Text style={GS.notificationText}> {lang ? 'Tema           ' + 'midlertidig: ' + theme : 'Theme           ' + 'temporary: ' + theme }</Text>
               </View>
               <View style={GS.view2}><Theme/></View>
             </View>
@@ -54,20 +58,20 @@ export default function SettingScreen( { navigation }) {
           <Card>
             <View style={GS.notificationBack}>
               <View style={GS.view}>
-                <Text style={GS.notificationText}>Språk</Text>
+                <Text style={GS.notificationText}>{lang ? 'Språk' : 'Language'}</Text>
               </View>
               <View style={GS.langView}><Language/></View>
             </View>
           </Card>
 
           {Space(5)}
-          <Text style={T.centeredOppositeColor}>Varslinger</Text>              
+          <Text style={T.centeredOppositeColor}>{lang ? 'Varslinger' : 'Notifications'}</Text>              
           
 
           <Card>
             <View style={GS.notificationBack}>
               <View style={GS.view}>
-                <Text style={GS.notificationText}>Viktig informasjon</Text>
+                <Text style={GS.notificationText}>{lang ? 'Viktig informasjon' : 'Important info'}</Text>
               </View>
               <View style={GS.view2}>{Notification(0)}</View>
             </View>
@@ -76,7 +80,7 @@ export default function SettingScreen( { navigation }) {
           <Card>
             <View style={GS.notificationBack}>
               <View style={GS.view}>
-                <Text style={GS.notificationText}>Påminnelser</Text>
+                <Text style={GS.notificationText}>{lang ? 'Påminnelser': 'Reminders'}</Text>
               </View>
               <View style={GS.view2}>{Notification(1)}</View>
             </View>
@@ -85,7 +89,7 @@ export default function SettingScreen( { navigation }) {
           <Card>
             <View style={GS.notificationBack}>
               <View style={GS.view}>
-                <Text style={GS.notificationText}>Events</Text>
+                <Text style={GS.notificationText}>{lang ? 'Arrangementer' : 'Events'}</Text>
               </View>
               <View style={GS.view2}>{Notification(2)}</View>
             </View>
@@ -94,7 +98,7 @@ export default function SettingScreen( { navigation }) {
           <Card>
             <View style={GS.notificationBack}>
               <View style={GS.view}>
-                <Text style={GS.notificationText}>Bedpres</Text>
+                <Text style={GS.notificationText}>{lang ? 'Bedpres': 'Company Presentation'}</Text>
               </View>
               <View style={GS.view2}>{Notification(4)}</View>
             </View>

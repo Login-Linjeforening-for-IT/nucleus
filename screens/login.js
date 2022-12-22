@@ -6,6 +6,7 @@ import { T } from '../styles/text';
 import { SS } from '../styles/settingStyles';
 import GreenLight, { Check, GrayLight, RedLight } from '../shared/eventComponents/otherComponents';
 import { Button, CardSmaller, Space } from '../shared/sharedComponents';
+import { useSelector } from 'react-redux';
 import { 
   Text, 
   View, 
@@ -20,18 +21,19 @@ import React, { useState } from 'react';
 
 export default function LoginScreen( { navigation }) {
 
-const goBack       = () => { navigation.navigate('ProfileScreen') }
-const listingPage  = () => { navigation.navigate('ListingScreen') }
-const eventPage    = () => { navigation.navigate('EventScreen')   }
-const homePage     = () => { navigation.navigate('HomeScreen')    }
-const profilePage  = () => { navigation.navigate('ProfileScreen') }
-const internalPage = () => {
-  if (data.name === database.name && data.pass === database.pass) {
-    navigation.navigate('InternalScreen');
-  } else {
-    Alert.alert('Feil brukernavn eller passord')
+  const { lang  } = useSelector( (state) => state.lang  )
+
+  const goBack       = () => { navigation.navigate('ProfileScreen') }
+  const listingPage  = () => { navigation.navigate('ListingScreen') }
+  const eventPage    = () => { navigation.navigate('EventScreen')   }
+  const homePage     = () => { navigation.navigate('HomeScreen')    }
+  const internalPage = () => {
+    if (data.name === database.name && data.pass === database.pass) {
+      navigation.navigate('InternalScreen');
+    } else {
+      Alert.alert('Feil brukernavn eller passord')
+    }
   }
-}
 
 const [data, setData] = useState({
   name: '',
@@ -77,7 +79,6 @@ const inputPass = (val) => {
   }
 }
 
-
 const showPass = () => {
   setData({
     ...data,
@@ -94,7 +95,7 @@ const showPass = () => {
       <Image style={MS.goBack} source={require('../assets/goback777.png')} />
     </TouchableOpacity>
 
-    <Text style={MS.screenTitle}>    Innsida</Text>
+    <Text style={MS.screenTitle}>{lang ? 'Innsida' : 'Intranet'}</Text>
 
       <TouchableOpacity>
         <Image style={MS.tMenuIcon} source={require('../assets/loginperson-orange.png')} />
@@ -105,7 +106,7 @@ const showPass = () => {
         
         <View>
           {Space(80)}
-            <Text style={T.centered50}>Innsida</Text>
+            <Text style={T.centered50}>{lang ? 'Innsida' : 'Intranet'}</Text>
             {Space(20)}
 
             <View style={SS.loginView}>
@@ -113,7 +114,7 @@ const showPass = () => {
                 <View style={SS.loginView}>
                   <TextInput 
                   style={GS.inputText}
-                  placeholder='         brukernavn'
+                  placeholder={lang ? '         brukernavn' : '         username'}
                   placeholderTextColor={'#555'}
                   textAlign='center'
                   onChangeText={(val) => inputName(val)}
@@ -140,7 +141,7 @@ const showPass = () => {
                 <View style={SS.loginView}>
                   <TextInput 
                   style={GS.inputText}
-                  placeholder='         passord'
+                  placeholder={lang ? '         passord' : '         password'}
                   placeholderTextColor={'#555'}
                   secureTextEntry = {data.secureTextEntry ? true : false}
                   textAlign='center'

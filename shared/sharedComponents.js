@@ -4,6 +4,9 @@ import { SS } from '../styles/settingStyles';
 import { ES } from '../styles/eventStyles';
 const GLOBAL = require('../styles/themes/dark')
 import { T } from '../styles/text'
+import { useSelector, useDispatch } from 'react-redux';
+import { changeLang } from '../redux/lang';
+
 import { 
     View, 
     Text, 
@@ -36,20 +39,26 @@ export function CardSmaller(props) {
 };
 
 export function Copyright() {   //Copyright info
+
+    const { lang  } = useSelector( (state) => state.lang  )
+
     return(
         <View>
-            <Text style={T.copyright}>Opphavsrett © 2022 Login - Linjeforeningen for IT, NO 811 940 372</Text>
+            <Text style={T.copyright}>{lang ? 'Opphavsrett © 2022 Login - Linjeforeningen for IT, NO 811 940 372' : 'Copyright © 2022 Login - Linjeforeningen for IT, NO 811 940 372'}</Text>
         </View>
     )
 }
 export function Kontakt() { //Contact info
+
+    const { lang } = useSelector((state) => state.lang)
+
     return(
     <View>
         <Text/>
-        <Text style={T.centeredBold25}>Kontakt</Text>
+        <Text style={T.centeredBold25}>{lang ? 'Kontakt' : 'Contact'}</Text>
         <Text style={T.centered15}>Login - Linjeforeningen for IT</Text>
         <Text style={T.centered15}>Teknologivegen 22</Text>
-        <Text style={T.centered15}>Bygg A, rom 155</Text>
+        <Text style={T.centered15}>{lang ? 'Bygg A, rom 155': 'Building A, room 155'}</Text>
         <Text style={T.centered15}>2815 GJØVIK</Text>
         <Text/>
         <Text style={T.orangeCentered15} onPress={() => Linking.openURL('mailto:kontakt@login.no')}>kontakt@login.no</Text>
@@ -94,60 +103,14 @@ export function Notification(index) {    //Notification button
 }
 
 export function Language() {    //Choose the language
-
-    const [data, setData] = useState({
-        lang: 0
-    }) 
-
-    const changeLang = async() => {
-        if (data.lang == 1) {
-            await AsyncStorage.setItem('lang', "0")
-            .then(
-                setData({
-                    ...data,
-                    lang: !data.lang
-                  })
-            )
-        } else {
-            await AsyncStorage.setItem('lang', "1")
-            .then(
-                setData({
-                    ...data,
-                    lang: !data.lang
-                  })
-            )
-        }
-        
-      }
-    
-    const fetchState = async() => {
-        let foundState = await AsyncStorage.getItem('lang');
-        if(foundState === "1"){
-            setData({
-                ...data,
-                lang: 1
-              });
-        }else{
-            setData({
-                ...data,
-                lang: 0
-              });
-        }
-    }
-
-    useEffect(() => {
-        fetchState();
-    },[])
+    const { lang } = useSelector((state) => state.lang)
+    const dispatch = useDispatch()
       
     return(
         <View>
-          <TouchableOpacity onPress={() => changeLang()}>
-        {data.lang ?
-            <Text style={SS.langSwitch}>EN</Text>
-        : 
-            <Text style={SS.langSwitch}>NO</Text>
-        }
-      </TouchableOpacity>
+            <TouchableOpacity onPress={() =>  dispatch(changeLang()) }>
+                <Text style={SS.langSwitch}>{lang ? 'EN' : 'NO'}</Text>
+            </TouchableOpacity>
         </View>
     )
 }
@@ -294,11 +257,14 @@ export function CompareDates(firstDate, secondDate) { // True if firstdate is ne
 }
 
 export function AllComitees() {
+    
+    const { lang  } = useSelector( (state) => state.lang  )
+
     return(
         <View>
           <Image style={GS.personImage} source={require('../assets/leder.png')} />
           {Space(10)}
-          <Text style={T.leaderTitle}>Leder</Text>
+          <Text style={T.leaderTitle}>{lang ? 'Leder' : 'Leader'}</Text>
           {Space(5)}
           <Text style={T.leaderName}>Anders Eiken</Text>
           {Space(5)}
@@ -308,7 +274,7 @@ export function AllComitees() {
           {Space(25)}
           <Image style={GS.personImage} source={require('../assets/nestleder.png')} />
           {Space(10)}
-          <Text style={T.leaderTitle}>Nestleder</Text>
+          <Text style={T.leaderTitle}>{lang ? 'Nestleder' : 'Deputy chairman'}</Text>
           {Space(5)}
           <Text style={T.leaderName}>Mads Halland</Text>
           {Space(5)}
@@ -318,7 +284,7 @@ export function AllComitees() {
           {Space(25)}
           <Image style={GS.personImage} source={require('../assets/sekreter.png')} />
           {Space(10)}
-          <Text style={T.leaderTitle}>Sekretær</Text>
+          <Text style={T.leaderTitle}>{lang ? 'Sekretær' : 'Secretary'}</Text>
           {Space(5)}
           <Text style={T.leaderName}>Celina Brynildsen</Text>
           {Space(5)}
@@ -328,7 +294,7 @@ export function AllComitees() {
           {Space(25)}
           <Image style={GS.personImage} source={require('../assets/eventkomleder.png')} />
           {Space(10)}
-          <Text style={T.leaderTitle}>EventKom leder</Text>
+          <Text style={T.leaderTitle}>{lang ? 'EventKom leder' : 'EventKom Leader'}</Text>
           {Space(5)}
           <Text style={T.leaderName}>Sofie Hagen</Text>
           {Space(5)}
@@ -338,7 +304,7 @@ export function AllComitees() {
           {Space(25)}
           <Image style={GS.personImage} source={require('../assets/prleder.png')} />
           {Space(10)}
-          <Text style={T.leaderTitle}>PR leder</Text>
+          <Text style={T.leaderTitle}>{lang ? 'PR leder' : 'PR leader'}</Text>
           {Space(5)}
           <Text style={T.leaderName}>Kristina Kataki</Text>
           {Space(5)}
@@ -348,7 +314,7 @@ export function AllComitees() {
           {Space(25)}
           <Image style={GS.personImage} source={require('../assets/tekkomleder.png')} />
           {Space(10)}
-          <Text style={T.leaderTitle}>TekKom leder</Text>
+          <Text style={T.leaderTitle}>{lang ? 'TekKom leder' : 'TekKom leader'}</Text>
           {Space(5)}
           <Text style={T.leaderName}>Simon Edna</Text>
           {Space(5)}
@@ -358,7 +324,7 @@ export function AllComitees() {
           {Space(25)}
           <Image style={GS.personImage} source={require('../assets/ctfkomleder.png')} />
           {Space(10)}
-          <Text style={T.leaderTitle}>CTF leder</Text>
+          <Text style={T.leaderTitle}>{lang ? 'CTF leder' : 'CTF leader'}</Text>
           {Space(5)}
           <Text style={T.leaderName}>Eskil Refsgaard</Text>
           {Space(5)}
@@ -368,7 +334,7 @@ export function AllComitees() {
           {Space(25)}
           <Image style={GS.personImage} source={require('../assets/satkomleder.png')} />
           {Space(10)}
-          <Text style={T.leaderTitle}>SatKom leder</Text>
+          <Text style={T.leaderTitle}>{lang ? 'SatKom leder' : 'SatKom leader'}</Text>
           {Space(5)}
           <Text style={T.leaderName}>Sebastian Hestsveen</Text>
           {Space(5)}

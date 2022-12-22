@@ -1,6 +1,7 @@
 import { StyleSheet } from "react-native";  //Stylesheet file
 import { T } from "./text";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+
 const GLOBAL = require('./themes/dark')
 
 // const getTheme = async() => {
@@ -8,7 +9,6 @@ const GLOBAL = require('./themes/dark')
 // } 
 
 export const ES = StyleSheet.create({
-
 //========================= EventScreen =========================
   view: { //Left side card view
     top: '-2%',
@@ -110,7 +110,6 @@ export const ES = StyleSheet.create({
       width: 10,
   },
   specificEventLight: { //Position of specific event color circle
-    left: 8,
     height: 20,
     width: 20,
   },

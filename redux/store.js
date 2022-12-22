@@ -1,7 +1,10 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
-import userReducer from './reducers';
+import { configureStore } from '@reduxjs/toolkit';
+import ThemeReducer from './theme';
+import LangReducer from './lang';
 
-const rootReducer = combineReducers({userReducer});
-
-export const Store = createStore(rootReducer, applyMiddleware(thunk));
+export default configureStore({
+    reducer: {
+        theme: ThemeReducer,
+        lang: LangReducer
+    }
+})

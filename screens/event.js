@@ -1,4 +1,4 @@
-import GreenLight, { GrayLight, Check, Month } from '../shared/eventComponents/otherComponents';  // Components used to display event
+import GreenLight, { GrayLight, Check, MonthNO, MonthEN } from '../shared/eventComponents/otherComponents';  // Components used to display event
 import Card, { CompareDates, CheckBox, CheckedBox } from '../shared/sharedComponents';  // Components used to display event
 import CategorySquare from '../shared/eventComponents/categorySquare'; // Left side square on eventcard
 import AsyncStorage from '@react-native-async-storage/async-storage'; // Localstorage
@@ -8,6 +8,7 @@ import { GS } from '../styles/globalStyles';                          // Global 
 import { ES } from '../styles/eventStyles';                           // Event styles
 import { MS } from '../styles/menuStyles';                            // Menu styles
 import { T } from '../styles/text';                                   // Text styles
+import { useSelector } from 'react-redux';
 import {                                                              // React native components
   Text, 
   View, 
@@ -17,9 +18,12 @@ import {                                                              // React n
   TouchableOpacity,
 } from 'react-native';
 
-const GLOBAL = require('../styles/themes/dark');                      //  Theme
+const GLOBAL = require('../styles/themes/dark')
 
 export default function EventScreen({ navigation }) {
+
+  const { lang  } = useSelector( (state) => state.lang  )
+
   //Declaring screens you can navigate to from this screen
   const listingPage = () => { navigation.navigate('ListingScreen') }  //  Job screen
   const homePage    = () => { navigation.navigate('HomeScreen')    }  //  Home screen
@@ -347,7 +351,7 @@ export default function EventScreen({ navigation }) {
                           <View>
                               {CategorySquare(item.category)}
                               <Text style={ES.eventCardDayText}>{item.startt[8]}{item.startt[9]}</Text>
-                              {Month(item.startt[5] + item.startt[6])}
+                              {lang ? MonthNO(item.startt[5] + item.startt[6]) : MonthEN(item.startt[5] + item.startt[6])}
                           </View>
                             <View style={ES.view2}>
                             
@@ -399,6 +403,5 @@ export default function EventScreen({ navigation }) {
             </TouchableOpacity>
         </View>     
     </View>
-        
   )
 };

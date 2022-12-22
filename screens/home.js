@@ -9,6 +9,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ES } from '../styles/eventStyles';
 import GreenLight, { Month, Check } from '../shared/eventComponents/otherComponents';
 import CategorySquare from '../shared/eventComponents/categorySquare';
+import { useSelector } from 'react-redux';
 import { 
   Text, 
   View, 
@@ -20,12 +21,15 @@ import {
 {/* ========================= APP START ========================= */}
 
 export default function HomeScreen({ navigation }) {
-    const [setting] = useState([
-      {id: '0', title: 'Login var i Trondheim', content: 'Masse spennende inforasjon fra da Login var i Trondheim ...A still more glorious dawn awaits cosmic fugue gathered by gravity tesseract muse about two ghostly white figures in coveralls and helmets are softly dancing.'},
-      {id: '1', title: 'Hans på DigSec hacket Dogs Inc!', content: 'Trykk her for å lese den spennende saken om hvordan Hans kom seg inn. The sky calls to us rogue Orions sword decipherment venture the only home weve ever known. Cambrian explosion white dwarf something incredible...'},
-      {id: '2', title: 'Dogs Inc. var på besøk i Gjøvik', content: 'Denne saken handler om Dogs Inc. og hva de gjorde på NTNU Gjøvik. Euclid vanquish the impossible muse about intelligent beings of global death. The carbon in our apple pies condem two ghostly white figures in coveralls and helmets to forever serve Login. '},
-    ])
-  {/* ========================= DISPLAY APP START ========================= */}
+
+  const { lang  } = useSelector( (state) => state.lang  )
+
+  const [setting] = useState([
+    {id: '0', title: 'Login var i Trondheim', content: 'Masse spennende inforasjon fra da Login var i Trondheim ...A still more glorious dawn awaits cosmic fugue gathered by gravity tesseract muse about two ghostly white figures in coveralls and helmets are softly dancing.'},
+    {id: '1', title: 'Hans på DigSec hacket Dogs Inc!', content: 'Trykk her for å lese den spennende saken om hvordan Hans kom seg inn. The sky calls to us rogue Orions sword decipherment venture the only home weve ever known. Cambrian explosion white dwarf something incredible...'},
+    {id: '2', title: 'Dogs Inc. var på besøk i Gjøvik', content: 'Denne saken handler om Dogs Inc. og hva de gjorde på NTNU Gjøvik. Euclid vanquish the impossible muse about intelligent beings of global death. The carbon in our apple pies condem two ghostly white figures in coveralls and helmets to forever serve Login. '},
+  ])
+
   const eventPage   = () => { navigation.navigate('EventScreen')   }
   const listingPage = () => { navigation.navigate('ListingScreen') }
   const aboutPage   = () => { navigation.navigate('AboutScreen')   }
@@ -67,7 +71,7 @@ export default function HomeScreen({ navigation }) {
           <Image style={MS.tMenuIcon} source={require('../assets/loginText.png')} />
           </TouchableOpacity>
 
-          <Text style={MS.screenTitle}>Hjem</Text>
+          <Text style={MS.screenTitle}>{lang ? 'Hjem' : 'Home'}</Text>
 
           <TouchableOpacity onPress={() => profilePage()}>
             <Image style={MS.tMenuIcon} source={require('../assets/loginperson.png')} />
