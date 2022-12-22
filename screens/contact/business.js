@@ -5,6 +5,7 @@ import { GS } from '../../styles/globalStyles';
 import { T } from '../../styles/text';
 import { MS } from '../../styles/menuStyles';
 import Card, { Kontakt, Space, Line } from '../../shared/sharedComponents';
+import { DynamicCircle } from '../../shared/eventComponents/otherComponents';
 import { useSelector } from 'react-redux';
 import { 
   Text, 
@@ -19,7 +20,8 @@ import {
 export default function BusinessScreen( { navigation }) {
 
   const { lang  } = useSelector( (state) => state.lang  )
-
+  const { login } = useSelector( (state) => state.login )
+  
   const eventPage   = () => { navigation.navigate('EventScreen')       }
   const homePage    = () => { navigation.navigate('HomeScreen')        }
   const listingPage = () => { navigation.navigate('ListingScreen')     }
@@ -34,7 +36,7 @@ export default function BusinessScreen( { navigation }) {
     <TouchableOpacity onPress={() => goBack()}>
       <Image style={MS.goBack} source={require('../../assets/goback777.png')} />
     </TouchableOpacity>
-
+    {login ? DynamicCircle(10,10,'red',0,0,60,0):null}
     <Text style={MS.screenTitle}>{lang ? 'Bedrift' : 'Company'}</Text>
 
       <TouchableOpacity onPress={() => profilePage()}>

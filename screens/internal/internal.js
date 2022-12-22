@@ -5,6 +5,7 @@ import { GS } from '../../styles/globalStyles'
 import { T } from '../../styles/text'
 import React, { useState } from 'react';
 import Card from '../../shared/sharedComponents';
+import { DynamicCircle } from '../../shared/eventComponents/otherComponents';
 import { useSelector } from 'react-redux';
 import { 
   Text, 
@@ -19,26 +20,29 @@ import {
 export default function InternalScreen({ navigation }) {
 
   const { lang  } = useSelector( (state) => state.lang  )
+  const { login } = useSelector( (state) => state.login )
 
-    const [setting] = useState([
-      {id: '0', nav: 'TodoScreen', titleNO: 'Gjøremål', titleEN: 'Todo'},
-      {id: '1', nav: 'MakeNotificationScreen', titleNO: 'Send Varsling', titleEN: 'Send notification'},
-
+  const [setting] = useState([
+    {id: '0', nav: 'TodoScreen', titleNO: 'Gjøremål', titleEN: 'Todo'},
+    {id: '1', nav: 'MakeNotificationScreen', titleNO: 'Send Varsling', titleEN: 'Send notification'},
   ])
-{/* ========================= DISPLAY APP START ========================= */}
-const eventPage   = () => { navigation.navigate('EventScreen')   }
-const homePage    = () => { navigation.navigate('HomeScreen')    }
-const listingPage = () => { navigation.navigate('ListingScreen') }
-const ProfilePage = () => { navigation.navigate('ProfileScreen') }
+
+  const eventPage   = () => { navigation.navigate('EventScreen'  ) }
+  const homePage    = () => { navigation.navigate('HomeScreen'   ) }
+  const listingPage = () => { navigation.navigate('ListingScreen') }
+  const ProfilePage = () => { navigation.navigate('ProfileScreen') }
+  const aboutPage   = () => { navigation.navigate('AboutScreen'  ) }
 
   return(
     <View>
       <StatusBar style="light" />
 {/* ========================= DISPLAY TOP MENU ========================= */}
       <View style={MS.topMenu}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => aboutPage()}>
             <Image style={MS.tMenuIcon} source={require('../../assets/loginText.png')} />
           </TouchableOpacity>
+
+          {login ? DynamicCircle(10,10,'red',0,0,60,0):null}
 
           <Text style={MS.screenTitle}>{lang ? 'Innsida' : 'Intranet'}</Text>
           

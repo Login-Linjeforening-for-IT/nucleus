@@ -6,6 +6,7 @@ import React, { useState, useEffect } from 'react';
 import { T } from '../styles/text'
 import Card from '../shared/sharedComponents';
 import { useSelector } from 'react-redux';
+import { DynamicCircle } from '../shared/eventComponents/otherComponents';
 import { 
   Text, 
   View, 
@@ -19,6 +20,7 @@ import {
 export default function ListingScreen({ navigation }) {
 
   const { lang  } = useSelector( (state) => state.lang  )
+  const { login } = useSelector( (state) => state.login )
 
   const [setting] = useState([
     {id: '1', title: 'Hagearbeid hos Login', content: 'A still more glorious dawn awaits cosmic fugue gathered by gravity tesseract muse about two ghostly white figures in coveralls and helmets are softly dancing. Rich in heavy atoms permanence of the stars descended from astronomers invent...'},
@@ -46,6 +48,8 @@ return(
     <TouchableOpacity onPress={() => aboutPage()}>
       <Image style={MS.tMenuIcon} source={require('../assets/loginText.png')} />
     </TouchableOpacity>
+
+    {login ? DynamicCircle(10,10,'red',0,0,60,0):null}
 
     <Text style={MS.screenTitle}>{lang ? 'Stillinger' : 'Vacancies'}</Text>
 

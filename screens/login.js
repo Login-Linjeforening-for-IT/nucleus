@@ -4,9 +4,10 @@ import { GS } from '../styles/globalStyles';
 import { MS } from '../styles/menuStyles';
 import { T } from '../styles/text';
 import { SS } from '../styles/settingStyles';
-import GreenLight, { Check, GrayLight, RedLight } from '../shared/eventComponents/otherComponents';
+import GreenLight, { Check, GrayLight, RedLight, DynamicCircle } from '../shared/eventComponents/otherComponents';
 import { Button, CardSmaller, Space } from '../shared/sharedComponents';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { changeLoginStatus } from '../redux/loginStatus';
 import { 
   Text, 
   View, 
@@ -22,13 +23,17 @@ import React, { useState } from 'react';
 export default function LoginScreen( { navigation }) {
 
   const { lang  } = useSelector( (state) => state.lang  )
+  const { login } = useSelector( (state) => state.login )
 
+  const dispatch = useDispatch()
+  
   const goBack       = () => { navigation.navigate('ProfileScreen') }
   const listingPage  = () => { navigation.navigate('ListingScreen') }
   const eventPage    = () => { navigation.navigate('EventScreen')   }
   const homePage     = () => { navigation.navigate('HomeScreen')    }
   const internalPage = () => {
     if (data.name === database.name && data.pass === database.pass) {
+      dispatch(changeLoginStatus())
       navigation.navigate('InternalScreen');
     } else {
       Alert.alert('Feil brukernavn eller passord')
@@ -94,6 +99,8 @@ const showPass = () => {
     <TouchableOpacity onPress={() => goBack()}>
       <Image style={MS.goBack} source={require('../assets/goback777.png')} />
     </TouchableOpacity>
+
+    {login ? DynamicCircle(10,10,'red',0,0,60,0):null}
 
     <Text style={MS.screenTitle}>{lang ? 'Innsida' : 'Intranet'}</Text>
 
@@ -191,10 +198,9 @@ const showPass = () => {
             </View>
             {Space(40)}
 
-
               <View style={SS.makeNotificationImage}>
-                  <Image style={GS.smallImage} source={require('../assets/loginText.png')} />
-                </View>
+                <Image style={GS.smallImage} source={require('../assets/loginText.png')} />
+              </View>
         </View>
       </View>   
 

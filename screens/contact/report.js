@@ -5,7 +5,7 @@ import { MS } from '../../styles/menuStyles';
 import { T } from '../../styles/text';
 import { SS } from '../../styles/settingStyles';
 import React, { useState } from 'react';
-import GreenLight, { Check, GrayLight } from '../../shared/eventComponents/otherComponents';
+import GreenLight, { Check, GrayLight, DynamicCircle } from '../../shared/eventComponents/otherComponents';
 import { Button, CardSmaller, Space } from '../../shared/sharedComponents';
 import { useSelector } from 'react-redux';
 import { 
@@ -24,6 +24,7 @@ import {
 export default function ReportScreen( { navigation }) {
  
   const { lang  } = useSelector( (state) => state.lang  )
+  const { login } = useSelector( (state) => state.login )
 
   const eventPage   = () => { navigation.navigate('EventScreen')       }
   const homePage    = () => { navigation.navigate('HomeScreen')        }
@@ -111,6 +112,8 @@ const inputContent = (val) => {
         <TouchableOpacity onPress={() => goBack()}>
           <Image style={MS.goBack} source={require('../../assets/goback777.png')} />
         </TouchableOpacity>
+
+        {login ? DynamicCircle(10,10,'red',0,0,60,0):null}
 
         <Text style={MS.screenTitle}>{lang ? 'Varsle' : 'Report'}</Text>
 

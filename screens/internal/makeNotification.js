@@ -3,6 +3,7 @@ import { MS } from '../../styles/menuStyles';
 import { GS } from '../../styles/globalStyles';
 import React, { useState, useEffect, useRef } from 'react';
 import { NotifyButton, Space } from '../../shared/sharedComponents';
+import { DynamicCircle } from '../../shared/eventComponents/otherComponents';
 import { T } from '../../styles/text';
 import { useSelector } from 'react-redux';
 import { 
@@ -47,6 +48,7 @@ global.nDelay = 1               // not being used, use array instead
 export default function MakeNotificationScreen({ navigation }) {
 
   const { lang  } = useSelector( (state) => state.lang  )
+  const { login } = useSelector( (state) => state.login )
 
   const eventPage   = () => { navigation.navigate('EventScreen')    }
   const homePage    = () => { navigation.navigate('HomeScreen')     }
@@ -110,6 +112,9 @@ export default function MakeNotificationScreen({ navigation }) {
         <TouchableOpacity onPress={() => goBack()}>
           <Image style={MS.goBack} source={require('../../assets/goback777.png')} />
         </TouchableOpacity>
+
+        {login ? DynamicCircle(10,10,'red',0,0,60,0):null}
+
 
         <TouchableOpacity onPress={() => ProfilePage()}>
           <Image style={MS.tMenuIcon} source={require('../../assets/loginperson-orange.png')} />

@@ -23,11 +23,11 @@ export const MS = StyleSheet.create ({
   },
   tMenuIcon: {  //Size of icons
     top: '5%',
-    width: 120,
+    width: 100,
     height: 120
   },
   tMenuIconWithExtra: {  //Placement when extra icons are added
-    right: '70%',
+    right: '50%',
     top: '5%',
     width: 50,
     height: 120

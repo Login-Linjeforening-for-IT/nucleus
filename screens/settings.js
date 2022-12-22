@@ -3,6 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import { GS } from '../styles/globalStyles';
 import { MS } from '../styles/menuStyles';
 import Card, { Notification, Language, Space } from '../shared/sharedComponents';
+import { DynamicCircle } from '../shared/eventComponents/otherComponents';
 import { useSelector } from 'react-redux';
 import Theme from '../styles/themes/theme';
 import { T } from '../styles/text';
@@ -21,6 +22,7 @@ export default function SettingScreen( { navigation }) {
 
   const { theme } = useSelector( (state) => state.theme ) 
   const { lang  } = useSelector( (state) => state.lang  )
+  const { login } = useSelector( (state) => state.login )
 
   const eventPage   = () => { navigation.navigate('EventScreen')   }
   const listingPage = () => { navigation.navigate('ListingScreen') }
@@ -36,6 +38,8 @@ export default function SettingScreen( { navigation }) {
     <TouchableOpacity onPress={() => goBack()}>
       <Image style={MS.goBack} source={require('../assets/goback777.png')} />
     </TouchableOpacity>
+
+    {login ? DynamicCircle(10,10,'red',0,0,60,0):null}
 
     <Text style={MS.screenTitle}>{lang ? 'Innstillinger' : 'Settings'}</Text>
 

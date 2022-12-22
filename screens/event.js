@@ -1,4 +1,4 @@
-import GreenLight, { GrayLight, Check, MonthNO, MonthEN } from '../shared/eventComponents/otherComponents';  // Components used to display event
+import GreenLight, { GrayLight, Check, MonthNO, MonthEN, DynamicCircle } from '../shared/eventComponents/otherComponents';  // Components used to display event
 import Card, { CompareDates, CheckBox, CheckedBox } from '../shared/sharedComponents';  // Components used to display event
 import CategorySquare from '../shared/eventComponents/categorySquare'; // Left side square on eventcard
 import AsyncStorage from '@react-native-async-storage/async-storage'; // Localstorage
@@ -23,6 +23,7 @@ const GLOBAL = require('../styles/themes/dark')
 export default function EventScreen({ navigation }) {
 
   const { lang  } = useSelector( (state) => state.lang  )
+  const { login } = useSelector( (state) => state.login )
 
   //Declaring screens you can navigate to from this screen
   const listingPage = () => { navigation.navigate('ListingScreen') }  //  Job screen
@@ -268,7 +269,8 @@ export default function EventScreen({ navigation }) {
         <TouchableOpacity onPress={() => aboutPage()}>
           <Image style={MS.tMenuIcon} source={require('../assets/loginText.png')} />
         </TouchableOpacity>
-
+        {login ? DynamicCircle(10,10,'red',0,0,60,0):null}
+       
         <Text style={MS.screenTitle}>Events</Text>
         
         {renderedArray != null ? 

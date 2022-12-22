@@ -5,6 +5,7 @@ import { MS } from '../styles/menuStyles';
 import { T } from '../styles/text';
 import { ES } from '../styles/eventStyles';
 import Card, { Space } from '../shared/sharedComponents';
+import { DynamicCircle } from '../shared/eventComponents/otherComponents';
 import { useSelector } from 'react-redux';
 import React from 'react';
 import { 
@@ -20,7 +21,7 @@ import {
 export default function SpecificListingScreen( { route, navigation }) {
 
   const { lang  } = useSelector( (state) => state.lang  )
-
+  const { login } = useSelector( (state) => state.login )
   const { item } = route.params
   //Check if image exists
 
@@ -38,6 +39,8 @@ export default function SpecificListingScreen( { route, navigation }) {
     <TouchableOpacity onPress={() => goBack()}>
       <Image style={MS.goBack} source={require('../assets/goback777.png')} />
     </TouchableOpacity>
+
+    {login ? DynamicCircle(10,10,'red',0,0,60,0):null}
 
     <Text style={MS.smallTitle}>{item.title}</Text>
 

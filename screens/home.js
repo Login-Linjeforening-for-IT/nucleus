@@ -7,7 +7,7 @@ import React, { useState, useEffect } from 'react';
 import Card from '../shared/sharedComponents';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ES } from '../styles/eventStyles';
-import GreenLight, { Month, Check } from '../shared/eventComponents/otherComponents';
+import GreenLight, { Month, Check, DynamicCircle } from '../shared/eventComponents/otherComponents';
 import CategorySquare from '../shared/eventComponents/categorySquare';
 import { useSelector } from 'react-redux';
 import { 
@@ -23,6 +23,7 @@ import {
 export default function HomeScreen({ navigation }) {
 
   const { lang  } = useSelector( (state) => state.lang  )
+  const { login } = useSelector( (state) => state.login )
 
   const [setting] = useState([
     {id: '0', title: 'Login var i Trondheim', content: 'Masse spennende inforasjon fra da Login var i Trondheim ...A still more glorious dawn awaits cosmic fugue gathered by gravity tesseract muse about two ghostly white figures in coveralls and helmets are softly dancing.'},
@@ -70,6 +71,8 @@ export default function HomeScreen({ navigation }) {
           <TouchableOpacity onPress={() => aboutPage()}>
           <Image style={MS.tMenuIcon} source={require('../assets/loginText.png')} />
           </TouchableOpacity>
+
+          {login ? DynamicCircle(10,10,'red',0,0,60,0):null}
 
           <Text style={MS.screenTitle}>{lang ? 'Hjem' : 'Home'}</Text>
 

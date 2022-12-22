@@ -4,6 +4,7 @@ import { MS } from '../../styles/menuStyles';
 import { T } from '../../styles/text';
 import React, { useState } from 'react';
 import Card, { Space, AllComitees, Line } from '../../shared/sharedComponents';
+import { DynamicCircle } from '../../shared/eventComponents/otherComponents';
 import { useSelector } from 'react-redux';
 import { 
   Text, 
@@ -19,6 +20,7 @@ import {
 export default function CommitteeMenuScreen({ navigation }) {
 
   const { lang  } = useSelector( (state) => state.lang  )
+  const { login } = useSelector( (state) => state.login )
 
   const eventPage   = () => { navigation.navigate('EventScreen')       }
   const homePage    = () => { navigation.navigate('HomeScreen')        }
@@ -34,6 +36,8 @@ export default function CommitteeMenuScreen({ navigation }) {
   <TouchableOpacity onPress={() => goBack()}>
       <Image style={MS.goBack} source={require('../../assets/goback777.png')} />
     </TouchableOpacity>
+
+    {login ? DynamicCircle(10,10,'red',0,0,60,0):null}
 
     <Text style={MS.screenTitle}>{lang ? 'Komité' : 'Committee'}</Text>
 

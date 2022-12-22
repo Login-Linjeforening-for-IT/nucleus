@@ -2,7 +2,7 @@
 import CategoryCircle from '../shared/eventComponents/categoryCircle';
 import CategorySquare from '../shared/eventComponents/categorySquare';
 import CleanDescription from '../shared/eventComponents/cleanDescription';
-import { GetEndTime, MonthNO, MonthEN, EventLocation } from '../shared/eventComponents/otherComponents';
+import { GetEndTime, MonthNO, MonthEN, EventLocation, DynamicCircle } from '../shared/eventComponents/otherComponents';
 import React, { useEffect, useState } from 'react';
 import Card, { CardSmaller, Space } from '../shared/sharedComponents';
 import { StatusBar } from 'expo-status-bar';
@@ -26,7 +26,7 @@ import {
 export default function SpecificEventScreen({ route, navigation}) {
 
   const { lang  } = useSelector( (state) => state.lang  )
-
+  const { login } = useSelector( (state) => state.login )
   const { item } = route.params
   const [usersData,setUsersData]=useState({})
 
@@ -57,6 +57,9 @@ export default function SpecificEventScreen({ route, navigation}) {
     <TouchableOpacity onPress={() => goBack()}>
       <Image style={MS.goBack} source={require('../assets/goback777.png')} />
     </TouchableOpacity>
+
+    {login ? DynamicCircle(10,10,'red',0,0,60,0):null}
+
       <TouchableOpacity onPress={() => profilePage()}>
         <Image style={MS.tMenuIcon} source={require('../assets/loginperson.png')} />
       </TouchableOpacity>

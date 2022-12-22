@@ -3,11 +3,11 @@ import { StatusBar } from 'expo-status-bar';
 import { GS } from '../styles/globalStyles';
 import { T } from '../styles/text';
 import { MS } from '../styles/menuStyles';
-import Card, { Line, Space , Social, AllComitees } from '../shared/sharedComponents';
-import { Copyright } from '../shared/sharedComponents';
+import Card, { Line, Space , Social, AllComitees, Copyright } from '../shared/sharedComponents';
 import React, {useState} from 'react';
 import Dropdown from '../shared/dropdown';
 import { useSelector } from 'react-redux';
+import { DynamicCircle } from '../shared/eventComponents/otherComponents';
 import { 
   Text, 
   View, 
@@ -22,6 +22,7 @@ import {
 export default function AboutScreen( { navigation }) {
 
   const { lang  } = useSelector( (state) => state.lang  )
+  const { login } = useSelector( (state) => state.login )
 
   const [info] = useState([
     {id: '0', titleNO: 'Styret',   titleEN: 'Board',    quoteNO: '', qouteEN: '', descriptionNO: 'Øverste leddet i foreningen er styret. Under årsmøtet blir leder, nestleder og sekretær stemt frem, og disse sitter sammen med lederene fra de ulike komiteene i styret. Sammen er disse ansvarlige for å drive foreningen, styre økonomien og sørge for at alle utfører de oppgavene de skal.', descriptionEN: 'The highest level of the association is the board. During the annual meeting, the chairman, deputy chairman and secretary are voted in, and these sit together with the leaders from the various committees on the board. Together, these are responsible for running the association, managing the finances and ensuring that everyone performs the tasks they are supposed to.'},
@@ -58,6 +59,8 @@ return(
     <TouchableOpacity onPress={() => goBack()}>
       <Image style={MS.goBack} source={require('../assets/goback777.png')} />
     </TouchableOpacity>
+
+    {login ? DynamicCircle(10,10,'red',0,0,60,0):null}
 
     <Text style={MS.screenTitle}>{lang ? 'Om Login' : 'About Login'}</Text>
 

@@ -144,6 +144,17 @@ export function RedLight() {    //Red colored light svg
     );
 };
 
+export function DynamicCircle(height, width, color, left, right, top, bottom) {    // Dynamic easy to style circle
+    return(
+    <View style={{left: left, right: right, top: top, bottom: bottom, height: height, width: width}}>
+        <Svg height="100%" width="100%" viewBox="0 0 100 100" >
+        <Circle cx="50" cy="50" r="50" fill={color} />
+        </Svg>
+    </View>
+    );
+};
+
+
 export function Check() {   //Checkmark svg
     return(
     <View style={ES.size}>

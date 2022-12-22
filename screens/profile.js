@@ -4,6 +4,7 @@ import { MS } from '../styles/menuStyles'
 import { GS } from '../styles/globalStyles'
 import React, { useState } from 'react';
 import Card from '../shared/sharedComponents';
+import { DynamicCircle } from '../shared/eventComponents/otherComponents';
 import { useSelector } from 'react-redux';
 import { 
   Text, 
@@ -20,17 +21,18 @@ import { T } from '../styles/text';
 export default function ProfileScreen({ navigation }) {
 
   const { lang  } = useSelector( (state) => state.lang  )
+  const { login } = useSelector( (state) => state.login )
 
   const [setting] = useState([
       {id: '1', nav: 'SettingScreen',     titleNO: 'Innstillinger',  titleEN: 'Settings'       },
       {id: '2', nav: 'ContactMenuScreen', titleNO: 'Kontakt Login',  titleEN: 'Contact Login'  },
       {id: '3', nav: 'LoginScreen',       titleNO: 'Innsida (verv)', titleEN: 'Intranet (verv)'},
   ])
-
-const goBack      = () => { navigation.goBack()                  }
-const eventPage   = () => { navigation.navigate('EventScreen')   }
-const listingPage = () => { navigation.navigate('ListingScreen') }
-const homePage    = () => { navigation.navigate('HomeScreen')    }
+  
+  const goBack      = () => { navigation.goBack()                  }
+  const eventPage   = () => { navigation.navigate('EventScreen')   }
+  const listingPage = () => { navigation.navigate('ListingScreen') }
+  const homePage    = () => { navigation.navigate('HomeScreen')    }
 
 return(
   <View>
@@ -40,6 +42,8 @@ return(
     <TouchableOpacity onPress={() => goBack()}>
       <Image style={MS.goBack} source={require('../assets/goback777.png')} />
     </TouchableOpacity>
+
+    {login ? DynamicCircle(10,10,'red',0,0,60,0):null}
 
     <Text style={MS.screenTitle}>{lang ? '      Profil' : '      Profile'}</Text>
 
@@ -57,7 +61,7 @@ return(
           data={setting}
           renderItem={({item}) => (
             <View>
-            <TouchableOpacity onPress={() => navigation.navigate(item.nav, item)}>
+            <TouchableOpacity onPress={() => item.id == 3 && login? navigation.navigate('InternalScreen', item) : navigation.navigate(item.nav, item)}>
               <Card>
                 <Text style={T.centered20}>{lang ? item.titleNO : item.titleEN}</Text>
               </Card>

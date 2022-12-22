@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import Card from '../../shared/sharedComponents';
 import { T } from '../../styles/text';
 import { useSelector } from 'react-redux';
+import { DynamicCircle } from '../../shared/eventComponents/otherComponents';
 import { 
   Text, 
   View, 
@@ -18,6 +19,7 @@ import {
 export default function TodoScreen({ navigation }) {
 
   const { lang  } = useSelector( (state) => state.lang  )
+  const { login } = useSelector( (state) => state.login )
 
   const [setting] = useState([
     {id: '1', todo: 'Implement mazemap - seems every library is deprecated'},
@@ -46,6 +48,8 @@ function goBack()      { navigation.navigate('InternalScreen') }
     <TouchableOpacity onPress={() => goBack()}>
       <Image style={MS.goBack} source={require('../../assets/goback777.png')} />
     </TouchableOpacity>
+
+    {login ? DynamicCircle(10,10,'red',0,0,60,0):null}
 
     <Text style={MS.screenTitle}>{lang ? 'Gjøremål' : 'Todo'}</Text>
     
