@@ -62,19 +62,14 @@ export default function SpecificListingScreen( { route, navigation }) {
 
             <Card>
               <View>
-                <Text style={{...T.centered20, color: FetchColor(theme, 'TEXTCOLOR')}}>{item.title}</Text>
+                <Text style={{...T.centered20, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? item.titleNO : item.titleEN}</Text>
               </View>
             </Card>
 
             <View>
-              <View>
-                <Text style={{...T.centered20, color: FetchColor(theme, 'TEXTCOLOR')}}>{item.eventname}</Text>
-              </View>
 
-              {Space(5)}
 
               <Card>
-                <Text style={{...T.centered20, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Stillingsbeskrivelse:' : 'Job description:'}</Text>
                 <Text style={{...T.margin15, color: FetchColor(theme, 'TEXTCOLOR')}}>{item.content}</Text>
               </Card>
             </View>

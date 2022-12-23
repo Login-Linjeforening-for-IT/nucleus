@@ -2,8 +2,9 @@ import { StyleSheet } from "react-native";  //Stylesheet file
 
 export const MS = StyleSheet.create ({
 //  ========================= STYLESHEET TOP MENU =========================
-  screenTitle: { //Header title of every page
-    top: '12%',
+  screenTitle: {
+    textAlign: 'center',
+    top: '11.5%',
     fontSize: 35,
   },
   smallTitle: { //Header title of every page
@@ -35,9 +36,9 @@ export const MS = StyleSheet.create ({
     height: 80,
   },
   searchIcon: {  //Size of icons
-    right: 18,
+    right: 14,
     top: '47.5%',
-    width: 36,
+    width: 32,
     height: 40
   },
   

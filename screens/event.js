@@ -1,9 +1,8 @@
-import GreenLight, { GrayLight, Check, MonthNO, MonthEN, DynamicCircle } from '../shared/eventComponents/otherComponents';  // Components used to display event
+import GreenLight, { GrayLight, Check, MonthNO, MonthEN, DynamicCircle, SmallCheck } from '../shared/eventComponents/otherComponents';  // Components used to display event
 import Card, { CompareDates, CheckBox, CheckedBox } from '../shared/sharedComponents';  // Components used to display event
 import CategorySquare from '../shared/eventComponents/categorySquare'; // Left side square on eventcard
 import AsyncStorage from '@react-native-async-storage/async-storage'; // Localstorage
 import React, { useEffect, useState, useRef } from 'react';           // React imports
-import { StatusBar } from 'expo-status-bar';                          // Status bar
 import { GS } from '../styles/globalStyles';                          // Global styles
 import { ES } from '../styles/eventStyles';                           // Event styles
 import { MS } from '../styles/menuStyles';                            // Menu styles
@@ -18,6 +17,7 @@ import {                                                              // React n
   TextInput,
   TouchableOpacity,
 } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 
 export default function EventScreen({ navigation }) {
 
@@ -180,6 +180,12 @@ export default function EventScreen({ navigation }) {
     }
   }
 
+  useFocusEffect(                                                   // Updates whenever the screen is visible on the screen
+  React.useCallback(() => {
+    fetchState()
+  }, [])
+);
+
   if (clickedEvents.length > 0) {                                     //  --- STORING FIRSTCOMING CLICKED EVENT ---
     (async() => {
       let storedID = 0;
@@ -211,8 +217,6 @@ export default function EventScreen({ navigation }) {
     }
   }
 
-  // Only updates the events displayed if the filter is closed to prevent bugs
-  useEffect(() => {if(search.status == 0) setRenderedArray([...events]), setClickedCategory([]) }, [search]);
   useEffect(() => {                                                   //  --- LOADING FILTERED DATA WHEN FILTER CHANGES ---
     if (filter.input != null || clickedCategory.length > 0) {
       if(filter.input != null && clickedCategory.length == 0)  {
@@ -250,7 +254,7 @@ export default function EventScreen({ navigation }) {
 
   useEffect(() => {                                                   //  --- UPDATES FILTER ON EVENT CHANGE ---
     fetchRelevantCategories();
-  }, [events, clickedEvents]);                                        //  Listens for changes in these arrays
+  }, [events.length, clickedEvents.length]);                          //  Listens for changes in these arrays
 
   useEffect(() => {                                                   //  --- FETCHES API AND UPDATES CACHE EVERY 10 SECONDS ---
     const interval = setInterval(() => {
@@ -269,8 +273,11 @@ export default function EventScreen({ navigation }) {
           <Image style={MS.tMenuIcon} source={require('../assets/loginText.png')} />
         </TouchableOpacity>
         {login ? DynamicCircle(10,10,'red',0,0,60,0):null}
-       
-        <Text style={{... MS.screenTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>Events</Text>
+        {lang ?
+          <Text style={{... MS.smallTitle, left: '-5%', top: '14%', color: FetchColor(theme, 'TITLETEXTCOLOR')}}>Arrangementer</Text>
+        : 
+          <Text style={{... MS.screenTitle, left: '-5%', color: FetchColor(theme, 'TITLETEXTCOLOR')}}>Events</Text>
+        }
         
         {renderedArray != null ? 
           renderedArray.length > 0 || clickedCategory.length > 0 || filter.input != null ? 
@@ -299,7 +306,7 @@ export default function EventScreen({ navigation }) {
                       style={{...ES.filterText, backgroundColor: FetchColor(theme, 'DARKER')}}
                       maxLength={40}
                       placeholder='Søk..'
-                      placeholderTextColor = '#777'
+                      placeholderTextColor={FetchColor(theme, 'TITLETEXTCOLOR')}
                       textAlign='center'
                       onChangeText={(val) => filterInput(val)}
                   />
@@ -319,8 +326,11 @@ export default function EventScreen({ navigation }) {
                               <View style={ES.categoryView}>
                                   {clickedCategory.includes(item) ?
                                       <TouchableOpacity onPress={() => setClickedCategory(clickedCategory.filter((x) => x.id !== item.id))}>
-                                          <Text style={{...T.filterCategoryText, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{item.category}</Text>
-                                          <CheckedBox/>
+                                        <View>
+                                        <Text style={{...T.filterCategoryText, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{item.category}</Text>
+                                          <View><CheckedBox/></View>
+                                          <View><SmallCheck/></View>
+                                        </View>
                                       </TouchableOpacity>
                                   :
                                       <TouchableOpacity onPress={() => setClickedCategory([...clickedCategory, item])}>
@@ -355,7 +365,6 @@ export default function EventScreen({ navigation }) {
                               {lang ? MonthNO(item.startt[5] + item.startt[6], FetchColor(theme, 'TEXTCOLOR')) : MonthEN(item.startt[5] + item.startt[6], FetchColor(theme, 'TEXTCOLOR'))}
                           </View>
                             <View style={ES.view2}>
-                            
                               <View style = {{...ES.title, color: FetchColor(theme, 'TEXTCOLOR')}}><Text style={{...ES.title, color: FetchColor(theme, 'TEXTCOLOR')}}>{item.eventname}</Text></View>
                               <View style = {{...ES.loc, color: FetchColor(theme, 'TEXTCOLOR')}}><Text style={{...ES.loc, color: FetchColor(theme, 'TEXTCOLOR')}}>{item.startt[11]}{item.startt[12]}:{item.startt[14]}{item.startt[15]} {item.roomno}. {item.campus}</Text></View>
                             </View>

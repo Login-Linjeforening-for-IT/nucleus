@@ -52,9 +52,14 @@ export const ES = StyleSheet.create({
     top: '12%',
     alignSelf: 'center',
   },
-  checkContent: { //Renders the check icon itself
+  checkContent: { //Renders big check icon
     left: 2,
     top: '-30%',
+    alignSelf: 'center',
+  },
+  smallerCheckIcon: { // Small check icon inside filter
+    height: 20,
+    top: '0%',
     alignSelf: 'center',
   },
 //======================== SpecificEventScreen ===================
@@ -134,14 +139,23 @@ export const ES = StyleSheet.create({
     borderBottomLeftRadius: 15,
     borderBottomRightRadius: 15,
   },
-  checkBox: { //Position of specific event color circle
+  checkBox: { //Position of eventfilter check icon
     top: '-50%',
     right: 20,
+  },
+  checkedBox: { //Position of eventfilter checked icon
+    top: '-80%',
+    right: 20,
+  },
+  checkedIconCheckMark: { // Checkmark on check icon
+    right: 18,
+    top: '-1000000%',
+    height: 0.004,
   },
   categoryView: {
     flexDirection: 'row',
     left: 30,
-    top: 10,
+    top: 7,
     width: 122,
   },
   filterResetIcon: { 

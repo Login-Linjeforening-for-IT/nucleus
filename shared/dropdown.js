@@ -126,7 +126,7 @@ export default function Dropdown() {
                         return(
                             <TouchableOpacity key={index} onPress={() => Linking.openURL(selectedCourse.link)}>
                                 <View style={{...GS.dropdownContent, backgroundColor: FetchColor(theme, 'CONTRAST')}}>
-                                    <Text style={{...T.text15, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? selectedCourse.titleNO : selectCourse.titleEN}</Text>
+                                    <Text style={{...T.text15, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? selectedCourse.titleNO : selectedCourse.titleEN}</Text>
                                     <Image style={GS.smallDropImage} source={require('../assets/linkicon-white.png')} />
                                 </View>
                             </TouchableOpacity>
@@ -144,6 +144,7 @@ export default function Dropdown() {
 export function DropdownBachelor() {
 
     const { lang  } = useSelector( (state) => state.lang  )
+    const { theme } = useSelector( (state) => state.theme )
 
     const [courses] = useState([
         {id: '0', titleNO: 'Dataingeniør', titleEN: 'Computer Science', link: 'https://www.ntnu.no/studier/bidata'},
@@ -196,6 +197,9 @@ export function DropdownBachelor() {
 }
 
 export function DropdownMaster() {
+
+    const { theme } = useSelector( (state) => state.theme ) 
+
     const [courses] = useState([
         {id: '0', title: 'Information Security', link: 'https://www.ntnu.no/studier/mis'},
         {id: '1', title: 'Applied Computer Science', link: 'https://www.ntnu.edu/studies/macs'},
@@ -249,6 +253,7 @@ export function DropdownMaster() {
 export function DropdownPHD() {
 
     const { lang  } = useSelector( (state) => state.lang  )
+    const { theme } = useSelector( (state) => state.theme )
 
     const [courses] = useState([
         {id: '0', titleNO: 'Informasjonsikkerhet og kommunikasjonsteknologi', titleEN: 'Information Security and Communication Technology', link: 'https://www.ntnu.no/studier/phisct'},

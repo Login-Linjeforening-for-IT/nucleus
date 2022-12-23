@@ -42,8 +42,8 @@
         "foregroundImage": "./assets/adaptiveIcon.png",
         "backgroundColor": "#000000"
       },
-      "package": "com.eirikhanasand.Login",
-      "versionCode": 4
+      "package": "com.login.Login",
+      "versionCode": 6
     },
     "web": {
       "favicon": "./assets/favicon.png"

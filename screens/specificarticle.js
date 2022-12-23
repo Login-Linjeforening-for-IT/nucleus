@@ -1,6 +1,7 @@
 {/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
 import { GS } from '../styles/globalStyles';
 import { MS } from '../styles/menuStyles';
+import { ES } from '../styles/eventStyles';
 import { T } from '../styles/text';
 import Card, { Space } from '../shared/sharedComponents'
 import { DynamicCircle } from '../shared/eventComponents/otherComponents';
@@ -55,11 +56,11 @@ export default function SpecificArticleScreen( { route, navigation }) {
         <View>
             <View style={GS.specificArticleView}>
             {Space(10)}
-              <Image style={GS.articleImage} source={require('../assets/hans.png')} />
+              <Image style={ES.specificEventImage} source={require('../assets/default.png')}/>
             </View>
               <Card>
-                <Text style={{...T.centered20, color: FetchColor(theme, 'TEXTCOLOR')}}>{item.title}</Text>
-                  <Text style={{...T.margin15, color: FetchColor(theme, 'TEXTCOLOR')}}>{item.content}</Text>
+                <Text style={{...T.centered20, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? item.titleNO : item.titleEN}</Text>
+                <Text style={{...T.margin15, color: FetchColor(theme, 'TEXTCOLOR')}}>{item.content}</Text>
               </Card> 
           </View>
 

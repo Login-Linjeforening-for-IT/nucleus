@@ -45,7 +45,7 @@ return(
 
     {login ? DynamicCircle(10,10,'red',0,0,60,0):null}
 
-    <Text style={{... MS.screenTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{lang ? '      Profil' : '      Profile'}</Text>
+    <Text style={{... MS.screenTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{lang ? 'Profil' : 'Profile'}</Text>
 
       <TouchableOpacity>
         <Image style={MS.tMenuIcon} source={require('../assets/loginperson-orange.png')} />
