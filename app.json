@@ -34,16 +34,16 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.login.Login",
-      "buildNumber": "6"
+      "bundleIdentifier": "com.eirikhanasand.Login",
+      "buildNumber": "9"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptiveIcon.png",
         "backgroundColor": "#000000"
       },
-      "package": "com.login.Login",
-      "versionCode": 1
+      "package": "com.eirikhanasand.Login",
+      "versionCode": 4
     },
     "web": {
       "favicon": "./assets/favicon.png"

@@ -3,9 +3,13 @@ import { View, Text } from 'react-native';
 import { T } from '../../styles/text'
 import { A } from '@expo/html-elements'; //Doesnt work in the commented lines below
 import { useSelector } from 'react-redux';
+import FetchColor from '../../styles/fetchTheme';
 
 export default function CleanDescription(string) {
+    
     const { lang  } = useSelector( (state) => state.lang  )
+    const { theme } = useSelector( (state) => state.theme )
+
     if (string != null) {
         const removePtag = string.replaceAll('<p>', '')
         const hTag = removePtag.replaceAll('<h2>', '')

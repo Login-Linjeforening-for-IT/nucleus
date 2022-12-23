@@ -75,15 +75,16 @@ export function GrayLight() {   //Background colored light svg
 export function GetEndTime(input){
 
     const { lang  } = useSelector( (state) => state.lang  )
+    const { theme } = useSelector( (state) => state.theme )
 
     if(input != null){
         const hour1     = (input)[11]    //Fetching endtime cipher 1 from api
         const hour2     = (input)[12]    //Fetching endtime cipher 2 from api
         const minute1   = (input)[14]    //Fetching endtime cipher 3 from api
         const minute2   = (input)[15]    //Fetching endtime cipher 4 from api
-        return(<View><Text style={T.specificEventInfo}>{hour1}{hour2}:{minute1}{minute2}</Text></View>)
+        return(<View><Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>{hour1}{hour2}:{minute1}{minute2}</Text></View>)
     }else{
-        return(<View><Text style={T.locationError}>{lang ? 'Feil ved henting av sluttid.' : 'Error fetching endtime.'}</Text></View>)
+        return(<View><Text style={{...T.locationError, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Feil ved henting av sluttid.' : 'Error fetching endtime.'}</Text></View>)
 
     }
 }
@@ -91,19 +92,20 @@ export function GetEndTime(input){
 export function EventLocation(room, campus) {
 
     const { lang  } = useSelector( (state) => state.lang  )
+    const { theme } = useSelector( (state) => state.theme )
 
     if(room != null && campus != null) {
         if (room.length == 0 && campus.length == 0 ) {
             return(
             <View style={ES.specificEventInfoView}>
-                <Text style={T.specificEventInfo}>{lang ? 'Lokasjon:\t\t' : 'Location:\t\t'}</Text>
-                <Text style={T.specificEventInfo}>TBA!</Text>
+                <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Lokasjon:\t\t' : 'Location:\t\t'}</Text>
+                <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>TBA!</Text>
             </View>)
         } else {
             return(
                 <View style={ES.specificEventInfoView}>
-                <Text style={T.specificEventInfo}>{lang ? 'Lokasjon:\t\t' : 'Location:\t\t'}</Text>
-                <Text style={T.specificEventInfo}>
+                <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Lokasjon:\t\t' : 'Location:\t\t'}</Text>
+                <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>
                   {room},{campus}
                 </Text>
               </View>

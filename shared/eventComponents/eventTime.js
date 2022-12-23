@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { T } from '../../styles/text'
 import { useSelector } from 'react-redux';
+import FetchColor from '../../styles/fetchTheme';
 
 export default function EventTime(startTime, endTime) {
     
