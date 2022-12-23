@@ -19,7 +19,7 @@ export default function CleanDescription(string) {
         const addSpace = addLB.replaceAll('&nbsp;', ' ')
         const removehT = addSpace.replaceAll('<h2>', '')
         const removePtag2 = removehT.replaceAll('<p>', '\n\n')
-        return(<View><Text style={T.paragraph}>{removePtag2}</Text></View>)
+        return(<View><Text style={{...T.paragraph, color: FetchColor(theme, 'TEXTCOLOR')}}>{removePtag2}</Text></View>)
     } else {
         return(<View><Text style={T.red}>{lang ? 'Feil ved henting av beskrivelse' : 'Error fetching description'}</Text></View>)
     }

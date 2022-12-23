@@ -1,4 +1,3 @@
-import { StatusBar } from 'expo-status-bar';
 import { MS } from '../../styles/menuStyles';
 import { GS } from '../../styles/globalStyles';
 import React, { useState, useEffect, useRef } from 'react';
@@ -6,6 +5,7 @@ import { NotifyButton, Space } from '../../shared/sharedComponents';
 import { DynamicCircle } from '../../shared/eventComponents/otherComponents';
 import { T } from '../../styles/text';
 import { useSelector } from 'react-redux';
+import FetchColor from '../../styles/fetchTheme';
 import { 
   Text, 
   View, 
@@ -49,10 +49,11 @@ export default function MakeNotificationScreen({ navigation }) {
 
   const { lang  } = useSelector( (state) => state.lang  )
   const { login } = useSelector( (state) => state.login )
+  const { theme } = useSelector( (state) => state.theme )
 
   const eventPage   = () => { navigation.navigate('EventScreen')    }
   const homePage    = () => { navigation.navigate('HomeScreen')     }
-  const ProfilePage = () => { navigation.navigate('ProfileScreen')  }
+  const profilePage = () => { navigation.navigate('ProfileScreen')  }
   const goBack      = () => { navigation.navigate('InternalScreen') }
   const listingPage = () => { navigation.navigate('ListingScreen')  }
 
@@ -107,71 +108,78 @@ export default function MakeNotificationScreen({ navigation }) {
 
   return(
     <View>
-      <StatusBar style="light" />
-      <View style={MS.topMenu}>
-        <TouchableOpacity onPress={() => goBack()}>
-          <Image style={MS.goBack} source={require('../../assets/goback777.png')} />
-        </TouchableOpacity>
+      {/* ========================= DISPLAY TOP MENU ========================= */}
+        <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'DARKER')}}>
+          <TouchableOpacity onPress={() => goBack()}>
+            <Image style={MS.goBack} source={require('../../assets/goback777.png')} />
+          </TouchableOpacity>
 
-        {login ? DynamicCircle(10,10,'red',0,0,60,0):null}
+          {login ? DynamicCircle(10,10,'red',0,0,60,0):null}
 
+          <Text style={{... MS.screenTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{lang ? 'Send Varsling' : 'Send Push'}</Text>
+          
+            <TouchableOpacity onPress={() => profilePage()}>
+              <Image style={MS.tMenuIcon} source={require('../../assets/loginperson-orange.png')} />
+            </TouchableOpacity>
+        </View>
 
-        <TouchableOpacity onPress={() => ProfilePage()}>
-          <Image style={MS.tMenuIcon} source={require('../../assets/loginperson-orange.png')} />
-        </TouchableOpacity>
-    </View>
-{/* ========================= DISPLAY CONTENT ========================= */}
-  <View style={GS.content}>
+    {/* ========================= DISPLAY CONTENT ========================= */}
+    <View style={{...GS.content, backgroundColor: FetchColor(theme, 'BACKGROUND')}}>
     <ScrollView showsVerticalScrollIndicator={false}>
 
-      {Space(5)}
+      {Space(50)}
 
-      <Text style={T.centered}>{lang ? 'Send varsling' : 'Send notification'}</Text>{Space(10)}
+      <Text style={{...T.centered, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Send varsling' : 'Send push notification'}</Text>{Space(10)}
 
-      <Text style={T.centered20}>{lang ? 'Tittel' : 'Title'}</Text>
+      {Space(15)}
 
-      {Space(5)}
+      <Text style={{...T.centered20, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Tittel' : 'Title'}</Text>
+
+      {Space(15)}
 
       <TextInput 
-        style={GS.inputText}
+        style={{...GS.inputText, backgroundColor: FetchColor(theme, 'DARKER'), color: FetchColor(theme, 'TEXTCOLOR')}}
         placeholder='Login'
-        placeholderTextColor={'#555'}
+        placeholderTextColor={FetchColor(theme, 'TITLETEXTCOLOR')}
         textAlign='center'
         onChangeText={(val) => nTitle = (val)}
       />
-      {Space(5)}
+      {Space(15)}
 
-      <Text style={T.centered20}>{lang ? 'Beskrivelse' : 'Description'}</Text>{Space(5)}
+      <Text style={{...T.centered20, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Beskrivelse' : 'Description'}</Text>
+      
+      {Space(15)}
+
       <TextInput 
         multiline
-        style={GS.inputText}
+        style={{...GS.inputText, backgroundColor: FetchColor(theme, 'DARKER'), color: FetchColor(theme, 'TEXTCOLOR')}}
         placeholder='Varsling'
-        placeholderTextColor={'#555'}
+        placeholderTextColor={FetchColor(theme, 'TITLETEXTCOLOR')}
         textAlign='center'
         onChangeText={(val) => nBody = (val)}
       />
 
-      {Space(5)}
+      {Space(15)}
 
-      <Text style={T.centered20}>Delay ({lang ? 'Sekunder': 'Seconds'})</Text>
+      <Text style={{...T.centered20, color: FetchColor(theme, 'TEXTCOLOR')}}>Delay ({lang ? 'Sekunder': 'Seconds'})</Text>
 
-      {Space(5)}
+      {Space(15)}
 
       <TextInput 
-        style={GS.inputText}
+        style={{...GS.inputText, backgroundColor: FetchColor(theme, 'DARKER'), color: FetchColor(theme, 'TEXTCOLOR')}}
         keyboardType='numeric'
         placeholder='1'
-        placeholderTextColor={'#555'}
+        placeholderTextColor={FetchColor(theme, 'TITLETEXTCOLOR')}
         textAlign='center'
         onChangeText={(val) => nDelay = (val)}
       />
 
-      {Space(5)}
+      {Space(15)}
 
       {/* onPress={async () => {await schedulePushNotification();}} */}
       <TouchableOpacity> 
         <NotifyButton>
-          <Text style={T.centered20}>{lang ? 'SEND VARSLING' : 'SEND NOTIFICATION'}</Text>
+          <Text style={{...T.centered20, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'SEND VARSLING' : 'SEND NOTIFICATION'}</Text>
         </NotifyButton>
       </TouchableOpacity>
 
@@ -185,16 +193,16 @@ export default function MakeNotificationScreen({ navigation }) {
   </View>    
 
 {/* ========================= DISPLAY BOTTOM MENU ========================= */}
-    <View style={MS.bMenu}>
+    <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'DARKER')}}>
       <TouchableOpacity onPress={() => homePage()}>
-            <Image style={MS.bMenuIcon} source={require('../../assets/house777.png')} />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => eventPage()}>
-            <Image style={MS.bMenuIcon} source={require('../../assets/calendar777.png')} />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => listingPage()}>
-            <Image style={MS.bMenuIcon} source={require('../../assets/business.png')} />
-          </TouchableOpacity>
+        <Image style={MS.bMenuIcon} source={require('../../assets/house777.png')} />
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => eventPage()}>
+        <Image style={MS.bMenuIcon} source={require('../../assets/calendar777.png')} />
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => listingPage()}>
+        <Image style={MS.bMenuIcon} source={require('../../assets/business.png')} />
+      </TouchableOpacity>
       </View>     
     </View>
     

@@ -1,5 +1,4 @@
 {/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
-import { StatusBar } from 'expo-status-bar';
 import { GS } from '../styles/globalStyles';
 import { MS } from '../styles/menuStyles';
 import { T } from '../styles/text';
@@ -8,6 +7,7 @@ import GreenLight, { Check, GrayLight, RedLight, DynamicCircle } from '../shared
 import { Button, CardSmaller, Space } from '../shared/sharedComponents';
 import { useSelector, useDispatch } from 'react-redux';
 import { changeLoginStatus } from '../redux/loginStatus';
+import FetchColor from '../styles/fetchTheme';
 import { 
   Text, 
   View, 
@@ -24,6 +24,7 @@ export default function LoginScreen( { navigation }) {
 
   const { lang  } = useSelector( (state) => state.lang  )
   const { login } = useSelector( (state) => state.login )
+  const { theme } = useSelector( (state) => state.theme )
 
   const dispatch = useDispatch()
   
@@ -93,34 +94,33 @@ const showPass = () => {
 
   return(
     <View>
-      <StatusBar style="light" />
 {/* ========================= DISPLAY TOP MENU ========================= */}
-<View style={MS.topMenu}>
+<View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'DARKER')}}>
     <TouchableOpacity onPress={() => goBack()}>
       <Image style={MS.goBack} source={require('../assets/goback777.png')} />
     </TouchableOpacity>
 
     {login ? DynamicCircle(10,10,'red',0,0,60,0):null}
 
-    <Text style={MS.screenTitle}>{lang ? 'Innsida' : 'Intranet'}</Text>
+    <Text style={{... MS.screenTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{lang ? 'Innsida' : 'Intranet'}</Text>
 
       <TouchableOpacity>
         <Image style={MS.tMenuIcon} source={require('../assets/loginperson-orange.png')} />
       </TouchableOpacity>
   </View>
 {/* ========================= DISPLAY CONTENT ========================= */}
-<View style={GS.content}>
+<View style={{...GS.content, backgroundColor: FetchColor(theme, 'BACKGROUND')}}>
         
         <View>
           {Space(80)}
-            <Text style={T.centered50}>{lang ? 'Innsida' : 'Intranet'}</Text>
+            <Text style={{...T.centered50, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Innsida' : 'Intranet'}</Text>
             {Space(20)}
 
             <View style={SS.loginView}>
               <CardSmaller>
                 <View style={SS.loginView}>
                   <TextInput 
-                  style={GS.inputText}
+                  style={{...GS.inputText, backgroundColor: FetchColor(theme, 'DARKER'), color: FetchColor(theme, 'TEXTCOLOR')}}
                   placeholder={lang ? '         brukernavn' : '         username'}
                   placeholderTextColor={'#555'}
                   textAlign='center'
@@ -147,7 +147,7 @@ const showPass = () => {
               <CardSmaller>
                 <View style={SS.loginView}>
                   <TextInput 
-                  style={GS.inputText}
+                  style={{...GS.inputText, backgroundColor: FetchColor(theme, 'DARKER'), color: FetchColor(theme, 'TEXTCOLOR')}}
                   placeholder={lang ? '         passord' : '         password'}
                   placeholderTextColor={'#555'}
                   secureTextEntry = {data.secureTextEntry ? true : false}
@@ -159,14 +159,14 @@ const showPass = () => {
                     {data.secureTextEntry ?
                       <View>
                       <View style = {SS.passLight}><GreenLight/></View>
-                      <View style = {SS.passCheck}>
+                      <View style = {{...SS.passCheck, color: FetchColor(theme, 'TEXTCOLOR')}}>
                       <Image style={SS.showPassImage} source={require('../assets/eyeF.png')} />
                     </View>
                     </View>
                     :
                     <View>
                     <View style = {SS.passLight}><RedLight/></View>
-                    <View style = {SS.passCheck}>
+                    <View style = {{...SS.passCheck, color: FetchColor(theme, 'TEXTCOLOR')}}>
                       <Image style={SS.showPassImage} source={require('../assets/eyeT.png')} />
                     </View>
                     </View>
@@ -176,7 +176,7 @@ const showPass = () => {
                   :
                   <View>
                     <View style = {SS.noPassLight}><GrayLight/></View>
-                    <View style = {SS.noPassCheck}>
+                    <View style = {{...SS.noPassCheck, color: FetchColor(theme, 'TEXTCOLOR')}}>
                       <Image style={SS.noPassImage} source={require('../assets/eyeF.png')} />
                     </View>
                   </View>
@@ -191,8 +191,8 @@ const showPass = () => {
               <TouchableOpacity 
               disabled ={!data.name || !data.pass}
               onPress={() => internalPage()}>
-                <Button style={SS.button}>
-                  <Text style={T.centered20}>LOGIN</Text>
+                <Button style={{...SS.button, backgroundColor: FetchColor(theme, 'ORANGE')}}>
+                  <Text style={{...T.centered20, color: FetchColor(theme, 'TEXTCOLOR')}}>LOGIN</Text>
                 </Button>
               </TouchableOpacity>
             </View>
@@ -205,7 +205,7 @@ const showPass = () => {
       </View>   
 
 {/* ========================= DISPLAY BOTTOM MENU ========================= */}
-      <View style={MS.bMenu}>
+      <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'DARKER')}}>
           <TouchableOpacity onPress={() => homePage()}>
             <Image style={MS.bMenuIcon} source={require('../assets/house777.png')} />
           </TouchableOpacity>

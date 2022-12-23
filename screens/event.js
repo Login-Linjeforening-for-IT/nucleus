@@ -8,7 +8,8 @@ import { GS } from '../styles/globalStyles';                          // Global 
 import { ES } from '../styles/eventStyles';                           // Event styles
 import { MS } from '../styles/menuStyles';                            // Menu styles
 import { T } from '../styles/text';                                   // Text styles
-import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';                            // Redux
+import FetchColor from '../styles/fetchTheme';
 import {                                                              // React native components
   Text, 
   View, 
@@ -18,12 +19,11 @@ import {                                                              // React n
   TouchableOpacity,
 } from 'react-native';
 
-const GLOBAL = require('../styles/themes/dark')
-
 export default function EventScreen({ navigation }) {
 
   const { lang  } = useSelector( (state) => state.lang  )
   const { login } = useSelector( (state) => state.login )
+  const { theme } = useSelector( (state) => state.theme )
 
   //Declaring screens you can navigate to from this screen
   const listingPage = () => { navigation.navigate('ListingScreen') }  //  Job screen
@@ -262,16 +262,15 @@ export default function EventScreen({ navigation }) {
 
   renderArray();                                                      //  --- WHICH EVENTS TO DISPLAY ---
   return(                                                             //  --- DISPLAYS THE EVENTSCREEN ---
-    <View>
-      <StatusBar style="light" /> 
+    <View> 
       {/* ========================= DISPLAY TOP MENU ========================= */}
-      <View style={MS.topMenu}>
+      <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'DARKER')}}>
         <TouchableOpacity onPress={() => aboutPage()}>
           <Image style={MS.tMenuIcon} source={require('../assets/loginText.png')} />
         </TouchableOpacity>
         {login ? DynamicCircle(10,10,'red',0,0,60,0):null}
        
-        <Text style={MS.screenTitle}>Events</Text>
+        <Text style={{... MS.screenTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>Events</Text>
         
         {renderedArray != null ? 
           renderedArray.length > 0 || clickedCategory.length > 0 || filter.input != null ? 
@@ -290,17 +289,17 @@ export default function EventScreen({ navigation }) {
       </View>
 
       {/* ========================= DISPLAY CONTENT ========================= */}
-      <View style={GS.content}>
+      <View style={{...GS.content, backgroundColor: FetchColor(theme, 'BACKGROUND')}}>
         {/* ----- RENDERS FILTER ----- */}
         {search.status ? 
           <View>
               <View style={ES.absoluteView}>
                   <TextInput 
                       ref={textInputRef}
-                      style={ES.filterText}
+                      style={{...ES.filterText, backgroundColor: FetchColor(theme, 'DARKER')}}
                       maxLength={40}
                       placeholder='Søk..'
-                      placeholderTextColor={GLOBAL.DARK.TITLETEXTCOLOR}
+                      placeholderTextColor = '#777'
                       textAlign='center'
                       onChangeText={(val) => filterInput(val)}
                   />
@@ -309,7 +308,7 @@ export default function EventScreen({ navigation }) {
                   </TouchableOpacity>
               </View>
               
-              <View style={ES.filterView}>
+              <View style={{...ES.filterView, backgroundColor: FetchColor(theme, 'DARKER')}}>
                   <FlatList
                           scrollEnabled={false}
                           showsVerticalScrollIndicator={false}
@@ -320,12 +319,12 @@ export default function EventScreen({ navigation }) {
                               <View style={ES.categoryView}>
                                   {clickedCategory.includes(item) ?
                                       <TouchableOpacity onPress={() => setClickedCategory(clickedCategory.filter((x) => x.id !== item.id))}>
-                                          <Text style={T.filterCategoryText}>{item.category}</Text>
+                                          <Text style={{...T.filterCategoryText, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{item.category}</Text>
                                           <CheckedBox/>
                                       </TouchableOpacity>
                                   :
                                       <TouchableOpacity onPress={() => setClickedCategory([...clickedCategory, item])}>
-                                          <Text style={T.filterCategoryText}>{item.category}</Text>
+                                          <Text style={{...T.filterCategoryText, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{item.category}</Text>
                                           <CheckBox/>
                                       </TouchableOpacity>
                                   }
@@ -352,13 +351,13 @@ export default function EventScreen({ navigation }) {
                         <View style={ES.eventBack}>
                           <View>
                               {CategorySquare(item.category)}
-                              <Text style={ES.eventCardDayText}>{item.startt[8]}{item.startt[9]}</Text>
-                              {lang ? MonthNO(item.startt[5] + item.startt[6]) : MonthEN(item.startt[5] + item.startt[6])}
+                              <Text style={{...ES.eventCardDayText, color: FetchColor(theme, 'TEXTCOLOR')}}>{item.startt[8]}{item.startt[9]}</Text>
+                              {lang ? MonthNO(item.startt[5] + item.startt[6], FetchColor(theme, 'TEXTCOLOR')) : MonthEN(item.startt[5] + item.startt[6], FetchColor(theme, 'TEXTCOLOR'))}
                           </View>
                             <View style={ES.view2}>
                             
-                              <View style = {ES.title}><Text style={ES.title}>{item.eventname}</Text></View>
-                              <View style = {ES.loc}><Text style={ES.loc}>{item.startt[11]}{item.startt[12]}:{item.startt[14]}{item.startt[15]} {item.roomno}. {item.campus}</Text></View>
+                              <View style = {{...ES.title, color: FetchColor(theme, 'TEXTCOLOR')}}><Text style={{...ES.title, color: FetchColor(theme, 'TEXTCOLOR')}}>{item.eventname}</Text></View>
+                              <View style = {{...ES.loc, color: FetchColor(theme, 'TEXTCOLOR')}}><Text style={{...ES.loc, color: FetchColor(theme, 'TEXTCOLOR')}}>{item.startt[11]}{item.startt[12]}:{item.startt[14]}{item.startt[15]} {item.roomno}. {item.campus}</Text></View>
                             </View>
                             <View style={ES.view3}>
                               {clickedEvents.some(event => event.eventID === item.eventID) ? 
@@ -382,18 +381,18 @@ export default function EventScreen({ navigation }) {
           : 
             <View>
               <View style={{height : '50%'}}/>
-              <Text style={T.centeredOppositeColor}>Ingen treff</Text>
+              <Text style={{...T.centeredOppositeColor, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>Ingen treff</Text>
             </View>
         : 
           <View style={{alignSelf: 'center', maxWidth: '80%'}}>
             <View style={{height : '58%'}}/>
-            <Text style={T.centeredBold20}>Sjekk nettverkstilkoblingen din og prøv igjen. Kontakt TEKKOM dersom problemet vedvarer.</Text>
+            <Text style={{...T.centeredBold20, color: FetchColor(theme, 'TEXTCOLOR')}}>Sjekk nettverkstilkoblingen din og prøv igjen. Kontakt TEKKOM dersom problemet vedvarer.</Text>
           </View>
         }
       </View>    
 
       {/* ========================= DISPLAY BOTTOM MENU ========================= */}
-        <View style={MS.bMenu}>
+        <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'DARKER')}}>
         <TouchableOpacity onPress={() => homePage()}>
               <Image style={MS.bMenuIcon} source={require('../assets/house777.png')} />
             </TouchableOpacity>

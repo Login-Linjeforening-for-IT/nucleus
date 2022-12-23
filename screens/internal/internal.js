@@ -1,5 +1,4 @@
 {/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
-import { StatusBar } from 'expo-status-bar'
 import { MS } from '../../styles/menuStyles'
 import { GS } from '../../styles/globalStyles'
 import { T } from '../../styles/text'
@@ -7,6 +6,7 @@ import React, { useState } from 'react';
 import Card from '../../shared/sharedComponents';
 import { DynamicCircle } from '../../shared/eventComponents/otherComponents';
 import { useSelector } from 'react-redux';
+import FetchColor from '../../styles/fetchTheme';
 import { 
   Text, 
   View, 
@@ -21,6 +21,7 @@ export default function InternalScreen({ navigation }) {
 
   const { lang  } = useSelector( (state) => state.lang  )
   const { login } = useSelector( (state) => state.login )
+  const { theme } = useSelector( (state) => state.theme )
 
   const [setting] = useState([
     {id: '0', nav: 'TodoScreen', titleNO: 'Gjøremål', titleEN: 'Todo'},
@@ -35,16 +36,15 @@ export default function InternalScreen({ navigation }) {
 
   return(
     <View>
-      <StatusBar style="light" />
 {/* ========================= DISPLAY TOP MENU ========================= */}
-      <View style={MS.topMenu}>
+<View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'DARKER')}}>
           <TouchableOpacity onPress={() => aboutPage()}>
             <Image style={MS.tMenuIcon} source={require('../../assets/loginText.png')} />
           </TouchableOpacity>
 
           {login ? DynamicCircle(10,10,'red',0,0,60,0):null}
 
-          <Text style={MS.screenTitle}>{lang ? 'Innsida' : 'Intranet'}</Text>
+          <Text style={{... MS.screenTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{lang ? 'Innsida' : 'Intranet'}</Text>
           
             <TouchableOpacity onPress={() => ProfilePage()}>
               <Image style={MS.tMenuIcon} source={require('../../assets/loginperson-orange.png')} />
@@ -52,7 +52,7 @@ export default function InternalScreen({ navigation }) {
         </View>
 
 {/* ========================= DISPLAY CONTENT ========================= */}
-      <View style={GS.content}>
+        <View style={{...GS.content, backgroundColor: FetchColor(theme, 'BACKGROUND')}}>
           <FlatList
           showsVerticalScrollIndicator={''}
           numColumns={1}
@@ -62,7 +62,7 @@ export default function InternalScreen({ navigation }) {
             <View>
             <TouchableOpacity onPress={() => navigation.navigate(item.nav, item)}>
               <Card>
-                <Text style={T.centered20}>{lang ? item.titleNO : item.titleEN}</Text>
+                <Text style={{...T.centered20, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? item.titleNO : item.titleEN}</Text>
               </Card>
             </TouchableOpacity>
           </View>
@@ -71,7 +71,7 @@ export default function InternalScreen({ navigation }) {
       </View>    
 
 {/* ========================= DISPLAY BOTTOM MENU ========================= */}
-      <View style={MS.bMenu}>
+      <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'DARKER')}}>
       <TouchableOpacity onPress={() => homePage()}>
         <Image style={MS.bMenuIcon} source={require('../../assets/house777.png')} />
       </TouchableOpacity>

@@ -1,12 +1,12 @@
 import React, {useEffect, useState } from 'react';
-import Svg, {Rect} from 'react-native-svg';
+import Svg, {Rect, Path} from 'react-native-svg';
 import { SS } from '../styles/settingStyles';
 import { ES } from '../styles/eventStyles';
-const GLOBAL = require('../styles/themes/dark')
 import { T } from '../styles/text'
 import { useSelector, useDispatch } from 'react-redux';
 import { changeLang } from '../redux/lang';
-
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import theme, { changeTheme, resetTheme, settheme } from '../redux/theme';
 import { 
     View, 
     Text, 
@@ -15,12 +15,14 @@ import {
     Image,
     Linking
 } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { GS } from '../styles/globalStyles';
+import FetchColor from '../styles/fetchTheme';
 
 export default function Card(props) {
+    const { theme } = useSelector( (state) => state.theme )
+
     return(
-        <View style={ES.card}>
+        <View style={{...ES.card, backgroundColor: FetchColor(theme, 'DARKER')}}>
             <View style={ES.cardContent}>
                 { props.children }
             </View>
@@ -29,8 +31,11 @@ export default function Card(props) {
 };
 
 export function CardSmaller(props) {
+    
+    const { theme } = useSelector( (state) => state.theme )
+
     return(
-        <View style={ES.cardSmaller}>
+        <View style={{...ES.cardSmaller, backgroundColor: FetchColor(theme, 'DARKER')}}>
             <View>
                 { props.children }
             </View>
@@ -41,33 +46,38 @@ export function CardSmaller(props) {
 export function Copyright() {   //Copyright info
 
     const { lang  } = useSelector( (state) => state.lang  )
+    const { theme } = useSelector( (state) => state.theme )
 
     return(
         <View>
-            <Text style={T.copyright}>{lang ? 'Opphavsrett © 2022 Login - Linjeforeningen for IT, NO 811 940 372' : 'Copyright © 2022 Login - Linjeforeningen for IT, NO 811 940 372'}</Text>
+            <Text style={{...T.copyright, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Opphavsrett © 2022 Login - Linjeforeningen for IT, NO 811 940 372' : 'Copyright © 2022 Login - Linjeforeningen for IT, NO 811 940 372'}</Text>
         </View>
     )
 }
 export function Kontakt() { //Contact info
 
-    const { lang } = useSelector((state) => state.lang)
+    const { lang  } = useSelector( (state) => state.lang  )
+    const { theme } = useSelector( (state) => state.theme )
 
     return(
     <View>
         <Text/>
-        <Text style={T.centeredBold25}>{lang ? 'Kontakt' : 'Contact'}</Text>
-        <Text style={T.centered15}>Login - Linjeforeningen for IT</Text>
-        <Text style={T.centered15}>Teknologivegen 22</Text>
-        <Text style={T.centered15}>{lang ? 'Bygg A, rom 155': 'Building A, room 155'}</Text>
-        <Text style={T.centered15}>2815 GJØVIK</Text>
+        <Text style={{...T.centeredBold25, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Kontakt' : 'Contact'}</Text>
+        <Text style={{...T.centered15, color: FetchColor(theme, 'TEXTCOLOR')}}>Login - Linjeforeningen for IT</Text>
+        <Text style={{...T.centered15, color: FetchColor(theme, 'TEXTCOLOR')}}>Teknologivegen 22</Text>
+        <Text style={{...T.centered15, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Bygg A, rom 155': 'Building A, room 155'}</Text>
+        <Text style={{...T.centered15, color: FetchColor(theme, 'TEXTCOLOR')}}>2815 GJØVIK</Text>
         <Text/>
-        <Text style={T.orangeCentered15} onPress={() => Linking.openURL('mailto:kontakt@login.no')}>kontakt@login.no</Text>
+        <Text style={{...T.orangeCentered15, color: FetchColor(theme, 'ORANGE')}} onPress={() => Linking.openURL('mailto:kontakt@login.no')}>kontakt@login.no</Text>
         <Text/>{Space(12)}
     </View> 
     )
 }
 
 export function Notification(index) {    //Notification button
+
+    const { theme } = useSelector( (state) => state.theme )
+    
     const [isEnabled, setState] = useState(false);
 
     const toggleSwitch = async() => {
@@ -88,13 +98,13 @@ export function Notification(index) {    //Notification button
     useEffect(() => {
         fetchState();
     })
-
+    
     return(
         <View>
             <Switch
-                trackColor={{ true: GLOBAL.DARK.TRACKCOLOR }}
-                thumbColor={isEnabled ? GLOBAL.DARK.SWITCHOFFSTATE : GLOBAL.DARK.SWITCHONSTATE}
-                ios_backgroundColor={GLOBAL.DARK.TRACKBACKGROUNDCOLOR}
+                trackColor={{ true: FetchColor(theme, 'TRACKCOLOR') }}
+                thumbColor={isEnabled ? FetchColor(theme, 'SWITCHOFFSTATE') : FetchColor(theme, 'SWITCHONSTATE')}
+                ios_backgroundColor={FetchColor(theme, 'TRACKBACKGROUNDCOLOR')}
                 onValueChange={toggleSwitch}
                 value={isEnabled}
             />
@@ -103,21 +113,25 @@ export function Notification(index) {    //Notification button
 }
 
 export function Language() {    //Choose the language
-    const { lang } = useSelector((state) => state.lang)
+    const { lang  } = useSelector((state) => state.lang  )
+    const { theme } = useSelector((state) => state.theme )
     const dispatch = useDispatch()
       
     return(
         <View>
             <TouchableOpacity onPress={() =>  dispatch(changeLang()) }>
-                <Text style={SS.langSwitch}>{lang ? 'EN' : 'NO'}</Text>
+                <Text style={{...SS.langSwitch, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'EN' : 'NO'}</Text>
             </TouchableOpacity>
         </View>
     )
 }
 
 export function Button(props) { //Button, Login colored
+
+    const { theme } = useSelector( (state) => state.theme )
+
     return(
-        <View style={SS.button}>
+        <View style={{...SS.button, backgroundColor: FetchColor(theme, 'ORANGE')}}>
             <View style={SS.buttonContent}>
                 { props.children }
             </View>
@@ -136,9 +150,12 @@ export function NotifyButton(props) {   //Button, red
 }
 
 export function CheckBox() {
+
+    const { theme } = useSelector( (state) => state.theme )
+
     return(
         <View style={ES.checkBox}>
-            <Svg width={24} height={24} stroke={GLOBAL.DARK.ORANGE} strokeWidth={1}>
+            <Svg width={24} height={24} stroke={FetchColor(theme, 'ORANGE')} strokeWidth={1}>
                 <Rect x='1' y='1' width={22} height={22} ry={7.5}/>
             </Svg>
         </View>
@@ -146,9 +163,12 @@ export function CheckBox() {
 }
 
 export function CheckedBox() {
+    
+    const { theme } = useSelector( (state) => state.theme )
+
     return(
         <View style={ES.checkBox}>
-            <Svg width="24" height="24" fill={GLOBAL.DARK.ORANGE} stroke={GLOBAL.DARK.ORANGE} strokeWidth={1}>
+            <Svg width="24" height="24" fill={FetchColor(theme, 'ORANGE')} stroke={FetchColor(theme, 'ORANGE')} strokeWidth={1}>
             <Rect x='1' y='1' width={22} height={22} ry={7.5}/>
             </Svg>
         </View>
@@ -156,9 +176,12 @@ export function CheckedBox() {
 }
 
 export function Line(height, width) {
+
+    const { theme } = useSelector( (state) => state.theme )
+
     return(
         <View style={ES.checkBox}>
-            <Svg width={width} height={height} fill={GLOBAL.DARK.ORANGE}>
+            <Svg width={width} height={height} fill={FetchColor(theme, 'ORANGE')}>
             <Rect x='1' y='1' width={width} height={height}/>
             </Svg>
         </View>
@@ -259,6 +282,7 @@ export function CompareDates(firstDate, secondDate) { // True if firstdate is ne
 export function AllComitees() {
     
     const { lang  } = useSelector( (state) => state.lang  )
+    const { theme } = useSelector( (state) => state.theme )
 
     return(
         <View>
@@ -266,82 +290,111 @@ export function AllComitees() {
           {Space(10)}
           <Text style={T.leaderTitle}>{lang ? 'Leder' : 'Leader'}</Text>
           {Space(5)}
-          <Text style={T.leaderName}>Anders Eiken</Text>
+          <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>Anders Eiken</Text>
           {Space(5)}
           <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/199580276823818240')}>
-            <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}Eiken#6059</Text>
+            <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}Eiken#6059</Text>
           </TouchableOpacity>
           {Space(25)}
           <Image style={GS.personImage} source={require('../assets/nestleder.png')} />
           {Space(10)}
           <Text style={T.leaderTitle}>{lang ? 'Nestleder' : 'Deputy chairman'}</Text>
           {Space(5)}
-          <Text style={T.leaderName}>Mads Halland</Text>
+          <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>Mads Halland</Text>
           {Space(5)}
           <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/193774211242655746')}>
-          <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}¬.¬#6719</Text>
+          <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}¬.¬#6719</Text>
           </TouchableOpacity>
           {Space(25)}
           <Image style={GS.personImage} source={require('../assets/sekreter.png')} />
           {Space(10)}
           <Text style={T.leaderTitle}>{lang ? 'Sekretær' : 'Secretary'}</Text>
           {Space(5)}
-          <Text style={T.leaderName}>Celina Brynildsen</Text>
+          <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>Celina Brynildsen</Text>
           {Space(5)}
           <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/745317481190785126')}>
-            <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}Celina#6955</Text>
+            <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}Celina#6955</Text>
           </TouchableOpacity>
           {Space(25)}
           <Image style={GS.personImage} source={require('../assets/eventkomleder.png')} />
           {Space(10)}
           <Text style={T.leaderTitle}>{lang ? 'EventKom leder' : 'EventKom Leader'}</Text>
           {Space(5)}
-          <Text style={T.leaderName}>Sofie Hagen</Text>
+          <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>Sofie Hagen</Text>
           {Space(5)}
           <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/877183922021216256')}>
-            <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}sofiee#9763</Text>
+            <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}sofiee#9763</Text>
           </TouchableOpacity>
           {Space(25)}
           <Image style={GS.personImage} source={require('../assets/prleder.png')} />
           {Space(10)}
           <Text style={T.leaderTitle}>{lang ? 'PR leder' : 'PR leader'}</Text>
           {Space(5)}
-          <Text style={T.leaderName}>Kristina Kataki</Text>
+          <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>Kristina Kataki</Text>
           {Space(5)}
           <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/877108421772582962')}>
-            <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}Kataki#7254</Text>
+            <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}Kataki#7254</Text>
           </TouchableOpacity>
           {Space(25)}
           <Image style={GS.personImage} source={require('../assets/tekkomleder.png')} />
           {Space(10)}
           <Text style={T.leaderTitle}>{lang ? 'TekKom leder' : 'TekKom leader'}</Text>
           {Space(5)}
-          <Text style={T.leaderName}>Simon Edna</Text>
+          <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>Simon Edna</Text>
           {Space(5)}
           <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/298525088914079745')}>
-            <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}Sim#3909</Text>
+            <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}Sim#3909</Text>
           </TouchableOpacity>
           {Space(25)}
           <Image style={GS.personImage} source={require('../assets/ctfkomleder.png')} />
           {Space(10)}
           <Text style={T.leaderTitle}>{lang ? 'CTF leder' : 'CTF leader'}</Text>
           {Space(5)}
-          <Text style={T.leaderName}>Eskil Refsgaard</Text>
+          <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>Eskil Refsgaard</Text>
           {Space(5)}
           <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/522483274933731331')}>
-            <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}refsgaard#9067</Text>
+            <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}refsgaard#9067</Text>
           </TouchableOpacity>
           {Space(25)}
           <Image style={GS.personImage} source={require('../assets/satkomleder.png')} />
           {Space(10)}
           <Text style={T.leaderTitle}>{lang ? 'SatKom leder' : 'SatKom leader'}</Text>
           {Space(5)}
-          <Text style={T.leaderName}>Sebastian Hestsveen</Text>
+          <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>Sebastian Hestsveen</Text>
           {Space(5)}
           <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/119120560931340290')}>
-            <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}stubbe#8694</Text>
+            <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}stubbe#8694</Text>
           </TouchableOpacity>
           {Space(20)}
+        </View>
+    )
+}
+
+export function HomeIcon() {
+    return(
+        <View>
+           <Svg height="125" width="100" viewBox="0 0 24 24">
+                <Path d="M3 10v15h6v-9h6v9h6v-15L12,3z" stroke={'red'}/>
+            </Svg>
+        </View>
+    )
+}
+
+export function ThemeSwitch() {
+
+    const { theme } = useSelector((state) => state.theme)
+    const dispatch = useDispatch()
+
+      return (
+        <View>
+            <TouchableOpacity onPress={() => theme > 3 ? dispatch(resetTheme()) : dispatch(changeTheme())}>
+            {theme == 0 ? <Image style={SS.lightSwitchImage} source={require('../assets/sun.png')} />: null}        
+            {theme == 1 ? <Image style={SS.lightSwitchImage} source={require('../assets/abyss.png')} />: null}
+            {theme == 2 ? <Image style={SS.lightSwitchImage} source={require('../assets/sunset.png')} />: null}
+            {theme == 3 ? <Image style={SS.lightSwitchImage} source={require('../assets/christmas.png')} />: null}
+            {/* {theme == 4 ? <Image style={SS.lightSwitchImage} source={require('../assets/easter.png')} />: null} */}
+            {theme == 4 ? <Image style={SS.lightSwitchImage} source={require('../assets/moon.png')} />: null}
+            </TouchableOpacity>
         </View>
     )
 }

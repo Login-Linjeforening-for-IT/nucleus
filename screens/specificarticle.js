@@ -1,5 +1,4 @@
 {/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
-import { StatusBar } from 'expo-status-bar';
 import { GS } from '../styles/globalStyles';
 import { MS } from '../styles/menuStyles';
 import { T } from '../styles/text';
@@ -7,6 +6,7 @@ import Card, { Space } from '../shared/sharedComponents'
 import { DynamicCircle } from '../shared/eventComponents/otherComponents';
 import { useSelector } from 'react-redux';
 import React from 'react';
+import FetchColor from '../styles/fetchTheme';
 import { 
   Text, 
   View, 
@@ -21,6 +21,8 @@ export default function SpecificArticleScreen( { route, navigation }) {
 
   const { lang  } = useSelector( (state) => state.lang  )
   const { login } = useSelector( (state) => state.login )
+  const { theme } = useSelector( (state) => state.theme )
+  
   const { item } = route.params
 
   const listingPage = () => { navigation.navigate('ListingScreen') }
@@ -31,16 +33,15 @@ export default function SpecificArticleScreen( { route, navigation }) {
 
   return(
     <View>
-      <StatusBar style="light" />
 {/* ========================= DISPLAY TOP MENU ========================= */}
-  <View style={MS.topMenu}>
+<View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'DARKER')}}>
     <TouchableOpacity onPress={() => goBack()}>
       <Image style={MS.goBack} source={require('../assets/goback777.png')} />
     </TouchableOpacity>
 
     {login ? DynamicCircle(10,10,'red',0,0,60,0):null}
 
-    <Text style={MS.smallTitle}>{item.title}</Text>
+    <Text style={{... MS.smallTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{item.title}</Text>
 
       <TouchableOpacity onPress={() => profilePage()}>
         <Image style={MS.tMenuIcon} source={require('../assets/loginperson.png')} />
@@ -48,7 +49,7 @@ export default function SpecificArticleScreen( { route, navigation }) {
   </View>
 
 {/* ========================= DISPLAY CONTENT ========================= */}
-      <View style={GS.content}>
+<View style={{...GS.content, backgroundColor: FetchColor(theme, 'BACKGROUND')}}>
         <ScrollView 
         showsVerticalScrollIndicator={false}>
         <View>
@@ -57,8 +58,8 @@ export default function SpecificArticleScreen( { route, navigation }) {
               <Image style={GS.articleImage} source={require('../assets/hans.png')} />
             </View>
               <Card>
-                <Text style={T.centered20}>{item.title}</Text>
-                  <Text style={T.margin15}>{item.content}</Text>
+                <Text style={{...T.centered20, color: FetchColor(theme, 'TEXTCOLOR')}}>{item.title}</Text>
+                  <Text style={{...T.margin15, color: FetchColor(theme, 'TEXTCOLOR')}}>{item.content}</Text>
               </Card> 
           </View>
 
@@ -68,7 +69,7 @@ export default function SpecificArticleScreen( { route, navigation }) {
       </View>    
 
 {/* ========================= DISPLAY BOTTOM MENU ========================= */}
-      <View style={MS.bMenu}>
+      <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'DARKER')}}>
         <TouchableOpacity onPress={() => homePage()}>
             <Image style={MS.bMenuIcon} source={require('../assets/house-orange.png')} />
           </TouchableOpacity>

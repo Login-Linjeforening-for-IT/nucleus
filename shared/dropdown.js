@@ -1,5 +1,4 @@
 import React, {useState } from 'react';
-const GLOBAL = require('../styles/themes/dark')
 import { T } from '../styles/text'
 import { 
     View, 
@@ -10,10 +9,12 @@ import {
 } from 'react-native';
 import { GS } from '../styles/globalStyles';
 import { useSelector } from 'react-redux';
+import FetchColor from '../styles/fetchTheme';
 
 export default function Dropdown() {
     
     const { lang  } = useSelector( (state) => state.lang  )
+    const { theme } = useSelector( (state) => state.theme )
 
     const [bcourses] = useState([
         {id: '0', titleNO: 'Dataingeniør', titleEN: 'Computer Science', link: 'https://www.ntnu.no/studier/bidata'},
@@ -53,13 +54,13 @@ export default function Dropdown() {
       return(
         <View>
             <TouchableOpacity onPress={() => selectedDegree(1)}>
-                <View style={GS.dropdown}>
+                <View style={{...GS.dropdown, backgroundColor: FetchColor(theme, 'CONTRAST')}}>
                 { course.selected == 1 ?
                     <Image style={GS.dropImage} source={require('../assets/linkselected.png')} />
                 :
                     <Image style={GS.dropImage} source={require('../assets/dropdown-orange.png')} />
                 }
-                        <Text style={T.centered}>Bachelor</Text>
+                        <Text style={{...T.centered, color: FetchColor(theme, 'TEXTCOLOR')}}>Bachelor</Text>
                 </View>
             </TouchableOpacity>
 
@@ -68,8 +69,8 @@ export default function Dropdown() {
                     bcourses.map((selectedCourse, index) => {
                         return(
                             <TouchableOpacity key={index} onPress={() => Linking.openURL(selectedCourse.link)}>
-                                <View style={GS.dropdownContent}>
-                                    <Text style={T.text15}>{lang ? selectedCourse.titleNO : selectedCourse.titleEN}</Text>
+                                <View style={{...GS.dropdownContent, backgroundColor: FetchColor(theme, 'CONTRAST')}}>
+                                    <Text style={{...T.text15, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? selectedCourse.titleNO : selectedCourse.titleEN}</Text>
                                     <Image style={GS.smallDropImage} source={require('../assets/linkicon-white.png')} />
                                 </View>
                             </TouchableOpacity>
@@ -81,13 +82,13 @@ export default function Dropdown() {
             </View>
 
             <TouchableOpacity onPress={() => selectedDegree(2)}>
-                <View style={GS.dropdown}>
+                <View style={{...GS.dropdown, backgroundColor: FetchColor(theme, 'CONTRAST')}}>
                 { course.selected  == 2 ?
                     <Image style={GS.dropImage} source={require('../assets/linkselected.png')} />
                 :
                     <Image style={GS.dropImage} source={require('../assets/dropdown-orange.png')} />
                 }
-                        <Text style={T.centered}>Master</Text>
+                        <Text style={{...T.centered, color: FetchColor(theme, 'TEXTCOLOR')}}>Master</Text>
                 </View>
             </TouchableOpacity>
 
@@ -96,8 +97,8 @@ export default function Dropdown() {
                     mcourses.map((selectedCourse, index) => {
                         return(
                             <TouchableOpacity key={index} onPress={() => Linking.openURL(selectedCourse.link)}>
-                                <View style={GS.dropdownContent}>
-                                    <Text style={T.text15}>{selectedCourse.title}</Text>
+                                <View style={{...GS.dropdownContent, backgroundColor: FetchColor(theme, 'CONTRAST')}}>
+                                    <Text style={{...T.text15, color: FetchColor(theme, 'TEXTCOLOR')}}>{selectedCourse.title}</Text>
                                     <Image style={GS.smallDropImage} source={require('../assets/linkicon-white.png')} />
                                 </View>
                             </TouchableOpacity>
@@ -109,13 +110,13 @@ export default function Dropdown() {
             </View>
 
             <TouchableOpacity onPress={() => selectedDegree(3)}>
-                <View style={GS.dropdown}>
+                <View style={{...GS.dropdown, backgroundColor: FetchColor(theme, 'CONTRAST')}}>
                 { course.selected  == 3 ?
                     <Image style={GS.dropImage} source={require('../assets/linkselected.png')} />
                 :
                     <Image style={GS.dropImage} source={require('../assets/dropdown-orange.png')} />
                 }
-                        <Text style={T.centered}>Ph.d</Text>
+                        <Text style={{...T.centered, color: FetchColor(theme, 'TEXTCOLOR')}}>Ph.d</Text>
                 </View>
             </TouchableOpacity>
 
@@ -124,8 +125,8 @@ export default function Dropdown() {
                     pcourses.map((selectedCourse, index) => {
                         return(
                             <TouchableOpacity key={index} onPress={() => Linking.openURL(selectedCourse.link)}>
-                                <View style={GS.dropdownContent}>
-                                    <Text style={T.text15}>{lang ? selectedCourse.titleNO : selectCourse.titleEN}</Text>
+                                <View style={{...GS.dropdownContent, backgroundColor: FetchColor(theme, 'CONTRAST')}}>
+                                    <Text style={{...T.text15, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? selectedCourse.titleNO : selectCourse.titleEN}</Text>
                                     <Image style={GS.smallDropImage} source={require('../assets/linkicon-white.png')} />
                                 </View>
                             </TouchableOpacity>
@@ -164,13 +165,13 @@ export function DropdownBachelor() {
     return(
         <View>
             <TouchableOpacity onPress={() => selectedDegree()}>
-                <View style={GS.dropdown}>
+                <View style={{...GS.dropdown, backgroundColor: FetchColor(theme, 'CONTRAST')}}>
                 { course.selected ?
                     <Image style={GS.dropImage} source={require('../assets/linkselected.png')} />
                 :
                     <Image style={GS.dropImage} source={require('../assets/dropdown-orange.png')} />
                 }
-                        <Text style={T.centered}>Bachelor</Text>
+                        <Text style={{...T.centered, color: FetchColor(theme, 'TEXTCOLOR')}}>Bachelor</Text>
                 </View>
             </TouchableOpacity>
 
@@ -179,8 +180,8 @@ export function DropdownBachelor() {
                     courses.map((selectedCourse, index) => {
                         return(
                             <TouchableOpacity key={index} onPress={() => Linking.openURL(selectedCourse.link)}>
-                                <View style={GS.dropdownContent}>
-                                    <Text style={T.text15}>{lang ? selectedCourse.titleNO : selectCourse.titleEN}</Text>
+                                <View style={{...GS.dropdownContent, backgroundColor: FetchColor(theme, 'CONTRAST')}}>
+                                    <Text style={{...T.text15, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? selectedCourse.titleNO : selectCourse.titleEN}</Text>
                                 </View>
                             </TouchableOpacity>
                             
@@ -215,13 +216,13 @@ export function DropdownMaster() {
     return(
         <View>
             <TouchableOpacity onPress={() => selectedDegree()}>
-                <View style={GS.dropdown}>
+                <View style={{...GS.dropdown, backgroundColor: FetchColor(theme, 'CONTRAST')}}>
                 { course.selected ?
                     <Image style={GS.dropImage} source={require('../assets/linkselected.png')} />
                 :
                     <Image style={GS.dropImage} source={require('../assets/dropdown-orange.png')} />
                 }
-                        <Text style={T.centered}>Master</Text>
+                        <Text style={{...T.centered, color: FetchColor(theme, 'TEXTCOLOR')}}>Master</Text>
                 </View>
             </TouchableOpacity>
 
@@ -230,8 +231,8 @@ export function DropdownMaster() {
                     courses.map((selectedCourse, index) => {
                         return(
                             <TouchableOpacity key={index} onPress={() => Linking.openURL(selectedCourse.link)}>
-                                <View style={GS.dropdownContent}>
-                                    <Text style={T.text15}>{selectedCourse.title}</Text>
+                                <View style={{...GS.dropdownContent, backgroundColor: FetchColor(theme, 'CONTRAST')}}>
+                                    <Text style={{...T.text15, color: FetchColor(theme, 'TEXTCOLOR')}}>{selectedCourse.title}</Text>
                                 </View>
                             </TouchableOpacity>
                             
@@ -269,13 +270,13 @@ export function DropdownPHD() {
     return(
         <View>
             <TouchableOpacity onPress={() => selectedDegree()}>
-                <View style={GS.dropdown}>
+                <View style={{...GS.dropdown, backgroundColor: FetchColor(theme, 'CONTRAST')}}>
                 { course.selected ?
                     <Image style={GS.dropImage} source={require('../assets/linkselected.png')} />
                 :
                     <Image style={GS.dropImage} source={require('../assets/dropdown-orange.png')} />
                 }
-                        <Text style={T.centered}>Ph.d</Text>
+                        <Text style={{...T.centered, color: FetchColor(theme, 'TEXTCOLOR')}}>Ph.d</Text>
                 </View>
             </TouchableOpacity>
 
@@ -284,8 +285,8 @@ export function DropdownPHD() {
                     courses.map((selectedCourse, index) => {
                         return(
                             <TouchableOpacity key={index} onPress={() => Linking.openURL(selectedCourse.link)}>
-                                <View style={GS.dropdownContent}>
-                                    <Text style={T.text15}>{lang ? selectedCourse.titleNO : selectedCourse.titleEN}</Text>
+                                <View style={{...GS.dropdownContent, backgroundColor: FetchColor(theme, 'CONTRAST')}}>
+                                    <Text style={{...T.text15, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? selectedCourse.titleNO : selectedCourse.titleEN}</Text>
                                 </View>
                             </TouchableOpacity>
                             

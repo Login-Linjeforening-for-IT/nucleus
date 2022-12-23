@@ -1,5 +1,4 @@
 {/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
-import { StatusBar } from 'expo-status-bar';
 import { GS } from '../styles/globalStyles';
 import { MS } from '../styles/menuStyles';
 import { T } from '../styles/text';
@@ -7,6 +6,7 @@ import { ES } from '../styles/eventStyles';
 import Card, { Space } from '../shared/sharedComponents';
 import { DynamicCircle } from '../shared/eventComponents/otherComponents';
 import { useSelector } from 'react-redux';
+import FetchColor from '../styles/fetchTheme';
 import React from 'react';
 import { 
   Text, 
@@ -22,6 +22,8 @@ export default function SpecificListingScreen( { route, navigation }) {
 
   const { lang  } = useSelector( (state) => state.lang  )
   const { login } = useSelector( (state) => state.login )
+  const { theme } = useSelector( (state) => state.theme )
+
   const { item } = route.params
   //Check if image exists
 
@@ -33,16 +35,15 @@ export default function SpecificListingScreen( { route, navigation }) {
 
   return(
     <View>
-      <StatusBar style="light" />
 {/* ========================= DISPLAY TOP MENU ========================= */}
-  <View style={MS.topMenu}>
+  <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'DARKER')}}>
     <TouchableOpacity onPress={() => goBack()}>
       <Image style={MS.goBack} source={require('../assets/goback777.png')} />
     </TouchableOpacity>
 
     {login ? DynamicCircle(10,10,'red',0,0,60,0):null}
 
-    <Text style={MS.smallTitle}>{item.title}</Text>
+    <Text style={{... MS.smallTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{item.title}</Text>
 
       <TouchableOpacity onPress={() => profilePage()}>
         <Image style={MS.tMenuIcon} source={require('../assets/loginperson.png')} />
@@ -50,7 +51,7 @@ export default function SpecificListingScreen( { route, navigation }) {
   </View>
 
 {/* ========================= DISPLAY CONTENT ========================= */}
-      <View style={GS.content}>
+<View style={{...GS.content, backgroundColor: FetchColor(theme, 'BACKGROUND')}}>
         <ScrollView showsVerticalScrollIndicator={false}>
         <View>
             <View style={ES.specificEventView1}>
@@ -61,20 +62,20 @@ export default function SpecificListingScreen( { route, navigation }) {
 
             <Card>
               <View>
-                <Text style={T.centered20}>{item.title}</Text>
+                <Text style={{...T.centered20, color: FetchColor(theme, 'TEXTCOLOR')}}>{item.title}</Text>
               </View>
             </Card>
 
             <View>
               <View>
-                <Text style={T.centered20}>{item.eventname}</Text>
+                <Text style={{...T.centered20, color: FetchColor(theme, 'TEXTCOLOR')}}>{item.eventname}</Text>
               </View>
 
               {Space(5)}
 
               <Card>
-                <Text style={T.centered20}>{lang ? 'Stillingsbeskrivelse:' : 'Job description:'}</Text>
-                <Text style={T.margin15}>{item.content}</Text>
+                <Text style={{...T.centered20, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Stillingsbeskrivelse:' : 'Job description:'}</Text>
+                <Text style={{...T.margin15, color: FetchColor(theme, 'TEXTCOLOR')}}>{item.content}</Text>
               </Card>
             </View>
           </View>
@@ -85,7 +86,7 @@ export default function SpecificListingScreen( { route, navigation }) {
       </View>    
 
 {/* ========================= DISPLAY BOTTOM MENU ========================= */}
-      <View style={MS.bMenu}>
+      <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'DARKER')}}>
         <TouchableOpacity onPress={() => homePage()}>
             <Image style={MS.bMenuIcon} source={require('../assets/house777.png')} />
           </TouchableOpacity>

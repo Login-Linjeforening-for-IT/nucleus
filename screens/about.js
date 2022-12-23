@@ -1,5 +1,4 @@
 {/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
-import { StatusBar } from 'expo-status-bar';
 import { GS } from '../styles/globalStyles';
 import { T } from '../styles/text';
 import { MS } from '../styles/menuStyles';
@@ -8,6 +7,7 @@ import React, {useState} from 'react';
 import Dropdown from '../shared/dropdown';
 import { useSelector } from 'react-redux';
 import { DynamicCircle } from '../shared/eventComponents/otherComponents';
+import FetchColor from '../styles/fetchTheme';
 import { 
   Text, 
   View, 
@@ -23,6 +23,7 @@ export default function AboutScreen( { navigation }) {
 
   const { lang  } = useSelector( (state) => state.lang  )
   const { login } = useSelector( (state) => state.login )
+  const { theme } = useSelector( (state) => state.theme )
 
   const [info] = useState([
     {id: '0', titleNO: 'Styret',   titleEN: 'Board',    quoteNO: '', qouteEN: '', descriptionNO: 'Øverste leddet i foreningen er styret. Under årsmøtet blir leder, nestleder og sekretær stemt frem, og disse sitter sammen med lederene fra de ulike komiteene i styret. Sammen er disse ansvarlige for å drive foreningen, styre økonomien og sørge for at alle utfører de oppgavene de skal.', descriptionEN: 'The highest level of the association is the board. During the annual meeting, the chairman, deputy chairman and secretary are voted in, and these sit together with the leaders from the various committees on the board. Together, these are responsible for running the association, managing the finances and ensuring that everyone performs the tasks they are supposed to.'},
@@ -53,31 +54,30 @@ export default function AboutScreen( { navigation }) {
 
 return(
   <View>
-      <StatusBar style="light" />
 {/* ========================= DISPLAY TOP MENU ========================= */}
-  <View style={MS.topMenu}>
+  <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'DARKER')}}>
     <TouchableOpacity onPress={() => goBack()}>
       <Image style={MS.goBack} source={require('../assets/goback777.png')} />
     </TouchableOpacity>
 
     {login ? DynamicCircle(10,10,'red',0,0,60,0):null}
 
-    <Text style={MS.screenTitle}>{lang ? 'Om Login' : 'About Login'}</Text>
+    <Text style={{... MS.screenTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{lang ? 'Om Login' : 'About Login'}</Text>
 
       <TouchableOpacity onPress={() => profilePage()}>
         <Image style={MS.tMenuIcon} source={require('../assets/loginperson.png')} />
       </TouchableOpacity>
   </View>
 {/* ========================= DISPLAY CONTENT ========================= */}
-<View style={GS.content}>
+<View style={{...GS.content, backgroundColor: FetchColor(theme, 'BACKGROUND')}}>
         
     <ScrollView showsVerticalScrollIndicator={false}>
       <Card>
-        <Text style={T.bold40}>{lang ? 'Hvem er vi?' : 'Who are we?'}</Text>{Space(5)}
+        <Text style={{...T.bold40, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Hvem er vi?' : 'Who are we?'}</Text>{Space(5)}
         <View style={GS.row}>
-          <Text>{Line(60,5)}</Text>
+          <Text>{lang ? Line(60,5) : Line(94,5)}</Text>
           <View>
-            <Text style={T.boldWithLine}>{lang ? 'Login er linjeforeningen for IT ved NTNU i Gjøvik og alle som går de følgene studiene er automatisk medlemmer i foreningen.' : 'Login is the student association for IT at  NTNU in Gjøvik and everyone who studies the following courses is automatically a member of the association.'}</Text>
+            <Text style={{...T.boldWithLine, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Login er linjeforeningen for IT ved NTNU i Gjøvik og alle som går de følgene studiene er automatisk medlemmer i foreningen.' : 'Login is the student association for IT at  NTNU in Gjøvik and everyone who studies the following courses is automatically a member of the association.'}</Text>
           </View>
         </View>
         {Space(5)}
@@ -85,24 +85,24 @@ return(
         {Space(10)}
         <Image style={GS.aboutImage} source={require('../assets/aboutimage.png')} />
         {Space(5)}
-        <Text style={T.centeredBold25}>{lang ? 'Av studenter, for studenter.' : 'By students, for students'}</Text>
+        <Text style={{...T.centeredBold25, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Av studenter, for studenter.' : 'By students, for students'}</Text>
         {Space(5)}
         <View style={GS.row}>
           <Text>{Line(60,5)}</Text>
           <View>
-            <Text style={T.boldWithLine}>{lang ? 'Foreningen drives av frivillige studenter som arbeider for at du skal få mest mulig ut av studiene dine ved  NTNU.' : 'The association is run by volunteer students who work to ensure that you get the most out of your studies at  NTNU.'}</Text>
+            <Text style={{...T.boldWithLine, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Foreningen drives av frivillige studenter som arbeider for at du skal få mest mulig ut av studiene dine ved  NTNU.' : 'The association is run by volunteer students who work to ensure that you get the most out of your studies at  NTNU.'}</Text>
           </View>
         </View>
         {Space(5)}
-        <Text style={T.paragraph}>{lang ? 'Vi arrangerer regelmessig sosiale arrangementer og bedriftspresentasjoner. Vi holder kontakt med aktuelle bedrifter og inviterer til blant annet cyberdagene én gang i semesteret slik at du som student skal bli kjent med mulighetene utdanningen din gir deg.' : 'We regularly organize social events and company presentations. We keep in touch with relevant companies and invite you to, among other things, the cyber days once a semester so that you, as a student, get to know the opportunities your education gives you.'}</Text>
+        <Text style={{...T.paragraph, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Vi arrangerer regelmessig sosiale arrangementer og bedriftspresentasjoner. Vi holder kontakt med aktuelle bedrifter og inviterer til blant annet cyberdagene én gang i semesteret slik at du som student skal bli kjent med mulighetene utdanningen din gir deg.' : 'We regularly organize social events and company presentations. We keep in touch with relevant companies and invite you to, among other things, the cyber days once a semester so that you, as a student, get to know the opportunities your education gives you.'}</Text>
         {Space(5)}
-        <Text style={T.paragraph}>{lang ? 'Hver uke samler vi studenter til  TekKom- og  CTF-samlinger, der man kan lære seg nye ting eller komme med bidrag til foreningen. Her kan man møte andre studenter som deler gleden for å lære, og å sette kunnskapene man tilegner seg i praksis. Videre jobber EvntKom stadig med nye og spennende arrangementer som f.eks. filmkvelder og vinterball.' : 'Every week we gather students for  TekKom and  CTF gatherings, where you can learn new things or contribute to the association. Here you can meet other students who share the joy of learning and putting the knowledge you acquire into practice.  EvntKom is also constantly working on new and exciting events such as movie nights and winter ball.'}</Text>
+        <Text style={{...T.paragraph, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Hver uke samler vi studenter til  TekKom- og  CTF-samlinger, der man kan lære seg nye ting eller komme med bidrag til foreningen. Her kan man møte andre studenter som deler gleden for å lære, og å sette kunnskapene man tilegner seg i praksis. Videre jobber EvntKom stadig med nye og spennende arrangementer som f.eks. filmkvelder og vinterball.' : 'Every week we gather students for  TekKom and  CTF gatherings, where you can learn new things or contribute to the association. Here you can meet other students who share the joy of learning and putting the knowledge you acquire into practice.  EvntKom is also constantly working on new and exciting events such as movie nights and winter ball.'}</Text>
         {Space(5)}
-        <Text style={T.centered25}>{lang ? 'Styret og komiteene' : 'The board and the committees'}</Text>
-        <Text style={T.boldParagraph}>{lang ? 'Foreningen er satt sammen av et hovedstyret og en rekke komiteer.' : 'The association is made up of a main board and a number of committees.'}</Text>
+        <Text style={{...T.centered25, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Styret og komiteene' : 'The board and the committees'}</Text>
+        <Text style={{...T.boldParagraph, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Foreningen er satt sammen av et hovedstyret og en rekke komiteer.' : 'The association is made up of a main board and a number of committees.'}</Text>
         <View style={GS.parentComitteeView}>
             <TouchableOpacity onPress={() => selectedComittee(0)}>
-              <View style={GS.comittee1}>
+              <View style={{...GS.comittee1, backgroundColor: FetchColor(theme, 'CONTRAST')}}>
                 {comittee.selected == 0 ? 
                     <Image style={GS.image80} source={require('../assets/styret-orange.png')} />
                   : 
@@ -112,7 +112,7 @@ return(
             </TouchableOpacity>
 
             <TouchableOpacity onPress={() => selectedComittee(1)}>
-              <View style={GS.comittee2}>
+              <View style={{...GS.comittee2, backgroundColor: FetchColor(theme, 'CONTRAST')}}>
                 {comittee.selected == 1 ? 
                     <Image style={GS.image80} source={require('../assets/eventkom-orange.png')} />
                   : 
@@ -122,7 +122,7 @@ return(
             </TouchableOpacity>
 
             <TouchableOpacity onPress={() => selectedComittee(2)}>
-              <View style={GS.comittee3}>
+              <View style={{...GS.comittee3, backgroundColor: FetchColor(theme, 'CONTRAST')}}>
                 {comittee.selected == 2 ? 
                     <Image style={GS.image80} source={require('../assets/tekkom-orange.png')} />
                   : 
@@ -133,7 +133,7 @@ return(
         </View>
         <View style={GS.parentComitteeView}>
           <TouchableOpacity onPress={() => selectedComittee(3)}>
-            <View style={GS.comittee1}>
+            <View style={{...GS.comittee1, backgroundColor: FetchColor(theme, 'CONTRAST')}}>
               {comittee.selected == 3 ? 
                 <Image style={GS.image80} source={require('../assets/pr-orange.png')} />
               : 
@@ -143,7 +143,7 @@ return(
           </TouchableOpacity>
 
           <TouchableOpacity onPress={() => selectedComittee(4)}>
-            <View style={GS.comittee2}>
+            <View style={{...GS.comittee2, backgroundColor: FetchColor(theme, 'CONTRAST')}}>
               {comittee.selected == 4 ? 
                   <Image style={GS.image80} source={require('../assets/ctfkom-orange.png')} />
                 : 
@@ -153,7 +153,7 @@ return(
           </TouchableOpacity>
 
           <TouchableOpacity onPress={() => selectedComittee(5)}>
-            <View style={GS.comittee3}>
+            <View style={{...GS.comittee3, backgroundColor: FetchColor(theme, 'CONTRAST')}}>
               {comittee.selected == 5 ? 
                   <Image style={GS.image80} source={require('../assets/satkom-orange.png')} />
                 : 
@@ -167,7 +167,7 @@ return(
               if (relevantComittee.id == comittee.selected) {
                 return(
                   <View key={index}>
-                    <Text style={T.text30}>
+                    <Text style={{...T.text30, color: FetchColor(theme, 'TEXTCOLOR')}}>
                       {relevantComittee.id == 0 ? <Image style={GS.small} source={require('../assets/styret-white.png')} />:null}
                       {relevantComittee.id == 1 ? <Image style={GS.small} source={require('../assets/eventkom-white.png')} />:null}
                       {relevantComittee.id == 2 ? <Image style={GS.small} source={require('../assets/tekkom-white.png')} />:null}
@@ -175,8 +175,8 @@ return(
                       {relevantComittee.id == 4 ? <Image style={GS.small} source={require('../assets/ctfkom-white.png')} />:null}
                       {relevantComittee.id == 5 ? <Image style={GS.small} source={require('../assets/satkom-white.png')} />:null}
                       {lang ? relevantComittee.titleNO : relevantComittee.titleEN}</Text>{lang ? relevantComittee.quoteNO : relevantComittee.qouteEN ? Space(5):null}
-                    <Text style={T.boldParagraph}>{lang ? relevantComittee.quoteNO : relevantComittee.qouteEN}</Text>{lang ? relevantComittee.quoteNO : relevantComittee.qouteEN? Space(5):null}
-                    <Text style={T.paragraph}>{lang ? relevantComittee.descriptionNO : relevantComittee.descriptionEN}</Text>
+                    <Text style={{...T.boldParagraph, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? relevantComittee.quoteNO : relevantComittee.qouteEN}</Text>{lang ? relevantComittee.quoteNO : relevantComittee.qouteEN? Space(5):null}
+                    <Text style={{...T.paragraph, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? relevantComittee.descriptionNO : relevantComittee.descriptionEN}</Text>
                     {Space(15)}
                   </View>
                 )
@@ -191,10 +191,10 @@ return(
           {Space(10)}
           <Text style={T.leaderTitle}>{lang ? 'EventKom leder' : 'EventKom leader'}</Text>
           {Space(5)}
-          <Text style={T.leaderName}>Sofie Hagen</Text>
+          <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>Sofie Hagen</Text>
           {Space(5)}
           <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/877183922021216256')}>
-            <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}sofiee#9763</Text>
+            <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}sofiee#9763</Text>
           </TouchableOpacity>
           {Space(25)}
         </View>: null}
@@ -205,10 +205,10 @@ return(
           {Space(10)}
           <Text style={T.leaderTitle}>{lang ? 'TekKom leder' : 'TekKom leader'}</Text>
           {Space(5)}
-          <Text style={T.leaderName}>Simon Edna</Text>
+          <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>Simon Edna</Text>
           {Space(5)}
           <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/298525088914079745')}>
-            <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}Sim#3909</Text>
+            <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}Sim#3909</Text>
           </TouchableOpacity>
           {Space(25)}
         </View>: null}
@@ -219,10 +219,10 @@ return(
             {Space(10)}
             <Text style={T.leaderTitle}>{lang ? 'PR leder' : 'PR leader'}</Text>
             {Space(5)}
-            <Text style={T.leaderName}>Kristina Kataki</Text>
+            <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>Kristina Kataki</Text>
             {Space(5)}
             <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/877108421772582962')}>
-              <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}Kataki#7254</Text>
+              <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}Kataki#7254</Text>
             </TouchableOpacity>
             {Space(25)}
           </View>: null}
@@ -233,10 +233,10 @@ return(
             {Space(10)}
             <Text style={T.leaderTitle}>{lang ? 'CTF leder' : 'CTF leader'}</Text>
             {Space(5)}
-            <Text style={T.leaderName}>Eskil Refsgaard</Text>
+            <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>Eskil Refsgaard</Text>
             {Space(5)}
             <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/522483274933731331')}>
-              <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}refsgaard#9067</Text>
+              <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}refsgaard#9067</Text>
           </TouchableOpacity>
             {Space(25)}
           </View>: null}
@@ -247,18 +247,18 @@ return(
             {Space(10)}
             <Text style={T.leaderTitle}>{lang ? 'SatKom leder' : 'SatKom leader'}</Text>
             {Space(5)}
-            <Text style={T.leaderName}>Sebastian Hestsveen</Text>
+            <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>Sebastian Hestsveen</Text>
             {Space(5)}
             <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/119120560931340290')}>
-              <Text style={T.leaderName}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}stubbe#8694</Text>
+              <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}stubbe#8694</Text>
             </TouchableOpacity>
             {Space(25)}
           </View>: null}
 
         {Space(10)}
-        <Text style={T.text25}>{lang ? 'Offentlige dokumenter' : 'Public documents'}</Text>
+        <Text style={{...T.text25, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Offentlige dokumenter' : 'Public documents'}</Text>
         <View>
-          <Text style={T.paragraph}>{lang ? 'For mer informasjon og offentlige dokumenter kan du besøke' : 'For more information and public documents, visit'}
+          <Text style={{...T.paragraph, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'For mer informasjon og offentlige dokumenter kan du besøke' : 'For more information and public documents, visit'}
             {<Text style={T.orange15} onPress={() => Linking.openURL('https://redmine.login.no/projects/wiki/wiki')}> Redmine
             {
               <Image style={GS.redMine} source={require('../assets/redmine-orange.png')} />
@@ -274,7 +274,7 @@ return(
     </ScrollView>
   </View> 
 
-  <View style={MS.bMenu}>
+  <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'DARKER')}}>
       <TouchableOpacity onPress={() => homePage()}>
         <Image style={MS.bMenuIcon} source={require('../assets/house-orange.png')} />
       </TouchableOpacity>

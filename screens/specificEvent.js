@@ -5,13 +5,13 @@ import CleanDescription from '../shared/eventComponents/cleanDescription';
 import { GetEndTime, MonthNO, MonthEN, EventLocation, DynamicCircle } from '../shared/eventComponents/otherComponents';
 import React, { useEffect, useState } from 'react';
 import Card, { CardSmaller, Space } from '../shared/sharedComponents';
-import { StatusBar } from 'expo-status-bar';
 import EventTime from '../shared/eventComponents/eventTime';
 import { useSelector } from 'react-redux';
 import { GS } from '../styles/globalStyles';
 import { MS } from '../styles/menuStyles';
 import { T } from '../styles/text';
 import { ES } from '../styles/eventStyles';
+import FetchColor from '../styles/fetchTheme';
 import { 
   Text, 
   View, 
@@ -27,6 +27,7 @@ export default function SpecificEventScreen({ route, navigation}) {
 
   const { lang  } = useSelector( (state) => state.lang  )
   const { login } = useSelector( (state) => state.login )
+  const { theme } = useSelector( (state) => state.theme )
   const { item } = route.params
   const [usersData,setUsersData]=useState({})
 
@@ -51,14 +52,15 @@ export default function SpecificEventScreen({ route, navigation}) {
 
   return(
     <View>
-      <StatusBar style="light" />
 {/* ========================= DISPLAY TOP MENU ========================= */}
-  <View style={MS.topMenu}>
+<View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'DARKER')}}>
     <TouchableOpacity onPress={() => goBack()}>
       <Image style={MS.goBack} source={require('../assets/goback777.png')} />
     </TouchableOpacity>
 
     {login ? DynamicCircle(10,10,'red',0,0,60,0):null}
+
+    <Text style={{... MS.smallTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{item.title}</Text>
 
       <TouchableOpacity onPress={() => profilePage()}>
         <Image style={MS.tMenuIcon} source={require('../assets/loginperson.png')} />
@@ -66,7 +68,7 @@ export default function SpecificEventScreen({ route, navigation}) {
   </View>
 
 {/* ========================= DISPLAY CONTENT ========================= */}
-      <View style={GS.content}>
+        <View style={{...GS.content, backgroundColor: FetchColor(theme, 'BACKGROUND')}}>
         <ScrollView showsVerticalScrollIndicator={false}>
           
           {Space(5)}
@@ -83,13 +85,13 @@ export default function SpecificEventScreen({ route, navigation}) {
               <View style={ES.specificEventInfoView}>
                   <Card>
                     {CategorySquare(item.category)} 
-                    <Text style={ES.dayText}>
+                    <Text style={{...ES.eventCardDayText, color: FetchColor(theme, 'TEXTCOLOR')}}>
                         {item.startt[8]}
                         {item.startt[9]}
                     </Text>
 
-                    <Text style={ES.monthText}>
-                    {lang ? MonthNO(item.startt[5] + item.startt[6]) : MonthEN(item.startt[5] + item.startt[6])}
+                    <Text style={{...ES.monthText, color: FetchColor(theme, 'TEXTCOLOR')}}>
+                    {lang ? MonthNO(item.startt[5] + item.startt[6], FetchColor(theme, 'TEXTCOLOR')) : MonthEN(item.startt[5] + item.startt[6], FetchColor(theme, 'TEXTCOLOR'))}
                     </Text>
                   </Card>
                     <Text>{EventTime(item.startt, usersData.endt)}</Text>
@@ -99,8 +101,8 @@ export default function SpecificEventScreen({ route, navigation}) {
             {Space(5)}
             <Card>
               <View style={ES.specificEventInfoView}>
-                <Text style={T.specificEventInfo}>{lang ? 'Starter:\t\t' : 'Starts:\t\t'}</Text>
-                <Text style={T.specificEventInfo}>
+                <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Starter:\t\t' : 'Starts:\t\t'}</Text>
+                <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>
                   {item.startt[11]}
                   {item.startt[12]}:
                   {item.startt[14]}
@@ -111,7 +113,7 @@ export default function SpecificEventScreen({ route, navigation}) {
               {Space(5)}
 
               <View style={ES.specificEventInfoView}>
-              <Text style={T.specificEventInfo}>{lang ? 'Slutter:\t\t' : 'Ends:\t\t\t'}</Text>
+              <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Slutter:\t\t' : 'Ends:\t\t\t'}</Text>
                 {GetEndTime(usersData.endt)}
                 
               </View>
@@ -123,9 +125,9 @@ export default function SpecificEventScreen({ route, navigation}) {
               {Space(5)}
 
               <View style={ES.specificEventInfoView}>
-                <Text style={T.specificEventInfo}>{lang ? 'Kategori:\t\t' : 'Category:\t'}</Text>
+                <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Kategori:\t\t' : 'Category:\t'}</Text>
                 {CategoryCircle(item.category)}
-                <Text style={T.specificEventInfo}>
+                <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>
                   {item.category}
                 </Text>
               </View>
@@ -133,8 +135,8 @@ export default function SpecificEventScreen({ route, navigation}) {
               {Space(5)}
 
               <View style={ES.specificEventInfoView}>
-                <Text style={T.specificEventInfo}>{lang ? 'Arrangør:\t\t' : 'Organizer:\t'}</Text>
-                <Text style={T.specificEventInfo}>
+                <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Arrangør:\t\t' : 'Organizer:\t'}</Text>
+                <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>
                   {item.organizer}
                 </Text>
               </View>
@@ -143,7 +145,7 @@ export default function SpecificEventScreen({ route, navigation}) {
            {Space(5)}
             <Card>
               <View>{Space(5)}
-                <Text style={T.centered20}>{item.eventname}</Text>
+                <Text style={{...T.centered20, color: FetchColor(theme, 'TEXTCOLOR')}}>{item.eventname}</Text>
               </View>
               {CleanDescription(usersData.description)}
             </Card>
@@ -151,7 +153,7 @@ export default function SpecificEventScreen({ route, navigation}) {
       </View>   
        
 {/* ========================= DISPLAY BOTTOM MENU ========================= */}
-      <View style={MS.bMenu}>
+      <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'DARKER')}}>
         <TouchableOpacity onPress={() => homePage()}>
             <Image style={MS.bMenuIcon} source={require('../assets/house777.png')} />
           </TouchableOpacity>

@@ -1,5 +1,4 @@
 {/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
-import { StatusBar } from 'expo-status-bar'
 import { MS } from '../../styles/menuStyles'
 import React, { useState } from 'react';
 import { GS } from '../../styles/globalStyles'
@@ -7,6 +6,7 @@ import { T } from '../../styles/text'
 import Card, { Social, Space } from '../../shared/sharedComponents';
 import { DynamicCircle } from '../../shared/eventComponents/otherComponents';
 import { useSelector } from 'react-redux';
+import FetchColor from '../../styles/fetchTheme';
 import { 
   Text, 
   View, 
@@ -21,6 +21,7 @@ export default function ContactMenuScreen({ navigation }) {
   
   const { lang  } = useSelector( (state) => state.lang  )
   const { login } = useSelector( (state) => state.login )
+  const { theme } = useSelector( (state) => state.theme )
 
   const [setting] = useState([
     {id: '1', nav: 'ReportScreen',        titleNO: 'Varsle', titleEN: 'Report'},
@@ -36,16 +37,15 @@ const goBack      = () => { navigation.navigate('ProfileScreen') }
 
 return(
   <View>
-  <StatusBar style="light" />
 {/* ========================= DISPLAY TOP MENU ========================= */}
-  <View style={MS.topMenu}>
+<View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'DARKER')}}>
   <TouchableOpacity onPress={() => goBack()}>
       <Image style={MS.goBack} source={require('../../assets/goback777.png')} />
     </TouchableOpacity>
 
     {login ? DynamicCircle(10,10,'red',0,0,60,0):null}
     
-    <Text style={MS.screenTitle}>{lang ? 'Kontakt' : 'Contact'}</Text>
+    <Text style={{... MS.screenTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{lang ? 'Kontakt' : 'Contact'}</Text>
 
       <TouchableOpacity onPress={() => profilePage()}>
         <Image style={MS.tMenuIcon} source={require('../../assets/loginperson-orange.png')} />
@@ -53,7 +53,7 @@ return(
   </View>
 
 {/* ========================= DISPLAY CONTENT ========================= */}
-      <View style={GS.content}>
+      <View style={{...GS.content, backgroundColor: FetchColor(theme, 'BACKGROUND')}}>
         <View>
           <FlatList
             scrollEnabled={false}
@@ -64,7 +64,7 @@ return(
             renderItem={({item}) => (
               <View>
               <TouchableOpacity onPress={() => navigation.navigate(item.nav, item)}>
-                <Card><Text style={T.centered20}>{lang ? item.titleNO : item.titleEN}</Text></Card>
+                <Card><Text style={{...T.centered20, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? item.titleNO : item.titleEN}</Text></Card>
               </TouchableOpacity>
             </View>
             )}
@@ -76,7 +76,7 @@ return(
       </View>    
 
 {/* ========================= DISPLAY BOTTOM MENU ========================= */}
-      <View style={MS.bMenu}>
+      <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'DARKER')}}>
       <TouchableOpacity onPress={() => homePage()}>
         <Image style={MS.bMenuIcon} source={require('../../assets/house777.png')} />
       </TouchableOpacity>

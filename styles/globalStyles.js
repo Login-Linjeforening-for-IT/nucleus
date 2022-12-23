@@ -1,12 +1,10 @@
 import { StyleSheet } from "react-native";  //Stylesheet file
-const GLOBAL = require('./themes/dark')
 
 export const GS = StyleSheet.create({
   
 //========================= EventScreen =========================
   content: { //Main view of every screen
   height: '78%',
-  backgroundColor: GLOBAL.DARK.BACKGROUND,
   },
   reportInputContentText: { //reportScreen description text
     alignSelf: 'center',
@@ -14,24 +12,20 @@ export const GS = StyleSheet.create({
     width: '80%',
     height: '90%',
     borderRadius: 40,
-    color: GLOBAL.DARK.TEXTCOLOR,
   },
   notificationBack: { //The horizontal card views on notificationScreen
     flexDirection: 'row',
     height: 25,
   },
   notificationText: { //The text on notificationScreen
-    color: GLOBAL.DARK.TEXTCOLOR,
     fontSize: 20
   },
   inputText: {  //reportScreen name and notifier text
-    backgroundColor: GLOBAL.DARK.DARKER,
     alignSelf: 'center',
     alignItems: 'center',
     width: '80%',
     height: 50,
     borderRadius: 20,
-    color: GLOBAL.DARK.TEXTCOLOR,
   },
   view: { //Left view of notificationScreen
     alignSelf: 'center',
@@ -60,17 +54,14 @@ export const GS = StyleSheet.create({
   },
   comittee1: {
     borderRadius: 10,
-    backgroundColor: GLOBAL.DARK.CONTRAST,
     width: '125%'
   },
   comittee2: {
     borderRadius: 10,
-    backgroundColor: GLOBAL.DARK.CONTRAST,
     width: '125%'
   },
   comittee3: {
     borderRadius: 10,
-    backgroundColor: GLOBAL.DARK.CONTRAST,
     width: '125%'
   },
   image80: {
@@ -82,14 +73,12 @@ export const GS = StyleSheet.create({
     flexDirection: 'row',
     paddingLeft: 5,
     alignItems: 'center',
-    backgroundColor: GLOBAL.DARK.CONTRAST,
     height: 40,
   },
   dropdownContent: {
     flexDirection: 'row',
     paddingLeft: 10,
     alignItems: 'center',
-    backgroundColor: GLOBAL.DARK.CONTRAST,
     height: 36,
   },
   dropImage: {

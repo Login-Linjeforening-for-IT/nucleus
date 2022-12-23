@@ -1,5 +1,4 @@
 import { StyleSheet } from "react-native";
-const GLOBAL = require('./themes/dark')
 
 export const SS = StyleSheet.create ({
     lightSwitchImage: { //lightSwitchImage in notificationScreen
@@ -10,11 +9,9 @@ export const SS = StyleSheet.create ({
     langSwitch: {   //langSwitch text style in notificationScreen
         left: 12.5,
         fontSize: 20,
-        color: GLOBAL.DARK.TEXTCOLOR,
     },
     button: {   //Login button on loginScreen
         borderRadius: 40,
-        backgroundColor: GLOBAL.DARK.ORANGE,
         marginHorizontal: 108, 
         marginVertical: 6,
     },
@@ -68,7 +65,6 @@ export const SS = StyleSheet.create ({
         left: '25%',
         top: '-35%',
         alignSelf: 'center',
-        color: GLOBAL.DARK.TEXTCOLOR,
     },
     showPassImage: {    //ShowPassIcon position on loginScreen
         left: '-11%',
@@ -91,6 +87,5 @@ export const SS = StyleSheet.create ({
         left: '25%',
         top: '-35%',
         alignSelf: 'center',
-        color: GLOBAL.DARK.TEXTCOLOR,
     },
 });

@@ -1,12 +1,4 @@
 import { StyleSheet } from "react-native";  //Stylesheet file
-import { T } from "./text";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-
-const GLOBAL = require('./themes/dark')
-
-// const getTheme = async() => {
-  //  WIP ID: 5, GOING TO BE USED FOR THEMES
-// } 
 
 export const ES = StyleSheet.create({
 //========================= EventScreen =========================
@@ -34,39 +26,27 @@ export const ES = StyleSheet.create({
   },
   dayText: { //Eventday text on specificEventScreen
     left: '20%',
-    color: GLOBAL.DARK.TEXTCOLOR,
     fontSize: 30,
   },
   monthText: { //Eventmonth text on specificEventScreen
     alignSelf: 'flex-start',
     top: '-7.5%',
     left: '20%',
-    color: GLOBAL.DARK.TEXTCOLOR,
     fontSize: 20,
   },
   eventCardDayText: { //Eventday text on eventScreen
     left: '15%',
-    color: GLOBAL.DARK.TEXTCOLOR,
     fontSize: 30,
-  },
-  eventCardMonthText: { //Eventmonth text on eventScreen
-    alignSelf: 'flex-start',
-    top: '-7.5%',
-    left: '15%',
-    color: GLOBAL.DARK.TEXTCOLOR,
-    fontSize: 20,
   },
   title: { //Eventname text on eventScreen
     left: 5,
     top: -5,
     fontSize: 20,
-    color: GLOBAL.DARK.TEXTCOLOR,
   },
   loc: { //Eventlocation text on eventScreen
     left: 5,
     top: -5,
     fontSize: 20,
-    color: GLOBAL.DARK.TEXTCOLOR,
   },
   greenLight: { //Position of checklight on eventScreen
     top: '12%',
@@ -115,7 +95,6 @@ export const ES = StyleSheet.create({
   },
   card: {
     borderRadius: 20,
-    backgroundColor: GLOBAL.DARK.DARKER,
     marginHorizontal: 10,
     marginTop: 10,
   },
@@ -126,7 +105,6 @@ export const ES = StyleSheet.create({
   cardSmaller: {
     marginHorizontal: 10,
     borderRadius: 20,
-    backgroundColor: GLOBAL.DARK.DARKER,
   },
   smallSize: {
     height: 20,
@@ -138,7 +116,6 @@ export const ES = StyleSheet.create({
     width: 20
   },
   filterText: {  //eventScreen filter text
-    backgroundColor: GLOBAL.DARK.DARKER,
     alignSelf: 'center',
     alignItems: 'center',
     marginTop: 10,
@@ -153,7 +130,6 @@ export const ES = StyleSheet.create({
   filterView: {
     paddingTop: 10,
     flexDirection: 'row',
-    backgroundColor: GLOBAL.DARK.DARKER,
     marginHorizontal: 10,
     borderBottomLeftRadius: 15,
     borderBottomRightRadius: 15,
@@ -167,12 +143,6 @@ export const ES = StyleSheet.create({
     left: 30,
     top: 10,
     width: 122,
-  },
-  card: {
-    borderRadius: 20,
-    backgroundColor: GLOBAL.DARK.DARKER,
-    marginHorizontal: 10,
-    marginTop: 10,
   },
   filterResetIcon: { 
       left: -60,

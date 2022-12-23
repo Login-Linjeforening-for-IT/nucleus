@@ -1,5 +1,4 @@
 {/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
-import { StatusBar } from 'expo-status-bar'
 import { MS } from '../styles/menuStyles'
 import { GS } from '../styles/globalStyles'
 import React, { useState, useEffect } from 'react';
@@ -7,6 +6,7 @@ import { T } from '../styles/text'
 import Card from '../shared/sharedComponents';
 import { useSelector } from 'react-redux';
 import { DynamicCircle } from '../shared/eventComponents/otherComponents';
+import FetchColor from '../styles/fetchTheme';
 import { 
   Text, 
   View, 
@@ -21,6 +21,7 @@ export default function ListingScreen({ navigation }) {
 
   const { lang  } = useSelector( (state) => state.lang  )
   const { login } = useSelector( (state) => state.login )
+  const { theme } = useSelector( (state) => state.theme )
 
   const [setting] = useState([
     {id: '1', title: 'Hagearbeid hos Login', content: 'A still more glorious dawn awaits cosmic fugue gathered by gravity tesseract muse about two ghostly white figures in coveralls and helmets are softly dancing. Rich in heavy atoms permanence of the stars descended from astronomers invent...'},
@@ -42,16 +43,15 @@ const profilePage = () => { navigation.navigate('ProfileScreen') }
 
 return(
   <View>
-  <StatusBar style="light" />
 {/* ========================= DISPLAY TOP MENU ========================= */}
-  <View style={MS.topMenu}>
+<View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'DARKER')}}>
     <TouchableOpacity onPress={() => aboutPage()}>
       <Image style={MS.tMenuIcon} source={require('../assets/loginText.png')} />
     </TouchableOpacity>
 
     {login ? DynamicCircle(10,10,'red',0,0,60,0):null}
 
-    <Text style={MS.screenTitle}>{lang ? 'Stillinger' : 'Vacancies'}</Text>
+    <Text style={{... MS.screenTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{lang ? 'Stillinger' : 'Vacancies'}</Text>
 
       <TouchableOpacity onPress={() => profilePage()}>
         <Image style={MS.tMenuIcon} source={require('../assets/loginperson.png')} />
@@ -59,7 +59,7 @@ return(
   </View>
 
 {/* ========================= DISPLAY CONTENT ========================= */}
-      <View style={GS.content}>
+<View style={{...GS.content, backgroundColor: FetchColor(theme, 'BACKGROUND')}}>
           <FlatList
           showsVerticalScrollIndicator={''}
           numColumns={1}
@@ -69,8 +69,8 @@ return(
             <View>
             <TouchableOpacity onPress={() => navigation.navigate('SpecificListingScreen', {item: item})}>
               <Card>
-                <Text style={T.centered20}>{item.title}</Text><Text/>
-                <Text style={T.centered15}>{item.content}</Text>
+                <Text style={{...T.centered20, color: FetchColor(theme, 'TEXTCOLOR')}}>{item.title}</Text><Text/>
+                <Text style={{...T.centered15, color: FetchColor(theme, 'TEXTCOLOR')}}>{item.content}</Text>
               </Card>
             </TouchableOpacity>
           </View>
@@ -79,7 +79,7 @@ return(
       </View>    
 
 {/* ========================= DISPLAY BOTTOM MENU ========================= */}
-      <View style={MS.bMenu}>
+      <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'DARKER')}}>
       <TouchableOpacity onPress={() => homePage()}>
         <Image style={MS.bMenuIcon} source={require('../assets/house777.png')} />
       </TouchableOpacity>

@@ -1,5 +1,4 @@
 {/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
-import { StatusBar } from 'expo-status-bar';
 import { GS } from '../../styles/globalStyles';
 import { MS } from '../../styles/menuStyles';
 import { T } from '../../styles/text';
@@ -8,6 +7,7 @@ import React, { useState } from 'react';
 import GreenLight, { Check, GrayLight, DynamicCircle } from '../../shared/eventComponents/otherComponents';
 import { Button, CardSmaller, Space } from '../../shared/sharedComponents';
 import { useSelector } from 'react-redux';
+import FetchColor from '../../styles/fetchTheme';
 import { 
   Text, 
   View, 
@@ -25,6 +25,7 @@ export default function ReportScreen( { navigation }) {
  
   const { lang  } = useSelector( (state) => state.lang  )
   const { login } = useSelector( (state) => state.login )
+  const { theme } = useSelector( (state) => state.theme )
 
   const eventPage   = () => { navigation.navigate('EventScreen')       }
   const homePage    = () => { navigation.navigate('HomeScreen')        }
@@ -106,35 +107,34 @@ const inputContent = (val) => {
   return(
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
     <View>
-      <StatusBar style="light" />
       {/* ========================= DISPLAY TOP MENU ========================= */}
-      <View style={MS.topMenu}>
+      <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'DARKER')}}>
         <TouchableOpacity onPress={() => goBack()}>
           <Image style={MS.goBack} source={require('../../assets/goback777.png')} />
         </TouchableOpacity>
 
         {login ? DynamicCircle(10,10,'red',0,0,60,0):null}
 
-        <Text style={MS.screenTitle}>{lang ? 'Varsle' : 'Report'}</Text>
+        <Text style={{... MS.screenTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{lang ? 'Varsle' : 'Report'}</Text>
 
         <TouchableOpacity onPress={() => profilePage()}>
           <Image style={MS.tMenuIcon} source={require('../../assets/loginperson-orange.png')} />
         </TouchableOpacity>
       </View>
       {/* ========================= DISPLAY CONTENT ========================= */}
-      <View style={GS.content}>
+      <View style={{...GS.content, backgroundColor: FetchColor(theme, 'BACKGROUND')}}>
         <View>
           {Space(40)}
-          <Text style={T.centered}>{lang ? 'Anonymt og sikkert. Alltid.' : 'Anonymous and secure. Always.'}</Text>
+          <Text style={{...T.centered, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Anonymt og sikkert. Alltid.' : 'Anonymous and secure. Always.'}</Text>
           {Space(30)}
 
           <View style={SS.loginView}>
             <CardSmaller>
               <View style={SS.loginView}>
                 <TextInput 
-                style={GS.inputText}
+                style={{...GS.inputText, backgroundColor: FetchColor(theme, 'DARKER'), color: FetchColor(theme, 'TEXTCOLOR')}}
                 placeholder = {lang ? 'Kontaktinformasjon varsler (frivillig)' : 'Contact info reporter (voluntary)'}
-                placeholderTextColor={'#555'}
+                placeholderTextColor={FetchColor(theme, 'TITLETEXTCOLOR')}
                 textAlign='center'
                 onChangeText={(val) => inputName(val)}
                 />
@@ -159,9 +159,9 @@ const inputContent = (val) => {
             <CardSmaller>
               <View style={SS.loginView}>
                 <TextInput 
-                style={GS.inputText}
+                style={{...GS.inputText, backgroundColor: FetchColor(theme, 'DARKER'), color: FetchColor(theme, 'TEXTCOLOR')}}
                 placeholder = {lang ? 'Hvem angår hendelsen? (frivillig)' : 'Who is affected? (voluntary'}
-                placeholderTextColor={'#555'}
+                placeholderTextColor={FetchColor(theme, 'TITLETEXTCOLOR')}
                 textAlign='center'
                 onChangeText={(val) => inputContact(val)}
                 />
@@ -187,9 +187,9 @@ const inputContent = (val) => {
                 <View style={SS.reportContentView}>
                   <TextInput 
                   multiline={true}
-                  style={GS.reportInputContentText}
+                  style={{...GS.reportInputContentText, color: FetchColor(theme, 'TEXTCOLOR')}}
                   placeholder = {lang ? 'Hva vil du rapportere?' : 'What would you like to report?'}
-                  placeholderTextColor={'#555'}
+                  placeholderTextColor={FetchColor(theme, 'TITLETEXTCOLOR')}
                   textAlign='center'
                   onChangeText={(val) => inputContent(val)}
                   />
@@ -213,8 +213,8 @@ const inputContent = (val) => {
             <TouchableOpacity 
             disabled ={!data.check_contentInputChange}
             onPress={() => sendForm()}>
-              <Button style={SS.button}>
-                <Text style={T.centered20}>SEND</Text>
+              <Button style={{...SS.button, backgroundColor: FetchColor(theme, 'ORANGE')}}>
+                <Text style={{...T.centered20, color: FetchColor(theme, 'TEXTCOLOR')}}>SEND</Text>
               </Button>
             </TouchableOpacity>
             {Space(20)}
@@ -223,7 +223,7 @@ const inputContent = (val) => {
     </View>   
 
       {/* ========================= DISPLAY BOTTOM MENU ========================= */}
-        <View style={MS.bMenu}>
+        <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'DARKER')}}>
             <TouchableOpacity onPress={() => homePage()}>
               <Image style={MS.bMenuIcon} source={require('../../assets/house777.png')} />
             </TouchableOpacity>
