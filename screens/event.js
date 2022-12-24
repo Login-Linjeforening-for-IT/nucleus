@@ -27,13 +27,11 @@ export default function EventScreen({ navigation }) {
   const { theme } = useSelector( (state) => state.theme )
 
   //Declaring screens you can navigate to from this screen
-  const listingPage = () => { navigation.navigate('ListingScreen') }  //  Job screen
-  const homePage    = () => { navigation.navigate('HomeScreen')    }  //  Home screen
-  const aboutPage   = () => { navigation.navigate('AboutScreen')   }  //  About screen
-  const profilePage = () => { navigation.navigate('ProfileScreen') }  //  Profile screen
+  const listingPage = () => { navigation.navigate('ListingScreen') }  // Job screen
+  const homePage    = () => { navigation.navigate('HomeScreen')    }  // Home screen
+  const aboutPage   = () => { navigation.navigate('AboutScreen')   }  // About screen
+  const profilePage = () => { navigation.navigate('ProfileScreen') }  // Profile screen
 
-  const screenHeight = Dimensions.get('window').height;
-  console.log(screenHeight)
   const getData=()=>{                                                 //  --- FETCHING DATA FROM API ---
     try {
       fetch('https://api.login.no/events')                            // PRODUCTION
