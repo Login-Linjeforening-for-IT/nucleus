@@ -1,22 +1,31 @@
 import { StyleSheet } from "react-native";  //Stylesheet file
+import { Dimensions } from "react-native";
 
 export const MS = StyleSheet.create ({
 //  ========================= STYLESHEET TOP MENU =========================
   screenTitle: {
     textAlign: 'center',
-    top: '11.5%',
+    marginTop: Dimensions.get('window').height/30,
+    alignSelf: 'center',
     fontSize: 35,
   },
   smallTitle: { //Header title of every page
+    textAlign: 'center',
+    marginTop: Dimensions.get('window').height/30,
+    alignSelf: 'center',
+    fontSize: 25,
+  },
+  smallMultilineTitle: { //Header title of every page
     maxWidth: 190,
     left: 15,
-    top: '12%',
+    alignSelf: 'flex-end',
+    marginBottom: Dimensions.get('window').height/50,
     fontSize: 20,
   },
   topMenu: {  //Top menu background view
     flexDirection: 'row',
     justifyContent: 'space-between',
-    height: '12%',
+    height: Dimensions.get('window').height/7.5,
   },
   tMenuIcon: {  //Size of icons
     top: '5%',
@@ -25,7 +34,7 @@ export const MS = StyleSheet.create ({
   },
   tMenuIconWithExtra: {  //Placement when extra icons are added
     right: '50%',
-    top: '5%',
+    top: 5,
     width: 50,
     height: 120
   },
@@ -36,21 +45,21 @@ export const MS = StyleSheet.create ({
     height: 80,
   },
   searchIcon: {  //Size of icons
-    right: 14,
-    top: '47.5%',
-    width: 32,
-    height: 40
+    top: '6%',
+    right: 10,
+    width: 30,
+    height: 120
   },
   
 //  ========================= STYLESHEET BOTTOM MENU =========================
   bMenu: { //Bottom menu background view
-      height: '10%',
+      height: Dimensions.get('window').height/10,
       flexDirection: 'row',
       justifyContent: 'space-evenly',
       alignItems: 'center'
   },
   bMenuIcon: {  //Icons in bottom menu
-    bottom: '10%',
+    bottom: '13%',
     width: 120,
     height: 120
   },

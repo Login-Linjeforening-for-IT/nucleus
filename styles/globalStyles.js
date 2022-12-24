@@ -1,10 +1,11 @@
 import { StyleSheet } from "react-native";  //Stylesheet file
+import { Dimensions } from "react-native";
 
 export const GS = StyleSheet.create({
   
 //========================= EventScreen =========================
   content: { //Main view of every screen
-  height: '78%',
+    height: Dimensions.get('window').height/1.28,
   },
   reportInputContentText: { //reportScreen description text
     alignSelf: 'center',

@@ -16,6 +16,7 @@ import {                                                              // React n
   FlatList,
   TextInput,
   TouchableOpacity,
+  Dimensions,
 } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 
@@ -31,6 +32,8 @@ export default function EventScreen({ navigation }) {
   const aboutPage   = () => { navigation.navigate('AboutScreen')   }  //  About screen
   const profilePage = () => { navigation.navigate('ProfileScreen') }  //  Profile screen
 
+  const screenHeight = Dimensions.get('window').height;
+  console.log(screenHeight)
   const getData=()=>{                                                 //  --- FETCHING DATA FROM API ---
     try {
       fetch('https://api.login.no/events')                            // PRODUCTION
@@ -205,13 +208,9 @@ export default function EventScreen({ navigation }) {
     })();
   }
 
-  console.warn('renderedArray.length ' + renderedArray.length)
-
   function renderArray() {                                            //  --- FETCHING EVENTS TO RENDER ---
     if (renderedArray.length == 0 ) {
       if(search.status == 0){
-        console.warn('inside renderarray')
-        console.warn('events length ' + events.length)
         if (events.length > 0) {
           setRenderedArray([...events])                               //  Sends the array to be rendered
         } else {
@@ -279,12 +278,12 @@ export default function EventScreen({ navigation }) {
         {login ? DynamicCircle(10,10,'red',0,0,60,0):null}
         {search.status == 0 && renderedArray.length == 0 ?
           lang ?
-            <Text style={{... MS.smallTitle, left: '-25%', top: '14%', color: FetchColor(theme, 'TITLETEXTCOLOR')}}>Arrangementer</Text>
+            <Text style={{... MS.smallTitle, left: '-25%', color: FetchColor(theme, 'TITLETEXTCOLOR')}}>Arrangementer</Text>
           : 
             <Text style={{... MS.screenTitle, left: '-25%', color: FetchColor(theme, 'TITLETEXTCOLOR')}}>Events</Text>
         :
           lang ?
-            <Text style={{... MS.smallTitle, left: '-5%', top: '14%', color: FetchColor(theme, 'TITLETEXTCOLOR')}}>Arrangementer</Text>
+            <Text style={{... MS.smallTitle, left: '-5%', color: FetchColor(theme, 'TITLETEXTCOLOR')}}>Arrangementer</Text>
           : 
             <Text style={{... MS.screenTitle, left: '-5%', color: FetchColor(theme, 'TITLETEXTCOLOR')}}>Events</Text>
         }

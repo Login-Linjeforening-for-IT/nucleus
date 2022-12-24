@@ -6,7 +6,7 @@ import { T } from '../styles/text'
 import { useSelector, useDispatch } from 'react-redux';
 import { changeLang } from '../redux/lang';
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import theme, { changeTheme, resetTheme, settheme } from '../redux/theme';
+import { changeTheme, resetTheme } from '../redux/theme';
 import { 
     View, 
     Text, 
@@ -18,7 +18,7 @@ import {
 import { GS } from '../styles/globalStyles';
 import FetchColor from '../styles/fetchTheme';
 
-export default function Card(props) {
+export default function Card (props) {
     const { theme } = useSelector( (state) => state.theme )
 
     return(
@@ -30,7 +30,7 @@ export default function Card(props) {
     );
 };
 
-export function CardSmaller(props) {
+export function CardSmaller (props) {
     
     const { theme } = useSelector( (state) => state.theme )
 
@@ -74,7 +74,7 @@ export function Kontakt() { //Contact info
     )
 }
 
-export function Notification(index) {    //Notification button
+export function Notification (index) {    //Notification button
 
     const { theme } = useSelector( (state) => state.theme )
     
@@ -126,7 +126,7 @@ export function Language() {    //Choose the language
     )
 }
 
-export function Button(props) { //Button, Login colored
+export function Button (props) { //Button, Login colored
 
     const { theme } = useSelector( (state) => state.theme )
 
@@ -139,7 +139,7 @@ export function Button(props) { //Button, Login colored
     );
 }
 
-export function NotifyButton(props) {   //Button, red
+export function NotifyButton (props) {   //Button, red
     return(
         <View style={SS.notifyButton}>
             <View style={SS.buttonContent}>
@@ -175,7 +175,7 @@ export function CheckedBox() {
     );
 }
 
-export function Line(height, width) {
+export function Line (height, width) {
 
     const { theme } = useSelector( (state) => state.theme )
 
@@ -188,7 +188,7 @@ export function Line(height, width) {
     );
 }
 
-export function Space(height) {
+export function Space (height) {
     return(
         <View style={{height: height}}/>
     );
@@ -243,7 +243,7 @@ export function Social() {
     )
 }
 
-export function CompareDates(firstDate, secondDate) { // True if firstdate is newer than seconddate
+export function CompareDates (firstDate, secondDate) { // True if firstdate is newer than seconddate
     if(firstDate != null && secondDate != null){                                                    //Concatenating start:
         const firstYear   = (firstDate)[0] + (firstDate)[1] + (firstDate)[2] + (firstDate)[3]       //  year
         const firstMonth  = (firstDate)[5] + (firstDate)[6]                                         //  month
@@ -399,6 +399,6 @@ export function ThemeSwitch() {
     )
 }
 
-export function NumberFromScreenWidth(width, multiplier) {
+export function NumberFromScreenWidth (width, multiplier) {
     return width*multiplier
 }

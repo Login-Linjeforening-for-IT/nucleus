@@ -60,7 +60,7 @@ export default function SpecificEventScreen({ route, navigation}) {
 
     {login ? DynamicCircle(10,10,'red',0,0,60,0):null}
 
-    <Text style={{... MS.smallTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{item.title}</Text>
+    <Text style={{... MS.smallMultilineTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{item.eventname}</Text>
 
       <TouchableOpacity onPress={() => profilePage()}>
         <Image style={MS.tMenuIcon} source={require('../assets/loginperson.png')} />
@@ -147,8 +147,10 @@ export default function SpecificEventScreen({ route, navigation}) {
               <View>{Space(5)}
                 <Text style={{...T.centered20, color: FetchColor(theme, 'TEXTCOLOR')}}>{item.eventname}</Text>
               </View>
+              {Space(5)}
               {CleanDescription(usersData.description)}
             </Card>
+            {Space(5)}
         </ScrollView>
       </View>   
        
