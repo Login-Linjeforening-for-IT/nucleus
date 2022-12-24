@@ -62,7 +62,7 @@ export const CHRISTMAS = {              // Christmas theme
     TEXTCOLOR: 'white',                 // Textcolor of the app
     OPPOSITETEXTCOLOR: 'black',         // Opposite of the background color
     TITLETEXTCOLOR: 'white',            // ScreenTitleColor of the app
-    SWITCHONSTATE: "#800000",           // Switch off state
+    SWITCHONSTATE: "#fff",           // Switch off state
     SWITCHOFFSTATE: "#013220",          // Switch on state
     TRACKCOLOR: "#E8E8E8",              // Track color of switch
     TRACKBACKGROUNDCOLOR: "#f0f0f0"     // Background color of switch

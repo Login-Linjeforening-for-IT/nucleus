@@ -57,9 +57,9 @@ export const T = StyleSheet.create({
     alignSelf: 'center',
     fontSize: 20,
   },
-  centered25: { //Centered text of size 25
+  centered24: { //Centered text of size 24 (25 is a bit too wide)
     alignSelf: 'center',
-    fontSize: 25,
+    fontSize: 24,
   },
   centeredBold25: { //Centered bold text of size 25
     fontWeight: 'bold',
@@ -120,6 +120,6 @@ export const T = StyleSheet.create({
   }, 
   filterCategoryText: {
     left: 10,
-    fontSize: '13%',
+    fontSize: 13,
   },
 })

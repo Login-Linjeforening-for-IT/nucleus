@@ -43,7 +43,7 @@ export default function SpecificListingScreen( { route, navigation }) {
 
     {login ? DynamicCircle(10,10,'red',0,0,60,0):null}
 
-    <Text style={{... MS.smallTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{item.title}</Text>
+    <Text style={{... MS.smallTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{lang ? item.titleNO : item.titleEN}</Text>
 
       <TouchableOpacity onPress={() => profilePage()}>
         <Image style={MS.tMenuIcon} source={require('../assets/loginperson.png')} />

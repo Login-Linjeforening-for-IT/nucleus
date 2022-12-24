@@ -205,9 +205,13 @@ export default function EventScreen({ navigation }) {
     })();
   }
 
+  console.warn('renderedArray.length ' + renderedArray.length)
+
   function renderArray() {                                            //  --- FETCHING EVENTS TO RENDER ---
-    if (renderedArray.length == 0) {
-      if(clickedCategory.length == 0 && filter.input == null){
+    if (renderedArray.length == 0 ) {
+      if(search.status == 0){
+        console.warn('inside renderarray')
+        console.warn('events length ' + events.length)
         if (events.length > 0) {
           setRenderedArray([...events])                               //  Sends the array to be rendered
         } else {
@@ -273,10 +277,16 @@ export default function EventScreen({ navigation }) {
           <Image style={MS.tMenuIcon} source={require('../assets/loginText.png')} />
         </TouchableOpacity>
         {login ? DynamicCircle(10,10,'red',0,0,60,0):null}
-        {lang ?
-          <Text style={{... MS.smallTitle, left: '-5%', top: '14%', color: FetchColor(theme, 'TITLETEXTCOLOR')}}>Arrangementer</Text>
-        : 
-          <Text style={{... MS.screenTitle, left: '-5%', color: FetchColor(theme, 'TITLETEXTCOLOR')}}>Events</Text>
+        {search.status == 0 && renderedArray.length == 0 ?
+          lang ?
+            <Text style={{... MS.smallTitle, left: '-25%', top: '14%', color: FetchColor(theme, 'TITLETEXTCOLOR')}}>Arrangementer</Text>
+          : 
+            <Text style={{... MS.screenTitle, left: '-25%', color: FetchColor(theme, 'TITLETEXTCOLOR')}}>Events</Text>
+        :
+          lang ?
+            <Text style={{... MS.smallTitle, left: '-5%', top: '14%', color: FetchColor(theme, 'TITLETEXTCOLOR')}}>Arrangementer</Text>
+          : 
+            <Text style={{... MS.screenTitle, left: '-5%', color: FetchColor(theme, 'TITLETEXTCOLOR')}}>Events</Text>
         }
         
         {renderedArray != null ? 
@@ -388,6 +398,12 @@ export default function EventScreen({ navigation }) {
               )}
             />
           : 
+          events.length == 0 ?
+            <View style={{alignSelf: 'center', maxWidth: '80%'}}>
+              <View style={{height : '58%'}}/>
+              <Text style={{...T.centeredBold20, color: FetchColor(theme, 'TEXTCOLOR')}}>Sjekk nettverkstilkoblingen din og prøv igjen. Kontakt TEKKOM dersom problemet vedvarer.</Text>
+            </View>
+          :
             <View>
               <View style={{height : '50%'}}/>
               <Text style={{...T.centeredOppositeColor, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>Ingen treff</Text>

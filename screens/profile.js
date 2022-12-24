@@ -55,7 +55,7 @@ return(
 {/* ========================= DISPLAY CONTENT ========================= */}
 <View style={{...GS.content, backgroundColor: FetchColor(theme, 'BACKGROUND')}}>
           <FlatList
-          showsVerticalScrollIndicator={''}
+          showsVerticalScrollIndicator={false}
           numColumns={1}
           keyExtractor={(item) => item.id}
           data={setting}

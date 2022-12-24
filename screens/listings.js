@@ -34,13 +34,6 @@ const homePage    = () => { navigation.navigate('HomeScreen')    }
 const aboutPage   = () => { navigation.navigate('AboutScreen')   }
 const profilePage = () => { navigation.navigate('ProfileScreen') }
 
-// useEffect(() => { //Fetches the API every 10 seconds
-//   const interval = setInterval(() => {
-//     //getData();
-//   }, 10000);
-//   return () => clearInterval(interval);
-// }, []);
-
 return(
   <View>
 {/* ========================= DISPLAY TOP MENU ========================= */}
@@ -61,7 +54,7 @@ return(
 {/* ========================= DISPLAY CONTENT ========================= */}
 <View style={{...GS.content, backgroundColor: FetchColor(theme, 'BACKGROUND')}}>
           <FlatList
-          showsVerticalScrollIndicator={''}
+          showsVerticalScrollIndicator={false}
           numColumns={1}
           keyExtractor={(item) => item.id}
           data={setting}

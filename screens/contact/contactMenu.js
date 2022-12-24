@@ -57,7 +57,7 @@ return(
         <View>
           <FlatList
             scrollEnabled={false}
-            showsVerticalScrollIndicator={''}
+            showsVerticalScrollIndicator={false}
             numColumns={1}
             keyExtractor={(item) => item.id}
             data={setting}

@@ -8,6 +8,7 @@ import Dropdown from '../shared/dropdown';
 import { useSelector } from 'react-redux';
 import { DynamicCircle } from '../shared/eventComponents/otherComponents';
 import FetchColor from '../styles/fetchTheme';
+import { Dimensions } from 'react-native';
 import { 
   Text, 
   View, 
@@ -25,6 +26,9 @@ export default function AboutScreen( { navigation }) {
   const { login } = useSelector( (state) => state.login )
   const { theme } = useSelector( (state) => state.theme )
 
+  const screenWidth = Dimensions.get('window').width;
+
+  console.log(screenWidth)
   const [info] = useState([
     {id: '0', titleNO: 'Styret',   titleEN: 'Board',    quoteNO: '', qouteEN: '', descriptionNO: 'Øverste leddet i foreningen er styret. Under årsmøtet blir leder, nestleder og sekretær stemt frem, og disse sitter sammen med lederene fra de ulike komiteene i styret. Sammen er disse ansvarlige for å drive foreningen, styre økonomien og sørge for at alle utfører de oppgavene de skal.', descriptionEN: 'The highest level of the association is the board. During the annual meeting, the chairman, deputy chairman and secretary are voted in, and these sit together with the leaders from the various committees on the board. Together, these are responsible for running the association, managing the finances and ensuring that everyone performs the tasks they are supposed to.'},
     {id: '1', titleNO: 'EventKom', titleEN: 'EventKom', quoteNO: 'EventKom er Logins party-komité hvor målet er å bruke opp alle inntektene PR sørger for.', qouteEN: "EventKom is Login's party committee, where the goal is to use up all the income PR provides.", descriptionNO: 'EventKom har ansvar for å stelle i stand sosiale arrangement på vegne av Login gjennom semesteret. Vi tilbyr sammenkomster der studenter kan møtes på tvers av studieprogram, år og klasser for å få et avbrekk fra studiehverdagen. Målet til EventKom er å bygge et sterkt fellesskap blant IT-studentene ved skolen, som du kan lene deg på når studiehverdagen tar på. Dersom du har forslag til aktiviteter, eller ønsker å være med i komiteen er det bare å kontakte oss på Discord. Forslag og tilbakemeldinger tas imot med glede, og vi håper å høre fra deg.', descriptionEN: 'EventKom is responsible for setting up social events on behalf of Login throughout the semester. We offer gatherings where students can meet across study programmes, years and classes in order to have a break from everyday study life. The aim of EventKom is to build a strong community among the IT students at the school, which you can lean on when the study life gets busy. If you have suggestions for activities, or want to join the committee, just contact us on Discord. Suggestions and feedback are welcomed, and we hope to hear from you.'},
@@ -75,7 +79,7 @@ return(
       <Card>
         <Text style={{...T.bold40, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Hvem er vi?' : 'Who are we?'}</Text>{Space(5)}
         <View style={GS.row}>
-          <Text>{lang ? Line(60,5) : Line(94,5)}</Text>
+          <Text>{lang ? Line(58,5) : screenWidth < 390 ? Line(94,5) : Line(74,5)}</Text>
           <View>
             <Text style={{...T.boldWithLine, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Login er linjeforeningen for IT ved NTNU i Gjøvik og alle som går de følgene studiene er automatisk medlemmer i foreningen.' : 'Login is the student association for IT at  NTNU in Gjøvik and everyone who studies the following courses is automatically a member of the association.'}</Text>
           </View>
@@ -88,7 +92,7 @@ return(
         <Text style={{...T.centeredBold25, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Av studenter, for studenter.' : 'By students, for students'}</Text>
         {Space(5)}
         <View style={GS.row}>
-          <Text>{Line(60,5)}</Text>
+          <Text>{Line(58,5)}</Text>
           <View>
             <Text style={{...T.boldWithLine, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Foreningen drives av frivillige studenter som arbeider for at du skal få mest mulig ut av studiene dine ved  NTNU.' : 'The association is run by volunteer students who work to ensure that you get the most out of your studies at  NTNU.'}</Text>
           </View>
@@ -97,8 +101,9 @@ return(
         <Text style={{...T.paragraph, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Vi arrangerer regelmessig sosiale arrangementer og bedriftspresentasjoner. Vi holder kontakt med aktuelle bedrifter og inviterer til blant annet cyberdagene én gang i semesteret slik at du som student skal bli kjent med mulighetene utdanningen din gir deg.' : 'We regularly organize social events and company presentations. We keep in touch with relevant companies and invite you to, among other things, the cyber days once a semester so that you, as a student, get to know the opportunities your education gives you.'}</Text>
         {Space(5)}
         <Text style={{...T.paragraph, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Hver uke samler vi studenter til  TekKom- og  CTF-samlinger, der man kan lære seg nye ting eller komme med bidrag til foreningen. Her kan man møte andre studenter som deler gleden for å lære, og å sette kunnskapene man tilegner seg i praksis. Videre jobber EvntKom stadig med nye og spennende arrangementer som f.eks. filmkvelder og vinterball.' : 'Every week we gather students for  TekKom and  CTF gatherings, where you can learn new things or contribute to the association. Here you can meet other students who share the joy of learning and putting the knowledge you acquire into practice.  EvntKom is also constantly working on new and exciting events such as movie nights and winter ball.'}</Text>
+        {Space(15)}
+        <Text style={{...T.centered24, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Styret og komiteene' : 'The board and the committees'}</Text>
         {Space(5)}
-        <Text style={{...T.centered25, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Styret og komiteene' : 'The board and the committees'}</Text>
         <Text style={{...T.boldParagraph, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Foreningen er satt sammen av et hovedstyret og en rekke komiteer.' : 'The association is made up of a main board and a number of committees.'}</Text>
         <View style={GS.parentComitteeView}>
             <TouchableOpacity onPress={() => selectedComittee(0)}>

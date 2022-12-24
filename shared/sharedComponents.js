@@ -180,7 +180,7 @@ export function Line(height, width) {
     const { theme } = useSelector( (state) => state.theme )
 
     return(
-        <View style={ES.checkBox}>
+        <View>
             <Svg width={width} height={height} fill={FetchColor(theme, 'ORANGE')}>
             <Rect x='1' y='1' width={width} height={height}/>
             </Svg>
@@ -397,4 +397,8 @@ export function ThemeSwitch() {
             </TouchableOpacity>
         </View>
     )
+}
+
+export function NumberFromScreenWidth(width, multiplier) {
+    return width*multiplier
 }
