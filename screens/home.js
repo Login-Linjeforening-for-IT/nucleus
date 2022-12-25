@@ -59,17 +59,21 @@ useFocusEffect(                                                           // Upd
 );
 
   const event = storedEvent ? JSON.parse(storedEvent) : null;             //  Parses the firstcoming event object
-  
+    /**
+     * Statusbar changed statusbar to light style if dark theme and vice verca
+     * Dynamiccircle created a small red circle in the top menu if the user is logged in
+     */
+    
     return(
       <View>
-          <StatusBar style={theme == 0 || theme == 2 || theme == 3 ? 'light' : 'dark'} /> {/** Statusbar light if dark theme, and dark if light theme */}
+          <StatusBar style={theme == 0 || theme == 2 || theme == 3 ? 'light' : 'dark'} /> 
           {/* ========================= DISPLAY TOP MENU ========================= */}
           <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'DARKER')}}>
           <TouchableOpacity onPress={() => aboutPage()}>
           <Image style={MS.tMenuIcon} source={require('../assets/loginText.png')} />
           </TouchableOpacity>
 
-          {login ? DynamicCircle(10,10,'red',0,0,60,0):null}               {/** Displays a red circle if the user is logged in */}
+          {login ? DynamicCircle(10,10,'red',0,0,60,0):null}               
 
           <Text style={{... MS.screenTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{lang ? 'Hjem' : 'Home'}</Text>
 
@@ -80,7 +84,6 @@ useFocusEffect(                                                           // Upd
 
           {/* ========================= DISPLAY CONTENT ========================= */}
           <View style={{...GS.content, backgroundColor: FetchColor(theme, 'BACKGROUND')}}>
-            {/* {HomeIcon()} HOME ICON SVG THAT MAY BE USED IN THE FUTURE*/}
             <ScrollView>
             {event != null ? (
                       <TouchableOpacity onPress={() => navigation.navigate('SpecificEventScreen', {item: event})}>
