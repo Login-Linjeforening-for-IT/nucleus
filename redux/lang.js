@@ -1,17 +1,17 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";     // Imports slicer
 
-export const LangSlice = createSlice({
-    name: 'lang',
-    initialState: {
-        lang: 1
+export const LangSlice = createSlice({              // Declares Language Slice
+    name: 'lang',                                   // Slice name
+    initialState: {                                 // Initial state
+        lang: 1                                     // 1 is Norwegian, 0 is English
     },
-    reducers: {
-        changeLang: (state) => {
-            state.lang = !state.lang
+    reducers: {                                     // Declares slice reducer
+        changeLang: (state) => {                    // Function to change language
+            state.lang = !state.lang                // Uses true false for 0 / 1
         },
     }
 })
 
-export const { changeLang } = LangSlice.actions
+export const { changeLang } = LangSlice.actions     // Exports the change function
 
-export default LangSlice.reducer
+export default LangSlice.reducer                    // Exports the language slice

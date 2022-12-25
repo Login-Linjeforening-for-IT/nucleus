@@ -1,3 +1,6 @@
+// THIS FILE DECLARES ALL THEMES AVAILABLE, AND IS THE FILE WHERE NEW THEMES SHOULD BE ADDED
+// NOTE: MUST MATCH AMOUNT OF THEMES AVAILABLE IN THE THEMESWITCH.JS THEME SWICH STATEMENT
+
 export const DARK = {                   // Dark theme
     BACKGROUND: '#181818',              // Background of the app
     DARKER: '#111',                     // Contentcolor of the app

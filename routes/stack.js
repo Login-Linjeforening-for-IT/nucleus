@@ -1,32 +1,32 @@
-import * as React from 'react';
+import * as React from 'react';                                                 // React
 
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { NavigationContainer } from '@react-navigation/native';                 // Navigation container
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';       // Creates bottom tab navigator
 
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator();                                         // Declares Tab to equal CBTN
 
-import HomeScreen from '../screens/home'
-import EventScreen from '../screens/event';
-import AboutScreen from '../screens/about';
-import ProfileScreen from '../screens/profile';
-import ListingScreen from '../screens/listings';
-import SpecificEventScreen from '../screens/specificEvent';
-import InternalScreen from '../screens/internal/internal';
-import BusinessScreen from '../screens/contact/business';
-import SettingScreen from '../screens/settings';
-import TodoScreen from '../screens/internal/todo';
-import MakeNotificationScreen from '../screens/internal/makeNotification';
-import LoginScreen from '../screens/login';
-import ReportScreen from '../screens/contact/report';
-import ContactMenuScreen from '../screens/contact/contactMenu';
-import CommitteeMenuScreen from '../screens/contact/committeeMenu';
-import SpecificListingScreen from '../screens/specificListing';
-import SpecificArticleScreen from '../screens/specificArticle';
+import HomeScreen from '../screens/home'                                        // Home
+import EventScreen from '../screens/event';                                     // Events
+import AboutScreen from '../screens/about';                                     // About Login
+import ProfileScreen from '../screens/profile';                                 // Profile
+import ListingScreen from '../screens/listings';                                // Job listings
+import SpecificEventScreen from '../screens/specificEvent';                     // Specific Events
+import InternalScreen from '../screens/internal/internal';                      // Innsida (verv)
+import BusinessScreen from '../screens/contact/business';                       // Companies' screen
+import SettingScreen from '../screens/settings';                                // Settings 
+import TodoScreen from '../screens/internal/todo';                              // Todo (verv)
+import MakeNotificationScreen from '../screens/internal/makeNotification';      // Make notification (verv)
+import LoginScreen from '../screens/login';                                     // Login to innsida
+import ReportScreen from '../screens/contact/report';                           // Report form for blameworthy conditions
+import ContactMenuScreen from '../screens/contact/contactMenu';                 // Contact Login - Linjeforeningen for IT
+import CommitteeMenuScreen from '../screens/contact/committeeMenu';             // Displays all committees contact information
+import SpecificListingScreen from '../screens/specificListing';                 // Specific Job listing
+import SpecificArticleScreen from '../screens/specificArticle';                 // Specific article
 
-function Navigator() {
+function Navigator() {                                                          // Declares Navigator
     return(
-        <NavigationContainer>
-            <Tab.Navigator screenOptions={{ headerShown: false}}>
+        <NavigationContainer>                                                   {/* Wraps in container */}
+            <Tab.Navigator screenOptions={{ headerShown: false}}>               {/* Removes header and declares all navigation routes */}
                 <Tab.Screen name='HomeScreen'               options={{tabBarStyle: { display: "none" }}} component={HomeScreen} />
                 <Tab.Screen name='EventScreen'              options={{tabBarStyle: { display: "none" }}} component={EventScreen} />
                 <Tab.Screen name='AboutScreen'              options={{tabBarStyle: { display: "none" }}} component={AboutScreen} />
@@ -44,9 +44,9 @@ function Navigator() {
                 <Tab.Screen name='CommitteeMenuScreen'      options={{tabBarStyle: { display: "none" }}} component={CommitteeMenuScreen} />
                 <Tab.Screen name='SpecificListingScreen'    options={{tabBarStyle: { display: "none" }}} component={SpecificListingScreen} />
                 <Tab.Screen name='SpecificArticleScreen'    options={{tabBarStyle: { display: "none" }}} component={SpecificArticleScreen} />
-            </Tab.Navigator>
+            </Tab.Navigator>                    
         </NavigationContainer>
     )
 }
 
-export default Navigator;
+export default Navigator;                                                         // Exports all navigation functionality
