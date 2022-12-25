@@ -23,10 +23,10 @@ import CommitteeMenuScreen from '../screens/contact/committeeMenu';             
 import SpecificListingScreen from '../screens/specificListing';                 // Specific Job listing
 import SpecificArticleScreen from '../screens/specificArticle';                 // Specific article
 
-function Navigator() {                                                          // Declares Navigator
+function Navigator() {                                                          // Declares Navigator, wraps in container and declares all navigation routes
     return(
-        <NavigationContainer>                                                   {/* Wraps in container */}
-            <Tab.Navigator screenOptions={{ headerShown: false}}>               {/* Removes header and declares all navigation routes */}
+        <NavigationContainer>                                                   
+            <Tab.Navigator screenOptions={{ headerShown: false}}>               
                 <Tab.Screen name='HomeScreen'               options={{tabBarStyle: { display: "none" }}} component={HomeScreen} />
                 <Tab.Screen name='EventScreen'              options={{tabBarStyle: { display: "none" }}} component={EventScreen} />
                 <Tab.Screen name='AboutScreen'              options={{tabBarStyle: { display: "none" }}} component={AboutScreen} />
