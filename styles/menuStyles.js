@@ -46,7 +46,7 @@ export const MS = StyleSheet.create ({
   },
   searchIcon: {  //Size of icons
     top: '6%',
-    right: 10,
+    right: 15,
     width: 30,
     height: 120
   },
