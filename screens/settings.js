@@ -51,7 +51,7 @@ export default function SettingScreen( { navigation }) {
           <Card>
             <View style={GS.notificationBack}>
               <View style={GS.view}>
-                <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}> {lang ? 'Tema           ' + 'midlertidig: ' + theme : 'Theme           ' + 'temporary: ' + theme }</Text>
+                <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}> {lang ? 'Tema' : 'Theme' }</Text>
               </View>
               <View style={GS.view2}><ThemeSwitch/></View>
             </View>
@@ -100,7 +100,7 @@ export default function SettingScreen( { navigation }) {
           <Card>
             <View style={GS.notificationBack}>
               <View style={GS.view}>
-                <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Bedpres': 'Company Presentation'}</Text>
+                <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Bedpres': 'Company Presentations'}</Text>
               </View>
               <View style={GS.view2}>{Notification(4)}</View>
             </View>
