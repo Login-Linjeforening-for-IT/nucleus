@@ -10,10 +10,15 @@ let persistor = persistStore(store)                                 // Middlewar
 
 export default function App() {                                     // Exports the app with all functions (main gate / index file)
     //registerNNPushToken(4494, 'pfYoC5VY4KhZt9mrD3FGu0');          // Registers push token (inactive, needs to be revised)
+    /**
+     * Provider allows the store to be used by any screen with navigation.
+     * Persistgate is used for syncing redux states with AsyncStorage
+     * Navigator contains all functionality and all screens reachable through navigation
+     */
     return( 
-        <Provider store={store}>                                    {/** Allows the store to be used by any screen with navigation */}
-            <PersistGate loading={null} persistor={persistor}>      {/** Gate for syncing redux state with AsyncStorage */}
-                <Navigator/>                                        {/** All navigation functionality and all screens */}
+        <Provider store={store}>                                    
+            <PersistGate loading={null} persistor={persistor}>      
+                <Navigator/>                                        
             </PersistGate>  
         </Provider>
     )
