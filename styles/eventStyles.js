@@ -95,73 +95,73 @@ export const ES = StyleSheet.create({         // Declares export ES ( Event Styl
       width: 10,
   },
   specificEventLight: {                       // Position of specific event color circle
-    height: 20,
-    width: 20,
+    height: 20,                               // Fixed height 20px
+    width: 20,                                // Fixed width 20px
   },
-  card: {
-    borderRadius: 20,
-    marginHorizontal: 10,
-    marginTop: 10,
+  card: {                                     // Card styling
+    borderRadius: 20,                         // Border radius
+    marginHorizontal: 10,                     // Horizontal margin
+    marginTop: 10,                            // Top margin
+  },  
+  cardContent: {                              // Card content styling
+    marginHorizontal: 18,                     // Horizontal margin  
+    marginVertical: 18                        // Vertical margin
   },
-  cardContent: {
-    marginHorizontal: 18,
-    marginVertical: 18
+  cardSmaller: {                              // Smaller card
+    marginHorizontal: 10,                     // Horizontal margin
+    borderRadius: 20,                         // Border radius
   },
-  cardSmaller: {
-    marginHorizontal: 10,
-    borderRadius: 20,
+  smallSize: {                                // Small icons
+    height: 20,                               // Fixed height 20px
+    width: 20                                 // Fixed width 20px
   },
-  smallSize: {
-    height: 20,
-    width: 20
+  specificEventLight: {                       // Event organizer circle on SES
+    left: 8,                                  // Moved 8px rightwards
+    height: 20,                               // Fixed height 20px
+    width: 20                                 // Fixed width 20px
   },
-  specificEventLight: {
-    left: 8,
-    height: 20,
-    width: 20
+  filterText: {                               // EventScreen filter text
+    alignSelf: 'center',                      // Vertically centered
+    alignItems: 'center',                     // Content vertically centered
+    marginTop: 10,                            // Top margin of 10px
+    width: '95%',                             // Width of filter 95% of parent view
+    paddingTop: 10,                           // Padding top
+    marginHorizontal: 10,                     // Horizontal margin  
+    height: 30,                               // Height of filter text
+    borderTopRightRadius: 15,                 // Curves top right corner
+    borderTopLeftRadius: 15,                  // Curves top left corner
+    color: 'white',                           // White text color (should be moved to depend on theme)
   },
-  filterText: {  //eventScreen filter text
-    alignSelf: 'center',
-    alignItems: 'center',
-    marginTop: 10,
-    width: '95%',
-    paddingTop: 10,
-    marginHorizontal: 10,
-    height: 30,
-    borderTopRightRadius: 15,
-    borderTopLeftRadius: 15,
-    color: 'white',
+  filterView: {                               // Filter view
+    paddingTop: 10,                           // Top padding of 10px
+    flexDirection: 'row',                     // Flexdirection set to row
+    marginHorizontal: 10,                     // 10px Horizontal margin
+    borderBottomLeftRadius: 15,               // Curves bottom left conrner
+    borderBottomRightRadius: 15,              // Curves bottom right corner
   },
-  filterView: {
-    paddingTop: 10,
-    flexDirection: 'row',
-    marginHorizontal: 10,
-    borderBottomLeftRadius: 15,
-    borderBottomRightRadius: 15,
+  checkBox: {                                 // Position of eventfilter check icon
+    top: '-50%',                              // Moves the checkbox 50% upwards
+    right: 20,                                // Moves checkbox 20px leftwards
+  },  
+  checkedBox: {                               // Eventfilter checked icon
+    top: '-80%',                              // Moves the checkbox 80% upwards
+    right: 20,                                // Moves the checkbox 20px leftwards
   },
-  checkBox: { //Position of eventfilter check icon
-    top: '-50%',
-    right: 20,
+  checkedIconCheckMark: {                     // Checkmark on check icon
+    right: 18,                                // Moves icon 18px leftwards
+    top: '-1000000%',                         // Moves the icon about 20px upwards
+    height: 0.004,                            // Extremely small height as it cannot be 0 (should be revised to use absolute positioning so it doesnt depend on height)
   },
-  checkedBox: { //Position of eventfilter checked icon
-    top: '-80%',
-    right: 20,
+  categoryView: {                             // View for categories inside the filter
+    flexDirection: 'row',                     // Flexdirection set to row
+    left: 30,                                 // Moved 30px rightwards
+    top: 7,                                   // Moved 7px downwards
+    width: 122,                               // Fixed width of 122px
   },
-  checkedIconCheckMark: { // Checkmark on check icon
-    right: 18,
-    top: '-1000000%',
-    height: 0.004,
-  },
-  categoryView: {
-    flexDirection: 'row',
-    left: 30,
-    top: 7,
-    width: 122,
-  },
-  filterResetIcon: { 
-      left: -60,
-      top: 10,
-      height: 40,
-      width: 40
+  filterResetIcon: {                          // Filter reset icon
+      left: -60,                              // Moved 60px leftwards
+      top: 10,                                // Moved 10px downwards
+      height: 40,                             // Fixed icon height of 40px
+      width: 40                               // Fixed icon width of 40px
   },
 })
