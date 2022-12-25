@@ -1,100 +1,100 @@
-import { StyleSheet } from "react-native";  //Stylesheet file
+import { StyleSheet } from "react-native";    // Stylesheet file
 
-export const ES = StyleSheet.create({
+export const ES = StyleSheet.create({         // Declares export ES ( Event Styles )
 //========================= EventScreen =========================
-  view: { //Left side card view
-    top: '-2%',
-    justifyContent: 'center',
-    height: '120%',
-    borderRadius: 10,
+  view: {                                     // Left side card view
+    top: '-2%',                               // Moves events 2% upwards
+    justifyContent: 'center',                 // Horizontally centers
+    height: '120%',                           // Sets the height to be 120% of the view
+    borderRadius: 10,                         // Adds 10px borderradius
   },
-  view2: { //Middle card view
-    top: 7.5,
-    justifyContent: 'center',
-    alignItems: 'flex-start',
-    left: 10,
-    width: '70%',
+  view2: {                                    // Middle card view
+    top: 7.5,                                 // Moves content 7.5px downwards
+    justifyContent: 'center',                 // Horizontally centers
+    alignItems: 'flex-start',                 // Vertically sets content to left side of view
+    left: 10,                                 // Moves events 10px rightwards
+    width: '70%',                             // Sets the width of the view to be 70% of the parent view
   },
-  view3: { //Right side card view
-    position: 'absolute',
-    right: 0,
-    height: '100%',
+  view3: {                                    // Right side card view
+    position: 'absolute',                     // Uses absolute positioning to layer circle and checkmark
+    right: 0,                                 // Sets it to absolute right
+    height: '100%',                           // Has a height of 100% of the parent view
   },
-  eventBack: { //Card height and direction on eventscreen
-    flexDirection: 'row',
-    height: 55,
+  eventBack: {                                // Card height and direction on eventscreen
+    flexDirection: 'row',                     // Changes flexdirection to row
+    height: 55,                               // Has a fixed height of 55px
   },
-  dayText: { //Eventday text on specificEventScreen
-    left: '20%',
-    fontSize: 30,
+  dayText: {                                  // Eventday text on specificEventScreen
+    left: '20%',                              // Moves text 20% rightwards
+    fontSize: 30,                             // Text font size
   },
-  monthText: { //Eventmonth text on specificEventScreen
-    alignSelf: 'flex-start',
-    top: '-7.5%',
-    left: '20%',
+  monthText: {                                // Eventmonth text on specificEventScreen
+    alignSelf: 'flex-start',                  // Aligns the text vertically to top
+    top: '-7.5%',                             // Moves text 7.5% upwards
+    left: '20%',                              // moves events 20% rightwards
+    fontSize: 20,                             // Text font size
+  },
+  eventCardDayText: {                         // Eventday text on eventScreen
+    left: '15%',                              // Moves events 15% rightwards
+    fontSize: 30,                             // Text font size
+  },
+  title: {                                    // Eventname text on eventScreen
+    left: 5,                                  // Moves title 5px rightwards
+    top: -5,                                  // Moves events 5px upwards
+    fontSize: 20,                             // Text font size
+  },
+  loc: {                                      // Eventlocation text on eventScreen
+    left: 5,                                  // Moves locationtext 5px rightwards
+    top: -5,                                  // Moves locationtext 5px upwards
     fontSize: 20,
   },
-  eventCardDayText: { //Eventday text on eventScreen
-    left: '15%',
-    fontSize: 30,
+  greenLight: {                               // Position of checklight on eventScreen
+    top: '12%',                               // Moves greenLight 12% downwards
+    alignSelf: 'center',                      // Vertically centers
   },
-  title: { //Eventname text on eventScreen
-    left: 5,
-    top: -5,
-    fontSize: 20,
+  checkContent: {                             // Renders big check icon
+    left: 2,                                  // Moves events 2px rightwards
+    top: '-30%',                              // Moves events 30% upwards
+    alignSelf: 'center',                      // Vertically centers
   },
-  loc: { //Eventlocation text on eventScreen
-    left: 5,
-    top: -5,
-    fontSize: 20,
-  },
-  greenLight: { //Position of checklight on eventScreen
-    top: '12%',
-    alignSelf: 'center',
-  },
-  checkContent: { //Renders big check icon
-    left: 2,
-    top: '-30%',
-    alignSelf: 'center',
-  },
-  smallerCheckIcon: { // Small check icon inside filter
-    height: 20,
-    top: '0%',
-    alignSelf: 'center',
+  smallerCheckIcon: {                         // Small check icon inside filter
+    height: 20,                               // Fixed height of 20px
+    top: '0%',                                // Fixed to top
+    alignSelf: 'center',                      // Vertically centered
   },
 //======================== SpecificEventScreen ===================
-  specificEventInfoView: { //Layout for specificEventScreen
-    flexDirection: 'row',
-    alignItems: 'center'
+  specificEventInfoView: {                    // Layout for specificEventScreen
+    flexDirection: 'row',                     // Flexdirection set to row
+    alignItems: 'center'                      // Vertically centers
   },
-  specificEventView1: { //Layout for the image on specificEventView
-    alignItems: 'center',
-    height: 100,
-    overflow: 'hidden'
+  specificEventView1: {                       // Layout for the image on specificEventView
+    alignItems: 'center',                     // Vertically centers
+    height: 100,                              // Fixed height of 100px
+    overflow: 'hidden'                        // Hides the overflow (elements outside the view)
   },
-  specificEventImage: { //The header image on specificEventScreen
-    width: '100%',
-    height: 100,
-    aspectRatio: 3, // Note: resizeMode: 'contain' may work here
+  specificEventImage: {                       // The header image on specificEventScreen
+    width: '100%',                            // Sets the width to 100% of the available width from the parent view
+    height: 100,                              // Fixed height of 100px
+    aspectRatio: 3,                           // Uses aspectRatio 3:1 Note: resizeMode: 'contain' may work here
   },
   //======================== EventComponentStyles ===================
-  size: { //Middle sized icons
-    height: 40,
-    width: 40
+  size: {                                     // Middle sized icons
+    height: 40,                               // Fixed height of 40px
+    width: 40                                 // Fixed width of 40px
   },
-  absoluteView: { //Middle sized icons
-    flexDirection: 'row',
+  absoluteView: {                             // Middle sized icons
+    flexDirection: 'row',                     // Flexdirection set to row
   },
-  smallSize: { //Small icons
-      height: 20,
-      width: 20
+  smallSize: {                                // Small icons
+      height: 20,                             // Fixed height 20px
+      width: 20                               // Fixed height 20px
   },
-  eventLight: { //Position of specific event color circle
-      top: -10,
+  eventLight: {                               // Position of specific event color circle
+      top: -10,                               // Moves eventLight 10px upwards
       height: 0,
       width: 10,
   },
-  specificEventLight: { //Position of specific event color circle
+  specificEventLight: {                       // Position of specific event color circle
     height: 20,
     width: 20,
   },

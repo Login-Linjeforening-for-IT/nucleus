@@ -1,33 +1,30 @@
-{/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
-import React from 'react';
-import { GS } from '../../styles/globalStyles';
-import { T } from '../../styles/text';
-import { MS } from '../../styles/menuStyles';
-import Card, { Kontakt, Space, Line } from '../../shared/sharedComponents';
-import { DynamicCircle } from '../../shared/eventComponents/otherComponents';
-import { useSelector } from 'react-redux';
-import FetchColor from '../../styles/fetchTheme';
-import { 
-  Text, 
-  View, 
-  Image, 
-  ScrollView,
-  TouchableOpacity,
+import React from 'react';                                                      // React
+import { GS } from '../../styles/globalStyles';                                 // Global styles 
+import { T } from '../../styles/text';                                          // Text styles 
+import { MS } from '../../styles/menuStyles';                                   // Menu styles
+import Card, { Kontakt, Space, Line } from '../../shared/sharedComponents';     // Various self made components 
+import { DynamicCircle } from '../../shared/eventComponents/otherComponents';   // Event components
+import { useSelector } from 'react-redux';                                      // Redux
+import FetchColor from '../../styles/fetchTheme';                               // Color fetcher
+import {    
+  Text,                                                                         // Text component
+  View,                                                                         // View component
+  Image,                                                                        // Image component
+  ScrollView,                                                                   // Scrollable view
+  TouchableOpacity,                                                             // Toucable opacity (like a custom button)
 } from 'react-native';
 
-{/* ========================= APP START ========================= */}
+export default function BusinessScreen( { navigation }) {                       // Declaring the screen
 
-export default function BusinessScreen( { navigation }) {
+  const { lang  } = useSelector( (state) => state.lang  )                       // Language state
+  const { login } = useSelector( (state) => state.login )                       // Login status
+  const { theme } = useSelector( (state) => state.theme )                       // Theme state
 
-  const { lang  } = useSelector( (state) => state.lang  )
-  const { login } = useSelector( (state) => state.login )
-  const { theme } = useSelector( (state) => state.theme )
-
-  const eventPage   = () => { navigation.navigate('EventScreen')       }
-  const homePage    = () => { navigation.navigate('HomeScreen')        }
-  const listingPage = () => { navigation.navigate('ListingScreen')     }
-  const profilePage = () => { navigation.navigate('ProfileScreen')     }
-  const goBack      = () => { navigation.navigate('ContactMenuScreen') }
+  const eventPage   = () => { navigation.navigate('EventScreen')       }        // Function to navigate to eventscreen
+  const homePage    = () => { navigation.navigate('HomeScreen')        }        // Function to navigate to homepage
+  const listingPage = () => { navigation.navigate('ListingScreen')     }        // Function to navigate to job advertisements
+  const profilePage = () => { navigation.navigate('ProfileScreen')     }        // Function to navigate to profile
+  const goBack      = () => { navigation.navigate('ContactMenuScreen') }        // Function to go back to the previous screen
 
   return(
     <View>

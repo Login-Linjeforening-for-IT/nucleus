@@ -1,33 +1,33 @@
-import { GS } from '../../styles/globalStyles';
-import { MS } from '../../styles/menuStyles';
-import { T } from '../../styles/text';
-import React, { useState } from 'react';
-import Card, { Space, AllComitees, Line } from '../../shared/sharedComponents';
-import { DynamicCircle } from '../../shared/eventComponents/otherComponents';
-import { useSelector } from 'react-redux';
-import FetchColor from '../../styles/fetchTheme';
+import { GS } from '../../styles/globalStyles';                                     // Global styles
+import { MS } from '../../styles/menuStyles';                                       // Menu styles
+import { T } from '../../styles/text';                                              // Text styles
+import React from 'react';                                                          // React
+import Card, { Space, AllComitees, Line } from '../../shared/sharedComponents';     // Various self made components
+import { DynamicCircle } from '../../shared/eventComponents/otherComponents';       // Various event components
+import { useSelector } from 'react-redux';                                          // Redux
+import FetchColor from '../../styles/fetchTheme';                                   // Function for fetching theme color
 import { 
-  Text, 
-  View, 
-  Image, 
-  TouchableOpacity,
-  ScrollView,
-  Linking
-} from 'react-native';
+  Text,                                                                             // Text component
+  View,                                                                             // View component
+  Image,                                                                            // Image component
+  TouchableOpacity,                                                                 // TouchableOpacity (custom button)
+  ScrollView,                                                                       // Scrollable view 
+  Linking                                                                           // Function to link to websites etc.
+} from 'react-native';                                                              // React Native
 
 {/* ========================= APP START ========================= */}
 
-export default function CommitteeMenuScreen({ navigation }) {
+export default function CommitteeMenuScreen({ navigation }) {                       // Declares the export Committeescreen
 
-  const { lang  } = useSelector( (state) => state.lang  )
-  const { login } = useSelector( (state) => state.login )
-  const { theme } = useSelector( (state) => state.theme )
+  const { lang  } = useSelector( (state) => state.lang  )                           // Language state
+  const { login } = useSelector( (state) => state.login )                           // Loginstatus
+  const { theme } = useSelector( (state) => state.theme )                           // Theme state
 
-  const eventPage   = () => { navigation.navigate('EventScreen')       }
-  const homePage    = () => { navigation.navigate('HomeScreen')        }
-  const listingPage = () => { navigation.navigate('ListingScreen')     }
-  const profilePage = () => { navigation.navigate('ProfileScreen')     }
-  const goBack      = () => { navigation.navigate('ContactMenuScreen') }
+  const eventPage   = () => { navigation.navigate('EventScreen')       }            // Function to navigate to eventscreen
+  const homePage    = () => { navigation.navigate('HomeScreen')        }            // Function to navigate to the home page
+  const listingPage = () => { navigation.navigate('ListingScreen')     }            // Function to navigate to job advertisements
+  const profilePage = () => { navigation.navigate('ProfileScreen')     }            // Function to navigate to profile
+  const goBack      = () => { navigation.navigate('ContactMenuScreen') }            // Function to go back to the previous screen
 
   return(
     <View>
@@ -37,7 +37,7 @@ export default function CommitteeMenuScreen({ navigation }) {
       <Image style={MS.goBack} source={require('../../assets/goback777.png')} />
     </TouchableOpacity>
 
-    {login ? DynamicCircle(10,10,'red',0,0,60,0):null}
+    {login ? DynamicCircle(10,10,'red',0,0,60,0):null}                              {/** Small red circle if the user is logged in */}
 
     <Text style={{... MS.screenTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{lang ? 'Komité' : 'Committee'}</Text>
 
