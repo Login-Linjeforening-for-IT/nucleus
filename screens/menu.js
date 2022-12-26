@@ -74,7 +74,7 @@ return(
 <BlurView style={MS.topMenu} intensity={30}/>
       <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
     <TouchableOpacity onPress={() => eventPage()}>
-      <Image style={MS.tMenuIcon} source={require('../assets/loginText.png')} />
+      <Image style={MS.tMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/loginText.png') : require('../assets/loginText-black.png')} />
     </TouchableOpacity>
 
     <View style={GS.loginStatus}>{login ? DynamicCircle(10,10,'red',0,0,60,0):null}</View>
@@ -86,12 +86,12 @@ return(
 <BlurView style={MS.bMenu} intensity={30}/>
     <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
         <TouchableOpacity onPress={() => eventPage()}>
-          <Image style={MS.bMenuIcon} source={require('../assets/calendar777.png')} />
+        <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/calendar777.png') : require('../assets/calendar-black.png')} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => listingPage()}>
-          <Image style={MS.bMenuIcon} source={require('../assets/business.png')} />
+        <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/business.png') : require('../assets/business-black.png')} />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => menuPage()}>
+        <TouchableOpacity>
               <Image style={MS.bMenuIcon} source={require('../assets/menu-orange.png')} />
         </TouchableOpacity>
       </View>     

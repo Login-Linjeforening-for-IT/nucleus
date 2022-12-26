@@ -43,7 +43,7 @@ export default function SpecificListingScreen( { route, navigation }) {
         {Space(Dimensions.get('window').height/7.5)}
         <View>
             <View style={ES.specificEventView1}>
-              <Image style={ES.specificEventImage} source={require('../assets/mnemonic.png')} />
+              <Image style={ES.specificEventImage} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/mnemonic.png') : require('../assets/mnemonic-black.png')} />
             </View>
 
             {Space(5)}
@@ -84,13 +84,13 @@ export default function SpecificListingScreen( { route, navigation }) {
 <BlurView style={MS.bMenu} intensity={30}/>
     <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
         <TouchableOpacity onPress={() => eventPage()}>
-            <Image style={MS.bMenuIcon} source={require('../assets/calendar777.png')} />
+        <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/calendar777.png') : require('../assets/calendar-black.png')} />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => listingPage()}>
             <Image style={MS.bMenuIcon} source={require('../assets/business-orange.png')} />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => menuPage()}>
-              <Image style={MS.bMenuIcon} source={require('../assets/menu.png')} />
+          <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/menu.png') : require('../assets/menu-black.png')} />
           </TouchableOpacity>
       </View>     
     </View>

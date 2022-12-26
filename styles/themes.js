@@ -19,7 +19,7 @@ export const DARK = {                   // Dark theme
 export const LIGHT = {                  // Light theme
     BACKGROUND: 'white',                // Background of the app
     DARKER: '#F0F0F0',                  // Contentcolor of the app
-    TRANSPARENT: '#F0F0F033',           // Blur effect color
+    TRANSPARENT: '#77777733',           // Blur effect color
     CONTRAST: '#B8B8B8',                // Contrast to background and darker
     ORANGE: '#fd8738',                  // Logins color
     TEXTCOLOR: 'black',                 // Textcolor of the app

@@ -159,10 +159,10 @@ export default function SpecificEventScreen({ route, navigation}) {
             <Image style={MS.bMenuIcon} source={require('../assets/calendar-orange.png')} />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => listingPage()}>
-            <Image style={MS.bMenuIcon} source={require('../assets/business.png')} />
+          <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/business.png') : require('../assets/business-black.png')} />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => menuPage()}>
-            <Image style={MS.bMenuIcon} source={require('../assets/menu.png')} />
+          <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/menu.png') : require('../assets/menu-black.png')} />
           </TouchableOpacity>
       </View>     
     </View>

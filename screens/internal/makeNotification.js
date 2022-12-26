@@ -195,13 +195,13 @@ export default function MakeNotificationScreen({ navigation }) {
 <BlurView style={MS.bMenu} intensity={25}/>
     <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'DARKER')}}>
       <TouchableOpacity onPress={() => eventPage()}>
-        <Image style={MS.bMenuIcon} source={require('../../assets/calendar777.png')} />
+      <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/calendar777.png') : require('../../assets/calendar-black.png')} />
       </TouchableOpacity>
       <TouchableOpacity onPress={() => listingPage()}>
-        <Image style={MS.bMenuIcon} source={require('../../assets/business.png')} />
+      <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/business.png') : require('../../assets/business-black.png')} />
       </TouchableOpacity>
       <TouchableOpacity onPress={() => menuPage()}>
-        <Image style={MS.bMenuIcon} source={require('../../assets/menu.png')} />
+        <Image style={MS.bMenuIcon} source={require('../../assets/menu-orange.png')} />
       </TouchableOpacity>
       </View>     
     </View>

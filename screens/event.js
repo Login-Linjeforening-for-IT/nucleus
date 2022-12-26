@@ -286,7 +286,7 @@ export default function EventScreen({ navigation }) {                     // Exp
                       onChangeText={(val) => filterInput(val)}
                   />
                   <TouchableOpacity onPress={() => filterInput(null) + setRenderedArray([...events]) + setClickedCategory([]) + textInputRef.current.clear()}>
-                      <Image style={ES.filterResetIcon} source={require('../assets/reset.png')} />
+                      <Image style={ES.filterResetIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/reset.png') : require('../assets/reset-black.png')} />
                   </TouchableOpacity>
               </View>
               
@@ -389,7 +389,7 @@ export default function EventScreen({ navigation }) {                     // Exp
       <BlurView style={MS.topMenu} intensity={30}/>
       <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
         <TouchableOpacity>
-          <Image style={MS.tMenuIcon} source={require('../assets/loginText.png')} />
+          <Image style={MS.tMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/loginText.png') : require('../assets/loginText-black.png')} />
         </TouchableOpacity>
         <View style={GS.loginStatus}>{login ? DynamicCircle(10,10,'red',0,0,60,0):null}</View>
         {
@@ -405,7 +405,7 @@ export default function EventScreen({ navigation }) {                     // Exp
             {search.status ? 
               <Image style={{...MS.tMenuIcon, right: 5}} source={require('../assets/filter-orange.png')} />
             :
-              <Image style={{...MS.tMenuIcon, right: 5}} source={require('../assets/filter.png')} />
+              <Image style={{...MS.tMenuIcon, right: 5}} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/filter.png') : require('../assets/filter-black.png')} />
             }
           </TouchableOpacity>
         :null:null}
@@ -417,10 +417,10 @@ export default function EventScreen({ navigation }) {                     // Exp
               <Image style={MS.bMenuIcon} source={require('../assets/calendar-orange.png')} />
             </TouchableOpacity>
             <TouchableOpacity onPress={() => listingPage()}>
-              <Image style={MS.bMenuIcon} source={require('../assets/business.png')} />
+            <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/business.png') : require('../assets/business-black.png')} />
             </TouchableOpacity>
             <TouchableOpacity onPress={() => menuPage()}>
-              <Image style={MS.bMenuIcon} source={require('../assets/menu.png')} />
+              <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/menu.png') : require('../assets/menu-black.png')} />
             </TouchableOpacity>
         </View>     
     </View>

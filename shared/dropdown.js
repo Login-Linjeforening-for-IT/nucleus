@@ -99,7 +99,7 @@ export default function Dropdown() {
                             <TouchableOpacity key={index} onPress={() => Linking.openURL(selectedCourse.link)}>
                                 <View style={{...GS.dropdownContent, backgroundColor: FetchColor(theme, 'CONTRAST')}}>
                                     <Text style={{...T.text15, color: FetchColor(theme, 'TEXTCOLOR')}}>{selectedCourse.title}</Text>
-                                    <Image style={GS.smallDropImage} source={require('../assets/linkicon-white.png')} />
+                                    <Image style={GS.smallDropImage} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/linkicon-white.png') : require('../assets/linkicon-black.png')} />
                                 </View>
                             </TouchableOpacity>
                             

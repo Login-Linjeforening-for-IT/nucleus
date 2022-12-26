@@ -27,14 +27,10 @@ export default function TodoScreen({ navigation }) {
   const [setting] = useState([
     {id: '1', todo: 'Implement mazemap - seems every library is deprecated'},
     {id: '2', todo: 'Implement mail sending service'},
-    {id: '3', todo: 'Center title position'},
-    {id: '4', todo: 'Bug: event storage'},
-    {id: '5', todo: 'Bug: missing photo SES'},
-    {id: '6', todo: 'Bug: SES eventtext'},
-    {id: '7', todo: 'Theme'},
-    {id: '8', todo: 'Language'},
-    {id: '9', todo: 'Push notifications need to be revisited'},
-    {id: '10', todo: 'Local notification event reminders'},
+    {id: '3', todo: 'Bug: missing photo SES'},
+    {id: '4', todo: 'Push notifications need to be revisited'},
+    {id: '5', todo: 'Local notification event reminders'},
+    {id: '6', todo: 'Swipable navigation'},
   ])
 {/* ========================= DISPLAY APP START ========================= */}
 function eventPage()   { navigation.navigate('EventScreen')    }
@@ -45,13 +41,13 @@ function goBack()      { navigation.navigate('InternalScreen') }
   return(
     <View>
 {/* ========================= DISPLAY CONTENT ========================= */}
-<View style={{...GS.content, backgroundColor: FetchColor(theme, 'DARKER')}}>
+<View style={{...GS.content, backgroundColor: FetchColor(theme, 'BACKGROUND')}}>
           <FlatList showsVerticalScrollIndicator={false}
           numColumns={1}
           keyExtractor={(item) => item.id}
           data={setting}
-          renderItem={({item}) => (
-            <View>
+          renderItem={({item, index}) => (
+            <View>{index == 0 ? Space(Dimensions.get('window').height/7.5): null}
               <Card>
                 <Text style={{...T.text15, color: FetchColor(theme, 'TEXTCOLOR')}}>{item.id}. {item.todo}</Text>
               </Card>
@@ -77,13 +73,13 @@ function goBack()      { navigation.navigate('InternalScreen') }
 <BlurView style={MS.bMenu} intensity={25}/>
       <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'DARKER')}}>
           <TouchableOpacity onPress={() => eventPage()}>
-            <Image style={MS.bMenuIcon} source={require('../../assets/calendar777.png')} />
+          <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/calendar777.png') : require('../../assets/calendar-black.png')} />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => listingPage()}>
-            <Image style={MS.bMenuIcon} source={require('../../assets/business.png')} />
+          <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/business.png') : require('../../assets/business-black.png')} />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => menuPage()}>
-            <Image style={MS.bMenuIcon} source={require('../../assets/menu.png')} />
+            <Image style={MS.bMenuIcon} source={require('../../assets/menu-orange.png')} />
           </TouchableOpacity>
       </View>   
     </View>
