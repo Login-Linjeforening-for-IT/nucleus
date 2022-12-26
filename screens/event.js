@@ -18,7 +18,8 @@ import {                                                                  // Rea
   FlatList,                                                               // Flatlist component   (basic list)
   TextInput,                                                              // Text input component (allows the user to type)
   TouchableOpacity,                                                       // TouchableOpacity     (custom button)
-  Dimensions
+  Dimensions,
+  Platform
 } from 'react-native';                                                    // React native
 import { useFocusEffect } from '@react-navigation/native';                // useFocusEffect       (do something when the screen is displayed)
 
@@ -386,7 +387,7 @@ export default function EventScreen({ navigation }) {                     // Exp
       </View>    
 
       {/* ========================= DISPLAY TOP MENU ========================= */}
-      <BlurView style={MS.topMenu} intensity={30}/>
+      {Platform.OS === 'ios' ? <BlurView style={MS.topMenu} intensity={30}/> : <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'TRANSPARENTANDROID')}}/>}
       <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
         <TouchableOpacity>
           <Image style={MS.tMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/loginText.png') : require('../assets/loginText-black.png')} />
@@ -411,7 +412,7 @@ export default function EventScreen({ navigation }) {                     // Exp
         :null:null}
       </View>
       {/* ========================= DISPLAY BOTTOM MENU ========================= */}
-      <BlurView style={MS.bMenu} intensity={30}/>
+      {Platform.OS === 'ios' ? <BlurView style={MS.bMenu} intensity={30}/> : <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENTANDROID')}}/>}
     <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
         <TouchableOpacity>
               <Image style={MS.bMenuIcon} source={require('../assets/calendar-orange.png')} />

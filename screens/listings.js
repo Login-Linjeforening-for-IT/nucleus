@@ -14,7 +14,8 @@ import {
   Image, 
   FlatList,
   TouchableOpacity,
-  Dimensions
+  Dimensions,
+  Platform
 } from 'react-native';
 
 {/* ========================= APP START ========================= */}
@@ -33,11 +34,11 @@ return(
 
 {/* ========================= DISPLAY CONTENT ========================= */}
 <View style={{...GS.content, backgroundColor: FetchColor(theme, 'BACKGROUND')}}>
-          <View style={{...T.centeredBold20, flex: 1, justifyContent: 'center'}}>{lang ? <Text style={{...T.centeredBold20, color: FetchColor(theme, 'TEXTCOLOR')}}>Jobbannonser kommer snart! Bli med i tekkom hvis du ønsker å hjelpe til😉</Text>:<Text style={{...T.centeredBold20, color: FetchColor(theme, 'TEXTCOLOR')}}>Job listings are coming soon! Join TekKom if you would like to help!😉</Text>}</View>
+          <View style={{...T.centeredBold20, flex: 1, justifyContent: 'center'}}>{lang ? <Text style={{...T.centeredBold20, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>Jobbannonser kommer snart! Bli med i tekkom hvis du ønsker å hjelpe til😉</Text>:<Text style={{...T.centeredBold20, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>Job listings are coming soon! Join TekKom if you would like to help!😉</Text>}</View>
       </View>    
 
 {/* ========================= DISPLAY TOP MENU ========================= */}
-<BlurView style={MS.topMenu} intensity={30}/>
+{Platform.OS === 'ios' ? <BlurView style={MS.topMenu} intensity={30}/> : <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'TRANSPARENTANDROID')}}/>}
       <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
     <TouchableOpacity onPress={() => eventPage()}>
       <Image style={MS.tMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/loginText.png') : require('../assets/loginText-black.png')} />
@@ -49,7 +50,7 @@ return(
   </View>
 
 {/* ========================= DISPLAY BOTTOM MENU ========================= */}
-<BlurView style={MS.bMenu} intensity={30}/>
+{Platform.OS === 'ios' ? <BlurView style={MS.bMenu} intensity={30}/> : <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENTANDROID')}}/>}
     <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
       <TouchableOpacity onPress={() => eventPage()}>
       <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/calendar777.png') : require('../assets/calendar-black.png')} />

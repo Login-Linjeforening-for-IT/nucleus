@@ -14,8 +14,10 @@ import {
   TouchableOpacity,                                                                 // TouchableOpacity (custom button)
   ScrollView,                                                                       // Scrollable view 
   Linking,                                                                          // Function to link to websites etc.
-  Dimensions                                                                        // Screen size
+  Dimensions,                                                                       // Screen size
+  Platform
 } from 'react-native';                                                              // React Native
+
 
 {/* ========================= APP START ========================= */}
 
@@ -58,7 +60,7 @@ export default function CommitteeMenuScreen({ navigation }) {                   
   </View>    
 
 {/* ========================= DISPLAY TOP MENU ========================= */}
-<BlurView style={MS.topMenu} intensity={30}/>
+{Platform.OS === 'ios' ? <BlurView style={MS.topMenu} intensity={30}/> : <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'TRANSPARENTANDROID')}}/>}
       <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
   <TouchableOpacity onPress={() => menuPage()}>
       <Image style={MS.goBack} source={require('../../assets/goback777.png')} />
@@ -71,7 +73,7 @@ export default function CommitteeMenuScreen({ navigation }) {                   
   </View>
 
 {/* ========================= DISPLAY BOTTOM MENU ========================= */}
-<BlurView style={MS.bMenu} intensity={30}/>
+{Platform.OS === 'ios' ? <BlurView style={MS.bMenu} intensity={30}/> : <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENTANDROID')}}/>}
     <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
       <TouchableOpacity onPress={() => eventPage()}>
       <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/calendar777.png') : require('../../assets/calendar-black.png')} />

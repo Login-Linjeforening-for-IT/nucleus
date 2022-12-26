@@ -7,6 +7,7 @@ export default function FetchColor(theme, variable) {
             case 'BACKGROUND':              return DARK.BACKGROUND
             case 'DARKER':                  return DARK.DARKER
             case 'TRANSPARENT':             return DARK.TRANSPARENT
+            case 'TRANSPARENTANDROID':      return DARK.TRANSPARENTANDROID
             case 'CONTRAST':                return DARK.CONTRAST
             case 'ORANGE':                  return DARK.ORANGE
             case 'TEXTCOLOR':               return DARK.TEXTCOLOR
@@ -24,6 +25,7 @@ export default function FetchColor(theme, variable) {
             case 'BACKGROUND':              return LIGHT.BACKGROUND
             case 'DARKER':                  return LIGHT.DARKER
             case 'TRANSPARENT':             return LIGHT.TRANSPARENT
+            case 'TRANSPARENTANDROID':      return LIGHT.TRANSPARENTANDROID
             case 'CONTRAST':                return LIGHT.CONTRAST
             case 'ORANGE':                  return LIGHT.ORANGE
             case 'TEXTCOLOR':               return LIGHT.TEXTCOLOR
@@ -41,6 +43,7 @@ export default function FetchColor(theme, variable) {
             case 'BACKGROUND':              return ABYSS.BACKGROUND
             case 'DARKER':                  return ABYSS.DARKER
             case 'TRANSPARENT':             return ABYSS.TRANSPARENT
+            case 'TRANSPARENTANDROID':      return ABYSS.TRANSPARENTANDROID
             case 'CONTRAST':                return ABYSS.CONTRAST
             case 'ORANGE':                  return ABYSS.ORANGE
             case 'TEXTCOLOR':               return ABYSS.TEXTCOLOR
@@ -58,6 +61,7 @@ export default function FetchColor(theme, variable) {
             case 'BACKGROUND':              return SUNSET.BACKGROUND
             case 'DARKER':                  return SUNSET.DARKER
             case 'TRANSPARENT':             return SUNSET.TRANSPARENT
+            case 'TRANSPARENTANDROID':      return SUNSET.TRANSPARENTANDROID
             case 'CONTRAST':                return SUNSET.CONTRAST
             case 'ORANGE':                  return SUNSET.ORANGE
             case 'TEXTCOLOR':               return SUNSET.TEXTCOLOR
@@ -75,6 +79,7 @@ export default function FetchColor(theme, variable) {
             case 'BACKGROUND':              return CHRISTMAS.BACKGROUND
             case 'DARKER':                  return CHRISTMAS.DARKER
             case 'TRANSPARENT':             return CHRISTMAS.TRANSPARENT
+            case 'TRANSPARENTANDROID':      return CHRISTMAS.TRANSPARENTANDROID
             case 'CONTRAST':                return CHRISTMAS.CONTRAST
             case 'ORANGE':                  return CHRISTMAS.ORANGE
             case 'TEXTCOLOR':               return CHRISTMAS.TEXTCOLOR
@@ -91,6 +96,7 @@ export default function FetchColor(theme, variable) {
         switch (variable) {
             case 'BACKGROUND':              return EASTER.BACKGROUND
             case 'TRANSPARENT':             return EASTER.TRANSPARENT
+            case 'TRANSPARENTANDROID':      return EASTER.TRANSPARENTANDROID
             case 'CONTRAST':                return EASTER.CONTRAST
             case 'ORANGE':                  return EASTER.ORANGE
             case 'TEXTCOLOR':               return EASTER.TEXTCOLOR

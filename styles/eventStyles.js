@@ -29,12 +29,13 @@ export const ES = StyleSheet.create({         // Declares export ES ( Event Styl
     fontSize: 30,                             // Text font size
   },
   monthText: {                                // Eventmonth text on specificEventScreen
-    alignSelf: 'flex-start',                  // Aligns the text vertically to top
-    top: '-7.5%',                             // Moves text 7.5% upwards
+    alignSelf: 'center',                  // Aligns the text vertically to top
+    bottom: 10,                             // Moves text 7.5% upwards
     left: '20%',                              // moves events 20% rightwards
     fontSize: 20,                             // Text font size
   },
   eventCardDayText: {                         // Eventday text on eventScreen
+    top: -5,
     left: '15%',                              // Moves events 15% rightwards
     fontSize: 30,                             // Text font size
   },

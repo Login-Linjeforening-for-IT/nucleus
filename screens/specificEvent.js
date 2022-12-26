@@ -19,7 +19,8 @@ import {
   Image, 
   ScrollView,
   TouchableOpacity,
-  Dimensions
+  Dimensions,
+  Platform
 } from 'react-native';
 
 
@@ -142,7 +143,7 @@ export default function SpecificEventScreen({ route, navigation}) {
       </View>   
        
        {/* ========================= DISPLAY TOP MENU ========================= */}
-       <BlurView style={MS.topMenu} intensity={30}/>
+       {Platform.OS === 'ios' ? <BlurView style={MS.topMenu} intensity={30}/> : <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'TRANSPARENTANDROID')}}/>}
       <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
     <TouchableOpacity onPress={() => goBack()}>
       <Image style={MS.goBack} source={require('../assets/goback777.png')} />
@@ -153,7 +154,7 @@ export default function SpecificEventScreen({ route, navigation}) {
     <Text style={{... MS.smallMultilineTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{item.eventname}</Text>
   </View>
 {/* ========================= DISPLAY BOTTOM MENU ========================= */}
-<BlurView style={MS.bMenu} intensity={30}/>
+{Platform.OS === 'ios' ? <BlurView style={MS.bMenu} intensity={30}/> : <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENTANDROID')}}/>}
     <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
         <TouchableOpacity onPress={() => eventPage()}>
             <Image style={MS.bMenuIcon} source={require('../assets/calendar-orange.png')} />
