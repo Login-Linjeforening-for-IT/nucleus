@@ -121,4 +121,9 @@ export const T = StyleSheet.create({          // Declares T - meant for all text
     left: 10,                                 // Moves text 10px rightwards
     fontSize: 13,                             // Text font size
   },
+  listingText: {
+    top: '25%',
+    alignSelf: 'center',
+    justifyContent: 'center'
+  }
 })
