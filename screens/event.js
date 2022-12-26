@@ -1,5 +1,5 @@
 import GreenLight, { GrayLight, Check, MonthNO, MonthEN, DynamicCircle, SmallCheck } from '../shared/eventComponents/otherComponents';  // Components used to display event
-import Card, { CompareDates, CheckBox, CheckedBox } from '../shared/sharedComponents';  // Components used to display event
+import Card, { CompareDates, CheckBox, CheckedBox, Space } from '../shared/sharedComponents';  // Components used to display event
 import CategorySquare from '../shared/eventComponents/categorySquare';    // Left side square on eventcard
 import AsyncStorage from '@react-native-async-storage/async-storage';     // Localstorage
 import React, { useEffect, useState, useRef } from 'react';               // React imports
@@ -8,7 +8,9 @@ import { ES } from '../styles/eventStyles';                               // Eve
 import { MS } from '../styles/menuStyles';                                // Menu styles
 import { T } from '../styles/text';                                       // Text styles
 import { useSelector } from 'react-redux';                                // Redux
+import { StatusBar } from 'expo-status-bar';                              // Status bar
 import FetchColor from '../styles/fetchTheme';                            // Function to fetch theme color
+import { BlurView } from 'expo-blur';                                     // Blur effect
 import {                                                                  // React native components
   Text,                                                                   // Text component
   View,                                                                   // View component
@@ -16,6 +18,7 @@ import {                                                                  // Rea
   FlatList,                                                               // Flatlist component   (basic list)
   TextInput,                                                              // Text input component (allows the user to type)
   TouchableOpacity,                                                       // TouchableOpacity     (custom button)
+  Dimensions
 } from 'react-native';                                                    // React native
 import { useFocusEffect } from '@react-navigation/native';                // useFocusEffect       (do something when the screen is displayed)
 
@@ -27,9 +30,7 @@ export default function EventScreen({ navigation }) {                     // Exp
 
                                                                           // Screens you can navigate to from this screen
   const listingPage = () => { navigation.navigate('ListingScreen') }      // Job screen
-  const homePage    = () => { navigation.navigate('HomeScreen')    }      // Home screen
-  const aboutPage   = () => { navigation.navigate('AboutScreen')   }      // About screen
-  const profilePage = () => { navigation.navigate('ProfileScreen') }      // Profile screen
+  const menuPage    = () => { navigation.navigate('MenuScreen')    }      // Function to navigate to menu
 
   const getData=()=>{                                                     //  --- FETCHING DATA FROM API ---
     try {
@@ -267,43 +268,11 @@ export default function EventScreen({ navigation }) {                     // Exp
   renderArray();                                                          //  --- WHICH EVENTS TO DISPLAY ---
   return(                                                                 //  --- DISPLAYS THE EVENTSCREEN ---
     <View> 
-      {/* ========================= DISPLAY TOP MENU ========================= */}
-      <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'DARKER')}}>
-        <TouchableOpacity onPress={() => aboutPage()}>
-          <Image style={MS.tMenuIcon} source={require('../assets/loginText.png')} />
-        </TouchableOpacity>
-        {login ? DynamicCircle(10,10,'red',0,0,60,0):null}
-        {search.status == 0 && renderedArray.length == 0 ?
-          lang ?
-            <Text style={{... MS.smallTitle, left: '-25%', color: FetchColor(theme, 'TITLETEXTCOLOR')}}>Arrangementer</Text>
-          : 
-            <Text style={{... MS.screenTitle, left: '-25%', color: FetchColor(theme, 'TITLETEXTCOLOR')}}>Events</Text>
-        :
-          lang ?
-            <Text style={{... MS.smallTitle, left: '-5%', color: FetchColor(theme, 'TITLETEXTCOLOR')}}>Arrangementer</Text>
-          : 
-            <Text style={{... MS.screenTitle, left: '-5%', color: FetchColor(theme, 'TITLETEXTCOLOR')}}>Events</Text>
-        }
-        
-        {renderedArray != null ? 
-          renderedArray.length > 0 || clickedCategory.length > 0 || filter.input != null ? 
-          <TouchableOpacity onPress={() => toggleSearchBar()}>
-            {search.status ? 
-              <Image style={MS.searchIcon} source={require('../assets/filter-orange.png')} />
-            :
-              <Image style={MS.searchIcon} source={require('../assets/filter.png')} />
-            }
-          </TouchableOpacity>
-        :null:null}
-
-          <TouchableOpacity onPress={() => profilePage()}>
-            <Image style={MS.tMenuIconWithExtra} source={require('../assets/loginperson.png')} />
-          </TouchableOpacity>
-      </View>
-
+      <StatusBar style={theme == 0 || theme == 2 || theme == 3 ? 'light' : 'dark'} />
       {/* ========================= DISPLAY CONTENT ========================= */}
       <View style={{...GS.content, backgroundColor: FetchColor(theme, 'BACKGROUND')}}>
         {/* ----- RENDERS FILTER ----- */}
+        {search.status == 1? Space(Dimensions.get('window').height/7.5):null}
         {search.status ? 
           <View>
               <View style={ES.absoluteView}>
@@ -360,12 +329,15 @@ export default function EventScreen({ navigation }) {                     // Exp
               numColumns={1}
               keyExtractor={(item) => item.eventID}
               data={renderedArray}
-              renderItem={({item}) => (
+              renderItem={({item, index}) => (
+                
                 <View> 
                   <TouchableOpacity onPress={() => navigation.navigate('SpecificEventScreen', {item: item})}>
+                  {index == 0 && search.status == 0? Space(Dimensions.get('window').height/7.5): null}
                       <Card style={ES.eventCard}>
                         <View style={ES.eventBack}>
                           <View>
+                            
                               {CategorySquare(item.category)}
                               <Text style={{...ES.eventCardDayText, color: FetchColor(theme, 'TEXTCOLOR')}}>{item.startt[8]}{item.startt[9]}</Text>
                               {lang ? MonthNO(item.startt[5] + item.startt[6], FetchColor(theme, 'TEXTCOLOR')) : MonthEN(item.startt[5] + item.startt[6], FetchColor(theme, 'TEXTCOLOR'))}
@@ -410,18 +382,45 @@ export default function EventScreen({ navigation }) {                     // Exp
             <Text style={{...T.centeredBold20, color: FetchColor(theme, 'TEXTCOLOR')}}>Sjekk nettverkstilkoblingen din og prøv igjen. Kontakt TEKKOM dersom problemet vedvarer.</Text>
           </View>
         }
+        {Space(Dimensions.get('window').height/10)}
       </View>    
 
+      {/* ========================= DISPLAY TOP MENU ========================= */}
+      <BlurView style={MS.topMenu} intensity={30}/>
+      <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
+        <TouchableOpacity>
+          <Image style={MS.tMenuIcon} source={require('../assets/loginText.png')} />
+        </TouchableOpacity>
+        <View style={GS.loginStatus}>{login ? DynamicCircle(10,10,'red',0,0,60,0):null}</View>
+        {
+          lang ?
+            <Text style={{... MS.smallTitle, left: '-5%', color: FetchColor(theme, 'TITLETEXTCOLOR')}}>Arrangementer</Text>
+          : 
+            <Text style={{... MS.eventScreenTitle, left: '-5%', color: FetchColor(theme, 'TITLETEXTCOLOR')}}>Events</Text>
+        }
+        
+        {renderedArray != null ? 
+          renderedArray.length > 0 || clickedCategory.length > 0 || filter.input != null ? 
+          <TouchableOpacity onPress={() => toggleSearchBar()}>
+            {search.status ? 
+              <Image style={{...MS.tMenuIcon, right: 5}} source={require('../assets/filter-orange.png')} />
+            :
+              <Image style={{...MS.tMenuIcon, right: 5}} source={require('../assets/filter.png')} />
+            }
+          </TouchableOpacity>
+        :null:null}
+      </View>
       {/* ========================= DISPLAY BOTTOM MENU ========================= */}
-        <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'DARKER')}}>
-        <TouchableOpacity onPress={() => homePage()}>
-              <Image style={MS.bMenuIcon} source={require('../assets/house777.png')} />
-            </TouchableOpacity>
-            <TouchableOpacity>
+      <BlurView style={MS.bMenu} intensity={30}/>
+    <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
+        <TouchableOpacity>
               <Image style={MS.bMenuIcon} source={require('../assets/calendar-orange.png')} />
             </TouchableOpacity>
             <TouchableOpacity onPress={() => listingPage()}>
               <Image style={MS.bMenuIcon} source={require('../assets/business.png')} />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => menuPage()}>
+              <Image style={MS.bMenuIcon} source={require('../assets/menu.png')} />
             </TouchableOpacity>
         </View>     
     </View>

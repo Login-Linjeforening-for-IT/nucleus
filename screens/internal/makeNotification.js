@@ -6,6 +6,7 @@ import { DynamicCircle } from '../../shared/eventComponents/otherComponents';
 import { T } from '../../styles/text';
 import { useSelector } from 'react-redux';
 import FetchColor from '../../styles/fetchTheme';
+import { BlurView } from 'expo-blur';
 import { 
   Text, 
   View, 
@@ -13,7 +14,8 @@ import {
   TouchableOpacity,
   Platform,
   TextInput,
-  ScrollView
+  ScrollView,
+  Dimensions
 } from 'react-native';
 // import * as Notifications from 'expo-notifications';
 
@@ -52,8 +54,7 @@ export default function MakeNotificationScreen({ navigation }) {
   const { theme } = useSelector( (state) => state.theme )
 
   const eventPage   = () => { navigation.navigate('EventScreen')    }
-  const homePage    = () => { navigation.navigate('HomeScreen')     }
-  const profilePage = () => { navigation.navigate('ProfileScreen')  }
+  const menuPage    = () => { navigation.navigate('MenuScreen')     }              // Function to navigate to menu
   const goBack      = () => { navigation.navigate('InternalScreen') }
   const listingPage = () => { navigation.navigate('ListingScreen')  }
 
@@ -108,26 +109,11 @@ export default function MakeNotificationScreen({ navigation }) {
 
   return(
     <View>
-      {/* ========================= DISPLAY TOP MENU ========================= */}
-        <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'DARKER')}}>
-          <TouchableOpacity onPress={() => goBack()}>
-            <Image style={MS.goBack} source={require('../../assets/goback777.png')} />
-          </TouchableOpacity>
-
-          {login ? DynamicCircle(10,10,'red',0,0,60,0):null}
-
-          <Text style={{... MS.screenTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{lang ? 'Send Varsling' : 'Send Push'}</Text>
-          
-            <TouchableOpacity onPress={() => profilePage()}>
-              <Image style={MS.tMenuIcon} source={require('../../assets/loginperson-orange.png')} />
-            </TouchableOpacity>
-        </View>
-
     {/* ========================= DISPLAY CONTENT ========================= */}
     <View style={{...GS.content, backgroundColor: FetchColor(theme, 'BACKGROUND')}}>
     <ScrollView showsVerticalScrollIndicator={false}>
 
-      {Space(50)}
+      {Space((Dimensions.get('window').height/7.5)+50)}
 
       <Text style={{...T.centered, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Send varsling' : 'Send push notification'}</Text>{Space(10)}
 
@@ -189,19 +175,33 @@ export default function MakeNotificationScreen({ navigation }) {
       </View>
 
       {Space(15)}
+      {Space(Dimensions.get('window').height/10)}
     </ScrollView>
   </View>    
 
+ {/* ========================= DISPLAY TOP MENU ========================= */}
+ <BlurView style={MS.topMenu} intensity={30}/>
+      <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
+          <TouchableOpacity onPress={() => goBack()}>
+            <Image style={MS.goBack} source={require('../../assets/goback777.png')} />
+          </TouchableOpacity>
+
+          <View style={GS.loginStatus}>{login ? DynamicCircle(10,10,'red',0,0,60,0):null}</View>
+
+          <Text style={{... MS.screenTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{lang ? 'Send Varsling' : 'Send Push'}</Text>
+        </View>
+
 {/* ========================= DISPLAY BOTTOM MENU ========================= */}
+<BlurView style={MS.bMenu} intensity={25}/>
     <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'DARKER')}}>
-      <TouchableOpacity onPress={() => homePage()}>
-        <Image style={MS.bMenuIcon} source={require('../../assets/house777.png')} />
-      </TouchableOpacity>
       <TouchableOpacity onPress={() => eventPage()}>
         <Image style={MS.bMenuIcon} source={require('../../assets/calendar777.png')} />
       </TouchableOpacity>
       <TouchableOpacity onPress={() => listingPage()}>
         <Image style={MS.bMenuIcon} source={require('../../assets/business.png')} />
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => menuPage()}>
+        <Image style={MS.bMenuIcon} source={require('../../assets/menu.png')} />
       </TouchableOpacity>
       </View>     
     </View>

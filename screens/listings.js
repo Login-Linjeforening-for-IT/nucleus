@@ -1,18 +1,20 @@
 {/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
 import { MS } from '../styles/menuStyles'
 import { GS } from '../styles/globalStyles'
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { T } from '../styles/text'
-import Card from '../shared/sharedComponents';
+import Card, {Space} from '../shared/sharedComponents';
 import { useSelector } from 'react-redux';
 import { DynamicCircle } from '../shared/eventComponents/otherComponents';
 import FetchColor from '../styles/fetchTheme';
+import { BlurView } from 'expo-blur';
 import { 
   Text, 
   View, 
   Image, 
   FlatList,
-  TouchableOpacity
+  TouchableOpacity,
+  Dimensions
 } from 'react-native';
 
 {/* ========================= APP START ========================= */}
@@ -30,26 +32,10 @@ export default function ListingScreen({ navigation }) {
   ])
 
 const eventPage   = () => { navigation.navigate('EventScreen')   }
-const homePage    = () => { navigation.navigate('HomeScreen')    }
-const aboutPage   = () => { navigation.navigate('AboutScreen')   }
-const profilePage = () => { navigation.navigate('ProfileScreen') }
+const menuPage    = () => { navigation.navigate('MenuScreen')    }              // Function to navigate to menu
 
 return(
   <View>
-{/* ========================= DISPLAY TOP MENU ========================= */}
-<View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'DARKER')}}>
-    <TouchableOpacity onPress={() => aboutPage()}>
-      <Image style={MS.tMenuIcon} source={require('../assets/loginText.png')} />
-    </TouchableOpacity>
-
-    {login ? DynamicCircle(10,10,'red',0,0,60,0):null}
-
-    <Text style={{... MS.screenTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{lang ? 'Stillinger' : 'Vacancies'}</Text>
-
-      <TouchableOpacity onPress={() => profilePage()}>
-        <Image style={MS.tMenuIcon} source={require('../assets/loginperson.png')} />
-      </TouchableOpacity>
-  </View>
 
 {/* ========================= DISPLAY CONTENT ========================= */}
 <View style={{...GS.content, backgroundColor: FetchColor(theme, 'BACKGROUND')}}>
@@ -58,8 +44,9 @@ return(
           numColumns={1}
           keyExtractor={(item) => item.id}
           data={setting}
-          renderItem={({item}) => (
+          renderItem={({item, index}) => (
             <View>
+              {index == 0 ? Space(Dimensions.get('window').height/7.5): null}
             <TouchableOpacity onPress={() => navigation.navigate('SpecificListingScreen', {item: item})}>
               <Card>
                 <Text style={{...T.centered20, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? item.titleNO : item.titleEN}</Text><Text/>
@@ -69,18 +56,32 @@ return(
           </View>
           )}
           />
+          {Space(Dimensions.get('window').height/10)}
       </View>    
 
+{/* ========================= DISPLAY TOP MENU ========================= */}
+<BlurView style={MS.topMenu} intensity={30}/>
+      <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
+    <TouchableOpacity onPress={() => eventPage()}>
+      <Image style={MS.tMenuIcon} source={require('../assets/loginText.png')} />
+    </TouchableOpacity>
+
+    <View style={GS.loginStatus}>{login ? DynamicCircle(10,10,'red',0,0,60,0):null}</View>
+
+    <Text style={{... MS.screenTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{lang ? 'Stillinger' : 'Vacancies'}</Text>
+  </View>
+
 {/* ========================= DISPLAY BOTTOM MENU ========================= */}
-      <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'DARKER')}}>
-      <TouchableOpacity onPress={() => homePage()}>
-        <Image style={MS.bMenuIcon} source={require('../assets/house777.png')} />
-      </TouchableOpacity>
+<BlurView style={MS.bMenu} intensity={30}/>
+    <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
       <TouchableOpacity onPress={() => eventPage()}>
         <Image style={MS.bMenuIcon} source={require('../assets/calendar777.png')} />
       </TouchableOpacity>
       <TouchableOpacity>
         <Image style={MS.bMenuIcon} source={require('../assets/business-orange.png')} />
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => menuPage()}>
+              <Image style={MS.bMenuIcon} source={require('../assets/menu.png')} />
       </TouchableOpacity>
       </View>     
     </View>

@@ -1,27 +1,27 @@
 {/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
-import { GS } from '../styles/globalStyles';
-import { T } from '../styles/text';
-import { MS } from '../styles/menuStyles';
-import Card, { Line, Space , Social, AllComitees, Copyright } from '../shared/sharedComponents';
+import { GS } from '../../styles/globalStyles';
+import { T } from '../../styles/text';
+import { MS } from '../../styles/menuStyles';
+import Card, { Line, Space , Social, AllComitees, Copyright } from '../../shared/sharedComponents';
 import React, {useState} from 'react';
-import Dropdown from '../shared/dropdown';
+import Dropdown from '../../shared/dropdown';
 import { useSelector } from 'react-redux';
-import { DynamicCircle } from '../shared/eventComponents/otherComponents';
-import FetchColor from '../styles/fetchTheme';
-import { Dimensions } from 'react-native';
+import { DynamicCircle } from '../../shared/eventComponents/otherComponents';
+import FetchColor from '../../styles/fetchTheme';
+import { BlurView } from 'expo-blur';
 import { 
   Text, 
   View, 
   Image, 
   ScrollView,
   TouchableOpacity,
-  Linking
+  Linking,
+  Dimensions
 } from 'react-native';
 
 {/* ========================= APP START ========================= */}
 
 export default function AboutScreen( { navigation }) {
-
   const { lang  } = useSelector( (state) => state.lang  )
   const { login } = useSelector( (state) => state.login )
   const { theme } = useSelector( (state) => state.theme )
@@ -38,10 +38,8 @@ export default function AboutScreen( { navigation }) {
   ])
 
   const eventPage   = () => { navigation.navigate('EventScreen')   }
-  const homePage    = () => { navigation.navigate('HomeScreen')    }
-  const profilePage = () => { navigation.navigate('ProfileScreen') }
+  const menuPage    = () => { navigation.navigate('MenuScreen')    }              // Function to navigate to menu
   const listingPage = () => { navigation.navigate('ListingScreen') }
-  const goBack      = () => { navigation.goBack()                  }
 
   const [comittee, selectComittee] = useState({
     selected: 0
@@ -53,28 +51,13 @@ export default function AboutScreen( { navigation }) {
       selected: val,
     });
   }
-{/* ========================= DISPLAY APP START ========================= */}
 
 return(
   <View>
-{/* ========================= DISPLAY TOP MENU ========================= */}
-  <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'DARKER')}}>
-    <TouchableOpacity onPress={() => goBack()}>
-      <Image style={MS.goBack} source={require('../assets/goback777.png')} />
-    </TouchableOpacity>
-
-    {login ? DynamicCircle(10,10,'red',0,0,60,0):null}
-
-    <Text style={{... MS.screenTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{lang ? 'Om Login' : 'About Login'}</Text>
-
-      <TouchableOpacity onPress={() => profilePage()}>
-        <Image style={MS.tMenuIcon} source={require('../assets/loginperson.png')} />
-      </TouchableOpacity>
-  </View>
 {/* ========================= DISPLAY CONTENT ========================= */}
 <View style={{...GS.content, backgroundColor: FetchColor(theme, 'BACKGROUND')}}>
-        
     <ScrollView showsVerticalScrollIndicator={false}>
+      {Space(Dimensions.get('window').height/7.5)}
       <Card>
         <Text style={{...T.bold40, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Hvem er vi?' : 'Who are we?'}</Text>{Space(5)}
         <View style={GS.row}>
@@ -86,7 +69,7 @@ return(
         {Space(5)}
         <Dropdown/>
         {Space(10)}
-        <Image style={GS.aboutImage} source={require('../assets/aboutimage.png')} />
+        <Image style={GS.aboutImage} source={require('../../assets/aboutimage.png')} />
         {Space(5)}
         <Text style={{...T.centeredBold25, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Av studenter, for studenter.' : 'By students, for students'}</Text>
         {Space(5)}
@@ -108,9 +91,9 @@ return(
             <TouchableOpacity onPress={() => selectedComittee(0)}>
               <View style={{...GS.comittee1, backgroundColor: FetchColor(theme, 'CONTRAST')}}>
                 {comittee.selected == 0 ? 
-                    <Image style={GS.image80} source={require('../assets/styret-orange.png')} />
+                    <Image style={GS.image80} source={require('../../assets/styret-orange.png')} />
                   : 
-                    <Image style={GS.image80} source={require('../assets/styret555.png')} />
+                    <Image style={GS.image80} source={require('../../assets/styret555.png')} />
                 }
               </View>
             </TouchableOpacity>
@@ -118,9 +101,9 @@ return(
             <TouchableOpacity onPress={() => selectedComittee(1)}>
               <View style={{...GS.comittee2, backgroundColor: FetchColor(theme, 'CONTRAST')}}>
                 {comittee.selected == 1 ? 
-                    <Image style={GS.image80} source={require('../assets/eventkom-orange.png')} />
+                    <Image style={GS.image80} source={require('../../assets/eventkom-orange.png')} />
                   : 
-                    <Image style={GS.image80} source={require('../assets/eventkom555.png')} />
+                    <Image style={GS.image80} source={require('../../assets/eventkom555.png')} />
                 }
               </View>
             </TouchableOpacity>
@@ -128,9 +111,9 @@ return(
             <TouchableOpacity onPress={() => selectedComittee(2)}>
               <View style={{...GS.comittee3, backgroundColor: FetchColor(theme, 'CONTRAST')}}>
                 {comittee.selected == 2 ? 
-                    <Image style={GS.image80} source={require('../assets/tekkom-orange.png')} />
+                    <Image style={GS.image80} source={require('../../assets/tekkom-orange.png')} />
                   : 
-                    <Image style={GS.image80} source={require('../assets/tekkom555.png')} />
+                    <Image style={GS.image80} source={require('../../assets/tekkom555.png')} />
                 }
               </View>
             </TouchableOpacity>
@@ -139,9 +122,9 @@ return(
           <TouchableOpacity onPress={() => selectedComittee(3)}>
             <View style={{...GS.comittee1, backgroundColor: FetchColor(theme, 'CONTRAST')}}>
               {comittee.selected == 3 ? 
-                <Image style={GS.image80} source={require('../assets/pr-orange.png')} />
+                <Image style={GS.image80} source={require('../../assets/pr-orange.png')} />
               : 
-                <Image style={GS.image80} source={require('../assets/pr555.png')} />
+                <Image style={GS.image80} source={require('../../assets/pr555.png')} />
               }
             </View>
           </TouchableOpacity>
@@ -149,9 +132,9 @@ return(
           <TouchableOpacity onPress={() => selectedComittee(4)}>
             <View style={{...GS.comittee2, backgroundColor: FetchColor(theme, 'CONTRAST')}}>
               {comittee.selected == 4 ? 
-                  <Image style={GS.image80} source={require('../assets/ctfkom-orange.png')} />
+                  <Image style={GS.image80} source={require('../../assets/ctfkom-orange.png')} />
                 : 
-                  <Image style={GS.image80} source={require('../assets/ctfkom555.png')} />
+                  <Image style={GS.image80} source={require('../../assets/ctfkom555.png')} />
               }
             </View>
           </TouchableOpacity>
@@ -159,9 +142,9 @@ return(
           <TouchableOpacity onPress={() => selectedComittee(5)}>
             <View style={{...GS.comittee3, backgroundColor: FetchColor(theme, 'CONTRAST')}}>
               {comittee.selected == 5 ? 
-                  <Image style={GS.image80} source={require('../assets/satkom-orange.png')} />
+                  <Image style={GS.image80} source={require('../../assets/satkom-orange.png')} />
                 : 
-                  <Image style={GS.image80} source={require('../assets/satkom555.png')} />
+                  <Image style={GS.image80} source={require('../../assets/satkom555.png')} />
               }
             </View>
           </TouchableOpacity>
@@ -172,14 +155,14 @@ return(
                 return(
                   <View key={index}>
                     <Text style={{...T.text30, color: FetchColor(theme, 'TEXTCOLOR')}}>
-                      {relevantComittee.id == 0 ? <Image style={GS.small} source={require('../assets/styret-white.png')} />:null}
-                      {relevantComittee.id == 1 ? <Image style={GS.small} source={require('../assets/eventkom-white.png')} />:null}
-                      {relevantComittee.id == 2 ? <Image style={GS.small} source={require('../assets/tekkom-white.png')} />:null}
-                      {relevantComittee.id == 3 ? <Image style={GS.small} source={require('../assets/pr-white.png')} />:null}
-                      {relevantComittee.id == 4 ? <Image style={GS.small} source={require('../assets/ctfkom-white.png')} />:null}
-                      {relevantComittee.id == 5 ? <Image style={GS.small} source={require('../assets/satkom-white.png')} />:null}
-                      {lang ? relevantComittee.titleNO : relevantComittee.titleEN}</Text>{lang ? relevantComittee.quoteNO : relevantComittee.qouteEN ? Space(5):null}
-                    <Text style={{...T.boldParagraph, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? relevantComittee.quoteNO : relevantComittee.qouteEN}</Text>{lang ? relevantComittee.quoteNO : relevantComittee.qouteEN? Space(5):null}
+                      {relevantComittee.id == 0 ? <Image style={GS.small} source={require('../../assets/styret-white.png')} />:null}
+                      {relevantComittee.id == 1 ? <Image style={GS.small} source={require('../../assets/eventkom-white.png')} />:null}
+                      {relevantComittee.id == 2 ? <Image style={GS.small} source={require('../../assets/tekkom-white.png')} />:null}
+                      {relevantComittee.id == 3 ? <Image style={GS.small} source={require('../../assets/pr-white.png')} />:null}
+                      {relevantComittee.id == 4 ? <Image style={GS.small} source={require('../../assets/ctfkom-white.png')} />:null}
+                      {relevantComittee.id == 5 ? <Image style={GS.small} source={require('../../assets/satkom-white.png')} />:null}
+                      {lang ? relevantComittee.titleNO : relevantComittee.titleEN}</Text>
+                    <Text style={{...T.boldParagraph, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? relevantComittee.quoteNO : relevantComittee.qouteEN}</Text>
                     <Text style={{...T.paragraph, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? relevantComittee.descriptionNO : relevantComittee.descriptionEN}</Text>
                     {Space(15)}
                   </View>
@@ -191,70 +174,70 @@ return(
         
         {comittee.selected == 1 ? 
         <View>
-          <Image style={GS.personImage} source={require('../assets/eventkomleder.png')} />
+          <Image style={GS.personImage} source={require('../../assets/eventkomleder.png')} />
           {Space(10)}
           <Text style={T.leaderTitle}>{lang ? 'EventKom leder' : 'EventKom leader'}</Text>
           {Space(5)}
           <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>Sofie Hagen</Text>
           {Space(5)}
           <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/877183922021216256')}>
-            <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}sofiee#9763</Text>
+            <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>{<Image style={GS.tiny} source={require('../../assets/discord-white.png')} />}sofiee#9763</Text>
           </TouchableOpacity>
           {Space(25)}
         </View>: null}
 
         {comittee.selected == 2 ? 
         <View>
-          <Image style={GS.personImage} source={require('../assets/tekkomleder.png')} />
+          <Image style={GS.personImage} source={require('../../assets/tekkomleder.png')} />
           {Space(10)}
           <Text style={T.leaderTitle}>{lang ? 'TekKom leder' : 'TekKom leader'}</Text>
           {Space(5)}
           <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>Simon Edna</Text>
           {Space(5)}
           <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/298525088914079745')}>
-            <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}Sim#3909</Text>
+            <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>{<Image style={GS.tiny} source={require('../../assets/discord-white.png')} />}Sim#3909</Text>
           </TouchableOpacity>
           {Space(25)}
         </View>: null}
 
         {comittee.selected == 3 ? 
           <View>
-            <Image style={GS.personImage} source={require('../assets/prleder.png')} />
+            <Image style={GS.personImage} source={require('../../assets/prleder.png')} />
             {Space(10)}
             <Text style={T.leaderTitle}>{lang ? 'PR leder' : 'PR leader'}</Text>
             {Space(5)}
             <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>Kristina Kataki</Text>
             {Space(5)}
             <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/877108421772582962')}>
-              <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}Kataki#7254</Text>
+              <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>{<Image style={GS.tiny} source={require('../../assets/discord-white.png')} />}Kataki#7254</Text>
             </TouchableOpacity>
             {Space(25)}
           </View>: null}
 
         {comittee.selected == 4 ? 
           <View>
-            <Image style={GS.personImage} source={require('../assets/ctfkomleder.png')} />
+            <Image style={GS.personImage} source={require('../../assets/ctfkomleder.png')} />
             {Space(10)}
             <Text style={T.leaderTitle}>{lang ? 'CTF leder' : 'CTF leader'}</Text>
             {Space(5)}
             <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>Eskil Refsgaard</Text>
             {Space(5)}
             <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/522483274933731331')}>
-              <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}refsgaard#9067</Text>
+              <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>{<Image style={GS.tiny} source={require('../../assets/discord-white.png')} />}refsgaard#9067</Text>
           </TouchableOpacity>
             {Space(25)}
           </View>: null}
 
         {comittee.selected == 5 ? 
           <View>
-            <Image style={GS.personImage} source={require('../assets/satkomleder.png')} />
+            <Image style={GS.personImage} source={require('../../assets/satkomleder.png')} />
             {Space(10)}
             <Text style={T.leaderTitle}>{lang ? 'SatKom leder' : 'SatKom leader'}</Text>
             {Space(5)}
             <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>Sebastian Hestsveen</Text>
             {Space(5)}
             <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/119120560931340290')}>
-              <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>{<Image style={GS.tiny} source={require('../assets/discord-white.png')} />}stubbe#8694</Text>
+              <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>{<Image style={GS.tiny} source={require('../../assets/discord-white.png')} />}stubbe#8694</Text>
             </TouchableOpacity>
             {Space(25)}
           </View>: null}
@@ -265,7 +248,7 @@ return(
           <Text style={{...T.paragraph, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'For mer informasjon og offentlige dokumenter kan du besøke' : 'For more information and public documents, visit'}
             {<Text style={T.orange15} onPress={() => Linking.openURL('https://redmine.login.no/projects/wiki/wiki')}> Redmine
             {
-              <Image style={GS.redMine} source={require('../assets/redmine-orange.png')} />
+              <Image style={GS.redMine} source={require('../../assets/redmine-orange.png')} />
             }</Text>}
           </Text>
           
@@ -275,20 +258,35 @@ return(
         <Copyright/>
       </Card>
       {Space(10)}
+      {Space(Dimensions.get('window').height/10)}
     </ScrollView>
   </View> 
 
-  <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'DARKER')}}>
-      <TouchableOpacity onPress={() => homePage()}>
-        <Image style={MS.bMenuIcon} source={require('../assets/house-orange.png')} />
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => eventPage()}>
-        <Image style={MS.bMenuIcon} source={require('../assets/calendar777.png')} />
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => listingPage()}>
-        <Image style={MS.bMenuIcon} source={require('../assets/business.png')} />
-      </TouchableOpacity>
+{/* ========================= DISPLAY TOP MENU ========================= */}
+<BlurView style={MS.topMenu} intensity={30}/>
+      <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
+    <TouchableOpacity onPress={() => menuPage()}>
+      <Image style={MS.goBack} source={require('../../assets/goback777.png')} />
+    </TouchableOpacity>
+
+    <View style={GS.loginStatus}>{login ? DynamicCircle(10,10,'red',0,0,60,0):null}</View>
+
+    <Text style={{... MS.screenTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{lang ? 'Om Login' : 'About Login'}</Text>
+  </View>
+{/* ========================= DISPLAY BOTTOM MENU ========================= */}
+
+    <BlurView style={MS.bMenu} intensity={30}/>
+    <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
+        <TouchableOpacity onPress={() => eventPage()}>
+          <Image style={MS.bMenuIcon} source={require('../../assets/calendar777.png')} />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => listingPage()}>
+          <Image style={MS.bMenuIcon} source={require('../../assets/business.png')} />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => menuPage()}>
+          <Image style={MS.bMenuIcon} source={require('../../assets/menu-orange.png')} />
+        </TouchableOpacity>
       </View> 
-    </View>
+  </View>
   )
 };

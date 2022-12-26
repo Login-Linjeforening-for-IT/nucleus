@@ -1,11 +1,12 @@
 {/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
-import { GS } from '../styles/globalStyles';
-import { MS } from '../styles/menuStyles';
-import Card, { Notification, Language, Space, ThemeSwitch } from '../shared/sharedComponents';
-import { DynamicCircle } from '../shared/eventComponents/otherComponents';
+import { GS } from '../../styles/globalStyles';
+import { MS } from '../../styles/menuStyles';
+import Card, { Notification, Language, Space, ThemeSwitch } from '../../shared/sharedComponents';
+import { DynamicCircle } from '../../shared/eventComponents/otherComponents';
 import { useSelector } from 'react-redux';
-import { T } from '../styles/text';
-import FetchColor from '../styles/fetchTheme';
+import { T } from '../../styles/text';
+import FetchColor from '../../styles/fetchTheme';
+import { BlurView } from 'expo-blur';
 import React from 'react';
 import { 
   Text, 
@@ -13,6 +14,7 @@ import {
   Image, 
   ScrollView,
   TouchableOpacity,
+  Dimensions
 } from 'react-native';
 
 {/* ========================= APP START ========================= */}
@@ -25,29 +27,14 @@ export default function SettingScreen( { navigation }) {
 
   const eventPage   = () => { navigation.navigate('EventScreen')   }
   const listingPage = () => { navigation.navigate('ListingScreen') }
-  const homePage    = () => { navigation.navigate('HomeScreen')    }
-  const profilePage = () => { navigation.navigate('ProfileScreen') }
-  const goBack      = () => { navigation.navigate('ProfileScreen') }
+  const menuPage    = () => { navigation.navigate('MenuScreen')    }              // Function to navigate to menu
 
   return(
     <View>
-{/* ========================= DISPLAY TOP MENU ========================= */}
-<View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'DARKER')}}>
-    <TouchableOpacity onPress={() => goBack()}>
-      <Image style={MS.goBack} source={require('../assets/goback777.png')} />
-    </TouchableOpacity>
-
-    {login ? DynamicCircle(10,10,'red',0,0,60,0):null}
-
-    <Text style={{... MS.screenTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{lang ? 'Innstillinger' : 'Settings'}</Text>
-
-      <TouchableOpacity onPress={() => profilePage()}>
-        <Image style={MS.tMenuIcon} source={require('../assets/loginperson-orange.png')} />
-      </TouchableOpacity>
-  </View>
 {/* ========================= DISPLAY CONTENT ========================= */}
 <View style={{...GS.content, backgroundColor: FetchColor(theme, 'BACKGROUND')}}>
         <ScrollView showsVerticalScrollIndicator={false}>
+        {Space(Dimensions.get('window').height/7.5)}
           <Card>
             <View style={GS.notificationBack}>
               <View style={GS.view}>
@@ -123,20 +110,33 @@ export default function SettingScreen( { navigation }) {
               <View style={GS.view2}>{Notification(6)}</View>
             </View>
           </Card>
-
+          {Space(Dimensions.get('window').height/10)}
         </ScrollView>
       </View>   
 
+{/* ========================= DISPLAY TOP MENU ========================= */}
+<BlurView style={MS.topMenu} intensity={30}/>
+      <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
+    <TouchableOpacity onPress={() => menuPage()}>
+      <Image style={MS.goBack} source={require('../../assets/goback777.png')} />
+    </TouchableOpacity>
+
+    <View style={GS.loginStatus}>{login ? DynamicCircle(10,10,'red',0,0,60,0):null}</View>
+
+    <Text style={{... MS.screenTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{lang ? 'Innstillinger' : 'Settings'}</Text>
+  </View>
+
 {/* ========================= DISPLAY BOTTOM MENU ========================= */}
-      <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'DARKER')}}>
-        <TouchableOpacity onPress={() => homePage()}>
-          <Image style={MS.bMenuIcon} source={require('../assets/house777.png')} />
-        </TouchableOpacity>
+<BlurView style={MS.bMenu} intensity={30}/>
+    <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
         <TouchableOpacity onPress={() => eventPage()}>
-          <Image style={MS.bMenuIcon} source={require('../assets/calendar777.png')} />
+          <Image style={MS.bMenuIcon} source={require('../../assets/calendar777.png')} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => listingPage()}>
-          <Image style={MS.bMenuIcon} source={require('../assets/business.png')} />
+          <Image style={MS.bMenuIcon} source={require('../../assets/business.png')} />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => menuPage()}>
+          <Image style={MS.bMenuIcon} source={require('../../assets/menu-orange.png')} />
         </TouchableOpacity>      
       </View>     
     </View>

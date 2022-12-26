@@ -4,6 +4,7 @@
 export const DARK = {                   // Dark theme
     BACKGROUND: '#181818',              // Background of the app
     DARKER: '#111',                     // Contentcolor of the app
+    TRANSPARENT: '#000000B3',           // Blur effect color
     CONTRAST: '#222',                   // Contrast to background and darker
     ORANGE: '#fd8738',                  // Logins color
     TEXTCOLOR: 'white',                 // Textcolor of the app
@@ -18,6 +19,7 @@ export const DARK = {                   // Dark theme
 export const LIGHT = {                  // Light theme
     BACKGROUND: 'white',                // Background of the app
     DARKER: '#F0F0F0',                  // Contentcolor of the app
+    TRANSPARENT: '#F0F0F033',           // Blur effect color
     CONTRAST: '#B8B8B8',                // Contrast to background and darker
     ORANGE: '#fd8738',                  // Logins color
     TEXTCOLOR: 'black',                 // Textcolor of the app
@@ -32,6 +34,7 @@ export const LIGHT = {                  // Light theme
 export const ABYSS ={                   // Abyss theme
     BACKGROUND: '#081334',              // Background of the app
     DARKER: '#020c17',                  // Contentcolor of the app
+    TRANSPARENT: '#020c17B3',           // Blur effect color
     CONTRAST: '#090940',                // Contrast to background and darker
     ORANGE: '#fd8738',                  // Logins color
     TEXTCOLOR: 'white',                 // Textcolor of the app
@@ -46,6 +49,7 @@ export const ABYSS ={                   // Abyss theme
 export const SUNSET = {                 // Sunset light theme
     BACKGROUND: '#4e0107',              // Background of the app
     DARKER: '#0f0000',                  // Contentcolor of the app
+    TRANSPARENT: '#0f0000B3',           // Blur effect color
     CONTRAST: '#520404',                // Contrast to background and darker
     ORANGE: '#fd8738',                  // Logins color
     TEXTCOLOR: 'white',                 // Textcolor of the app
@@ -60,6 +64,7 @@ export const SUNSET = {                 // Sunset light theme
 export const CHRISTMAS = {              // Christmas theme
     BACKGROUND: 'white',                // Background of the app
     DARKER: '#800000',                  // Contentcolor of the app
+    TRANSPARENT: '#800000E6',           // Blur effect color
     CONTRAST: '#820000',                // Contrast to background and darker
     ORANGE: '#fd8738',                  // Logins color
     TEXTCOLOR: 'white',                 // Textcolor of the app

@@ -6,12 +6,14 @@ import Card, { Kontakt, Space, Line } from '../../shared/sharedComponents';     
 import { DynamicCircle } from '../../shared/eventComponents/otherComponents';   // Event components
 import { useSelector } from 'react-redux';                                      // Redux
 import FetchColor from '../../styles/fetchTheme';                               // Color fetcher
-import {    
+import { BlurView } from 'expo-blur';                                           // Blur effect
+import {      
   Text,                                                                         // Text component
   View,                                                                         // View component
   Image,                                                                        // Image component
   ScrollView,                                                                   // Scrollable view
   TouchableOpacity,                                                             // Toucable opacity (like a custom button)
+  Dimensions                                                                    // Screen size
 } from 'react-native';
 
 export default function BusinessScreen( { navigation }) {                       // Declaring the screen
@@ -20,30 +22,17 @@ export default function BusinessScreen( { navigation }) {                       
   const { login } = useSelector( (state) => state.login )                       // Login status
   const { theme } = useSelector( (state) => state.theme )                       // Theme state
 
-  const eventPage   = () => { navigation.navigate('EventScreen')       }        // Function to navigate to eventscreen
-  const homePage    = () => { navigation.navigate('HomeScreen')        }        // Function to navigate to homepage
-  const listingPage = () => { navigation.navigate('ListingScreen')     }        // Function to navigate to job advertisements
-  const profilePage = () => { navigation.navigate('ProfileScreen')     }        // Function to navigate to profile
-  const goBack      = () => { navigation.navigate('ContactMenuScreen') }        // Function to go back to the previous screen
+  const eventPage   = () => { navigation.navigate('EventScreen')    }           // Function to navigate to eventscreen
+  const listingPage = () => { navigation.navigate('ListingScreen')  }           // Function to navigate to job advertisements
+  const menuPage    = () => { navigation.navigate('MenuScreen')     }           // Function to navigate to menu
 
   return(
     <View>
-{/* ========================= DISPLAY TOP MENU ========================= */}
-  <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'DARKER')}}>
-    <TouchableOpacity onPress={() => goBack()}>
-      <Image style={MS.goBack} source={require('../../assets/goback777.png')} />
-    </TouchableOpacity>
-    {login ? DynamicCircle(10,10,'red',0,0,60,0):null}
-    <Text style={{... MS.screenTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{lang ? 'Bedrift' : 'Company'}</Text>
-
-      <TouchableOpacity onPress={() => profilePage()}>
-        <Image style={MS.tMenuIcon} source={require('../../assets/loginperson-orange.png')} />
-      </TouchableOpacity>
-  </View>
 {/* ========================= DISPLAY CONTENT ========================= */}
   <View style={{...GS.content, backgroundColor: FetchColor(theme, 'BACKGROUND')}}>
         
         <ScrollView showsVerticalScrollIndicator={false}>
+        {Space(Dimensions.get('window').height/7.5)}
           <Card>
             <Text style={{...T.bold40, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'For bedrifter' : 'For companies'}</Text>{Space(5)}
 
@@ -108,21 +97,34 @@ export default function BusinessScreen( { navigation }) {                       
           </Card>
             
           {Space(10)}
-
+          {Space(Dimensions.get('window').height/10)}
         </ScrollView>
         
       </View>   
 
+{/* ========================= DISPLAY TOP MENU ========================= */}
+<BlurView style={MS.topMenu} intensity={30}/>
+      <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
+    <TouchableOpacity onPress={() => menuPage()}>
+      <Image style={MS.goBack} source={require('../../assets/goback777.png')} />
+    </TouchableOpacity>
+
+    <View style={GS.loginStatus}>{login ? DynamicCircle(10,10,'red',0,0,60,0):null}</View>
+
+    <Text style={{... MS.screenTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{lang ? 'For bedrifter' : 'For companies'}</Text>
+  </View>
+
 {/* ========================= DISPLAY BOTTOM MENU ========================= */}
-      <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'DARKER')}}>
-      <TouchableOpacity onPress={() => homePage()}>
-            <Image style={MS.bMenuIcon} source={require('../../assets/house777.png')} />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => eventPage()}>
+<BlurView style={MS.bMenu} intensity={30}/>
+    <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
+      <TouchableOpacity onPress={() => eventPage()}>
             <Image style={MS.bMenuIcon} source={require('../../assets/calendar777.png')} />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => listingPage()}>
-            <Image style={MS.bMenuIcon} source={require('../../assets/business-orange.png')} />
+            <Image style={MS.bMenuIcon} source={require('../../assets/business.png')} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => menuPage()}>
+            <Image style={MS.bMenuIcon} source={require('../../assets/menu-orange.png')} />
           </TouchableOpacity>
       </View>     
     </View>

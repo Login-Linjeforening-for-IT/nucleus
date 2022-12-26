@@ -1,28 +1,56 @@
 import { StyleSheet } from "react-native";                // Stylesheet file
 import { Dimensions } from "react-native";                // Screen dimensions
 
-export const MS = StyleSheet.create ({                    // Declares the export - meant for styling menus
+export const MS = StyleSheet.create ({                    // Declares the export - meant for styling top and bottom menu
                                                           // --- TOP MENU ---
   screenTitle: {                                          // Big headertitle
-    textAlign: 'center',                                  // Horizontal center
-    marginTop: Dimensions.get('window').height/30,        // Adds top margin based on screen height
+    position: 'absolute',
+    textAlign: 'center',
+    marginTop: Dimensions.get('window').height/18,
+    left: 75,
+    right: 75,
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    fontSize: 35
+  },
+  eventScreenTitle: {                                     // Big headertitle for EventScreen (due to filter causing problems)
+    position: 'absolute',
+    textAlign: 'center',
+    top: Dimensions.get('window').height/35,
+    left: 100,
+    right: '-6%',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    marginTop: Dimensions.get('window').height/38,        // Adds top margin based on screen height
     alignSelf: 'center',                                  // Vertically centers
     fontSize: 35,                                         // Text font size
   },
   smallTitle: {                                           // Small headertitle (for VERY LONG words)
-    textAlign: 'center',                                  // Horizontal center
-    marginTop: Dimensions.get('window').height/30,        // Adds top margin based on screen height
+    position: 'absolute',
+    textAlign: 'center',
+    top: Dimensions.get('window').height/17,
+    left: 0,
+    right: '-6%',
+    marginLeft: 'auto',
+    marginRight: 'auto',
     alignSelf: 'center',                                  // Vertically centers
-    fontSize: 25,                                         // Text font size 
+    fontSize: 30,                                         // Text font size 
   },
   smallMultilineTitle: {                                  // Small headertitle (for multiline)
-    maxWidth: 190,                                        // Max width to ensure it doesnt move other elements
-    left: 15,                                             // Moves it 15 pixels rightwards
+    top: Dimensions.get('window').height/20,
+    position: 'absolute',
+    left: 50,
+    right: 50,
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    textAlign: 'center',
     alignSelf: 'flex-end',                                // Vertical flex end
-    marginBottom: Dimensions.get('window').height/50,     // Used together with alignSelf to vertically center
-    fontSize: 20,                                         // Text font size
+    fontSize: 25,                                         // Text font size
   },
   topMenu: {                                              // Top menu background view
+    position: 'absolute',
+    top: 0,
+    width: '100%',
     flexDirection: 'row',                                 // Changes flex direction to allow for multiple elements on the same horizontal level
     justifyContent: 'space-between',                      // Adds an equal amount of space between every element
     height: Dimensions.get('window').height/7.5,          // Sets the height of the top menu to 13.3% of the screen height
@@ -53,6 +81,9 @@ export const MS = StyleSheet.create ({                    // Declares the export
   
                                                           // --- BOTTOM MENU ---
   bMenu: {                                                // Bottom menu view
+      position: 'absolute',
+      bottom: 0,
+      width: '100%',
       height: Dimensions.get('window').height/10,         // Sets the height of the bottom menu to 10% of the screen height
       flexDirection: 'row',                               // Changes the flex directions to allow for multiple elements horizontally
       justifyContent: 'space-evenly',                     // Adds equal amount of space between icons
