@@ -43,7 +43,7 @@
         "backgroundColor": "#000000"
       },
       "package": "com.login.Login",
-      "versionCode": 10
+      "versionCode": 11
     },
     "web": {
       "favicon": "./assets/favicon.png"
