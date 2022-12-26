@@ -33,7 +33,7 @@ return(
 
 {/* ========================= DISPLAY CONTENT ========================= */}
 <View style={{...GS.content, backgroundColor: FetchColor(theme, 'BACKGROUND')}}>
-          <View style={{flex: 1, justifyContent: 'center'}}>{lang ? <Text style={T.centeredBold20}>Jobbannonser kommer snart! Bli med i tekkom hvis du ønsker å hjelpe til😉</Text>:<Text style={T.centeredBold20}>Job listings are coming soon! Join TekKom if you would like to help!😉</Text>}</View>
+          <View style={{...T.centeredBold20, flex: 1, justifyContent: 'center'}}>{lang ? <Text style={{...T.centeredBold20, color: FetchColor(theme, 'TEXTCOLOR')}}>Jobbannonser kommer snart! Bli med i tekkom hvis du ønsker å hjelpe til😉</Text>:<Text style={{...T.centeredBold20, color: FetchColor(theme, 'TEXTCOLOR')}}>Job listings are coming soon! Join TekKom if you would like to help!😉</Text>}</View>
       </View>    
 
 {/* ========================= DISPLAY TOP MENU ========================= */}
