@@ -98,7 +98,7 @@ export function Kontakt() { //Contact info
  * @param {*} category      Category the switch should control
  * @returns                 Notification switch as view
  */
-export function Notification ({category, active}) {    //Notification button
+export function Notification ({category}) {    //Notification button
 
     const notification = useSelector( (state) => state.notification ) // Fetches notification state
     const { theme } = useSelector( (state) => state.theme )
@@ -110,7 +110,7 @@ export function Notification ({category, active}) {    //Notification button
                 trackColor={{ true: FetchColor(theme, 'TRACKCOLOR') }}
                 thumbColor={notification[category] ? FetchColor(theme, 'SWITCHOFFSTATE') : FetchColor(theme, 'SWITCHONSTATE')}
                 ios_backgroundColor={FetchColor(theme, 'TRACKBACKGROUNDCOLOR')}
-                onValueChange={() => active === false ? null:dispatch(changeNotificationState(category))}
+                onValueChange={() => dispatch(changeNotificationState(category))}
                 value={notification[category]}
             />
         </View>
