@@ -8,4 +8,6 @@ The app depends on external libraries. You may install all of these at once usin
 
 The goal of the app is to provide a easier and quicker way to keep up to date with all of Logins and our colloborative partners events.
 
+The current roadmap may be found in the Roadmap.MD file in this folder. Mail any inquires regarding this to kontakt@login.no.
+
 The app may not be copied or redistributed in any way without prior formal agreement with Login - Linjeforeningen for IT.
