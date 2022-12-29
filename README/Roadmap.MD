@@ -1,7 +1,7 @@
-Tasks currently being worked on: 
+Features currently being worked on: 
 none
 
-Tasks planned:
+Features planned:
 1. Push notifications for new events 
     - requires cloud server but easy enough (should use firebase since its free)    
     - firebase is hard to setup
@@ -31,7 +31,7 @@ Tasks planned:
     - not sure how to do swipe logic
     - idea: could render with negative and positive values to create a illusion that a swipe is in progress, and update the swiping as the user goes?
 
-Potential tasks: 
+Potential features: 
 7. Admin tool
     - Provides way to manage things in the app
     - Add job ads through the app
