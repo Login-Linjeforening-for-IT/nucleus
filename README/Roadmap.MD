@@ -18,6 +18,9 @@ Tasks planned:
 4. Implement mail sending service 
     - issue: deprecated libraries 
     - unknown solution
+    - provides: 
+        - report scheme
+        - method to enroll for events through the app
 
 5. Render the correct event image for each event on the SES (SpecificEventScreen) 
     - issue: cant concat the input string 
@@ -29,4 +32,7 @@ Tasks planned:
     - idea: could render with negative and positive values to create a illusion that a swipe is in progress, and update the swiping as the user goes?
 
 Potential tasks: 
-Admin tool
+7. Admin tool
+    - Provides way to manage things in the app
+    - Add job ads through the app
+    - Add events through the app
