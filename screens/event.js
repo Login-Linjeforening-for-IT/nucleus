@@ -13,7 +13,7 @@ import { useSelector } from 'react-redux';                                // Red
 import { StatusBar } from 'expo-status-bar';                              // Status bar
 import FetchColor from '../styles/fetchTheme';                            // Function to fetch theme color
 import { NotificationDelay } from '../shared/eventComponents/notificationDelay'; // Delay in seconds until push notification should be sent
-import registerNNPushToken, { getPushDataObject }from 'native-notify';    // Push notification key
+import registerNNPushToken, { getPushDataObject } from 'native-notify';    // Push notification key
 import { BlurView } from 'expo-blur';                                     // Blur effect
 import {                                                                  // React native components
   Text,                                                                   // Text component
