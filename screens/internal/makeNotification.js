@@ -1,3 +1,6 @@
+//
+// SCREEN DEPRECATED, FUNCTIONALITY MOVED TO NOTIFICATIONMANAGER.JS
+//
 import { MS } from '../../styles/menuStyles';
 import { GS } from '../../styles/globalStyles';
 import React, { useState, useEffect, useRef } from 'react';
@@ -17,31 +20,6 @@ import {
   ScrollView,
   Dimensions
 } from 'react-native';
-// import * as Notifications from 'expo-notifications';
-
-// let isSettingNotificationHandler = false;
-
-// async function setNotificationHandlerAsync() {
-//   if (isSettingNotificationHandler) {
-//     return;
-//   }
-
-//   isSettingNotificationHandler = true;
-//   try {
-//      Notifications.setNotificationHandler({
-//       handleNotification: async () => ({
-//         shouldShowAlert: true,
-//         shouldPlaySound: false,
-//         shouldSetBadge: false,
-//       }),
-//     });
-//   } catch (error) {
-//     console.error(error);
-//   } finally {
-//     isSettingNotificationHandler = false;
-//   }
-// }
-
 {/* ========================= APP START ========================= */}
 global.nTitle = "Login 💻"       // not being used, use array instead
 global.nBody = "Varsling"       // not being used, use array instead

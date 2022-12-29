@@ -11,6 +11,10 @@ import { GS } from '../styles/globalStyles';
 import { useSelector } from 'react-redux';
 import FetchColor from '../styles/fetchTheme';
 
+/**
+ * Creates a full dropdownmenu for bachelor, master and phd
+ * @returns View
+ */
 export default function Dropdown() {
     
     const { lang  } = useSelector( (state) => state.lang  )
@@ -141,6 +145,10 @@ export default function Dropdown() {
     )
 }
 
+/**
+ * Dropdown menu for bachelor 
+ * @returns View
+ */
 export function DropdownBachelor() {
 
     const { lang  } = useSelector( (state) => state.lang  )
@@ -196,6 +204,10 @@ export function DropdownBachelor() {
     )
 }
 
+/**
+ * Dropdown menu for master
+ * @returns View
+ */
 export function DropdownMaster() {
 
     const { theme } = useSelector( (state) => state.theme ) 
@@ -250,6 +262,10 @@ export function DropdownMaster() {
     )
 }
 
+/**
+ * Dropdown menu for PHD
+ * @returns View
+ */
 export function DropdownPHD() {
 
     const { lang  } = useSelector( (state) => state.lang  )

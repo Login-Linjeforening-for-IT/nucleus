@@ -5,8 +5,8 @@ import { ES } from '../styles/eventStyles';
 import { T } from '../styles/text'
 import { useSelector, useDispatch } from 'react-redux';
 import { changeLang } from '../redux/lang';
-import AsyncStorage from '@react-native-async-storage/async-storage'
 import { changeTheme, resetTheme } from '../redux/theme';
+import { changeNotificationState } from '../redux/notifications';
 import { 
     View, 
     Text, 
@@ -18,6 +18,11 @@ import {
 import { GS } from '../styles/globalStyles';
 import FetchColor from '../styles/fetchTheme';
 
+/**
+ * Card function for styling a div, displays a view containing curved corners with content inside
+ * @param {*} props     Content to put inside the card
+ * @returns             Card with the props inside
+ */
 export default function Card (props) {
     const { theme } = useSelector( (state) => state.theme )
 
@@ -30,6 +35,11 @@ export default function Card (props) {
     );
 };
 
+/**
+ * Smaller card function for styling a div, displays a view containing curved corners with content inside
+ * @param {*} props     Content to put inside the card
+ * @returns             Card with the props inside
+ */
 export function CardSmaller (props) {
     
     const { theme } = useSelector( (state) => state.theme )
@@ -43,6 +53,10 @@ export function CardSmaller (props) {
     );
 };
 
+/**
+ * Function for displaying the copyright info of Login - Linjeforeningen for IT as a text inside a view
+ * @returns Copyright view
+ */
 export function Copyright() {   //Copyright info
 
     const { lang  } = useSelector( (state) => state.lang  )
@@ -54,6 +68,11 @@ export function Copyright() {   //Copyright info
         </View>
     )
 }
+
+/**
+ * Function for displaying the contact info of Login - Linjeforeningen for IT as a text inside a view
+ * @returns Contact info
+ */
 export function Kontakt() { //Contact info
 
     const { lang  } = useSelector( (state) => state.lang  )
@@ -74,44 +93,34 @@ export function Kontakt() { //Contact info
     )
 }
 
-export function Notification (index) {    //Notification button
+/**
+ * Function for displaying a notification switch
+ * @param {*} category      Category the switch should control
+ * @returns                 Notification switch as view
+ */
+export function Notification ({category, active}) {    //Notification button
 
+    const notification = useSelector( (state) => state.notification ) // Fetches notification state
     const { theme } = useSelector( (state) => state.theme )
-    
-    const [isEnabled, setState] = useState(false);
-
-    const toggleSwitch = async() => {
-        if (isEnabled == true) {
-            await AsyncStorage.setItem('notification'+index, "0")
-            .then(setState(!isEnabled))
-        }else{
-            await AsyncStorage.setItem('notification'+index, "1")
-            .then(setState(!isEnabled))
-        }
-    }
-    
-    const fetchState = async() => {
-        let foundState = await AsyncStorage.getItem('notification'+index);
-        if(foundState === "1"){setState(true)}else{setState(false)}
-    }
-
-    useEffect(() => {
-        fetchState();
-    })
+    const dispatch = useDispatch()
     
     return(
         <View>
             <Switch
                 trackColor={{ true: FetchColor(theme, 'TRACKCOLOR') }}
-                thumbColor={isEnabled ? FetchColor(theme, 'SWITCHOFFSTATE') : FetchColor(theme, 'SWITCHONSTATE')}
+                thumbColor={notification[category] ? FetchColor(theme, 'SWITCHOFFSTATE') : FetchColor(theme, 'SWITCHONSTATE')}
                 ios_backgroundColor={FetchColor(theme, 'TRACKBACKGROUNDCOLOR')}
-                onValueChange={toggleSwitch}
-                value={isEnabled}
+                onValueChange={() => active === false ? null:dispatch(changeNotificationState(category))}
+                value={notification[category]}
             />
         </View>
     )
 }
 
+/**
+ * Function for choosing the language
+ * @returns View representing a switch which controls the language of the application
+ */
 export function Language() {    //Choose the language
     const { lang  } = useSelector((state) => state.lang  )
     const { theme } = useSelector((state) => state.theme )
@@ -126,6 +135,11 @@ export function Language() {    //Choose the language
     )
 }
 
+/**
+ * Returns a Login colored button
+ * @param {*} props 
+ * @returns Button with the content displayed inside
+ */
 export function Button (props) { //Button, Login colored
 
     const { theme } = useSelector( (state) => state.theme )
@@ -139,6 +153,11 @@ export function Button (props) { //Button, Login colored
     );
 }
 
+/**
+ * Returns a red colored button
+ * @param {*} props 
+ * @returns Button with the content displayed inside
+ */
 export function NotifyButton (props) {   //Button, red
     return(
         <View style={SS.notifyButton}>
@@ -149,6 +168,11 @@ export function NotifyButton (props) {   //Button, red
     );
 }
 
+/**
+ * Function for displaying a small check box, should be used together with CheckedBox
+ * @see CheckBox
+ * @returns View containg a checkable box
+ */
 export function CheckBox() {
 
     const { theme } = useSelector( (state) => state.theme )
@@ -162,6 +186,11 @@ export function CheckBox() {
     );
 }
 
+/**
+ * Function for displaying a small checked box, should be used together with CheckBox
+ * @see CheckBox
+ * @returns View containing a checked box
+ */
 export function CheckedBox() {
     
     const { theme } = useSelector( (state) => state.theme )
@@ -175,6 +204,12 @@ export function CheckedBox() {
     );
 }
 
+/**
+ * Function for drawing a dynamic line, can be adjusted as you wish using the height and width
+ * @param {*} height    Height of the line
+ * @param {*} width     Width of the line
+ * @returns             View of the given size based on theme
+ */
 export function Line (height, width) {
 
     const { theme } = useSelector( (state) => state.theme )
@@ -188,12 +223,21 @@ export function Line (height, width) {
     );
 }
 
+/**
+ * Function for creating an empty view, for adding spaces between objects such as views paragraphs etc
+ * @param {*} height    How big the space should be
+ * @returns             Empty view of the given height
+ */
 export function Space (height) {
     return(
         <View style={{height: height}}/>
     );
 }
 
+/**
+ * Function for displaying all of the social media you can reaxch Login on
+ * @returns Social media icons
+ */
 export function Social() {
 
     const { theme } = useSelector( (state) => state.theme )
@@ -246,6 +290,12 @@ export function Social() {
     )
 }
 
+/**
+ * Function for comparing dates, true if the first is newer than the second
+ * @param {*} firstDate     First date to compare
+ * @param {*} secondDate    Second date to compare
+ * @returns                 Boolean, true if first is newer, otherwise false
+ */
 export function CompareDates (firstDate, secondDate) { // True if firstdate is newer than seconddate
     if(firstDate != null && secondDate != null){                                                    //Concatenating start:
         const firstYear   = (firstDate)[0] + (firstDate)[1] + (firstDate)[2] + (firstDate)[3]       //  year
@@ -282,6 +332,10 @@ export function CompareDates (firstDate, secondDate) { // True if firstdate is n
     }
 }
 
+/**
+ * Function for displaying all comitees 
+ * @returns View containing all comittees
+ */
 export function AllComitees() {
     
     const { lang  } = useSelector( (state) => state.lang  )
@@ -373,6 +427,12 @@ export function AllComitees() {
     )
 }
 
+/**
+ * WIP - NOT USED
+ * 
+ * Function for displaying the home icon as a svg instead of png (to save space)
+ * @returns View containg home icon svg
+ */
 export function HomeIcon() {
     return(
         <View>
@@ -383,6 +443,10 @@ export function HomeIcon() {
     )
 }
 
+/**
+ * Function that provides a switch for controlling the theme of the application
+ * @returns View containing switch 
+ */
 export function ThemeSwitch() {
 
     const { theme } = useSelector((state) => state.theme)
@@ -400,8 +464,4 @@ export function ThemeSwitch() {
             </TouchableOpacity>
         </View>
     )
-}
-
-export function NumberFromScreenWidth (width, multiplier) {
-    return width*multiplier
 }

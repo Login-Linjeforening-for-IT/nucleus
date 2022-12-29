@@ -1,7 +1,9 @@
-import GreenLight, { GrayLight, Check, MonthNO, MonthEN, DynamicCircle, SmallCheck } from '../shared/eventComponents/otherComponents';  // Components used to display event
+import GreenLight, { GrayLight, Check, MonthNO, MonthEN, DynamicCircle, SmallCheck, fetchEmoji } from '../shared/eventComponents/otherComponents';  // Components used to display event
 import Card, { CompareDates, CheckBox, CheckedBox, Space } from '../shared/sharedComponents';  // Components used to display event
 import CategorySquare from '../shared/eventComponents/categorySquare';    // Left side square on eventcard
 import AsyncStorage from '@react-native-async-storage/async-storage';     // Localstorage
+import * as Device from 'expo-device';                                    // Device user is using
+import * as Notifications from 'expo-notifications';                      // Local notifications
 import React, { useEffect, useState, useRef } from 'react';               // React imports
 import { GS } from '../styles/globalStyles';                              // Global styles
 import { ES } from '../styles/eventStyles';                               // Event styles
@@ -10,6 +12,8 @@ import { T } from '../styles/text';                                       // Tex
 import { useSelector } from 'react-redux';                                // Redux
 import { StatusBar } from 'expo-status-bar';                              // Status bar
 import FetchColor from '../styles/fetchTheme';                            // Function to fetch theme color
+import { NotificationDelay } from '../shared/eventComponents/notificationDelay'; // Delay in seconds until push notification should be sent
+import registerNNPushToken, { getPushDataObject }from 'native-notify';    // Push notification key
 import { BlurView } from 'expo-blur';                                     // Blur effect
 import {                                                                  // React native components
   Text,                                                                   // Text component
@@ -18,71 +22,94 @@ import {                                                                  // Rea
   FlatList,                                                               // Flatlist component   (basic list)
   TextInput,                                                              // Text input component (allows the user to type)
   TouchableOpacity,                                                       // TouchableOpacity     (custom button)
-  Dimensions,
-  Platform
+  Dimensions,                                                             // Size of the device
+  Platform                                                                // Operating system
 } from 'react-native';                                                    // React native
 import { useFocusEffect } from '@react-navigation/native';                // useFocusEffect       (do something when the screen is displayed)
 
-export default function EventScreen({ navigation }) {                     // Exports the screen
+// cancel scheduled notification:
 
-  const { lang  } = useSelector( (state) => state.lang  )                 // Language state
-  const { login } = useSelector( (state) => state.login )                 // Loginstatus
-  const { theme } = useSelector( (state) => state.theme )                 // Theme state
+// // Replace 'notificationId' with the ID of the notification you want to cancel
+// Notifications.cancelScheduledNotificationAsync(notificationId).then(() => {
+//   console.log('Notification canceled');
+// });
 
-                                                                          // Screens you can navigate to from this screen
-  const listingPage = () => { navigation.navigate('ListingScreen') }      // Job screen
-  const menuPage    = () => { navigation.navigate('MenuScreen')    }      // Function to navigate to menu
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: true,
+    shouldSetBadge: false,
+  }),
+});
 
-  const getData=()=>{                                                     //  --- FETCHING DATA FROM API ---
+export default function EventScreen({ navigation }) {                     //  Exports the screen
+  const [events, setEvents] = useState([]);                               //  Events from api
+  const [renderedArray, setRenderedArray] = useState([]);                 //  Events currently displayed
+  const [clickedEvents, setClickedEvents] = useState([]);                 //  Clicked events
+  const [clickedCategory, setClickedCategory] = useState([]);             //  Clicked categories
+  const [filter, setFilter] = useState({input: null});                    //  Filter text input declaration
+  const textInputRef = useRef(null);                                      //  Clears text input
+  const [relevantCategories, setRelevantCategories] = useState([]);       //  Relevant categories to filter
+  const [search, toggleSearch] = useState({status: 0})                    //  Search bar visibility boolean
+  const notification = useSelector( (state) => state.notification )       //  Fetches notification state
+  const { lang  }    = useSelector( (state) => state.lang  )              //  Language state
+  const { login }    = useSelector( (state) => state.login )              //  Loginstatus
+  const { theme }    = useSelector( (state) => state.theme )              //  Theme state
+  const listingPage = () => { navigation.navigate('ListingScreen') }      //  Navigate to Job screen
+  const menuPage    = () => { navigation.navigate('MenuScreen')    }      //  Navigate to menu
+  const [expoPushToken, setExpoPushToken] = useState('');                 //  Array for notification token
+  const [pushNotification, setPushNotification] = useState(false);        //  Array for setting the pish notification
+  const notificationListener = useRef();                                  //  Notification listener
+  const responseListener = useRef();                                      //  Response listener (if it was sent or not)
+  registerNNPushToken(4494, 'pfYoC5VY4KhZt9mrD3FGu0');                    // Allows notifications
+  const [category] = useState([                                           //  All categories to filter - DO NOT CHANGE IDS 
+  {id: '2', category: 'TEKKOM'},                                          
+  {id: '3', category: 'SOCIAL'},
+  {id: '4', category: 'CTF'},
+  {id: '5', category: 'KARRIEREDAG'}, 
+  {id: '6', category: 'FADDERUKA'},
+  {id: '7', category: 'BEDPRES'},
+  {id: '8', category: 'LOGIN'},
+]);                                           
+                               
+  const categoryAllowed = (props) => {                                    // Function for checking if notifications of given category is allowed
+    if(notification.REMINDERS) {                                          // Only send notification if reminders are enabled
+      const category = props.category                                      
+      switch (category) {
+        case 'TEKKOM':    return notification[category]
+        case 'BEDPRES':   return notification[category]
+        case 'CTF':       return notification[category]
+        case 'SOCIAL':    return notification[category]
+        default:          return notification.EVENTS                      // Returns the state of events if category does not have its own switch in settings
+      }
+    } else return false                                                   // Otherwise return false
+  }
+
+  async function getData() {                                              //  --- FETCHING DATA FROM API ---
     try {
       fetch('https://api.login.no/events')                                // PRODUCTION
       //fetch('https://tekkom:rottejakt45@api.login.no:8443/events')      // TESTING
       .then(response=>response.json())                                    // Formatting the response
       .then(data=>setEvents(data))                                        // Setting the response
-    } catch (e) {                                                         // Catches any errors (usually missing wifi)
+      .then(setRenderedArray([...events]));                               // Updates the renderedarray to equal cache
+      if(events.length > 0) await AsyncStorage.setItem('cachedEvents', JSON.stringify(events))  // Setting the cache
+    } catch (e) {                                                         // Catches any errors (missing wifi)
       (async() => {                                                       // Immediately invoked function expression (IIFE)
-        try {                                                         
+        try {     
           let cache = await AsyncStorage.getItem('cachedEvents')          // Tries to fetch event cache
-          console.warn('cache' + cache)                                   // Warn (this needs to be tested more)
           if(cache) cache = JSON.parse(cache); setEvents([...cache])      // If cached events was found save them in event array
         } catch (e) {console.warn('Failed to fetch cache: ' + e)}         // If cache was not found tell the user cache wasnt found
-      })
+      })    
+    }
+  }
 
-      if (events) {if(events.length > 0) renderArray();}else{console.warn('didnt find cache')}  // Error message if cache wasnt found
-    
-    }
-  }
-  
-  const storeCache = async() => {                                         // --- SAVING EVENTS IN LOCALSTORAGE ---
-    if(events.length > 0){                                          
-      await AsyncStorage.setItem('cachedEvents', JSON.stringify(events))  // Function to set cache
-    }
-  }
-  const [search, toggleSearch] = useState({status: 0})                    //  Search bar visibility boolean
   const toggleSearchBar = () => {                                         //  Toggle search bar visiblity
     toggleSearch({
       ...search,
       status: !search.status
     });
   }
-                                                                          //  --- ARRAY DECLARATION ---
-  const [events, setEvents] = useState([]);                               //  Events from api
-  const [renderedArray, setRenderedArray] = useState([]);                 //  Events currently displayed
-  const [clickedEvents, setClickedEvents] = useState([]);                 //  Clicked events
-  const [clickedCategory, setClickedCategory] = useState([]);             //  Clicked categories
-  const [relevantCategories, setRelevantCategories] = useState([]);       //  Relevant categories to filter
-  const [category] = useState([                                           //  All categories to filter
-    {id: '2', category: 'TEKKOM'}, 
-    {id: '3', category: 'SOCIAL'},
-    {id: '4', category: 'CTF'},
-    {id: '5', category: 'KARRIEREDAG'}, 
-    {id: '6', category: 'FADDERUKA'},
-    {id: '7', category: 'BEDPRES'},
-    {id: '8', category: 'LOGIN'},
-  ]);
 
-  const [filter, setFilter] = useState({input: null});                    //  Filter text input declaration
-  const textInputRef = useRef(null);                                      //  Clears text input
   const filterInput = (val) => {                                          //  --- UPDATES FILTER TEXT INPUT ---
       setFilter({                                                         // Function to set filter
       ...filter,                                                          // Spread operator to spread filter
@@ -175,7 +202,7 @@ export default function EventScreen({ navigation }) {                     // Exp
 
   const fetchStoredEvents = async() => {                                  //  --- FETCHING STORED EVENTS IF NO WIFI ---
     let tempArray = await AsyncStorage.getItem('cachedEvents')            //  Fetches cache
-    if(tempArray != null){                                                // If cache existts
+    if(tempArray != null){                                                // If cache exists
       let parsed = JSON.parse(tempArray);                                 // Parses from string to objects
       setRenderedArray([...parsed]);                                      // Updates the renderedarray to equal cache
       setEvents([...parsed]);                                             // Updates the events array to equal cache
@@ -188,7 +215,7 @@ export default function EventScreen({ navigation }) {                     // Exp
   }, [])
 );
 
-  if (clickedEvents.length > 0) {                                         //  --- STORING FIRSTCOMING CLICKED EVENT ---
+  if (clickedEvents.length > 0) {                                         //  --- STORING FIRSTCOMING AND ALL CLICKED EVENT ---
     (async() => {                                                         // IIFE
       let storedID = 0;                                                   // Variable that takes the ID of the stored event
 
@@ -196,7 +223,7 @@ export default function EventScreen({ navigation }) {                     // Exp
         if (CompareDates((clickedEvents)[i].startt, (clickedEvents)[storedID].startt) == true) {
           storedID = i                                                    // If the events comes before the next updates the storedID
         }
-      }                                                                   // Stores the firstcoming event
+      }                                                                  
       await AsyncStorage.setItem("clickedEvents", JSON.stringify(clickedEvents))            // Stores clicked events
       await AsyncStorage.setItem("firstEvent", JSON.stringify((clickedEvents)[storedID]))   // Stores firstcoming clicked events
     })();
@@ -207,17 +234,22 @@ export default function EventScreen({ navigation }) {                     // Exp
     })();
   }
 
-  function renderArray() {                                                //  --- FETCHING EVENTS TO RENDER ---
-    if (renderedArray.length == 0 ) {                                     // If there are any events to render
-      if(search.status == 0){                                             // If the filter is not open
-        if (events.length > 0) {                                          // If there are events in the events array
-          setRenderedArray([...events])                                   // Sets the renderedArray to equal the events array
-        } else {                                                          // If there are no events in the rendered array
-          fetchStoredEvents();                                            //  Fetches cache if no wifi
-        }
-      }
-    }
-  }
+  useEffect(() => {                                                       //  --- NOTIFICATION MANAGEMENT ---
+    registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
+
+    notificationListener.current = Notifications.addNotificationReceivedListener(pushNotification => {
+      setPushNotification(pushNotification);
+    });
+
+    responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
+      console.log(response);
+    });
+
+    return () => {
+      Notifications.removeNotificationSubscription(notificationListener.current);
+      Notifications.removeNotificationSubscription(responseListener.current);
+    };
+  }, []);
 
   useEffect(() => {                                                       //  --- LOADING FILTERED DATA WHEN FILTER CHANGES ---
     if (filter.input != null || clickedCategory.length > 0) {             // If the filter is not null or there are categories clicked
@@ -252,6 +284,7 @@ export default function EventScreen({ navigation }) {                     // Exp
     getData();                                                            //  Fetches API
     fetchState();                                                         //  Fetches clickedEvents
     fetchRelevantCategories();                                            //  Fetches categories available to filter
+    events.length ? setRenderedArray([...events]) : fetchStoredEvents();  
   },[])                                                                   //  Renders when the screen is loaded
 
   useEffect(() => {                                                       //  --- UPDATES FILTER ON EVENT CHANGE ---
@@ -259,14 +292,22 @@ export default function EventScreen({ navigation }) {                     // Exp
   }, [events.length, clickedEvents.length]);                              //  Listens for changes in these arrays
 
   useEffect(() => {                                                       //  --- FETCHES API AND UPDATES CACHE EVERY 10 SECONDS ---
-    const interval = setInterval(() => {                                  // Interval to perform task
-      getData();                                                          // Fetch API
-      storeCache();                                                       // Update cache
-    }, 10000);                                                            // Run every 10 seconds
-    return () => clearInterval(interval)                                  // Clear interval when unmounted
+    const interval = setInterval(() => {                                  //  Interval to perform task
+      getData();                                                          //  Fetch API
+    }, 10000);                                                            //  Run every 10 seconds
+    return () => clearInterval(interval)                                  //  Clears interval when unmounted
   }, []);
 
-  renderArray();                                                          //  --- WHICH EVENTS TO DISPLAY ---
+
+  async function RenderEvents() {                                         //  --- RESETS RENDERED EVENTS
+    setRenderedArray([...events])                                       //  Updates the rendered array
+    await AsyncStorage.setItem('cachedEvents', JSON.stringify(events))  //  Updates cache
+  }
+  if(events.length > 0 && events.length !== renderedArray.length){        //  --- CHECKS FOR AND FIXES INCORRECT RENDER ---
+    if (!filter.input) clickedCategory.length == 0 ? RenderEvents():null//  Fixes any errors if the user is not currently filtering
+    else filter.input.length == 0 && clickedCategory.length == 0 ? RenderEvents() : null // Fixes any errors if the user has been searching, but is not doing so now
+  }
+
   return(                                                                 //  --- DISPLAYS THE EVENTSCREEN ---
     <View> 
       <StatusBar style={theme == 0 || theme == 2 || theme == 3 ? 'light' : 'dark'} />
@@ -349,12 +390,12 @@ export default function EventScreen({ navigation }) {                     // Exp
                             </View>
                             <View style={ES.view3}>
                               {clickedEvents.some(event => event.eventID === item.eventID) ? 
-                                <TouchableOpacity onPress={() => setClickedEvents(clickedEvents.filter((x) => x.eventID !== item.eventID))}>
+                                <TouchableOpacity onPress={() => cancelScheduledNotification(item) + setClickedEvents(clickedEvents.filter((x) => x.eventID !== item.eventID))}>
                                   <View style = {ES.greenLight}><GreenLight/></View>
                                   <View style = {ES.checkContent}><Check/></View>
                                 </TouchableOpacity>
                               :
-                                <TouchableOpacity onPress={() => setClickedEvents([...clickedEvents, item])}>
+                                <TouchableOpacity onPress={() => (categoryAllowed(item) ? schedulePushNotification(item) : null) + setClickedEvents([...clickedEvents, item])}>
                                   <View style = {ES.greenLight}><GrayLight/></View>
                                   <View style = {ES.checkContent}><Check/></View>
                                 </TouchableOpacity>
@@ -427,3 +468,68 @@ export default function EventScreen({ navigation }) {                     // Exp
     </View>
   )
 };
+
+/**
+ * Function for scheduling push notifications
+ * @param {string} title    Notification title
+ * @param {string} body     Notification Body
+ * @param {date} sendtime   Time the notification should be sent
+ */
+async function schedulePushNotification(props) {                          // --- SCHEDULE PUSH NOTIFICATION ---
+  Notifications.cancelAllScheduledNotificationsAsync()
+  const emoji = fetchEmoji(props)                                         // Fetches emoji from emoji function
+  await Notifications.scheduleNotificationAsync({
+    content: {  
+      title: props.eventname + emoji,                                     // Notification title
+      body: 'Begynner om en halvtime! 🏃',                                // Notificaton body
+    },
+    trigger: { seconds: NotificationDelay(props) },                       // Triggers 1 hour before event
+    identifier: JSON.stringify(props.eventID)                             // ID of the notification
+  });
+}
+
+/**
+ * Function for canceling scheduled using the id of the event
+ * @param {event} props   Event object
+ */
+async function cancelScheduledNotification(props) {                       // --- CANCEL SCHEDULED PUSH NOTIFICATION ---
+    const eventID = JSON.stringify(props.eventID)                         // Converting to string
+    await Notifications.cancelScheduledNotificationAsync(eventID)         // Canceling the scheduled push notification
+}
+
+/**
+ * Made by Expo - 
+ * Function for getting push notification permission from the user
+ * @returns Push notification token
+ */
+async function registerForPushNotificationsAsync() {                      // --- GETTING PUSH NOTIFICATION PERMISSION ---
+  let token;
+
+  if (Platform.OS === 'android') { 
+    await Notifications.setNotificationChannelAsync('default', {
+      name: 'default',
+      importance: Notifications.AndroidImportance.MAX,
+      vibrationPattern: [0, 250, 250, 250],
+      lightColor: '#FF231F7C',
+    });
+  }
+
+  if (Device.isDevice) {                                                  // Checks for physical device 
+    const { status: existingStatus } = await Notifications.getPermissionsAsync();
+    let finalStatus = existingStatus;
+    if (existingStatus !== 'granted') {
+      const { status } = await Notifications.requestPermissionsAsync();
+      finalStatus = status;
+    }
+    if (finalStatus !== 'granted') {
+      alert('Gå til instillinger for å slå på varslinger.');
+      return;
+    }
+    token = (await Notifications.getExpoPushTokenAsync()).data;
+    //console.log(token); // Logs the token
+  } else {
+    alert('Varslinger er ikke tilgjengelig på simulatorer.');
+  }
+
+  return token;
+}

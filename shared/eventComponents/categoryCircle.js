@@ -3,6 +3,12 @@ import { View } from 'react-native';
 import Svg, { Circle } from 'react-native-svg';
 import { ES } from '../../styles/eventStyles';
 
+/**
+ * Function for drawing a very small square of the category of the event
+ * 
+ * @param {string} condition    Category of the event, Format: 'CATEGORY'
+ * @returns                     Small circle of the categories color
+ */
 export default function CategoryCircle(condition) {  //SVG showing the color of the category
     if (condition === 'TEKKOM') {
         return(

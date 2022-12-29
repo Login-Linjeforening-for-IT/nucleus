@@ -4,12 +4,17 @@ import { T } from '../../styles/text'
 import { useSelector } from 'react-redux';
 import FetchColor from '../../styles/fetchTheme';
 
+/**
+ * Function for displaying the event status, how long till it starts, how long its been ongoing, or how long till it ends
+ * @param {string} startTime 
+ * @param {string} endTime 
+ * @returns Event start time, as a text inside a view
+ */
 export default function EventTime(startTime, endTime) {
     
     const { lang  } = useSelector( (state) => state.lang  )
     const { theme } = useSelector( (state) => state.theme )
 
-            //MAKE COUNTDOWN FUNCTION BASED ON HOURS AND MINUTES
     var year     = new Date().getFullYear()
     var month    = new Date().getMonth()
     var day      = new Date().getDate()
@@ -167,10 +172,20 @@ export default function EventTime(startTime, endTime) {
     }
 }
 
+/**
+ * Function for checking if the given year is a leap year (skuddår)
+ * @param {number} year 
+ * @returns boolean, true if yes, false if no
+ */
 export function leapYear(year){         //Bool for leapyear
     return (year % 100 === 0) ? (year % 400 === 0) : (year % 4 === 0);
 }
 
+/**
+ *  Function for checking how many days are in a month
+ * @param {number} month The month in question
+ * @returns The number of days in the given month
+ */
 export function lastDayOfMonth(month) { //Returns amount of days in the given month, also checks for leap year
     var year = new Date().getFullYear()
     switch (month) {
@@ -185,6 +200,11 @@ export function lastDayOfMonth(month) { //Returns amount of days in the given mo
     }
 }
 
+/**
+ * Function for checking if an event has passed, checks if current time is beyond eventTime
+ * @param {string} eventTime 
+ * @returns Boolean, true if passed, otherwise false
+ */
 export function beyondTime(eventTime) { // True if the given time has passed
     var year     = new Date().getFullYear()
     var month    = 1 + new Date().getMonth()
@@ -214,6 +234,11 @@ export function beyondTime(eventTime) { // True if the given time has passed
     } else {return true}
 }
 
+/**
+ * Function for checking if the event ends soon
+ * @param {string} endTime Endtime of the event
+ * @returns                Boolean 
+ */
 export function endsSoon(endTime) {     //Bool for if we are more than half way through the event
     var year     = new Date().getFullYear()
     var month    = 1 + new Date().getMonth()

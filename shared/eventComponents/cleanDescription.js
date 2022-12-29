@@ -5,6 +5,11 @@ import { A } from '@expo/html-elements'; //Doesnt work in the commented lines be
 import { useSelector } from 'react-redux';
 import FetchColor from '../../styles/fetchTheme';
 
+/**
+ * Removes HTML formatting from a string, for example unicodes etc
+ * @param {string} string   String to cleanup
+ * @returns                 Clean string
+ */
 export default function CleanDescription(string) {
     
     const { lang  } = useSelector( (state) => state.lang  )

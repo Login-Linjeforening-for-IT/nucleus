@@ -23,11 +23,11 @@ import SpecificListingScreen from '../screens/specificListing';                 
 function Navigator() {                                                          // Declares Navigator, wraps in container and declares all navigation routes
     return(
         <NavigationContainer>                                                   
-            <Tab.Navigator screenOptions={{ headerShown: false}}>               
+            <Tab.Navigator screenOptions={{ headerShown: false}}>  
                 <Tab.Screen name='EventScreen'              options={{tabBarStyle: { display: "none" }}} component={EventScreen} />
-                <Tab.Screen name='AboutScreen'              options={{tabBarStyle: { display: "none" }}} component={AboutScreen} />
+                <Tab.Screen name='ListingScreen'            options={{tabBarStyle: { display: "none" }}} component={ListingScreen} />             
                 <Tab.Screen name='MenuScreen'               options={{tabBarStyle: { display: "none" }}} component={MenuScreen} />
-                <Tab.Screen name='ListingScreen'            options={{tabBarStyle: { display: "none" }}} component={ListingScreen} />
+                <Tab.Screen name='AboutScreen'              options={{tabBarStyle: { display: "none" }}} component={AboutScreen} />
                 <Tab.Screen name='SpecificEventScreen'      options={{tabBarStyle: { display: "none" }}} component={SpecificEventScreen} />
                 <Tab.Screen name='InternalScreen'           options={{tabBarStyle: { display: "none" }}} component={InternalScreen} />
                 <Tab.Screen name='BusinessScreen'           options={{tabBarStyle: { display: "none" }}} component={BusinessScreen} />

@@ -15,7 +15,8 @@ import {
   ScrollView,
   TouchableOpacity,
   Dimensions,
-  Platform
+  Platform,
+  TouchableWithoutFeedback
 } from 'react-native';
 
 {/* ========================= APP START ========================= */}
@@ -63,7 +64,7 @@ export default function SettingScreen( { navigation }) {
               <View style={GS.view}>
                 <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Viktig informasjon' : 'Important info'}</Text>
               </View>
-              <View style={GS.view2}>{Notification(0)}</View>
+              <View style={GS.view2}><Notification category='IMPORTANT'/></View>
             </View>
           </Card>
 
@@ -72,46 +73,72 @@ export default function SettingScreen( { navigation }) {
               <View style={GS.view}>
                 <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Påminnelser': 'Reminders'}</Text>
               </View>
-              <View style={GS.view2}>{Notification(1)}</View>
+              <View style={GS.view2}><Notification category='REMINDERS'/></View>
             </View>
           </Card>
 
           <Card>
             <View style={GS.notificationBack}>
               <View style={GS.view}>
-                <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Arrangementer' : 'Events'}</Text>
+              <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                <Text style={{...GS.notificationText, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? 'Arrangementer ' : 'Events'}</Text>
+                <Text style={{...GS.notificationText, alignSelf: 'center', fontSize: 10, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? 'Gjelder kun påminnelser atm ' : 'Currently only affects reminders '}</Text>
+                </View>
+                
               </View>
-              <View style={GS.view2}>{Notification(2)}</View>
+              <View style={GS.view2}><Notification category='EVENTS'/></View>
             </View>
           </Card>
 
           <Card>
             <View style={GS.notificationBack}>
               <View style={GS.view}>
-                <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Bedpres': 'Company Presentations'}</Text>
+              <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                <Text style={{...GS.notificationText, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? 'Bedpres ': 'Company Presentations'}</Text>
+                <Text style={{...GS.notificationText, alignSelf: 'center', fontSize: 10, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? 'Gjelder kun påminnelser atm ' : 'reminders '}</Text>
+                </View>
               </View>
-              <View style={GS.view2}>{Notification(4)}</View>
+              <View style={GS.view2}><Notification category='BEDPRES'/></View>
             </View>
           </Card>
 
           <Card>
             <View style={GS.notificationBack}>
               <View style={GS.view}>
-                <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}>TekKom</Text>
+              <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                <Text style={{...GS.notificationText, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>TekKom </Text>
+                <Text style={{...GS.notificationText, alignSelf: 'center', fontSize: 10, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? 'Gjelder kun påminnelser atm ' : 'Currently only affects reminders '}</Text>
               </View>
-              <View style={GS.view2}>{Notification(5)}</View>
+              </View>
+              <View style={GS.view2}><Notification category='TEKKOM'/></View>
             </View>
           </Card>
 
           <Card>
             <View style={GS.notificationBack}>
               <View style={GS.view}>
-                <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}>CTF</Text>
+              <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                <Text style={{...GS.notificationText, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>CTF </Text>
+                <Text style={{...GS.notificationText, alignSelf: 'center', fontSize: 10, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? 'Gjelder kun påminnelser atm ' : 'Currently only affects reminders '}</Text>
               </View>
-              <View style={GS.view2}>{Notification(6)}</View>
+              </View>
+              <View style={GS.view2}><Notification category='CTF'/></View>
             </View>
           </Card>
-          {Space(Dimensions.get('window').height/10)}
+
+          <Card>
+            <View style={GS.notificationBack}>
+              <View style={GS.view}>
+              <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                <Text style={{...GS.notificationText, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? 'Sosialt ':'Social '}</Text>
+                <Text style={{...GS.notificationText, alignSelf: 'center', fontSize: 10, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? 'Gjelder kun påminnelser atm ' : 'Currently only affects reminders '}</Text>
+                </View>
+              </View>
+              <View style={GS.view2}><Notification category='SOCIAL'/></View>
+            </View>
+          </Card>
+            
+          {Space((Dimensions.get('window').height/10)+10)}
         </ScrollView>
       </View>   
 
