@@ -522,8 +522,7 @@ async function registerForPushNotificationsAsync() {                      // ---
       finalStatus = status;
     }
     if (finalStatus !== 'granted') {
-      alert('Gå til instillinger for å slå på varslinger.');
-      return;
+      return;                                   // Alert here if the user tries to do anything notification related without granted status
     }
     token = (await Notifications.getExpoPushTokenAsync()).data;
     //console.log(token); // Logs the token
