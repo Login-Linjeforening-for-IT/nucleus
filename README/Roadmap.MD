@@ -14,25 +14,29 @@ Features planned:
 3. Implement mazemap     
     - issue: deprecated libraries
     - unknown solution
+    - vent at tekkom meeting
 
 4. Implement mail sending service 
-    - issue: deprecated libraries 
-    - unknown solution
+    - issue: needs backend
+    - vent at tekkom meeting
     - provides: 
         - report scheme
         - method to enroll for events through the app
 
 5. Render the correct event image for each event on the SES (SpecificEventScreen) 
     - issue: cant concat the input string 
-    - unknown solution
+    - unknown solution - look into
 
 6. Swipable navigation 
     - idea: Needs to be gesture and listener based, 
     - not sure how to do swipe logic
     - idea: could render with negative and positive values to create a illusion that a swipe is in progress, and update the swiping as the user goes?
 
+7. Join event button on SES
+    - Can be implemented after feature 4. 
+
 Potential features: 
-7. Admin tool
+8. Admin tool
     - Provides way to manage things in the app
     - Add job ads through the app
     - Add events through the app
