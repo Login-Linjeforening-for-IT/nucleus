@@ -41,3 +41,6 @@ Potential features:
     - Provides way to manage things in the app
     - Add job ads through the app
     - Add events through the app
+
+Bug fixes needed:
+    - Fix case of bottom menu android being disabled
