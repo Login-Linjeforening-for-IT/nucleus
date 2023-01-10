@@ -35,7 +35,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.eirikhanasand.Login",
-      "buildNumber": "16"
+      "buildNumber": "17"
     },
     "android": {
       "adaptiveIcon": {
@@ -43,7 +43,7 @@
         "backgroundColor": "#000000"
       },
       "package": "com.login.Login",
-      "versionCode": 12
+      "versionCode": 13
     },
     "web": {
       "favicon": "./assets/favicon.png"
