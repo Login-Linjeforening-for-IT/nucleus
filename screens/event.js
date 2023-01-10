@@ -489,7 +489,7 @@ async function schedulePushNotification(props) {                          // ---
   await Notifications.scheduleNotificationAsync({
     content: {  
       title: props.eventname + emoji,                                     // Notification title
-      body: 'Begynner om en halvtime! 🏃',                                // Notificaton body
+      body: 'Begynner om en time! 🏃',                                    // Notificaton body
     },
     trigger: { seconds: NotificationDelay(props) },                       // Triggers 1 hour before event
     identifier: JSON.stringify(props.eventID)                             // ID of the notification
