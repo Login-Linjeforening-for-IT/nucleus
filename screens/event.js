@@ -407,7 +407,8 @@ export default function EventScreen({ navigation }) {                     //  Ex
                             </View>
                         </View>
                       </Card>
-                      {index == renderedArray.length-1 && search.status == 1? Space(Dimensions.get('window').height/2.85): null}
+                      {index == renderedArray.length-1 && search.status == 1? Space(Dimensions.get('window').height/2.75): null}
+                      {index == renderedArray.length-1 && search.status == 0? Space(Dimensions.get('window').height/9): null}
                     </TouchableOpacity>
                 </View>
               )}

@@ -10,7 +10,7 @@ import FetchColor from '../../styles/fetchTheme';
  * @param {string} endTime 
  * @returns Event start time, as a text inside a view
  */
-export default function EventTime(startTime, endTime) {
+export default function EventTime(startTime, endTime) { // startTime
     
     const { lang  } = useSelector( (state) => state.lang  )
     const { theme } = useSelector( (state) => state.theme )
@@ -21,25 +21,25 @@ export default function EventTime(startTime, endTime) {
     var hour     = new Date().getHours()
     var minute   = new Date().getMinutes()
 
-    if(startTime != null && endTime != null){                                                   //Concatenating start:
-        const startYear   = (startTime)[0] + (startTime)[1] + (startTime)[2] + (startTime)[3]   //  year
-        const startMonth  = (startTime)[5] + (startTime)[6]                                     //  month
-        const startDay    = (startTime)[8] + (startTime)[9]                                     //  day
-        const startHour   = (startTime)[11] + (startTime)[12]                                   //  hour
-        const startMinute = (startTime)[14] + (startTime)[15]                                   //  minute
+    if(startTime != null && endTime != null){                                               //Concatenating start:
+        const startYear   = parseInt((startTime)[0] + (startTime)[1] + (startTime)[2] + (startTime)[3])   //  year
+        const startMonth  = parseInt((startTime)[5] + (startTime)[6])-1                                   //  month
+        const startDay    = parseInt((startTime)[8] + (startTime)[9])                                     //  day
+        const startHour   = parseInt((startTime)[11] + (startTime)[12])                                   //  hour
+        const startMinute = parseInt((startTime)[14] + (startTime)[15])                                   //  minute
                                                                                                 //Concatenating end:
-        const endYear     = (endTime)[0]  + (endTime)[1] + (endTime)[2] + (endTime)[3]          //  year
-        const endMonth    = (endTime)[5]  + (endTime)[6]                                        //  month
-        const endDay      = (endTime)[8]  + (endTime)[9]                                        //  day
-        const endHour     = (endTime)[11] + (endTime)[12]                                       //  hour
-        const endMinute   = (endTime)[14] + (endTime)[15]                                       //  minute
+        const endYear     = parseInt((endTime)[0]  + (endTime)[1] + (endTime)[2] + (endTime)[3])          //  year
+        const endMonth    = parseInt((endTime)[5]  + (endTime)[6])-1                                      //  month
+        const endDay      = parseInt((endTime)[8]  + (endTime)[9])                                        //  day
+        const endHour     = parseInt((endTime)[11] + (endTime)[12])                                       //  hour
+        const endMinute   = parseInt((endTime)[14] + (endTime)[15])                                       //  minute
 
         const startMinutesCalculated = startMinute-minute                                       //  Amount of minutes remaining if less than one hour
-
-        const nextHour = 59-startMinutesCalculated                                              //  Minutes left if event is the next hour
-        const nextMonth = lastDayOfMonth(month+=1)-day                                          //  Days left if event is next month
+        const startMinuteMore = 60-minute                                                       //  Minutes remaining till event if more than one hour
+        const nextHour = 59-startMinutesCalculated 
+        const nextMonth = (lastDayOfMonth(month+1)-day)+startDay                                  //  Days left if event is next month
         const startHourCalculated = startHour-hour-1                                            //  Amount of hours remaining if the event is the same day
-        const startMinutesAfterHourCalculated = 59-startMinutesCalculated+startMinute*2         //  Amount of minutes remaining after hours have been subtracted
+        const startMinutesAfterHourCalculated = 60-startMinutesCalculated                       //  Amount of minutes remaining after hours have been subtracted
         const startsNextDay = 24-(hour-startHour)
         const startDayNextMonth = lastDayOfMonth(month)-day                                     //  Startday if event is in more than 1 month
         const lessThanOneMonth = 31+startDay*2-startDay-day                                     //  Startday if event is in less than 1 month
@@ -62,10 +62,10 @@ export default function EventTime(startTime, endTime) {
                             if (endMinute == minute) {
                                 return(<View><Text style={{...T.text25, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Slutt' : 'Ended'}</Text></View>)
                             } else {
-                                return(<View><Text style={{...T.text25, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Ferdig om ' + endMinuteCalculated + ' min' : 'Ends in ' + endMinuteCalculated + ' min'}</Text></View>)
+                                return(<View><Text style={{...T.text25, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Ferdig om ' + endMinuteCalculated + 'min' : 'Ends in ' + endMinuteCalculated + 'min'}</Text></View>)
                             }
                         } else {
-                            return(<View><Text style={{...T.text25, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Ferdig om ' + endHourCalculated + 't' + endMinuteCalculated + ' min' : 'Ends in ' + endHourCalculated + 'h' + endMinuteCalculated + ' min'}</Text></View>)
+                            return(<View><Text style={{...T.text25, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Ferdig om ' + endHourCalculated + 't ' + endMinuteCalculated + 'min' : 'Ends in ' + endHourCalculated + 'h ' + endMinuteCalculated + 'min'}</Text></View>)
                         }
                     } else {
                         if (endDayCalculated == 1) {
@@ -93,7 +93,7 @@ export default function EventTime(startTime, endTime) {
         if(startYear == year) {                                 //Event is this year
             if (startMonth == month) {                          //Event is this month
                 if (startDay == day) {                          //Event is today
-                    if (startHour == hour) {                    //Eventet is this hour
+                    if (startHour == hour) {                    //Event is this hour
                         if (startMinute == minute) {            //Event is now
                             return(<View><Text style={{...T.text25, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Nå' : 'Now'}</Text></View>)
                         }else if(startMinute < minute){ //Event started x minutes ago
@@ -102,7 +102,7 @@ export default function EventTime(startTime, endTime) {
                             return(<View><Text style={{...T.text25, color: FetchColor(theme, 'TEXTCOLOR')}}>{startMinutesCalculated} {lang ? ' min til' : ' min left'}</Text></View>)
                         }
                     }else if(startHour == hour-1){ //Event started less than 1 hour ago
-                        return(<View><Text style={{...T.text25, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Pågått i' + nextHour + 'min': 'Started ' + nextHour + ' min ago'}</Text></View>)
+                        return(<View><Text style={{...T.text25, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Pågått i ' + nextHour + 'min': 'Started ' + nextHour + 'min ago'}</Text></View>)
                     }else if(startHour == hour-2){ //Event started between 1 and 2 hours ago
                         return(<View><Text style={{...T.text25, color: FetchColor(theme, 'TEXTCOLOR')}}>{hour-startHour-1} {lang ? ' time siden' : ' hour ago'}</Text></View>)
                     }else if(startHour < hour){ //Event was x hours ago
@@ -110,7 +110,8 @@ export default function EventTime(startTime, endTime) {
                     }else if(startHour == hour+1){ //Event is the next hour
                         return(<View><Text style={{...T.text25, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? startMinutesCalculated + 'min til' : 'Starts in ' + startMinutesCalculated + 'min'}</Text></View>)
                     }else{ //Event starts in x hours
-                        return(<View><Text style={{...T.text25, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? startHourCalculated + 't' + startMinutesAfterHourCalculated + 'min til' : 'Starts in ' + startHourCalculated + 'h ' + startMinutesAfterHourCalculated + 'min'}</Text></View>)
+                        console.log('hei')
+                        return(<View><Text style={{...T.text25, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? startHourCalculated + 't ' + startMinuteMore + 'min til' : 'Starts in ' + startHourCalculated + 'h ' + startMinutesAfterHourCalculated + 'min'}</Text></View>)
                     }
                 }else if(startDay == day-1){ //Event was yesterday
                     return(<View><Text style={{...T.text25, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'I går' : 'Yesterday'}</Text></View>)
@@ -140,11 +141,11 @@ export default function EventTime(startTime, endTime) {
                     return(<View><Text style={{...T.text25, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Forrige måned' : 'Last month'}</Text></View>)
                 }
             }else if(startMonth < month){ //Event was x months ago
-                return(<View><Text style={{...T.text25, color: FetchColor(theme, 'TEXTCOLOR')}}>{month-startMonth} {lang ? 'måneder siden' : 'months ago'}</Text></View>)
+                return(<View><Text style={{...T.text25, color: FetchColor(theme, 'TEXTCOLOR')}}>{month-startMonth} {lang ? ' måneder siden' : ' months ago'}</Text></View>)
             }else if(startMonth == month+1){ //Event is next month
-                return(<View><Text style={{...T.text25, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? startDayNextMonth + 'dager til' : 'Starts in ' + startDayNextMonth +  'days'}</Text></View>)
+                return(<View><Text style={{...T.text25, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? startDayNextMonth + ' dager til' : ' Starts in ' + startDayNextMonth +  'days'}</Text></View>)
             }else{ //Event is in x months
-                return(<View><Text style={{...T.text25, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? monthThisYear + 'måneder til' : 'Starts in ' + monthThisYear + ' months'}</Text></View>)
+                return(<View><Text style={{...T.text25, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? monthThisYear + ' måneder til' : ' Starts in ' + monthThisYear + ' months'}</Text></View>)
             }
         }else if(startYear == year-1){ //Event was last year
             return(<View><Text style={{...T.text25, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'I fjor' : 'Last year'}</Text></View>)
@@ -154,7 +155,7 @@ export default function EventTime(startTime, endTime) {
             if(monthNextYear <= 12){ //Event is in less than 12 months
                 if(monthNextYear == 1){    //Event is in January
                     if (lessThanOneMonth <= 31) { //Less than one month till event
-                        return(<View><Text style={{...T.text25, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? lessThanOneMonth + 'dager til' : 'Starts in ' + lessThanOneMonth + ' days'}</Text></View>)
+                        return(<View><Text style={{...T.text25, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? lessThanOneMonth + ' dager til' : 'Starts in ' + lessThanOneMonth + ' days'}</Text></View>)
                     } else {    //More than one month till event
                         return(<View><Text style={{...T.text25, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Neste måned' : 'Next month'}</Text></View>)
                     }
@@ -165,7 +166,7 @@ export default function EventTime(startTime, endTime) {
                 return(<View><Text style={{...T.text25, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Neste år' : 'Next year'}</Text></View>)
             }
         }else{  //Event is in x years
-            return(<View><Text style={{...T.text25, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Starter om' : 'Starts in'} {startYear-year} {lang ? 'år' : 'years'}</Text></View>)
+            return(<View><Text style={{...T.text25, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Starter om ' : 'Starts in '} {startYear-year} {lang ? ' år' : ' years'}</Text></View>)
         }
     }else{  //Error occured
         return(<View><Text style={T.red}>{lang ? 'Feil ved henting av tid' : 'Error fetching time'}</Text></View>)
