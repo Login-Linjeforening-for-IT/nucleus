@@ -42,7 +42,7 @@ export default function SpecificEventScreen({ route, navigation}) {
   }
   useEffect(() => {
     getData();
-    },[])
+    },[item])
 
   const listingPage = () => { navigation.navigate('ListingScreen') }
   const eventPage   = () => { navigation.navigate('EventScreen')   }
@@ -137,7 +137,7 @@ export default function SpecificEventScreen({ route, navigation}) {
               {Space(5)}
               {CleanDescription(usersData.description)}
             </Card>
-            {Space(5)}
+            {Space(10)}
             {Space(Dimensions.get('window').height/10)}
         </ScrollView>
       </View>   
