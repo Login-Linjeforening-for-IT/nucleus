@@ -4,6 +4,7 @@ import store from './redux/store';                                          // R
 import { Provider } from 'react-redux';                                     // Redux provider
 import { PersistGate } from 'redux-persist/integration/react';              // Persistgate to fetch state from AsyncStorage
 import { persistStore } from 'redux-persist';                               // PersistStore to store states in AsyncStorage
+import registerNNPushToken from 'native-notify';                            // Push notification key
 
 let persistor = persistStore(store)                                         // Middleware to interact with AsyncStorage
 
@@ -19,7 +20,8 @@ let persistor = persistStore(store)                                         // M
  * Navigator contains all screens and functionality to navigate between them
  * @returns The app
  */
-export default function App() {        
+export default function App() {  
+    registerNNPushToken(4494, 'pfYoC5VY4KhZt9mrD3FGu0');                    // Allows notifications      
     return( 
         <Provider store={store}>                     
             <PersistGate loading={null} persistor={persistor}>     

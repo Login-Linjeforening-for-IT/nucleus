@@ -29,8 +29,8 @@ export const ES = StyleSheet.create({         // Declares export ES ( Event Styl
     fontSize: 30,                             // Text font size
   },
   monthText: {                                // Eventmonth text on specificEventScreen
-    alignSelf: 'center',                  // Aligns the text vertically to top
-    bottom: 10,                             // Moves text 7.5% upwards
+    alignSelf: 'center',                      // Aligns the text vertically to top
+    bottom: 10,                               // Moves text 7.5% upwards
     left: '20%',                              // moves events 20% rightwards
     fontSize: 20,                             // Text font size
   },
@@ -104,6 +104,10 @@ export const ES = StyleSheet.create({         // Declares export ES ( Event Styl
     marginHorizontal: 10,                     // Horizontal margin
     marginTop: 10,                            // Top margin
   },  
+  topCard: {                                     // Card styling
+    borderRadius: 20,                         // Border radius
+    marginHorizontal: 10,                     // Horizontal margin
+  },
   cardContent: {                              // Card content styling
     marginHorizontal: 18,                     // Horizontal margin  
     marginVertical: 18                        // Vertical margin

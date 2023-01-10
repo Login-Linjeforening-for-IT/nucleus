@@ -119,7 +119,7 @@ export const T = StyleSheet.create({          // Declares T - meant for all text
   },  
   filterCategoryText: {                       // Text used for filter categories
     left: 10,                                 // Moves text 10px rightwards
-    fontSize: 13,                             // Text font size
+    fontSize: 12,                             // Text font size
   },
   listingText: {
     top: '25%',

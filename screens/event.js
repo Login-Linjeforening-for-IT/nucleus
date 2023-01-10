@@ -13,7 +13,6 @@ import { useSelector } from 'react-redux';                                // Red
 import { StatusBar } from 'expo-status-bar';                              // Status bar
 import FetchColor from '../styles/fetchTheme';                            // Function to fetch theme color
 import { NotificationDelay } from '../shared/eventComponents/notificationDelay'; // Delay in seconds until push notification should be sent
-import registerNNPushToken, { getPushDataObject } from 'native-notify';    // Push notification key
 import { BlurView } from 'expo-blur';                                     // Blur effect
 import {                                                                  // React native components
   Text,                                                                   // Text component
@@ -23,7 +22,7 @@ import {                                                                  // Rea
   TextInput,                                                              // Text input component (allows the user to type)
   TouchableOpacity,                                                       // TouchableOpacity     (custom button)
   Dimensions,                                                             // Size of the device
-  Platform                                                                // Operating system
+  Platform,                                                               // Operating system
 } from 'react-native';                                                    // React native
 import { useFocusEffect } from '@react-navigation/native';                // useFocusEffect       (do something when the screen is displayed)
 
@@ -61,7 +60,6 @@ export default function EventScreen({ navigation }) {                     //  Ex
   const [pushNotification, setPushNotification] = useState(false);        //  Array for setting the pish notification
   const notificationListener = useRef();                                  //  Notification listener
   const responseListener = useRef();                                      //  Response listener (if it was sent or not)
-  registerNNPushToken(4494, 'pfYoC5VY4KhZt9mrD3FGu0');                    // Allows notifications
   const [category] = useState([                                           //  All categories to filter - DO NOT CHANGE IDS 
   {id: '2', category: 'TEKKOM'},                                          
   {id: '3', category: 'SOCIAL'},
@@ -98,7 +96,7 @@ export default function EventScreen({ navigation }) {                     //  Ex
         try {     
           let cache = await AsyncStorage.getItem('cachedEvents')          // Tries to fetch event cache
           if(cache) cache = JSON.parse(cache); setEvents([...cache])      // If cached events was found save them in event array
-        } catch (e) {console.warn('Failed to fetch cache: ' + e)}         // If cache was not found tell the user cache wasnt found
+        } catch (e) {console.warn('Failed to fetch cache: ' + e)}         // If cache was not found tell the user cache wasnt found (custom notification needs to go here)
       })    
     }
   }
@@ -209,7 +207,7 @@ export default function EventScreen({ navigation }) {                     //  Ex
     }
   }
 
-  useFocusEffect(                                                         //  --- FETCHES CLICKED EVENTS WHEN SCREEN IS VISIBLE ---
+  useFocusEffect(                                                         //  --- FETCHES CLICKED EVENTS WHEN SCREEN BECOMES VISIBLE ---
   React.useCallback(() => {                                               // Callback to avoid too many rerenders
     fetchState()                                                          // Function to fetch clicked events
   }, [])
@@ -292,16 +290,20 @@ export default function EventScreen({ navigation }) {                     //  Ex
   }, [events.length, clickedEvents.length]);                              //  Listens for changes in these arrays
 
   useEffect(() => {                                                       //  --- FETCHES API AND UPDATES CACHE EVERY 10 SECONDS ---
-    const interval = setInterval(() => {                                  //  Interval to perform task
-      getData();                                                          //  Fetch API
-    }, 10000);                                                            //  Run every 10 seconds
-    return () => clearInterval(interval)                                  //  Clears interval when unmounted
-  }, []);
-
+    let interval = null;
+    if(!search.status){                                                   //  Only when filter is closed so it doesnt say no match when there is a match
+      interval = setInterval(() => {                                          
+        getData();                                                        //  Fetches cache
+      }, 10000);                                                          //  Runs every 10 seconds
+    }else{3
+      clearInterval(interval)                                             //  Clears the interval when the filter is opened
+    }
+    return () => clearInterval(interval)                                  //  Clears interval when unmounted to prevent memory leaks
+  }, [search.status]);
 
   async function RenderEvents() {                                         //  --- RESETS RENDERED EVENTS
-    setRenderedArray([...events])                                       //  Updates the rendered array
-    await AsyncStorage.setItem('cachedEvents', JSON.stringify(events))  //  Updates cache
+    setRenderedArray([...events])                                         //  Updates the rendered array
+    await AsyncStorage.setItem('cachedEvents', JSON.stringify(events))    //  Updates cache
   }
   if(events.length > 0 && events.length !== renderedArray.length){        //  --- CHECKS FOR AND FIXES INCORRECT RENDER ---
     if (!filter.input) clickedCategory.length == 0 ? RenderEvents():null//  Fixes any errors if the user is not currently filtering
@@ -359,24 +361,26 @@ export default function EventScreen({ navigation }) {                     //  Ex
                                   
                               </View>
                           )}
-                  /><Text/>
+                  />
               </View>
           </View>
         :null}
         {/* ----- RENDERS EVENTS ----- */}
+        {renderedArray != null ? renderedArray.length != null ? search.status ? Space(10) :null:null:null}
         {renderedArray != null ? 
-          renderedArray.length > 0 ?
+          renderedArray.length > 0 ? 
             <FlatList
+              style={search.status ? {minHeight: '100%'} : {minHeight: '100%'}}
               showsVerticalScrollIndicator={false}
               numColumns={1}
               keyExtractor={(item) => item.eventID}
               data={renderedArray}
               renderItem={({item, index}) => (
                 
-                <View> 
+                <View style={{marginTop: search.status && !index ? -10:0}}> 
                   <TouchableOpacity onPress={() => navigation.navigate('SpecificEventScreen', {item: item})}>
                   {index == 0 && search.status == 0? Space(Dimensions.get('window').height/7.5): null}
-                      <Card style={ES.eventCard}>
+                      <Card>
                         <View style={ES.eventBack}>
                           <View>
                             
@@ -403,6 +407,7 @@ export default function EventScreen({ navigation }) {                     //  Ex
                             </View>
                         </View>
                       </Card>
+                      {index == renderedArray.length-1 && search.status == 1? Space(Dimensions.get('window').height/2.85): null}
                     </TouchableOpacity>
                 </View>
               )}
@@ -454,17 +459,20 @@ export default function EventScreen({ navigation }) {                     //  Ex
       </View>
       {/* ========================= DISPLAY BOTTOM MENU ========================= */}
       {Platform.OS === 'ios' ? <BlurView style={MS.bMenu} intensity={30}/> : <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENTANDROID')}}/>}
-    <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
+      <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
         <TouchableOpacity>
-              <Image style={MS.bMenuIcon} source={require('../assets/calendar-orange.png')} />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => listingPage()}>
-            <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/business.png') : require('../assets/business-black.png')} />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => menuPage()}>
-              <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/menu.png') : require('../assets/menu-black.png')} />
-            </TouchableOpacity>
-        </View>     
+          <Image style={MS.bMenuIcon} source={require('../assets/calendar-orange.png')} />
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => listingPage()}>
+          <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/business.png') : require('../assets/business-black.png')} />
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => menuPage()}>
+          <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/menu.png') : require('../assets/menu-black.png')} />
+        </TouchableOpacity>
+      </View>     
+      
     </View>
   )
 };

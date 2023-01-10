@@ -43,7 +43,9 @@ function goBack()      { navigation.navigate('InternalScreen') }
     <View>
 {/* ========================= DISPLAY CONTENT ========================= */}
 <View style={{...GS.content, backgroundColor: FetchColor(theme, 'BACKGROUND')}}>
-          <FlatList showsVerticalScrollIndicator={false}
+          <FlatList 
+          style={{minHeight: '100%'}} // To allow content to flow behind bottom menu
+          showsVerticalScrollIndicator={false}
           numColumns={1}
           keyExtractor={(item) => item.id}
           data={setting}

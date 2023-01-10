@@ -25,6 +25,7 @@ Features planned:
 
 5. Render the correct event image for each event on the SES (SpecificEventScreen) 
     - issue: cant concat the input string 
+    - issue: cant be hard coded due to long review times
     - unknown solution - look into
 
 6. Swipable navigation 
@@ -32,8 +33,8 @@ Features planned:
     - not sure how to do swipe logic
     - idea: could render with negative and positive values to create a illusion that a swipe is in progress, and update the swiping as the user goes?
 
-7. Join event button on SES
-    - Can be implemented after feature 4. 
+7. Make green button automatically enroll you for the event clicked
+    - Requires mail sending service to send enrollment via mail
 
 Potential features: 
 8. Admin tool

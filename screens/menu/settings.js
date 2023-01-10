@@ -99,7 +99,7 @@ export default function SettingScreen( { navigation }) {
                 </View>
               </View>
               <View style={GS.view2}><Notification category='BEDPRES'/></View>
-            </View>x
+            </View>
           </Card>
 
           <Card>
