@@ -54,7 +54,7 @@ export const T = StyleSheet.create({          // Declares T - meant for all text
   },
   contact: {                                  // Centered text of size 20 for the contact screen
     alignSelf: 'center',                      // Vertically centers
-    fontSize: 20,                             // Text font size
+    fontSize: 15,                             // Text font size
   },
   centered24: {                               // Centered text of size 24 (25 is a bit too wide)
     alignSelf: 'center',                      // Vertically centers

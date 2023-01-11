@@ -36,7 +36,7 @@ export default function ReportScreen( { navigation }) {
   
   const sendForm = () => {
     if (data.name === data.name) {
-      lang ? Alert.alert('Takk for beskjed.') : Alert.alert('Thanks for letting us know.')
+      lang ? Alert.alert('Denne funksjonen kommer snart', 'Midlertidig løsning:\nMail: kontakt@login.no\nDiscord: Axe#9595') : Alert.alert('This function is coming soon.', 'Temporary solution:\nMail: kontakt@login.no\nDiscord: Axe#9595') // Takk for beskjed. / Thanks for letting us know.
     } else {
       lang ? Alert.alert('Feil! Vennligst send varslingen som anonym epost til kontakt@login.no') : Alert.alert('Error! Please send the report as an anonymous email to kontakt@login.no')
     }

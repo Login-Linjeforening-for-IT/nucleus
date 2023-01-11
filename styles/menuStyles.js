@@ -92,6 +92,6 @@ export const MS = StyleSheet.create ({                              // Declares 
   bMenuIcon: {                                                      // Bottom menu icons
     bottom: '13%',                                                  // Moves icons 13% upwards
     width: 120,                                                     // Icon width
-    height: 120                                                     // Icon height
+    height: 100                                                     // Icon height
   },
 });

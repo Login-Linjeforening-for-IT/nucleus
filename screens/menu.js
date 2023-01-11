@@ -35,8 +35,13 @@ export default function MenuScreen({ navigation }) {
       {id: '5', nav: 'BusinessScreen',      titleNO: 'For bedrifter',   titleEN: 'For companies'  },
       {id: '6', nav: 'LoginScreen',         titleNO: 'Innsida (verv)',  titleEN: 'Intranet (verv)'},
   ])
-  
-  const goBack      = () => { navigation.navigate('EventScreen')   }
+  const [feedback, setFeedback] = useState({status: 0})                   //  Feedback options visibility boolean
+
+  function toggleFeedback() {                                             //  --- UPDATES FEEDBACK STATE ---
+    setFeedback({                                                         //  Function to show feedback types
+           status: !feedback.status                                       //  Change feedback state
+    });
+}
   const eventPage   = () => { navigation.navigate('EventScreen')   }
   const listingPage = () => { navigation.navigate('ListingScreen') }
 
@@ -46,7 +51,7 @@ return(
 {/* ========================= DISPLAY CONTENT ========================= */}
 <View style={{...GS.content, backgroundColor: FetchColor(theme, 'BACKGROUND')}}>
           <FlatList
-          
+          style={{minHeight: '100%'}}
           showsVerticalScrollIndicator={false}
           numColumns={1}
           keyExtractor={(item) => item.id}
@@ -59,15 +64,36 @@ return(
                 <Text style={{...T.centered20, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? item.titleNO : item.titleEN}</Text>
               </Card>
             </TouchableOpacity>
+            <View>
+              {index == setting.length-1 ? Space(10):null}
+              {index == setting.length-1 && !feedback.status ?
+                <TouchableOpacity onPress={() => toggleFeedback()}>
+                  <View style={{backgroundColor: FetchColor(theme, 'BACKGROUND')}}>
+                    <Text style={{...T.contact, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? 'Gi tilbakemelding' : 'Give feedback'}</Text>
+                  </View>
+                </TouchableOpacity>
+              :null}
+              
+              {index == setting.length-1 && feedback.status ?
+              <View style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
+                <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/376827396764073997')}>
+                  <View style={{backgroundColor: FetchColor(theme, 'BACKGROUND')}}>
+                    <Text style={{...T.contact, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>Discord</Text>
+                  </View>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => Linking.openURL('mailto:kontakt@login.no')}>
+                  <View style={{backgroundColor: FetchColor(theme, 'BACKGROUND')}}>
+                    <Text style={{...T.contact, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>Mail</Text>
+                  </View>
+                </TouchableOpacity>
+              </View>
+                
+              :null}
+            </View>
           </View>
+            
           )}
           />
-          <TouchableOpacity onPress={() => Linking.openURL('mailto:kontakt@login.no')}>
-              <View style={{backgroundColor: FetchColor(theme, 'BACKGROUND')}}>
-                <Text style={{...T.contact, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? 'Funnet en bug?' : 'Found a bug?'}</Text>
-                <Image style={GS.smallImage} source={require('../assets/plane-orange.png')} />
-              </View>
-            </TouchableOpacity>
             {Space(Dimensions.get('window').height/10)}
       </View>    
 
