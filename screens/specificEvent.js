@@ -1,29 +1,31 @@
 {/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
+import { GetEndTime, MonthNO, MonthEN, EventLocation, DynamicCircle } from '../shared/eventComponents/otherComponents';
+import CleanDescription, {FetchJoinLink} from '../shared/eventComponents/cleanDescription';
+import { nSchedulePushNotification, eSchedulePushNotification } from './event';
 import CategoryCircle from '../shared/eventComponents/categoryCircle';
 import CategorySquare from '../shared/eventComponents/categorySquare';
-import CleanDescription, {FetchJoinLink} from '../shared/eventComponents/cleanDescription';
-import { GetEndTime, MonthNO, MonthEN, EventLocation, DynamicCircle } from '../shared/eventComponents/otherComponents';
-import React, { useEffect, useState } from 'react';
 import Card, { CardSmaller, Space } from '../shared/sharedComponents';
 import EventTime from '../shared/eventComponents/eventTime';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import FetchColor from '../styles/fetchTheme';
 import { GS } from '../styles/globalStyles';
+import { ES } from '../styles/eventStyles';
+import { useSelector } from 'react-redux';
 import { SvgUri } from 'react-native-svg';
 import { MS } from '../styles/menuStyles';
-import { T } from '../styles/text';
-import { ES } from '../styles/eventStyles';
-import FetchColor from '../styles/fetchTheme';
 import { BlurView } from 'expo-blur';
+import { T } from '../styles/text';
 import { 
-  Text, 
-  View, 
-  Image, 
-  ScrollView,
   TouchableOpacity,
+  ScrollView,
   Dimensions,
   Platform,
-  Linking
+  Linking,
+  Image,
+  View,
+  Text, 
 } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 {/* ========================= APP START ========================= */}
@@ -51,6 +53,15 @@ export default function SpecificEventScreen({ route, navigation}) {
   const menuPage    = () => { navigation.navigate('MenuScreen')    }
   const goBack      = () => { navigation.navigate('EventScreen')   }
 
+  async function updateStorage() {
+    let storedClickedEvents = JSON.parse(await AsyncStorage.getItem('clickedEvents'))
+    if(storedClickedEvents){
+      storedClickedEvents.push(item)
+      await AsyncStorage.setItem('clickedEvents', JSON.stringify(storedClickedEvents))
+    }else{
+      await AsyncStorage.setItem('clickedEvents', JSON.stringify([item]))
+    }
+  }
   return(
     <View>
 {/* ========================= DISPLAY CONTENT ========================= */}
@@ -150,7 +161,7 @@ export default function SpecificEventScreen({ route, navigation}) {
               {Space(10)}
               {
                 FetchJoinLink(usersData.description) ?
-                <TouchableOpacity onPress={() => FetchJoinLink(usersData.description) ? Linking.openURL(FetchJoinLink(usersData.description)):null}>
+                <TouchableOpacity onPress={() => FetchJoinLink(usersData.description) ? updateStorage() + Linking.openURL(FetchJoinLink(usersData.description)):null}>
                 <View style={{...ES.eventButton, backgroundColor: FetchColor(theme, 'ORANGE')}}>
                   <Text style={{...T.centered20, color: FetchColor(theme, 'TEXTCOLOR')}}>
                     {lang ? "Meld meg på":"Join event"}
