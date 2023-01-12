@@ -1,3 +1,6 @@
+
+  // NOTE: THIS FILE IS CURRENTLY NOT USED IN PRODUCTION
+
 {/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
 import { GS } from '../styles/globalStyles';
 import { MS } from '../styles/menuStyles';
@@ -41,10 +44,10 @@ export default function SpecificListingScreen( { route, navigation }) {
 {/* ========================= DISPLAY CONTENT ========================= */}
 <View style={{...GS.content, backgroundColor: FetchColor(theme, 'BACKGROUND')}}>
         <ScrollView showsVerticalScrollIndicator={false}>
-        {Space(Dimensions.get('window').height/7.5)}
+        {Space(Dimensions.get('window').height/9)}
         <View>
             <View style={ES.specificEventView1}>
-              <Image style={ES.specificEventImage} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/mnemonic.png') : require('../assets/mnemonic-black.png')} />
+              {/* <Image style={ES.specificEventImage} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/mnemonic.png') : require('../assets/mnemonic-black.png')} /> */}
             </View>
 
             {Space(5)}
@@ -76,7 +79,7 @@ export default function SpecificListingScreen( { route, navigation }) {
       <Image style={MS.goBack} source={require('../assets/goback777.png')} />
     </TouchableOpacity>
 
-    <View style={GS.loginStatus}>{login ? DynamicCircle(10,10,'red',0,0,60,0):null}</View>
+    <View style={GS.loginStatus}>{login ? DynamicCircle(10,10,'red',Dimensions.get('window').width/1.4,null,60,null):null}</View>
 
     <Text style={{... MS.smallMultilineTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{lang ? item.titleNO : item.titleEN}</Text>
   </View>

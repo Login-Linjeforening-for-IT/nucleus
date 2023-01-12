@@ -111,7 +111,7 @@ const inputContent = (val) => {
       {/* ========================= DISPLAY CONTENT ========================= */}
       <View style={{...GS.content, backgroundColor: FetchColor(theme, 'BACKGROUND')}}>
         <View>
-          {Space((Dimensions.get('window').height/7.5)+40)}
+          {Space((Dimensions.get('window').height/9)+40)}
           <Text style={{...T.centered, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Anonymt og sikkert. Alltid.' : 'Anonymous and secure. Always.'}</Text>
           {Space(30)}
 
@@ -217,7 +217,7 @@ const inputContent = (val) => {
           <Image style={MS.goBack} source={require('../../assets/goback777.png')} />
         </TouchableOpacity>
 
-        <View style={GS.loginStatus}>{login ? DynamicCircle(10,10,'red',0,0,60,0):null}</View>
+        <View style={GS.loginStatus}>{login ? DynamicCircle(10,10,'red',Dimensions.get('window').width/1.4,null,60,null):null}</View>
 
         <Text style={{... MS.screenTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{lang ? 'Varsle' : 'Report'}</Text>
 

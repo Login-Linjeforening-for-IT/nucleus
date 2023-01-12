@@ -1,13 +1,14 @@
 {/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
 import CategoryCircle from '../shared/eventComponents/categoryCircle';
 import CategorySquare from '../shared/eventComponents/categorySquare';
-import CleanDescription from '../shared/eventComponents/cleanDescription';
+import CleanDescription, {FetchJoinLink} from '../shared/eventComponents/cleanDescription';
 import { GetEndTime, MonthNO, MonthEN, EventLocation, DynamicCircle } from '../shared/eventComponents/otherComponents';
 import React, { useEffect, useState } from 'react';
 import Card, { CardSmaller, Space } from '../shared/sharedComponents';
 import EventTime from '../shared/eventComponents/eventTime';
 import { useSelector } from 'react-redux';
 import { GS } from '../styles/globalStyles';
+import { SvgUri } from 'react-native-svg';
 import { MS } from '../styles/menuStyles';
 import { T } from '../styles/text';
 import { ES } from '../styles/eventStyles';
@@ -20,7 +21,8 @@ import {
   ScrollView,
   TouchableOpacity,
   Dimensions,
-  Platform
+  Platform,
+  Linking
 } from 'react-native';
 
 
@@ -46,25 +48,34 @@ export default function SpecificEventScreen({ route, navigation}) {
 
   const listingPage = () => { navigation.navigate('ListingScreen') }
   const eventPage   = () => { navigation.navigate('EventScreen')   }
-  const menuPage    = () => { navigation.navigate('MenuScreen')    }              // Function to navigate to menu
+  const menuPage    = () => { navigation.navigate('MenuScreen')    }
   const goBack      = () => { navigation.navigate('EventScreen')   }
-
-  //Logs correctly
-  // console.log('https://cdn.login.no/img/events/' + usersData.image)
 
   return(
     <View>
-
 {/* ========================= DISPLAY CONTENT ========================= */}
         <View style={{...GS.content, backgroundColor: FetchColor(theme, 'BACKGROUND')}}>
         <ScrollView showsVerticalScrollIndicator={false}>
-        {Space((Dimensions.get('window').height/7.5)+5)}
 
-            <View style={ES.specificEventView1}>
-              {/* Doesnt work */}
-              <Image style={ES.specificEventImage} source={require('../assets/default.png')}/>
-              {/* <Image style={ES.specificEventImage} source={{uri: 'https://cdn.login.no/img/events/' + usersData.image}} /> */}
-            </View>
+        {Space((Dimensions.get('window').height/9)+5)}
+
+        {(item.image).includes('.svg') ? 
+          <SvgUri
+            style={{alignSelf: 'center'}}
+            width={(Dimensions.get('window').width)/1.2}
+            height={Dimensions.get('window').width/3}
+            uri={`https://cdn.login.no/img/events/${item.image}`}
+          />
+        :
+          (item.image).includes('.png') ?
+            <Image style={ES.specificEventImage} source={{uri: `https://cdn.login.no/img/events/${item.image}`}}/>
+          : 
+            item.image == 'none' ?
+              item.category == 'TEKKOM' ?
+                <Image style={ES.specificEventImage} source={require(`../assets/tekkom.png`)} />
+              :
+                <Image style={ES.specificEventImage} source={require(`../assets/ctf.png`)} />
+            : null}
 
             {Space(5)}
           
@@ -136,6 +147,17 @@ export default function SpecificEventScreen({ route, navigation}) {
               </View>
               {Space(5)}
               {CleanDescription(usersData.description)}
+              {Space(10)}
+              {
+                FetchJoinLink(usersData.description) ?
+                <TouchableOpacity onPress={() => FetchJoinLink(usersData.description) ? Linking.openURL(FetchJoinLink(usersData.description)):null}>
+                <View style={{...ES.eventButton, backgroundColor: FetchColor(theme, 'ORANGE')}}>
+                  <Text style={{...T.centered20, color: FetchColor(theme, 'TEXTCOLOR')}}>
+                    {lang ? "Meld meg på":"Join event"}
+                  </Text>
+                </View>
+              </TouchableOpacity>:null
+              }
             </Card>
             {Space(10)}
             {Space(Dimensions.get('window').height/10)}
@@ -149,7 +171,7 @@ export default function SpecificEventScreen({ route, navigation}) {
       <Image style={MS.goBack} source={require('../assets/goback777.png')} />
     </TouchableOpacity>
 
-    <View style={GS.loginStatus}>{login ? DynamicCircle(10,10,'red',0,0,60,0):null}</View>
+    <View style={GS.loginStatus}>{login ? DynamicCircle(10,10,'red',Dimensions.get('window').width/1.4,null,60,null):null}</View>
 
     <Text style={{... MS.smallMultilineTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{item.eventname}</Text>
   </View>

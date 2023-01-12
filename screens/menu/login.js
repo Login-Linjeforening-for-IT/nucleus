@@ -100,7 +100,7 @@ const showPass = () => {
     <View>
 {/* ========================= DISPLAY CONTENT ========================= */}
 <View style={{...GS.content, backgroundColor: FetchColor(theme, 'BACKGROUND')}}>
-{Space(Dimensions.get('window').height/7.5)}
+{Space(Dimensions.get('window').height/9)}
         <View>
           {Space(80)}
             <Text style={{...T.centered50, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Innsida' : 'Intranet'}</Text>
@@ -202,7 +202,7 @@ const showPass = () => {
       <Image style={MS.goBack} source={require('../../assets/goback777.png')} />
     </TouchableOpacity>
 
-    <View style={GS.loginStatus}>{login ? DynamicCircle(10,10,'red',0,0,60,0):null}</View>
+    <View style={GS.loginStatus}>{login ? DynamicCircle(10,10,'red',Dimensions.get('window').width/1.4,null,60,null):null}</View>
 
     <Text style={{... MS.screenTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{lang ? 'Innsida' : 'Intranet'}</Text>
   </View>

@@ -33,7 +33,7 @@ export default function BusinessScreen( { navigation }) {                       
   <View style={{...GS.content, backgroundColor: FetchColor(theme, 'BACKGROUND')}}>
         
         <ScrollView showsVerticalScrollIndicator={false}>
-        {Space(Dimensions.get('window').height/7.5)}
+        {Space(Dimensions.get('window').height/9)}
           <Card>
             <Text style={{...T.bold40, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'For bedrifter' : 'For companies'}</Text>{Space(5)}
 
@@ -110,7 +110,7 @@ export default function BusinessScreen( { navigation }) {                       
       <Image style={MS.goBack} source={require('../../assets/goback777.png')} />
     </TouchableOpacity>
 
-    <View style={GS.loginStatus}>{login ? DynamicCircle(10,10,'red',0,0,60,0):null}</View>
+    <View style={GS.loginStatus}>{login ? DynamicCircle(10,10,'red',Dimensions.get('window').width/1.4,null,60,null):null}</View>
 
     <Text style={{... MS.screenTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{lang ? 'For bedrifter' : 'For companies'}</Text>
   </View>

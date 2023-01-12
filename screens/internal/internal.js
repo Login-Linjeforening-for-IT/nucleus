@@ -45,7 +45,7 @@ export default function InternalScreen({ navigation }) {
           keyExtractor={(item) => item.id}
           data={setting}
           renderItem={({item, index}) => (
-            <View>{index == 0 ? Space(Dimensions.get('window').height/7.5): null}
+            <View>{index == 0 ? Space(Dimensions.get('window').height/9): null}
             <TouchableOpacity onPress={() => navigation.navigate(item.nav, item)}>
               <Card>
                 <Text style={{...T.centered20, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? item.titleNO : item.titleEN}</Text>
@@ -64,7 +64,7 @@ export default function InternalScreen({ navigation }) {
             <Image style={MS.tMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/loginText.png') : require('../../assets/loginText-black.png')} />
           </TouchableOpacity>
 
-          <View style={GS.loginStatus}>{login ? DynamicCircle(10,10,'red',0,0,60,0):null}</View>
+          <View style={GS.loginStatus}>{login ? DynamicCircle(10,10,'red',Dimensions.get('window').width/1.4,null,60,null):null}</View>
 
           <Text style={{... MS.screenTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{lang ? 'Innsida' : 'Intranet'}</Text>
         </View>

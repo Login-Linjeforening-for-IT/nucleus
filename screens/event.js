@@ -316,7 +316,7 @@ export default function EventScreen({ navigation }) {                     //  Ex
       {/* ========================= DISPLAY CONTENT ========================= */}
       <View style={{...GS.content, backgroundColor: FetchColor(theme, 'BACKGROUND')}}>
         {/* ----- RENDERS FILTER ----- */}
-        {search.status == 1? Space(Dimensions.get('window').height/7.5):null}
+        {search.status == 1? Space(Dimensions.get('window').height/9):null}
         {search.status ? 
           <View>
               <View style={ES.absoluteView}>
@@ -379,7 +379,7 @@ export default function EventScreen({ navigation }) {                     //  Ex
                 
                 <View style={{marginTop: search.status && !index ? -10:0}}> 
                   <TouchableOpacity onPress={() => navigation.navigate('SpecificEventScreen', {item: item})}>
-                  {index == 0 && search.status == 0? Space(Dimensions.get('window').height/7.5): null}
+                  {index == 0 && search.status == 0? Space(Dimensions.get('window').height/9): null}
                       <Card>
                         <View style={ES.eventBack}>
                           <View>
@@ -417,17 +417,17 @@ export default function EventScreen({ navigation }) {                     //  Ex
           events.length == 0 ?
             <View style={{alignSelf: 'center', maxWidth: '80%'}}>
               <View style={{height : '58%'}}/>
-              <Text style={{...T.centeredBold20, color: FetchColor(theme, 'TEXTCOLOR')}}>Sjekk nettverkstilkoblingen din og prøv igjen. Kontakt TEKKOM dersom problemet vedvarer.</Text>
+              <Text style={{...T.centeredBold20, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? "Sjekk nettverkstilkoblingen din og prøv igjen. Kontakt TEKKOM dersom problemet vedvarer.":"Check your wifi connection and try again. Contact TEKKOM if the issue persists."}</Text>
             </View>
           :
             <View>
               <View style={{height : '50%'}}/>
-              <Text style={{...T.centeredOppositeColor, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>Ingen treff</Text>
+              <Text style={{...T.centeredOppositeColor, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? "Ingen treff":"No matching events"}</Text>
             </View>
         : 
           <View style={{alignSelf: 'center', maxWidth: '80%'}}>
             <View style={{height : '58%'}}/>
-            <Text style={{...T.centeredBold20, color: FetchColor(theme, 'TEXTCOLOR')}}>Sjekk nettverkstilkoblingen din og prøv igjen. Kontakt TEKKOM dersom problemet vedvarer.</Text>
+            <Text style={{...T.centeredBold20, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? "Sjekk nettverkstilkoblingen din og prøv igjen. Kontakt TEKKOM dersom problemet vedvarer.":"Check your wifi connection and try again. Contact TEKKOM if the issue persists."}</Text>
           </View>
         }
         {Space(Dimensions.get('window').height/10)}
@@ -439,7 +439,7 @@ export default function EventScreen({ navigation }) {                     //  Ex
         <TouchableOpacity>
           <Image style={MS.tMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/loginText.png') : require('../assets/loginText-black.png')} />
         </TouchableOpacity>
-        <View style={GS.loginStatus}>{login ? DynamicCircle(10,10,'red',0,0,60,0):null}</View>
+        <View style={GS.loginStatus}>{login ? DynamicCircle(10,10,'red',Dimensions.get('window').width/1.4,null,60,null):null}</View>
         {
           lang ?
             <Text style={{... MS.smallTitle, left: '-5%', color: FetchColor(theme, 'TITLETEXTCOLOR')}}>Arrangementer</Text>
@@ -451,9 +451,9 @@ export default function EventScreen({ navigation }) {                     //  Ex
           renderedArray.length > 0 || clickedCategory.length > 0 || filter.input != null ? 
           <TouchableOpacity onPress={() => toggleSearchBar()}>
             {search.status ? 
-              <Image style={{...MS.tMenuIcon, right: 5}} source={require('../assets/filter-orange.png')} />
+              <Image style={{...MS.tMenuIcon, right: 5, top: 7.5}} source={require('../assets/filter-orange.png')} />
             :
-              <Image style={{...MS.tMenuIcon, right: 5}} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/filter.png') : require('../assets/filter-black.png')} />
+              <Image style={{...MS.tMenuIcon, right: 5, top: 7.5}} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/filter.png') : require('../assets/filter-black.png')} />
             }
           </TouchableOpacity>
         :null:null}
@@ -536,7 +536,7 @@ async function registerForPushNotificationsAsync() {                      // ---
     token = (await Notifications.getExpoPushTokenAsync()).data;
     //console.log(token); // Logs the token
   } else {
-    alert('Varslinger er ikke tilgjengelig på simulatorer.');
+    alert(lang ? 'Varslinger er ikke tilgjengelig på simulatorer.': 'Notifications are not available on simulators');
   }
 
   return token;

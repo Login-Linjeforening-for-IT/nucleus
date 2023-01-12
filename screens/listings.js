@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import { DynamicCircle } from '../shared/eventComponents/otherComponents';
 import FetchColor from '../styles/fetchTheme';
 import { BlurView } from 'expo-blur';
+import { SvgUri } from 'react-native-svg';
 import { 
   Text, 
   View, 
@@ -34,7 +35,16 @@ return(
 
 {/* ========================= DISPLAY CONTENT ========================= */}
 <View style={{...GS.content, backgroundColor: FetchColor(theme, 'BACKGROUND')}}>
-          <View style={{...T.centeredBold20, flex: 1, justifyContent: 'center'}}>{lang ? <Text style={{...T.centeredBold20, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>Jobbannonser kommer snart! Bli med i tekkom hvis du ønsker å hjelpe til😉</Text>:<Text style={{...T.centeredBold20, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>Job listings are coming soon! Join TekKom if you would like to help!😉</Text>}</View>
+          <View style={{...T.centeredBold20, flex: 1, justifyContent: 'center'}}>{lang ? <Text style={{...T.centeredBold20, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>Jobbannonser kommer snart! Bli med i tekkom hvis du ønsker å hjelpe til😉</Text>:<Text style={{...T.centeredBold20, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>Job listings are coming soon! Join TekKom if you would like to help!😉</Text>}
+          {Space(10)}
+          <SvgUri
+            style={{alignSelf: 'center'}}
+            width={(Dimensions.get('window').width)/1.2}
+            height={Dimensions.get('window').width/3}
+            uri={`https://cdn.login.no/img/events/mnemonic.svg`}
+          />
+          <Text style={{...T.centeredBold20, top:-20, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? 'Hovedsamarbeidsparner':'Main partner'}</Text>
+          </View>
       </View>    
 
 {/* ========================= DISPLAY TOP MENU ========================= */}
@@ -44,7 +54,7 @@ return(
       <Image style={MS.tMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/loginText.png') : require('../assets/loginText-black.png')} />
     </TouchableOpacity>
 
-    <View style={GS.loginStatus}>{login ? DynamicCircle(10,10,'red',0,0,60,0):null}</View>
+    <View style={GS.loginStatus}>{login ? DynamicCircle(10,10,'red',Dimensions.get('window').width/1.4,null,60,null):null}</View>
 
     <Text style={{... MS.screenTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{lang ? 'Stillinger' : 'Vacancies'}</Text>
   </View>

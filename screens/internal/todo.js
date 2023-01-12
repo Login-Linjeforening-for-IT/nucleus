@@ -50,7 +50,7 @@ function goBack()      { navigation.navigate('InternalScreen') }
           keyExtractor={(item) => item.id}
           data={setting}
           renderItem={({item, index}) => (
-            <View>{index == 0 ? Space(Dimensions.get('window').height/7.5): null}
+            <View>{index == 0 ? Space(Dimensions.get('window').height/9): null}
               <Card>
                 <Text style={{...T.text15, color: FetchColor(theme, 'TEXTCOLOR')}}>{item.id}. {item.todo}</Text>
               </Card>
@@ -67,7 +67,7 @@ function goBack()      { navigation.navigate('InternalScreen') }
       <Image style={MS.goBack} source={require('../../assets/goback777.png')} />
     </TouchableOpacity>
 
-    <View style={GS.loginStatus}>{login ? DynamicCircle(10,10,'red',0,0,60,0):null}</View>
+    <View style={GS.loginStatus}>{login ? DynamicCircle(10,10,'red',Dimensions.get('window').width/1.4,null,60,null):null}</View>
 
     <Text style={{... MS.screenTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{lang ? 'Gjøremål' : 'Todo'}</Text>
   </View>

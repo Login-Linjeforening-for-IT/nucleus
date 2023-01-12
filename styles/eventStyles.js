@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";    // Stylesheet file
+import { StyleSheet, Dimensions } from "react-native";  //Stylesheet file
 
 export const ES = StyleSheet.create({         // Declares export ES ( Event Styles )
 //========================= EventScreen =========================
@@ -74,9 +74,10 @@ export const ES = StyleSheet.create({         // Declares export ES ( Event Styl
     overflow: 'hidden'                        // Hides the overflow (elements outside the view)
   },
   specificEventImage: {                       // The header image on specificEventScreen
-    width: '100%',                            // Sets the width to 100% of the available width from the parent view
-    height: 100,                              // Fixed height of 100px
-    aspectRatio: 3,                           // Uses aspectRatio 3:1 Note: resizeMode: 'contain' may work here
+    alignSelf: 'center',                      // Centers the image
+    width: (Dimensions.get('window').width)-4,// Almost full csreen width
+    height: 150,                              // Fixed height of 150px
+    resizeMode: 'contain'                     // Adjusts the image to fit
   },
   //======================== EventComponentStyles ===================
   size: {                                     // Middle sized icons
@@ -169,4 +170,10 @@ export const ES = StyleSheet.create({         // Declares export ES ( Event Styl
       height: 40,                             // Fixed icon height of 40px
       width: 40                               // Fixed icon width of 40px
   },
+  eventButton: {
+    height: 30,
+    width: Dimensions.get('window').width/3.5, 
+    alignSelf: 'center',
+    borderRadius: 10
+  }
 })
