@@ -30,7 +30,6 @@ export default function CleanDescription(string) {
         const removeHTMLreferences = removePtag2.replace(/&#\d+;/g, '.');
         const removeExcessSpace = removeHTMLreferences.replace(/\s+\./g, '!');
         const removeSpace = removeExcessSpace.trimEnd()
-        console.log(removeSpace)
         return(<View><Text style={{...T.paragraph, color: FetchColor(theme, 'TEXTCOLOR')}}>{removeSpace}</Text></View>)
     } else {
         return(<View><Text style={T.red}>{lang ? 'Feil ved henting av beskrivelse' : 'Error fetching description'}</Text></View>)
@@ -45,9 +44,3 @@ export function FetchJoinLink(string) {
         return link
     }else return null
 }
-
-//let linkStart = sstring.indexOf('https://forms')
-//let linkEnd = sstring.indexOf("&lt;a&gt;");
-//let link = sstring.slice(2, 20)
-//console.log(link)
-//console.log(string.match(/https?:\/\/(?:www)?\.forms[^ ,.]+/gm))
