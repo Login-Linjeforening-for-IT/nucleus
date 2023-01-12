@@ -19,17 +19,27 @@ export default function CleanDescription(string) {
         const removeTags = string.replace(/<p>|<h2>|<a |<\/h2>/g, '')
         const Fristcleanup = removeTags.replace(' (frist', 'sfrist:')
         const FristClosingCleanup = Fristcleanup.replace(/\):/g, '.')
-        const RegistrationCleanup = FristClosingCleanup.replace(' (due', ' due:')
+        const RegistrationCleanup = FristClosingCleanup.replace(/ \(due/g, ' due:')
         const LinkCleanup = RegistrationCleanup.replace(/href=".*?">.*?<\/a>/g, '')
-        const addO = LinkCleanup.replace(/&oslash;/g, 'ø');
-        const addA = addO.replace(/&aring;/g, 'å');
-        const addLB = addA.replace(/<\/p>/g, '\n\n');
+        const makeList = LinkCleanup.replace(/<ul> <li>/g, ' - ')
+        const makeNewLine = makeList.replace(/<\/li> <li>/g, '\n - ')
+        const endList = makeNewLine.replace(/<\/li> <\/ul>/g, '\n\n')
+        const fixAbbreviation = endList.replace(/<abbr title="/g, '')
+        const fixEndAbbreviation = fixAbbreviation.replace(/">/g, ' (')
+        const fixClosingAbbreviation = fixEndAbbreviation.replace(/<\/abbr>/g, ')')
+        const addO = fixClosingAbbreviation.replace(/&Oslash;/g, 'Ø');
+        const addo = addO.replace(/&oslash;/g, 'ø');
+        const addA = addo.replace(/&Aring;/g, 'Å');
+        const adda = addA.replace(/&aring;/g, 'å');
+        const addLB = adda.replace(/<\/p>/g, '\n\n');
         const addSpace = addLB.replace(/&nbsp;/g, ' ');
         const removehT = addSpace.replace(/<h2>/g, '');
         const removePtag2 = removehT.replace(/<p>/g, '\n\n');
         const removeHTMLreferences = removePtag2.replace(/&#\d+;/g, '.');
         const removeExcessSpace = removeHTMLreferences.replace(/\s+\./g, '!');
-        const removeSpace = removeExcessSpace.trimEnd()
+        const missingExpiretime = removeExcessSpace.replace(/(^|\n)(?=.*Påmelding)(?!.*frist).*(\n|$)/g, '')
+        const removeLeadingSpace = missingExpiretime.replace(/^[ \t]+|[ \t]+$/gm, '')
+        const removeSpace = removeLeadingSpace.trimEnd()
         return(<View><Text style={{...T.paragraph, color: FetchColor(theme, 'TEXTCOLOR')}}>{removeSpace}</Text></View>)
     } else {
         return(<View><Text style={T.red}>{lang ? 'Feil ved henting av beskrivelse' : 'Error fetching description'}</Text></View>)
@@ -41,6 +51,6 @@ export function FetchJoinLink(string) {
         let linkStart = string.lastIndexOf('https://forms')
         let linkEnd = string.lastIndexOf("</a>");
         let link = string.slice(linkStart, linkEnd)
-        return link
+        return link.trim()
     }else return null
 }

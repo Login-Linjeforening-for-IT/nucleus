@@ -172,7 +172,7 @@ export const ES = StyleSheet.create({         // Declares export ES ( Event Styl
   },
   eventButton: {
     height: 30,
-    width: Dimensions.get('window').width/3.5, 
+    width: Dimensions.get('window').width/3, 
     alignSelf: 'center',
     borderRadius: 10
   }

@@ -35,8 +35,10 @@ export default function SpecificEventScreen({ route, navigation}) {
   const { lang  } = useSelector( (state) => state.lang  )
   const { login } = useSelector( (state) => state.login )
   const { theme } = useSelector( (state) => state.theme )
-  const { item } = route.params
   const [usersData,setUsersData]=useState({})
+  const { item } = route.params
+  const link = FetchJoinLink(usersData.description)
+
 
   const getData=()=>{
     fetch('https://api.login.no/events/' + item.eventID)
@@ -161,8 +163,8 @@ export default function SpecificEventScreen({ route, navigation}) {
               {CleanDescription(usersData.description)}
               {Space(10)}
               {
-                FetchJoinLink(usersData.description) ?
-                <TouchableOpacity onPress={() => FetchJoinLink(usersData.description) ? updateStorage() + Linking.openURL(FetchJoinLink(usersData.description)):null}>
+                link ?
+                <TouchableOpacity onPress={() => {updateStorage() + Linking.openURL(link)}}>
                 <View style={{...ES.eventButton, backgroundColor: FetchColor(theme, 'ORANGE')}}>
                   <Text style={{...T.centered20, color: FetchColor(theme, 'TEXTCOLOR')}}>
                     {lang ? "Meld meg på":"Join event"}
