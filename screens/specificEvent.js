@@ -62,6 +62,7 @@ export default function SpecificEventScreen({ route, navigation}) {
       await AsyncStorage.setItem('clickedEvents', JSON.stringify([item]))
     }
   }
+  
   return(
     <View>
 {/* ========================= DISPLAY CONTENT ========================= */}
