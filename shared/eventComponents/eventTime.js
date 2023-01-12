@@ -124,7 +124,7 @@ export default function EventTime(startTime, endTime) { // startTime
                         return(<View><Text style={{...T.text25, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'I morgen' : 'Tomorrow'}</Text></View>)
                     }
                 }else{ //Event is in x days
-                    return(<View><Text style={{...T.text25, color: FetchColor(theme, 'TEXTCOLOR')}}>{startDay-day} {lang ? ' dager til' : ' days left'}</Text></View>)
+                    return(<View><Text style={{...T.text25, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Starter om': 'Starts in'} {startDay-day} {lang ? 'dager' : 'days'}</Text></View>)
                 }
             }else if(startMonth == month+1){ //Event is next month
                 if (day == lastDayOfMonth(month+1) && startDay == 1) {
