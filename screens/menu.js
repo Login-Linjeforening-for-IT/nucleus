@@ -15,7 +15,8 @@ import {
   TouchableOpacity,
   Linking,
   Dimensions,
-  Platform
+  Platform,
+  Alert
 } from 'react-native';
 import { T } from '../styles/text';
 
@@ -81,7 +82,9 @@ return(
                     <Text style={{...T.contact, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>Discord</Text>
                   </View>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => Linking.openURL('mailto:kontakt@login.no')}>
+                <TouchableOpacity onPress={async() => {
+                 Linking.openURL('mailto:kontakt@login.no').catch(() => lang ? Alert.alert('Kunne ikke åpne mail!', 'Mail: kontakt@login.no'):Alert.alert('Could not open mail!', 'Reach us at kontakt@login.no'))
+                }}>
                   <View style={{backgroundColor: FetchColor(theme, 'BACKGROUND')}}>
                     <Text style={{...T.contact, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>Mail</Text>
                   </View>

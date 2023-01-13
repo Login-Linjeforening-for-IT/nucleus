@@ -16,7 +16,6 @@ import {
   TouchableOpacity,
   Dimensions,
   Platform,
-  TouchableWithoutFeedback
 } from 'react-native';
 
 {/* ========================= APP START ========================= */}
