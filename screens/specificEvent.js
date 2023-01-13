@@ -59,8 +59,10 @@ export default function SpecificEventScreen({ route, navigation}) {
     let storedClickedEvents = JSON.parse(await AsyncStorage.getItem('clickedEvents'))
     if(storedClickedEvents){
       storedClickedEvents.push(item)
+      lang ? nSchedulePushNotification(item):eSchedulePushNotification(item)
       await AsyncStorage.setItem('clickedEvents', JSON.stringify(storedClickedEvents))
     }else{
+      lang ? nSchedulePushNotification(item):eSchedulePushNotification(item)
       await AsyncStorage.setItem('clickedEvents', JSON.stringify([item]))
     }
   }

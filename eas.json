@@ -1,25 +1,16 @@
 {
-  "cli": {
-    "version": ">= 2.7.1"
-  },
   "build": {
-    "development": {
-      "developmentClient": true,
-      "distribution": "internal",
-      "channel": "development"
-    },
-    "preview": {
-      "distribution": "internal",
-      "ios": {
-        "enterpriseProvisioning": "universal"
-      },
-      "channel": "preview"
-    },
-    "production": {
-      "channel": "production"
-    }
-  },
-  "submit": {
-    "production": {}
-  }
-}
+     "development": {
+       "developmentClient": true,
+       "distribution": "internal",
+       "ios": {
+         "resourceClass": "m1-medium"
+       }
+     },
+     "production": {
+       "ios": {
+         "resourceClass": "m1-medium"
+       }
+     }
+   }
+ }

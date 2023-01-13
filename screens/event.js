@@ -399,7 +399,7 @@ export default function EventScreen({ navigation }) {                     //  Ex
                                   <View style = {ES.checkContent}><Check/></View>
                                 </TouchableOpacity>
                               :
-                                <TouchableOpacity onPress={() => (categoryAllowed(item) ? schedulePushNotification(item) : null) + setClickedEvents([...clickedEvents, item])}>
+                                <TouchableOpacity onPress={() => (categoryAllowed(item) ? lang ? nSchedulePushNotification(item):eSchedulePushNotification(item) : null) + setClickedEvents([...clickedEvents, item])}>
                                   <View style = {ES.greenLight}><GrayLight/></View>
                                   <View style = {ES.checkContent}><Check/></View>
                                 </TouchableOpacity>
@@ -484,13 +484,32 @@ export default function EventScreen({ navigation }) {                     //  Ex
  * @param {string} body     Notification Body
  * @param {date} sendtime   Time the notification should be sent
  */
-async function schedulePushNotification(props) {                          // --- SCHEDULE PUSH NOTIFICATION ---
+export async function nSchedulePushNotification(props) {                          // --- SCHEDULE PUSH NOTIFICATION ---
   Notifications.cancelAllScheduledNotificationsAsync()
   const emoji = fetchEmoji(props)                                         // Fetches emoji from emoji function
   await Notifications.scheduleNotificationAsync({
     content: {  
       title: props.eventname + emoji,                                     // Notification title
       body: 'Begynner om en time! 🏃',                                    // Notificaton body
+    },
+    trigger: { seconds: NotificationDelay(props) },                       // Triggers 1 hour before event
+    identifier: JSON.stringify(props.eventID)                             // ID of the notification
+  });
+}
+
+/**
+ * Function for scheduling push notifications in English
+ * @param {string} title    Notification title
+ * @param {string} body     Notification Body
+ * @param {date} sendtime   Time the notification should be sent
+ */
+export async function eSchedulePushNotification(props) {                          // --- SCHEDULE PUSH NOTIFICATION ---
+  Notifications.cancelAllScheduledNotificationsAsync()
+  const emoji = fetchEmoji(props)                                         // Fetches emoji from emoji function
+  await Notifications.scheduleNotificationAsync({
+    content: {  
+      title: props.eventname + emoji,                                     // Notification title
+      body: 'Starts in one hour! 🏃',                                    // Notificaton body
     },
     trigger: { seconds: NotificationDelay(props) },                       // Triggers 1 hour before event
     identifier: JSON.stringify(props.eventID)                             // ID of the notification
