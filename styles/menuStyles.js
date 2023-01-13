@@ -55,7 +55,7 @@ export const MS = StyleSheet.create ({                              // Declares 
     height: Dimensions.get('window').height/9,                    // Sets the height of the top menu to 13.3% of the screen height
   },
   tMenuIcon: {                                                      // Size of top menu icons
-    top: '4%',                                                      // Moves the icon 5% downwards
+    top: '7.5%',                                                      // Moves the icon 5% downwards
     width: 100,                                                     // Icon width
     height: 120                                                     // Icon height
   },
