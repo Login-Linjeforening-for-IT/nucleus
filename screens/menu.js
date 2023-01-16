@@ -30,11 +30,11 @@ export default function MenuScreen({ navigation }) {
 
   const [setting] = useState([
       {id: '1', nav: 'SettingScreen',       titleNO: 'Innstillinger',   titleEN: 'Settings'       },
-      {id: '2', nav: 'ReportScreen',        titleNO: 'Varsle',          titleEN: 'Report'         },
+      //{id: '2', nav: 'ReportScreen',        titleNO: 'Varsle',          titleEN: 'Report'         },
       {id: '3', nav: 'CommitteeMenuScreen', titleNO: 'Komité',          titleEN: 'Committee'      },
       {id: '4', nav: 'AboutScreen',         titleNO: 'Om oss',          titleEN: 'About Login'    },
       {id: '5', nav: 'BusinessScreen',      titleNO: 'For bedrifter',   titleEN: 'For companies'  },
-      {id: '6', nav: 'LoginScreen',         titleNO: 'Innsida (verv)',  titleEN: 'Intranet (verv)'},
+      //{id: '6', nav: 'LoginScreen',         titleNO: 'Innsida (verv)',  titleEN: 'Intranet (verv)'},
   ])
   const [feedback, setFeedback] = useState({status: 0})                   //  Feedback options visibility boolean
 

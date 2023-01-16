@@ -295,7 +295,7 @@ export default function EventScreen({ navigation }) {                     //  Ex
       interval = setInterval(() => {                                          
         getData();                                                        //  Fetches cache
       }, 10000);                                                          //  Runs every 10 seconds
-    }else{3
+    }else{
       clearInterval(interval)                                             //  Clears the interval when the filter is opened
     }
     return () => clearInterval(interval)                                  //  Clears interval when unmounted to prevent memory leaks

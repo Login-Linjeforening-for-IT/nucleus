@@ -5,6 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';       
 
 const Tab = createBottomTabNavigator();                                         // Declares Tab to equal CBTN function
 
+import CountdownScreen from '../screens/countdown';                             // Countdown for launch party
 import EventScreen from '../screens/event';                                     // Events
 import AboutScreen from '../screens/menu/about';                                // About Login
 import MenuScreen from '../screens/menu';                                       // Profile
@@ -21,21 +22,26 @@ import CommitteeMenuScreen from '../screens/menu/committeeMenu';                
 import SpecificListingScreen from '../screens/specificListing';                 // Specific Job listing
 
 function Navigator() {                                                          // Declares Navigator, wraps in container and declares all navigation routes
+    // Remove after launch party
+    var month = 1 + new Date().getMonth()
+    var day      = new Date().getDate()                                                                     // Current day
+    // Remove after launch party
     return(
         <NavigationContainer>                                                   
             <Tab.Navigator screenOptions={{ headerShown: false}}>  
-                <Tab.Screen name='EventScreen'              options={{tabBarStyle: { display: "none" }}} component={EventScreen} />
+            {month == 1 && day > 18 || month == 2 && day < 11 ? <Tab.Screen name='CountdownScreen' options={{tabBarStyle: { display: "none" }}} component={CountdownScreen} />:<Tab.Screen name='EventScreen' options={{tabBarStyle: { display: "none" }}} component={EventScreen} />}
+                {/* <Tab.Screen name='EventScreen' options={{tabBarStyle: { display: "none" }}} component={EventScreen} /> */}
                 <Tab.Screen name='ListingScreen'            options={{tabBarStyle: { display: "none" }}} component={ListingScreen} />             
                 <Tab.Screen name='MenuScreen'               options={{tabBarStyle: { display: "none" }}} component={MenuScreen} />
                 <Tab.Screen name='AboutScreen'              options={{tabBarStyle: { display: "none" }}} component={AboutScreen} />
                 <Tab.Screen name='SpecificEventScreen'      options={{tabBarStyle: { display: "none" }}} component={SpecificEventScreen} />
-                <Tab.Screen name='InternalScreen'           options={{tabBarStyle: { display: "none" }}} component={InternalScreen} />
+                {/* <Tab.Screen name='InternalScreen'           options={{tabBarStyle: { display: "none" }}} component={InternalScreen} /> */}
                 <Tab.Screen name='BusinessScreen'           options={{tabBarStyle: { display: "none" }}} component={BusinessScreen} />
                 <Tab.Screen name='SettingScreen'            options={{tabBarStyle: { display: "none" }}} component={SettingScreen} />
-                <Tab.Screen name='TodoScreen'               options={{tabBarStyle: { display: "none" }}} component={TodoScreen} />
-                <Tab.Screen name='MakeNotificationScreen'   options={{tabBarStyle: { display: "none" }}} component={MakeNotificationScreen} />
-                <Tab.Screen name='LoginScreen'              options={{tabBarStyle: { display: "none" }}} component={LoginScreen} />
-                <Tab.Screen name='ReportScreen'             options={{tabBarStyle: { display: "none" }}} component={ReportScreen} />
+                {/* <Tab.Screen name='TodoScreen'               options={{tabBarStyle: { display: "none" }}} component={TodoScreen} /> */}
+                {/* <Tab.Screen name='MakeNotificationScreen'   options={{tabBarStyle: { display: "none" }}} component={MakeNotificationScreen} /> */}
+                {/* <Tab.Screen name='LoginScreen'              options={{tabBarStyle: { display: "none" }}} component={LoginScreen} /> */}
+                {/* <Tab.Screen name='ReportScreen'             options={{tabBarStyle: { display: "none" }}} component={ReportScreen} /> */}
                 <Tab.Screen name='CommitteeMenuScreen'      options={{tabBarStyle: { display: "none" }}} component={CommitteeMenuScreen} />
                 <Tab.Screen name='SpecificListingScreen'    options={{tabBarStyle: { display: "none" }}} component={SpecificListingScreen} />
             </Tab.Navigator>                    
