@@ -23,8 +23,8 @@ import SpecificListingScreen from '../screens/specificListing';                 
 
 function Navigator() {                                                          // Declares Navigator, wraps in container and declares all navigation routes
     // Remove after launch party
-    var month = 1 + new Date().getMonth()
-    var day      = new Date().getDate()                                                                     // Current day
+    var month = 1 + new Date().getMonth()                                       // Current month
+    var day = new Date().getDate()                                              // Current day
     // Remove after launch party
     return(
         <NavigationContainer>                                                   
@@ -35,9 +35,9 @@ function Navigator() {                                                          
                 <Tab.Screen name='MenuScreen'               options={{tabBarStyle: { display: "none" }}} component={MenuScreen} />
                 <Tab.Screen name='AboutScreen'              options={{tabBarStyle: { display: "none" }}} component={AboutScreen} />
                 <Tab.Screen name='SpecificEventScreen'      options={{tabBarStyle: { display: "none" }}} component={SpecificEventScreen} />
-                {/* <Tab.Screen name='InternalScreen'           options={{tabBarStyle: { display: "none" }}} component={InternalScreen} /> */}
                 <Tab.Screen name='BusinessScreen'           options={{tabBarStyle: { display: "none" }}} component={BusinessScreen} />
                 <Tab.Screen name='SettingScreen'            options={{tabBarStyle: { display: "none" }}} component={SettingScreen} />
+                {/* <Tab.Screen name='InternalScreen'           options={{tabBarStyle: { display: "none" }}} component={InternalScreen} /> */}
                 {/* <Tab.Screen name='TodoScreen'               options={{tabBarStyle: { display: "none" }}} component={TodoScreen} /> */}
                 {/* <Tab.Screen name='MakeNotificationScreen'   options={{tabBarStyle: { display: "none" }}} component={MakeNotificationScreen} /> */}
                 {/* <Tab.Screen name='LoginScreen'              options={{tabBarStyle: { display: "none" }}} component={LoginScreen} /> */}
