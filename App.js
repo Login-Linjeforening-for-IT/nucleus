@@ -7,7 +7,6 @@ import { persistStore } from 'redux-persist';                               // P
 import registerNNPushToken from 'native-notify';                            // Push notification key
 import { AppRegistry } from 'react-native';
 import messaging from '@react-native-firebase/messaging';
-import App from './App';
 
 let persistor = persistStore(store)                                         // Middleware to interact with AsyncStorage
 

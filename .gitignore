@@ -15,3 +15,5 @@ babel.config.js
 # macOS
 .DS_Store
 secret.json
+google-services.json
+GoogleService-Info.plist
