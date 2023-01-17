@@ -36,8 +36,14 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.eirikhanasand.Login",
+      "buildNumber": "20",
       "googleServicesFile": "./GoogleService-Info.plist",
-      "buildNumber": "19"
+      "infoPlist": {
+         "UIBackgroundModes": [
+           "fetch",
+           "remote-notification"
+         ]
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -46,13 +52,7 @@
       },
       "package": "com.login.Login",
       "googleServicesFile": "./GoogleService-Info.plist",
-      "infoPlist": {
-         "UIBackgroundModes": [
-           "fetch",
-           "remote-notification"
-         ]
-      },
-      "versionCode": 16
+      "versionCode": 17
     },
     "web": {
       "favicon": "./assets/favicon.png"
