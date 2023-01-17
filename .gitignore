@@ -12,8 +12,10 @@ npm-debug.*
 web-build/
 babel.config.js
 
-# macOS
-.DS_Store
+# secrets
 secret.json
 google-services.json
 GoogleService-Info.plist
+
+# macOS
+.DS_Store
