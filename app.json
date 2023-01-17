@@ -27,7 +27,8 @@
             "./assets/notificationsound.wav"
           ]
         }
-      ]
+      ],
+      ["@react-native-firebase/app"]
     ],
     "assetBundlePatterns": [
       "**/*"
@@ -35,6 +36,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.eirikhanasand.Login",
+      "googleServicesFile": "./GoogleService-Info.plist",
       "buildNumber": "19"
     },
     "android": {
@@ -43,6 +45,13 @@
         "backgroundColor": "#000000"
       },
       "package": "com.login.Login",
+      "googleServicesFile": "./GoogleService-Info.plist",
+      "infoPlist": {
+         "UIBackgroundModes": [
+           "fetch",
+           "remote-notification"
+         ]
+      },
       "versionCode": 16
     },
     "web": {

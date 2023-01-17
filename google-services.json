@@ -7,7 +7,7 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:426443151904:android:d71dced18ac36bc27afa45",
+        "mobilesdk_app_id": "1:426443151904:android:93d230f0e780c5077afa45",
         "android_client_info": {
           "package_name": "com.login.Login"
         }
@@ -39,10 +39,10 @@
               "client_type": 3
             },
             {
-              "client_id": "426443151904-oer2vuq14scrkbvvqe00mlpd9s55q1fo.apps.googleusercontent.com",
+              "client_id": "426443151904-i7r0jhmkqoisadl6rgtjcsfdd0jfu326.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.eirikhanasand.Login",
+                "bundle_id": "com.login.Login",
                 "app_store_id": "1660125165"
               }
             }

@@ -23,12 +23,11 @@ import {                                                                  // Rea
   TouchableOpacity,                                                       // TouchableOpacity     (custom button)
   Dimensions,                                                             // Size of the device
   Platform,                                                               // Operating system
-  Alert                                                                   // Alerts the user
+  Alert,                                                                  // Alerts the user
+  AppRegistry                                                             // Used for FCM
 } from 'react-native';                                                    // React native
 import { useFocusEffect } from '@react-navigation/native';                // useFocusEffect       (do something when the screen is displayed)
-
-//import firebase from '@react-native-firebase/app';                      // EDITING - DOESNT WORK
-//import '@react-native-firebase/messaging';                              // EDITING - DOESNT WORK
+import messaging from '@react-native-firebase/messaging';
 
 // cancel scheduled notification:
 
@@ -50,6 +49,7 @@ export default function EventScreen({ navigation }) {                     //  Ex
   const [renderedArray, setRenderedArray] = useState([]);                 //  Events currently displayed
   const [clickedEvents, setClickedEvents] = useState([]);                 //  Clicked events
   const [clickedCategory, setClickedCategory] = useState([]);             //  Clicked categories
+  const [lastSave, setLastSave] = useState(null)
   const [filter, setFilter] = useState({input: null});                    //  Filter text input declaration
   const textInputRef = useRef(null);                                      //  Clears text input
   const [relevantCategories, setRelevantCategories] = useState([]);       //  Relevant categories to filter
@@ -93,7 +93,8 @@ export default function EventScreen({ navigation }) {                     //  Ex
       //fetch('https://tekkom:rottejakt45@api.login.no:8443/events')      // TESTING
       .then(response=>response.json())                                    // Formatting the response
       .then(data=>setEvents(data))                                        // Setting the response
-      .then(setRenderedArray([...events]));                               // Updates the renderedarray to equal cache
+      .then(setRenderedArray([...events]))                                // Updates the renderedarray to equal cache
+      .then(() => LastFetch());                                           // Updates last fetch displayed on the screen
       if(events.length > 0) await AsyncStorage.setItem('cachedEvents', JSON.stringify(events))  // Setting the cache
     } catch (e) {                                                         // Catches any errors (missing wifi)
       (async() => {                                                       // Immediately invoked function expression (IIFE)
@@ -105,7 +106,26 @@ export default function EventScreen({ navigation }) {                     //  Ex
     }
   }
 
-  const toggleSearchBar = () => {                                         //  Toggle search bar visiblity
+  async function LastFetch() {                                            //  --- RETURNS WHEN EVENTS WERE FETCHED FROM STORAGE ---
+    var storedTime = await AsyncStorage.getItem('lastFetch')
+    if(storedTime){
+      var storedYear   = parseInt((storedTime)[0] + (storedTime)[1] + (storedTime)[2] + (storedTime)[3])   //  year
+      var storedMonth  = parseInt((storedTime)[5] + (storedTime)[6])+1                                     //  month
+      var storedDay    = parseInt((storedTime)[7] + (storedTime)[8])                                       //  day
+      var storedHour   = parseInt((storedTime)[10] + (storedTime)[11])                                     //  hour
+      var storedMinute = parseInt((storedTime)[13] + (storedTime)[14])                                     //  minute
+
+      if(storedMonth < 10) storedMonth = '0' + storedMonth                  // Checking and fixing missing 0
+      if(storedDay < 10) storedDay = '0' + storedDay                        // Checking and fixing missing 0
+      if(storedHour < 10) storedHour = '0' + storedHour                     // Checking and fixing missing 0
+      if(storedMinute < 10) storedMinute = '0' + storedMinute               // Checking and fixing missing 0
+
+      const CleanedTime = storedHour + ':' + storedMinute + ', ' + storedDay + '/' + storedMonth + ' ' + storedYear
+      setLastSave(CleanedTime)
+    } 
+  }
+
+  const toggleSearchBar = () => {                                         //  --- SEARCH BAR VISIBILITY ---
     toggleSearch({
       ...search,
       status: !search.status
@@ -235,47 +255,14 @@ export default function EventScreen({ navigation }) {                     //  Ex
       await AsyncStorage.setItem("clickedEvents", "")
     })();
   }
-
-  // EDITING THIS BLOCK - EDITING THIS BLOCK - EDITING THIS BLOCK - EDITING THIS BLOCK - EDITING THIS BLOCK
-  // ......................................................................................................
-
-  // useEffect(() => {
-  //   // Assume a message-notification contains a "type" property in the data payload of the screen to open
-  //   messaging().onNotificationOpenedApp(remoteMessage => {
-  //     console.log(
-  //       'Notification caused app to open from background state:',
-  //       remoteMessage.notification,
-  //     );
-  //     console.log('data ', remoteMessage.data)
-  //     //navigation.navigate('SpecificEventScreen', {item: remoteMessage.data.type});
-  //   });
-
-  //   // Check whether an initial notification is available
-  //   messaging()
-  //     .getInitialNotification()
-  //     .then(remoteMessage => {
-  //       if (remoteMessage) {
-  //         console.log(
-  //           'Notification caused app to open from quit state:',
-  //           remoteMessage.notification,
-  //         );
-  //       }
-  //     });
-
-  //   messaging()
-  //     .setBackgroundMessageHandler(async (remoteMessage) => {
-  //       console.log('Message handled in the background', remoteMessage)
-  //     })
-
-  //   const unsubscribe = messaging.onMessage(async (remoteMessage) => {
-  //     Alert.alert('A new FCM message arrived', JSON.stringify(remoteMessage))
-  //   })
-
-  //   return unsubscribe;
-  // }, []);
-
-  // ......................................................................................................
-  // EDITING THIS BLOCK - EDITING THIS BLOCK - EDITING THIS BLOCK - EDITING THIS BLOCK - EDITING THIS BLOCK
+  
+  useEffect(() => {                                                       //  --- FCM FOREGROUND NOTIFICATIONS ---
+    const unsubscribe = messaging().onMessage(async remoteMessage=>{
+      Alert.alert('A new FCM message arrived!') 
+      console.log(JSON.stringify(remoteMessage))
+    });
+    return unsubscribe;                                                   //  Stops when in the background / quit state
+   }, []);
 
   useEffect(() => {                                                       //  --- NOTIFICATION MANAGEMENT ---
     registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
@@ -336,9 +323,18 @@ export default function EventScreen({ navigation }) {                     //  Ex
 
   useEffect(() => {                                                       //  --- FETCHES API AND UPDATES CACHE EVERY 10 SECONDS ---
     let interval = null;
-    if(!search.status){                                                   //  Only when filter is closed so it doesnt say no match when there is a match
-      interval = setInterval(() => {                                          
-        getData();                                                        //  Fetches cache
+    if(!search.status){                                                   //  Only when filter is closed to prevent "no match" issue
+      interval = setInterval(() => {        
+        (async() => {                                                     // Storing the current time
+          var year     = new Date().getFullYear()                         // Current year
+          var month    = new Date().getMonth()                            // Current month
+          var day      = new Date().getDate()                             // Current day
+          var hour     = new Date().getHours()                            // Current hour
+          var minute   = new Date().getMinutes()                          // Current minute
+          var currentTime = year + '-' + month + '-' + day + 'T' + hour + ':' + minute + ':00Z'       // Current full date
+          await AsyncStorage.setItem('lastFetch', currentTime)            //  Storing in AsyncStorage 
+          getData();                                                      //  Fetches cache
+        })()           
       }, 10000);                                                          //  Runs every 10 seconds
     }else{
       clearInterval(interval)                                             //  Clears the interval when the filter is opened
@@ -355,6 +351,8 @@ export default function EventScreen({ navigation }) {                     //  Ex
     if (!filter.input) clickedCategory.length == 0 ? RenderEvents():null//  Fixes any errors if the user is not currently filtering
     else filter.input.length == 0 && clickedCategory.length == 0 ? RenderEvents() : null // Fixes any errors if the user has been searching, but is not doing so now
   }
+
+  if(lastSave == null) LastFetch();
 
   return(                                                                 //  --- DISPLAYS THE EVENTSCREEN ---
     <View> 
@@ -429,7 +427,6 @@ export default function EventScreen({ navigation }) {                     //  Ex
                       <Card>
                         <View style={ES.eventBack}>
                           <View>
-                            
                               {CategorySquare(item.category)}
                               <Text style={{...ES.eventCardDayText, color: FetchColor(theme, 'TEXTCOLOR')}}>{item.startt[8]}{item.startt[9]}</Text>
                               {lang ? MonthNO(item.startt[5] + item.startt[6], FetchColor(theme, 'TEXTCOLOR')) : MonthEN(item.startt[5] + item.startt[6], FetchColor(theme, 'TEXTCOLOR'))}
@@ -453,7 +450,9 @@ export default function EventScreen({ navigation }) {                     //  Ex
                             </View>
                         </View>
                       </Card>
-                      {index == renderedArray.length-1 && search.status == 1? Space(Dimensions.get('window').height/2.75): null}
+                      {index == renderedArray.length-1 ? Space(10):null}
+                      {index == renderedArray.length-1 ? <Text style={{...T.contact, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? 'Oppdatert kl:':'Updated:'} {lastSave}</Text>:null}
+                      {index == renderedArray.length-1 && search.status == 1? Space(Dimensions.get('window').height/2.6): null}
                       {index == renderedArray.length-1 && search.status == 0? Space(Dimensions.get('window').height/9): null}
                     </TouchableOpacity>
                 </View>
