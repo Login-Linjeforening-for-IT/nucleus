@@ -23,8 +23,12 @@ import {                                                                  // Rea
   TouchableOpacity,                                                       // TouchableOpacity     (custom button)
   Dimensions,                                                             // Size of the device
   Platform,                                                               // Operating system
+  Alert                                                                   // Alerts the user
 } from 'react-native';                                                    // React native
 import { useFocusEffect } from '@react-navigation/native';                // useFocusEffect       (do something when the screen is displayed)
+
+//import firebase from '@react-native-firebase/app';                      // EDITING - DOESNT WORK
+//import '@react-native-firebase/messaging';                              // EDITING - DOESNT WORK
 
 // cancel scheduled notification:
 
@@ -232,6 +236,47 @@ export default function EventScreen({ navigation }) {                     //  Ex
     })();
   }
 
+  // EDITING THIS BLOCK - EDITING THIS BLOCK - EDITING THIS BLOCK - EDITING THIS BLOCK - EDITING THIS BLOCK
+  // ......................................................................................................
+
+  // useEffect(() => {
+  //   // Assume a message-notification contains a "type" property in the data payload of the screen to open
+  //   messaging().onNotificationOpenedApp(remoteMessage => {
+  //     console.log(
+  //       'Notification caused app to open from background state:',
+  //       remoteMessage.notification,
+  //     );
+  //     console.log('data ', remoteMessage.data)
+  //     //navigation.navigate('SpecificEventScreen', {item: remoteMessage.data.type});
+  //   });
+
+  //   // Check whether an initial notification is available
+  //   messaging()
+  //     .getInitialNotification()
+  //     .then(remoteMessage => {
+  //       if (remoteMessage) {
+  //         console.log(
+  //           'Notification caused app to open from quit state:',
+  //           remoteMessage.notification,
+  //         );
+  //       }
+  //     });
+
+  //   messaging()
+  //     .setBackgroundMessageHandler(async (remoteMessage) => {
+  //       console.log('Message handled in the background', remoteMessage)
+  //     })
+
+  //   const unsubscribe = messaging.onMessage(async (remoteMessage) => {
+  //     Alert.alert('A new FCM message arrived', JSON.stringify(remoteMessage))
+  //   })
+
+  //   return unsubscribe;
+  // }, []);
+
+  // ......................................................................................................
+  // EDITING THIS BLOCK - EDITING THIS BLOCK - EDITING THIS BLOCK - EDITING THIS BLOCK - EDITING THIS BLOCK
+
   useEffect(() => {                                                       //  --- NOTIFICATION MANAGEMENT ---
     registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
 
@@ -305,6 +350,7 @@ export default function EventScreen({ navigation }) {                     //  Ex
     setRenderedArray([...events])                                         //  Updates the rendered array
     await AsyncStorage.setItem('cachedEvents', JSON.stringify(events))    //  Updates cache
   }
+
   if(events.length > 0 && events.length !== renderedArray.length){        //  --- CHECKS FOR AND FIXES INCORRECT RENDER ---
     if (!filter.input) clickedCategory.length == 0 ? RenderEvents():null//  Fixes any errors if the user is not currently filtering
     else filter.input.length == 0 && clickedCategory.length == 0 ? RenderEvents() : null // Fixes any errors if the user has been searching, but is not doing so now
