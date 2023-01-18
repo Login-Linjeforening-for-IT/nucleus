@@ -12,9 +12,5 @@ npm-debug.*
 web-build/
 babel.config.js
 
-# When cloning remove all references to these files to be able to run the project
-google-services.json
-GoogleService-Info.plist
-
 # macOS
 .DS_Store
