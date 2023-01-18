@@ -4,9 +4,8 @@ import store from './redux/store';                                          // R
 import { Provider } from 'react-redux';                                     // Redux provider
 import { PersistGate } from 'redux-persist/integration/react';              // Persistgate to fetch state from AsyncStorage
 import { persistStore } from 'redux-persist';                               // PersistStore to store states in AsyncStorage
-//import registerNNPushToken from 'native-notify';                            // Push notification key
-//import { AppRegistry } from 'react-native';
-//import messaging from '@react-native-firebase/messaging';
+import { AppRegistry } from 'react-native';                                 // Entry point of the application
+import messaging from '@react-native-firebase/messaging';                   // Notifications
 
 let persistor = persistStore(store)                                         // Middleware to interact with AsyncStorage
 
@@ -23,14 +22,11 @@ let persistor = persistStore(store)                                         // M
  * @returns The app
  */
 export default function App() {  
-    // Register FCM background handler
-    // messaging().setBackgroundMessageHandler(async remoteMessage => {
-    //     console.log('Message handled in the background!', remoteMessage);
-    // });
+    messaging().setBackgroundMessageHandler(async remoteMessage => {        // FCM Background Handler
+        console.log('Message handled in the background!', remoteMessage);
+    });
   
-    // AppRegistry.registerComponent('app', () => App);
-
-    // registerNNPushToken(4494, 'pfYoC5VY4KhZt9mrD3FGu0');                    // Native-notify notifications - should be removed once FCM is working
+    AppRegistry.registerComponent('app', () => App);
     return( 
         <Provider store={store}>                     
             <PersistGate loading={null} persistor={persistor}>     

@@ -27,7 +27,7 @@ import {                                                                  // Rea
   AppRegistry                                                             // Used for FCM
 } from 'react-native';                                                    // React native
 import { useFocusEffect } from '@react-navigation/native';                // useFocusEffect       (do something when the screen is displayed)
-//import messaging from '@react-native-firebase/messaging';
+import messaging from '@react-native-firebase/messaging';
 
 // cancel scheduled notification:
 
@@ -256,13 +256,13 @@ export default function EventScreen({ navigation }) {                     //  Ex
     })();
   }
   
-  // useEffect(() => {                                                       //  --- FCM FOREGROUND NOTIFICATIONS ---
-  //   const unsubscribe = messaging().onMessage(async remoteMessage=>{
-  //     Alert.alert('A new FCM message arrived!') 
-  //     console.log(JSON.stringify(remoteMessage))
-  //   });
-  //   return unsubscribe;                                                   //  Stops when in the background / quit state
-  //  }, []);
+  useEffect(() => {                                                       //  --- FCM FOREGROUND NOTIFICATIONS ---
+    const unsubscribe = messaging().onMessage(async remoteMessage=>{
+      Alert.alert('A new FCM message arrived!') 
+      console.log(JSON.stringify(remoteMessage))
+    });
+    return unsubscribe;                                                   //  Stops when in the background / quit state
+   }, []);
 
   useEffect(() => {                                                       //  --- NOTIFICATION MANAGEMENT ---
     registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
