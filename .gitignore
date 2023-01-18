@@ -12,5 +12,9 @@ npm-debug.*
 web-build/
 babel.config.js
 
+# contact @eirikhanasand on any media or @Axe#9595 for copy of these files
+google-services.json
+GoogleService-Info.plist
+
 # macOS
 .DS_Store
