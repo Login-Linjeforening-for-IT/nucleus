@@ -28,8 +28,14 @@ Features planned:
     5. Make green button automatically enroll you for the event clicked
         - Requires mail sending service to send enrollment via mail
 
-Potential features: 
-    6. Admin tool
+    6. Report feature
+        - Ready in app, missing backend
+
+Future features: 
+    7. Adding Logins calendar to your calendar app
+         - Unknown requirements - not a priority
+
+    8. Admin tool
         - Provides way to manage things in the app
         - Add job ads through the app
         - Add events through the app
