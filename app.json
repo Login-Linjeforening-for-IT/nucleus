@@ -59,7 +59,7 @@
         "backgroundColor": "#000000"
       },
       "package": "com.login.Login",
-      "googleServicesFile": "./GoogleService-Info.plist",
+      "googleServicesFile": "./google-services.json",
       "versionCode": 19
     },
     "web": {
