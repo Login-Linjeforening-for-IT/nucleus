@@ -29,13 +29,6 @@ import {                                                                  // Rea
 import { useFocusEffect } from '@react-navigation/native';                // useFocusEffect       (do something when the screen is displayed)
 import messaging from '@react-native-firebase/messaging';
 
-// cancel scheduled notification:
-
-// // Replace 'notificationId' with the ID of the notification you want to cancel
-// Notifications.cancelScheduledNotificationAsync(notificationId).then(() => {
-//   console.log('Notification canceled');
-// });
-
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
@@ -496,9 +489,9 @@ export default function EventScreen({ navigation }) {                     //  Ex
           renderedArray.length > 0 || clickedCategory.length > 0 || filter.input != null ? 
           <TouchableOpacity onPress={() => toggleSearchBar()}>
             {search.status ? 
-              <Image style={{...MS.tMenuIcon, right: 5, top: 7.5, height: 80}} source={require('../assets/filter-orange.png')} />
+              <Image style={{...MS.tMenuIcon, right: 5, top: '40%', height: 60, width: 140}} source={require('../assets/filter-orange.png')} />
             :
-              <Image style={{...MS.tMenuIcon, right: 5, top: 7.5, height: 80}} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/filter.png') : require('../assets/filter-black.png')} />
+              <Image style={{...MS.tMenuIcon, right: 5, top: '40%', height: 60, width: 140}} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/filter.png') : require('../assets/filter-black.png')} />
             }
           </TouchableOpacity>
         :null:null}

@@ -55,9 +55,9 @@ export const MS = StyleSheet.create ({                              // Declares 
     height: Dimensions.get('window').height/9,                      // Sets the height of the top menu to 13.3% of the screen height
   },
   tMenuIcon: {                                                      // Size of top menu icons
-    top: '7.5%',                                                    // Moves the icon 5% downwards
-    width: 100,                                                     // Icon width
-    height: 120                                                     // Icon height
+    top: '40%',                                                     // Moves the icon 5% downwards
+    width: 120,                                                     // Icon width
+    height: 60,                                                     // Icon height
   },
   tMenuIconWithExtra: {                                             // Placement when extra icons are added to the top menu
     right: '50%',                                                   // Moves the icon 50% leftwards
@@ -90,8 +90,8 @@ export const MS = StyleSheet.create ({                              // Declares 
   },
   
   bMenuIcon: {                                                      // Bottom menu icons
-    bottom: '13%',                                                  // Moves icons 13% upwards
+    bottom: '12%',                                                  // Moves icons 13% upwards
     width: 120,                                                     // Icon width
-    height: 100                                                     // Icon height
+    height: 65,                                                     // Icon height
   },
 });
