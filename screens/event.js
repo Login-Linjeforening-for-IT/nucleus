@@ -37,6 +37,18 @@ Notifications.setNotificationHandler({
   }),
 });
 
+/**
+ * Parent EventScreen function
+ * 
+ * Handles: 
+ * - Displaying events
+ * - Filtering events
+ * - Notification Management
+ * - Event notifications, both scheduling and cancelling
+ * 
+ * @param {navigation} Navigation Navigation route
+ * @returns EventScreen
+ */
 export default function EventScreen({ navigation }) {                     //  Exports the screen
   const [events, setEvents] = useState([]);                               //  Events from api
   const [renderedArray, setRenderedArray] = useState([]);                 //  Events currently displayed
@@ -522,7 +534,7 @@ export default function EventScreen({ navigation }) {                     //  Ex
  * @param {string} body     Notification Body
  * @param {date} sendtime   Time the notification should be sent
  */
-export async function nSchedulePushNotification(props) {                          // --- SCHEDULE PUSH NOTIFICATION ---
+export async function nSchedulePushNotification(props) {                  // --- SCHEDULE PUSH NOTIFICATION ---
   const emoji = fetchEmoji(props)                                         // Fetches emoji from emoji function
   await Notifications.scheduleNotificationAsync({
     content: {  
@@ -540,7 +552,7 @@ export async function nSchedulePushNotification(props) {                        
  * @param {string} body     Notification Body
  * @param {date} sendtime   Time the notification should be sent
  */
-export async function eSchedulePushNotification(props) {                          // --- SCHEDULE PUSH NOTIFICATION ---
+export async function eSchedulePushNotification(props) {                  // --- SCHEDULE PUSH NOTIFICATION ---
   const emoji = fetchEmoji(props)                                         // Fetches emoji from emoji function
   await Notifications.scheduleNotificationAsync({
     content: {  

@@ -12,14 +12,14 @@ let persistor = persistStore(store)                                         // M
 /**
  * **Function for running the entire Login app**
  * 
- * NNPushToken registers the native-notify token used for remote push notifications
+ * Handles notifications while app is in background state
  * 
  * Provider allows the store to be used by any screen with navigation.
  * 
  * Persistgate is used for syncing Redux states with AsyncStorage
  * 
  * Navigator contains all screens and functionality to navigate between them
- * @returns The app
+ * @returns Entire application
  */
 export default function App() {  
     messaging().setBackgroundMessageHandler(async remoteMessage => {        // FCM Background Handler
