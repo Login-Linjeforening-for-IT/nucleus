@@ -496,9 +496,9 @@ export default function EventScreen({ navigation }) {                     //  Ex
           renderedArray.length > 0 || clickedCategory.length > 0 || filter.input != null ? 
           <TouchableOpacity onPress={() => toggleSearchBar()}>
             {search.status ? 
-              <Image style={{...MS.tMenuIcon, right: 5, top: 7.5}} source={require('../assets/filter-orange.png')} />
+              <Image style={{...MS.tMenuIcon, right: 5, top: 7.5, height: 80}} source={require('../assets/filter-orange.png')} />
             :
-              <Image style={{...MS.tMenuIcon, right: 5, top: 7.5}} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/filter.png') : require('../assets/filter-black.png')} />
+              <Image style={{...MS.tMenuIcon, right: 5, top: 7.5, height: 80}} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/filter.png') : require('../assets/filter-black.png')} />
             }
           </TouchableOpacity>
         :null:null}
@@ -530,7 +530,6 @@ export default function EventScreen({ navigation }) {                     //  Ex
  * @param {date} sendtime   Time the notification should be sent
  */
 export async function nSchedulePushNotification(props) {                          // --- SCHEDULE PUSH NOTIFICATION ---
-  Notifications.cancelAllScheduledNotificationsAsync()
   const emoji = fetchEmoji(props)                                         // Fetches emoji from emoji function
   await Notifications.scheduleNotificationAsync({
     content: {  
@@ -549,7 +548,6 @@ export async function nSchedulePushNotification(props) {                        
  * @param {date} sendtime   Time the notification should be sent
  */
 export async function eSchedulePushNotification(props) {                          // --- SCHEDULE PUSH NOTIFICATION ---
-  Notifications.cancelAllScheduledNotificationsAsync()
   const emoji = fetchEmoji(props)                                         // Fetches emoji from emoji function
   await Notifications.scheduleNotificationAsync({
     content: {  
