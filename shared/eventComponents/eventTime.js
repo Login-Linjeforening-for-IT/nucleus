@@ -140,9 +140,9 @@ export default function EventTime(startTime, endTime) { // startTime
                     return(<View><Text style={{...T.text25, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Forrige måned' : 'Last month'}</Text></View>)
                 }
             }else if(startMonth < month && month-startMonth == 1){ //Event was 1 month ago
-                return(<View><Text style={{...T.text25, color: FetchColor(theme, 'TEXTCOLOR')}}>{month-startMonth} {lang ? ' måned siden' : ' month ago'}</Text></View>)
+                return(<View><Text style={{...T.text25, color: FetchColor(theme, 'TEXTCOLOR')}}>{month-startMonth} {lang ? 'måned siden' : 'month ago'}</Text></View>)
             }else if(startMonth < month){ //Event was x months ago
-                return(<View><Text style={{...T.text25, color: FetchColor(theme, 'TEXTCOLOR')}}>{month-startMonth} {lang ? ' måneder siden' : ' months ago'}</Text></View>)
+                return(<View><Text style={{...T.text25, color: FetchColor(theme, 'TEXTCOLOR')}}>{month-startMonth} {lang ? 'måneder siden' : 'months ago'}</Text></View>)
             }else if(startMonth == month+1){ //Event is next month
                 return(<View><Text style={{...T.text25, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? startDayNextMonth + ' dager til' : ' Starts in ' + startDayNextMonth +  'days'}</Text></View>)
             }else{ //Event is in x months
