@@ -477,13 +477,13 @@ export function ThemeSwitch() {
 
       return (
         <View>
-            <TouchableOpacity onPress={() => theme > 3 ? dispatch(resetTheme()) : dispatch(changeTheme())}>
+            <TouchableOpacity onPress={() => theme > 2 ? dispatch(resetTheme()) : dispatch(changeTheme())}>
             {theme == 0 ? <Image style={SS.lightSwitchImage} source={require('../assets/sun.png')} />: null}        
             {theme == 1 ? <Image style={SS.lightSwitchImage} source={require('../assets/abyss.png')} />: null}
             {theme == 2 ? <Image style={SS.lightSwitchImage} source={require('../assets/sunset.png')} />: null}
-            {theme == 3 ? <Image style={SS.lightSwitchImage} source={require('../assets/christmas.png')} />: null}
+            {/* {theme == 3 ? <Image style={SS.lightSwitchImage} source={require('../assets/christmas.png')} />: null} */}
             {/* {theme == 4 ? <Image style={SS.lightSwitchImage} source={require('../assets/easter.png')} />: null} */}
-            {theme == 4 ? <Image style={SS.lightSwitchImage} source={require('../assets/moon.png')} />: null}
+            {theme == 3 ? <Image style={SS.lightSwitchImage} source={require('../assets/moon.png')} />: null}
             </TouchableOpacity>
         </View>
     )

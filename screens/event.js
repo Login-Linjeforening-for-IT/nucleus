@@ -26,7 +26,7 @@ import {                                                                  // Rea
 import { useFocusEffect } from '@react-navigation/native';                // useFocusEffect       (do something when the screen is displayed)
 
 // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 3/4
-import messaging from '@react-native-firebase/messaging';
+// import messaging from '@react-native-firebase/messaging';
 // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 3/4
 
 Notifications.setNotificationHandler({
@@ -259,13 +259,13 @@ export default function EventScreen({ navigation }) {                     //  Ex
   }
   
   // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 4/4
-  useEffect(() => {                                                       //  --- FCM FOREGROUND NOTIFICATIONS ---
-    const unsubscribe = messaging().onMessage(async remoteMessage=>{
-      Alert.alert('A new FCM message arrived!') 
-      console.log(JSON.stringify(remoteMessage))
-    });
-    return unsubscribe;                                                   //  Stops when in the background / quit state
-   }, []);
+  // useEffect(() => {                                                       //  --- FCM FOREGROUND NOTIFICATIONS ---
+  //   const unsubscribe = messaging().onMessage(async remoteMessage=>{
+  //     Alert.alert('A new FCM message arrived!') 
+  //     console.log(JSON.stringify(remoteMessage))
+  //   });
+  //   return unsubscribe;                                                   //  Stops when in the background / quit state
+  //  }, []);
   // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 4/4
 
   useEffect(() => {                                                       //  --- NOTIFICATION MANAGEMENT ---
