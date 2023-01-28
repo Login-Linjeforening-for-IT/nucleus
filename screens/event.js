@@ -116,7 +116,7 @@ export default function EventScreen({ navigation }) {                     //  Ex
 
     if(time){
       var year   = parseInt((time)[0] + (time)[1] + (time)[2] + (time)[3])//  year
-      var month  = 1 + parseInt((time)[5] + (time)[6])                    //  month
+      var month  = parseInt((time)[5] + (time)[6])                        //  month
       var day    = parseInt((time)[8] + (time)[9])                        //  day
       var hour   = parseInt((time)[11] + (time)[12])                      //  hour
       var minute = parseInt((time)[14] + (time)[15])                      //  minute
