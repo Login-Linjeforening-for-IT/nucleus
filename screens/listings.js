@@ -43,7 +43,9 @@ return(
             height={Dimensions.get('window').width/3}
             uri={`https://cdn.login.no/img/events/mnemonic.svg`}
           />
-          <Text style={{...T.centeredBold20, top:-20, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? 'Hovedsamarbeidsparner':'Main partner'}</Text>
+          {theme !== 1 ? <Text style={{...T.centeredBold20, top:-40, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? 'Hovedsamarbeidsparner':'Main partner'}</Text>
+          :<Text style={{...T.centeredBold20, top:-40, color: FetchColor(theme, 'BACKGROUND')}}>{lang ? 'Hovedsamarbeidsparner':'Main partner'}</Text>
+          }
           </View>
       </View>    
 

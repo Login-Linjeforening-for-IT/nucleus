@@ -66,7 +66,7 @@ export default function SpecificEventScreen({ route, navigation}) {
       await AsyncStorage.setItem('clickedEvents', JSON.stringify([item]))
     }
   }
-  
+ 
   return(
     <View>
 {/* ========================= DISPLAY CONTENT ========================= */}
@@ -83,9 +83,12 @@ export default function SpecificEventScreen({ route, navigation}) {
             uri={`https://cdn.login.no/img/events/${item.image}`}
           />
         :(item.image).includes('.png')?<Image style={ES.specificEventImage} source={{uri: `https://cdn.login.no/img/events/${item.image}`}}/>:null}
-        {(item.image == 'none' || !item.image) && item.category == 'TEKKOM' ?<Image style={ES.specificEventImage} source={require(`../assets/tekkom.png`)} />:null}
-        {(item.image == 'none' || !item.image) && item.category == 'CTF' ?<Image style={ES.specificEventImage} source={require(`../assets/ctf.png`)} />:null}
-        {(item.image == 'none' || !item.image) && item.category == 'SOCIAL' ?<Image style={ES.specificEventImage} source={require(`../assets/sosialt.png`)} />:null}
+        {(item.image == 'none' || !item.image) && item.category == 'TEKKOM'  ? <Image style={ES.specificEventImage} source={require(`../assets/tekkom.png`    )} />:null}
+        {(item.image == 'none' || !item.image) && item.category == 'CTF'     ? <Image style={ES.specificEventImage} source={require(`../assets/ctf.png`       )} />:null}
+        {(item.image == 'none' || !item.image) && item.category == 'SOCIAL'  ? <Image style={ES.specificEventImage} source={require(`../assets/sosialt.png`   )} />:null}
+        {(item.image == 'none' || !item.image) && item.category == 'LOGIN'   ? <Image style={ES.specificEventImage} source={require(`../assets/login.png`     )} />:null}
+        {(item.image == 'none' || !item.image) && item.category == 'ANNET'   ? <Image style={ES.specificEventImage} source={require(`../assets/annet.png`     )} />:null}
+        {(item.image == 'none' || !item.image) && item.category == 'BEDPRES' ? <Image style={ES.specificEventImage} source={require(`../assets/bedpresBig.png`)} />:null}
 
             {Space(5)}
           
@@ -142,9 +145,25 @@ export default function SpecificEventScreen({ route, navigation}) {
 
               <View style={ES.specificEventInfoView}>
                 <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Arrangør:\t  ' : 'Organizer:   '}</Text>
-                <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>{item.organizer}{item.organizerlink ? ' - ': ''}</Text>
-                {item.organizerlink ? 
-                  <TouchableOpacity style={{minWidth: 70}} onPress={() => {Linking.openURL(`${item.organizerlink}`)}}>
+                <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>{item.organizer}{usersData.organizerlink || usersData.discordlink || usersData.fblink ? ' - ':null}</Text>
+                {usersData.discordlink ? 
+                  <TouchableOpacity style={{minWidth: 70}} onPress={() => {Linking.openURL(`${item.discordlink}`)}}>
+                        <View style={ES.row}>
+                            <Text style={{...T.mazemap, color: FetchColor(theme, 'ORANGE')}}>Discord</Text>
+                        </View>
+                    </TouchableOpacity>
+                :null}
+                {usersData.fblink && !usersData.discordlink ? 
+                  <TouchableOpacity style={{minWidth: 70}} onPress={() => {Linking.openURL(`${usersData.discordlink}`)}}>
+                        <View style={ES.row}>
+                            <Text style={{...T.mazemap, color: FetchColor(theme, 'ORANGE')}}>Facebook</Text>
+                        </View>
+                    </TouchableOpacity>
+                :null}
+                {usersData.organizerlink && (usersData.discordlink || usersData.fblink) ?
+                <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>{' - '}</Text>:null}
+                {usersData.organizerlink ? 
+                  <TouchableOpacity style={{minWidth: 70}} onPress={() => {Linking.openURL(`${usersData.organizerlink}`)}}>
                         <View style={ES.row}>
                             <Text style={{...T.mazemap, color: FetchColor(theme, 'ORANGE')}}>{lang ? 'Mer info':'More info'}</Text>
                         </View>

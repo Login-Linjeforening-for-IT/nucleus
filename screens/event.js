@@ -26,7 +26,7 @@ import {                                                                  // Rea
 import { useFocusEffect } from '@react-navigation/native';                // useFocusEffect       (do something when the screen is displayed)
 
 // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 3/4
-// import messaging from '@react-native-firebase/messaging';
+import messaging from '@react-native-firebase/messaging';
 // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 3/4
 
 Notifications.setNotificationHandler({
@@ -115,13 +115,18 @@ export default function EventScreen({ navigation }) {                     //  Ex
     var time = await AsyncStorage.getItem('lastFetch');
 
     if(time){
-      var storedYear   = parseInt((time)[0] + (time)[1] + (time)[2] + (time)[3])   //  year
-      var storedMonth  = 1 + parseInt((time)[5] + (time)[6])                       //  month
-      var storedDay    = parseInt((time)[8] + (time)[9])                           //  day
-      var storedHour   = parseInt((time)[11] + (time)[12])                         //  hour
-      var storedMinute = parseInt((time)[14] + (time)[15])                         //  minute
+      var year   = parseInt((time)[0] + (time)[1] + (time)[2] + (time)[3])//  year
+      var month  = 1 + parseInt((time)[5] + (time)[6])                    //  month
+      var day    = parseInt((time)[8] + (time)[9])                        //  day
+      var hour   = parseInt((time)[11] + (time)[12])                      //  hour
+      var minute = parseInt((time)[14] + (time)[15])                      //  minute
       
-      const CleanedTime = storedHour + ':' + storedMinute + ', ' + storedDay + '/' + storedMonth + ' ' + storedYear;
+      if(month < 10) month = '0' + month                                  // Checking and fixing missing 0
+      if(day < 10) day = '0' + day                                        // Checking and fixing missing 0
+      if(hour < 10) hour = '0' + hour                                     // Checking and fixing missing 0
+      if(minute < 10) minute = '0' + minute                               // Checking and fixing missing 0
+
+      const CleanedTime = hour + ':' + minute + ', ' + day + '/' + month + ', ' + year;
 
       setLastSave(CleanedTime);
     } 
