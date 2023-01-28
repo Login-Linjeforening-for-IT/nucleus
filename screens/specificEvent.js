@@ -147,9 +147,7 @@ export default function SpecificEventScreen({ route, navigation}) {
 
               <View style={ES.specificEventInfoView}>
                 <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Arrangør:\t  ' : 'Organizer:   '}</Text>
-                <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>
-                  {item.organizer}{item.organizerlink ? ' - ': ''}
-                </Text>
+                <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>{item.organizer}{item.organizerlink ? ' - ': ''}</Text>
                 {item.organizerlink ? 
                   <TouchableOpacity style={{minWidth: 70}} onPress={() => {Linking.openURL(`${item.organizerlink}`)}}>
                         <View style={ES.row}>
