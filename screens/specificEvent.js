@@ -1,7 +1,7 @@
 {/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
 import { GetEndTime, MonthNO, MonthEN, EventLocation, DynamicCircle } from '../shared/eventComponents/otherComponents';
 import CleanDescription, {FetchJoinLink} from '../shared/eventComponents/cleanDescription';
-import { nSchedulePushNotification, eSchedulePushNotification } from './event';
+import { SchedulePushNotification } from '../shared/notificationManagement';
 import CategoryCircle from '../shared/eventComponents/categoryCircle';
 import CategorySquare from '../shared/eventComponents/categorySquare';
 import Card, { CardSmaller, Space } from '../shared/sharedComponents';
@@ -59,10 +59,10 @@ export default function SpecificEventScreen({ route, navigation}) {
     let storedClickedEvents = JSON.parse(await AsyncStorage.getItem('clickedEvents'))
     if(storedClickedEvents){
       storedClickedEvents.push(item)
-      lang ? nSchedulePushNotification(item):eSchedulePushNotification(item)
+      SchedulePushNotification(item, lang)
       await AsyncStorage.setItem('clickedEvents', JSON.stringify(storedClickedEvents))
     }else{
-      lang ? nSchedulePushNotification(item):eSchedulePushNotification(item)
+      SchedulePushNotification(item, lang)
       await AsyncStorage.setItem('clickedEvents', JSON.stringify([item]))
     }
   }
@@ -86,11 +86,6 @@ export default function SpecificEventScreen({ route, navigation}) {
         {(item.image == 'none' || !item.image) && item.category == 'TEKKOM' ?<Image style={ES.specificEventImage} source={require(`../assets/tekkom.png`)} />:null}
         {(item.image == 'none' || !item.image) && item.category == 'CTF' ?<Image style={ES.specificEventImage} source={require(`../assets/ctf.png`)} />:null}
         {(item.image == 'none' || !item.image) && item.category == 'SOCIAL' ?<Image style={ES.specificEventImage} source={require(`../assets/sosialt.png`)} />:null}
-
-            {/* item.image == 'none' ?
-              item.category == 'TEKKOM' ?<Image style={ES.specificEventImage} source={require(`../assets/tekkom.png`)} />:null
-              item.category == 'CTF' ?<Image style={ES.specificEventImage} source={require(`../assets/ctf.png`)} />:null
-            : null} */}
 
             {Space(5)}
           
