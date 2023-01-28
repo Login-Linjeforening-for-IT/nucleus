@@ -82,22 +82,23 @@ export default function SpecificEventScreen({ route, navigation}) {
             height={Dimensions.get('window').width/3}
             uri={`https://cdn.login.no/img/events/${item.image}`}
           />
-        :
-          (item.image).includes('.png') ?
-            <Image style={ES.specificEventImage} source={{uri: `https://cdn.login.no/img/events/${item.image}`}}/>
-          : 
-            item.image == 'none' ?
-              item.category == 'TEKKOM' ?
-                <Image style={ES.specificEventImage} source={require(`../assets/tekkom.png`)} />
-              :
-                <Image style={ES.specificEventImage} source={require(`../assets/ctf.png`)} />
-            : null}
+        :(item.image).includes('.png')?<Image style={ES.specificEventImage} source={{uri: `https://cdn.login.no/img/events/${item.image}`}}/>:null}
+        {(item.image == 'none' || !item.image) && item.category == 'TEKKOM' ?<Image style={ES.specificEventImage} source={require(`../assets/tekkom.png`)} />:null}
+        {(item.image == 'none' || !item.image) && item.category == 'CTF' ?<Image style={ES.specificEventImage} source={require(`../assets/ctf.png`)} />:null}
+        {(item.image == 'none' || !item.image) && item.category == 'SOCIAL' ?<Image style={ES.specificEventImage} source={require(`../assets/sosialt.png`)} />:null}
+
+            {/* item.image == 'none' ?
+              item.category == 'TEKKOM' ?<Image style={ES.specificEventImage} source={require(`../assets/tekkom.png`)} />:null
+              item.category == 'CTF' ?<Image style={ES.specificEventImage} source={require(`../assets/ctf.png`)} />:null
+            : null} */}
 
             {Space(5)}
           
             <CardSmaller>
               <View style={ES.specificEventInfoView}>
                   <Card>
+                    <View style={{left: -10}}>
+
                     {CategorySquare(item.category)} 
                     <Text style={{...ES.eventCardDayText, color: FetchColor(theme, 'TEXTCOLOR')}}>
                         {item.startt[8]}
@@ -107,52 +108,55 @@ export default function SpecificEventScreen({ route, navigation}) {
                     <Text style={{...ES.monthText, color: FetchColor(theme, 'TEXTCOLOR')}}>
                     {lang ? MonthNO(item.startt[5] + item.startt[6], FetchColor(theme, 'TEXTCOLOR')) : MonthEN(item.startt[5] + item.startt[6], FetchColor(theme, 'TEXTCOLOR'))}
                     </Text>
+                    </View>
                   </Card>
                     <Text>{EventTime(item.startt, usersData.endt)}</Text>
-              </View>
+                  </View>
             </CardSmaller>
 
             {Space(5)}
             <Card>
               <View style={ES.specificEventInfoView}>
-                <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Starter:\t\t' : 'Starts:\t\t'}</Text>
+                <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Starter:\t  ' : 'Starts:\t    '}</Text>
                 <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>
-                  {item.startt[11]}
-                  {item.startt[12]}:
-                  {item.startt[14]}
-                  {item.startt[15]}
+                  {item.startt[11]}{item.startt[12]}:{item.startt[14]}{item.startt[15]}
                 </Text>
               </View>
 
               {Space(5)}
 
               <View style={ES.specificEventInfoView}>
-              <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Slutter:\t\t' : 'Ends:\t\t\t'}</Text>
+              <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Slutter:\t  ' : 'Ends:\t\t    '}</Text>
                 {GetEndTime(usersData.endt)}
                 
               </View>
 
               {Space(5)}
 
-              {EventLocation(usersData.roomno, usersData.campus)}
+              {EventLocation(usersData.roomno, usersData.campus, usersData.street, usersData.mazeref)}
 
               {Space(5)}
 
               <View style={ES.specificEventInfoView}>
-                <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Kategori:\t\t' : 'Category:\t'}</Text>
+                <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Kategori:\t    ' : 'Category:\t'}</Text>
                 {CategoryCircle(item.category)}
-                <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>
-                  {item.category}
-                </Text>
+                <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>{item.category}</Text>
               </View>
 
               {Space(5)}
 
               <View style={ES.specificEventInfoView}>
-                <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Arrangør:\t\t' : 'Organizer:\t'}</Text>
+                <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Arrangør:\t  ' : 'Organizer:   '}</Text>
                 <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>
-                  {item.organizer}
+                  {item.organizer}{item.organizerlink ? ' - ': ''}
                 </Text>
+                {item.organizerlink ? 
+                  <TouchableOpacity style={{minWidth: 70}} onPress={() => {Linking.openURL(`${item.organizerlink}`)}}>
+                        <View style={ES.row}>
+                            <Text style={{...T.mazemap, color: FetchColor(theme, 'ORANGE')}}>{lang ? 'Mer info':'More info'}</Text>
+                        </View>
+                    </TouchableOpacity>
+                :null}
               </View>
            </Card>
 

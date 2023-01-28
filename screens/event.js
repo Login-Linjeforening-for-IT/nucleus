@@ -1,8 +1,8 @@
 import GreenLight, { GrayLight, Check, MonthNO, MonthEN, DynamicCircle, SmallCheck, fetchEmoji } from '../shared/eventComponents/otherComponents';  // Components used to display event
-import Card, { CompareDates, CheckBox, CheckedBox, Space } from '../shared/sharedComponents';  // Components used to display event
+import { registerForPushNotificationsAsync, SchedulePushNotification, cancelScheduledNotification } from '../shared/notificationManagement';  // Notification management
+import Card, { CompareDates, CheckBox, CheckedBox, Space, EventCardLocation } from '../shared/sharedComponents';  // Components used to display event
 import CategorySquare from '../shared/eventComponents/categorySquare';    // Left side square on eventcard
 import AsyncStorage from '@react-native-async-storage/async-storage';     // Localstorage
-import * as Device from 'expo-device';                                    // Device user is using
 import * as Notifications from 'expo-notifications';                      // Local notifications
 import React, { useEffect, useState, useRef } from 'react';               // React imports
 import { GS } from '../styles/globalStyles';                              // Global styles
@@ -12,7 +12,6 @@ import { T } from '../styles/text';                                       // Tex
 import { useSelector } from 'react-redux';                                // Redux
 import { StatusBar } from 'expo-status-bar';                              // Status bar
 import FetchColor from '../styles/fetchTheme';                            // Function to fetch theme color
-import { NotificationDelay } from '../shared/eventComponents/notificationDelay'; // Delay in seconds until push notification should be sent
 import { BlurView } from 'expo-blur';                                     // Blur effect
 import {                                                                  // React native components
   Text,                                                                   // Text component
@@ -23,11 +22,12 @@ import {                                                                  // Rea
   TouchableOpacity,                                                       // TouchableOpacity     (custom button)
   Dimensions,                                                             // Size of the device
   Platform,                                                               // Operating system
-  Alert,                                                                  // Alerts the user
-  AppRegistry                                                             // Used for FCM
 } from 'react-native';                                                    // React native
 import { useFocusEffect } from '@react-navigation/native';                // useFocusEffect       (do something when the screen is displayed)
-import messaging from '@react-native-firebase/messaging';
+
+// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 3/4
+// import messaging from '@react-native-firebase/messaging';
+// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 3/4
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -54,7 +54,7 @@ export default function EventScreen({ navigation }) {                     //  Ex
   const [renderedArray, setRenderedArray] = useState([]);                 //  Events currently displayed
   const [clickedEvents, setClickedEvents] = useState([]);                 //  Clicked events
   const [clickedCategory, setClickedCategory] = useState([]);             //  Clicked categories
-  const [lastSave, setLastSave] = useState(null)
+  const [lastSave, setLastSave] = useState(null)                          //  Last time API was fetched successfully
   const [filter, setFilter] = useState({input: null});                    //  Filter text input declaration
   const textInputRef = useRef(null);                                      //  Clears text input
   const [relevantCategories, setRelevantCategories] = useState([]);       //  Relevant categories to filter
@@ -66,7 +66,7 @@ export default function EventScreen({ navigation }) {                     //  Ex
   const listingPage = () => { navigation.navigate('ListingScreen') }      //  Navigate to Job screen
   const menuPage    = () => { navigation.navigate('MenuScreen')    }      //  Navigate to menu
   const [expoPushToken, setExpoPushToken] = useState('');                 //  Array for notification token
-  const [pushNotification, setPushNotification] = useState(false);        //  Array for setting the pish notification
+  const [pushNotification, setPushNotification] = useState(false);        //  Array for setting the push notification
   const notificationListener = useRef();                                  //  Notification listener
   const responseListener = useRef();                                      //  Response listener (if it was sent or not)
   const [category] = useState([                                           //  All categories to filter - DO NOT CHANGE IDS 
@@ -77,8 +77,8 @@ export default function EventScreen({ navigation }) {                     //  Ex
   {id: '6', category: 'FADDERUKA'},
   {id: '7', category: 'BEDPRES'},
   {id: '8', category: 'LOGIN'},
+  {id: '9', category: 'ANNET'}
 ]);                                           
-                               
   const categoryAllowed = (props) => {                                    // Function for checking if notifications of given category is allowed
     if(notification.REMINDERS) {                                          // Only send notification if reminders are enabled
       const category = props.category                                      
@@ -112,21 +112,18 @@ export default function EventScreen({ navigation }) {                     //  Ex
   }
 
   async function LastFetch() {                                            //  --- RETURNS WHEN EVENTS WERE FETCHED FROM STORAGE ---
-    var storedTime = await AsyncStorage.getItem('lastFetch')
-    if(storedTime){
-      var storedYear   = parseInt((storedTime)[0] + (storedTime)[1] + (storedTime)[2] + (storedTime)[3])   //  year
-      var storedMonth  = parseInt((storedTime)[5] + (storedTime)[6])+1                                     //  month
-      var storedDay    = parseInt((storedTime)[7] + (storedTime)[8])                                       //  day
-      var storedHour   = parseInt((storedTime)[10] + (storedTime)[11])                                     //  hour
-      var storedMinute = parseInt((storedTime)[13] + (storedTime)[14])                                     //  minute
+    var time = await AsyncStorage.getItem('lastFetch');
 
-      if(storedMonth < 10) storedMonth = '0' + storedMonth                  // Checking and fixing missing 0
-      if(storedDay < 10) storedDay = '0' + storedDay                        // Checking and fixing missing 0
-      if(storedHour < 10) storedHour = '0' + storedHour                     // Checking and fixing missing 0
-      if(storedMinute < 10) storedMinute = '0' + storedMinute               // Checking and fixing missing 0
+    if(time){
+      var storedYear   = parseInt((time)[0] + (time)[1] + (time)[2] + (time)[3])   //  year
+      var storedMonth  = 1 + parseInt((time)[5] + (time)[6])                       //  month
+      var storedDay    = parseInt((time)[8] + (time)[9])                           //  day
+      var storedHour   = parseInt((time)[11] + (time)[12])                         //  hour
+      var storedMinute = parseInt((time)[14] + (time)[15])                         //  minute
+      
+      const CleanedTime = storedHour + ':' + storedMinute + ', ' + storedDay + '/' + storedMonth + ' ' + storedYear;
 
-      const CleanedTime = storedHour + ':' + storedMinute + ', ' + storedDay + '/' + storedMonth + ' ' + storedYear
-      setLastSave(CleanedTime)
+      setLastSave(CleanedTime);
     } 
   }
 
@@ -261,16 +258,18 @@ export default function EventScreen({ navigation }) {                     //  Ex
     })();
   }
   
-  useEffect(() => {                                                       //  --- FCM FOREGROUND NOTIFICATIONS ---
-    const unsubscribe = messaging().onMessage(async remoteMessage=>{
-      Alert.alert('A new FCM message arrived!') 
-      console.log(JSON.stringify(remoteMessage))
-    });
-    return unsubscribe;                                                   //  Stops when in the background / quit state
-   }, []);
+  // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 4/4
+  // useEffect(() => {                                                       //  --- FCM FOREGROUND NOTIFICATIONS ---
+  //   const unsubscribe = messaging().onMessage(async remoteMessage=>{
+  //     Alert.alert('A new FCM message arrived!') 
+  //     console.log(JSON.stringify(remoteMessage))
+  //   });
+  //   return unsubscribe;                                                   //  Stops when in the background / quit state
+  //  }, []);
+  // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 4/4
 
   useEffect(() => {                                                       //  --- NOTIFICATION MANAGEMENT ---
-    registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
+    registerForPushNotificationsAsync(lang).then(token => setExpoPushToken(token));
 
     notificationListener.current = Notifications.addNotificationReceivedListener(pushNotification => {
       setPushNotification(pushNotification);
@@ -332,10 +331,16 @@ export default function EventScreen({ navigation }) {                     //  Ex
       interval = setInterval(() => {        
         (async() => {                                                     // Storing the current time
           var year     = new Date().getFullYear()                         // Current year
-          var month    = new Date().getMonth()                            // Current month
+          var month    = 1 + new Date().getMonth()                        // Current month
           var day      = new Date().getDate()                             // Current day
           var hour     = new Date().getHours()                            // Current hour
           var minute   = new Date().getMinutes()                          // Current minute
+
+          if(month < 10) month = '0' + month                              // Checking and fixing missing 0
+          if(day < 10) day = '0' + day                                    // Checking and fixing missing 0
+          if(hour < 10) hour = '0' + hour                                 // Checking and fixing missing 0
+          if(minute < 10) minute = '0' + minute                           // Checking and fixing missing 0
+
           var currentTime = year + '-' + month + '-' + day + 'T' + hour + ':' + minute + ':00Z'       // Current full date
           await AsyncStorage.setItem('lastFetch', currentTime)            //  Storing in AsyncStorage 
           getData();                                                      //  Fetches cache
@@ -419,7 +424,7 @@ export default function EventScreen({ navigation }) {                     //  Ex
         {renderedArray != null ? 
           renderedArray.length > 0 ? 
             <FlatList
-              style={search.status ? {minHeight: '100%'} : {minHeight: '100%'}}
+              style={{minHeight: '100%'}}
               showsVerticalScrollIndicator={false}
               numColumns={1}
               keyExtractor={(item) => item.eventID}
@@ -433,13 +438,10 @@ export default function EventScreen({ navigation }) {                     //  Ex
                         <View style={ES.eventBack}>
                           <View>
                               {CategorySquare(item.category)}
-                              <Text style={{...ES.eventCardDayText, color: FetchColor(theme, 'TEXTCOLOR')}}>{item.startt[8]}{item.startt[9]}</Text>
+                              <Text style={{...ES.eventCardDayText,color: FetchColor(theme, 'TEXTCOLOR')}}>{item.startt[8]}{item.startt[9]}</Text>
                               {lang ? MonthNO(item.startt[5] + item.startt[6], FetchColor(theme, 'TEXTCOLOR')) : MonthEN(item.startt[5] + item.startt[6], FetchColor(theme, 'TEXTCOLOR'))}
                           </View>
-                            <View style={ES.view2}>
-                              <View style = {{...ES.title, color: FetchColor(theme, 'TEXTCOLOR')}}><Text style={{...ES.title, color: FetchColor(theme, 'TEXTCOLOR')}}>{item.eventname}</Text></View>
-                              <View style = {{...ES.loc, color: FetchColor(theme, 'TEXTCOLOR')}}><Text style={{...ES.loc, color: FetchColor(theme, 'TEXTCOLOR')}}>{item.startt[11]}{item.startt[12]}:{item.startt[14]}{item.startt[15]} {item.roomno}. {item.campus}</Text></View>
-                            </View>
+                            {EventCardLocation(item, theme, lang)}
                             <View style={ES.view3}>
                               {clickedEvents.some(event => event.eventID === item.eventID) ? 
                                 <TouchableOpacity onPress={() => cancelScheduledNotification(item) + setClickedEvents(clickedEvents.filter((x) => x.eventID !== item.eventID))}>
@@ -447,7 +449,7 @@ export default function EventScreen({ navigation }) {                     //  Ex
                                   <View style = {ES.checkContent}><Check/></View>
                                 </TouchableOpacity>
                               :
-                                <TouchableOpacity onPress={() => (categoryAllowed(item) ? lang ? nSchedulePushNotification(item):eSchedulePushNotification(item) : null) + setClickedEvents([...clickedEvents, item])}>
+                                <TouchableOpacity onPress={() => (categoryAllowed(item) ? SchedulePushNotification(item,lang):null) + setClickedEvents([...clickedEvents, item])}>
                                   <View style = {ES.greenLight}><GrayLight/></View>
                                   <View style = {ES.checkContent}><Check/></View>
                                 </TouchableOpacity>
@@ -456,13 +458,14 @@ export default function EventScreen({ navigation }) {                     //  Ex
                         </View>
                       </Card>
                       {index == renderedArray.length-1 ? Space(10):null}
-                      {index == renderedArray.length-1 ? <Text style={{...T.contact, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? 'Oppdatert kl:':'Updated:'} {lastSave}</Text>:null}
-                      {index == renderedArray.length-1 && search.status == 1? Space(Dimensions.get('window').height/2.6): null}
-                      {index == renderedArray.length-1 && search.status == 0? Space(Dimensions.get('window').height/9): null}
+                      {index == renderedArray.length-1 ? <Text style={{...T.contact, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? 'Oppdatert kl:':'Updated:'} {lastSave}.</Text>:null}
+                      {index == renderedArray.length-1 ? Space(Dimensions.get('window').height/9):null} 
+                      {index == renderedArray.length-1 && search.status == 1 ? Space(152.5):null}
+                      {index == renderedArray.length-1 && search.status == 1 ? Space(40*(Math.ceil(relevantCategories.length/3))):null}
                     </TouchableOpacity>
                 </View>
               )}
-            />
+            /> 
           : 
           events.length == 0 ?
             <View style={{alignSelf: 'center', maxWidth: '80%'}}>
@@ -501,9 +504,9 @@ export default function EventScreen({ navigation }) {                     //  Ex
           renderedArray.length > 0 || clickedCategory.length > 0 || filter.input != null ? 
           <TouchableOpacity onPress={() => toggleSearchBar()}>
             {search.status ? 
-              <Image style={{...MS.tMenuIcon, right: 5, top: '40%', height: 60, width: 140}} source={require('../assets/filter-orange.png')} />
+              <Image style={{...MS.tMenuIcon, right: '-9%', top: '40%', height: 60, width: 140}} source={require('../assets/filter-orange.png')} />
             :
-              <Image style={{...MS.tMenuIcon, right: 5, top: '40%', height: 60, width: 140}} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/filter.png') : require('../assets/filter-black.png')} />
+              <Image style={{...MS.tMenuIcon, right: '-9%', top: '40%', height: 60, width: 140}} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/filter.png') : require('../assets/filter-black.png')} />
             }
           </TouchableOpacity>
         :null:null}
@@ -527,84 +530,3 @@ export default function EventScreen({ navigation }) {                     //  Ex
     </View>
   )
 };
-
-/**
- * Function for scheduling push notifications
- * @param {string} title    Notification title
- * @param {string} body     Notification Body
- * @param {date} sendtime   Time the notification should be sent
- */
-export async function nSchedulePushNotification(props) {                  // --- SCHEDULE PUSH NOTIFICATION ---
-  const emoji = fetchEmoji(props)                                         // Fetches emoji from emoji function
-  await Notifications.scheduleNotificationAsync({
-    content: {  
-      title: props.eventname + emoji,                                     // Notification title
-      body: 'Begynner om en time! 🏃',                                    // Notificaton body
-    },
-    trigger: { seconds: NotificationDelay(props) },                       // Triggers 1 hour before event
-    identifier: JSON.stringify(props.eventID)                             // ID of the notification
-  });
-}
-
-/**
- * Function for scheduling push notifications in English
- * @param {string} title    Notification title
- * @param {string} body     Notification Body
- * @param {date} sendtime   Time the notification should be sent
- */
-export async function eSchedulePushNotification(props) {                  // --- SCHEDULE PUSH NOTIFICATION ---
-  const emoji = fetchEmoji(props)                                         // Fetches emoji from emoji function
-  await Notifications.scheduleNotificationAsync({
-    content: {  
-      title: props.eventname + emoji,                                     // Notification title
-      body: 'Starts in one hour! 🏃',                                    // Notificaton body
-    },
-    trigger: { seconds: NotificationDelay(props) },                       // Triggers 1 hour before event
-    identifier: JSON.stringify(props.eventID)                             // ID of the notification
-  });
-}
-
-/**
- * Function for canceling scheduled using the id of the event
- * @param {event} props   Event object
- */
-async function cancelScheduledNotification(props) {                       // --- CANCEL SCHEDULED PUSH NOTIFICATION ---
-    const eventID = JSON.stringify(props.eventID)                         // Converting to string
-    await Notifications.cancelScheduledNotificationAsync(eventID)         // Canceling the scheduled push notification
-}
-
-/**
- * Made by Expo - 
- * Function for getting push notification permission from the user
- * @returns Push notification token
- */
-async function registerForPushNotificationsAsync() {                      // --- GETTING PUSH NOTIFICATION PERMISSION ---
-  let token;
-
-  if (Platform.OS === 'android') { 
-    await Notifications.setNotificationChannelAsync('default', {
-      name: 'default',
-      importance: Notifications.AndroidImportance.MAX,
-      vibrationPattern: [0, 250, 250, 250],
-      lightColor: '#FF231F7C',
-    });
-  }
-
-  if (Device.isDevice) {                                                  // Checks for physical device 
-    const { status: existingStatus } = await Notifications.getPermissionsAsync();
-    let finalStatus = existingStatus;
-    if (existingStatus !== 'granted') {
-      const { status } = await Notifications.requestPermissionsAsync();
-      finalStatus = status;
-    }
-    if (finalStatus !== 'granted') {
-      return;                                   // Alert here if the user tries to do anything notification related without granted status
-    }
-    token = (await Notifications.getExpoPushTokenAsync()).data;
-    //console.log(token); // Logs the token
-  } else {
-    alert(lang ? 'Varslinger er ikke tilgjengelig på simulatorer.': 'Notifications are not available on simulators');
-  }
-
-  return token;
-}

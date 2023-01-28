@@ -3,13 +3,13 @@ import { createSlice } from "@reduxjs/toolkit";                             // I
 export const NotificationSlice = createSlice({                              // Declares notification slice
     name: 'notification',                                                   // Slice name
     initialState: {                                                         // Initial state
-        IMPORTANT:  1,                                                      // Important information
-        REMINDERS:  1,                                                      // Reminders for enrolled events
-        EVENTS:     1,                                                      // Notifications when any events are posted
-        BEDPRES:    1,                                                      // Notifications when bedpres events are posted
-        TEKKOM:     1,                                                      // Reminder 1 hour before tekkom starts
-        CTF:        1,                                                      // Reminders for ctf
-        SOCIAL:     1,                                                      // Reminders for social events like parties etc
+        IMPORTANT:  true,                                                      // Important information
+        REMINDERS:  true,                                                      // Reminders for enrolled events
+        EVENTS:     true,                                                      // Notifications when any events are posted
+        BEDPRES:    true,                                                      // Notifications when bedpres events are posted
+        TEKKOM:     true,                                                      // Reminder 1 hour before tekkom starts
+        CTF:        true,                                                      // Reminders for ctf
+        SOCIAL:     true,                                                      // Reminders for social events like parties etc
     },
     reducers: {                                                             // Declares slice reducer
         changeNotificationState: (state, category) => {                     // Change state of important notifications

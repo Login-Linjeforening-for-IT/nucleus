@@ -1,6 +1,7 @@
 {/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
 import { MS } from '../styles/menuStyles'
 import { GS } from '../styles/globalStyles'
+import { ES }from '../styles/eventStyles'
 import React, { useState } from 'react';
 import Card, {Space} from '../shared/sharedComponents';
 import { DynamicCircle } from '../shared/eventComponents/otherComponents';
@@ -76,7 +77,7 @@ return(
               :null}
               
               {index == setting.length-1 && feedback.status ?
-              <View style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
+              <View style={{...ES.row, justifyContent: 'space-evenly'}}>
                 <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/376827396764073997')}>
                   <View style={{backgroundColor: FetchColor(theme, 'BACKGROUND')}}>
                     <Text style={{...T.contact, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>Discord</Text>

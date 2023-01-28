@@ -1,3 +1,5 @@
+// This file contains several dropdown menus mostly but not exclusively used by the AboutScreen.
+
 import React, {useState } from 'react';
 import { T } from '../styles/text'
 import { 

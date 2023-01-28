@@ -27,11 +27,14 @@ export default function CleanDescription(string) {
         const fixAbbreviation = endList.replace(/<abbr title="/g, '')
         const fixEndAbbreviation = fixAbbreviation.replace(/">/g, ' (')
         const fixClosingAbbreviation = fixEndAbbreviation.replace(/<\/abbr>/g, ')')
-        const addO = fixClosingAbbreviation.replace(/&Oslash;/g, 'Ø');
+        const addAE = fixClosingAbbreviation.replace(/&AElig;/, 'Æ');
+        const addae = addAE.replace(/&aelig;/g, 'æ');
+        const addO = addae.replace(/&Oslash;/g, 'Ø');
         const addo = addO.replace(/&oslash;/g, 'ø');
         const addA = addo.replace(/&Aring;/g, 'Å');
         const adda = addA.replace(/&aring;/g, 'å');
-        const addLB = adda.replace(/<\/p>/g, '\n\n');
+        const removeSign = adda.replace(/&zwj;♂/g, '');
+        const addLB = removeSign.replace(/<\/p>/g, '\n\n');
         const addSpace = addLB.replace(/&nbsp;/g, ' ');
         const removehT = addSpace.replace(/<h2>/g, '');
         const removePtag2 = removehT.replace(/<p>/g, '\n\n');

@@ -1,4 +1,5 @@
-import { StyleSheet } from "react-native";    // Stylesheet file        
+import { StyleSheet } from "react-native";    // Stylesheet file 
+import { Dimensions } from "react-native";       
 
 export const T = StyleSheet.create({          // Declares T - meant for all text styling
   red: {                                      // Red text - used when something is missing or went wrong
@@ -108,9 +109,7 @@ export const T = StyleSheet.create({          // Declares T - meant for all text
     fontSize: 17,                             // Text font size
   },
   specificEventInfo: {                        // DpecificEventInfo text (+10px from left)
-    alignSelf: 'center',                      // Horizontally centers (used together with flexdirection: row)
     fontSize: 20,                             // Text font size
-    left: 10                                  // Moves text 10px rightwards
   },
   margin15: {                                 // Centered text of size 15 with 15 margin
     alignSelf: 'center',                      // Vertically centers
@@ -121,9 +120,13 @@ export const T = StyleSheet.create({          // Declares T - meant for all text
     left: 10,                                 // Moves text 10px rightwards
     fontSize: 12,                             // Text font size
   },
-  listingText: {
-    top: '25%',
-    alignSelf: 'center',
-    justifyContent: 'center'
-  }
+  listingText: {                              // Job listing text
+    top: '25%',                               // Shifted 25% downwards
+    alignSelf: 'center',                      // Horizontally centered
+  },
+  mazemap: {                                  // Mazemap text on SES
+    textDecorationLine: 'underline',
+    fontSize: 20,                             // Text font size
+    textAlign: 'flex-end',                       // Right shifted
+  },
 })

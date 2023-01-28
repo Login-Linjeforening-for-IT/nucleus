@@ -1,11 +1,31 @@
+/**
+ * Collection of custom components
+ * 
+ * Content in order:
+ * - GreenLight         - Green light on eventscreen when event is clicked
+ * - GrayLight          - Gray light on eventscreen when event is not clicked
+ * - GetEndTime         - Fetches end time of an event
+ * - EventLocation      - Fetches location of an event
+ * - EventImage         - Idea for function to replace clutter in specificEvent.js 
+ * - MonthNO            - Month of event in norwegian
+ * - MonthEN            - Month of event in English
+ * - RedLight           - Red light for admin tools (red light if logged in), currently not in use but project will crash if removed
+ * - DynamicCircle      - Dynamic circle with height, width color and placement variables
+ * - Check              - Check icon displayed on the right side of an event on the EventScreen
+ * - SmallCheck         - Smaller check icon displayed inside of the filter for each category
+ * - CheckState         - Maps relevant icon for if an event has been clicked or not (green/gray)
+ * - fetchEmoji         - Fetches emoji for event notifications
+ */
+
 import Svg, { Circle, Path } from 'react-native-svg';
 import React from 'react';
 import { ES } from '../../styles/eventStyles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { T } from '../../styles/text'
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, Linking } from 'react-native';
 import { useSelector } from 'react-redux';
 import FetchColor from '../../styles/fetchTheme';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 /**
  * NOTE: SHOULD BE COMBINDED WITH GRAYLIGHT AND REDLIGHT INTO LIGHT AND TAKE COLOR AS PARAMETER
@@ -110,28 +130,61 @@ export function GetEndTime(input){
  * @param {string} campus   Campus where the event takes place
  * @returns                 View containing the event location as a text
  */
-export function EventLocation(room, campus) {
-
+export function EventLocation(room, campus, street, mazeref) {
     const { lang  } = useSelector( (state) => state.lang  )
     const { theme } = useSelector( (state) => state.theme )
 
-    if(room != null && campus != null) {
-        if (room.length == 0 && campus.length == 0 ) {
-            return(
-            <View style={ES.specificEventInfoView}>
-                <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Lokasjon:\t\t' : 'Location:\t\t'}</Text>
-                <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>TBA!</Text>
-            </View>)
-        } else {
-            return(
-                <View style={ES.specificEventInfoView}>
-                <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Lokasjon:\t\t' : 'Location:\t\t'}</Text>
-                <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>
-                  {room},{campus}
-                </Text>
-              </View>
-            )
+    function handleLink(mazeref, street) {
+        if (mazeref) {
+            Linking.openURL(`https://use.mazemap.com/#v=1&campusid=55&sharepoitype=poi&sharepoi=${mazeref}`).catch(() => {
+                Alert.alert('Mazemap kunne ikke åpnes', `Send en mail til kontakt@login.no dersom problemet vedvarer. Feilkode: M${mazeref}`)
+            })
+            return;
+        };
+
+        switch((street.trim()).toUpperCase()) {
+            case 'ORGKOLLEKTIVET':  
+                Linking.openURL('https://link.mazemap.com/wZDe8byp').catch(() =>{
+                    Alert.alert('Mazemap kunne ikke åpnes', 'Send en mail til kontakt@login.no dersom problemet vedvarer. Feilkode: wZDe8byp');
+                }); 
+                break;
+
+            case 'STUDENTHUSET 14':
+            case 'STUDENTHUSET':    
+                Linking.openURL('https://link.meazemap.com/MGfrIBrd').catch(() => {
+                    Alert.alert('Maze kunne ikke åpnes.', 'Send en mail til kontakt@login.no dersom problemet vedvarer. Feilkode: MGfrIBrd')
+                });
+                break;
+
+            default: return;
         }
+    }
+
+    if(!room && !campus && !street) {
+        return(
+            <View style={ES.specificEventInfoView}>
+                <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Lokasjon:\t  ' : 'Location:\t    '}</Text>
+                <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>TBA!</Text>
+            </View>
+        )
+    }
+
+    if(room != null || campus != null || street != null) {
+        return(
+            <View style={ES.specificEventInfoView}>
+                <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Lokasjon:\t  ' : 'Location:\t    '}</Text>
+                <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>{room ? room + ', ':null}{campus}{street}</Text>
+                {mazeref  || ((street.trim()).toUpperCase() == 'ORGKOLLEKTIVET' || (street.trim()).toUpperCase() == 'STUDENTHUSET' || (street.trim()).toUpperCase() == 'STUDENTHUSET 14') ? 
+                <TouchableOpacity style={{minWidth: 70}} onPress={() => {handleLink(mazeref, street)}}>
+                    <View style={ES.row}>
+                        <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>{' - '}</Text>
+                        <Text style={{...T.mazemap, color: FetchColor(theme, 'ORANGE')}}>{lang ? 'Kart' : 'Map'}</Text>
+                        <Image style={ES.mazemapIcon} source={require('../../assets/mazemap.png')}/> 
+                    </View>
+                </TouchableOpacity>
+                :null}
+            </View>
+        )
     }else{
         <View style={ES.specificEventInfoView}>
             <Text style={T.red}>{lang ? 'Feil ved henting av sted.' : 'Error fetching location'}</Text>

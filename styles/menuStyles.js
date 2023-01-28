@@ -47,9 +47,10 @@ export const MS = StyleSheet.create ({                              // Declares 
     fontSize: 25,                                                   // Text font size
   },
   topMenu: {                                                        // Top menu background view
-    position: 'absolute',
-    top: 0,
-    width: '100%',
+    position: 'absolute',                                           // Absolute position (top menu should always be at the top)
+    top: 0,                                                         // Fixed to the top
+    left: '-2.5%',                                                  // Moved 2.5% leftwards
+    width: '105%',                                                  // 105% width to layer on line with event left hand views
     flexDirection: 'row',                                           // Changes flex direction to allow for multiple elements on the same horizontal level
     justifyContent: 'space-between',                                // Adds an equal amount of space between every element
     height: Dimensions.get('window').height/9,                      // Sets the height of the top menu to 13.3% of the screen height

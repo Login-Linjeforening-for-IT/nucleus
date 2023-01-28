@@ -110,7 +110,6 @@ export default function EventTime(startTime, endTime) { // startTime
                     }else if(startHour == hour+1){ //Event is the next hour
                         return(<View><Text style={{...T.text25, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? startMinutesCalculated + 'min til' : 'Starts in ' + startMinutesCalculated + 'min'}</Text></View>)
                     }else{ //Event starts in x hours
-                        console.log('hei')
                         return(<View><Text style={{...T.text25, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? startHourCalculated + 't ' + startMinuteMore + 'min til' : 'Starts in ' + startHourCalculated + 'h ' + startMinutesAfterHourCalculated + 'min'}</Text></View>)
                     }
                 }else if(startDay == day-1){ //Event was yesterday
@@ -140,6 +139,8 @@ export default function EventTime(startTime, endTime) { // startTime
                 }else{ //If the event was last month, but youre not on the first day of the month
                     return(<View><Text style={{...T.text25, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Forrige måned' : 'Last month'}</Text></View>)
                 }
+            }else if(startMonth < month && month-startMonth == 1){ //Event was 1 month ago
+                return(<View><Text style={{...T.text25, color: FetchColor(theme, 'TEXTCOLOR')}}>{month-startMonth} {lang ? ' måned siden' : ' month ago'}</Text></View>)
             }else if(startMonth < month){ //Event was x months ago
                 return(<View><Text style={{...T.text25, color: FetchColor(theme, 'TEXTCOLOR')}}>{month-startMonth} {lang ? ' måneder siden' : ' months ago'}</Text></View>)
             }else if(startMonth == month+1){ //Event is next month

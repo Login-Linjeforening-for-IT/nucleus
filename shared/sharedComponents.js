@@ -1,4 +1,26 @@
-import React, {useEffect, useState } from 'react';
+/**
+ * Collection of custom components
+ * 
+ * Content in order:
+ * - Card               - Custom view used on every screen of the application, every square with rounded corners is a card.
+ * - CardSmaller        - Smaller custom view used by every screen of the application.
+ * - Kontakt            - View containing the contact information for Login - Linjeforeningen for IT.
+ * - Notification       - Notification switch used in settings.
+ * - Language           - Language switch used in settings.
+ * - Button             - Orange button.
+ * - NotifyButton       - Button used on reportscreen, currently waiting for backend infrastructure.
+ * - CheckBox           - Check box used by eventfilter.
+ * - CheckedBox         - Box displaying that the box has been checked in the eventfilter.
+ * - Line               - Line with height and width properties for easy customization.
+ * - Space              - Empty view with height as variable for creating space between content. Used wherever there is space.
+ * - Social             - View displaying all of Logins other social media.
+ * - CompareDates       - Function for comparing two dates, true if firstdate is newer
+ * - AllComitees        - View containing all comittees 
+ * - HomeIcon           - Home icon svg, currently not in use. (bad design)
+ * - ThemeSwitch        - Theme switch in settings
+ */
+
+import React from 'react';
 import Svg, {Rect, Path} from 'react-native-svg';
 import { SS } from '../styles/settingStyles';
 import { ES } from '../styles/eventStyles';
@@ -104,7 +126,7 @@ export function Notification ({category}) {    //Notification button
     const notification = useSelector( (state) => state.notification ) // Fetches notification state
     const { theme } = useSelector( (state) => state.theme )
     const dispatch = useDispatch()
-    
+
     return(
         <View>
             <Switch
@@ -463,6 +485,24 @@ export function ThemeSwitch() {
             {/* {theme == 4 ? <Image style={SS.lightSwitchImage} source={require('../assets/easter.png')} />: null} */}
             {theme == 4 ? <Image style={SS.lightSwitchImage} source={require('../assets/moon.png')} />: null}
             </TouchableOpacity>
+        </View>
+    )
+}
+
+export function EventCardLocation(item, theme, lang) {
+    let time = ' ' + item.startt[11]+item.startt[12]+':'+item.startt[14]+item.startt[15] + '. ';
+    let location = item.campus + '. ' + item.roomno + '.';
+
+    return(
+        <View style={ES.view2}>
+            <View style = {{...ES.title, color: FetchColor(theme, 'TEXTCOLOR')}}>
+                <Text style={{...ES.title, color: FetchColor(theme, 'TEXTCOLOR')}}>{item.eventname}</Text>
+            </View>
+            <View style={{flexDirection: 'row'}}>
+                {time != ' : ' && time != ' 00:00. ' ? <Text style={{...ES.loc, color: FetchColor(theme, 'TEXTCOLOR')}}>{time != '00:00' ? time:null}</Text>:null}
+                {location != '. .' ? <Text style={{...ES.loc, color: FetchColor(theme, 'TEXTCOLOR')}}>{location}</Text>:null} 
+                {time == ' : ' || time == ' 00:00. ' && location == '. .' ? <Text style={{...ES.loc, color: FetchColor(theme, 'TEXTCOLOR')}}> {lang ? 'Mer info TBA!':'More info TBA!'}</Text>:null}
+            </View>
         </View>
     )
 }

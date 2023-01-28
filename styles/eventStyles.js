@@ -12,7 +12,6 @@ export const ES = StyleSheet.create({         // Declares export ES ( Event Styl
     top: 7.5,                                 // Moves content 7.5px downwards
     justifyContent: 'center',                 // Horizontally centers
     alignItems: 'flex-start',                 // Vertically sets content to left side of view
-    left: 10,                                 // Moves events 10px rightwards
     width: '70%',                             // Sets the width of the view to be 70% of the parent view
   },
   view3: {                                    // Right side card view
@@ -29,14 +28,15 @@ export const ES = StyleSheet.create({         // Declares export ES ( Event Styl
     fontSize: 30,                             // Text font size
   },
   monthText: {                                // Eventmonth text on specificEventScreen
-    alignSelf: 'center',                      // Aligns the text vertically to top
+    width: 45,                                // Same width as background view
+    textAlign: 'center',                      // Aligns the text vertically to top
     bottom: 10,                               // Moves text 7.5% upwards
-    left: '20%',                              // moves events 20% rightwards
     fontSize: 20,                             // Text font size
   },
   eventCardDayText: {                         // Eventday text on eventScreen
-    top: -5,
-    left: '15%',                              // Moves events 15% rightwards
+    textAlign: 'center',                      // Horizontally centers
+    width: 45,                                // Same width as the colored view behind
+    top: -5,                                  // Shifts it 5px upwards
     fontSize: 30,                             // Text font size
   },
   title: {                                    // Eventname text on eventScreen
@@ -86,10 +86,6 @@ export const ES = StyleSheet.create({         // Declares export ES ( Event Styl
   },
   absoluteView: {                             // Middle sized icons
     flexDirection: 'row',                     // Flexdirection set to row
-  },
-  smallSize: {                                // Small icons
-      height: 20,                             // Fixed height 20px
-      width: 20                               // Fixed height 20px
   },
   eventLight: {                               // Position of specific event color circle
       top: -10,                               // Moves eventLight 10px upwards
@@ -170,10 +166,18 @@ export const ES = StyleSheet.create({         // Declares export ES ( Event Styl
       height: 40,                             // Fixed icon height of 40px
       width: 40                               // Fixed icon width of 40px
   },
-  eventButton: {
-    height: 30,
-    width: Dimensions.get('window').width/3, 
-    alignSelf: 'center',
-    borderRadius: 10
+  eventButton: {                              // Join event button 
+    height: 30,                               // Fixed height of 30px
+    width: Dimensions.get('window').width/3,  // Fixed width of 1/3 of the screen
+    alignSelf: 'center',                      // Horizontally centered
+    borderRadius: 10                          // Rounded corners
+  },
+  mazemapIcon: {                              // Mazemap icon used on SES
+    left: 4,                                 // Shifted to the right side
+    height: 20,                               // 20px high
+    width: 10,                                // 10px wide
+  },
+  row: {
+    flexDirection: 'row'                       // When things just need to be horizontally aligned
   }
 })
