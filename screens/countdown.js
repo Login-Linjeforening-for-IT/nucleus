@@ -1,4 +1,5 @@
 import { GS } from '../styles/globalStyles'
+import { ES } from '../styles/eventStyles'
 import React, {useEffect, useState} from 'react';
 import { T } from '../styles/text'
 import { StatusBar } from 'expo-status-bar';
@@ -16,7 +17,7 @@ return(
       <StatusBar hidden={true}/>
       <View style={{...GS.content, backgroundColor: 'black'}}>
           <View style={{flex: 1, justifyContent: 'center'}}>
-            <Text style={{...T.centeredBold25, color: 'white'}}>Nucleus</Text>
+            <Image style={ES.specificEventImage} source={require(`../assets/nucleus.png`)} />
             {Space(20)}
             <Text style={{...T.centeredBold25, color: 'white'}}><Countdown props={startt="2023-02-11T00:00:00Z"}/></Text>
           </View>
