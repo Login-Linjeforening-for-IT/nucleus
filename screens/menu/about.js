@@ -161,7 +161,7 @@ return(
                       {relevantComittee.id == 2 ? <Image style={GS.small} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/tekkom-white.png') : require('../../assets/tekkom-black.png')} />:null}
                       {relevantComittee.id == 3 ? <Image style={GS.small} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/pr-white.png') : require('../../assets/pr-black.png')} />:null}
                       {relevantComittee.id == 4 ? <Image style={GS.small} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/ctfkom-white.png') : require('../../assets/ctfkom-black.png')} />:null}
-                      {relevantComittee.id == 5 ? <Image style={GS.small} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/satkom-white.png') : require('../../assets/satkom-black.png')} />:null}
+                      {relevantComittee.id == 5 ? <Image style={GS.small} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/satkom.png') : require('../../assets/satkom-black.png')} />:null}
                       {lang ? relevantComittee.titleNO : relevantComittee.titleEN}</Text>
                     <Text style={{...T.boldParagraph, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? relevantComittee.quoteNO : relevantComittee.qouteEN}</Text>
                     <Text style={{...T.paragraph, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? relevantComittee.descriptionNO : relevantComittee.descriptionEN}</Text>
