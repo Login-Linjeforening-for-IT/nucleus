@@ -83,12 +83,12 @@ export default function SpecificEventScreen({ route, navigation}) {
             uri={`https://cdn.login.no/img/events/${item.image}`}
           />
         :(item.image).includes('.png')?<Image style={ES.specificEventImage} source={{uri: `https://cdn.login.no/img/events/${item.image}`}}/>:null}
-        {(item.image == 'none' || !item.image) && item.category == 'TEKKOM'  ? <Image style={ES.specificEventImage} source={require(`../assets/tekkom.png`    )} />:null}
-        {(item.image == 'none' || !item.image) && item.category == 'CTF'     ? <Image style={ES.specificEventImage} source={require(`../assets/ctf.png`       )} />:null}
-        {(item.image == 'none' || !item.image) && item.category == 'SOCIAL'  ? <Image style={ES.specificEventImage} source={require(`../assets/sosialt.png`   )} />:null}
-        {(item.image == 'none' || !item.image) && item.category == 'LOGIN'   ? <Image style={ES.specificEventImage} source={require(`../assets/login.png`     )} />:null}
-        {(item.image == 'none' || !item.image) && item.category == 'ANNET'   ? <Image style={ES.specificEventImage} source={require(`../assets/annet.png`     )} />:null}
-        {(item.image == 'none' || !item.image) && item.category == 'BEDPRES' ? <Image style={ES.specificEventImage} source={require(`../assets/bedpresBig.png`)} />:null}
+        {(item.image == 'none' || !item.image) && item.category == 'TEKKOM'  ? <Image style={ES.specificEventImage} source={require(`../assets/committee/tekkom/tekkom.png`    )} />:null}
+        {(item.image == 'none' || !item.image) && item.category == 'CTF'     ? <Image style={ES.specificEventImage} source={require(`../assets/committee/ctfkom/ctf.png`       )} />:null}
+        {(item.image == 'none' || !item.image) && item.category == 'SOCIAL'  ? <Image style={ES.specificEventImage} source={require(`../assets/categories/sosialt.png`   )} />:null}
+        {(item.image == 'none' || !item.image) && item.category == 'LOGIN'   ? <Image style={ES.specificEventImage} source={require(`../assets/categories/login.png`     )} />:null}
+        {(item.image == 'none' || !item.image) && item.category == 'ANNET'   ? <Image style={ES.specificEventImage} source={require(`../assets/categories/annet.png`     )} />:null}
+        {(item.image == 'none' || !item.image) && item.category == 'BEDPRES' ? <Image style={ES.specificEventImage} source={require(`../assets/categories/bedpresBig.png`)} />:null}
 
             {Space(5)}
           
@@ -200,7 +200,7 @@ export default function SpecificEventScreen({ route, navigation}) {
        {Platform.OS === 'ios' ? <BlurView style={MS.topMenu} intensity={30}/> : <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'TRANSPARENTANDROID')}}/>}
       <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
     <TouchableOpacity onPress={() => goBack()}>
-      <Image style={MS.goBack} source={require('../assets/goback777.png')} />
+      <Image style={MS.goBack} source={require('../assets/icons/goback777.png')} />
     </TouchableOpacity>
 
     <View style={GS.loginStatus}>{login ? DynamicCircle(10,10,'red',Dimensions.get('window').width/1.4,null,60,null):null}</View>
@@ -211,13 +211,13 @@ export default function SpecificEventScreen({ route, navigation}) {
 {Platform.OS === 'ios' ? <BlurView style={MS.bMenu} intensity={30}/> : <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENTANDROID')}}/>}
     <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
         <TouchableOpacity onPress={() => eventPage()}>
-            <Image style={MS.bMenuIcon} source={require('../assets/calendar-orange.png')} />
+            <Image style={MS.bMenuIcon} source={require('../assets/menu/calendar-orange.png')} />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => listingPage()}>
-          <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/business.png') : require('../assets/business-black.png')} />
+          <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/menu/business.png') : require('../assets/menu/business-black.png')} />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => menuPage()}>
-          <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/menu.png') : require('../assets/menu-black.png')} />
+          <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/menu/menu.png') : require('../assets/menu/menu-black.png')} />
           </TouchableOpacity>
       </View>     
     </View>

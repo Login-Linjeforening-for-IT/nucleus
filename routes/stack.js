@@ -15,7 +15,6 @@ import InternalScreen from '../screens/internal/internal';                      
 import BusinessScreen from '../screens/menu/business';                          // Companies' screen
 import SettingScreen from '../screens/menu/settings';                           // Settings 
 import TodoScreen from '../screens/internal/todo';                              // Todo (verv)
-import MakeNotificationScreen from '../screens/internal/makeNotification';      // Make notification (verv)
 import LoginScreen from '../screens/menu/login';                                // Login to innsida
 import ReportScreen from '../screens/menu/report';                              // Report form for blameworthy conditions
 import CommitteeMenuScreen from '../screens/menu/committeeMenu';                // Displays all committees contact information
@@ -51,7 +50,6 @@ function Navigator() {                                                          
                     <Tab.Screen name='SettingScreen'            options={{tabBarStyle: { display: "none" }}} component={SettingScreen} />
                     {/* <Tab.Screen name='InternalScreen'           options={{tabBarStyle: { display: "none" }}} component={InternalScreen} /> */}
                     {/* <Tab.Screen name='TodoScreen'               options={{tabBarStyle: { display: "none" }}} component={TodoScreen} /> */}
-                    {/* <Tab.Screen name='MakeNotificationScreen'   options={{tabBarStyle: { display: "none" }}} component={MakeNotificationScreen} /> */}
                     {/* <Tab.Screen name='LoginScreen'              options={{tabBarStyle: { display: "none" }}} component={LoginScreen} /> */}
                     {/* <Tab.Screen name='ReportScreen'             options={{tabBarStyle: { display: "none" }}} component={ReportScreen} /> */}
                     <Tab.Screen name='CommitteeMenuScreen'      options={{tabBarStyle: { display: "none" }}} component={CommitteeMenuScreen} />

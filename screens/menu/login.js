@@ -150,14 +150,14 @@ const showPass = () => {
                       <View>
                       <View style = {SS.passLight}><GreenLight/></View>
                       <View style = {{...SS.passCheck, color: FetchColor(theme, 'TEXTCOLOR')}}>
-                      <Image style={SS.showPassImage} source={require('../../assets/eyeF.png')} />
+                      <Image style={SS.showPassImage} source={require('../../assets/icons/eyeF.png')} />
                     </View>
                     </View>
                     :
                     <View>
                     <View style = {SS.passLight}><RedLight/></View>
                     <View style = {{...SS.passCheck, color: FetchColor(theme, 'TEXTCOLOR')}}>
-                      <Image style={SS.showPassImage} source={require('../../assets/eyeT.png')} />
+                      <Image style={SS.showPassImage} source={require('../../assets/icons/eyeT.png')} />
                     </View>
                     </View>
                     }
@@ -167,7 +167,7 @@ const showPass = () => {
                   <View>
                     <View style = {SS.noPassLight}><GrayLight/></View>
                     <View style = {{...SS.noPassCheck, color: FetchColor(theme, 'TEXTCOLOR')}}>
-                      <Image style={SS.noPassImage} source={require('../../assets/eyeF.png')} />
+                      <Image style={SS.noPassImage} source={require('../../assets/icons/eyeF.png')} />
                     </View>
                   </View>
                   }
@@ -189,7 +189,7 @@ const showPass = () => {
             {Space(40)}
 
               <View style={SS.makeNotificationImage}>
-                <Image style={GS.smallImage} source={require('../../assets/loginText.png')} />
+                <Image style={GS.smallImage} source={require('../../assets/logo/loginText.png')} />
               </View>
         </View>
         {Space(Dimensions.get('window').height/10)}
@@ -199,7 +199,7 @@ const showPass = () => {
 {Platform.OS === 'ios' ? <BlurView style={MS.topMenu} intensity={30}/> : <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'TRANSPARENTANDROID')}}/>}
       <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
     <TouchableOpacity onPress={() => menuPage()}>
-      <Image style={MS.goBack} source={require('../../assets/goback777.png')} />
+      <Image style={MS.goBack} source={require('../../assets/icons/goback777.png')} />
     </TouchableOpacity>
 
     <View style={GS.loginStatus}>{login ? DynamicCircle(10,10,'red',Dimensions.get('window').width/1.4,null,60,null):null}</View>
@@ -211,13 +211,13 @@ const showPass = () => {
 {Platform.OS === 'ios' ? <BlurView style={MS.bMenu} intensity={30}/> : <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENTANDROID')}}/>}
     <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
           <TouchableOpacity onPress={() => eventPage()}>
-          <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/calendar777.png') : require('../../assets/calendar-black.png')} />
+          <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/menu/calendar777.png') : require('../../assets/menu/calendar-black.png')} />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => listingPage()}>
-          <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/business.png') : require('../../assets/business-black.png')} />
+          <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/menu/business.png') : require('../../assets/menu/business-black.png')} />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => menuPage()}>
-              <Image style={MS.bMenuIcon} source={require('../../assets/menu-orange.png')} />
+              <Image style={MS.bMenuIcon} source={require('../../assets/menu/menu-orange.png')} />
           </TouchableOpacity>
       </View>     
     </View>

@@ -179,7 +179,7 @@ export function EventLocation(room, campus, street, mazeref) {
                     <View style={ES.row}>
                         <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>{' - '}</Text>
                         <Text style={{...T.mazemap, color: FetchColor(theme, 'ORANGE')}}>{lang ? 'Kart' : 'Map'}</Text>
-                        <Image style={ES.mazemapIcon} source={require('../../assets/mazemap.png')}/> 
+                        <Image style={ES.mazemapIcon} source={require('../../assets/icons/mazemap.png')}/> 
                     </View>
                 </TouchableOpacity>
                 :null}
@@ -201,7 +201,7 @@ export function EventImage(condition) {  //Doesnt work
     if(!condition) {
         return(
             <View>
-                <Image style={ES.specificEventImage} source={require('../../assets/default.png')} />
+                <Image style={ES.specificEventImage} source={require('../../assets/categories/default.png')} />
             </View>
         )
     }

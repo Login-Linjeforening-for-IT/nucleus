@@ -17,7 +17,7 @@ return(
       <StatusBar hidden={true}/>
       <View style={{...GS.content, backgroundColor: 'black'}}>
           <View style={{flex: 1, justifyContent: 'center'}}>
-            <Image style={ES.specificEventImage} source={require(`../assets/nucleus.png`)} />
+            <Image style={ES.specificEventImage} source={require(`../assets/logo/nucleus.png`)} />
             {Space(20)}
             <Text style={{...T.centeredBold25, color: 'white'}}><Countdown props={startt="2023-02-11T00:00:00Z"}/></Text>
           </View>

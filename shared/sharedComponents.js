@@ -267,24 +267,24 @@ export function Social() {
 
     return(
         <View>
-            <Image style={GS.socialBigImage} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/loginBig-white.png') : require('../assets/loginBig-black.png')} />
+            <Image style={GS.socialBigImage} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/logo/loginBig-white.png') : require('../assets/logo/loginBig-black.png')} />
             {Space(10)}
             <View style={GS.socialView}>
                 <View style={GS.socialPartView}>
                 <TouchableOpacity onPress={() => Linking.openURL('https://discord.com/invite/login-ntnu')}>
-                        <Image style={GS.medium} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/discord-white.png') : require('../assets/discord-black.png')} />
+                        <Image style={GS.medium} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/social/discord-white.png') : require('../assets/social/discord-black.png')} />
                     </TouchableOpacity>
                 </View>
                 
                 <View style={GS.socialPartView}>
                 <TouchableOpacity onPress={() => Linking.openURL('https://www.instagram.com/login_linjeforening/')}>
-                        <Image style={GS.medium} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/instagram-white.png') : require('../assets/instagram-black.png')} />
+                        <Image style={GS.medium} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/social/instagram-white.png') : require('../assets/social/instagram-black.png')} />
                     </TouchableOpacity>
                 </View>
 
                 <View style={GS.socialPartView}>
                 <TouchableOpacity onPress={() => Linking.openURL('https://facebook.com/LogNTNU')}>
-                        <Image style={GS.medium} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/facebook-white.png') : require('../assets/facebook-black.png')} />
+                        <Image style={GS.medium} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/social/facebook-white.png') : require('../assets/social/facebook-black.png')} />
                     </TouchableOpacity>
                 </View>
             </View>
@@ -292,19 +292,19 @@ export function Social() {
             <View style={GS.socialView}>
                 <View style={GS.socialPartView}>
                     <TouchableOpacity onPress={() => Linking.openURL('https://linkedin.com/company/linjeforeningen-login/about')}>
-                        <Image style={GS.medium} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/linkedin-white.png') : require('../assets/linkedin-black.png')} />
+                        <Image style={GS.medium} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/social/linkedin-white.png') : require('../assets/social/linkedin-black.png')} />
                     </TouchableOpacity>
                 </View>
                 
                 <View style={GS.socialPartView}>
                 <TouchableOpacity onPress={() => Linking.openURL('https://git.logntnu.no')}>
-                        <Image style={GS.medium} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/gitlab-white.png') : require('../assets/gitlab-black.png')} />
+                        <Image style={GS.medium} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/social/gitlab-white.png') : require('../assets/social/gitlab-black.png')} />
                     </TouchableOpacity>
                 </View>
 
                 <View style={GS.socialPartView}>
                 <TouchableOpacity onPress={() => Linking.openURL('https://redmine.login.no')}>
-                        <Image style={GS.medium} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/redmine-white.png') : require('../assets/redmine-black.png')} />
+                        <Image style={GS.medium} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/social/redmine-white.png') : require('../assets/social/redmine-black.png')} />
                     </TouchableOpacity>
                 </View>
             </View>
@@ -366,84 +366,84 @@ export function AllComitees() {
 
     return(
         <View>
-          <Image style={GS.personImage} source={require('../assets/leder.png')} />
+          <Image style={GS.personImage} source={require('../assets/photos/leder.png')} />
           {Space(10)}
           <Text style={T.leaderTitle}>{lang ? 'Leder' : 'Leader'}</Text>
           {Space(5)}
           <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>Anders Eiken</Text>
           {Space(5)}
           <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/199580276823818240')}>
-            <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>{<Image style={GS.tiny} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/discord-white.png') : require('../assets/discord-black.png')} />}Eiken#6059</Text>
+            <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>{<Image style={GS.tiny} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/social/discord-white.png') : require('../assets/social/discord-black.png')} />}Eiken#6059</Text>
           </TouchableOpacity>
           {Space(25)}
-          <Image style={GS.personImage} source={require('../assets/nestleder.png')} />
+          <Image style={GS.personImage} source={require('../assets/photos/nestleder.png')} />
           {Space(10)}
           <Text style={T.leaderTitle}>{lang ? 'Nestleder' : 'Deputy chairman'}</Text>
           {Space(5)}
           <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>Mads Halland</Text>
           {Space(5)}
           <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/193774211242655746')}>
-          <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>{<Image style={GS.tiny} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/discord-white.png') : require('../assets/discord-black.png')} />}¬.¬#6719</Text>
+          <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>{<Image style={GS.tiny} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/social/discord-white.png') : require('../assets/social/discord-black.png')} />}¬.¬#6719</Text>
           </TouchableOpacity>
           {Space(25)}
-          <Image style={GS.personImage} source={require('../assets/sekreter.png')} />
+          <Image style={GS.personImage} source={require('../assets/photos/sekreter.png')} />
           {Space(10)}
           <Text style={T.leaderTitle}>{lang ? 'Sekretær' : 'Secretary'}</Text>
           {Space(5)}
           <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>Celina Brynildsen</Text>
           {Space(5)}
           <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/745317481190785126')}>
-            <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>{<Image style={GS.tiny} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/discord-white.png') : require('../assets/discord-black.png')} />}Celina#6955</Text>
+            <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>{<Image style={GS.tiny} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/social/discord-white.png') : require('../assets/social/discord-black.png')} />}Celina#6955</Text>
           </TouchableOpacity>
           {Space(25)}
-          <Image style={GS.personImage} source={require('../assets/eventkomleder.png')} />
+          <Image style={GS.personImage} source={require('../assets/committee/eventkom/eventkomleder.png')} />
           {Space(10)}
           <Text style={T.leaderTitle}>{lang ? 'EventKom leder' : 'EventKom Leader'}</Text>
           {Space(5)}
           <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>Sofie Hagen</Text>
           {Space(5)}
           <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/877183922021216256')}>
-            <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>{<Image style={GS.tiny} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/discord-white.png') : require('../assets/discord-black.png')} />}sofiee#9763</Text>
+            <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>{<Image style={GS.tiny} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/social/discord-white.png') : require('../assets/social/discord-black.png')} />}sofiee#9763</Text>
           </TouchableOpacity>
           {Space(25)}
-          <Image style={GS.personImage} source={require('../assets/prleder.png')} />
+          <Image style={GS.personImage} source={require('../assets/committee/prkom/prleder.png')} />
           {Space(10)}
           <Text style={T.leaderTitle}>{lang ? 'PR leder' : 'PR leader'}</Text>
           {Space(5)}
           <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>Kristina Kataki</Text>
           {Space(5)}
           <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/877108421772582962')}>
-            <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>{<Image style={GS.tiny} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/discord-white.png') : require('../assets/discord-black.png')} />}Kataki#7254</Text>
+            <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>{<Image style={GS.tiny} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/social/discord-white.png') : require('../assets/social/discord-black.png')} />}Kataki#7254</Text>
           </TouchableOpacity>
           {Space(25)}
-          <Image style={GS.personImage} source={require('../assets/tekkomleder.png')} />
+          <Image style={GS.personImage} source={require('../assets/committee/tekkom/tekkomleder.png')} />
           {Space(10)}
           <Text style={T.leaderTitle}>{lang ? 'TekKom leder' : 'TekKom leader'}</Text>
           {Space(5)}
           <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>Simon Edna</Text>
           {Space(5)}
           <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/298525088914079745')}>
-            <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>{<Image style={GS.tiny} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/discord-white.png') : require('../assets/discord-black.png')} />}Sim#3909</Text>
+            <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>{<Image style={GS.tiny} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/social/discord-white.png') : require('../assets/social/discord-black.png')} />}Sim#3909</Text>
           </TouchableOpacity>
           {Space(25)}
-          <Image style={GS.personImage} source={require('../assets/ctfkomleder.png')} />
+          <Image style={GS.personImage} source={require('../assets/committee/ctfkom/ctfkomleder.png')} />
           {Space(10)}
           <Text style={T.leaderTitle}>{lang ? 'CTF leder' : 'CTF leader'}</Text>
           {Space(5)}
           <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>Eskil Refsgaard</Text>
           {Space(5)}
           <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/522483274933731331')}>
-            <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>{<Image style={GS.tiny} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/discord-white.png') : require('../assets/discord-black.png')} />}refsgaard#9067</Text>
+            <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>{<Image style={GS.tiny} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/social/discord-white.png') : require('../assets/social/discord-black.png')} />}refsgaard#9067</Text>
           </TouchableOpacity>
           {Space(25)}
-          <Image style={GS.personImage} source={require('../assets/satkomleder.png')} />
+          <Image style={GS.personImage} source={require('../assets/committee/satkom/satkomleder.png')} />
           {Space(10)}
           <Text style={T.leaderTitle}>{lang ? 'SatKom leder' : 'SatKom leader'}</Text>
           {Space(5)}
           <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>Sebastian Hestsveen</Text>
           {Space(5)}
           <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/119120560931340290')}>
-            <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>{<Image style={GS.tiny} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/discord-white.png') : require('../assets/discord-black.png')} />}stubbe#8694</Text>
+            <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>{<Image style={GS.tiny} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/social/discord-white.png') : require('../assets/social/discord-black.png')} />}stubbe#8694</Text>
           </TouchableOpacity>
           {Space(20)}
         </View>
@@ -478,12 +478,12 @@ export function ThemeSwitch() {
       return (
         <View>
             <TouchableOpacity onPress={() => theme > 2 ? dispatch(resetTheme()) : dispatch(changeTheme())}>
-            {theme == 0 ? <Image style={SS.lightSwitchImage} source={require('../assets/sun.png')} />: null}        
-            {theme == 1 ? <Image style={SS.lightSwitchImage} source={require('../assets/abyss.png')} />: null}
-            {theme == 2 ? <Image style={SS.lightSwitchImage} source={require('../assets/sunset.png')} />: null}
-            {/* {theme == 3 ? <Image style={SS.lightSwitchImage} source={require('../assets/christmas.png')} />: null} */}
-            {/* {theme == 4 ? <Image style={SS.lightSwitchImage} source={require('../assets/easter.png')} />: null} */}
-            {theme == 3 ? <Image style={SS.lightSwitchImage} source={require('../assets/moon.png')} />: null}
+            {theme == 0 ? <Image style={SS.lightSwitchImage} source={require('../assets/themes/sun.png')} />: null}        
+            {theme == 1 ? <Image style={SS.lightSwitchImage} source={require('../assets/themes/abyss.png')} />: null}
+            {theme == 2 ? <Image style={SS.lightSwitchImage} source={require('../assets/themes/sunset.png')} />: null}
+            {/* {theme == 3 ? <Image style={SS.lightSwitchImage} source={require('../assets/themes/christmas.png')} />: null} */}
+            {/* {theme == 4 ? <Image style={SS.lightSwitchImage} source={require('../assets/themes/easter.png')} />: null} */}
+            {theme == 3 ? <Image style={SS.lightSwitchImage} source={require('../assets/themes/moon.png')} />: null}
             </TouchableOpacity>
         </View>
     )

@@ -389,7 +389,7 @@ export default function EventScreen({ navigation }) {                     //  Ex
                       onChangeText={(val) => filterInput(val)}
                   />
                   <TouchableOpacity onPress={() => filterInput(null) + setRenderedArray([...events]) + setClickedCategory([]) + textInputRef.current.clear()}>
-                      <Image style={ES.filterResetIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/reset.png') : require('../assets/reset-black.png')} />
+                      <Image style={ES.filterResetIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/icons/reset.png') : require('../assets/icons/reset-black.png')} />
                   </TouchableOpacity>
               </View>
               
@@ -495,7 +495,7 @@ export default function EventScreen({ navigation }) {                     //  Ex
       {Platform.OS === 'ios' ? <BlurView style={MS.topMenu} intensity={30}/> : <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'TRANSPARENTANDROID')}}/>}
       <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
         <TouchableOpacity>
-          <Image style={MS.tMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/loginText.png') : require('../assets/loginText-black.png')} />
+          <Image style={MS.tMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/logo/loginText.png') : require('../assets/logo/loginText-black.png')} />
         </TouchableOpacity>
         <View style={GS.loginStatus}>{login ? DynamicCircle(10,10,'red',Dimensions.get('window').width/1.4,null,60,null):null}</View>
         {
@@ -509,9 +509,9 @@ export default function EventScreen({ navigation }) {                     //  Ex
           renderedArray.length > 0 || clickedCategory.length > 0 || filter.input != null ? 
           <TouchableOpacity onPress={() => toggleSearchBar()}>
             {search.status ? 
-              <Image style={{...MS.tMenuIcon, right: '-9%', top: '40%', height: 60, width: 140}} source={require('../assets/filter-orange.png')} />
+              <Image style={{...MS.tMenuIcon, right: '-9%', top: '40%', height: 60, width: 140}} source={require('../assets/icons/filter-orange.png')} />
             :
-              <Image style={{...MS.tMenuIcon, right: '-9%', top: '40%', height: 60, width: 140}} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/filter.png') : require('../assets/filter-black.png')} />
+              <Image style={{...MS.tMenuIcon, right: '-9%', top: '40%', height: 60, width: 140}} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/icons/filter.png') : require('../assets/icons/filter-black.png')} />
             }
           </TouchableOpacity>
         :null:null}
@@ -520,15 +520,15 @@ export default function EventScreen({ navigation }) {                     //  Ex
       {Platform.OS === 'ios' ? <BlurView style={MS.bMenu} intensity={30}/> : <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENTANDROID')}}/>}
       <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
         <TouchableOpacity>
-          <Image style={MS.bMenuIcon} source={require('../assets/calendar-orange.png')} />
+          <Image style={MS.bMenuIcon} source={require('../assets/menu/calendar-orange.png')} />
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => listingPage()}>
-          <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/business.png') : require('../assets/business-black.png')} />
+          <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/menu/business.png') : require('../assets/menu/business-black.png')} />
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => menuPage()}>
-          <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/menu.png') : require('../assets/menu-black.png')} />
+          <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/menu/menu.png') : require('../assets/menu/menu-black.png')} />
         </TouchableOpacity>
       </View>     
       
