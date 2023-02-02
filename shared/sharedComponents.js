@@ -40,6 +40,7 @@ import {
 } from 'react-native';
 import { GS } from '../styles/globalStyles';
 import FetchColor from '../styles/fetchTheme';
+import { topic } from './notificationManagement';
 
 /**
  * Card function for styling a div, displays a view containing curved corners with content inside
@@ -126,6 +127,8 @@ export function Notification ({category}) {    //Notification button
     const notification = useSelector( (state) => state.notification ) // Fetches notification state
     const { theme } = useSelector( (state) => state.theme )
     const dispatch = useDispatch()
+
+    topic(category, notification[category]);
 
     return(
         <View>

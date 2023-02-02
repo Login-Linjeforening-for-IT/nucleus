@@ -15,6 +15,10 @@ import {                                                                        
   Alert                                                                                 // Alerts the user
 } from 'react-native';                                                                  // React native
 
+// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 3/4
+// import messaging from '@react-native-firebase/messaging';
+// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 3/4
+
 /**
  * Function for scheduling push notifications
  * @param {string} title    Notification title
@@ -77,3 +81,18 @@ if (Device.isDevice) {                                                          
 
 return token;
 };
+
+/**
+ * Function for subscribing and unsubscribing from notification topics.
+ * Notification categories will be enum values while events will be numbers.
+ * @param {*} topicID Topic identifier (enum category or number eventID)
+ * @param {bool} status  true/false Subscribe or unsubscribe from given topic.
+ */
+export async function topic(topicID, status) {
+  return 0
+    // const granted = await messaging().requestPermission();
+    // if(granted) {
+    //   status ? await messaging().subscribeToTopic(`${topicID}`) : await messaging().unsubscribeFromTopic(`${topicID}`);
+    //   Alert.alert((status ? "Subscribed to ":"Unsubscribed from ") + "topic", topicID)
+    // }
+}

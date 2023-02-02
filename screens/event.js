@@ -26,6 +26,7 @@ import {                                                                  // Rea
 import { useFocusEffect } from '@react-navigation/native';                // useFocusEffect       (do something when the screen is displayed)
 
 // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 3/4
+import { topic } from '../shared/notificationManagement';
 // import messaging from '@react-native-firebase/messaging';
 // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 3/4
 
@@ -79,18 +80,18 @@ export default function EventScreen({ navigation }) {                     //  Ex
   {id: '8', category: 'LOGIN'},
   {id: '9', category: 'ANNET'}
 ]);                                           
-  const categoryAllowed = (props) => {                                    // Function for checking if notifications of given category is allowed
-    if(notification.REMINDERS) {                                          // Only send notification if reminders are enabled
-      const category = props.category                                      
-      switch (category) {
-        case 'TEKKOM':    return notification[category]
-        case 'BEDPRES':   return notification[category]
-        case 'CTF':       return notification[category]
-        case 'SOCIAL':    return notification[category]
-        default:          return notification.EVENTS                      // Returns the state of events if category does not have its own switch in settings
-      }
-    } else return false                                                   // Otherwise return false
-  }
+  // const categoryAllowed = (props) => {                                    // Function for checking if notifications of given category is allowed
+  //   if(notification.REMINDERS) {                                          // Only send notification if reminders are enabled
+  //     const category = props.category                                      
+  //     switch (category) {
+  //       case 'TEKKOM':    return notification[category]
+  //       case 'BEDPRES':   return notification[category]
+  //       case 'CTF':       return notification[category]
+  //       case 'SOCIAL':    return notification[category]
+  //       default:          return notification.EVENTS                      // Returns the state of events if category does not have its own switch in settings
+  //     }
+  //   } else return false                                                   // Otherwise return false
+  // }
 
   async function getData() {                                              //  --- FETCHING DATA FROM API ---
     try {
@@ -449,12 +450,12 @@ export default function EventScreen({ navigation }) {                     //  Ex
                             {EventCardLocation(item, theme, lang)}
                             <View style={ES.view3}>
                               {clickedEvents.some(event => event.eventID === item.eventID) ? 
-                                <TouchableOpacity onPress={() => cancelScheduledNotification(item) + setClickedEvents(clickedEvents.filter((x) => x.eventID !== item.eventID))}>
+                                <TouchableOpacity onPress={() => topic(item.eventID, 0) + cancelScheduledNotification(item) + setClickedEvents(clickedEvents.filter((x) => x.eventID !== item.eventID))}>
                                   <View style = {ES.greenLight}><GreenLight/></View>
                                   <View style = {ES.checkContent}><Check/></View>
                                 </TouchableOpacity>
                               :
-                                <TouchableOpacity onPress={() => (categoryAllowed(item) ? SchedulePushNotification(item,lang):null) + setClickedEvents([...clickedEvents, item])}>
+                                <TouchableOpacity onPress={() => {topic(item.eventID, 1) + SchedulePushNotification(item,lang) + setClickedEvents([...clickedEvents, item])}}>
                                   <View style = {ES.greenLight}><GrayLight/></View>
                                   <View style = {ES.checkContent}><Check/></View>
                                 </TouchableOpacity>
