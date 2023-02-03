@@ -16,7 +16,7 @@ import {                                                                        
 } from 'react-native';                                                                  // React native
 
 // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 3/4
-// import messaging from '@react-native-firebase/messaging';
+import messaging from '@react-native-firebase/messaging';
 // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 3/4
 
 /**
@@ -89,10 +89,9 @@ return token;
  * @param {bool} status  true/false Subscribe or unsubscribe from given topic.
  */
 export async function topic(topicID, status) {
-  return 0
-    // const granted = await messaging().requestPermission();
-    // if(granted) {
-    //   status ? await messaging().subscribeToTopic(`${topicID}`) : await messaging().unsubscribeFromTopic(`${topicID}`);
-    //   Alert.alert((status ? "Subscribed to ":"Unsubscribed from ") + "topic", topicID)
-    // }
+    const granted = await messaging().requestPermission();
+    if(granted) {
+      status ? await messaging().subscribeToTopic(`${topicID}`) : await messaging().unsubscribeFromTopic(`${topicID}`);
+      Alert.alert((status ? "Subscribed to ":"Unsubscribed from ") + "topic", topicID)
+    }
 }

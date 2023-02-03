@@ -24,10 +24,10 @@ import {                                                                  // Rea
   Platform,                                                               // Operating system
 } from 'react-native';                                                    // React native
 import { useFocusEffect } from '@react-navigation/native';                // useFocusEffect       (do something when the screen is displayed)
+import { topic } from '../shared/notificationManagement';
 
 // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 3/4
-import { topic } from '../shared/notificationManagement';
-// import messaging from '@react-native-firebase/messaging';
+import messaging from '@react-native-firebase/messaging';
 // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 3/4
 
 Notifications.setNotificationHandler({
@@ -80,18 +80,6 @@ export default function EventScreen({ navigation }) {                     //  Ex
   {id: '8', category: 'LOGIN'},
   {id: '9', category: 'ANNET'}
 ]);                                           
-  // const categoryAllowed = (props) => {                                    // Function for checking if notifications of given category is allowed
-  //   if(notification.REMINDERS) {                                          // Only send notification if reminders are enabled
-  //     const category = props.category                                      
-  //     switch (category) {
-  //       case 'TEKKOM':    return notification[category]
-  //       case 'BEDPRES':   return notification[category]
-  //       case 'CTF':       return notification[category]
-  //       case 'SOCIAL':    return notification[category]
-  //       default:          return notification.EVENTS                      // Returns the state of events if category does not have its own switch in settings
-  //     }
-  //   } else return false                                                   // Otherwise return false
-  // }
 
   async function getData() {                                              //  --- FETCHING DATA FROM API ---
     try {
@@ -265,13 +253,13 @@ export default function EventScreen({ navigation }) {                     //  Ex
   }
   
   // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 4/4
-  // useEffect(() => {                                                       //  --- FCM FOREGROUND NOTIFICATIONS ---
-  //   const unsubscribe = messaging().onMessage(async remoteMessage=>{
-  //     Alert.alert('A new FCM message arrived!') 
-  //     console.log(JSON.stringify(remoteMessage))
-  //   });
-  //   return unsubscribe;                                                   //  Stops when in the background / quit state
-  //  }, []);
+  useEffect(() => {                                                       //  --- FCM FOREGROUND NOTIFICATIONS ---
+    const unsubscribe = messaging().onMessage(async remoteMessage=>{
+      Alert.alert('A new FCM message arrived!') 
+      console.log(JSON.stringify(remoteMessage))
+    });
+    return unsubscribe;                                                   //  Stops when in the background / quit state
+   }, []);
   // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 4/4
 
   useEffect(() => {                                                       //  --- NOTIFICATION MANAGEMENT ---
