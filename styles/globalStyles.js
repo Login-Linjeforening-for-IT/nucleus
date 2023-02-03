@@ -1,26 +1,26 @@
-import { StyleSheet, Dimensions } from "react-native";  //Stylesheet file
+import { StyleSheet, Dimensions } from "react-native";  // Stylesheet file
 
 export const GS = StyleSheet.create({
   
 //========================= EventScreen =========================
   content: { //Main view of every screen
-    height: Dimensions.get('window').height, // Dimensions.get('window').height/7.5
+    height: Dimensions.get('window').height,            // Dimensions.get('window').height/7.5
   },
-  reportInputContentText: { //reportScreen description text
+  reportInputContentText: {                             // ReportScreen description text
     alignSelf: 'center',
     alignItems: 'center',
     width: '80%',
     height: '90%',
     borderRadius: 40,
   },
-  notificationBack: { //The horizontal card views on notificationScreen
+  notificationBack: {                                   // Horizontal card views on setting notifications
     flexDirection: 'row',
     height: 25,
   },
-  notificationText: { //The text on notificationScreen
+  notificationText: {                                   // Notification card text
     fontSize: 20
   },
-  inputText: {  //reportScreen name and notifier text
+  inputText: {                                          // ReportScreen name and notifier text
     alignSelf: 'center',
     alignItems: 'center',
     width: '80%',

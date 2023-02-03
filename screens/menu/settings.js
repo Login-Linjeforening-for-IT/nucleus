@@ -68,73 +68,58 @@ export default function SettingScreen( { navigation }) {
             </View>
           </Card>
 
+
+          <Card>
+            <View style={GS.notificationBack}>
+              <View style={GS.view}>
+                <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Nye arrangementer': 'New events'}</Text>
+              </View>
+              <Notification category='EVENTS'/>
+            </View>
+          </Card>
+
           <Card>
             <View style={GS.notificationBack}>
               <View style={GS.view}>
                 <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Påminnelser': 'Reminders'}</Text>
               </View>
-              <View style={GS.view2}><Notification category='REMINDERS'/></View>
+              <Notification category='REMINDERS'/>
             </View>
           </Card>
 
           <Card>
             <View style={GS.notificationBack}>
               <View style={GS.view}>
-              <View style={{...ES.row, justifyContent: 'space-between'}}>
-                <Text style={{...GS.notificationText, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? 'Arrangementer ' : 'Events'}</Text>
-                <Text style={{...GS.notificationText, alignSelf: 'center', fontSize: 10, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? 'Kun påminnelser atm ' : 'Only for reminders atm'}</Text>
-                </View>
-                
+                <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Bedpres': 'Company Presentations'}</Text>
               </View>
-              <View style={GS.view2}><Notification category='EVENTS'/></View>
+              <Notification category='BEDPRES'/>
             </View>
           </Card>
 
           <Card>
             <View style={GS.notificationBack}>
               <View style={GS.view}>
-              <View style={{...ES.row, justifyContent: 'space-between'}}>
-                <Text style={{...GS.notificationText, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? 'Bedpres ': 'Company Presentations'}</Text>
-                <Text style={{...GS.notificationText, alignSelf: 'center', fontSize: 10, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? 'Kun påminnelser atm ' : 'reminders atm'}</Text>
-                </View>
+                <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}>TekKom</Text>
               </View>
-              <View style={GS.view2}><Notification category='BEDPRES'/></View>
+              <Notification category='TEKKOM'/>
             </View>
           </Card>
 
           <Card>
             <View style={GS.notificationBack}>
               <View style={GS.view}>
-              <View style={{...ES.row, justifyContent: 'space-between'}}>
-                <Text style={{...GS.notificationText, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>TekKom </Text>
-                <Text style={{...GS.notificationText, alignSelf: 'center', fontSize: 10, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? 'Kun påminnelser atm ' : 'Only for reminders atm'}</Text>
+                <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}>CTF</Text>
               </View>
-              </View>
-              <View style={GS.view2}><Notification category='TEKKOM'/></View>
+              <Notification category='CTF'/>
             </View>
           </Card>
 
           <Card>
             <View style={GS.notificationBack}>
               <View style={GS.view}>
-              <View style={{...ES.row, justifyContent: 'space-between'}}>
-                <Text style={{...GS.notificationText, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>CTF </Text>
-                <Text style={{...GS.notificationText, alignSelf: 'center', fontSize: 10, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? 'Kun påminnelser atm ' : 'Only for reminders atm'}</Text>
+                <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Sosialt':'Social'}</Text>
               </View>
-              </View>
-              <View style={GS.view2}><Notification category='CTF'/></View>
-            </View>
-          </Card>
-
-          <Card>
-            <View style={GS.notificationBack}>
-              <View style={GS.view}>
-              <View style={{...ES.row, justifyContent: 'space-between'}}>
-                <Text style={{...GS.notificationText, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? 'Sosialt ':'Social '}</Text>
-                <Text style={{...GS.notificationText, alignSelf: 'center', fontSize: 10, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? 'Kun påminnelser atm ' : 'Only for reminders atm'}</Text>
-                </View>
-              </View>
-              <View style={GS.view2}><Notification category='SOCIAL'/></View>
+              <Notification category='SOCIAL'/>
             </View>
           </Card>
             

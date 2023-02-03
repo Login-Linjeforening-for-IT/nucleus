@@ -238,7 +238,7 @@ return(
             <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>Sebastian Hestsveen</Text>
             {Space(5)}
             <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/119120560931340290')}>
-              <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>{<Image style={GS.tiny} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/social/discord-white.png') : require('../../assets/social/discord-black.png')} />}stubbe#8694</Text>
+              <Text style={{...T.discord, color: FetchColor(theme, 'DISCORD')}}>{<Image style={GS.tiny} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/social/discord-colored.png') : require('../../assets/social/discord-black.png')} />}stubbe#8694</Text>
             </TouchableOpacity>
             {Space(25)}
           </View>: null}

@@ -1,5 +1,4 @@
 import { StyleSheet } from "react-native";    // Stylesheet file 
-import { Dimensions } from "react-native";       
 
 export const T = StyleSheet.create({          // Declares T - meant for all text styling
   red: {                                      // Red text - used when something is missing or went wrong
@@ -31,7 +30,7 @@ export const T = StyleSheet.create({          // Declares T - meant for all text
     fontSize: 30,                             // Text font size
   },
   text25: {                                   // Text of size 25
-    fontSize: 25,
+    fontSize: 25,                             // Text font size
   },
   centered: {                                 // Centered text of size 30
     alignSelf: 'center',                      // Vertically centers
@@ -92,6 +91,11 @@ export const T = StyleSheet.create({          // Declares T - meant for all text
     left: '17.5%',                            // Moves text 17.5% rightwards
     fontSize: 20,                             // Text font size
   },
+  discord: {                                  // Committee leader discord text
+    left: '16.5%',                            // Moves text 17.5% rightwards
+    fontSize: 20,                             // Text font size
+    textDecorationLine: 'underline'           // Underline
+  },
   boldWithLine: {                             // Bold text with line next to it
     left: 5,                                  // Moves it 5px rightwards
     justifyContent: 'center',                 // Horizontally centers (used together with flexdirection: row)
@@ -125,8 +129,8 @@ export const T = StyleSheet.create({          // Declares T - meant for all text
     alignSelf: 'center',                      // Horizontally centered
   },
   mazemap: {                                  // Mazemap text on SES
-    textDecorationLine: 'underline',
+    textDecorationLine: 'underline',          // Underline
     fontSize: 20,                             // Text font size
-    textAlign: 'flex-end',                       // Right shifted
+    textAlign: 'flex-end',                    // Right shifted
   },
 })

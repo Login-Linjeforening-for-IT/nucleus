@@ -173,11 +173,11 @@ export const ES = StyleSheet.create({         // Declares export ES ( Event Styl
     borderRadius: 10                          // Rounded corners
   },
   mazemapIcon: {                              // Mazemap icon used on SES
-    left: 4,                                 // Shifted to the right side
+    left: 4,                                  // Shifted to the right side
     height: 20,                               // 20px high
     width: 10,                                // 10px wide
   },
-  row: {
-    flexDirection: 'row'                       // When things just need to be horizontally aligned
+  row: {                                      // When all u need is a row
+    flexDirection: 'row'                      // Horizontal direction
   }
 })
