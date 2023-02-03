@@ -5,10 +5,10 @@
     "slug": "Login",
     "version": "1.1.4",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/logo/icon.png",
     "userInterfaceStyle": "dark",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/logo/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#000000"
     },
@@ -20,11 +20,11 @@
       [
         "expo-notifications",
         {
-          "icon": "./assets/loginText.png",
+          "icon": "./assets/logo/loginText.png",
           "color": "#000000",
           "sounds": [
-            "./assets/notificationlogin.wav",
-            "./assets/notificationsound.wav"
+            "./assets/sounds/notificationlogin.wav",
+            "./assets/sounds/notificationsound.wav"
           ]
         }
       ],
@@ -55,7 +55,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptiveIcon.png",
+        "foregroundImage": "./assets/logo/adaptiveIcon.png",
         "backgroundColor": "#000000"
       },
       "package": "com.login.Login",
@@ -63,7 +63,7 @@
       "versionCode": 21
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/logo/favicon.ico"
     },
     "extra": {
       "eas": {
