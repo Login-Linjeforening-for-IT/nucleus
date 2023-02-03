@@ -89,7 +89,7 @@ return token;
  * @param {bool} status  true/false Subscribe or unsubscribe from given topic.
  */
 export async function topic(topicID, status) {
-  return 0
+  return 0;
     // const granted = await messaging().requestPermission();
     // if(granted) {
     //   status ? await messaging().subscribeToTopic(`${topicID}`) : await messaging().unsubscribeFromTopic(`${topicID}`);

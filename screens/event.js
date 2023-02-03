@@ -80,18 +80,6 @@ export default function EventScreen({ navigation }) {                     //  Ex
   {id: '8', category: 'LOGIN'},
   {id: '9', category: 'ANNET'}
 ]);                                           
-  // const categoryAllowed = (props) => {                                    // Function for checking if notifications of given category is allowed
-  //   if(notification.REMINDERS) {                                          // Only send notification if reminders are enabled
-  //     const category = props.category                                      
-  //     switch (category) {
-  //       case 'TEKKOM':    return notification[category]
-  //       case 'BEDPRES':   return notification[category]
-  //       case 'CTF':       return notification[category]
-  //       case 'SOCIAL':    return notification[category]
-  //       default:          return notification.EVENTS                      // Returns the state of events if category does not have its own switch in settings
-  //     }
-  //   } else return false                                                   // Otherwise return false
-  // }
 
   async function getData() {                                              //  --- FETCHING DATA FROM API ---
     try {
