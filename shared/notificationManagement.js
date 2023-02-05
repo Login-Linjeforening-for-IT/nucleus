@@ -88,10 +88,13 @@ return token;
  * @param {*} topicID Topic identifier (enum category or number eventID)
  * @param {bool} status  true/false Subscribe or unsubscribe from given topic.
  */
-export async function topic(topicID, status) {
+export async function topic(topicID, lang, status) {
     const granted = await messaging().requestPermission();
+    const topic = lang + topicID;
     if(granted) {
-      status ? await messaging().subscribeToTopic(`${topicID}`) : await messaging().unsubscribeFromTopic(`${topicID}`);
-      Alert.alert((status ? "Subscribed to ":"Unsubscribed from ") + "topic", topicID)
+      status ? await messaging().subscribeToTopic(`${topic}`) : await messaging().unsubscribeFromTopic(`${topic}`);
+      Alert.alert((status ? "Subscribed to ":"Unsubscribed from ") + "topic", topicID);
+    }else{
+      Alert.alert("Granted status missing.", granted);
     }
 }

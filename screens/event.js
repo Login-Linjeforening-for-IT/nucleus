@@ -1,4 +1,4 @@
-import GreenLight, { GrayLight, Check, MonthNO, MonthEN, DynamicCircle, SmallCheck, fetchEmoji } from '../shared/eventComponents/otherComponents';  // Components used to display event
+import GreenLight, { GrayLight, Check, MonthNO, MonthEN, DynamicCircle, SmallCheck } from '../shared/eventComponents/otherComponents';  // Components used to display event
 import { registerForPushNotificationsAsync, SchedulePushNotification, cancelScheduledNotification } from '../shared/notificationManagement';  // Notification management
 import Card, { CompareDates, CheckBox, CheckedBox, Space, EventCardLocation } from '../shared/sharedComponents';  // Components used to display event
 import CategorySquare from '../shared/eventComponents/categorySquare';    // Left side square on eventcard
@@ -438,12 +438,12 @@ export default function EventScreen({ navigation }) {                     //  Ex
                             {EventCardLocation(item, theme, lang)}
                             <View style={ES.view3}>
                               {clickedEvents.some(event => event.eventID === item.eventID) ? 
-                                <TouchableOpacity onPress={() => topic(item.eventID, 0) + cancelScheduledNotification(item) + setClickedEvents(clickedEvents.filter((x) => x.eventID !== item.eventID))}>
+                                <TouchableOpacity onPress={() => topic(item.eventID, lang, 0) + cancelScheduledNotification(item) + setClickedEvents(clickedEvents.filter((x) => x.eventID !== item.eventID))}>
                                   <View style = {ES.greenLight}><GreenLight/></View>
                                   <View style = {ES.checkContent}><Check/></View>
                                 </TouchableOpacity>
                               :
-                                <TouchableOpacity onPress={() => {topic(item.eventID, 1) + SchedulePushNotification(item,lang) + setClickedEvents([...clickedEvents, item])}}>
+                                <TouchableOpacity onPress={() => {topic(item.eventID,lang, 1) + SchedulePushNotification(item,lang) + setClickedEvents([...clickedEvents, item])}}>
                                   <View style = {ES.greenLight}><GrayLight/></View>
                                   <View style = {ES.checkContent}><Check/></View>
                                 </TouchableOpacity>
