@@ -1,4 +1,4 @@
-import GreenLight, { GrayLight, Check, MonthNO, MonthEN, DynamicCircle, SmallCheck, fetchEmoji } from '../shared/eventComponents/otherComponents';  // Components used to display event
+import GreenLight, { GrayLight, Check, MonthNO, MonthEN, DynamicCircle, SmallCheck } from '../shared/eventComponents/otherComponents';  // Components used to display event
 import { registerForPushNotificationsAsync, SchedulePushNotification, cancelScheduledNotification } from '../shared/notificationManagement';  // Notification management
 import Card, { CompareDates, CheckBox, CheckedBox, Space, EventCardLocation } from '../shared/sharedComponents';  // Components used to display event
 import CategorySquare from '../shared/eventComponents/categorySquare';    // Left side square on eventcard
@@ -24,10 +24,10 @@ import {                                                                  // Rea
   Platform,                                                               // Operating system
 } from 'react-native';                                                    // React native
 import { useFocusEffect } from '@react-navigation/native';                // useFocusEffect       (do something when the screen is displayed)
+import { topic } from '../shared/notificationManagement';
 
 // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 3/4
-import { topic } from '../shared/notificationManagement';
-// import messaging from '@react-native-firebase/messaging';
+import messaging from '@react-native-firebase/messaging';
 // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 3/4
 
 Notifications.setNotificationHandler({
@@ -253,13 +253,13 @@ export default function EventScreen({ navigation }) {                     //  Ex
   }
   
   // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 4/4
-  // useEffect(() => {                                                       //  --- FCM FOREGROUND NOTIFICATIONS ---
-  //   const unsubscribe = messaging().onMessage(async remoteMessage=>{
-  //     Alert.alert('A new FCM message arrived!') 
-  //     console.log(JSON.stringify(remoteMessage))
-  //   });
-  //   return unsubscribe;                                                   //  Stops when in the background / quit state
-  //  }, []);
+  useEffect(() => {                                                       //  --- FCM FOREGROUND NOTIFICATIONS ---
+    const unsubscribe = messaging().onMessage(async remoteMessage=>{
+      Alert.alert('A new FCM message arrived!') 
+      console.log(JSON.stringify(remoteMessage))
+    });
+    return unsubscribe;                                                   //  Stops when in the background / quit state
+   }, []);
   // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 4/4
 
   useEffect(() => {                                                       //  --- NOTIFICATION MANAGEMENT ---
@@ -438,12 +438,12 @@ export default function EventScreen({ navigation }) {                     //  Ex
                             {EventCardLocation(item, theme, lang)}
                             <View style={ES.view3}>
                               {clickedEvents.some(event => event.eventID === item.eventID) ? 
-                                <TouchableOpacity onPress={() => topic(item.eventID, 0) + cancelScheduledNotification(item) + setClickedEvents(clickedEvents.filter((x) => x.eventID !== item.eventID))}>
+                                <TouchableOpacity onPress={() => topic(item.eventID, lang, 0) + cancelScheduledNotification(item) + setClickedEvents(clickedEvents.filter((x) => x.eventID !== item.eventID))}>
                                   <View style = {ES.greenLight}><GreenLight/></View>
                                   <View style = {ES.checkContent}><Check/></View>
                                 </TouchableOpacity>
                               :
-                                <TouchableOpacity onPress={() => {topic(item.eventID, 1) + SchedulePushNotification(item,lang) + setClickedEvents([...clickedEvents, item])}}>
+                                <TouchableOpacity onPress={() => {topic(item.eventID,lang, 1) + SchedulePushNotification(item,lang) + setClickedEvents([...clickedEvents, item])}}>
                                   <View style = {ES.greenLight}><GrayLight/></View>
                                   <View style = {ES.checkContent}><Check/></View>
                                 </TouchableOpacity>

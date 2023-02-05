@@ -125,10 +125,11 @@ export function Kontakt() { //Contact info
 export function Notification ({category}) {    //Notification button
 
     const notification = useSelector( (state) => state.notification ) // Fetches notification state
+    const { lang  } = useSelector( (state) => state.lang  )
     const { theme } = useSelector( (state) => state.theme )
     const dispatch = useDispatch()
 
-    topic(category, notification[category]);
+    topic(category, lang, notification[category]);
 
     return(
         <View>
