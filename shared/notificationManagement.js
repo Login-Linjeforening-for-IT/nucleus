@@ -89,12 +89,12 @@ return token;
  * @param {bool} status  true/false Subscribe or unsubscribe from given topic.
  */
 export async function topic(topicID, lang, status) {
-    const granted = await messaging().requestPermission();
+    return 0; // remove this before pushing to main
     const topic = lang + topicID;
     if(granted) {
       status ? await messaging().subscribeToTopic(`${topic}`) : await messaging().unsubscribeFromTopic(`${topic}`);
-      Alert.alert((status ? "Subscribed to ":"Unsubscribed from ") + "topic", topicID);
+      Alert.alert((status ? "Subscribed to ":"Unsubscribed from ") + `topic: ${topicID}`);
     }else{
-      Alert.alert("Granted status missing.", granted);
+      Alert.alert("Granted status missing.", `${granted}`);
     }
 }
