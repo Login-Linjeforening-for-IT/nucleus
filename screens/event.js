@@ -1,6 +1,6 @@
 import GreenLight, { GrayLight, Check, MonthNO, MonthEN, DynamicCircle, SmallCheck } from '../shared/eventComponents/otherComponents';  // Components used to display event
-import { registerForPushNotificationsAsync, SchedulePushNotification, cancelScheduledNotification } from '../shared/notificationManagement';  // Notification management
-import Card, { CompareDates, CheckBox, CheckedBox, Space, EventCardLocation } from '../shared/sharedComponents';  // Components used to display event
+import { registerForPushNotificationsAsync, SchedulePushNotification, cancelScheduledNotification, notificationSetup } from '../shared/notificationManagement';  // Notification management
+import Card, { CompareDates, CheckBox, CheckedBox, Space, EventCardLocation, Notification } from '../shared/sharedComponents';  // Components used to display event
 import CategorySquare from '../shared/eventComponents/categorySquare';    // Left side square on eventcard
 import AsyncStorage from '@react-native-async-storage/async-storage';     // Localstorage
 import * as Notifications from 'expo-notifications';                      // Local notifications
@@ -9,7 +9,7 @@ import { GS } from '../styles/globalStyles';                              // Glo
 import { ES } from '../styles/eventStyles';                               // Event styles
 import { MS } from '../styles/menuStyles';                                // Menu styles
 import { T } from '../styles/text';                                       // Text styles
-import { useSelector } from 'react-redux';                                // Redux
+import { useSelector, useDispatch } from 'react-redux';                                // Redux
 import { StatusBar } from 'expo-status-bar';                              // Status bar
 import FetchColor from '../styles/fetchTheme';                            // Function to fetch theme color
 import { BlurView } from 'expo-blur';                                     // Blur effect
@@ -26,9 +26,9 @@ import {                                                                  // Rea
 import { useFocusEffect } from '@react-navigation/native';                // useFocusEffect       (do something when the screen is displayed)
 import { topic } from '../shared/notificationManagement';
 
-// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 3/6
+// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 3/7
 // import messaging from '@react-native-firebase/messaging';
-// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 3/6
+// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 3/7
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -58,6 +58,7 @@ export default function EventScreen({ navigation }) {                     //  Ex
   const [lastSave, setLastSave] = useState(null)                          //  Last time API was fetched successfully
   const [filter, setFilter] = useState({input: null});                    //  Filter text input declaration
   const textInputRef = useRef(null);                                      //  Clears text input
+  const dispatch = useDispatch()                                          //  Dispatch to change Redux state
   const [relevantCategories, setRelevantCategories] = useState([]);       //  Relevant categories to filter
   const [search, toggleSearch] = useState({status: 0})                    //  Search bar visibility boolean
   const notification = useSelector( (state) => state.notification )       //  Fetches notification state
@@ -252,7 +253,7 @@ export default function EventScreen({ navigation }) {                     //  Ex
     })();
   }
   
-  // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 4/6
+  // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 4/7
   // useEffect(() => {                                                       //  --- FCM FOREGROUND NOTIFICATIONS ---
   //   const unsubscribe = messaging().onMessage(async remoteMessage=>{
   //     Alert.alert('A new FCM message arrived!') 
@@ -260,7 +261,7 @@ export default function EventScreen({ navigation }) {                     //  Ex
   //   });
   //   return unsubscribe;                                                   //  Stops when in the background / quit state
   //  }, []);
-  // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 4/6
+  // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 4/7
 
   useEffect(() => {                                                       //  --- NOTIFICATION MANAGEMENT ---
     registerForPushNotificationsAsync(lang).then(token => setExpoPushToken(token));
@@ -356,7 +357,11 @@ export default function EventScreen({ navigation }) {                     //  Ex
     else filter.input.length == 0 && clickedCategory.length == 0 ? RenderEvents() : null // Fixes any errors if the user has been searching, but is not doing so now
   }
 
-  if(lastSave == null) LastFetch();
+                                                                          //  --- SETUP CODE ONCE APP IS DOWNLOADED---
+  if(lastSave == null)       LastFetch();                                 //  Creates initial local copy of the events
+  // COMMENT OUT THE BELOW LINE WHEN TESTING IN EXPO 7/7
+  if(!notification["SETUP"]) notificationSetup();                         //  Sets up initial notifications
+  // COMMENT OUT THE ABOVE LINE WHEN TESTING IN EXPO 7/7
 
   return(                                                                 //  --- DISPLAYS THE EVENTSCREEN ---
     <View> 

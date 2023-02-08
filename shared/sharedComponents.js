@@ -123,7 +123,7 @@ export function Kontakt() { //Contact info
  * @returns                 Notification switch as view
  */
 export function Notification ({category}) {    //Notification button
-
+    console.log(category)
     const notification = useSelector( (state) => state.notification ) // Fetches notification state
     const { lang  } = useSelector( (state) => state.lang  )
     const { theme } = useSelector( (state) => state.theme )

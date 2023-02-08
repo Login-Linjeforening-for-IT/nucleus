@@ -14,10 +14,11 @@ import {                                                                        
   Platform,                                                                             // Operating system
   Alert                                                                                 // Alerts the user
 } from 'react-native';                                                                  // React native
+import { useDispatch } from 'react-redux';
 
-// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 5/6
+// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 5/7
 // import messaging from '@react-native-firebase/messaging';
-// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 5/6
+// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 5/7
 
 /**
  * Function for scheduling push notifications
@@ -93,14 +94,31 @@ export async function topic(topicID, lang, status) {
     var topic = lang ? "norwegian"+topicID:"english"+topicID;
     console.log(`Subscribed to topic: ${topic}`);
     return 0; 
-    // COMMENT OUT WHILE TESTING IN EXPO 6/6
+    // COMMENT OUT WHILE TESTING IN EXPO 6/7
     const granted = await messaging().requestPermission();
     var topic = lang ? "norwegian"+topicID:"english"+topicID;
     if(granted) {
       status ? await messaging().subscribeToTopic(`${topic}`) : await messaging().unsubscribeFromTopic(`${topic}`);
       Alert.alert((status ? "Subscribed to ":"Unsubscribed from ") + `topic: ${topicID}`);
-    }else{
-      Alert.alert("Missing notification permissions.", `${granted}`);
-    }
-    // COMMENT OUT WHILE TESTING IN EXPO 6/6
+    } else Alert.alert("Missing notification permissions.", `${granted}`);
+    // COMMENT OUT WHILE TESTING IN EXPO 6/7
+}
+
+/**
+ * Runs when the app is first opened to setup initial notifications
+ */
+export async function notificationSetup() {
+  const notification = useSelector( (state) => state.notification )       //  Fetches notification state
+  const dispatch = useDispatch()
+  const granted = await messaging().requestPermission();
+  if   (granted) {
+    await messaging().subscribeToTopic("norwegianIMPORTANT");
+    await messaging().subscribeToTopic("norwegianREMINDERS");
+    await messaging().subscribeToTopic("norwegianEVENTS");
+    await messaging().subscribeToTopic("norwegianBEDPRES");
+    await messaging().subscribeToTopic("norwegianTEKKOM");
+    await messaging().subscribeToTopic("norwegianCTF");
+    await messaging().subscribeToTopic("norwegianSOCIAL").then(dispatch(changeNotificationState("SETUP")));
+    Alert.alert("Setup finished", `${notification["SETUP"]}`);
+  } 
 }
