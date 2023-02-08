@@ -33,8 +33,8 @@ function Navigator() {                                                          
         return () => clearInterval(interval);
     }, [day])
     // REMOVE THIS BOX AFTER LAUNCH PARTY
-    // if(true) {
-    if (!(year == 2023 && (month == 1 && day > 18 || month == 2 && day < 11))) { // REMOVE IF ELSE AFTER LAUNCH PARTY
+    if(true) {
+    // if (!(year == 2023 && (month == 1 && day > 18 || month == 2 && day < 11))) { // REMOVE IF ELSE AFTER LAUNCH PARTY
         return(
             <NavigationContainer>                                                   
                 <Tab.Navigator screenOptions={{ headerShown: false}}>  
