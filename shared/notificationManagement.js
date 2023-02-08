@@ -15,9 +15,9 @@ import {                                                                        
   Alert                                                                                 // Alerts the user
 } from 'react-native';                                                                  // React native
 
-// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 3/4
+// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 5/6
 // import messaging from '@react-native-firebase/messaging';
-// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 3/4
+// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 5/6
 
 /**
  * Function for scheduling push notifications
@@ -89,7 +89,11 @@ return token;
  * @param {bool} status  true/false Subscribe or unsubscribe from given topic.
  */
 export async function topic(topicID, lang, status) {
-    return 0; // remove before development
+    // COMMENT OUT THE THREE LINES BELOW WHEN PUBLISHING
+    var topic = lang ? "norwegian"+topicID:"english"+topicID;
+    console.log(`Subscribed to topic: ${topic}`);
+    return 0; 
+    // COMMENT OUT WHILE TESTING IN EXPO 6/6
     const granted = await messaging().requestPermission();
     var topic = lang ? "norwegian"+topicID:"english"+topicID;
     if(granted) {
@@ -98,4 +102,5 @@ export async function topic(topicID, lang, status) {
     }else{
       Alert.alert("Missing notification permissions.", `${granted}`);
     }
+    // COMMENT OUT WHILE TESTING IN EXPO 6/6
 }
