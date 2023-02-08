@@ -3,6 +3,7 @@ import { View, Text } from 'react-native';
 import { T } from '../../styles/text'
 import { useSelector } from 'react-redux';
 import FetchColor from '../../styles/fetchTheme';
+import { NotificationDelay } from './notificationDelay';
 
 /**
  * Function for displaying the event status, how long till it starts, how long its been ongoing, or how long till it ends
@@ -12,6 +13,7 @@ import FetchColor from '../../styles/fetchTheme';
  */
 export default function EventTime(startTime, endTime) { // startTime
     
+    console.log(TimeTillEvent(startTime));
     const { lang  } = useSelector( (state) => state.lang  )
     const { theme } = useSelector( (state) => state.theme )
 
@@ -275,3 +277,44 @@ export function endsSoon(endTime) {     //Bool for if we are more than half way 
             }else{return false}}
     }else{return false}
 }
+
+/**
+ * Seconds till event from now to startTime
+ * @param {startTime} startTime
+ * @returns {string} Countdown (yy-mm-dd-hh-mm-ss)
+ */
+export function TimeTillEvent(s) {
+    const [timer, setTimer] = useState(NotificationDelay(s));
+    useEffect(() => {
+      const interval = setInterval(() => {                                          
+        setTimer(NotificationDelay(s));
+      }, 1000);
+      return () => clearInterval(interval);
+    }, [timer]);
+    var days = Math.floor(timer/86400) == 0 ? '':Math.floor(timer/86400);
+    var years = Math.floor(days/365) == 0 ? '':Math.floor(days/365);
+    var months = Math.floor((days%365)/28) == 0 ? '':Math.floor((days%365)/28);
+    
+    if(days < 29) {
+        var days = Math.floor(timer/86400) == 0 ? '':Math.floor(timer/86400);
+        var hour = 1 + Math.floor((timer%86400)/3600) == 0 ? '':1 + Math.floor((timer%86400)/3600)
+        var minutes = Math.floor(((timer%86400)%3600)/60) == 0 ? '':Math.floor(((timer%86400)%3600)/60)
+        var seconds = ((timer%86400)%3600)%60 == 0 ? '':((timer%86400)%3600)%60
+
+        if (days < 10) days = `0${days}`;
+        if (hour < 10) hour = `0${hour}`;
+        if (minutes < 10) minutes = `0${minutes}`;
+        if (seconds < 10) seconds = `0${seconds}`;
+
+        var countdown = `00-00-${days}-${hour}-${minutes}-${seconds}`
+    } else {
+        if (years < 10) years = `0${years}`;
+        if (months < 10) months = `0${months}`;
+        if (days < 10) days = `0${days}`;
+        var countdown = `${years}-${months}-${days}-00-00-00`;
+    }
+    return countdown;
+}
+
+// MULIG DEN KAN VÆRE ETT OBJEKT
+// KAN DA LAGRE ÅR, MÅNEDER, DAGER, TIMER, MINUTTER, SEKUNDER SOM PROPERTIES
