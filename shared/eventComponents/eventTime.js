@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { View, Text } from 'react-native';
 import { T } from '../../styles/text'
 import { useSelector } from 'react-redux';
 import FetchColor from '../../styles/fetchTheme';
+import { NotificationDelay } from './notificationDelay';
 
 /**
  * Function for displaying the event status, how long till it starts, how long its been ongoing, or how long till it ends
@@ -34,7 +35,7 @@ export default function EventTime(startTime, endTime) { // startTime
         const endHour     = parseInt((endTime)[11] + (endTime)[12])                                       //  hour
         const endMinute   = parseInt((endTime)[14] + (endTime)[15])                                       //  minute
 
-        const startMinutesCalculated = startMinute-minute                                       //  Amount of minutes remaining if less than one hour
+        const startMinutesCalculated = 60-startMinute-minute                                       //  Amount of minutes remaining if less than one hour
         const startMinuteMore = 60-minute                                                       //  Minutes remaining till event if more than one hour
         const nextHour = 59-startMinutesCalculated 
         const nextMonth = (lastDayOfMonth(month+1)-day)+startDay                                  //  Days left if event is next month
@@ -275,3 +276,44 @@ export function endsSoon(endTime) {     //Bool for if we are more than half way 
             }else{return false}}
     }else{return false}
 }
+
+/**
+ * Seconds till event from now to startTime - WIP
+ * @param {startTime} startTime
+ * @returns {string} Countdown (yy-mm-dd-hh-mm-ss)
+ */
+export function TimeTillEvent(s) {
+    const [timer, setTimer] = useState(NotificationDelay(s));
+    useEffect(() => {
+      const interval = setInterval(() => {                                          
+        setTimer(NotificationDelay(s));
+      }, 1000);
+      return () => clearInterval(interval);
+    }, [timer]);
+    var days = Math.floor(timer/86400) == 0 ? '':Math.floor(timer/86400);
+    var years = Math.floor(days/365) == 0 ? '':Math.floor(days/365);
+    var months = Math.floor((days%365)/28) == 0 ? '':Math.floor((days%365)/28);
+    
+    if(days < 29) {
+        var days = Math.floor(timer/86400) == 0 ? '':Math.floor(timer/86400);
+        var hour = 1 + Math.floor((timer%86400)/3600) == 0 ? '':1 + Math.floor((timer%86400)/3600)
+        var minutes = Math.floor(((timer%86400)%3600)/60) == 0 ? '':Math.floor(((timer%86400)%3600)/60)
+        var seconds = ((timer%86400)%3600)%60 == 0 ? '':((timer%86400)%3600)%60
+
+        if (days < 10) days = `0${days}`;
+        if (hour < 10) hour = `0${hour}`;
+        if (minutes < 10) minutes = `0${minutes}`;
+        if (seconds < 10) seconds = `0${seconds}`;
+
+        var countdown = `00-00-${days}-${hour}-${minutes}-${seconds}`
+    } else {
+        if (years < 10) years = `0${years}`;
+        if (months < 10) months = `0${months}`;
+        if (days < 10) days = `0${days}`;
+        var countdown = `${years}-${months}-${days}-00-00-00`;
+    }
+    return countdown;
+}
+
+// MAY BE AN OBJECT?
+// CAN THEN STORE YEARS, MONTHS, DAYS, HOURS, MINUTES AND SECONDS AS PROPERTIES.

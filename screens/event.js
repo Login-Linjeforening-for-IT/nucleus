@@ -1,6 +1,6 @@
 import GreenLight, { GrayLight, Check, MonthNO, MonthEN, DynamicCircle, SmallCheck } from '../shared/eventComponents/otherComponents';  // Components used to display event
 import { registerForPushNotificationsAsync, SchedulePushNotification, cancelScheduledNotification, notificationSetup } from '../shared/notificationManagement';  // Notification management
-import Card, { CompareDates, CheckBox, CheckedBox, Space, EventCardLocation, Notification } from '../shared/sharedComponents';  // Components used to display event
+import Card, { CompareDates, CheckBox, CheckedBox, Space, EventCardLocation, LastFetch } from '../shared/sharedComponents';  // Components used to display event
 import CategorySquare from '../shared/eventComponents/categorySquare';    // Left side square on eventcard
 import AsyncStorage from '@react-native-async-storage/async-storage';     // Localstorage
 import * as Notifications from 'expo-notifications';                      // Local notifications
@@ -26,9 +26,9 @@ import {                                                                  // Rea
 import { useFocusEffect } from '@react-navigation/native';                // useFocusEffect       (do something when the screen is displayed)
 import { topic } from '../shared/notificationManagement';
 
-// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 3/7
-import messaging from '@react-native-firebase/messaging';
-// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 3/7
+// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 3/8
+// import messaging from '@react-native-firebase/messaging';
+// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 3/8
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -89,7 +89,7 @@ export default function EventScreen({ navigation }) {                     //  Ex
       .then(response=>response.json())                                    // Formatting the response
       .then(data=>setEvents(data))                                        // Setting the response
       .then(setRenderedArray([...events]))                                // Updates the renderedarray to equal cache
-      .then(() => LastFetch());                                           // Updates last fetch displayed on the screen
+      .then(async() => setLastSave(await LastFetch()));                              // Updates last fetch displayed on the screen
       if(events.length > 0) await AsyncStorage.setItem('cachedEvents', JSON.stringify(events))  // Setting the cache
     } catch (e) {                                                         // Catches any errors (missing wifi)
       (async() => {                                                       // Immediately invoked function expression (IIFE)
@@ -99,27 +99,6 @@ export default function EventScreen({ navigation }) {                     //  Ex
         } catch (e) {console.warn('Failed to fetch cache: ' + e)}         // If cache was not found tell the user cache wasnt found (custom notification needs to go here)
       })    
     }
-  }
-
-  async function LastFetch() {                                            //  --- RETURNS WHEN EVENTS WERE FETCHED FROM STORAGE ---
-    var time = await AsyncStorage.getItem('lastFetch');
-
-    if(time){
-      var year   = parseInt((time)[0] + (time)[1] + (time)[2] + (time)[3])//  year
-      var month  = parseInt((time)[5] + (time)[6])                        //  month
-      var day    = parseInt((time)[8] + (time)[9])                        //  day
-      var hour   = parseInt((time)[11] + (time)[12])                      //  hour
-      var minute = parseInt((time)[14] + (time)[15])                      //  minute
-      
-      if(month < 10) month = '0' + month                                  // Checking and fixing missing 0
-      if(day < 10) day = '0' + day                                        // Checking and fixing missing 0
-      if(hour < 10) hour = '0' + hour                                     // Checking and fixing missing 0
-      if(minute < 10) minute = '0' + minute                               // Checking and fixing missing 0
-
-      const CleanedTime = hour + ':' + minute + ', ' + day + '/' + month + ', ' + year;
-
-      setLastSave(CleanedTime);
-    } 
   }
 
   const toggleSearchBar = () => {                                         //  --- SEARCH BAR VISIBILITY ---
@@ -253,15 +232,15 @@ export default function EventScreen({ navigation }) {                     //  Ex
     })();
   }
   
-  // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 4/7
-  useEffect(() => {                                                       //  --- FCM FOREGROUND NOTIFICATIONS ---
-    const unsubscribe = messaging().onMessage(async remoteMessage=>{
-      Alert.alert('A new FCM message arrived!') 
-      console.log(JSON.stringify(remoteMessage))
-    });
-    return unsubscribe;                                                   //  Stops when in the background / quit state
-   }, []);
-  // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 4/7
+  // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 4/8
+  // useEffect(() => {                                                       //  --- FCM FOREGROUND NOTIFICATIONS ---
+  //   const unsubscribe = messaging().onMessage(async remoteMessage=>{
+  //     Alert.alert('A new FCM message arrived!') 
+  //     console.log(JSON.stringify(remoteMessage))
+  //   });
+  //   return unsubscribe;                                                   //  Stops when in the background / quit state
+  //  }, []);
+  // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 4/8
 
   useEffect(() => {                                                       //  --- NOTIFICATION MANAGEMENT ---
     registerForPushNotificationsAsync(lang).then(token => setExpoPushToken(token));
@@ -358,10 +337,10 @@ export default function EventScreen({ navigation }) {                     //  Ex
   }
 
                                                                           //  --- SETUP CODE ONCE APP IS DOWNLOADED---
-  if(lastSave == null)       LastFetch();                                 //  Creates initial local copy of the events
-  // COMMENT OUT THE BELOW LINE WHEN TESTING IN EXPO 7/7
+  if(lastSave == null) (async() => {setLastSave(await LastFetch())})()    //  Displays when the API was last fetched successfully
+  // COMMENT OUT THE BELOW LINE WHEN TESTING IN EXPO 7/8
   if(!notification["SETUP"]) notificationSetup();                         //  Sets up initial notifications
-  // COMMENT OUT THE ABOVE LINE WHEN TESTING IN EXPO 7/7
+  // COMMENT OUT THE ABOVE LINE WHEN TESTING IN EXPO 7/8
 
   return(                                                                 //  --- DISPLAYS THE EVENTSCREEN ---
     <View> 

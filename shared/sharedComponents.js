@@ -41,6 +41,7 @@ import {
 import { GS } from '../styles/globalStyles';
 import FetchColor from '../styles/fetchTheme';
 import { topic } from './notificationManagement';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 /**
  * Card function for styling a div, displays a view containing curved corners with content inside
@@ -119,11 +120,11 @@ export function Kontakt() { //Contact info
 
 /**
  * Function for displaying a notification switch
- * @param {*} category      Category the switch should control
+ * @param {string} category      Category the switch should control
+ * @param {boolean} langChange    True if on the notification settings panel
  * @returns                 Notification switch as view
  */
 export function Notification ({category}) {    //Notification button
-    console.log(category)
     const notification = useSelector( (state) => state.notification ) // Fetches notification state
     const { lang  } = useSelector( (state) => state.lang  )
     const { theme } = useSelector( (state) => state.theme )
@@ -152,7 +153,9 @@ export function Language() {    //Choose the language
     const { lang  } = useSelector((state) => state.lang  )
     const { theme } = useSelector((state) => state.theme )
     const dispatch = useDispatch()
-      
+
+    topic("langChange", lang);  // Sets up notifications to follow language
+
     return(
         <View>
             <TouchableOpacity onPress={() =>  dispatch(changeLang()) }>
@@ -510,3 +513,28 @@ export function EventCardLocation(item, theme, lang) {
         </View>
     )
 }
+
+/**
+ * Function for checking when the API was last fetched successfully.
+ * @returns String
+ */
+export async function LastFetch() {                                            //  --- RETURNS WHEN EVENTS WERE FETCHED FROM STORAGE ---
+    var time = await AsyncStorage.getItem('lastFetch');
+
+    if(time){
+      var year   = parseInt((time)[0] + (time)[1] + (time)[2] + (time)[3])//  year
+      var month  = parseInt((time)[5] + (time)[6])                        //  month
+      var day    = parseInt((time)[8] + (time)[9])                        //  day
+      var hour   = parseInt((time)[11] + (time)[12])                      //  hour
+      var minute = parseInt((time)[14] + (time)[15])                      //  minute
+      
+      if(month < 10) month = '0' + month                                  // Checking and fixing missing 0
+      if(day < 10) day = '0' + day                                        // Checking and fixing missing 0
+      if(hour < 10) hour = '0' + hour                                     // Checking and fixing missing 0
+      if(minute < 10) minute = '0' + minute                               // Checking and fixing missing 0
+
+      const CleanedTime = hour + ':' + minute + ', ' + day + '/' + month + ', ' + year;
+
+      return CleanedTime;
+    } 
+  }

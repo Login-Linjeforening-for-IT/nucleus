@@ -16,9 +16,9 @@ import {                                                                        
 } from 'react-native';                                                                  // React native
 import { useDispatch } from 'react-redux';
 
-// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 5/7
-import messaging from '@react-native-firebase/messaging';
-// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 5/7
+// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 5/8
+// import messaging from '@react-native-firebase/messaging';
+// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 5/8
 
 /**
  * Function for scheduling push notifications
@@ -84,31 +84,51 @@ return token;
 };
 
 /**
- * Function for subscribing and unsubscribing from notification topics.
- * Notification categories will be enum values while events will be numbers.
- * @param {*} topicID Topic identifier (enum category or number eventID)
- * @param {bool} status  true/false Subscribe or unsubscribe from given topic.
+ * **Function for subscribing and unsubscribing from notification topics**
+ * 
+ * When changing language it will setup notifications to follow language.
+ * 
+ * @param {string} topicID Topic identifier - "langChange" passed when changing language
+ * @param {boolean} lang Language, 1 for norwegian, 0 for english
+ * @param {boolean} status  true/false Subscribe or unsubscribe from given topic.
  */
 export async function topic(topicID, lang, status) {
-    // COMMENT OUT THE THREE LINES BELOW WHEN PUBLISHING
-    // var topic = lang ? "norwegian"+topicID:"english"+topicID;
-    // console.log(`Subscribed to topic: ${topic}`);
-    // return 0; 
-    // COMMENT OUT WHILE TESTING IN EXPO 6/7
+    return null; // For testing in Expo
+    // COMMENT OUT WHILE TESTING IN EXPO 6/8 - COMMENT IN THE ABOVE LINE INSTEAD
     const granted = await messaging().requestPermission();
     var topic = lang ? "norwegian"+topicID:"english"+topicID;
+
     if(granted) {
-      status ? await messaging().subscribeToTopic(`${topic}`) : await messaging().unsubscribeFromTopic(`${topic}`);
-      Alert.alert((status ? "Subscribed to ":"Unsubscribed from ") + `topic: ${topicID}`);
-    } else Alert.alert("Missing notification permissions.", `${granted}`);
-    // COMMENT OUT WHILE TESTING IN EXPO 6/7
+      if(topicID == "langChange") {
+        if(lang) {
+          await messaging().unsubscribeFromTopic("englishIMPORTANT");
+          await messaging().unsubscribeFromTopic("englishREMINDERS");
+          await messaging().unsubscribeFromTopic("englishEVENTS");
+          await messaging().unsubscribeFromTopic("englishBEDPRES");
+          await messaging().unsubscribeFromTopic("englishTEKKOM");
+          await messaging().unsubscribeFromTopic("englishCTF");
+          await messaging().unsubscribeFromTopic("englishSOCIAL");
+          return null;
+        }else{
+          await messaging().unsubscribeFromTopic("norwegianIMPORTANT");
+          await messaging().unsubscribeFromTopic("norwegianREMINDERS");
+          await messaging().unsubscribeFromTopic("norwegianEVENTS");
+          await messaging().unsubscribeFromTopic("norwegianBEDPRES");
+          await messaging().unsubscribeFromTopic("norwegianTEKKOM");
+          await messaging().unsubscribeFromTopic("norwegianCTF");
+          await messaging().unsubscribeFromTopic("norwegianSOCIAL");
+          return null;
+        }
+      } else status ? await messaging().subscribeToTopic(`${topic}`) : await messaging().unsubscribeFromTopic(`${topic}`);
+    }
 }
 
 /**
  * Runs when the app is first opened to setup initial notifications
  */
 export async function notificationSetup() {
-  const notification = useSelector( (state) => state.notification )       //  Fetches notification state
+  return null; // For testing in Expo
+  // COMMENT OUT WHILE TESTING IN EXPO 6/8 - COMMENT IN THE ABOVE LINE INSTEAD
   const dispatch = useDispatch()
   const granted = await messaging().requestPermission();
   if   (granted) {
@@ -119,6 +139,5 @@ export async function notificationSetup() {
     await messaging().subscribeToTopic("norwegianTEKKOM");
     await messaging().subscribeToTopic("norwegianCTF");
     await messaging().subscribeToTopic("norwegianSOCIAL").then(dispatch(changeNotificationState("SETUP")));
-    Alert.alert("Setup finished", `${notification["SETUP"]}`);
   } 
 }
