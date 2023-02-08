@@ -17,7 +17,7 @@ import {                                                                        
 import { useDispatch } from 'react-redux';
 
 // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 5/7
-// import messaging from '@react-native-firebase/messaging';
+import messaging from '@react-native-firebase/messaging';
 // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 5/7
 
 /**
@@ -91,9 +91,9 @@ return token;
  */
 export async function topic(topicID, lang, status) {
     // COMMENT OUT THE THREE LINES BELOW WHEN PUBLISHING
-    var topic = lang ? "norwegian"+topicID:"english"+topicID;
-    console.log(`Subscribed to topic: ${topic}`);
-    return 0; 
+    // var topic = lang ? "norwegian"+topicID:"english"+topicID;
+    // console.log(`Subscribed to topic: ${topic}`);
+    // return 0; 
     // COMMENT OUT WHILE TESTING IN EXPO 6/7
     const granted = await messaging().requestPermission();
     var topic = lang ? "norwegian"+topicID:"english"+topicID;

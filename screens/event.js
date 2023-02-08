@@ -27,7 +27,7 @@ import { useFocusEffect } from '@react-navigation/native';                // use
 import { topic } from '../shared/notificationManagement';
 
 // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 3/7
-// import messaging from '@react-native-firebase/messaging';
+import messaging from '@react-native-firebase/messaging';
 // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 3/7
 
 Notifications.setNotificationHandler({
@@ -254,13 +254,13 @@ export default function EventScreen({ navigation }) {                     //  Ex
   }
   
   // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 4/7
-  // useEffect(() => {                                                       //  --- FCM FOREGROUND NOTIFICATIONS ---
-  //   const unsubscribe = messaging().onMessage(async remoteMessage=>{
-  //     Alert.alert('A new FCM message arrived!') 
-  //     console.log(JSON.stringify(remoteMessage))
-  //   });
-  //   return unsubscribe;                                                   //  Stops when in the background / quit state
-  //  }, []);
+  useEffect(() => {                                                       //  --- FCM FOREGROUND NOTIFICATIONS ---
+    const unsubscribe = messaging().onMessage(async remoteMessage=>{
+      Alert.alert('A new FCM message arrived!') 
+      console.log(JSON.stringify(remoteMessage))
+    });
+    return unsubscribe;                                                   //  Stops when in the background / quit state
+   }, []);
   // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 4/7
 
   useEffect(() => {                                                       //  --- NOTIFICATION MANAGEMENT ---
@@ -360,7 +360,7 @@ export default function EventScreen({ navigation }) {                     //  Ex
                                                                           //  --- SETUP CODE ONCE APP IS DOWNLOADED---
   if(lastSave == null)       LastFetch();                                 //  Creates initial local copy of the events
   // COMMENT OUT THE BELOW LINE WHEN TESTING IN EXPO 7/7
-  // if(!notification["SETUP"]) notificationSetup();                         //  Sets up initial notifications
+  if(!notification["SETUP"]) notificationSetup();                         //  Sets up initial notifications
   // COMMENT OUT THE ABOVE LINE WHEN TESTING IN EXPO 7/7
 
   return(                                                                 //  --- DISPLAYS THE EVENTSCREEN ---
