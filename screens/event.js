@@ -360,7 +360,7 @@ export default function EventScreen({ navigation }) {                     //  Ex
                                                                           //  --- SETUP CODE ONCE APP IS DOWNLOADED---
   if(lastSave == null)       LastFetch();                                 //  Creates initial local copy of the events
   // COMMENT OUT THE BELOW LINE WHEN TESTING IN EXPO 7/7
-  if(!notification["SETUP"]) notificationSetup();                         //  Sets up initial notifications
+  // if(!notification["SETUP"]) notificationSetup();                         //  Sets up initial notifications
   // COMMENT OUT THE ABOVE LINE WHEN TESTING IN EXPO 7/7
 
   return(                                                                 //  --- DISPLAYS THE EVENTSCREEN ---
