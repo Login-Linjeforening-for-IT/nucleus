@@ -4,6 +4,7 @@ import { T } from '../../styles/text'
 import { A } from '@expo/html-elements'; //Doesnt work in the commented lines below
 import { useSelector } from 'react-redux';
 import FetchColor from '../../styles/fetchTheme';
+import 
 
 /**
  * Removes HTML formatting from a string, for example unicodes etc
@@ -38,10 +39,19 @@ export default function CleanDescription(string) {
         const removeHTMLreferences = addSpace.replace(/&#\d+;/g, '.');
         const removeLaquo = removeHTMLreferences.replace(/&laquo;|&raquo;/g, '"');
         const removeExcessSpace = removeLaquo.replace(/\s+\./g, '!');
-        const missingExpiretime = removeExcessSpace.replace(/(^|\n)(?=.*Påmelding)(?!.*frist).*(\n|$)|  /g, '')
+        const missingExpiretime = removeExcessSpace.replace(/(^|\n)(?=.*Påmelding)(?!.*frist).*(\n|$)|  /g, '');
         const removeLeadingSpace = missingExpiretime.replace(/^[ \t]+|[ \t]+$/gm, '')
-        const removeSpace = removeLeadingSpace.trimEnd()
-        return(<View><Text style={{...T.paragraph, color: FetchColor(theme, 'TEXTCOLOR')}}>{removeSpace}</Text></View>)
+        const removeSpace = removeLeadingSpace.trimEnd();
+
+        if(styleStart && styleEnd) return(<View><Text dangerouslySetInnerHTML={{}} style={{...T.paragraph, color: FetchColor(theme, 'TEXTCOLOR')}}></Text></View>)
+        return(
+        <View>
+            {styleStart && styleEnd ?
+                <Text
+                 dangerouslySetInnerHTML={{ __html: htmlString }}
+            }
+            <Text style={{...T.paragraph, color: FetchColor(theme, 'TEXTCOLOR')}}>{removeSpace}</Text>
+            </View>)
     } else {
         return(<View><Text style={T.red}>{lang ? 'Feil ved henting av beskrivelse' : 'Error fetching description'}</Text></View>)
     }
@@ -49,9 +59,19 @@ export default function CleanDescription(string) {
 
 export function FetchJoinLink(string) {
     if(string != undefined) {
-        let linkStart = string.lastIndexOf('https://forms')
-        let linkEnd = string.lastIndexOf("</a>");
-        let link = string.slice(linkStart, linkEnd)
+        let formStart = string.lastIndexOf('https://forms');
+        let formEnd = string.lastIndexOf("</a>");
+
+        let tikkioStart = string.lastIndexOf('https://tikkio');
+        let tikkioEnd = string.lastIndexOf('</a>');
+
+        let netStart = string.lastIndexOf('https://nettskjema.no');
+        let netEnd = string.lastIndexOf('</a>')
+
+        if(formStart && formEnd) var link = string.slice(linkStart, linkEnd);
+        if(tikkioStart && tikkioEnd) var link = string.slice(tikkioStart, tikkioEnd);
+        if(netStart && netEnd) var link = string.slice(netStart, netEnd);
+
         return link.trim()
     }else return null
 }
