@@ -47,6 +47,7 @@ export const T = StyleSheet.create({          // Declares T - meant for all text
   orangeCentered15: {                         // Orange centered text of size 15
     alignSelf: 'center',                      // Vertically centers
     fontSize: 15,                             // Text font size
+    textDecorationLine: 'underline'           // Underline
   },
   centered20: {                               // Centered text of size 20
     alignSelf: 'center',                      // Vertically centers
@@ -131,6 +132,5 @@ export const T = StyleSheet.create({          // Declares T - meant for all text
   mazemap: {                                  // Mazemap text on SES
     textDecorationLine: 'underline',          // Underline
     fontSize: 20,                             // Text font size
-    textAlign: 'flex-end',                    // Right shifted
   },
 })

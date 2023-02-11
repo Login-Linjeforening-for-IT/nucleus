@@ -182,7 +182,7 @@ return(
           <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>Sofie Hagen</Text>
           {Space(5)}
           <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/877183922021216256')}>
-            <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>{<Image style={GS.tiny} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/social/discord-white.png') : require('../../assets/social/discord-black.png')} />}sofiee#9763</Text>
+            <Text style={{...T.discord, color: FetchColor(theme, 'DISCORD')}}>{<Image style={GS.tiny} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/social/discord-colored.png') : require('../../assets/social/discord-black.png')} />}sofiee#9763</Text>
           </TouchableOpacity>
           {Space(25)}
         </View>: null}
@@ -196,7 +196,7 @@ return(
           <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>Simon Edna</Text>
           {Space(5)}
           <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/298525088914079745')}>
-            <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>{<Image style={GS.tiny} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/social/discord-white.png') : require('../../assets/social/discord-black.png')} />}Sim#3909</Text>
+            <Text style={{...T.discord, color: FetchColor(theme, 'DISCORD')}}>{<Image style={GS.tiny} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/social/discord-colored.png') : require('../../assets/social/discord-black.png')} />}Sim#3909</Text>
           </TouchableOpacity>
           {Space(25)}
         </View>: null}
@@ -210,7 +210,7 @@ return(
             <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>Kristina Kataki</Text>
             {Space(5)}
             <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/877108421772582962')}>
-              <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>{<Image style={GS.tiny} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/social/discord-white.png') : require('../../assets/social/discord-black.png')} />}Kataki#7254</Text>
+              <Text style={{...T.discord, color: FetchColor(theme, 'DISCORD')}}>{<Image style={GS.tiny} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/social/discord-colored.png') : require('../../assets/social/discord-black.png')} />}Kataki#7254</Text>
             </TouchableOpacity>
             {Space(25)}
           </View>: null}
@@ -224,7 +224,7 @@ return(
             <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>Eskil Refsgaard</Text>
             {Space(5)}
             <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/522483274933731331')}>
-              <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>{<Image style={GS.tiny} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/social/discord-white.png') : require('../../assets/social/discord-black.png')} />}refsgaard#9067</Text>
+              <Text style={{...T.discord, color: FetchColor(theme, 'DISCORD')}}>{<Image style={GS.tiny} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/social/discord-colored.png') : require('../../assets/social/discord-black.png')} />}refsgaard#9067</Text>
           </TouchableOpacity>
             {Space(25)}
           </View>: null}
