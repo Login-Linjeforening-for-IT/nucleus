@@ -66,7 +66,27 @@ export default function SpecificEventScreen({ route, navigation}) {
       await AsyncStorage.setItem('clickedEvents', JSON.stringify([item]))
     }
   }
- 
+
+  function handleLink(mazeref, street, organizer) {
+    if (mazeref) {
+        Linking.openURL(`https://use.mazemap.com/#v=1&campusid=55&sharepoitype=poi&sharepoi=${mazeref}`).catch(() => {
+            Alert.alert('Mazemap kunne ikke åpnes', `Send en mail til kontakt@login.no dersom problemet vedvarer. Feilkode: M${mazeref}`)
+        })
+        return;
+    };
+    if(street == 'Orgkollektivet') {
+      Linking.openURL('https://link.mazemap.com/tBlfH1oY').catch(() =>{
+          Alert.alert('Mazemap kunne ikke åpnes', 'Send en mail til kontakt@login.no dersom problemet vedvarer. Feilkode: wZDe8byp');
+      }); 
+    }
+
+    if(organizer == 'HUSET') {
+      Linking.openURL('https://link.mazemap.com/O1OdhRU4').catch(() => {
+        Alert.alert('Mazemap kunne ikke åpnes.', 'Send en mail til kontakt@login.no dersom problemet vedvarer. Feilkode: MGfrIBrd')
+      });
+    }
+}
+
   return(
     <View>
 {/* ========================= DISPLAY CONTENT ========================= */}
@@ -115,7 +135,7 @@ export default function SpecificEventScreen({ route, navigation}) {
             {Space(5)}
             <Card>
               <View style={ES.specificEventInfoView}>
-                <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Starter:\t  ' : 'Starts:\t    '}</Text>
+                <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Starter:      ' : 'Starts:         '}</Text>
                 <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>
                   {item.startt[11]}{item.startt[12]}:{item.startt[14]}{item.startt[15]}
                 </Text>
@@ -124,19 +144,31 @@ export default function SpecificEventScreen({ route, navigation}) {
               {Space(5)}
 
               <View style={ES.specificEventInfoView}>
-              <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Slutter:\t  ' : 'Ends:\t\t    '}</Text>
+              <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Slutter:       ' : 'Ends:           '}</Text>
                 {GetEndTime(usersData.endt)}
                 
               </View>
 
               {Space(5)}
 
+              <View style={{flexDirection: 'row'}}>
+
               {EventLocation(usersData.roomno, usersData.campus, usersData.street, usersData.mazeref)}
+              {usersData.mazeref || (usersData.street == 'Orgkollektivet' || usersData.organizer == 'HUSET') ? 
+                <TouchableOpacity style={{minWidth: 70}} onPress={() => {handleLink(usersData.mazeref, usersData.street, usersData.organizer)}}>
+                    <View style={ES.row}>
+                        <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>{' - '}</Text>
+                        <Text style={{...T.mazemap, color: FetchColor(theme, 'ORANGE')}}>{lang ? 'Kart' : 'Map'}</Text>
+                        <Image style={ES.mazemapIcon} source={require('../assets/icons/mazemap.png')}/> 
+                    </View>
+                </TouchableOpacity>
+                :null}
+              </View>
 
               {Space(5)}
 
               <View style={ES.specificEventInfoView}>
-                <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Kategori:\t    ' : 'Category:\t'}</Text>
+                <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Kategori:      ' : 'Category:      '}</Text>
                 {CategoryCircle(item.category)}
                 <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>{item.category}</Text>
               </View>
@@ -144,7 +176,7 @@ export default function SpecificEventScreen({ route, navigation}) {
               {Space(5)}
 
               <View style={ES.specificEventInfoView}>
-                <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Arrangør:\t  ' : 'Organizer:   '}</Text>
+                <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Arrangør:   ' : 'Organizer:   '}</Text>
                 <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>{item.organizer}{usersData.organizerlink || usersData.discordlink || usersData.fblink ? ' - ':null}</Text>
                 {usersData.discordlink ? 
                   <TouchableOpacity style={{minWidth: 70}} onPress={() => {Linking.openURL(`${item.discordlink}`)}}>

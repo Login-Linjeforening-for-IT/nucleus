@@ -5,7 +5,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';       
 
 const Tab = createBottomTabNavigator();                                         // Declares Tab to equal CBTN function
 
-import CountdownScreen from '../screens/countdown';                             // Countdown for launch party
 import EventScreen from '../screens/event';                                     // Events
 import AboutScreen from '../screens/menu/about';                                // About Login
 import MenuScreen from '../screens/menu';                                       // Profile
@@ -18,6 +17,9 @@ import CommitteeMenuScreen from '../screens/menu/committeeMenu';                
 import SpecificListingScreen from '../screens/specificListing';                 // Specific Job listing
 
 function Navigator() {                                                          // Declares Navigator, wraps in container and declares all navigation routes
+<<<<<<< HEAD
+    return(
+=======
 
     // REMOVE THIS BOX AFTER LAUNCH PARTY
     const [day, setDay] = React.useState(new Date().getDate())
@@ -36,6 +38,7 @@ function Navigator() {                                                          
     // if(true) {
     if (!(year == 2023 && (month == 1 && day > 18 || month == 2 && day < 11))) { // REMOVE IF ELSE AFTER LAUNCH PARTY
         return(
+>>>>>>> main
             <NavigationContainer>                                                   
                 <Tab.Navigator screenOptions={{ headerShown: false}}>  
                     <Tab.Screen name='EventScreen' options={{tabBarStyle: { display: "none" }}} component={EventScreen} />
@@ -51,15 +54,6 @@ function Navigator() {                                                          
                 </Tab.Navigator>                    
             </NavigationContainer>
         )
-    }else{
-        return(
-            <NavigationContainer>                                                   
-                <Tab.Navigator screenOptions={{ headerShown: false}}> 
-                    <Tab.Screen name='CountdownScreen' options={{tabBarStyle: { display: "none" }}} component={CountdownScreen} />
-                </Tab.Navigator>                    
-            </NavigationContainer>
-        )
-    }
 }
 
 export default Navigator;                                                         // Exports all navigation functionality

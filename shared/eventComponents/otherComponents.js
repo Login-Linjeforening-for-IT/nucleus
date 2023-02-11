@@ -134,36 +134,10 @@ export function EventLocation(room, campus, street, mazeref) {
     const { lang  } = useSelector( (state) => state.lang  )
     const { theme } = useSelector( (state) => state.theme )
 
-    function handleLink(mazeref, street) {
-        if (mazeref) {
-            Linking.openURL(`https://use.mazemap.com/#v=1&campusid=55&sharepoitype=poi&sharepoi=${mazeref}`).catch(() => {
-                Alert.alert('Mazemap kunne ikke åpnes', `Send en mail til kontakt@login.no dersom problemet vedvarer. Feilkode: M${mazeref}`)
-            })
-            return;
-        };
-
-        switch((street.trim()).toUpperCase()) {
-            case 'ORGKOLLEKTIVET':  
-                Linking.openURL('https://link.mazemap.com/wZDe8byp').catch(() =>{
-                    Alert.alert('Mazemap kunne ikke åpnes', 'Send en mail til kontakt@login.no dersom problemet vedvarer. Feilkode: wZDe8byp');
-                }); 
-                break;
-
-            case 'STUDENTHUSET 14':
-            case 'STUDENTHUSET':    
-                Linking.openURL('https://link.meazemap.com/MGfrIBrd').catch(() => {
-                    Alert.alert('Maze kunne ikke åpnes.', 'Send en mail til kontakt@login.no dersom problemet vedvarer. Feilkode: MGfrIBrd')
-                });
-                break;
-
-            default: return;
-        }
-    }
-
     if(!room && !campus && !street) {
         return(
             <View style={ES.specificEventInfoView}>
-                <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Lokasjon:\t  ' : 'Location:\t    '}</Text>
+                <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Lokasjon:   ' : 'Location:     '}</Text>
                 <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>TBA!</Text>
             </View>
         )
@@ -172,17 +146,8 @@ export function EventLocation(room, campus, street, mazeref) {
     if(room != null || campus != null || street != null) {
         return(
             <View style={ES.specificEventInfoView}>
-                <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Lokasjon:\t  ' : 'Location:\t    '}</Text>
+                <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Lokasjon:   ' : 'Location:     '}</Text>
                 <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>{room ? room + ', ':null}{campus}{street}</Text>
-                {mazeref  || ((street.trim()).toUpperCase() == 'ORGKOLLEKTIVET' || (street.trim()).toUpperCase() == 'STUDENTHUSET' || (street.trim()).toUpperCase() == 'STUDENTHUSET 14') ? 
-                <TouchableOpacity style={{minWidth: 70}} onPress={() => {handleLink(mazeref, street)}}>
-                    <View style={ES.row}>
-                        <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>{' - '}</Text>
-                        <Text style={{...T.mazemap, color: FetchColor(theme, 'ORANGE')}}>{lang ? 'Kart' : 'Map'}</Text>
-                        <Image style={ES.mazemapIcon} source={require('../../assets/icons/mazemap.png')}/> 
-                    </View>
-                </TouchableOpacity>
-                :null}
             </View>
         )
     }else{
