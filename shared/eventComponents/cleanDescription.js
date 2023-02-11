@@ -4,7 +4,6 @@ import { T } from '../../styles/text'
 import { A } from '@expo/html-elements'; //Doesnt work in the commented lines below
 import { useSelector } from 'react-redux';
 import FetchColor from '../../styles/fetchTheme';
-import 
 
 /**
  * Removes HTML formatting from a string, for example unicodes etc
@@ -34,8 +33,15 @@ export default function CleanDescription(string) {
         const addo = addO.replace(/&oslash;/g, 'ø');
         const addA = addo.replace(/&Aring;/g, 'Å');
         const adda = addA.replace(/&aring;/g, 'å');
-        const addLB = adda.replace(/<\/p>|<p>/g, '\n\n');
-        const addSpace = addLB.replace(/&nbsp;/g, ' ');
+
+        // issue 15 - Currently removes all styling instead of preserving it
+        const removeStyling = adda.replace(/<strong style="color: #f0802a; \(/g,'');
+        const removeClosingStyling = removeStyling.replace(/<\/strong>/g,'');
+        // issue 15 - Currently removes all styling instead of preserving it
+
+        const addLB = removeClosingStyling.replace(/<\/p>|<p>/g, '\n\n');
+        const addEnglishLB = addLB.replace(/English/g, 'English\n');
+        const addSpace = addEnglishLB.replace(/&nbsp;/g, ' ');
         const removeHTMLreferences = addSpace.replace(/&#\d+;/g, '.');
         const removeLaquo = removeHTMLreferences.replace(/&laquo;|&raquo;/g, '"');
         const removeExcessSpace = removeLaquo.replace(/\s+\./g, '!');
@@ -43,18 +49,12 @@ export default function CleanDescription(string) {
         const removeLeadingSpace = missingExpiretime.replace(/^[ \t]+|[ \t]+$/gm, '')
         const removeSpace = removeLeadingSpace.trimEnd();
 
-        if(styleStart && styleEnd) return(<View><Text dangerouslySetInnerHTML={{}} style={{...T.paragraph, color: FetchColor(theme, 'TEXTCOLOR')}}></Text></View>)
-        return(
-        <View>
-            {styleStart && styleEnd ?
-                <Text
-                 dangerouslySetInnerHTML={{ __html: htmlString }}
-            }
-            <Text style={{...T.paragraph, color: FetchColor(theme, 'TEXTCOLOR')}}>{removeSpace}</Text>
-            </View>)
-    } else {
-        return(<View><Text style={T.red}>{lang ? 'Feil ved henting av beskrivelse' : 'Error fetching description'}</Text></View>)
-    }
+        // issue 15 - Currently removes all styling instead of preserving it
+        // if(styleStart && styleEnd) return(<View><Text style={{...T.paragraph, color: FetchColor(theme, 'TEXTCOLOR')}}></Text></View>)
+        return(<View><Text style={{...T.paragraph, color: FetchColor(theme, 'TEXTCOLOR')}}>{removeSpace}</Text></View>)
+        // issue 15 - Currently removes all styling instead of preserving it
+
+    } else return(<View><Text style={T.red}>{lang ? 'Feil ved henting av beskrivelse' : 'Error fetching description'}</Text></View>)
 }
 
 export function FetchJoinLink(string) {
@@ -68,10 +68,14 @@ export function FetchJoinLink(string) {
         let netStart = string.lastIndexOf('https://nettskjema.no');
         let netEnd = string.lastIndexOf('</a>')
 
-        if(formStart && formEnd) var link = string.slice(linkStart, linkEnd);
-        if(tikkioStart && tikkioEnd) var link = string.slice(tikkioStart, tikkioEnd);
-        if(netStart && netEnd) var link = string.slice(netStart, netEnd);
+        var formLink = string.slice(formStart, formEnd);
+        var tikkioLink = string.slice(tikkioStart, tikkioEnd);
+        var netLink = string.slice(netStart, netEnd);
+      
+        if(formLink)    return formLink;
+        if(tikkioLink)  return tikkioLink;
+        if(netLink)     return netLink;
 
-        return link.trim()
+        return null;
     }else return null
 }

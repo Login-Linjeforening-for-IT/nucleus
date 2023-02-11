@@ -164,6 +164,7 @@ return(
                       {relevantComittee.id == 5 ? <Image style={GS.small} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/committee/satkom/satkom.png') : require('../../assets/committee/satkom/satkom-black.png')} />:null}
                       {lang ? relevantComittee.titleNO : relevantComittee.titleEN}</Text>
                     <Text style={{...T.boldParagraph, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? relevantComittee.quoteNO : relevantComittee.qouteEN}</Text>
+                    {Space(10)}
                     <Text style={{...T.paragraph, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? relevantComittee.descriptionNO : relevantComittee.descriptionEN}</Text>
                     {Space(15)}
                   </View>
