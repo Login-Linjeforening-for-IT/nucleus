@@ -17,7 +17,7 @@ import {                                                                        
 import { useDispatch } from 'react-redux';
 
 // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 5/8
-import messaging from '@react-native-firebase/messaging';
+// import messaging from '@react-native-firebase/messaging';
 // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 5/8
 
 /**
@@ -93,7 +93,7 @@ return token;
  * @param {boolean} status  true/false Subscribe or unsubscribe from given topic.
  */
 export async function topic(topicID, lang, status) {
-    // return null; // For testing in Expo
+    return null; // For testing in Expo
     // COMMENT OUT WHILE TESTING IN EXPO 6/8 - COMMENT IN THE ABOVE LINE INSTEAD
     const granted = await messaging().requestPermission();
     var topic = lang ? "norwegian"+topicID:"english"+topicID;
@@ -127,7 +127,7 @@ export async function topic(topicID, lang, status) {
  * Runs when the app is first opened to setup initial notifications
  */
 export async function notificationSetup() {
-  // return null; // For testing in Expo
+  return null; // For testing in Expo
   // COMMENT OUT WHILE TESTING IN EXPO 6/8 - COMMENT IN THE ABOVE LINE INSTEAD
   const dispatch = useDispatch()
   const granted = await messaging().requestPermission();
