@@ -156,15 +156,16 @@ return(
                 return(
                   <View key={index}>
                     <Text style={{...T.text30, color: FetchColor(theme, 'TEXTCOLOR')}}>
-                      {relevantComittee.id == 0 ? <Image style={GS.small} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/committee/styret/styret-white.png') : require('../../assets/committee/styret/styret-black.png')} />:null}
-                      {relevantComittee.id == 1 ? <Image style={GS.small} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/committee/eventkom/eventkom-white.png') : require('../../assets/committee/eventkom/eventkom-black.png')} />:null}
-                      {relevantComittee.id == 2 ? <Image style={GS.small} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/committee/tekkom/tekkom-white.png') : require('../../assets/committee/tekkom/tekkom-black.png')} />:null}
-                      {relevantComittee.id == 3 ? <Image style={GS.small} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/committee/prkom/pr-white.png') : require('../../assets/committee/prkom/pr-black.png')} />:null}
-                      {relevantComittee.id == 4 ? <Image style={GS.small} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/committee/ctfkom/ctfkom-white.png') : require('../../assets/committee/ctfkom/ctfkom-black.png')} />:null}
-                      {relevantComittee.id == 5 ? <Image style={GS.small} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/committee/satkom/satkom.png') : require('../../assets/committee/satkom/satkom-black.png')} />:null}
-                      {lang ? relevantComittee.titleNO : relevantComittee.titleEN}</Text>
-                    <Text style={{...T.boldParagraph, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? relevantComittee.quoteNO : relevantComittee.qouteEN}</Text>
-                    {Space(10)}
+                    {relevantComittee.id == 0 ? <Image style={GS.small} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/committee/styret/styret-white.png') : require('../../assets/committee/styret/styret-black.png')} />:null}
+                    {relevantComittee.id == 1 ? <Image style={GS.small} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/committee/eventkom/eventkom-white.png') : require('../../assets/committee/eventkom/eventkom-black.png')} />:null}
+                    {relevantComittee.id == 2 ? <Image style={GS.small} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/committee/tekkom/tekkom-white.png') : require('../../assets/committee/tekkom/tekkom-black.png')} />:null}
+                    {relevantComittee.id == 3 ? <Image style={GS.small} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/committee/prkom/pr-white.png') : require('../../assets/committee/prkom/pr-black.png')} />:null}
+                    {relevantComittee.id == 4 ? <Image style={GS.small} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/committee/ctfkom/ctfkom-white.png') : require('../../assets/committee/ctfkom/ctfkom-black.png')} />:null}
+                    {relevantComittee.id == 5 ? <Image style={GS.small} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/committee/satkom/satkom.png') : require('../../assets/committee/satkom/satkom-black.png')} />:null}
+                    {lang ? relevantComittee.titleNO : relevantComittee.titleEN}</Text>
+
+                    {(relevantComittee.quoteNO && lang || relevantComittee.qouteEN && !lang) ? <Text style={{...T.boldParagraph, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? relevantComittee.quoteNO : relevantComittee.qouteEN}</Text>:null}
+                    {(relevantComittee.quoteNO && lang || relevantComittee.qouteEN && !lang) ? Space(10):null}
                     <Text style={{...T.paragraph, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? relevantComittee.descriptionNO : relevantComittee.descriptionEN}</Text>
                     {Space(15)}
                   </View>

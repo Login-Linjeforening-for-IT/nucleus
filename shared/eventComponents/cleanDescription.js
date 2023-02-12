@@ -72,9 +72,9 @@ export function FetchJoinLink(string) {
         var tikkioLink = string.slice(tikkioStart, tikkioEnd);
         var netLink = string.slice(netStart, netEnd);
       
-        if(formLink)    return formLink;
-        if(tikkioLink)  return tikkioLink;
-        if(netLink)     return netLink;
+        if(formLink)    return formLink.trim();
+        if(tikkioLink)  return tikkioLink.trim();
+        if(netLink)     return netLink.trim();
 
         return null;
     }else return null
