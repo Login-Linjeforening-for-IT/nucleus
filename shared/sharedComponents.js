@@ -381,7 +381,7 @@ export function AllComitees() {
           <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>Tormod Müller</Text>
           {Space(5)}
           <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/210124409816612876')}>
-            <Text style={{...T.discord, color: FetchColor(theme, 'DISCORD')}}>{<Image style={GS.tiny} source={require('../assets/social/discord-colored.png')} />}Eiken#6059</Text>
+            <Text style={{...T.discord, color: FetchColor(theme, 'DISCORD')}}>{<Image style={GS.tiny} source={require('../assets/social/discord-colored.png')} />}Backsiide#3129</Text>
           </TouchableOpacity>
           {Space(25)}
           <Image style={GS.personImage} source={require('../assets/photos/nestleder.png')} />
@@ -391,7 +391,7 @@ export function AllComitees() {
           <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>Kristina Kataki</Text>
           {Space(5)}
           <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/877108421772582962')}>
-          <Text style={{...T.discord, color: FetchColor(theme, 'DISCORD')}}>{<Image style={GS.tiny} source={require('../assets/social/discord-colored.png')} />}¬.¬#6719</Text>
+          <Text style={{...T.discord, color: FetchColor(theme, 'DISCORD')}}>{<Image style={GS.tiny} source={require('../assets/social/discord-colored.png')} />}Kataki#7254</Text>
           </TouchableOpacity>
           {Space(25)}
           <Image style={GS.personImage} source={require('../assets/photos/sekreter.png')} />
@@ -401,7 +401,7 @@ export function AllComitees() {
           <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>Aleksander Aaboen</Text>
           {Space(5)}
           <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/610784035777544202')}>
-            <Text style={{...T.discord, color: FetchColor(theme, 'DISCORD')}}>{<Image style={GS.tiny} source={require('../assets/social/discord-colored.png')} />}Celina#6955</Text>
+            <Text style={{...T.discord, color: FetchColor(theme, 'DISCORD')}}>{<Image style={GS.tiny} source={require('../assets/social/discord-colored.png')} />}aleksanderaa#2130</Text>
           </TouchableOpacity>
           {Space(25)}
           <Image style={GS.personImage} source={require('../assets/committee/eventkom/eventkomleder.png')} />
@@ -411,7 +411,7 @@ export function AllComitees() {
           <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>Sander Hauge</Text>
           {Space(5)}
           <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/171972901501796352')}>
-            <Text style={{...T.discord, color: FetchColor(theme, 'DISCORD')}}>{<Image style={GS.tiny} source={require('../assets/social/discord-colored.png')} />}sofiee#9763</Text>
+            <Text style={{...T.discord, color: FetchColor(theme, 'DISCORD')}}>{<Image style={GS.tiny} source={require('../assets/social/discord-colored.png')} />}Sandiss#5586</Text>
           </TouchableOpacity>
           {Space(25)}
           <Image style={GS.personImage} source={require('../assets/committee/prkom/prleder.png')} />
@@ -421,7 +421,7 @@ export function AllComitees() {
           <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>Ida Førland</Text>
           {Space(5)}
           <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/470279697465606159')}>
-            <Text style={{...T.discord, color: FetchColor(theme, 'DISCORD')}}>{<Image style={GS.tiny} source={require('../assets/social/discord-colored.png')} />}Kataki#7254</Text>
+            <Text style={{...T.discord, color: FetchColor(theme, 'DISCORD')}}>{<Image style={GS.tiny} source={require('../assets/social/discord-colored.png')} />}IdaForland#1277</Text>
           </TouchableOpacity>
           {Space(25)}
           <Image style={GS.personImage} source={require('../assets/committee/tekkom/tekkomleder.png')} />
@@ -431,7 +431,7 @@ export function AllComitees() {
           <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>Eirik Hanasand</Text>
           {Space(5)}
           <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/376827396764073997')}>
-            <Text style={{...T.discord, color: FetchColor(theme, 'DISCORD')}}>{<Image style={GS.tiny} source={require('../assets/social/discord-colored.png')} />}Sim#3909</Text>
+            <Text style={{...T.discord, color: FetchColor(theme, 'DISCORD')}}>{<Image style={GS.tiny} source={require('../assets/social/discord-colored.png')} />}Axe#9595</Text>
           </TouchableOpacity>
           {Space(25)}
           <Image style={GS.personImage} source={require('../assets/committee/ctfkom/ctfkomleder.png')} />
@@ -451,7 +451,7 @@ export function AllComitees() {
           <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>Trygve Sollund</Text>
           {Space(5)}
           <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/209395476288634881')}>
-            <Text style={{...T.discord, color: FetchColor(theme, 'DISCORD')}}>{<Image style={GS.tiny} source={require('../assets/social/discord-colored.png')} />}stubbe#8694</Text>
+            <Text style={{...T.discord, color: FetchColor(theme, 'DISCORD')}}>{<Image style={GS.tiny} source={require('../assets/social/discord-colored.png')} />}Spikeupine#4356</Text>
           </TouchableOpacity>
           {Space(20)}
         </View>
