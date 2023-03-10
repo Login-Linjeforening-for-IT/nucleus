@@ -372,9 +372,10 @@ export function AllComitees() {
     const { lang  } = useSelector( (state) => state.lang  )
     const { theme } = useSelector( (state) => state.theme )
 
+    // Todo: Rework this into a more general solution
     return(
         <View>
-          <Image style={GS.personImage} source={require('../assets/photos/leder.png')} />
+          <Image style={GS.personImage} source={{uri: `https://cdn.login.no/img%2Fportraits%2Fportrett_leder.jpg`}} />
           {Space(10)}
           <Text style={T.leaderTitle}>{lang ? 'Leder' : 'Leader'}</Text>
           {Space(5)}
@@ -384,7 +385,7 @@ export function AllComitees() {
             <Text style={{...T.discord, color: FetchColor(theme, 'DISCORD')}}>{<Image style={GS.tiny} source={require('../assets/social/discord-colored.png')} />}Backsiide#3129</Text>
           </TouchableOpacity>
           {Space(25)}
-          <Image style={GS.personImage} source={require('../assets/photos/nestleder.png')} />
+          <Image style={GS.personImage} source={{uri: `https://cdn.login.no/img%2Fportraits%2Fportrett_nestleder.jpg`}} />
           {Space(10)}
           <Text style={T.leaderTitle}>{lang ? 'Nestleder' : 'Deputy chairman'}</Text>
           {Space(5)}
@@ -394,7 +395,7 @@ export function AllComitees() {
           <Text style={{...T.discord, color: FetchColor(theme, 'DISCORD')}}>{<Image style={GS.tiny} source={require('../assets/social/discord-colored.png')} />}Kataki#7254</Text>
           </TouchableOpacity>
           {Space(25)}
-          <Image style={GS.personImage} source={require('../assets/photos/sekreter.png')} />
+          <Image style={GS.personImage} source={{uri: `https://cdn.login.no/img%2Fportraits%2Fportrett_sekret%C3%A6r.jpg`}} />
           {Space(10)}
           <Text style={T.leaderTitle}>{lang ? 'Sekretær' : 'Secretary'}</Text>
           {Space(5)}
@@ -404,7 +405,7 @@ export function AllComitees() {
             <Text style={{...T.discord, color: FetchColor(theme, 'DISCORD')}}>{<Image style={GS.tiny} source={require('../assets/social/discord-colored.png')} />}aleksanderaa#2130</Text>
           </TouchableOpacity>
           {Space(25)}
-          <Image style={GS.personImage} source={require('../assets/committee/eventkom/eventkomleder.png')} />
+          <Image style={GS.personImage} source={{uri: `https://cdn.login.no/img/portraits/portrett_eventkom-leder.jpg`}} />
           {Space(10)}
           <Text style={T.leaderTitle}>{lang ? 'EventKom leder' : 'EventKom Leader'}</Text>
           {Space(5)}
@@ -414,7 +415,7 @@ export function AllComitees() {
             <Text style={{...T.discord, color: FetchColor(theme, 'DISCORD')}}>{<Image style={GS.tiny} source={require('../assets/social/discord-colored.png')} />}Sandiss#5586</Text>
           </TouchableOpacity>
           {Space(25)}
-          <Image style={GS.personImage} source={require('../assets/committee/prkom/prleder.png')} />
+          <Image style={GS.personImage} source={{uri: `https://cdn.login.no/img/portraits/portrett_pr-leder.jpg`}} />
           {Space(10)}
           <Text style={T.leaderTitle}>{lang ? 'PR leder' : 'PR leader'}</Text>
           {Space(5)}
@@ -424,7 +425,7 @@ export function AllComitees() {
             <Text style={{...T.discord, color: FetchColor(theme, 'DISCORD')}}>{<Image style={GS.tiny} source={require('../assets/social/discord-colored.png')} />}IdaForland#1277</Text>
           </TouchableOpacity>
           {Space(25)}
-          <Image style={GS.personImage} source={require('../assets/committee/tekkom/tekkomleder.png')} />
+          <Image style={GS.personImage} source={{uri: `https://cdn.login.no/img/portraits/portrett_tekkom-leder.jpg`}} />
           {Space(10)}
           <Text style={T.leaderTitle}>{lang ? 'TekKom leder' : 'TekKom leader'}</Text>
           {Space(5)}
@@ -434,7 +435,7 @@ export function AllComitees() {
             <Text style={{...T.discord, color: FetchColor(theme, 'DISCORD')}}>{<Image style={GS.tiny} source={require('../assets/social/discord-colored.png')} />}Axe#9595</Text>
           </TouchableOpacity>
           {Space(25)}
-          <Image style={GS.personImage} source={require('../assets/committee/ctfkom/ctfkomleder.png')} />
+          <Image style={GS.personImage} source={{uri: `https://cdn.login.no/img/portraits/portrett_ctfkom-leder.jpg`}} />
           {Space(10)}
           <Text style={T.leaderTitle}>{lang ? 'CTF leder' : 'CTF leader'}</Text>
           {Space(5)}
@@ -444,7 +445,7 @@ export function AllComitees() {
             <Text style={{...T.discord, color: FetchColor(theme, 'DISCORD')}}>{<Image style={GS.tiny} source={require('../assets/social/discord-colored.png')} />}refsgaard#9067</Text>
           </TouchableOpacity>
           {Space(25)}
-          <Image style={GS.personImage} source={require('../assets/committee/satkom/satkomleder.png')} />
+          <Image style={GS.personImage} source={{uri: `https://cdn.login.no/img%2Fportraits%2Fportrett_%C3%B8konomi.jpg`}} />
           {Space(10)}
           <Text style={T.leaderTitle}>{lang ? 'SatKom leder' : 'SatKom leader'}</Text>
           {Space(5)}

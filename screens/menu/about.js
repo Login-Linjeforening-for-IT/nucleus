@@ -177,21 +177,21 @@ return(
         
         {comittee.selected == 1 ? 
         <View>
-          <Image style={GS.personImage} source={require('../../assets/committee/eventkom/eventkomleder.png')} />
+          <Image style={GS.personImage} source={{uri: `https://cdn.login.no/img/portraits/portrett_eventkom-leder.jpg`}} />
           {Space(10)}
           <Text style={T.leaderTitle}>{lang ? 'EventKom leder' : 'EventKom leader'}</Text>
           {Space(5)}
           <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>Sander Hauge</Text>
           {Space(5)}
           <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/171972901501796352')}>
-            <Text style={{...T.discord, color: FetchColor(theme, 'DISCORD')}}>{<Image style={GS.tiny} source={require('../../assets/social/discord-colored.png')} />}Sandiss#5586</Text>
+            <Text style={{...T.discord, color: FetchColor(theme, 'DISCORD')}}>{<Image style={GS.tiny} source={{uri: `https://cdn.login.no/img/portraits/portrett_eventkom-leder.jpg`}} />}Sandiss#5586</Text>
           </TouchableOpacity>
           {Space(25)}
         </View>: null}
 
         {comittee.selected == 2 ? 
         <View>
-          <Image style={GS.personImage} source={require('../../assets/committee/tekkom/tekkomleder.png')} />
+          <Image style={GS.personImage} source={{uri: `https://cdn.login.no/img/portraits/portrett_tekkom-leder.jpg`}} />
           {Space(10)}
           <Text style={T.leaderTitle}>{lang ? 'TekKom leder' : 'TekKom leader'}</Text>
           {Space(5)}
@@ -205,21 +205,21 @@ return(
 
         {comittee.selected == 3 ? 
           <View>
-            <Image style={GS.personImage} source={require('../../assets/committee/prkom/prleder.png')} />
+            <Image style={GS.personImage} source={{uri: `https://cdn.login.no/img/portraits/portrett_pr-leder.jpg`}} />
             {Space(10)}
             <Text style={T.leaderTitle}>{lang ? 'PR leder' : 'PR leader'}</Text>
             {Space(5)}
-            <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>Kristina Kataki</Text>
+            <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>Ida Førland</Text>
             {Space(5)}
-            <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/877108421772582962')}>
-              <Text style={{...T.discord, color: FetchColor(theme, 'DISCORD')}}>{<Image style={GS.tiny} source={require('../../assets/social/discord-colored.png')} />}Kataki#7254</Text>
+            <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/470279697465606159')}>
+              <Text style={{...T.discord, color: FetchColor(theme, 'DISCORD')}}>{<Image style={GS.tiny} source={require('../../assets/social/discord-colored.png')} />}IdaForland#1277</Text>
             </TouchableOpacity>
             {Space(25)}
           </View>: null}
 
         {comittee.selected == 4 ? 
           <View>
-            <Image style={GS.personImage} source={require('../../assets/committee/ctfkom/ctfkomleder.png')} />
+            <Image style={GS.personImage} source={{uri: `https://cdn.login.no/img/portraits/portrett_ctfkom-leder.jpg`}} />
             {Space(10)}
             <Text style={T.leaderTitle}>{lang ? 'CTF leder' : 'CTF leader'}</Text>
             {Space(5)}
@@ -230,10 +230,10 @@ return(
           </TouchableOpacity>
             {Space(25)}
           </View>: null}
-
+          
         {comittee.selected == 5 ? 
           <View>
-            <Image style={GS.personImage} source={require('../../assets/committee/satkom/satkomleder.png')} />
+            <Image style={GS.personImage} source={{uri: `https://cdn.login.no/img%2Fportraits%2Fportrett_%C3%B8konomi.jpg`}} />
             {Space(10)}
             <Text style={T.leaderTitle}>{lang ? 'SatKom leder' : 'SatKom leader'}</Text>
             {Space(5)}
