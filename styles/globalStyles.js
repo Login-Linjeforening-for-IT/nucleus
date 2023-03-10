@@ -4,7 +4,7 @@ export const GS = StyleSheet.create({
   
 //========================= EventScreen =========================
   content: { //Main view of every screen
-    height: Dimensions.get('window').height,            // Dimensions.get('window').height/7.5
+    height: Dimensions.get('window').height+200,            // Dimensions.get('window').height/7.5
   },
   reportInputContentText: {                             // ReportScreen description text
     alignSelf: 'center',

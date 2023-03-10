@@ -82,7 +82,7 @@ export const MS = StyleSheet.create ({                              // Declares 
                                                                     // --- BOTTOM MENU ---
   bMenu: {                                                          // Bottom menu view
       position: 'absolute',
-      bottom: 0, //-(PixelRatio.getPixelSizeForLayoutSize(48))
+      top: Dimensions.get('window').height-Dimensions.get('window').height/10, //-(PixelRatio.getPixelSizeForLayoutSize(48))
       width: '100%',
       height: Dimensions.get('window').height/10,                   // Sets the height of the bottom menu to 10% of the screen height
       flexDirection: 'row',                                         // Changes the flex directions to allow for multiple elements horizontally
