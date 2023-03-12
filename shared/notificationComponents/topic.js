@@ -1,5 +1,5 @@
 // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 5/8
-// import messaging from '@react-native-firebase/messaging';
+import messaging from '@react-native-firebase/messaging';
 // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 5/8
 
 /**
@@ -12,7 +12,7 @@
  * @param {boolean} status  true/false Subscribe or unsubscribe from given topic.
  */
 export default async function topic(topicID, lang, status, category, catArray) {
-  return null; // For testing in Expo
+  // return null; // For testing in Expo
   // COMMENT OUT WHILE TESTING IN EXPO 6/8 - COMMENT IN THE ABOVE LINE INSTEAD
   const granted = await messaging().requestPermission();
   var topic = lang ? "norwegian"+topicID:"english"+topicID;
@@ -33,11 +33,10 @@ export default async function topic(topicID, lang, status, category, catArray) {
 
         // Subscribe to new language
         await messaging().subscribeToTopic("norwegianIMPORTANT");
-        await messaging().subscribeToTopic("norwegianEVENTS");
         await messaging().subscribeToTopic("norwegianBEDPRES");
         await messaging().subscribeToTopic("norwegianTEKKOM");
         await messaging().subscribeToTopic("norwegianCTF");
-        await messaging().subscribeToTopic("norwegianSOCIAL")
+        await messaging().subscribeToTopic("norwegianSOCIAL");
         await messaging().subscribeToTopic("norwegianKARRIEREDAG");
         await messaging().subscribeToTopic("norwegianFADDERUKA");
         await messaging().subscribeToTopic("norwegianLOGIN");
@@ -46,8 +45,7 @@ export default async function topic(topicID, lang, status, category, catArray) {
       }else{
 
         // Unsubscribe from old language
-        await messaging().unsubscribeFromTopic("norwegianIMPORTANT");
-        await messaging().unsubscribeFromTopic("norwegianEVENTS");
+        await messaging().unsubscribeFromTopic("englishIMPORTANT");
         await messaging().unsubscribeFromTopic("norwegianBEDPRES");
         await messaging().unsubscribeFromTopic("norwegianTEKKOM");
         await messaging().unsubscribeFromTopic("norwegianCTF");
@@ -59,11 +57,10 @@ export default async function topic(topicID, lang, status, category, catArray) {
 
         // Subscribe to new language
         await messaging().subscribeToTopic("englishIMPORTANT");
-        await messaging().subscribeToTopic("englishEVENTS");
         await messaging().subscribeToTopic("englishBEDPRES");
         await messaging().subscribeToTopic("englishTEKKOM");
         await messaging().subscribeToTopic("englishCTF");
-        await messaging().subscribeToTopic("englishSOCIAL")
+        await messaging().subscribeToTopic("englishSOCIAL");
         await messaging().subscribeToTopic("englishKARRIEREDAG");
         await messaging().subscribeToTopic("englishFADDERUKA");
         await messaging().subscribeToTopic("englishLOGIN");
