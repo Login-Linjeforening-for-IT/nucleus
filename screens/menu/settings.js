@@ -60,8 +60,7 @@ export default function SettingScreen( { navigation }) {
           </Card>
 
           {Space(15)}
-          <Text style={{...T.text25, left: 15, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? 'Varslinger' : 'Notifications'}</Text>              
-          {Space(5)}
+          <Text style={{...T.text30, left: 15, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? 'Varslinger' : 'Notifications'}</Text>              
 
           <Card>
             <View style={GS.notificationBack}>
@@ -72,23 +71,8 @@ export default function SettingScreen( { navigation }) {
             </View>
           </Card>
 
-          <Card>
-            <View style={GS.notificationBack}>
-              <View style={GS.view}>
-                <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Nye arrangementer': 'New events'}</Text>
-              </View>
-              <Notification category='EVENTS'/>
-            </View>
-          </Card>
-
-          <Card>
-            <View style={GS.notificationBack}>
-              <View style={GS.view}>
-                <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Påminnelser': 'Reminders'}</Text>
-              </View>
-              <Notification category='REMINDERS'/>
-            </View>
-          </Card>
+          {Space(10)}
+          <Text style={{...T.text25, left: 15, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? 'Nye arrangementer' : 'New events'}</Text>              
 
           <Card>
             <View style={GS.notificationBack}>
@@ -120,14 +104,51 @@ export default function SettingScreen( { navigation }) {
           <Card>
             <View style={GS.notificationBack}>
               <View style={GS.view}>
-                <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Sosialt':'Social'}</Text>
+                <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Sosialt': 'Social'}</Text>
               </View>
               <Notification category='SOCIAL'/>
             </View>
           </Card>
 
+          <Card>
+            <View style={GS.notificationBack}>
+              <View style={GS.view}>
+                <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Karrieredag':'Career day'}</Text>
+              </View>
+              <Notification category='KARRIEREDAG'/>
+            </View>
+          </Card>
+          
+          <Card>
+            <View style={GS.notificationBack}>
+              <View style={GS.view}>
+                <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}>Fadderuka</Text>
+              </View>
+              <Notification category='FADDERUKA'/>
+            </View>
+          </Card>
+
+
+          <Card>
+            <View style={GS.notificationBack}>
+              <View style={GS.view}>
+                <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}>Login</Text>
+              </View>
+              <Notification category='LOGIN'/>
+            </View>
+          </Card>
+
+          <Card>
+            <View style={GS.notificationBack}>
+              <View style={GS.view}>
+                <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? "Annet":"Other"}</Text>
+              </View>
+              <Notification category='ANNET'/>
+            </View>
+          </Card>
+
           {Space(15)}
-          <Text style={{...T.text25, left: 15, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? 'Varslingsvalg' : 'Notification preferences'}</Text>              
+          <Text style={{...T.text25, left: 15, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? 'Påminnelser' : 'Reminders'}</Text>              
 
           {topicSwitchList("tekkom", "TekKom")}
           {topicSwitchList("ctf", "CTF")}

@@ -14,11 +14,14 @@ export default async function notificationSetup() {
   const granted = await messaging().requestPermission();
   if   (granted) {
     await messaging().subscribeToTopic("norwegianIMPORTANT");
-    await messaging().subscribeToTopic("norwegianREMINDERS");
-    await messaging().subscribeToTopic("norwegianEVENTS");
-    await messaging().subscribeToTopic("norwegianBEDPRES");
-    await messaging().subscribeToTopic("norwegianTEKKOM");
-    await messaging().subscribeToTopic("norwegianCTF");
-    await messaging().subscribeToTopic("norwegianSOCIAL").then(dispatch(changeNotificationState("SETUP")));
+        await messaging().subscribeToTopic("norwegianEVENTS");
+        await messaging().subscribeToTopic("norwegianBEDPRES");
+        await messaging().subscribeToTopic("norwegianTEKKOM");
+        await messaging().subscribeToTopic("norwegianCTF");
+        await messaging().subscribeToTopic("norwegianSOCIAL")
+        await messaging().subscribeToTopic("norwegianKARRIEREDAG");
+        await messaging().subscribeToTopic("norwegianFADDERUKA");
+        await messaging().subscribeToTopic("norwegianLOGIN");
+        await messaging().subscribeToTopic("norwegianANNET").then(dispatch(changeNotificationState("SETUP")));
   } 
 }
