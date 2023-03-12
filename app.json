@@ -44,7 +44,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.eirikhanasand.Login",
-      "buildNumber": "31",
+      "buildNumber": "32",
       "googleServicesFile": "./GoogleService-Info.plist",
       "infoPlist": {
          "UIBackgroundModes": [
@@ -60,7 +60,7 @@
       },
       "package": "com.login.Login",
       "googleServicesFile": "./google-services.json",
-      "versionCode": 24
+      "versionCode": 25
     },
     "web": {
       "favicon": "./assets/logo/favicon.ico"

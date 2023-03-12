@@ -14,13 +14,13 @@ import topic from '../notificationComponents/topic';
  * @param {string} topicID          Topic the user should be subscribed to or unsubscribed from
  * @returns                         Notification switch as view
  */
-export default function Notification ({category}, status) {    //Notification button
+export default function Notification ({category}, skip) {    //Notification button
     const notification = useSelector( (state) => state.notification ) // Fetches notification state
     const { lang  } = useSelector( (state) => state.lang  )
     const { theme } = useSelector( (state) => state.theme )
     const dispatch = useDispatch()
 
-    topic(category, lang, notification[category]);
+    if (!skip) topic(category, lang, notification[category]);
 
     return(
         <View>
