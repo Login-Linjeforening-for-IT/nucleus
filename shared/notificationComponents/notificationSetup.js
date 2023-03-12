@@ -14,7 +14,6 @@ export default async function notificationSetup() {
   const granted = await messaging().requestPermission();
   if   (granted) {
     await messaging().subscribeToTopic("norwegianIMPORTANT");
-        await messaging().subscribeToTopic("norwegianEVENTS");
         await messaging().subscribeToTopic("norwegianBEDPRES");
         await messaging().subscribeToTopic("norwegianTEKKOM");
         await messaging().subscribeToTopic("norwegianCTF");
