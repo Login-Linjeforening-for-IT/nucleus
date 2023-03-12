@@ -21,7 +21,7 @@ export default function topicSwitch(topic, textNo, textEn) {
               <View style={GS.view}>
               <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? textNo : textEn}</Text>
               </View>
-              <View style={GS.view2}><Notification category={topic}/></View>
+              <View style={GS.view2}>{Notification(topic, 1)}</View>
           </View>
       </Card>
   )
