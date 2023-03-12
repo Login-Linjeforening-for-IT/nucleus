@@ -3,7 +3,7 @@
  * @param {event} props Event object
  * @returns seconds
  */
-export function NotificationDelay (props) {
+export default function NotificationDelay (props) {
   var year     = new Date().getFullYear()                                                                 // Current year
   var month    = 1 + new Date().getMonth()                                                                // Current month
   var day      = new Date().getDate()                                                                     // Current day

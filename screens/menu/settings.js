@@ -1,12 +1,16 @@
 {/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
+import topicSwitchList from '../../shared/notificationComponents/topicSwitchList';
+import DynamicCircle from '../../shared/eventComponents/dynamicCircle';
+import Notification from '../../shared/functions/notification';
+import ThemeSwitch from '../../shared/functions/themeSwitch';
+import Language from '../../shared/functions/language';
+import Space from '../../shared/functions/space';
+import FetchColor from '../../styles/fetchTheme';
 import { GS } from '../../styles/globalStyles';
+import Card from '../../shared/functions/card';
 import { MS } from '../../styles/menuStyles';
-import { ES } from '../../styles/eventStyles';
-import Card, { Notification, Language, Space, ThemeSwitch } from '../../shared/sharedComponents';
-import { DynamicCircle } from '../../shared/eventComponents/otherComponents';
 import { useSelector } from 'react-redux';
 import { T } from '../../styles/text';
-import FetchColor from '../../styles/fetchTheme';
 import { BlurView } from 'expo-blur';
 import React from 'react';
 import { 
@@ -55,9 +59,9 @@ export default function SettingScreen( { navigation }) {
             </View>
           </Card>
 
+          {Space(15)}
+          <Text style={{...T.text25, left: 15, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? 'Varslinger' : 'Notifications'}</Text>              
           {Space(5)}
-          <Text style={{...T.centeredOppositeColor, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? 'Varslinger' : 'Notifications'}</Text>              
-          
 
           <Card>
             <View style={GS.notificationBack}>
@@ -67,7 +71,6 @@ export default function SettingScreen( { navigation }) {
               <View style={GS.view2}><Notification category='IMPORTANT'/></View>
             </View>
           </Card>
-
 
           <Card>
             <View style={GS.notificationBack}>
@@ -122,8 +125,20 @@ export default function SettingScreen( { navigation }) {
               <Notification category='SOCIAL'/>
             </View>
           </Card>
+
+          {Space(15)}
+          <Text style={{...T.text25, left: 15, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? 'Varslingsvalg' : 'Notification preferences'}</Text>              
+
+          {topicSwitchList("tekkom", "TekKom")}
+          {topicSwitchList("ctf", "CTF")}
+          {lang ? topicSwitchList("social", "Sosialt", 1):topicSwitchList("social", "Social", 1)}
+          {lang ? topicSwitchList("karrieredag", "Karrieredag", 1):topicSwitchList("karrieredag", "Career day", 1)}
+          {topicSwitchList("fadderuka", "Fadderuka", 1)}
+          {topicSwitchList("bedpres", "Bedpres", 1)}
+          {topicSwitchList("login", "Login", 1)}
+          {lang ? topicSwitchList("annet", "Annet", 1):topicSwitchList("annet", "Other", 1)} 
             
-          {Space((Dimensions.get('window').height/10)+10)}
+          {Space((Dimensions.get('window').height/3)+10)}
         </ScrollView>
       </View>   
 

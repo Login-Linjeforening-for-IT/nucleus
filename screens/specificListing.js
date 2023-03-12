@@ -2,15 +2,16 @@
   // NOTE: THIS FILE IS CURRENTLY NOT USED IN PRODUCTION
 
 {/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
-import { GS } from '../styles/globalStyles';
-import { MS } from '../styles/menuStyles';
-import { T } from '../styles/text';
-import { ES } from '../styles/eventStyles';
-import Card, { Space } from '../shared/sharedComponents';
-import { DynamicCircle } from '../shared/eventComponents/otherComponents';
-import { useSelector } from 'react-redux';
+import DynamicCircle from '../shared/eventComponents/dynamicCircle';
+import Space from '../shared/functions/space';
 import FetchColor from '../styles/fetchTheme';
+import { GS } from '../styles/globalStyles';
+import Card from '../shared/functions/card';
+import { ES } from '../styles/eventStyles';
+import { MS } from '../styles/menuStyles';
+import { useSelector } from 'react-redux';
 import { BlurView } from 'expo-blur';
+import { T } from '../styles/text';
 import React from 'react';
 import { 
   Text, 
@@ -68,7 +69,7 @@ export default function SpecificListingScreen( { route, navigation }) {
           </View>
 
           {Space(20)}
-          {Space(Dimensions.get('window').height/10)}
+          {Space(Dimensions.get('window').height/3)}
         </ScrollView>
       </View>    
 

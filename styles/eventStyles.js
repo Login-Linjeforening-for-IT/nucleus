@@ -168,7 +168,7 @@ export const ES = StyleSheet.create({         // Declares export ES ( Event Styl
   },
   eventButton: {                              // Join event button 
     height: 30,                               // Fixed height of 30px
-    width: Dimensions.get('window').width/3,  // Fixed width of 1/3 of the screen
+    width:Dimensions.get('window').width/2.75,// Fixed width of 1/2.75 of the screen
     alignSelf: 'center',                      // Horizontally centered
     borderRadius: 10                          // Rounded corners
   },
@@ -179,5 +179,5 @@ export const ES = StyleSheet.create({         // Declares export ES ( Event Styl
   },
   row: {                                      // When all u need is a row
     flexDirection: 'row'                      // Horizontal direction
-  }
+  },
 })

@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import { View, Text } from 'react-native';
-import { T } from '../../styles/text'
+import { T } from '../../styles/text'
 import { useSelector } from 'react-redux';
 import FetchColor from '../../styles/fetchTheme';
-import { NotificationDelay } from './notificationDelay';
+import NotificationDelay from './notificationDelay';
 
 /**
  * Function for displaying the event status, how long till it starts, how long its been ongoing, or how long till it ends

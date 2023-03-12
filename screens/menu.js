@@ -1,12 +1,14 @@
 {/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
-import { MS } from '../styles/menuStyles'
-import { GS } from '../styles/globalStyles'
-import { ES }from '../styles/eventStyles'
-import React, { useState } from 'react';
-import Card, {Space} from '../shared/sharedComponents';
-import { DynamicCircle } from '../shared/eventComponents/otherComponents';
-import { useSelector } from 'react-redux';
+import DynamicCircle from '../shared/eventComponents/dynamicCircle';
+import { nativeApplicationVersion } from "expo-application";
+import Space from '../shared/functions/space';
 import FetchColor from '../styles/fetchTheme';
+import { GS } from '../styles/globalStyles';
+import Card from '../shared/functions/card';
+import { MS } from '../styles/menuStyles';
+import { ES }from '../styles/eventStyles';
+import { useSelector } from 'react-redux';
+import React, { useState } from 'react';
 import { BlurView } from 'expo-blur';
 import { 
   Text, 
@@ -84,7 +86,7 @@ return(
                   </View>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={async() => {
-                 Linking.openURL('mailto:kontakt@login.no').catch(() => lang ? Alert.alert('Kunne ikke åpne mail!', 'Mail: kontakt@login.no'):Alert.alert('Could not open mail!', 'Reach us at kontakt@login.no'))
+                  Linking.openURL('mailto:kontakt@login.no').catch(() => lang ? Alert.alert('Kunne ikke åpne mail!', 'Mail: kontakt@login.no'):Alert.alert('Could not open mail!', 'Reach us at kontakt@login.no'))
                 }}>
                   <View style={{backgroundColor: FetchColor(theme, 'BACKGROUND')}}>
                     <Text style={{...T.contact, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>Mail</Text>
@@ -92,8 +94,9 @@ return(
                 </TouchableOpacity>
               </View>
                 
-              :null}
+                :null}
             </View>
+            {index == setting.length-1 ? <Text style={{...T.contact, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? `Versjon ${nativeApplicationVersion}` : `Version ${nativeApplicationVersion}`}</Text>:null}
           </View>
             
           )}

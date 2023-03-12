@@ -1,18 +1,31 @@
-import GreenLight, { GrayLight, Check, MonthNO, MonthEN, DynamicCircle, SmallCheck } from '../shared/eventComponents/otherComponents';  // Components used to display event
-import { registerForPushNotificationsAsync, SchedulePushNotification, cancelScheduledNotification, notificationSetup } from '../shared/notificationManagement';  // Notification management
-import Card, { CompareDates, CheckBox, CheckedBox, Space, EventCardLocation, LastFetch } from '../shared/sharedComponents';  // Components used to display event
+import registerForPushNotificationsAsync from '../shared/notificationComponents/registerForPushNotificationAsync';
+import notificationSetup from '../shared/notificationComponents/notificationSetup';
+import EventCardLocation from '../shared/eventComponents/eventCardLocation';
 import CategorySquare from '../shared/eventComponents/categorySquare';    // Left side square on eventcard
 import AsyncStorage from '@react-native-async-storage/async-storage';     // Localstorage
-import * as Notifications from 'expo-notifications';                      // Local notifications
+import DynamicCircle from '../shared/eventComponents/dynamicCircle';
+import GreenLight from '../shared/eventComponents/greenLight';
+import SmallCheck from '../shared/eventComponents/smallCheck';
+import GrayLight from '../shared/eventComponents/grayLight';
+import CompareDates from '../shared/functions/compareDates';
+import topic from '../shared/notificationComponents/topic';
 import React, { useEffect, useState, useRef } from 'react';               // React imports
+import MonthNO from '../shared/eventComponents/monthNO';
+import MonthEN from '../shared/eventComponents/monthEN';
+import CheckedBox from '../shared/functions/checkedBox';
+import { useSelector, useDispatch } from 'react-redux';                                // Redux
+import Check from '../shared/eventComponents/check';
+import CheckBox from '../shared/functions/checkBox';
+import * as Notifications from 'expo-notifications';                      // Local notifications
+import Space from '../shared/functions/space';
+import FetchColor from '../styles/fetchTheme';                            // Function to fetch theme color
+import Card from '../shared/functions/card';
 import { GS } from '../styles/globalStyles';                              // Global styles
+import { StatusBar } from 'expo-status-bar';                              // Status bar
 import { ES } from '../styles/eventStyles';                               // Event styles
 import { MS } from '../styles/menuStyles';                                // Menu styles
-import { T } from '../styles/text';                                       // Text styles
-import { useSelector, useDispatch } from 'react-redux';                                // Redux
-import { StatusBar } from 'expo-status-bar';                              // Status bar
-import FetchColor from '../styles/fetchTheme';                            // Function to fetch theme color
 import { BlurView } from 'expo-blur';                                     // Blur effect
+import { T } from '../styles/text';                                       // Text styles
 import {                                                                  // React native components
   Text,                                                                   // Text component
   View,                                                                   // View component
@@ -24,7 +37,7 @@ import {                                                                  // Rea
   Platform,                                                               // Operating system
 } from 'react-native';                                                    // React native
 import { useFocusEffect } from '@react-navigation/native';                // useFocusEffect       (do something when the screen is displayed)
-import { topic } from '../shared/notificationManagement';
+import LastFetch from '../shared/functions/lastfetch';
 
 // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 3/8
 // import messaging from '@react-native-firebase/messaging';
@@ -81,6 +94,141 @@ export default function EventScreen({ navigation }) {                     //  Ex
   {id: '8', category: 'LOGIN'},
   {id: '9', category: 'ANNET'}
 ]);                                           
+
+  // Returns the state of every tekkom notification interval
+  function tekkomArray() {
+    let array = [];
+    if(notification["tekkom10m"]) {array.push(1)} else array.push(0);
+    if(notification["tekkom30m"]) {array.push(1)} else array.push(0);
+    if(notification["tekkom1h"]) {array.push(1)} else array.push(0);
+    if(notification["tekkom2h"]) {array.push(1)} else array.push(0);
+    if(notification["tekkom3h"]) {array.push(1)} else array.push(0);
+    if(notification["tekkom6h"]) {array.push(1)} else array.push(0);
+    if(notification["tekkom1d"]) {array.push(1)} else array.push(0);
+    if(notification["tekkom2d"]) {array.push(1)} else array.push(0);
+    if(notification["tekkom1w"]) {array.push(1)} else array.push(0);
+    return array;
+  }
+
+  // Returns the state of every social notification interval
+  function socialArray() {
+    let array = [];
+    if(notification["social10m"]) {array.push(1)} else array.push(0);
+    if(notification["social30m"]) {array.push(1)} else array.push(0);
+    if(notification["social1h"]) {array.push(1)} else array.push(0);
+    if(notification["social2h"]) {array.push(1)} else array.push(0);
+    if(notification["social3h"]) {array.push(1)} else array.push(0);
+    if(notification["social6h"]) {array.push(1)} else array.push(0);
+    if(notification["social1d"]) {array.push(1)} else array.push(0);
+    if(notification["social2d"]) {array.push(1)} else array.push(0);
+    if(notification["social1w"]) {array.push(1)} else array.push(0);
+    return array;
+  }
+
+  // Returns the state of every ctf notification interval
+  function ctfArray() {
+    let array = [];
+    if(notification["ctf10m"]) {array.push(1)} else array.push(0);
+    if(notification["ctf30m"]) {array.push(1)} else array.push(0);
+    if(notification["ctf1h"]) {array.push(1)} else array.push(0);
+    if(notification["ctf2h"]) {array.push(1)} else array.push(0);
+    if(notification["ctf3h"]) {array.push(1)} else array.push(0);
+    if(notification["ctf6h"]) {array.push(1)} else array.push(0);
+    if(notification["ctf1d"]) {array.push(1)} else array.push(0);
+    if(notification["ctf2d"]) {array.push(1)} else array.push(0);
+    if(notification["ctf1w"]) {array.push(1)} else array.push(0);
+    return array;
+  }
+
+  // Returns the state of every karrieredag notification interval
+  function karrieredagArray() {
+    let array = [];
+    if(notification["karrieredag10m"]) {array.push(1)} else array.push(0);
+    if(notification["karrieredag30m"]) {array.push(1)} else array.push(0);
+    if(notification["karrieredag1h"]) {array.push(1)} else array.push(0);
+    if(notification["karrieredag2h"]) {array.push(1)} else array.push(0);
+    if(notification["karrieredag3h"]) {array.push(1)} else array.push(0);
+    if(notification["karrieredag6h"]) {array.push(1)} else array.push(0);
+    if(notification["karrieredag1d"]) {array.push(1)} else array.push(0);
+    if(notification["karrieredag2d"]) {array.push(1)} else array.push(0);
+    if(notification["karrieredag1w"]) {array.push(1)} else array.push(0);
+    return array;
+  }
+
+  // Returns the state of every fadderuka notification interval
+  function fadderukaArray() {
+    let array = [];
+    if(notification["fadderuka10m"]) {array.push(1)} else array.push(0);
+    if(notification["fadderuka30m"]) {array.push(1)} else array.push(0);
+    if(notification["fadderuka1h"]) {array.push(1)} else array.push(0);
+    if(notification["fadderuka2h"]) {array.push(1)} else array.push(0);
+    if(notification["fadderuka3h"]) {array.push(1)} else array.push(0);
+    if(notification["fadderuka6h"]) {array.push(1)} else array.push(0);
+    if(notification["fadderuka1d"]) {array.push(1)} else array.push(0);
+    if(notification["fadderuka2d"]) {array.push(1)} else array.push(0);
+    if(notification["fadderuka1w"]) {array.push(1)} else array.push(0);
+    return array;
+  }
+
+  // Returns the state of every bedpres notification interval
+  function bedpresArray() {
+    let array = [];
+    if(notification["bedpres10m"]) {array.push(1)} else array.push(0);
+    if(notification["bedpres30m"]) {array.push(1)} else array.push(0);
+    if(notification["bedpres1h"]) {array.push(1)} else array.push(0);
+    if(notification["bedpres2h"]) {array.push(1)} else array.push(0);
+    if(notification["bedpres3h"]) {array.push(1)} else array.push(0);
+    if(notification["bedpres6h"]) {array.push(1)} else array.push(0);
+    if(notification["bedpres1d"]) {array.push(1)} else array.push(0);
+    if(notification["bedpres2d"]) {array.push(1)} else array.push(0);
+    if(notification["bedpres1w"]) {array.push(1)} else array.push(0);
+    return array;
+  }
+
+  // Returns the state of every login notification interval
+  function loginArray() {
+    let array = [];
+    if(notification["login10m"]) {array.push(1)} else array.push(0);
+    if(notification["login30m"]) {array.push(1)} else array.push(0);
+    if(notification["login1h"]) {array.push(1)} else array.push(0);
+    if(notification["login2h"]) {array.push(1)} else array.push(0);
+    if(notification["login3h"]) {array.push(1)} else array.push(0);
+    if(notification["login6h"]) {array.push(1)} else array.push(0);
+    if(notification["login1d"]) {array.push(1)} else array.push(0);
+    if(notification["login2d"]) {array.push(1)} else array.push(0);
+    if(notification["login1w"]) {array.push(1)} else array.push(0);
+    return array;
+  }
+
+  // Returns the state of every annet notification interval
+  function annetArray() {
+    let array = [];
+    if(notification["annet10m"]) {array.push(1)} else array.push(0);
+    if(notification["annet30m"]) {array.push(1)} else array.push(0);
+    if(notification["annet1h"]) {array.push(1)} else array.push(0);
+    if(notification["annet2h"]) {array.push(1)} else array.push(0);
+    if(notification["annet3h"]) {array.push(1)} else array.push(0);
+    if(notification["annet6h"]) {array.push(1)} else array.push(0);
+    if(notification["annet1d"]) {array.push(1)} else array.push(0);
+    if(notification["annet2d"]) {array.push(1)} else array.push(0);
+    if(notification["annet1w"]) {array.push(1)} else array.push(0);
+    return array;
+  }
+
+  function notificationArray(category) {
+    let cat = category.toLowerCase();
+
+    switch (cat) {
+      case "tekkom":        return tekkomArray();
+      case "social":        return socialArray();
+      case "ctf":           return ctfArray();
+      case "karrieredag":   return karrieredagArray();
+      case "fadderuka":     return fadderukaArray();
+      case "bedpres":       return bedpresArray();       
+      case "login":         return loginArray();
+      case "annet":         return annetArray();
+    }
+  }
 
   async function getData() {                                              //  --- FETCHING DATA FROM API ---
     try {
@@ -422,12 +570,18 @@ export default function EventScreen({ navigation }) {                     //  Ex
                             {EventCardLocation(item, theme, lang)}
                             <View style={ES.view3}>
                               {clickedEvents.some(event => event.eventID === item.eventID) ? 
-                                <TouchableOpacity onPress={() => topic(item.eventID, lang, 0) + cancelScheduledNotification(item) + setClickedEvents(clickedEvents.filter((x) => x.eventID !== item.eventID))}>
+                                <TouchableOpacity onPress={() => {
+                                  topic(item.eventID, lang, 0, (item.category).toLowerCase(), notificationArray(item.category))
+                                  setClickedEvents(clickedEvents.filter((x) => x.eventID !== item.eventID))
+                                }}>
                                   <View style = {ES.greenLight}><GreenLight/></View>
                                   <View style = {ES.checkContent}><Check/></View>
                                 </TouchableOpacity>
                               :
-                                <TouchableOpacity onPress={() => {topic(item.eventID,lang, 1) + SchedulePushNotification(item,lang) + setClickedEvents([...clickedEvents, item])}}>
+                                <TouchableOpacity onPress={() => {
+                                  topic(item.eventID,lang, 1, (item.category).toLowerCase(), notificationArray(item.category))
+                                  setClickedEvents([...clickedEvents, item])
+                                }}>
                                   <View style = {ES.greenLight}><GrayLight/></View>
                                   <View style = {ES.checkContent}><Check/></View>
                                 </TouchableOpacity>
@@ -437,7 +591,7 @@ export default function EventScreen({ navigation }) {                     //  Ex
                       </Card>
                       {index == renderedArray.length-1 ? Space(10):null}
                       {index == renderedArray.length-1 ? <Text style={{...T.contact, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? 'Oppdatert kl:':'Updated:'} {lastSave}.</Text>:null}
-                      {index == renderedArray.length-1 ? Space(Dimensions.get('window').height/9):null} 
+                      {index == renderedArray.length-1 ? Space((Dimensions.get('window').height/3)+10):null} 
                       {index == renderedArray.length-1 && search.status == 1 ? Space(152.5):null}
                       {index == renderedArray.length-1 && search.status == 1 ? Space(40*(Math.ceil(relevantCategories.length/3))):null}
                     </TouchableOpacity>
@@ -461,7 +615,7 @@ export default function EventScreen({ navigation }) {                     //  Ex
             <Text style={{...T.centeredBold20, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? "Sjekk nettverkstilkoblingen din og prøv igjen. Kontakt TEKKOM dersom problemet vedvarer.":"Check your wifi connection and try again. Contact TEKKOM if the issue persists."}</Text>
           </View>
         }
-        {Space(Dimensions.get('window').height/10)}
+        {Space(Dimensions.get('window').height/3)}
       </View>    
 
       {/* ========================= DISPLAY TOP MENU ========================= */}

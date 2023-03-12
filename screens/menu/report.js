@@ -1,13 +1,18 @@
 {/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
+import DynamicCircle from '../../shared/eventComponents/dynamicCircle';
+import GreenLight from '../../shared/eventComponents/greenLight';
+import GrayLight from '../../shared/eventComponents/grayLight';
+import CardSmaller from '../../shared/functions/cardSmaller';
+import Check from '../../shared/eventComponents/check';
+import Button from '../../shared/functions/button';
+import Space from '../../shared/functions/space';
+import FetchColor from '../../styles/fetchTheme';
+import { SS } from '../../styles/settingStyles';
 import { GS } from '../../styles/globalStyles';
 import { MS } from '../../styles/menuStyles';
-import { T } from '../../styles/text';
-import { SS } from '../../styles/settingStyles';
-import React, { useState } from 'react';
-import GreenLight, { Check, GrayLight, DynamicCircle } from '../../shared/eventComponents/otherComponents';
-import { Button, CardSmaller, Space } from '../../shared/sharedComponents';
 import { useSelector } from 'react-redux';
-import FetchColor from '../../styles/fetchTheme';
+import React, { useState } from 'react';
+import { T } from '../../styles/text';
 import { BlurView } from 'expo-blur';
 import { 
   Text, 

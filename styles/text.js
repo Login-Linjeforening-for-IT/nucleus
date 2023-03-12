@@ -32,6 +32,9 @@ export const T = StyleSheet.create({          // Declares T - meant for all text
   text25: {                                   // Text of size 25
     fontSize: 25,                             // Text font size
   },
+  text20: {                                   // Text of size 20
+    fontSize: 20,                             // Text font size
+  },
   centered: {                                 // Centered text of size 30
     alignSelf: 'center',                      // Vertically centers
     fontSize: 30,                             // Text font size
