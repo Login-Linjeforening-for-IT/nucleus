@@ -1,6 +1,6 @@
 import FetchColor from '../../styles/fetchTheme';
-import { View, Text } from 'react-native';
 import { useSelector } from 'react-redux';
+import { View, Text } from 'react-native';
 import topicSwitch from './topicSwitch';
 import Space from '../functions/space';
 import { T } from '../../styles/text';

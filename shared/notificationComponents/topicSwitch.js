@@ -5,10 +5,6 @@ import { View, Text } from 'react-native';                                      
 import { useSelector } from 'react-redux';
 import Card from '../functions/card';
 
-// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 5/8
-// import messaging from '@react-native-firebase/messaging';
-// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 5/8
-
 /**
  * Switch for notification intervals on SES.
  * 

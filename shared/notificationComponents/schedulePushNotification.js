@@ -1,9 +1,6 @@
 import NotificationDelay from '../eventComponents/notificationDelay';
 import * as Notifications from 'expo-notifications';                                    // Local notifications
 import fetchEmoji from '../functions/fetchEmoji';
-// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 5/8
-// import messaging from '@react-native-firebase/messaging';
-// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 5/8
 
 /**
  * Function for scheduling push notifications

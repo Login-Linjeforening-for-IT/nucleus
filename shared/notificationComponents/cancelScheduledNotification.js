@@ -1,8 +1,4 @@
 import * as Notifications from 'expo-notifications';                                    // Local notifications
-
-// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 5/8
-// import messaging from '@react-native-firebase/messaging';
-// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 5/8
   
 /**
  * Function for canceling scheduled using the id of the event
