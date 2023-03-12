@@ -5,14 +5,16 @@ export const NotificationSlice = createSlice({                              // D
     initialState: {                                                         // Initial state
 
         // Notification categories
-        SETUP:              false,                                              // Initial notification setup when app is downloaded
-        IMPORTANT:          true,                                               // Important information
-        REMINDERS:          true,                                               // Reminders for enrolled events
-        EVENTS:             true,                                               // Notifications when any events are posted
-        BEDPRES:            true,                                               // Notifications when bedpres events are posted
-        TEKKOM:             true,                                               // Reminder 1 hour before tekkom starts
-        CTF:                true,                                               // Reminders for ctf
-        SOCIAL:             true,                                               // Reminders for social events like parties etc
+        SETUP:              false,                                          // Initial notification setup when app is downloaded
+        IMPORTANT:          true,                                           // Important information
+        TEKKOM:             true,                                           // Notifications for new events of category TEKKOM
+        CTF:                true,                                           // Notifications for new events of category CTF
+        SOCIAL:             true,                                           // Notifications for new events of category SOCIAL
+        BEDPRES:            true,                                           // Notifications for new events of category BEDPRES
+        KARRIEREDAG:        true,                                           // Notifications for new events of category KARRIEREDAG
+        FADDERUKA:          true,                                           // Notifications for new events of category FADDERUKA
+        LOGIN:              true,                                           // Notifications for new events of category LOGIN
+        ANNET:              true,                                           // Notifications for new events of category ANNET
 
         // Notification preferences - for automatic notifications
 

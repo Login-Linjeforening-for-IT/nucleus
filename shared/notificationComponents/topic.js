@@ -22,41 +22,52 @@ export default async function topic(topicID, lang, status, category, catArray) {
       if(lang) {
         // Unsubscribe from old language
         await messaging().unsubscribeFromTopic("englishIMPORTANT");
-        await messaging().unsubscribeFromTopic("englishREMINDERS");
-        await messaging().unsubscribeFromTopic("englishEVENTS");
         await messaging().unsubscribeFromTopic("englishBEDPRES");
         await messaging().unsubscribeFromTopic("englishTEKKOM");
         await messaging().unsubscribeFromTopic("englishCTF");
         await messaging().unsubscribeFromTopic("englishSOCIAL");
+        await messaging().unsubscribeFromTopic("englishKARRIEREDAG");
+        await messaging().unsubscribeFromTopic("englishFADDERUKA");
+        await messaging().unsubscribeFromTopic("englishLOGIN");
+        await messaging().unsubscribeFromTopic("englishANNET");
 
         // Subscribe to new language
         await messaging().subscribeToTopic("norwegianIMPORTANT");
-        await messaging().subscribeToTopic("norwegianREMINDERS");
         await messaging().subscribeToTopic("norwegianEVENTS");
         await messaging().subscribeToTopic("norwegianBEDPRES");
         await messaging().subscribeToTopic("norwegianTEKKOM");
         await messaging().subscribeToTopic("norwegianCTF");
         await messaging().subscribeToTopic("norwegianSOCIAL")
+        await messaging().subscribeToTopic("norwegianKARRIEREDAG");
+        await messaging().subscribeToTopic("norwegianFADDERUKA");
+        await messaging().subscribeToTopic("norwegianLOGIN");
+        await messaging().subscribeToTopic("norwegianANNET");
         return null;
       }else{
 
         // Unsubscribe from old language
         await messaging().unsubscribeFromTopic("norwegianIMPORTANT");
-        await messaging().unsubscribeFromTopic("norwegianREMINDERS");
         await messaging().unsubscribeFromTopic("norwegianEVENTS");
         await messaging().unsubscribeFromTopic("norwegianBEDPRES");
         await messaging().unsubscribeFromTopic("norwegianTEKKOM");
         await messaging().unsubscribeFromTopic("norwegianCTF");
         await messaging().unsubscribeFromTopic("norwegianSOCIAL");
+        await messaging().unsubscribeFromTopic("norwegianKARRIEREDAG");
+        await messaging().unsubscribeFromTopic("norwegianFADDERUKA");
+        await messaging().unsubscribeFromTopic("norwegianLOGIN");
+        await messaging().unsubscribeFromTopic("norwegianANNET");
 
         // Subscribe to new language
         await messaging().subscribeToTopic("englishIMPORTANT");
-        await messaging().subscribeToTopic("englishREMINDERS");
         await messaging().subscribeToTopic("englishEVENTS");
         await messaging().subscribeToTopic("englishBEDPRES");
         await messaging().subscribeToTopic("englishTEKKOM");
         await messaging().subscribeToTopic("englishCTF");
         await messaging().subscribeToTopic("englishSOCIAL")
+        await messaging().subscribeToTopic("englishKARRIEREDAG");
+        await messaging().subscribeToTopic("englishFADDERUKA");
+        await messaging().subscribeToTopic("englishLOGIN");
+        await messaging().subscribeToTopic("englishANNET");
         return null;
       }
     } else {
