@@ -71,30 +71,32 @@ export default async function topic(topicID, lang, status, category, catArray) {
         return null;
       }
     } else {
+      let cat = category.toLowerCase();
+      
       if(status) {
         // Subscribe to given topic for desired time intervals
         await messaging().subscribeToTopic(`${topic}`);
-        if(catArray[0]) await messaging().subscribeToTopic(topic + category + "10m");
-        if(catArray[1]) await messaging().subscribeToTopic(topic + category + "30m");
-        if(catArray[2]) await messaging().subscribeToTopic(topic + category + "1h");
-        if(catArray[3]) await messaging().subscribeToTopic(topic + category + "2h");
-        if(catArray[4]) await messaging().subscribeToTopic(topic + category + "3h");
-        if(catArray[5]) await messaging().subscribeToTopic(topic + category + "6h");
-        if(catArray[6]) await messaging().subscribeToTopic(topic + category + "1d");
-        if(catArray[7]) await messaging().subscribeToTopic(topic + category + "2d");
-        if(catArray[8]) await messaging().subscribeToTopic(topic + category + "1w");
+        if(catArray[0]) await messaging().subscribeToTopic(topic + cat + "10m");
+        if(catArray[1]) await messaging().subscribeToTopic(topic + cat + "30m");
+        if(catArray[2]) await messaging().subscribeToTopic(topic + cat + "1h");
+        if(catArray[3]) await messaging().subscribeToTopic(topic + cat + "2h");
+        if(catArray[4]) await messaging().subscribeToTopic(topic + cat + "3h");
+        if(catArray[5]) await messaging().subscribeToTopic(topic + cat + "6h");
+        if(catArray[6]) await messaging().subscribeToTopic(topic + cat + "1d");
+        if(catArray[7]) await messaging().subscribeToTopic(topic + cat + "2d");
+        if(catArray[8]) await messaging().subscribeToTopic(topic + cat + "1w");
       } else {
         // Unsubscribe from given topic for all time intervals
         await messaging().unsubscribeFromTopic(`${topic}`);
-        await messaging().unsubscribeFromTopic(topic + category + "10m");
-        await messaging().unsubscribeFromTopic(topic + category + "30m");
-        await messaging().unsubscribeFromTopic(topic + category + "1h");
-        await messaging().unsubscribeFromTopic(topic + category + "2h");
-        await messaging().unsubscribeFromTopic(topic + category + "3h");
-        await messaging().unsubscribeFromTopic(topic + category + "6h");
-        await messaging().unsubscribeFromTopic(topic + category + "1d");
-        await messaging().unsubscribeFromTopic(topic + category + "2d");
-        await messaging().unsubscribeFromTopic(topic + category + "1w");
+        await messaging().unsubscribeFromTopic(topic + cat + "10m");
+        await messaging().unsubscribeFromTopic(topic + cat + "30m");
+        await messaging().unsubscribeFromTopic(topic + cat + "1h");
+        await messaging().unsubscribeFromTopic(topic + cat + "2h");
+        await messaging().unsubscribeFromTopic(topic + cat + "3h");
+        await messaging().unsubscribeFromTopic(topic + cat + "6h");
+        await messaging().unsubscribeFromTopic(topic + cat + "1d");
+        await messaging().unsubscribeFromTopic(topic + cat + "2d");
+        await messaging().unsubscribeFromTopic(topic + cat + "1w");
       }
     }
   }
