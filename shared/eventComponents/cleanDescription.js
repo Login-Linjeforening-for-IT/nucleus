@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import { T } from '../../styles/text'
-import { A } from '@expo/html-elements'; //Doesnt work in the commented lines below
+import { T } from '../../styles/text'
 import { useSelector } from 'react-redux';
 import FetchColor from '../../styles/fetchTheme';
 

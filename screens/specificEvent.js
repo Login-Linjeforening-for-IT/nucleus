@@ -1,13 +1,20 @@
 {/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
-import { GetEndTime, MonthNO, MonthEN, EventLocation, DynamicCircle } from '../shared/eventComponents/otherComponents';
+import SchedulePushNotification from '../shared/notificationComponents/schedulePushNotification';
 import CleanDescription, {FetchJoinLink} from '../shared/eventComponents/cleanDescription';
-import { SchedulePushNotification } from '../shared/notificationManagement';
 import CategoryCircle from '../shared/eventComponents/categoryCircle';
 import CategorySquare from '../shared/eventComponents/categorySquare';
-import Card, { CardSmaller, Space } from '../shared/sharedComponents';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import EventLocation from '../shared/eventComponents/eventLocation';
+import DynamicCircle from '../shared/eventComponents/dynamicCircle';
 import EventTime from '../shared/eventComponents/eventTime';
+import CardSmaller from '../shared/functions/cardSmaller';
+import MonthNO from '../shared/eventComponents/monthNO';
+import MonthEN from '../shared/eventComponents/monthEN';
+import GetEndTime from '../shared/functions/getEndTime';
 import React, { useEffect, useState } from 'react';
+import Space from '../shared/functions/space';
 import FetchColor from '../styles/fetchTheme';
+import Card from '../shared/functions/card';
 import { GS } from '../styles/globalStyles';
 import { ES } from '../styles/eventStyles';
 import { useSelector } from 'react-redux';
@@ -25,7 +32,6 @@ import {
   View,
   Text, 
 } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 {/* ========================= APP START ========================= */}
@@ -224,7 +230,7 @@ export default function SpecificEventScreen({ route, navigation}) {
               }
             </Card>
             {Space(10)}
-            {Space(Dimensions.get('window').height/10)}
+            {Space(Dimensions.get('window').height/3)}
         </ScrollView>
       </View>   
        

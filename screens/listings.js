@@ -1,22 +1,20 @@
 {/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
-import { MS } from '../styles/menuStyles'
-import { GS } from '../styles/globalStyles'
-import React, { useState } from 'react';
-import { T } from '../styles/text'
-import Card, {Space} from '../shared/sharedComponents';
-import { useSelector } from 'react-redux';
-import { DynamicCircle } from '../shared/eventComponents/otherComponents';
+import Space from '../shared/functions/space';
 import FetchColor from '../styles/fetchTheme';
-import { BlurView } from 'expo-blur';
+import { GS } from '../styles/globalStyles';
+import { useSelector } from 'react-redux';
+import { MS } from '../styles/menuStyles';
 import { SvgUri } from 'react-native-svg';
+import { BlurView } from 'expo-blur';
+import { T } from '../styles/text'
+import React from 'react';
 import { 
-  Text, 
-  View, 
-  Image, 
-  FlatList,
   TouchableOpacity,
   Dimensions,
-  Platform
+  Platform,
+  Image, 
+  Text, 
+  View, 
 } from 'react-native';
 
 {/* ========================= APP START ========================= */}

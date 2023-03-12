@@ -1,12 +1,15 @@
-import React from 'react';                                                      // React
-import { GS } from '../../styles/globalStyles';                                 // Global styles 
-import { T } from '../../styles/text';                                          // Text styles 
-import { MS } from '../../styles/menuStyles';                                   // Menu styles
-import Card, { Kontakt, Space, Line } from '../../shared/sharedComponents';     // Various self made components 
-import { DynamicCircle } from '../../shared/eventComponents/otherComponents';   // Event components
-import { useSelector } from 'react-redux';                                      // Redux
+import DynamicCircle from '../../shared/eventComponents/dynamicCircle';
+import Kontakt from '../../shared/functions/kontakt';
 import FetchColor from '../../styles/fetchTheme';                               // Color fetcher
+import Space from '../../shared/functions/space';
+import Line from '../../shared/functions/line';
+import Card from '../../shared/functions/card';
+import { GS } from '../../styles/globalStyles';                                 // Global styles 
+import { MS } from '../../styles/menuStyles';                                   // Menu styles
+import { useSelector } from 'react-redux';                                      // Redux
+import { T } from '../../styles/text';                                          // Text styles 
 import { BlurView } from 'expo-blur';                                           // Blur effect
+import React from 'react';                                                      // React
 import {      
   Text,                                                                         // Text component
   View,                                                                         // View component
@@ -98,7 +101,7 @@ export default function BusinessScreen( { navigation }) {                       
           </Card>
             
           {Space(10)}
-          {Space(Dimensions.get('window').height/10)}
+          {Space(Dimensions.get('window').height/3)}
         </ScrollView>
         
       </View>   

@@ -1,13 +1,19 @@
 {/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
-import { GS } from '../../styles/globalStyles';
-import { T } from '../../styles/text';
-import { MS } from '../../styles/menuStyles';
-import Card, { Line, Space , Social, AllComitees, Copyright } from '../../shared/sharedComponents';
-import React, {useState} from 'react';
-import Dropdown from '../../shared/dropdown';
-import { useSelector } from 'react-redux';
-import { DynamicCircle } from '../../shared/eventComponents/otherComponents';
+import DynamicCircle from '../../shared/eventComponents/dynamicCircle';
+import CornerSquare from '../../shared/eventComponents/cornerSquare';
+import AllComitees from '../../shared/functions/allCommittees';
+import Copyright from '../../shared/functions/copyright';
+import Dropdown from '../../shared/functions/dropdown';
+import Social from '../../shared/functions/social';
+import Space from '../../shared/functions/space';
 import FetchColor from '../../styles/fetchTheme';
+import Card from '../../shared/functions/card';
+import Line from '../../shared/functions/line';
+import { GS } from '../../styles/globalStyles';
+import { MS } from '../../styles/menuStyles';
+import { useSelector } from 'react-redux';
+import React, {useState} from 'react';
+import { T } from '../../styles/text';
 import { BlurView } from 'expo-blur';
 import { 
   Text, 
@@ -64,7 +70,7 @@ return(
         <View style={GS.row}>
           <Text>{lang ? Line(58,5) : screenWidth < 390 ? Line(94,5) : Line(92,5)}</Text>
           <View>
-            <Text style={{...T.boldWithLine, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Login er linjeforeningen for IT ved NTNU i Gjøvik og alle som går de følgene studiene er automatisk medlemmer i foreningen.' : 'Login is the student association for IT at  NTNU in Gjøvik and everyone who studies the following courses is automatically a member of the association.'}</Text>
+            <Text style={{...T.boldWithLine, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Login er linjeforeningen for IT ved NTNU i Gjøvik og alle som går de følgene studiene er automatisk medlemmer i foreningen.' : 'Login is the student association for IT at NTNU in Gjøvik and everyone who studies the following courses is automatically a member of the association.'}</Text>
           </View>
         </View>
         {Space(5)}
@@ -77,13 +83,13 @@ return(
         <View style={GS.row}>
           <Text>{Line(58,5)}</Text>
           <View>
-            <Text style={{...T.boldWithLine, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Foreningen drives av frivillige studenter som arbeider for at du skal få mest mulig ut av studiene dine ved  NTNU.' : 'The association is run by volunteer students who work to ensure that you get the most out of your studies at  NTNU.'}</Text>
+            <Text style={{...T.boldWithLine, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Foreningen drives av frivillige studenter som arbeider for at du skal få mest mulig ut av studiene dine ved NTNU.' : 'The association is run by volunteer students who work to ensure that you get the most out of your studies at NTNU.'}</Text>
           </View>
         </View>
         {Space(5)}
         <Text style={{...T.paragraph, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Vi arrangerer regelmessig sosiale arrangementer og bedriftspresentasjoner. Vi holder kontakt med aktuelle bedrifter og inviterer til blant annet cyberdagene én gang i semesteret slik at du som student skal bli kjent med mulighetene utdanningen din gir deg.' : 'We regularly organize social events and company presentations. We keep in touch with relevant companies and invite you to, among other things, the cyber days once a semester so that you, as a student, get to know the opportunities your education gives you.'}</Text>
         {Space(5)}
-        <Text style={{...T.paragraph, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Hver uke samler vi studenter til  TekKom- og  CTF-samlinger, der man kan lære seg nye ting eller komme med bidrag til foreningen. Her kan man møte andre studenter som deler gleden for å lære, og å sette kunnskapene man tilegner seg i praksis. Videre jobber EvntKom stadig med nye og spennende arrangementer som f.eks. filmkvelder og vinterball.' : 'Every week we gather students for  TekKom and  CTF gatherings, where you can learn new things or contribute to the association. Here you can meet other students who share the joy of learning and putting the knowledge you acquire into practice.  EvntKom is also constantly working on new and exciting events such as movie nights and winter ball.'}</Text>
+        <Text style={{...T.paragraph, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Hver uke samler vi studenter til TekKom- og CTF-samlinger, der man kan lære seg nye ting eller komme med bidrag til foreningen. Her kan man møte andre studenter som deler gleden for å lære, og å sette kunnskapene man tilegner seg i praksis. Videre jobber EvntKom stadig med nye og spennende arrangementer som f.eks. filmkvelder og vinterball.' : 'Every week we gather students for  TekKom and  CTF gatherings, where you can learn new things or contribute to the association. Here you can meet other students who share the joy of learning and putting the knowledge you acquire into practice. EvntKom is also constantly working on new and exciting events such as movie nights and winter ball.'}</Text>
         {Space(15)}
         <Text style={{...T.centered24, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Styret og komiteene' : 'The board and the committees'}</Text>
         {Space(5)}
@@ -177,50 +183,54 @@ return(
         
         {comittee.selected == 1 ? 
         <View>
-          <Image style={GS.personImage} source={require('../../assets/committee/eventkom/eventkomleder.png')} />
+          <Image style={GS.personImage} source={{uri: `https://cdn.login.no/img/portraits/portrett_eventkom-leder.jpg`}} />
           {Space(10)}
+          <View style={{position: 'relative', left: 0, bottom: 0}}>{CornerSquare(theme)}</View>
           <Text style={T.leaderTitle}>{lang ? 'EventKom leder' : 'EventKom leader'}</Text>
           {Space(5)}
-          <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>Sofie Hagen</Text>
+          <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>Sander Hauge</Text>
           {Space(5)}
-          <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/877183922021216256')}>
-            <Text style={{...T.discord, color: FetchColor(theme, 'DISCORD')}}>{<Image style={GS.tiny} source={require('../../assets/social/discord-colored.png')} />}sofiee#9763</Text>
+          <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/171972901501796352')}>
+            <Text style={{...T.discord, color: FetchColor(theme, 'DISCORD')}}>{<Image style={GS.tiny} source={{uri: `https://cdn.login.no/img/portraits/portrett_eventkom-leder.jpg`}} />}Sandiss#5586</Text>
           </TouchableOpacity>
           {Space(25)}
         </View>: null}
 
         {comittee.selected == 2 ? 
         <View>
-          <Image style={GS.personImage} source={require('../../assets/committee/tekkom/tekkomleder.png')} />
+          <Image style={GS.personImage} source={{uri: `https://cdn.login.no/img/portraits/portrett_tekkom-leder.jpg`}} />
           {Space(10)}
+          <View style={{position: 'relative', left: 0, bottom: 0}}>{CornerSquare(theme)}</View>
           <Text style={T.leaderTitle}>{lang ? 'TekKom leder' : 'TekKom leader'}</Text>
           {Space(5)}
-          <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>Simon Edna</Text>
+          <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>Eirik Hanasand</Text>
           {Space(5)}
-          <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/298525088914079745')}>
-            <Text style={{...T.discord, color: FetchColor(theme, 'DISCORD')}}>{<Image style={GS.tiny} source={require('../../assets/social/discord-colored.png')} />}Sim#3909</Text>
+          <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/376827396764073997')}>
+            <Text style={{...T.discord, color: FetchColor(theme, 'DISCORD')}}>{<Image style={GS.tiny} source={require('../../assets/social/discord-colored.png')} />}Axe#9595</Text>
           </TouchableOpacity>
           {Space(25)}
         </View>: null}
 
         {comittee.selected == 3 ? 
           <View>
-            <Image style={GS.personImage} source={require('../../assets/committee/prkom/prleder.png')} />
+            <Image style={GS.personImage} source={{uri: `https://cdn.login.no/img/portraits/portrett_pr-leder.jpg`}} />
             {Space(10)}
+            <View style={{position: 'relative', left: 0, bottom: 0}}>{CornerSquare(theme)}</View>
             <Text style={T.leaderTitle}>{lang ? 'PR leder' : 'PR leader'}</Text>
             {Space(5)}
-            <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>Kristina Kataki</Text>
+            <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>Ida Førland</Text>
             {Space(5)}
-            <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/877108421772582962')}>
-              <Text style={{...T.discord, color: FetchColor(theme, 'DISCORD')}}>{<Image style={GS.tiny} source={require('../../assets/social/discord-colored.png')} />}Kataki#7254</Text>
+            <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/470279697465606159')}>
+              <Text style={{...T.discord, color: FetchColor(theme, 'DISCORD')}}>{<Image style={GS.tiny} source={require('../../assets/social/discord-colored.png')} />}IdaForland#1277</Text>
             </TouchableOpacity>
             {Space(25)}
           </View>: null}
 
         {comittee.selected == 4 ? 
           <View>
-            <Image style={GS.personImage} source={require('../../assets/committee/ctfkom/ctfkomleder.png')} />
+            <Image style={GS.personImage} source={{uri: `https://cdn.login.no/img/portraits/portrett_ctfkom-leder.jpg`}} />
             {Space(10)}
+            <View style={{position: 'relative', left: 0, bottom: 0}}>{CornerSquare(theme)}</View>
             <Text style={T.leaderTitle}>{lang ? 'CTF leder' : 'CTF leader'}</Text>
             {Space(5)}
             <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>Eskil Refsgaard</Text>
@@ -230,17 +240,18 @@ return(
           </TouchableOpacity>
             {Space(25)}
           </View>: null}
-
+          
         {comittee.selected == 5 ? 
           <View>
-            <Image style={GS.personImage} source={require('../../assets/committee/satkom/satkomleder.png')} />
+            <Image style={GS.personImage} source={{uri: `https://cdn.login.no/img%2Fportraits%2Fportrett_%C3%B8konomi.jpg`}} />
             {Space(10)}
+            <View style={{position: 'relative', left: 0, bottom: 0}}>{CornerSquare(theme)}</View>
             <Text style={T.leaderTitle}>{lang ? 'SatKom leder' : 'SatKom leader'}</Text>
             {Space(5)}
-            <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>Sebastian Hestsveen</Text>
+            <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>Trygve Sollund</Text>
             {Space(5)}
-            <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/119120560931340290')}>
-              <Text style={{...T.discord, color: FetchColor(theme, 'DISCORD')}}>{<Image style={GS.tiny} source={require('../../assets/social/discord-colored.png')} />}stubbe#8694</Text>
+            <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/209395476288634881')}>
+              <Text style={{...T.discord, color: FetchColor(theme, 'DISCORD')}}>{<Image style={GS.tiny} source={require('../../assets/social/discord-colored.png')} />}Spikeupine#4356</Text>
             </TouchableOpacity>
             {Space(25)}
           </View>: null}
@@ -261,7 +272,7 @@ return(
         <Copyright/>
       </Card>
       {Space(10)}
-      {Space(Dimensions.get('window').height/10)}
+      {Space(Dimensions.get('window').height/3)}
     </ScrollView>
   </View> 
 
