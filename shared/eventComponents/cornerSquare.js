@@ -21,8 +21,8 @@ export default function CornerSquare(theme, corner) {  //SVG showing the color o
     if (corner == 3) {h = 45; w = "-12.85%", h1 = -307.5, w1 = -2.5}
 
     return(
-        <View style={{position: 'absolute', left: w, bottom: h}}>
-            <View style={{left: w1, bottom: h1, transform: [{ rotate: `${90*corner}deg` }]}}>
+        <View style={{backgroundColor: 'red', position: 'absolute', left: w, bottom: h}}>
+            <View style={{backgroundColor: 'red', left: w1, bottom: h1, transform: [{ rotate: `${90*corner}deg` }]}}>
                 {/** ORANGE */}
                 <Svg left={p1} bottom={p2} width={115} height={115} fill={FetchColor(theme, "ORANGE")}>
                     <Rect width={13} height={70} />
