@@ -1,4 +1,5 @@
 {/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
+import DynamicCircle from '../shared/eventComponents/dynamicCircle';
 import Space from '../shared/functions/space';
 import FetchColor from '../styles/fetchTheme';
 import { GS } from '../styles/globalStyles';
