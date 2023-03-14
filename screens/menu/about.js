@@ -192,10 +192,8 @@ export default function AboutScreen( { navigation }) {
         <Text style={{...T.text25, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Offentlige dokumenter' : 'Public documents'}</Text>
         <View>
           <Text style={{...T.paragraph, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'For mer informasjon og offentlige dokumenter kan du besøke' : 'For more information and public documents, visit'}
-            {<Text style={T.orange15} onPress={() => Linking.openURL('https://redmine.login.no/projects/wiki/wiki')}> Redmine
-            {
-              <Image style={GS.redMine} source={require('../../assets/social/redmine-orange.png')} />
-            }</Text>}
+            {<Text style={T.orange15} onPress={() => Linking.openURL('https://wiki.login.no')}> {lang ? "wikien":"the wiki"}
+            {/** <Image style={GS.redMine} source={require('../../assets/social/redmine-orange.png')} /> */}</Text>}.
           </Text>
           
         </View>

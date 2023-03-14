@@ -42,7 +42,7 @@ export default function person(person, lang, theme) {
             <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>{obj.name}</Text>
             {Space(5)}
             <TouchableOpacity onPress={() => Linking.openURL(obj.dclink)}>
-                <Text style={{...T.discord, zIndex: 1,color: FetchColor(theme, 'DISCORD')}}>{<Image style={GS.tiny} source={require('../../assets/social/discord-colored.png')} />}{obj.tag}</Text>
+                <Text style={{...T.discord, zIndex: 100,color: FetchColor(theme, 'DISCORD')}}>{<Image style={GS.tiny} source={require('../../assets/social/discord-colored.png')} />}{obj.tag}</Text>
             </TouchableOpacity>
             {Space(25)}
         </View>
