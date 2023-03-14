@@ -6,9 +6,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';       
 const Tab = createBottomTabNavigator();                                         // Declares Tab to equal CBTN function
 
 import EventScreen from '../screens/event';                                     // Events
-import AboutScreen from '../screens/menu/about';                                // About Login
-import MenuScreen from '../screens/menu';                                       // Profile
 import ListingScreen from '../screens/listings';                                // Job listings
+import MenuScreen from '../screens/menu';                                       // Profile
+import AboutScreen from '../screens/menu/about';                                // About Login
 import SpecificEventScreen from '../screens/specificEvent';                     // Specific Events
 import BusinessScreen from '../screens/menu/business';                          // Companies' screen
 import SettingScreen from '../screens/menu/settings';                           // Settings 

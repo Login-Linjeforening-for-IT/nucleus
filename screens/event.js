@@ -13,7 +13,7 @@ import React, { useEffect, useState, useRef } from 'react';               // Rea
 import MonthNO from '../shared/eventComponents/monthNO';
 import MonthEN from '../shared/eventComponents/monthEN';
 import CheckedBox from '../shared/functions/checkedBox';
-import { useSelector, useDispatch } from 'react-redux';                                // Redux
+import { useSelector, useDispatch } from 'react-redux';                   // Redux
 import Check from '../shared/eventComponents/check';
 import CheckBox from '../shared/functions/checkBox';
 import * as Notifications from 'expo-notifications';                      // Local notifications
@@ -496,7 +496,7 @@ export default function EventScreen({ navigation }) {                     //  Ex
       {/* ========================= DISPLAY CONTENT ========================= */}
       <View style={{...GS.content, backgroundColor: FetchColor(theme, 'BACKGROUND')}}>
         {/* ----- RENDERS FILTER ----- */}
-        {search.status == 1? Space(Dimensions.get('window').height/9):null}
+        {search.status == 1? Space(Dimensions.get('window').height/8):null}
         {search.status ? 
           <View>
               <View style={ES.absoluteView}>
@@ -559,7 +559,7 @@ export default function EventScreen({ navigation }) {                     //  Ex
                 
                 <View style={{marginTop: search.status && !index ? -10:0}}> 
                   <TouchableOpacity onPress={() => navigation.navigate('SpecificEventScreen', {item: item})}>
-                  {index == 0 && search.status == 0? Space(Dimensions.get('window').height/9): null}
+                  {index == 0 && search.status == 0? Space(Dimensions.get('window').height/8): null}
                       <Card>
                         <View style={ES.eventBack}>
                           <View>
@@ -636,9 +636,9 @@ export default function EventScreen({ navigation }) {                     //  Ex
           renderedArray.length > 0 || clickedCategory.length > 0 || filter.input != null ? 
           <TouchableOpacity onPress={() => toggleSearchBar()}>
             {search.status ? 
-              <Image style={{...MS.tMenuIcon, right: '-9%', top: '40%', height: 60, width: 140}} source={require('../assets/icons/filter-orange.png')} />
+              <Image style={MS.filterIcon} source={require('../assets/icons/filter-orange.png')} />
             :
-              <Image style={{...MS.tMenuIcon, right: '-9%', top: '40%', height: 60, width: 140}} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/icons/filter.png') : require('../assets/icons/filter-black.png')} />
+              <Image style={MS.filterIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/icons/filter.png') : require('../assets/icons/filter-black.png')} />
             }
           </TouchableOpacity>
         :null:null}
@@ -646,19 +646,18 @@ export default function EventScreen({ navigation }) {                     //  Ex
       {/* ========================= DISPLAY BOTTOM MENU ========================= */}
       {Platform.OS === 'ios' ? <BlurView style={MS.bMenu} intensity={30}/> : <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENTANDROID')}}/>}
       <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
-        <TouchableOpacity>
+        <TouchableOpacity style={MS.bMenuIconTO}>
           <Image style={MS.bMenuIcon} source={require('../assets/menu/calendar-orange.png')} />
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => listingPage()}>
+        <TouchableOpacity style={MS.bMenuIconTO} onPress={() => listingPage()}>
           <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/menu/business.png') : require('../assets/menu/business-black.png')} />
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => menuPage()}>
+        <TouchableOpacity style={MS.bMenuIconTO} onPress={() => menuPage()}>
           <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/menu/menu.png') : require('../assets/menu/menu-black.png')} />
         </TouchableOpacity>
       </View>     
-      
     </View>
   )
 };

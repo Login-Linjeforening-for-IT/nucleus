@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions } from "react-native";  // Stylesheet file
+import { StyleSheet, Dimensions, PixelRatio } from "react-native";  // Stylesheet file
 
 export const GS = StyleSheet.create({
   
@@ -95,8 +95,9 @@ export const GS = StyleSheet.create({
     flexDirection: 'row',
   },
   aboutImage: {
-      width: '100%',
-      height: 220
+    width: '100%',
+    height: undefined,
+    aspectRatio: 1.5,
   },
   redMine: {
     height: 15,

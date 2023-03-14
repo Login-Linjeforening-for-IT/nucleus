@@ -45,7 +45,7 @@ export default function SpecificListingScreen( { route, navigation }) {
 {/* ========================= DISPLAY CONTENT ========================= */}
 <View style={{...GS.content, backgroundColor: FetchColor(theme, 'BACKGROUND')}}>
         <ScrollView showsVerticalScrollIndicator={false}>
-        {Space(Dimensions.get('window').height/9)}
+        {Space(Dimensions.get('window').height/8)}
         <View>
             <View style={ES.specificEventView1}>
               {/* <Image style={ES.specificEventImage} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/mnemonic.png') : require('../assets/mnemonic-black.png')} /> */}
@@ -88,13 +88,13 @@ export default function SpecificListingScreen( { route, navigation }) {
 {/* ========================= DISPLAY BOTTOM MENU ========================= */}
 {Platform.OS === 'ios' ? <BlurView style={MS.bMenu} intensity={30}/> : <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENTANDROID')}}/>}
     <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
-        <TouchableOpacity onPress={() => eventPage()}>
+        <TouchableOpacity style={MS.bMenuIconTO} onPress={() => eventPage()}>
         <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/menu/calendar777.png') : require('../assets/menu/calendar-black.png')} />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => listingPage()}>
+          <TouchableOpacity style={MS.bMenuIconTO} onPress={() => listingPage()}>
             <Image style={MS.bMenuIcon} source={require('../assets/menu/business-orange.png')} />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => menuPage()}>
+          <TouchableOpacity style={MS.bMenuIconTO} onPress={() => menuPage()}>
           <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/menu/menu.png') : require('../assets/menu/menu-black.png')} />
           </TouchableOpacity>
       </View>     

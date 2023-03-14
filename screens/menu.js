@@ -62,7 +62,7 @@ return(
           data={setting}
           renderItem={({item, index}) => (
             <View>
-              {index == 0 ? Space(Dimensions.get('window').height/9): null}
+              {index == 0 ? Space(Dimensions.get('window').height/8): null}
             <TouchableOpacity onPress={() => item.id == 6 && login? navigation.navigate('InternalScreen', item) : navigation.navigate(item.nav, item)}>
               <Card>
                 <Text style={{...T.centered20, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? item.titleNO : item.titleEN}</Text>
@@ -73,7 +73,7 @@ return(
               {index == setting.length-1 && !feedback.status ?
                 <TouchableOpacity onPress={() => toggleFeedback()}>
                   <View style={{backgroundColor: FetchColor(theme, 'BACKGROUND')}}>
-                    <Text style={{...T.contact, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? 'Gi tilbakemelding' : 'Give feedback'}</Text>
+                    <Text style={{...T.contact, textDecorationLine: 'underline',color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? 'Gi tilbakemelding' : 'Give feedback'}</Text>
                   </View>
                 </TouchableOpacity>
               :null}
@@ -82,14 +82,14 @@ return(
               <View style={{...ES.row, justifyContent: 'space-evenly'}}>
                 <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/376827396764073997')}>
                   <View style={{backgroundColor: FetchColor(theme, 'BACKGROUND')}}>
-                    <Text style={{...T.contact, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>Discord</Text>
+                    <Text style={{...T.contact, textDecorationLine: 'underline', color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>Discord</Text>
                   </View>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={async() => {
                   Linking.openURL('mailto:kontakt@login.no').catch(() => lang ? Alert.alert('Kunne ikke åpne mail!', 'Mail: kontakt@login.no'):Alert.alert('Could not open mail!', 'Reach us at kontakt@login.no'))
                 }}>
                   <View style={{backgroundColor: FetchColor(theme, 'BACKGROUND')}}>
-                    <Text style={{...T.contact, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>Mail</Text>
+                    <Text style={{...T.contact, textDecorationLine: 'underline', color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>Mail</Text>
                   </View>
                 </TouchableOpacity>
               </View>
@@ -119,13 +119,13 @@ return(
 {/* ========================= DISPLAY BOTTOM MENU ========================= */}
 {Platform.OS === 'ios' ? <BlurView style={MS.bMenu} intensity={30}/> : <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENTANDROID')}}/>}
     <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
-        <TouchableOpacity onPress={() => eventPage()}>
+        <TouchableOpacity style={MS.bMenuIconTO} onPress={() => eventPage()}>
         <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/menu/calendar777.png') : require('../assets/menu/calendar-black.png')} />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => listingPage()}>
+        <TouchableOpacity style={MS.bMenuIconTO} onPress={() => listingPage()}>
         <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/menu/business.png') : require('../assets/menu/business-black.png')} />
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity style={MS.bMenuIconTO}>
               <Image style={MS.bMenuIcon} source={require('../assets/menu/menu-orange.png')} />
         </TouchableOpacity>
       </View>     

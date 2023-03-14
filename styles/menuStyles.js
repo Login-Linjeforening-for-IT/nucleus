@@ -1,4 +1,5 @@
-import { StyleSheet, Dimensions, PixelRatio } from "react-native";  // Importing needed dependencies
+import { StyleSheet, Dimensions, PixelRatio, Platform } from "react-native";  // Importing needed dependencies
+
 
 export const MS = StyleSheet.create ({                              // Declares the export - meant for styling top and bottom menu
                                                                     // --- TOP MENU ---
@@ -53,14 +54,14 @@ export const MS = StyleSheet.create ({                              // Declares 
     width: '105%',                                                  // 105% width to layer on line with event left hand views
     flexDirection: 'row',                                           // Changes flex direction to allow for multiple elements on the same horizontal level
     justifyContent: 'space-between',                                // Adds an equal amount of space between every element
-    height: Dimensions.get('window').height/9,                      // Sets the height of the top menu to 13.3% of the screen height
+    height: "10%",                                                  // Sets the height of the top menu to 13.3% of the screen height
   },
   tMenuIcon: {                                                      // Size of top menu icons
-    top: '37.5%',                                                     // Moves the icon 5% downwards
+    top: '35%',                                                     // Moves the icon 35% downwards
     width: 120,                                                     // Icon width
     height: 60,                                                     // Icon height
   },
-  tMenuIconWithExtra: {                                             // Placement when extra icons are added to the top menu
+  tMenuIconWithExtra: {                                             // Placement when extra icons are added to the top menu NOTE: NOT IN USE BUT DONT REMOVE
     right: '50%',                                                   // Moves the icon 50% leftwards
     top: 5,                                                         // Moves the icon 5 px downwards
     width: 50,                                                      // Icon width
@@ -72,26 +73,30 @@ export const MS = StyleSheet.create ({                              // Declares 
     width: 80,                                                      // Icon width
     height: 80,                                                     // Icon height
   },
-  searchIcon: {                                                     // Filter icon
-    top: '6%',                                                      // Moves it 6% downwards
-    right: 15,                                                      // Moves it 15px towards the left
-    width: 30,                                                      // Icon width
-    height: 120                                                     // Icon height
-  },  
-  
-                                                                    // --- BOTTOM MENU ---
-  bMenu: {                                                          // Bottom menu view
-      position: 'absolute',
-      top: Dimensions.get('window').height-Dimensions.get('window').height/10, //-(PixelRatio.getPixelSizeForLayoutSize(48))
-      width: '100%',
-      height: Dimensions.get('window').height/10,                   // Sets the height of the bottom menu to 10% of the screen height
-      flexDirection: 'row',                                         // Changes the flex directions to allow for multiple elements horizontally
-      justifyContent: 'space-evenly',                               // Adds equal amount of space between icons
-      alignItems: 'center'                                          // Vertically aligns items inside to center
+  filterIcon: {
+    top: '37%',                                                     // Moves the icon 35% downwards
+    height: 60,                                                     // Icon height
+    right: '-9%',                                                   // Moving it 9% rightwards
+    width: 140,                                                     // Icon width
   },
   
+  // --- BOTTOM MENU ---
+  bMenu: {                                                          // Bottom menu view
+    position: 'absolute',
+    top: Platform.OS == "ios" ? "73%":"75%",                        // iphone and samsung is 73%, oneplus is 75% -(PixelRatio.getPixelSizeForLayoutSize(48)), oneplus is 10ppi
+    width: '100%',
+    height: PixelRatio.getPixelSizeForLayoutSize(100),              // Sets the height of the bottom menu to 10% of the screen height
+    flexDirection: 'row',                                           // Changes the flex directions to allow for multiple elements horizontally
+    justifyContent: 'space-evenly',                                 // Adds equal amount of space between icons
+    alignItems: 'center'                                            // Vertically aligns items inside to center
+  },
+  bMenuIconTO: {                                                    // Bottom menu icons
+    bottom: PixelRatio.getPixelSizeForLayoutSize(40),               // Moves icons 13% upwards
+    width: 120,                                                     // Icon width
+    height: 65,                                                     // Icon height
+  },
   bMenuIcon: {                                                      // Bottom menu icons
-    bottom: '12%',                                                  // Moves icons 13% upwards
+    bottom: PixelRatio.getPixelSizeForLayoutSize(2),               // Moves icons 13% upwards
     width: 120,                                                     // Icon width
     height: 65,                                                     // Icon height
   },

@@ -116,7 +116,7 @@ const inputContent = (val) => {
       {/* ========================= DISPLAY CONTENT ========================= */}
       <View style={{...GS.content, backgroundColor: FetchColor(theme, 'BACKGROUND')}}>
         <View>
-          {Space((Dimensions.get('window').height/9)+40)}
+          {Space((Dimensions.get('window').height/8)+40)}
           <Text style={{...T.centered, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Anonymt og sikkert. Alltid.' : 'Anonymous and secure. Always.'}</Text>
           {Space(30)}
 
@@ -231,13 +231,13 @@ const inputContent = (val) => {
       {/* ========================= DISPLAY BOTTOM MENU ========================= */}
       {Platform.OS === 'ios' ? <BlurView style={MS.bMenu} intensity={30}/> : <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENTANDROID')}}/>}
     <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
-            <TouchableOpacity onPress={() => eventPage()}>
+            <TouchableOpacity style={MS.bMenuIconTO} onPress={() => eventPage()}>
             <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/menu/calendar777.png') : require('../../assets/menu/calendar-black.png')} />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => listingPage()}>
+            <TouchableOpacity style={MS.bMenuIconTO} onPress={() => listingPage()}>
             <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/menu/business.png') : require('../../assets/menu/business-black.png')} />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => menuPage()}>
+            <TouchableOpacity style={MS.bMenuIconTO} onPress={() => menuPage()}>
               <Image style={MS.bMenuIcon} source={require('../../assets/menu/menu-orange.png')} />
             </TouchableOpacity>
         </View>     

@@ -58,6 +58,13 @@
         "foregroundImage": "./assets/logo/adaptiveIcon.png",
         "backgroundColor": "#000000"
       },
+      "notification": {
+        "icon": "./assets/logo/adaptiveIcon.png",
+        "androidMode": "default",
+        "priority": "max",
+        "visibility": "public",
+        "smallIconSize": 24
+      },
       "package": "com.login.Login",
       "googleServicesFile": "./google-services.json",
       "versionCode": 27

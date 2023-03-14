@@ -31,9 +31,7 @@ export default async function registerForPushNotificationsAsync(lang) {         
       }
       token = (await Notifications.getExpoPushTokenAsync()).data;
       //console.log(token); // Logs the token
-  } else {
-      Alert.alert(lang ? 'Varslinger er ikke tilgjengelig på simulatorer.': 'Notifications are not available on simulators');
-  }
+  } //else console.log('Notifications are not available on simulators');                    // Enable this line if you have a simulator issue
 
   return token;
 };

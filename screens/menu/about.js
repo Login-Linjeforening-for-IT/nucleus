@@ -1,10 +1,10 @@
 {/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
 import DynamicCircle from '../../shared/eventComponents/dynamicCircle';
-import CornerSquare from '../../shared/eventComponents/cornerSquare';
 import AllComitees from '../../shared/functions/allCommittees';
 import Copyright from '../../shared/functions/copyright';
 import Dropdown from '../../shared/functions/dropdown';
 import Social from '../../shared/functions/social';
+import person from '../../shared/functions/person';
 import Space from '../../shared/functions/space';
 import FetchColor from '../../styles/fetchTheme';
 import Card from '../../shared/functions/card';
@@ -59,12 +59,12 @@ export default function AboutScreen( { navigation }) {
     });
   }
 
-return(
+  return(
   <View>
 {/* ========================= DISPLAY CONTENT ========================= */}
 <View style={{...GS.content, backgroundColor: FetchColor(theme, 'BACKGROUND')}}>
     <ScrollView showsVerticalScrollIndicator={false}>
-      {Space(Dimensions.get('window').height/9)}
+      {Space(Dimensions.get('window').height/8)}
       <Card>
         <Text style={{...T.bold40, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Hvem er vi?' : 'Who are we?'}</Text>{Space(5)}
         <View style={GS.row}>
@@ -95,6 +95,7 @@ return(
         {Space(5)}
         <Text style={{...T.boldParagraph, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Foreningen er satt sammen av et hovedstyret og en rekke komiteer.' : 'The association is made up of a main board and a number of committees.'}</Text>
         <View style={GS.parentComitteeView}>
+
             <TouchableOpacity onPress={() => selectedComittee(0)}>
               <View style={{...GS.comittee1, backgroundColor: FetchColor(theme, 'CONTRAST')}}>
                 {comittee.selected == 0 ? 
@@ -157,104 +158,35 @@ return(
           </TouchableOpacity>
         </View>
         {
-            info.map((relevantComittee, index) => {
-              if (relevantComittee.id == comittee.selected) {
-                return(
-                  <View key={index}>
-                    <Text style={{...T.text30, color: FetchColor(theme, 'TEXTCOLOR')}}>
-                    {relevantComittee.id == 0 ? <Image style={GS.small} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/committee/styret/styret-white.png') : require('../../assets/committee/styret/styret-black.png')} />:null}
-                    {relevantComittee.id == 1 ? <Image style={GS.small} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/committee/eventkom/eventkom-white.png') : require('../../assets/committee/eventkom/eventkom-black.png')} />:null}
-                    {relevantComittee.id == 2 ? <Image style={GS.small} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/committee/tekkom/tekkom-white.png') : require('../../assets/committee/tekkom/tekkom-black.png')} />:null}
-                    {relevantComittee.id == 3 ? <Image style={GS.small} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/committee/prkom/pr-white.png') : require('../../assets/committee/prkom/pr-black.png')} />:null}
-                    {relevantComittee.id == 4 ? <Image style={GS.small} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/committee/ctfkom/ctfkom-white.png') : require('../../assets/committee/ctfkom/ctfkom-black.png')} />:null}
-                    {relevantComittee.id == 5 ? <Image style={GS.small} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/committee/satkom/satkom.png') : require('../../assets/committee/satkom/satkom-black.png')} />:null}
-                    {lang ? relevantComittee.titleNO : relevantComittee.titleEN}</Text>
+          info.map((relevantComittee, index) => {
+            if (relevantComittee.id == comittee.selected) {
+              return(
+                <View key={index}>
+                  <Text style={{...T.text30, color: FetchColor(theme, 'TEXTCOLOR')}}>
+                  {relevantComittee.id == 0 ? <Image style={GS.small} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/committee/styret/styret-white.png') : require('../../assets/committee/styret/styret-black.png')} />:null}
+                  {relevantComittee.id == 1 ? <Image style={GS.small} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/committee/eventkom/eventkom-white.png') : require('../../assets/committee/eventkom/eventkom-black.png')} />:null}
+                  {relevantComittee.id == 2 ? <Image style={GS.small} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/committee/tekkom/tekkom-white.png') : require('../../assets/committee/tekkom/tekkom-black.png')} />:null}
+                  {relevantComittee.id == 3 ? <Image style={GS.small} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/committee/prkom/pr-white.png') : require('../../assets/committee/prkom/pr-black.png')} />:null}
+                  {relevantComittee.id == 4 ? <Image style={GS.small} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/committee/ctfkom/ctfkom-white.png') : require('../../assets/committee/ctfkom/ctfkom-black.png')} />:null}
+                  {relevantComittee.id == 5 ? <Image style={GS.small} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/committee/satkom/satkom.png') : require('../../assets/committee/satkom/satkom-black.png')} />:null}
+                  {lang ? relevantComittee.titleNO : relevantComittee.titleEN}</Text>
 
-                    {(relevantComittee.quoteNO && lang || relevantComittee.qouteEN && !lang) ? <Text style={{...T.boldParagraph, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? relevantComittee.quoteNO : relevantComittee.qouteEN}</Text>:null}
-                    {(relevantComittee.quoteNO && lang || relevantComittee.qouteEN && !lang) ? Space(10):null}
-                    <Text style={{...T.paragraph, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? relevantComittee.descriptionNO : relevantComittee.descriptionEN}</Text>
-                    {Space(15)}
-                  </View>
-                )
-              }
-            })
-          }
-        {comittee.selected == 0 ? <AllComitees/>: null}
-        
-        {comittee.selected == 1 ? 
-        <View>
-          <Image style={GS.personImage} source={{uri: `https://cdn.login.no/img/portraits/portrett_eventkom-leder.jpg`}} />
-          {Space(10)}
-          <View style={{position: 'relative', left: 0, bottom: 0}}>{CornerSquare(theme)}</View>
-          <Text style={T.leaderTitle}>{lang ? 'EventKom leder' : 'EventKom leader'}</Text>
-          {Space(5)}
-          <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>Sander Hauge</Text>
-          {Space(5)}
-          <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/171972901501796352')}>
-            <Text style={{...T.discord, color: FetchColor(theme, 'DISCORD')}}>{<Image style={GS.tiny} source={{uri: `https://cdn.login.no/img/portraits/portrett_eventkom-leder.jpg`}} />}Sandiss#5586</Text>
-          </TouchableOpacity>
-          {Space(25)}
-        </View>: null}
+                  {(relevantComittee.quoteNO && lang || relevantComittee.qouteEN && !lang) ? <Text style={{...T.boldParagraph, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? relevantComittee.quoteNO : relevantComittee.qouteEN}</Text>:null}
+                  {(relevantComittee.quoteNO && lang || relevantComittee.qouteEN && !lang) ? Space(10):null}
+                  <Text style={{...T.paragraph, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? relevantComittee.descriptionNO : relevantComittee.descriptionEN}</Text>
+                  {Space(15)}
+                </View>
+              )
+            }
+          })
+        }
 
-        {comittee.selected == 2 ? 
-        <View>
-          <Image style={GS.personImage} source={{uri: `https://cdn.login.no/img/portraits/portrett_tekkom-leder.jpg`}} />
-          {Space(10)}
-          <View style={{position: 'relative', left: 0, bottom: 0}}>{CornerSquare(theme)}</View>
-          <Text style={T.leaderTitle}>{lang ? 'TekKom leder' : 'TekKom leader'}</Text>
-          {Space(5)}
-          <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>Eirik Hanasand</Text>
-          {Space(5)}
-          <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/376827396764073997')}>
-            <Text style={{...T.discord, color: FetchColor(theme, 'DISCORD')}}>{<Image style={GS.tiny} source={require('../../assets/social/discord-colored.png')} />}Axe#9595</Text>
-          </TouchableOpacity>
-          {Space(25)}
-        </View>: null}
-
-        {comittee.selected == 3 ? 
-          <View>
-            <Image style={GS.personImage} source={{uri: `https://cdn.login.no/img/portraits/portrett_pr-leder.jpg`}} />
-            {Space(10)}
-            <View style={{position: 'relative', left: 0, bottom: 0}}>{CornerSquare(theme)}</View>
-            <Text style={T.leaderTitle}>{lang ? 'PR leder' : 'PR leader'}</Text>
-            {Space(5)}
-            <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>Ida Førland</Text>
-            {Space(5)}
-            <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/470279697465606159')}>
-              <Text style={{...T.discord, color: FetchColor(theme, 'DISCORD')}}>{<Image style={GS.tiny} source={require('../../assets/social/discord-colored.png')} />}IdaForland#1277</Text>
-            </TouchableOpacity>
-            {Space(25)}
-          </View>: null}
-
-        {comittee.selected == 4 ? 
-          <View>
-            <Image style={GS.personImage} source={{uri: `https://cdn.login.no/img/portraits/portrett_ctfkom-leder.jpg`}} />
-            {Space(10)}
-            <View style={{position: 'relative', left: 0, bottom: 0}}>{CornerSquare(theme)}</View>
-            <Text style={T.leaderTitle}>{lang ? 'CTF leder' : 'CTF leader'}</Text>
-            {Space(5)}
-            <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>Eskil Refsgaard</Text>
-            {Space(5)}
-            <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/522483274933731331')}>
-              <Text style={{...T.discord, color: FetchColor(theme, 'DISCORD')}}>{<Image style={GS.tiny} source={require('../../assets/social/discord-colored.png')} />}refsgaard#9067</Text>
-          </TouchableOpacity>
-            {Space(25)}
-          </View>: null}
-          
-        {comittee.selected == 5 ? 
-          <View>
-            <Image style={GS.personImage} source={{uri: `https://cdn.login.no/img%2Fportraits%2Fportrett_%C3%B8konomi.jpg`}} />
-            {Space(10)}
-            <View style={{position: 'relative', left: 0, bottom: 0}}>{CornerSquare(theme)}</View>
-            <Text style={T.leaderTitle}>{lang ? 'SatKom leder' : 'SatKom leader'}</Text>
-            {Space(5)}
-            <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>Trygve Sollund</Text>
-            {Space(5)}
-            <TouchableOpacity onPress={() => Linking.openURL('https://discordapp.com/users/209395476288634881')}>
-              <Text style={{...T.discord, color: FetchColor(theme, 'DISCORD')}}>{<Image style={GS.tiny} source={require('../../assets/social/discord-colored.png')} />}Spikeupine#4356</Text>
-            </TouchableOpacity>
-            {Space(25)}
-          </View>: null}
+        {comittee.selected == 0 ? AllComitees(lang,theme): null}
+        {comittee.selected == 1 ? person('evntkom', lang, theme): null}
+        {comittee.selected == 2 ? person('tekkom', lang, theme): null}
+        {comittee.selected == 3 ? person('pr', lang, theme): null}
+        {comittee.selected == 4 ? person('ctf', lang, theme): null}
+        {comittee.selected == 5 ? person('eco', lang, theme): null}
 
         {Space(10)}
         <Text style={{...T.text25, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Offentlige dokumenter' : 'Public documents'}</Text>
@@ -291,13 +223,13 @@ return(
 
 {Platform.OS === 'ios' ? <BlurView style={MS.bMenu} intensity={30}/> : <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENTANDROID')}}/>}
     <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
-        <TouchableOpacity onPress={() => eventPage()}>
+        <TouchableOpacity style={MS.bMenuIconTO} onPress={() => eventPage()}>
         <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/menu/calendar777.png') : require('../../assets/menu/calendar-black.png')} />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => listingPage()}>
+        <TouchableOpacity style={MS.bMenuIconTO} onPress={() => listingPage()}>
         <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/menu/business.png') : require('../../assets/menu/business-black.png')} />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => menuPage()}>
+        <TouchableOpacity style={MS.bMenuIconTO} onPress={() => menuPage()}>
           <Image style={MS.bMenuIcon} source={require('../../assets/menu/menu-orange.png')} />
         </TouchableOpacity>
       </View> 
