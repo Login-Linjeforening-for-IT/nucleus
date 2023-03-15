@@ -67,7 +67,7 @@
       },
       "package": "com.login.Login",
       "googleServicesFile": "./google-services.json",
-      "versionCode": 28
+      "versionCode": 29
     },
     "web": {
       "favicon": "./assets/logo/favicon.ico"
