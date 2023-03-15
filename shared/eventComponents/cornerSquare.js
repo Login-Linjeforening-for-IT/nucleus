@@ -14,7 +14,7 @@ export default function CornerSquare(theme, corner) {  //SVG showing the color o
 
     return(
         <View style={{...GS.personImage, transform: [{ rotate: `${90*corner}deg` }]}}>
-            <View>
+            <View style={{maxHeight: 220}}>
                 {/** ORANGE */}
                 <Svg width={115} height={115} fill={FetchColor(theme, "ORANGE")}>
                     <Rect width={13} height={70} />
