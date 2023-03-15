@@ -1,5 +1,6 @@
 /**
  * Function for comparing dates, true if the first is newer than the second
+ * 
  * @param {*} firstDate     First date to compare
  * @param {*} secondDate    Second date to compare
  * @returns                 Boolean, true if first is newer, otherwise false
@@ -26,16 +27,12 @@ export default function CompareDates (firstDate, secondDate) { // True if firstd
                     if(firstDay > secondDay) return false
                     if (firstHour >= secondHour) {
                         if(firstHour > secondHour) return false
-                        if (firstMinute >= secondMinute) { return false} 
-                        else {return true}
-                    } else {return true}
-                } else {return true}
-            } else {return true}
-        } else {return true}
-        
-    }else if (firstDate != null) { //True if no seconddate exists
-        return true
-    }else{
-        return -1
-    }
+                        if (firstMinute >= secondMinute) return false
+                        else return true
+                    } else return true
+                } else return true
+            } else return true
+        } else return true
+    } else if (firstDate != null) return true                                                            // True if no seconddate exists
+    else return -1                                                                                      // -1 if fatal error
 }

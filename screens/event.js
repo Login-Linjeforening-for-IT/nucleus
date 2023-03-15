@@ -1,4 +1,5 @@
 import registerForPushNotificationsAsync from '../shared/notificationComponents/registerForPushNotificationAsync';
+import removeDuplicatesAndOld from '../shared/eventComponents/removeDuplicatesAndOld';
 import notificationSetup from '../shared/notificationComponents/notificationSetup';
 import EventCardLocation from '../shared/eventComponents/eventCardLocation';
 import CategorySquare from '../shared/eventComponents/categorySquare';    // Left side square on eventcard
@@ -237,7 +238,7 @@ export default function EventScreen({ navigation }) {                     //  Ex
       .then(response=>response.json())                                    // Formatting the response
       .then(data=>setEvents(data))                                        // Setting the response
       .then(setRenderedArray([...events]))                                // Updates the renderedarray to equal cache
-      .then(async() => setLastSave(await LastFetch()));                              // Updates last fetch displayed on the screen
+      .then(async() => setLastSave(await LastFetch()));                   // Updates last fetch displayed on the screen
       if(events.length > 0) await AsyncStorage.setItem('cachedEvents', JSON.stringify(events))  // Setting the cache
     } catch (e) {                                                         // Catches any errors (missing wifi)
       (async() => {                                                       // Immediately invoked function expression (IIFE)
@@ -273,24 +274,27 @@ export default function EventScreen({ navigation }) {                     //  Ex
           let duplicateExists = categoryFiltered.some(catEvent => catEvent.eventID === event.eventID); // Checks for duplicates
           if (!duplicateExists) { concatenatedArray.push(event) }         // If no duplicate pushes to temporary array
         });
-        concatenatedArray = categoryFiltered.concat(concatenatedArray);   // Concatinates clickedEvents and filtered events
-        const filtered = concatenatedArray.filter(event => event.eventname.toLowerCase().includes(filter.input.toLowerCase()));
-        setRenderedArray([...filtered]);                                  // Updates renderedArray
+        let newConcatenatedArray = categoryFiltered.concat(concatenatedArray);   // Concatinates clickedEvents and filtered events
+        const filtered = newConcatenatedArray.filter(event => event.eventname.toLowerCase().includes(filter.input.toLowerCase()));
+        let uniqueFiltered = removeDuplicatesAndOld(events, filtered);
+        setRenderedArray([...uniqueFiltered]);                            // Updates renderedArray
       }else{                                                              // If only PÅMELDT is clicked
-        let filtered = clickedEvents.filter(event => clickedCategory.some(category => event.category === event.category));  // Filters clickedEvents
-        filtered = filtered.filter(event => event.eventname.toLowerCase().includes(filter.input.toLowerCase()));            // Filters text
-        setRenderedArray([...filtered]);                                    // Updates the renderedarray
+        let filtered = clickedEvents.filter(event => event.eventname.toLowerCase().includes(filter.input.toLowerCase()));            // Filters text
+        let uniqueFiltered = removeDuplicatesAndOld(events, filtered);
+        setRenderedArray([...uniqueFiltered]);                            // Updates renderedArray
       }
     }else{                                                                  // If PÅMELDT is not clicked filter events normally
       let filtered = events.filter(event => clickedCategory.some(category => category.category === event.category));        // Filters categories
       filtered = filtered.filter(event => event.eventname.toLowerCase().includes(filter.input.toLowerCase()));              // Filters text
-      setRenderedArray([...filtered]);                                      // Updates the renderedArray
+      let uniqueFiltered = removeDuplicatesAndOld(events, filtered);
+      setRenderedArray([...uniqueFiltered]);                              // Updates renderedArray                                   // Updates the renderedArray
     }
   }
   
   const filterText = () => {                                              //  --- FILTERS TEXT ---
     let textFiltered = events.filter(event => event.eventname.toLowerCase().includes(filter.input.toLowerCase()));
-    setRenderedArray([...textFiltered]);                                  // Converts to lowercase, filters and updates
+    let uniqueFiltered = removeDuplicatesAndOld(events, textFiltered);
+    setRenderedArray([...uniqueFiltered]);                                  // Converts to lowercase, filters and updates
   }
 
   const filterCategories = () => {                                        //  --- FILTERS CATEGORIES ---
@@ -304,14 +308,17 @@ export default function EventScreen({ navigation }) {                     //  Ex
           if (!duplicateExists) { concatenatedArray.push(event) }         // Removes duplicates
         });
         concatenatedArray = categoryFiltered.concat(concatenatedArray);   // Combines categoryFiltered and concatenatedArray
-        setRenderedArray([...concatenatedArray])                          // Updates renderedEvents to equal categories filtered
+        let uniqueFiltered = removeDuplicatesAndOld(events, concatenatedArray);
+        setRenderedArray([...uniqueFiltered])                          // Updates renderedEvents to equal categories filtered
       }else{                                                              // If only PÅMELDT is clicked only render the events in the clickedEvents array
         const categoryFiltered = clickedEvents.filter(event => clickedCategory.some(category => event.category === event.category)); 
-        setRenderedArray([...categoryFiltered])                           // if there are no enrolled events filters and updates rendered array
+        let uniqueFiltered = removeDuplicatesAndOld(events, categoryFiltered);
+        setRenderedArray([...uniqueFiltered])                           // if there are no enrolled events filters and updates rendered array
       }
     }else{                                                                // If the PÅMELDT category is not active
       const categoryFiltered = events.filter(event => clickedCategory.some(category => category.category === event.category)); 
-      setRenderedArray([...categoryFiltered])                             // Filter categories normally and update the renderedArray
+      let uniqueFiltered = removeDuplicatesAndOld(events, categoryFiltered);
+      setRenderedArray([...uniqueFiltered])                             // Filter categories normally and update the renderedArray
     }
   }
   
@@ -320,9 +327,7 @@ export default function EventScreen({ navigation }) {                     //  Ex
       if (clickedCategory.length > 0){                                    // If the user has clicked something
         if(filter.input.length > 0){  filterBoth()}                       // Filter both text and categories if the text is longer than 0
         else{setRenderedArray([...events])}                               // Update the displayed events if the text is not longer than 0
-      }else{
-        filterText()                                                      // If no categories are clicked only filter text
-      }
+      } else filterText()                                                      // If no categories are clicked only filter text
     } else if (clickedCategory.length > 0) {filterCategories()}           // if the filter is null but categories are clicked only filter categories
     else{setRenderedArray([...events])}                                   // If both are null or 0 update the displayed events
   }
@@ -365,20 +370,18 @@ export default function EventScreen({ navigation }) {                     //  Ex
     (async() => {                                                         // IIFE
       let storedID = 0;                                                   // Variable that takes the ID of the stored event
 
-      for (let i = 0; i < clickedEvents.length; i++) {                    // Finds the firstcoming event 
-        if (CompareDates((clickedEvents)[i].startt, (clickedEvents)[storedID].startt) == true) {
-          storedID = i                                                    // If the events comes before the next updates the storedID
+      let unique = removeDuplicatesAndOld(events, clickedEvents);
+
+      if(unique) {
+        for (let i = 0; i < unique.length; i++) {                              // Finds the firstcoming event 
+          if (CompareDates((unique[i]).startt, (unique[storedID]).startt) == true) storedID = i;
         }
-      }                                                                  
-      await AsyncStorage.setItem("clickedEvents", JSON.stringify(clickedEvents))            // Stores clicked events
-      await AsyncStorage.setItem("firstEvent", JSON.stringify((clickedEvents)[storedID]))   // Stores firstcoming clicked events
+        
+        await AsyncStorage.setItem("clickedEvents", JSON.stringify(unique))                                 // Stores clicked events
+        if(unique[storedID]) await AsyncStorage.setItem("firstEvent", JSON.stringify((unique[storedID])))   // Stores firstcoming clicked events
+      }
     })();
-  }else{
-    (async() => { //Sets it to "" if there are no clicked events
-      await AsyncStorage.setItem("firstEvent", "")
-      await AsyncStorage.setItem("clickedEvents", "")
-    })();
-  }
+  };
   
   // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 4/8
   useEffect(() => {                                                       //  --- FCM FOREGROUND NOTIFICATIONS ---
@@ -413,7 +416,7 @@ export default function EventScreen({ navigation }) {                     //  Ex
         if (filter.input.length == 0) {                                   // If the length of the filter search text is equal 0
           filterInput(null);                                              // Resets filter input
           setClickedCategory([]);                                         // Resets clicked categories
-          setRenderedArray([...events])                                   // Resets renderedArray to equal events
+          setRenderedArray([...events])                                   // Resets renderedArray to all events
         }
         Filter();                                                         // Run filter function if the filter search text is not empty
       }else{
@@ -429,9 +432,7 @@ export default function EventScreen({ navigation }) {                     //  Ex
           filterInput(null);                                              // Resets filter input
           setClickedCategory([]);                                         // Resets clicked categories
         }
-      }else{
-        setRenderedArray([...events]);                                    // If the filter text is null reset renderedArray to equal events
-      }
+      } else setRenderedArray([...events]);                               // If the filter text is null reset renderedArray to equal events
     }
 
   }, [filter, clickedCategory]);                                          //  Listens to changes in these arrays
@@ -486,10 +487,8 @@ export default function EventScreen({ navigation }) {                     //  Ex
 
                                                                           //  --- SETUP CODE ONCE APP IS DOWNLOADED---
   if(lastSave == null) (async() => {setLastSave(await LastFetch())})()    //  Displays when the API was last fetched successfully
-  // COMMENT OUT THE BELOW LINE WHEN TESTING IN EXPO 7/8
   if(!notification["SETUP"]) notificationSetup();                         //  Sets up initial notifications
-  // COMMENT OUT THE ABOVE LINE WHEN TESTING IN EXPO 7/8
-
+  
   return(                                                                 //  --- DISPLAYS THE EVENTSCREEN ---
     <View> 
       <StatusBar style={theme == 0 || theme == 2 || theme == 3 ? 'light' : 'dark'} />
@@ -591,7 +590,7 @@ export default function EventScreen({ navigation }) {                     //  Ex
                       </Card>
                       {index == renderedArray.length-1 ? Space(10):null}
                       {index == renderedArray.length-1 ? <Text style={{...T.contact, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? 'Oppdatert kl:':'Updated:'} {lastSave}.</Text>:null}
-                      {index == renderedArray.length-1 ? Space((Dimensions.get('window').height/3)+10):null} 
+                      {index == renderedArray.length-1 ? Space((Dimensions.get('window').height/3)+20):null} 
                       {index == renderedArray.length-1 && search.status == 1 ? Space(152.5):null}
                       {index == renderedArray.length-1 && search.status == 1 ? Space(40*(Math.ceil(relevantCategories.length/3))):null}
                     </TouchableOpacity>
