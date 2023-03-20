@@ -83,4 +83,9 @@ export const SS = StyleSheet.create ({
         top: '-35%',
         alignSelf: 'center',
     },
+    loginView: {                        // Views on login screen
+        height: 50,
+        alignSelf: 'center',
+        flexDirection: 'row'
+    },
 });

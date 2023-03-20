@@ -5,16 +5,18 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';       
 
 const Tab = createBottomTabNavigator();                                         // Declares Tab to equal CBTN function
 
-import EventScreen from '../screens/event';                                     // Events
-import ListingScreen from '../screens/listings';                                // Job listings
-import MenuScreen from '../screens/menu';                                       // Profile
-import AboutScreen from '../screens/menu/about';                                // About Login
+import CommitteeMenuScreen from '../screens/menu/committeeMenu';                // Displays all committees contact information
+import SpecificListingScreen from '../screens/specificListing';                 // Specific Job listing
 import SpecificEventScreen from '../screens/specificEvent';                     // Specific Events
+import InternalScreen from '../screens/menu/internal';                          // Internal screen
 import BusinessScreen from '../screens/menu/business';                          // Companies' screen
 import SettingScreen from '../screens/menu/settings';                           // Settings 
 import ReportScreen from '../screens/menu/report';                              // Report form for blameworthy conditions
-import CommitteeMenuScreen from '../screens/menu/committeeMenu';                // Displays all committees contact information
-import SpecificListingScreen from '../screens/specificListing';                 // Specific Job listing
+import ListingScreen from '../screens/listings';                                // Job listings
+import AboutScreen from '../screens/menu/about';                                // About Login
+import LoginScreen from '../screens/menu/login';                                // Login to innsida
+import EventScreen from '../screens/event';                                     // Events
+import MenuScreen from '../screens/menu';                                       // Profile
 
 function Navigator() {                                                          // Declares Navigator, wraps in container and declares all navigation routes
     return(
@@ -28,6 +30,8 @@ function Navigator() {                                                          
                     <Tab.Screen name='BusinessScreen'           options={{tabBarStyle: { display: "none" }}} component={BusinessScreen} />
                     <Tab.Screen name='SettingScreen'            options={{tabBarStyle: { display: "none" }}} component={SettingScreen} />
                     {/* <Tab.Screen name='ReportScreen'             options={{tabBarStyle: { display: "none" }}} component={ReportScreen} /> */}
+                    <Tab.Screen name='InternalScreen'             options={{tabBarStyle: { display: "none" }}} component={InternalScreen} />
+                    <Tab.Screen name='LoginScreen'             options={{tabBarStyle: { display: "none" }}} component={LoginScreen} />
                     <Tab.Screen name='CommitteeMenuScreen'      options={{tabBarStyle: { display: "none" }}} component={CommitteeMenuScreen} />
                     <Tab.Screen name='SpecificListingScreen'    options={{tabBarStyle: { display: "none" }}} component={SpecificListingScreen} />
                 </Tab.Navigator>                    

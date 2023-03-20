@@ -1,10 +1,12 @@
 {/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
 import DynamicCircle from '../../shared/eventComponents/dynamicCircle';
+import CornerSquare from '../../shared/eventComponents/cornerSquare';
 import AllComitees from '../../shared/functions/allCommittees';
 import Copyright from '../../shared/functions/copyright';
 import Dropdown from '../../shared/functions/dropdown';
 import Social from '../../shared/functions/social';
 import person from '../../shared/functions/person';
+import styret from '../../shared/functions/styret';
 import Space from '../../shared/functions/space';
 import FetchColor from '../../styles/fetchTheme';
 import Card from '../../shared/functions/card';
@@ -76,7 +78,7 @@ export default function AboutScreen( { navigation }) {
         {Space(5)}
         <Dropdown/>
         {Space(10)}
-        <Image style={GS.aboutImage} source={require('../../assets/photos/aboutimage.png')} />
+        {styret(theme)}
         {Space(5)}
         <Text style={{...T.centeredBold25, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Av studenter, for studenter.' : 'By students, for students'}</Text>
         {Space(5)}

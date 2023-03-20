@@ -2,16 +2,6 @@ Features currently being worked on:
 none
 
 Features planned:
-    1. Push notifications for new events 
-        - requires cloud server but easy enough (should use firebase since its free)    
-        - firebase is hard to setup
-        - should only be sent if the category matches
-        - how to check for matching category before delivery?
-
-    2. Implement mazemap     
-        - issue: deprecated libraries
-        - unknown solution
-        - vent at tekkom meeting
 
     3. Implement mail sending service 
         - issue: needs backend
@@ -41,5 +31,5 @@ Future features:
         - Add events through the app
 
 Bug fixes needed:
-    1. Bottom navigation menu disabled android causes white footer
-        -  Unknown how to check if the menu is disabled (easy to fix once we know this)
+    1. Bottom navigation menu too low on some deviecs
+        -  Unknown how to get it to always be at the bottom due to some devices not having 0 at the actual bottom.

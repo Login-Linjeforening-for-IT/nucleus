@@ -11,7 +11,7 @@ export const MS = StyleSheet.create ({                              // Declares 
     right: 75,
     marginLeft: 'auto',
     marginRight: 'auto',
-    fontSize: 35
+    fontSize: 30
   },
   eventScreenTitle: {                                               // Big headertitle for EventScreen (due to filter causing problems)
     position: 'absolute',
@@ -34,7 +34,7 @@ export const MS = StyleSheet.create ({                              // Declares 
     marginLeft: 'auto',
     marginRight: 'auto',
     alignSelf: 'center',                                            // Vertically centers
-    fontSize: 30,                                                   // Text font size 
+    fontSize: 25,                                                   // Text font size 
   },
   smallMultilineTitle: {                                            // Small headertitle (for multiline)
     top: Dimensions.get('window').height/20,
@@ -45,7 +45,7 @@ export const MS = StyleSheet.create ({                              // Declares 
     marginRight: 'auto',
     textAlign: 'center',
     alignSelf: 'flex-end',                                          // Vertical flex end
-    fontSize: 25,                                                   // Text font size
+    fontSize: 20,                                                   // Text font size
   },
   topMenu: {                                                        // Top menu background view
     position: 'absolute',                                           // Absolute position (top menu should always be at the top)
@@ -61,12 +61,6 @@ export const MS = StyleSheet.create ({                              // Declares 
     width: 120,                                                     // Icon width
     height: 60,                                                     // Icon height
   },
-  tMenuIconWithExtra: {                                             // Placement when extra icons are added to the top menu NOTE: NOT IN USE BUT DONT REMOVE
-    right: '50%',                                                   // Moves the icon 50% leftwards
-    top: 5,                                                         // Moves the icon 5 px downwards
-    width: 50,                                                      // Icon width
-    height: 120                                                     // Icon height
-  },
   goBack: {                                                         // Size of goBack icon 
     top: '25%',                                                     // Adjusts it 25% downwards (because its a very small icon)
     left: '-10%',                                                   // Moves it 10% towards the left
@@ -76,8 +70,19 @@ export const MS = StyleSheet.create ({                              // Declares 
   filterIcon: {
     top: '37%',                                                     // Moves the icon 35% downwards
     height: 60,                                                     // Icon height
-    right: '-9%',                                                   // Moving it 9% rightwards
+    right: '-20%',                                                   // Moving it 9% rightwards
     width: 140,                                                     // Icon width
+  },
+  multiTop: {
+    width: 90,
+    top: '50%',
+    right: '5%',
+    flexDirection: 'row',
+    justifyContent: 'space-evenly'
+  },
+  multiIcon: {
+    height: 28,
+    width: 28,
   },
   
   // --- BOTTOM MENU ---

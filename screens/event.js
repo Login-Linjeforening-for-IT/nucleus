@@ -1,6 +1,9 @@
 import registerForPushNotificationsAsync from '../shared/notificationComponents/registerForPushNotificationAsync';
 import removeDuplicatesAndOld from '../shared/eventComponents/removeDuplicatesAndOld';
 import notificationSetup from '../shared/notificationComponents/notificationSetup';
+import updateCalendar from '../shared/eventComponents/calendar/updateCalendar';
+import createCalendar from '../shared/eventComponents/calendar/createCalendar';
+import calendarExists from '../shared/eventComponents/calendar/calendarExists';
 import EventCardLocation from '../shared/eventComponents/eventCardLocation';
 import CategorySquare from '../shared/eventComponents/categorySquare';    // Left side square on eventcard
 import AsyncStorage from '@react-native-async-storage/async-storage';     // Localstorage
@@ -18,6 +21,7 @@ import { useSelector, useDispatch } from 'react-redux';                   // Red
 import Check from '../shared/eventComponents/check';
 import CheckBox from '../shared/functions/checkBox';
 import * as Notifications from 'expo-notifications';                      // Local notifications
+import { setCalendarID } from '../redux/misc';
 import Space from '../shared/functions/space';
 import FetchColor from '../styles/fetchTheme';                            // Function to fetch theme color
 import Card from '../shared/functions/card';
@@ -39,9 +43,10 @@ import {                                                                  // Rea
 } from 'react-native';                                                    // React native
 import { useFocusEffect } from '@react-navigation/native';                // useFocusEffect       (do something when the screen is displayed)
 import LastFetch from '../shared/functions/lastfetch';
+import { getCalendarPermissionsAsync } from 'expo-calendar';
 
 // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 3/8
-import messaging from '@react-native-firebase/messaging';
+// import messaging from '@react-native-firebase/messaging';
 // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 3/8
 
 Notifications.setNotificationHandler({
@@ -79,6 +84,7 @@ export default function EventScreen({ navigation }) {                     //  Ex
   const { lang  }    = useSelector( (state) => state.lang  )              //  Language state
   const { login }    = useSelector( (state) => state.login )              //  Loginstatus
   const { theme }    = useSelector( (state) => state.theme )              //  Theme state
+  const { calendarID } = useSelector( (state) => state.misc )             //  Calendar ID
   const listingPage = () => { navigation.navigate('ListingScreen') }      //  Navigate to Job screen
   const menuPage    = () => { navigation.navigate('MenuScreen')    }      //  Navigate to menu
   const [expoPushToken, setExpoPushToken] = useState('');                 //  Array for notification token
@@ -384,13 +390,13 @@ export default function EventScreen({ navigation }) {                     //  Ex
   };
   
   // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 4/8
-  useEffect(() => {                                                       //  --- FCM FOREGROUND NOTIFICATIONS ---
-    const unsubscribe = messaging().onMessage(async remoteMessage=>{
-      Alert.alert('A new FCM message arrived!') 
-      console.log(JSON.stringify(remoteMessage))
-    });
-    return unsubscribe;                                                   //  Stops when in the background / quit state
-   }, []);
+  // useEffect(() => {                                                       //  --- FCM FOREGROUND NOTIFICATIONS ---
+  //   const unsubscribe = messaging().onMessage(async remoteMessage=>{
+  //     Alert.alert('A new FCM message arrived!') 
+  //     console.log(JSON.stringify(remoteMessage))
+  //   });
+  //   return unsubscribe;                                                   //  Stops when in the background / quit state
+  //  }, []);
   // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 4/8
 
   useEffect(() => {                                                       //  --- NOTIFICATION MANAGEMENT ---
@@ -631,16 +637,23 @@ export default function EventScreen({ navigation }) {                     //  Ex
             <Text style={{... MS.eventScreenTitle, left: '-5%', color: FetchColor(theme, 'TITLETEXTCOLOR')}}>Events</Text>
         }
         
-        {renderedArray != null ? 
-          renderedArray.length > 0 || clickedCategory.length > 0 || filter.input != null ? 
-          <TouchableOpacity onPress={() => toggleSearchBar()}>
-            {search.status ? 
-              <Image style={MS.filterIcon} source={require('../assets/icons/filter-orange.png')} />
-            :
-              <Image style={MS.filterIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/icons/filter.png') : require('../assets/icons/filter-black.png')} />
-            }
+        <View style={MS.multiTop}>
+          <TouchableOpacity onPress={async () => typeof await calendarExists(calendarID) != "undefined" ? await updateCalendar(clickedEvents, calendarID):dispatch(setCalendarID(await createCalendar(clickedEvents)))}>
+            <Image style={MS.multiIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/icons/download.png') : require('../assets/icons/download-black.png')} />
           </TouchableOpacity>
-        :null:null}
+
+          {renderedArray != null ? 
+            renderedArray.length > 0 || clickedCategory.length > 0 || filter.input != null ? 
+            <TouchableOpacity onPress={() => toggleSearchBar()}>
+              {search.status ? 
+                <Image style={MS.multiIcon} source={require('../assets/icons/filter-orange.png')} />
+              :
+                <Image style={MS.multiIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/icons/filter.png') : require('../assets/icons/filter-black.png')} />
+              }
+            </TouchableOpacity>
+          :null:null}
+          
+        </View>
       </View>
       {/* ========================= DISPLAY BOTTOM MENU ========================= */}
       {Platform.OS === 'ios' ? <BlurView style={MS.bMenu} intensity={30}/> : <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENTANDROID')}}/>}

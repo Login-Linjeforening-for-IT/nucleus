@@ -30,6 +30,12 @@
       ],
       ["@react-native-firebase/app"],
       [
+        "expo-calendar",
+        {
+          "calendarPermission": "Login wants to save events to your calendar."
+        }
+      ],
+      [
         "expo-build-properties",
         {
           "ios": {
@@ -44,7 +50,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.eirikhanasand.Login",
-      "buildNumber": "38",
+      "buildNumber": "39",
       "googleServicesFile": "./GoogleService-Info.plist",
       "infoPlist": {
          "UIBackgroundModes": [
@@ -67,7 +73,12 @@
       },
       "package": "com.login.Login",
       "googleServicesFile": "./google-services.json",
-      "versionCode": 30
+      "versionCode": 30,
+      "permissions": [
+        "NOTIFICATIONS",
+        "READ_CALENDAR",
+        "WRITE_CALENDAR"
+      ]
     },
     "web": {
       "favicon": "./assets/logo/favicon.ico"
