@@ -57,9 +57,10 @@ export const MS = StyleSheet.create ({                              // Declares 
     height: "10%",                                                  // Sets the height of the top menu to 13.3% of the screen height
   },
   tMenuIcon: {                                                      // Size of top menu icons
-    top: '35%',                                                     // Moves the icon 35% downwards
-    width: 120,                                                     // Icon width
-    height: 60,                                                     // Icon height
+    left: '100%',
+    top: '42%',                                                     // Moves the icon 35% downwards
+    width: 40,                                                     // Icon width
+    height: 40,                                                     // Icon height
   },
   goBack: {                                                         // Size of goBack icon 
     top: '25%',                                                     // Adjusts it 25% downwards (because its a very small icon)
@@ -84,24 +85,22 @@ export const MS = StyleSheet.create ({                              // Declares 
     height: 28,
     width: 28,
   },
-  
-  // --- BOTTOM MENU ---
+    // --- BOTTOM MENU ---
   bMenu: {                                                          // Bottom menu view
     position: 'absolute',
-    top: Platform.OS == "ios" ? "73%":"75%",                        // iphone and samsung is 73%, oneplus is 75% -(PixelRatio.getPixelSizeForLayoutSize(48)), oneplus is 10ppi
+    top: Platform.OS == "ios" ? "73%":null,
+    bottom: Platform.OS == "ios" ? null : 350-Dimensions.get('window').height/3.3,
     width: '100%',
-    height: PixelRatio.getPixelSizeForLayoutSize(100),              // Sets the height of the bottom menu to 10% of the screen height
+    height: "10%",//Dimensions.get('window').height/4,              // Sets the height of the bottom menu to 10% of the screen height
     flexDirection: 'row',                                           // Changes the flex directions to allow for multiple elements horizontally
     justifyContent: 'space-evenly',                                 // Adds equal amount of space between icons
-    alignItems: 'center'                                            // Vertically aligns items inside to center
   },
   bMenuIconTO: {                                                    // Bottom menu icons
-    bottom: PixelRatio.getPixelSizeForLayoutSize(40),               // Moves icons 13% upwards
     width: 120,                                                     // Icon width
     height: 65,                                                     // Icon height
   },
   bMenuIcon: {                                                      // Bottom menu icons
-    bottom: PixelRatio.getPixelSizeForLayoutSize(2),               // Moves icons 13% upwards
+    bottom: '10%',
     width: 120,                                                     // Icon width
     height: 65,                                                     // Icon height
   },
