@@ -440,13 +440,41 @@ export default function EventScreen({ navigation }) {                     //  Ex
   };
   
   // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 4/8
-  // useEffect(() => {                                                       //  --- FCM FOREGROUND NOTIFICATIONS ---
-  //   const unsubscribe = messaging().onMessage(async remoteMessage=>{
-  //     Alert.alert('A new FCM message arrived!') 
-  //     console.log(JSON.stringify(remoteMessage))
+  /**
+   * Handles redirection of event notifications
+   */
+  // useEffect(() => {                                                       
+  //   const unsubscribe = messaging().onMessage(async remoteMessage => {
+  //       console.log(JSON.stringify(remoteMessage));
+        
+  //       // Extract the event ID from the notification payload
+  //       const event = remoteMessage.data;
+
+  //       if (AppState.currentState === "active") {
+  //           // If the app is in the foreground, show a confirmation dialog
+  //           Alert.alert(
+  //               lang ? `${remoteMessage.title} har blitt oppdatert`:`${remoteMessage.title} has been updated`,
+  //               lang ? "Vil du se arrangementet?":"Would you like to view the event?",
+  //               [
+  //                   { text: lang ? "Avslå":"Cancel", style: "cancel" },
+  //                   {
+  //                       text: "OK",
+  //                       onPress: () => {
+  //                           // If the user tapped "OK", navigate to the SpecificEventScreen
+  //                           navigation.navigate("SpecificEventScreen", { item: event });
+  //                       }
+  //                   }
+  //               ],
+  //               { cancelable: true }
+  //           );
+  //       } else {
+  //           // If the app is in the background, navigate to the SpecificEventScreen directly
+  //           navigation.navigate("SpecificEventScreen", { item: event });
+  //       }
   //   });
+    
   //   return unsubscribe;                                                   //  Stops when in the background / quit state
-  //  }, []);
+  // }, []);
   // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 4/8
 
   useEffect(() => {                                                       //  --- NOTIFICATION MANAGEMENT ---
@@ -687,23 +715,26 @@ export default function EventScreen({ navigation }) {                     //  Ex
             <Text style={{... MS.eventScreenTitle, left: '-5%', color: FetchColor(theme, 'TITLETEXTCOLOR')}}>Events</Text>
         }
         
-        <View style={MS.multiTop}>
-          <TouchableOpacity onPress={async () => await handleDownload()}>
-            <Image style={MS.multiIcon} source={theme == 0 || theme == 2 || theme == 3 ? timeSinceDownload() >= 1000 ? require('../assets/icons/download.png'):require('../assets/icons/download-orange.png') : require('../assets/icons/download-black.png')} />
-          </TouchableOpacity>
+        {renderedArray != null ? 
+          <View style={MS.multiTop}>
+            {clickedEvents.length > 0 ? 
+              <TouchableOpacity onPress={async () => await handleDownload()}>
+                <Image style={MS.multiIcon} source={theme == 0 || theme == 2 || theme == 3 ? timeSinceDownload() >= 1000 ? require('../assets/icons/download.png'):require('../assets/icons/download-orange.png') : require('../assets/icons/download-black.png')} />
+              </TouchableOpacity>
+            :null}
 
-          {renderedArray != null ? 
-            renderedArray.length > 0 || clickedCategory.length > 0 || filter.input != null ? 
-            <TouchableOpacity onPress={() => toggleSearchBar()}>
-              {search.status ? 
-                <Image style={MS.multiIcon} source={require('../assets/icons/filter-orange.png')} />
-              :
-                <Image style={MS.multiIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/icons/filter.png') : require('../assets/icons/filter-black.png')} />
-              }
-            </TouchableOpacity>
-          :null:null}
-          
-        </View>
+            {renderedArray.length > 0 || clickedCategory.length > 0 || filter.input != null ? 
+              <TouchableOpacity onPress={() => toggleSearchBar()}>
+                {search.status ? 
+                  <Image style={MS.multiIcon} source={require('../assets/icons/filter-orange.png')} />
+                :
+                  <Image style={MS.multiIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/icons/filter.png') : require('../assets/icons/filter-black.png')} />
+                }
+              </TouchableOpacity>
+            :null}
+          </View>
+        :null}
+
       </View>
       {/* ========================= DISPLAY BOTTOM MENU ========================= */}
       {Platform.OS === 'ios' ? <BlurView style={MS.bMenu} intensity={30}/> : <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENTANDROID')}}/>}

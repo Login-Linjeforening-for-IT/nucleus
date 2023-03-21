@@ -76,6 +76,7 @@ export const MS = StyleSheet.create ({                              // Declares 
   },
   multiTop: {
     width: 90,
+    height: 40,
     top: '50%',
     right: '5%',
     flexDirection: 'row',

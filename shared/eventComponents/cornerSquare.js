@@ -3,6 +3,7 @@ import { GS } from '../../styles/globalStyles';
 import Svg, { Rect } from 'react-native-svg';
 import { View } from 'react-native';
 import React from 'react';
+import random from '../functions/random';
 
 /**
  * Function for drawing a small square of the category of the event
@@ -13,11 +14,8 @@ export default function CornerSquare(theme, corner, type) {  //SVG showing the c
     let p1 = 10, p2 = 100, p3 = 13, p4 = 102, p5 = 0, p6 = 160, p7 = 70, p8 = 345;
     
     if(type) {
-        if(corner == 1) p1 = -83.5, p2 = 133.75, p3 = -70.2, p4 = 271, p5 = -83.5, p6 = 329, p7 = -13.5, p8 = 513.8
-        if(corner == 3) p1 = -39.5, p2 = 133.75, p3 = -26.2, p4 = 271, p5 = -40, p6 = 329, p7 = 30.5, p8 = 520
-        if(corner == 0 || corner == 2) {
-            p1 = 0, p2 = 0, p3 = 13, p4 = 137, p5 = 0, p6 = 195, p7 = 70, p8 = 380
-        }
+        while(corner != 0 && corner != 2) corner = random(0,3);
+        if(corner == 0 || corner == 2) p1 = 0, p2 = 0, p3 = 13, p4 = 137, p5 = 0, p6 = 195, p7 = 70, p8 = 380
     }
 
     return(
