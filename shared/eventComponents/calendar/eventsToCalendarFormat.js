@@ -11,21 +11,19 @@ export default async function eventsToCalendarFormat(events, calendarID) {
     let formattedEvents = [];
   
     for (const event of events) {
-      let APIevent = await fetchEventDetails(event);
+      const APIevent = await fetchEventDetails(event);
   
-      console.log(APIevent.startt)
-      let room = APIevent.roomno ? APIevent.roomno + ', ':'';
-      let campus = APIevent.campus ? APIevent.campus + ', ':'';
-      let street = APIevent.street ? APIevent.street:'';
-      let loc = room + campus + street;
+      const room = APIevent.roomno ? APIevent.roomno + ', ':'';
+      const campus = APIevent.campus ? APIevent.campus + ', ':'';
+      const street = APIevent.street ? APIevent.street:'';
+      const loc = room + campus + street;
 
-      let startDate = new Date(APIevent.startt);
-      let endDate = new Date(APIevent.endt);
+      const startDate = new Date(APIevent.startt);
+      const endDate = new Date(APIevent.endt);
 
-      obj = {
+      const obj = {
         calendarId: calendarID,
         allDay: false,
-        recurrenceRule: null,
         id: APIevent.eventID,
         title: APIevent.eventname,
         notes: APIevent.description,

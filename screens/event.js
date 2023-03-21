@@ -14,6 +14,7 @@ import GrayLight from '../shared/eventComponents/grayLight';
 import CompareDates from '../shared/functions/compareDates';
 import topic from '../shared/notificationComponents/topic';
 import React, { useEffect, useState, useRef } from 'react';               // React imports
+import currentTime from '../shared/functions/currentTime';
 import MonthNO from '../shared/eventComponents/monthNO';
 import MonthEN from '../shared/eventComponents/monthEN';
 import CheckedBox from '../shared/functions/checkedBox';
@@ -75,6 +76,7 @@ export default function EventScreen({ navigation }) {                     //  Ex
   const [clickedEvents, setClickedEvents] = useState([]);                 //  Clicked events
   const [clickedCategory, setClickedCategory] = useState([]);             //  Clicked categories
   const [lastSave, setLastSave] = useState(null)                          //  Last time API was fetched successfully
+  const [DS, setDS] = useState(null)                                      //  Download state
   const [filter, setFilter] = useState({input: null});                    //  Filter text input declaration
   const textInputRef = useRef(null);                                      //  Clears text input
   const dispatch = useDispatch()                                          //  Dispatch to change Redux state
@@ -237,6 +239,54 @@ export default function EventScreen({ navigation }) {                     //  Ex
     }
   }
 
+  /**
+   * Executes the download itself, updates existing calendar or creates a new calendar if no calendar exists.
+   * 
+   * @param clickedEvents Array of events the user has joined
+   * @param calendarID    ID of the calendar if one does already exist
+   * 
+   * @see calendarExists  Checks if the calendar storage is defined and if it still exists on the device
+   * @see setCalendarID   Stores the ID of a new calendar in localstorage
+   * @see updateCalendar  Updates the events for a calendar that is found 
+   * @see createCalendar  Creates a new calendar if no calendar is to be found
+   */
+  async function executeDownload(clickedEvents, calendarID) {
+      if (typeof await calendarExists(calendarID != "undefined")) await updateCalendar(clickedEvents, calendarID)
+      else dispatch(setCalendarID(await createCalendar(clickedEvents)));
+  }
+
+  /**
+   * Handles press of download button, changes color of the button 
+   * and downloads if more than 3 seconds since last download
+   * 
+   * @see executeDownload Executes the download if permitted
+   * @see currentTime Returns the current time as a string of the IFO8 format
+   */
+  async function handleDownload() {
+    if(DS == null) {
+      setDS(currentTime());
+      await executeDownload(clickedEvents, calendarID);
+    } else {
+      if(timeSinceDownload() >= 1000) await executeDownload(clickedEvents, calendarID);
+      setDS(currentTime());
+    }
+  }
+
+  /**
+   * Checks how long its been since the events were last downloaded and returns the time in seconds.
+   * 
+   * @returns int, seconds
+   */
+  function timeSinceDownload() {
+    const now = new Date (currentTime());
+    const before = new Date (DS);
+    return now-before;
+  }
+
+  /**
+   * Fetches data from API, formats the response, sets the cache, updates the events on the screen,
+   * catches any errors and fetches localstorage, and handles errors. 
+   */
   async function getData() {                                              //  --- FETCHING DATA FROM API ---
     try {
       fetch('https://api.login.no/events')                                // PRODUCTION
@@ -638,8 +688,8 @@ export default function EventScreen({ navigation }) {                     //  Ex
         }
         
         <View style={MS.multiTop}>
-          <TouchableOpacity onPress={async () => typeof await calendarExists(calendarID) != "undefined" ? await updateCalendar(clickedEvents, calendarID):dispatch(setCalendarID(await createCalendar(clickedEvents)))}>
-            <Image style={MS.multiIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/icons/download.png') : require('../assets/icons/download-black.png')} />
+          <TouchableOpacity onPress={async () => await handleDownload()}>
+            <Image style={MS.multiIcon} source={theme == 0 || theme == 2 || theme == 3 ? timeSinceDownload() >= 1000 ? require('../assets/icons/download.png'):require('../assets/icons/download-orange.png') : require('../assets/icons/download-black.png')} />
           </TouchableOpacity>
 
           {renderedArray != null ? 
