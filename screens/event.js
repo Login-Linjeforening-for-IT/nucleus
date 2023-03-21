@@ -47,7 +47,7 @@ import LastFetch from '../shared/functions/lastfetch';
 import { getCalendarPermissionsAsync } from 'expo-calendar';
 
 // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 3/8
-import messaging from '@react-native-firebase/messaging';
+// import messaging from '@react-native-firebase/messaging';
 // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 3/8
 
 Notifications.setNotificationHandler({
@@ -251,7 +251,8 @@ export default function EventScreen({ navigation }) {                     //  Ex
    * @see createCalendar  Creates a new calendar if no calendar is to be found
    */
   async function executeDownload(clickedEvents, calendarID) {
-      if (typeof await calendarExists(calendarID != "undefined")) await updateCalendar(clickedEvents, calendarID)
+    console.log(typeof await calendarExists(calendarID) != "undefined")
+      if (typeof await calendarExists(calendarID) != "undefined") await updateCalendar(clickedEvents, calendarID)
       else dispatch(setCalendarID(await createCalendar(clickedEvents)));
   }
 
@@ -443,38 +444,38 @@ export default function EventScreen({ navigation }) {                     //  Ex
   /**
    * Handles redirection of event notifications
    */
-  useEffect(() => {                                                       
-    const unsubscribe = messaging().onMessage(async remoteMessage => {
-        console.log(JSON.stringify(remoteMessage));
+  // useEffect(() => {                                                       
+  //   const unsubscribe = messaging().onMessage(async remoteMessage => {
+  //       console.log(JSON.stringify(remoteMessage));
         
-        // Extract the event ID from the notification payload
-        const event = remoteMessage.data;
+  //       // Extract the event ID from the notification payload
+  //       const event = remoteMessage.data;
 
-        if (AppState.currentState === "active") {
-            // If the app is in the foreground, show a confirmation dialog
-            Alert.alert(
-                lang ? `${remoteMessage.eventname} har blitt oppdatert`:`${remoteMessage.eventname} has been updated`,
-                lang ? "Vil du se arrangementet?":"Would you like to view the event?",
-                [
-                    { text: lang ? "Avslå":"Cancel", style: "cancel" },
-                    {
-                        text: "OK",
-                        onPress: () => {
-                            // If the user tapped "OK", navigate to the SpecificEventScreen
-                            navigation.navigate("SpecificEventScreen", { item: event });
-                        }
-                    }
-                ],
-                { cancelable: true }
-            );
-        } else {
-            // If the app is in the background, navigate to the SpecificEventScreen directly
-            navigation.navigate("SpecificEventScreen", { item: event });
-        }
-    });
+  //       if (AppState.currentState === "active") {
+  //           // If the app is in the foreground, show a confirmation dialog
+  //           Alert.alert(
+  //               lang ? `${remoteMessage.eventname} har blitt oppdatert`:`${remoteMessage.eventname} has been updated`,
+  //               lang ? "Vil du se arrangementet?":"Would you like to view the event?",
+  //               [
+  //                   { text: lang ? "Avslå":"Cancel", style: "cancel" },
+  //                   {
+  //                       text: "OK",
+  //                       onPress: () => {
+  //                           // If the user tapped "OK", navigate to the SpecificEventScreen
+  //                           navigation.navigate("SpecificEventScreen", { item: event });
+  //                       }
+  //                   }
+  //               ],
+  //               { cancelable: true }
+  //           );
+  //       } else {
+  //           // If the app is in the background, navigate to the SpecificEventScreen directly
+  //           navigation.navigate("SpecificEventScreen", { item: event });
+  //       }
+  //   });
     
-    return unsubscribe;                                                   //  Stops when in the background / quit state
-  }, []);
+  //   return unsubscribe;                                                   //  Stops when in the background / quit state
+  // }, []);
   // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 4/8
 
   useEffect(() => {                                                       //  --- NOTIFICATION MANAGEMENT ---

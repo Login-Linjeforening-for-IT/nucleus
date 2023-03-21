@@ -15,12 +15,19 @@ export default async function updateCalendar(events, calendarID) {
 
     for (const event of formattedEvents) {
       // Find the matching event in the formatted events array
-      const matchingEvent = calendarEvents.find(e => e.id === event.id);
+      const matchingEvent = calendarEvents.find(e => e.title === event.title);
+      const newObj = {
+        title: event.title,
+        notes: event.notes,
+        location: event.location,
+        startDate: event.startDate,
+        endDate: event.endDate,
+      }
 
       // Update the event in the calendar
       if (matchingEvent) {
         try {
-          await updateEventAsync(event.id, matchingEvent);
+          await updateEventAsync(matchingEvent.id, newObj);
         } catch (e) {console.log(`Error updating event: ${e}`)}
       } else {
         try { 
@@ -29,4 +36,4 @@ export default async function updateCalendar(events, calendarID) {
       }
     }
   }
-  }
+}
