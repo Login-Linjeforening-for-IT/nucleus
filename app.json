@@ -50,7 +50,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.eirikhanasand.Login",
-      "buildNumber": "43",
+      "buildNumber": "44",
       "googleServicesFile": "./GoogleService-Info.plist",
       "infoPlist": {
          "UIBackgroundModes": [
@@ -64,16 +64,9 @@
         "foregroundImage": "./assets/logo/adaptiveIcon.png",
         "backgroundColor": "#000000"
       },
-      "notification": {
-        "icon": "./assets/logo/adaptiveIcon.png",
-        "androidMode": "default",
-        "priority": "max",
-        "visibility": "public",
-        "smallIconSize": 24
-      },
       "package": "com.login.Login",
       "googleServicesFile": "./google-services.json",
-      "versionCode": 34,
+      "versionCode": 35,
       "permissions": [
         "NOTIFICATIONS",
         "READ_CALENDAR",

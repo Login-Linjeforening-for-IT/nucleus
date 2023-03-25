@@ -45,10 +45,6 @@ import {                                                                  // Rea
 import { useFocusEffect } from '@react-navigation/native';                // useFocusEffect       (do something when the screen is displayed)
 import LastFetch from '../shared/functions/lastfetch';
 
-// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 3/8
-// import messaging from '@react-native-firebase/messaging';
-// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 3/8
-
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
@@ -438,44 +434,6 @@ export default function EventScreen({ navigation }) {                     //  Ex
       }
     })();
   };
-  
-  // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 4/8
-  /**
-   * Handles redirection of event notifications
-   */
-  // useEffect(() => {                                                       
-  //   const unsubscribe = messaging().onMessage(async remoteMessage => {
-  //       console.log(JSON.stringify(remoteMessage));
-        
-  //       // Extract the event ID from the notification payload
-  //       const event = remoteMessage.data;
-
-  //       if (AppState.currentState === "active") {
-  //           // If the app is in the foreground, show a confirmation dialog
-  //           Alert.alert(
-  //               lang ? `${remoteMessage.eventname} har blitt oppdatert`:`${remoteMessage.eventname} has been updated`,
-  //               lang ? "Vil du se arrangementet?":"Would you like to view the event?",
-  //               [
-  //                   { text: lang ? "Avslå":"Cancel", style: "cancel" },
-  //                   {
-  //                       text: "OK",
-  //                       onPress: () => {
-  //                           // If the user tapped "OK", navigate to the SpecificEventScreen
-  //                           navigation.navigate("SpecificEventScreen", { item: event });
-  //                       }
-  //                   }
-  //               ],
-  //               { cancelable: true }
-  //           );
-  //       } else {
-  //           // If the app is in the background, navigate to the SpecificEventScreen directly
-  //           navigation.navigate("SpecificEventScreen", { item: event });
-  //       }
-  //   });
-    
-  //   return unsubscribe;                                                   //  Stops when in the background / quit state
-  // }, []);
-  // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 4/8
 
   useEffect(() => {                                                       //  --- NOTIFICATION MANAGEMENT ---
     registerForPushNotificationsAsync(lang).then(token => setExpoPushToken(token));
