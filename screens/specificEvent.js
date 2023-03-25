@@ -1,8 +1,8 @@
 {/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
-import CleanDescription, {FetchJoinLink} from '../shared/eventComponents/cleanDescription';
 import CategoryCircle from '../shared/eventComponents/categoryCircle';
 import CategorySquare from '../shared/eventComponents/categorySquare';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import FetchJoinLink from '../shared/eventComponents/fetchJoinLink';
 import EventLocation from '../shared/eventComponents/eventLocation';
 import DynamicCircle from '../shared/eventComponents/dynamicCircle';
 import EventTime from '../shared/eventComponents/eventTime';
@@ -11,6 +11,7 @@ import MonthNO from '../shared/eventComponents/monthNO';
 import MonthEN from '../shared/eventComponents/monthEN';
 import GetEndTime from '../shared/functions/getEndTime';
 import React, { useEffect, useState } from 'react';
+import RenderHTML from 'react-native-render-html';
 import Space from '../shared/functions/space';
 import FetchColor from '../styles/fetchTheme';
 import Card from '../shared/functions/card';
@@ -88,7 +89,7 @@ export default function SpecificEventScreen({ route, navigation}) {
       });
     }
 }
-
+  
   return(
     <View>
 {/* ========================= DISPLAY CONTENT ========================= */}
@@ -212,7 +213,17 @@ export default function SpecificEventScreen({ route, navigation}) {
                 <Text style={{...T.centered20, color: FetchColor(theme, 'TEXTCOLOR')}}>{item.eventname}</Text>
               </View>
               {Space(5)}
-              {CleanDescription(usersData.description)}
+              {usersData.description ? 
+                <RenderHTML 
+                  baseStyle={{
+                    maxWidth: '100%',
+                    color: FetchColor(theme, 'TEXTCOLOR'),
+                  }}
+                  contentWidth={300} 
+                  source={{html: usersData.description}} 
+                />
+                : null
+              }
               {Space(10)}
               {
                 link ?
