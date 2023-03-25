@@ -5,9 +5,10 @@ import { Provider } from 'react-redux';                                     // R
 import { PersistGate } from 'redux-persist/integration/react';              // Persistgate to fetch state from AsyncStorage
 import { persistStore } from 'redux-persist';                               // PersistStore to store states in AsyncStorage
 import { AppRegistry } from 'react-native';                                 // Entry point of the application
+import { Alert } from 'react-native';
 
 // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 1/8
-// import messaging from '@react-native-firebase/messaging';                   // Notifications
+import messaging from '@react-native-firebase/messaging';                   // Notifications
 // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 1/8
 
 let persistor = persistStore(store)                                         // Middleware to interact with AsyncStorage
@@ -26,9 +27,9 @@ let persistor = persistStore(store)                                         // M
  */
 export default function App() {  
     // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 2/8
-    // messaging().setBackgroundMessageHandler(async remoteMessage => {        // FCM Background Handler
-    //     console.log('Message handled in the background!', remoteMessage);
-    // });
+    messaging().setBackgroundMessageHandler(async remoteMessage => {        // FCM Background Handler
+        Alert.alert('Recieved notification!', remoteMessage);
+    });
     // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 2/8
 
     AppRegistry.registerComponent('app', () => App);
