@@ -1,5 +1,4 @@
 {/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
-import SchedulePushNotification from '../shared/notificationComponents/schedulePushNotification';
 import CleanDescription, {FetchJoinLink} from '../shared/eventComponents/cleanDescription';
 import CategoryCircle from '../shared/eventComponents/categoryCircle';
 import CategorySquare from '../shared/eventComponents/categorySquare';
@@ -33,7 +32,6 @@ import {
   Text, 
 } from 'react-native';
 
-
 {/* ========================= APP START ========================= */}
 
 export default function SpecificEventScreen({ route, navigation}) {
@@ -65,10 +63,8 @@ export default function SpecificEventScreen({ route, navigation}) {
     let storedClickedEvents = JSON.parse(await AsyncStorage.getItem('clickedEvents'))
     if(storedClickedEvents){
       storedClickedEvents.push(item)
-      SchedulePushNotification(item, lang)
       await AsyncStorage.setItem('clickedEvents', JSON.stringify(storedClickedEvents))
     }else{
-      SchedulePushNotification(item, lang)
       await AsyncStorage.setItem('clickedEvents', JSON.stringify([item]))
     }
   }

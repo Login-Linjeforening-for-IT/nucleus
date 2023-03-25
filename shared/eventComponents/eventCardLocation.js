@@ -13,7 +13,18 @@ import FetchColor from '../../styles/fetchTheme';
  */
 export default function EventCardLocation(item, theme, lang) {
     let time = ' ' + item.startt[11]+item.startt[12]+':'+item.startt[14]+item.startt[15] + '. ';
-    let location = item.campus + '. ' + item.roomno + '.';
+    let r = item.roomno;
+    let c = item.campus;
+    let s = item.street;
+    let loc;
+    if (r && c && s) loc = r + ", " + c + ", " + s + '.';
+    else if (r && c) loc = r + ", " + c + '.';
+    else if (r && s) loc = r + ", " + s + '.';
+    else if (c && s) loc = c + ", " + s + '.';
+    else if (r) loc = r + '.';
+    else if (c) loc = c + '.';
+    else if (s) loc = s + '.';
+    else loc = null;
 
     return(
         <View style={ES.view2}>
@@ -22,8 +33,8 @@ export default function EventCardLocation(item, theme, lang) {
             </View>
             <View style={{flexDirection: 'row'}}>
                 {time != ' : ' && time != ' 00:00. ' ? <Text style={{...ES.loc, color: FetchColor(theme, 'TEXTCOLOR')}}>{time != '00:00' ? time:null}</Text>:null}
-                {location != '. .' ? <Text style={{...ES.loc, color: FetchColor(theme, 'TEXTCOLOR')}}>{location}</Text>:null} 
-                {time == ' : ' || time == ' 00:00. ' && location == '. .' ? <Text style={{...ES.loc, color: FetchColor(theme, 'TEXTCOLOR')}}> {lang ? 'Mer info TBA!':'More info TBA!'}</Text>:null}
+                {loc ? <Text style={{...ES.loc, color: FetchColor(theme, 'TEXTCOLOR')}}>{loc}</Text>:null} 
+                {time == ' : ' || time == ' 00:00. ' && !loc || !loc ? <Text style={{...ES.loc, color: FetchColor(theme, 'TEXTCOLOR')}}> {lang ? 'Mer info TBA!':'More info TBA!'}</Text>:null}
             </View>
         </View>
     )

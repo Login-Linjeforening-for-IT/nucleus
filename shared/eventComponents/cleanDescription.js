@@ -33,6 +33,7 @@ export default function CleanDescription(string) {
         const addA = addo.replace(/&Aring;/g, 'Å');
         const adda = addA.replace(/&aring;/g, 'å');
 
+
         // issue 15 - Currently removes all styling instead of preserving it
         const removeStyling = adda.replace(/<strong style="color: #f0802a; \(/g,'');
         const removeClosingStyling = removeStyling.replace(/<\/strong>/g,'');
@@ -42,6 +43,8 @@ export default function CleanDescription(string) {
         const addEnglishLB = addLB.replace(/English/g, 'English\n');
         const addSpace = addEnglishLB.replace(/&nbsp;/g, ' ');
         const removeHTMLreferences = addSpace.replace(/&#\d+;/g, '.');
+        const removeStrong = removeHTMLreferences.replace(/<strong>/, '');
+        const removeTableStyle = removeStrong.replace(/<table style=/)
         const removeLaquo = removeHTMLreferences.replace(/&laquo;|&raquo;/g, '"');
         const removeExcessSpace = removeLaquo.replace(/\s+\./g, '!');
         const missingExpiretime = removeExcessSpace.replace(/(^|\n)(?=.*Påmelding)(?!.*frist).*(\n|$)|  /g, '');

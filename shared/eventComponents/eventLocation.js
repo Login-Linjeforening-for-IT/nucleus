@@ -28,7 +28,7 @@ export default function EventLocation(room, campus, street) {
         return(
             <View style={ES.specificEventInfoView}>
                 <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Lokasjon:   ' : 'Location:     '}</Text>
-                <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>{room ? room + ', ':null}{campus}{street}</Text>
+                <Text style={{...T.specificEventInfo, maxWidth: '80%', color: FetchColor(theme, 'TEXTCOLOR')}}>{room ? room + ', ':null}{campus}{street}</Text>
             </View>
         )
     }else{

@@ -44,10 +44,9 @@ import {                                                                  // Rea
 } from 'react-native';                                                    // React native
 import { useFocusEffect } from '@react-navigation/native';                // useFocusEffect       (do something when the screen is displayed)
 import LastFetch from '../shared/functions/lastfetch';
-import { getCalendarPermissionsAsync } from 'expo-calendar';
 
 // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 3/8
-import messaging from '@react-native-firebase/messaging';
+// import messaging from '@react-native-firebase/messaging';
 // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 3/8
 
 Notifications.setNotificationHandler({
@@ -444,38 +443,38 @@ export default function EventScreen({ navigation }) {                     //  Ex
   /**
    * Handles redirection of event notifications
    */
-  useEffect(() => {                                                       
-    const unsubscribe = messaging().onMessage(async remoteMessage => {
-        console.log(JSON.stringify(remoteMessage));
+  // useEffect(() => {                                                       
+  //   const unsubscribe = messaging().onMessage(async remoteMessage => {
+  //       console.log(JSON.stringify(remoteMessage));
         
-        // Extract the event ID from the notification payload
-        const event = remoteMessage.data;
+  //       // Extract the event ID from the notification payload
+  //       const event = remoteMessage.data;
 
-        if (AppState.currentState === "active") {
-            // If the app is in the foreground, show a confirmation dialog
-            Alert.alert(
-                lang ? `${remoteMessage.eventname} har blitt oppdatert`:`${remoteMessage.eventname} has been updated`,
-                lang ? "Vil du se arrangementet?":"Would you like to view the event?",
-                [
-                    { text: lang ? "Avslå":"Cancel", style: "cancel" },
-                    {
-                        text: "OK",
-                        onPress: () => {
-                            // If the user tapped "OK", navigate to the SpecificEventScreen
-                            navigation.navigate("SpecificEventScreen", { item: event });
-                        }
-                    }
-                ],
-                { cancelable: true }
-            );
-        } else {
-            // If the app is in the background, navigate to the SpecificEventScreen directly
-            navigation.navigate("SpecificEventScreen", { item: event });
-        }
-    });
+  //       if (AppState.currentState === "active") {
+  //           // If the app is in the foreground, show a confirmation dialog
+  //           Alert.alert(
+  //               lang ? `${remoteMessage.eventname} har blitt oppdatert`:`${remoteMessage.eventname} has been updated`,
+  //               lang ? "Vil du se arrangementet?":"Would you like to view the event?",
+  //               [
+  //                   { text: lang ? "Avslå":"Cancel", style: "cancel" },
+  //                   {
+  //                       text: "OK",
+  //                       onPress: () => {
+  //                           // If the user tapped "OK", navigate to the SpecificEventScreen
+  //                           navigation.navigate("SpecificEventScreen", { item: event });
+  //                       }
+  //                   }
+  //               ],
+  //               { cancelable: true }
+  //           );
+  //       } else {
+  //           // If the app is in the background, navigate to the SpecificEventScreen directly
+  //           navigation.navigate("SpecificEventScreen", { item: event });
+  //       }
+  //   });
     
-    return unsubscribe;                                                   //  Stops when in the background / quit state
-  }, []);
+  //   return unsubscribe;                                                   //  Stops when in the background / quit state
+  // }, []);
   // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 4/8
 
   useEffect(() => {                                                       //  --- NOTIFICATION MANAGEMENT ---
@@ -583,49 +582,47 @@ export default function EventScreen({ navigation }) {                     //  Ex
         {search.status == 1? Space(Dimensions.get('window').height/8):null}
         {search.status ? 
           <View>
-              <View style={ES.absoluteView}>
-                  <TextInput 
-                      ref={textInputRef}
-                      style={{...ES.filterText, backgroundColor: FetchColor(theme, 'DARKER')}}
-                      maxLength={40}
-                      placeholder='Søk..'
-                      placeholderTextColor={FetchColor(theme, 'TITLETEXTCOLOR')}
-                      textAlign='center'
-                      onChangeText={(val) => filterInput(val)}
-                  />
-                  <TouchableOpacity onPress={() => filterInput(null) + setRenderedArray([...events]) + setClickedCategory([]) + textInputRef.current.clear()}>
-                      <Image style={ES.filterResetIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/icons/reset.png') : require('../assets/icons/reset-black.png')} />
-                  </TouchableOpacity>
-              </View>
+            <View style={ES.absoluteView}>
+              <TextInput 
+                ref={textInputRef}
+                style={{...ES.filterText, backgroundColor: FetchColor(theme, 'DARKER')}}
+                maxLength={40}
+                placeholder='Søk..'
+                placeholderTextColor={FetchColor(theme, 'TITLETEXTCOLOR')}
+                textAlign='center'
+                onChangeText={(val) => filterInput(val)}
+              />
+              <TouchableOpacity onPress={() => filterInput(null) + setRenderedArray([...events]) + setClickedCategory([]) + textInputRef.current.clear()}>
+                <Image style={ES.filterResetIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/icons/reset.png') : require('../assets/icons/reset-black.png')} />
+              </TouchableOpacity>
+            </View>
               
               <View style={{...ES.filterView, backgroundColor: FetchColor(theme, 'DARKER')}}>
-                  <FlatList
-                          scrollEnabled={false}
-                          showsVerticalScrollIndicator={false}
-                          numColumns={3}
-                          keyExtractor={(item) => item.id}
-                          data={relevantCategories}
-                          renderItem={({item}) => (
-                              <View style={ES.categoryView}>
-                                  {clickedCategory.includes(item) ?
-                                      <TouchableOpacity onPress={() => setClickedCategory(clickedCategory.filter((x) => x.id !== item.id))}>
-                                        <View>
-                                        <Text style={{...T.filterCategoryText, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{item.category}</Text>
-                                          <View><CheckedBox/></View>
-                                          <View><SmallCheck/></View>
-                                        </View>
-                                      </TouchableOpacity>
-                                  :
-                                      <TouchableOpacity onPress={() => setClickedCategory([...clickedCategory, item])}>
-                                          <Text style={{...T.filterCategoryText, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{item.category}</Text>
-                                          <CheckBox/>
-                                      </TouchableOpacity>
-                                  }
-                                  
-                                  
-                              </View>
-                          )}
-                  />
+                <FlatList
+                  scrollEnabled={false}
+                  showsVerticalScrollIndicator={false}
+                  numColumns={3}
+                  keyExtractor={(item) => item.id}
+                  data={relevantCategories}
+                  renderItem={({item}) => (
+                    <View style={ES.categoryView}>
+                      {clickedCategory.includes(item) ?
+                        <TouchableOpacity onPress={() => setClickedCategory(clickedCategory.filter((x) => x.id !== item.id))}>
+                          <View>
+                          <Text style={{...T.filterCategoryText, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{item.category}</Text>
+                            <View><CheckedBox/></View>
+                            <View><SmallCheck/></View>
+                          </View>
+                        </TouchableOpacity>
+                      :
+                        <TouchableOpacity onPress={() => setClickedCategory([...clickedCategory, item])}>
+                          <Text style={{...T.filterCategoryText, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{item.category}</Text>
+                          <CheckBox/>
+                        </TouchableOpacity>
+                      }
+                    </View>
+                  )}
+                />
               </View>
           </View>
         :null}
