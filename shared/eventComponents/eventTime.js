@@ -35,8 +35,8 @@ export default function EventTime(startTime, endTime) { // startTime
         const endHour     = parseInt((endTime)[11] + (endTime)[12])                                       //  hour
         const endMinute   = parseInt((endTime)[14] + (endTime)[15])                                       //  minute
 
-        const startMinutesCalculated = 60-startMinute-minute                                       //  Amount of minutes remaining if less than one hour
-        const startMinuteMore = 60-minute                                                       //  Minutes remaining till event if more than one hour
+        const startMinutesCalculated = 59-startMinute-minute                                       //  Amount of minutes remaining if less than one hour
+        const startMinuteMore = 59-minute                                                       //  Minutes remaining till event if more than one hour
         const nextHour = 59-startMinutesCalculated 
         const nextMonth = (lastDayOfMonth(month+1)-day)+startDay                                  //  Days left if event is next month
         const startHourCalculated = startHour-hour-1                                            //  Amount of hours remaining if the event is the same day
