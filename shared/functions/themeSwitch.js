@@ -18,7 +18,7 @@ export default function ThemeSwitch() {
     const dispatch = useDispatch()
 
       return (
-        <View>
+        <View style={{maxHeight: 40, justifyContent: 'center'}}>
             <TouchableOpacity onPress={() => theme > 2 ? dispatch(resetTheme()) : dispatch(changeTheme())}>
             {theme == 0 ? <Image style={SS.lightSwitchImage} source={require('../../assets/themes/sun.png')} />: null}        
             {theme == 1 ? <Image style={SS.lightSwitchImage} source={require('../../assets/themes/abyss.png')} />: null}

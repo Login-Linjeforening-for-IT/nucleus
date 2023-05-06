@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions, PixelRatio, Platform } from "react-native";  // Importing needed dependencies
+import { StyleSheet, Dimensions, Platform } from "react-native";  // Importing needed dependencies
 
 
 export const MS = StyleSheet.create ({                              // Declares the export - meant for styling top and bottom menu
@@ -13,7 +13,7 @@ export const MS = StyleSheet.create ({                              // Declares 
     marginRight: 'auto',
     fontSize: 30
   },
-  eventScreenTitle: {                                               // Big headertitle for EventScreen (due to filter causing problems)
+  filterScreenTitle: {                                               // Big headertitle for EventScreen (due to filter causing problems)
     position: 'absolute',
     textAlign: 'center',
     top: Dimensions.get('window').height/35,
@@ -57,16 +57,15 @@ export const MS = StyleSheet.create ({                              // Declares 
     height: "10%",                                                  // Sets the height of the top menu to 13.3% of the screen height
   },
   tMenuIcon: {                                                      // Size of top menu icons
-    left: '100%',
-    top: '42%',                                                     // Moves the icon 35% downwards
-    width: 40,                                                     // Icon width
-    height: 40,                                                     // Icon height
+    top: '48%',                                                     // Moves the icon 35% downwards
+    width: 32,                                                     // Icon width
+    height: 32,                                                     // Icon height
   },
   goBack: {                                                         // Size of goBack icon 
-    top: '25%',                                                     // Adjusts it 25% downwards (because its a very small icon)
-    left: '-10%',                                                   // Moves it 10% towards the left
-    width: 80,                                                      // Icon width
-    height: 80,                                                     // Icon height
+    top: '52%',                                                     // Adjusts it 25% downwards (because its a very small icon)
+    left: '140%',                                                   // Moves it 10% towards the left
+    width: 25,                                                      // Icon width
+    height: 25,                                                     // Icon height
   },
   filterIcon: {
     top: '37%',                                                     // Moves the icon 35% downwards
@@ -102,7 +101,12 @@ export const MS = StyleSheet.create ({                              // Declares 
   },
   bMenuIcon: {                                                      // Bottom menu icons
     bottom: '10%',
-    width: 120,                                                     // Icon width
+    width: 90,                                                     // Icon width
     height: 65,                                                     // Icon height
+    alignSelf: 'center'
   },
+  logoBackground: {
+    width: 100,
+    alignItems: 'center',
+  }
 });

@@ -40,7 +40,7 @@ export default function EventTime(startTime, endTime) { // startTime
         const nextHour = 59-startMinutesCalculated 
         const nextMonth = (lastDayOfMonth(month+1)-day)+startDay                                  //  Days left if event is next month
         const startHourCalculated = startHour-hour-1                                            //  Amount of hours remaining if the event is the same day
-        const startMinutesAfterHourCalculated = 60-startMinutesCalculated                       //  Amount of minutes remaining after hours have been subtracted
+        const startMinutesAfterHourCalculated = 59-startMinutesCalculated                       //  Amount of minutes remaining after hours have been subtracted
         const startsNextDay = 24-(hour-startHour)
         const startDayNextMonth = lastDayOfMonth(month)-day                                     //  Startday if event is in more than 1 month
         const lessThanOneMonth = 31+startDay*2-startDay-day                                     //  Startday if event is in less than 1 month

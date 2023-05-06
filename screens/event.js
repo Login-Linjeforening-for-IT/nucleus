@@ -8,9 +8,7 @@ import EventCardLocation from '../shared/eventComponents/eventCardLocation';
 import CategorySquare from '../shared/eventComponents/categorySquare';    // Left side square on eventcard
 import AsyncStorage from '@react-native-async-storage/async-storage';     // Localstorage
 import DynamicCircle from '../shared/eventComponents/dynamicCircle';
-import GreenLight from '../shared/eventComponents/greenLight';
 import SmallCheck from '../shared/eventComponents/smallCheck';
-import GrayLight from '../shared/eventComponents/grayLight';
 import CompareDates from '../shared/functions/compareDates';
 import topic from '../shared/notificationComponents/topic';
 import React, { useEffect, useState, useRef } from 'react';               // React imports
@@ -19,13 +17,12 @@ import MonthNO from '../shared/eventComponents/monthNO';
 import MonthEN from '../shared/eventComponents/monthEN';
 import CheckedBox from '../shared/functions/checkedBox';
 import { useSelector, useDispatch } from 'react-redux';                   // Redux
-import Check from '../shared/eventComponents/check';
 import CheckBox from '../shared/functions/checkBox';
 import * as Notifications from 'expo-notifications';                      // Local notifications
 import { setCalendarID } from '../redux/misc';
 import Space from '../shared/functions/space';
 import FetchColor from '../styles/fetchTheme';                            // Function to fetch theme color
-import Card from '../shared/functions/card';
+import Cluster from '../shared/functions/cluster';
 import { GS } from '../styles/globalStyles';                              // Global styles
 import { StatusBar } from 'expo-status-bar';                              // Status bar
 import { ES } from '../styles/eventStyles';                               // Event styles
@@ -44,6 +41,7 @@ import {                                                                  // Rea
 } from 'react-native';                                                    // React native
 import { useFocusEffect } from '@react-navigation/native';                // useFocusEffect       (do something when the screen is displayed)
 import LastFetch from '../shared/functions/lastfetch';
+import Bell from '../shared/eventComponents/bell';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -81,9 +79,10 @@ export default function EventScreen({ navigation }) {                     //  Ex
   const { lang  }    = useSelector( (state) => state.lang  )              //  Language state
   const { login }    = useSelector( (state) => state.login )              //  Loginstatus
   const { theme }    = useSelector( (state) => state.theme )              //  Theme state
+  const { oldUI }    = useSelector( (state) => state.misc )               //  Old User Interface
   const { calendarID } = useSelector( (state) => state.misc )             //  Calendar ID
-  const listingPage = () => { navigation.navigate('ListingScreen') }      //  Navigate to Job screen
-  const menuPage    = () => { navigation.navigate('MenuScreen')    }      //  Navigate to menu
+  const adPage = () => { navigation.navigate('AdScreen') }                //  Navigate to Job ad screen
+  const menuPage = () => { navigation.navigate(!oldUI ? 'MenuScreen':'OldMenuScreen') }
   const [expoPushToken, setExpoPushToken] = useState('');                 //  Array for notification token
   const [pushNotification, setPushNotification] = useState(false);        //  Array for setting the push notification
   const notificationListener = useRef();                                  //  Notification listener
@@ -535,15 +534,15 @@ export default function EventScreen({ navigation }) {                     //  Ex
     <View> 
       <StatusBar style={theme == 0 || theme == 2 || theme == 3 ? 'light' : 'dark'} />
       {/* ========================= DISPLAY CONTENT ========================= */}
-      <View style={{...GS.content, backgroundColor: FetchColor(theme, 'BACKGROUND')}}>
+      <View style={{...GS.content, backgroundColor: FetchColor(theme, 'DARKER')}}>
         {/* ----- RENDERS FILTER ----- */}
-        {search.status == 1? Space(Dimensions.get('window').height/8):null}
+        {search.status == 1? Space(Dimensions.get('window').height/9):null}
         {search.status ? 
           <View>
             <View style={ES.absoluteView}>
               <TextInput 
                 ref={textInputRef}
-                style={{...ES.filterText, backgroundColor: FetchColor(theme, 'DARKER')}}
+                style={{...ES.clusterFilterText, backgroundColor: FetchColor(theme, 'DARKER')}}
                 maxLength={40}
                 placeholder='Søk..'
                 placeholderTextColor={FetchColor(theme, 'TITLETEXTCOLOR')}
@@ -551,11 +550,11 @@ export default function EventScreen({ navigation }) {                     //  Ex
                 onChangeText={(val) => filterInput(val)}
               />
               <TouchableOpacity onPress={() => filterInput(null) + setRenderedArray([...events]) + setClickedCategory([]) + textInputRef.current.clear()}>
-                <Image style={ES.filterResetIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/icons/reset.png') : require('../assets/icons/reset-black.png')} />
+                <Image style={ES.clusterFilterResetIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/icons/reset.png') : require('../assets/icons/reset-black.png')} />
               </TouchableOpacity>
             </View>
               
-              <View style={{...ES.filterView, backgroundColor: FetchColor(theme, 'DARKER')}}>
+              <View style={{...ES.clusterFilterView, backgroundColor: FetchColor(theme, 'DARKER')}}>
                 <FlatList
                   scrollEnabled={false}
                   showsVerticalScrollIndicator={false}
@@ -563,7 +562,7 @@ export default function EventScreen({ navigation }) {                     //  Ex
                   keyExtractor={(item) => item.id}
                   data={relevantCategories}
                   renderItem={({item}) => (
-                    <View style={ES.categoryView}>
+                    <View style={ES.clusterCategoryView}>
                       {clickedCategory.includes(item) ?
                         <TouchableOpacity onPress={() => setClickedCategory(clickedCategory.filter((x) => x.id !== item.id))}>
                           <View>
@@ -585,7 +584,6 @@ export default function EventScreen({ navigation }) {                     //  Ex
           </View>
         :null}
         {/* ----- RENDERS EVENTS ----- */}
-        {renderedArray != null ? renderedArray.length != null ? search.status ? Space(10) :null:null:null}
         {renderedArray != null ? 
           renderedArray.length > 0 ? 
             <FlatList
@@ -596,10 +594,11 @@ export default function EventScreen({ navigation }) {                     //  Ex
               data={renderedArray}
               renderItem={({item, index}) => (
                 
-                <View style={{marginTop: search.status && !index ? -10:0}}> 
+                <View> 
                   <TouchableOpacity onPress={() => navigation.navigate('SpecificEventScreen', {item: item})}>
-                  {index == 0 && search.status == 0? Space(Dimensions.get('window').height/8): null}
-                      <Card>
+                  {index == 0 && search.status == 0? Space(Dimensions.get('window').height/8.1): null}
+                      <Cluster space={8}>
+                      {index == 0 ? Space(8):null}
                         <View style={ES.eventBack}>
                           <View>
                               {CategorySquare(item.category)}
@@ -608,27 +607,15 @@ export default function EventScreen({ navigation }) {                     //  Ex
                           </View>
                             {EventCardLocation(item, theme, lang)}
                             <View style={ES.view3}>
-                              {clickedEvents.some(event => event.eventID === item.eventID) ? 
                                 <TouchableOpacity onPress={() => {
                                   topic(item.eventID, lang, 0, (item.category).toLowerCase(), notificationArray(item.category))
-                                  setClickedEvents(clickedEvents.filter((x) => x.eventID !== item.eventID))
+                                  setClickedEvents(clickedEvents.some(event => event.eventID === item.eventID) ? clickedEvents.filter((x) => x.eventID !== item.eventID):[...clickedEvents, item])
                                 }}>
-                                  <View style = {ES.greenLight}><GreenLight/></View>
-                                  <View style = {ES.checkContent}><Check/></View>
+                                    <View style = {ES.bellPosition}><Bell orange={clickedEvents.some(event => event.eventID === item.eventID) ? true:false}/></View>
                                 </TouchableOpacity>
-                              :
-                                <TouchableOpacity onPress={() => {
-                                  topic(item.eventID,lang, 1, (item.category).toLowerCase(), notificationArray(item.category))
-                                  setClickedEvents([...clickedEvents, item])
-                                }}>
-                                  <View style = {ES.greenLight}><GrayLight/></View>
-                                  <View style = {ES.checkContent}><Check/></View>
-                                </TouchableOpacity>
-                              }
                             </View>
                         </View>
-                      </Card>
-                      {index == renderedArray.length-1 ? Space(10):null}
+                      </Cluster>
                       {index == renderedArray.length-1 ? <Text style={{...T.contact, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? 'Oppdatert kl:':'Updated:'} {lastSave}.</Text>:null}
                       {index == renderedArray.length-1 ? Space((Dimensions.get('window').height/3)+20):null} 
                       {index == renderedArray.length-1 && search.status == 1 ? Space(152.5):null}
@@ -660,7 +647,7 @@ export default function EventScreen({ navigation }) {                     //  Ex
       {/* ========================= DISPLAY TOP MENU ========================= */}
       {Platform.OS === 'ios' ? <BlurView style={MS.topMenu} intensity={30}/> : <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'TRANSPARENTANDROID')}}/>}
       <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
-        <TouchableOpacity>
+        <TouchableOpacity style={MS.logoBackground}>
           <Image style={MS.tMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/logo/loginText.png') : require('../assets/logo/loginText-black.png')} />
         </TouchableOpacity>
         <View style={GS.loginStatus}>{login ? DynamicCircle(10,10,'red',Dimensions.get('window').width/1.4,null,60,null):null}</View>
@@ -668,7 +655,7 @@ export default function EventScreen({ navigation }) {                     //  Ex
           lang ?
             <Text style={{... MS.smallTitle, left: '-5%', color: FetchColor(theme, 'TITLETEXTCOLOR')}}>Arrangementer</Text>
           : 
-            <Text style={{... MS.eventScreenTitle, left: '-5%', color: FetchColor(theme, 'TITLETEXTCOLOR')}}>Events</Text>
+            <Text style={{... MS.filterScreenTitle, left: '-5%', color: FetchColor(theme, 'TITLETEXTCOLOR')}}>Events</Text>
         }
         
         {renderedArray != null ? 
@@ -699,7 +686,7 @@ export default function EventScreen({ navigation }) {                     //  Ex
           <Image style={MS.bMenuIcon} source={require('../assets/menu/calendar-orange.png')} />
         </TouchableOpacity>
 
-        <TouchableOpacity style={MS.bMenuIconTO} onPress={() => listingPage()}>
+        <TouchableOpacity style={MS.bMenuIconTO} onPress={() => adPage()}>
           <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/menu/business.png') : require('../assets/menu/business-black.png')} />
         </TouchableOpacity>
 

@@ -56,7 +56,7 @@ export default function Social() {
 
                 <View style={GS.socialPartView}>
                 <TouchableOpacity onPress={() => Linking.openURL('https://redmine.login.no')}>
-                        <Image style={GS.medium} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/social/redmine-white.png') : require('../../assets/social/redmine-black.png')} />
+                        <Image style={GS.medium} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/social/wiki-white.png') : require('../../assets/social/wiki-black.png')} />
                     </TouchableOpacity>
                 </View>
             </View>

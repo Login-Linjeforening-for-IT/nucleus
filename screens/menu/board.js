@@ -20,28 +20,30 @@ import {
   Dimensions,                                                                       // Screen size
   Platform
 } from 'react-native';                                                              // React Native
+import Cluster from '../../shared/functions/cluster';
 
 
 {/* ========================= APP START ========================= */}
 
-export default function CommitteeMenuScreen({ navigation }) {                       // Declares the export Committeescreen
+export default function BoardScreen({ navigation }) {                       // Declares the export Committeescreen
 
   const { lang  } = useSelector( (state) => state.lang  )                           // Language state
   const { login } = useSelector( (state) => state.login )                           // Loginstatus
   const { theme } = useSelector( (state) => state.theme )                           // Theme state
+  const { oldUI }    = useSelector( (state) => state.misc )                   //  Old User Interface
 
-  const eventPage   = () => { navigation.navigate('EventScreen')       }            // Function to navigate to eventscreen
-  const listingPage = () => { navigation.navigate('ListingScreen')     }            // Function to navigate to job advertisements
-  const menuPage    = () => { navigation.navigate('MenuScreen')        }            // Function to navigate to menu
+  const eventPage   = () => { navigation.navigate(!oldUI ? 'EventScreen':'OldEventScreen') }
+  const menuPage   = () => { navigation.navigate(!oldUI ? 'MenuScreen':'OldMenuScreen') }
+  const adPage = () => { navigation.navigate('AdScreen') }            // Function to navigate to job advertisements
 
   return(
     <View>
 {/* ========================= DISPLAY CONTENT ========================= */}
-  <View style={{...GS.content, backgroundColor: FetchColor(theme, 'BACKGROUND')}}>
+  <View style={{...GS.content, backgroundColor: FetchColor(theme, 'DARKER')}}>
     <ScrollView showsVerticalScrollIndicator={false}>
       <View>
-        {Space(Dimensions.get('window').height/8)}
-        <Card>
+        {Space(Dimensions.get('window').height/8.1)}
+        <Cluster>
             <TouchableOpacity onPress={() => Linking.openURL('mailto:kontakt@login.no')}>
               <View>
               <View style={GS.row}>
@@ -55,7 +57,7 @@ export default function CommitteeMenuScreen({ navigation }) {                   
               </View>
             </TouchableOpacity>
           {AllComitees(lang, theme)}
-        </Card>
+        </Cluster>
         {Space(10)}
       </View>
       {Space(Dimensions.get('window').height/3)}
@@ -71,7 +73,7 @@ export default function CommitteeMenuScreen({ navigation }) {                   
 
     <View style={GS.loginStatus}>{login ? DynamicCircle(10,10,'red',Dimensions.get('window').width/1.4,null,60,null):null}</View>                    
 
-    <Text style={{... MS.screenTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{lang ? 'Komité' : 'Committee'}</Text>
+    <Text style={{... MS.screenTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{lang ? 'Styret' : 'The Board'}</Text>
 
   </View>
 
@@ -81,7 +83,7 @@ export default function CommitteeMenuScreen({ navigation }) {                   
       <TouchableOpacity style={MS.bMenuIconTO} onPress={() => eventPage()}>
       <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/menu/calendar777.png') : require('../../assets/menu/calendar-black.png')} />
       </TouchableOpacity>
-      <TouchableOpacity style={MS.bMenuIconTO} onPress={() => listingPage()}>
+      <TouchableOpacity style={MS.bMenuIconTO} onPress={() => adPage()}>
       <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/menu/business.png') : require('../../assets/menu/business-black.png')} />
       </TouchableOpacity>
       <TouchableOpacity style={MS.bMenuIconTO} onPress={() => menuPage()}>

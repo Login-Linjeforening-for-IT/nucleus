@@ -3,7 +3,7 @@ import Kontakt from '../../shared/functions/kontakt';
 import FetchColor from '../../styles/fetchTheme';                               // Color fetcher
 import Space from '../../shared/functions/space';
 import Line from '../../shared/functions/line';
-import Card from '../../shared/functions/card';
+import Cluster from '../../shared/functions/cluster';
 import { GS } from '../../styles/globalStyles';                                 // Global styles 
 import { MS } from '../../styles/menuStyles';                                   // Menu styles
 import { useSelector } from 'react-redux';                                      // Redux
@@ -25,19 +25,20 @@ export default function BusinessScreen( { navigation }) {                       
   const { lang  } = useSelector( (state) => state.lang  )                       // Language state
   const { login } = useSelector( (state) => state.login )                       // Login status
   const { theme } = useSelector( (state) => state.theme )                       // Theme state
+  const { oldUI }    = useSelector( (state) => state.misc )                   //  Old User Interface
 
-  const eventPage   = () => { navigation.navigate('EventScreen')    }           // Function to navigate to eventscreen
-  const listingPage = () => { navigation.navigate('ListingScreen')  }           // Function to navigate to job advertisements
-  const menuPage    = () => { navigation.navigate('MenuScreen')     }           // Function to navigate to menu
+  const eventPage = () => { navigation.navigate(!oldUI ? 'EventScreen':'OldEventScreen') }
+  const menuPage = () => { navigation.navigate(!oldUI ? 'MenuScreen':'OldMenuScreen') }
+  const adPage = () => { navigation.navigate('AdScreen') }           // Function to navigate to job advertisements
 
   return(
     <View>
 {/* ========================= DISPLAY CONTENT ========================= */}
-  <View style={{...GS.content, backgroundColor: FetchColor(theme, 'BACKGROUND')}}>
+  <View style={{...GS.content, backgroundColor: FetchColor(theme, 'DARKER')}}>
         
         <ScrollView showsVerticalScrollIndicator={false}>
-        {Space(Dimensions.get('window').height/8)}
-          <Card>
+        {Space(Dimensions.get('window').height/8.1)}
+          <Cluster>
             <Text style={{...T.bold40, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'For bedrifter' : 'For companies'}</Text>{Space(5)}
 
             {Space(10)}
@@ -98,7 +99,7 @@ export default function BusinessScreen( { navigation }) {                       
 
             <Kontakt/>
 
-          </Card>
+          </Cluster>
             
           {Space(10)}
           {Space(Dimensions.get('window').height/3)}
@@ -124,7 +125,7 @@ export default function BusinessScreen( { navigation }) {                       
       <TouchableOpacity style={MS.bMenuIconTO} onPress={() => eventPage()}>
       <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/menu/calendar777.png') : require('../../assets/menu/calendar-black.png')} />
           </TouchableOpacity>
-          <TouchableOpacity style={MS.bMenuIconTO} onPress={() => listingPage()}>
+          <TouchableOpacity style={MS.bMenuIconTO} onPress={() => adPage()}>
           <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/menu/business.png') : require('../../assets/menu/business-black.png')} />
           </TouchableOpacity>
           <TouchableOpacity style={MS.bMenuIconTO} onPress={() => menuPage()}>

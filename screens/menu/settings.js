@@ -1,5 +1,4 @@
 {/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
-import topicSwitchList from '../../shared/notificationComponents/topicSwitchList';
 import DynamicCircle from '../../shared/eventComponents/dynamicCircle';
 import Notification from '../../shared/functions/notification';
 import ThemeSwitch from '../../shared/functions/themeSwitch';
@@ -22,6 +21,9 @@ import {
   Dimensions,
   Platform,
 } from 'react-native';
+import BellChange from '../../shared/legacy/oldUI';
+import Cluster from '../../shared/functions/cluster';
+import Reminders from '../../shared/functions/reminders';
 
 {/* ========================= APP START ========================= */}
 
@@ -30,136 +32,154 @@ export default function SettingScreen( { navigation }) {
   const { theme } = useSelector( (state) => state.theme ) 
   const { lang  } = useSelector( (state) => state.lang  )
   const { login } = useSelector( (state) => state.login )
+  const { oldUI }    = useSelector( (state) => state.misc )                   //  Old User Interface
 
-  const eventPage   = () => { navigation.navigate('EventScreen')   }
-  const listingPage = () => { navigation.navigate('ListingScreen') }
-  const menuPage    = () => { navigation.navigate('MenuScreen')    }              // Function to navigate to menu
+  const eventPage   = () => { navigation.navigate(!oldUI ? 'EventScreen':'OldEventScreen') }
+  const menuPage   = () => { navigation.navigate(!oldUI ? 'MenuScreen':'OldMenuScreen') }
+  const adPage = () => { navigation.navigate('AdScreen') }
 
   return(
     <View>
 {/* ========================= DISPLAY CONTENT ========================= */}
-<View style={{...GS.content, backgroundColor: FetchColor(theme, 'BACKGROUND')}}>
+<View style={{...GS.content, backgroundColor: FetchColor(theme, 'DARKER')}}>
         <ScrollView showsVerticalScrollIndicator={false}>
-        {Space(Dimensions.get('window').height/8)}
-          <Card>
+        {Space(Dimensions.get('window').height/8.1)}
+          <Cluster>
             <View style={GS.notificationBack}>
-              <View style={GS.view}>
-                <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}> {lang ? 'Tema' : 'Theme' }</Text>
+              <View style={{...GS.view, textAlign: 'flex-end'}}>
+                <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Tema' : 'Theme' }</Text>
+                <Text style={{...GS.notificationTip, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? 'Endrer appens fargetema.' : 'Changes the color theme of the app.' }</Text>
               </View>
               <View style={GS.view2}><ThemeSwitch/></View>
             </View>
-          </Card>
+          </Cluster>
 
-          <Card>
+          <Cluster>
             <View style={GS.notificationBack}>
               <View style={GS.view}>
                 <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Språk' : 'Language'}</Text>
+                <Text style={{...GS.notificationTip, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? 'Endrer språk.' : 'Changes language.' }</Text>
               </View>
               <View style={GS.langView}><Language/></View>
             </View>
-          </Card>
+          </Cluster>
 
-          {Space(15)}
+          <Cluster>
+            <View style={GS.notificationBack}>
+              <View style={GS.view}>
+                <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Gammel UI' : 'Old UI'}</Text>
+                <Text style={{...GS.notificationTip, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? 'Gammelt brukergrensesnitt.' : 'Old User Interface.' }</Text>
+              </View>
+              <View style={GS.view2}><BellChange/></View>
+            </View>
+          </Cluster>
+
+          {Space(10)}
           <Text style={{...T.text30, left: 15, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? 'Varslinger' : 'Notifications'}</Text>              
+          {Space(10)}
 
-          <Card>
+          <Cluster>
             <View style={GS.notificationBack}>
               <View style={GS.view}>
                 <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Viktig informasjon' : 'Important info'}</Text>
+                <Text style={{...GS.notificationTip, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? 'Motta varsel om viktig informasjon, som tid for årsmøte etc.' : 'Recieve notifications about important information, such as annual meetings.'}</Text>
               </View>
               <View style={GS.view2}><Notification category='IMPORTANT'/></View>
             </View>
-          </Card>
+          </Cluster>
 
           {Space(10)}
           <Text style={{...T.text25, left: 15, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? 'Nye arrangementer' : 'New events'}</Text>              
-
-          <Card>
+          {Space(10)}
+          
+          <Cluster>
             <View style={GS.notificationBack}>
               <View style={GS.view}>
                 <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Bedpres': 'Company Presentations'}</Text>
+                <Text style={{...GS.notificationTip, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? 'Varsel hver gang det legges ut ny bedriftpresentasjon.' : 'Notification every time a company presentation is posted.' }</Text>
               </View>
               <Notification category='BEDPRES'/>
             </View>
-          </Card>
+          </Cluster>
 
-          <Card>
+          <Cluster>
             <View style={GS.notificationBack}>
               <View style={GS.view}>
                 <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}>TekKom</Text>
-              </View>
+                <Text style={{...GS.notificationTip, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? 'Varsel hver gang det legges ut ny TekKom samling.' : 'Notification every time a TekKom gathering is posted.' }</Text>
+             </View>
               <Notification category='TEKKOM'/>
             </View>
-          </Card>
+          </Cluster>
 
-          <Card>
+          <Cluster>
             <View style={GS.notificationBack}>
               <View style={GS.view}>
                 <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}>CTF</Text>
+                <Text style={{...GS.notificationTip, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? 'Varsel hver gang det legges ut en CTF.' : 'Notification every time a CTF is posted.' }</Text>
               </View>
               <Notification category='CTF'/>
             </View>
-          </Card>
+          </Cluster>
 
-          <Card>
+          <Cluster>
             <View style={GS.notificationBack}>
               <View style={GS.view}>
                 <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Sosialt': 'Social'}</Text>
+                <Text style={{...GS.notificationTip, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? 'Varsel hver gang det legges ut et nytt EvntKom arrangement.' : 'Notification every time a EvntKom event is posted.' }</Text>
               </View>
               <Notification category='SOCIAL'/>
             </View>
-          </Card>
+          </Cluster>
 
-          <Card>
+          <Cluster>
             <View style={GS.notificationBack}>
               <View style={GS.view}>
                 <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Karrieredag':'Career day'}</Text>
+                <Text style={{...GS.notificationTip, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? 'Varsel hver gang det legges ut en ny karrieredag.' : 'Notification every time a career day is posted.' }</Text>
               </View>
               <Notification category='KARRIEREDAG'/>
             </View>
-          </Card>
+          </Cluster>
           
-          <Card>
+          <Cluster>
             <View style={GS.notificationBack}>
               <View style={GS.view}>
                 <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}>Fadderuka</Text>
+                <Text style={{...GS.notificationTip, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? 'Varsel hver gang det legges ut et fadderuka arrangement.' : 'Notification every time a fadderuka event is posted.' }</Text>
               </View>
               <Notification category='FADDERUKA'/>
             </View>
-          </Card>
+          </Cluster>
 
 
-          <Card>
+          <Cluster>
             <View style={GS.notificationBack}>
               <View style={GS.view}>
                 <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}>Login</Text>
+                <Text style={{...GS.notificationTip, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? 'Varsel hver gang det legges ut et arrangement angående foreningens drift.' : 'Notification every time a event is posted regarding the operation of Login.' }</Text>
               </View>
               <Notification category='LOGIN'/>
             </View>
-          </Card>
+          </Cluster>
 
-          <Card>
+          <Cluster>
             <View style={GS.notificationBack}>
               <View style={GS.view}>
                 <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? "Annet":"Other"}</Text>
+                <Text style={{...GS.notificationTip, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? 'Varsel hver gang det legges ut et ukategorisert arrangement.' : 'Notification every time a uncategorized event is posted.' }</Text>
               </View>
               <Notification category='ANNET'/>
             </View>
-          </Card>
+            {Space(5)}
+          </Cluster>
 
-          {Space(15)}
+          {Space(10)}
           <Text style={{...T.text25, left: 15, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? 'Påminnelser' : 'Reminders'}</Text>              
-
-          {topicSwitchList("tekkom", "TekKom")}
-          {topicSwitchList("ctf", "CTF")}
-          {lang ? topicSwitchList("social", "Sosialt", 1):topicSwitchList("social", "Social", 1)}
-          {lang ? topicSwitchList("karrieredag", "Karrieredag", 1):topicSwitchList("karrieredag", "Career day", 1)}
-          {topicSwitchList("fadderuka", "Fadderuka", 1)}
-          {topicSwitchList("bedpres", "Bedpres", 1)}
-          {topicSwitchList("login", "Login", 1)}
-          {lang ? topicSwitchList("annet", "Annet", 1):topicSwitchList("annet", "Other", 1)} 
+          {Space(10)}
+          <Reminders/>
             
-          {Space((Dimensions.get('window').height/3)+10)}
+          {Space((Dimensions.get('window').height/3))}
         </ScrollView>
       </View>   
 
@@ -181,7 +201,7 @@ export default function SettingScreen( { navigation }) {
         <TouchableOpacity style={MS.bMenuIconTO} onPress={() => eventPage()}>
         <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/menu/calendar777.png') : require('../../assets/menu/calendar-black.png')} />
         </TouchableOpacity>
-        <TouchableOpacity style={MS.bMenuIconTO} onPress={() => listingPage()}>
+        <TouchableOpacity style={MS.bMenuIconTO} onPress={() => adPage()}>
         <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/menu/business.png') : require('../../assets/menu/business-black.png')} />
         </TouchableOpacity>
         <TouchableOpacity style={MS.bMenuIconTO} onPress={() => menuPage()}>

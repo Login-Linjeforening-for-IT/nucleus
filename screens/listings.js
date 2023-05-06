@@ -22,12 +22,13 @@ import {
 
 export default function ListingScreen({ navigation }) {
 
-  const { lang  } = useSelector( (state) => state.lang  )
-  const { login } = useSelector( (state) => state.login )
-  const { theme } = useSelector( (state) => state.theme )
+    const { lang  } = useSelector( (state) => state.lang  )
+    const { login } = useSelector( (state) => state.login )
+    const { theme } = useSelector( (state) => state.theme )
+    const { oldUI } = useSelector( (state) => state.misc )               //  Old User Interface
 
-const eventPage   = () => { navigation.navigate('EventScreen')   }
-const menuPage    = () => { navigation.navigate('MenuScreen')    }              // Function to navigate to menu
+    const eventPage   = () => { navigation.navigate(!oldUI ? 'EventScreen':'OldEventScreen') }
+    const menuPage   = () => { navigation.navigate(!oldUI ? 'MenuScreen':'OldMenuScreen') }
 
 return(
   <View>
@@ -51,7 +52,7 @@ return(
 {/* ========================= DISPLAY TOP MENU ========================= */}
 {Platform.OS === 'ios' ? <BlurView style={MS.topMenu} intensity={30}/> : <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'TRANSPARENTANDROID')}}/>}
       <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
-    <TouchableOpacity onPress={() => eventPage()}>
+    <TouchableOpacity style={MS.logoBackground} onPress={() => eventPage()}>
       <Image style={MS.tMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/logo/loginText.png') : require('../assets/logo/loginText-black.png')} />
     </TouchableOpacity>
 
@@ -74,6 +75,5 @@ return(
       </TouchableOpacity>
       </View>     
     </View>
-    
   )
 };

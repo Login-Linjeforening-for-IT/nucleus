@@ -1,6 +1,6 @@
 import * as Device from 'expo-device';                                                  // Device user is using
 import * as Notifications from 'expo-notifications';                                    // Local notifications
-import { Platform, Alert } from 'react-native';                                         // React native
+import { Platform } from 'react-native';                                         // React native
 
 /**
  * Made by Expo - 

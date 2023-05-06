@@ -25,19 +25,19 @@ import {
 
 {/* ========================= APP START ========================= */}
 
-export default function SpecificListingScreen( { route, navigation }) {
+export default function SpecificAdScreen( { route, navigation }) {
 
   const { lang  } = useSelector( (state) => state.lang  )
   const { login } = useSelector( (state) => state.login )
   const { theme } = useSelector( (state) => state.theme )
-
+  const { oldUI } = useSelector( (state) => state.misc  )               //  Old User Interface
   const { item } = route.params
   //Check if image exists
 
-  const listingPage = () => { navigation.navigate('ListingScreen') }
-  const eventPage   = () => { navigation.navigate('EventScreen')   }
-  const menuPage    = () => { navigation.navigate('MenuScreen')    }              // Function to navigate to menu
-  const goBack      = () => { navigation.navigate('ListingScreen') }
+  const adPage = () => { navigation.navigate('AdScreen') }
+  const eventPage = () => { navigation.navigate(!oldUI ? 'EventScreen':'OldEventScreen') }
+  const menuPage = () => { navigation.navigate(!oldUI ? 'MenuScreen':'OldMenuScreen') }
+  const goBack = () => { navigation.navigate('AdScreen') }
 
   return(
     <View>
@@ -91,7 +91,7 @@ export default function SpecificListingScreen( { route, navigation }) {
         <TouchableOpacity style={MS.bMenuIconTO} onPress={() => eventPage()}>
         <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/menu/calendar777.png') : require('../assets/menu/calendar-black.png')} />
           </TouchableOpacity>
-          <TouchableOpacity style={MS.bMenuIconTO} onPress={() => listingPage()}>
+          <TouchableOpacity style={MS.bMenuIconTO} onPress={() => adPage()}>
             <Image style={MS.bMenuIcon} source={require('../assets/menu/business-orange.png')} />
           </TouchableOpacity>
           <TouchableOpacity style={MS.bMenuIconTO} onPress={() => menuPage()}>

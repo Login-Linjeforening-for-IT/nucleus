@@ -27,6 +27,7 @@ import {
   Dimensions,
   Platform
 } from 'react-native';
+import Cluster from '../../shared/functions/cluster';
 
 {/* ========================= APP START ========================= */}
 
@@ -34,6 +35,7 @@ export default function AboutScreen( { navigation }) {
   const { lang  } = useSelector( (state) => state.lang  )
   const { login } = useSelector( (state) => state.login )
   const { theme } = useSelector( (state) => state.theme )
+  const { oldUI } = useSelector( (state) => state.misc )
 
   const screenWidth = Dimensions.get('window').width;
 
@@ -46,9 +48,9 @@ export default function AboutScreen( { navigation }) {
     {id: '5', titleNO: 'SATkom',   titleEN: 'SATkom',   quoteNO: "SATkom er komiteen som vokter Login sin pengebinge, og sørger for at pengene både flyter inn og ut. Hvis du har økonomisk sans, eller bare vil bli Login's nye sugar daddy, så er dette komiteen for deg!", qouteEN: "SATkom is the committee that guards Login's money bin and ensures that the money flows both in and out. If you have financial skills, or just want to be Login's new sugar daddy, then this is the committee for you!", descriptionNO: "SATkom står for Sytematiserte Automatiserte Transaksjoner, og de jobber med å forvalte midlene Login har tilgengelig. Deres oppgaver innebærer betaling av regninger, utsending av fakturaer og innkjøp til foreningen. De lager ukentlige regnskap, og passer på at komiteene ikke overskrider budsjettene for mye. Komiteen har også en 'Dungeon Master' som har i oppgave å passe på Loungen, og at alle medlemmene våre får nok koffein. Videre er komiteen involvert i budsjettering, diverse økonomiske saker og andre ablegøyer.", descriptionEN: "SATkom stands for Systematized Automated Transactions, and they work with managing the funds Login has available. Their duties involve paying bills, sending out invoices and purchasing for the association. They prepare weekly accounts, and make sure that the committees do not exceed their budgets too much. The committee also has a 'Dungeon Master' who is tasked with looking after the Lounge, and that all our members get enough caffeine. Furthermore, the committee is involved in budgeting, various financial matters and other minor matters."}
   ])
 
-  const eventPage   = () => { navigation.navigate('EventScreen')   }
-  const menuPage    = () => { navigation.navigate('MenuScreen')    }              // Function to navigate to menu
-  const listingPage = () => { navigation.navigate('ListingScreen') }
+  const eventPage   = () => { navigation.navigate(!oldUI ? 'EventScreen':'OldEventScreen') }
+  const menuPage   = () => { navigation.navigate(!oldUI ? 'MenuScreen':'OldMenuScreen') }
+  const adPage = () => { navigation.navigate('AdScreen') }
 
   const [comittee, selectComittee] = useState({
     selected: 0
@@ -64,10 +66,10 @@ export default function AboutScreen( { navigation }) {
   return(
   <View>
 {/* ========================= DISPLAY CONTENT ========================= */}
-<View style={{...GS.content, backgroundColor: FetchColor(theme, 'BACKGROUND')}}>
+<View style={{...GS.content, backgroundColor: FetchColor(theme, 'DARKER')}}>
     <ScrollView showsVerticalScrollIndicator={false}>
-      {Space(Dimensions.get('window').height/8)}
-      <Card>
+      {Space(Dimensions.get('window').height/8.1)}
+      <Cluster>
         <Text style={{...T.bold40, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Hvem er vi?' : 'Who are we?'}</Text>{Space(5)}
         <View style={GS.row}>
           <Text>{lang ? Line(58,5) : screenWidth < 390 ? Line(94,5) : Line(92,5)}</Text>
@@ -194,15 +196,14 @@ export default function AboutScreen( { navigation }) {
         <Text style={{...T.text25, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Offentlige dokumenter' : 'Public documents'}</Text>
         <View>
           <Text style={{...T.paragraph, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'For mer informasjon og offentlige dokumenter kan du besøke' : 'For more information and public documents, visit'}
-            {<Text style={T.orange15} onPress={() => Linking.openURL('https://wiki.login.no')}> {lang ? "wikien":"the wiki"}
-            {/** <Image style={GS.redMine} source={require('../../assets/social/redmine-orange.png')} /> */}</Text>}.
+            {<Text style={T.orange15} onPress={() => Linking.openURL('https://wiki.login.no')}> {lang ? "wikien":"the wiki"}</Text>}.
           </Text>
           
         </View>
         {Space(10)}
         <Social/>
         <Copyright/>
-      </Card>
+      </Cluster>
       {Space(10)}
       {Space(Dimensions.get('window').height/3)}
     </ScrollView>
@@ -226,7 +227,7 @@ export default function AboutScreen( { navigation }) {
         <TouchableOpacity style={MS.bMenuIconTO} onPress={() => eventPage()}>
         <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/menu/calendar777.png') : require('../../assets/menu/calendar-black.png')} />
         </TouchableOpacity>
-        <TouchableOpacity style={MS.bMenuIconTO} onPress={() => listingPage()}>
+        <TouchableOpacity style={MS.bMenuIconTO} onPress={() => adPage()}>
         <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/menu/business.png') : require('../../assets/menu/business-black.png')} />
         </TouchableOpacity>
         <TouchableOpacity style={MS.bMenuIconTO} onPress={() => menuPage()}>

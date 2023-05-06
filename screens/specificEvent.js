@@ -40,6 +40,7 @@ export default function SpecificEventScreen({ route, navigation}) {
   const { lang  } = useSelector( (state) => state.lang  )
   const { login } = useSelector( (state) => state.login )
   const { theme } = useSelector( (state) => state.theme )
+  const { oldUI } = useSelector( (state) => state.misc  )               //  Old User Interface
   const [usersData,setUsersData]=useState({})
   const { item } = route.params
   const link = FetchJoinLink(usersData.description)
@@ -55,10 +56,10 @@ export default function SpecificEventScreen({ route, navigation}) {
     getData();
     },[item])
 
-  const listingPage = () => { navigation.navigate('ListingScreen') }
-  const eventPage   = () => { navigation.navigate('EventScreen')   }
-  const menuPage    = () => { navigation.navigate('MenuScreen')    }
-  const goBack      = () => { navigation.navigate('EventScreen')   }
+  const adPage = () => { navigation.navigate('AdScreen') }
+  const eventPage   = () => { navigation.navigate(!oldUI ? 'EventScreen':'OldEventScreen')}
+  const menuPage   = () => { navigation.navigate(!oldUI ? 'MenuScreen':'OldMenuScreen')}
+  const goBack      = () => { navigation.navigate(!oldUI ? 'EventScreen':'OldEventScreen')}
 
   async function updateStorage() {
     let storedClickedEvents = JSON.parse(await AsyncStorage.getItem('clickedEvents'))
@@ -258,7 +259,7 @@ export default function SpecificEventScreen({ route, navigation}) {
         <TouchableOpacity style={MS.bMenuIconTO} onPress={() => eventPage()}>
             <Image style={MS.bMenuIcon} source={require('../assets/menu/calendar-orange.png')} />
           </TouchableOpacity>
-          <TouchableOpacity style={MS.bMenuIconTO} onPress={() => listingPage()}>
+          <TouchableOpacity style={MS.bMenuIconTO} onPress={() => adPage()}>
           <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/menu/business.png') : require('../assets/menu/business-black.png')} />
           </TouchableOpacity>
           <TouchableOpacity style={MS.bMenuIconTO} onPress={() => menuPage()}>

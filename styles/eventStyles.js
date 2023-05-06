@@ -9,10 +9,10 @@ export const ES = StyleSheet.create({         // Declares export ES ( Event Styl
     borderRadius: 10,                         // Adds 10px borderradius
   },
   view2: {                                    // Middle card view
-    top: 7.5,                                 // Moves content 7.5px downwards
+    top: 5,                                   // Moves content 7.5px downwards
     justifyContent: 'center',                 // Horizontally centers
     alignItems: 'flex-start',                 // Vertically sets content to left side of view
-    width: '70%',                             // Sets the width of the view to be 70% of the parent view
+    width: '72%',                             // Sets the width of the view to be 70% of the parent view
   },
   view3: {                                    // Right side card view
     position: 'absolute',                     // Uses absolute positioning to layer circle and checkmark
@@ -45,6 +45,11 @@ export const ES = StyleSheet.create({         // Declares export ES ( Event Styl
     fontSize: 20,                             // Text font size
   },
   loc: {                                      // Eventlocation text on eventScreen
+    left: 10,                                  // Moves locationtext 5px rightwards
+    top: -10,                                  // Moves locationtext 5px upwards
+    fontSize: 15,
+  },
+  oldLoc: {                                   // Eventlocation text on oldEventScreen
     left: 5,                                  // Moves locationtext 5px rightwards
     top: -5,                                  // Moves locationtext 5px upwards
     fontSize: 20,
@@ -82,12 +87,24 @@ export const ES = StyleSheet.create({         // Declares export ES ( Event Styl
   //======================== EventComponentStyles ===================
   size: {                                     // Middle sized icons
     height: 40,                               // Fixed height of 40px
-    width: 40                                 // Fixed width of 40px
+    width: 40,                                // Fixed width of 40px
+  },
+  bellSize: {                                 // Middle sized icons
+    height: 30,                               // Fixed height of 40px
+    width: 30,                                // Fixed width of 40px
+  },
+  bellPosition: {
+    top: 6
   },
   absoluteView: {                             // Middle sized icons
     flexDirection: 'row',                     // Flexdirection set to row
   },
   eventLight: {                               // Position of specific event color circle
+      top: -10,                               // Moves eventLight 10px upwards
+      height: 0,
+      width: 10,
+  },
+  legacyEventLight: {                               // Position of specific event color circle
       top: -10,                               // Moves eventLight 10px upwards
       height: 0,
       width: 10,
@@ -101,15 +118,27 @@ export const ES = StyleSheet.create({         // Declares export ES ( Event Styl
     marginHorizontal: 10,                     // Horizontal margin
     marginTop: 10,                            // Top margin
   },  
-  topCard: {                                     // Card styling
-    borderRadius: 20,                         // Border radius
-    marginHorizontal: 10,                     // Horizontal margin
-  },
   cardContent: {                              // Card content styling
     marginHorizontal: 18,                     // Horizontal margin  
     marginVertical: 18                        // Vertical margin
   },
   cardSmaller: {                              // Smaller card
+    marginHorizontal: 10,                     // Horizontal margin
+    borderRadius: 20,                         // Border radius
+  },
+  cluster: {                                  // Cluster styling
+  },  
+  clusterContent: {                           // Card content styling
+    paddingTop: 3,
+    marginHorizontal: 15,                     // Horizontal margin
+    marginVertical: 4                         // Vertical margin
+  },
+  jobClusterContent: {                        // Card content styling
+    paddingTop: 3,
+    marginHorizontal: 15,                     // Horizontal margin
+    marginVertical: 6                        // Vertical margin
+  },
+  clusterSmaller: {                           // Smaller card
     marginHorizontal: 10,                     // Horizontal margin
     borderRadius: 20,                         // Border radius
   },
@@ -141,6 +170,19 @@ export const ES = StyleSheet.create({         // Declares export ES ( Event Styl
     borderBottomLeftRadius: 15,               // Curves bottom left conrner
     borderBottomRightRadius: 15,              // Curves bottom right corner
   },
+  clusterFilterView: {                        // Filter view
+    paddingTop: 10,                           // Top padding of 10px
+    flexDirection: 'row',                     // Flexdirection set to row
+  },
+  clusterFilterText: {                        // EventScreen filter text
+    alignSelf: 'center',                      // Vertically centered
+    alignItems: 'center',                     // Content vertically centered
+    marginTop: 10,                            // Top margin of 10px
+    width: '100%',                             // Width of filter 95% of parent view
+    paddingTop: 10,                           // Padding top
+    height: 30,                               // Height of filter text
+    color: 'white',                           // White text color (should be moved to depend on theme)
+  },
   checkBox: {                                 // Position of eventfilter check icon
     top: '-50%',                              // Moves the checkbox 50% upwards
     right: 20,                                // Moves checkbox 20px leftwards
@@ -160,12 +202,24 @@ export const ES = StyleSheet.create({         // Declares export ES ( Event Styl
     top: 7,                                   // Moved 7px downwards
     width: 122,                               // Fixed width of 122px
   },
+  clusterCategoryView: {                      // View for categories inside the filter
+    flexDirection: 'row',                     // Flexdirection set to row
+    justifyContent: 'center',
+    top: 7,                                   // Moved 7px downwards
+    width: Dimensions.get('window').width/3,                               // Fixed width of 122px
+  },
   filterResetIcon: {                          // Filter reset icon
       left: -60,                              // Moved 60px leftwards
       top: 10,                                // Moved 10px downwards
       height: 40,                             // Fixed icon height of 40px
       width: 40                               // Fixed icon width of 40px
   },
+  clusterFilterResetIcon: {                          // Filter reset icon
+    left: -45,                              // Moved 60px leftwards
+    top: 10,                                // Moved 10px downwards
+    height: 40,                             // Fixed icon height of 40px
+    width: 40                               // Fixed icon width of 40px
+},
   eventButton: {                              // Join event button 
     height: 30,                               // Fixed height of 30px
     width:Dimensions.get('window').width/2.75,// Fixed width of 1/2.75 of the screen

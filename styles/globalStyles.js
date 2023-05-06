@@ -15,10 +15,13 @@ export const GS = StyleSheet.create({
   },
   notificationBack: {                                   // Horizontal card views on setting notifications
     flexDirection: 'row',
-    height: 25,
+    alignItems: 'center'
   },
   notificationText: {                                   // Notification card text
-    fontSize: 20
+    fontSize: 20,
+  },
+  notificationTip: {                                   // Notification card text
+    fontSize: 15,
   },
   inputText: {                                          // ReportScreen name and notifier text
     alignSelf: 'center',
@@ -75,6 +78,13 @@ export const GS = StyleSheet.create({
     alignItems: 'center',
     height: 40,
   },
+  reminderDropdown: {
+    flexDirection: 'row',
+    paddingHorizontal: 15,
+    alignItems: 'center',
+    height: 40,
+    justifyContent: 'space-between'
+  },
   dropdownContent: {
     flexDirection: 'row',
     paddingLeft: 10,
@@ -85,6 +95,17 @@ export const GS = StyleSheet.create({
     alignSelf: 'center',
     height: 60,
     width: 40
+  },
+  reminderDropdownArrow: {
+    alignSelf: 'center',
+    height: 20,
+    width: 20,
+    resizeMode: 'contain'
+  },
+  reminderDropdownArrowOrange: {
+    alignSelf: 'center',
+    height: 60,
+    width: 40,
   },
   smallDropImage: {
     alignSelf: 'center',
@@ -100,7 +121,7 @@ export const GS = StyleSheet.create({
     aspectRatio: 1.5,
   },
   redMine: {
-    height: 15,
+    height: 20,
     width: 20
   },
   tiny: {
@@ -144,6 +165,6 @@ export const GS = StyleSheet.create({
   },
   loginStatus: {
     position: 'absolute',
-    left: Dimensions.get('window').width/5,
+    left: 15,
   }
 });

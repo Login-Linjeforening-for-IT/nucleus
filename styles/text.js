@@ -128,10 +128,6 @@ export const T = StyleSheet.create({          // Declares T - meant for all text
     left: 10,                                 // Moves text 10px rightwards
     fontSize: 12,                             // Text font size
   },
-  listingText: {                              // Job listing text
-    top: '25%',                               // Shifted 25% downwards
-    alignSelf: 'center',                      // Horizontally centered
-  },
   mazemap: {                                  // Mazemap text on SES
     textDecorationLine: 'underline',          // Underline
     fontSize: 20,                             // Text font size

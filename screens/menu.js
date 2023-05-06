@@ -4,10 +4,11 @@ import { nativeApplicationVersion } from "expo-application";
 import Space from '../shared/functions/space';
 import FetchColor from '../styles/fetchTheme';
 import { GS } from '../styles/globalStyles';
-import Card from '../shared/functions/card';
+import Cluster from '../shared/functions/cluster';
 import { MS } from '../styles/menuStyles';
 import { ES }from '../styles/eventStyles';
 import { useSelector } from 'react-redux';
+import { CS } from '../styles/clusterStyles';
 import React, { useState } from 'react';
 import { BlurView } from 'expo-blur';
 import { 
@@ -34,7 +35,7 @@ export default function MenuScreen({ navigation }) {
   const [setting] = useState([
       {id: '1', nav: 'SettingScreen',       titleNO: 'Innstillinger',   titleEN: 'Settings'       },
       //{id: '2', nav: 'ReportScreen',        titleNO: 'Varsle',          titleEN: 'Report'         },
-      {id: '3', nav: 'CommitteeMenuScreen', titleNO: 'Komité',          titleEN: 'Committee'      },
+      {id: '3', nav: 'BoardScreen',         titleNO: 'Styret',          titleEN: 'The Board'      },
       {id: '4', nav: 'AboutScreen',         titleNO: 'Om oss',          titleEN: 'About Login'    },
       {id: '5', nav: 'BusinessScreen',      titleNO: 'For bedrifter',   titleEN: 'For companies'  },
       {id: '6', nav: 'LoginScreen',         titleNO: 'Innsida (verv)',  titleEN: 'Intranet (verv)'},
@@ -47,13 +48,13 @@ export default function MenuScreen({ navigation }) {
     });
 }
   const eventPage   = () => { navigation.navigate('EventScreen')   }
-  const listingPage = () => { navigation.navigate('ListingScreen') }
+  const adPage = () => { navigation.navigate('AdScreen') }
 
 return(
   <View>
 
 {/* ========================= DISPLAY CONTENT ========================= */}
-<View style={{...GS.content, backgroundColor: FetchColor(theme, 'BACKGROUND')}}>
+<View style={{...GS.content, backgroundColor: FetchColor(theme, 'DARKER')}}>
           <FlatList
           style={{minHeight: '100%'}}
           showsVerticalScrollIndicator={false}
@@ -64,15 +65,22 @@ return(
             <View>
               {index == 0 ? Space(Dimensions.get('window').height/8): null}
             <TouchableOpacity onPress={() => item.id == 6 && login? navigation.navigate('InternalScreen', item) : navigation.navigate(item.nav, item)}>
-              <Card>
-                <Text style={{...T.centered20, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? item.titleNO : item.titleEN}</Text>
-              </Card>
+              <Cluster>
+                <View style={{...CS.clusterBack, alignContent: 'space-between'}}>
+                    <View style={CS.twinLeft}>
+                        <Text style={{...T.text20, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? item.titleNO : item.titleEN}</Text>
+                    </View>
+                    <View style={CS.twinRight}>
+                        <Image style={CS.arrowImage} source={require('../assets/icons/dropdownBase.png')}/>
+                    </View>
+                </View>
+              </Cluster>
             </TouchableOpacity>
             <View>
               {index == setting.length-1 ? Space(10):null}
               {index == setting.length-1 && !feedback.status ?
                 <TouchableOpacity onPress={() => toggleFeedback()}>
-                  <View style={{backgroundColor: FetchColor(theme, 'BACKGROUND')}}>
+                  <View>
                     <Text style={{...T.contact, textDecorationLine: 'underline',color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? 'Gi tilbakemelding' : 'Give feedback'}</Text>
                   </View>
                 </TouchableOpacity>
@@ -88,7 +96,7 @@ return(
                 <TouchableOpacity onPress={async() => {
                   Linking.openURL('mailto:kontakt@login.no').catch(() => lang ? Alert.alert('Kunne ikke åpne mail!', 'Mail: kontakt@login.no'):Alert.alert('Could not open mail!', 'Reach us at kontakt@login.no'))
                 }}>
-                  <View style={{backgroundColor: FetchColor(theme, 'BACKGROUND')}}>
+                  <View>
                     <Text style={{...T.contact, textDecorationLine: 'underline', color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>Mail</Text>
                   </View>
                 </TouchableOpacity>
@@ -107,7 +115,7 @@ return(
 {/* ========================= DISPLAY TOP MENU ========================= */}
 {Platform.OS === 'ios' ? <BlurView style={MS.topMenu} intensity={30}/> : <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'TRANSPARENTANDROID')}}/>}
       <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
-    <TouchableOpacity onPress={() => eventPage()}>
+    <TouchableOpacity style={MS.logoBackground} onPress={() => eventPage()}>
       <Image style={MS.tMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/logo/loginText.png') : require('../assets/logo/loginText-black.png')} />
     </TouchableOpacity>
 
@@ -122,7 +130,7 @@ return(
         <TouchableOpacity style={MS.bMenuIconTO} onPress={() => eventPage()}>
         <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/menu/calendar777.png') : require('../assets/menu/calendar-black.png')} />
         </TouchableOpacity>
-        <TouchableOpacity style={MS.bMenuIconTO} onPress={() => listingPage()}>
+        <TouchableOpacity style={MS.bMenuIconTO} onPress={() => adPage()}>
         <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/menu/business.png') : require('../assets/menu/business-black.png')} />
         </TouchableOpacity>
         <TouchableOpacity style={MS.bMenuIconTO}>

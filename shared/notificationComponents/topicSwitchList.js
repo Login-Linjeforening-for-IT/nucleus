@@ -1,9 +1,6 @@
-import FetchColor from '../../styles/fetchTheme';
-import { useSelector } from 'react-redux';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import topicSwitch from './topicSwitch';
-import Space from '../functions/space';
-import { T } from '../../styles/text';
+
 
 /**
 * List of switch for notification intervals on SES.
@@ -14,13 +11,11 @@ import { T } from '../../styles/text';
 * @param {boolean} length Whether to include week option or not
 * @returns Visual list of switches
 */
-export default function topicSwitchList(category, topicTitle, length) {
-    const { theme } = useSelector( (state) => state.theme )
-  
+export default function topicSwitchList(props) {
+    const category = props.category
+
     return(
         <View>
-            {Space(10)}
-            <Text style={{...T.text20, left:15, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{topicTitle}</Text>
             {topicSwitch(category + "10m","10 min før", "10 min before")}
             {topicSwitch(category + "30m","30 min før", "30 min before")}
             {topicSwitch(category + "1h","1 time før", "1 hour before")}
@@ -29,7 +24,7 @@ export default function topicSwitchList(category, topicTitle, length) {
             {topicSwitch(category + "6h","6 timer før", "6 hours before")}
             {topicSwitch(category + "1d","1 dag før", "1 day before")}
             {topicSwitch(category + "2d","2 dager før", "2 days before")}
-            {length == 1 ? topicSwitch(category + "1w","1 uke før", "1 week before"):null}
+            {topicSwitch(category + "1w","1 uke før", "1 week before")}
         </View>
     )
-  }
+}

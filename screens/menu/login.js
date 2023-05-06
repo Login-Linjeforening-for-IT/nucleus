@@ -35,13 +35,14 @@ export default function LoginScreen( { navigation }) {
   const { lang  } = useSelector( (state) => state.lang  )
   const { login } = useSelector( (state) => state.login )
   const { theme } = useSelector( (state) => state.theme )
+  const { oldUI }    = useSelector( (state) => state.misc )                   //  Old User Interface
 
   const dispatch = useDispatch()
   
+  const eventPage   = () => { navigation.navigate(!oldUI ? 'EventScreen':'OldEventScreen') }
+  const menuPage   = () => { navigation.navigate(!oldUI ? 'MenuScreen':'OldMenuScreen') }
   const goBack       = () => { navigation.navigate('ProfileScreen') }
-  const menuPage     = () => { navigation.navigate('MenuScreen')    }              // Function to navigate to menu
-  const eventPage    = () => { navigation.navigate('EventScreen')   }
-  const listingPage  = () => { navigation.navigate('ListingScreen') }
+  const adPage  = () => { navigation.navigate('AdScreen') }
 
   const internalPage = () => {
     if (data.name === database.name && data.pass === database.pass) {
@@ -106,8 +107,8 @@ const showPass = () => {
   return(
     <View>
 {/* ========================= DISPLAY CONTENT ========================= */}
-<View style={{...GS.content, backgroundColor: FetchColor(theme, 'BACKGROUND')}}>
-{Space(Dimensions.get('window').height/8)}
+<View style={{...GS.content, backgroundColor: FetchColor(theme, 'DARKER')}}>
+{Space(Dimensions.get('window').height/8.1)}
         <View>
           {Space(80)}
             <Text style={{...T.centered50, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Innsida' : 'Intranet'}</Text>
@@ -220,7 +221,7 @@ const showPass = () => {
       <TouchableOpacity style={MS.bMenuIconTO} onPress={() => eventPage()}>
       <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/menu/calendar777.png') : require('../../assets/menu/calendar-black.png')} />
           </TouchableOpacity>
-          <TouchableOpacity style={MS.bMenuIconTO} onPress={() => listingPage()}>
+          <TouchableOpacity style={MS.bMenuIconTO} onPress={() => adPage()}>
           <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/menu/business.png') : require('../../assets/menu/business-black.png')} />
           </TouchableOpacity>
           <TouchableOpacity style={MS.bMenuIconTO} onPress={() => menuPage()}>

@@ -2,8 +2,10 @@
 // NOTE: MUST MATCH AMOUNT OF THEMES AVAILABLE IN THE THEMESWITCH.JS THEME SWICH STATEMENT
 
 export const DARK = {                   // Dark theme
-    BACKGROUND:             "#181818",  // Background of the app
-    DARKER:                    "#111",  // Contentcolor of the app
+    OLDBACKGROUND:             "#101010",  // Background of the app
+    OLDDARKER:                 "#131313",  // Contentcolor of the app
+    BACKGROUND:          "#181818",  // Old background of the app
+    DARKER:                 "#111",  // Old contentcolor of the app
     TRANSPARENT:          "#000000B3",  // Blur effect color
     TRANSPARENTANDROID:   "#000000B3",  // Dark see through to justify for ios blur
     CONTRAST:                  "#222",  // Contrast to background and darker

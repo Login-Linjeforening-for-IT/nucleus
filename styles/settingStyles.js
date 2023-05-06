@@ -2,9 +2,9 @@ import { StyleSheet } from "react-native";
 
 export const SS = StyleSheet.create ({
     lightSwitchImage: {                 // lightSwitchImage in notificationScreen
-        left: '-27.5%',
-        width: 120,
-        height: 120
+        left: '-23%',
+        aspectRatio: 1/1,
+        height: 100,
     },
     langSwitch: {                       // langSwitch text style in notificationScreen
         left: 12.5,

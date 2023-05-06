@@ -12,8 +12,8 @@ import color from './categoryColor';
 export default function CategorySquare(category) {  //SVG showing the color of the category
     return(
         <View style={ES.eventLight}>
-            <Svg width={45} height={70} fill={color(category)}>
-                <Rect width={45} height={70} ry={10}/>
+            <Svg width={45} height={65} fill={color(category)}>
+                <Rect width={45} height={65} ry={10}/>
             </Svg>
         </View>
     );
