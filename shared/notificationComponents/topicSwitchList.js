@@ -24,7 +24,7 @@ export default function topicSwitchList(props) {
             {topicSwitch(category + "6h","6 timer før", "6 hours before")}
             {topicSwitch(category + "1d","1 dag før", "1 day before")}
             {topicSwitch(category + "2d","2 dager før", "2 days before")}
-            {topicSwitch(category + "1w","1 uke før", "1 week before")}
+            {props.showLast ? topicSwitch(category + "1w","1 uke før", "1 week before"):null}
         </View>
     )
 }

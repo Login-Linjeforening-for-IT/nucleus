@@ -50,7 +50,7 @@ export default function Reminders() {
                                 <Image style={GS.reminderDropdownArrow} source={index == category ? require('../../assets/icons/reminderDropdownOrange.png') : require('../../assets/icons/dropdownBase.png')} />
                             </View>
                             </TouchableOpacity>
-                            {category == index ? <TopicSwitchList category={cat.source}></TopicSwitchList>:null}
+                            {category == index ? <TopicSwitchList category={cat.source} showLast={index > 1 ? true:false}></TopicSwitchList>:null}
                         </View>
                     )
                 })
