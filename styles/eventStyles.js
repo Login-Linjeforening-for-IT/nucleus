@@ -23,21 +23,17 @@ export const ES = StyleSheet.create({         // Declares export ES ( Event Styl
     flexDirection: 'row',                     // Changes flexdirection to row
     height: 55,                               // Has a fixed height of 55px
   },
-  dayText: {                                  // Eventday text on specificEventScreen
-    left: '20%',                              // Moves text 20% rightwards
-    fontSize: 30,                             // Text font size
-  },
   monthText: {                                // Eventmonth text on specificEventScreen
     width: 45,                                // Same width as background view
     textAlign: 'center',                      // Aligns the text vertically to top
-    bottom: 10,                               // Moves text 7.5% upwards
+    bottom: 8,                               // Moves text 7.5% upwards
     fontSize: 20,                             // Text font size
   },
   eventCardDayText: {                         // Eventday text on eventScreen
     textAlign: 'center',                      // Horizontally centers
     width: 45,                                // Same width as the colored view behind
     top: -5,                                  // Shifts it 5px upwards
-    fontSize: 30,                             // Text font size
+    fontSize: 25,                             // Text font size
   },
   title: {                                    // Eventname text on eventScreen
     left: 5,                                  // Moves title 5px rightwards

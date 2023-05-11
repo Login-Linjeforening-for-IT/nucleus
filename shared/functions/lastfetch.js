@@ -3,8 +3,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
  * Function for checking when the API was last fetched successfully.
  * @returns String
  */
-export default async function LastFetch() {                                            //  --- RETURNS WHEN EVENTS WERE FETCHED FROM STORAGE ---
-    var time = await AsyncStorage.getItem('lastFetch');
+export default async function LastFetch(param) {                          //  --- RETURNS WHEN EVENTS WERE FETCHED FROM STORAGE ---
+    var time = param ? param : await AsyncStorage.getItem('lastFetch');
 
     if(time){
       var year   = parseInt((time)[0] + (time)[1] + (time)[2] + (time)[3])//  year

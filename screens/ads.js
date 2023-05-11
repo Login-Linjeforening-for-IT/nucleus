@@ -94,17 +94,17 @@ export default function AdScreen({ navigation }) {                          //  
             title_en: 'Project Manager', 
             position_title_no: 'Prosjektleder', 
             position_title_en: 'Project Manager', 
-            description_short_no: 'Ledelse av prosjekter.', 
+            description_short_no: 'Vi søker en dyktig JavaScript-utvikler til å være prosjektleder for vår nettside. Jobben krever 1 års ledererfaring eller styring av team. Du må ha erfaring med JavaScript og gode designferdigheter. Det er en fordel om du er kjent med forskjellige frameworks slik som React og nextjs.', 
             description_short_en: 'Managing projects.', 
-            description_long_no: 'Erfaren prosjektleder søkes for å lede ulike prosjekter.', 
-            description_long_en: 'Experienced project manager sought to lead various projects.', 
-            job_type: 'full', 
+            description_long_no: 'Lorem ipsum dolor sit amet lol dette er en lang beskrivelse over hvordan en lang beskrivelse vil se ut. Lorem ipsum dolor sit amet lol dette er en lang beskrivelse over hvordan en lang beskrivelse vil se ut. Lorem ipsum dolor sit amet lol dette er en lang beskrivelse over hvordan en lang beskrivelse vil se ut. Lorem ipsum dolor sit amet lol dette er en lang beskrivelse over hvordan en lang beskrivelse vil se ut. Lorem ipsum dolor sit amet lol dette er en lang beskrivelse over hvordan en lang beskrivelse vil se ut.', 
+            description_long_en: 'Experienced project manager sought to lead various projects. Lorem ipsum dolor sit amet lol dette er en lang beskrivelse over hvordan en lang beskrivelse vil se ut. Lorem ipsum dolor sit amet lol dette er en lang beskrivelse over hvordan en lang beskrivelse vil se ut. Lorem ipsum dolor sit amet lol dette er en lang beskrivelse over hvordan en lang beskrivelse vil se ut. Lorem ipsum dolor sit amet lol dette er en lang beskrivelse over hvordan en lang beskrivelse vil se ut. Lorem ipsum dolor sit amet this is a long description in English.', 
+            job_type: 'Fulltid', 
             application_deadline: '2023-06-01 00:00:00', 
-            banner_image: 'https://org1.example.com/banner1.png', 
-            organization: 'ORG1', 
+            banner_image: 'https://cdn.login.no/img/ads/adbanner.png', 
+            organization: 'Login - Linjeforeningen for IT', 
             application_url: 'https://org1.example.com/apply1', 
-            created_at: '2023-06-01 00:00:00', 
-            updated_at: '2023-06-01 00:00:00',
+            created_at: '2023-05-12 00:00:00', 
+            updated_at: '2023-05-12 00:00:00',
             shortname: 'ORG1', 
             name_no: 'Organisasjon 1', 
             name_en: 'Organization 1', 
@@ -114,9 +114,9 @@ export default function AdScreen({ navigation }) {                          //  
             link_linkedin: 'https://linkedin.com/org1', 
             link_facebook: 'https://facebook.com/org1', 
             link_instagram: 'https://instagram.com/org1', 
-            logo: 'https://org1.example.com/logo.png',
+            logo: 'https://cdn.login.no/img/ads/adcompany.png',
             city: 'Oslo',
-            skill: 'Project Management'
+            skill: 'Bruker ikke Thinkpad\nAnti Arch\nLiker JavaScript\nLang fartstid med nettsideutvikling'
         },
         {
             id: 2, 
@@ -130,11 +130,11 @@ export default function AdScreen({ navigation }) {                          //  
             description_long_en: 'Experienced developer sought to work on exciting projects.', 
             job_type:  'Part time', 
             application_deadline: '2023-06-15 00:00:00',
-            banner_image: 'https://org2.example.com/banner2.png', 
-            organization: 'ORG2', 
+            banner_image: 'https://cdn.login.no/img/ads/adbannerblue.png', 
+            organization: 'mnemonic', 
             application_url: 'https://org2.example.com/apply2', 
-            created_at: '2023-06-01 00:00:00', 
-            updated_at: '2023-06-01 00:00:00',
+            created_at: '2023-05-12 00:00:00', 
+            updated_at: '2023-05-12 00:00:00',
             shortname: 'ORG2', 
             name_no: 'Organisasjon 2', 
             name_en: 'Organization 2', 
@@ -144,10 +144,18 @@ export default function AdScreen({ navigation }) {                          //  
             link_linkedin: 'https://linkedin.com/org2', 
             link_facebook: 'https://facebook.com/org2', 
             link_instagram: 'https://instagram.com/org2', 
-            logo: 'https://org1.example.com/logo.png',
+            logo: 'https://cdn.login.no/img/ads/adcompanyblue.png',
             city: 'Trondheim',
             skill: 'Programming'
-        }
+        },
+        {id: 3, title_no: 'Pentester'},
+        {id: 4, title_no: 'Dokumentasjonsansvarlig'},
+        {id: 5, title_no: 'SOC Trainee'},
+        {id: 6, title_no: 'Docker ekspert', logo: 'https://cdn.login.no/img/ads/adcompanyblue.png', banner_image: 'https://cdn.login.no/img/ads/adbannerblue.png'},
+        {id: 7, title_no: 'Etisk hacker', logo: 'https://cdn.login.no/img/ads/adcompanyblue.png', banner_image: 'https://cdn.login.no/img/ads/adbannerblue.png'},
+        {id: 8, title_no: 'Spillutvikler'},
+        {id: 9, title_no: 'Machine learning internship'},
+        {id: 10, title_no: 'Machine learning summerinternship for 4-5th year student'},
     ])
 
   // TEMPORARY TESTDATA
@@ -324,9 +332,7 @@ export default function AdScreen({ navigation }) {                          //  
       }else{
         if(filter.input != null && clickedAds.length > 0){                  // If the filter is not null and there are categories clicked
           if(filter.input.length > 0) {filterBoth();}                       // If the filter text is not empty calls filterBoth function
-          //else{filterAds()}                                          // filterCategories if filter text is empty but categories are clicked
         }
-        //else{filterAds()}
       }                                           // If the filter input is null only filter categories
     }else{
       if(filter.input != null && clickedAds.length == 0 ) {                 // If the filter is not null but no categories are clicked
@@ -434,7 +440,7 @@ export default function AdScreen({ navigation }) {                          //  
                         <Cluster>
                             <View style={AS.adBack}>
                                 <View style={AS.adViewLeft}>
-                                    <AdClusterImage/>
+                                    <AdClusterImage image={ad.logo}/>
                                 </View>
                                 <View style={AS.adViewMid}>
                                     {AdClusterLocation(ad, theme, lang)}

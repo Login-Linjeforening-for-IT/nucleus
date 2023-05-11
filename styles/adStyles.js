@@ -26,8 +26,35 @@ export const AS = StyleSheet.create({         // Declares export AD ( Ad Styles 
         maxHeight: Platform.OS == 'ios' ? 20*3 : 17*2.5,
         fontSize: Platform.OS == 'ios' ? 20 : 17,                             // Text font size
     },
+    specificAdTitle: {                                    // Eventname text on eventScreen
+        maxWidth: '90%',
+        left: 10,
+        maxHeight: Platform.OS == 'ios' ? 20*3 : 17*2.5,
+        fontSize: Platform.OS == 'ios' ? 20 : 17,                             // Text font size
+    },
+    adInfoType: {                                    // Eventname text on eventScreen
+        width: '38%',
+        fontSize: Platform.OS == 'ios' ? 17.5 : 14,                             // Text font size
+    },
+    adInfo: {                                    // Eventname text on eventScreen
+        // maxWidth: '90%',
+        fontSize: Platform.OS == 'ios' ? 17.5 : 14,                             // Text font size
+    },
+    adInfoBold: {                                    // Eventname text on eventScreen
+        fontWeight: 'bold',
+        fontSize: Platform.OS == 'ios' ? 17.5 : 14,                             // Text font size
+    },
     loc: {                                      // Eventlocation text on eventScreen
         fontSize: Platform.OS == 'ios' ? 15 : 13
+    },
+    adTitleView: {
+        flexDirection: 'row',
+    },
+    adInfoView: {
+
+    },
+    adInfoInsideView: {
+        flexDirection: 'row',
     },
     organizationLogoSmall: {
         alignSelf: 'center',                      // Centers the image
@@ -49,6 +76,11 @@ export const AS = StyleSheet.create({         // Declares export AD ( Ad Styles 
     adBannerSmall: {
         height: 55,
         aspectRatio: 3/2,
+        resizeMode: 'contain'
+    },
+    adBanner: {
+        width: '100%',
+        aspectRatio: 10/4,
         resizeMode: 'contain'
     },
     adClusterImage: {                               // Position of specific event color circle

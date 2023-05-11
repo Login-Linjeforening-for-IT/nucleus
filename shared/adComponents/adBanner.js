@@ -7,12 +7,12 @@ import React from 'react';
  * @param {string} banner Link to the advertisement banner
  * @returns               Small banner image
  */
-export default function AdClusterImage(props) {
+export default function AdBanner(props) {
     const bannerURL  = props.image
 
     return(
-        <View style={AS.adClusterImage}>
-            <Image style={AS.adBannerSmall} source={{uri: bannerURL ? bannerURL:'https://cdn.login.no/img/ads/adcompany.png'}}/>
+        <View>
+            <Image style={AS.adBanner} source={{uri: bannerURL ? bannerURL:'https://cdn.login.no/img/ads/adbanner.png'}}/>
         </View>
     );
 };

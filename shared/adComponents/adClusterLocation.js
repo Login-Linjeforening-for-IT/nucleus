@@ -1,7 +1,7 @@
-import React from 'react';
-import { AS } from '../../styles/adStyles';
 import { View, Text, Dimensions, Platform } from 'react-native';
 import FetchColor from '../../styles/fetchTheme';
+import { AS } from '../../styles/adStyles';
+import React from 'react';
 
 /**
  * Visual representation of the location on the Ad Cluster
@@ -27,14 +27,15 @@ export default function AdClusterLocation(item, theme, lang) {
     // else if (campus) location = campus + '.';
     // else if (street) location = street + '.';
     // else location = lang ? 'Mer info TBA!':'More info TBA!';
-    const tempName = "Sikkerhetskonsulent"
+    console.log(item)
+    const tempName = item.title_no
     const tempType = "Fulltid"
     const tempLoc = "Gjøvik, Oslo, Stavanger, Bergen, Trondheim, Login Loungen"
     let name = tempName;
     let info = tempType + ', ' + tempLoc;
     let halfWidth = Platform.OS == 'ios' ? Dimensions.get('window').width / 9 : Dimensions.get('window').width / 8.7805
-    if (tempName.length > halfWidth && (tempType + tempLoc).length > (halfWidth*1.25)) {
-        name = tempName.substring(0, halfWidth) + "..."
+    if (tempName.length > halfWidth / 1.7 && (tempType + tempLoc).length > (halfWidth*1.25)) {
+        name = tempName.length > halfWidth / 1.1 ? tempName.substring(0, halfWidth / 1.1) + "..." : tempName
         info = info.substring(0, halfWidth / 1.3) + "..."
     } else if (tempName.length > halfWidth) {
         name = tempName.substring(0, halfWidth) + "..."

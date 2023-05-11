@@ -22,6 +22,12 @@ import {
   Dimensions,
   Platform
 } from 'react-native';
+import Cluster from '../shared/functions/cluster';
+import AdBanner from '../shared/adComponents/adBanner';
+import AdTitle from '../shared/adComponents/adTitle';
+import AdInfo from '../shared/adComponents/adInfo';
+import AdDescription from '../shared/adComponents/adDescription';
+import AdUpdateInfo from '../shared/adComponents/adUpdateInfo';
 
 {/* ========================= APP START ========================= */}
 
@@ -44,33 +50,22 @@ export default function SpecificAdScreen( { route, navigation }) {
 
 {/* ========================= DISPLAY CONTENT ========================= */}
 <View style={{...GS.content, backgroundColor: FetchColor(theme, 'BACKGROUND')}}>
-        <ScrollView showsVerticalScrollIndicator={false}>
-        {Space(Dimensions.get('window').height/8)}
-        <View>
-            <View style={ES.specificEventView1}>
-              {/* <Image style={ES.specificEventImage} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/mnemonic.png') : require('../assets/mnemonic-black.png')} /> */}
-            </View>
-
-            {Space(5)}
-
-            <Card>
-              <View>
-                <Text style={{...T.centered20, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? item.titleNO : item.titleEN}</Text>
-              </View>
-            </Card>
-
-            <View>
-
-
-              <Card>
-                <Text style={{...T.margin15, color: FetchColor(theme, 'TEXTCOLOR')}}>{item.content}</Text>
-              </Card>
-            </View>
-          </View>
-
-          {Space(20)}
-          {Space(Dimensions.get('window').height/3)}
-        </ScrollView>
+    <ScrollView showsVerticalScrollIndicator={false}>
+        {Space(Dimensions.get('window').height/8.1)}
+        <Cluster>
+            {item.banner_image ? <AdBanner props={item.banner_image}/>:null}
+            {Space(10)}
+            <AdTitle props={item}/>
+            {Space(10)}
+            <AdInfo props={item}/>
+            {Space(10)}
+            <AdDescription props={item}/>
+            {Space(10)}
+            <AdUpdateInfo props={item}/>
+            {Space(10)}
+        </Cluster>
+        {Space(Dimensions.get('window').height/3)}
+    </ScrollView>
       </View>    
 
 {/* ========================= DISPLAY TOP MENU ========================= */}
@@ -82,7 +77,7 @@ export default function SpecificAdScreen( { route, navigation }) {
 
     <View style={GS.loginStatus}>{login ? DynamicCircle(10,10,'red',Dimensions.get('window').width/1.4,null,60,null):null}</View>
 
-    <Text style={{... MS.smallMultilineTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{lang ? item.titleNO : item.titleEN}</Text>
+    <Text style={{... MS.smallMultilineTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{lang ? item.title_no : item.title_no}</Text>
   </View>
 
 {/* ========================= DISPLAY BOTTOM MENU ========================= */}
