@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions } from "react-native";  //Stylesheet file
+import { StyleSheet, Dimensions, Platform } from "react-native";  //Stylesheet file
 
 export const ES = StyleSheet.create({         // Declares export ES ( Event Styles )
 //========================= EventScreen =========================
@@ -27,13 +27,13 @@ export const ES = StyleSheet.create({         // Declares export ES ( Event Styl
     width: 45,                                // Same width as background view
     textAlign: 'center',                      // Aligns the text vertically to top
     bottom: 8,                               // Moves text 7.5% upwards
-    fontSize: 20,                             // Text font size
+    fontSize: Platform.OS == 'ios' ? 20 : 18,                             // Text font size
   },
   eventCardDayText: {                         // Eventday text on eventScreen
     textAlign: 'center',                      // Horizontally centers
     width: 45,                                // Same width as the colored view behind
     top: -5,                                  // Shifts it 5px upwards
-    fontSize: 25,                             // Text font size
+    fontSize: Platform.OS == 'ios' ? 25 : 22,                             // Text font size
   },
   title: {                                    // Eventname text on eventScreen
     left: 5,                                  // Moves title 5px rightwards
@@ -96,11 +96,11 @@ export const ES = StyleSheet.create({         // Declares export ES ( Event Styl
     flexDirection: 'row',                     // Flexdirection set to row
   },
   eventLight: {                               // Position of specific event color circle
-      top: -10,                               // Moves eventLight 10px upwards
+      top: Platform.OS == 'ios' ? -10 : -8,                               // Moves eventLight 10px upwards
       height: 0,
       width: 10,
   },
-  legacyEventLight: {                               // Position of specific event color circle
+  legacyEventLight: {                         // Position of specific event color circle
       top: -10,                               // Moves eventLight 10px upwards
       height: 0,
       width: 10,

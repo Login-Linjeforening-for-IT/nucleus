@@ -28,6 +28,7 @@ import AdTitle from '../shared/adComponents/adTitle';
 import AdInfo from '../shared/adComponents/adInfo';
 import AdDescription from '../shared/adComponents/adDescription';
 import AdUpdateInfo from '../shared/adComponents/adUpdateInfo';
+import AdMedia from '../shared/adComponents/adMedia';
 
 {/* ========================= APP START ========================= */}
 
@@ -61,6 +62,7 @@ export default function SpecificAdScreen( { route, navigation }) {
             {Space(10)}
             <AdDescription props={item}/>
             {Space(10)}
+            <AdMedia props={item}/>
             <AdUpdateInfo props={item}/>
             {Space(10)}
         </Cluster>

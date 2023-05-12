@@ -3,6 +3,7 @@ import LastFetch from '../functions/lastfetch';
 import { AS } from '../../styles/adStyles';
 import { useSelector } from 'react-redux';
 import { View, Text } from 'react-native';
+import Space from '../functions/space';
 import { T } from '../../styles/text';
 import React from 'react';
 /**
@@ -20,6 +21,7 @@ export default function AdUpdateInfo(props) {
     return(
         <View style={AS.adInfoView}>
             <Text style={{...T.contact, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? 'Oppdatert kl:':'Updated:'} {updated}.</Text>
+            {Space(5)}
             <Text style={{...T.contact, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? 'Opprettet kl:':'Created:'} {created}.</Text>
         </View>
     );

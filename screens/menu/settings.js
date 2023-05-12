@@ -56,10 +56,9 @@ export default function SettingScreen( { navigation }) {
     },
     {
         id: 2, 
-        titleNO: 'Gammel UI', 
-        titleEN: 'Old UI', 
-        descriptionNO: 'Gammelt brukergrensesnitt.', 
-        descriptionEN: 'Old User Interface.'
+        titleNO: 'Legacy UI', 
+        descriptionNO: 'Tidligere brukergrensesnitt.', 
+        descriptionEN: 'Previous User Interface.'
     },
     {
         id: 3, 
@@ -165,7 +164,7 @@ export default function SettingScreen( { navigation }) {
           <Cluster>
             <View style={GS.notificationBack}>
               <View style={GS.view}>
-                <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? info[2].titleNO : info[2].titleEN }</Text>
+                <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}>{info[2].titleNO}</Text>
                 <Text style={{...GS.notificationTip, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? info[2].descriptionNO : info[2].descriptionEN }</Text>
               </View>
               <View style={GS.view2}><BellChange/></View>

@@ -1,9 +1,9 @@
-import { StyleSheet, Dimensions, Platform } from "react-native";  //Stylesheet file
+import { StyleSheet, Dimensions, Platform } from "react-native";  // Stylesheet file
 
 export const AS = StyleSheet.create({         // Declares export AD ( Ad Styles )
     //========================= AdScreen =========================
-    adBack: {                                // Card height and direction on eventscreen
-        flexDirection: 'row',                     // Changes flexdirection to row
+    adBack: {
+        flexDirection: 'row',
         alignItems: 'center',
     },
     adViewLeft: {
@@ -19,32 +19,56 @@ export const AS = StyleSheet.create({         // Declares export AD ( Ad Styles 
     adViewRight: {
         width: '8.5%',
     },
-    locationView: {                                    // Middle card view
-        justifyContent: 'center',                 // Horizontally centers
+    locationView: {
+        justifyContent: 'center',
     },
-    title: {                                    // Eventname text on eventScreen
+    title: {
         maxHeight: Platform.OS == 'ios' ? 20*3 : 17*2.5,
-        fontSize: Platform.OS == 'ios' ? 20 : 17,                             // Text font size
+        fontSize: Platform.OS == 'ios' ? 20 : 17,
     },
-    specificAdTitle: {                                    // Eventname text on eventScreen
+    specificAdTitle: {
         maxWidth: '90%',
         left: 10,
+        alignSelf: 'center',
         maxHeight: Platform.OS == 'ios' ? 20*3 : 17*2.5,
-        fontSize: Platform.OS == 'ios' ? 20 : 17,                             // Text font size
+        fontSize: Platform.OS == 'ios' ? 20 : 17,
     },
-    adInfoType: {                                    // Eventname text on eventScreen
-        width: '38%',
-        fontSize: Platform.OS == 'ios' ? 17.5 : 14,                             // Text font size
+    adInfoType: {
+        fontSize: Platform.OS == 'ios' ? 16 : 14,
     },
-    adInfo: {                                    // Eventname text on eventScreen
+    adInfo: {
         // maxWidth: '90%',
-        fontSize: Platform.OS == 'ios' ? 17.5 : 14,                             // Text font size
+        fontSize: Platform.OS == 'ios' ? 16 : 14,
     },
-    adInfoBold: {                                    // Eventname text on eventScreen
+    adInfoBold: {
         fontWeight: 'bold',
-        fontSize: Platform.OS == 'ios' ? 17.5 : 14,                             // Text font size
+        fontSize: Platform.OS == 'ios' ? 17.5 : 14,
     },
-    loc: {                                      // Eventlocation text on eventScreen
+    socialMediaImage: {
+        height: 30,
+        width: 30
+    },
+    socialPartView: {
+        
+    },
+    adButton: {                              // Join event button 
+        height: 30,                               // Fixed height of 30px
+        width:Dimensions.get('window').width/2.75,// Fixed width of 1/2.75 of the screen
+        alignSelf: 'center',                      // Horizontally centered
+        borderRadius: 10                          // Rounded corners
+    },
+    adButtonText: {                              // Join event button 
+        textAlign: 'center',
+        top: Platform.OS == 'ios' ? 2:0,
+        fontWeight: '600',
+        fontSize: 20,
+    },
+    socialView: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-evenly'
+      },
+    loc: {
         fontSize: Platform.OS == 'ios' ? 15 : 13
     },
     adTitleView: {
@@ -57,10 +81,10 @@ export const AS = StyleSheet.create({         // Declares export AD ( Ad Styles 
         flexDirection: 'row',
     },
     organizationLogoSmall: {
-        alignSelf: 'center',                      // Centers the image
-        width: (Dimensions.get('window').width)-4,// Almost full csreen width
-        height: 150,                              // Fixed height of 150px
-        resizeMode: 'contain'                     // Adjusts the image to fit
+        alignSelf: 'center',
+        width: (Dimensions.get('window').width)-4,
+        height: 150,
+        resizeMode: 'contain'
     },
     adViewTitle: {
         left: 5,
@@ -74,7 +98,8 @@ export const AS = StyleSheet.create({         // Declares export AD ( Ad Styles 
         top: -3,
     },
     adBannerSmall: {
-        height: 55,
+        top: 1.7,
+        height: 60,
         aspectRatio: 3/2,
         resizeMode: 'contain'
     },
@@ -194,12 +219,12 @@ export const AS = StyleSheet.create({         // Declares export AD ( Ad Styles 
         alignSelf: 'center',                      // Horizontally centered
         borderRadius: 10                          // Rounded corners
     },
-    mazemapIcon: {                              // Mazemap icon used on SES
-        left: 4,                                  // Shifted to the right side
-        height: 20,                               // 20px high
-        width: 10,                                // 10px wide
+    mazemapIcon: {
+        left: 4,
+        height: 20,
+        width: 10,
     },
-    row: {                                      // When all u need is a row
-        flexDirection: 'row'                      // Horizontal direction
+    row: {
+        flexDirection: 'row'
     },
 });

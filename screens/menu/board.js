@@ -18,6 +18,7 @@ import {
   ScrollView,                                                                       // Scrollable view 
   Linking,                                                                          // Function to link to websites etc.
   Dimensions,                                                                       // Screen size
+  Alert,
   Platform
 } from 'react-native';                                                              // React Native
 import Cluster from '../../shared/functions/cluster';
@@ -44,12 +45,14 @@ export default function BoardScreen({ navigation }) {                       // D
       <View>
         {Space(Dimensions.get('window').height/8.1)}
         <Cluster>
-            <TouchableOpacity onPress={() => Linking.openURL('mailto:kontakt@login.no')}>
+            <TouchableOpacity onPress={async() => {
+                  Linking.openURL('mailto:kontakt@login.no').catch(() => lang ? Alert.alert('Kunne ikke åpne mail!', 'Mail: kontakt@login.no'):Alert.alert('Could not open mail!', 'Reach us at kontakt@login.no'))
+                }}>
               <View>
-              <View style={GS.row}>
-              <Text>{Line(60,5)}</Text>
-              <View>
-              <Text style={{...T.boldWithLine, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Trykk på flyet for henvendelser angående app, nettside, eller som ikke skal til en konkret komite.' : 'Press the plane for inquiries regarding app, website, or not for a specific committee'}</Text>
+                <View style={GS.row}>
+                    <Text>{Line(60,5)}</Text>
+                <View>
+                <Text style={{...T.boldWithLine, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Trykk på flyet for henvendelser angående app, nettside, eller som ikke skal til en konkret komite.' : 'Press the plane for inquiries regarding app, website, or not for a specific committee'}</Text>
               </View>
             </View>
             {Space(10)}

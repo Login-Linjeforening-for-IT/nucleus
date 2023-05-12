@@ -16,14 +16,12 @@ export const MS = StyleSheet.create ({                              // Declares 
   filterScreenTitle: {                                               // Big headertitle for EventScreen (due to filter causing problems)
     position: 'absolute',
     textAlign: 'center',
-    top: Dimensions.get('window').height/35,
     left: 100,
+    top: Platform.OS == 'ios' ? '45%' : '40%',
     right: '-6%',
     marginLeft: 'auto',
     marginRight: 'auto',
-    marginTop: Dimensions.get('window').height/38,                  // Adds top margin based on screen height
-    alignSelf: 'center',                                            // Vertically centers
-    fontSize: 35,                                                   // Text font size
+    fontSize: Platform.OS == 'ios' ? 30 : 28,                                                   // Text font size
   },
   smallTitle: {                                                     // Small headertitle (for VERY LONG words)
     position: 'absolute',
@@ -34,7 +32,7 @@ export const MS = StyleSheet.create ({                              // Declares 
     marginLeft: 'auto',
     marginRight: 'auto',
     alignSelf: 'center',                                            // Vertically centers
-    fontSize: 25,                                                   // Text font size 
+    fontSize: Platform.OS == 'ios' ? 25 : 23,                                                   // Text font size 
   },
   smallMultilineTitle: {                                            // Small headertitle (for multiline)
     top: Dimensions.get('window').height/20,
@@ -57,7 +55,7 @@ export const MS = StyleSheet.create ({                              // Declares 
     height: "10%",                                                  // Sets the height of the top menu to 13.3% of the screen height
   },
   tMenuIcon: {                                                      // Size of top menu icons
-    top: '48%',                                                     // Moves the icon 35% downwards
+    top: '46%',                                                     // Moves the icon 35% downwards
     width: 32,                                                     // Icon width
     height: 32,                                                     // Icon height
   },
@@ -76,14 +74,14 @@ export const MS = StyleSheet.create ({                              // Declares 
   multiTop: {
     width: 90,
     height: 40,
-    top: '50%',
+    top: Dimensions.get('window').height/17+5,
     right: '5%',
     flexDirection: 'row',
     justifyContent: 'space-evenly'
   },
   multiIcon: {
-    height: 28,
-    width: 28,
+    height: 24,
+    width: 24,
   },
     // --- BOTTOM MENU ---
   bMenu: {                                                          // Bottom menu view

@@ -3,6 +3,7 @@ import { AS } from '../../styles/adStyles';
 import { View, Text } from 'react-native';
 import { useSelector } from 'react-redux';
 import Space from '../functions/space';
+import { T } from '../../styles/text';
 import React from 'react';
 
 /**
@@ -21,13 +22,13 @@ export default function AdDescription(props) {
     return(
         <View style={AS.adInfoView}>
             <Text style={{...AS.adInfoBold, color: FetchColor(theme, 'TEXTCOLOR')}}>Kort fortalt</Text>
-            <Text style={{...AS.adInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>{shortDescription}</Text>
+            <Text style={{...T.paragraph, color: FetchColor(theme, 'TEXTCOLOR')}}>{shortDescription}</Text>
             {Space(10)}
             <Text style={{...AS.adInfoBold, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? "Ferdigheter" : "Skills"}</Text>
-            <Text style={{...AS.adInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>{skills}</Text>
+            <Text style={{...T.paragraph, color: FetchColor(theme, 'TEXTCOLOR')}}>{skills}</Text>
             {Space(10)}
             <Text style={{...AS.adInfoBold, color: FetchColor(theme, 'TEXTCOLOR')}}>Om stillingen</Text>
-            <Text style={{...AS.adInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>{LongDescription}</Text>
+            <Text style={{...T.paragraph, color: FetchColor(theme, 'TEXTCOLOR')}}>{LongDescription}</Text>
         </View>
     );
 };

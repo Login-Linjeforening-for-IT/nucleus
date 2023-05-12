@@ -27,7 +27,6 @@ export default function AdClusterLocation(item, theme, lang) {
     // else if (campus) location = campus + '.';
     // else if (street) location = street + '.';
     // else location = lang ? 'Mer info TBA!':'More info TBA!';
-    console.log(item)
     const tempName = item.title_no
     const tempType = "Fulltid"
     const tempLoc = "Gjøvik, Oslo, Stavanger, Bergen, Trondheim, Login Loungen"
