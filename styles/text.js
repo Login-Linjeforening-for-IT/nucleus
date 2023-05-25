@@ -16,6 +16,9 @@ export const T = StyleSheet.create({          // Declares T - meant for all text
   text15: {                                   // Text of size 15
     fontSize: 15,                             // Text font size
   },
+  text10: {                                   // Text of size 15
+    fontSize: 10,                             // Text font size
+  },
   bold40: {                                   // Bold text of size 40
     fontSize: 40,                             // Text font size
     fontWeight: 'bold',                       // Font weight bold

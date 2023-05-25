@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 import { CS } from '../styles/clusterStyles';
 import React, { useState } from 'react';
 import { BlurView } from 'expo-blur';
+import SmallProfile from '../shared/profile/smallProfile';
 import { 
   Text, 
   View, 
@@ -31,7 +32,9 @@ export default function MenuScreen({ navigation }) {
   const { lang  } = useSelector( (state) => state.lang  )
   const { login } = useSelector( (state) => state.login )
   const { theme } = useSelector( (state) => state.theme )
-
+  const { id, name, image } = useSelector( (state) => state.profile )
+  const profile = { id: 0, name: "Eirik Hanasand", image}
+  
   const [setting] = useState([
       {id: '1', nav: 'SettingScreen',       titleNO: 'Innstillinger',   titleEN: 'Settings'       },
       //{id: '2', nav: 'ReportScreen',        titleNO: 'Varsle',          titleEN: 'Report'         },
@@ -64,9 +67,10 @@ return(
           renderItem={({item, index}) => (
             <View>
               {index == 0 ? Space(Dimensions.get('window').height/8): null}
-            <TouchableOpacity onPress={() => item.id == 6 && login? navigation.navigate('InternalScreen', item) : navigation.navigate(item.nav, item)}>
+              {index == 0 ? SmallProfile(navigation, theme, lang, profile, login) : null}
+            <TouchableOpacity onPress={() => item.id == 6 && login ? navigation.navigate('InternalScreen', item) : navigation.navigate(item.nav, item)}>
               <Cluster>
-                <View style={{...CS.clusterBack, alignContent: 'space-between'}}>
+                <View style={{...CS.clusterBack, alignContent: 'space-evenly'}}>
                     <View style={CS.twinLeft}>
                         <Text style={{...T.text20, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? item.titleNO : item.titleEN}</Text>
                     </View>
@@ -77,7 +81,7 @@ return(
               </Cluster>
             </TouchableOpacity>
             <View>
-              {index == setting.length-1 ? Space(10):null}
+              {Space(10)}
               {index == setting.length-1 && !feedback.status ?
                 <TouchableOpacity onPress={() => toggleFeedback()}>
                   <View>

@@ -13,7 +13,7 @@ export default function CategorySquare(category) {  //SVG showing the color of t
     return(
         <View style={ES.eventLight}>
             <Svg width={45} height={65} fill={color(category)}>
-                <Rect width={45} height={65} ry={10}/>
+                <Rect width={40} height={65} ry={10}/>
             </Svg>
         </View>
     );

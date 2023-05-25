@@ -1,4 +1,3 @@
-{/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
 import CategoryCircle from '../shared/eventComponents/categoryCircle';
 import CategorySquare from '../shared/eventComponents/categorySquare';
 import AsyncStorage from '@react-native-async-storage/async-storage';

@@ -166,5 +166,5 @@ export const GS = StyleSheet.create({
   loginStatus: {
     position: 'absolute',
     left: 15,
-  }
+  },
 });

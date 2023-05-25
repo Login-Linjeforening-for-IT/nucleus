@@ -13,6 +13,18 @@ export const CS = StyleSheet.create({         // Declares export ES ( Event Styl
         justifyContent: 'center',
         width: '3%'
     },
+    evenTwinLeft: {
+        top: -1,
+        minHeight: 30,
+        justifyContent: 'center',
+        width: '40%',
+    },
+    evenTwinRight: {
+        minHeight: 30,
+        justifyContent: 'center',
+        flexDirection: 'row',
+        width: '60%',
+    },
     adViewLeft: {
         justifyContent: 'center',
         width: '38%'

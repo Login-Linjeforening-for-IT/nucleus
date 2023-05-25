@@ -31,7 +31,7 @@ import Cluster from '../../shared/functions/cluster';
 
 {/* ========================= APP START ========================= */}
 
-export default function AboutScreen( { navigation }) {
+export default function AboutScreen( { navigation } ) {
   const { lang  } = useSelector( (state) => state.lang  )
   const { login } = useSelector( (state) => state.login )
   const { theme } = useSelector( (state) => state.theme )

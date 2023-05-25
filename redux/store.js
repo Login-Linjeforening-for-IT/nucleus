@@ -6,6 +6,7 @@ import LoginReducer from './loginStatus'                                // Login
 import ThemeReducer from './theme';                                     // Theme state
 import LangReducer from './lang';                                       // Lang state
 import MiscReducer from './misc';                                       // Misc items
+import ProfileReducer from './profile'                                  // Profile items
 import thunk from 'redux-thunk';                                        // Middleware
 
 const reducers = combineReducers({                                      // Combines all reducers
@@ -13,13 +14,14 @@ const reducers = combineReducers({                                      // Combi
     lang: LangReducer,                                                  // Language reducer
     login: LoginReducer,                                                // Loginstatus reducer
     notification: NotificationReducer,                                  // Notification reducer
-    misc: MiscReducer
+    misc: MiscReducer,
+    profile: ProfileReducer
   });
 
 const saveState = {                                                     // Function to localstore redux state
     key: 'root',                                                        // Key property: root
     storage: AsyncStorage,                                              // Which storage to use, AsyncStorage has most active community
-    whitelist: ['lang', 'login', 'theme', 'notification', 'misc']       // Whitelists the names of the states to save
+    whitelist: ['lang', 'login', 'theme', 'notification', 'misc', 'profile']       // Whitelists the names of the states to save
 }
   
 const persistedReducer = persistReducer(saveState, reducers);           // Persistor to remember the state

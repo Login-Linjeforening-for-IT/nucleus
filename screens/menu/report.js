@@ -130,6 +130,7 @@ const inputContent = (val) => {
                 placeholderTextColor={FetchColor(theme, 'TITLETEXTCOLOR')}
                 textAlign='center'
                 onChangeText={(val) => inputName(val)}
+                selectionColor={FetchColor(theme, "ORANGE")}
                 />
                   {data.check_nameInputChange ?
                 <View>
@@ -157,6 +158,7 @@ const inputContent = (val) => {
                 placeholderTextColor={FetchColor(theme, 'TITLETEXTCOLOR')}
                 textAlign='center'
                 onChangeText={(val) => inputContact(val)}
+                selectionColor={FetchColor(theme, "ORANGE")}
                 />
                   {data.check_contactInputChange ?
                 <View>
@@ -185,6 +187,7 @@ const inputContent = (val) => {
                   placeholderTextColor={FetchColor(theme, 'TITLETEXTCOLOR')}
                   textAlign='center'
                   onChangeText={(val) => inputContent(val)}
+                  selectionColor={FetchColor(theme, "ORANGE")}
                   />
                     {data.check_contentInputChange ?
                   <View>

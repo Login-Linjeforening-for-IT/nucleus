@@ -1,7 +1,4 @@
 
-  // NOTE: THIS FILE IS CURRENTLY NOT USED IN PRODUCTION
-
-{/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
 import DynamicCircle from '../shared/eventComponents/dynamicCircle';
 import Space from '../shared/functions/space';
 import FetchColor from '../styles/fetchTheme';

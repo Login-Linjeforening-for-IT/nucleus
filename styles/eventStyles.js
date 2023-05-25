@@ -16,7 +16,7 @@ export const ES = StyleSheet.create({         // Declares export ES ( Event Styl
   },
   view3: {                                    // Right side card view
     position: 'absolute',                     // Uses absolute positioning to layer circle and checkmark
-    right: 0,                                 // Sets it to absolute right
+    right: 5,                                 // Sets it to absolute right
     height: '100%',                           // Has a height of 100% of the parent view
   },
   eventBack: {                                // Card height and direction on eventscreen
@@ -26,13 +26,13 @@ export const ES = StyleSheet.create({         // Declares export ES ( Event Styl
   monthText: {                                // Eventmonth text on specificEventScreen
     width: 45,                                // Same width as background view
     textAlign: 'center',                      // Aligns the text vertically to top
-    bottom: 8,                               // Moves text 7.5% upwards
+    bottom: 7,                                // Moves text 7.5% upwards
     fontSize: Platform.OS == 'ios' ? 20 : 18,                             // Text font size
   },
   eventCardDayText: {                         // Eventday text on eventScreen
     textAlign: 'center',                      // Horizontally centers
     width: 45,                                // Same width as the colored view behind
-    top: -5,                                  // Shifts it 5px upwards
+    top: -3,                                  // Shifts it 5px upwards
     fontSize: Platform.OS == 'ios' ? 25 : 22,                             // Text font size
   },
   title: {                                    // Eventname text on eventScreen
@@ -96,9 +96,10 @@ export const ES = StyleSheet.create({         // Declares export ES ( Event Styl
     flexDirection: 'row',                     // Flexdirection set to row
   },
   eventLight: {                               // Position of specific event color circle
-      top: Platform.OS == 'ios' ? -10 : -8,                               // Moves eventLight 10px upwards
+      top: Platform.OS == 'ios' ? -9 : -8,    // Moves eventLight 10px upwards
       height: 0,
-      width: 10,
+      alignSelf: 'center',
+      left: 2
   },
   legacyEventLight: {                         // Position of specific event color circle
       top: -10,                               // Moves eventLight 10px upwards
@@ -200,9 +201,9 @@ export const ES = StyleSheet.create({         // Declares export ES ( Event Styl
   },
   clusterCategoryView: {                      // View for categories inside the filter
     flexDirection: 'row',                     // Flexdirection set to row
-    justifyContent: 'center',
+    left: '9%',
     top: 7,                                   // Moved 7px downwards
-    width: Dimensions.get('window').width/3,                               // Fixed width of 122px
+    width: Dimensions.get('window').width/3.1,// Fixed width of 122px
   },
   filterResetIcon: {                          // Filter reset icon
       left: -60,                              // Moved 60px leftwards
@@ -210,11 +211,11 @@ export const ES = StyleSheet.create({         // Declares export ES ( Event Styl
       height: 40,                             // Fixed icon height of 40px
       width: 40                               // Fixed icon width of 40px
   },
-  clusterFilterResetIcon: {                          // Filter reset icon
-    left: -45,                              // Moved 60px leftwards
-    top: 10,                                // Moved 10px downwards
-    height: 40,                             // Fixed icon height of 40px
-    width: 40                               // Fixed icon width of 40px
+  clusterFilterResetIcon: {                   // Filter reset icon
+    left: -45,                                // Moved 60px leftwards
+    top: 10,                                  // Moved 10px downwards
+    height: 40,                               // Fixed icon height of 40px
+    width: 40                                 // Fixed icon width of 40px
 },
   eventButton: {                              // Join event button 
     height: 30,                               // Fixed height of 30px

@@ -11,9 +11,10 @@ import React from 'react';
  */
 export default function Cluster (props) {
     const { theme } = useSelector( (state) => state.theme )
+    const noColor = props.noColor
 
     return(
-        <View style={{...ES.cluster, backgroundColor: FetchColor(theme, 'DARKER')}}>
+        <View style={{...ES.cluster, backgroundColor: !noColor ? FetchColor(theme, 'DARKER') : null}}>
             <View style={props.space ? {...ES.clusterContent, marginVertical: props.space} : ES.clusterContent}>
                 { props.children }
             </View>

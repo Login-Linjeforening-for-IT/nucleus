@@ -95,7 +95,7 @@ export const AS = StyleSheet.create({         // Declares export AD ( Ad Styles 
         width: 40,                                // Fixed width of 40px
     },
     bellPosition: {
-        top: -3,
+        left: -4.2,
     },
     adBannerSmall: {
         top: 1.7,

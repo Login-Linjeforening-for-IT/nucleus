@@ -11,14 +11,17 @@ import FetchColor from '../../styles/fetchTheme';
  * @param {*} width     Width of the line
  * @returns             View of the given size based on theme
  */
-export default function Line (height, width) {
+export default function Line (height, width, fill) {
 
     const { theme } = useSelector( (state) => state.theme )
 
     return(
         <View>
-            <Svg width={width} height={height} fill={FetchColor(theme, 'ORANGE')}>
-            <Rect x='1' y='1' width={width} height={height}/>
+            <Svg 
+                width={width} 
+                height={height} 
+                fill={fill ? fill : FetchColor(theme, 'ORANGE')}>
+                <Rect x='1' y='1' width={width} height={height}/>
             </Svg>
         </View>
     );

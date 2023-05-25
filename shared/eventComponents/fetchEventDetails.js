@@ -10,7 +10,5 @@
 export default async function fetchEventDetails(event) {
     const response = await fetch(`https://api.login.no/events/${event.eventID}`);
     const eventDetails = await response.json();
-
-    console.log(`Fetching details for event ${event.eventID}.`);
     return{...event, ...eventDetails};
 }

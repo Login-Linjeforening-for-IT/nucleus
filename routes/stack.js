@@ -14,7 +14,8 @@ import SettingScreen from '../screens/menu/settings'; // Settings
 import OldSettingScreen from '../shared/legacy/oldSettings'; // Old settings
 import ReportScreen from '../screens/menu/report'; // Report form for blameworthy conditions
 import AboutScreen from '../screens/menu/about'; // About Login
-import LoginScreen from '../screens/menu/login'; // Login to innsida
+import ProfileScreen from '../screens/menu/profile/profile'; // Login to innsida
+import LoginScreen from '../screens/menu/profile/login'; // Login to innsida
 import EventScreen from '../screens/event'; // Events
 import MenuScreen from '../screens/menu'; // Menu
 import OldMenuScreen from '../shared/legacy/oldMenu'; // Old menu
@@ -164,6 +165,15 @@ function Navigator() { // Declares Navigator, wraps in container and declares al
                         }
                     }
                     component={LoginScreen}/>
+                <Tab.Screen name='ProfileScreen'
+                    options={
+                        {
+                            tabBarStyle: {
+                                display: "none"
+                            }
+                        }
+                    }
+                    component={ProfileScreen}/>
                 {
                     !oldUI ? 
                         <Tab.Screen name='BoardScreen'

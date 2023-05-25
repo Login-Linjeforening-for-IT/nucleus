@@ -73,8 +73,8 @@ export const MS = StyleSheet.create ({                              // Declares 
   },
   multiTop: {
     width: 90,
-    height: 40,
-    top: Dimensions.get('window').height/17+5,
+    height: 60,
+    top: 35,
     right: '5%',
     flexDirection: 'row',
     justifyContent: 'space-evenly'
@@ -106,5 +106,10 @@ export const MS = StyleSheet.create ({                              // Declares 
   logoBackground: {
     width: 100,
     alignItems: 'center',
+  },
+  touchableIcon: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 35,
   }
 });

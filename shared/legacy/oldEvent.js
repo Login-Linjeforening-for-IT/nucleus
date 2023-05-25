@@ -1027,6 +1027,7 @@ export default function OldEventScreen({navigation}) { // Exports the screen
                             FetchColor(theme, 'TITLETEXTCOLOR')
                         }
                         textAlign='center'
+                        selectionColor={FetchColor(theme, "ORANGE")}
                         onChangeText={
                             (val) => filterInput(val)
                         }/>

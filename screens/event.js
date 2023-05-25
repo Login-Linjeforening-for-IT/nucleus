@@ -548,6 +548,7 @@ export default function EventScreen({ navigation }) {                     //  Ex
                 placeholderTextColor={FetchColor(theme, 'TITLETEXTCOLOR')}
                 textAlign='center'
                 onChangeText={(val) => filterInput(val)}
+                selectionColor={FetchColor(theme, "ORANGE")}
               />
               <TouchableOpacity onPress={() => filterInput(null) + setRenderedArray([...events]) + setClickedCategory([]) + textInputRef.current.clear()}>
                 <Image style={ES.clusterFilterResetIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/icons/reset.png') : require('../assets/icons/reset-black.png')} />
@@ -661,13 +662,13 @@ export default function EventScreen({ navigation }) {                     //  Ex
         {renderedArray != null ? 
           <View style={MS.multiTop}>
             {clickedEvents.length > 0 ? 
-              <TouchableOpacity onPress={async () => await handleDownload()}>
+              <TouchableOpacity style={MS.touchableIcon} onPress={async () => await handleDownload()}>
                 <Image style={MS.multiIcon} source={theme == 0 || theme == 2 || theme == 3 ? timeSinceDownload() >= 1000 ? require('../assets/icons/download.png'):require('../assets/icons/download-orange.png') : require('../assets/icons/download-black.png')} />
               </TouchableOpacity>
             :null}
 
             {renderedArray.length > 0 || clickedCategory.length > 0 || filter.input != null ? 
-              <TouchableOpacity onPress={() => toggleSearchBar()}>
+              <TouchableOpacity style={MS.touchableIcon} onPress={() => toggleSearchBar()}>
                 {search.status ? 
                   <Image style={MS.multiIcon} source={require('../assets/icons/filter-orange.png')} />
                 :
