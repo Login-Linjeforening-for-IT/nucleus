@@ -397,6 +397,68 @@ export default function AdScreen({ navigation }) {                          //  
   if(lastSave == null) (async() => {setLastSave(await LastFetch())})()      //  Displays when the API was last fetched successfully
   if(!notification["SETUP"]) notificationSetup();                           //  Sets up initial notifications
 
+  return(
+    <View>
+        <View style={{...GS.content, backgroundColor: FetchColor(theme, 'DARKER')}}>
+            {Space(Dimensions.get('window').height/8.1)}
+            <View>
+              <View style={{height : '50%'}}/>
+              <Text style={{...T.centeredOppositeColor, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? "Kommer snart!":"Coming soon!"}</Text>
+            </View>
+        </View>
+        {/* ========================= DISPLAY TOP MENU ========================= */}
+        {Platform.OS === 'ios' ? <BlurView style={MS.topMenu} intensity={30}/> : <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'TRANSPARENTANDROID')}}/>}
+        <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
+        <TouchableOpacity style={MS.logoBackground} onPress={() => eventPage()}>
+            <Image style={MS.tMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/logo/loginText.png') : require('../assets/logo/loginText-black.png')} />
+        </TouchableOpacity>
+        <View style={GS.loginStatus}>{login ? DynamicCircle(10,10,'red',Dimensions.get('window').width/1.4,null,60,null):null}</View>
+        {
+            lang ?
+            <Text style={{... MS.smallTitle, left: '-5%', color: FetchColor(theme, 'TITLETEXTCOLOR')}}>Jobbannonser</Text>
+            : 
+            <Text style={{... MS.filterScreenTitle, left: '-5%', color: FetchColor(theme, 'TITLETEXTCOLOR')}}>Job listings</Text>
+        }
+        
+        {renderedArray != null ? 
+            <View style={MS.multiTop}>
+            {clickedAds.length > 0 ? 
+                <TouchableOpacity style={MS.touchableIcon} onPress={async () => await handleDownload()}>
+                <Image style={MS.multiIcon} source={theme == 0 || theme == 2 || theme == 3 ? timeSinceDownload() >= 1000 ? require('../assets/icons/download.png'):require('../assets/icons/download-orange.png') : require('../assets/icons/download-black.png')} />
+                </TouchableOpacity>
+            :null}
+
+            {renderedArray.length > 0 || clickedAds.length > 0 || filter.input != null ? 
+                <TouchableOpacity style={MS.touchableIcon} onPress={() => toggleSearchBar()}>
+                {search.status ? 
+                    <Image style={MS.multiIcon} source={require('../assets/icons/filter-orange.png')} />
+                :
+                    <Image style={MS.multiIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/icons/filter.png') : require('../assets/icons/filter-black.png')} />
+                }
+                </TouchableOpacity>
+            :null}
+            </View>
+        :null}
+
+        </View>
+        {/* ========================= DISPLAY BOTTOM MENU ========================= */}
+        {Platform.OS === 'ios' ? <BlurView style={MS.bMenu} intensity={30}/> : <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENTANDROID')}}/>}
+        <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
+        <TouchableOpacity style={MS.bMenuIconTO} onPress={() => eventPage()}>
+        <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/menu/calendar777.png') : require('../assets/menu/calendar-black.png')} />
+        </TouchableOpacity>
+
+        <TouchableOpacity style={MS.bMenuIconTO}>
+            <Image style={MS.bMenuIcon} source={require('../assets/menu/business-orange.png')} />
+        </TouchableOpacity>
+
+        <TouchableOpacity style={MS.bMenuIconTO} onPress={() => menuPage()}>
+            <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/menu/menu.png') : require('../assets/menu/menu-black.png')} />
+        </TouchableOpacity>
+        </View>     
+    </View>
+  )
+  
   return(                                                                   //  --- DISPLAYS THE EVENTSCREEN ---
     <View> 
       <StatusBar style={theme == 0 || theme == 2 || theme == 3 ? 'light' : 'dark'} />
