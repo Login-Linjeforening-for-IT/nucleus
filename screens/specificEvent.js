@@ -39,7 +39,6 @@ export default function SpecificEventScreen({ route, navigation}) {
   const { lang  } = useSelector( (state) => state.lang  )
   const { login } = useSelector( (state) => state.login )
   const { theme } = useSelector( (state) => state.theme )
-  const { oldUI } = useSelector( (state) => state.misc  )               //  Old User Interface
   const [usersData,setUsersData]=useState({})
   const { item } = route.params
   const link = FetchJoinLink(usersData.description)
@@ -56,9 +55,9 @@ export default function SpecificEventScreen({ route, navigation}) {
     },[item])
 
   const adPage = () => { navigation.navigate('AdScreen') }
-  const eventPage   = () => { navigation.navigate(!oldUI ? 'EventScreen':'OldEventScreen')}
-  const menuPage   = () => { navigation.navigate(!oldUI ? 'MenuScreen':'OldMenuScreen')}
-  const goBack      = () => { navigation.navigate(!oldUI ? 'EventScreen':'OldEventScreen')}
+  const eventPage   = () => { navigation.navigate('EventScreen')}
+  const menuPage   = () => { navigation.navigate('MenuScreen')}
+  const goBack      = () => { navigation.navigate('EventScreen')}
 
   async function updateStorage() {
     let storedClickedEvents = JSON.parse(await AsyncStorage.getItem('clickedEvents'))

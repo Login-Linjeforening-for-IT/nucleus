@@ -6,34 +6,26 @@ import {NavigationContainer} from '@react-navigation/native'; // Navigation cont
 const Tab = createBottomTabNavigator(); // Declares Tab to equal CBTN function
 import BoardScreen from '../screens/menu/board'; // Displays all committees contact information
 import SpecificEventScreen from '../screens/specificEvent'; // Specific Events
-import OldEventScreen from '../shared/legacy/oldEvent'; // Events
 import InternalScreen from '../screens/menu/internal'; // Internal screen
 import BusinessScreen from '../screens/menu/business'; // Companies' screen
 import SpecificAdScreen from '../screens/specificAd'; // Specific job listing
 import SettingScreen from '../screens/menu/settings'; // Settings
-import OldSettingScreen from '../shared/legacy/oldSettings'; // Old settings
 import ReportScreen from '../screens/menu/report'; // Report form for blameworthy conditions
 import AboutScreen from '../screens/menu/about'; // About Login
 import ProfileScreen from '../screens/menu/profile/profile'; // Login to innsida
 import LoginScreen from '../screens/menu/profile/login'; // Login to innsida
 import EventScreen from '../screens/event'; // Events
 import MenuScreen from '../screens/menu'; // Menu
-import OldMenuScreen from '../shared/legacy/oldMenu'; // Old menu
 import {useSelector} from 'react-redux'; // Redux
 import AdScreen from '../screens/ads'; // Job advertisements
-import LegacyAboutScreen from '../shared/legacy/legacyAbout';
-import LegacyBoardScreen from '../shared/legacy/legacyBoard';
-import LegacyBusinessScreen from '../shared/legacy/legacyBusiness';
 
 function Navigator() { // Declares Navigator, wraps in container and declares all navigation routes
-    const {oldUI} = useSelector((state) => state.misc) // Old User Interface
     return (
         <NavigationContainer>
             <Tab.Navigator screenOptions={
                 {headerShown: false}
             }>
-                {
-                !oldUI ? <Tab.Screen name='EventScreen'
+                <Tab.Screen name='EventScreen'
                     options={
                         {
                             tabBarStyle: {
@@ -41,16 +33,7 @@ function Navigator() { // Declares Navigator, wraps in container and declares al
                             }
                         }
                     }
-                    component={EventScreen}/> : <Tab.Screen name='OldEventScreen'
-                    options={
-                        {
-                            tabBarStyle: {
-                                display: "none"
-                            }
-                        }
-                    }
-                    component={OldEventScreen}/>
-                }
+                    component={EventScreen}/>
                 <Tab.Screen name='AdScreen'
                     options={
                         {
@@ -60,9 +43,7 @@ function Navigator() { // Declares Navigator, wraps in container and declares al
                         }
                     }
                     component={AdScreen}/> 
-                {
-                    !oldUI ? 
-                        <Tab.Screen name='MenuScreen'
+                <Tab.Screen name='MenuScreen'
                             options={
                                 {
                                     tabBarStyle: {
@@ -72,21 +53,8 @@ function Navigator() { // Declares Navigator, wraps in container and declares al
                             }
                             component={MenuScreen}
                         /> 
-                    : 
-                    <Tab.Screen name='OldMenuScreen'
-                        options={
-                            {
-                                tabBarStyle: {
-                                    display: "none"
-                                }
-                            }
-                        }
-                        component={OldMenuScreen}
-                    />
-                }
 
-{
-                !oldUI ? <Tab.Screen name='AboutScreen'
+                <Tab.Screen name='AboutScreen'
                     options={
                         {
                             tabBarStyle: {
@@ -94,16 +62,7 @@ function Navigator() { // Declares Navigator, wraps in container and declares al
                             }
                         }
                     }
-                    component={AboutScreen}/> : <Tab.Screen name='LegacyAboutScreen'
-                    options={
-                        {
-                            tabBarStyle: {
-                                display: "none"
-                            }
-                        }
-                    }
-                    component={LegacyAboutScreen}/>
-                }
+                    component={AboutScreen}/>
 
                 <Tab.Screen name='SpecificEventScreen'
                     options={
@@ -123,9 +82,7 @@ function Navigator() { // Declares Navigator, wraps in container and declares al
                         }
                     }
                     component={BusinessScreen}/> 
-            {
-                !oldUI ? 
-                    <Tab.Screen name='SettingScreen'
+            <Tab.Screen name='SettingScreen'
                         options={
                             {
                                 tabBarStyle: {
@@ -134,17 +91,6 @@ function Navigator() { // Declares Navigator, wraps in container and declares al
                             }
                         }
                         component={SettingScreen}/> 
-                : 
-                    <Tab.Screen name='OldSettingScreen'
-                    options={
-                        {
-                            tabBarStyle: {
-                                display: "none"
-                            }
-                        }
-                    }
-                    component={OldSettingScreen}/>
-            }
                 
             {/* <Tab.Screen name='ReportScreen'             options={{tabBarStyle: { display: "none" }}} component={ReportScreen} /> */}
                 <Tab.Screen name='InternalScreen'
@@ -174,9 +120,7 @@ function Navigator() { // Declares Navigator, wraps in container and declares al
                         }
                     }
                     component={ProfileScreen}/>
-                {
-                    !oldUI ? 
-                        <Tab.Screen name='BoardScreen'
+                <Tab.Screen name='BoardScreen'
                             options={
                                 {
                                     tabBarStyle: {
@@ -185,17 +129,6 @@ function Navigator() { // Declares Navigator, wraps in container and declares al
                                 }
                             }
                             component={BoardScreen}/> 
-                    : 
-                        <Tab.Screen name='LegacyBoardScreen'
-                            options={
-                                {
-                                    tabBarStyle: {
-                                        display: "none"
-                                    }
-                                }
-                            }
-                            component={LegacyBoardScreen}/>
-                }
                 <Tab.Screen name='SpecificAdScreen'
                     options={
                         {
@@ -205,15 +138,6 @@ function Navigator() { // Declares Navigator, wraps in container and declares al
                         }
                     }
                     component={SpecificAdScreen}/>
-                <Tab.Screen name='LegacyBusinessScreen'
-                    options={
-                        {
-                            tabBarStyle: {
-                                display: "none"
-                            }
-                        }
-                    }
-                    component={LegacyBusinessScreen}/>
             </Tab.Navigator>
         </NavigationContainer>
     )

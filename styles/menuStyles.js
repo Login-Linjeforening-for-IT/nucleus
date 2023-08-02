@@ -52,10 +52,10 @@ export const MS = StyleSheet.create ({                              // Declares 
     width: '105%',                                                  // 105% width to layer on line with event left hand views
     flexDirection: 'row',                                           // Changes flex direction to allow for multiple elements on the same horizontal level
     justifyContent: 'space-between',                                // Adds an equal amount of space between every element
-    height: "10%",                                                  // Sets the height of the top menu to 13.3% of the screen height
+    height: "9%",                                                  // Sets the height of the top menu to 13.3% of the screen height
   },
   tMenuIcon: {                                                      // Size of top menu icons
-    top: '46%',                                                     // Moves the icon 35% downwards
+    top: '50%',                                                     // Moves the icon 35% downwards
     width: 32,                                                     // Icon width
     height: 32,                                                     // Icon height
   },

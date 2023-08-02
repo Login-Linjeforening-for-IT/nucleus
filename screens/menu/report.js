@@ -34,10 +34,9 @@ export default function ReportScreen( { navigation }) {
   const { lang  } = useSelector( (state) => state.lang  )
   const { login } = useSelector( (state) => state.login )
   const { theme } = useSelector( (state) => state.theme )
-  const { oldUI }    = useSelector( (state) => state.misc )                   //  Old User Interface
 
-  const eventPage   = () => { navigation.navigate(!oldUI ? 'EventScreen':'OldEventScreen') }
-  const menuPage   = () => { navigation.navigate(!oldUI ? 'MenuScreen':'OldMenuScreen') }
+  const eventPage   = () => { navigation.navigate('EventScreen') }
+  const menuPage   = () => { navigation.navigate('MenuScreen') }
   const adPage = () => { navigation.navigate('AdScreen') }
   
   const sendForm = () => {

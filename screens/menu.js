@@ -41,7 +41,7 @@ export default function MenuScreen({ navigation }) {
       {id: '3', nav: 'BoardScreen',         titleNO: 'Styret',          titleEN: 'The Board'      },
       {id: '4', nav: 'AboutScreen',         titleNO: 'Om oss',          titleEN: 'About Login'    },
       {id: '5', nav: 'BusinessScreen',      titleNO: 'For bedrifter',   titleEN: 'For companies'  },
-      {id: '6', nav: 'LoginScreen',         titleNO: 'Innsida (verv)',  titleEN: 'Intranet (verv)'},
+    //   {id: '6', nav: 'LoginScreen',         titleNO: 'Innsida (verv)',  titleEN: 'Intranet (verv)'},
   ])
   const [feedback, setFeedback] = useState({status: 0})                   //  Feedback options visibility boolean
 
@@ -67,7 +67,7 @@ return(
           renderItem={({item, index}) => (
             <View>
               {index == 0 ? Space(Dimensions.get('window').height/8): null}
-              {index == 0 ? SmallProfile(navigation, theme, lang, profile, login) : null}
+              {/* {index == 0 ? SmallProfile(navigation, theme, lang, profile, login) : null} */}
             <TouchableOpacity onPress={() => item.id == 6 && login ? navigation.navigate('InternalScreen', item) : navigation.navigate(item.nav, item)}>
               <Cluster>
                 <View style={{...CS.clusterBack, alignContent: 'space-evenly'}}>

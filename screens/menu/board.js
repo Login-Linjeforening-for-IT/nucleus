@@ -31,10 +31,9 @@ export default function BoardScreen({ navigation }) {                       // D
   const { lang  } = useSelector( (state) => state.lang  )                           // Language state
   const { login } = useSelector( (state) => state.login )                           // Loginstatus
   const { theme } = useSelector( (state) => state.theme )                           // Theme state
-  const { oldUI }    = useSelector( (state) => state.misc )                   //  Old User Interface
 
-  const eventPage   = () => { navigation.navigate(!oldUI ? 'EventScreen':'OldEventScreen') }
-  const menuPage   = () => { navigation.navigate(!oldUI ? 'MenuScreen':'OldMenuScreen') }
+  const eventPage   = () => { navigation.navigate('EventScreen') }
+  const menuPage   = () => { navigation.navigate('MenuScreen') }
   const adPage = () => { navigation.navigate('AdScreen') }            // Function to navigate to job advertisements
 
   return(

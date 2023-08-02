@@ -101,11 +101,6 @@ export const ES = StyleSheet.create({         // Declares export ES ( Event Styl
       alignSelf: 'center',
       left: 2
   },
-  legacyEventLight: {                         // Position of specific event color circle
-      top: -10,                               // Moves eventLight 10px upwards
-      height: 0,
-      width: 10,
-  },
   specificEventLight: {                       // Position of specific event color circle
     height: 20,                               // Fixed height 20px
     width: 20,                                // Fixed width 20px

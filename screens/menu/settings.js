@@ -22,7 +22,6 @@ import {
   Dimensions,
   Platform,
 } from 'react-native';
-import BellChange from '../../shared/legacy/oldUI';
 import Cluster from '../../shared/functions/cluster';
 import Reminders from '../../shared/functions/reminders';
 
@@ -33,10 +32,9 @@ export default function SettingScreen( { navigation }) {
   const { theme } = useSelector( (state) => state.theme ) 
   const { lang  } = useSelector( (state) => state.lang  )
   const { login } = useSelector( (state) => state.login )
-  const { oldUI }    = useSelector( (state) => state.misc )                   //  Old User Interface
 
-  const eventPage   = () => { navigation.navigate(!oldUI ? 'EventScreen':'OldEventScreen') }
-  const menuPage   = () => { navigation.navigate(!oldUI ? 'MenuScreen':'OldMenuScreen') }
+  const eventPage   = () => { navigation.navigate('EventScreen') }
+  const menuPage   = () => { navigation.navigate('MenuScreen') }
   const adPage = () => { navigation.navigate('AdScreen') }
 
   const [info] = useState([
@@ -56,80 +54,74 @@ export default function SettingScreen( { navigation }) {
     },
     {
         id: 2, 
-        titleNO: 'Legacy UI', 
-        descriptionNO: 'Tidligere brukergrensesnitt.', 
-        descriptionEN: 'Previous User Interface.'
-    },
-    {
-        id: 3, 
         titleNO: 'Varslinger', 
         titleEN: 'Notifications', 
     },
     {
-        id: 4, 
+        id: 3, 
         titleNO: 'Viktig informasjon', 
         titleEN: 'Important info', 
         descriptionNO: 'Motta varsel om viktig informasjon, som tid for årsmøte etc.', 
         descriptionEN: 'Recieve notifications about important information, such as annual meetings.'
     },
     {
-        id: 5, 
+        id: 4, 
         titleNO: 'Nye arrangementer', 
         titleEN: 'New events', 
     },
     {
-        id: 6, 
+        id: 5, 
         titleNO: 'Bedpres', 
         titleEN: 'Company Presentations', 
         descriptionNO: 'Varsel hver gang det legges ut ny bedriftpresentasjon.', 
         descriptionEN: 'Notification every time a company presentation is posted.'
     },
     {
-        id: 7, 
+        id: 6, 
         titleNO: 'TekKom', 
         descriptionNO: 'Varsel hver gang det legges ut en TekKom samling.', 
         descriptionEN: 'Notification every time a TekKom gathering is posted.'},
     {
-        id: 8, 
+        id: 7, 
         titleNO: 'CTF', 
         descriptionNO: 'Varsel hver gang det legges ut en CTF.', 
         descriptionEN: 'Notification every time a CTF is posted.'
     },
     {
-        id: 9, 
+        id: 8, 
         titleNO: 'Sosialt', 
         titleEN: 'Social', 
         descriptionNO: 'Varsel hver gang det legges ut et EvntKom arrangement.', 
         descriptionEN: 'Notification every time a EvntKom event is posted.'
     },
     {
-        id: 10, 
+        id: 9, 
         titleNO: 'Karrieredag', 
         titleEN: 'Career day', 
         descriptionNO: 'Varsel hver gang det legges ut en karrieredag.', 
         descriptionEN: 'Notification every time a career day is posted.'
     },
     {
-        id: 11, 
+        id: 10, 
         titleNO: 'Fadderuka', 
         descriptionNO: 'Varsel hver gang det legges ut et fadderuka arrangement.', 
         descriptionEN: 'Notification every time a fadderuka event is posted.'
     },
     {
-        id: 12, 
+        id: 11, 
         titleNO: 'Login', 
         descriptionNO: 'Varsel hver gang det legges ut et arrangement angående foreningens drift.', 
         descriptionEN: 'Notification every time a event is posted regarding the operation of Login.'
     },
     {
-        id: 13, 
+        id: 12, 
         titleNO: 'Annet', 
         titleEN: 'Other', 
         descriptionNO: 'Varsel hver gang det legges ut et ukategorisert arrangement.', 
         descriptionEN: 'Notification every time an uncategorized event is posted.'
     },
     {
-        id: 14, 
+        id: 13, 
         titleNO: 'Påminnelser', 
         titleEN: 'Reminders',
     },
@@ -161,39 +153,29 @@ export default function SettingScreen( { navigation }) {
             </View>
           </Cluster>
 
-          <Cluster>
-            <View style={GS.notificationBack}>
-              <View style={GS.view}>
-                <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}>{info[2].titleNO}</Text>
-                <Text style={{...GS.notificationTip, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? info[2].descriptionNO : info[2].descriptionEN }</Text>
-              </View>
-              <View style={GS.view2}><BellChange/></View>
-            </View>
-          </Cluster>
-
           {Space(10)}
-          <Text style={{...T.text30, left: 15, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? info[3].titleNO : info[3].titleEN}</Text>              
+          <Text style={{...T.text30, left: 15, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? info[2].titleNO : info[2].titleEN}</Text>              
           {Space(10)}
 
           <Cluster>
             <View style={GS.notificationBack}>
               <View style={GS.view}>
-                <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? info[4].titleNO : info[4].titleEN }</Text>
-                <Text style={{...GS.notificationTip, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? info[4].descriptionNO : info[4].descriptionEN }</Text>
+                <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? info[3].titleNO : info[3].titleEN }</Text>
+                <Text style={{...GS.notificationTip, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? info[3].descriptionNO : info[3].descriptionEN }</Text>
               </View>
               <View style={GS.view2}><Notification category='IMPORTANT'/></View>
             </View>
           </Cluster>
 
           {Space(10)}
-          <Text style={{...T.text25, left: 15, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? info[5].titleNO : info[5].titleEN}</Text>              
+          <Text style={{...T.text25, left: 15, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? info[4].titleNO : info[4].titleEN}</Text>              
           {Space(10)}
           
           <Cluster>
             <View style={GS.notificationBack}>
               <View style={GS.view}>
-                <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? info[6].titleNO : info[6].titleEN }</Text>
-                <Text style={{...GS.notificationTip, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? info[6].descriptionNO : info[6].descriptionEN }</Text>
+                <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? info[5].titleNO : info[5].titleEN }</Text>
+                <Text style={{...GS.notificationTip, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? info[5].descriptionNO : info[5].descriptionEN }</Text>
               </View>
               <Notification category='BEDPRES'/>
             </View>
@@ -202,8 +184,8 @@ export default function SettingScreen( { navigation }) {
           <Cluster>
             <View style={GS.notificationBack}>
               <View style={GS.view}>
-                <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}>{info[7].titleNO}</Text>
-                <Text style={{...GS.notificationTip, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? info[7].descriptionNO : info[7].descriptionEN }</Text>
+                <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}>{info[6].titleNO}</Text>
+                <Text style={{...GS.notificationTip, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? info[6].descriptionNO : info[6].descriptionEN }</Text>
              </View>
               <Notification category='TEKKOM'/>
             </View>
@@ -212,10 +194,20 @@ export default function SettingScreen( { navigation }) {
           <Cluster>
             <View style={GS.notificationBack}>
               <View style={GS.view}>
-                <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}>{info[8].titleNO}</Text>
-                <Text style={{...GS.notificationTip, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? info[8].descriptionNO : info[8].descriptionEN }</Text>
+                <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}>{info[7].titleNO}</Text>
+                <Text style={{...GS.notificationTip, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? info[7].descriptionNO : info[7].descriptionEN }</Text>
               </View>
               <Notification category='CTF'/>
+            </View>
+          </Cluster>
+
+          <Cluster>
+            <View style={GS.notificationBack}>
+              <View style={GS.view}>
+                <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? info[8].titleNO : info[8].titleEN }</Text>
+                <Text style={{...GS.notificationTip, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? info[8].descriptionNO : info[8].descriptionEN }</Text>
+              </View>
+              <Notification category='SOCIAL'/>
             </View>
           </Cluster>
 
@@ -225,16 +217,6 @@ export default function SettingScreen( { navigation }) {
                 <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? info[9].titleNO : info[9].titleEN }</Text>
                 <Text style={{...GS.notificationTip, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? info[9].descriptionNO : info[9].descriptionEN }</Text>
               </View>
-              <Notification category='SOCIAL'/>
-            </View>
-          </Cluster>
-
-          <Cluster>
-            <View style={GS.notificationBack}>
-              <View style={GS.view}>
-                <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? info[10].titleNO : info[10].titleEN }</Text>
-                <Text style={{...GS.notificationTip, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? info[10].descriptionNO : info[10].descriptionEN }</Text>
-              </View>
               <Notification category='KARRIEREDAG'/>
             </View>
           </Cluster>
@@ -242,8 +224,8 @@ export default function SettingScreen( { navigation }) {
           <Cluster>
             <View style={GS.notificationBack}>
               <View style={GS.view}>
-                <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}>{info[11].titleNO}</Text>
-                <Text style={{...GS.notificationTip, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? info[11].descriptionNO : info[11].descriptionEN }</Text>
+                <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}>{info[10].titleNO}</Text>
+                <Text style={{...GS.notificationTip, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? info[10].descriptionNO : info[10].descriptionEN }</Text>
               </View>
               <Notification category='FADDERUKA'/>
             </View>
@@ -253,8 +235,8 @@ export default function SettingScreen( { navigation }) {
           <Cluster>
             <View style={GS.notificationBack}>
               <View style={GS.view}>
-                <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}>{info[12].titleNO}</Text>
-                <Text style={{...GS.notificationTip, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? info[12].descriptionNO : info[12].descriptionEN }</Text>
+                <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}>{info[11].titleNO}</Text>
+                <Text style={{...GS.notificationTip, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? info[11].descriptionNO : info[11].descriptionEN }</Text>
               </View>
               <Notification category='LOGIN'/>
             </View>
@@ -263,8 +245,8 @@ export default function SettingScreen( { navigation }) {
           <Cluster>
             <View style={GS.notificationBack}>
               <View style={GS.view}>
-                <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? info[13].titleNO : info[13].titleEN }</Text>
-                <Text style={{...GS.notificationTip, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? info[13].descriptionNO : info[13].descriptionEN }</Text>
+                <Text style={{...GS.notificationText, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? info[12].titleNO : info[12].titleEN }</Text>
+                <Text style={{...GS.notificationTip, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? info[12].descriptionNO : info[12].descriptionEN }</Text>
               </View>
               <Notification category='ANNET'/>
             </View>
@@ -272,7 +254,7 @@ export default function SettingScreen( { navigation }) {
           </Cluster>
 
           {Space(10)}
-          <Text style={{...T.text25, left: 15, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? info[14].titleNO : info[14].titleEN}</Text>              
+          <Text style={{...T.text25, left: 15, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? info[13].titleNO : info[13].titleEN}</Text>              
           {Space(10)}
           <Reminders/>
           {Space(8)}

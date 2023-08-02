@@ -77,10 +77,9 @@ export default function AdScreen({ navigation }) {                          //  
   const { lang  }    = useSelector( (state) => state.lang  )                //  Language state
   const { login }    = useSelector( (state) => state.login )                //  Loginstatus
   const { theme }    = useSelector( (state) => state.theme )                //  Theme state
-  const { oldUI }    = useSelector( (state) => state.misc )                 //  Old User Interface
   const { calendarID } = useSelector( (state) => state.misc )               //  Calendar ID
-  const eventPage   = () => { navigation.navigate(!oldUI ? 'EventScreen':'OldEventScreen') } // Navigate to eventPage
-  const menuPage   = () => { navigation.navigate(!oldUI ? 'MenuScreen':'OldMenuScreen') }
+  const eventPage   = () => { navigation.navigate('EventScreen') } // Navigate to eventPage
+  const menuPage   = () => { navigation.navigate('MenuScreen') }
   const [expoPushToken, setExpoPushToken] = useState('');                   //  Array for notification token
   const [pushNotification, setPushNotification] = useState(false);          //  Array for setting the push notification
   const notificationListener = useRef();                                    //  Notification listener

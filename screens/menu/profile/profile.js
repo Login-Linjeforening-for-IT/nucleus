@@ -35,13 +35,12 @@ export default function ProfileScreen( { navigation }) {
     const { lang  } = useSelector( (state) => state.lang  )
     const { login } = useSelector( (state) => state.login )
     const { theme } = useSelector( (state) => state.theme )
-    const { oldUI } = useSelector( (state) => state.misc )
     const { id, ban, joinedevents, name, allergies, preferences, mail, schoolyear, degree, image } = useSelector( (state) => state.profile )
     const profile = { id: 0, ban, joinedevents: 40, name, allergies, preferences, mail, schoolyear, degree, image }
     const profileInfo = { degree, schoolyear, mail, preferences, allergies }
 
-    const eventPage = () => { navigation.navigate(!oldUI ? 'EventScreen':'OldEventScreen') }
-    const menuPage = () => { navigation.navigate(!oldUI ? 'MenuScreen':'OldMenuScreen') }
+    const eventPage = () => { navigation.navigate('EventScreen') }
+    const menuPage = () => { navigation.navigate('MenuScreen') }
     const adPage = () => { navigation.navigate('AdScreen') }
 
     const [scrollPosition, setScrollPosition] = useState(0);

@@ -32,9 +32,8 @@ export default function MenuScreen({ navigation }) {
   const { lang  } = useSelector( (state) => state.lang  )
   const { login } = useSelector( (state) => state.login )
   const { theme } = useSelector( (state) => state.theme )
-  const { oldUI } = useSelector( (state) => state.misc  )               //  Old User Interface
   const [setting] = useState([
-      {id: '1', nav: !oldUI ? 'SettingScreen':'OldSettingScreen',   titleNO: 'Innstillinger',   titleEN: 'Settings'       },
+      {id: '1', nav: 'SettingScreen',   titleNO: 'Innstillinger',   titleEN: 'Settings'       },
     //   {id: '2', nav: 'ReportScreen',    titleNO: 'Varsle',          titleEN: 'Report'         },
       {id: '3', nav: 'BoardScreen',     titleNO: 'Styret',          titleEN: 'The Board'      },
       {id: '4', nav: 'AboutScreen',     titleNO: 'Om oss',          titleEN: 'About Login'    },
@@ -48,7 +47,7 @@ export default function MenuScreen({ navigation }) {
            status: !feedback.status                                       //  Change feedback state
     });
 }
-    const eventPage = () => { navigation.navigate(!oldUI ? 'EventScreen':'OldEventScreen') }
+    const eventPage = () => { navigation.navigate('EventScreen') }
     const adPage  = () => { navigation.navigate('AdScreen') }
 
 return(

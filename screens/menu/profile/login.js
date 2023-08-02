@@ -36,11 +36,10 @@ export default function LoginScreen( { navigation }) {
     const { lang  } = useSelector( (state) => state.lang  )
     const { login } = useSelector( (state) => state.login )
     const { theme } = useSelector( (state) => state.theme )
-    const { oldUI }    = useSelector( (state) => state.misc )
 
     const dispatch = useDispatch()
-    const eventPage = () => { navigation.navigate(!oldUI ? 'EventScreen':'OldEventScreen') }
-    const menuPage = () => { navigation.navigate(!oldUI ? 'MenuScreen':'OldMenuScreen') }
+    const eventPage = () => { navigation.navigate('EventScreen') }
+    const menuPage = () => { navigation.navigate('MenuScreen') }
     const adPage = () => { navigation.navigate('AdScreen') }
 
     const internalPage = () => {
