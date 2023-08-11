@@ -31,7 +31,6 @@ export default function SettingScreen( { navigation }) {
 
   const { theme } = useSelector( (state) => state.theme ) 
   const { lang  } = useSelector( (state) => state.lang  )
-  const { login } = useSelector( (state) => state.login )
 
   const eventPage   = () => { navigation.navigate('EventScreen') }
   const menuPage   = () => { navigation.navigate('MenuScreen') }
@@ -268,8 +267,6 @@ export default function SettingScreen( { navigation }) {
     <TouchableOpacity onPress={() => menuPage()}>
       <Image style={MS.goBack} source={require('../../assets/icons/goback777.png')} />
     </TouchableOpacity>
-
-    <View style={GS.loginStatus}>{login ? DynamicCircle(10,10,'red',Dimensions.get('window').width/1.4,null,60,null):null}</View>
 
     <Text style={{... MS.screenTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{lang ? 'Innstillinger' : 'Settings'}</Text>
   </View>

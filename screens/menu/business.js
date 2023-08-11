@@ -23,7 +23,6 @@ import {
 export default function BusinessScreen( { navigation }) {                       // Declaring the screen
 
   const { lang  } = useSelector( (state) => state.lang  )                       // Language state
-  const { login } = useSelector( (state) => state.login )                       // Login status
   const { theme } = useSelector( (state) => state.theme )                       // Theme state
 
   const eventPage = () => { navigation.navigate('EventScreen') }
@@ -112,8 +111,6 @@ export default function BusinessScreen( { navigation }) {                       
     <TouchableOpacity onPress={() => menuPage()}>
       <Image style={MS.goBack} source={require('../../assets/icons/goback777.png')} />
     </TouchableOpacity>
-
-    <View style={GS.loginStatus}>{login ? DynamicCircle(10,10,'red',Dimensions.get('window').width/1.4,null,60,null):null}</View>
 
     <Text style={{... MS.screenTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{lang ? 'For bedrifter' : 'For companies'}</Text>
   </View>

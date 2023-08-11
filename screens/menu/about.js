@@ -215,8 +215,6 @@ export default function AboutScreen( { navigation } ) {
       <Image style={MS.goBack} source={require('../../assets/icons/goback777.png')} />
     </TouchableOpacity>
 
-    <View style={GS.loginStatus}>{login ? DynamicCircle(10,10,'red',Dimensions.get('window').width/1.4,null,60,null):null}</View>
-
     <Text style={{... MS.screenTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{lang ? 'Om Login' : 'About Login'}</Text>
   </View>
 {/* ========================= DISPLAY BOTTOM MENU ========================= */}

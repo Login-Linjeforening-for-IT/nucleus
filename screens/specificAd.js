@@ -32,7 +32,6 @@ import AdMedia from '../shared/adComponents/adMedia';
 export default function SpecificAdScreen( { route, navigation }) {
 
   const { lang  } = useSelector( (state) => state.lang  )
-  const { login } = useSelector( (state) => state.login )
   const { theme } = useSelector( (state) => state.theme )
   const { item } = route.params
   //Check if image exists
@@ -72,8 +71,6 @@ export default function SpecificAdScreen( { route, navigation }) {
     <TouchableOpacity onPress={() => goBack()}>
       <Image style={MS.goBack} source={require('../assets/icons/goback777.png')} />
     </TouchableOpacity>
-
-    <View style={GS.loginStatus}>{login ? DynamicCircle(10,10,'red',Dimensions.get('window').width/1.4,null,60,null):null}</View>
 
     <Text style={{... MS.smallMultilineTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{lang ? item.title_no : item.title_no}</Text>
   </View>

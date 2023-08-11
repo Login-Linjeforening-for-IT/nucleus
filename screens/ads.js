@@ -75,7 +75,6 @@ export default function AdScreen({ navigation }) {                          //  
   const [search, toggleSearch] = useState({status: 0})                      //  Search bar visibility boolean
   const notification = useSelector( (state) => state.notification )         //  Fetches notification state
   const { lang  }    = useSelector( (state) => state.lang  )                //  Language state
-  const { login }    = useSelector( (state) => state.login )                //  Loginstatus
   const { theme }    = useSelector( (state) => state.theme )                //  Theme state
   const { calendarID } = useSelector( (state) => state.misc )               //  Calendar ID
   const eventPage   = () => { navigation.navigate('EventScreen') } // Navigate to eventPage
@@ -412,7 +411,6 @@ export default function AdScreen({ navigation }) {                          //  
         <TouchableOpacity style={MS.logoBackground} onPress={() => eventPage()}>
             <Image style={MS.tMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/logo/loginText.png') : require('../assets/logo/loginText-black.png')} />
         </TouchableOpacity>
-        <View style={GS.loginStatus}>{login ? DynamicCircle(10,10,'red',Dimensions.get('window').width/1.4,null,60,null):null}</View>
         {
             lang ?
             <Text style={{... MS.smallTitle, left: '-5%', color: FetchColor(theme, 'TITLETEXTCOLOR')}}>Jobbannonser</Text>
@@ -553,7 +551,6 @@ export default function AdScreen({ navigation }) {                          //  
         <TouchableOpacity style={MS.logoBackground} onPress={() => eventPage()}>
             <Image style={MS.tMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/logo/loginText.png') : require('../assets/logo/loginText-black.png')} />
         </TouchableOpacity>
-        <View style={GS.loginStatus}>{login ? DynamicCircle(10,10,'red',Dimensions.get('window').width/1.4,null,60,null):null}</View>
         {
           lang ?
             <Text style={{... MS.smallTitle, left: '-5%', color: FetchColor(theme, 'TITLETEXTCOLOR')}}>Jobbannonser</Text>

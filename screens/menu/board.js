@@ -29,7 +29,6 @@ import Cluster from '../../shared/functions/cluster';
 export default function BoardScreen({ navigation }) {                       // Declares the export Committeescreen
 
   const { lang  } = useSelector( (state) => state.lang  )                           // Language state
-  const { login } = useSelector( (state) => state.login )                           // Loginstatus
   const { theme } = useSelector( (state) => state.theme )                           // Theme state
 
   const eventPage   = () => { navigation.navigate('EventScreen') }
@@ -51,7 +50,7 @@ export default function BoardScreen({ navigation }) {                       // D
                 <View style={GS.row}>
                     <Text>{Line(60,5)}</Text>
                 <View>
-                <Text style={{...T.boldWithLine, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Trykk på flyet for henvendelser angående app, nettside, eller som ikke skal til en konkret komite.' : 'Press the plane for inquiries regarding app, website, or not for a specific committee'}</Text>
+                <Text style={{...T.boldWithLine, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Trykk på flyet for henvendelser angående app, nettside, eller som ikke skal til en konkret komite.' : 'Press the plane for inquiries regarding app, website, or if committee is not relevant.'}</Text>
               </View>
             </View>
             {Space(10)}
@@ -72,8 +71,6 @@ export default function BoardScreen({ navigation }) {                       // D
   <TouchableOpacity onPress={() => menuPage()}>
       <Image style={MS.goBack} source={require('../../assets/icons/goback777.png')} />
     </TouchableOpacity>
-
-    <View style={GS.loginStatus}>{login ? DynamicCircle(10,10,'red',Dimensions.get('window').width/1.4,null,60,null):null}</View>                    
 
     <Text style={{... MS.screenTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{lang ? 'Styret' : 'The Board'}</Text>
 
