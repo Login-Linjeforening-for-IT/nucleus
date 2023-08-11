@@ -6,7 +6,7 @@ export const MS = StyleSheet.create ({                              // Declares 
   screenTitle: {                                                    // Big headertitle
     position: 'absolute',
     textAlign: 'center',
-    marginTop: Dimensions.get('window').height/18,
+    marginTop: Platform.OS == 'ios' ? Dimensions.get('window').height/18 : Dimensions.get('window').height/23,
     left: 75,
     right: 75,
     marginLeft: 'auto',
@@ -17,7 +17,7 @@ export const MS = StyleSheet.create ({                              // Declares 
     position: 'absolute',
     textAlign: 'center',
     left: 100,
-    top: Platform.OS == 'ios' ? '45%' : '40%',
+    top: Platform.OS == 'ios' ? '50%' : '40%',
     right: '-6%',
     marginLeft: 'auto',
     marginRight: 'auto',
@@ -26,7 +26,7 @@ export const MS = StyleSheet.create ({                              // Declares 
   smallTitle: {                                                     // Small headertitle (for VERY LONG words)
     position: 'absolute',
     textAlign: 'center',
-    top: Dimensions.get('window').height/17,
+    top: Dimensions.get('window').height/18,
     left: 0,
     right: '-6%',
     marginLeft: 'auto',
@@ -111,5 +111,6 @@ export const MS = StyleSheet.create ({                              // Declares 
     justifyContent: 'center',
     alignItems: 'center',
     width: 35,
+    top: Platform.OS == "ios" ? null : -8
   }
 });

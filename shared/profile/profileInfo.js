@@ -64,7 +64,7 @@ export default function ProfileInfo(theme, lang, profile) {  //SVG showing the c
                 <View key={key}>
                     <TouchableOpacity onPress={() => handleClick(index)}>
                         <Cluster noColor={true}>
-                            <View style={{...CS.clusterBack, alignContent: 'space-evenly'}}>
+                            <View style={{...CS.clusterBack}}>
                                 <View style={CS.evenTwinLeft}>
                                     <Text style={{...T.text20, color: FetchColor(theme, 'TEXTCOLOR')}}>{type[index]}</Text>
                                 </View>

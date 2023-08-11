@@ -81,9 +81,9 @@ export default function SpecificAdScreen( { route, navigation }) {
         <TouchableOpacity style={MS.bMenuIconTO} onPress={() => eventPage()}>
         <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/menu/calendar777.png') : require('../assets/menu/calendar-black.png')} />
           </TouchableOpacity>
-          <TouchableOpacity style={MS.bMenuIconTO} onPress={() => adPage()}>
+          {/* <TouchableOpacity style={MS.bMenuIconTO} onPress={() => adPage()}>
             <Image style={MS.bMenuIcon} source={require('../assets/menu/business-orange.png')} />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <TouchableOpacity style={MS.bMenuIconTO} onPress={() => menuPage()}>
           <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/menu/menu.png') : require('../assets/menu/menu-black.png')} />
           </TouchableOpacity>

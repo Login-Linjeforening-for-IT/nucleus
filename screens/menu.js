@@ -70,7 +70,7 @@ return(
               {/* {index == 0 ? SmallProfile(navigation, theme, lang, profile, login) : null} */}
             <TouchableOpacity onPress={() => item.id == 6 && login ? navigation.navigate('InternalScreen', item) : navigation.navigate(item.nav, item)}>
               <Cluster>
-                <View style={{...CS.clusterBack, alignContent: 'space-evenly'}}>
+                <View style={{...CS.clusterBack}}>
                     <View style={CS.twinLeft}>
                         <Text style={{...T.text20, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? item.titleNO : item.titleEN}</Text>
                     </View>
@@ -132,9 +132,9 @@ return(
         <TouchableOpacity style={MS.bMenuIconTO} onPress={() => eventPage()}>
         <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/menu/calendar777.png') : require('../assets/menu/calendar-black.png')} />
         </TouchableOpacity>
-        <TouchableOpacity style={MS.bMenuIconTO} onPress={() => adPage()}>
+        {/* <TouchableOpacity style={MS.bMenuIconTO} onPress={() => adPage()}>
         <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/menu/business.png') : require('../assets/menu/business-black.png')} />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         <TouchableOpacity style={MS.bMenuIconTO}>
               <Image style={MS.bMenuIcon} source={require('../assets/menu/menu-orange.png')} />
         </TouchableOpacity>

@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";    // Stylesheet file 
+import { StyleSheet, Platform } from "react-native";  // Importing needed dependencies
 
 export const T = StyleSheet.create({          // Declares T - meant for all text styling
   red: {                                      // Red text - used when something is missing or went wrong
@@ -33,7 +33,7 @@ export const T = StyleSheet.create({          // Declares T - meant for all text
     fontSize: 30,                             // Text font size
   },
   text25: {                                   // Text of size 25
-    fontSize: 25,                             // Text font size
+    fontSize: Platform.OS == 'ios' ? 25 : 20, // Text font size
   },
   text20: {                                   // Text of size 20
     fontSize: 20,                             // Text font size

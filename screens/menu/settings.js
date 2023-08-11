@@ -284,18 +284,14 @@ export default function SettingScreen( { navigation }) {
                 } 
             />
         </TouchableOpacity>
-        <TouchableOpacity 
+        {/* <TouchableOpacity 
             style={MS.bMenuIconTO} 
             onPress={() => adPage()}>
-        <Image 
-            style={MS.bMenuIcon} 
-            source={theme == 0 || theme == 2 || theme == 3 ? 
-                require('../../assets/menu/business.png') 
-            : 
-                require('../../assets/menu/business-black.png')
-            } 
-        />
-        </TouchableOpacity>
+            <Image 
+                style={MS.bMenuIcon} 
+                source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/menu/business.png') : require('../../assets/menu/business-black.png') } 
+            />
+        </TouchableOpacity> */}
         <TouchableOpacity 
             style={MS.bMenuIconTO} 
             onPress={() => menuPage()

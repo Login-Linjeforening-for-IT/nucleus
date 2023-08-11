@@ -539,19 +539,19 @@ export default function EventScreen({ navigation }) {                     //  Ex
         {search.status ? 
           <View>
             <View style={ES.absoluteView}>
-              <TextInput 
-                ref={textInputRef}
-                style={{...ES.clusterFilterText, backgroundColor: FetchColor(theme, 'DARKER')}}
-                maxLength={40}
-                placeholder='Søk..'
-                placeholderTextColor={FetchColor(theme, 'TITLETEXTCOLOR')}
-                textAlign='center'
-                onChangeText={(val) => filterInput(val)}
-                selectionColor={FetchColor(theme, "ORANGE")}
-              />
-              <TouchableOpacity onPress={() => filterInput(null) + setRenderedArray([...events]) + setClickedCategory([]) + textInputRef.current.clear()}>
-                <Image style={ES.clusterFilterResetIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/icons/reset.png') : require('../assets/icons/reset-black.png')} />
-              </TouchableOpacity>
+                <TextInput 
+                    ref={textInputRef}
+                    style={{...ES.clusterFilterText, backgroundColor: FetchColor(theme, 'DARKER')}}
+                    maxLength={40}
+                    placeholder='Søk..'
+                    placeholderTextColor={FetchColor(theme, 'TITLETEXTCOLOR')}
+                    textAlign='center'
+                    onChangeText={(val) => filterInput(val)}
+                    selectionColor={FetchColor(theme, "ORANGE")}
+                />
+                <TouchableOpacity onPress={() => filterInput(null) + setRenderedArray([...events]) + setClickedCategory([]) + textInputRef.current.clear()}>
+                        <Image style={ES.clusterFilterResetIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/icons/reset.png') : require('../assets/icons/reset-black.png')} />
+                </TouchableOpacity>
             </View>
               
               <View style={{...ES.clusterFilterView, backgroundColor: FetchColor(theme, 'DARKER')}}>
@@ -685,9 +685,9 @@ export default function EventScreen({ navigation }) {                     //  Ex
           <Image style={MS.bMenuIcon} source={require('../assets/menu/calendar-orange.png')} />
         </TouchableOpacity>
 
-        <TouchableOpacity style={MS.bMenuIconTO} onPress={() => adPage()}>
+        {/* <TouchableOpacity style={MS.bMenuIconTO} onPress={() => adPage()}>
           <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/menu/business.png') : require('../assets/menu/business-black.png')} />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
         <TouchableOpacity style={MS.bMenuIconTO} onPress={() => menuPage()}>
           <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/menu/menu.png') : require('../assets/menu/menu-black.png')} />
