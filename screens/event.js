@@ -7,7 +7,6 @@ import calendarExists from '../shared/eventComponents/calendar/calendarExists';
 import EventCardLocation from '../shared/eventComponents/eventCardLocation';
 import CategorySquare from '../shared/eventComponents/categorySquare';    // Left side square on eventcard
 import AsyncStorage from '@react-native-async-storage/async-storage';     // Localstorage
-import DynamicCircle from '../shared/eventComponents/dynamicCircle';
 import SmallCheck from '../shared/eventComponents/smallCheck';
 import CompareDates from '../shared/functions/compareDates';
 import topic from '../shared/notificationComponents/topic';
@@ -69,7 +68,7 @@ export default function EventScreen({ navigation }) {                     //  Ex
   const [clickedEvents, setClickedEvents] = useState([]);                 //  Clicked events
   const [clickedCategory, setClickedCategory] = useState([]);             //  Clicked categories
   const [lastSave, setLastSave] = useState(null)                          //  Last time API was fetched successfully
-  const [DS, setDS] = useState(null)                                      //  Download state
+  const [downloadState, setDownloadState] = useState(null)                                      //  Download state
   const [filter, setFilter] = useState({input: null});                    //  Filter text input declaration
   const textInputRef = useRef(null);                                      //  Clears text input
   const dispatch = useDispatch()                                          //  Dispatch to change Redux state
@@ -257,12 +256,12 @@ export default function EventScreen({ navigation }) {                     //  Ex
    * @see currentTime Returns the current time as a string of the IFO8 format
    */
   async function handleDownload() {
-    if(DS == null) {
-      setDS(currentTime());
+    if(downloadState == null) {
+      setDownloadState(currentTime());
       await executeDownload(clickedEvents, calendarID);
     } else {
       if(timeSinceDownload() >= 1000) await executeDownload(clickedEvents, calendarID);
-      setDS(currentTime());
+      setDownloadState(currentTime());
     }
   }
 
@@ -273,7 +272,7 @@ export default function EventScreen({ navigation }) {                     //  Ex
    */
   function timeSinceDownload() {
     const now = new Date (currentTime());
-    const before = new Date (DS);
+    const before = new Date (downloadState);
     return now-before;
   }
 

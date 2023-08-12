@@ -16,7 +16,6 @@ import ProfileScreen from '../screens/menu/profile/profile'; // Login to innsida
 import LoginScreen from '../screens/menu/profile/login'; // Login to innsida
 import EventScreen from '../screens/event'; // Events
 import MenuScreen from '../screens/menu'; // Menu
-import {useSelector} from 'react-redux'; // Redux
 import AdScreen from '../screens/ads'; // Job advertisements
 
 function Navigator() { // Declares Navigator, wraps in container and declares all navigation routes
@@ -25,119 +24,19 @@ function Navigator() { // Declares Navigator, wraps in container and declares al
             <Tab.Navigator screenOptions={
                 {headerShown: false}
             }>
-                <Tab.Screen name='EventScreen'
-                    options={
-                        {
-                            tabBarStyle: {
-                                display: "none"
-                            }
-                        }
-                    }
-                    component={EventScreen}/>
-                <Tab.Screen name='AdScreen'
-                    options={
-                        {
-                            tabBarStyle: {
-                                display: "none"
-                            }
-                        }
-                    }
-                    component={AdScreen}/> 
-                <Tab.Screen name='MenuScreen'
-                            options={
-                                {
-                                    tabBarStyle: {
-                                        display: "none"
-                                    }
-                                }
-                            }
-                            component={MenuScreen}
-                        /> 
-
-                <Tab.Screen name='AboutScreen'
-                    options={
-                        {
-                            tabBarStyle: {
-                                display: "none"
-                            }
-                        }
-                    }
-                    component={AboutScreen}/>
-
-                <Tab.Screen name='SpecificEventScreen'
-                    options={
-                        {
-                            tabBarStyle: {
-                                display: "none"
-                            }
-                        }
-                    }
-                    component={SpecificEventScreen}/>
-                <Tab.Screen name='BusinessScreen'
-                    options={
-                        {
-                            tabBarStyle: {
-                                display: "none"
-                            }
-                        }
-                    }
-                    component={BusinessScreen}/> 
-            <Tab.Screen name='SettingScreen'
-                        options={
-                            {
-                                tabBarStyle: {
-                                    display: "none"
-                                }
-                            }
-                        }
-                        component={SettingScreen}/> 
-                
+                <Tab.Screen name='EventScreen' options={ { tabBarStyle: { display: "none" } } } component={EventScreen}/>
+                <Tab.Screen name='AdScreen' options={{tabBarStyle: {display: "none"}}} component={AdScreen}/> 
+                <Tab.Screen name='MenuScreen' options={{tabBarStyle: {display: "none"}}}component={MenuScreen}/> 
+                <Tab.Screen name='AboutScreen' options={{tabBarStyle: {display: "none"}}} component={AboutScreen}/>
+                <Tab.Screen name='SpecificEventScreen' options={{tabBarStyle: {display: "none"}}} component={SpecificEventScreen}/>
+                <Tab.Screen name='BusinessScreen' options={{tabBarStyle: {display: "none"}}} component={BusinessScreen}/>
+                <Tab.Screen name='SettingScreen' options={{tabBarStyle: {display: "none"}}} component={SettingScreen}/>
             {/* <Tab.Screen name='ReportScreen'             options={{tabBarStyle: { display: "none" }}} component={ReportScreen} /> */}
-                <Tab.Screen name='InternalScreen'
-                    options={
-                        {
-                            tabBarStyle: {
-                                display: "none"
-                            }
-                        }
-                    }
-                    component={InternalScreen}/>
-                <Tab.Screen name='LoginScreen'
-                    options={
-                        {
-                            tabBarStyle: {
-                                display: "none"
-                            }
-                        }
-                    }
-                    component={LoginScreen}/>
-                <Tab.Screen name='ProfileScreen'
-                    options={
-                        {
-                            tabBarStyle: {
-                                display: "none"
-                            }
-                        }
-                    }
-                    component={ProfileScreen}/>
-                <Tab.Screen name='BoardScreen'
-                            options={
-                                {
-                                    tabBarStyle: {
-                                        display: "none"
-                                    }
-                                }
-                            }
-                            component={BoardScreen}/> 
-                <Tab.Screen name='SpecificAdScreen'
-                    options={
-                        {
-                            tabBarStyle: {
-                                display: "none"
-                            }
-                        }
-                    }
-                    component={SpecificAdScreen}/>
+                <Tab.Screen name='InternalScreen' options={{tabBarStyle: {display: "none"}}} component={InternalScreen}/>
+                <Tab.Screen name='LoginScreen' options={{tabBarStyle: {display: "none"}}} component={LoginScreen}/>
+                <Tab.Screen name='ProfileScreen' options={{tabBarStyle: {display: "none"}}} component={ProfileScreen}/>
+                <Tab.Screen name='BoardScreen' options={{tabBarStyle: {display: "none"}}} component={BoardScreen}/>
+                <Tab.Screen name='SpecificAdScreen' options={{tabBarStyle: {display: "none"}}} component={SpecificAdScreen}/>
             </Tab.Navigator>
         </NavigationContainer>
     )

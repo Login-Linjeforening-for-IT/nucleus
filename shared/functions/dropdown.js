@@ -76,7 +76,7 @@ export default function Dropdown() {
                         return(
                             <TouchableOpacity key={index} onPress={() => Linking.openURL(selectedCourse.link)}>
                                 <View style={{...GS.dropdownContent, backgroundColor: FetchColor(theme, 'CONTRAST')}}>
-                                    <Text style={{...T.text15, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? selectedCourse.titleNO : selectedCourse.titleEN}</Text>
+                                    <Text style={{...T.text15, maxWidth: '91%', color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? selectedCourse.titleNO : selectedCourse.titleEN}</Text>
                                     <Image style={GS.smallDropImage} source={require('../../assets/icons/linkicon-white.png')} />
                                 </View>
                             </TouchableOpacity>
@@ -104,7 +104,7 @@ export default function Dropdown() {
                         return(
                             <TouchableOpacity key={index} onPress={() => Linking.openURL(selectedCourse.link)}>
                                 <View style={{...GS.dropdownContent, backgroundColor: FetchColor(theme, 'CONTRAST')}}>
-                                    <Text style={{...T.text15, color: FetchColor(theme, 'TEXTCOLOR')}}>{selectedCourse.title}</Text>
+                                    <Text style={{...T.text15, maxWidth: '91%', color: FetchColor(theme, 'TEXTCOLOR')}}>{selectedCourse.title}</Text>
                                     <Image style={GS.smallDropImage} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/icons/linkicon-white.png') : require('../../assets/icons/linkicon-black.png')} />
                                 </View>
                             </TouchableOpacity>
@@ -132,7 +132,7 @@ export default function Dropdown() {
                         return(
                             <TouchableOpacity key={index} onPress={() => Linking.openURL(selectedCourse.link)}>
                                 <View style={{...GS.dropdownContent, backgroundColor: FetchColor(theme, 'CONTRAST')}}>
-                                    <Text style={{...T.text15, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? selectedCourse.titleNO : selectedCourse.titleEN}</Text>
+                                    <Text style={{...T.text15, maxWidth: '91%',  color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? selectedCourse.titleNO : selectedCourse.titleEN}</Text>
                                     <Image style={GS.smallDropImage} source={require('../../assets/icons/linkicon-white.png')} />
                                 </View>
                             </TouchableOpacity>
