@@ -7,6 +7,9 @@
          "resourceClass": "m-medium"
        }
      },
+     "preview": {
+        "distribution": "internal"
+      },
      "production": {
        "ios": {
          "resourceClass": "m-medium"

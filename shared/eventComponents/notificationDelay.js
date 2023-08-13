@@ -22,7 +22,6 @@ export default function NotificationDelay (props) {
     //const dt2 = new Date(props.startt);                                                                   // Converting from string to date old and correct version
     const dt2 = props.props ? new Date(props.props):new Date(props.startt);                                 // Launchparty version - remove in later update
     const seconds = (dt2.getTime() - dt1.getTime()) / 1000;                                                 // Subtracting and dividing from milliseconds to seconds
-    //console.log(seconds)
     if(seconds > 3602) return seconds-3600;                                                                 // Checks if its more than 1 hour till the event
     else if (seconds < 2) return 2;                                                                         // Returns 2 to instasend if date is passed
     else return seconds                                                                                     // Otherwise returns seconds

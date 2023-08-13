@@ -36,7 +36,7 @@ export default function ReportScreen( { navigation }) {
 
   const eventPage   = () => { navigation.navigate('EventScreen') }
   const menuPage   = () => { navigation.navigate('MenuScreen') }
-  const adPage = () => { navigation.navigate('AdScreen') }
+//   const adPage = () => { navigation.navigate('AdScreen') }
   
   const sendForm = () => {
     if (data.name === data.name) {

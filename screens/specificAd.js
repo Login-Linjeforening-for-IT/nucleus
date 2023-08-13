@@ -36,7 +36,7 @@ export default function SpecificAdScreen( { route, navigation }) {
   const { item } = route.params
   //Check if image exists
 
-  const adPage = () => { navigation.navigate('AdScreen') }
+//   const adPage = () => { navigation.navigate('AdScreen') }
   const eventPage = () => { navigation.navigate('EventScreen') }
   const menuPage = () => { navigation.navigate('EventScreen') }
   const goBack = () => { navigation.navigate('AdScreen') }

@@ -40,7 +40,7 @@ export default function LoginScreen( { navigation }) {
     const dispatch = useDispatch()
     const eventPage = () => { navigation.navigate('EventScreen') }
     const menuPage = () => { navigation.navigate('MenuScreen') }
-    const adPage = () => { navigation.navigate('AdScreen') }
+    // const adPage = () => { navigation.navigate('AdScreen') }
 
     const internalPage = () => {
         if (data.name === database.name && data.pass === database.pass) {

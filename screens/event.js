@@ -79,7 +79,7 @@ export default function EventScreen({ navigation }) {                     //  Ex
   const { login }    = useSelector( (state) => state.login )              //  Loginstatus
   const { theme }    = useSelector( (state) => state.theme )              //  Theme state
   const { calendarID } = useSelector( (state) => state.misc )             //  Calendar ID
-  const adPage = () => { navigation.navigate('AdScreen') }                //  Navigate to Job ad screen
+//   const adPage = () => { navigation.navigate('AdScreen') }                //  Navigate to Job ad screen
   const menuPage = () => { navigation.navigate('MenuScreen') }
   const [expoPushToken, setExpoPushToken] = useState('');                 //  Array for notification token
   const [pushNotification, setPushNotification] = useState(false);        //  Array for setting the push notification
@@ -243,7 +243,6 @@ export default function EventScreen({ navigation }) {                     //  Ex
    * @see createCalendar  Creates a new calendar if no calendar is to be found
    */
   async function executeDownload(clickedEvents, calendarID) {
-    console.log(typeof await calendarExists(calendarID) != "undefined")
       if (typeof await calendarExists(calendarID) != "undefined") await updateCalendar(clickedEvents, calendarID)
       else dispatch(setCalendarID(await createCalendar(clickedEvents)));
   }

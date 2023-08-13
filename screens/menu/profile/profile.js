@@ -41,7 +41,7 @@ export default function ProfileScreen( { navigation }) {
 
     const eventPage = () => { navigation.navigate('EventScreen') }
     const menuPage = () => { navigation.navigate('MenuScreen') }
-    const adPage = () => { navigation.navigate('AdScreen') }
+    // const adPage = () => { navigation.navigate('AdScreen') }
 
     const [scrollPosition, setScrollPosition] = useState(0);
 

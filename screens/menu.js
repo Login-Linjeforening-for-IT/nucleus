@@ -51,7 +51,7 @@ export default function MenuScreen({ navigation }) {
     });
 }
   const eventPage   = () => { navigation.navigate('EventScreen')   }
-  const adPage = () => { navigation.navigate('AdScreen') }
+//   const adPage = () => { navigation.navigate('AdScreen') }
 
 return(
   <View>

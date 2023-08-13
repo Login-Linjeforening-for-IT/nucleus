@@ -53,7 +53,7 @@ export default function SpecificEventScreen({ route, navigation}) {
     getData();
     },[item])
 
-  const adPage = () => { navigation.navigate('AdScreen') }
+//   const adPage = () => { navigation.navigate('AdScreen') }
   const eventPage   = () => { navigation.navigate('EventScreen')}
   const menuPage   = () => { navigation.navigate('MenuScreen')}
   const goBack      = () => { navigation.navigate('EventScreen')}

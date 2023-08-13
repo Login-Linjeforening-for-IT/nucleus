@@ -49,7 +49,7 @@ export default function AboutScreen( { navigation } ) {
 
   const eventPage   = () => { navigation.navigate('EventScreen') }
   const menuPage   = () => { navigation.navigate('MenuScreen') }
-  const adPage = () => { navigation.navigate('AdScreen') }
+//   const adPage = () => { navigation.navigate('AdScreen') }
 
   const [comittee, selectComittee] = useState({
     selected: 0

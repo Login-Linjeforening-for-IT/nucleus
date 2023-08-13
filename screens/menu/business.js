@@ -27,7 +27,7 @@ export default function BusinessScreen( { navigation }) {                       
 
   const eventPage = () => { navigation.navigate('EventScreen') }
   const menuPage = () => { navigation.navigate('MenuScreen') }
-  const adPage = () => { navigation.navigate('AdScreen') }           // Function to navigate to job advertisements
+//   const adPage = () => { navigation.navigate('AdScreen') }           // Function to navigate to job advertisements
 
   return(
     <View>
