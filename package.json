@@ -12,13 +12,11 @@
     "@react-native-async-storage/async-storage": "~1.17.3",
     "@react-native-firebase/app": "^16.5.0",
     "@react-native-firebase/messaging": "^16.5.0",
-    "@react-native-masked-view/masked-view": "0.2.8",
     "@react-navigation/bottom-tabs": "^6.5.2",
     "@react-navigation/native": "^6.1.1",
     "@react-navigation/native-stack": "^6.9.7",
     "@react-navigation/stack": "^6.3.10",
     "@reduxjs/toolkit": "^1.9.1",
-    "events-polyfill": "^2.1.2",
     "expo": "~47.0.12",
     "expo-blur": "~12.0.1",
     "expo-build-properties": "~0.4.1",
@@ -30,7 +28,6 @@
     "expo-permissions": "~14.0.0",
     "expo-splash-screen": "~0.17.5",
     "expo-status-bar": "~1.4.2",
-    "expo-updates": "~0.15.6",
     "react": "18.1.0",
     "react-native": "0.70.8",
     "react-native-event-listeners": "^1.0.7",
@@ -43,8 +40,7 @@
     "react-redux": "^8.0.5",
     "redux": "^4.2.1",
     "redux-persist": "^6.0.0",
-    "redux-thunk": "^2.4.2",
-    "url-polyfill": "^1.1.12"
+    "redux-thunk": "^2.4.2"
   },
   "devDependencies": {
     "@babel/core": "^7.22.10",
