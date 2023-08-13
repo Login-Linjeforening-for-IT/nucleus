@@ -3,7 +3,7 @@
     "owner": "loginapp",
     "name": "Login",
     "slug": "Login",
-    "version": "1.1.15",
+    "version": "1.1.16",
     "orientation": "portrait",
     "icon": "./assets/logo/icon.png",
     "userInterfaceStyle": "dark",
@@ -57,7 +57,7 @@
     "ios": {
         "supportsTablet": true,
         "bundleIdentifier": "com.eirikhanasand.Login",
-        "buildNumber": "56",
+        "buildNumber": "57",
         "googleServicesFile": "./GoogleService-Info.plist",
         "infoPlist": {
             "UIBackgroundModes": [
