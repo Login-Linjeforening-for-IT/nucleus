@@ -57,7 +57,7 @@
     "ios": {
         "supportsTablet": true,
         "bundleIdentifier": "com.eirikhanasand.Login",
-        "buildNumber": "57",
+        "buildNumber": "59",
         "googleServicesFile": "./GoogleService-Info.plist",
         "infoPlist": {
             "UIBackgroundModes": [

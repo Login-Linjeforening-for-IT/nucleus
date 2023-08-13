@@ -7,8 +7,6 @@
     "ios": "expo run:ios"
   },
   "dependencies": {
-    "@babel/core": "^7.20.7",
-    "@babel/plugin-proposal-export-namespace-from": "^7.18.9",
     "@expo/config-plugins": "^5.0.4",
     "@expo/html-elements": "^0.2.2",
     "@react-native-async-storage/async-storage": "~1.17.3",
@@ -27,17 +25,14 @@
     "expo-calendar": "~11.0.1",
     "expo-dev-client": "~2.0.1",
     "expo-device": "~5.0.0",
+    "expo-image-picker": "~14.0.2",
     "expo-notifications": "^0.17.0",
     "expo-permissions": "~14.0.0",
     "expo-splash-screen": "~0.17.5",
     "expo-status-bar": "~1.4.2",
     "expo-updates": "~0.15.6",
-    "metro-core": "^0.73.6",
-    "native-notify": "^3.0.4",
-    "node": "^19.3.0",
     "react": "18.1.0",
     "react-native": "0.70.8",
-    "react-native-dropdownalert": "^4.5.1",
     "react-native-event-listeners": "^1.0.7",
     "react-native-gesture-handler": "~2.8.0",
     "react-native-reanimated": "~2.12.0",
@@ -49,11 +44,12 @@
     "redux": "^4.2.1",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.4.2",
-    "url-polyfill": "^1.1.12",
-    "expo-image-picker": "~14.0.2"
+    "url-polyfill": "^1.1.12"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9",
+    "@babel/core": "^7.22.10",
+    "@babel/plugin-proposal-export-namespace-from": "^7.18.9",
+    "metro-core": "^0.78.0",
     "react-native-svg-transformer": "^1.0.0"
   },
   "private": true
