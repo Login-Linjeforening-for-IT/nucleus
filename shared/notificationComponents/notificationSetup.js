@@ -1,19 +1,20 @@
 import { useDispatch } from 'react-redux';
 
-// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 5/8
+// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 5/6
 import messaging from '@react-native-firebase/messaging';
-// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 5/8
+// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 5/6
 
 /**
  * Runs when the app is first opened to setup initial notifications
  */
 export default async function notificationSetup() {
-//   return null; // For testing in Expo
-  // COMMENT OUT WHILE TESTING IN EXPO 6/8 - COMMENT IN THE ABOVE LINE INSTEAD
-  const dispatch = useDispatch()
-  const granted = await messaging().requestPermission();
-  if   (granted) {
-    await messaging().subscribeToTopic("norwegianIMPORTANT");
+    // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 5/6
+    // return null; // For testing in Expo
+    // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 5/6
+    const dispatch = useDispatch()
+    const granted = await messaging().requestPermission();
+    if   (granted) {
+        await messaging().subscribeToTopic("norwegianIMPORTANT");
         await messaging().subscribeToTopic("norwegianBEDPRES");
         await messaging().subscribeToTopic("norwegianTEKKOM");
         await messaging().subscribeToTopic("norwegianCTF");
@@ -22,5 +23,5 @@ export default async function notificationSetup() {
         await messaging().subscribeToTopic("norwegianFADDERUKA");
         await messaging().subscribeToTopic("norwegianLOGIN");
         await messaging().subscribeToTopic("norwegianANNET").then(dispatch(changeNotificationState("SETUP")));
-  } 
+    } 
 }

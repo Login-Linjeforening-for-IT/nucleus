@@ -10,13 +10,13 @@ import { View } from 'react-native';
  * @see CheckBox
  * @returns View containg a checkable box
  */
-export default function CheckBox() {
+export default function CheckBox() {
 
     const { theme } = useSelector( (state) => state.theme )
 
     return(
         <View style={ES.checkBox}>
-            <Svg width={24} height={24} stroke={FetchColor(theme, 'ORANGE')} strokeWidth={1}>
+            <Svg width={24} height={24} fill={FetchColor(theme, 'DARKER')} stroke={FetchColor(theme, 'ORANGE')} strokeWidth={1}>
                 <Rect x='1' y='1' width={22} height={22} ry={7.5}/>
             </Svg>
         </View>

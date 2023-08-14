@@ -7,9 +7,9 @@ import { persistStore } from 'redux-persist';                               // P
 import { AppRegistry } from 'react-native';                                 // Entry point of the application
 import { Alert } from 'react-native';
 
-// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 1/8
+// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 1/6
 import messaging from '@react-native-firebase/messaging';                   // Notifications
-// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 1/8
+// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 1/6
 
 let persistor = persistStore(store)                                         // Middleware to interact with AsyncStorage
 
@@ -26,11 +26,11 @@ let persistor = persistStore(store)                                         // M
  * @returns Entire application
  */
 export default function App() {  
-    // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 2/8
+    // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 2/6
     messaging().setBackgroundMessageHandler(async remoteMessage => {        // FCM Background Handler
         Alert.alert('Recieved notification!', remoteMessage);
     });
-    // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 2/8
+    // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 2/6
 
     AppRegistry.registerComponent('app', () => App);
     return( 

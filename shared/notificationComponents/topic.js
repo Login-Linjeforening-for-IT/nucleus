@@ -1,6 +1,6 @@
-// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 3/8
+// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 3/6
 import messaging from '@react-native-firebase/messaging';
-// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 3/8
+// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 3/6
 
 /**
  * **Function for subscribing and unsubscribing from notification topics**
@@ -12,8 +12,9 @@ import messaging from '@react-native-firebase/messaging';
  * @param {boolean} status  true/false Subscribe or unsubscribe from given topic.
  */
 export default async function topic(topicID, lang, status, category, catArray) {
-    //   return null; // For testing in Expo
-    // COMMENT OUT WHILE TESTING IN EXPO 4/8 - COMMENT IN THE ABOVE LINE INSTEAD
+    // COMMENT IN THIS BOX WHILE TESTING IN EXPO 4/6
+    //   return null;
+    // COMMENT IN THIS BOX WHILE TESTING IN EXPO 4/6
     const granted = await messaging().requestPermission();
     var topic = lang ? "norwegian"+topicID:"english"+topicID;
   

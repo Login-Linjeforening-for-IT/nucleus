@@ -15,7 +15,7 @@ export default function Copyright() {   //Copyright info
 
     return(
         <View>
-            <Text style={{...T.copyright, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Opphavsrett © 2022 Login - Linjeforeningen for IT, NO 811 940 372' : 'Copyright © 2022 Login - Linjeforeningen for IT, NO 811 940 372'}</Text>
+            <Text style={{...T.copyright, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Opphavsrett © 2022-2023 Login - Linjeforeningen for IT, NO 811 940 372' : 'Copyright © 2022-2023 Login - Linjeforeningen for IT, NO 811 940 372'}</Text>
         </View>
     )
 }
