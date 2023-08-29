@@ -1,20 +1,16 @@
 import registerForPushNotificationsAsync from '../shared/notificationComponents/registerForPushNotificationAsync';
 import removeDuplicatesAndOld from '../shared/eventComponents/removeDuplicatesAndOld';
-import notificationSetup from '../shared/notificationComponents/notificationSetup';
 import updateCalendar from '../shared/eventComponents/calendar/updateCalendar';
 import createCalendar from '../shared/eventComponents/calendar/createCalendar';
 import calendarExists from '../shared/eventComponents/calendar/calendarExists';
 import AsyncStorage from '@react-native-async-storage/async-storage';       // Localstorage
-import DynamicCircle from '../shared/eventComponents/dynamicCircle';
 import CompareDates from '../shared/functions/compareDates';
 import topic from '../shared/notificationComponents/topic';
 import React, { useEffect, useState, useRef } from 'react';                 // React imports
 import currentTime from '../shared/functions/currentTime';
-import CheckedBox from '../shared/functions/checkedBox';
 import { useSelector, useDispatch } from 'react-redux';                     // Redux
 import Check from '../shared/eventComponents/check';
 import Bell from '../shared/eventComponents/bell';
-import CheckBox from '../shared/functions/checkBox';
 import * as Notifications from 'expo-notifications';                        // Local notifications
 import { setCalendarID } from '../redux/misc';
 import Space from '../shared/functions/space';
@@ -391,10 +387,6 @@ export default function AdScreen({ navigation }) {                          //  
     if (!filter.input) clickedAds.length == 0 ? RenderAds():null                    //  Fixes any errors if the user is not currently filtering
     else filter.input.length == 0 && clickedAds.length == 0 ? RenderAds() : null    // Fixes any errors if the user has been searching, but is not doing so now
   }
-
-                                                                            //  --- SETUP CODE ONCE APP IS DOWNLOADED---
-  if(lastSave == null) (async() => {setLastSave(await LastFetch())})()      //  Displays when the API was last fetched successfully
-  if(!notification["SETUP"]) notificationSetup();                           //  Sets up initial notifications
 
   return(
     <View>
