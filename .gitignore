@@ -1,7 +1,6 @@
 node_modules/
 .expo/
 .vscode
-.secrets.json
 google-services.json
 GoogleService-Info.plist
 dist/
