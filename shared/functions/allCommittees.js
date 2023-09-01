@@ -1,8 +1,6 @@
 import person from './person';
 import React from 'react';
-import { 
-    View, 
-} from 'react-native';
+import { View } from 'react-native';
 
 /**
  * Function for displaying all comitees 
@@ -13,12 +11,13 @@ export default function AllComitees(lang, theme) {
         <View>
           {person("leader", lang, theme)}
           {person("coleader", lang, theme)}
-          {person("sekretaer", lang, theme)}
+          {person("secretary", lang, theme)}
           {person("evntkom", lang, theme)}
           {person("pr", lang, theme)}
           {person("tekkom", lang, theme)}
           {person("ctf", lang, theme)}
           {person("eco", lang, theme)}
+          {person("bedkom", lang, theme)}
         </View>
     )
 }

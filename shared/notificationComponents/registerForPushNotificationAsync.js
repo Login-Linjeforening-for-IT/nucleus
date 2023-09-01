@@ -10,28 +10,28 @@ import { Platform } from 'react-native';                                        
 export default async function registerForPushNotificationsAsync(lang) {                         // --- GETTING PUSH NOTIFICATION PERMISSION ---
   let token;
 
-  if (Platform.OS === 'android') { 
-      await Notifications.setNotificationChannelAsync('default', {
-      name: 'default',
-      importance: Notifications.AndroidImportance.MAX,
-      vibrationPattern: [0, 250, 250, 250],
-      lightColor: '#FF231F7C',
-      });
-  }
+    if (Platform.OS === 'android') { 
+        await Notifications.setNotificationChannelAsync('default', {
+        name: 'default',
+        importance: Notifications.AndroidImportance.MAX,
+        vibrationPattern: [0, 250, 250, 250],
+        lightColor: '#FF231F7C',
+        });
+    }
 
-  if (Device.isDevice) {                                                                  // Checks for physical device 
-      const { status: existingStatus } = await Notifications.getPermissionsAsync();
-      let finalStatus = existingStatus;
-      if (existingStatus !== 'granted') {
-      const { status } = await Notifications.requestPermissionsAsync();
-      finalStatus = status;
-      }
-      if (finalStatus !== 'granted') {
-      return;                                                                             // Alert here if user schedules notification without granted status
-      }
-      token = (await Notifications.getExpoPushTokenAsync()).data;
-      //console.log(token); // Logs the token
-  } //else console.log('Notifications are not available on simulators');                    // Enable this line if you have a simulator issue
+    if (Device.isDevice) {                                                                  // Checks for physical device 
+            const { status: existingStatus } = await Notifications.getPermissionsAsync();
+            let finalStatus = existingStatus;
+            if (existingStatus !== 'granted') {
+                const { status } = await Notifications.requestPermissionsAsync();
+                finalStatus = status;
+            }
+                if (finalStatus !== 'granted') {
+                return;                                                                             // Alert here if user schedules notification without granted status
+            }
+            token = (await Notifications.getExpoPushTokenAsync()).data;
+            //console.log(token); // Logs the token
+    } //else console.log('Notifications are not available on simulators');                    // Enable this line if you have a simulator issue
 
   return token;
 };

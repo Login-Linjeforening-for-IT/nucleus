@@ -8,9 +8,9 @@ import messaging from '@react-native-firebase/messaging';
  * Runs when the app is first opened to setup initial notifications
  */
 export default async function notificationSetup() {
-    // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 5/6
+    // COMMENT IN THIS BOX WHILE TESTING IN EXPO 5/6
     // return null; // For testing in Expo
-    // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 5/6
+    // COMMENT IN THIS BOX WHILE TESTING IN EXPO 5/6
     const dispatch = useDispatch()
     const granted = await messaging().requestPermission();
     if   (granted) {

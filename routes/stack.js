@@ -4,7 +4,6 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'; // Creat
 import {NavigationContainer} from '@react-navigation/native'; // Navigation container
 
 const Tab = createBottomTabNavigator(); // Declares Tab to equal CBTN function
-import BoardScreen from '../screens/menu/board'; // Displays all committees contact information
 import SpecificEventScreen from '../screens/specificEvent'; // Specific Events
 import InternalScreen from '../screens/menu/internal'; // Internal screen
 import BusinessScreen from '../screens/menu/business'; // Companies' screen
@@ -35,7 +34,6 @@ function Navigator() { // Declares Navigator, wraps in container and declares al
                 <Tab.Screen name='InternalScreen' options={{tabBarStyle: {display: "none"}}} component={InternalScreen}/>
                 <Tab.Screen name='LoginScreen' options={{tabBarStyle: {display: "none"}}} component={LoginScreen}/>
                 <Tab.Screen name='ProfileScreen' options={{tabBarStyle: {display: "none"}}} component={ProfileScreen}/>
-                <Tab.Screen name='BoardScreen' options={{tabBarStyle: {display: "none"}}} component={BoardScreen}/>
                 {/* <Tab.Screen name='SpecificAdScreen' options={{tabBarStyle: {display: "none"}}} component={SpecificAdScreen}/> */}
             </Tab.Navigator>
         </NavigationContainer>
