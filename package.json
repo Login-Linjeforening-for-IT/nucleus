@@ -2,9 +2,12 @@
   "name": "login",
   "version": "1.0.0",
   "scripts": {
-    "start": "expo start --dev-client",
+    "start": "npx expo start",
     "android": "expo run:android",
-    "ios": "expo run:ios"
+    "ios": "expo run:ios",
+    "build": "eas build -p all --auto-submit",
+    "build-local-ios": "eas build -p ios --local",
+    "build-local-android": "eas build -p android --local"
   },
   "dependencies": {
     "@expo/config-plugins": "^7.2.5",
@@ -41,7 +44,7 @@
   "devDependencies": {
     "@babel/core": "^7.22.11",
     "@babel/plugin-proposal-export-namespace-from": "^7.18.9",
-    "metro-core": "^0.78.1",
+    "metro-core": "^0.79.0",
     "react-native-svg-transformer": "^1.1.0"
   },
   "private": true
