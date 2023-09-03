@@ -29,7 +29,9 @@ export default async function registerForPushNotificationsAsync(lang) {         
                 if (finalStatus !== 'granted') {
                 return;                                                                             // Alert here if user schedules notification without granted status
             }
-            token = (await Notifications.getExpoPushTokenAsync()).data;
+            token = (await Notifications.getExpoPushTokenAsync({
+                projectId: "952a1914-0c53-43e7-b64e-8daab0b3a435"
+            })).data;
             //console.log(token); // Logs the token
     } //else console.log('Notifications are not available on simulators');                    // Enable this line if you have a simulator issue
 

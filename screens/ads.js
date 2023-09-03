@@ -1,13 +1,10 @@
 import registerForPushNotificationsAsync from '../shared/notificationComponents/registerForPushNotificationAsync';
 import removeDuplicatesAndOld from '../shared/eventComponents/removeDuplicatesAndOld';
-import updateCalendar from '../shared/eventComponents/calendar/updateCalendar';
-import createCalendar from '../shared/eventComponents/calendar/createCalendar';
-import calendarExists from '../shared/eventComponents/calendar/calendarExists';
+import updateCalendar, { createCalendar, calendarExists } from '../shared/eventComponents/calendar';
 import AsyncStorage from '@react-native-async-storage/async-storage';       // Localstorage
 import CompareDates from '../shared/functions/compareDates';
 import topic from '../shared/notificationComponents/topic';
 import React, { useEffect, useState, useRef } from 'react';                 // React imports
-import currentTime from '../shared/functions/currentTime';
 import { useSelector, useDispatch } from 'react-redux';                     // Redux
 import Check from '../shared/eventComponents/check';
 import Bell from '../shared/eventComponents/bell';
@@ -34,8 +31,8 @@ import {                                                                    // R
 import { useFocusEffect } from '@react-navigation/native';                  // useFocusEffect       (do something when the screen is displayed)
 import LastFetch from '../shared/functions/lastfetch';
 import Cluster from '../shared/functions/cluster';
-import AdClusterLocation from '../shared/adComponents/adClusterLocation';
-import AdClusterImage from '../shared/adComponents/adClusterImage';
+import { AdClusterLocation, AdClusterImage } from '../shared/ad';
+import BottomMenu from '../shared/bottomMenu';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -74,7 +71,6 @@ export default function AdScreen({ navigation }) {                          //  
   const { theme }    = useSelector( (state) => state.theme )                //  Theme state
   const { calendarID } = useSelector( (state) => state.misc )               //  Calendar ID
   const eventPage   = () => { navigation.navigate('EventScreen') } // Navigate to eventPage
-  const menuPage   = () => { navigation.navigate('MenuScreen') }
   const [expoPushToken, setExpoPushToken] = useState('');                   //  Array for notification token
   const [pushNotification, setPushNotification] = useState(false);          //  Array for setting the push notification
   const notificationListener = useRef();                                    //  Notification listener
@@ -175,15 +171,14 @@ export default function AdScreen({ navigation }) {                          //  
    * and downloads if more than 3 seconds since last download
    * 
    * @see executeDownload Executes the download if permitted
-   * @see currentTime Returns the current time as a string of the IFO8 format
    */
   async function handleDownload() {
     if(DS == null) {
-      setDS(currentTime());
+      setDS(new Date().toISOString());
       await executeDownload(clickedAds, calendarID);
     } else {
       if(timeSinceDownload() >= 1000) await executeDownload(clickedAds, calendarID);
-      setDS(currentTime());
+      setDS(new Date().toISOString());
     }
   }
 
@@ -193,7 +188,7 @@ export default function AdScreen({ navigation }) {                          //  
    * @returns int, seconds
    */
   function timeSinceDownload() {
-    const now = new Date (currentTime());
+    const now = new Date (new Date().toISOString());
     const before = new Date (DS);
     return now-before;
   }
@@ -348,7 +343,7 @@ export default function AdScreen({ navigation }) {                          //  
   },[])                                                                     //  Renders when the screen is loaded
 
   useEffect(() => {                                                         //  --- UPDATES FILTER ON EVENT CHANGE ---
-    fetchRelevantAds();                                              //  Updates relevant categories to filter
+    fetchRelevantAds();                                                     //  Updates relevant categories to filter
   }, [ads.length, clickedAds.length]);                                      //  Listens for changes in these arrays
 
   useEffect(() => {                                                         //  --- FETCHES API AND UPDATES CACHE EVERY 10 SECONDS ---
@@ -356,19 +351,7 @@ export default function AdScreen({ navigation }) {                          //  
     if(!search.status){                                                     //  Only when filter is closed to prevent "no match" issue
       interval = setInterval(() => {        
         (async() => {                                                       // Storing the current time
-          var year     = new Date().getFullYear()                           // Current year
-          var month    = 1 + new Date().getMonth()                          // Current month
-          var day      = new Date().getDate()                               // Current day
-          var hour     = new Date().getHours()                              // Current hour
-          var minute   = new Date().getMinutes()                            // Current minute
-
-          if(month < 10) month = '0' + month                                // Checking and fixing missing 0
-          if(day < 10) day = '0' + day                                      // Checking and fixing missing 0
-          if(hour < 10) hour = '0' + hour                                   // Checking and fixing missing 0
-          if(minute < 10) minute = '0' + minute                             // Checking and fixing missing 0
-
-          var currentTime = year + '-' + month + '-' + day + 'T' + hour + ':' + minute + ':00Z'       // Current full date
-          await AsyncStorage.setItem('lastFetch', currentTime)              //  Storing in AsyncStorage 
+          await AsyncStorage.setItem('lastFetch', new Date().toISOString()) //  Storing in AsyncStorage 
           getData();                                                        //  Fetches cache
         })()           
       }, 10000);                                                            //  Runs every 10 seconds
@@ -431,21 +414,7 @@ export default function AdScreen({ navigation }) {                          //  
         :null}
 
         </View>
-        {/* ========================= DISPLAY BOTTOM MENU ========================= */}
-        {Platform.OS === 'ios' ? <BlurView style={MS.bMenu} intensity={30}/> : <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENTANDROID')}}/>}
-        <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
-        <TouchableOpacity style={MS.bMenuIconTO} onPress={() => eventPage()}>
-        <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/menu/calendar777.png') : require('../assets/menu/calendar-black.png')} />
-        </TouchableOpacity>
-
-        <TouchableOpacity style={MS.bMenuIconTO}>
-            <Image style={MS.bMenuIcon} source={require('../assets/menu/business-orange.png')} />
-        </TouchableOpacity>
-
-        <TouchableOpacity style={MS.bMenuIconTO} onPress={() => menuPage()}>
-            <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/menu/menu.png') : require('../assets/menu/menu-black.png')} />
-        </TouchableOpacity>
-        </View>     
+        <BottomMenu navigation={navigation} screen="ad" />  
     </View>
   )
   
@@ -571,21 +540,7 @@ export default function AdScreen({ navigation }) {                          //  
         :null}
 
       </View>
-      {/* ========================= DISPLAY BOTTOM MENU ========================= */}
-      {Platform.OS === 'ios' ? <BlurView style={MS.bMenu} intensity={30}/> : <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENTANDROID')}}/>}
-      <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
-        <TouchableOpacity style={MS.bMenuIconTO} onPress={() => eventPage()}>
-        <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/menu/calendar777.png') : require('../assets/menu/calendar-black.png')} />
-        </TouchableOpacity>
-
-        <TouchableOpacity style={MS.bMenuIconTO}>
-          <Image style={MS.bMenuIcon} source={require('../assets/menu/business-orange.png')} />
-        </TouchableOpacity>
-
-        <TouchableOpacity style={MS.bMenuIconTO} onPress={() => menuPage()}>
-          <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/menu/menu.png') : require('../assets/menu/menu-black.png')} />
-        </TouchableOpacity>
-      </View>     
+      <BottomMenu navigation={navigation} screen="ad" />
     </View>
   )
 };

@@ -1,0 +1,31 @@
+{
+  "companies" : {
+    "title":"For companies",
+    "intro": "Is your company looking for sharp IT students? Vi arrangerer blant annet bedriftspresentasjoner hver uke, og cyberdager hvert semester. Ta kontakt [her for nærmere avtale rundt bedriftspresentasjon](mailto:bedpres@login.no) eller [her for nærmere avtale rundt cyberdagene](mailto:cyberdagene@login.no). Read on to learn about everything we have to offer your company.",
+    "bedpres": {
+      "title": "Company presentation",
+      "body": "Login's PR committee organizes company presentations where your company gets the opportunity to present to the students what you work on, what services you offer, how you work, etc. With this the students become aware of what you offer, and your working environment. We offer arrangements for food service (pizza) during the presentation, but it is most common to stroll down to a restaurant in town for dining and mingling between students and company representatives."
+    },
+    "cyberdays":{
+      "title": "The Cyberdays",
+      "body": "The cyber days are our career day! It is organized once per semester and is a great arena for recruiting and promoting yourself to our students. Here you will have the opportunity to have a chat with students, market yourself, and not least advertise summer jobs to eager students! The company gets a stand and decides for itself what you want to carry out during the career day itself. Here we also arrange for speed interviews if desired. In the evening, arrangements are made for mingling with students at Huset with a beer and some food."
+    },
+    "ctf": {
+      "title": "CTF",
+      "body": "Capture the Flag is a perfect arena for both getting to know and developing the students' info-sec skills. Here you as a company can challenge our students to solve tasks together! We encourage you to have a self-made CTF that the students can play with. After the CTF itself, it is customary to take all the participants down to a restaurant for dining and mingling with the company representatives."
+    },
+    "workshop": {
+      "title": "Workshop & Subject Presentation",
+      "body": "Login also organizes workshops and subject presentations. Workshops involve the company getting some time where they can present themselves, followed by students working on various projects they have at the same time as company representatives mingle and give tips to students. With a professional presentation, the company will again be able to briefly introduce itself before a professionally focused presentation of the company is held. Here it can be the dissemination of technologies or principles that your company works with."
+    },
+    "profiling": {
+      "title": "Ads & Profiling",
+      "body": "The PR committee also offers the sharing of job advertisements, job advertisements and other types of profiling on our active social channels (Discord, Instagram, Facebook, Login.no). If the company has arranged a bedpres, workshop/fagpres or CTF with us in the current semester, profiling will be included (at no extra cost)."
+    }
+  },
+  "contact": {
+    "title": "Contact Info",
+    "address": "Address",
+    "email": "Email"
+  }
+}

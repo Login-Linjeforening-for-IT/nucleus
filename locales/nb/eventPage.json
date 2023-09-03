@@ -1,0 +1,23 @@
+{
+  "info": {
+    "start": "Starter",
+    "end": "Slutter",
+    "location": "Lokasjon",
+    "type": "Kategori",
+    "organizer": "Arrangør",
+    "links": "Lenker",
+    "form": {
+        "button": "Meld meg på",
+        "full": "Dette arrangementet er fullt!",
+        "send": "Send",
+        "sent": "Du er påmeldt.",
+        "cancel": "Meld meg av.",
+        "name": "Navn",
+        "degree": "Studieretning",
+        "study_year": "Studieår",
+        "mail": "Mail",
+        "preferences": "Preferanser",
+        "allergies": "Allergier"
+    }
+  }
+}

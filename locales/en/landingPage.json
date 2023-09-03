@@ -1,0 +1,18 @@
+{
+  "landing": {
+    "readMore":"Read more",
+    "welcome": "Welcome to",
+    "whoAreWe": {
+      "title": "Who are we?",
+      "body": "Login is a student association for IT studies at NTNU Gjøvik. The association is run by students and the aim of our work is to improve the study environment at the university."
+    },
+    "sponsor": {
+      "title": "mnemonic",
+      "body": "mnemonic is the main sponsor of Login. They are one of the leading IT security providers in Europe. Their experts are always ready to crack down on advanced cyber threats."
+    },
+    "companiesInfo": {
+      "title": "For companies",
+      "body": "Login acts as the link between studies and working life. Check out what we can offer your company."
+    }
+  }
+}

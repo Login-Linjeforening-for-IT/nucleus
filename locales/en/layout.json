@@ -1,0 +1,12 @@
+{
+  "nav": {
+    "about": "ABOUT US",
+    "events": "EVENTS",
+    "companies": "FOR COMPANIES",
+    "verv": "VERV"
+  },
+  "footer": {
+    "sponsor": "Main partner",
+    "copy": "Copyright &copy; 2023 Login - Linjeforeningen for IT, NO 811 940 372"
+  }
+}

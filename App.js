@@ -30,7 +30,7 @@ export default function App() {
     // Handles background
     useEffect(() => {
         // Check whether the app was opened from a tapped notification
-        const unsubscribeOnOpen = messaging().onNotificationOpenedApp(remoteMessage => {
+        const unsubscribeOnOpen = messaging().onNotificationOpenedApp((remoteMessage) => {
             Alert.alert('Notification caused app to open from background state:', remoteMessage);
             // Handle the interaction
         });
@@ -50,9 +50,9 @@ export default function App() {
 
     // Handles foreground
     useEffect(() => {
-        const unsubscribe = messaging.onMessage(async remoteMessage => {
-            // Handles notifications recieved while the app is in the foreground
+        const unsubscribe = messaging().onMessage(async(remoteMessage) => {
             Alert.alert("Recieved new message", JSON.stringify(remoteMessage))
+            // Handles notifications recieved while the app is in the foreground
         })
 
         return unsubscribe

@@ -58,7 +58,7 @@
         "supportsTablet": true,
         "bundleIdentifier": "com.eirikhanasand.Login",
         "buildNumber": "69",
-        "googleServicesFile": "./GoogleService-Info.plist",
+        "googleServicesFile": "../.secrets/GoogleService-Info.plist",
         "infoPlist": {
             "UIBackgroundModes": [
                 "fetch",
@@ -72,7 +72,7 @@
             "backgroundColor": "#000000"
         },
         "package": "com.login.Login",
-        "googleServicesFile": "./google-services.json",
+        "googleServicesFile": "../.secrets/google-services.json",
         "versionCode": 46,
         "permissions": [
             "NOTIFICATIONS",

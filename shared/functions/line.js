@@ -1,10 +1,8 @@
-import React from 'react';
+import FetchColor from '../../styles/fetchTheme';
 import Svg, {Rect} from 'react-native-svg';
 import { useSelector } from 'react-redux';
-import { 
-    View, 
-} from 'react-native';
-import FetchColor from '../../styles/fetchTheme';
+import { View } from 'react-native';
+
 /**
  * Function for drawing a dynamic line, can be adjusted as you wish using the height and width
  * @param {*} height    Height of the line
@@ -15,7 +13,7 @@ export default function Line (height, width, fill) {
 
     const { theme } = useSelector( (state) => state.theme )
 
-    return(
+    const line = (
         <View>
             <Svg 
                 width={width} 
@@ -24,5 +22,7 @@ export default function Line (height, width, fill) {
                 <Rect x='1' y='1' width={width} height={height}/>
             </Svg>
         </View>
-    );
+    )
+    
+    return line
 }
