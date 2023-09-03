@@ -42,7 +42,7 @@ export default function BottomMenu({ navigation, screen, back }) {
                 <TouchableOpacity style={MS.bMenuIconTO} onPress={() => screen != "ad" && adScreen()}>
                 <Image style={MS.bMenuIcon} source={screen == "ad" || screen == "sas" ? logo.ad.current : logo.ad.logo} />
                 </TouchableOpacity>
-                <TouchableOpacity style={MS.bMenuIconTO} onPress={() => screen != "menu" || back && menuScreen()}>
+                <TouchableOpacity style={MS.bMenuIconTO} onPress={() => (screen != "menu" || back) && menuScreen()}>
                 <Image style={MS.bMenuIcon} source={screen == "menu" ? logo.menu.current : logo.menu.logo} />
                 </TouchableOpacity>
             </View> 

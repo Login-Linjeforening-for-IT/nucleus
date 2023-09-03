@@ -8,6 +8,7 @@ import store from './redux/store';                              // Redux store
 
 // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 1/6
 import messaging from '@react-native-firebase/messaging';       // Notifications
+import { requestUserPermission } from './shared/notificationComponents/requestUserPermission';
 // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 1/6
 
 let persistor = persistStore(store)                             // Middleware to interact with AsyncStorage
@@ -26,7 +27,7 @@ let persistor = persistStore(store)                             // Middleware to
  */
 export default function App() {  
     // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 2/6
-
+    requestUserPermission()
     // Handles background
     useEffect(() => {
         // Check whether the app was opened from a tapped notification

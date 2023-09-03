@@ -35,7 +35,7 @@ export function NotificationDropdown() {
           ...course,
           selected: !course.selected,
         });
-      }
+    }
 
     return(
         <View>

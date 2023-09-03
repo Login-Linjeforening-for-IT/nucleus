@@ -1,4 +1,4 @@
-import TopicSwitchList from '../notificationComponents/topicSwitchList';
+import TopicSwitchList from '../notificationComponents/topicSwitch';
 import { TouchableOpacity, Image, View, Text } from 'react-native';
 import FetchColor from '../../styles/fetchTheme';
 import { GS } from '../../styles/globalStyles';

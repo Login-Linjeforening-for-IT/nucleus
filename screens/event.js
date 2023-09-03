@@ -1,4 +1,3 @@
-import registerForPushNotificationsAsync from '../shared/notificationComponents/registerForPushNotificationAsync';
 import LastFetch, { removeDuplicatesAndOld } from '../shared/eventComponents/fetch';
 import notificationSetup from '../shared/notificationComponents/notificationSetup';
 import { CheckBox, CheckedBox, SmallCheck } from '../shared/eventComponents/check';
@@ -243,23 +242,6 @@ export default function EventScreen({ navigation }) {                     //  Ex
       }
     })();
   };
-
-  useEffect(() => {                                                       //  --- NOTIFICATION MANAGEMENT ---
-    registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
-
-    notificationListener.current = Notifications.addNotificationReceivedListener(pushNotification => {
-      setPushNotification(pushNotification);
-    });
-
-    responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
-      console.log(response);
-    });
-
-    return () => {
-      Notifications.removeNotificationSubscription(notificationListener.current);
-      Notifications.removeNotificationSubscription(responseListener.current);
-    };
-  }, []);
 
   useEffect(() => {                                                       //  --- LOADING FILTERED DATA WHEN FILTER CHANGES ---
     if (filter.input != null || clickedCategory.length > 0) {             // If the filter is not null or there are categories clicked

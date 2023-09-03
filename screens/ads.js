@@ -1,4 +1,3 @@
-import registerForPushNotificationsAsync from '../shared/notificationComponents/registerForPushNotificationAsync';
 import updateCalendar, { createCalendar, calendarExists } from '../shared/eventComponents/calendar';
 import { AdClusterLocation, AdClusterImage } from '../shared/components/ad';
 import { removeDuplicatesAndOld } from '../shared/eventComponents/fetch';
@@ -291,23 +290,6 @@ export default function AdScreen({ navigation }) {                          //  
       }
     })();
   };
-
-  useEffect(() => {                                                         //  --- NOTIFICATION MANAGEMENT ---
-    registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
-
-    notificationListener.current = Notifications.addNotificationReceivedListener(pushNotification => {
-      setPushNotification(pushNotification);
-    });
-
-    responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
-      console.log(response);
-    });
-
-    return () => {
-      Notifications.removeNotificationSubscription(notificationListener.current);
-      Notifications.removeNotificationSubscription(responseListener.current);
-    };
-  }, []);
 
   useEffect(() => {                                                         //  --- LOADING FILTERED DATA WHEN FILTER CHANGES ---
     if (filter.input != null || clickedAds.length > 0) {                    // If the filter is not null or there are categories clicked
