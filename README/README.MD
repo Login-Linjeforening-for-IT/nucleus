@@ -1,6 +1,6 @@
 Login App README
 
-The app was initially created as of October 26th. 2022.
+The app was initially created as of October 22nd. 2022.
 
 Installation guides for Mac, Linux and Windows may be found as PDFs in this folder.
 
