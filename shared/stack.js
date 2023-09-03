@@ -1,23 +1,22 @@
-import * as React from 'react'; // React
-
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'; // Creates bottom tab navigator
-import {NavigationContainer} from '@react-navigation/native'; // Navigation container
+import {NavigationContainer} from '@react-navigation/native';           // Navigation container
+import ProfileScreen from '../screens/menu/profile/profile';            // Login to innsida
+import SpecificEventScreen from '../screens/specificEvent';             // Specific Events
+import LoginScreen from '../screens/menu/profile/login';                // Login to innsida
+// import SpecificAdScreen from '../screens/specificAd';                // Specific job listing
+import InternalScreen from '../screens/menu/internal';                  // Internal screen
+import BusinessScreen from '../screens/menu/business';                  // Companies' screen
+import SettingScreen from '../screens/menu/settings';                   // Settings
+import ReportScreen from '../screens/menu/report';                      // Report form for blameworthy conditions
+import AboutScreen from '../screens/menu/about';                        // About Login
+import EventScreen from '../screens/event';                             // Events
+import MenuScreen from '../screens/menu';                               // Menu
+// import AdScreen from '../screens/ads';                               // Job advertisements
+import * as React from 'react';                                         // React
 
-const Tab = createBottomTabNavigator(); // Declares Tab to equal CBTN function
-import SpecificEventScreen from '../screens/specificEvent'; // Specific Events
-import InternalScreen from '../screens/menu/internal'; // Internal screen
-import BusinessScreen from '../screens/menu/business'; // Companies' screen
-// import SpecificAdScreen from '../screens/specificAd'; // Specific job listing
-import SettingScreen from '../screens/menu/settings'; // Settings
-import ReportScreen from '../screens/menu/report'; // Report form for blameworthy conditions
-import AboutScreen from '../screens/menu/about'; // About Login
-import ProfileScreen from '../screens/menu/profile/profile'; // Login to innsida
-import LoginScreen from '../screens/menu/profile/login'; // Login to innsida
-import EventScreen from '../screens/event'; // Events
-import MenuScreen from '../screens/menu'; // Menu
-// import AdScreen from '../screens/ads'; // Job advertisements
+const Tab = createBottomTabNavigator();                                 // Declares Tab to equal CBTN function
 
-function Navigator() { // Declares Navigator, wraps in container and declares all navigation routes
+export default function Navigator() {                                   // Contains all navigation functionality, and declares all navigation routes
     return (
         <NavigationContainer>
             <Tab.Navigator backBehavior='history' initialRouteName='EventScreen' screenOptions={{headerShown: false}}>
@@ -37,5 +36,3 @@ function Navigator() { // Declares Navigator, wraps in container and declares al
         </NavigationContainer>
     )
 }
-
-export default Navigator; // Exports all navigation functionality

@@ -1,13 +1,8 @@
+import { View, Image, TouchableOpacity, Platform } from 'react-native';     // React native
 import FetchColor from '../styles/fetchTheme';                              // Function to fetch theme color
 import { MS } from '../styles/menuStyles';                                  // Menu styles
-import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';                                  // Redux
 import { BlurView } from 'expo-blur';                                       // Blur effect
-import {                                                                    // React native components
-  View,                                                                     // View component
-  Image,                                                                    // Image component
-  TouchableOpacity,                                                         // TouchableOpacity     (custom button)
-  Platform,                                                                 // Operating system
-} from 'react-native';                                                      // React native
 
 /**
  * Bottom Menu on every page
