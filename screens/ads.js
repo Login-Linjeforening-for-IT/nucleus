@@ -32,14 +32,6 @@ import {                                                                    // R
     Platform,                                                                 // Operating system
 } from 'react-native';                                                      // React native
 
-Notifications.setNotificationHandler({
-    handleNotification: async () => ({
-        shouldShowAlert: true,
-        shouldPlaySound: true,
-        shouldSetBadge: false,
-    }),
-});
-
 /**
  * Parent AdScreen function
  * 

@@ -1,3 +1,4 @@
+import NavigateFromPushNotification from '../shared/notificationComponents/navigateFromPushNotification';
 import LastFetch, { removeDuplicatesAndOld } from '../shared/eventComponents/fetch';
 import notificationSetup from '../shared/notificationComponents/notificationSetup';
 import { CheckBox, CheckedBox, SmallCheck } from '../shared/eventComponents/check';
@@ -11,7 +12,6 @@ import CompareDates from '../shared/functions/compareDates';
 import topic from '../shared/notificationComponents/topic';
 import React, { useEffect, useState, useRef } from 'react';               // React imports
 import { useFocusEffect } from '@react-navigation/native';                // useFocusEffect       (do something when the screen is displayed)
-import * as Notifications from 'expo-notifications';                      // Local notifications
 import Bell from '../shared/eventComponents/bell';
 import Cluster from '../shared/functions/cluster';
 import FetchColor from '../styles/fetchTheme';                            // Function to fetch theme color
@@ -33,14 +33,6 @@ import {                                                                  // Rea
     Platform,                                                               // Operating system
 } from 'react-native';                                                    // React native
 
-Notifications.setNotificationHandler({
-    handleNotification: async () => ({
-        shouldShowAlert: true,
-        shouldPlaySound: true,
-        shouldSetBadge: false,
-    })
-});
-
 /**
  * Parent EventScreen function
  * 
@@ -53,13 +45,13 @@ Notifications.setNotificationHandler({
  * @param {navigation} Navigation Navigation route
  * @returns EventScreen
  */
-export default function EventScreen({ navigation }) {                     //  Exports the screen
+export default function EventScreen({ navigation }) {                       //  Exports the screen
     const [events, setEvents] = useState([]);                               //  Events from api
     const [renderedArray, setRenderedArray] = useState([]);                 //  Events currently displayed
     const [clickedEvents, setClickedEvents] = useState([]);                 //  Clicked events
     const [clickedCategory, setClickedCategory] = useState([]);             //  Clicked categories
     const [lastSave, setLastSave] = useState(null)                          //  Last time API was fetched successfully
-    const [downloadState, setDownloadState] = useState(null)                                      //  Download state
+    const [downloadState, setDownloadState] = useState(null)                //  Download state
     const [filter, setFilter] = useState({input: null});                    //  Filter text input declaration
     const textInputRef = useRef(null);                                      //  Clears text input
     const [relevantCategories, setRelevantCategories] = useState([]);       //  Relevant categories to filter
@@ -69,10 +61,9 @@ export default function EventScreen({ navigation }) {                     //  Ex
     const { login }    = useSelector( (state) => state.login )              //  Loginstatus
     const { theme }    = useSelector( (state) => state.theme )              //  Theme state
     const { calendarID } = useSelector( (state) => state.misc )             //  Calendar ID
-    const [expoPushToken, setExpoPushToken] = useState('');                 //  Array for notification token
-    const [pushNotification, setPushNotification] = useState(false);        //  Array for setting the push notification
-    const notificationListener = useRef();                                  //  Notification listener
-    const responseListener = useRef();                                      //  Response listener (if it was sent or not)
+
+    NavigateFromPushNotification({navigation})                              //  Allows for navigation to a specific page if the app is opened by a push notification
+
     const [category] = useState([                                           //  All categories to filter - DO NOT CHANGE IDS 
         {id: '2', category: 'TEKKOM'},                                          
         {id: '3', category: 'SOCIAL'},
@@ -91,22 +82,22 @@ export default function EventScreen({ navigation }) {                     //  Ex
      * catches any errors and fetches localstorage, and handles errors. 
      */
     async function getData() {                                              //  --- FETCHING DATA FROM API ---
-            try {
-                fetch('https://api.login.no/events')                                // PRODUCTION
-                //fetch('https://tekkom:rottejakt45@api.login.no:8443/events')      // TESTING
-                .then(response=>response.json())                                    // Formatting the response
-                .then(data=>setEvents(data))                                        // Setting the response
-                .then(setRenderedArray([...events]))                                // Updates the renderedarray to equal cache
-                .then(async() => setLastSave(await LastFetch()));                   // Updates last fetch displayed on the screen
-                if(events.length > 0) await AsyncStorage.setItem('cachedEvents', JSON.stringify(events))  // Setting the cache
-            } catch (e) {                                                         // Catches any errors (missing wifi)
-                (async() => {                                                       // Immediately invoked function expression (IIFE)
-                    try {     
-                    let cache = await AsyncStorage.getItem('cachedEvents')          // Tries to fetch event cache
-                    if(cache) cache = JSON.parse(cache); setEvents([...cache])      // If cached events was found save them in event array
-                    } catch (e) {console.warn('Failed to fetch cache: ' + e)}         // If cache was not found tell the user cache wasnt found (custom notification needs to go here)
-                })    
-            }
+        try {
+            fetch('https://api.login.no/events')                                // PRODUCTION
+            //fetch('https://tekkom:rottejakt45@api.login.no:8443/events')      // TESTING
+            .then(response=>response.json())                                    // Formatting the response
+            .then(data=>setEvents(data))                                        // Setting the response
+            .then(setRenderedArray([...events]))                                // Updates the renderedarray to equal cache
+            .then(async() => setLastSave(await LastFetch()));                   // Updates last fetch displayed on the screen
+            if(events.length > 0) await AsyncStorage.setItem('cachedEvents', JSON.stringify(events))  // Setting the cache
+        } catch (e) {                                                         // Catches any errors (missing wifi)
+            (async() => {                                                       // Immediately invoked function expression (IIFE)
+                try {     
+                let cache = await AsyncStorage.getItem('cachedEvents')          // Tries to fetch event cache
+                if(cache) cache = JSON.parse(cache); setEvents([...cache])      // If cached events was found save them in event array
+                } catch (e) {console.warn('Failed to fetch cache: ' + e)}         // If cache was not found tell the user cache wasnt found (custom notification needs to go here)
+            })
+        }
     }
 
     const toggleSearchBar = () => {                                         //  --- SEARCH BAR VISIBILITY ---

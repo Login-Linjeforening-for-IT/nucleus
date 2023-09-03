@@ -10,7 +10,7 @@ import { T } from '../../styles/text';
  * @param {string} category    Category of the event, Format: 'CATEGORY'
  * @returns                     Small circle of the categories color
  */
-export default function SmallProfile(navigation, theme, lang, profile, login) {  //SVG showing the color of the category
+export default function SmallProfile(navigation, theme, lang, profile, login) {  // SVG showing the color of the category
     return(
         <TouchableOpacity onPress={() => login ? navigation.navigate("ProfileScreen") : navigation.navigate("LoginScreen")}>
             <View style={PS.profileBackground}>

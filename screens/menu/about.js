@@ -1,8 +1,7 @@
-{/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
 import person, { AllComitees, Social, styret, Copyright } from '../../shared/functions/social';
+import Space, { Line } from '../../shared/components/utils';
 import Dropdown from '../../shared/functions/dropdown';
 import Cluster from '../../shared/functions/cluster';
-import Space, { Line } from '../../shared/components/utils';
 import FetchColor from '../../styles/fetchTheme';
 import en from '../../locales/en/aboutPage.json';
 import no from '../../locales/nb/aboutPage.json';
@@ -20,8 +19,6 @@ import {
   Linking,
   Dimensions,
 } from 'react-native';
-
-{/* ========================= APP START ========================= */}
 
 export default function AboutScreen( { navigation } ) {
   const { lang  } = useSelector( (state) => state.lang  )

@@ -94,8 +94,6 @@ export default function ChangeProfleCard({theme, lang, type, value, hide, trigge
           quality: 1,
         });
     
-        //console.log(result);
-    
         if (!result.canceled) {
           setTempImage(result.assets[0].uri);
           dispatch(setImage(result.assets[0].uri))
@@ -132,5 +130,5 @@ export default function ChangeProfleCard({theme, lang, type, value, hide, trigge
                 </View>
             </Animated.View>
         </PanGestureHandler>
-        );
+    );
 };

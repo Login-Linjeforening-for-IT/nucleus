@@ -5,6 +5,7 @@ export const NotificationSlice = createSlice({                              // D
     initialState: {                                                         // Initial state
 
         // Notification categories
+
         SETUP:              false,                                          // Initial notification setup when app is downloaded
         IMPORTANT:          true,                                           // Important information
         TEKKOM:             true,                                           // Notifications for new events of category TEKKOM
@@ -102,7 +103,7 @@ export const NotificationSlice = createSlice({                              // D
         annet6h:            false,
         annet1d:            false,
         annet2d:            false,
-        annet1w:            true,
+        annet1w:            false,
     },
     reducers: {                                                             // Declares slice reducer
         changeNotificationState: (state, category) => {                     // Change state of important notifications

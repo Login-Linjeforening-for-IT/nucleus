@@ -1,15 +1,16 @@
 import GreenLight, { RedLight, GrayLight } from '../../../shared/eventComponents/light';
-import Cluster from '../../../shared/functions/cluster';
 import { changeLoginStatus } from '../../../redux/loginStatus';
-import { useSelector, useDispatch } from 'react-redux';
 import Check from '../../../shared/eventComponents/check';
+import Cluster from '../../../shared/functions/cluster';
+import { useSelector, useDispatch } from 'react-redux';
 import Button from '../../../shared/functions/button';
 import Space from '../../../shared/components/utils';
 import FetchColor from '../../../styles/fetchTheme';                                   // Function for fetching theme color
 import { SS } from '../../../styles/settingStyles';
 import { GS } from '../../../styles/globalStyles';                                     // Global styles
-import React, { useState } from 'react';
+import TopMenu from '../../../shared/topMenu';
 import { T } from '../../../styles/text';                                              // Text styles
+import React, { useState } from 'react';
 import { 
     Text,                                                                             // Text component
     View,                                                                             // View component
@@ -19,11 +20,6 @@ import {
     TextInput,
     Alert,
 } from 'react-native';                                                              // React Native
-import TopMenu from '../../../shared/topMenu';
-
-{/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
-
-{/* ========================= APP START ========================= */}
 
 export default function LoginScreen( { navigation }) {
 

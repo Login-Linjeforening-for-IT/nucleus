@@ -1,22 +1,24 @@
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'; // Creates bottom tab navigator
-import {NavigationContainer} from '@react-navigation/native'; // Navigation container
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';     // Creates bottom tab navigator
+import {NavigationContainer} from '@react-navigation/native';               // Navigation container
 
-const Tab = createBottomTabNavigator(); // Declares Tab to equal CBTN function
-import SpecificEventScreen from '../screens/specificEvent'; // Specific Events
-import InternalScreen from '../screens/menu/internal'; // Internal screen
-import BusinessScreen from '../screens/menu/business'; // Companies' screen
-// import SpecificAdScreen from '../screens/specificAd'; // Specific job listing
-import SettingScreen from '../screens/menu/settings'; // Settings
-import ReportScreen from '../screens/menu/report'; // Report form for blameworthy conditions
-import AboutScreen from '../screens/menu/about'; // About Login
-import ProfileScreen from '../screens/menu/profile/profile'; // Login to innsida
-import LoginScreen from '../screens/menu/profile/login'; // Login to innsida
-import EventScreen from '../screens/event'; // Events
-import MenuScreen from '../screens/menu'; // Menu
-// import AdScreen from '../screens/ads'; // Job advertisements
+import ProfileScreen from '../screens/menu/profile/profile';                // Login to innsida
+import SpecificEventScreen from '../screens/specificEvent';                 // Specific Events
+import LoginScreen from '../screens/menu/profile/login';                    // Login to innsida
+import InternalScreen from '../screens/menu/internal';                      // Internal screen
+import BusinessScreen from '../screens/menu/business';                      // Companies' screen
+// import SpecificAdScreen from '../screens/specificAd';                   // Specific job listing
+import SettingScreen from '../screens/menu/settings';                       // Settings
+import ReportScreen from '../screens/menu/report';                          // Report form for blameworthy conditions
+import AboutScreen from '../screens/menu/about';                            // About Login
+import EventScreen from '../screens/event';                                 // Events
+import MenuScreen from '../screens/menu';                                   // Menu
+// import AdScreen from '../screens/ads';                                   // Job advertisements
 import TabBar from './functions/tabBar.js'
 
-export default function Navigator() { // Declares Navigator, wraps in container and declares all navigation routes
+const Tab = createBottomTabNavigator();                                     // Declares Tab to equal CBTN function
+
+export default function Navigator() {                                       // Declares Navigator, wraps in container and declares all navigation routes
+
     return (
         <NavigationContainer>
             <Tab.Navigator
@@ -45,7 +47,7 @@ export default function Navigator() { // Declares Navigator, wraps in container 
                     name='MenuScreen' 
                     component={MenuScreen}
                 />
-                
+
                 {/* <Tab.Screen name='AdScreen'         options={{ display: false }} component={AdScreen}/>  */}
                 <Tab.Screen name='AboutScreen'          options={{ display: false }} component={AboutScreen} />
                 <Tab.Screen name='SpecificEventScreen'  options={{ display: false }} component={SpecificEventScreen} />
