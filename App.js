@@ -8,8 +8,8 @@ import store from './redux/store';                              // Redux store
 
 // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 1/6
 // import messaging from '@react-native-firebase/messaging';       // Notifications
-import messaging from '@react-native-firebase/messaging';       // Notifications
-import { requestUserPermission } from './shared/notificationComponents/requestUserPermission';
+// import messaging from '@react-native-firebase/messaging';       // Notifications
+// import { requestUserPermission } from './shared/notificationComponents/requestUserPermission';
 // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 1/6
 
 let persistor = persistStore(store)                             // Middleware to interact with AsyncStorage
