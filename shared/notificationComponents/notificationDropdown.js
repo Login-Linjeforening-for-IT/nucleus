@@ -1,3 +1,6 @@
+import FetchColor from '../../styles/fetchTheme';
+import { GS } from '../../styles/globalStyles';
+import { useSelector } from 'react-redux';
 import React, {useState } from 'react';
 import { T } from '../../styles/text'
 import { 
@@ -7,9 +10,6 @@ import {
     Linking,
     Image,
 } from 'react-native';
-import { GS } from '../../styles/globalStyles';
-import { useSelector } from 'react-redux';
-import FetchColor from '../../styles/fetchTheme';
 
 /**
  * Dropdown menu for notifications.

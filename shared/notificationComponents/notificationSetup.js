@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 
 // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 5/6
-// import messaging from '@react-native-firebase/messaging';
+import messaging from '@react-native-firebase/messaging';
 // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 5/6
 
 /**
@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux';
  */
 export default async function notificationSetup() {
     // COMMENT IN THIS BOX WHILE TESTING IN EXPO 5/6
-    return null; // For testing in Expo
+    // return null; // For testing in Expo
     // COMMENT IN THIS BOX WHILE TESTING IN EXPO 5/6
     const dispatch = useDispatch()
     const granted = await messaging().requestPermission();

@@ -27,8 +27,8 @@ export default function Footer({ state, descriptors, navigation }) {
                         });
                     
                         if (!isFocused && !event.defaultPrevented) {
-                        // The `merge: true` option makes sure that the params inside the tab screen are preserved
-                        navigation.navigate({ name: route.name, merge: true });
+                            // The `merge: true` option makes sure that the params inside the tab screen are preserved
+                            navigation.navigate({ name: route.name, merge: true });
                         }
                     };
             
@@ -47,9 +47,10 @@ export default function Footer({ state, descriptors, navigation }) {
                             accessibilityLabel={options.tabBarAccessibilityLabel}
                             testID={options.tabBarTestID}
                             style={{...MS.bMenuIconTO}}
-                            onPress={onPress} onLongPress={onLongPress}
+                            onPress={onPress} 
+                            onLongPress={onLongPress}
                         >
-                        <Image style={MS.bMenuIcon} source={isFocused?options.focusedIcon:options.themeIcon(theme)}></Image>
+                        <Image style={MS.bMenuIcon} source={isFocused ? options.focusedIcon : options.themeIcon(theme)}></Image>
                         </TouchableOpacity>
                     );
                 })}

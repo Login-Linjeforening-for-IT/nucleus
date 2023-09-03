@@ -7,9 +7,8 @@ import Navigator from './shared/stack'                          // Allows the us
 import store from './redux/store';                              // Redux store
 
 // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 1/6
-// import messaging from '@react-native-firebase/messaging';       // Notifications
-// import messaging from '@react-native-firebase/messaging';       // Notifications
-// import { requestUserPermission } from './shared/notificationComponents/requestUserPermission';
+import requestUserPermission from './shared/notificationComponents/requestUserPermission';
+import messaging from '@react-native-firebase/messaging';       // Notifications
 // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 1/6
 
 let persistor = persistStore(store)                             // Middleware to interact with AsyncStorage
@@ -28,37 +27,35 @@ let persistor = persistStore(store)                             // Middleware to
  */
 export default function App() {  
     // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 2/6
+    requestUserPermission()
+    // Handles background
+    useEffect(() => {
+        // Check whether the app was opened from a tapped notification
+        const unsubscribeOnOpen = messaging().onNotificationOpenedApp(remoteMessage => {
+            Alert.alert('Notification caused app to open from background state:', `${remoteMessage}`);
+            // Handle the interaction
+        });
 
-    // // Handles background
-    // useEffect(() => {
-    //     // Check whether the app was opened from a tapped notification
-    //     const unsubscribeOnOpen = messaging().onNotificationOpenedApp(remoteMessage => {
-    //         Alert.alert('Notification caused app to open from background state:', remoteMessage);
-    //         // Handle the interaction
-    //     });
+        // Check if the app was opened by a notification when it was terminated
+        messaging().getInitialNotification().then(remoteMessage => {
+            if (remoteMessage) {
+                Alert.alert('Notification caused app to open from a terminated state:', `${remoteMessage}`);
+                // Handle the interaction
+            }
+            });
 
-    //     // Check if the app was opened by a notification when it was terminated
-    //     messaging()
-    //         .getInitialNotification()
-    //         .then(remoteMessage => {
-    //         if (remoteMessage) {
-    //             Alert.alert('Notification caused app to open from a terminated state:', remoteMessage);
-    //             // Handle the interaction
-    //         }
-    //         });
+        return unsubscribeOnOpen;
+    })
 
-    //     return unsubscribeOnOpen;
-    // })
+    // Handles foreground
+    useEffect(() => {
+        const unsubscribe = messaging().onMessage(remoteMessage => {
+            // Handles notifications recieved while the app is in the foreground
+            Alert.alert("Recieved new message", `${remoteMessage}`)
+        })
 
-    // // Handles foreground
-    // useEffect(() => {
-    //     const unsubscribe = messaging.onMessage(async remoteMessage => {
-    //         // Handles notifications recieved while the app is in the foreground
-    //         Alert.alert("Recieved new message", JSON.stringify(remoteMessage))
-    //     })
-
-    //     return unsubscribe
-    // }, [])
+        return unsubscribe
+    }, [])
     // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 2/6
 
     AppRegistry.registerComponent('app', () => App);
