@@ -1,4 +1,4 @@
-import AdInfo, { AdBanner, AdTitle, AdDescription, AdUpdateInfo, AdMedia } from '../shared/ad';
+import AdInfo, { AdBanner, AdTitle, AdDescription, AdUpdateInfo, AdMedia } from '../shared/components/ad'
 import { View, ScrollView, Dimensions } from 'react-native';
 import Cluster from '../shared/functions/cluster';
 import Space from '../shared/functions/space';

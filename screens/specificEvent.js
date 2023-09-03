@@ -93,12 +93,12 @@ export default function SpecificEventScreen({ route, navigation}) {
             uri={`https://cdn.login.no/img/events/${item.image}`}
           />
         :(item.image).includes('.png')?<Image style={ES.specificEventImage}  source={{uri: `https://cdn.login.no/img/events/${item.image}`}}/>:null}
-        {(item.image == 'none' || !item.image) && item.category == 'TEKKOM'  ? <Image style={ES.specificEventImage} source={require(`../assets/committee/tekkom/tekkom.png`)} />:null}
-        {(item.image == 'none' || !item.image) && item.category == 'CTF'     ? <Image style={ES.specificEventImage} source={require(`../assets/committee/ctfkom/ctf.png`)} />:null}
-        {(item.image == 'none' || !item.image) && item.category == 'SOCIAL'  ? <Image style={ES.specificEventImage} source={require(`../assets/categories/sosialt.png`)} />:null}
-        {(item.image == 'none' || !item.image) && item.category == 'LOGIN'   ? <Image style={ES.specificEventImage} source={require(`../assets/categories/login.png`)} />:null}
-        {(item.image == 'none' || !item.image) && item.category == 'ANNET'   ? <Image style={ES.specificEventImage} source={require(`../assets/categories/annet.png`)} />:null}
-        {(item.image == 'none' || !item.image) && item.category == 'BEDPRES' ? <Image style={ES.specificEventImage} source={require(`../assets/categories/bedpresBig.png`)} />:null}
+        {(item.image == 'none' || !item.image) && item.category == 'TEKKOM'  && <Image style={ES.specificEventImage} source={require(`../assets/committee/tekkom/tekkom.png`)} />}
+        {(item.image == 'none' || !item.image) && item.category == 'CTF'     && <Image style={ES.specificEventImage} source={require(`../assets/committee/ctfkom/ctf.png`)} />}
+        {(item.image == 'none' || !item.image) && item.category == 'SOCIAL'  && <Image style={ES.specificEventImage} source={require(`../assets/categories/sosialt.png`)} />}
+        {(item.image == 'none' || !item.image) && item.category == 'LOGIN'   && <Image style={ES.specificEventImage} source={require(`../assets/categories/login.png`)} />}
+        {(item.image == 'none' || !item.image) && item.category == 'ANNET'   && <Image style={ES.specificEventImage} source={require(`../assets/categories/annet.png`)} />}
+        {(item.image == 'none' || !item.image) && item.category == 'BEDPRES' && <Image style={ES.specificEventImage} source={require(`../assets/categories/bedpresBig.png`)} />}
 
             {Space(5)}
           
