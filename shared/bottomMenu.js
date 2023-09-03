@@ -7,7 +7,7 @@ import { BlurView } from 'expo-blur';                                       // B
 /**
  * Bottom Menu on every page
  * @param {*} props 
- * @returns 
+ * @returns {JSX.Element} Bottom menu
  */
 export default function BottomMenu({ navigation, screen, back }) {
     const { theme }    = useSelector( (state) => state.theme )              //  Theme state
