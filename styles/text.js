@@ -23,6 +23,10 @@ export const T = StyleSheet.create({          // Declares T - meant for all text
     fontSize: 40,                             // Text font size
     fontWeight: 'bold',                       // Font weight bold
   },
+  bold25: {                                   // Bold text of size 25 (used for a few words per line max)
+    fontSize: 25,                             // Text font size
+    fontWeight: 'bold',                       // Font weight bold
+  },
   bold28: {                                   // Bold text of size 28 (30 is too big when bold)
     maxWidth: '89%',                          // Max width to avoid bugs
     alignSelf: 'center',                      // Horizontally centers

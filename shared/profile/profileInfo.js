@@ -3,7 +3,6 @@ import { CS } from '../../styles/clusterStyles';
 import { PS } from '../../styles/profileStyles';
 import ChangeInfoCard from './changeInfoCard';
 import Cluster from '../functions/cluster';
-import Space from '../functions/space';
 import React, {useState} from 'react';
 import { T } from '../../styles/text';
 import { 

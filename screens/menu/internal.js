@@ -1,43 +1,35 @@
-{/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
-import DynamicCircle from '../../shared/eventComponents/dynamicCircle';
+import topic from '../../shared/notificationComponents/topic';
 import FetchColor from '../../styles/fetchTheme';
-import Space from '../../shared/functions/space';
+import Space from '../../shared/components/utils';
+import BottomMenu from '../../shared/bottomMenu';
 import Card from '../../shared/functions/card';
 import { GS } from '../../styles/globalStyles';                                     // Global styles
-import { MS } from '../../styles/menuStyles';                                       // Menu styles
+import TopMenu from '../../shared/topMenu';
 import { useSelector } from 'react-redux';
 import React, { useState } from 'react';
 import { T } from '../../styles/text';                                              // Text styles
-import { BlurView } from 'expo-blur';                                               // Blur effect
 import { 
   Text, 
   View, 
-  Image, 
   FlatList,
   TouchableOpacity,
   Dimensions,
-  Platform
 } from 'react-native';
-import topic from '../../shared/notificationComponents/topic';
-import BottomMenu from '../../shared/bottomMenu';
 
 
 {/* ========================= APP START ========================= */}
 
 export default function InternalScreen({ navigation }) {
 
-  const { lang  } = useSelector( (state) => state.lang  )
-  const { login } = useSelector( (state) => state.login )
-  const { theme } = useSelector( (state) => state.theme )
+    const { lang  } = useSelector( (state) => state.lang  )
+    const { login } = useSelector( (state) => state.login )
+    const { theme } = useSelector( (state) => state.theme )
 
-  const [setting] = useState([
-    {id: '0', nav: 'TodoScreen', arg: 1, titleEN: 'Todo'},
-    {id: '1', nav: 'MakeNotificationScreen', arg: 0, titleEN: 'Send notification'},
-  ])
+    const [setting] = useState([
+        {id: '0', nav: 'TodoScreen', arg: 1, titleEN: 'Todo'},
+        {id: '1', nav: 'MakeNotificationScreen', arg: 0, titleEN: 'Send notification'},
+    ])
 
-  const eventPage = () => { navigation.navigate('EventScreen') }
-  const menuPage = () => { navigation.navigate('MenuScreen') }
-//   const adPage = () => { navigation.navigate('AdScreen') }
 
   return(
     <View>
@@ -60,22 +52,9 @@ export default function InternalScreen({ navigation }) {
           />
           {Space(Dimensions.get('window').height/3)}
       </View>    
-
-{/* ========================= DISPLAY TOP MENU ========================= */}
-{Platform.OS === 'ios' ? <BlurView style={MS.topMenu} intensity={30}/> : <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'TRANSPARENTANDROID')}}/>}
-      <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
-    <TouchableOpacity onPress={() => menuPage()}>
-      <Image style={MS.goBack} source={require('../../assets/icons/goback777.png')} />
-    </TouchableOpacity>
-
-    <View style={GS.loginStatus}>{login ? DynamicCircle(10,10,'red',Dimensions.get('window').width/1.4,null,60,null):null}</View>
-
-    <Text style={{... MS.screenTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{lang ? 'For bedrifter' : 'For companies'}</Text>
-  </View>
-
-{/* ========================= DISPLAY BOTTOM MENU ========================= */}
-    <BottomMenu navigation={navigation} screen="menu" /> 
-    </View>
     
+        <TopMenu navigation={navigation} title={lang ? "Internt" : "Intranet"} back={"MenuScreen"} />
+        <BottomMenu navigation={navigation} screen="menu" back={true} /> 
+    </View>
   )
 };

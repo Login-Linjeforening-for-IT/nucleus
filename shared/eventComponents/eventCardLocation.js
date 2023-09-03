@@ -14,21 +14,23 @@ import FetchColor from '../../styles/fetchTheme';
 export default function EventCardLocation(item, theme, lang) {
 
     let time = ' ' + item.startt[11]+item.startt[12]+':'+item.startt[14]+item.startt[15] + '. ';
-    if(item.startt[11]+item.startt[12]+item.startt[14]+item.startt[15] == '0000') time = '  '
+    if (item.startt[11]+item.startt[12]+item.startt[14]+item.startt[15] == '0000') time = '  '
     let room = item.roomno;
     let campus = item.campus;
     let street = item.street;
     let location;
-    if (room && campus && street) location = room + ", " + campus + ", " + street + '.';
-    else if (room && campus) location = room + ", " + campus + '.';
-    else if (room && street) location = room + ", " + street + '.';
-    else if (campus && street) location = campus + ", " + street + '.';
-    else if (room) location = room + '.';
-    else if (campus) location = campus + '.';
-    else if (street) location = street + '.';
-    else location = lang ? 'Mer info TBA!':'More info TBA!';
+
+    if (room && campus && street)   location = room + ", " + campus + ", " + street + '.';
+    else if (room && campus)        location = room + ", " + campus + '.';
+    else if (room && street)        location = room + ", " + street + '.';
+    else if (campus && street)      location = campus + ", " + street + '.';
+    else if (room)                  location = room + '.';
+    else if (campus)                location = campus + '.';
+    else if (street)                location = street + '.';
+    else                            location = lang ? 'Mer info TBA!':'More info TBA!';
 
     const info = time + location
+    
     return(
         <View style={ES.view2}>
             <View style = {{...ES.title, color: FetchColor(theme, 'TEXTCOLOR')}}>

@@ -1,16 +1,21 @@
 import registerForPushNotificationsAsync from '../shared/notificationComponents/registerForPushNotificationAsync';
-import removeDuplicatesAndOld from '../shared/eventComponents/removeDuplicatesAndOld';
 import updateCalendar, { createCalendar, calendarExists } from '../shared/eventComponents/calendar';
+import { AdClusterLocation, AdClusterImage } from '../shared/components/ad';
+import { removeDuplicatesAndOld } from '../shared/eventComponents/fetch';
 import AsyncStorage from '@react-native-async-storage/async-storage';       // Localstorage
+import Space, { errorMessage } from '../shared/components/utils';
 import CompareDates from '../shared/functions/compareDates';
 import topic from '../shared/notificationComponents/topic';
 import React, { useEffect, useState, useRef } from 'react';                 // React imports
+import { useFocusEffect } from '@react-navigation/native';                  // useFocusEffect       (do something when the screen is displayed)
+import LastFetch from '../shared/eventComponents/fetch';
 import { useSelector, useDispatch } from 'react-redux';                     // Redux
 import Check from '../shared/eventComponents/check';
-import Bell from '../shared/eventComponents/bell';
 import * as Notifications from 'expo-notifications';                        // Local notifications
+import Cluster from '../shared/functions/cluster';
+import Bell from '../shared/eventComponents/bell';
+import BottomMenu from '../shared/bottomMenu';
 import { setCalendarID } from '../redux/misc';
-import Space from '../shared/functions/space';
 import FetchColor from '../styles/fetchTheme';                              // Function to fetch theme color
 import { GS } from '../styles/globalStyles';                                // Global styles
 import { StatusBar } from 'expo-status-bar';                                // Status bar
@@ -28,11 +33,6 @@ import {                                                                    // R
   Dimensions,                                                               // Size of the device
   Platform,                                                                 // Operating system
 } from 'react-native';                                                      // React native
-import { useFocusEffect } from '@react-navigation/native';                  // useFocusEffect       (do something when the screen is displayed)
-import LastFetch from '../shared/functions/lastfetch';
-import Cluster from '../shared/functions/cluster';
-import { AdClusterLocation, AdClusterImage } from '../shared/ad';
-import BottomMenu from '../shared/bottomMenu';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -293,7 +293,7 @@ export default function AdScreen({ navigation }) {                          //  
   };
 
   useEffect(() => {                                                         //  --- NOTIFICATION MANAGEMENT ---
-    registerForPushNotificationsAsync(lang).then(token => setExpoPushToken(token));
+    registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
 
     notificationListener.current = Notifications.addNotificationReceivedListener(pushNotification => {
       setPushNotification(pushNotification);
@@ -487,22 +487,8 @@ export default function AdScreen({ navigation }) {                          //  
               )}
             /> 
           : 
-          ads.length == 0 ?
-            <View style={{alignSelf: 'center', maxWidth: '80%'}}>
-              <View style={{height : '58%'}}/>
-              <Text style={{...T.centeredBold20, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? "Sjekk nettverkstilkoblingen din og prøv igjen. Kontakt TEKKOM dersom problemet vedvarer.":"Check your wifi connection and try again. Contact TEKKOM if the issue persists."}</Text>
-            </View>
-          :
-            <View>
-              <View style={{height : '50%'}}/>
-              <Text style={{...T.centeredOppositeColor, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? "Ingen treff":"No matching ads"}</Text>
-            </View>
-        : 
-          <View style={{alignSelf: 'center', maxWidth: '80%'}}>
-            <View style={{height : '58%'}}/>
-            <Text style={{...T.centeredBold20, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? "Sjekk nettverkstilkoblingen din og prøv igjen. Kontakt TEKKOM dersom problemet vedvarer.":"Check your wifi connection and try again. Contact TEKKOM if the issue persists."}</Text>
-          </View>
-        }
+          ads.length == 0 ? errorMessage("wifi", theme, lang) : errorMessage("nomatch", theme, lang)
+        : errorMessage("wifi", theme, lang)}
         {Space(Dimensions.get('window').height/3)}
       </View>    
 

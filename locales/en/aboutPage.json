@@ -73,7 +73,7 @@
   },
   "publicDocs": {
     "title": "Public documents",
-    "body": "For more information and public documents, visit our <a class='standard-link standard-link--underscore-hover' href='https://wiki.login.no/en/public/docs'>wiki<i class='logfont-wikijs'></i></a>, here you can find the following types of documents:",
+    "body": "For more information and public documents, visit our wiki, here you can find the following types of documents:",
     "bulletPoints": {
       "agendas": "Agenda",
       "minutes": "Minutes",

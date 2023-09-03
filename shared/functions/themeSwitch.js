@@ -1,12 +1,7 @@
-import React from 'react';
-import { SS } from '../../styles/settingStyles';
-import { useSelector, useDispatch } from 'react-redux';
+import { View, TouchableOpacity, Image } from 'react-native';
 import { changeTheme, resetTheme } from '../../redux/theme';
-import { 
-    View,  
-    TouchableOpacity,
-    Image,
-} from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
+import { SS } from '../../styles/settingStyles';
 
 /**
  * Function that provides a switch for controlling the theme of the application

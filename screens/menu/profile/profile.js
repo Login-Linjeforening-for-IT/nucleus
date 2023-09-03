@@ -1,26 +1,15 @@
-{/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
-import DynamicCircle from '../../../shared/eventComponents/dynamicCircle';
 import Svg, { LinearGradient, Rect, Stop } from 'react-native-svg';
 import ProfileInfo from '../../../shared/profile/profileInfo';
+import { View, Dimensions,ScrollView } from 'react-native';
 import Profile from '../../../shared/profile/profile';
-import Space from '../../../shared/functions/space';
+import Space from '../../../shared/components/utils';
 import FetchColor from '../../../styles/fetchTheme';
+import BottomMenu from '../../../shared/bottomMenu';
 import { PS } from '../../../styles/profileStyles';
 import { GS } from '../../../styles/globalStyles';
-import { MS } from '../../../styles/menuStyles';
+import TopMenu from '../../../shared/topMenu';
 import { useSelector } from 'react-redux';
-import { BlurView } from 'expo-blur';
 import {useState} from 'react';
-import { 
-  Text, 
-  View, 
-  Image, 
-  TouchableOpacity,
-  Dimensions,
-  Platform,
-  ScrollView
-} from 'react-native';
-import BottomMenu from '../../../shared/bottomMenu';
 
 {/* ========================= APP START ========================= */}
 
@@ -31,10 +20,6 @@ export default function ProfileScreen( { navigation }) {
     const { id, ban, joinedevents, name, allergies, preferences, mail, schoolyear, degree, image } = useSelector( (state) => state.profile )
     const profile = { id: 0, ban, joinedevents: 40, name, allergies, preferences, mail, schoolyear, degree, image }
     const profileInfo = { degree, schoolyear, mail, preferences, allergies }
-
-    const eventPage = () => { navigation.navigate('EventScreen') }
-    const menuPage = () => { navigation.navigate('MenuScreen') }
-    // const adPage = () => { navigation.navigate('AdScreen') }
 
     const [scrollPosition, setScrollPosition] = useState(0);
 
@@ -63,19 +48,8 @@ export default function ProfileScreen( { navigation }) {
             </ScrollView>
         </View>   
 
-    {/* ========================= DISPLAY TOP MENU ========================= */}
-        <View style={MS.topMenu}>
-            <TouchableOpacity onPress={() => menuPage()}>
-            <Image style={MS.goBack} source={require('../../../assets/icons/goback111.png')} />
-            </TouchableOpacity>
-
-            <View style={GS.loginStatus}>{login ? DynamicCircle(10,10,'red',Dimensions.get('window').width/1.4,null,60,null):null}</View>
-
-            <Text style={{... MS.screenTitle, color: "#111"}}>{lang ? 'Profil' : 'Profile'}</Text>
-        </View>
-    {/* ========================= DISPLAY BOTTOM MENU ========================= */}
-
-    <BottomMenu navigation={navigation} screen="menu" />
+        <TopMenu navigation={navigation} title={lang ? "Profil" : "Profile"} back={"MenuScreen"} />
+        <BottomMenu navigation={navigation} screen="menu" back={true} />
     </View>
   )
 };

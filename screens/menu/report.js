@@ -3,28 +3,25 @@ import GreenLight, { GrayLight } from '../../shared/eventComponents/light';
 import { CardSmaller } from '../../shared/functions/card';
 import Check from '../../shared/eventComponents/check';
 import Button from '../../shared/functions/button';
-import Space from '../../shared/functions/space';
+import BottomMenu from '../../shared/bottomMenu';
+import Space from '../../shared/components/utils';
 import FetchColor from '../../styles/fetchTheme';
 import { SS } from '../../styles/settingStyles';
 import { GS } from '../../styles/globalStyles';
-import { MS } from '../../styles/menuStyles';
+import TopMenu from '../../shared/topMenu';
 import { useSelector } from 'react-redux';
 import React, { useState } from 'react';
 import { T } from '../../styles/text';
-import { BlurView } from 'expo-blur';
 import { 
   Text, 
   View, 
-  Image, 
   TouchableOpacity,
   TouchableWithoutFeedback,
   Keyboard,
   TextInput,
   Alert,
   Dimensions,
-  Platform
 } from 'react-native';
-import BottomMenu from '../../shared/bottomMenu';
 
 {/* ========================= APP START ========================= */}
 
@@ -32,10 +29,6 @@ export default function ReportScreen( { navigation }) {
  
   const { lang  } = useSelector( (state) => state.lang  )
   const { theme } = useSelector( (state) => state.theme )
-
-  const eventPage   = () => { navigation.navigate('EventScreen') }
-  const menuPage   = () => { navigation.navigate('MenuScreen') }
-//   const adPage = () => { navigation.navigate('AdScreen') }
   
   const sendForm = () => {
     if (data.name === data.name) {
@@ -216,19 +209,9 @@ const inputContent = (val) => {
         {Space(Dimensions.get('window').height/10)}
     </View>   
 
-  {/* ========================= DISPLAY TOP MENU ========================= */}
-  {Platform.OS === 'ios' ? <BlurView style={MS.topMenu} intensity={30}/> : <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'TRANSPARENTANDROID')}}/>}
-      <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
-        <TouchableOpacity onPress={() => menuPage()}>
-          <Image style={MS.goBack} source={require('../../assets/icons/goback777.png')} />
-        </TouchableOpacity>
-
-        <Text style={{... MS.screenTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{lang ? 'Varsle' : 'Report'}</Text>
-
-      </View>
-
-      <BottomMenu navigation={navigation} screen="menu" />
-      </View>
+        <TopMenu navigation={navigation} title={lang ? "Varsle" : "Report"} back={"MenuScreen"} />
+        <BottomMenu navigation={navigation} screen="menu" back={true} />
+        </View>
     </TouchableWithoutFeedback>
 
   )

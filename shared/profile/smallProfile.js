@@ -1,10 +1,8 @@
-import React from 'react';
 import { Image, View, Text, TouchableOpacity } from 'react-native';
 import { PS } from '../../styles/profileStyles';
 import { CS } from '../../styles/clusterStyles';
 import FetchColor from '../../styles/fetchTheme';
 import { T } from '../../styles/text';
-import Space from '../functions/space';
 
 /**
  * Function for drawing a very small square of the category of the event

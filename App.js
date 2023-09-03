@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';                       // React
-import Navigator from './routes/stack';                         // Navigation
-import store from './redux/store';                              // Redux store
-import { Provider } from 'react-redux';                         // Redux provider
 import { PersistGate } from 'redux-persist/integration/react';  // Persistgate to fetch state from AsyncStorage
-import { persistStore } from 'redux-persist';                   // PersistStore to store states in AsyncStorage
 import { Alert, AppRegistry } from 'react-native';              // Entry point of the application
+import { persistStore } from 'redux-persist';                   // PersistStore to store states in AsyncStorage
+import React, { useEffect } from 'react';                       // React
+import { Provider } from 'react-redux';                         // Redux provider
+import Navigator from './shared/stack'                          // Allows the user to navigate in the app
+import store from './redux/store';                              // Redux store
 
 // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 1/6
 import messaging from '@react-native-firebase/messaging';       // Notifications

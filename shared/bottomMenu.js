@@ -14,7 +14,7 @@ import {                                                                    // R
  * @param {*} props 
  * @returns 
  */
-export default function BottomMenu({ navigation, screen }) {
+export default function BottomMenu({ navigation, screen, back }) {
     const { theme }    = useSelector( (state) => state.theme )              //  Theme state
     const isDark = theme == 0 || theme == 2 || theme == 3 ? true : false
 
@@ -47,7 +47,7 @@ export default function BottomMenu({ navigation, screen }) {
                 <TouchableOpacity style={MS.bMenuIconTO} onPress={() => screen != "ad" && adScreen()}>
                 <Image style={MS.bMenuIcon} source={screen == "ad" || screen == "sas" ? logo.ad.current : logo.ad.logo} />
                 </TouchableOpacity>
-                <TouchableOpacity style={MS.bMenuIconTO} onPress={() => screen != "menu" && menuScreen()}>
+                <TouchableOpacity style={MS.bMenuIconTO} onPress={() => screen != "menu" || back && menuScreen()}>
                 <Image style={MS.bMenuIcon} source={screen == "menu" ? logo.menu.current : logo.menu.logo} />
                 </TouchableOpacity>
             </View> 

@@ -1,11 +1,9 @@
 import { PanGestureHandler } from 'react-native-gesture-handler';
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import FetchColor from '../../styles/fetchTheme';
 import { PS } from '../../styles/profileStyles';
-import { CS } from '../../styles/clusterStyles';
-import Cluster from '../functions/cluster';
 import { useDispatch, useSelector } from 'react-redux';
-import Space from '../functions/space';
+import { Line } from '../components/utils';
 import { T } from '../../styles/text';
 
 import { 
@@ -13,11 +11,8 @@ import {
     Dimensions,
     TextInput,
     Keyboard,
-    Image, 
     View, 
     Text,
-    ScrollView,
-    TouchableWithoutFeedback,
 } from 'react-native';
 
 import Animated, { 
@@ -29,14 +24,12 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import { 
-    setName, 
     setAllergies, 
     setPreferences, 
     setMail, 
     setSchoolyear,
     setDegree
 } from '../../redux/profile';
-import Line from '../functions/line';
 
 /**
  * Function for drawing a very small square of the category of the event

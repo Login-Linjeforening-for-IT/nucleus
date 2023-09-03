@@ -1,30 +1,26 @@
 import GreenLight, { RedLight, GrayLight } from '../../../shared/eventComponents/light';
-import DynamicCircle from '../../../shared/eventComponents/dynamicCircle';
 import Cluster from '../../../shared/functions/cluster';
 import { changeLoginStatus } from '../../../redux/loginStatus';
 import { useSelector, useDispatch } from 'react-redux';
 import Check from '../../../shared/eventComponents/check';
 import Button from '../../../shared/functions/button';
-import Space from '../../../shared/functions/space';
+import Space from '../../../shared/components/utils';
 import FetchColor from '../../../styles/fetchTheme';                                   // Function for fetching theme color
 import { SS } from '../../../styles/settingStyles';
 import { GS } from '../../../styles/globalStyles';                                     // Global styles
-import { MS } from '../../../styles/menuStyles';                                       // Menu styles
 import React, { useState } from 'react';
 import { T } from '../../../styles/text';                                              // Text styles
-import { BlurView } from 'expo-blur';                                               // Blur effect
 import { 
     Text,                                                                             // Text component
     View,                                                                             // View component
     Image,                                                                            // Image component
     TouchableOpacity,                                                                 // TouchableOpacity (custom button)
     Dimensions,                                                                       // Screen size
-    Platform,
     TextInput,
     Alert,
-    Keyboard,
 } from 'react-native';                                                              // React Native
 import BottomMenu from '../../../shared/bottomMenu';
+import TopMenu from '../../../shared/topMenu';
 
 {/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
 
@@ -37,9 +33,6 @@ export default function LoginScreen( { navigation }) {
     const { theme } = useSelector( (state) => state.theme )
 
     const dispatch = useDispatch()
-    const eventPage = () => { navigation.navigate('EventScreen') }
-    const menuPage = () => { navigation.navigate('MenuScreen') }
-    // const adPage = () => { navigation.navigate('AdScreen') }
 
     const internalPage = () => {
         if (data.name === database.name && data.pass === database.pass) {
@@ -202,22 +195,8 @@ export default function LoginScreen( { navigation }) {
             {Space(Dimensions.get('window').height/3)}
         </View>
 
-    {/* ========================= DISPLAY TOP MENU ========================= */}
-    {Platform.OS === 'ios' ? <BlurView style={MS.topMenu} intensity={30}/> : <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'TRANSPARENTANDROID')}}/>}
-    <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
-        <TouchableOpacity onPress={() => menuPage()}>
-            <Image style={MS.goBack} source={require('../../../assets/icons/goback777.png')} />
-        </TouchableOpacity>
-
-        <View style={GS.loginStatus}>
-            {login ? DynamicCircle(10,10,'red',Dimensions.get('window').width/1.4,null,60,null):null}
-        </View>
-
-        <Text style={{... MS.screenTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{lang ? 'For bedrifter' : 'For companies'}</Text>
-    </View>
-
-    {/* ========================= DISPLAY BOTTOM MENU ========================= */}
-        <BottomMenu navigation={navigation} screen="menu" />
+        <TopMenu navigation={navigation} title={lang ? "Login" : "Login"} back={"MenuScreen"} />
+        <BottomMenu navigation={navigation} screen="menu" back={true} />
     </View>
   )
 };

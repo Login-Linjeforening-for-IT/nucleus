@@ -1,17 +1,15 @@
-{/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
-import DynamicCircle from '../shared/eventComponents/dynamicCircle';
 import { nativeApplicationVersion } from "expo-application";
-import Space from '../shared/functions/space';
-import FetchColor from '../styles/fetchTheme';
-import { GS } from '../styles/globalStyles';
 import Cluster from '../shared/functions/cluster';
-import { MS } from '../styles/menuStyles';
+import BottomMenu from '../shared/bottomMenu';
+import Space from "../shared/components/utils";
+import FetchColor from '../styles/fetchTheme';
+import { CS } from '../styles/clusterStyles';
+import { GS } from '../styles/globalStyles';
 import { ES }from '../styles/eventStyles';
 import { useSelector } from 'react-redux';
-import { CS } from '../styles/clusterStyles';
 import React, { useState } from 'react';
-import { BlurView } from 'expo-blur';
-import SmallProfile from '../shared/profile/smallProfile';
+import TopMenu from '../shared/topMenu';
+import { T } from '../styles/text';
 import { 
   Text, 
   View, 
@@ -20,11 +18,8 @@ import {
   TouchableOpacity,
   Linking,
   Dimensions,
-  Platform,
   Alert
 } from 'react-native';
-import { T } from '../styles/text';
-import BottomMenu from '../shared/bottomMenu';
 
 {/* ========================= APP START ========================= */}
 
@@ -50,8 +45,6 @@ export default function MenuScreen({ navigation }) {
            status: !feedback.status                                       //  Change feedback state
     });
 }
-  const eventPage   = () => { navigation.navigate('EventScreen')   }
-//   const adPage = () => { navigation.navigate('AdScreen') }
 
 return(
   <View>
@@ -116,15 +109,7 @@ return(
             {Space(Dimensions.get('window').height/10)}
       </View>    
 
-{/* ========================= DISPLAY TOP MENU ========================= */}
-{Platform.OS === 'ios' ? <BlurView style={MS.topMenu} intensity={30}/> : <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'TRANSPARENTANDROID')}}/>}
-      <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
-    <TouchableOpacity style={MS.logoBackground} onPress={() => eventPage()}>
-      <Image style={MS.tMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/logo/loginText.png') : require('../assets/logo/loginText-black.png')} />
-    </TouchableOpacity>
-
-    <Text style={{... MS.screenTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{lang ? 'Meny' : 'Menu'}</Text>
-  </View>
+        <TopMenu navigation={navigation} title={lang ? "Meny" : "Menu"}/>
         <BottomMenu navigation={navigation} screen="menu" />
     </View>
   )

@@ -1,41 +1,28 @@
-{/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
-import DynamicCircle from '../../shared/eventComponents/dynamicCircle';
 import Notification from '../../shared/functions/notification';
 import ThemeSwitch from '../../shared/functions/themeSwitch';
+import Reminders from '../../shared/functions/reminders';
 import Language from '../../shared/functions/language';
-import Space from '../../shared/functions/space';
+import Cluster from '../../shared/functions/cluster';
+import Space from '../../shared/components/utils';
 import FetchColor from '../../styles/fetchTheme';
+import BottomMenu from '../../shared/bottomMenu';
 import { GS } from '../../styles/globalStyles';
-import Card from '../../shared/functions/card';
-import { MS } from '../../styles/menuStyles';
-import { useState } from 'react';
+import TopMenu from '../../shared/topMenu';
 import { useSelector } from 'react-redux';
 import { T } from '../../styles/text';
-import { BlurView } from 'expo-blur';
+import { useState } from 'react';
 import React from 'react';
 import { 
   Text, 
   View, 
-  Image, 
   ScrollView,
-  TouchableOpacity,
   Dimensions,
-  Platform,
 } from 'react-native';
-import Cluster from '../../shared/functions/cluster';
-import Reminders from '../../shared/functions/reminders';
-import BottomMenu from '../../shared/bottomMenu';
-
-{/* ========================= APP START ========================= */}
 
 export default function SettingScreen( { navigation }) {
 
   const { theme } = useSelector( (state) => state.theme ) 
   const { lang  } = useSelector( (state) => state.lang  )
-
-  const eventPage   = () => { navigation.navigate('EventScreen') }
-  const menuPage   = () => { navigation.navigate('MenuScreen') }
-//   const adPage = () => { navigation.navigate('AdScreen') }
 
   const [info] = useState([
     {
@@ -262,17 +249,8 @@ export default function SettingScreen( { navigation }) {
         </ScrollView>
       </View>   
 
-{/* ========================= DISPLAY TOP MENU ========================= */}
-{Platform.OS === 'ios' ? <BlurView style={MS.topMenu} intensity={30}/> : <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'TRANSPARENTANDROID')}}/>}
-      <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
-    <TouchableOpacity onPress={() => menuPage()}>
-      <Image style={MS.goBack} source={require('../../assets/icons/goback777.png')} />
-    </TouchableOpacity>
-
-    <Text style={{... MS.screenTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{lang ? 'Innstillinger' : 'Settings'}</Text>
-  </View>
-
-  <BottomMenu navigation={navigation} screen="menu" />
+        <TopMenu navigation={navigation} title={lang ? "Innstillinger" : "Settings"} back={"MenuScreen"} />
+        <BottomMenu navigation={navigation} screen="menu" back={true} />
     </View>
     
   )

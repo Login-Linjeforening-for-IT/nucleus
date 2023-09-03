@@ -1,12 +1,8 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import { changeNotificationState } from '../../redux/notifications';
-import { 
-    View, 
-    Switch, 
-} from 'react-native';
-import FetchColor from '../../styles/fetchTheme';
+import { useSelector, useDispatch } from 'react-redux';
 import topic from '../notificationComponents/topic';
+import FetchColor from '../../styles/fetchTheme';
+import { View, Switch } from 'react-native';
 
 /**
  * Function for displaying a notification switch

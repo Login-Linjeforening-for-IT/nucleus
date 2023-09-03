@@ -1,90 +1,82 @@
 import CategorySquare, { CategoryCircle } from '../shared/eventComponents/category';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import FetchJoinLink from '../shared/eventComponents/fetchJoinLink';
 import EventLocation from '../shared/eventComponents/eventLocation';
-import EventTime from '../shared/functions/time';
+import { FetchJoinLink } from '../shared/eventComponents/fetch';
+import Space, { Month } from '../shared/components/utils';
 import { CardSmaller } from '../shared/functions/card';
-import Month from '../shared/eventComponents/month';
 import { GetEndTime } from '../shared/functions/time';
 import React, { useEffect, useState } from 'react';
 import RenderHTML from 'react-native-render-html';
-import Space from '../shared/functions/space';
+import EventTime from '../shared/functions/time';
 import FetchColor from '../styles/fetchTheme';
+import BottomMenu from '../shared/bottomMenu';
 import Card from '../shared/functions/card';
 import { GS } from '../styles/globalStyles';
 import { ES } from '../styles/eventStyles';
-import { useSelector } from 'react-redux';
 import { SvgUri } from 'react-native-svg';
-import { MS } from '../styles/menuStyles';
-import { BlurView } from 'expo-blur';
+import { useSelector } from 'react-redux';
+import TopMenu from '../shared/topMenu';
 import { T } from '../styles/text';
 import { 
   TouchableOpacity,
   ScrollView,
   Dimensions,
-  Platform,
   Linking,
   Image,
   View,
   Text, 
 } from 'react-native';
-import BottomMenu from '../shared/bottomMenu';
 
 {/* ========================= APP START ========================= */}
 
 export default function SpecificEventScreen({ route, navigation}) {
 
-  const { lang  } = useSelector( (state) => state.lang  )
-  const { theme } = useSelector( (state) => state.theme )
-  const [usersData,setUsersData]=useState({})
-  const { item } = route.params
-  const link = FetchJoinLink(usersData.description)
+    const { lang  } = useSelector( (state) => state.lang  )
+    const { theme } = useSelector( (state) => state.theme )
+    const [usersData,setUsersData]=useState({})
+    const { item } = route.params
+    const link = FetchJoinLink(usersData.description)
 
 
-  const getData=()=>{
-    fetch('https://api.login.no/events/' + item.eventID)
-    // fetch('https://tekkom:rottejakt45@api.login.no:8443') //TESTING
-    .then(response => response.json())
-    .then(data=>setUsersData(data))
-  }
-  useEffect(() => {
-    getData();
-    },[item])
-
-//   const adPage = () => { navigation.navigate('AdScreen') }
-  const eventPage   = () => { navigation.navigate('EventScreen')}
-  const menuPage   = () => { navigation.navigate('MenuScreen')}
-  const goBack      = () => { navigation.navigate('EventScreen')}
-
-  async function updateStorage() {
-    let storedClickedEvents = JSON.parse(await AsyncStorage.getItem('clickedEvents'))
-    if(storedClickedEvents){
-      storedClickedEvents.push(item)
-      await AsyncStorage.setItem('clickedEvents', JSON.stringify(storedClickedEvents))
-    }else{
-      await AsyncStorage.setItem('clickedEvents', JSON.stringify([item]))
-    }
-  }
-
-  function handleLink(mazeref, street, organizer) {
-    if (mazeref) {
-        Linking.openURL(`https://use.mazemap.com/#v=1&campusid=55&sharepoitype=poi&sharepoi=${mazeref}`).catch(() => {
-            Alert.alert('Mazemap kunne ikke åpnes', `Send en mail til kontakt@login.no dersom problemet vedvarer. Feilkode: M${mazeref}`)
-        })
-        return;
-    };
-    if(street == 'Orgkollektivet') {
-      Linking.openURL('https://link.mazemap.com/tBlfH1oY').catch(() =>{
-          Alert.alert('Mazemap kunne ikke åpnes', 'Send en mail til kontakt@login.no dersom problemet vedvarer. Feilkode: wZDe8byp');
-      }); 
+    const getData=()=>{
+        fetch('https://api.login.no/events/' + item.eventID)
+        // fetch('https://tekkom:rottejakt45@api.login.no:8443') //TESTING
+        .then(response => response.json())
+        .then(data=>setUsersData(data))
     }
 
-    if(organizer == 'HUSET') {
-      Linking.openURL('https://link.mazemap.com/O1OdhRU4').catch(() => {
-        Alert.alert('Mazemap kunne ikke åpnes.', 'Send en mail til kontakt@login.no dersom problemet vedvarer. Feilkode: MGfrIBrd')
-      });
+    useEffect(() => { getData() },[item])
+
+    async function updateStorage() {
+        let storedClickedEvents = JSON.parse(await AsyncStorage.getItem('clickedEvents'))
+        if(storedClickedEvents){
+        storedClickedEvents.push(item)
+        await AsyncStorage.setItem('clickedEvents', JSON.stringify(storedClickedEvents))
+        }else{
+        await AsyncStorage.setItem('clickedEvents', JSON.stringify([item]))
+        }
     }
-}
+
+    function handleLink(mazeref, street, organizer) {
+        if (mazeref) {
+            Linking.openURL(`https://use.mazemap.com/#v=1&campusid=55&sharepoitype=poi&sharepoi=${mazeref}`).catch(() => {
+                Alert.alert('Mazemap kunne ikke åpnes', `Send en mail til kontakt@login.no dersom problemet vedvarer. Feilkode: M${mazeref}`)
+            })
+            return;
+        };
+
+        if(street == 'Orgkollektivet') {
+            Linking.openURL('https://link.mazemap.com/tBlfH1oY').catch(() =>{
+                Alert.alert('Mazemap kunne ikke åpnes', 'Send en mail til kontakt@login.no dersom problemet vedvarer. Feilkode: wZDe8byp');
+            }); 
+        }
+
+        if(organizer == 'HUSET') {
+            Linking.openURL('https://link.mazemap.com/O1OdhRU4').catch(() => {
+                Alert.alert('Mazemap kunne ikke åpnes.', 'Send en mail til kontakt@login.no dersom problemet vedvarer. Feilkode: MGfrIBrd')
+            });
+        }
+    }
   
   return(
     <View>
@@ -101,12 +93,12 @@ export default function SpecificEventScreen({ route, navigation}) {
             height={Dimensions.get('window').width/3}
             uri={`https://cdn.login.no/img/events/${item.image}`}
           />
-        :(item.image).includes('.png')?<Image style={ES.specificEventImage} source={{uri: `https://cdn.login.no/img/events/${item.image}`}}/>:null}
-        {(item.image == 'none' || !item.image) && item.category == 'TEKKOM'  ? <Image style={ES.specificEventImage} source={require(`../assets/committee/tekkom/tekkom.png`    )} />:null}
-        {(item.image == 'none' || !item.image) && item.category == 'CTF'     ? <Image style={ES.specificEventImage} source={require(`../assets/committee/ctfkom/ctf.png`       )} />:null}
-        {(item.image == 'none' || !item.image) && item.category == 'SOCIAL'  ? <Image style={ES.specificEventImage} source={require(`../assets/categories/sosialt.png`   )} />:null}
-        {(item.image == 'none' || !item.image) && item.category == 'LOGIN'   ? <Image style={ES.specificEventImage} source={require(`../assets/categories/login.png`     )} />:null}
-        {(item.image == 'none' || !item.image) && item.category == 'ANNET'   ? <Image style={ES.specificEventImage} source={require(`../assets/categories/annet.png`     )} />:null}
+        :(item.image).includes('.png')?<Image style={ES.specificEventImage}  source={{uri: `https://cdn.login.no/img/events/${item.image}`}}/>:null}
+        {(item.image == 'none' || !item.image) && item.category == 'TEKKOM'  ? <Image style={ES.specificEventImage} source={require(`../assets/committee/tekkom/tekkom.png`)} />:null}
+        {(item.image == 'none' || !item.image) && item.category == 'CTF'     ? <Image style={ES.specificEventImage} source={require(`../assets/committee/ctfkom/ctf.png`)} />:null}
+        {(item.image == 'none' || !item.image) && item.category == 'SOCIAL'  ? <Image style={ES.specificEventImage} source={require(`../assets/categories/sosialt.png`)} />:null}
+        {(item.image == 'none' || !item.image) && item.category == 'LOGIN'   ? <Image style={ES.specificEventImage} source={require(`../assets/categories/login.png`)} />:null}
+        {(item.image == 'none' || !item.image) && item.category == 'ANNET'   ? <Image style={ES.specificEventImage} source={require(`../assets/categories/annet.png`)} />:null}
         {(item.image == 'none' || !item.image) && item.category == 'BEDPRES' ? <Image style={ES.specificEventImage} source={require(`../assets/categories/bedpresBig.png`)} />:null}
 
             {Space(5)}
@@ -237,16 +229,8 @@ export default function SpecificEventScreen({ route, navigation}) {
         </ScrollView>
       </View>   
        
-       {/* ========================= DISPLAY TOP MENU ========================= */}
-       {Platform.OS === 'ios' ? <BlurView style={MS.topMenu} intensity={30}/> : <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'TRANSPARENTANDROID')}}/>}
-      <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
-    <TouchableOpacity onPress={() => goBack()}>
-      <Image style={MS.goBack} source={require('../assets/icons/goback777.png')} />
-    </TouchableOpacity>
-
-    <Text style={{... MS.smallMultilineTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{item.eventname}</Text>
-  </View>
-  <BottomMenu navigation={navigation} screen="ses" />
+        <TopMenu navigation={navigation} title={item.eventname} back={"EventScreen"} />
+        <BottomMenu navigation={navigation} screen="ses" />
     </View>
   )
 };

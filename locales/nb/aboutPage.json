@@ -1,6 +1,6 @@
 {
   "title": "Hvem er vi?",
-  "intro": "Login er linjeforeningen for IT ved <i class='logfont-ntnu'></i> NTNU i Gjøvik og alle som går de følgene studiene er automatisk medlemmer i foreningen.",
+  "intro": "Login er linjeforeningen for IT ved NTNU i Gjøvik og alle som går de følgene studiene er automatisk medlemmer i foreningen.",
   "bachelor": {
     "computerEngineer": "Dataingeniør",
     "digsec": "Digital infrastruktur og cybersikkerhet",
@@ -18,10 +18,10 @@
   },
   "about": {
     "title": "Av studenter, for studenter",
-    "intro": "Foreningen drives av frivillige studenter som arbeider for at du skal få mest mulig ut av studiene dine ved <i class='logfont-ntnu'></i> NTNU.",
+    "intro": "Foreningen drives av frivillige studenter som arbeider for at du skal få mest mulig ut av studiene dine ved NTNU.",
     "body": {
       "p1":"Vi arrangerer regelmessig sosiale arrangementer og bedriftspresentasjoner. Vi holder kontakt med aktuelle bedrifter og inviterer til blant annet cyberdagene én gang i semesteret slik at du som student skal bli kjent med mulighetene utdanningen din gir deg.",
-      "p2": "Hver uke samler vi studenter til <i class='logfont-tekkom'></i> TekKom- og <i class='logfont-ctf-filled'></i> CTF-samlinger, der man kan lære seg nye ting eller komme med bidrag til foreningen. Her kan man møte andre studenter som deler gleden for å lære, og å sette kunnskapene man tilegner seg i praksis. Videre jobber <i class='logfont-eventkom-filled'></i> EvntKom stadig med nye og spennende arrangementer som f.eks. filmkvelder og vinterball."
+      "p2": "Hver uke samler vi studenter til TekKom og CTF-samlinger, der man kan lære seg nye ting eller komme med bidrag til foreningen. Her kan man møte andre studenter som deler gleden for å lære, og å sette kunnskapene man tilegner seg i praksis. Videre jobber EvntKom stadig med nye og spennende arrangementer som f.eks. filmkvelder og vinterball."
     }
   },
   "committeeSection": {
@@ -73,7 +73,7 @@
   },
   "publicDocs": {
     "title": "Offentlige dokumenter",
-    "body": "For mer informasjon og offentlige dokumenter kan du besøke <a class='standard-link standard-link--underscore-hover' href='https://wiki.login.no/en/public/docs'>wikien <i class='logfont-wikijs'></i></a>, her kan du blant annet finne følgende type dokumenter:",
+    "body": "For mer informasjon og offentlige dokumenter kan du besøke wikien, her kan du blant annet finne følgende type dokumenter:",
     "bulletPoints": {
       "agendas": "Agenda",
       "minutes": "Referat",

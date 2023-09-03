@@ -1,4 +1,4 @@
-import fetchEventDetails from './fetchEventDetails';
+import { fetchEventDetails } from './fetch';
 import * as Calendar from 'expo-calendar';
 import { Platform } from 'react-native';
 
@@ -26,15 +26,8 @@ export default async function updateCalendar(events, calendarID) {
             }
     
             // Update the event in the calendar
-            if (matchingEvent) {
-                try {
-                    await Calendar.updateEventAsync(matchingEvent.id, newObj);
-                } catch (e) {console.log(`Error updating event: ${e}`)}
-            } else {
-                try { 
-                    await Calendar.createEventAsync(calendarID, event); 
-                } catch (e) {console.log(e)}
-            }
+            if (matchingEvent) await Calendar.updateEventAsync(matchingEvent.id, newObj);
+            else await Calendar.createEventAsync(calendarID, event); 
         }
     }
 }

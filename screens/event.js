@@ -1,30 +1,26 @@
 import registerForPushNotificationsAsync from '../shared/notificationComponents/registerForPushNotificationAsync';
-import removeDuplicatesAndOld from '../shared/eventComponents/removeDuplicatesAndOld';
+import LastFetch, { removeDuplicatesAndOld } from '../shared/eventComponents/fetch';
 import notificationSetup from '../shared/notificationComponents/notificationSetup';
 import { CheckBox, CheckedBox, SmallCheck } from '../shared/eventComponents/check';
 import notificationArray from '../shared/notificationComponents/notificationArray';
 import handleDownload, { timeSinceDownload } from '../shared/functions/download';
 import EventCardLocation from '../shared/eventComponents/eventCardLocation';
 import AsyncStorage from '@react-native-async-storage/async-storage';     // Localstorage
+import Space, { Month, errorMessage } from '../shared/components/utils';
 import CategorySquare from '../shared/eventComponents/category'
 import CompareDates from '../shared/functions/compareDates';
-import errorMessage from '../shared/functions/errorMessage';
 import topic from '../shared/notificationComponents/topic';
 import React, { useEffect, useState, useRef } from 'react';               // React imports
 import { useFocusEffect } from '@react-navigation/native';                // useFocusEffect       (do something when the screen is displayed)
-import { useSelector, useDispatch } from 'react-redux';                   // Redux
-import LastFetch from '../shared/functions/lastfetch';
 import * as Notifications from 'expo-notifications';                      // Local notifications
-import Month from '../shared/eventComponents/month';
 import Bell from '../shared/eventComponents/bell';
 import Cluster from '../shared/functions/cluster';
-import { setCalendarID } from '../redux/misc';
-import Space from '../shared/functions/space';
 import BottomMenu from '../shared/bottomMenu';
 import FetchColor from '../styles/fetchTheme';                            // Function to fetch theme color
 import { GS } from '../styles/globalStyles';                              // Global styles
 import { StatusBar } from 'expo-status-bar';                              // Status bar
 import { ES } from '../styles/eventStyles';                               // Event styles
+import { useSelector } from 'react-redux';                                // Redux
 import { MS } from '../styles/menuStyles';                                // Menu styles
 import { BlurView } from 'expo-blur';                                     // Blur effect
 import { T } from '../styles/text';                                       // Text styles
@@ -40,11 +36,11 @@ import {                                                                  // Rea
 } from 'react-native';                                                    // React native
 
 Notifications.setNotificationHandler({
-  handleNotification: async () => ({
-    shouldShowAlert: true,
-    shouldPlaySound: true,
-    shouldSetBadge: false,
-  }),
+    handleNotification: async () => ({
+        shouldShowAlert: true,
+        shouldPlaySound: true,
+        shouldSetBadge: false,
+    })
 });
 
 /**
@@ -68,7 +64,6 @@ export default function EventScreen({ navigation }) {                     //  Ex
   const [downloadState, setDownloadState] = useState(null)                                      //  Download state
   const [filter, setFilter] = useState({input: null});                    //  Filter text input declaration
   const textInputRef = useRef(null);                                      //  Clears text input
-  const dispatch = useDispatch()                                          //  Dispatch to change Redux state
   const [relevantCategories, setRelevantCategories] = useState([]);       //  Relevant categories to filter
   const [search, toggleSearch] = useState({status: 0})                    //  Search bar visibility boolean
   const notification = useSelector( (state) => state.notification )       //  Fetches notification state
@@ -250,7 +245,7 @@ export default function EventScreen({ navigation }) {                     //  Ex
   };
 
   useEffect(() => {                                                       //  --- NOTIFICATION MANAGEMENT ---
-    registerForPushNotificationsAsync(lang).then(token => setExpoPushToken(token));
+    registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
 
     notificationListener.current = Notifications.addNotificationReceivedListener(pushNotification => {
       setPushNotification(pushNotification);
@@ -416,7 +411,7 @@ export default function EventScreen({ navigation }) {                     //  Ex
                                   topic(item.eventID, lang, 0, (item.category).toLowerCase(), notificationArray(notification, item.category))
                                   setClickedEvents(clickedEvents.some(event => event.eventID === item.eventID) ? clickedEvents.filter((x) => x.eventID !== item.eventID):[...clickedEvents, item])
                                 }}>
-                                    <View style = {ES.bellPosition}><Bell orange={clickedEvents.some(event => event.eventID === item.eventID) ? true:false}/></View>
+                                    <View style = {ES.bellPosition}><Bell orange={clickedEvents.some(event => event.eventID === item.eventID) ? true:false} theme={theme} /></View>
                                 </TouchableOpacity>
                             </View>
                         </View>
