@@ -1,0 +1,113 @@
+{
+    "title": "Verv",
+    "intro": "Verv er en frivillig stilling for de som brenner for eller ønsker å gjøre en ekstra innstats for Login. Verv gir ekstra ansvar og krever dermed mer innsats. Samtidig gir det en fantatisk mulighet til å stifte nye vennskap, blant annet ved å kunne delta på interne arrangementer.",
+    "imageCarousel": {
+        "1": {
+            "title": "Anders, tidligere leder av Login",
+            "description": "Anders utfører en fargetest."
+        },
+        "2": {
+            "title": "Stand fra Catch IDI",
+            "description": "Pepper sammen med flere av masterstudentene til Login."
+        },
+        "3": {
+            "title": "Nucleus launch party",
+            "description": "Simon, tidligere leder av TekKom, sammen med flere av TekKom medlemmene på launch party av Logins app."
+        },
+        "4": {
+            "title": "CTF",
+            "description": "CTFkom under en CTF."
+        },
+        "5": {
+            "title": "CTF",
+            "description": "Deltakerne får utfordret seg under Login sine CTFer."
+        },
+        "6": {
+            "title": "Julebord",
+            "description": "Det er god stemning på Login sitt julebord."
+        },
+        "7": {
+            "title": "Hyttetur",
+            "description": "EvntKom arrangerte hyttetur. Dette ble en stor suksess."
+        },
+        "8": {
+            "title": "Grilling på hyttetur",
+            "description": "Gode minner fra grilling på hyttetur."
+        },
+        "9": {
+            "title": "EvntKom på Bowling",
+            "description": "EvntKom var på bowling."
+        },
+        "10": {
+            "title": "Pokerkveld",
+            "description": "Noen ble rikere enn andre da Login hadde pokerkveld. God stemning var det ihvertfall."
+        },
+        "11": {
+            "title": "Login på Bedpres",
+            "description": "Omtrent hver uke gjennom hele semesteret arrangeres det bedriftpresentasjoner. Dette er svært populært blant studentene, men hadde ikke vært mulig uten noen ildsjeler."
+        },
+        "12": {
+            "title": "Innslipp til Bedpres",
+            "description": "Wiktor og Mads kontrollerer at alle som møter opp på bedpres er påmeldte."
+        },
+        "13": {
+            "title": "PR spiller bordtennis",
+            "description": "Flere av medlemmene til PR spiller bordtennis."
+        },
+        "14": {
+            "title": "VR Event",
+            "description": "Login holder VR event. Her fikk mange utfordret sansene sine."
+        },
+        "15": {
+            "title": "PR på byen",
+            "description": "Login sprer god stemning på byen!"
+        }
+    },
+    "committeeSection": {
+        "title": "Hva gjør man med verv?",
+        "intro": "Login består av 5 komitéer med ulike arbeidsoppgaver. Nedenfor finner du en kort beskrivelse av hva hver enkelt komité gjør, og deres typiske arbeidsoppgaver.",
+        "board": {
+            "eventkom": "EventKom leder",
+            "pr": "PR leder",
+            "bedkom": "BedKom leder",
+            "tekkom": "TekKom leder",
+            "ctfkom": "CTFkom leder",
+            "satkom": "SATkom leder"
+          },
+        "eventkom": {
+            "title": "EvntKom",
+            "intro": "EvntKom er ansvarlig for Login sine arrangementer.",
+            "body": "Med verv i EvntKom vil man være svært synlig i foreningen. Man hjelper til å arrangere og får være med på arrangementene til Login. Dette er komitéen for deg som liker å ha ansvar, men samtidig være sosial og finne på ting."
+        },
+        "tekkom": {
+            "title": "TekKom",
+            "intro": "TekKom utvikler Login sin infrastruktur.",
+            "body": "Dette er et veldig åpent verv, og det er både mulig å bidra på eksisterende prosjekter, som denne nettsiden og Login appen, eller begynne på helt nye prosjekter. Vi trenger både flinke utviklere, og flinke designere."
+        },
+        "pr": {
+            "title": "PR",
+            "intro": "PR er Logins ansikt utad og har ansvar for Logins offentlige mediekanaler",
+            "body": "Med verv i PR vil du være med på å kommunisere med både studentene våre og bedriftene våre. PR promoterer arrangementer og andre ting som angår Login i sosiale medier. PR bistår også med rekruttering. Enten du er flink til å ta bilder, eller vil bli en Logfluencer er dette komitéen for deg."
+        },
+        "bedkom": {
+            "title": "BedKom",
+            "intro": "BedKom intro placeholder",
+            "body": "Bedkom body placeholder"
+        },
+        "ctfkom": {
+            "title": "CTFkom",
+            "intro": "CTFkom er Logins hacker-komité",
+            "body": "CTFKom er komiteen som stiller i stand CTF arrangementer på campus. Deres viktigste oppdrag er å hacke seg inn på ING:α sin infrastruktur og lage sprell der! Med verv i CTFkom vil man både være med på å utvikle CTF oppgaver, og arrangere bedrift CTFer. Her arbeider man for at alle IT- studentene ved skolen skal kunne utvikle sine ferdigheter gjennom Capture The Flag konkurranser. Annenhver uke bidrar man til å holde Login CTFer. Mange av CTFkom sine medlemmer er også aktive i online CTF konkurranser, og er en unik mulighet til å utvikle nye CTF egenskaper, samtidig som man får kontakt med mange interessante bedrifter."
+        },
+        "satkom":{
+            "title": "SATkom",
+            "intro": "<abbr title=\"Systematiserte Automatiserte Transaksjoner\">SATkom</abbr> er komiteen som vokter Login sin pengebinge, og sørger for at pengene både flyter inn og ut. Enten du har økonomisk sans, eller bare vil bli Login's nye sugar daddy, så er dette komiteen for deg!",
+            "body": "Med verv i SATkom hjelper man til med å forvalte midlene Login har tilgjengelig, og unngår at SATkom sin leder blir tatt av skatteetaten. SATkom lager ukentlige regnskap, og passer på at komiteene ikke overskrider budsjettene for mye. Komiteen har også en 'Dungeon Master' som har i oppgave å passe på Loungen, og at alle medlemmene våre får nok koffein. Videre er komiteen involvert i budsjettering, diverse økonomiske saker og andre ablegøyer."
+        }
+    },
+    "apply": {
+        "title": "Søk verv",
+        "body": "Komitéene tar fortløpende imot søknader nedenfor. Dersom du har flere spørsmål om verv i en spesifikk komité eller er usikker på hvordan du kan bidra, kan du ta kontakt med den respektive komitelederen. For generelle henvendelser kan du ta kontakt med rekrutteringsansvarlig via <a class='standard-link standard-link--underscore-hover' href='https://discordapp.com/users/877108421772582962'>Discord</a>, eller sende oss en <a class='standard-link standard-link--underscore-hover' href='mailto:kontakt@login.no'>mail</a>.",
+        "action": "Søk verv"
+    }
+  }

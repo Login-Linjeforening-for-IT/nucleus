@@ -1,0 +1,18 @@
+{
+  "landing":{
+    "readMore":"Les mer",
+    "welcome": "Velkommen til",
+    "whoAreWe": {
+      "title": "Hvem er vi?",
+      "body": "Login er linjeforeningen for IT ved NTNU i Gjøvik. Foreningen drives av studenter og målet med arbeidet vårt er å forbedre studiemiljøet på universitetet."
+    },
+    "sponsor": {
+      "title": "mnemonic",
+      "body": "Hovedsamarbeidspartneren vår er mnemonic. De er en av Europas ledende tjenesteleverandører innen cybersikkerhet. Ekspertene deres står alltid klar til å håndtere avanserte cyberangrep."
+    },
+    "companiesInfo": {
+      "title": "For bedrifter",
+      "body": "Login fungerer som bindeleddet mellom studier og arbeidsliv. Sjekk ut hva vi kan tilby din bedrift."
+    }
+  }
+}

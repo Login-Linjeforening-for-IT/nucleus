@@ -20,9 +20,7 @@ import MenuScreen from '../screens/menu'; // Menu
 function Navigator() { // Declares Navigator, wraps in container and declares all navigation routes
     return (
         <NavigationContainer>
-            <Tab.Navigator backBehavior='history' initialRouteName='EventScreen' screenOptions={
-                {headerShown: false}
-            }>
+            <Tab.Navigator backBehavior='history' initialRouteName='EventScreen' screenOptions={{headerShown: false}}>
                 <Tab.Screen name='EventScreen' options={ { tabBarStyle: { display: "none" } } } component={EventScreen}/>
                 <Tab.Screen name='MenuScreen' options={{tabBarStyle: {display: "none"}}}component={MenuScreen}/> 
                 {/* <Tab.Screen name='AdScreen' options={{tabBarStyle: {display: "none"}}} component={AdScreen}/>  */}

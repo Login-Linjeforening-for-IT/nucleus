@@ -19,6 +19,7 @@ import {
   Platform
 } from 'react-native';
 import topic from '../../shared/notificationComponents/topic';
+import BottomMenu from '../../shared/bottomMenu';
 
 
 {/* ========================= APP START ========================= */}
@@ -73,18 +74,7 @@ export default function InternalScreen({ navigation }) {
   </View>
 
 {/* ========================= DISPLAY BOTTOM MENU ========================= */}
-{Platform.OS === 'ios' ? <BlurView style={MS.bMenu} intensity={30}/> : <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENTANDROID')}}/>}
-    <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
-      <TouchableOpacity style={MS.bMenuIconTO} onPress={() => eventPage()}>
-      <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/menu/calendar777.png') : require('../../assets/menu/calendar-black.png')} />
-          </TouchableOpacity>
-          {/* <TouchableOpacity style={MS.bMenuIconTO} onPress={() => adPage()}>
-          <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/menu/business.png') : require('../../assets/menu/business-black.png')} />
-          </TouchableOpacity> */}
-          <TouchableOpacity style={MS.bMenuIconTO} onPress={() => menuPage()}>
-            <Image style={MS.bMenuIcon} source={require('../../assets/menu/menu-orange.png')} />
-          </TouchableOpacity>
-      </View>     
+    <BottomMenu navigation={navigation} screen="menu" /> 
     </View>
     
   )

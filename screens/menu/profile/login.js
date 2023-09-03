@@ -1,8 +1,6 @@
+import GreenLight, { RedLight, GrayLight } from '../../../shared/eventComponents/light';
 import DynamicCircle from '../../../shared/eventComponents/dynamicCircle';
-import GreenLight from '../../../shared/eventComponents/greenLight';
-import GrayLight from '../../../shared/eventComponents/grayLight';
 import Cluster from '../../../shared/functions/cluster';
-import RedLight from '../../../shared/eventComponents/redLight';
 import { changeLoginStatus } from '../../../redux/loginStatus';
 import { useSelector, useDispatch } from 'react-redux';
 import Check from '../../../shared/eventComponents/check';
@@ -26,6 +24,7 @@ import {
     Alert,
     Keyboard,
 } from 'react-native';                                                              // React Native
+import BottomMenu from '../../../shared/bottomMenu';
 
 {/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
 
@@ -218,18 +217,7 @@ export default function LoginScreen( { navigation }) {
     </View>
 
     {/* ========================= DISPLAY BOTTOM MENU ========================= */}
-    {Platform.OS === 'ios' ? <BlurView style={MS.bMenu} intensity={30}/> : <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENTANDROID')}}/>}
-        <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
-            <TouchableOpacity style={MS.bMenuIconTO} onPress={() => eventPage()}>
-                <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../../../assets/menu/calendar777.png') : require('../../../assets/menu/calendar-black.png')} />
-            </TouchableOpacity>
-            {/* <TouchableOpacity style={MS.bMenuIconTO} onPress={() => adPage()}>
-                <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../../../assets/menu/business.png') : require('../../../assets/menu/business-black.png')} />
-            </TouchableOpacity> */}
-            <TouchableOpacity style={MS.bMenuIconTO} onPress={() => menuPage()}>
-                <Image style={MS.bMenuIcon} source={require('../../../assets/menu/menu-orange.png')} />
-            </TouchableOpacity>
-        </View>
+        <BottomMenu navigation={navigation} screen="menu" />
     </View>
   )
 };

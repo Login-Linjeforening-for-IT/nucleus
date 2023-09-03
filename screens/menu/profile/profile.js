@@ -1,22 +1,16 @@
 {/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
 import DynamicCircle from '../../../shared/eventComponents/dynamicCircle';
+import Svg, { LinearGradient, Rect, Stop } from 'react-native-svg';
+import ProfileInfo from '../../../shared/profile/profileInfo';
+import Profile from '../../../shared/profile/profile';
 import Space from '../../../shared/functions/space';
 import FetchColor from '../../../styles/fetchTheme';
+import { PS } from '../../../styles/profileStyles';
 import { GS } from '../../../styles/globalStyles';
 import { MS } from '../../../styles/menuStyles';
-import Cluster from '../../../shared/functions/cluster';
 import { useSelector } from 'react-redux';
-import GrayLight from '../../../shared/eventComponents/grayLight';
-import React, {useState} from 'react';
-import { T } from '../../../styles/text';
-import { PS } from '../../../styles/profileStyles';
-import Svg, { LinearGradient, Rect, Stop } from 'react-native-svg';
 import { BlurView } from 'expo-blur';
-import { SS } from '../../../styles/settingStyles';
-import GreenLight from '../../../shared/eventComponents/greenLight';
-import RedLight from '../../../shared/eventComponents/redLight';
-import Check from '../../../shared/eventComponents/check';
-import Button from '../../../shared/functions/button';
+import {useState} from 'react';
 import { 
   Text, 
   View, 
@@ -26,8 +20,7 @@ import {
   Platform,
   ScrollView
 } from 'react-native';
-import Profile from '../../../shared/profile/profile';
-import ProfileInfo from '../../../shared/profile/profileInfo';
+import BottomMenu from '../../../shared/bottomMenu';
 
 {/* ========================= APP START ========================= */}
 
@@ -82,18 +75,7 @@ export default function ProfileScreen( { navigation }) {
         </View>
     {/* ========================= DISPLAY BOTTOM MENU ========================= */}
 
-        {Platform.OS === 'ios' ? <BlurView style={MS.bMenu} intensity={30}/> : <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENTANDROID')}}/>}
-        <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
-            <TouchableOpacity style={MS.bMenuIconTO} onPress={() => eventPage()}>
-                <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../../../assets/menu/calendar777.png') : require('../../../assets/menu/calendar-black.png')} />
-            </TouchableOpacity>
-            {/* <TouchableOpacity style={MS.bMenuIconTO} onPress={() => adPage()}>
-                <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../../../assets/menu/business.png') : require('../../../assets/menu/business-black.png')} />
-            </TouchableOpacity> */}
-            <TouchableOpacity style={MS.bMenuIconTO} onPress={() => menuPage()}>
-                <Image style={MS.bMenuIcon} source={require('../../../assets/menu/menu-orange.png')} />
-            </TouchableOpacity>
-        </View> 
+    <BottomMenu navigation={navigation} screen="menu" />
     </View>
   )
 };

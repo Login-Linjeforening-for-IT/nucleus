@@ -1,8 +1,6 @@
 {/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
-import DynamicCircle from '../../shared/eventComponents/dynamicCircle';
-import GreenLight from '../../shared/eventComponents/greenLight';
-import GrayLight from '../../shared/eventComponents/grayLight';
-import CardSmaller from '../../shared/functions/cardSmaller';
+import GreenLight, { GrayLight } from '../../shared/eventComponents/light';
+import { CardSmaller } from '../../shared/functions/card';
 import Check from '../../shared/eventComponents/check';
 import Button from '../../shared/functions/button';
 import Space from '../../shared/functions/space';
@@ -26,6 +24,7 @@ import {
   Dimensions,
   Platform
 } from 'react-native';
+import BottomMenu from '../../shared/bottomMenu';
 
 {/* ========================= APP START ========================= */}
 
@@ -228,19 +227,7 @@ const inputContent = (val) => {
 
       </View>
 
-      {/* ========================= DISPLAY BOTTOM MENU ========================= */}
-      {Platform.OS === 'ios' ? <BlurView style={MS.bMenu} intensity={30}/> : <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENTANDROID')}}/>}
-    <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
-            <TouchableOpacity style={MS.bMenuIconTO} onPress={() => eventPage()}>
-            <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/menu/calendar777.png') : require('../../assets/menu/calendar-black.png')} />
-            </TouchableOpacity>
-            {/* <TouchableOpacity style={MS.bMenuIconTO} onPress={() => adPage()}>
-            <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/menu/business.png') : require('../../assets/menu/business-black.png')} />
-            </TouchableOpacity> */}
-            <TouchableOpacity style={MS.bMenuIconTO} onPress={() => menuPage()}>
-              <Image style={MS.bMenuIcon} source={require('../../assets/menu/menu-orange.png')} />
-            </TouchableOpacity>
-        </View>     
+      <BottomMenu navigation={navigation} screen="menu" />
       </View>
     </TouchableWithoutFeedback>
 

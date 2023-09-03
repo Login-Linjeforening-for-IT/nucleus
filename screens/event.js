@@ -1,27 +1,27 @@
 import registerForPushNotificationsAsync from '../shared/notificationComponents/registerForPushNotificationAsync';
 import removeDuplicatesAndOld from '../shared/eventComponents/removeDuplicatesAndOld';
 import notificationSetup from '../shared/notificationComponents/notificationSetup';
-import updateCalendar from '../shared/eventComponents/calendar/updateCalendar';
-import createCalendar from '../shared/eventComponents/calendar/createCalendar';
-import calendarExists from '../shared/eventComponents/calendar/calendarExists';
+import { CheckBox, CheckedBox, SmallCheck } from '../shared/eventComponents/check';
+import notificationArray from '../shared/notificationComponents/notificationArray';
+import handleDownload, { timeSinceDownload } from '../shared/functions/download';
 import EventCardLocation from '../shared/eventComponents/eventCardLocation';
-import CategorySquare from '../shared/eventComponents/categorySquare';    // Left side square on eventcard
 import AsyncStorage from '@react-native-async-storage/async-storage';     // Localstorage
-import SmallCheck from '../shared/eventComponents/smallCheck';
+import CategorySquare from '../shared/eventComponents/category'
 import CompareDates from '../shared/functions/compareDates';
+import errorMessage from '../shared/functions/errorMessage';
 import topic from '../shared/notificationComponents/topic';
 import React, { useEffect, useState, useRef } from 'react';               // React imports
-import currentTime from '../shared/functions/currentTime';
-import MonthNO from '../shared/eventComponents/monthNO';
-import MonthEN from '../shared/eventComponents/monthEN';
-import CheckedBox from '../shared/functions/checkedBox';
+import { useFocusEffect } from '@react-navigation/native';                // useFocusEffect       (do something when the screen is displayed)
 import { useSelector, useDispatch } from 'react-redux';                   // Redux
-import CheckBox from '../shared/functions/checkBox';
+import LastFetch from '../shared/functions/lastfetch';
 import * as Notifications from 'expo-notifications';                      // Local notifications
+import Month from '../shared/eventComponents/month';
+import Bell from '../shared/eventComponents/bell';
+import Cluster from '../shared/functions/cluster';
 import { setCalendarID } from '../redux/misc';
 import Space from '../shared/functions/space';
+import BottomMenu from '../shared/bottomMenu';
 import FetchColor from '../styles/fetchTheme';                            // Function to fetch theme color
-import Cluster from '../shared/functions/cluster';
 import { GS } from '../styles/globalStyles';                              // Global styles
 import { StatusBar } from 'expo-status-bar';                              // Status bar
 import { ES } from '../styles/eventStyles';                               // Event styles
@@ -38,9 +38,6 @@ import {                                                                  // Rea
   Dimensions,                                                             // Size of the device
   Platform,                                                               // Operating system
 } from 'react-native';                                                    // React native
-import { useFocusEffect } from '@react-navigation/native';                // useFocusEffect       (do something when the screen is displayed)
-import LastFetch from '../shared/functions/lastfetch';
-import Bell from '../shared/eventComponents/bell';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -79,8 +76,6 @@ export default function EventScreen({ navigation }) {                     //  Ex
   const { login }    = useSelector( (state) => state.login )              //  Loginstatus
   const { theme }    = useSelector( (state) => state.theme )              //  Theme state
   const { calendarID } = useSelector( (state) => state.misc )             //  Calendar ID
-//   const adPage = () => { navigation.navigate('AdScreen') }                //  Navigate to Job ad screen
-  const menuPage = () => { navigation.navigate('MenuScreen') }
   const [expoPushToken, setExpoPushToken] = useState('');                 //  Array for notification token
   const [pushNotification, setPushNotification] = useState(false);        //  Array for setting the push notification
   const notificationListener = useRef();                                  //  Notification listener
@@ -96,184 +91,7 @@ export default function EventScreen({ navigation }) {                     //  Ex
   {id: '9', category: 'ANNET'}
 ]);                                           
 
-  // Returns the state of every tekkom notification interval
-  function tekkomArray() {
-    let array = [];
-    if(notification["tekkom10m"]) {array.push(1)} else array.push(0);
-    if(notification["tekkom30m"]) {array.push(1)} else array.push(0);
-    if(notification["tekkom1h"]) {array.push(1)} else array.push(0);
-    if(notification["tekkom2h"]) {array.push(1)} else array.push(0);
-    if(notification["tekkom3h"]) {array.push(1)} else array.push(0);
-    if(notification["tekkom6h"]) {array.push(1)} else array.push(0);
-    if(notification["tekkom1d"]) {array.push(1)} else array.push(0);
-    if(notification["tekkom2d"]) {array.push(1)} else array.push(0);
-    if(notification["tekkom1w"]) {array.push(1)} else array.push(0);
-    return array;
-  }
-
-  // Returns the state of every social notification interval
-  function socialArray() {
-    let array = [];
-    if(notification["social10m"]) {array.push(1)} else array.push(0);
-    if(notification["social30m"]) {array.push(1)} else array.push(0);
-    if(notification["social1h"]) {array.push(1)} else array.push(0);
-    if(notification["social2h"]) {array.push(1)} else array.push(0);
-    if(notification["social3h"]) {array.push(1)} else array.push(0);
-    if(notification["social6h"]) {array.push(1)} else array.push(0);
-    if(notification["social1d"]) {array.push(1)} else array.push(0);
-    if(notification["social2d"]) {array.push(1)} else array.push(0);
-    if(notification["social1w"]) {array.push(1)} else array.push(0);
-    return array;
-  }
-
-  // Returns the state of every ctf notification interval
-  function ctfArray() {
-    let array = [];
-    if(notification["ctf10m"]) {array.push(1)} else array.push(0);
-    if(notification["ctf30m"]) {array.push(1)} else array.push(0);
-    if(notification["ctf1h"]) {array.push(1)} else array.push(0);
-    if(notification["ctf2h"]) {array.push(1)} else array.push(0);
-    if(notification["ctf3h"]) {array.push(1)} else array.push(0);
-    if(notification["ctf6h"]) {array.push(1)} else array.push(0);
-    if(notification["ctf1d"]) {array.push(1)} else array.push(0);
-    if(notification["ctf2d"]) {array.push(1)} else array.push(0);
-    if(notification["ctf1w"]) {array.push(1)} else array.push(0);
-    return array;
-  }
-
-  // Returns the state of every karrieredag notification interval
-  function karrieredagArray() {
-    let array = [];
-    if(notification["karrieredag10m"]) {array.push(1)} else array.push(0);
-    if(notification["karrieredag30m"]) {array.push(1)} else array.push(0);
-    if(notification["karrieredag1h"]) {array.push(1)} else array.push(0);
-    if(notification["karrieredag2h"]) {array.push(1)} else array.push(0);
-    if(notification["karrieredag3h"]) {array.push(1)} else array.push(0);
-    if(notification["karrieredag6h"]) {array.push(1)} else array.push(0);
-    if(notification["karrieredag1d"]) {array.push(1)} else array.push(0);
-    if(notification["karrieredag2d"]) {array.push(1)} else array.push(0);
-    if(notification["karrieredag1w"]) {array.push(1)} else array.push(0);
-    return array;
-  }
-
-  // Returns the state of every fadderuka notification interval
-  function fadderukaArray() {
-    let array = [];
-    if(notification["fadderuka10m"]) {array.push(1)} else array.push(0);
-    if(notification["fadderuka30m"]) {array.push(1)} else array.push(0);
-    if(notification["fadderuka1h"]) {array.push(1)} else array.push(0);
-    if(notification["fadderuka2h"]) {array.push(1)} else array.push(0);
-    if(notification["fadderuka3h"]) {array.push(1)} else array.push(0);
-    if(notification["fadderuka6h"]) {array.push(1)} else array.push(0);
-    if(notification["fadderuka1d"]) {array.push(1)} else array.push(0);
-    if(notification["fadderuka2d"]) {array.push(1)} else array.push(0);
-    if(notification["fadderuka1w"]) {array.push(1)} else array.push(0);
-    return array;
-  }
-
-  // Returns the state of every bedpres notification interval
-  function bedpresArray() {
-    let array = [];
-    if(notification["bedpres10m"]) {array.push(1)} else array.push(0);
-    if(notification["bedpres30m"]) {array.push(1)} else array.push(0);
-    if(notification["bedpres1h"]) {array.push(1)} else array.push(0);
-    if(notification["bedpres2h"]) {array.push(1)} else array.push(0);
-    if(notification["bedpres3h"]) {array.push(1)} else array.push(0);
-    if(notification["bedpres6h"]) {array.push(1)} else array.push(0);
-    if(notification["bedpres1d"]) {array.push(1)} else array.push(0);
-    if(notification["bedpres2d"]) {array.push(1)} else array.push(0);
-    if(notification["bedpres1w"]) {array.push(1)} else array.push(0);
-    return array;
-  }
-
-  // Returns the state of every login notification interval
-  function loginArray() {
-    let array = [];
-    if(notification["login10m"]) {array.push(1)} else array.push(0);
-    if(notification["login30m"]) {array.push(1)} else array.push(0);
-    if(notification["login1h"]) {array.push(1)} else array.push(0);
-    if(notification["login2h"]) {array.push(1)} else array.push(0);
-    if(notification["login3h"]) {array.push(1)} else array.push(0);
-    if(notification["login6h"]) {array.push(1)} else array.push(0);
-    if(notification["login1d"]) {array.push(1)} else array.push(0);
-    if(notification["login2d"]) {array.push(1)} else array.push(0);
-    if(notification["login1w"]) {array.push(1)} else array.push(0);
-    return array;
-  }
-
-  // Returns the state of every annet notification interval
-  function annetArray() {
-    let array = [];
-    if(notification["annet10m"]) {array.push(1)} else array.push(0);
-    if(notification["annet30m"]) {array.push(1)} else array.push(0);
-    if(notification["annet1h"]) {array.push(1)} else array.push(0);
-    if(notification["annet2h"]) {array.push(1)} else array.push(0);
-    if(notification["annet3h"]) {array.push(1)} else array.push(0);
-    if(notification["annet6h"]) {array.push(1)} else array.push(0);
-    if(notification["annet1d"]) {array.push(1)} else array.push(0);
-    if(notification["annet2d"]) {array.push(1)} else array.push(0);
-    if(notification["annet1w"]) {array.push(1)} else array.push(0);
-    return array;
-  }
-
-  function notificationArray(category) {
-    let cat = category.toLowerCase();
-
-    switch (cat) {
-      case "tekkom":        return tekkomArray();
-      case "social":        return socialArray();
-      case "ctf":           return ctfArray();
-      case "karrieredag":   return karrieredagArray();
-      case "fadderuka":     return fadderukaArray();
-      case "bedpres":       return bedpresArray();       
-      case "login":         return loginArray();
-      case "annet":         return annetArray();
-    }
-  }
-
-  /**
-   * Executes the download itself, updates existing calendar or creates a new calendar if no calendar exists.
-   * 
-   * @param clickedEvents Array of events the user has joined
-   * @param calendarID    ID of the calendar if one does already exist
-   * 
-   * @see calendarExists  Checks if the calendar storage is defined and if it still exists on the device
-   * @see setCalendarID   Stores the ID of a new calendar in localstorage
-   * @see updateCalendar  Updates the events for a calendar that is found 
-   * @see createCalendar  Creates a new calendar if no calendar is to be found
-   */
-  async function executeDownload(clickedEvents, calendarID) {
-      if (typeof await calendarExists(calendarID) != "undefined") await updateCalendar(clickedEvents, calendarID)
-      else dispatch(setCalendarID(await createCalendar(clickedEvents)));
-  }
-
-  /**
-   * Handles press of download button, changes color of the button 
-   * and downloads if more than 3 seconds since last download
-   * 
-   * @see executeDownload Executes the download if permitted
-   * @see currentTime Returns the current time as a string of the IFO8 format
-   */
-  async function handleDownload() {
-    if(downloadState == null) {
-      setDownloadState(currentTime());
-      await executeDownload(clickedEvents, calendarID);
-    } else {
-      if(timeSinceDownload() >= 1000) await executeDownload(clickedEvents, calendarID);
-      setDownloadState(currentTime());
-    }
-  }
-
-  /**
-   * Checks how long its been since the events were last downloaded and returns the time in seconds.
-   * 
-   * @returns int, seconds
-   */
-  function timeSinceDownload() {
-    const now = new Date (currentTime());
-    const before = new Date (downloadState);
-    return now-before;
-  }
+    notificationArray(category)
 
   /**
    * Fetches data from API, formats the response, sets the cache, updates the events on the screen,
@@ -488,22 +306,11 @@ export default function EventScreen({ navigation }) {                     //  Ex
 
   useEffect(() => {                                                       //  --- FETCHES API AND UPDATES CACHE EVERY 10 SECONDS ---
     let interval = null;
+
     if(!search.status){                                                   //  Only when filter is closed to prevent "no match" issue
       interval = setInterval(() => {        
         (async() => {                                                     // Storing the current time
-          var year     = new Date().getFullYear()                         // Current year
-          var month    = 1 + new Date().getMonth()                        // Current month
-          var day      = new Date().getDate()                             // Current day
-          var hour     = new Date().getHours()                            // Current hour
-          var minute   = new Date().getMinutes()                          // Current minute
-
-          if(month < 10) month = '0' + month                              // Checking and fixing missing 0
-          if(day < 10) day = '0' + day                                    // Checking and fixing missing 0
-          if(hour < 10) hour = '0' + hour                                 // Checking and fixing missing 0
-          if(minute < 10) minute = '0' + minute                           // Checking and fixing missing 0
-
-          var currentTime = year + '-' + month + '-' + day + 'T' + hour + ':' + minute + ':00Z'       // Current full date
-          await AsyncStorage.setItem('lastFetch', currentTime)            //  Storing in AsyncStorage 
+          await AsyncStorage.setItem('lastFetch', new Date().toISOString()) //  Storing in AsyncStorage 
           getData();                                                      //  Fetches cache
         })()           
       }, 10000);                                                          //  Runs every 10 seconds
@@ -601,12 +408,12 @@ export default function EventScreen({ navigation }) {                     //  Ex
                           <View>
                               {CategorySquare(item.category)}
                               <Text style={{...ES.eventCardDayText,color: FetchColor(theme, 'TEXTCOLOR')}}>{item.startt[8]}{item.startt[9]}</Text>
-                              {lang ? MonthNO(item.startt[5] + item.startt[6], FetchColor(theme, 'TEXTCOLOR')) : MonthEN(item.startt[5] + item.startt[6], FetchColor(theme, 'TEXTCOLOR'))}
+                              {Month(item.startt[5] + item.startt[6], FetchColor(theme, 'TEXTCOLOR'), lang)}
                           </View>
                             {EventCardLocation(item, theme, lang)}
                             <View style={ES.view3}>
                                 <TouchableOpacity onPress={() => {
-                                  topic(item.eventID, lang, 0, (item.category).toLowerCase(), notificationArray(item.category))
+                                  topic(item.eventID, lang, 0, (item.category).toLowerCase(), notificationArray(notification, item.category))
                                   setClickedEvents(clickedEvents.some(event => event.eventID === item.eventID) ? clickedEvents.filter((x) => x.eventID !== item.eventID):[...clickedEvents, item])
                                 }}>
                                     <View style = {ES.bellPosition}><Bell orange={clickedEvents.some(event => event.eventID === item.eventID) ? true:false}/></View>
@@ -623,22 +430,8 @@ export default function EventScreen({ navigation }) {                     //  Ex
               )}
             /> 
           : 
-          events.length == 0 ?
-            <View style={{alignSelf: 'center', maxWidth: '80%'}}>
-              <View style={{height : '58%'}}/>
-              <Text style={{...T.centeredBold20, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? "Sjekk nettverkstilkoblingen din og prøv igjen. Kontakt TEKKOM dersom problemet vedvarer.":"Check your wifi connection and try again. Contact TEKKOM if the issue persists."}</Text>
-            </View>
-          :
-            <View>
-              <View style={{height : '50%'}}/>
-              <Text style={{...T.centeredOppositeColor, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? "Ingen treff":"No matching events"}</Text>
-            </View>
-        : 
-          <View style={{alignSelf: 'center', maxWidth: '80%'}}>
-            <View style={{height : '58%'}}/>
-            <Text style={{...T.centeredBold20, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? "Sjekk nettverkstilkoblingen din og prøv igjen. Kontakt TEKKOM dersom problemet vedvarer.":"Check your wifi connection and try again. Contact TEKKOM if the issue persists."}</Text>
-          </View>
-        }
+          events.length == 0 ? errorMessage("wifi", theme, lang) : errorMessage("nomatch", theme, lang)
+        : errorMessage("wifi", theme, lang)}
         {Space(Dimensions.get('window').height/3)}
       </View>    
 
@@ -658,8 +451,8 @@ export default function EventScreen({ navigation }) {                     //  Ex
         {renderedArray != null ? 
           <View style={MS.multiTop}>
             {clickedEvents.length > 0 ? 
-              <TouchableOpacity style={MS.touchableIcon} onPress={async () => await handleDownload()}>
-                <Image style={MS.multiIcon} source={theme == 0 || theme == 2 || theme == 3 ? timeSinceDownload() >= 1000 ? require('../assets/icons/download.png'):require('../assets/icons/download-orange.png') : require('../assets/icons/download-black.png')} />
+              <TouchableOpacity style={MS.touchableIcon} onPress={async () => await handleDownload(setDownloadState, downloadState, clickedEvents, calendarID)}>
+                <Image style={MS.multiIcon} source={theme == 0 || theme == 2 || theme == 3 ? timeSinceDownload(downloadState) >= 1000 ? require('../assets/icons/download.png'):require('../assets/icons/download-orange.png') : require('../assets/icons/download-black.png')} />
               </TouchableOpacity>
             :null}
 
@@ -676,21 +469,8 @@ export default function EventScreen({ navigation }) {                     //  Ex
         :null}
 
       </View>
-      {/* ========================= DISPLAY BOTTOM MENU ========================= */}
-      {Platform.OS === 'ios' ? <BlurView style={MS.bMenu} intensity={30}/> : <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENTANDROID')}}/>}
-      <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
-        <TouchableOpacity style={MS.bMenuIconTO}>
-          <Image style={MS.bMenuIcon} source={require('../assets/menu/calendar-orange.png')} />
-        </TouchableOpacity>
-
-        {/* <TouchableOpacity style={MS.bMenuIconTO} onPress={() => adPage()}>
-          <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/menu/business.png') : require('../assets/menu/business-black.png')} />
-        </TouchableOpacity> */}
-
-        <TouchableOpacity style={MS.bMenuIconTO} onPress={() => menuPage()}>
-          <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/menu/menu.png') : require('../assets/menu/menu-black.png')} />
-        </TouchableOpacity>
-      </View>     
+      
+      <BottomMenu navigation={navigation} screen="event" />
     </View>
   )
 };

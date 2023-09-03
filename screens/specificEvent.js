@@ -1,14 +1,11 @@
-import CategoryCircle from '../shared/eventComponents/categoryCircle';
-import CategorySquare from '../shared/eventComponents/categorySquare';
+import CategorySquare, { CategoryCircle } from '../shared/eventComponents/category';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import FetchJoinLink from '../shared/eventComponents/fetchJoinLink';
 import EventLocation from '../shared/eventComponents/eventLocation';
-import DynamicCircle from '../shared/eventComponents/dynamicCircle';
-import EventTime from '../shared/eventComponents/eventTime';
-import CardSmaller from '../shared/functions/cardSmaller';
-import MonthNO from '../shared/eventComponents/monthNO';
-import MonthEN from '../shared/eventComponents/monthEN';
-import GetEndTime from '../shared/functions/getEndTime';
+import EventTime from '../shared/functions/time';
+import { CardSmaller } from '../shared/functions/card';
+import Month from '../shared/eventComponents/month';
+import { GetEndTime } from '../shared/functions/time';
 import React, { useEffect, useState } from 'react';
 import RenderHTML from 'react-native-render-html';
 import Space from '../shared/functions/space';
@@ -31,6 +28,7 @@ import {
   View,
   Text, 
 } from 'react-native';
+import BottomMenu from '../shared/bottomMenu';
 
 {/* ========================= APP START ========================= */}
 
@@ -125,7 +123,7 @@ export default function SpecificEventScreen({ route, navigation}) {
                     </Text>
 
                     <Text style={{...ES.monthText, color: FetchColor(theme, 'TEXTCOLOR')}}>
-                    {lang ? MonthNO(item.startt[5] + item.startt[6], FetchColor(theme, 'TEXTCOLOR')) : MonthEN(item.startt[5] + item.startt[6], FetchColor(theme, 'TEXTCOLOR'))}
+                    {Month(item.startt[5] + item.startt[6], FetchColor(theme, 'TEXTCOLOR'), lang)}
                     </Text>
                     </View>
                   </Card>
@@ -248,19 +246,7 @@ export default function SpecificEventScreen({ route, navigation}) {
 
     <Text style={{... MS.smallMultilineTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{item.eventname}</Text>
   </View>
-{/* ========================= DISPLAY BOTTOM MENU ========================= */}
-{Platform.OS === 'ios' ? <BlurView style={MS.bMenu} intensity={30}/> : <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENTANDROID')}}/>}
-    <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
-        <TouchableOpacity style={MS.bMenuIconTO} onPress={() => eventPage()}>
-            <Image style={MS.bMenuIcon} source={require('../assets/menu/calendar-orange.png')} />
-          </TouchableOpacity>
-          {/* <TouchableOpacity style={MS.bMenuIconTO} onPress={() => adPage()}>
-          <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/menu/business.png') : require('../assets/menu/business-black.png')} />
-          </TouchableOpacity> */}
-          <TouchableOpacity style={MS.bMenuIconTO} onPress={() => menuPage()}>
-          <Image style={MS.bMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/menu/menu.png') : require('../assets/menu/menu-black.png')} />
-          </TouchableOpacity>
-      </View>     
+  <BottomMenu navigation={navigation} screen="ses" />
     </View>
   )
 };

@@ -23,7 +23,7 @@ export default function Notification (category, skip) {    //Notification button
 
     if (!skip) topic(category, lang, notification[category]);
 
-    return(
+    const notificationSwitch = (
         <View>
             <Switch
                 trackColor={{ true: FetchColor(theme, 'TRACKCOLOR') }}
@@ -34,4 +34,6 @@ export default function Notification (category, skip) {    //Notification button
             />
         </View>
     )
+    
+    return notificationSwitch
 }
