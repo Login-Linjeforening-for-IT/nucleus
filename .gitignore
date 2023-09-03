@@ -5,6 +5,8 @@ android
 ios
 dist/
 npm-debug.*
+google-services.json
+GoogleService-Info.plist
 *.jks
 *.p8
 *.p12
