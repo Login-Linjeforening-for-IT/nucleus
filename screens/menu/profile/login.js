@@ -19,7 +19,6 @@ import {
     TextInput,
     Alert,
 } from 'react-native';                                                              // React Native
-import BottomMenu from '../../../shared/bottomMenu';
 import TopMenu from '../../../shared/topMenu';
 
 {/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
@@ -196,7 +195,6 @@ export default function LoginScreen( { navigation }) {
         </View>
 
         <TopMenu navigation={navigation} title={lang ? "Login" : "Login"} back={"MenuScreen"} />
-        <BottomMenu navigation={navigation} screen="menu" back={true} />
     </View>
   )
 };

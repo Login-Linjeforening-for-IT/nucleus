@@ -4,7 +4,6 @@ import { View, Dimensions,ScrollView } from 'react-native';
 import Profile from '../../../shared/profile/profile';
 import Space from '../../../shared/components/utils';
 import FetchColor from '../../../styles/fetchTheme';
-import BottomMenu from '../../../shared/bottomMenu';
 import { PS } from '../../../styles/profileStyles';
 import { GS } from '../../../styles/globalStyles';
 import TopMenu from '../../../shared/topMenu';
@@ -49,7 +48,6 @@ export default function ProfileScreen( { navigation }) {
         </View>   
 
         <TopMenu navigation={navigation} title={lang ? "Profil" : "Profile"} back={"MenuScreen"} />
-        <BottomMenu navigation={navigation} screen="menu" back={true} />
     </View>
   )
 };

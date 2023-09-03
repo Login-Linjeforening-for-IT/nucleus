@@ -9,7 +9,6 @@ import React, { useEffect, useState } from 'react';
 import RenderHTML from 'react-native-render-html';
 import EventTime from '../shared/functions/time';
 import FetchColor from '../styles/fetchTheme';
-import BottomMenu from '../shared/bottomMenu';
 import Card from '../shared/functions/card';
 import { GS } from '../styles/globalStyles';
 import { ES } from '../styles/eventStyles';
@@ -230,7 +229,6 @@ export default function SpecificEventScreen({ route, navigation}) {
       </View>   
        
         <TopMenu navigation={navigation} title={item.eventname} back={"EventScreen"} />
-        <BottomMenu navigation={navigation} screen="ses" />
     </View>
   )
 };

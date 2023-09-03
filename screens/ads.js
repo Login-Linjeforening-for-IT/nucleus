@@ -14,7 +14,6 @@ import Check from '../shared/eventComponents/check';
 import * as Notifications from 'expo-notifications';                        // Local notifications
 import Cluster from '../shared/functions/cluster';
 import Bell from '../shared/eventComponents/bell';
-import BottomMenu from '../shared/bottomMenu';
 import { setCalendarID } from '../redux/misc';
 import FetchColor from '../styles/fetchTheme';                              // Function to fetch theme color
 import { GS } from '../styles/globalStyles';                                // Global styles
@@ -414,7 +413,6 @@ export default function AdScreen({ navigation }) {                          //  
         :null}
 
         </View>
-        <BottomMenu navigation={navigation} screen="ad" />  
     </View>
   )
   
@@ -525,8 +523,7 @@ export default function AdScreen({ navigation }) {                          //  
           </View>
         :null}
 
-      </View>
-      <BottomMenu navigation={navigation} screen="ad" />
+      </View>   
     </View>
   )
 };

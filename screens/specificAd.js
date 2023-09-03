@@ -1,7 +1,6 @@
 import AdInfo, { AdBanner, AdTitle, AdDescription, AdUpdateInfo, AdMedia } from '../shared/ad';
 import { View, ScrollView, Dimensions } from 'react-native';
 import Cluster from '../shared/functions/cluster';
-import BottomMenu from '../shared/bottomMenu';
 import Space from '../shared/functions/space';
 import FetchColor from '../styles/fetchTheme';
 import { GS } from '../styles/globalStyles';
@@ -37,7 +36,6 @@ export default function SpecificAdScreen( { route, navigation }) {
                 </ScrollView>
             </View>    
             <TopMenu navigation={navigation} title={lang ? item.title_no : item.title_no} back={"AdScreen"} />
-            <BottomMenu navigation={navigation} screen="sas" />
         </View>
     )
 };

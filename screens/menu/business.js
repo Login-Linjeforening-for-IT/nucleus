@@ -4,7 +4,6 @@ import { Kontakt } from '../../shared/functions/social';
 import Cluster from '../../shared/functions/cluster';
 import en from '../../locales/en/companiesPage.json'
 import no from '../../locales/nb/companiesPage.json'
-import BottomMenu from '../../shared/bottomMenu';
 import FetchColor from '../../styles/fetchTheme';                               // Color fetcher
 import { GS } from '../../styles/globalStyles';                                 // Global styles 
 import TopMenu from '../../shared/topMenu';
@@ -69,7 +68,6 @@ export default function BusinessScreen( { navigation }) {                       
         
         </View>   
         <TopMenu navigation={navigation} title={lang ? "For bedrifter" : "For companies"} back={"MenuScreen"} />
-        <BottomMenu navigation={navigation} screen="menu" back={true} />
     </View>
     
   )

@@ -1,6 +1,5 @@
 import { nativeApplicationVersion } from "expo-application";
 import Cluster from '../shared/functions/cluster';
-import BottomMenu from '../shared/bottomMenu';
 import Space from "../shared/components/utils";
 import FetchColor from '../styles/fetchTheme';
 import { CS } from '../styles/clusterStyles';
@@ -110,7 +109,7 @@ return(
       </View>    
 
         <TopMenu navigation={navigation} title={lang ? "Meny" : "Menu"}/>
-        <BottomMenu navigation={navigation} screen="menu" />
+        
     </View>
   )
 };

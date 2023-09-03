@@ -5,7 +5,6 @@ import Language from '../../shared/functions/language';
 import Cluster from '../../shared/functions/cluster';
 import Space from '../../shared/components/utils';
 import FetchColor from '../../styles/fetchTheme';
-import BottomMenu from '../../shared/bottomMenu';
 import { GS } from '../../styles/globalStyles';
 import TopMenu from '../../shared/topMenu';
 import { useSelector } from 'react-redux';
@@ -250,7 +249,6 @@ export default function SettingScreen( { navigation }) {
       </View>   
 
         <TopMenu navigation={navigation} title={lang ? "Innstillinger" : "Settings"} back={"MenuScreen"} />
-        <BottomMenu navigation={navigation} screen="menu" back={true} />
     </View>
     
   )
