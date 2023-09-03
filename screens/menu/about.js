@@ -4,7 +4,6 @@ import Dropdown from '../../shared/functions/dropdown';
 import Cluster from '../../shared/functions/cluster';
 import Space, { Line } from '../../shared/components/utils';
 import FetchColor from '../../styles/fetchTheme';
-import BottomMenu from '../../shared/bottomMenu';
 import en from '../../locales/en/aboutPage.json';
 import no from '../../locales/nb/aboutPage.json';
 import { GS } from '../../styles/globalStyles';
@@ -198,7 +197,6 @@ export default function AboutScreen( { navigation } ) {
     </ScrollView>
     </View> 
         <TopMenu navigation={navigation} title={lang ? "Om oss" : "About Login"} back={"MenuScreen"} />
-        <BottomMenu navigation={navigation} screen="menu" back={true} />
     </View>
   )
 };

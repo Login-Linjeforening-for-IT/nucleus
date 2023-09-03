@@ -3,7 +3,6 @@ import GreenLight, { GrayLight } from '../../shared/eventComponents/light';
 import { CardSmaller } from '../../shared/functions/card';
 import Check from '../../shared/eventComponents/check';
 import Button from '../../shared/functions/button';
-import BottomMenu from '../../shared/bottomMenu';
 import Space from '../../shared/components/utils';
 import FetchColor from '../../styles/fetchTheme';
 import { SS } from '../../styles/settingStyles';
@@ -210,7 +209,6 @@ const inputContent = (val) => {
     </View>   
 
         <TopMenu navigation={navigation} title={lang ? "Varsle" : "Report"} back={"MenuScreen"} />
-        <BottomMenu navigation={navigation} screen="menu" back={true} />
         </View>
     </TouchableWithoutFeedback>
 

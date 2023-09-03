@@ -14,7 +14,6 @@ import { useFocusEffect } from '@react-navigation/native';                // use
 import * as Notifications from 'expo-notifications';                      // Local notifications
 import Bell from '../shared/eventComponents/bell';
 import Cluster from '../shared/functions/cluster';
-import BottomMenu from '../shared/bottomMenu';
 import FetchColor from '../styles/fetchTheme';                            // Function to fetch theme color
 import { GS } from '../styles/globalStyles';                              // Global styles
 import { StatusBar } from 'expo-status-bar';                              // Status bar
@@ -444,10 +443,7 @@ export default function EventScreen({ navigation }) {                     //  Ex
             :null}
           </View>
         :null}
-
       </View>
-      
-      <BottomMenu navigation={navigation} screen="event" />
     </View>
   )
 };

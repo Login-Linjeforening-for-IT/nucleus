@@ -1,7 +1,6 @@
 import topic from '../../shared/notificationComponents/topic';
 import FetchColor from '../../styles/fetchTheme';
 import Space from '../../shared/components/utils';
-import BottomMenu from '../../shared/bottomMenu';
 import Card from '../../shared/functions/card';
 import { GS } from '../../styles/globalStyles';                                     // Global styles
 import TopMenu from '../../shared/topMenu';
@@ -54,7 +53,6 @@ export default function InternalScreen({ navigation }) {
       </View>    
     
         <TopMenu navigation={navigation} title={lang ? "Internt" : "Intranet"} back={"MenuScreen"} />
-        <BottomMenu navigation={navigation} screen="menu" back={true} /> 
     </View>
   )
 };
