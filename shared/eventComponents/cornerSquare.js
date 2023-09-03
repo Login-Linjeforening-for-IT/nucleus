@@ -1,9 +1,9 @@
 import FetchColor from '../../styles/fetchTheme';
 import { GS } from '../../styles/globalStyles';
 import Svg, { Rect } from 'react-native-svg';
+import { random } from '../components/utils';
 import { View } from 'react-native';
-import React from 'react';
-import random from '../functions/random';
+
 
 /**
  * Function for drawing a small square of the category of the event

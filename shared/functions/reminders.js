@@ -1,15 +1,10 @@
-import TopicSwitchList from '../notificationComponents/topicSwitchList';
+import TopicSwitchList from '../notificationComponents/topicSwitch';
+import { TouchableOpacity, Image, View, Text } from 'react-native';
 import FetchColor from '../../styles/fetchTheme';
 import { GS } from '../../styles/globalStyles';
 import { useSelector } from 'react-redux';
 import React, {useState } from 'react';
 import { T } from '../../styles/text'
-import { 
-    TouchableOpacity,
-    Image,
-    View, 
-    Text, 
-} from 'react-native';
 
 /**
  * Creates a full dropdownmenu for reminders
@@ -19,19 +14,18 @@ export default function Reminders() {
     
     const { lang  } = useSelector( (state) => state.lang  )
     const { theme } = useSelector( (state) => state.theme )
+    const [category, setCategory] = useState(-1)
 
     const [categories] = useState([
-        {id: '1', source: 'tekkom', title: 'TekKom'},
-        {id: '2', source: 'ctf', title: 'CTF'},
-        {id: '3', source: 'social', title: lang ? 'Sosialt' : "Social"},
+        {id: '1', source: 'tekkom',      title: 'TekKom'},
+        {id: '2', source: 'ctf',         title: 'CTF'},
+        {id: '3', source: 'social',      title: lang ? 'Sosialt' : "Social"},
         {id: '4', source: 'karrieredag', title: lang ? "Karrieredag" : "Career day"},
-        {id: '5', source: 'fadderuka', title: 'Fadderuka'},
-        {id: '6', source: 'bedpres', title: 'Bedpres'},
-        {id: '7', source: 'login', title: 'Login'},
-        {id: '8', source: 'annet', title: lang ? "Annet" : "Other"}
+        {id: '5', source: 'fadderuka',   title: 'Fadderuka'},
+        {id: '6', source: 'bedpres',     title: 'Bedpres'},
+        {id: '7', source: 'login',       title: 'Login'},
+        {id: '8', source: 'annet',       title: lang ? "Annet" : "Other"}
     ])
-
-    const [category, setCategory] = useState(-1)
 
     const showCategory = (val) => {
         if (category == val) setCategory(-1);

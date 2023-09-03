@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as ImagePicker from 'expo-image-picker';
 import FetchColor from '../../styles/fetchTheme';
 import { PS } from '../../styles/profileStyles';
-import React, {useState} from 'react';
+import { setImage } from '../../redux/profile';
 import { T } from '../../styles/text';
+import {useState} from 'react';
 
 import { 
     TouchableOpacity, 
@@ -21,10 +22,6 @@ import Animated, {
     withTiming,
     runOnJS,
 } from 'react-native-reanimated';
-
-import { 
-    setImage
-} from '../../redux/profile';
 
 /**
  * Function for drawing a very small square of the category of the event
@@ -97,8 +94,6 @@ export default function ChangeProfleCard({theme, lang, type, value, hide, trigge
           quality: 1,
         });
     
-        //console.log(result);
-    
         if (!result.canceled) {
           setTempImage(result.assets[0].uri);
           dispatch(setImage(result.assets[0].uri))
@@ -135,5 +130,5 @@ export default function ChangeProfleCard({theme, lang, type, value, hide, trigge
                 </View>
             </Animated.View>
         </PanGestureHandler>
-        );
+    );
 };

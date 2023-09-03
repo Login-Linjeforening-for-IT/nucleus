@@ -1,14 +1,9 @@
-import React from 'react';
-import { SS } from '../../styles/settingStyles';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import { changeLang } from '../../redux/lang';
-import { 
-    View, 
-    Text, 
-    TouchableOpacity,
-} from 'react-native';
-import FetchColor from '../../styles/fetchTheme';
 import topic from '../notificationComponents/topic';
+import FetchColor from '../../styles/fetchTheme';
+import { SS } from '../../styles/settingStyles';
+import { changeLang } from '../../redux/lang';
 
 /**
  * Function for choosing the language

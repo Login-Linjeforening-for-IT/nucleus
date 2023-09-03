@@ -15,7 +15,7 @@ export default function EventLocation(room, campus, street) {
     const { lang  } = useSelector( (state) => state.lang  )
     const { theme } = useSelector( (state) => state.theme )
 
-    if(!room && !campus && !street) {
+    if (!room && !campus && !street) {
         return(
             <View style={ES.specificEventInfoView}>
                 <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Lokasjon:   ' : 'Location:     '}</Text>
@@ -24,14 +24,14 @@ export default function EventLocation(room, campus, street) {
         )
     }
 
-    if(room != null || campus != null || street != null) {
+    if (room != null || campus != null || street != null) {
         return(
             <View style={ES.specificEventInfoView}>
                 <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? 'Lokasjon:   ' : 'Location:     '}</Text>
                 <Text style={{...T.specificEventInfo, maxWidth: '80%', color: FetchColor(theme, 'TEXTCOLOR')}}>{room ? room + ', ':null}{campus}{street}</Text>
             </View>
         )
-    }else{
+    } else {
         <View style={ES.specificEventInfoView}>
             <Text style={T.red}>{lang ? 'Feil ved henting av sted.' : 'Error fetching location'}</Text>
         </View>

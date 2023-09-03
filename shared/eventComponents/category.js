@@ -30,7 +30,7 @@ export function CategoryCircle(category) {  //SVG showing the color of the categ
             <Circle cx="50" cy="50" r="50" fill={CategoryColor(category)} />
             </Svg>
         </View>
-        );
+    );
 };
 
 /**

@@ -13,12 +13,11 @@ export default function EventTime(startTime, endTime) { // startTime
     
     const { lang  } = useSelector( (state) => state.lang  )
     const { theme } = useSelector( (state) => state.theme )
-
-    var year     = new Date().getFullYear()
-    var month    = new Date().getMonth()
-    var day      = new Date().getDate()
-    var hour     = new Date().getHours()
-    var minute   = new Date().getMinutes()
+    const year     = new Date().getFullYear()
+    const month    = new Date().getMonth()
+    const day      = new Date().getDate()
+    const hour     = new Date().getHours()
+    const minute   = new Date().getMinutes()
 
     if(startTime != null && endTime != null){                                               //Concatenating start:
         const startYear   = parseInt((startTime)[0] + (startTime)[1] + (startTime)[2] + (startTime)[3])   //  year
@@ -241,12 +240,11 @@ function beyondTime(eventTime) { // True if the given time has passed
  * @returns                Boolean 
  */
 export function endsSoon(endTime) {     //Bool for if we are more than half way through the event
-    var year     = new Date().getFullYear()
-    var month    = 1 + new Date().getMonth()
-    var day      = new Date().getDate()
-    var hour     = new Date().getHours()
-    var minute   = new Date().getMinutes()
-
+    const year     = new Date().getFullYear()
+    const month    = 1 + new Date().getMonth()
+    const day      = new Date().getDate()
+    const hour     = new Date().getHours()
+    const minute   = new Date().getMinutes()
     const endYear     = (endTime)[0]  + (endTime)[1] + (endTime)[2] + (endTime)[3]  //  year
     const endMonth    = (endTime)[5]  + (endTime)[6]                                //  month
     const endDay      = (endTime)[8]  + (endTime)[9]                                //  day

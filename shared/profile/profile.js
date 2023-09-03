@@ -3,7 +3,7 @@ import ChangeProfileCard from './changeProfileCard';
 import FetchColor from '../../styles/fetchTheme';
 import { PS } from '../../styles/profileStyles';
 import React, { useState } from 'react';
-import Space from '../functions/space';
+import Space from '../components/utils';
 import { T } from '../../styles/text';
 
 /**

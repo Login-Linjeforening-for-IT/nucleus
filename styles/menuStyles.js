@@ -86,8 +86,8 @@ export const MS = StyleSheet.create ({                              // Declares 
     // --- BOTTOM MENU ---
   bMenu: {                                                          // Bottom menu view
     position: 'absolute',
-    top: Platform.OS == "ios" ? "73%":null,
-    bottom: Platform.OS == "ios" ? null : 350-Dimensions.get('window').height/3.3,
+    top: Platform.OS == "ios" ? "90%":null,
+    bottom: Platform.OS == "ios" ? null : 0,
     width: '100%',
     height: "10%",//Dimensions.get('window').height/4,              // Sets the height of the bottom menu to 10% of the screen height
     flexDirection: 'row',                                           // Changes the flex directions to allow for multiple elements horizontally
@@ -98,7 +98,6 @@ export const MS = StyleSheet.create ({                              // Declares 
     height: 65,                                                     // Icon height
   },
   bMenuIcon: {                                                      // Bottom menu icons
-    bottom: '10%',
     width: 90,                                                     // Icon width
     height: 65,                                                     // Icon height
     alignSelf: 'center'

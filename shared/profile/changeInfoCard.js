@@ -1,11 +1,9 @@
 import { PanGestureHandler } from 'react-native-gesture-handler';
-import React, {useEffect, useState} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import FetchColor from '../../styles/fetchTheme';
 import { PS } from '../../styles/profileStyles';
-import { CS } from '../../styles/clusterStyles';
-import Cluster from '../functions/cluster';
-import { useDispatch, useSelector } from 'react-redux';
-import Space from '../functions/space';
+import { Line } from '../components/utils';
+import {useEffect, useState} from 'react';
 import { T } from '../../styles/text';
 
 import { 
@@ -13,11 +11,8 @@ import {
     Dimensions,
     TextInput,
     Keyboard,
-    Image, 
     View, 
     Text,
-    ScrollView,
-    TouchableWithoutFeedback,
 } from 'react-native';
 
 import Animated, { 
@@ -29,14 +24,12 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import { 
-    setName, 
     setAllergies, 
     setPreferences, 
     setMail, 
     setSchoolyear,
     setDegree
 } from '../../redux/profile';
-import Line from '../functions/line';
 
 /**
  * Function for drawing a very small square of the category of the event
@@ -143,7 +136,6 @@ export default function ChangeInfoCard({theme, lang, type, value, hide, trigger}
     }
 
     const save = () => {
-        console.log("saved")
         switch (value) {
             case 0:     dispatch(setDegree(text));       break;
             case 1:     dispatch(setSchoolyear(text));   break;
@@ -153,13 +145,13 @@ export default function ChangeInfoCard({theme, lang, type, value, hide, trigger}
         }
     }
 
-    findBestPlaceHolder = () => {
+    const findBestPlaceHolder = () => {
         switch (value) {
-            case 0: return(profile.degree       ? profile.degree        : type)
-            case 1: return(profile.schoolyear   ? profile.schoolyear    : type)
-            case 2: return(profile.mail         ? profile.mail          : type)
-            case 3: return(profile.preferences  ? profile.preferences   : type)
-            case 4: return(profile.allergies    ? profile.allergies     : type)
+            case 0:     return(profile.degree      ? profile.degree      : type)
+            case 1:     return(profile.schoolyear  ? profile.schoolyear  : type)
+            case 2:     return(profile.mail        ? profile.mail        : type)
+            case 3:     return(profile.preferences ? profile.preferences : type)
+            case 4:     return(profile.allergies   ? profile.allergies   : type)
         }
     }
 

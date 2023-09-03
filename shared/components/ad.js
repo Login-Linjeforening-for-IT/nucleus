@@ -1,9 +1,9 @@
 import FetchColor from '../../styles/fetchTheme';
-import LastFetch from '../functions/lastfetch';
+import LastFetch from '../eventComponents/fetch';
 import { AS } from '../../styles/adStyles';
 import { useSelector } from 'react-redux';
 import { View, Text } from 'react-native';
-import Space from '../functions/space';
+import Space from './utils';
 import { T } from '../../styles/text';
 import { 
     TouchableOpacity,

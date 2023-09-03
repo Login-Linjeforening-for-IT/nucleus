@@ -2,7 +2,6 @@ import FetchColor from '../../styles/fetchTheme';
 import { SS } from '../../styles/settingStyles';
 import { useSelector } from 'react-redux';
 import { View } from 'react-native';
-import React from 'react';
 
 /**
  * Returns a Login colored button

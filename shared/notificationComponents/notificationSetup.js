@@ -1,3 +1,4 @@
+import { changeNotificationState } from '../../redux/notifications';
 import { useDispatch } from 'react-redux';
 
 // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 5/6
@@ -13,6 +14,7 @@ export default async function notificationSetup() {
     // COMMENT IN THIS BOX WHILE TESTING IN EXPO 5/6
     const dispatch = useDispatch()
     const granted = await messaging().requestPermission();
+
     if   (granted) {
         await messaging().subscribeToTopic("norwegianIMPORTANT");
         await messaging().subscribeToTopic("norwegianBEDPRES");
@@ -22,6 +24,8 @@ export default async function notificationSetup() {
         await messaging().subscribeToTopic("norwegianKARRIEREDAG");
         await messaging().subscribeToTopic("norwegianFADDERUKA");
         await messaging().subscribeToTopic("norwegianLOGIN");
-        await messaging().subscribeToTopic("norwegianANNET").then(dispatch(changeNotificationState("SETUP")));
-    } 
+        await messaging().subscribeToTopic("norwegianANNET")
+    }
+    
+    dispatch(changeNotificationState("SETUP"))
 }

@@ -1,16 +1,19 @@
-import registerForPushNotificationsAsync from '../shared/notificationComponents/registerForPushNotificationAsync';
-import removeDuplicatesAndOld from '../shared/eventComponents/removeDuplicatesAndOld';
 import updateCalendar, { createCalendar, calendarExists } from '../shared/eventComponents/calendar';
+import { AdClusterLocation, AdClusterImage } from '../shared/components/ad';
+import { removeDuplicatesAndOld } from '../shared/eventComponents/fetch';
 import AsyncStorage from '@react-native-async-storage/async-storage';       // Localstorage
+import Space, { errorMessage } from '../shared/components/utils';
 import CompareDates from '../shared/functions/compareDates';
 import topic from '../shared/notificationComponents/topic';
 import React, { useEffect, useState, useRef } from 'react';                 // React imports
+import { useFocusEffect } from '@react-navigation/native';                  // useFocusEffect       (do something when the screen is displayed)
+import LastFetch from '../shared/eventComponents/fetch';
 import { useSelector, useDispatch } from 'react-redux';                     // Redux
 import Check from '../shared/eventComponents/check';
-import Bell from '../shared/eventComponents/bell';
 import * as Notifications from 'expo-notifications';                        // Local notifications
+import Cluster from '../shared/functions/cluster';
+import Bell from '../shared/eventComponents/bell';
 import { setCalendarID } from '../redux/misc';
-import Space from '../shared/functions/space';
 import FetchColor from '../styles/fetchTheme';                              // Function to fetch theme color
 import { GS } from '../styles/globalStyles';                                // Global styles
 import { StatusBar } from 'expo-status-bar';                                // Status bar
@@ -19,28 +22,15 @@ import { MS } from '../styles/menuStyles';                                  // M
 import { BlurView } from 'expo-blur';                                       // Blur effect
 import { T } from '../styles/text';                                         // Text styles
 import {                                                                    // React native components
-  Text,                                                                     // Text component
-  View,                                                                     // View component
-  Image,                                                                    // Image component
-  FlatList,                                                                 // Flatlist component   (basic list)
-  TextInput,                                                                // Text input component (allows the user to type)
-  TouchableOpacity,                                                         // TouchableOpacity     (custom button)
-  Dimensions,                                                               // Size of the device
-  Platform,                                                                 // Operating system
+    Text,                                                                     // Text component
+    View,                                                                     // View component
+    Image,                                                                    // Image component
+    FlatList,                                                                 // Flatlist component   (basic list)
+    TextInput,                                                                // Text input component (allows the user to type)
+    TouchableOpacity,                                                         // TouchableOpacity     (custom button)
+    Dimensions,                                                               // Size of the device
+    Platform,                                                                 // Operating system
 } from 'react-native';                                                      // React native
-import { useFocusEffect } from '@react-navigation/native';                  // useFocusEffect       (do something when the screen is displayed)
-import LastFetch from '../shared/functions/lastfetch';
-import Cluster from '../shared/functions/cluster';
-import { AdClusterLocation, AdClusterImage } from '../shared/ad';
-import BottomMenu from '../shared/bottomMenu';
-
-Notifications.setNotificationHandler({
-  handleNotification: async () => ({
-    shouldShowAlert: true,
-    shouldPlaySound: true,
-    shouldSetBadge: false,
-  }),
-});
 
 /**
  * Parent AdScreen function
@@ -55,28 +45,28 @@ Notifications.setNotificationHandler({
  * @returns EventScreen
  */
 export default function AdScreen({ navigation }) {                          //  Exports the screen
-  const [ads, setAds] = useState([]);                                       //  Ads from api
-  const [renderedArray, setRenderedArray] = useState([]);                   //  Ads currently displayed
-  const [clickedAds, setClickedAds] = useState([]);                         //  Clicked ads
-  const [clickedAdType, setClickedAdType] = useState([]);                   //  Clicked ad types
-  const [lastSave, setLastSave] = useState(null)                            //  Last time API was fetched successfully
-  const [DS, setDS] = useState(null)                                        //  Download state
-  const [filter, setFilter] = useState({input: null});                      //  Filter text input declaration
-  const textInputRef = useRef(null);                                        //  Clears text input
-  const dispatch = useDispatch()                                            //  Dispatch to change Redux state
-  const [relevantAds, setRelevantAds] = useState([]);                       //  Relevant ads to filter
-  const [search, toggleSearch] = useState({status: 0})                      //  Search bar visibility boolean
-  const notification = useSelector( (state) => state.notification )         //  Fetches notification state
-  const { lang  }    = useSelector( (state) => state.lang  )                //  Language state
-  const { theme }    = useSelector( (state) => state.theme )                //  Theme state
-  const { calendarID } = useSelector( (state) => state.misc )               //  Calendar ID
-  const eventPage   = () => { navigation.navigate('EventScreen') } // Navigate to eventPage
-  const [expoPushToken, setExpoPushToken] = useState('');                   //  Array for notification token
-  const [pushNotification, setPushNotification] = useState(false);          //  Array for setting the push notification
-  const notificationListener = useRef();                                    //  Notification listener
-  const responseListener = useRef();                                        //  Response listener (if it was sent or not)                                     
+    const [ads, setAds] = useState([]);                                       //  Ads from api
+    const [renderedArray, setRenderedArray] = useState([]);                   //  Ads currently displayed
+    const [clickedAds, setClickedAds] = useState([]);                         //  Clicked ads
+    const [clickedAdType, setClickedAdType] = useState([]);                   //  Clicked ad types
+    const [lastSave, setLastSave] = useState(null)                            //  Last time API was fetched successfully
+    const [DS, setDS] = useState(null)                                        //  Download state
+    const [filter, setFilter] = useState({input: null});                      //  Filter text input declaration
+    const textInputRef = useRef(null);                                        //  Clears text input
+    const dispatch = useDispatch()                                            //  Dispatch to change Redux state
+    const [relevantAds, setRelevantAds] = useState([]);                       //  Relevant ads to filter
+    const [search, toggleSearch] = useState({status: 0})                      //  Search bar visibility boolean
+    const notification = useSelector( (state) => state.notification )         //  Fetches notification state
+    const { lang  }    = useSelector( (state) => state.lang  )                //  Language state
+    const { theme }    = useSelector( (state) => state.theme )                //  Theme state
+    const { calendarID } = useSelector( (state) => state.misc )               //  Calendar ID
+    const eventPage   = () => { navigation.navigate('EventScreen') } // Navigate to eventPage
+    const [expoPushToken, setExpoPushToken] = useState('');                   //  Array for notification token
+    const [pushNotification, setPushNotification] = useState(false);          //  Array for setting the push notification
+    const notificationListener = useRef();                                    //  Notification listener
+    const responseListener = useRef();                                        //  Response listener (if it was sent or not)                                     
 
-  // TEMPORARY TESTDATA
+    // TEMPORARY TESTDATA
     const [addata] = useState([
         {
             id: 1, 
@@ -237,129 +227,110 @@ export default function AdScreen({ navigation }) {                          //  
     setRenderedArray([...uniqueFiltered]);                                  // Converts to lowercase, filters and updates
   }
   
-  const Filter = () => {                                                    //  --- PARENT FILTER FUNCTION ---
-    if (filter.input != null) {                                             // If filter.input is not null
-      if (clickedAdType.length > 0){                                        // If the user has clicked something
-        if(filter.input.length > 0){  filterBoth()}                         // Filter both text and categories if the text is longer than 0
-        else{setRenderedArray([...ads])}                                    // Update the displayed ads if the text is not longer than 0
-      } else filterText()                                                   // If no categories are clicked only filter text
-    } else if (clickedAdType.length > 0) {fetchRelevantAds()}               // if the filter is null but categories are clicked only filter categories
-    else{setRenderedArray([...ads])}                                        // If both are null or 0 update the displayed ads
-  }
+    const Filter = () => {                                                    //  --- PARENT FILTER FUNCTION ---
+        if (filter.input != null) {                                             // If filter.input is not null
+        if (clickedAdType.length > 0){                                        // If the user has clicked something
+            if(filter.input.length > 0){  filterBoth()}                         // Filter both text and categories if the text is longer than 0
+            else{setRenderedArray([...ads])}                                    // Update the displayed ads if the text is not longer than 0
+        } else filterText()                                                   // If no categories are clicked only filter text
+        } else if (clickedAdType.length > 0) {fetchRelevantAds()}               // if the filter is null but categories are clicked only filter categories
+        else{setRenderedArray([...ads])}                                        // If both are null or 0 update the displayed ads
+    }
   
-  const fetchRelevantAds = () => {                                          //  --- FETCHES RELEVANT CATEGORIES TO FILTER ---
-    relevantAds.unshift({id: '1', type: 'PÅMELDT'})                         // Filters then adds PÅMELDT since no ad has this attribute
-    setRelevantAds([...relevantAds])                                        // Updates categories available to filter
-  }
-
-  const fetchState = async() => {                                           //  --- FETCHES CLICKED ADS ---
-    let foundState = await AsyncStorage.getItem('clickedAds');              // Fetches the cache
-    if (foundState != null) {                                               // If cache exists
-      let parsed = JSON.parse(foundState)                                   // Parses from string to objects
-      setClickedAds(parsed)                                                 // Function to update the clickedAds array
-    } 
-  }
-
-  const fetchStoredAds = async() => {                                       // --- FETCHING STORED ADS IF NO WIFI ---
-    let tempArray = await AsyncStorage.getItem('cachedAds')                 // Fetches cache
-    if(tempArray != null){                                                  // If cache exists
-      let parsed = JSON.parse(tempArray);                                   // Parses from string to objects
-      setRenderedArray([...parsed]);                                        // Updates the renderedarray to equal cache
-      setAds([...parsed]);                                                  // Updates the ads array to equal cache
+    const fetchRelevantAds = () => {                                          //  --- FETCHES RELEVANT CATEGORIES TO FILTER ---
+        relevantAds.unshift({id: '1', type: 'PÅMELDT'})                         // Filters then adds PÅMELDT since no ad has this attribute
+        setRelevantAds([...relevantAds])                                        // Updates categories available to filter
     }
-  }
 
-  useFocusEffect(                                                           //  --- FETCHES CLICKED EVENTS WHEN SCREEN BECOMES VISIBLE ---
-  React.useCallback(() => {                                                 // Callback to avoid too many rerenders
-    fetchState()                                                            // Function to fetch clicked ads
-  }, [])
-);
+    const fetchState = async() => {                                           //  --- FETCHES CLICKED ADS ---
+        let foundState = await AsyncStorage.getItem('clickedAds');              // Fetches the cache
+        if (foundState != null) {                                               // If cache exists
+        let parsed = JSON.parse(foundState)                                   // Parses from string to objects
+        setClickedAds(parsed)                                                 // Function to update the clickedAds array
+        } 
+    }
 
-  if (clickedAds.length > 0) {                                              //  --- STORING FIRSTCOMING AND ALL CLICKED EVENT ---
-    (async() => {                                                           // IIFE
-      let storedID = 0;                                                     // Variable that takes the ID of the stored ad
-
-      let unique = removeDuplicatesAndOld(ads, clickedAds);
-
-      if(unique) {
-        for (let i = 0; i < unique.length; i++) {                           // Finds the firstcoming ad 
-          if (CompareDates((unique[i]).startt, (unique[storedID]).startt) == true) storedID = i;
+    const fetchStoredAds = async() => {                                       // --- FETCHING STORED ADS IF NO WIFI ---
+        let tempArray = await AsyncStorage.getItem('cachedAds')                 // Fetches cache
+        if(tempArray != null){                                                  // If cache exists
+        let parsed = JSON.parse(tempArray);                                   // Parses from string to objects
+        setRenderedArray([...parsed]);                                        // Updates the renderedarray to equal cache
+        setAds([...parsed]);                                                  // Updates the ads array to equal cache
         }
-        
-        await AsyncStorage.setItem("clickedAds", JSON.stringify(unique))                                 // Stores clicked ads
-        if(unique[storedID]) await AsyncStorage.setItem("firstAd", JSON.stringify((unique[storedID])))   // Stores firstcoming clicked ads
-      }
-    })();
-  };
+    }
 
-  useEffect(() => {                                                         //  --- NOTIFICATION MANAGEMENT ---
-    registerForPushNotificationsAsync(lang).then(token => setExpoPushToken(token));
+    useFocusEffect(                                                           //  --- FETCHES CLICKED EVENTS WHEN SCREEN BECOMES VISIBLE ---
+        React.useCallback(() => {                                                 // Callback to avoid too many rerenders
+            fetchState()                                                            // Function to fetch clicked ads
+        }, [])
+    );
 
-    notificationListener.current = Notifications.addNotificationReceivedListener(pushNotification => {
-      setPushNotification(pushNotification);
-    });
+    if (clickedAds.length > 0) {                                              //  --- STORING FIRSTCOMING AND ALL CLICKED EVENT ---
+        (async() => {                                                           // IIFE
+            let storedID = 0;                                                     // Variable that takes the ID of the stored ad
 
-    responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
-      console.log(response);
-    });
+            let unique = removeDuplicatesAndOld(ads, clickedAds);
 
-    return () => {
-      Notifications.removeNotificationSubscription(notificationListener.current);
-      Notifications.removeNotificationSubscription(responseListener.current);
+            if(unique) {
+                for (let i = 0; i < unique.length; i++) {                           // Finds the firstcoming ad 
+                if (CompareDates((unique[i]).startt, (unique[storedID]).startt) == true) storedID = i;
+                }
+                
+                await AsyncStorage.setItem("clickedAds", JSON.stringify(unique))                                 // Stores clicked ads
+                if(unique[storedID]) await AsyncStorage.setItem("firstAd", JSON.stringify((unique[storedID])))   // Stores firstcoming clicked ads
+            }
+        })();
     };
-  }, []);
 
-  useEffect(() => {                                                         //  --- LOADING FILTERED DATA WHEN FILTER CHANGES ---
-    if (filter.input != null || clickedAds.length > 0) {                    // If the filter is not null or there are categories clicked
-      if(filter.input != null && clickedAds.length == 0)  {                 // If the filter is not null but no categories are clicked
-        if (filter.input.length == 0) {                                     // If the length of the filter search text is equal 0
-          filterInput(null);                                                // Resets filter input
-          setClickedAds([]);                                                // Resets clicked categories
-          setRenderedArray([...ads])                                        // Resets renderedArray to all ads
+    useEffect(() => {                                                         //  --- LOADING FILTERED DATA WHEN FILTER CHANGES ---
+        if (filter.input != null || clickedAds.length > 0) {                    // If the filter is not null or there are categories clicked
+            if(filter.input != null && clickedAds.length == 0)  {                 // If the filter is not null but no categories are clicked
+                if (filter.input.length == 0) {                                     // If the length of the filter search text is equal 0
+                filterInput(null);                                                // Resets filter input
+                setClickedAds([]);                                                // Resets clicked categories
+                setRenderedArray([...ads])                                        // Resets renderedArray to all ads
+                }
+                Filter();                                                           // Run filter function if the filter search text is not empty
+            }else{
+                if(filter.input != null && clickedAds.length > 0){                  // If the filter is not null and there are categories clicked
+                if(filter.input.length > 0) {filterBoth();}                       // If the filter text is not empty calls filterBoth function
+                }
+            }                                           // If the filter input is null only filter categories
+        }else{
+            if(filter.input != null && clickedAds.length == 0 ) {                 // If the filter is not null but no categories are clicked
+                if(filter.input.length == 0) {                                      // If the filter length is 0
+                setRenderedArray([...ads]);                                       // Resets renderedArray
+                filterInput(null);                                                // Resets filter input
+                setClickedAds([]);                                                // Resets clicked categories
+                }
+            } else setRenderedArray([...ads]);                                    // If the filter text is null reset renderedArray to equal ads
         }
-        Filter();                                                           // Run filter function if the filter search text is not empty
-      }else{
-        if(filter.input != null && clickedAds.length > 0){                  // If the filter is not null and there are categories clicked
-          if(filter.input.length > 0) {filterBoth();}                       // If the filter text is not empty calls filterBoth function
-        }
-      }                                           // If the filter input is null only filter categories
-    }else{
-      if(filter.input != null && clickedAds.length == 0 ) {                 // If the filter is not null but no categories are clicked
-        if(filter.input.length == 0) {                                      // If the filter length is 0
-          setRenderedArray([...ads]);                                       // Resets renderedArray
-          filterInput(null);                                                // Resets filter input
-          setClickedAds([]);                                                // Resets clicked categories
-        }
-      } else setRenderedArray([...ads]);                                    // If the filter text is null reset renderedArray to equal ads
-    }
 
-  }, [filter, clickedAdType]);                                              //  Listens to changes in these arrays
+    }, [filter, clickedAdType]);                                              //  Listens to changes in these arrays
 
-  useEffect(() => {                                                         //  --- LOADING INITIAL DATA ---
-    getData();                                                              //  Fetches API
-    fetchState();                                                           //  Fetches clickedAds
-    fetchRelevantAds();                                              //  Fetches categories available to filter
-    ads.length ? setRenderedArray([...ads]) : fetchStoredAds();  
-  },[])                                                                     //  Renders when the screen is loaded
+    useEffect(() => {                                                         //  --- LOADING INITIAL DATA ---
+        getData();                                                              //  Fetches API
+        fetchState();                                                           //  Fetches clickedAds
+        fetchRelevantAds();                                              //  Fetches categories available to filter
+        ads.length ? setRenderedArray([...ads]) : fetchStoredAds();  
+    },[])                                                                     //  Renders when the screen is loaded
 
-  useEffect(() => {                                                         //  --- UPDATES FILTER ON EVENT CHANGE ---
-    fetchRelevantAds();                                                     //  Updates relevant categories to filter
-  }, [ads.length, clickedAds.length]);                                      //  Listens for changes in these arrays
+    useEffect(() => {                                                         //  --- UPDATES FILTER ON EVENT CHANGE ---
+        fetchRelevantAds();                                                     //  Updates relevant categories to filter
+    }, [ads.length, clickedAds.length]);                                      //  Listens for changes in these arrays
 
-  useEffect(() => {                                                         //  --- FETCHES API AND UPDATES CACHE EVERY 10 SECONDS ---
-    let interval = null;
-    if(!search.status){                                                     //  Only when filter is closed to prevent "no match" issue
-      interval = setInterval(() => {        
-        (async() => {                                                       // Storing the current time
-          await AsyncStorage.setItem('lastFetch', new Date().toISOString()) //  Storing in AsyncStorage 
-          getData();                                                        //  Fetches cache
-        })()           
-      }, 10000);                                                            //  Runs every 10 seconds
-    }else{
-      clearInterval(interval)                                               //  Clears the interval when the filter is opened
-    }
-    return () => clearInterval(interval)                                    //  Clears interval when unmounted to prevent memory leaks
-  }, [search.status]);
+    useEffect(() => {                                                         //  --- FETCHES API AND UPDATES CACHE EVERY 10 SECONDS ---
+        let interval = null;
+        if(!search.status){                                                     //  Only when filter is closed to prevent "no match" issue
+            interval = setInterval(() => {        
+                (async() => {                                                       // Storing the current time
+                await AsyncStorage.setItem('lastFetch', new Date().toISOString()) //  Storing in AsyncStorage 
+                getData();                                                        //  Fetches cache
+                })()           
+            }, 10000);                                                            //  Runs every 10 seconds
+        }else clearInterval(interval)                                               // Clears the interval when the menu is opened
+        return () => clearInterval(interval)                                    //  Clears interval when unmounted to prevent memory leaks
+    }, [search.status]);
 
   async function RenderAds() {                                              //  --- RESETS RENDERED EVENTS
     setRenderedArray([...ads])                                              //  Updates the rendered array
@@ -395,11 +366,11 @@ export default function AdScreen({ navigation }) {                          //  
         
         {renderedArray != null ? 
             <View style={MS.multiTop}>
-            {clickedAds.length > 0 ? 
+            {clickedAds.length > 0 && 
                 <TouchableOpacity style={MS.touchableIcon} onPress={async () => await handleDownload()}>
                 <Image style={MS.multiIcon} source={theme == 0 || theme == 2 || theme == 3 ? timeSinceDownload() >= 1000 ? require('../assets/icons/download.png'):require('../assets/icons/download-orange.png') : require('../assets/icons/download-black.png')} />
                 </TouchableOpacity>
-            :null}
+            }
 
             {renderedArray.length > 0 || clickedAds.length > 0 || filter.input != null ? 
                 <TouchableOpacity style={MS.touchableIcon} onPress={() => toggleSearchBar()}>
@@ -414,7 +385,6 @@ export default function AdScreen({ navigation }) {                          //  
         :null}
 
         </View>
-        <BottomMenu navigation={navigation} screen="ad" />  
     </View>
   )
   
@@ -487,22 +457,8 @@ export default function AdScreen({ navigation }) {                          //  
               )}
             /> 
           : 
-          ads.length == 0 ?
-            <View style={{alignSelf: 'center', maxWidth: '80%'}}>
-              <View style={{height : '58%'}}/>
-              <Text style={{...T.centeredBold20, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? "Sjekk nettverkstilkoblingen din og prøv igjen. Kontakt TEKKOM dersom problemet vedvarer.":"Check your wifi connection and try again. Contact TEKKOM if the issue persists."}</Text>
-            </View>
-          :
-            <View>
-              <View style={{height : '50%'}}/>
-              <Text style={{...T.centeredOppositeColor, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? "Ingen treff":"No matching ads"}</Text>
-            </View>
-        : 
-          <View style={{alignSelf: 'center', maxWidth: '80%'}}>
-            <View style={{height : '58%'}}/>
-            <Text style={{...T.centeredBold20, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? "Sjekk nettverkstilkoblingen din og prøv igjen. Kontakt TEKKOM dersom problemet vedvarer.":"Check your wifi connection and try again. Contact TEKKOM if the issue persists."}</Text>
-          </View>
-        }
+          ads.length == 0 ? errorMessage("wifi", theme, lang) : errorMessage("nomatch", theme, lang)
+        : errorMessage("wifi", theme, lang)}
         {Space(Dimensions.get('window').height/3)}
       </View>    
 
@@ -539,8 +495,7 @@ export default function AdScreen({ navigation }) {                          //  
           </View>
         :null}
 
-      </View>
-      <BottomMenu navigation={navigation} screen="ad" />
+      </View>   
     </View>
   )
 };
