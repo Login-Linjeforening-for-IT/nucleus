@@ -22,15 +22,15 @@ export default function Navigator() {                                       // D
     return (
         <NavigationContainer>
             <Tab.Navigator
-                intialRouteName='EventScreen'
+                intialRouteName='EventScreen' // Set initialscreen at to not defaut to top of tab stack
                 backBehavior='history'
                 screenOptions={{ headerShown: false }}
-                tabBar={props => <TabBar {...props} />}
+                tabBar={props => <TabBar {...props} />} // Sets the tab bar componet
             >
                 <Tab.Screen options={{
-                        display: true,
-                        focusedIcon: require('../assets/menu/calendar-orange.png'),
-                        themeIcon: (theme) => {
+                        display: true, // Set true if it should be shown in tab bar
+                        focusedIcon: require('../assets/menu/calendar-orange.png'), // The image to be used if the screen is selected
+                        themeIcon: (theme) => { // Method to get the image based on the theme
                             return theme == 0 || theme == 2 || theme == 3 ? require('../assets/menu/calendar777.png') : require('../assets/menu/calendar-black.png')
                         }
                     }}
