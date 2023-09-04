@@ -1,5 +1,6 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'; // Creates bottom tab navigator
 import {NavigationContainer} from '@react-navigation/native'; // Navigation container
+import { SafeAreaView } from 'react-native';
 
 const Tab = createBottomTabNavigator(); // Declares Tab to equal CBTN function
 import SpecificEventScreen from '../screens/specificEvent'; // Specific Events
@@ -15,6 +16,7 @@ import EventScreen from '../screens/event'; // Events
 import MenuScreen from '../screens/menu'; // Menu
 // import AdScreen from '../screens/ads'; // Job advertisements
 import TabBar from './functions/tabBar.js'
+import Header from './functions/header';
 
 export default function Navigator() { // Declares Navigator, wraps in container and declares all navigation routes
     return (
@@ -23,7 +25,9 @@ export default function Navigator() { // Declares Navigator, wraps in container 
             intialRouteName='EventScreen'
             backBehavior='history'
             screenOptions={{
-                headerShown: false
+                headerMode: 'screen',
+                headerTransparent: true,
+                header: props => <Header {...props}/>
             }}
             tabBar={props => <TabBar {...props} />}
             >
@@ -44,7 +48,8 @@ export default function Navigator() { // Declares Navigator, wraps in container 
                         focusedIcon: require('../assets/menu/menu-orange.png'),
                         themeIcon: (theme)=>{
                             return theme == 0 || theme == 2 || theme == 3 ? require('../assets/menu/menu.png') : require('../assets/menu/menu-black.png')
-                        }
+                        },
+                        title: ['Menu', 'Meny']
                     }} 
                     name='MenuScreen' 
                     component={MenuScreen}
