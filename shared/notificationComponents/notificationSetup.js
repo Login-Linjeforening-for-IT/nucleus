@@ -1,17 +1,17 @@
 import { changeNotificationState } from '../../redux/notifications';
 import { useDispatch } from 'react-redux';
 
-// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 5/6
-import messaging from '@react-native-firebase/messaging';
-// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 5/6
+// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 1/6
+// import messaging from '@react-native-firebase/messaging';
+// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 1/6
 
 /**
  * Runs when the app is first opened to setup initial notifications
  */
 export default async function notificationSetup() {
-    // COMMENT IN THIS BOX WHILE TESTING IN EXPO 5/6
-    // return null; // For testing in Expo
-    // COMMENT IN THIS BOX WHILE TESTING IN EXPO 5/6
+    // COMMENT IN THIS BOX WHILE TESTING IN EXPO 2/6
+    return null; // For testing in Expo
+    // COMMENT IN THIS BOX WHILE TESTING IN EXPO 2/6
     const dispatch = useDispatch()
     const granted = await messaging().requestPermission();
 
