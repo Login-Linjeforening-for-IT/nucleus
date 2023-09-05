@@ -13,11 +13,11 @@ export default function Footer({ state, descriptors, navigation }) {
 
     return (
         <>
-            // Create a blur element to blur tab backgound or android alternative
+            {/*Create a blur element to blur tab backgound or android alternative*/}
             {Platform.OS === 'ios' ? <BlurView style={MS.bMenu} intensity={30}/> : <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENTANDROID')}}/>}
-            // Transparent container for the icons
+            {/* Transparent container for the icons */}
             <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT') }}>
-                // Create the icons based on options passed from stack.js
+                {/* Create the icons based on options passed from stack.js */}
                 {state.routes.map((route, index) => {
                     const { options } = descriptors[route.key];
                     if (!options.display) return
