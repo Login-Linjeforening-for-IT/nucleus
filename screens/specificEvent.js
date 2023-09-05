@@ -1,21 +1,21 @@
-import CategorySquare, { CategoryCircle } from '../shared/eventComponents/category';
+import CategorySquare, { CategoryCircle } from 'login/shared/eventComponents/category';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import EventLocation from '../shared/eventComponents/eventLocation';
-import { FetchJoinLink } from '../shared/eventComponents/fetch';
-import Space, { Month } from '../shared/components/utils';
-import { CardSmaller } from '../shared/functions/card';
-import { GetEndTime } from '../shared/functions/time';
+import EventLocation from 'login/shared/eventComponents/eventLocation';
+import { FetchJoinLink } from 'login/shared/eventComponents/fetch';
+import Space, { Month } from 'login/shared/components/utils';
+import { CardSmaller } from 'login/shared/functions/card';
+import { GetEndTime } from 'login/shared/functions/time';
 import React, { useEffect, useState } from 'react';
 import RenderHTML from 'react-native-render-html';
-import EventTime from '../shared/functions/time';
-import FetchColor from '../styles/fetchTheme';
-import Card from '../shared/functions/card';
-import { GS } from '../styles/globalStyles';
-import { ES } from '../styles/eventStyles';
+import EventTime from 'login/shared/functions/time';
+import FetchColor from 'login/styles/fetchTheme';
+import Card from 'login/shared/functions/card';
+import { GS } from 'login/styles/globalStyles';
+import { ES } from 'login/styles/eventStyles';
 import { SvgUri } from 'react-native-svg';
 import { useSelector } from 'react-redux';
-import TopMenu from '../shared/topMenu';
-import { T } from '../styles/text';
+import TopMenu from 'login/shared/topMenu';
+import { T } from 'login/styles/text';
 import { 
   TouchableOpacity,
   ScrollView,
@@ -93,12 +93,12 @@ export default function SpecificEventScreen({ route, navigation}) {
             uri={`https://cdn.login.no/img/events/${item.image}`}
           />
         :(item.image).includes('.png')?<Image style={ES.specificEventImage}  source={{uri: `https://cdn.login.no/img/events/${item.image}`}}/>:null}
-        {(item.image == 'none' || !item.image) && item.category == 'TEKKOM'  && <Image style={ES.specificEventImage} source={require(`../assets/committee/tekkom/tekkom.png`)} />}
-        {(item.image == 'none' || !item.image) && item.category == 'CTF'     && <Image style={ES.specificEventImage} source={require(`../assets/committee/ctfkom/ctf.png`)} />}
-        {(item.image == 'none' || !item.image) && item.category == 'SOCIAL'  && <Image style={ES.specificEventImage} source={require(`../assets/categories/sosialt.png`)} />}
-        {(item.image == 'none' || !item.image) && item.category == 'LOGIN'   && <Image style={ES.specificEventImage} source={require(`../assets/categories/login.png`)} />}
-        {(item.image == 'none' || !item.image) && item.category == 'ANNET'   && <Image style={ES.specificEventImage} source={require(`../assets/categories/annet.png`)} />}
-        {(item.image == 'none' || !item.image) && item.category == 'BEDPRES' && <Image style={ES.specificEventImage} source={require(`../assets/categories/bedpresBig.png`)} />}
+        {(item.image == 'none' || !item.image) && item.category == 'TEKKOM'  && <Image style={ES.specificEventImage} source={require(`login/assets/committee/tekkom/tekkom.png`)} />}
+        {(item.image == 'none' || !item.image) && item.category == 'CTF'     && <Image style={ES.specificEventImage} source={require(`login/assets/committee/ctfkom/ctf.png`)} />}
+        {(item.image == 'none' || !item.image) && item.category == 'SOCIAL'  && <Image style={ES.specificEventImage} source={require(`login/assets/categories/sosialt.png`)} />}
+        {(item.image == 'none' || !item.image) && item.category == 'LOGIN'   && <Image style={ES.specificEventImage} source={require(`login/assets/categories/login.png`)} />}
+        {(item.image == 'none' || !item.image) && item.category == 'ANNET'   && <Image style={ES.specificEventImage} source={require(`login/assets/categories/annet.png`)} />}
+        {(item.image == 'none' || !item.image) && item.category == 'BEDPRES' && <Image style={ES.specificEventImage} source={require(`login/assets/categories/bedpresBig.png`)} />}
 
             {Space(5)}
           
@@ -149,7 +149,7 @@ export default function SpecificEventScreen({ route, navigation}) {
                     <View style={ES.row}>
                         <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>{' - '}</Text>
                         <Text style={{...T.mazemap, color: FetchColor(theme, 'ORANGE')}}>{lang ? 'Kart' : 'Map'}</Text>
-                        <Image style={ES.mazemapIcon} source={require('../assets/icons/mazemap.png')}/> 
+                        <Image style={ES.mazemapIcon} source={require('login/assets/icons/mazemap.png')}/> 
                     </View>
                 </TouchableOpacity>
                 :null}

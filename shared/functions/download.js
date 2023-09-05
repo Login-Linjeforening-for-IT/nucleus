@@ -1,4 +1,4 @@
-import updateCalendar, { createCalendar, calendarExists } from '../eventComponents/calendar';
+import updateCalendar, { createCalendar, calendarExists } from 'login/shared/eventComponents/calendar';
 
 /**
  * Handles press of download button, changes color of the button 

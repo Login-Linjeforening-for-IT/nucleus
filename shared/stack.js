@@ -1,19 +1,19 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';     // Creates bottom tab navigator
 import {NavigationContainer} from '@react-navigation/native';               // Navigation container
 
-import ProfileScreen from '../screens/menu/profile/profile';                // Login to innsida
-import SpecificEventScreen from '../screens/specificEvent';                 // Specific Events
-import LoginScreen from '../screens/menu/profile/login';                    // Login to innsida
-import InternalScreen from '../screens/menu/internal';                      // Internal screen
-import BusinessScreen from '../screens/menu/business';                      // Companies' screen
-// import SpecificAdScreen from '../screens/specificAd';                   // Specific job listing
-import SettingScreen from '../screens/menu/settings';                       // Settings
-import ReportScreen from '../screens/menu/report';                          // Report form for blameworthy conditions
-import AboutScreen from '../screens/menu/about';                            // About Login
-import EventScreen from '../screens/event';                                 // Events
-import MenuScreen from '../screens/menu';                                   // Menu
-// import AdScreen from '../screens/ads';                                   // Job advertisements
-import TabBar from './functions/tabBar.js'
+import ProfileScreen from 'login/screens/menu/profile/profile';                // Login to innsida
+import SpecificEventScreen from 'login/screens/specificEvent';                 // Specific Events
+import LoginScreen from 'login/screens/menu/profile/login';                    // Login to innsida
+import InternalScreen from 'login/screens/menu/internal';                      // Internal screen
+import BusinessScreen from 'login/screens/menu/business';                      // Companies' screen
+// import SpecificAdScreen from 'login/screens/specificAd';                   // Specific job listing
+import SettingScreen from 'login/screens/menu/settings';                       // Settings
+import ReportScreen from 'login/screens/menu/report';                          // Report form for blameworthy conditions
+import AboutScreen from 'login/screens/menu/about';                            // About Login
+import EventScreen from 'login/screens/event';                                 // Events
+import MenuScreen from 'login/screens/menu';                                   // Menu
+// import AdScreen from 'login/screens/ads';                                   // Job advertisements
+import TabBar from 'login/shared/functions/tabBar.js'
 
 const Tab = createBottomTabNavigator();                                     // Declares Tab to equal CBTN function
 
@@ -29,9 +29,9 @@ export default function Navigator() {                                       // D
             >
                 <Tab.Screen options={{
                         display: true, // Set true if it should be shown in tab bar
-                        focusedIcon: require('../assets/menu/calendar-orange.png'), // The image to be used if the screen is selected
+                        focusedIcon: require('login/assets/menu/calendar-orange.png'), // The image to be used if the screen is selected
                         themeIcon: (theme) => { // Method to get the image based on the theme
-                            return theme == 0 || theme == 2 || theme == 3 ? require('../assets/menu/calendar777.png') : require('../assets/menu/calendar-black.png')
+                            return theme == 0 || theme == 2 || theme == 3 ? require('login/assets/menu/calendar777.png') : require('login/assets/menu/calendar-black.png')
                         }
                     }}
                     name='EventScreen'
@@ -39,9 +39,9 @@ export default function Navigator() {                                       // D
                 />
                 <Tab.Screen options={{
                         display: true,
-                        focusedIcon: require('../assets/menu/menu-orange.png'),
+                        focusedIcon: require('login/assets/menu/menu-orange.png'),
                         themeIcon: (theme) => {
-                            return theme == 0 || theme == 2 || theme == 3 ? require('../assets/menu/menu.png') : require('../assets/menu/menu-black.png')
+                            return theme == 0 || theme == 2 || theme == 3 ? require('login/assets/menu/menu.png') : require('login/assets/menu/menu-black.png')
                         }
                 }} 
                     name='MenuScreen' 

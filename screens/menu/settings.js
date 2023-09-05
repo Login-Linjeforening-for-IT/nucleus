@@ -1,14 +1,14 @@
-import Notification from '../../shared/functions/notification';
-import ThemeSwitch from '../../shared/functions/themeSwitch';
-import Reminders from '../../shared/functions/reminders';
-import Language from '../../shared/functions/language';
-import Cluster from '../../shared/functions/cluster';
-import Space from '../../shared/components/utils';
-import FetchColor from '../../styles/fetchTheme';
-import { GS } from '../../styles/globalStyles';
-import TopMenu from '../../shared/topMenu';
+import Notification from 'login/shared/functions/notification';
+import ThemeSwitch from 'login/shared/functions/themeSwitch';
+import Reminders from 'login/shared/functions/reminders';
+import Language from 'login/shared/functions/language';
+import Cluster from 'login/shared/functions/cluster';
+import Space from 'login/shared/components/utils';
+import FetchColor from 'login/styles/fetchTheme';
+import { GS } from 'login/styles/globalStyles';
+import TopMenu from 'login/shared/topMenu';
 import { useSelector } from 'react-redux';
-import { T } from '../../styles/text';
+import { T } from 'login/styles/text';
 import { useState } from 'react';
 import React from 'react';
 import { 

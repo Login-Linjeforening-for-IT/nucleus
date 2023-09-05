@@ -1,4 +1,4 @@
-import { changeNotificationState } from '../../redux/notifications';
+import { changeNotificationState } from 'login/redux/notifications';
 import { useDispatch } from 'react-redux';
 
 // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 1/6

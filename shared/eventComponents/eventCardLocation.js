@@ -1,7 +1,7 @@
 import React from 'react';
-import { ES } from '../../styles/eventStyles';
+import { ES } from 'login/styles/eventStyles';
 import { View, Text } from 'react-native';
-import FetchColor from '../../styles/fetchTheme';
+import FetchColor from 'login/styles/fetchTheme';
 
 /**
  * Visual representation of the location on the Event Card

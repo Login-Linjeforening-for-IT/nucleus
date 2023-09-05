@@ -1,26 +1,26 @@
-import updateCalendar, { createCalendar, calendarExists } from '../shared/eventComponents/calendar';
-import { AdClusterLocation, AdClusterImage } from '../shared/components/ad';
-import { removeDuplicatesAndOld } from '../shared/eventComponents/fetch';
+import updateCalendar, { createCalendar, calendarExists } from 'login/shared/eventComponents/calendar';
+import { AdClusterLocation, AdClusterImage } from 'login/shared/components/ad';
+import { removeDuplicatesAndOld } from 'login/shared/eventComponents/fetch';
 import AsyncStorage from '@react-native-async-storage/async-storage';       // Localstorage
-import Space, { errorMessage } from '../shared/components/utils';
-import CompareDates from '../shared/functions/compareDates';
-import topic from '../shared/notificationComponents/topic';
+import Space, { errorMessage } from 'login/shared/components/utils';
+import CompareDates from 'login/shared/functions/compareDates';
+import topic from 'login/shared/notificationComponents/topic';
 import React, { useEffect, useState, useRef } from 'react';                 // React imports
 import { useFocusEffect } from '@react-navigation/native';                  // useFocusEffect       (do something when the screen is displayed)
-import LastFetch from '../shared/eventComponents/fetch';
+import LastFetch from 'login/shared/eventComponents/fetch';
 import { useSelector, useDispatch } from 'react-redux';                     // Redux
-import Check from '../shared/eventComponents/check';
+import Check from 'login/shared/eventComponents/check';
 import * as Notifications from 'expo-notifications';                        // Local notifications
-import Cluster from '../shared/functions/cluster';
-import Bell from '../shared/eventComponents/bell';
-import { setCalendarID } from '../redux/misc';
-import FetchColor from '../styles/fetchTheme';                              // Function to fetch theme color
-import { GS } from '../styles/globalStyles';                                // Global styles
+import Cluster from 'login/shared/functions/cluster';
+import Bell from 'login/shared/eventComponents/bell';
+import { setCalendarID } from 'login/redux/misc';
+import FetchColor from 'login/styles/fetchTheme';                              // Function to fetch theme color
+import { GS } from 'login/styles/globalStyles';                                // Global styles
 import { StatusBar } from 'expo-status-bar';                                // Status bar
-import { AS } from '../styles/adStyles';                                    // Ad styles
-import { MS } from '../styles/menuStyles';                                  // Menu styles
+import { AS } from 'login/styles/adStyles';                                    // Ad styles
+import { MS } from 'login/styles/menuStyles';                                  // Menu styles
 import { BlurView } from 'expo-blur';                                       // Blur effect
-import { T } from '../styles/text';                                         // Text styles
+import { T } from 'login/styles/text';                                         // Text styles
 import {                                                                    // React native components
     Text,                                                                     // Text component
     View,                                                                     // View component
@@ -355,7 +355,7 @@ export default function AdScreen({ navigation }) {                          //  
         {Platform.OS === 'ios' ? <BlurView style={MS.topMenu} intensity={30}/> : <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'TRANSPARENTANDROID')}}/>}
         <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
         <TouchableOpacity style={MS.logoBackground} onPress={() => eventPage()}>
-            <Image style={MS.tMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/logo/loginText.png') : require('../assets/logo/loginText-black.png')} />
+            <Image style={MS.tMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('login/assets/logo/loginText.png') : require('login/assets/logo/loginText-black.png')} />
         </TouchableOpacity>
         {
             lang ?
@@ -368,16 +368,16 @@ export default function AdScreen({ navigation }) {                          //  
             <View style={MS.multiTop}>
             {clickedAds.length > 0 && 
                 <TouchableOpacity style={MS.touchableIcon} onPress={async () => await handleDownload()}>
-                <Image style={MS.multiIcon} source={theme == 0 || theme == 2 || theme == 3 ? timeSinceDownload() >= 1000 ? require('../assets/icons/download.png'):require('../assets/icons/download-orange.png') : require('../assets/icons/download-black.png')} />
+                <Image style={MS.multiIcon} source={theme == 0 || theme == 2 || theme == 3 ? timeSinceDownload() >= 1000 ? require('login/assets/icons/download.png'):require('login/assets/icons/download-orange.png') : require('login/assets/icons/download-black.png')} />
                 </TouchableOpacity>
             }
 
             {renderedArray.length > 0 || clickedAds.length > 0 || filter.input != null ? 
                 <TouchableOpacity style={MS.touchableIcon} onPress={() => toggleSearchBar()}>
                 {search.status ? 
-                    <Image style={MS.multiIcon} source={require('../assets/icons/filter-orange.png')} />
+                    <Image style={MS.multiIcon} source={require('login/assets/icons/filter-orange.png')} />
                 :
-                    <Image style={MS.multiIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/icons/filter.png') : require('../assets/icons/filter-black.png')} />
+                    <Image style={MS.multiIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('login/assets/icons/filter.png') : require('login/assets/icons/filter-black.png')} />
                 }
                 </TouchableOpacity>
             :null}
@@ -409,7 +409,7 @@ export default function AdScreen({ navigation }) {                          //  
                 selectionColor={FetchColor(theme, "ORANGE")}
               />
               <TouchableOpacity onPress={() => filterInput(null) + setRenderedArray([...ads]) + textInputRef.current.clear()}>
-                <Image style={AS.filterResetIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/icons/reset.png') : require('../assets/icons/reset-black.png')} />
+                <Image style={AS.filterResetIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('login/assets/icons/reset.png') : require('login/assets/icons/reset-black.png')} />
               </TouchableOpacity>
             </View>
           </View>
@@ -466,7 +466,7 @@ export default function AdScreen({ navigation }) {                          //  
       {Platform.OS === 'ios' ? <BlurView style={MS.topMenu} intensity={30}/> : <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'TRANSPARENTANDROID')}}/>}
       <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
         <TouchableOpacity style={MS.logoBackground} onPress={() => eventPage()}>
-            <Image style={MS.tMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/logo/loginText.png') : require('../assets/logo/loginText-black.png')} />
+            <Image style={MS.tMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('login/assets/logo/loginText.png') : require('login/assets/logo/loginText-black.png')} />
         </TouchableOpacity>
         {
           lang ?
@@ -479,16 +479,16 @@ export default function AdScreen({ navigation }) {                          //  
           <View style={MS.multiTop}>
             {clickedAds.length > 0 ? 
               <TouchableOpacity style={MS.touchableIcon} onPress={async () => await handleDownload()}>
-                <Image style={MS.multiIcon} source={theme == 0 || theme == 2 || theme == 3 ? timeSinceDownload() >= 1000 ? require('../assets/icons/download.png'):require('../assets/icons/download-orange.png') : require('../assets/icons/download-black.png')} />
+                <Image style={MS.multiIcon} source={theme == 0 || theme == 2 || theme == 3 ? timeSinceDownload() >= 1000 ? require('login/assets/icons/download.png'):require('login/assets/icons/download-orange.png') : require('login/assets/icons/download-black.png')} />
               </TouchableOpacity>
             :null}
 
             {renderedArray.length > 0 || clickedAds.length > 0 || filter.input != null ? 
               <TouchableOpacity style={MS.touchableIcon} onPress={() => toggleSearchBar()}>
                 {search.status ? 
-                  <Image style={MS.multiIcon} source={require('../assets/icons/filter-orange.png')} />
+                  <Image style={MS.multiIcon} source={require('login/assets/icons/filter-orange.png')} />
                 :
-                  <Image style={MS.multiIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/icons/filter.png') : require('../assets/icons/filter-black.png')} />
+                  <Image style={MS.multiIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('login/assets/icons/filter.png') : require('login/assets/icons/filter-black.png')} />
                 }
               </TouchableOpacity>
             :null}

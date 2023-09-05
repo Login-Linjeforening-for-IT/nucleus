@@ -1,4 +1,4 @@
-import { fetchEventDetails } from './fetch';
+import { fetchEventDetails } from 'login/shared/eventComponents/fetch';
 import * as Calendar from 'expo-calendar';
 import { Platform } from 'react-native';
 

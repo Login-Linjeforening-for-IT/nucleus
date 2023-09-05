@@ -1,12 +1,12 @@
 import Svg, { LinearGradient, Rect, Stop } from 'react-native-svg';
-import ProfileInfo from '../../../shared/profile/profileInfo';
+import ProfileInfo from 'login/shared/profile/profileInfo';
 import { View, Dimensions,ScrollView } from 'react-native';
-import Profile from '../../../shared/profile/profile';
-import Space from '../../../shared/components/utils';
-import FetchColor from '../../../styles/fetchTheme';
-import { PS } from '../../../styles/profileStyles';
-import { GS } from '../../../styles/globalStyles';
-import TopMenu from '../../../shared/topMenu';
+import Profile from 'login/shared/profile/profile';
+import Space from 'login/shared/components/utils';
+import FetchColor from 'login/styles/fetchTheme';
+import { PS } from 'login/styles/profileStyles';
+import { GS } from 'login/styles/globalStyles';
+import TopMenu from 'login/shared/topMenu';
 import { useSelector } from 'react-redux';
 import {useState} from 'react';
 

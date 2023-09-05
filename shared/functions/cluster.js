@@ -1,6 +1,6 @@
-import FetchColor from '../../styles/fetchTheme';
-import { CS } from '../../styles/clusterStyles';
-import { ES } from '../../styles/eventStyles';
+import FetchColor from 'login/styles/fetchTheme';
+import { CS } from 'login/styles/clusterStyles';
+import { ES } from 'login/styles/eventStyles';
 import { useSelector } from 'react-redux';
 import { View, Image } from 'react-native';
 
@@ -48,7 +48,7 @@ export function ClusterSmaller (props) {
 export function ClusterArrow() {
     return(
         <View style={CS.arrowView}>
-            <Image style={CS.arrowImage} source={require('../../assets/icons/goback777.png')}/>
+            <Image style={CS.arrowImage} source={require('login/assets/icons/goback777.png')}/>
         </View>
     );
 };

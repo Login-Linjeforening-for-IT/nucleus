@@ -1,7 +1,7 @@
-import { changeNotificationState } from '../../redux/notifications';
+import { changeNotificationState } from 'login/redux/notifications';
 import { useSelector, useDispatch } from 'react-redux';
-import topic from '../notificationComponents/topic';
-import FetchColor from '../../styles/fetchTheme';
+import topic from 'login/shared/notificationComponents/topic';
+import FetchColor from 'login/styles/fetchTheme';
 import { View, Switch } from 'react-native';
 
 /**

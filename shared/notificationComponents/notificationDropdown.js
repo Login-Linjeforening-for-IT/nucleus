@@ -1,8 +1,8 @@
-import FetchColor from '../../styles/fetchTheme';
-import { GS } from '../../styles/globalStyles';
+import FetchColor from 'login/styles/fetchTheme';
+import { GS } from 'login/styles/globalStyles';
 import { useSelector } from 'react-redux';
 import React, {useState } from 'react';
-import { T } from '../../styles/text'
+import { T } from 'login/styles/text'
 import { 
     View, 
     Text, 
@@ -42,9 +42,9 @@ export function NotificationDropdown() {
             <TouchableOpacity onPress={() => selectedDegree()}>
                 <View style={{...GS.dropdown, backgroundColor: FetchColor(theme, 'CONTRAST')}}>
                 { course.selected ?
-                    <Image style={GS.dropImage} source={require('../../assets/icons/linkselected.png')} />
+                    <Image style={GS.dropImage} source={require('login/assets/icons/linkselected.png')} />
                 :
-                    <Image style={GS.dropImage} source={require('../../assets/icons/dropdown-orange.png')} />
+                    <Image style={GS.dropImage} source={require('login/assets/icons/dropdown-orange.png')} />
                 }
                         <Text style={{...T.centered, color: FetchColor(theme, 'TEXTCOLOR')}}>Ph.d</Text>
                 </View>

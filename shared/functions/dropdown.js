@@ -1,7 +1,7 @@
 // This file contains several dropdown menus mostly but not exclusively used by the AboutScreen.
 
 import React, {useState } from 'react';
-import { T } from '../../styles/text'
+import { T } from 'login/styles/text'
 import { 
     View, 
     Text, 
@@ -9,9 +9,9 @@ import {
     Linking,
     Image,
 } from 'react-native';
-import { GS } from '../../styles/globalStyles';
+import { GS } from 'login/styles/globalStyles';
 import { useSelector } from 'react-redux';
-import FetchColor from '../../styles/fetchTheme';
+import FetchColor from 'login/styles/fetchTheme';
 
 /**
  * Creates a full dropdownmenu for bachelor, master and phd
@@ -62,9 +62,9 @@ export default function Dropdown() {
             <TouchableOpacity onPress={() => selectedDegree(1)}>
                 <View style={{...GS.dropdown, backgroundColor: FetchColor(theme, 'CONTRAST')}}>
                 { course.selected == 1 ?
-                    <Image style={GS.dropImage} source={require('../../assets/icons/linkselected.png')} />
+                    <Image style={GS.dropImage} source={require('login/assets/icons/linkselected.png')} />
                 :
-                    <Image style={GS.dropImage} source={require('../../assets/icons/dropdown-orange.png')} />
+                    <Image style={GS.dropImage} source={require('login/assets/icons/dropdown-orange.png')} />
                 }
                         <Text style={{...T.centered, color: FetchColor(theme, 'TEXTCOLOR')}}>Bachelor</Text>
                 </View>
@@ -77,7 +77,7 @@ export default function Dropdown() {
                             <TouchableOpacity key={index} onPress={() => Linking.openURL(selectedCourse.link)}>
                                 <View style={{...GS.dropdownContent, backgroundColor: FetchColor(theme, 'CONTRAST')}}>
                                     <Text style={{...T.text15, maxWidth: '91%', color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? selectedCourse.titleNO : selectedCourse.titleEN}</Text>
-                                    <Image style={GS.smallDropImage} source={require('../../assets/icons/linkicon-white.png')} />
+                                    <Image style={GS.smallDropImage} source={require('login/assets/icons/linkicon-white.png')} />
                                 </View>
                             </TouchableOpacity>
                             
@@ -90,9 +90,9 @@ export default function Dropdown() {
             <TouchableOpacity onPress={() => selectedDegree(2)}>
                 <View style={{...GS.dropdown, backgroundColor: FetchColor(theme, 'CONTRAST')}}>
                 { course.selected  == 2 ?
-                    <Image style={GS.dropImage} source={require('../../assets/icons/linkselected.png')} />
+                    <Image style={GS.dropImage} source={require('login/assets/icons/linkselected.png')} />
                 :
-                    <Image style={GS.dropImage} source={require('../../assets/icons/dropdown-orange.png')} />
+                    <Image style={GS.dropImage} source={require('login/assets/icons/dropdown-orange.png')} />
                 }
                         <Text style={{...T.centered, color: FetchColor(theme, 'TEXTCOLOR')}}>Master</Text>
                 </View>
@@ -105,7 +105,7 @@ export default function Dropdown() {
                             <TouchableOpacity key={index} onPress={() => Linking.openURL(selectedCourse.link)}>
                                 <View style={{...GS.dropdownContent, backgroundColor: FetchColor(theme, 'CONTRAST')}}>
                                     <Text style={{...T.text15, maxWidth: '91%', color: FetchColor(theme, 'TEXTCOLOR')}}>{selectedCourse.title}</Text>
-                                    <Image style={GS.smallDropImage} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/icons/linkicon-white.png') : require('../../assets/icons/linkicon-black.png')} />
+                                    <Image style={GS.smallDropImage} source={theme == 0 || theme == 2 || theme == 3 ? require('login/assets/icons/linkicon-white.png') : require('login/assets/icons/linkicon-black.png')} />
                                 </View>
                             </TouchableOpacity>
                             
@@ -118,9 +118,9 @@ export default function Dropdown() {
             <TouchableOpacity onPress={() => selectedDegree(3)}>
                 <View style={{...GS.dropdown, backgroundColor: FetchColor(theme, 'CONTRAST')}}>
                 { course.selected  == 3 ?
-                    <Image style={GS.dropImage} source={require('../../assets/icons/linkselected.png')} />
+                    <Image style={GS.dropImage} source={require('login/assets/icons/linkselected.png')} />
                 :
-                    <Image style={GS.dropImage} source={require('../../assets/icons/dropdown-orange.png')} />
+                    <Image style={GS.dropImage} source={require('login/assets/icons/dropdown-orange.png')} />
                 }
                         <Text style={{...T.centered, color: FetchColor(theme, 'TEXTCOLOR')}}>Ph.d</Text>
                 </View>
@@ -133,7 +133,7 @@ export default function Dropdown() {
                             <TouchableOpacity key={index} onPress={() => Linking.openURL(selectedCourse.link)}>
                                 <View style={{...GS.dropdownContent, backgroundColor: FetchColor(theme, 'CONTRAST')}}>
                                     <Text style={{...T.text15, maxWidth: '91%',  color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? selectedCourse.titleNO : selectedCourse.titleEN}</Text>
-                                    <Image style={GS.smallDropImage} source={require('../../assets/icons/linkicon-white.png')} />
+                                    <Image style={GS.smallDropImage} source={require('login/assets/icons/linkicon-white.png')} />
                                 </View>
                             </TouchableOpacity>
                             
@@ -178,9 +178,9 @@ export function DropdownBachelor() {
             <TouchableOpacity onPress={() => selectedDegree()}>
                 <View style={{...GS.dropdown, backgroundColor: FetchColor(theme, 'CONTRAST')}}>
                 { course.selected ?
-                    <Image style={GS.dropImage} source={require('../../assets/icons/linkselected.png')} />
+                    <Image style={GS.dropImage} source={require('login/assets/icons/linkselected.png')} />
                 :
-                    <Image style={GS.dropImage} source={require('../../assets/icons/dropdown-orange.png')} />
+                    <Image style={GS.dropImage} source={require('login/assets/icons/dropdown-orange.png')} />
                 }
                         <Text style={{...T.centered, color: FetchColor(theme, 'TEXTCOLOR')}}>Bachelor</Text>
                 </View>
@@ -236,9 +236,9 @@ export function DropdownMaster() {
             <TouchableOpacity onPress={() => selectedDegree()}>
                 <View style={{...GS.dropdown, backgroundColor: FetchColor(theme, 'CONTRAST')}}>
                 { course.selected ?
-                    <Image style={GS.dropImage} source={require('../../assets/icons/linkselected.png')} />
+                    <Image style={GS.dropImage} source={require('login/assets/icons/linkselected.png')} />
                 :
-                    <Image style={GS.dropImage} source={require('../../assets/icons/dropdown-orange.png')} />
+                    <Image style={GS.dropImage} source={require('login/assets/icons/dropdown-orange.png')} />
                 }
                         <Text style={{...T.centered, color: FetchColor(theme, 'TEXTCOLOR')}}>Master</Text>
                 </View>
@@ -295,9 +295,9 @@ export function DropdownPHD() {
             <TouchableOpacity onPress={() => selectedDegree()}>
                 <View style={{...GS.dropdown, backgroundColor: FetchColor(theme, 'CONTRAST')}}>
                 { course.selected ?
-                    <Image style={GS.dropImage} source={require('../../assets/icons/linkselected.png')} />
+                    <Image style={GS.dropImage} source={require('login/assets/icons/linkselected.png')} />
                 :
-                    <Image style={GS.dropImage} source={require('../../assets/icons/dropdown-orange.png')} />
+                    <Image style={GS.dropImage} source={require('login/assets/icons/dropdown-orange.png')} />
                 }
                         <Text style={{...T.centered, color: FetchColor(theme, 'TEXTCOLOR')}}>Ph.d</Text>
                 </View>

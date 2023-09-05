@@ -2,8 +2,8 @@
 import { View, TouchableOpacity, Image} from 'react-native';
 import React from 'react';
 import {BlurView} from 'expo-blur'
-import { MS } from '../../styles/menuStyles';
-import FetchColor from '../../styles/fetchTheme';
+import { MS } from 'login/styles/menuStyles';
+import FetchColor from 'login/styles/fetchTheme';
 import { useSelector } from 'react-redux';
 
 

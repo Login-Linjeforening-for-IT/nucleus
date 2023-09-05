@@ -1,14 +1,14 @@
-import Space, { Line } from '../../shared/components/utils';
-import Paragraph from '../../shared/components/paragraph';
-import { Kontakt } from '../../shared/functions/social';
-import Cluster from '../../shared/functions/cluster';
-import en from '../../locales/en/companiesPage.json'
-import no from '../../locales/nb/companiesPage.json'
-import FetchColor from '../../styles/fetchTheme';                               // Color fetcher
-import { GS } from '../../styles/globalStyles';                                 // Global styles 
-import TopMenu from '../../shared/topMenu';
+import Space, { Line } from 'login/shared/components/utils';
+import Paragraph from 'login/shared/components/paragraph';
+import { Kontakt } from 'login/shared/functions/social';
+import Cluster from 'login/shared/functions/cluster';
+import en from 'login/locales/en/companiesPage.json'
+import no from 'login/locales/nb/companiesPage.json'
+import FetchColor from 'login/styles/fetchTheme';                               // Color fetcher
+import { GS } from 'login/styles/globalStyles';                                 // Global styles 
+import TopMenu from 'login/shared/topMenu';
 import { useSelector } from 'react-redux';                                      // Redux
-import { T } from '../../styles/text';                                          // Text styles 
+import { T } from 'login/styles/text';                                          // Text styles 
 import React from 'react';                                                      // React
 import {      
     Text,                                                                       // Text component
@@ -23,11 +23,11 @@ export default function BusinessScreen( { navigation }) {                       
     const { theme } = useSelector( (state) => state.theme )                     // Theme state
     const isDark = theme == 0 || theme == 2 || theme == 3 ? true : false
     const logo = {
-        bedpres:    isDark ? require('../../assets/committee/eventkom/bedpres-white.png') : require('../../assets/committee/eventkom/bedpres-black.png'),
-        pr:         isDark ? require('../../assets/committee/prkom/pr-white.png')         : require('../../assets/committee/prkom/pr-black.png'),
-        ctf:        isDark ? require('../../assets/committee/ctfkom/ctfkom-white.png')    : require('../../assets/committee/ctfkom/ctfkom-black.png'),
-        workshop:   isDark ? require('../../assets/committee/eventkom/workshop.png')      : require('../../assets/committee/eventkom/workshop-black.png'),
-        profiling:  isDark ? require('../../assets/committee/eventkom/utlysning.png')     : require('../../assets/committee/eventkom/utlysning-black.png')
+        bedpres:    isDark ? require('login/assets/committee/eventkom/bedpres-white.png') : require('login/assets/committee/eventkom/bedpres-black.png'),
+        pr:         isDark ? require('login/assets/committee/prkom/pr-white.png')         : require('login/assets/committee/prkom/pr-black.png'),
+        ctf:        isDark ? require('login/assets/committee/ctfkom/ctfkom-white.png')    : require('login/assets/committee/ctfkom/ctfkom-black.png'),
+        workshop:   isDark ? require('login/assets/committee/eventkom/workshop.png')      : require('login/assets/committee/eventkom/workshop-black.png'),
+        profiling:  isDark ? require('login/assets/committee/eventkom/utlysning.png')     : require('login/assets/committee/eventkom/utlysning-black.png')
     }
 
   return(

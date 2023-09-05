@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import FetchColor from '../../styles/fetchTheme';
+import FetchColor from 'login/styles/fetchTheme';
 import Svg, { Circle } from 'react-native-svg';
-import { ES } from '../../styles/eventStyles';
+import { ES } from 'login/styles/eventStyles';
 import { useSelector } from 'react-redux';
 import { View } from 'react-native';
 
