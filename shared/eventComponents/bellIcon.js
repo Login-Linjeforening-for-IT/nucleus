@@ -5,7 +5,7 @@ import { View, Image } from 'react-native';
  * Small bell icon used to subscribe to event and job advertisement updates
  * @returns {JSX.Element} Bell icon
  */
-export default function Bell({orange, theme}) {
+export default function BellIcon({orange, theme}) {
     let icon = require('../../assets/icons/bell.png');
     let isDark = theme == 0 || theme == 2 || theme == 3 ? true : false 
 

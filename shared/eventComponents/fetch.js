@@ -89,5 +89,44 @@ export function removeDuplicatesAndOld(APIevents, events) {
     });
  
     return filteredEvents;
- };
- 
+};
+
+export async function fetchState (setClickedEvents) {                                         //  --- FETCHES CLICKED EVENTS ---
+    let foundState = await AsyncStorage.getItem('clickedEvents');         // Fetches the cache
+    if (foundState != null) {                                             // If cache exists
+        let parsed = JSON.parse(foundState)                                 // Parses from string to objects
+        setClickedEvents(parsed)                                            // Function to update the clickedEvents array
+    } 
+}
+
+export async function fetchStoredEvents (setRenderedArray, setEvents) {                                  //  --- FETCHING STORED EVENTS IF NO WIFI ---
+    let tempArray = await AsyncStorage.getItem('cachedEvents')            //  Fetches cache
+    if (tempArray != null){                                                // If cache exists
+        let parsed = JSON.parse(tempArray);                                 // Parses from string to objects
+        setRenderedArray([...parsed]);                                      // Updates the renderedarray to equal cache
+        setEvents([...parsed]);                                             // Updates the events array to equal cache
+    }
+}
+
+/**
+     * Fetches data from API, formats the response, sets the cache, updates the events on the screen,
+     * catches any errors and fetches localstorage, and handles errors. 
+     */
+export async function getData(setEvents, setRenderedArray, setLastSave, events) {                                              //  --- FETCHING DATA FROM API ---
+    try {
+        fetch('https://api.login.no/events')                                // PRODUCTION
+        //fetch('https://tekkom:rottejakt45@api.login.no:8443/events')      // TESTING
+        .then(response=>response.json())                                    // Formatting the response
+        .then(data=>setEvents(data))                                        // Setting the response
+        .then(setRenderedArray([...events]))                                // Updates the renderedarray to equal cache
+        .then(async() => setLastSave(await LastFetch()));                   // Updates last fetch displayed on the screen
+        if(events.length > 0) await AsyncStorage.setItem('cachedEvents', JSON.stringify(events))  // Setting the cache
+    } catch (e) {                                                         // Catches any errors (missing wifi)
+        (async() => {                                                       // Immediately invoked function expression (IIFE)
+            try {     
+            let cache = await AsyncStorage.getItem('cachedEvents')          // Tries to fetch event cache
+            if(cache) cache = JSON.parse(cache); setEvents([...cache])      // If cached events was found save them in event array
+            } catch (e) {console.warn('Failed to fetch cache: ' + e)}         // If cache was not found tell the user cache wasnt found (custom notification needs to go here)
+        })
+    }
+}

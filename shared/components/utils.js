@@ -71,7 +71,7 @@ export function errorMessage(argument, theme, lang) {
 
     const styledError = (
         <View style={{alignSelf: 'center', maxWidth: '80%'}}>
-              <View style={{height : '58%'}}/>
+              <View style={{height : '45%'}}/>
               <Text style={{...T.centeredBold20, color: FetchColor(theme, 'TEXTCOLOR')}}>{text[argument]}</Text>
         </View>
     )
@@ -84,7 +84,7 @@ export function errorMessage(argument, theme, lang) {
  * @param {hex} color       Hex color for the text based on theme
  * @returns 
  */
-export function Month(month, color, lang) {
+export function Month({month, color, lang}) {
     const monthsEN = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Des'];
     const monthsNO = ['jan', 'feb', 'mar', 'apr', 'mai', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'des'];
 

@@ -11,7 +11,7 @@ import FetchColor from '../../styles/fetchTheme';
  * @param {string} campus   Campus where the event takes place
  * @returns                 View containing the event location as a text
  */
-export default function EventLocation(room, campus, street) {
+export default function EventLocation({room, campus, street}) {
     const { lang  } = useSelector( (state) => state.lang  )
     const { theme } = useSelector( (state) => state.theme )
 
