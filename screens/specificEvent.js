@@ -252,7 +252,7 @@ function Map({usersData, lang, handleLink, theme}) {
                 <View style={ES.row}>
                     <Text style={{...T.specificEventInfo, color: FetchColor(theme, 'TEXTCOLOR')}}>{' - '}</Text>
                     <Text style={{...T.mazemap, color: FetchColor(theme, 'ORANGE')}}>{lang ? 'Kart' : 'Map'}</Text>
-                    <Image style={ES.mazemapIcon} source={require('../assets/icons/mazemap.png')}/> 
+                    <Image style={ES.mazemapIcon} source={require('login/assets/icons/mazemap.png')}/> 
                 </View>
             </TouchableOpacity>
         )
@@ -263,12 +263,12 @@ function StaticImage({item}) {
     let image = null
 
     const images = {
-        tekkom:  require(`../assets/committee/tekkom/tekkom.png`),
-        ctf:     require(`../assets/committee/ctfkom/ctf.png`),
-        social:  require(`../assets/categories/sosialt.png`),
-        login:   require(`../assets/categories/login.png`),
-        annet:   require(`../assets/categories/annet.png`),
-        bedpres: require(`../assets/categories/bedpresBig.png`)
+        tekkom:  require(`login/assets/committee/tekkom/tekkom.png`),
+        ctf:     require(`login/assets/committee/ctfkom/ctf.png`),
+        social:  require(`login/assets/categories/sosialt.png`),
+        login:   require(`login/assets/categories/login.png`),
+        annet:   require(`login/assets/categories/annet.png`),
+        bedpres: require(`login/assets/categories/bedpresBig.png`)
     }
 
     switch (item.category) {

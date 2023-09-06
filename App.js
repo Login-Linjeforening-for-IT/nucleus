@@ -2,8 +2,8 @@ import { PersistGate } from 'redux-persist/integration/react';  // Persistgate t
 import { AppRegistry } from 'react-native';                     // Entry point of the application
 import { persistStore } from 'redux-persist';                   // PersistStore to store states in AsyncStorage
 import { Provider } from 'react-redux';                         // Redux provider
-import Navigator from 'login/shared/stack'                          // Allows the user to navigate in the app
-import store from 'login/redux/store';                              // Redux store
+import Navigator from 'login/shared/stack'                      // Allows the user to navigate in the app
+import store from 'login/redux/store';                          // Redux store
 import React from 'react';                                      // React
 
 let persistor = persistStore(store)                             // Middleware to interact with AsyncStorage

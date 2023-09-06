@@ -1,19 +1,19 @@
-import NavigateFromPushNotification from '../shared/notificationComponents/navigateFromPushNotification';
-import LastFetch, { fetchState, fetchStoredEvents, getData } from '../shared/eventComponents/fetch';
-import handleDownload, { timeSinceDownload } from '../shared/eventComponents/calendar';
-import notificationSetup from '../shared/notificationComponents/notificationSetup';
-import notificationArray from '../shared/notificationComponents/notificationArray';
+import NavigateFromPushNotification from 'login/shared/notificationComponents/navigateFromPushNotification';
+import LastFetch, { fetchState, fetchStoredEvents, getData } from 'login/shared/eventComponents/fetch';
+import handleDownload, { timeSinceDownload } from 'login/shared/eventComponents/calendar';
+import notificationSetup from 'login/shared/notificationComponents/notificationSetup';
+import notificationArray from 'login/shared/notificationComponents/notificationArray';
 import AsyncStorage from '@react-native-async-storage/async-storage';     // Localstorage
-import Space, { errorMessage } from '../shared/components/utils';
-import storeEvents from '../shared/eventComponents/storeEvents';
-import EventList from '../shared/eventComponents/eventList';
+import Space, { errorMessage } from 'login/shared/components/utils';
+import storeEvents from 'login/shared/eventComponents/storeEvents';
+import EventList from 'login/shared/eventComponents/eventList';
 import React, { useEffect, useState, useRef } from 'react';               // React imports
 import { useFocusEffect } from '@react-navigation/native';                // useFocusEffect       (do something when the screen is displayed)
 import { useDispatch, useSelector } from 'react-redux';                   // Redux
-import FetchColor from '../styles/fetchTheme';                            // Function to fetch theme color
-import { GS } from '../styles/globalStyles';                              // Global styles
+import FetchColor from 'login/styles/fetchTheme';                            // Function to fetch theme color
+import { GS } from 'login/styles/globalStyles';                              // Global styles
 import { StatusBar } from 'expo-status-bar';                              // Status bar
-import { MS } from '../styles/menuStyles';                                // Menu styles
+import { MS } from 'login/styles/menuStyles';                                // Menu styles
 import { BlurView } from 'expo-blur';                                     // Blur effect
 import Filter, { 
     fetchRelevantCategories, 
@@ -22,7 +22,7 @@ import Filter, {
     filterInput, 
     filterBoth, 
     FilterUI, 
-} from '../shared/eventComponents/filter';
+} from 'login/shared/eventComponents/filter';
 import {                                                                  // React native components
     Text,                                                                 // Text component
     View,                                                                 // View component
@@ -188,7 +188,7 @@ export default function EventScreen({ navigation }) {                       //  
             {Platform.OS === 'ios' ? <BlurView style={MS.topMenu} intensity={30}/> : <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'TRANSPARENTANDROID')}}/>}
             <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
                 <TouchableOpacity style={MS.logoBackground}>
-                <Image style={MS.tMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/logo/loginText.png') : require('../assets/logo/loginText-black.png')} />
+                <Image style={MS.tMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('login/assets/logo/loginText.png') : require('login/assets/logo/loginText-black.png')} />
                 </TouchableOpacity>
                 {
                 lang ?
@@ -201,15 +201,15 @@ export default function EventScreen({ navigation }) {                       //  
                     <View style={MS.multiTop}>
                         {clickedEvents.length > 0 ? 
                             <TouchableOpacity style={MS.touchableIcon} onPress={async () => await handleDownload(setDownloadState, downloadState, clickedEvents, calendarID, dispatch)}>
-                                <Image style={MS.multiIcon} source={theme == 0 || theme == 2 || theme == 3 ? timeSinceDownload(downloadState) >= 1000 ? require('../assets/icons/download.png'):require('../assets/icons/download-orange.png') : require('../assets/icons/download-black.png')} />
+                                <Image style={MS.multiIcon} source={theme == 0 || theme == 2 || theme == 3 ? timeSinceDownload(downloadState) >= 1000 ? require('login/assets/icons/download.png'):require('login/assets/icons/download-orange.png') : require('login/assets/icons/download-black.png')} />
                             </TouchableOpacity>
                         :null}
 
                         {renderedArray.length > 0 || clickedCategory.length > 0 || filter.input != null ? 
                             <TouchableOpacity style={MS.touchableIcon} onPress={() => toggleFilter(toggleSearch, search)}>
                                 {search.status 
-                                    ? <Image style={MS.multiIcon} source={require('../assets/icons/filter-orange.png')} />
-                                    : <Image style={MS.multiIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/icons/filter.png') : require('../assets/icons/filter-black.png')} />
+                                    ? <Image style={MS.multiIcon} source={require('login/assets/icons/filter-orange.png')} />
+                                    : <Image style={MS.multiIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('login/assets/icons/filter.png') : require('login/assets/icons/filter-black.png')} />
                                 }
                             </TouchableOpacity>
                         :null}

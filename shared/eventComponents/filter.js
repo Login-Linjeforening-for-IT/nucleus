@@ -1,16 +1,16 @@
-import { removeDuplicatesAndOld } from "./fetch";
-import { ES } from "../../styles/eventStyles";
-import FetchColor from "../../styles/fetchTheme";
-import { CheckBox, CheckedBox, SmallCheck } from "./check";
+import { CheckBox, CheckedBox, SmallCheck } from "login/shared/eventComponents/check";
+import { removeDuplicatesAndOld } from "login/shared/eventComponents/fetch";
+import FetchColor from "login/styles/fetchTheme";
+import { ES } from "login/styles/eventStyles";
+import { T } from "login/styles/text";
 import React from 'react';                                                  // React
-import { T } from "../../styles/text";
 import {                                                                    // React native components
-    Text,                                                                   // Text component
-    View,                                                                   // View component
-    Image,                                                                  // Image component
-    FlatList,                                                               // Flatlist component   (basic list)
-    TextInput,                                                              // Text input component (allows the user to type)
     TouchableOpacity,                                                       // TouchableOpacity     (custom button)
+    TextInput,                                                              // Text input component (allows the user to type)
+    FlatList,                                                               // Flatlist component   (basic list)
+    Image,                                                                  // Image component
+    View,                                                                   // View component
+    Text,                                                                   // Text component
 } from 'react-native';                                                      // React native
 
 export default function Filter (filter, setRenderedArray, events, clickedEvents, clickedCategory) {                                                  //  --- PARENT FILTER FUNCTION ---
@@ -138,7 +138,7 @@ export function FilterUI ({textInputRef, setRenderedArray, setClickedCategory, r
                     selectionColor={FetchColor(theme, "ORANGE")}
                 />
                 <TouchableOpacity onPress={() => filterInput(null) + setRenderedArray([...events]) + setClickedCategory([]) + textInputRef.current.clear()}>
-                        <Image style={ES.clusterFilterResetIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/icons/reset.png') : require('../../assets/icons/reset-black.png')} />
+                        <Image style={ES.clusterFilterResetIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('login/assets/icons/reset.png') : require('login/assets/icons/reset-black.png')} />
                 </TouchableOpacity>
             </View>
             

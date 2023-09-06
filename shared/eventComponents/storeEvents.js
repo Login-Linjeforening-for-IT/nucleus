@@ -1,6 +1,6 @@
+import { removeDuplicatesAndOld } from "login/shared/eventComponents/fetch";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import CompareDates from "../functions/compareDates";
-import { removeDuplicatesAndOld } from "./fetch";
+import CompareDates from "login/shared/functions/compareDates";
 
 /**
  * Stores firstcoming event and all clicked events

@@ -1,5 +1,5 @@
 import { setCalendarID } from 'login/redux/misc'
-import { fetchEventDetails } from './fetch';
+import { fetchEventDetails } from 'login/shared/eventComponents/fetch'
 import { Platform } from 'react-native';
 import { 
     requestCalendarPermissionsAsync, 

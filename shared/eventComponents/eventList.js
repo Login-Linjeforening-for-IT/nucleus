@@ -1,13 +1,13 @@
-import notificationArray from '../notificationComponents/notificationArray';
-import EventCardLocation from './eventCardLocation';
-import topic from '../notificationComponents/topic';
-import Space, { Month } from '../components/utils';
-import FetchColor from '../../styles/fetchTheme';
-import { ES } from '../../styles/eventStyles';
-import Cluster from '../functions/cluster';
-import CategorySquare from './category';
-import { T } from '../../styles/text';
-import BellIcon from './bellIcon';
+import notificationArray from 'login/shared/notificationComponents/notificationArray';
+import EventCardLocation from 'login/shared/eventComponents/eventCardLocation';
+import CategorySquare from 'login/shared/eventComponents/category';
+import topic from 'login/shared/notificationComponents/topic';
+import Space, { Month } from 'login/shared/components/utils';
+import BellIcon from 'login/shared/eventComponents/bellIcon';
+import Cluster from 'login/shared/functions/cluster';
+import FetchColor from 'login/styles/fetchTheme';
+import { ES } from 'login/styles/eventStyles';
+import { T } from 'login/styles/text';
 import React from 'react';               // React imports
 import {                                 // React native components
     TouchableOpacity,                    // TouchableOpacity     (custom button)
