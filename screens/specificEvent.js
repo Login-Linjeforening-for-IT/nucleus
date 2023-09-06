@@ -1,21 +1,21 @@
-import CategorySquare, { CategoryCircle } from '../shared/eventComponents/category';
+import CategorySquare, { CategoryCircle } from 'login/shared/eventComponents/category';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import EventLocation from '../shared/eventComponents/eventLocation';
-import { FetchJoinLink } from '../shared/eventComponents/fetch';
-import Space, { Month } from '../shared/components/utils';
-import { CardSmaller } from '../shared/functions/card';
-import { GetEndTime } from '../shared/functions/time';
+import EventLocation from 'login/shared/eventComponents/eventLocation';
+import { FetchJoinLink } from 'login/shared/eventComponents/fetch';
+import Space, { Month } from 'login/shared/components/utils';
+import { CardSmaller } from 'login/shared/functions/card';
+import { GetEndTime } from 'login/shared/functions/time';
 import React, { useEffect, useState } from 'react';
 import RenderHTML from 'react-native-render-html';
-import EventTime from '../shared/functions/time';
-import FetchColor from '../styles/fetchTheme';
-import Card from '../shared/functions/card';
-import { GS } from '../styles/globalStyles';
-import { ES } from '../styles/eventStyles';
+import EventTime from 'login/shared/functions/time';
+import FetchColor from 'login/styles/fetchTheme';
+import Card from 'login/shared/functions/card';
+import { GS } from 'login/styles/globalStyles';
+import { ES } from 'login/styles/eventStyles';
 import { SvgUri } from 'react-native-svg';
 import { useSelector } from 'react-redux';
-import TopMenu from '../shared/topMenu';
-import { T } from '../styles/text';
+import TopMenu from 'login/shared/topMenu';
+import { T } from 'login/styles/text';
 import { 
   TouchableOpacity,
   ScrollView,

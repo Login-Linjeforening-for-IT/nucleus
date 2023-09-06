@@ -1,5 +1,5 @@
-import FetchColor from '../../styles/fetchTheme';
-import { ES } from '../../styles/eventStyles';
+import FetchColor from 'login/styles/fetchTheme';
+import { ES } from 'login/styles/eventStyles';
 import { useSelector } from 'react-redux';
 import { View } from 'react-native';
 

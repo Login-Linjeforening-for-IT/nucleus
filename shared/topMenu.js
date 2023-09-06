@@ -1,5 +1,5 @@
-import FetchColor from '../styles/fetchTheme';                              // Function to fetch theme color
-import { MS } from '../styles/menuStyles';                                  // Menu styles
+import FetchColor from 'login/styles/fetchTheme';                              // Function to fetch theme color
+import { MS } from 'login/styles/menuStyles';                                  // Menu styles
 import { useSelector } from 'react-redux';
 import { BlurView } from 'expo-blur';                                       // Blur effect
 import {                                                                    // React native components
@@ -26,11 +26,11 @@ export default function TopMenu({ navigation, title, screen, back }) {
             <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
                 {back ? 
                     <TouchableOpacity onPress={() => goBack()}>
-                        <Image style={MS.goBack} source={require('../assets/icons/goback777.png')} />
+                        <Image style={MS.goBack} source={require('login/assets/icons/goback777.png')} />
                     </TouchableOpacity>
                 :
                     <TouchableOpacity style={MS.logoBackground} onPress={() => screen != 'event' && eventPage()}>
-                        <Image style={MS.tMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../assets/logo/loginText.png') : require('../assets/logo/loginText-black.png')} />
+                        <Image style={MS.tMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('login/assets/logo/loginText.png') : require('login/assets/logo/loginText-black.png')} />
                     </TouchableOpacity>
                 }
                 {

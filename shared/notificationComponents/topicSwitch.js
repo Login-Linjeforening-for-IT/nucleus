@@ -1,7 +1,7 @@
-import Notification from '../functions/notification';
-import FetchColor from '../../styles/fetchTheme';
-import { GS } from '../../styles/globalStyles';
-import Cluster from '../functions/cluster';
+import Notification from 'login/shared/functions/notification';
+import FetchColor from 'login/styles/fetchTheme';
+import { GS } from 'login/styles/globalStyles';
+import Cluster from 'login/shared/functions/cluster';
 import { View, Text } from 'react-native';
 import { useSelector } from 'react-redux';
 

@@ -1,16 +1,16 @@
 {/* ========================= IMPORTING NEEDED LIBRARIES ========================= */}
-import GreenLight, { GrayLight } from '../../shared/eventComponents/light';
-import { CardSmaller } from '../../shared/functions/card';
-import Check from '../../shared/eventComponents/check';
-import Button from '../../shared/functions/button';
-import Space from '../../shared/components/utils';
-import FetchColor from '../../styles/fetchTheme';
-import { SS } from '../../styles/settingStyles';
-import { GS } from '../../styles/globalStyles';
-import TopMenu from '../../shared/topMenu';
+import GreenLight, { GrayLight } from 'login/shared/eventComponents/light';
+import { CardSmaller } from 'login/shared/functions/card';
+import Check from 'login/shared/eventComponents/check';
+import Button from 'login/shared/functions/button';
+import Space from 'login/shared/components/utils';
+import FetchColor from 'login/styles/fetchTheme';
+import { SS } from 'login/styles/settingStyles';
+import { GS } from 'login/styles/globalStyles';
+import TopMenu from 'login/shared/topMenu';
 import { useSelector } from 'react-redux';
 import React, { useState } from 'react';
-import { T } from '../../styles/text';
+import { T } from 'login/styles/text';
 import { 
   Text, 
   View, 

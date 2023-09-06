@@ -1,9 +1,9 @@
-import CornerSquare from '../eventComponents/cornerSquare';                 // Cornersquare
-import FetchColor from '../../styles/fetchTheme';                           // Function to fetch theme color
-import { GS } from '../../styles/globalStyles';                             // Global styles
+import CornerSquare from 'login/shared/eventComponents/cornerSquare';                 // Cornersquare
+import FetchColor from 'login/styles/fetchTheme';                           // Function to fetch theme color
+import { GS } from 'login/styles/globalStyles';                             // Global styles
 import { useSelector } from 'react-redux';
-import Space, { random } from '../components/utils';
-import { T } from '../../styles/text';                                      // Text styles
+import Space, { random } from 'login/shared/components/utils';
+import { T } from 'login/styles/text';                                      // Text styles
 import React from 'react';                                                  // React imports
 import {                                                                    // React native components
     TouchableOpacity,                                                         // TouchableOpacity     (custom button)
@@ -42,7 +42,7 @@ export default function person(person, lang, theme) {
             <Text style={{...T.leaderName, color: FetchColor(theme, 'TEXTCOLOR')}}>{obj.name}</Text>
             {Space(5)}
             <TouchableOpacity onPress={() => Linking.openURL(obj.dclink)}>
-                <Text style={{...T.discord, color: FetchColor(theme, 'DISCORD')}}>{<Image style={GS.tiny} source={require('../../assets/social/discord-colored.png')} />}{obj.tag}</Text>
+                <Text style={{...T.discord, color: FetchColor(theme, 'DISCORD')}}>{<Image style={GS.tiny} source={require('login/assets/social/discord-colored.png')} />}{obj.tag}</Text>
             </TouchableOpacity>
             {Space(25)}
         </View>
@@ -79,27 +79,27 @@ export function Social() {
     const media = {
         discord: {
             link: "https://discord.com/invite/login-ntnu",
-            logo: isDark ? require("../../assets/social/discord-white.png") : require("../../assets/social/discord-black.png")
+            logo: isDark ? require("login/assets/social/discord-white.png") : require("login/assets/social/discord-black.png")
         },
         instagram: {
             link: "https://www.instagram.com/login_linjeforening/",
-            logo: isDark ? require('../../assets/social/instagram-white.png') : require('../../assets/social/instagram-black.png')
+            logo: isDark ? require('login/assets/social/instagram-white.png') : require('login/assets/social/instagram-black.png')
         },
         facebook: {
             link: 'https://facebook.com/LogNTNU',
-            logo: isDark ? require('../../assets/social/facebook-white.png') : require('../../assets/social/facebook-black.png')
+            logo: isDark ? require('login/assets/social/facebook-white.png') : require('login/assets/social/facebook-black.png')
         },
         linkedin: {
             link: 'https://linkedin.com/company/linjeforeningen-login/about',
-            logo: isDark ? require('../../assets/social/linkedin-white.png') : require('../../assets/social/linkedin-black.png')
+            logo: isDark ? require('login/assets/social/linkedin-white.png') : require('login/assets/social/linkedin-black.png')
         },
         gitlab: {
             link: 'https://git.logntnu.no',
-            logo: isDark ? require('../../assets/social/gitlab-white.png') : require('../../assets/social/gitlab-black.png')
+            logo: isDark ? require('login/assets/social/gitlab-white.png') : require('login/assets/social/gitlab-black.png')
         },
         wiki: {
             link: 'https://wiki.login.no',
-            logo: isDark ? require('../../assets/social/wiki-white.png') : require('../../assets/social/wiki-black.png')
+            logo: isDark ? require('login/assets/social/wiki-white.png') : require('login/assets/social/wiki-black.png')
         }
     }
     

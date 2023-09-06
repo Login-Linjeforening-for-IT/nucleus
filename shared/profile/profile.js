@@ -1,10 +1,10 @@
 import { Image, View, Text, TouchableOpacity } from 'react-native';
-import ChangeProfileCard from './changeProfileCard';
-import FetchColor from '../../styles/fetchTheme';
-import { PS } from '../../styles/profileStyles';
+import ChangeProfileCard from 'login/shared/profile/changeProfileCard';
+import FetchColor from 'login/styles/fetchTheme';
+import { PS } from 'login/styles/profileStyles';
 import React, { useState } from 'react';
-import Space from '../components/utils';
-import { T } from '../../styles/text';
+import Space from 'login/shared/components/utils';
+import { T } from 'login/styles/text';
 
 /**
  * Function for drawing a very small square of the category of the event
@@ -49,9 +49,9 @@ export default function Profile(navigation, theme, lang, profile, login, scrollP
                                     {uri: profile.image}
                                 : 
                                     theme == 0 || theme == 2 || theme == 3 ? 
-                                        require('../../assets/icons/loginperson-white.png') 
+                                        require('login/assets/icons/loginperson-white.png') 
                                         : 
-                                        require('../../assets/icons/loginperson-black.png')} 
+                                        require('login/assets/icons/loginperson-black.png')} 
                             />
                             }
                         </View>

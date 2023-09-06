@@ -1,15 +1,15 @@
-import person, { AllComitees, Social, styret, Copyright } from '../../shared/functions/social';
-import Space, { Line } from '../../shared/components/utils';
-import Dropdown from '../../shared/functions/dropdown';
-import Cluster from '../../shared/functions/cluster';
-import FetchColor from '../../styles/fetchTheme';
-import en from '../../locales/en/aboutPage.json';
-import no from '../../locales/nb/aboutPage.json';
-import { GS } from '../../styles/globalStyles';
-import TopMenu from '../../shared/topMenu';
+import person, { AllComitees, Social, styret, Copyright } from 'login/shared/functions/social';
+import Space, { Line } from 'login/shared/components/utils';
+import Dropdown from 'login/shared/functions/dropdown';
+import Cluster from 'login/shared/functions/cluster';
+import FetchColor from 'login/styles/fetchTheme';
+import en from 'login/locales/en/aboutPage.json';
+import no from 'login/locales/nb/aboutPage.json';
+import { GS } from 'login/styles/globalStyles';
+import TopMenu from 'login/shared/topMenu';
 import { useSelector } from 'react-redux';
 import React, {useState} from 'react';
-import { T } from '../../styles/text';
+import { T } from 'login/styles/text';
 import { 
   Text, 
   View, 
@@ -88,9 +88,9 @@ export default function AboutScreen( { navigation } ) {
             <TouchableOpacity onPress={() => selectedComittee(0)}>
               <View style={{...GS.comittee1, backgroundColor: FetchColor(theme, 'CONTRAST')}}>
                 {comittee.selected == 0 ? 
-                    <Image style={GS.image80} source={require('../../assets/committee/styret/styret-orange.png')} />
+                    <Image style={GS.image80} source={require('login/assets/committee/styret/styret-orange.png')} />
                   : 
-                    <Image style={GS.image80} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/committee/styret/styret555.png') : require('../../assets/committee/styret/styret-black.png')} />
+                    <Image style={GS.image80} source={theme == 0 || theme == 2 || theme == 3 ? require('login/assets/committee/styret/styret555.png') : require('login/assets/committee/styret/styret-black.png')} />
                 }
               </View>
             </TouchableOpacity>
@@ -98,9 +98,9 @@ export default function AboutScreen( { navigation } ) {
             <TouchableOpacity onPress={() => selectedComittee(1)}>
               <View style={{...GS.comittee2, backgroundColor: FetchColor(theme, 'CONTRAST')}}>
                 {comittee.selected == 1 ? 
-                    <Image style={GS.image80} source={require('../../assets/committee/eventkom/eventkom-orange.png')} />
+                    <Image style={GS.image80} source={require('login/assets/committee/eventkom/eventkom-orange.png')} />
                   : 
-                    <Image style={GS.image80} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/committee/eventkom/eventkom555.png') : require('../../assets/committee/eventkom/eventkom-black.png')} />
+                    <Image style={GS.image80} source={theme == 0 || theme == 2 || theme == 3 ? require('login/assets/committee/eventkom/eventkom555.png') : require('login/assets/committee/eventkom/eventkom-black.png')} />
                 }
               </View>
             </TouchableOpacity>
@@ -108,9 +108,9 @@ export default function AboutScreen( { navigation } ) {
             <TouchableOpacity onPress={() => selectedComittee(2)}>
               <View style={{...GS.comittee3, backgroundColor: FetchColor(theme, 'CONTRAST')}}>
                 {comittee.selected == 2 ? 
-                    <Image style={GS.image80} source={require('../../assets/committee/tekkom/tekkom-orange.png')} />
+                    <Image style={GS.image80} source={require('login/assets/committee/tekkom/tekkom-orange.png')} />
                   : 
-                    <Image style={GS.image80} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/committee/tekkom/tekkom555.png') : require('../../assets/committee/tekkom/tekkom-black.png')} />
+                    <Image style={GS.image80} source={theme == 0 || theme == 2 || theme == 3 ? require('login/assets/committee/tekkom/tekkom555.png') : require('login/assets/committee/tekkom/tekkom-black.png')} />
                 }
               </View>
             </TouchableOpacity>
@@ -119,9 +119,9 @@ export default function AboutScreen( { navigation } ) {
           <TouchableOpacity onPress={() => selectedComittee(3)}>
             <View style={{...GS.comittee1, backgroundColor: FetchColor(theme, 'CONTRAST')}}>
               {comittee.selected == 3 ? 
-                <Image style={GS.image80} source={require('../../assets/committee/prkom/pr-orange.png')} />
+                <Image style={GS.image80} source={require('login/assets/committee/prkom/pr-orange.png')} />
               : 
-                <Image style={GS.image80} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/committee/prkom/pr555.png') : require('../../assets/committee/prkom/pr-black.png')} />
+                <Image style={GS.image80} source={theme == 0 || theme == 2 || theme == 3 ? require('login/assets/committee/prkom/pr555.png') : require('login/assets/committee/prkom/pr-black.png')} />
               }
             </View>
           </TouchableOpacity>
@@ -129,9 +129,9 @@ export default function AboutScreen( { navigation } ) {
           <TouchableOpacity onPress={() => selectedComittee(4)}>
             <View style={{...GS.comittee2, backgroundColor: FetchColor(theme, 'CONTRAST')}}>
               {comittee.selected == 4 ? 
-                  <Image style={GS.image80} source={require('../../assets/committee/ctfkom/ctfkom-orange.png')} />
+                  <Image style={GS.image80} source={require('login/assets/committee/ctfkom/ctfkom-orange.png')} />
                 : 
-                  <Image style={GS.image80} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/committee/ctfkom/ctfkom555.png') : require('../../assets/committee/ctfkom/ctfkom-black.png')} />
+                  <Image style={GS.image80} source={theme == 0 || theme == 2 || theme == 3 ? require('login/assets/committee/ctfkom/ctfkom555.png') : require('login/assets/committee/ctfkom/ctfkom-black.png')} />
               }
             </View>
           </TouchableOpacity>
@@ -139,9 +139,9 @@ export default function AboutScreen( { navigation } ) {
           <TouchableOpacity onPress={() => selectedComittee(5)}>
             <View style={{...GS.comittee3, backgroundColor: FetchColor(theme, 'CONTRAST')}}>
               {comittee.selected == 5 ? 
-                  <Image style={GS.image80} source={require('../../assets/committee/satkom/satkom-orange.png')} />
+                  <Image style={GS.image80} source={require('login/assets/committee/satkom/satkom-orange.png')} />
                 : 
-                  <Image style={GS.image80} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/committee/satkom/satkom555.png') : require('../../assets/committee/satkom/satkom-black.png')} />
+                  <Image style={GS.image80} source={theme == 0 || theme == 2 || theme == 3 ? require('login/assets/committee/satkom/satkom555.png') : require('login/assets/committee/satkom/satkom-black.png')} />
               }
             </View>
           </TouchableOpacity>
@@ -152,12 +152,12 @@ export default function AboutScreen( { navigation } ) {
               return(
                 <View key={index}>
                   <Text style={{...T.text30, color: FetchColor(theme, 'TEXTCOLOR')}}>
-                  {relevantComittee.id == 0 ? <Image style={GS.small} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/committee/styret/styret-white.png') : require('../../assets/committee/styret/styret-black.png')} />:null}
-                  {relevantComittee.id == 1 ? <Image style={GS.small} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/committee/eventkom/eventkom-white.png') : require('../../assets/committee/eventkom/eventkom-black.png')} />:null}
-                  {relevantComittee.id == 2 ? <Image style={GS.small} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/committee/tekkom/tekkom-white.png') : require('../../assets/committee/tekkom/tekkom-black.png')} />:null}
-                  {relevantComittee.id == 3 ? <Image style={GS.small} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/committee/prkom/pr-white.png') : require('../../assets/committee/prkom/pr-black.png')} />:null}
-                  {relevantComittee.id == 4 ? <Image style={GS.small} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/committee/ctfkom/ctfkom-white.png') : require('../../assets/committee/ctfkom/ctfkom-black.png')} />:null}
-                  {relevantComittee.id == 5 ? <Image style={GS.small} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/committee/satkom/satkom.png') : require('../../assets/committee/satkom/satkom-black.png')} />:null}
+                  {relevantComittee.id == 0 ? <Image style={GS.small} source={theme == 0 || theme == 2 || theme == 3 ? require('login/assets/committee/styret/styret-white.png') : require('login/assets/committee/styret/styret-black.png')} />:null}
+                  {relevantComittee.id == 1 ? <Image style={GS.small} source={theme == 0 || theme == 2 || theme == 3 ? require('login/assets/committee/eventkom/eventkom-white.png') : require('login/assets/committee/eventkom/eventkom-black.png')} />:null}
+                  {relevantComittee.id == 2 ? <Image style={GS.small} source={theme == 0 || theme == 2 || theme == 3 ? require('login/assets/committee/tekkom/tekkom-white.png') : require('login/assets/committee/tekkom/tekkom-black.png')} />:null}
+                  {relevantComittee.id == 3 ? <Image style={GS.small} source={theme == 0 || theme == 2 || theme == 3 ? require('login/assets/committee/prkom/pr-white.png') : require('login/assets/committee/prkom/pr-black.png')} />:null}
+                  {relevantComittee.id == 4 ? <Image style={GS.small} source={theme == 0 || theme == 2 || theme == 3 ? require('login/assets/committee/ctfkom/ctfkom-white.png') : require('login/assets/committee/ctfkom/ctfkom-black.png')} />:null}
+                  {relevantComittee.id == 5 ? <Image style={GS.small} source={theme == 0 || theme == 2 || theme == 3 ? require('login/assets/committee/satkom/satkom.png') : require('login/assets/committee/satkom/satkom-black.png')} />:null}
                   {lang ? relevantComittee.titleNO : relevantComittee.titleEN}</Text>
 
                   {(relevantComittee.quoteNO && lang || relevantComittee.qouteEN && !lang) ? <Text style={{...T.boldParagraph, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? relevantComittee.quoteNO : relevantComittee.qouteEN}</Text>:null}

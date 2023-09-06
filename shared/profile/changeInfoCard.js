@@ -1,10 +1,10 @@
 import { PanGestureHandler } from 'react-native-gesture-handler';
 import { useDispatch, useSelector } from 'react-redux';
-import FetchColor from '../../styles/fetchTheme';
-import { PS } from '../../styles/profileStyles';
-import { Line } from '../components/utils';
+import FetchColor from 'login/styles/fetchTheme';
+import { PS } from 'login/styles/profileStyles';
+import { Line } from 'login/shared/components/utils';
 import {useEffect, useState} from 'react';
-import { T } from '../../styles/text';
+import { T } from 'login/styles/text';
 
 import { 
     TouchableOpacity, 
@@ -29,7 +29,7 @@ import {
     setMail, 
     setSchoolyear,
     setDegree
-} from '../../redux/profile';
+} from 'login/redux/profile';
 
 /**
  * Function for drawing a very small square of the category of the event

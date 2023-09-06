@@ -1,7 +1,12 @@
-import messaging from '@react-native-firebase/messaging';       // Notifications
+// COMMENT IN THIS BOX WHILE TESTING IN EXPO 6/6
+// import messaging from '@react-native-firebase/messaging';       // Notifications
+// COMMENT IN THIS BOX WHILE TESTING IN EXPO 6/6
 import { useEffect, useState } from 'react';
 
 export default function NavigateFromPushNotification({ navigation }) {
+    // COMMENT IN THIS BOX WHILE TESTING IN EXPO 6/6
+    return null
+    // COMMENT IN THIS BOX WHILE TESTING IN EXPO 6/6
     const [event, setEvent] = useState()
 
     useEffect(() => {

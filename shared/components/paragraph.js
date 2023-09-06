@@ -1,9 +1,9 @@
 import { View, Text, Image } from 'react-native';
-import FetchColor from '../../styles/fetchTheme';
-import { GS } from '../../styles/globalStyles';
+import FetchColor from 'login/styles/fetchTheme';
+import { GS } from 'login/styles/globalStyles';
 import { useSelector } from 'react-redux';
-import { T } from '../../styles/text';
-import Space from './utils';
+import { T } from 'login/styles/text';
+import Space from 'login/shared/components/utils';
 
 export default function Paragraph({ logo, title, body }) {
     const { theme } = useSelector((state) => state.theme)

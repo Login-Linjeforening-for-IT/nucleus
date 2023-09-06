@@ -1,4 +1,4 @@
-import { setCalendarID } from '../../redux/misc'
+import { setCalendarID } from 'login/redux/misc'
 import { fetchEventDetails } from './fetch';
 import { Platform } from 'react-native';
 import { 

@@ -1,4 +1,4 @@
-import { ES } from '../../styles/eventStyles';
+import { ES } from 'login/styles/eventStyles';
 import { View, Image } from 'react-native';
 
 /**
@@ -6,12 +6,12 @@ import { View, Image } from 'react-native';
  * @returns {JSX.Element} Bell icon
  */
 export default function BellIcon({orange, theme}) {
-    let icon = require('../../assets/icons/bell.png');
+    let icon = require('login/assets/icons/bell.png');
     let isDark = theme == 0 || theme == 2 || theme == 3 ? true : false 
 
-    if (orange)         icon = require('../../assets/icons/bell-orange.png');
-    else if (isDark)    icon = require('../../assets/icons/bell.png');
-    else                icon = require('../../assets/icons/bell-black.png');
+    if (orange)         icon = require('login/assets/icons/bell-orange.png');
+    else if (isDark)    icon = require('login/assets/icons/bell.png');
+    else                icon = require('login/assets/icons/bell-black.png');
 
     return(
         <View>

@@ -1,9 +1,9 @@
 import React from 'react';
-import { ES } from '../../styles/eventStyles';
-import { T } from '../../styles/text'
+import { ES } from 'login/styles/eventStyles';
+import { T } from 'login/styles/text'
 import { View, Text } from 'react-native';
 import { useSelector } from 'react-redux';
-import FetchColor from '../../styles/fetchTheme';
+import FetchColor from 'login/styles/fetchTheme';
 
 /**
  * Function for finding the eventlocation of an event

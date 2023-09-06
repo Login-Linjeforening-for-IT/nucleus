@@ -1,7 +1,7 @@
-import FetchColor from '../../styles/fetchTheme';
+import FetchColor from 'login/styles/fetchTheme';
 import { View, Text } from 'react-native';
 import { useSelector } from 'react-redux';
-import { T } from '../../styles/text'
+import { T } from 'login/styles/text'
 
 /**
  * Function for displaying the event status, how long till it starts, how long its been ongoing, or how long till it ends

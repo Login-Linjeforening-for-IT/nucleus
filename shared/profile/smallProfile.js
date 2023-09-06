@@ -1,8 +1,8 @@
 import { Image, View, Text, TouchableOpacity } from 'react-native';
-import { PS } from '../../styles/profileStyles';
-import { CS } from '../../styles/clusterStyles';
-import FetchColor from '../../styles/fetchTheme';
-import { T } from '../../styles/text';
+import { PS } from 'login/styles/profileStyles';
+import { CS } from 'login/styles/clusterStyles';
+import FetchColor from 'login/styles/fetchTheme';
+import { T } from 'login/styles/text';
 
 /**
  * Function for drawing a very small square of the category of the event
@@ -22,9 +22,9 @@ export default function SmallProfile(navigation, theme, lang, profile, login) { 
                                  {uri: profile.image}
                                 : 
                                     theme == 0 || theme == 2 || theme == 3 ? 
-                                        require('../../assets/icons/loginperson-white.png') 
+                                        require('login/assets/icons/loginperson-white.png') 
                                         : 
-                                        require('../../assets/icons/loginperson-black.png')} 
+                                        require('login/assets/icons/loginperson-black.png')} 
                         />
                     </View>
                 </View>
@@ -39,7 +39,7 @@ export default function SmallProfile(navigation, theme, lang, profile, login) { 
                     }
                 </View>
                 <View style={PS.smallProfileRightTriplet}>
-                    <Image style={CS.arrowImage} source={require('../../assets/icons/dropdownBase.png')}/>
+                    <Image style={CS.arrowImage} source={require('login/assets/icons/dropdownBase.png')}/>
                 </View>
             </View>
         </TouchableOpacity>

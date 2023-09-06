@@ -1,9 +1,9 @@
-import FetchColor from '../../styles/fetchTheme';
-import { ES } from '../../styles/eventStyles';
+import FetchColor from 'login/styles/fetchTheme';
+import { ES } from 'login/styles/eventStyles';
 import Svg, {Rect} from 'react-native-svg';
 import { useSelector } from 'react-redux';
 import { View, Text } from 'react-native';
-import { T } from "../../styles/text"
+import { T } from "login/styles/text"
 
 /**
  * Function for creating an empty view, for adding spaces between objects such as views paragraphs etc

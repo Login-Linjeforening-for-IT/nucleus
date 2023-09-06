@@ -1,4 +1,4 @@
-import { NotificationDelay } from '../eventComponents/notificationDelay';
+import { NotificationDelay } from 'login/shared/eventComponents/notificationDelay';
 
 /**
  * Function for counting down till a set time.

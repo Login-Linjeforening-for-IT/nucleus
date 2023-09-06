@@ -1,10 +1,10 @@
-import TopicSwitchList from '../notificationComponents/topicSwitch';
+import TopicSwitchList from 'login/shared/notificationComponents/topicSwitch';
 import { TouchableOpacity, Image, View, Text } from 'react-native';
-import FetchColor from '../../styles/fetchTheme';
-import { GS } from '../../styles/globalStyles';
+import FetchColor from 'login/styles/fetchTheme';
+import { GS } from 'login/styles/globalStyles';
 import { useSelector } from 'react-redux';
 import React, {useState } from 'react';
-import { T } from '../../styles/text'
+import { T } from 'login/styles/text'
 
 /**
  * Creates a full dropdownmenu for reminders
@@ -41,7 +41,7 @@ export default function Reminders() {
                             <TouchableOpacity key={index} onPress={() => showCategory(index)}>
                             <View style={{...GS.reminderDropdown, backgroundColor: FetchColor(theme, 'DARKER')}}>
                                 <Text style={{...T.text20, color: FetchColor(theme, 'TEXTCOLOR')}}>{cat.title}</Text>
-                                <Image style={GS.reminderDropdownArrow} source={index == category ? require('../../assets/icons/reminderDropdownOrange.png') : require('../../assets/icons/dropdownBase.png')} />
+                                <Image style={GS.reminderDropdownArrow} source={index == category ? require('login/assets/icons/reminderDropdownOrange.png') : require('login/assets/icons/dropdownBase.png')} />
                             </View>
                             </TouchableOpacity>
                             {category == index ? <TopicSwitchList category={cat.source} showLast={index > 1 ? true:false}></TopicSwitchList>:null}

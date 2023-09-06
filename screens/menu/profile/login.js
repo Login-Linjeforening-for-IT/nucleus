@@ -1,15 +1,15 @@
-import GreenLight, { RedLight, GrayLight } from '../../../shared/eventComponents/light';
-import { changeLoginStatus } from '../../../redux/loginStatus';
-import Check from '../../../shared/eventComponents/check';
-import Cluster from '../../../shared/functions/cluster';
+import GreenLight, { RedLight, GrayLight } from 'login/shared/eventComponents/light';
+import { changeLoginStatus } from 'login/redux/loginStatus';
+import Check from 'login/shared/eventComponents/check';
+import Cluster from 'login/shared/functions/cluster';
 import { useSelector, useDispatch } from 'react-redux';
-import Button from '../../../shared/functions/button';
-import Space from '../../../shared/components/utils';
-import FetchColor from '../../../styles/fetchTheme';                                   // Function for fetching theme color
-import { SS } from '../../../styles/settingStyles';
-import { GS } from '../../../styles/globalStyles';                                     // Global styles
-import TopMenu from '../../../shared/topMenu';
-import { T } from '../../../styles/text';                                              // Text styles
+import Button from 'login/shared/functions/button';
+import Space from 'login/shared/components/utils';
+import FetchColor from 'login/styles/fetchTheme';                                   // Function for fetching theme color
+import { SS } from 'login/styles/settingStyles';
+import { GS } from 'login/styles/globalStyles';                                     // Global styles
+import TopMenu from 'login/shared/topMenu';
+import { T } from 'login/styles/text';                                              // Text styles
 import React, { useState } from 'react';
 import { 
     Text,                                                                             // Text component
@@ -145,14 +145,14 @@ export default function LoginScreen( { navigation }) {
                             <View>
                             <View style = {SS.passLight}><GreenLight/></View>
                             <View style = {{...SS.passCheck, color: FetchColor(theme, 'TEXTCOLOR')}}>
-                            <Image style={SS.showPassImage} source={require('../../../assets/icons/eyeF.png')} />
+                            <Image style={SS.showPassImage} source={require('login/assets/icons/eyeF.png')} />
                             </View>
                             </View>
                             :
                             <View>
                             <View style = {SS.passLight}><RedLight/></View>
                             <View style = {{...SS.passCheck, color: FetchColor(theme, 'TEXTCOLOR')}}>
-                            <Image style={SS.showPassImage} source={require('../../../assets/icons/eyeT.png')} />
+                            <Image style={SS.showPassImage} source={require('login/assets/icons/eyeT.png')} />
                             </View>
                             </View>
                             }
@@ -162,7 +162,7 @@ export default function LoginScreen( { navigation }) {
                         <View>
                             <View style = {SS.noPassLight}><GrayLight/></View>
                             <View style = {{...SS.noPassCheck, color: FetchColor(theme, 'TEXTCOLOR')}}>
-                            <Image style={SS.noPassImage} source={require('../../../assets/icons/eyeF.png')} />
+                            <Image style={SS.noPassImage} source={require('login/assets/icons/eyeF.png')} />
                             </View>
                         </View>
                         }
@@ -184,7 +184,7 @@ export default function LoginScreen( { navigation }) {
                 {Space(40)}
 
                 <View style={SS.makeNotificationImage}>
-                    <Image style={GS.smallImage} source={require('../../../assets/logo/loginText.png')} />
+                    <Image style={GS.smallImage} source={require('login/assets/logo/loginText.png')} />
                 </View>
             </View>
             {Space(Dimensions.get('window').height/3)}
