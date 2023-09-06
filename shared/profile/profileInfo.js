@@ -1,10 +1,10 @@
-import FetchColor from '../../styles/fetchTheme';
-import { CS } from '../../styles/clusterStyles';
-import { PS } from '../../styles/profileStyles';
-import ChangeInfoCard from './changeInfoCard';
-import Cluster from '../functions/cluster';
+import FetchColor from 'login/styles/fetchTheme';
+import { CS } from 'login/styles/clusterStyles';
+import { PS } from 'login/styles/profileStyles';
+import ChangeInfoCard from 'login/shared/profile/changeInfoCard';
+import Cluster from 'login/shared/functions/cluster';
 import React, {useState} from 'react';
-import { T } from '../../styles/text';
+import { T } from 'login/styles/text';
 import { 
     Image, 
     View, 
@@ -78,7 +78,7 @@ export default function ProfileInfo(theme, lang, profile) {  //SVG showing the c
                                         </Text>
                                     </View>
                                     <View style={CS.twinRight}>
-                                        <Image style={PS.editImage} source={selectedIndex == index ? require('../../assets/icons/pencil-orange.png') : require('../../assets/icons/pencil777.png')}/>
+                                        <Image style={PS.editImage} source={selectedIndex == index ? require('login/assets/icons/pencil-orange.png') : require('login/assets/icons/pencil777.png')}/>
                                     </View>
                                 </View>
                             </View>

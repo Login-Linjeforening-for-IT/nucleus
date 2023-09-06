@@ -1,12 +1,12 @@
-import topic from '../../shared/notificationComponents/topic';
-import FetchColor from '../../styles/fetchTheme';
-import Space from '../../shared/components/utils';
-import Card from '../../shared/functions/card';
-import { GS } from '../../styles/globalStyles';                                     // Global styles
-import TopMenu from '../../shared/topMenu';
+import topic from 'login/shared/notificationComponents/topic';
+import FetchColor from 'login/styles/fetchTheme';
+import Space from 'login/shared/components/utils';
+import Card from 'login/shared/functions/card';
+import { GS } from 'login/styles/globalStyles';                                     // Global styles
+import TopMenu from 'login/shared/topMenu';
 import { useSelector } from 'react-redux';
 import React, { useState } from 'react';
-import { T } from '../../styles/text';                                              // Text styles
+import { T } from 'login/styles/text';                                              // Text styles
 import { 
   Text, 
   View, 

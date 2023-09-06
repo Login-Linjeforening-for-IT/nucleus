@@ -1,7 +1,7 @@
-import FetchColor from '../../styles/fetchTheme';
-import { GS } from '../../styles/globalStyles';
+import FetchColor from 'login/styles/fetchTheme';
+import { GS } from 'login/styles/globalStyles';
 import Svg, { Rect } from 'react-native-svg';
-import { random } from '../components/utils';
+import { random } from 'login/shared/components/utils';
 import { View } from 'react-native';
 
 

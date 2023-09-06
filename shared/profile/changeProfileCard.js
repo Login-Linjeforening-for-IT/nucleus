@@ -1,10 +1,10 @@
 import { PanGestureHandler } from 'react-native-gesture-handler';
 import { useDispatch, useSelector } from 'react-redux';
 import * as ImagePicker from 'expo-image-picker';
-import FetchColor from '../../styles/fetchTheme';
-import { PS } from '../../styles/profileStyles';
-import { setImage } from '../../redux/profile';
-import { T } from '../../styles/text';
+import FetchColor from 'login/styles/fetchTheme';
+import { PS } from 'login/styles/profileStyles';
+import { setImage } from 'login/redux/profile';
+import { T } from 'login/styles/text';
 import {useState} from 'react';
 
 import { 
@@ -121,9 +121,9 @@ export default function ChangeProfleCard({theme, lang, type, value, hide, trigge
                                  {uri: tempImage ? tempImage : image}
                                 : 
                                     theme == 0 || theme == 2 || theme == 3 ? 
-                                        require('../../assets/icons/loginperson-white.png') 
+                                        require('login/assets/icons/loginperson-white.png') 
                                         : 
-                                        require('../../assets/icons/loginperson-black.png')} 
+                                        require('login/assets/icons/loginperson-black.png')} 
                         />
                         <Text style={{...T.centered15, color: FetchColor(theme, "OPPOSITETEXTCOLOR")}}>{lang ? "Velg bilde" : "Choose image"}</Text>
                     </TouchableOpacity>

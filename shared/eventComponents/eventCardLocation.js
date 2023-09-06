@@ -1,7 +1,7 @@
 import React from 'react';
-import { ES } from '../../styles/eventStyles';
+import { ES } from 'login/styles/eventStyles';
 import { View, Text } from 'react-native';
-import FetchColor from '../../styles/fetchTheme';
+import FetchColor from 'login/styles/fetchTheme';
 
 /**
  * Visual representation of the location on the Event Card
@@ -11,7 +11,7 @@ import FetchColor from '../../styles/fetchTheme';
  * @param {*} lang  User language
  * @returns 
  */
-export default function EventCardLocation(item, theme, lang) {
+export default function EventCardLocation({item, theme, lang}) {
 
     let time = ' ' + item.startt[11]+item.startt[12]+':'+item.startt[14]+item.startt[15] + '. ';
     if (item.startt[11]+item.startt[12]+item.startt[14]+item.startt[15] == '0000') time = '  '

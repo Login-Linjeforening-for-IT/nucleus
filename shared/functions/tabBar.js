@@ -1,24 +1,29 @@
-
+// Import needed components
 import { View, TouchableOpacity, Image} from 'react-native';
 import React from 'react';
 import {BlurView} from 'expo-blur'
-import { MS } from '../../styles/menuStyles';
-import FetchColor from '../../styles/fetchTheme';
+import { MS } from 'login/styles/menuStyles';
+import FetchColor from 'login/styles/fetchTheme';
 import { useSelector } from 'react-redux';
 
 
 export default function Footer({ state, descriptors, navigation }) {
+    // Get the current theme
     const { theme } = useSelector( (state) => state.theme )
 
     return (
         <>
+            {/*Create a blur element to blur tab backgound or android alternative*/}
             {Platform.OS === 'ios' ? <BlurView style={MS.bMenu} intensity={30}/> : <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENTANDROID')}}/>}
+            {/* Transparent container for the icons */}
             <View style={{...MS.bMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT') }}>
+                {/* Create the icons based on options passed from stack.js */}
                 {state.routes.map((route, index) => {
                     const { options } = descriptors[route.key];
                     if (!options.display) return
                     const isFocused = state.index === index;
-            
+                    
+                    // Emitt the normal tab events
                     const onPress = () => {
                         const event = navigation.emit({
                             type: 'tabPress',
@@ -44,8 +49,6 @@ export default function Footer({ state, descriptors, navigation }) {
                             key={route.key}
                             accessibilityRole="button"
                             accessibilityState={isFocused ? { selected: true } : {}}
-                            accessibilityLabel={options.tabBarAccessibilityLabel}
-                            testID={options.tabBarTestID}
                             style={{...MS.bMenuIconTO}}
                             onPress={onPress} 
                             onLongPress={onLongPress}

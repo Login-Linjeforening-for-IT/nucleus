@@ -1,4 +1,4 @@
-import { DARK, LIGHT, ABYSS, SUNSET, CHRISTMAS, EASTER } from "./themes";
+import { DARK, LIGHT, ABYSS, SUNSET, CHRISTMAS, EASTER } from "login/styles/themes";
 
 export default function FetchColor(theme, variable) {    
     switch (theme) {

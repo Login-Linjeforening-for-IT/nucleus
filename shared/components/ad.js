@@ -1,10 +1,10 @@
-import FetchColor from '../../styles/fetchTheme';
-import LastFetch from '../eventComponents/fetch';
-import { AS } from '../../styles/adStyles';
+import FetchColor from 'login/styles/fetchTheme';
+import LastFetch from 'login/eventComponents/fetch';
+import { AS } from 'login/styles/adStyles';
 import { useSelector } from 'react-redux';
 import { View, Text } from 'react-native';
-import Space from './utils';
-import { T } from '../../styles/text';
+import Space from 'login/shared/components/utils';
+import { T } from 'login/styles/text';
 import { 
     TouchableOpacity,
     Dimensions,
@@ -161,7 +161,7 @@ export function AdMedia(props) {
                 {discord ? 
                     <View style={AS.socialPartView}>
                         <TouchableOpacity onPress={() => Linking.openURL(discord)}>
-                            <Image style={AS.socialMediaImage} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/social/discord-white.png') : require('../../assets/social/discord-black.png')} />
+                            <Image style={AS.socialMediaImage} source={theme == 0 || theme == 2 || theme == 3 ? require('login/assets/social/discord-white.png') : require('login/assets/social/discord-black.png')} />
                         </TouchableOpacity>
                     </View>
                 :null}
@@ -169,7 +169,7 @@ export function AdMedia(props) {
                 {instagram ? 
                     <View style={AS.socialPartView}>
                         <TouchableOpacity onPress={() => Linking.openURL(instagram)}>
-                            <Image style={AS.socialMediaImage} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/social/instagram-white.png') : require('../../assets/social/instagram-black.png')} />
+                            <Image style={AS.socialMediaImage} source={theme == 0 || theme == 2 || theme == 3 ? require('login/assets/social/instagram-white.png') : require('login/assets/social/instagram-black.png')} />
                         </TouchableOpacity>
                     </View>
                 :null}
@@ -177,7 +177,7 @@ export function AdMedia(props) {
                 {homepage ? 
                     <View style={AS.socialPartView}>
                         <TouchableOpacity onPress={() => Linking.openURL(homepage)}>
-                            <Image style={AS.socialMediaImage} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/social/web-white.png') : require('../../assets/social/web-black.png')} />
+                            <Image style={AS.socialMediaImage} source={theme == 0 || theme == 2 || theme == 3 ? require('login/assets/social/web-white.png') : require('login/assets/social/web-black.png')} />
                         </TouchableOpacity>
                     </View>
                 :null}
@@ -185,7 +185,7 @@ export function AdMedia(props) {
                 {facebook ? 
                     <View style={AS.socialPartView}>
                         <TouchableOpacity onPress={() => Linking.openURL(facebook)}>
-                            <Image style={AS.socialMediaImage} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/social/facebook-white.png') : require('../../assets/social/facebook-black.png')} />
+                            <Image style={AS.socialMediaImage} source={theme == 0 || theme == 2 || theme == 3 ? require('login/assets/social/facebook-white.png') : require('login/assets/social/facebook-black.png')} />
                         </TouchableOpacity>
                     </View>
                 :null}
@@ -193,7 +193,7 @@ export function AdMedia(props) {
                 {linkedin ? 
                     <View style={AS.socialPartView}>
                         <TouchableOpacity onPress={() => Linking.openURL(linkedin)}>
-                            <Image style={AS.socialMediaImage} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/social/linkedin-white.png') : require('../../assets/social/linkedin-black.png')} />
+                            <Image style={AS.socialMediaImage} source={theme == 0 || theme == 2 || theme == 3 ? require('login/assets/social/linkedin-white.png') : require('login/assets/social/linkedin-black.png')} />
                         </TouchableOpacity>
                     </View>
                 :null}

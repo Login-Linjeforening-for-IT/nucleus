@@ -1,12 +1,41 @@
-import { fetchEventDetails } from './fetch';
-import * as Calendar from 'expo-calendar';
+import { setCalendarID } from 'login/redux/misc'
+import { fetchEventDetails } from 'login/shared/eventComponents/fetch'
 import { Platform } from 'react-native';
+import { 
+    requestCalendarPermissionsAsync, 
+    getDefaultCalendarAsync,
+    createCalendarAsync, 
+    CalendarAccessLevel,
+    getCalendarsAsync, 
+    updateEventAsync, 
+    createEventAsync,
+    getEventsAsync, 
+    EntityTypes, 
+} from 'expo-calendar';
 
-export default async function updateCalendar(events, calendarID) {
-    const { status } = await Calendar.requestCalendarPermissionsAsync();
+/**
+ * Handles press of download button, changes color of the button 
+ * and downloads if more than 3 seconds since last download
+ * 
+ * @see executeDownload Executes the download if permitted
+ */
+export default async function handleDownload(setDownloadState, downloadState, clickedEvents, calendarID, dispatch) {
+    const currentTime = new Date().toISOString()
+
+    if (downloadState == null) {
+        setDownloadState(currentTime);
+        await executeDownload(clickedEvents, calendarID, dispatch);
+    } else {
+        if (timeSinceDownload() >= 1000) await executeDownload(clickedEvents, calendarID, dispatch);
+        setDownloadState(currentTime);
+    }
+}
+
+export async function updateCalendar(events, calendarID) {
+    const { status } = await requestCalendarPermissionsAsync();
     
     if (status === 'granted') {
-        const calendarEvents = await Calendar.getEventsAsync(
+        const calendarEvents = await getEventsAsync(
             [calendarID],
             new Date(Date.now() - 86400000),      // Start date = 24 hours ago
             new Date(Date.now() + 31536000000)    // End date = 1 year from now
@@ -26,24 +55,34 @@ export default async function updateCalendar(events, calendarID) {
             }
     
             // Update the event in the calendar
-            if (matchingEvent) await Calendar.updateEventAsync(matchingEvent.id, newObj);
-            else await Calendar.createEventAsync(calendarID, event); 
+            if (matchingEvent) await updateEventAsync(matchingEvent.id, newObj);
+            else await createEventAsync(calendarID, event); 
         }
     }
 }
 
 /**
- * Function for checking if a given calendar still exists
+ * Checks how long its been since the events were last downloaded and returns the time in seconds.
  * 
- * @param {string} calendarID ID of the calendar to check if exists
+ * @returns int, seconds
+ */
+export function timeSinceDownload(downloadState) {
+    const now = new Date()
+    const before = new Date(downloadState);
+    return now - before;
+}
+
+/**
+ * Function for checking if a given calendar still exists
+ *
  * @returns boolean
  */
-export async function calendarExists(calendarID) {
-    const { status } = await Calendar.requestCalendarPermissionsAsync();
-    
+async function calendarExists(calendarID) {
+    const { status } = await requestCalendarPermissionsAsync();
+
     if (status === 'granted') {
         try {
-            const calendars = await Calendar.getCalendarsAsync(Calendar.EntityTypes.EVENT);
+            const calendars = await getCalendarsAsync(EntityTypes.EVENT);
             const matchingCalendar = calendars.find(calendar => calendar.id === calendarID);
             return matchingCalendar; 
         } catch (e) {console.log(e)}
@@ -55,8 +94,8 @@ export async function calendarExists(calendarID) {
  * 
  * @param {array} events Events to include in the calendar
  */
-export async function createCalendar(events) {
-    const { status } = await Calendar.requestCalendarPermissionsAsync();
+async function createCalendar(events) {
+    const { status } = await requestCalendarPermissionsAsync();
     
     if (status === 'granted') {
         try {
@@ -64,19 +103,19 @@ export async function createCalendar(events) {
             Platform.OS === 'ios'
             ? await getDefaultCalendarSource()
             : { isLocalAccount: true, name: 'Login' };
-            const newCalendarID = await Calendar.createCalendarAsync({
+            const newCalendarID = await createCalendarAsync({
                 title: 'Login',
                 color: '#fd8738',
-                entityType: Calendar.EntityTypes.EVENT,
+                entityType: EntityTypes.EVENT,
                 sourceId: defaultCalendarSource.id,
                 source: defaultCalendarSource,
                 name: 'internalCalendarName',
                 ownerAccount: 'personal',
-                accessLevel: Calendar.CalendarAccessLevel.OWNER,
+                accessLevel: CalendarAccessLevel.OWNER,
                 events: null
             });
-            await updateCalendar(events,newCalendarID);
-            console.log(`Login calendar: ${newCalendarID}`);
+            await updateCalendar(events, newCalendarID);
+
             return newCalendarID;
         } catch (e) {console.log(e)}
     };
@@ -86,7 +125,6 @@ export async function createCalendar(events) {
  * Function for formatting events to native calendar format
  * 
  * @param {array} events      Events to format
- * @param {string} calendarID ID of the calendar
  * @returns                   Native calendar objects
  */
 async function eventsToCalendarFormat(events, calendarID) {
@@ -102,7 +140,6 @@ async function eventsToCalendarFormat(events, calendarID) {
 
         const startDate = new Date(APIevent.startt);
         const endDate = new Date(APIevent.endt);
-
         const obj = {
             calendarId: calendarID,
             allDay: false,
@@ -116,11 +153,11 @@ async function eventsToCalendarFormat(events, calendarID) {
             status: "CONFIRMED",
             availability: "BUSY",
             alarms: [
-            { relativeOffset: -30 }
+                { relativeOffset: -30 }
             ]
         };
         formattedEvents.push(obj);
-        }
+    }
     
         return formattedEvents;
   };
@@ -131,12 +168,27 @@ async function eventsToCalendarFormat(events, calendarID) {
  * @returns Default source
  */
 async function getDefaultCalendarSource() {
-    const { status } = await Calendar.requestCalendarPermissionsAsync();
+    const { status } = await requestCalendarPermissionsAsync();
     
     if (status === 'granted') {
         try {
-            const defaultCalendar = await Calendar.getDefaultCalendarAsync();
+            const defaultCalendar = await getDefaultCalendarAsync();
             return defaultCalendar.source; 
         } catch (e) {console.log(e)}
     };
 };
+
+/**
+ * Executes the download itself, updates existing calendar or creates a new calendar if no calendar exists.
+ * 
+ * @param clickedEvents Array of events the user has joined
+ * 
+ * @see calendarExists  Checks if the calendar storage is defined and if it still exists on the device
+ * @see setCalendarID   Stores the ID of a new calendar in localstorage
+ * @see updateCalendar  Updates the events for a calendar that is found 
+ * @see createCalendar  Creates a new calendar if no calendar is to be found
+ */
+async function executeDownload(clickedEvents, calendarID, dispatch) {
+    if (typeof await calendarExists() != "undefined") await updateCalendar(clickedEvents, calendarID)
+    else dispatch(setCalendarID(await createCalendar(clickedEvents)));
+}

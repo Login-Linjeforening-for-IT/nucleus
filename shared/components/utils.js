@@ -1,9 +1,9 @@
-import FetchColor from '../../styles/fetchTheme';
-import { ES } from '../../styles/eventStyles';
+import FetchColor from 'login/styles/fetchTheme';
+import { ES } from 'login/styles/eventStyles';
 import Svg, {Rect} from 'react-native-svg';
 import { useSelector } from 'react-redux';
 import { View, Text } from 'react-native';
-import { T } from "../../styles/text"
+import { T } from "login/styles/text"
 
 /**
  * Function for creating an empty view, for adding spaces between objects such as views paragraphs etc
@@ -71,7 +71,7 @@ export function errorMessage(argument, theme, lang) {
 
     const styledError = (
         <View style={{alignSelf: 'center', maxWidth: '80%'}}>
-              <View style={{height : '58%'}}/>
+              <View style={{height : '45%'}}/>
               <Text style={{...T.centeredBold20, color: FetchColor(theme, 'TEXTCOLOR')}}>{text[argument]}</Text>
         </View>
     )
@@ -84,7 +84,7 @@ export function errorMessage(argument, theme, lang) {
  * @param {hex} color       Hex color for the text based on theme
  * @returns 
  */
-export function Month(month, color, lang) {
+export function Month({month, color, lang}) {
     const monthsEN = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Des'];
     const monthsNO = ['jan', 'feb', 'mar', 'apr', 'mai', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'des'];
 

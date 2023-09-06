@@ -1,9 +1,9 @@
 import React from 'react';
-import { ES } from '../../styles/eventStyles';
-import { T } from '../../styles/text'
+import { ES } from 'login/styles/eventStyles';
+import { T } from 'login/styles/text'
 import { View, Text } from 'react-native';
 import { useSelector } from 'react-redux';
-import FetchColor from '../../styles/fetchTheme';
+import FetchColor from 'login/styles/fetchTheme';
 
 /**
  * Function for finding the eventlocation of an event
@@ -11,7 +11,7 @@ import FetchColor from '../../styles/fetchTheme';
  * @param {string} campus   Campus where the event takes place
  * @returns                 View containing the event location as a text
  */
-export default function EventLocation(room, campus, street) {
+export default function EventLocation({room, campus, street}) {
     const { lang  } = useSelector( (state) => state.lang  )
     const { theme } = useSelector( (state) => state.theme )
 

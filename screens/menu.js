@@ -1,14 +1,14 @@
 import { nativeApplicationVersion } from "expo-application";
-import Cluster from '../shared/functions/cluster';
-import Space from "../shared/components/utils";
-import FetchColor from '../styles/fetchTheme';
-import { CS } from '../styles/clusterStyles';
-import { GS } from '../styles/globalStyles';
-import { ES }from '../styles/eventStyles';
+import Cluster from 'login/shared/functions/cluster';
+import Space from "login/shared/components/utils";
+import FetchColor from 'login/styles/fetchTheme';
+import { CS } from 'login/styles/clusterStyles';
+import { GS } from 'login/styles/globalStyles';
+import { ES }from 'login/styles/eventStyles';
 import { useSelector } from 'react-redux';
 import React, { useState } from 'react';
-import TopMenu from '../shared/topMenu';
-import { T } from '../styles/text';
+import TopMenu from 'login/shared/topMenu';
+import { T } from 'login/styles/text';
 import { 
   Text, 
   View, 
@@ -65,7 +65,7 @@ export default function MenuScreen({ navigation }) {
                                 <Text style={{...T.text20, color: FetchColor(theme, 'TEXTCOLOR')}}>{lang ? item.titleNO : item.titleEN}</Text>
                             </View>
                             <View style={CS.twinRight}>
-                                <Image style={CS.arrowImage} source={require('../assets/icons/dropdownBase.png')}/>
+                                <Image style={CS.arrowImage} source={require('login/assets/icons/dropdownBase.png')}/>
                             </View>
                         </View>
                     </Cluster>
