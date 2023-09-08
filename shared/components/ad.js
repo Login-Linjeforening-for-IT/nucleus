@@ -1,9 +1,8 @@
+import LastFetch from 'login/shared/eventComponents/fetch';
+import Space from 'login/shared/components/utils';
 import FetchColor from 'login/styles/fetchTheme';
-import LastFetch from 'login/eventComponents/fetch';
 import { AS } from 'login/styles/adStyles';
 import { useSelector } from 'react-redux';
-import { View, Text } from 'react-native';
-import Space from 'login/shared/components/utils';
 import { T } from 'login/styles/text';
 import { 
     TouchableOpacity,
@@ -84,7 +83,7 @@ export function AdClusterImage(props) {
  * @param {*} lang  User language
  * @returns 
  */
-export function AdClusterLocation(item, theme, lang) {
+export function AdClusterLocation({item, theme, lang}) {
     const tempName = item.title_no
     const tempType = "Fulltid"
     const tempLoc = "Gjøvik, Oslo, Stavanger, Bergen, Trondheim, Login Loungen"

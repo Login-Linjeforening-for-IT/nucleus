@@ -91,7 +91,7 @@ export function removeDuplicatesAndOld(APIevents, events) {
     return filteredEvents;
 };
 
-export async function fetchState (setClickedEvents) {                                         //  --- FETCHES CLICKED EVENTS ---
+export async function fetchState(setClickedEvents) {                                         //  --- FETCHES CLICKED EVENTS ---
     let foundState = await AsyncStorage.getItem('clickedEvents');         // Fetches the cache
     if (foundState != null) {                                             // If cache exists
         let parsed = JSON.parse(foundState)                                 // Parses from string to objects
@@ -99,12 +99,20 @@ export async function fetchState (setClickedEvents) {                           
     } 
 }
 
-export async function fetchStoredEvents (setRenderedArray, setEvents) {                                  //  --- FETCHING STORED EVENTS IF NO WIFI ---
-    let tempArray = await AsyncStorage.getItem('cachedEvents')            //  Fetches cache
+/**
+ * Fetches localstorage for desired value, updates state and rendered array
+ * 
+ * @param {*} setRenderedArray  The rendered array to be updated
+ * @param {*} setState          The state to be updated
+ * @param {*} value             The value to find in localstorage
+ */
+export async function fetchStored(setRenderedArray, setState, value) {                                  //  --- FETCHING STORED EVENTS IF NO WIFI ---
+    const stored = value == "ads" ? "cachedsAd" : "cachedEvents"
+    let tempArray = await AsyncStorage.getItem(stored)            //  Fetches cache
     if (tempArray != null){                                                // If cache exists
         let parsed = JSON.parse(tempArray);                                 // Parses from string to objects
         setRenderedArray([...parsed]);                                      // Updates the renderedarray to equal cache
-        setEvents([...parsed]);                                             // Updates the events array to equal cache
+        setState([...parsed]);                                             // Updates the events array to equal cache
     }
 }
 

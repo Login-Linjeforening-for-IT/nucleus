@@ -105,7 +105,7 @@ function EventCard ({
                         />
                     </View>
                 </Cluster>
-                <EventListFooter 
+                <ListFooter 
                     index={index}
                     renderedArray={renderedArray}
                     search={search}
@@ -119,7 +119,7 @@ function EventCard ({
     )
 }
 
-function EventListFooter({index, renderedArray, search, relevantCategories, lastSave, lang, theme}) {
+export function ListFooter({index, renderedArray, search, relevantCategories, lastSave, lang, theme}) {
     return (
         <>
             {index == renderedArray.length-1 && <Text style={{...T.contact, color: FetchColor(theme, 'OPPOSITETEXTCOLOR')}}>{lang ? 'Oppdatert kl:':'Updated:'} {lastSave}.</Text>}

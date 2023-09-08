@@ -7,7 +7,10 @@
     "ios": "expo run:ios",
     "build": "eas build -p all --auto-submit",
     "build-local-ios": "eas build -p ios --local",
-    "build-local-android": "eas build -p android --local"
+    "build-local-android": "eas build -p android --local",
+    "nstart": "react-native start",
+    "nios": "react-native run-ios",
+    "nandroid": "react-native run-android"
   },
   "dependencies": {
     "@expo/config-plugins": "^7.2.5",

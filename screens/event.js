@@ -1,5 +1,5 @@
 import NavigateFromPushNotification from 'login/shared/notificationComponents/navigateFromPushNotification';
-import LastFetch, { fetchState, fetchStoredEvents, getData } from 'login/shared/eventComponents/fetch';
+import LastFetch, { fetchState, fetchStored, getData } from 'login/shared/eventComponents/fetch';
 import handleDownload, { timeSinceDownload } from 'login/shared/eventComponents/calendar';
 import notificationSetup from 'login/shared/notificationComponents/notificationSetup';
 import notificationArray from 'login/shared/notificationComponents/notificationArray';
@@ -10,10 +10,10 @@ import EventList from 'login/shared/eventComponents/eventList';
 import React, { useEffect, useState, useRef } from 'react';               // React imports
 import { useFocusEffect } from '@react-navigation/native';                // useFocusEffect       (do something when the screen is displayed)
 import { useDispatch, useSelector } from 'react-redux';                   // Redux
-import FetchColor from 'login/styles/fetchTheme';                            // Function to fetch theme color
-import { GS } from 'login/styles/globalStyles';                              // Global styles
+import FetchColor from 'login/styles/fetchTheme';                         // Function to fetch theme color
+import { GS } from 'login/styles/globalStyles';                           // Global styles
 import { StatusBar } from 'expo-status-bar';                              // Status bar
-import { MS } from 'login/styles/menuStyles';                                // Menu styles
+import { MS } from 'login/styles/menuStyles';                             // Menu styles
 import { BlurView } from 'expo-blur';                                     // Blur effect
 import Filter, { 
     fetchRelevantCategories, 
@@ -86,12 +86,12 @@ export default function EventScreen({ navigation }) {                       //  
     storeEvents(events, clickedEvents)
 
     useEffect(() => {                                                       //  --- LOADING FILTERED DATA WHEN FILTER CHANGES ---
-        if (filter.input != null || clickedCategory.length > 0) {             // If the filter is not null or there are categories clicked
-            if(filter.input != null && clickedCategory.length == 0)  {          // If the filter is not null but no categories are clicked
-                if (filter.input.length == 0) {                                   // If the length of the filter search text is equal 0
-                    filterInput(setFilter, null, filter);                                              // Resets filter input
-                    setClickedCategory([]);                                         // Resets clicked categories
-                    setRenderedArray([...events])                                   // Resets renderedArray to all events
+        if (filter.input != null || clickedCategory.length > 0) {           // If the filter is not null or there are categories clicked
+            if(filter.input != null && clickedCategory.length == 0)  {      // If the filter is not null but no categories are clicked
+                if (filter.input.length == 0) {                             // If the length of the filter search text is equal 0
+                    filterInput(setFilter, null, filter);                   // Resets filter input
+                    setClickedCategory([]);                                 // Resets clicked categories
+                    setRenderedArray([...events])                           // Resets renderedArray to all events
                 }
                 Filter(filter, setRenderedArray, events, clickedEvents, clickedCategory);                                                         // Run filter function if the filter search text is not empty
             }else{
@@ -116,7 +116,7 @@ export default function EventScreen({ navigation }) {                       //  
         getData(setEvents, setRenderedArray, setLastSave, events);                            //  Fetches API
         fetchState(setClickedEvents);                                                         //  Fetches clickedEvents
         fetchRelevantCategories(setRelevantCategories, clickedEvents, events, category); //  Fetches categories available to filter
-        events.length ? setRenderedArray([...events]) : fetchStoredEvents(setRenderedArray, setEvents);  
+        events.length ? setRenderedArray([...events]) : fetchStored(setRenderedArray, setEvents);  
     }, [])                                                                   //  Renders when the screen is loaded
 
     useEffect(() => {                                                       //  --- UPDATES FILTER ON EVENT CHANGE ---
@@ -126,21 +126,21 @@ export default function EventScreen({ navigation }) {                       //  
     useEffect(() => {                                                       //  --- FETCHES API AND UPDATES CACHE EVERY 10 SECONDS ---
         let interval = null;
 
-        if(!search.status){                                                   //  Only when filter is closed to prevent "no match" issue
+        if(!search.status){                                                 //  Only when filter is closed to prevent "no match" issue
             interval = setInterval(() => {        
-                (async() => {                                                     // Storing the current time
+                (async() => {                                               // Storing the current time
                     await AsyncStorage.setItem('lastFetch', new Date().toISOString()) //  Storing in AsyncStorage 
                     getData(setEvents, setRenderedArray, setLastSave, events);        //  Fetches cache
                 })()           
-            }, 10000);                                                          //  Runs every 10 seconds
-        } else clearInterval(interval)                                          //  Clears the interval when the filter is opened
+            }, 10000);                                                      //  Runs every 10 seconds
+        } else clearInterval(interval)                                      //  Clears the interval when the filter is opened
 
-        return () => clearInterval(interval)                                  //  Clears interval when unmounted to prevent memory leaks
+        return () => clearInterval(interval)                                //  Clears interval when unmounted to prevent memory leaks
     }, [search.status]);
 
     async function RenderEvents() {                                         //  --- RESETS RENDERED EVENTS
-        setRenderedArray([...events])                                         //  Updates the rendered array
-        await AsyncStorage.setItem('cachedEvents', JSON.stringify(events))    //  Updates cache
+        setRenderedArray([...events])                                       //  Updates the rendered array
+        await AsyncStorage.setItem('cachedEvents', JSON.stringify(events))  //  Updates cache
     }
 
     if(events.length > 0 && events.length !== renderedArray.length){        //  --- CHECKS FOR AND FIXES INCORRECT RENDER ---
@@ -148,7 +148,7 @@ export default function EventScreen({ navigation }) {                       //  
         else filter.input.length == 0 && clickedCategory.length == 0 ? RenderEvents() : null // Fixes any errors if the user has been searching, but is not doing so now
     }
 
-                                                                          //  --- SETUP CODE ONCE APP IS DOWNLOADED---
+                                                                            //  --- SETUP CODE ONCE APP IS DOWNLOADED---
     if(lastSave == null) (async() => {setLastSave(await LastFetch())})()    //  Displays when the API was last fetched successfully
     if(!notification["SETUP"]) notificationSetup();                         //  Sets up initial notifications
   

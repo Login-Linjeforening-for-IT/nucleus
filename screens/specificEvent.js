@@ -48,11 +48,11 @@ export default function SpecificEventScreen({ route, navigation}) {
 
     async function updateStorage() {
         let storedClickedEvents = JSON.parse(await AsyncStorage.getItem('clickedEvents'))
-        if(storedClickedEvents){
-        storedClickedEvents.push(item)
-        await AsyncStorage.setItem('clickedEvents', JSON.stringify(storedClickedEvents))
-        }else{
-        await AsyncStorage.setItem('clickedEvents', JSON.stringify([item]))
+        if (storedClickedEvents){
+            storedClickedEvents.push(item)
+            await AsyncStorage.setItem('clickedEvents', JSON.stringify(storedClickedEvents))
+        } else {
+            await AsyncStorage.setItem('clickedEvents', JSON.stringify([item]))
         }
     }
 
@@ -94,7 +94,7 @@ export default function SpecificEventScreen({ route, navigation}) {
             :(item.image).includes('.png')?<Image style={ES.specificEventImage}  source={{uri: `https://cdn.login.no/img/events/${item.image}`}}/>:null}
             <StaticImage item={item} />
 
-                {Space(5)}
+            {Space(5)}
             
             <CardSmaller>
                 <View style={ES.specificEventInfoView}>

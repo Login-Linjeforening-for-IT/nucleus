@@ -1,11 +1,11 @@
 import AdInfo, { AdBanner, AdTitle, AdDescription, AdUpdateInfo, AdMedia } from 'login/shared/components/ad'
 import { View, ScrollView, Dimensions } from 'react-native';
 import Cluster from 'login/shared/functions/cluster';
-import Space from 'login/shared/functions/space';
+import Space from 'login/shared/components/utils';
 import FetchColor from 'login/styles/fetchTheme';
 import { GS } from 'login/styles/globalStyles';
-import { useSelector } from 'react-redux';
 import TopMenu from 'login/shared/topMenu';
+import { useSelector } from 'react-redux';
 import React from 'react';
 
 export default function SpecificAdScreen( { route, navigation }) {
