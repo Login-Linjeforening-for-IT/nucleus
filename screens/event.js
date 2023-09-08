@@ -411,7 +411,7 @@ export default function EventScreen({ navigation }) {                     //  Ex
         {Space(Dimensions.get('window').height/3)}
       </View>    
 
-      {/* ========================= DISPLAY TOP MENU ========================= */}
+      {/* ========================= DISPLAY TOP MENU =========================
       {Platform.OS === 'ios' ? <BlurView style={MS.topMenu} intensity={30}/> : <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'TRANSPARENTANDROID')}}/>}
       <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
         <TouchableOpacity style={MS.logoBackground}>
@@ -443,7 +443,7 @@ export default function EventScreen({ navigation }) {                     //  Ex
             :null}
           </View>
         :null}
-      </View>
+      </View> */}
     </View>
   )
 };

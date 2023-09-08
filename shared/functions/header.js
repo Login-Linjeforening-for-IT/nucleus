@@ -8,7 +8,6 @@ import {                                                                    // R
   View,                                                                     // View component
   Image,                                                                    // Image component
   TouchableOpacity,                                                         // TouchableOpacity     (custom button)
-  Platform,                                                                 // Operating system
   Text,
   StatusBar
 } from 'react-native';                                                      // React native
@@ -17,27 +16,31 @@ import {                                                                    // R
 export default function Header({navigation, route, options}){
     const { lang } = useSelector((state) => state.lang)
     const { theme }  = useSelector( (state) => state.theme )
-    const goBack = () => { navigation.goBack()}
     const eventPage = () => { navigation.navigate('EventScreen') }
-    const title = options.title ? options.title[lang] : route.name
+    const title = options.title ? options.title[lang] : route.name;
+    
     return (
         <>
-            {Platform.OS === 'ios' ? <BlurView style={{height: Dimensions.get('window').height*9/100+StatusBar.currentHeight}} intensity={30}/> : <View style={{height: Dimensions.get('window').height*9/100+StatusBar.currentHeight, backgroundColor: FetchColor(theme, 'TRANSPARENTANDROID')}}/>}
-            {/* <View style={{...MS.topMenu, backgroundColor: FetchColor(theme, 'TRANSPARENT')}}>
+            <BlurView tint='dark' style={{paddingTop: StatusBar.currentHeight, height: Dimensions.get('window').height*8/100+StatusBar.currentHeight, backgroundColor: FetchColor(theme, 'TRANSPARENT')}} intensity={30}>
+                <View style={{display:'flex', flexDirection:'row', justifyContent:'center', height: '100%'}}>
                 {options.back ? 
-                    <TouchableOpacity onPress={() => goBack()}>
-                        <Image style={MS.goBack} source={require('../../assets/icons/goback777.png')} />
+                    <TouchableOpacity onPress={() => navigation.goBack()}>
+                        <Image style={{}} source={require('../../assets/icons/goback777.png')} />
                     </TouchableOpacity>
                 :
-                    <TouchableOpacity style={MS.logoBackground} onPress={() => screen != 'event' && eventPage()}>
-                        <Image style={MS.tMenuIcon} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/logo/loginText.png') : require('../../assets/logo/loginText-black.png')} />
+                    <TouchableOpacity style={{flex: 1, justifyContent: 'center'}} onPress={() => route.name != 'EventScreen' && eventPage()}>
+                        <Image style={{width: 32, height: 32, left: '20%'}} source={theme == 0 || theme == 2 || theme == 3 ? require('../../assets/logo/loginText.png') : require('../../assets/logo/loginText-black.png')} />
                     </TouchableOpacity>
                 }
                 {
-                    title.length > 40 ? <Text style={{...MS.smallMultilineTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{title}</Text>
-                    : <Text style={{... MS.screenTitle, color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{title}</Text>
+                    title.length > 40 ? <Text style={{color: FetchColor(theme, 'TITLETEXTCOLOR')}}>{title}</Text>
+                    : <Text style={{alignSelf: 'center', color: FetchColor(theme, 'TITLETEXTCOLOR'), fontSize: 30}}>{title}</Text>
                 }
-            </View> */}
+                <View style={{flex: 1, display: 'flex', flexDirection: 'row'}}>
+                </View>
+                    {(route.params)&&route.params.content}
+                </View>
+            </BlurView>
         </>
     )
 }
