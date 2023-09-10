@@ -15,7 +15,7 @@
 6. Download the app from Testflight.
 7. Test the application on a physical iPhone.
 8. Build the app for android using "eas build -p android".
-9. Go to the Expo Developer dashboard and verify that the build has succeeded. 
+9. Go to the Expo Developer dashboard and verify that the build has succeeded.
 10. Download the finished build.
 11. Test the Android build on a physical Android device.
 12. Push the repository to remote with the firebase / messaging code commented out.
@@ -24,7 +24,7 @@
 14. Submit it to Google Play for review and auto release.
 15. Submit it to App Store for review and auto release.
 
-Notes: 
+Notes:
 1. You can build for android first, if so do the steps relevant for Android first, then the iOS steps afterwards.
 2. You can test using emulators, but physical devices are recommended as emulators gives limited functionality and can give bugs that are not present on physical devices.
 3. Emulators do NOT support notifications.
