@@ -17,7 +17,7 @@ export default function Language() {    //Choose the language
 
     topic({topicID: "langChange", lang})  // Sets up notifications to follow language
 
-    return(
+    return (
         <View>
             <TouchableOpacity onPress={() =>  dispatch(changeLang()) }>
                 <Text style={{

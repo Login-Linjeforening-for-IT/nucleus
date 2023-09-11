@@ -38,7 +38,7 @@ export function NotificationDropdown() {
         })
     }
 
-    return(
+    return (
         <View>
             <TouchableOpacity onPress={() => selectedDegree()}>
                 <View style={{...GS.dropdown, backgroundColor: FetchColor({theme, variable: "CONTRAST"})}}>
@@ -54,7 +54,7 @@ export function NotificationDropdown() {
             <View>
                 { course.selected ?
                     courses.map((selectedCourse, index) => {
-                        return(
+                        return (
                             <TouchableOpacity key={index} onPress={() => Linking.openURL(selectedCourse.link)}>
                                 <View style={{...GS.dropdownContent, backgroundColor: FetchColor({theme, variable: "CONTRAST"})}}>
                                     <Text style={{...T.text15, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{lang ? selectedCourse.titleNO : selectedCourse.titleEN}</Text>

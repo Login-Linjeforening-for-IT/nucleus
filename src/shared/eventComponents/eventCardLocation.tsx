@@ -37,7 +37,7 @@ export default function EventCardLocation({item, theme, lang}: EventCardLocation
 
     const info = time + location
 
-    return(
+    return (
         <View style={ES.view2}>
             <View style = {{...ES.title}}>
                 <Text style={{...ES.title, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{item.eventname.trim()}</Text>

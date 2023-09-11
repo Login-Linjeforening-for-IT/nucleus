@@ -25,7 +25,7 @@ SmallProfileProps): JSX.Element {  // SVG showing the color of the category
 
     const isDark = theme === 0 || theme === 2 || theme === 3 ? true : false
 
-    return(
+    return (
         <TouchableOpacity onPress={() => login
             ? navigation.navigate("ProfileScreen")
             : navigation.navigate("LoginScreen")}

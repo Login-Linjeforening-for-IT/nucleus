@@ -61,7 +61,7 @@ export default function MenuScreen({ navigation }: ScreenProps): JSX.Element {
         setFeedback(prevFeedback => !prevFeedback)
     }
 
-    return(
+    return (
         <View>
             <View style={{...GS.content, backgroundColor: FetchColor({theme, variable: "DARKER"})}}>
                 <FlatList
@@ -94,7 +94,7 @@ export default function MenuScreen({ navigation }: ScreenProps): JSX.Element {
 function MenuItem({index, item, navigation, theme, lang, setting, feedback, 
 toggleFeedback, login}: MenuItemProps) {
 
-    return(
+    return (
         <View>
             {index === 0 ? Space(Dimensions.get("window").height/8): null}
             {/* {index === 0 ? SmallProfile(navigation, theme, lang, profile, login) : null} */}

@@ -23,7 +23,6 @@ export default function Notification ({category, skip}: NotificationProps) {
     const { lang  } = useSelector( (state: ReduxState) => state.lang  )
     const { theme } = useSelector( (state: ReduxState) => state.theme )
     const dispatch = useDispatch()
-    let Category = ""
 
     if (!skip) topic({category: category, lang, catArray: notification[category]})
 
@@ -31,7 +30,7 @@ export default function Notification ({category, skip}: NotificationProps) {
         <View>
             <Switch
                 trackColor={{ true: FetchColor({theme, variable: "TRACKCOLOR"})}}
-                thumbColor={notification[Category]
+                thumbColor={notification[category]
                     ? FetchColor({theme, variable: "SWITCHOFFSTATE"})
                     : FetchColor({theme, variable: "SWITCHONSTATE"})
                 }
@@ -41,7 +40,7 @@ export default function Notification ({category, skip}: NotificationProps) {
                 onValueChange={(value) => {
                     dispatch(changeNotificationState({value, category}))
                 }}
-                value={notification[Category]}
+                value={notification[category]}
             />
         </View>
     )

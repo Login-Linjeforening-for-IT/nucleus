@@ -24,7 +24,7 @@ export default function TopMenu({ navigation, title, screen, back }
     const goBack = () => { navigation.navigate(back ? back : "EventScreen")}
     const eventPage = () => { navigation.navigate("EventScreen") }
 
-    return(
+    return (
         <>
             {Platform.OS === "ios"
                 ? <BlurView style={MS.topMenu} intensity={30}/>

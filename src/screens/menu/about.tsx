@@ -38,11 +38,11 @@ type CommitteePersonProps = {
 }
 
 type CommitteeImageTouchableProps = {
-    key: number
     setCommittee: React.Dispatch<React.SetStateAction<number>>
     committee: number
-    isDark: boolean,
+    isDark: boolean
     theme: number
+    index: number
 }
 
 type CommitteeViewProps = {
@@ -69,7 +69,7 @@ export default function AboutScreen( { navigation }: ScreenProps): JSX.Element {
     {id: 5, titleNO: "SATkom",   titleEN: "SATkom",   quoteNO: "SATkom er komiteen som vokter Login sin pengebinge, og sørger for at pengene både flyter inn og ut. Hvis du har økonomisk sans, eller bare vil bli Login's nye sugar daddy, så er dette komiteen for deg!", qouteEN: "SATkom is the committee that guards Login's money bin and ensures that the money flows both in and out. If you have financial skills, or just want to be Login's new sugar daddy, then this is the committee for you!", descriptionNO: "SATkom står for Sytematiserte Automatiserte Transaksjoner, og de jobber med å forvalte midlene Login har tilgengelig. Deres oppgaver innebærer betaling av regninger, utsending av fakturaer og innkjøp til foreningen. De lager ukentlige regnskap, og passer på at komiteene ikke overskrider budsjettene for mye. Komiteen har også en \"Dungeon Master\" som har i oppgave å passe på Loungen, og at alle medlemmene våre får nok koffein. Videre er komiteen involvert i budsjettering, diverse økonomiske saker og andre ablegøyer.", descriptionEN: "SATkom stands for Systematized Automated Transactions, and they work with managing the funds Login has available. Their duties involve paying bills, sending out invoices and purchasing for the association. They prepare weekly accounts, and make sure that the committees do not exceed their budgets too much. The committee also has a \"Dungeon Master\" who is tasked with looking after the Lounge, and that all our members get enough caffeine. Furthermore, the committee is involved in budgeting, various financial matters and other minor matters."}
   ]
 
-  return(
+  return (
   <View>
     <View style={{...GS.content, backgroundColor: FetchColor({theme, variable: "DARKER"})}}>
         <ScrollView showsVerticalScrollIndicator={false}>
@@ -136,7 +136,7 @@ export default function AboutScreen( { navigation }: ScreenProps): JSX.Element {
                 {
                 info.map((relevantCommittee, index) => {
                     if (relevantCommittee.id === committee) {
-                        return(
+                        return (
                             <View key={index}>
                                 <Text style={{...T.text30, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>
                                 <Image 
@@ -252,28 +252,28 @@ function CommitteeView({setCommittee, committee, isDark, theme}: CommitteeViewPr
     
     for (let i = 0; i < 6; i+=3) {
         elements.push(
-            <View key={"View" + i} style={GS.parentComitteeView}>
+            <View key={"View" + i} style={GS.parentCommitteeView}>
                 <CommitteeImageTouchable 
-                    key={i}
                     setCommittee={setCommittee}
                     committee={committee}
                     isDark={isDark}
                     theme={theme}
-                />
+                    index={i}
+                    />
                 <CommitteeImageTouchable 
-                    key={i+1}
                     setCommittee={setCommittee}
                     committee={committee}
                     isDark={isDark}
                     theme={theme}
-                />
+                    index={i+1}
+                    />
                 <CommitteeImageTouchable 
-                    key={i+2}
                     setCommittee={setCommittee}
                     committee={committee}
                     isDark={isDark}
                     theme={theme}
-                />
+                    index={i+2}
+                    />
             </View>
         )
     }
@@ -281,19 +281,19 @@ function CommitteeView({setCommittee, committee, isDark, theme}: CommitteeViewPr
     return elements
 }
 
-function CommitteeImageTouchable({key, setCommittee, committee, isDark, theme}
-: CommitteeImageTouchableProps): JSX.Element {
-    const image = committee === key ? "" : isDark ? "dark" : "gray"
+function CommitteeImageTouchable({setCommittee, committee, isDark, theme, 
+index}: CommitteeImageTouchableProps): JSX.Element {
+    const image = committee === index ? "" : isDark ? "dark" : "gray"
 
-    return(
-        <TouchableOpacity onPress={() => setCommittee(key)}>
+    return (
+        <TouchableOpacity onPress={() => setCommittee(index)}>
             <View style={{
-                ...GS.comittee, 
+                ...GS.committee, 
                 backgroundColor: FetchColor({theme, variable: "CONTRAST"})
             }}>
                 <Image 
                     style={GS.image80} 
-                    source={getCommitteeImage({id: key, style: image})}
+                    source={getCommitteeImage({id: index, style: image})}
                 />
             </View>
         </TouchableOpacity>

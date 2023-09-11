@@ -14,7 +14,7 @@ export default function SpecificAdScreen({ route, navigation }: SpecificAdScreen
     const { theme } = useSelector( (state: ReduxState) => state.theme )
     const { item } = route.params
 
-    return(
+    return (
         <View>
             <View style={{
                 ...GS.content,

@@ -1,12 +1,12 @@
 import NavigateFromPushNotification from "@shared/notificationComponents/navigateFromPushNotification"
-import handleDownload, { timeSinceDownload } from "@shared/eventComponents/calendar"
+import handleDownload from "@shared/eventComponents/calendar"
 import notificationSetup from "@shared/notificationComponents/notificationSetup"
-import LastFetch, { fetchState, getData } from "@shared/eventComponents/fetch"
+import LastFetch, { fetchState, timeSince } from "@shared/eventComponents/fetch"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { ListFooter } from "@shared/eventComponents/eventList"
 import Space, { ErrorMessage } from "@shared/components/utils"
 import storeAds from "@shared/eventComponents/storeEvents"
-import React, { useEffect, useState, useRef } from "react"
+import React, { useEffect, useState } from "react"
 import { useFocusEffect } from "@react-navigation/native"
 import { useDispatch, useSelector } from "react-redux"
 import { AdListItem } from "@components/adListItem"
@@ -177,7 +177,7 @@ export default function AdScreen({ navigation }: ScreenProps): JSX.Element {
     if(!notification["SETUP"]) notificationSetup()
 
     //  --- DISPLAYS THE EVENTSCREEN ---
-    return(
+    return (
     <View>
         <StatusBar style={theme === 0 || theme === 2 || theme === 3 ? "light" : "dark"} />
         <View style={{...GS.content, backgroundColor: FetchColor({theme, variable: "DARKER"})}}>
@@ -255,7 +255,7 @@ export default function AdScreen({ navigation }: ScreenProps): JSX.Element {
                 <Image 
                     style={MS.multiIcon}
                     source={theme === 0 || theme === 2 || theme === 3 
-                        ? timeSinceDownload(downloadState) >= 1000 
+                        ? timeSince(downloadState) >= 1000 
                             ? require("@assets/icons/download.png")
                             : require("@assets/icons/download-orange.png") 
                         : require("@assets/icons/download-black.png")} />

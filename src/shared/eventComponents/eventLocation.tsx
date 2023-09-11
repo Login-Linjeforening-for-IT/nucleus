@@ -22,7 +22,7 @@ export default function EventLocation({room, campus, street}: EventLocationProps
     const { theme } = useSelector( (state: ReduxState) => state.theme )
 
     if (!room && !campus && !street) {
-        return(
+        return (
             <View style={ES.specificEventInfoView}>
                 <Text style={{...T.specificEventInfo, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{lang ? "Lokasjon:   " : "Location:     "}</Text>
                 <Text style={{...T.specificEventInfo, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>TBA!</Text>
@@ -31,10 +31,10 @@ export default function EventLocation({room, campus, street}: EventLocationProps
     }
 
     if (room != null || campus != null || street != null) {
-        return(
+        return (
             <View style={ES.specificEventInfoView}>
                 <Text style={{...T.specificEventInfo, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{lang ? "Lokasjon:   " : "Location:     "}</Text>
-                <Text style={{...T.specificEventInfo, maxWidth: "80%", color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{room ? room + ", ":null}{campus}{street}</Text>
+                <Text style={{...T.specificEventInfo, maxWidth: "70%", color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{room ? room + ", ":null}{campus}{street}</Text>
             </View>
         )
     } else {

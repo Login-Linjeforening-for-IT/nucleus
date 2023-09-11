@@ -14,6 +14,7 @@ import {
     Text,
     ImageSourcePropType,
 } from "react-native"
+import { ES } from "@styles/eventStyles"
 
 type PersonProps = {
     person: string
@@ -26,7 +27,7 @@ type MediaLogoProps = {
     logo: ImageSourcePropType
 }
 
-type AllComitteesProps = {
+type AllCommitteesProps = {
     lang: boolean
     theme: number
 }
@@ -58,7 +59,7 @@ export default function person({person, lang, theme}: PersonProps): JSX.Element 
     let obj = personInfo({person, lang})
     let corner = random({min: 0, max: 4})
 
-    return(
+    return (
         <View>
             <Image style={{...GS.personImage}} source={{uri: obj.img}} />
             {Space(10)}
@@ -87,11 +88,11 @@ export default function person({person, lang, theme}: PersonProps): JSX.Element 
 }
 
 /**
- * Function for displaying all comitees
- * @returns View containing all comittees
+ * Function for displaying all committees
+ * @returns View containing all committees
  */
-export function AllComitees({lang, theme}: AllComitteesProps): JSX.Element {
-  return(
+export function AllComitees({lang, theme}: AllCommitteesProps): JSX.Element {
+  return (
         <View>
           {person({person: "leader", lang, theme})}
           {person({person: "coleader", lang, theme})}
@@ -194,7 +195,7 @@ export function styret(theme: number) {
 
     let corner = random({min: 0, max: 4})
 
-    return(
+    return (
         <View>
             <Image 
                 style={{...GS.aboutImage}} 
@@ -224,7 +225,7 @@ export function Kontakt() {
         post: "2815 GJØVIK"
     }
 
-    return(
+    return (
     <View>
         <Text/>
         <Text style={{...T.centeredBold25, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{info.contact}</Text>
@@ -259,7 +260,7 @@ export function Copyright() {
     const { lang  } = useSelector( (state: ReduxState) => state.lang  )
     const { theme } = useSelector( (state: ReduxState) => state.theme )
 
-    return(
+    return (
         <View>
             <Text style={{...T.copyright, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>
                 {lang 
@@ -374,4 +375,28 @@ function personInfo({person, lang}: personInfoProps) {
         case "bedkom":      return bedkom_leader
         default:            return tekkom_leader
     }
+}
+
+export function StaticImage({item}: {item: EventProps}): JSX.Element {
+    let image = null
+
+    const images = {
+        tekkom:  require(`../../../public/assets/committee/tekkom/tekkom.png`),
+        ctf:     require(`../../../public/assets/committee/ctfkom/ctf.png`),
+        social:  require(`../../../public/assets/categories/sosialt.png`),
+        login:   require(`../../../public/assets/categories/login.png`),
+        annet:   require(`../../../public/assets/categories/annet.png`),
+        bedpres: require(`../../../public/assets/categories/bedpresBig.png`)
+    }
+
+    switch (item.category) {
+        case "TEKKOM":  image = images.tekkom;  break
+        case "CTF":     image = images.ctf;     break
+        case "SOCIAL":  image = images.social;  break
+        case "LOGIN":   image = images.login;   break
+        case "BEDPRES": image = images.bedpres; break
+        default:        image = images.annet;   break
+    }
+
+    return <Image style={ES.specificEventImage} source={image} />
 }

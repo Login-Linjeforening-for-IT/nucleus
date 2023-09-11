@@ -105,7 +105,7 @@ export default function LoginScreen( { navigation }: ScreenProps): JSX.Element {
         })
     }
 
-  return(
+  return (
     <View>
         {/* ========================= DISPLAY CONTENT ========================= */}
         <View style={{...GS.content, backgroundColor: FetchColor({theme, variable: "DARKER"})}}>
@@ -207,7 +207,7 @@ export default function LoginScreen( { navigation }: ScreenProps): JSX.Element {
 }
 
 function UsernameUI({theme, lang, data, inputName}: UsernameUIProps) {
-    return(
+    return (
         <View style={SS.loginView}>
             <Cluster>
                 <View style={SS.loginView}>

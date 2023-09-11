@@ -160,16 +160,16 @@ trigger}: ChangeInfoCardProps) {
 
     const findBestPlaceHolder = () => {
         switch (value) {
-            case 0: return(profile.degree      ? profile.degree      : type)
-            case 1: return(profile.schoolyear  ? profile.schoolyear  : type)
-            case 2: return(profile.mail        ? profile.mail        : type)
-            case 3: return(profile.preferences ? profile.preferences : type)
-            case 4: return(profile.allergies   ? profile.allergies   : type)
+            case 0: return (profile.degree      ? profile.degree      : type)
+            case 1: return (profile.schoolyear  ? profile.schoolyear  : type)
+            case 2: return (profile.mail        ? profile.mail        : type)
+            case 3: return (profile.preferences ? profile.preferences : type)
+            case 4: return (profile.allergies   ? profile.allergies   : type)
         }
     }
 
     // Returns the visual card component
-    return(
+    return (
         <PanGestureHandler onGestureEvent={gestureHandler}>
             <Animated.View
                 style={[

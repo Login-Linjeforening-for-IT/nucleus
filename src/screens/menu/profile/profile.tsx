@@ -38,7 +38,7 @@ export default function ProfileScreen( { navigation }: ScreenProps): JSX.Element
         setScrollPosition(-event.nativeEvent.contentOffset.y)
       }
 
-  return(
+  return (
     <View>
         <View style={{
                 ...GS.content, 

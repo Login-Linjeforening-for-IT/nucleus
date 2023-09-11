@@ -121,7 +121,7 @@ trigger}: ChangeProfileCardProps): JSX.Element {
     }
 
     // Returns the visual card component
-    return(
+    return (
         <PanGestureHandler onGestureEvent={gestureHandler}>
             <Animated.View style={[PS.animatedProfileChangeCard, animation,
                 {backgroundColor: FetchColor({theme, variable: "DARKER"})}]}>

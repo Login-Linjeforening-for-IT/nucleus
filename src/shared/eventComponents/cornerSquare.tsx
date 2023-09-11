@@ -24,7 +24,7 @@ export default function CornerSquare({theme, corner, type}: CornerSquareProps) {
         if(corner === 0 || corner === 2) p1 = 0, p2 = 0, p3 = 13, p4 = 137, p5 = 0, p6 = 195, p7 = 70, p8 = 380
     }
 
-    return(
+    return (
         <View style={type ? {...GS.aboutImage,top: corner === 1 || corner === 3 ? 100:null, maxWidth: corner === 1 || corner === 3 ? 100:null, transform: [{ rotate: `${90*corner}deg` }]}:{...GS.personImage, transform: [{ rotate: `${90*corner}deg` }]}}>
             <View style={{maxHeight: 220}}>
                 {/** ORANGE */}
@@ -34,18 +34,18 @@ export default function CornerSquare({theme, corner, type}: CornerSquareProps) {
                 </Svg>
 
                 {/** BACKGROUND INSIDE*/}
-                <Svg style={{left: type ? p3:null, bottom: type ? p4 : null}} width={115} height={115} fill={FetchColor({theme, variable: "DARKER"})}>
+                <Svg style={{left: p3, bottom: p4}} width={115} height={115} fill={FetchColor({theme, variable: "DARKER"})}>
                     <Rect width={13} height={70} />
                     <Rect width={70} height={13} />
                 </Svg>
 
                 {/** BACKGROUND FIRST CLOCKWISE */}
-                <Svg style={{left: type ? p5:null, bottom: type ? p6 : null}} width={115} height={115} fill={FetchColor({theme, variable: "DARKER"})}>
+                <Svg style={{left: p5, bottom: p6}} width={115} height={115} fill={FetchColor({theme, variable: "DARKER"})}>
                     <Rect width={20} height={13} />
                 </Svg>
 
                 {/** BACKGROUND LAST CLOCKWISE*/}
-                <Svg style={{left: type ? p7:null, bottom: type ? p8 : null}} width={115} height={115} fill={FetchColor({theme, variable: "DARKER"})}>
+                <Svg style={{left: p7, bottom: p8}} width={115} height={115} fill={FetchColor({theme, variable: "DARKER"})}>
                     <Rect width={13} height={20} />
                 </Svg>
             </View>

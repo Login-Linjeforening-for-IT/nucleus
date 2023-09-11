@@ -27,6 +27,7 @@ import {
   View,
   Text,
 } from "react-native"
+import { StaticImage } from "@shared/functions/social"
 
 type handleLinkProps = {
     mazeref: string
@@ -66,7 +67,7 @@ export default function SpecificEventScreen({ route, navigation }: SpecificEvent
     const { item } = route.params
     let link
     const [event, setEvent]=useState<DetailedEventProps | EventProps>(item)
-    
+
     const getData=()=>{
         fetch("https://api.login.no/events/" + item.eventID)
         // fetch("https://tekkom:rottejakt45@api.login.no:8443") //TESTING
@@ -113,7 +114,7 @@ export default function SpecificEventScreen({ route, navigation }: SpecificEvent
         }
     }
 
-  return(
+  return (
     <View>
         <View style={{...GS.content, backgroundColor: FetchColor({theme, variable: "BACKGROUND"})}}>
             <ScrollView showsVerticalScrollIndicator={false}>
@@ -129,8 +130,7 @@ export default function SpecificEventScreen({ route, navigation }: SpecificEvent
             />
             :(item.image).includes(".png")?<Image style={ES.specificEventImage}  source={{uri: `https://cdn.login.no/img/events/${item.image}`}}/>:null}
             <StaticImage item={item} />
-
-            {Space(5)}
+            {Space(10)}
 
             <CardSmaller>
                 <View style={ES.specificEventInfoView}>
@@ -169,7 +169,7 @@ export default function SpecificEventScreen({ route, navigation }: SpecificEvent
 
                 <View style={ES.specificEventInfoView}>
                     <Text style={{...T.specificEventInfo, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{lang ? "Slutter:       " : "Ends:           "}</Text>
-                    {"endt" in event && GetEndTime(event.endt)}
+                    {"endt" in event && GetEndTime({input: event.endt, lang, theme})}
                 </View>
 
                 {Space(5)}
@@ -259,7 +259,7 @@ export default function SpecificEventScreen({ route, navigation }: SpecificEvent
 
 function JoinButton({theme, lang, link, updateStorage}: JoinButtonProps) {
     if (link.length) {
-        return(
+        return (
             <TouchableOpacity onPress={() => {updateStorage(); Linking.openURL(link)}}>
                 <View style={{...ES.eventButton, backgroundColor: FetchColor({theme, variable: "ORANGE"})}}>
                     <Text style={{...T.centered20, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>
@@ -296,28 +296,4 @@ function Map({event, lang, handleLink, theme}: MapProps) {
             </TouchableOpacity>
         )
     }
-}
-
-function StaticImage({item}: {item: EventProps}): JSX.Element {
-    let image = null
-
-    const images = {
-        // tekkom:  require(`@assets/committee/tekkom/tekkom.png`),
-        // ctf:     require(`@assets/committee/ctfkom/ctf.png`),
-        // social:  require(`@assets/categories/sosialt.png`),
-        // login:   require(`@assets/categories/login.png`),
-        // annet:   require(`@assets/categories/annet.png`),
-        // bedpres: require(`@assets/categories/bedpresBig.png`)
-    }
-
-    switch (item.category) {
-        case "TEKKOM":  image = images.tekkom;  break
-        case "CTF":     image = images.ctf;     break
-        case "SOCIAL":  image = images.social;  break
-        case "LOGIN":   image = images.login;   break
-        case "BEDPRES": image = images.bedpres; break
-        default:        image = images.annet;   break
-    }
-
-    return <Image style={ES.specificEventImage} source={image} />
 }

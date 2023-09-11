@@ -17,7 +17,7 @@ export default function Button (props: ButtonProps) { // Button, Login colored
 
     const { theme } = useSelector( (state: ReduxState) => state.theme )
 
-    return(
+    return (
         <View style={{...SS.button, backgroundColor: FetchColor({theme, variable: "ORANGE"})}}>
             <View style={SS.buttonContent}>
                 { props.children }

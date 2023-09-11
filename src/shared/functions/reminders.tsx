@@ -32,28 +32,31 @@ export default function Reminders() {
         else setCategory(val)
       }
 
-    return(
+    return (
         <View>
-            {
-                categories.map((cat, index) => {
-                    return(
-                        <View key={index}>
-                            <TouchableOpacity key={index} onPress={() => showCategory(index)}>
-                            <View style={{...GS.reminderDropdown, backgroundColor: FetchColor({theme, variable: "DARKER"})}}>
-                                <Text style={{...T.text20, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{cat.title}</Text>
-                                <Image
-                                    style={GS.reminderDropdownArrow}
-                                    source={index === category
-                                        ? require("@assets/icons/reminderDropdownOrange.png")
-                                        : require("@assets/icons/dropdownBase.png")}
-                                    />
-                            </View>
-                            </TouchableOpacity>
-                            {category === index ? <TopicSwitchList category={cat.source} showLast={index > 1 ? true:false} />:null}
+            {categories.map((cat, index) => {
+                return (
+                    <View key={index}>
+                        <TouchableOpacity key={index} onPress={() => showCategory(index)}>
+                        <View style={{...GS.reminderDropdown, backgroundColor: FetchColor({theme, variable: "DARKER"})}}>
+                            <Text style={{...T.text20, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{cat.title}</Text>
+                            <Image
+                                style={GS.reminderDropdownArrow}
+                                source={index === category
+                                    ? require("@assets/icons/reminderDropdownOrange.png")
+                                    : require("@assets/icons/dropdownBase.png")}
+                                />
                         </View>
-                    )
-                })
-            }
+                        </TouchableOpacity>
+                        {category === index ? 
+                            <TopicSwitchList 
+                                category={cat.source} 
+                                showLast={index > 1 ? true:false} 
+                            />
+                        :null}
+                    </View>
+                )
+            })}
         </View>
     )
 }

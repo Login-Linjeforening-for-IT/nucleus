@@ -18,7 +18,7 @@ type AdListItemProps = {
 export function AdListItem({clickedAds, ad, theme, lang, setClickedAds}: AdListItemProps): JSX.Element {
     const isOrange = clickedAds.some(ads => ads.id === ad.id) ? true : false
 
-    return(
+    return (
         <Cluster>
             <View style={AS.adBack}>
                 <View style={AS.adViewLeft}>

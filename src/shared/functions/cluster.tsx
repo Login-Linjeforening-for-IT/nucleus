@@ -15,7 +15,7 @@ import React from "react"
 export default function Cluster ({ noColor, space, children }: ClusterProps) {
     const { theme } = useSelector( (state: ReduxState) => state.theme )
 
-    return(
+    return (
         <View style={{backgroundColor: !noColor
             ? FetchColor({theme, variable: "DARKER"})
             : ""
@@ -39,7 +39,7 @@ export function ClusterSmaller ({children}: React.PropsWithChildren<{}>) {
 
     const { theme } = useSelector( (state: ReduxState) => state.theme )
 
-    return(
+    return (
         <View style={{
                 ...ES.clusterSmaller,
                 backgroundColor: FetchColor({theme, variable: "DARKER"})}}>
@@ -56,7 +56,7 @@ export function ClusterSmaller ({children}: React.PropsWithChildren<{}>) {
  * @returns               Small banner image
  */
 export function ClusterArrow() {
-    return(
+    return (
         <View style={CS.arrowView}>
             <Image
                 style={CS.arrowImage}

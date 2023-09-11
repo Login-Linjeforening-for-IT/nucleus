@@ -57,13 +57,13 @@ export const GS = StyleSheet.create({
         height: 100,
         width: 200,
     },
-    parentComitteeView: {
+    parentCommitteeView: {
         flexDirection: "row",
         justifyContent: "space-between",
         marginVertical: 8,
         maxWidth: "93%"
     },
-    comittee: {
+    committee: {
         borderRadius: 10,
         width: "125%",
     },

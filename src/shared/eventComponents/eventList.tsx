@@ -80,7 +80,7 @@ export default function EventList ({
 }: EventListProps): JSX.Element {
     if (!renderedArray.length) return <ErrorMessage argument="wifi" theme={theme} lang={lang} />
     else if (renderedArray.length > 0) {
-        return(
+        return (
             <View>
                 <FlatList
                     style={{minHeight: "100%"}}
@@ -140,7 +140,7 @@ function EventCard ({
 }: EventCardProps): JSX.Element {
     const isOrange = clickedEvents.some(event => event.eventID === item.eventID) ? true : false
 
-    return(
+    return (
         <View>
             <TouchableOpacity onPress={() =>
                     navigation.navigate("SpecificEventScreen", {item: item})

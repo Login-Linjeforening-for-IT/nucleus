@@ -1,6 +1,6 @@
 import NavigateFromPushNotification from "@shared/notificationComponents/navigateFromPushNotification"
-import LastFetch, { fetchState, fetchStored, getData } from "@shared/eventComponents/fetch"
-import handleDownload, { timeSinceDownload } from "@shared/eventComponents/calendar"
+import LastFetch, { fetchState, fetchStored, getData, timeSince } from "@shared/eventComponents/fetch"
+import handleDownload from "@shared/eventComponents/calendar"
 import notificationSetup from "@shared/notificationComponents/notificationSetup"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import Space, { ErrorMessage } from "@shared/components/utils"
@@ -51,7 +51,7 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
     // Clicked events
     const [clickedEvents, setClickedEvents] = useState<EventProps[]>([])
     // Clicked categories
-    const [clickedCategory, setClickedCategory] = useState([])
+    const [clickedCategory, setClickedCategory] = useState<CategoryWithID[]>([])
     // Last time API was fetched successfully
     const [lastSave, setLastSave] = useState("")
     // Download state
@@ -212,7 +212,7 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
     if(!notification["SETUP"]) notificationSetup()
 
     // --- DISPLAYS THE EVENTSCREEN ---
-    return(
+    return (
         <View>
             <StatusBar style={theme === 0 || theme === 2 || theme === 3 ? "light" : "dark"} />
             <View style={{...GS.content, backgroundColor: FetchColor({theme, variable: "DARKER"})}}>
@@ -292,7 +292,7 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
                                 <Image 
                                     style={MS.multiIcon}
                                     source={theme === 0 || theme === 2 || theme === 3 
-                                        ? timeSinceDownload(downloadState) >= 1000 
+                                        ? timeSince(downloadState) >= 1000 
                                             ? require("@assets/icons/download.png")
                                             : require("@assets/icons/download-orange.png")
                                         : require("@assets/icons/download-black.png")} />

@@ -16,13 +16,23 @@ type ParagraphProps = {
 export default function Paragraph({ logo, title, body }: ParagraphProps) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
 
-    return(
+    return (
         <View>
               <View style={GS.row}>
                 <Image style={GS.medium} source={logo} />
-                <Text style={{...T.bold28, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{title}</Text>
+                <Text style={{
+                    ...T.bold28, 
+                    color: FetchColor({theme, variable: "TEXTCOLOR"})
+                }}>
+                    {title}
+                </Text>
               </View>
-              <Text style={{...T.paragraph, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{body}</Text>
+              <Text style={{
+                    ...T.paragraph, 
+                    color: FetchColor({theme, variable: "TEXTCOLOR"})
+                }}>
+                    {body}
+                </Text>
               {Space(25)}
         </View>
     )

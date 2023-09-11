@@ -19,9 +19,5 @@ export default function BellIcon({orange, theme}: BellIconProps): JSX.Element {
     else if (isDark)    icon = require("@assets/icons/bell.png")
     else                icon = require("@assets/icons/bell-black.png")
 
-    return(
-        <View>
-            <Image style={ES.bellSize} source={icon} />
-        </View>
-    )
+    return <Image style={ES.bellSize} source={icon} />
 }

@@ -7,7 +7,7 @@ type topicParams = {
     lang: boolean | undefined
     status?: boolean
     category?: string
-    catArray?: number[]
+    catArray?: boolean[] | boolean
 }
 
 /**

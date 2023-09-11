@@ -38,7 +38,7 @@ export default function BusinessScreen( { navigation }: ScreenProps): JSX.Elemen
             : require("@assets/committee/eventkom/utlysning-black.png")
     }
 
-  return(
+  return (
     <View>
 {/* ========================= DISPLAY CONTENT ========================= */}
   <View style={{...GS.content, backgroundColor: FetchColor({theme, variable: "DARKER"})}}>

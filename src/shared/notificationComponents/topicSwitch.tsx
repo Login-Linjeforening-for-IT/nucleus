@@ -28,7 +28,7 @@ type TopicSwitchProps = {
 */
 export default function topicSwitchList({category, showLast}: TopicSwitchListProps): JSX.Element {
 
-    return(
+    return (
         <View>
             {topicSwitch({topic: category + "10m",textNo: "10 min før", textEn: "10 min before"})}
             {topicSwitch({topic: category + "30m",textNo: "30 min før", textEn: "30 min before"})}
@@ -53,7 +53,7 @@ function topicSwitch({topic, textNo, textEn}: TopicSwitchProps): JSX.Element {
     const { lang  } = useSelector( (state: ReduxState) => state.lang  )
     const { theme } = useSelector( (state: ReduxState) => state.theme )
 
-    return(
+    return (
         <Cluster>
             <View style={GS.notificationBack}>
                 <View style={GS.view}>

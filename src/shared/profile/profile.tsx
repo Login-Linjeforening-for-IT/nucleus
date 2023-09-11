@@ -56,7 +56,7 @@ export default function Profile({theme, lang, profile } : ProfileElementprops) {
         setShow(true)
     }
 
-    return(
+    return (
         <>
             <TouchableOpacity onPress={() => handlePress()}>
                 <View style={PS.profileBackground}>
@@ -92,7 +92,7 @@ export default function Profile({theme, lang, profile } : ProfileElementprops) {
 }
 
 function SmallProfileImage({show, profile, theme}: SmallProfileImageProps) {
-    return(
+    return (
         <View style={PS.smallProfileImageView}>
             {!show &&
                 <Image
@@ -109,7 +109,7 @@ function SmallProfileImage({show, profile, theme}: SmallProfileImageProps) {
 }
 
 function MainProfileInfo({show, profile, theme, lang, year}: MainProfileInfoProps) {
-    if (!show) return(
+    if (!show) return (
         <>
             <Text style={{
                 ...T.text20,

@@ -99,7 +99,7 @@ const inputContent = (val: string) => {
   }
 }
 
-  return(
+  return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
     <View>
       {/* ========================= DISPLAY CONTENT ========================= */}

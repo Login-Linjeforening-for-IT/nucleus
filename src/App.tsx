@@ -25,7 +25,7 @@ export default function App(): JSX.Element {
 
     AppRegistry.registerComponent("app", () => App)
 
-    return(
+    return (
         <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}>
                 <Navigator />

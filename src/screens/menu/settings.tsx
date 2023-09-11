@@ -70,11 +70,11 @@ export default function SettingScreen( { navigation }: ScreenProps): JSX.Element
         },
         {
             title: "Fadderuka",
-            descriptionNO: "Varsel hver gang det legges ut et fadderuka arrangement.",
+            description: "Varsel hver gang det legges ut et fadderuka arrangement.",
         },
         {
             title: "Login",
-            descriptionNO: "Varsel hver gang det legges ut et arrangement angående foreningens drift.",
+            description: "Varsel hver gang det legges ut et arrangement angående foreningens drift.",
         },
         {
             title: "Annet",
@@ -156,7 +156,7 @@ export default function SettingScreen( { navigation }: ScreenProps): JSX.Element
 
     const info = lang ? infoNO : infoEN
 
-    return(
+    return (
         <View>
             <View style={{...GS.content, backgroundColor: FetchColor({theme, variable: "DARKER"})}}>
                 <ScrollView showsVerticalScrollIndicator={false}>
@@ -219,7 +219,7 @@ export default function SettingScreen( { navigation }: ScreenProps): JSX.Element
 }
 
 function ClusterWithSwitch({theme, obj, category}: ClusterWithSwitchProps) {
-    return(
+    return (
         <Cluster>
             <View style={GS.notificationBack}>
                 <View style={GS.view}>

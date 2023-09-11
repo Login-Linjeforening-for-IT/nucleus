@@ -56,7 +56,7 @@ export default function ProfileInfo({theme, lang, profile}: ProfileInfoProps) {
         }
     }
 
-    return(
+    return (
         <View>
             {profileInfoKeys.map((key, index) => (
                 <View key={key}>
@@ -91,7 +91,7 @@ export default function ProfileInfo({theme, lang, profile}: ProfileInfoProps) {
 function ProfileInfoContent ({type, index, theme, profile, selectedIndex}: 
 ProfileInfoContentProps) {
 
-    return(
+    return (
         <Cluster noColor={true}>
             <View style={{...CS.clusterBack}}>
                 <View style={CS.evenTwinLeft}>

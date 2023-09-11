@@ -9,7 +9,7 @@ import React from "react"
  * @returns                 Small circle of the categories color
  */
 export default function CategorySquare({category}: {category: string}): JSX.Element {
-    return(
+    return (
         <View style={ES.eventLight}>
             <Svg width={45} height={65} fill={CategoryColor(category)}>
                 <Rect width={40} height={65} ry={10}/>
@@ -25,7 +25,7 @@ export default function CategorySquare({category}: {category: string}): JSX.Elem
  * @returns                     Small circle of the categories color
  */
 export function CategoryCircle(category: string): JSX.Element {
-    return(
+    return (
         <View style={{...ES.specificEventLight, left: -10}}>
             <Svg height="100%" width="100%" viewBox="0 0 100 100" >
                 <Circle cx="50" cy="50" r="50" fill={CategoryColor(category)} />

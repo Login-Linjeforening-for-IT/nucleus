@@ -20,25 +20,18 @@ type getDataProps = {
  */
 export default async function LastFetch(param?: string) {
     const stored = await AsyncStorage.getItem("lastFetch")
-    const time: string = param ? param : stored ? stored : ""
+    const utc: string = param ? param : stored ? stored : new Date().toISOString()
+    const time = new Date(utc)
 
-    if(time.length){
-      let year:   number = parseInt((time)[0] + (time)[1] + (time)[2] + (time)[3])
-      let month:  number = parseInt((time)[5] + (time)[6])
-      let day:    number = parseInt((time)[8] + (time)[9])
-      let hour:   number = parseInt((time)[11] + (time)[12])
-      let minute: number = parseInt((time)[14] + (time)[15])
+    // Checking and fixing missing 0
+    let day = time.getDate().toString().padStart(2, '0');
+    let month = (time.getMonth() + 1).toString().padStart(2, '0');
+    let year = time.getFullYear();
+    
+    let hour = time.getHours().toString().padStart(2, '0');
+    let minute = time.getMinutes().toString().padStart(2, '0');
 
-      // Checking and fixing missing 0's
-      if(month < 10)    month =  parseInt("0" + month)
-      if(day < 10)      day =    parseInt("0" + day)
-      if(hour < 10)     hour =   parseInt("0" + hour)
-      if(minute < 10)   minute = parseInt("0" + minute)
-
-      const CleanedTime = hour + ":" + minute + ", " + day + "/" + month + ", " + year
-
-      return CleanedTime
-    } else return ""
+    return `${hour}:${minute}, ${day}/${month}, ${year}`
 }
 
 /**
@@ -183,4 +176,15 @@ export async function getData({setEvents, setRenderedArray, setLastSave, events}
             } catch (e) {console.warn("Failed to fetch cache: " + e)}
         })
     }
+}
+
+/**
+ * Checks how long its been since a date object
+ *
+ * @returns number, seconds
+ */
+export function timeSince(downloadState: Date): number {
+    const now = new Date()
+    const before = downloadState
+    return now.valueOf() - before.valueOf()
 }

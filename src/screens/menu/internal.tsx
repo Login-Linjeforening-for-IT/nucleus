@@ -28,7 +28,7 @@ export default function InternalScreen({ navigation }: ScreenProps): JSX.Element
     ]
 
 
-  return(
+  return (
     <View>
         <View style={{...GS.content, backgroundColor: FetchColor({theme, variable: "DARKER"})}}>
             <FlatList

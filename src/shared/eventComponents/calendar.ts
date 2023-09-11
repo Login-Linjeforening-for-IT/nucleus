@@ -1,4 +1,4 @@
-import { fetchEventDetails } from "@shared/eventComponents/fetch"
+import { fetchEventDetails, timeSince } from "@shared/eventComponents/fetch"
 import { setCalendarID } from "@redux/misc"
 import { Platform } from "react-native"
 import { AnyAction, Dispatch } from "redux"
@@ -53,7 +53,7 @@ clickedEvents, calendarID, dispatch}: handleDownloadProps) {
         setDownloadState(new Date(currentTime))
         await executeDownload({clickedEvents, calendarID, dispatch})
     } else {
-        if (timeSinceDownload(downloadState) >= 1000) await executeDownload({clickedEvents, calendarID, dispatch})
+        if (timeSince(downloadState) >= 1000) await executeDownload({clickedEvents, calendarID, dispatch})
         setDownloadState(new Date(currentTime))
     }
 }
@@ -86,17 +86,6 @@ export async function updateCalendar({events, calendarID}: updateCalendarProps) 
             else await createEventAsync(calendarID, event)
         }
     }
-}
-
-/**
- * Checks how long its been since the events were last downloaded and returns the time in seconds.
- *
- * @returns int, seconds
- */
-export function timeSinceDownload(downloadState: Date) {
-    const now = new Date()
-    const before = new Date(downloadState)
-    return now.valueOf() - before.valueOf()
 }
 
 /**

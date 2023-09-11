@@ -32,7 +32,7 @@ export default function Feedback({index, setting, feedback, theme, lang, toggleF
     }
 
     if (index === setting.length-1 && feedback) {
-        return(
+        return (
             <View style={{...ES.row, justifyContent: "space-evenly"}}>
                 <TouchableOpacity onPress={() =>
                     Linking.openURL("https://discordapp.com/users/376827396764073997")}>

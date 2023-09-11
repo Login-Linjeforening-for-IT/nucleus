@@ -9,7 +9,7 @@ import React from "react"
  * @returns Green Light svg
  */
 export default function GreenLight() {  //Green colored light svg
-    return(
+    return (
         <View style={ES.size}>
             <Svg height="100%" width="100%" viewBox="0 0 100 100" >
             <Circle cx="50" cy="50" r="50" stroke="green" strokeWidth=".5" fill="green" />
@@ -24,7 +24,7 @@ export default function GreenLight() {  //Green colored light svg
  * @returns Red colored light svg
  */
 export function RedLight() {    //Red colored light svg
-    return(
+    return (
     <View style={ES.size}>
         <Svg height="100%" width="100%" viewBox="0 0 100 100" >
         <Circle cx="50" cy="50" r="50" fill="red" />
