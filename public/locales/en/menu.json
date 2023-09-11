@@ -1,0 +1,30 @@
+{
+    "setting": [
+        {
+            "id": 1, 
+            "nav": "SettingScreen",   
+            "title": "Settings" 
+        },
+        {
+            "id": 2, 
+            "nav": "ReportScreen",   
+            "title": "Report" 
+        },
+        {
+            "id": 3, 
+            "nav": "AboutScreen",     
+            "title": "About Login"    
+        },
+        {
+            "id": 4, 
+            "nav": "BusinessScreen",  
+            "title": "For companies" 
+        },
+        {
+            "id": 5, 
+            "nav": "LoginScreen",     
+            "title": "Intranet (verv)"
+        }
+    ],
+    "version": "Version"
+}

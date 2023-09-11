@@ -11,7 +11,7 @@ export default function notificationArray({notification, category}: notification
 
     for (let i = 0; i < intervals.length; i++) {
         const id = committees[index] + intervals[i]
-        notification[id] ? array.push(1) : array.push(0)
+        notification[id] ? array.push(true) : array.push(false)
     }
 
     return array

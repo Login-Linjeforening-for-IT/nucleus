@@ -41,7 +41,8 @@ export default async function LastFetch(param?: string) {
  *
  * @returns                 All details for passed event
  */
-export async function fetchEventDetails(event: EventProps): Promise<DetailedEventProps>{
+export async function fetchEventDetails(event: EventProps): 
+Promise<DetailedEventProps> {
     const response = await fetch(`https://api.login.no/events/${event.eventID}`)
     const eventDetails = await response.json()
     return{...event, ...eventDetails}
@@ -87,10 +88,12 @@ export function FetchJoinLink(string: string): string | null {
 * @param {array} Events Events to filter
 * @returns Filtered events
 */
-export function removeDuplicatesAndOld(APIevents: EventProps[], events: EventProps[]) {
+export function removeDuplicatesAndOld(APIevents: EventProps[], events: 
+EventProps[]): EventProps[] {
 
     // Removes old events and preserves newer version of all events
-    let realEvents = APIevents.filter(APIevent => events.some(event => APIevent.eventID === event.eventID))
+    let realEvents = APIevents.filter(APIevent => events.some(
+        event => APIevent.eventID === event.eventID))
 
     // Removes duplicates
     let filteredEvents = realEvents.filter((event, index) => {
@@ -105,7 +108,8 @@ export function removeDuplicatesAndOld(APIevents: EventProps[], events: EventPro
  * the passed array
  * @param setClickedEvents
  */
-export async function fetchState(setClickedEvents: React.Dispatch<React.SetStateAction<EventProps[]>>) {
+export async function fetchState(setClickedEvents: 
+React.Dispatch<React.SetStateAction<EventProps[]>>): Promise<void> {
     let foundState = await AsyncStorage.getItem("clickedEvents")
     if (foundState != null) {
         let parsed = JSON.parse(foundState)
@@ -121,7 +125,8 @@ export async function fetchState(setClickedEvents: React.Dispatch<React.SetState
  * @param {*} setState          The state to be updated
  * @param {*} value             The value to find in localstorage
  */
-export async function fetchStored({setRenderedArray, setState, value}: fetchStoredProps) {
+export async function fetchStored({setRenderedArray, setState, value}: 
+fetchStoredProps): Promise<void> {
     const stored = value === "ads" ? "cachedsAd" : "cachedEvents"
     //  Fetches cache
     let tempArray = await AsyncStorage.getItem(stored)
@@ -137,10 +142,12 @@ export async function fetchStored({setRenderedArray, setState, value}: fetchStor
 }
 
 /**
-     * Fetches data from API, formats the response, sets the cache, updates the events on the screen,
-     * catches any errors and fetches localstorage, and handles errors.
-     */
-export async function getData({setEvents, setRenderedArray, setLastSave, events}: getDataProps) {
+ * Fetches data from API, formats the response, sets the cache, updates the 
+ * events on the screen, catches any errors and fetches localstorage, and 
+ * handles errors.
+ */
+export async function getData({setEvents, setRenderedArray, setLastSave, 
+events}: getDataProps): Promise<void> {
     try {
         // PRODUCTION
         fetch("https://api.login.no/events")
@@ -158,7 +165,8 @@ export async function getData({setEvents, setRenderedArray, setLastSave, events}
         // Updates last fetch displayed on the screen
         .then(async() => setLastSave(await LastFetch()))
         // Setting the cache
-        if(events.length > 0) await AsyncStorage.setItem("cachedEvents", JSON.stringify(events))
+        if(events.length > 0) await AsyncStorage.setItem("cachedEvents", 
+            JSON.stringify(events))
         // Catches any errors (missing wifi)
     } catch (e) {
         // Immediately invoked function expression (IIFE)

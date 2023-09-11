@@ -19,16 +19,18 @@ type ScrollProps = {
     }
 }
 
-export default function ProfileScreen( { navigation }: ScreenProps): JSX.Element {
+export default function ProfileScreen( { navigation }: ScreenProps): 
+JSX.Element {
     const { lang  } = useSelector( (state: ReduxState) => state.lang  )
     const { login } = useSelector( (state: ReduxState) => state.login )
     const { theme } = useSelector( (state: ReduxState) => state.theme )
 
-    const { id, ban, joinedevents, name, allergies, preferences, mail, schoolyear, 
-        degree, image } = useSelector( (state: ReduxState) => state.profile )
+    const { id, ban, joinedevents, name, allergies, preferences, mail, 
+        schoolyear, degree, image } = useSelector( (state: ReduxState) => 
+        state.profile )
 
-    const profile = { id: 0, ban, joinedevents: 40, name, allergies, preferences, 
-        mail, schoolyear, degree, image }
+    const profile = { id: 0, ban, joinedevents: 40, name, allergies, 
+        preferences, mail, schoolyear, degree, image }
 
     const profileInfo = { degree, schoolyear, mail, preferences, allergies }
 

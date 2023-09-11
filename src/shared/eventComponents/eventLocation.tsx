@@ -17,15 +17,26 @@ type EventLocationProps = {
  * @param {string} campus   Campus where the event takes place
  * @returns                 View containing the event location as a text
  */
-export default function EventLocation({room, campus, street}: EventLocationProps) {
+export default function EventLocation({room, campus, street}: 
+EventLocationProps): JSX.Element {
     const { lang  } = useSelector( (state: ReduxState) => state.lang  )
     const { theme } = useSelector( (state: ReduxState) => state.theme )
 
     if (!room && !campus && !street) {
         return (
             <View style={ES.specificEventInfoView}>
-                <Text style={{...T.specificEventInfo, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{lang ? "Lokasjon:   " : "Location:     "}</Text>
-                <Text style={{...T.specificEventInfo, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>TBA!</Text>
+                <Text style={{
+                        ...T.specificEventInfo, 
+                        color: FetchColor({theme, variable: "TEXTCOLOR"})
+                }}>
+                        {lang ? "Lokasjon:   " : "Location:     "}
+                </Text>
+                <Text 
+                    style={{
+                        ...T.specificEventInfo, 
+                        color: FetchColor({theme, variable: "TEXTCOLOR"})
+                    }}>
+                        TBA!</Text>
             </View>
         )
     }
@@ -33,13 +44,28 @@ export default function EventLocation({room, campus, street}: EventLocationProps
     if (room != null || campus != null || street != null) {
         return (
             <View style={ES.specificEventInfoView}>
-                <Text style={{...T.specificEventInfo, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{lang ? "Lokasjon:   " : "Location:     "}</Text>
-                <Text style={{...T.specificEventInfo, maxWidth: "70%", color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{room ? room + ", ":null}{campus}{street}</Text>
+                <Text style={{
+                    ...T.specificEventInfo, 
+                    color: FetchColor({theme, variable: "TEXTCOLOR"})
+                }}>
+                    {lang ? "Lokasjon:   " : "Location:     "}</Text>
+                <Text style={{
+                    ...T.specificEventInfo, 
+                    maxWidth: "70%", color: FetchColor({theme, variable: 
+                    "TEXTCOLOR"})
+                }}>
+                        {room ? room + ", ":null}{campus}{street}
+                </Text>
             </View>
         )
     } else {
-        <View style={ES.specificEventInfoView}>
-            <Text style={T.red}>{lang ? "Feil ved henting av sted." : "Error fetching location"}</Text>
-        </View>
+        return (
+            <View style={ES.specificEventInfoView}>
+                <Text style={T.red}>{lang 
+                    ? "Feil ved henting av sted." 
+                    : "Error fetching location"}
+                </Text>
+            </View>
+        )
     }
 }

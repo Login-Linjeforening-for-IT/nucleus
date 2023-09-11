@@ -7,7 +7,8 @@ import {BlurView} from "expo-blur"
 import React from "react"
 import { RouteProp } from "@react-navigation/native"
 
-export default function Footer({ state, descriptors, navigation }: ExtendedBottomTabBarProps) {
+export default function Footer({ state, descriptors, navigation }: 
+ExtendedBottomTabBarProps): JSX.Element {
     // Get the current theme
     const { theme } = useSelector( (state: ReduxState) => state.theme )
 
@@ -27,7 +28,8 @@ export default function Footer({ state, descriptors, navigation }: ExtendedBotto
                     backgroundColor: FetchColor({theme, variable: "TRANSPARENT"})
                 }}>
                 {/* Create the icons based on options passed from stack.js */}
-                {state.routes.map((route: RouteProp<RootStackParamList, any>, index: number) => {
+                {state.routes.map((route: RouteProp<RootStackParamList, any>, 
+                    index: number) => {
                     const { options } = descriptors[route.key]
                     
                     if (!options.display) return

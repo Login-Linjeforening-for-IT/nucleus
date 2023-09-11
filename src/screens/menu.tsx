@@ -9,6 +9,8 @@ import { GS } from "@styles/globalStyles"
 import { useSelector } from "react-redux"
 import React, { useState } from "react"
 import TopMenu from "@shared/topMenu"
+import en from "@text/en/menu.json"
+import no from "@text/no/menu.json"
 import { T } from "@styles/text"
 import {
   Text,
@@ -42,16 +44,10 @@ export default function MenuScreen({ navigation }: ScreenProps): JSX.Element {
     const { lang  } = useSelector( (state: ReduxState) => state.lang  )
     const { login } = useSelector( (state: ReduxState) => state.login )
     const { theme } = useSelector( (state: ReduxState) => state.theme )
-    const { id, name, image } = useSelector( (state: ReduxState) => state.profile )
+    const { id, name, image } = useSelector( (state: ReduxState) => 
+    state.profile )
     const profile = { id: 0, name: "Eirik Hanasand", image}
-
-    const setting = [
-        {id: 1, nav: "SettingScreen",   title: lang ? "Innstillinger" : "Settings" },
-        // {id: 2, nav: "ReportScreen",   title: lang ? "Varsle" : "Report" },
-        {id: 3, nav: "AboutScreen",     title: lang ? "Om oss" : "About Login"    },
-        {id: 4, nav: "BusinessScreen",  title: lang ? "For bedrifter" : "For companies" },
-        {id: 5, nav: "LoginScreen",     title: lang ? "Innsida (verv)" : "Intranet (verv)"},
-    ]
+    const setting = lang ? no.setting : en.setting
 
     // Feedback options visibility boolean
     const [feedback, setFeedback] = useState(false)
@@ -63,7 +59,10 @@ export default function MenuScreen({ navigation }: ScreenProps): JSX.Element {
 
     return (
         <View>
-            <View style={{...GS.content, backgroundColor: FetchColor({theme, variable: "DARKER"})}}>
+            <View style={{
+                ...GS.content, 
+                backgroundColor: FetchColor({theme, variable: "DARKER"})
+            }}>
                 <FlatList
                 style={{minHeight: "100%"}}
                 showsVerticalScrollIndicator={false}
@@ -86,18 +85,24 @@ export default function MenuScreen({ navigation }: ScreenProps): JSX.Element {
                 />
                 {Space(Dimensions.get("window").height / 10)}
             </View>
-            <TopMenu navigation={navigation} screen="menu" title={lang ? "Meny" : "Menu"}/>
+            <TopMenu 
+                navigation={navigation} 
+                screen="menu" 
+                title={lang ? "Meny" : "Menu"}
+                />
         </View>
     )
 }
 
 function MenuItem({index, item, navigation, theme, lang, setting, feedback, 
 toggleFeedback, login}: MenuItemProps) {
+    const info = lang ? no : en
 
     return (
         <View>
             {index === 0 ? Space(Dimensions.get("window").height/8): null}
-            {/* {index === 0 ? SmallProfile(navigation, theme, lang, profile, login) : null} */}
+            {/* {index === 0 ? SmallProfile(navigation, theme, lang, 
+                profile, login) : null} */}
             <TouchableOpacity onPress={() => item.id === 5 && login 
                 ? navigation.navigate("InternalScreen", item) 
                 : navigation.navigate(item.nav, item)}
@@ -107,14 +112,17 @@ toggleFeedback, login}: MenuItemProps) {
                         <View style={CS.twinLeft}>
                             <Text style={{
                                 ...T.text20, 
-                                color: FetchColor({theme, variable: "TEXTCOLOR"})}}>
+                                color: FetchColor({theme, variable: 
+                            "TEXTCOLOR"})}}>
                                     {item.title}
                             </Text>
                         </View>
                         <View style={CS.twinRight}>
                             <Image 
                                 style={CS.arrowImage}
-                                source={require("@assets/icons/dropdownBase.png")}
+                                source={
+                                    require("@assets/icons/dropdownBase.png")
+                                }
                             />
                         </View>
                     </View>
@@ -136,10 +144,7 @@ toggleFeedback, login}: MenuItemProps) {
                     ...T.contact, 
                     color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})
                 }}>
-                    {lang 
-                        ? `Versjon ${nativeApplicationVersion}`
-                        : `Version ${nativeApplicationVersion}`
-                    }
+                    {info.version}{nativeApplicationVersion}
                 </Text>
             : null}
         </View>

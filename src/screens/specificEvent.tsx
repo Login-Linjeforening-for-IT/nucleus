@@ -60,7 +60,8 @@ type CategoryProps = {
  * @param param0
  * @returns
  */
-export default function SpecificEventScreen({ route, navigation }: SpecificEventScreenProps): JSX.Element {
+export default function SpecificEventScreen({ route, navigation }: 
+SpecificEventScreenProps): JSX.Element {
 
     const { lang  } = useSelector( (state: ReduxState) => state.lang  )
     const { theme } = useSelector( (state: ReduxState) => state.theme )
@@ -87,9 +88,11 @@ export default function SpecificEventScreen({ route, navigation }: SpecificEvent
         let storedClickedEvents = stored ? JSON.parse(stored) : []
         if (storedClickedEvents){
             storedClickedEvents.push(item)
-            await AsyncStorage.setItem("clickedEvents", JSON.stringify(storedClickedEvents))
+            await AsyncStorage.setItem("clickedEvents", 
+            JSON.stringify(storedClickedEvents))
         } else {
-            await AsyncStorage.setItem("clickedEvents", JSON.stringify([item]))
+            await AsyncStorage.setItem("clickedEvents", 
+            JSON.stringify([item]))
         }
     }
 
@@ -128,7 +131,10 @@ export default function SpecificEventScreen({ route, navigation }: SpecificEvent
                 height={Dimensions.get("window").width/3}
                 uri={`https://cdn.login.no/img/events/${item.image}`}
             />
-            :(item.image).includes(".png")?<Image style={ES.specificEventImage}  source={{uri: `https://cdn.login.no/img/events/${item.image}`}}/>:null}
+            :(item.image).includes(".png") ? <Image 
+                style={ES.specificEventImage}
+                source={{uri: `https://cdn.login.no/img/events/${item.image}`}}
+            />:null}
             <StaticImage item={item} />
             {Space(10)}
 
@@ -138,12 +144,18 @@ export default function SpecificEventScreen({ route, navigation }: SpecificEvent
                         <View style={{left: -10}}>
 
                         <CategorySquare category={item.category} />
-                        <Text style={{...ES.eventCardDayText, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>
+                        <Text style={{
+                            ...ES.eventCardDayText, 
+                            color: FetchColor({theme, variable: "TEXTCOLOR"})
+                        }}>
                             {item.startt[8]}
                             {item.startt[9]}
                         </Text>
 
-                        <Text style={{...ES.monthText, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>
+                        <Text style={{
+                            ...ES.monthText, 
+                            color: FetchColor({theme, variable: "TEXTCOLOR"})
+                        }}>
                         <Month
                             month={parseInt(item.startt[5] + item.startt[6])}
                             color={FetchColor({theme, variable: "TEXTCOLOR"})}
@@ -152,24 +164,42 @@ export default function SpecificEventScreen({ route, navigation }: SpecificEvent
                         </Text>
                         </View>
                     </Card>
-                    <Text>{EventTime({startTime: item.startt, endTime: "endt" in event ? event.endt : ""})}</Text>
+                    <Text>
+                        {EventTime({startTime: item.startt, 
+                            endTime: "endt" in event ? event.endt : ""})}
+                    </Text>
                 </View>
             </CardSmaller>
 
                 {Space(5)}
             <Card>
                 <View style={ES.specificEventInfoView}>
-                    <Text style={{...T.specificEventInfo, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{lang ? "Starter:      " : "Starts:         "}</Text>
-                    <Text style={{...T.specificEventInfo, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>
-                    {item.startt[11]}{item.startt[12]}:{item.startt[14]}{item.startt[15]}
+                    <Text style={{
+                        ...T.specificEventInfo, 
+                        color: FetchColor({theme, variable: "TEXTCOLOR"})
+                    }}>
+                        {lang ? "Starter:      " : "Starts:         "}
+                    </Text>
+                    <Text style={{
+                        ...T.specificEventInfo, 
+                        color: FetchColor({theme, variable: "TEXTCOLOR"})
+                    }}>
+                    {item.startt[11]}{item.startt[12]}:{item.startt[14]}
+                    {item.startt[15]}
                     </Text>
                 </View>
 
                 {Space(5)}
 
                 <View style={ES.specificEventInfoView}>
-                    <Text style={{...T.specificEventInfo, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{lang ? "Slutter:       " : "Ends:           "}</Text>
-                    {"endt" in event && GetEndTime({input: event.endt, lang, theme})}
+                    <Text style={{
+                        ...T.specificEventInfo, 
+                        color: FetchColor({theme, variable: "TEXTCOLOR"})
+                    }}>
+                        {lang ? "Slutter:       " : "Ends:           "}
+                    </Text>
+                    {"endt" in event && GetEndTime({input: event.endt, lang, 
+                    theme})}
                 </View>
 
                 {Space(5)}
@@ -194,19 +224,46 @@ export default function SpecificEventScreen({ route, navigation }: SpecificEvent
                 {Space(5)}
 
                 <View style={ES.specificEventInfoView}>
-                    <Text style={{...T.specificEventInfo, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{lang ? "Arrangør:   " : "Organizer:   "}</Text>
-                    <Text style={{...T.specificEventInfo, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{item.organizer}{("organizerlink" in event && event.organizerlink) || event.discordlink || event.fblink ? " - ":null}</Text>
+                    <Text style={{
+                        ...T.specificEventInfo, 
+                        color: FetchColor({theme, variable: "TEXTCOLOR"})
+                    }}>
+                        {lang ? "Arrangør:   " : "Organizer:   "}
+                    </Text>
+                    <Text style={{
+                        ...T.specificEventInfo, 
+                        color: FetchColor({theme, variable: "TEXTCOLOR"})
+                    }}>
+                        {item.organizer}{("organizerlink" in event && 
+                        event.organizerlink) || event.discordlink 
+                        || event.fblink ? " - ":null}
+                    </Text>
                     {event.discordlink ?
-                    <TouchableOpacity style={{minWidth: 70}} onPress={() => {Linking.openURL(`${item.discordlink}`)}}>
+                    <TouchableOpacity style={{minWidth: 70}} onPress={() => 
+                    {Linking.openURL(`${item.discordlink}`)}}>
                             <View style={ES.row}>
-                                <Text style={{...T.mazemap, color: FetchColor({theme, variable: "ORANGE"})}}>Discord</Text>
+                                <Text style={{
+                                    ...T.mazemap, 
+                                    color: FetchColor({theme, variable: "ORANGE"})
+                                }}>
+                                    Discord
+                                </Text>
                             </View>
                         </TouchableOpacity>
                     :null}
                     {event.fblink && !event.discordlink ?
-                    <TouchableOpacity style={{minWidth: 70}} onPress={() => {Linking.openURL(`${event.discordlink}`)}}>
+                    <TouchableOpacity 
+                        style={{minWidth: 70}} 
+                        onPress={() => {
+                            Linking.openURL(`${event.discordlink}`)
+                        }}>
                             <View style={ES.row}>
-                                <Text style={{...T.mazemap, color: FetchColor({theme, variable: "ORANGE"})}}>Facebook</Text>
+                                <Text style={{
+                                    ...T.mazemap, 
+                                    color: FetchColor({theme, variable: "ORANGE"})
+                                }}>
+                                    Facebook
+                                </Text>
                             </View>
                         </TouchableOpacity>
                     :null}
@@ -215,7 +272,12 @@ export default function SpecificEventScreen({ route, navigation }: SpecificEvent
                     {("organizerlink" in event) && event.organizerlink ?
                     <TouchableOpacity style={{minWidth: 70}} onPress={() => {Linking.openURL(`${event.organizerlink}`)}}>
                             <View style={ES.row}>
-                                <Text style={{...T.mazemap, color: FetchColor({theme, variable: "ORANGE"})}}>{lang ? "Mer info":"More info"}</Text>
+                                <Text style={{
+                                    ...T.mazemap, 
+                                    color: FetchColor({theme, variable: "ORANGE"})
+                                }}>
+                                    {lang ? "Mer info":"More info"}
+                                </Text>
                             </View>
                         </TouchableOpacity>
                     :null}
@@ -226,7 +288,12 @@ export default function SpecificEventScreen({ route, navigation }: SpecificEvent
                 <Card>
                     <View>
                         {Space(5)}
-                        <Text style={{...T.centered20, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{item.eventname}</Text>
+                        <Text style={{
+                            ...T.centered20, 
+                            color: FetchColor({theme, variable: "TEXTCOLOR"})
+                        }}>
+                            {item.eventname}
+                        </Text>
                     </View>
                     {Space(5)}
                     {"description" in event && event.description ?
@@ -252,7 +319,12 @@ export default function SpecificEventScreen({ route, navigation }: SpecificEvent
                 {Space(Dimensions.get("window").height/3)}
             </ScrollView>
         </View>
-        <TopMenu navigation={navigation} screen="ses" title={item.eventname} back={"EventScreen"} />
+        <TopMenu 
+            navigation={navigation} 
+            screen="ses" 
+            title={item.eventname} 
+            back={"EventScreen"}
+        />
     </View>
   )
 }
@@ -260,9 +332,18 @@ export default function SpecificEventScreen({ route, navigation }: SpecificEvent
 function JoinButton({theme, lang, link, updateStorage}: JoinButtonProps) {
     if (link.length) {
         return (
-            <TouchableOpacity onPress={() => {updateStorage(); Linking.openURL(link)}}>
-                <View style={{...ES.eventButton, backgroundColor: FetchColor({theme, variable: "ORANGE"})}}>
-                    <Text style={{...T.centered20, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>
+            <TouchableOpacity onPress={() => {
+                updateStorage()
+                Linking.openURL(link)
+            }}>
+                <View style={{
+                    ...ES.eventButton, 
+                    backgroundColor: FetchColor({theme, variable: "ORANGE"})
+                }}>
+                    <Text style={{
+                        ...T.centered20, 
+                        color: FetchColor({theme, variable: "TEXTCOLOR"})
+                    }}>
                         {lang ? "Meld meg på":"Join event"}
                     </Text>
                 </View>
@@ -274,24 +355,51 @@ function JoinButton({theme, lang, link, updateStorage}: JoinButtonProps) {
 function Category({item, theme, lang}: CategoryProps) {
     return (
         <View style={ES.specificEventInfoView}>
-            <Text style={{...T.specificEventInfo, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{lang ? "Kategori:      " : "Category:      "}</Text>
+            <Text style={{
+                ...T.specificEventInfo, 
+                color: FetchColor({theme, variable: "TEXTCOLOR"})
+            }}>
+                {lang ? "Kategori:      " : "Category:      "}
+            </Text>
             {CategoryCircle(item.category)}
-            <Text style={{...T.specificEventInfo, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{item.category}</Text>
+            <Text style={{
+                ...T.specificEventInfo, 
+                color: FetchColor({theme, variable: "TEXTCOLOR"})
+            }}>
+                {item.category}
+            </Text>
         </View>
     )
 }
 
 function Map({event, lang, handleLink, theme}: MapProps) {
-    if (("mazeref" in event) && event.mazeref || (event.street === "Orgkollektivet" || event.organizer === "HUSET")) {
+    if (("mazeref" in event) && event.mazeref || (event.street === 
+        "Orgkollektivet" || event.organizer === "HUSET")) {
         return (
             <TouchableOpacity 
                 style={{minWidth: 70}} 
-                onPress={() => {handleLink({mazeref: "mazeref" in event ? event.mazeref : "", 
+                onPress={() => {handleLink({mazeref: "mazeref" in event 
+                    ? event.mazeref 
+                    : "", 
                 street: event.street, organizer: event.organizer})}}>
                 <View style={ES.row}>
-                    <Text style={{...T.specificEventInfo, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{" - "}</Text>
-                    <Text style={{...T.mazemap, color: FetchColor({theme, variable: "ORANGE"})}}>{lang ? "Kart" : "Map"}</Text>
-                    <Image style={ES.mazemapIcon} source={require("@assets/icons/mazemap.png")}/>
+                    <Text 
+                        style={{
+                            ...T.specificEventInfo, 
+                            color: FetchColor({theme, variable: "TEXTCOLOR"})
+                        }}>
+                            {" - "}
+                        </Text>
+                    <Text 
+                        style={{
+                            ...T.mazemap, 
+                            color: FetchColor({theme, variable: "ORANGE"})
+                        }}>
+                                {lang ? "Kart" : "Map"}
+                    </Text>
+                    <Image 
+                        style={ES.mazemapIcon} 
+                        source={require("@assets/icons/mazemap.png")}/>
                 </View>
             </TouchableOpacity>
         )

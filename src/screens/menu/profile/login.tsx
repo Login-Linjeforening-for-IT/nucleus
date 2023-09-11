@@ -37,6 +37,21 @@ type DataProps = {
     secureTextEntry: boolean
 }
 
+type InputProps = {
+    theme: number
+    lang: boolean
+    inputName: (val: string) => void
+    data: DataProps
+}
+
+type PasswordUIProps = {
+    theme: number
+    lang: boolean
+    data: DataProps
+    inputPass: (val: string) => void
+    showPass: () => void
+}
+
 export default function LoginScreen( { navigation }: ScreenProps): JSX.Element {
 
     const { lang  } = useSelector( (state: ReduxState) => state.lang  )
@@ -107,90 +122,58 @@ export default function LoginScreen( { navigation }: ScreenProps): JSX.Element {
 
   return (
     <View>
-        {/* ========================= DISPLAY CONTENT ========================= */}
-        <View style={{...GS.content, backgroundColor: FetchColor({theme, variable: "DARKER"})}}>
+        <View style={{
+            ...GS.content, 
+            backgroundColor: FetchColor({theme, variable: "DARKER"})
+        }}>
             {Space(Dimensions.get("window").height/8.1)}
-                <View>
-                    {Space(80)}
-                    <Text style={{
-                        ...T.centered50,
-                        color: FetchColor({theme, variable: "TEXTCOLOR"})
-                    }}>
-                        {lang ? "Innsida" : "Intranet"}
-                    </Text>
-                    {Space(20)}
-
-                    <UsernameUI 
-                        theme={theme}
-                        lang={lang}
-                        data={data}
-                        inputName={inputName}
-                    />
-
-                    {Space(10)}
-
-                    <View style={SS.loginView}>
-                    <Cluster>
-                        <View style={SS.loginView}>
-                        <TextInput
-                            style={{
-                                ...GS.inputText,
-                                backgroundColor: FetchColor({theme, variable: "DARKER"}),
-                                color: FetchColor({theme, variable: "TEXTCOLOR"})
-                            }}
-                            placeholder={lang ? "         passord" : "         password"}
-                            placeholderTextColor={"#555"}
-                            secureTextEntry = {data.secureTextEntry ? true : false}
-                            textAlign="center"
-                            onChangeText={(val) => inputPass(val)}
-                            selectionColor={FetchColor({theme, variable: "ORANGE"})}
-                        />
-                        {data.check_passInputChange ?
-                            <TouchableOpacity onPress={showPass}>
-                            {data.secureTextEntry ?
-                                <View>
-                                    <View style = {SS.passLight}><GreenLight/></View>
-                                    <View style = {{...SS.passCheck}}>
-                                        <Image style={SS.showPassImage} source={require("@assets/icons/eyeF.png")} />
-                                    </View>
-                                </View>
-                            :
-                                <View>
-                                    <View style = {SS.passLight}><RedLight/></View>
-                                    <View style = {{...SS.passCheck}}>
-                                        <Image style={SS.showPassImage} source={require("@assets/icons/eyeT.png")} />
-                                    </View>
-                                </View>
-                            }
-
-                            </TouchableOpacity>
-                        :
-                        <View>
-                            <View style = {SS.noPassLight}><RedLight/></View>
-                            <View style = {{...SS.noPassCheck}}>
-                            <Image style={SS.noPassImage} source={require("@assets/icons/eyeF.png")} />
-                            </View>
-                        </View>
-                        }
-
-                    </View>
-                </Cluster>
-                </View>
-
-                <View>
+            <View>
+                {Space(80)}
+                <Text style={{
+                    ...T.centered50,
+                    color: FetchColor({theme, variable: "TEXTCOLOR"})
+                }}>
+                    {lang ? "Innsida" : "Intranet"}
+                </Text>
                 {Space(20)}
-                <TouchableOpacity
-                    disabled ={!data.name || !data.pass}
-                onPress={() => internalPage()}>
-                    <Button>
-                    <Text style={{...T.centered20, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>LOGIN</Text>
-                    </Button>
-                </TouchableOpacity>
+
+                <UsernameUI 
+                    theme={theme}
+                    lang={lang}
+                    data={data}
+                    inputName={inputName}
+                />
+
+                {Space(10)}
+
+                <PasswordUI 
+                    theme={theme}
+                    lang={lang}
+                    data={data}
+                    inputPass={inputPass}
+                    showPass={showPass}
+                />
+                <View>
+                    {Space(20)}
+                    <TouchableOpacity
+                        disabled ={!data.name || !data.pass}
+                    onPress={() => internalPage()}>
+                        <Button>
+                            <Text style={{
+                                ...T.centered20, 
+                                color: FetchColor({theme, variable: "TEXTCOLOR"})
+                            }}>
+                                LOGIN
+                            </Text>
+                        </Button>
+                    </TouchableOpacity>
                 </View>
                 {Space(40)}
-
                 <View style={SS.makeNotificationImage}>
-                    <Image style={GS.smallImage} source={require("@assets/logo/loginText.png")} />
+                    <Image 
+                        style={GS.smallImage} 
+                        source={require("@assets/logo/loginText.png")}
+                    />
                 </View>
             </View>
             {Space(Dimensions.get("window").height/3)}
@@ -206,39 +189,114 @@ export default function LoginScreen( { navigation }: ScreenProps): JSX.Element {
   )
 }
 
-function UsernameUI({theme, lang, data, inputName}: UsernameUIProps) {
+function UsernameUI({theme, lang, data, inputName}: UsernameUIProps):
+JSX.Element {
     return (
         <View style={SS.loginView}>
             <Cluster>
+                <UsernameInput
+                    theme={theme}
+                    lang={lang}
+                    inputName={inputName}
+                    data={data}
+                />
+            </Cluster>
+        </View>
+    )
+}
+
+function UsernameInput({theme, lang, inputName, data}: InputProps): 
+JSX.Element {
+    return(
+        <View style={SS.loginView}>
+            <TextInput
+                style={{
+                    ...GS.inputText,
+                    backgroundColor: FetchColor({theme, variable: "DARKER"}),
+                    color: FetchColor({theme, variable: "TEXTCOLOR"})
+                }}
+                placeholder={lang 
+                    ? "         brukernavn"
+                    : "         username"
+                }
+                placeholderTextColor={"#555"}
+                textAlign="center"
+                onChangeText={(val) => inputName(val)}
+                selectionColor={FetchColor({theme, variable: "ORANGE"})}
+                />
+            {data.check_textInputChange ?
+                <View>
+                    <View style = {SS.greenLight}><GreenLight/></View>
+                    <View style = {SS.checkContent}><Check/></View>
+                </View>
+            :
+                <View>
+                <View style = {SS.greenLight}><RedLight/></View>
+                <View style = {SS.checkContent}><Check/></View>
+                </View>
+            }
+        </View>
+    )
+}
+
+function PasswordUI({theme, lang, data, inputPass, showPass}: PasswordUIProps): 
+JSX.Element {
+    return(
+        <View style={SS.loginView}>
+            <Cluster>
                 <View style={SS.loginView}>
-                    <TextInput
-                        style={{
-                            ...GS.inputText,
-                            backgroundColor: FetchColor({theme, variable: "DARKER"}),
-                            color: FetchColor({theme, variable: "TEXTCOLOR"})
-                        }}
-                        placeholder={lang 
-                            ? "         brukernavn"
-                            : "         username"
-                        }
-                        placeholderTextColor={"#555"}
-                        textAlign="center"
-                        onChangeText={(val) => inputName(val)}
-                        selectionColor={FetchColor({theme, variable: "ORANGE"})}
-                    />
-                    {data.check_textInputChange ?
+                <TextInput
+                    style={{
+                        ...GS.inputText,
+                        backgroundColor: FetchColor({theme, variable: "DARKER"}),
+                        color: FetchColor({theme, variable: "TEXTCOLOR"})
+                    }}
+                    placeholder={lang ? "         passord" : "         password"}
+                    placeholderTextColor={"#555"}
+                    secureTextEntry = {data.secureTextEntry ? true : false}
+                    textAlign="center"
+                    onChangeText={(val) => inputPass(val)}
+                    selectionColor={FetchColor({theme, variable: "ORANGE"})}
+                />
+                {data.check_passInputChange ?
+                    <TouchableOpacity onPress={showPass}>
+                    {data.secureTextEntry ?
                         <View>
-                            <View style = {SS.greenLight}><GreenLight/></View>
-                            <View style = {SS.checkContent}><Check/></View>
+                            <View style = {SS.passLight}><GreenLight/></View>
+                            <View style = {{...SS.passCheck}}>
+                                <Image 
+                                    style={SS.showPassImage} 
+                                    source={require("@assets/icons/eyeF.png")}
+                                />
+                            </View>
                         </View>
                     :
                         <View>
-                        <View style = {SS.greenLight}><RedLight/></View>
-                        <View style = {SS.checkContent}><Check/></View>
+                            <View style = {SS.passLight}><RedLight/></View>
+                            <View style = {{...SS.passCheck}}>
+                                <Image 
+                                    style={SS.showPassImage} 
+                                    source={require("@assets/icons/eyeT.png")}
+                                />
+                            </View>
                         </View>
                     }
+
+                    </TouchableOpacity>
+                :
+                <View>
+                    <View style = {SS.noPassLight}><RedLight/></View>
+                    <View style = {{...SS.noPassCheck}}>
+                    <Image 
+                        style={SS.noPassImage} 
+                        source={require("@assets/icons/eyeF.png")} 
+                    />
+                    </View>
                 </View>
-            </Cluster>
+                }
+
+            </View>
+        </Cluster>
         </View>
     )
 }

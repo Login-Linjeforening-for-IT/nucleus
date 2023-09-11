@@ -43,21 +43,23 @@ type NotificationCategory =
 export const NotificationSlice = createSlice({
     // Slice name
     name: "notification",
-    // Initial state
+    // Initial states, the user will recieve notifications for truthy values.
     initialState: {
 
-        // Notification categories
+        /**
+         * Notification categories.
+         */
 
-        SETUP:             false, // Initial notification setup when app is downloaded
-        IMPORTANT:          true, // Important information
-        TEKKOM:             true, // Notifications for new events of category TEKKOM
-        CTF:                true, // Notifications for new events of category CTF
-        SOCIAL:             true, // Notifications for new events of category SOCIAL
-        BEDPRES:            true, // Notifications for new events of category BEDPRES
-        KARRIEREDAG:        true, // Notifications for new events of category KARRIEREDAG
-        FADDERUKA:          true, // Notifications for new events of category FADDERUKA
-        LOGIN:              true, // Notifications for new events of category LOGIN
-        ANNET:              true, // Notifications for new events of category ANNET
+        SETUP:             false,
+        IMPORTANT:          true,
+        TEKKOM:             true,
+        CTF:                true,
+        SOCIAL:             true,
+        BEDPRES:            true,
+        KARRIEREDAG:        true,
+        FADDERUKA:          true,
+        LOGIN:              true,
+        ANNET:              true,
 
         // Notification preferences - for automatic notifications
 

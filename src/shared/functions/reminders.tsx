@@ -37,9 +37,19 @@ export default function Reminders() {
             {categories.map((cat, index) => {
                 return (
                     <View key={index}>
-                        <TouchableOpacity key={index} onPress={() => showCategory(index)}>
-                        <View style={{...GS.reminderDropdown, backgroundColor: FetchColor({theme, variable: "DARKER"})}}>
-                            <Text style={{...T.text20, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{cat.title}</Text>
+                        <TouchableOpacity 
+                            key={index} 
+                            onPress={() => showCategory(index)}
+                        >
+                        <View style={{
+                            ...GS.reminderDropdown, 
+                            backgroundColor: FetchColor({theme, variable: "DARKER"})
+                        }}>
+                            <Text style={{
+                                ...T.text20, 
+                                color: FetchColor({theme, variable: "TEXTCOLOR"})}}>
+                                    {cat.title}
+                            </Text>
                             <Image
                                 style={GS.reminderDropdownArrow}
                                 source={index === category

@@ -26,9 +26,17 @@ type DynamicCircleProps = {
  *
  * @returns                 Circle with the properties given
  */
-export default function DynamicCircle({height, width, color, left, right, top, bottom}: DynamicCircleProps): JSX.Element {
+export default function DynamicCircle({height, width, color, left, right, top, 
+bottom}: DynamicCircleProps): JSX.Element {
     return (
-        <View style={{left: left, right: right, top: top, bottom: bottom, height: height, width: width}}>
+        <View style={{
+                left: left, 
+                right: right, 
+                top: top, 
+                bottom: bottom, 
+                height: height, 
+                width: width
+            }}>
             <Svg height="100%" width="100%" viewBox="0 0 100 100" >
                 <Circle cx="50" cy="50" r="50" fill={color} />
             </Svg>

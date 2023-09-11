@@ -15,7 +15,9 @@ type AdListItemProps = {
     setClickedAds: React.Dispatch<React.SetStateAction<any[]>>
 }
 
-export function AdListItem({clickedAds, ad, theme, lang, setClickedAds}: AdListItemProps): JSX.Element {
+export function AdListItem({clickedAds, ad, theme, lang, setClickedAds}: 
+AdListItemProps): JSX.Element {
+
     const isOrange = clickedAds.some(ads => ads.id === ad.id) ? true : false
 
     return (
@@ -29,8 +31,10 @@ export function AdListItem({clickedAds, ad, theme, lang, setClickedAds}: AdListI
                 </View>
                 <View style={AS.adViewRight}>
                     <TouchableOpacity onPress={() => {
-                        // Doesnt work as we have not made categories for advertisements yet.
-                        // topic({topicID: ad.id, lang, status: 0, category: (ad.category).toLowerCase(),
+                        // Doesnt work as we have not made categories for 
+                        // advertisements yet.
+                        // topic({topicID: ad.id, lang, status: 0, category: 
+                        // (ad.category).toLowerCase(),
                         //     catArray: notificationArray(ad.category)})
                         setClickedAds(clickedAds.some(ads => ads.id === ad.id)
                             ? clickedAds.filter((x) => x.id !== ad.id)

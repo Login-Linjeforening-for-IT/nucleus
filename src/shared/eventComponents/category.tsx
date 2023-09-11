@@ -8,7 +8,8 @@ import React from "react"
  * @param {string} category Category of the event, Format: "CATEGORY"
  * @returns                 Small circle of the categories color
  */
-export default function CategorySquare({category}: {category: string}): JSX.Element {
+export default function CategorySquare({category}: {category: string}): 
+JSX.Element {
     return (
         <View style={ES.eventLight}>
             <Svg width={45} height={65} fill={CategoryColor(category)}>

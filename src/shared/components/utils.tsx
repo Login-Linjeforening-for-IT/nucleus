@@ -24,7 +24,8 @@ type MonthProps = {
 }
 
 /**
- * Function for creating an empty view, for adding spaces between objects such as views paragraphs etc
+ * Function for creating an empty view, for adding spaces between objects such 
+ * as views paragraphs etc
  *
  * @param {float} height How big the space should be
  * @returns Empty view of the given height
@@ -34,7 +35,8 @@ export default function Space (height: number): JSX.Element {
 }
 
 /**
- * Function for drawing a dynamic line, can be adjusted as you wish using the height and width
+ * Function for drawing a dynamic line, can be adjusted as you wish using 
+ * the height and width
  *
  * @param {number} height Height of the line
  * @param {number} width Width of the line
@@ -81,14 +83,19 @@ export function random({min, max}: randomProps): number {
 export function ErrorMessage({argument, theme, lang}: ErrorMessageProps): JSX.Element {
 
     const text = {
-        "wifi": lang ? "Sjekk nettverkstilkoblingen din og prøv igjen. Kontakt TEKKOM dersom problemet vedvarer." : "Check your wifi connection and try again. Contact TEKKOM if the issue persists.",
+        "wifi": lang 
+        ? "Sjekk nettverkstilkoblingen din og prøv igjen. Kontakt TEKKOM dersom problemet vedvarer." 
+        : "Check your wifi connection and try again. Contact TEKKOM if the issue persists.",
         "nomatch": lang ? "Ingen treff" : "No matching events"
     }
 
     return (
         <View style={{alignSelf: "center", maxWidth: "80%"}}>
-              <View style={{height : "45%"}}/>
-              <Text style={{...T.centeredBold20, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{text[argument]}</Text>
+            <View style={{height : "45%"}}/>
+            <Text style={{...T.centeredBold20, color: FetchColor({theme, 
+                variable: "TEXTCOLOR"})}}>
+                {text[argument]}
+            </Text>
         </View>
     )
 }
@@ -99,8 +106,12 @@ export function ErrorMessage({argument, theme, lang}: ErrorMessageProps): JSX.El
  * @returns
  */
 export function Month({month, color, lang}: MonthProps): JSX.Element {
-    const monthsEN = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Des"]
-    const monthsNO = ["jan", "feb", "mar", "apr", "mai", "jun", "jul", "aug", "sep", "okt", "nov", "des"]
+    const monthsEN = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", 
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Des"]
+    const monthsNO = ["jan", "feb", "mar", "apr", "mai", "jun", 
+        "jul", "aug", "sep", "okt", "nov", "des"]
 
-    return <Text style={{...ES.monthText, color: color}}>{lang ? monthsNO[month - 1]: monthsEN[month - 1]}</Text>
+    return <Text style={{...ES.monthText, color: color}}>
+        {lang ? monthsNO[month - 1]: monthsEN[month - 1]}
+    </Text>
 }

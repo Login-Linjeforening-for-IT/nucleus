@@ -1,4 +1,3 @@
-import AdInfo, { AdBanner, AdTitle, AdDescription, AdUpdateInfo, AdMedia } from "@shared/components/ad"
 import { View, ScrollView, Dimensions } from "react-native"
 import { SpecificAdScreenProps } from "@interfaces"
 import Cluster from "@shared/functions/cluster"
@@ -8,8 +7,17 @@ import { GS } from "@styles/globalStyles"
 import { useSelector } from "react-redux"
 import TopMenu from "@shared/topMenu"
 import React from "react"
+import AdInfo, { 
+    AdBanner, 
+    AdTitle, 
+    AdDescription, 
+    AdUpdateInfo, 
+    AdMedia 
+} from "@shared/components/ad"
   
-export default function SpecificAdScreen({ route, navigation }: SpecificAdScreenProps): JSX.Element {
+export default function SpecificAdScreen({ route, navigation }: 
+SpecificAdScreenProps): JSX.Element {
+
     const { lang  } = useSelector( (state: ReduxState) => state.lang  )
     const { theme } = useSelector( (state: ReduxState) => state.theme )
     const { item } = route.params

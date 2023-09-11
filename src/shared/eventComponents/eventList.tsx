@@ -76,9 +76,13 @@ export default function EventList ({
     setClickedEvents,
     lastSave,
     events,
-    ErrorMessage
+    ErrorMessage,
 }: EventListProps): JSX.Element {
-    if (!renderedArray.length) return <ErrorMessage argument="wifi" theme={theme} lang={lang} />
+    if (!renderedArray.length) return <ErrorMessage 
+        argument="wifi" 
+        theme={theme} 
+        lang={lang} 
+    />
     else if (renderedArray.length > 0) {
         return (
             <View>
@@ -136,9 +140,11 @@ function EventCard ({
     setClickedEvents,
     lastSave,
     item,
-    index
+    index,
 }: EventCardProps): JSX.Element {
-    const isOrange = clickedEvents.some(event => event.eventID === item.eventID) ? true : false
+    const isOrange = clickedEvents.some(event => event.eventID === item.eventID) 
+        ? true 
+        : false
 
     return (
         <View>
@@ -150,8 +156,16 @@ function EventCard ({
                 <Cluster space={8}>
                     {index === 0 ? Space(8):null}
                     <View style={ES.eventBack}>
-                        <FullCategorySquare item={item} theme={theme} lang={lang} />
-                        <EventCardLocation item={item} theme={theme} lang={lang} />
+                        <FullCategorySquare 
+                            item={item} 
+                            theme={theme} 
+                            lang={lang} 
+                        />
+                        <EventCardLocation 
+                            item={item} 
+                            theme={theme} 
+                            lang={lang} 
+                        />
                         <Bell
                             item={item}
                             lang={lang}
@@ -177,13 +191,22 @@ function EventCard ({
     )
 }
 
-export function ListFooter({index, renderedArray, search, relevantCategories, lastSave, lang, theme}: ListFooterProps): JSX.Element {
+export function ListFooter({index, renderedArray, search, relevantCategories, 
+lastSave, lang, theme}: ListFooterProps): JSX.Element {
     return (
         <>
-            {index === renderedArray.length-1 && <Text style={{...T.contact, color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})}}>{lang ? "Oppdatert kl:":"Updated:"} {lastSave}.</Text>}
-            {index === renderedArray.length-1 && Space((Dimensions.get("window").height/3)+20)}
-            {index === renderedArray.length-1 && search === true ? Space(152.5):null}
-            {index === renderedArray.length-1 && search === true ? Space(40*(Math.ceil(relevantCategories.length/3))):null}
+            {index === renderedArray.length-1 && <Text style={{...T.contact, 
+                color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})}}>
+                    {lang ? "Oppdatert kl:":"Updated:"} {lastSave}.
+                </Text>}
+            {index === renderedArray.length-1 
+                && Space((Dimensions.get("window").height/3)+20)}
+            {index === renderedArray.length-1 
+                && search === true ? Space(152.5):null}
+            {index === renderedArray.length-1 && search === true 
+                ? Space(40*(Math.ceil(relevantCategories.length / 3)))
+                : null
+            }
         </>
     )
 }
@@ -207,12 +230,14 @@ function FullCategorySquare({item,theme, lang}: FullCategorySquareProps) {
     )
 }
 
-function Bell({item, lang, notification, clickedEvents, isOrange, theme, setClickedEvents}: BellProps): JSX.Element {
+function Bell({item, lang, notification, clickedEvents, isOrange, theme, 
+setClickedEvents}: BellProps): JSX.Element {
     return (
         <View style={ES.view3}>
             <TouchableOpacity onPress={() => {
-                topic({topicID: `${item.eventID}`, lang, status: false, category: (item.category).toLowerCase(),
-                    catArray: notificationArray({notification, category: item.category})})
+                topic({topicID: `${item.eventID}`, lang, status: false, 
+                    category: (item.category).toLowerCase(), catArray: 
+                    notificationArray({notification, category: item.category})})
                 setClickedEvents(
                     clickedEvents.some(event => event.eventID === item.eventID)
                     ? clickedEvents.filter((x) => x.eventID !== item.eventID)

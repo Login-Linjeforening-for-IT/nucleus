@@ -53,7 +53,8 @@ clickedEvents, calendarID, dispatch}: handleDownloadProps) {
         setDownloadState(new Date(currentTime))
         await executeDownload({clickedEvents, calendarID, dispatch})
     } else {
-        if (timeSince(downloadState) >= 1000) await executeDownload({clickedEvents, calendarID, dispatch})
+        if (timeSince(downloadState) >= 1000) await executeDownload(
+            {clickedEvents, calendarID, dispatch})
         setDownloadState(new Date(currentTime))
     }
 }
@@ -145,7 +146,8 @@ async function createCalendar(events: EventProps[]) {
  * @param {array} events      Events to format
  * @returns                   Native calendar objects
  */
-async function eventsToCalendarFormat({events, calendarID}: eventsToCalendarFormatProps) {
+async function eventsToCalendarFormat({events, calendarID}: 
+eventsToCalendarFormatProps) {
     let formattedEvents = []
 
     for (const event of events) {

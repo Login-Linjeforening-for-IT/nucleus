@@ -1,26 +1,32 @@
-import NavigateFromPushNotification from "@shared/notificationComponents/navigateFromPushNotification"
-import LastFetch, { fetchState, fetchStored, getData, timeSince } from "@shared/eventComponents/fetch"
-import handleDownload from "@shared/eventComponents/calendar"
 import notificationSetup from "@shared/notificationComponents/notificationSetup"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import Space, { ErrorMessage } from "@shared/components/utils"
 import storeEvents from "@shared/eventComponents/storeEvents"
+import handleDownload from "@shared/eventComponents/calendar"
 import React, { useEffect, useState, useRef } from "react"
 import { useFocusEffect } from "@react-navigation/native"
 import EventList from "@shared/eventComponents/eventList"
 import { useDispatch, useSelector } from "react-redux"
 import { StatusBar } from "expo-status-bar"
+import { AnyAction, Dispatch } from "redux"
 import FetchColor from "@styles/fetchTheme"
 import { GS } from "@styles/globalStyles"
 import { MS } from "@styles/menuStyles"
 import { BlurView } from "expo-blur"
+import NavigateFromPushNotification 
+from "@shared/notificationComponents/navigateFromPushNotification"
 import Filter, {
     fetchRelevantCategories,
     filterCategories,
     filterBoth,
     FilterUI,
 } from "@shared/eventComponents/filter"
-
+import LastFetch, { 
+    fetchState, 
+    fetchStored, 
+    getData, 
+    timeSince 
+} from "@shared/eventComponents/fetch"
 import {
     Text,
     View,
@@ -30,6 +36,20 @@ import {
     Platform,
 } from "react-native"
 import { ScreenProps } from "@interfaces"
+
+type HeaderComponentProps = {
+    renderedArray: EventProps[]
+    clickedEvents: EventProps[]
+    setDownloadState: React.Dispatch<React.SetStateAction<Date>>
+    downloadState: Date
+    calendarID: string
+    dispatch: Dispatch<AnyAction>
+    theme: number
+    clickedCategory: CategoryWithID[]
+    input: string
+    toggleSearch: () => void
+    search: boolean
+}
 
 /**
  * Parent EventScreen function
@@ -61,17 +81,20 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
     // Clears text input
     const textInputRef = useRef(null)
     // Relevant categories to filter
-    const [relevantCategories, setRelevantCategories] = useState<CategoryWithID[]>([])
+    const [relevantCategories, setRelevantCategories] = 
+    useState<CategoryWithID[]>([])
     // Search bar visibility boolean
     const [search, setSearch] = useState(false)
-    const notification =    useSelector( (state: ReduxState) => state.notification)
+    const notification =    useSelector( (state: ReduxState) => 
+    state.notification)
     const { lang  } =       useSelector( (state: ReduxState) => state.lang)
     const { login } =       useSelector( (state: ReduxState) => state.login)
     const { theme } =       useSelector( (state: ReduxState) => state.theme)
     const { calendarID } =  useSelector( (state: ReduxState) => state.misc)
+    const isDark = theme === 0 || theme === 2 || theme === 3 ? true : false
     const dispatch = useDispatch()
 
-    // Allows for navigation to a specific page if the app is opened by a push notification
+    // Navigates if the app is opened by a push notification
     NavigateFromPushNotification({navigation})
 
     // All categories to filter - DO NOT CHANGE IDS
@@ -113,15 +136,21 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
                     setRenderedArray([...events])
                 }
                 // Run filter function if the filter search text is not empty
-                Filter({input, setRenderedArray, events, clickedEvents, clickedCategory})
+                Filter({input, setRenderedArray, events, clickedEvents, 
+                    clickedCategory})
             }else{
                 // If the filter is not null and there are categories clicked
                 if(input.length && clickedCategory.length > 0){
                     // If the filter text is not empty calls filterBoth function
-                    if(input.length > 0) {filterBoth({clickedCategory, clickedEvents, events, setRenderedArray, input})}
-                    // filterCategories if filter text is empty but categories are clicked
-                    else {filterCategories({events, clickedEvents, clickedCategory, setRenderedArray})}
-                } else {filterCategories({events, clickedEvents, clickedCategory, setRenderedArray})}
+                    if(input.length > 0) {
+                        filterBoth({clickedCategory, clickedEvents, 
+                        events, setRenderedArray, input})
+                    }
+                    // When categories are clicked but there is no input text
+                    else {filterCategories({events, clickedEvents, 
+                        clickedCategory, setRenderedArray})}
+                } else {filterCategories({events, clickedEvents, 
+                    clickedCategory, setRenderedArray})}
             }
         // If the filter input is null only filter categories
         } else {
@@ -136,7 +165,7 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
                     // Resets clicked categories
                     setClickedCategory([])
                 }
-                // If the filter text is null reset renderedArray to equal events
+                // Resets if there is no text to filter
             } else setRenderedArray([...events])
         }
 
@@ -150,15 +179,19 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
         // Fetches clickedEvents
         fetchState(setClickedEvents)
         // Fetches categories available to filter
-        fetchRelevantCategories({setRelevantCategories, clickedEvents, events, category})
-        events.length ? setRenderedArray([...events]) : fetchStored({setRenderedArray, setState: setEvents})
+        fetchRelevantCategories({setRelevantCategories, clickedEvents, events, 
+            category})
+        events.length 
+            ? setRenderedArray([...events]) 
+            : fetchStored({setRenderedArray, setState: setEvents})
     // Renders when the screen is loaded
     }, [])
 
     //  --- UPDATES FILTER ON EVENT CHANGE ---
     useEffect(() => {
         // Updates relevant categories to filter
-        fetchRelevantCategories({setRelevantCategories, clickedEvents, events, category})
+        fetchRelevantCategories({setRelevantCategories, clickedEvents, events, 
+            category})
         // Listens for changes in these arrays
     }, [events.length, clickedEvents.length])
 
@@ -172,7 +205,8 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
                 // Storing the current time
                 (async() => {
                     // Storing in AsyncStorage
-                    await AsyncStorage.setItem("lastFetch", new Date().toISOString())
+                    await AsyncStorage.setItem("lastFetch", 
+                    new Date().toISOString())
                     // Fetches cache
                     getData({setEvents, setRenderedArray, setLastSave, events})
                 })()
@@ -201,8 +235,10 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
     if(events.length > 0 && events.length !== renderedArray.length){
         // Fixes any errors if the user is not currently filtering
         if (!input.length) clickedCategory.length === 0 ? RenderEvents():null
-        // Fixes any errors if the user has been searching, but is not doing so now
-        else input.length === 0 && clickedCategory.length === 0 ? RenderEvents() : null
+        // Fixes any potential render errors after user has been searching
+        else if (input.length === 0 && clickedCategory.length === 0) {
+            RenderEvents()
+        }
     }
 
     // --- SETUP CODE ONCE APP IS DOWNLOADED---
@@ -214,8 +250,11 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
     // --- DISPLAYS THE EVENTSCREEN ---
     return (
         <View>
-            <StatusBar style={theme === 0 || theme === 2 || theme === 3 ? "light" : "dark"} />
-            <View style={{...GS.content, backgroundColor: FetchColor({theme, variable: "DARKER"})}}>
+            <StatusBar style={isDark ? "light" : "dark"} />
+            <View style={{
+                ...GS.content, 
+                backgroundColor: FetchColor({theme, variable: "DARKER"})
+            }}>
                 {search === true && Space(Dimensions.get("window").height/9)}
                 <FilterUI
                     textInputRef={textInputRef}
@@ -246,19 +285,22 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
                 {Space(Dimensions.get("window").height/3)}
             </View>
 
-            {/* ========================= DISPLAY TOP MENU ========================= */}
             {Platform.OS === "ios" 
                 ? <BlurView style={MS.topMenu} intensity={30}/>
                 : <View style={{
                     ...MS.topMenu, 
-                    backgroundColor: FetchColor({theme, variable: "TRANSPARENTANDROID"})}}
-                />
+                    backgroundColor: FetchColor({theme, 
+                        variable: "TRANSPARENTANDROID"})
+                }} />
             }
-            <View style={{...MS.topMenu, backgroundColor: FetchColor({theme, variable: "TRANSPARENT"})}}>
+            <View style={{
+                ...MS.topMenu, 
+                backgroundColor: FetchColor({theme, variable: "TRANSPARENT"})
+            }}>
                 <TouchableOpacity style={MS.logoBackground}>
                 <Image 
                     style={MS.tMenuIcon} 
-                    source={theme === 0 || theme === 2 || theme === 3 
+                    source={isDark
                         ? require("@assets/logo/loginText.png")
                         : require("@assets/logo/loginText-black.png")} 
                 />
@@ -281,47 +323,78 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
                         Events
                     </Text>
                 }
-                {renderedArray != null ?
-                    <View style={MS.multiTop}>
-                        {clickedEvents.length > 0 ?
-                            <TouchableOpacity 
-                                style={MS.touchableIcon} 
-                                onPress={async () => await handleDownload({
-                                    setDownloadState, downloadState, clickedEvents, 
-                                    calendarID, dispatch})}>
-                                <Image 
-                                    style={MS.multiIcon}
-                                    source={theme === 0 || theme === 2 || theme === 3 
-                                        ? timeSince(downloadState) >= 1000 
-                                            ? require("@assets/icons/download.png")
-                                            : require("@assets/icons/download-orange.png")
-                                        : require("@assets/icons/download-black.png")} />
-                            </TouchableOpacity>
-                        :null}
-
-                        {renderedArray.length > 0 || clickedCategory.length > 0 || input.length ?
-                            <TouchableOpacity 
-                                style={MS.touchableIcon} 
-                                onPress={toggleSearch}
-                            >
-                                {search
-                                    ? <Image 
-                                        style={MS.multiIcon} 
-                                        source={require("@assets/icons/filter-orange.png")}
-                                    />
-                                    : <Image 
-                                        style={MS.multiIcon} 
-                                        source={theme === 0 || theme === 2 || theme === 3 
-                                            ? require("@assets/icons/filter.png") 
-                                            : require("@assets/icons/filter-black.png")
-                                        }
-                                    />
-                                }
-                            </TouchableOpacity>
-                        :null}
-                    </View>
-                :null}
+                <HeaderComponents 
+                    renderedArray={renderedArray}
+                    clickedEvents={clickedEvents}
+                    setDownloadState={setDownloadState}
+                    downloadState={downloadState}
+                    calendarID={calendarID}
+                    dispatch={dispatch}
+                    theme={theme}
+                    clickedCategory={clickedCategory}
+                    input={input}
+                    toggleSearch={toggleSearch}
+                    search={search}
+                />
             </View>
+        </View>
+    )
+}
+
+function HeaderComponents({
+    renderedArray, 
+    clickedEvents, 
+    setDownloadState, 
+    downloadState, 
+    calendarID, 
+    dispatch, 
+    theme, 
+    clickedCategory, 
+    input, 
+    toggleSearch, 
+    search
+}: HeaderComponentProps): JSX.Element {
+    const isDark = theme === 0 || theme === 2 || theme === 3 ? true : false
+    if (!renderedArray.length) return <></>
+    return (
+        <View style={MS.multiTop}>
+            {clickedEvents.length > 0 ?
+                <TouchableOpacity 
+                    style={MS.touchableIcon} 
+                    onPress={async () => await handleDownload({
+                        setDownloadState, downloadState, clickedEvents, 
+                        calendarID, dispatch})}>
+                    <Image 
+                        style={MS.multiIcon}
+                        source={isDark
+                            ? timeSince(downloadState) >= 1000 
+                                ? require("@assets/icons/download.png")
+                                : require("@assets/icons/download-orange.png")
+                            : require("@assets/icons/download-black.png")} />
+                </TouchableOpacity>
+            :null}
+
+            {renderedArray.length > 0 || clickedCategory.length > 0 || 
+            input.length ?
+                <TouchableOpacity 
+                    style={MS.touchableIcon} 
+                    onPress={toggleSearch}
+                >
+                    {search
+                        ? <Image 
+                            style={MS.multiIcon} 
+                            source={require("@assets/icons/filter-orange.png")}
+                        />
+                        : <Image 
+                            style={MS.multiIcon} 
+                            source={isDark
+                                ? require("@assets/icons/filter.png") 
+                                : require("@assets/icons/filter-black.png")
+                            }
+                        />
+                    }
+                </TouchableOpacity>
+            :null}
         </View>
     )
 }
