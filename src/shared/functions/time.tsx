@@ -283,7 +283,7 @@ export function stringEvent({startTime, endTime}: EventTimeProps): string { // s
                 } else if (day > startDay) {
                     return text[23]
                 } else {return text[24]}
-            } else if (startMonth === month) { //Event was last month
+            } else if (startMonth === month) { // Event was last month
                 // If the event was the last day of the month and youre on the first day of the month
                 if (day === 1 && startDay === lastDayOfMonth(month)) {
                     return text[25]
