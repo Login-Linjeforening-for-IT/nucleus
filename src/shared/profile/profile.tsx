@@ -37,17 +37,26 @@ export default function Profile({theme, lang, profile } : ProfileElementprops) {
 
     let y
 
+    const yearNO = ["1. år", "2. år", "3. år", "4. år", "5. år", "6. år", 
+                    "7. år", "8. år", "9. år", "10. år"]
+
+    const yearEN = ["1st. year", "2nd. year", "3rd. year", "4th. year", 
+                    "5th. year", "6th. year", "7th. year", "8th. year", 
+                    "9th. year", "10th. year"]
+
+    const yearArray = lang ? yearNO : yearEN
+
     switch (profile.schoolyear) {
-        case "1" : y = lang ? "1. år"  : "1st. year" ; break
-        case "2" : y = lang ? "2. år"  : "2nd. year" ; break
-        case "3" : y = lang ? "3. år"  : "3rd. year" ; break
-        case "4" : y = lang ? "4. år"  : "4th. year" ; break
-        case "5" : y = lang ? "5. år"  : "5th. year" ; break
-        case "6" : y = lang ? "6. år"  : "6th. year" ; break
-        case "7" : y = lang ? "7. år"  : "7th. year" ; break
-        case "8" : y = lang ? "8. år"  : "8th. year" ; break
-        case "9" : y = lang ? "9. år"  : "9th. year" ; break
-        case "10": y = lang ? "10. år" : "10th. year"; break
+        case "1" : y = yearArray[0]; break
+        case "2" : y = yearArray[1]; break
+        case "3" : y = yearArray[2]; break
+        case "4" : y = yearArray[3]; break
+        case "5" : y = yearArray[4]; break
+        case "6" : y = yearArray[5]; break
+        case "7" : y = yearArray[6]; break
+        case "8" : y = yearArray[7]; break
+        case "9" : y = yearArray[8]; break
+        case "10": y = yearArray[9]; break
     }
 
     const year = y + " "
