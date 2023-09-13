@@ -1,4 +1,6 @@
 {
+    "screen": "Menu",
+    "nav": "menu",
     "setting": [
         {
             "id": 1, 

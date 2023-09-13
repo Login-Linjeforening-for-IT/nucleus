@@ -127,28 +127,28 @@ export default function AdScreen({ navigation }: ScreenProps): JSX.Element {
                 keyExtractor={(ad) => `${ad.id}`}
                 data={renderedArray}
                 renderItem={({item: ad, index}) => (
-                <View>
-                    <TouchableOpacity onPress={() => 
-                        navigation.navigate("SpecificAdScreen", {item: ad})}>
-                    {index === 0 && Space(Dimensions.get("window").height / 8.1)}
-                        <AdListItem 
-                            clickedAds={clickedAds}
-                            ad={ad}
-                            theme={theme}
-                            lang={lang}
-                            setClickedAds={setClickedAds}
-                        />
-                        <ListFooter
-                            index={index}
-                            renderedArray={renderedArray}
-                            search={false}
-                            relevantCategories={[]}
-                            lastSave={lastSave}
-                            lang={lang}
-                            theme={theme}
-                        />
-                    </TouchableOpacity>
-                </View>
+                    <View key={index}>
+                        <TouchableOpacity onPress={() => 
+                            navigation.navigate("SpecificAdScreen", {item: ad})}>
+                        {index === 0 && Space(Dimensions.get("window").height / 8.1)}
+                            <AdListItem 
+                                clickedAds={clickedAds}
+                                ad={ad}
+                                theme={theme}
+                                lang={lang}
+                                setClickedAds={setClickedAds}
+                            />
+                            <ListFooter
+                                index={index}
+                                renderedArray={renderedArray}
+                                search={false}
+                                relevantCategories={[]}
+                                lastSave={lastSave}
+                                lang={lang}
+                                theme={theme}
+                            />
+                        </TouchableOpacity>
+                    </View>
                 )}
             />
             :

@@ -47,7 +47,7 @@ export default function MenuScreen({ navigation }: ScreenProps): JSX.Element {
     const { id, name, image } = useSelector( (state: ReduxState) => 
     state.profile )
     const profile = { id: 0, name: "Eirik Hanasand", image}
-    const setting = lang ? no.setting : en.setting
+    const text = lang ? no : en
 
     // Feedback options visibility boolean
     const [feedback, setFeedback] = useState(false)
@@ -68,7 +68,7 @@ export default function MenuScreen({ navigation }: ScreenProps): JSX.Element {
                 showsVerticalScrollIndicator={false}
                 numColumns={1}
                 keyExtractor={(item) => `${item.id}`}
-                data={setting}
+                data={text.setting}
                 renderItem={({item, index}) => (
                     <MenuItem 
                         index={index}
@@ -76,7 +76,7 @@ export default function MenuScreen({ navigation }: ScreenProps): JSX.Element {
                         navigation={navigation}
                         theme={theme}
                         lang={lang}
-                        setting={setting}
+                        setting={text.setting}
                         feedback={feedback}
                         toggleFeedback={toggleFeedback}
                         login={login}
@@ -87,9 +87,9 @@ export default function MenuScreen({ navigation }: ScreenProps): JSX.Element {
             </View>
             <TopMenu 
                 navigation={navigation} 
-                screen="menu" 
-                title={lang ? "Meny" : "Menu"}
-                />
+                screen={text.nav}
+                title={text.screen}
+            />
         </View>
     )
 }

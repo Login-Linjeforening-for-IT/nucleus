@@ -63,7 +63,7 @@
             "skill": "Programming"
         },
         {
-            "id": 1,
+            "id": 3,
             "title_no": "Prosjektleder",
             "title_en": "Project Manager",
             "position_title_no": "Prosjektleder",
@@ -94,7 +94,7 @@
             "skill": "Bruker ikke Thinkpad\nAnti Arch\nLiker JavaScript\nLang fartstid med nettsideutvikling"
         },
         {
-            "id": 2,
+            "id": 4,
             "title_no": "Utvikler",
             "title_en": "Developer",
             "position_title_no": "Utvikler",
@@ -125,7 +125,7 @@
             "skill": "Programming"
         },
         {
-            "id": 1,
+            "id": 5,
             "title_no": "Prosjektleder",
             "title_en": "Project Manager",
             "position_title_no": "Prosjektleder",
@@ -156,7 +156,7 @@
             "skill": "Bruker ikke Thinkpad\nAnti Arch\nLiker JavaScript\nLang fartstid med nettsideutvikling"
         },
         {
-            "id": 2,
+            "id": 6,
             "title_no": "Utvikler",
             "title_en": "Developer",
             "position_title_no": "Utvikler",
@@ -187,7 +187,7 @@
             "skill": "Programming"
         },
         {
-            "id": 1,
+            "id": 7,
             "title_no": "Prosjektleder",
             "title_en": "Project Manager",
             "position_title_no": "Prosjektleder",
@@ -218,7 +218,7 @@
             "skill": "Bruker ikke Thinkpad\nAnti Arch\nLiker JavaScript\nLang fartstid med nettsideutvikling"
         },
         {
-            "id": 2,
+            "id": 8,
             "title_no": "Utvikler",
             "title_en": "Developer",
             "position_title_no": "Utvikler",
@@ -249,7 +249,7 @@
             "skill": "Programming"
         },
         {
-            "id": 1,
+            "id": 9,
             "title_no": "Prosjektleder",
             "title_en": "Project Manager",
             "position_title_no": "Prosjektleder",
@@ -280,7 +280,7 @@
             "skill": "Bruker ikke Thinkpad\nAnti Arch\nLiker JavaScript\nLang fartstid med nettsideutvikling"
         },
         {
-            "id": 2,
+            "id": 10,
             "title_no": "Utvikler",
             "title_en": "Developer",
             "position_title_no": "Utvikler",

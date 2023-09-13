@@ -1,0 +1,12 @@
+{
+    "alert": "Report",
+    "back": "MenuScreen",
+    "soon": "This function is coming soon.",
+    "temp": "Temporary solution:\nMail: kontakt@login.no\nDiscord: eirikhanasand",
+    "error": "Error! Please send the report as an anonymous email to kontakt@login.no",
+    "secure": "Anonymous and secure. Always.",
+    "contact": "Contact info reporter (voluntary)",
+    "who": "Who is affected? (voluntary)",
+    "what": "What would you like to report?",
+    "send": "SEND"
+}

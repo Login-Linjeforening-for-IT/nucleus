@@ -8,6 +8,8 @@ import { ScreenProps } from "@interfaces"
 import { SS } from "@styles/settingStyles"
 import { GS } from "@styles/globalStyles"
 import { useSelector } from "react-redux"
+import no from "@text/no/report.json"
+import en from "@text/en/report.json"
 import React, { useState } from "react"
 import TopMenu from "@shared/topMenu"
 import { T } from "@styles/text"
@@ -21,20 +23,19 @@ import {
     View,
     Text,
 } from "react-native"
-
-{/* ========================= APP START ========================= */}
+import { ClusterSmaller } from "@shared/functions/cluster"
 
 export default function ReportScreen( { navigation }: ScreenProps): JSX.Element {
 
     const { lang  } = useSelector( (state: ReduxState) => state.lang  )
     const { theme } = useSelector( (state: ReduxState) => state.theme )
-
+    const text = lang ? no : en 
     const sendForm = () => {
         if (data.name === data.name) {
             // Takk for beskjed. / Thanks for letting us know.
-            lang ? Alert.alert("Denne funksjonen kommer snart", "Midlertidig løsning:\nMail: kontakt@login.no\nDiscord: eirikhanasand") : Alert.alert("This function is coming soon.", "Temporary solution:\nMail: kontakt@login.no\nDiscord: eirikhanasand")
+            Alert.alert(text.soon, text.temp)
         } else {
-            lang ? Alert.alert("Feil! Vennligst send varslingen som anonym epost til kontakt@login.no") : Alert.alert("Error! Please send the report as an anonymous email to kontakt@login.no")
+            Alert.alert(text.alert)
         }
     }
 
@@ -103,19 +104,25 @@ const inputContent = (val: string) => {
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
     <View>
-      {/* ========================= DISPLAY CONTENT ========================= */}
-      <View style={{...GS.content, backgroundColor: FetchColor({theme, variable: "DARKER"})}}>
+        <View style={{
+            ...GS.content, 
+            backgroundColor: FetchColor({theme, variable: "DARKER"})
+        }}>
         <View>
           {Space((Dimensions.get("window").height/8.1)+40)}
-          <Text style={{...T.centered, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{lang ? "Anonymt og sikkert. Alltid." : "Anonymous and secure. Always."}</Text>
+          <Text style={{...T.centered, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{text.secure}</Text>
           {Space(30)}
 
           <View style={SS.loginView}>
-            <CardSmaller>
+            <ClusterSmaller>
               <View style={SS.loginView}>
                     <TextInput
-                        style={{...GS.inputText, backgroundColor: FetchColor({theme, variable: "DARKER"}), color: FetchColor({theme, variable: "TEXTCOLOR"})}}
-                        placeholder = {lang ? "Kontaktinformasjon varsler (frivillig)" : "Contact info reporter (voluntary)"}
+                        style={{
+                            ...GS.inputText, 
+                            backgroundColor: FetchColor({theme, variable: "DARKER"}), 
+                            color: FetchColor({theme, variable: "TEXTCOLOR"})
+                        }}
+                        placeholder = {text.contact}
                         placeholderTextColor={FetchColor({theme, variable: "TITLETEXTCOLOR"})}
                         textAlign="center"
                         onChangeText={(val) => inputName(val)}
@@ -133,7 +140,7 @@ const inputContent = (val: string) => {
                         </View>
                     }
               </View>
-            </CardSmaller>
+            </ClusterSmaller>
           </View>
 
           {Space(20)}
@@ -142,9 +149,15 @@ const inputContent = (val: string) => {
             <CardSmaller>
               <View style={SS.loginView}>
                 <TextInput
-                style={{...GS.inputText, backgroundColor: FetchColor({theme, variable: "DARKER"}), color: FetchColor({theme, variable: "TEXTCOLOR"})}}
-                placeholder = {lang ? "Hvem angår hendelsen? (frivillig)" : "Who is affected? (voluntary"}
-                placeholderTextColor={FetchColor({theme, variable: "TITLETEXTCOLOR"})}
+                style={{
+                    ...GS.inputText, 
+                    backgroundColor: FetchColor({theme, variable: "DARKER"}), 
+                    color: FetchColor({theme, variable: "TEXTCOLOR"})
+                }}
+                placeholder = {text.who}
+                placeholderTextColor={
+                    FetchColor({theme, variable: "TITLETEXTCOLOR"})
+                }
                 textAlign="center"
                 onChangeText={(val) => inputContact(val)}
                 selectionColor={FetchColor({theme, variable: "ORANGE"})}
@@ -172,7 +185,7 @@ const inputContent = (val: string) => {
                     <TextInput
                     multiline={true}
                     style={{...GS.reportInputContentText, color: FetchColor({theme, variable: "TEXTCOLOR"})}}
-                    placeholder = {lang ? "Hva vil du rapportere?" : "What would you like to report?"}
+                    placeholder = {text.what}
                     placeholderTextColor={FetchColor({theme, variable: "TITLETEXTCOLOR"})}
                         textAlign="center"
                         onChangeText={(val) => inputContent(val)}
@@ -196,11 +209,17 @@ const inputContent = (val: string) => {
           <View>
           {Space(40)}
             <TouchableOpacity
-            disabled ={!data.check_contentInputChange}
-            onPress={() => sendForm()}>
-              <Button>
-                <Text style={{...T.centered20, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>SEND</Text>
-              </Button>
+                disabled ={!data.check_contentInputChange}
+                onPress={() => sendForm()}
+            >
+                <Button>
+                    <Text style={{
+                        ...T.centered20, 
+                        color: FetchColor({theme, variable: "TEXTCOLOR"})
+                    }}>
+                        {text.send}
+                    </Text>
+                </Button>
             </TouchableOpacity>
             {Space(20)}
           </View>
@@ -210,9 +229,9 @@ const inputContent = (val: string) => {
 
         <TopMenu 
             navigation={navigation} 
-            screen="report" 
-            title={lang ? "Varsle" : "Report"} 
-            back={"MenuScreen"}
+            screen={text.alert} 
+            title={text.alert} 
+            back={text.back}
         />
         </View>
     </TouchableWithoutFeedback>

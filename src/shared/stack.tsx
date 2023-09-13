@@ -64,7 +64,7 @@ export default function Navigator(): JSX.Element {
         { name: "LoginScreen",          component: LoginScreen},
         { name: "ProfileScreen",        component: ProfileScreen},
         { name: "SpecificAdScreen",     component: SpecificAdScreen},
-        // { name: "ReportScreen", component: ReportScreen},
+        { name: "ReportScreen",         component: ReportScreen},
     ]
 
     return (
