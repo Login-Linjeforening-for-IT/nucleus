@@ -306,21 +306,12 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
                 />
                 </TouchableOpacity>
                 {
-                lang ?
                     <Text style={{
                         ...MS.smallTitle, 
                         left: "-5%", 
                         color: FetchColor({theme, variable: "TITLETEXTCOLOR"})
                     }}>
-                        Arrangementer
-                    </Text>
-                :
-                    <Text style={{
-                        ...MS.filterScreenTitle, 
-                        left: "-5%", 
-                        color: FetchColor({theme, variable: "TITLETEXTCOLOR"})
-                    }}>
-                        Events
+                        {lang ? "Events" : "Arrangementer"}
                     </Text>
                 }
                 <HeaderComponents 

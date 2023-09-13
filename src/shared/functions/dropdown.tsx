@@ -17,10 +17,30 @@ export default function Dropdown() {
     const { lang  } = useSelector( (state: ReduxState) => state.lang  )
     const { theme } = useSelector( (state: ReduxState) => state.theme )
 
+    const titleNO = {
+        data: "Dataingeniør",
+        digsec: "Digital infrastruktur og cybersikkerhet",
+        prog: "Programmering",
+        infosec: "Informasjonsikkerhet og kommunikasjonsteknologi",
+        cs: "Datateknologi og informatikk",
+        phet: "Elektronikk og telekommunikasjon"
+    }
+
+    const titleEN = {
+        data: "Computer Science",
+        digsec: "Digital Infrastructure and Cyber Security",
+        prog: "Programming",
+        infosec: "Information Security and Communication Technology",
+        cs: "Computer Science",
+        phet: "Electronics and Telecommunication" 
+    }
+
+    const title = lang ? titleNO : titleEN
+
     const [bcourses] = useState([
-        {id: 0, titleNO: "Dataingeniør", titleEN: "Computer Science", link: "https://www.ntnu.no/studier/bidata"},
-        {id: 1, titleNO: "Digital infrastruktur og cybersikkerhet", titleEN: "Digital Infrastructure and Cyber Security", link: "https://www.ntnu.no/studier/bdigsec"},
-        {id: 2, titleNO: "Programmering", titleEN: "Programming", link: "https://www.ntnu.no/studier/bprog"}
+        {id: 0, title: title.data, link: "https://www.ntnu.no/studier/bidata"},
+        {id: 1, title: title.digsec, link: "https://www.ntnu.no/studier/bdigsec"},
+        {id: 2, title: title.prog, link: "https://www.ntnu.no/studier/bprog"}
     ])
     const [mcourses] = useState([
         {id: 0, title: "Information Security", link: "https://www.ntnu.no/studier/mis"},
@@ -29,9 +49,9 @@ export default function Dropdown() {
     ])
 
     const [pcourses] = useState([
-        {id: 0, titleNO: "Informasjonsikkerhet og kommunikasjonsteknologi", titleEN: "Information Security and Communication Technology", link: "https://www.ntnu.no/studier/phisct"},
-        {id: 1, titleNO: "Datateknologi og informatikk", titleEN: "Computer Science", link: "https://www.ntnu.no/studier/phcos"},
-        {id: 2, titleNO: "Elektronikk og telekommunikasjon", titleEN: "Electronics and Telecommunication", link: "https://www.ntnu.no/studier/phet"}
+        {id: 0, title: title.infosec, link: "https://www.ntnu.no/studier/phisct"},
+        {id: 1, title: title.cs, link: "https://www.ntnu.no/studier/phcos"},
+        {id: 2, title: title.phet, link: "https://www.ntnu.no/studier/phet"}
     ])
 
     const [course, selectCourse] = useState({
@@ -71,7 +91,7 @@ export default function Dropdown() {
                         return (
                             <TouchableOpacity key={index} onPress={() => Linking.openURL(selectedCourse.link)}>
                                 <View style={{...GS.dropdownContent, backgroundColor: FetchColor({theme, variable: "CONTRAST"})}}>
-                                    <Text style={{...T.text15, maxWidth: "91%", color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{lang ? selectedCourse.titleNO : selectedCourse.titleEN}</Text>
+                                    <Text style={{...T.text15, maxWidth: "91%", color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{selectedCourse.title}</Text>
                                     <Image style={GS.smallDropImage} source={require("@assets/icons/linkicon-white.png")} />
                                 </View>
                             </TouchableOpacity>
@@ -125,7 +145,7 @@ export default function Dropdown() {
                         return (
                             <TouchableOpacity key={index} onPress={() => Linking.openURL(selectedCourse.link)}>
                                 <View style={{...GS.dropdownContent, backgroundColor: FetchColor({theme, variable: "CONTRAST"})}}>
-                                    <Text style={{...T.text15, maxWidth: "91%",  color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{lang ? selectedCourse.titleNO : selectedCourse.titleEN}</Text>
+                                    <Text style={{...T.text15, maxWidth: "91%",  color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{selectedCourse.title}</Text>
                                     <Image style={GS.smallDropImage} source={require("@assets/icons/linkicon-white.png")} />
                                 </View>
                             </TouchableOpacity>
@@ -147,10 +167,24 @@ export function DropdownBachelor() {
     const { lang  } = useSelector( (state: ReduxState) => state.lang  )
     const { theme } = useSelector( (state: ReduxState) => state.theme )
 
+    const titleNO = {
+        data: "Dataingeniør",
+        digsec: "Digital infrastruktur og cybersikkerhet",
+        prog: "Programmering"
+    }
+
+    const titleEN = {
+        data: "Computer Science",
+        digsec: "Digital Infrastructure and Cyber Security",
+        prog: "Programming"
+    }
+
+    const title = lang ? titleNO : titleEN
+
     const [courses] = useState([
-        {id: 0, titleNO: "Dataingeniør", titleEN: "Computer Science", link: "https://www.ntnu.no/studier/bidata"},
-        {id: 1, titleNO: "Digital infrastruktur og cybersikkerhet", titleEN: "Digital Infrastructure and Cyber Security", link: "https://www.ntnu.no/studier/bdigsec"},
-        {id: 2, titleNO: "Programmering", titleEN: "Programming", link: "https://www.ntnu.no/studier/bprog"}
+        {id: 0, title: title.data, link: "https://www.ntnu.no/studier/bidata"},
+        {id: 1, title: title.digsec, link: "https://www.ntnu.no/studier/bdigsec"},
+        {id: 2, title: title.prog, link: "https://www.ntnu.no/studier/bprog"}
     ])
 
     const [course, selectCourse] = useState({
@@ -159,10 +193,10 @@ export function DropdownBachelor() {
 
     const selectedDegree = () => {
         selectCourse({
-          ...course,
-          selected: !course.selected,
+            ...course,
+            selected: !course.selected,
         })
-      }
+    }
 
     return (
         <View>
@@ -183,7 +217,7 @@ export function DropdownBachelor() {
                         return (
                             <TouchableOpacity key={index} onPress={() => Linking.openURL(selectedCourse.link)}>
                                 <View style={{...GS.dropdownContent, backgroundColor: FetchColor({theme, variable: "CONTRAST"})}}>
-                                    <Text style={{...T.text15, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{lang ? selectedCourse.titleNO : selectedCourse.titleEN}</Text>
+                                    <Text style={{...T.text15, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{selectedCourse.title}</Text>
                                 </View>
                             </TouchableOpacity>
                         )
@@ -260,10 +294,24 @@ export function DropdownPHD() {
     const { lang  } = useSelector( (state: ReduxState) => state.lang  )
     const { theme } = useSelector( (state: ReduxState) => state.theme )
 
+    const titleNO = {
+        infosec: "Informasjonsikkerhet og kommunikasjonsteknologi",
+        cs: "Datateknologi og informatikk",
+        phet: "Elektronikk og telekommunikasjon"
+    }
+
+    const titleEN = {
+        infosec: "Information Security and Communication Technology",
+        cs: "Computer Science",
+        phet: "Electronics and Telecommunication" 
+    }
+
+    const title = lang ? titleNO : titleEN
+
     const [courses] = useState([
-        {id: 0, titleNO: "Informasjonsikkerhet og kommunikasjonsteknologi", titleEN: "Information Security and Communication Technology", link: "https://www.ntnu.no/studier/phisct"},
-        {id: 1, titleNO: "Datateknologi og informatikk", titleEN: "Computer Science", link: "https://www.ntnu.no/studier/phcos"},
-        {id: 2, titleNO: "Elektronikk og telekommunikasjon", titleEN: "Electronics and Telecommunication", link: "https://www.ntnu.no/studier/phet"}
+        {id: 0, title: title.infosec, link: "https://www.ntnu.no/studier/phisct"},
+        {id: 1, title: title.cs, link: "https://www.ntnu.no/studier/phcos"},
+        {id: 2, title: title.phet, link: "https://www.ntnu.no/studier/phet"}
     ])
 
     const [course, selectCourse] = useState({
@@ -296,7 +344,7 @@ export function DropdownPHD() {
                         return (
                             <TouchableOpacity key={index} onPress={() => Linking.openURL(selectedCourse.link)}>
                                 <View style={{...GS.dropdownContent, backgroundColor: FetchColor({theme, variable: "CONTRAST"})}}>
-                                    <Text style={{...T.text15, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{lang ? selectedCourse.titleNO : selectedCourse.titleEN}</Text>
+                                    <Text style={{...T.text15, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{selectedCourse.title}</Text>
                                 </View>
                             </TouchableOpacity>
                         )

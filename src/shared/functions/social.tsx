@@ -292,8 +292,34 @@ function personInfo({person, lang}: personInfoProps) {
 
     let p = person.toLowerCase()
 
+    const titleNO = {
+        leader: "Leader",
+        coleader: "Deputy chairwoman",
+        secretary: "Secretary",
+        evntkom: "EvntKom leader",
+        bedkom: "BedKom leder",
+        tekkom: "TekKom leder",
+        ctf: "CTFkom leader",
+        satkom: "SatKom leader",
+        pr: "PR leader"
+    }
+
+    const titleEN = {
+        leader: "Leder",
+        coleader: "Nestleder",
+        secretary: "Sekretær",
+        evntkom: "EvntKom leder",
+        bedkom: "BedKom leader",
+        tekkom: "TekKom leader",
+        ctf: "CTFkom leder",
+        satkom: "SatKom leder",
+        pr: "PR leader"
+    }
+
+    const title = lang ? titleNO : titleEN
+
     let leader = {
-        title: lang ? "Leder":"Leader",
+        title: title.leader,
         name: "Tormod Mork Müller",
         tag: "backsiide",
         dclink: "https://discordapp.com/users/210124409816612876",
@@ -301,7 +327,7 @@ function personInfo({person, lang}: personInfoProps) {
     }
 
     let coleader = {
-        title: lang ? "Nestleder":"Deputy chairwoman",
+        title: title.coleader,
         name: "Kristina Kataki",
         tag: "Kataki#7254",
         dclink: "https://discordapp.com/users/877108421772582962",
@@ -309,7 +335,7 @@ function personInfo({person, lang}: personInfoProps) {
     }
 
     let secretary = {
-        title: lang ? "Sekretær":"Secretary",
+        title: title.secretary,
         name: "Aleksander Aaboen",
         tag: "aleksanderaa#2130",
         dclink: "https://discordapp.com/users/610784035777544202",
@@ -317,7 +343,7 @@ function personInfo({person, lang}: personInfoProps) {
     }
 
     let eventkom_leader = {
-        title: lang ? "EventKom leder":"EventKom leader",
+        title: title.evntkom,
         name: "Sander Hauge",
         tag: "sandiss",
         dclink: "https://discordapp.com/users/171972901501796352",
@@ -325,7 +351,7 @@ function personInfo({person, lang}: personInfoProps) {
     }
 
     let bedkom_leader = {
-        title: lang ? "BedKom leder":"BedKom leader",
+        title: title.bedkom,
         name: "Ida Førland",
         tag: "idaforland",
         dclink: "https://discordapp.com/users/470279697465606159",
@@ -333,7 +359,7 @@ function personInfo({person, lang}: personInfoProps) {
     }
 
     let tekkom_leader = {
-        title: lang ? "TekKom leder":"TekKom leader",
+        title: title.tekkom,
         name: "Eirik Hanasand",
         tag: "eirikhanasand",
         dclink: "https://discordapp.com/users/376827396764073997",
@@ -341,7 +367,7 @@ function personInfo({person, lang}: personInfoProps) {
     }
 
     let ctfkom_leader = {
-        title: lang ? "CTFkom leder":"CTFkom leader",
+        title: title.ctf,
         name: "Eskil Refsgaard",
         tag: "rrefsgaard",
         dclink: "https://discordapp.com/users/522483274933731331",
@@ -349,7 +375,7 @@ function personInfo({person, lang}: personInfoProps) {
     }
 
     let satkom_leader = {
-        title: lang ? "SatKom leder":"SatKom leader",
+        title: title.satkom,
         name: "Trygve Sollund",
         tag: "spikeupine",
         dclink: "https://discordapp.com/users/209395476288634881",
@@ -357,7 +383,7 @@ function personInfo({person, lang}: personInfoProps) {
     }
 
     let pr_leader = {
-        title: lang ? "PR leder":"PR leader",
+        title: title.pr,
         name: "Bjørn Kristian Strand",
         tag: "bk_suup",
         dclink: "https://discordapp.com/users/353992260507140097",

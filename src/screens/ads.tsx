@@ -173,25 +173,13 @@ export default function AdScreen({ navigation }: ScreenProps): JSX.Element {
                 : require("@assets/logo/loginText-black.png")}
             />
         </TouchableOpacity>
-        {
-            lang ?
-            <Text style={{
-                ...MS.smallTitle,
-                left: "-5%", 
-                color: FetchColor({theme, variable: "TITLETEXTCOLOR"})
-            }}>
-                Jobbannonser
-            </Text>
-            :
-            <Text style={{
-                ...MS.filterScreenTitle, 
-                left: "-5%", 
-                color: FetchColor({theme, variable: "TITLETEXTCOLOR"})
-            }}>
-                Job listings
-            </Text>
-        }
-
+        <Text style={{
+            ...MS.smallTitle,
+            left: "-5%", 
+            color: FetchColor({theme, variable: "TITLETEXTCOLOR"})
+        }}>
+            {lang ? "Jobbannonser" : "Job listings"}
+        </Text>
         {renderedArray != null ?
             <View style={MS.multiTop}>
             {clickedAds.length > 0 ?

@@ -366,20 +366,24 @@ export function AdUpdateInfo({ad}: {ad: AdProps}) {
     const updated = LastFetch(ad.updated_at)
     const created = LastFetch(ad.created_at)
 
+    const textNO = ["Oppdatert kl:", "Opprettet kl:"]
+    const textEN = ["Updated:", "Created:"]
+    const text = lang ? textNO : textEN
+
     return (
         <View>
             <Text style={{
                 ...T.contact, 
                 color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})
             }}>
-                {lang ? "Oppdatert kl:":"Updated:"} {!updated}.
+                {text[0]} {!updated}.
             </Text>
             {Space(5)}
             <Text style={{
                 ...T.contact,
                 color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})
             }}>
-                {lang ? "Opprettet kl:":"Created:"} {!created}.
+                {text[1]} {!created}.
             </Text>
         </View>
     )

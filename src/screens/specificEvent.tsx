@@ -117,6 +117,22 @@ SpecificEventScreenProps): JSX.Element {
         }
     }
 
+    const textNO = {
+        start: "Starter:      ",
+        end: "Slutter:       ",
+        host: "Arrangør:   ",
+        more: "Mer info"
+    }
+
+    const textEN = {
+        start: "Starts:         ",
+        end: "Ends:           ",
+        host: "Organizer:   ",
+        more: "More info"
+    }
+
+    const text = lang ? textNO : textEN
+
   return (
     <View>
         <View style={{...GS.content, backgroundColor: FetchColor({theme, variable: "BACKGROUND"})}}>
@@ -178,7 +194,7 @@ SpecificEventScreenProps): JSX.Element {
                         ...T.specificEventInfo, 
                         color: FetchColor({theme, variable: "TEXTCOLOR"})
                     }}>
-                        {lang ? "Starter:      " : "Starts:         "}
+                        {text.start}
                     </Text>
                     <Text style={{
                         ...T.specificEventInfo, 
@@ -196,7 +212,7 @@ SpecificEventScreenProps): JSX.Element {
                         ...T.specificEventInfo, 
                         color: FetchColor({theme, variable: "TEXTCOLOR"})
                     }}>
-                        {lang ? "Slutter:       " : "Ends:           "}
+                        {text.end}
                     </Text>
                     {"endt" in event && GetEndTime({input: event.endt, lang, 
                     theme})}
@@ -228,7 +244,7 @@ SpecificEventScreenProps): JSX.Element {
                         ...T.specificEventInfo, 
                         color: FetchColor({theme, variable: "TEXTCOLOR"})
                     }}>
-                        {lang ? "Arrangør:   " : "Organizer:   "}
+                        {text.host}
                     </Text>
                     <Text style={{
                         ...T.specificEventInfo, 
@@ -276,7 +292,7 @@ SpecificEventScreenProps): JSX.Element {
                                     ...T.mazemap, 
                                     color: FetchColor({theme, variable: "ORANGE"})
                                 }}>
-                                    {lang ? "Mer info":"More info"}
+                                    {text.more}
                                 </Text>
                             </View>
                         </TouchableOpacity>
