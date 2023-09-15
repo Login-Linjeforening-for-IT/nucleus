@@ -1,17 +1,17 @@
-Features currently being worked on: 
+Features currently being worked on:
 none
 
 Features planned:
 
-    3. Implement mail sending service 
+    3. Implement mail sending service
         - issue: needs backend
         - vent at tekkom meeting
-        - provides: 
+        - provides:
             - report scheme
             - method to enroll for events through the app
 
-    4. Swipable navigation 
-        - idea: Needs to be gesture and listener based, 
+    4. Swipable navigation
+        - idea: Needs to be gesture and listener based,
         - not sure how to do swipe logic
         - idea: could render with negative and positive values to create a illusion that a swipe is in progress, and update the swiping as the user goes?
 
@@ -21,7 +21,7 @@ Features planned:
     6. Report feature
         - Ready in app, missing backend
 
-Future features: 
+Future features:
     8. Admin tool
         - Provides way to manage things in the app
         - Add job ads through the app

@@ -1,0 +1,57 @@
+{
+    "info": [
+        {
+            "title": "Theme",
+            "description": "Changes the color theme of the app."
+        },
+        {
+            "id": 1,
+            "title": "Language",
+            "description": "Changes language."
+        },
+        {
+            "title": "Notifications"
+        },
+        {
+            "title": "Important info",
+            "description": "Recieve notifications about important information, such as annual meetings."
+        },
+        {
+            "title": "New events"
+        },
+        {
+            "title": "Company Presentations",
+            "description": "Notification every time a company presentation is posted."
+        },
+        {
+            "title": "TekKom",
+            "description": "Notification every time a TekKom gathering is posted."},
+        {
+            "title": "CTF",
+            "description": "Notification every time a CTF is posted."
+        },
+        {
+            "title": "Social",
+            "description": "Notification every time a EvntKom event is posted."
+        },
+        {
+            "title": "Career day",
+            "description": "Notification every time a career day is posted."
+        },
+        {
+            "title": "Fadderuka",
+            "description": "Notification every time a fadderuka event is posted."
+        },
+        {
+            "title": "Login",
+            "description": "Notification every time a event is posted regarding the operation of Login."
+        },
+        {
+            "title": "Other",
+            "description": "Notification every time an uncategorized event is posted."
+        },
+        {
+            "title": "Reminders"
+        }
+    ]
+}

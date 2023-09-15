@@ -1,0 +1,105 @@
+{
+    "DARK": {
+        "OLDBACKGROUND":          "#101010",
+        "OLDDARKER":              "#131313",
+        "BACKGROUND":             "#181818",
+        "DARKER":                    "#111", 
+        "TRANSPARENT":          "#000000B3", 
+        "TRANSPARENTANDROID":   "#000000B3",
+        "CONTRAST":                  "#222",
+        "ORANGE":                 "#fd8738",
+        "DISCORD":                "#6471fa",
+        "TEXTCOLOR":                "white",
+        "OPPOSITETEXTCOLOR":         "#999",
+        "TITLETEXTCOLOR":            "#777",
+        "SWITCHONSTATE":          "#f1f1f1", 
+        "SWITCHOFFSTATE":         "#fd8738", 
+        "TRACKCOLOR":             "#181818",
+        "TRACKBACKGROUNDCOLOR":   "#080808"
+    },
+
+    "LIGHT": {
+        "BACKGROUND":               "white",
+        "DARKER":                 "#F0F0F0",
+        "TRANSPARENT":          "#77777733",
+        "TRANSPARENTANDROID":   "#999999F1",
+        "CONTRAST":               "#B8B8B8",
+        "ORANGE":                 "#fd8738",
+        "DISCORD":                "#6471fa",
+        "TEXTCOLOR":                "black",
+        "OPPOSITETEXTCOLOR":        "black",
+        "TITLETEXTCOLOR":           "black",
+        "SWITCHONSTATE":             "#fff",
+        "SWITCHOFFSTATE":         "#fd8738",
+        "TRACKCOLOR":             "#909090",
+        "TRACKBACKGROUNDCOLOR":   "#909090"
+    },
+
+    "ABYSS": {
+        "BACKGROUND":             "#081334",
+        "DARKER":                 "#020c17",
+        "TRANSPARENT":          "#020c17B3",
+        "TRANSPARENTANDROID":   "#020c17E6",
+        "CONTRAST":               "#090940",
+        "ORANGE":                 "#fd8738",
+        "DISCORD":                "#6471fa",
+        "TEXTCOLOR":                "white",
+        "OPPOSITETEXTCOLOR":        "white",
+        "TITLETEXTCOLOR":           "white",
+        "SWITCHONSTATE":          "#06061F",
+        "SWITCHOFFSTATE":         "#fd8738",
+        "TRACKCOLOR":                "#111",
+        "TRACKBACKGROUNDCOLOR":      "#000"
+    },
+
+    "SUNSET": {
+        "BACKGROUND":             "#4e0107",
+        "DARKER":                 "#0f0000",
+        "TRANSPARENT":          "#0f0000B3",
+        "TRANSPARENTANDROID":   "#0f0000B5",
+        "CONTRAST":               "#520404",
+        "ORANGE":                 "#fd8738",
+        "DISCORD":                "#6471fa",
+        "TEXTCOLOR":                "white",
+        "OPPOSITETEXTCOLOR":        "white",
+        "TITLETEXTCOLOR":           "white",
+        "SWITCHONSTATE":          "#800000",
+        "SWITCHOFFSTATE":             "red",
+        "TRACKCOLOR":             "#4e0107",
+        "TRACKBACKGROUNDCOLOR": "#4e0107EE"
+    },
+
+    "CHRISTMAS": {
+        "BACKGROUND":               "white",
+        "DARKER":                 "#800000",
+        "TRANSPARENT":          "#800000E6",
+        "TRANSPARENTANDROID":   "#800000B3",
+        "CONTRAST":               "#820000",
+        "ORANGE":                 "#fd8738",
+        "DISCORD":                "#6471fa",
+        "TEXTCOLOR":                "white",
+        "OPPOSITETEXTCOLOR":        "black",
+        "TITLETEXTCOLOR":           "white",
+        "SWITCHONSTATE":             "#fff",
+        "SWITCHOFFSTATE":         "#013220",
+        "TRACKCOLOR":             "#E8E8E8",
+        "TRACKBACKGROUNDCOLOR":   "#f0f0f0"
+    },
+
+    "EASTER": {
+        "BACKGROUND":             "#FFFFE0",
+        "DARKER":                 "#ffe66b",
+        "CONTRAST":               "#FFE200",
+        "TRANSPARENTANDROID":   "#FFE200B3",
+        "ORANGE":                 "#fd8738",
+        "DISCORD":                "#6471fa",
+        "TEXTCOLOR":                "black",
+        "TITLETEXTCOLOR":           "black",
+        "OPPOSITETEXTCOLOR":        "black",
+        "TRANSPARENT":              "white",
+        "SWITCHONSTATE":            "white",
+        "SWITCHOFFSTATE":         "#ffe66b",
+        "TRACKCOLOR":           "#FFFFE020",
+        "TRACKBACKGROUNDCOLOR": "#FFFFE010"
+    }
+}
