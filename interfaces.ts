@@ -13,7 +13,7 @@ export interface ExtendedDescriptor {
 
 export interface ExtendedBottomTabBarProps 
 extends Omit<BottomTabBarProps, 'descriptors'> {
-    descriptors: Record<string, ExtendedDescriptor>;
+    descriptors: Record<string, ExtendedDescriptor>
 }
 
 export interface ExtendedRouteOptions extends BottomTabNavigationOptions {
@@ -26,8 +26,7 @@ export interface ScreenProps {
     navigation: Navigation
 }
 
-export interface SpecificEventScreenProps {
-    navigation: Navigation
+export interface SpecificEventScreenProps extends ScreenProps {
     item: EventProps
 }
 
