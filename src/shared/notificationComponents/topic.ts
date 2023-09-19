@@ -28,9 +28,9 @@ topicParams) {
     const granted = await messaging().requestPermission()
     var topic = lang ? "norwegian"+topicID:"english"+topicID
 
-    if(granted) {
-        if(topicID === "langChange") {
-            if(lang) {
+    if (granted) {
+        if (topicID === "langChange") {
+            if (lang) {
                 // Unsubscribe from old language
                 await messaging().unsubscribeFromTopic("englishIMPORTANT")
                 await messaging().unsubscribeFromTopic("englishBEDPRES")
@@ -78,23 +78,23 @@ topicParams) {
                 return null
             }
         } else if (topicID === "maintenance") {
-            if(!lang) await messaging().subscribeToTopic("maintenance")       // For maintainers of this project
+            if (!lang) await messaging().subscribeToTopic("maintenance")       // For maintainers of this project
             else      await messaging().unsubscribeFromTopic("maintenance")   // When you no longer desire to be notified
         } else {
             let cat = category ? category.toLowerCase() : null
 
-            if(status && catArray) {
+            if (status && catArray) {
                 // Subscribe to given topic for desired time intervals
                 await messaging().subscribeToTopic(`${topic}`)
-                if(catArray[0]) await messaging().subscribeToTopic(topic + cat + "10m")
-                if(catArray[1]) await messaging().subscribeToTopic(topic + cat + "30m")
-                if(catArray[2]) await messaging().subscribeToTopic(topic + cat + "1h")
-                if(catArray[3]) await messaging().subscribeToTopic(topic + cat + "2h")
-                if(catArray[4]) await messaging().subscribeToTopic(topic + cat + "3h")
-                if(catArray[5]) await messaging().subscribeToTopic(topic + cat + "6h")
-                if(catArray[6]) await messaging().subscribeToTopic(topic + cat + "1d")
-                if(catArray[7]) await messaging().subscribeToTopic(topic + cat + "2d")
-                if(catArray[8]) await messaging().subscribeToTopic(topic + cat + "1w")
+                if (catArray[0]) await messaging().subscribeToTopic(topic + cat + "10m")
+                if (catArray[1]) await messaging().subscribeToTopic(topic + cat + "30m")
+                if (catArray[2]) await messaging().subscribeToTopic(topic + cat + "1h")
+                if (catArray[3]) await messaging().subscribeToTopic(topic + cat + "2h")
+                if (catArray[4]) await messaging().subscribeToTopic(topic + cat + "3h")
+                if (catArray[5]) await messaging().subscribeToTopic(topic + cat + "6h")
+                if (catArray[6]) await messaging().subscribeToTopic(topic + cat + "1d")
+                if (catArray[7]) await messaging().subscribeToTopic(topic + cat + "2d")
+                if (catArray[8]) await messaging().subscribeToTopic(topic + cat + "1w")
             } else {
                 // Unsubscribe from given topic for all time intervals
                 await messaging().unsubscribeFromTopic(`${topic}`)

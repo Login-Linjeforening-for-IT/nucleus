@@ -86,7 +86,7 @@ SpecificEventScreenProps): JSX.Element {
     async function updateStorage() {
         let stored = await AsyncStorage.getItem("clickedEvents")
         let storedClickedEvents = stored ? JSON.parse(stored) : []
-        if (storedClickedEvents){
+        if (storedClickedEvents) {
             storedClickedEvents.push(item)
             await AsyncStorage.setItem("clickedEvents", 
             JSON.stringify(storedClickedEvents))
@@ -104,13 +104,13 @@ SpecificEventScreenProps): JSX.Element {
             return
         }
 
-        if(street === "Orgkollektivet") {
+        if (street === "Orgkollektivet") {
             Linking.openURL("https://link.mazemap.com/tBlfH1oY").catch(() =>{
                 Alert.alert("Mazemap kunne ikke åpnes", "Send en mail til tekkom@login.no dersom problemet vedvarer. Feilkode: wZDe8byp")
             })
         }
 
-        if(organizer === "HUSET") {
+        if (organizer === "HUSET") {
             Linking.openURL("https://link.mazemap.com/O1OdhRU4").catch(() => {
                 Alert.alert("Mazemap kunne ikke åpnes.", "Send en mail til tekkom@login.no dersom problemet vedvarer. Feilkode: MGfrIBrd")
             })

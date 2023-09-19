@@ -82,7 +82,7 @@ export default function AdScreen({ navigation }: ScreenProps): JSX.Element {
         //  Fetches API
         // getData(setAds, setRenderedArray, setLastSave, ads)
         setRenderedArray([...addata])
-        if(addata.length > 0) (async() => {
+        if (addata.length > 0) (async() => {
             await AsyncStorage.setItem("cachedAds", JSON.stringify(addata))
         })
         // Fetches clickedAds
@@ -105,10 +105,10 @@ export default function AdScreen({ navigation }: ScreenProps): JSX.Element {
 
     // --- SETUP CODE ONCE APP IS DOWNLOADED---
     // Displays when the API was last fetched successfully
-    if(lastSave === "") (async() => {setLastSave(await LastFetch())})()
+    if (lastSave === "") (async() => {setLastSave(await LastFetch())})()
 
     // Sets up initial notifications
-    if(!notification["SETUP"]) notificationSetup()
+    if (!notification["SETUP"]) notificationSetup()
 
     //  --- DISPLAYS THE EVENTSCREEN ---
     return (

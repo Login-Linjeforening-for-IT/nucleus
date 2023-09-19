@@ -83,7 +83,7 @@ export default function LoginScreen( { navigation }: ScreenProps): JSX.Element {
     })
 
     const inputName = (val: string) => {
-        if(val.length > 0) {
+        if (val.length > 0) {
             setData({
             ...data,
             name: val,
@@ -207,7 +207,7 @@ JSX.Element {
 
 function UsernameInput({theme, lang, inputName, data}: InputProps): 
 JSX.Element {
-    return(
+    return (
         <View style={SS.loginView}>
             <TextInput
                 style={{
@@ -241,7 +241,7 @@ JSX.Element {
 
 function PasswordUI({theme, lang, data, inputPass, showPass}: PasswordUIProps): 
 JSX.Element {
-    return(
+    return (
         <View style={SS.loginView}>
             <Cluster>
                 <View style={SS.loginView}>

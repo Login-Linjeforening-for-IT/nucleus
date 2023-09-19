@@ -54,7 +54,7 @@ const [database] = useState({
 })
 
 const inputName = (val: string) => {
-  if(val.length > 1) {
+  if (val.length > 1) {
     setData({
       ...data,
       name: val,
@@ -70,7 +70,7 @@ const inputName = (val: string) => {
 }
 
 const inputContact = (val: string) => {
-  if(val.length > 1) {
+  if (val.length > 1) {
     setData({
       ...data,
       contact: val,
@@ -86,7 +86,7 @@ const inputContact = (val: string) => {
 }
 
 const inputContent = (val: string) => {
-  if(val.length > 20) {
+  if (val.length > 20) {
     setData({
       ...data,
       content: val,

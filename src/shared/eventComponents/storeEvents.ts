@@ -22,7 +22,7 @@ export default function storeEvents({events, clickedEvents}: StoreEventsProps) {
 
             let unique = removeDuplicatesAndOld(events, clickedEvents)
 
-            if(unique) {
+            if (unique) {
                 // Finds the firstcoming event
                 for (let i = 0; i < unique.length; i++) {
                     if (CompareDates({firstDate: (unique[i]).startt, secondDate: (unique[storedID]).startt}) === true) storedID = i

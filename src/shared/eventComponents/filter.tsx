@@ -66,9 +66,9 @@ export default function Filter ({input, setRenderedArray, events, clickedEvents,
     // If the input is not empty
     if (input.length) {
         // If the user has clicked something
-        if (clickedCategory.length > 0){
+        if (clickedCategory.length > 0) {
             // Filter both text and categories if the text is longer than 0
-            if (input.length > 0){  filterBoth({clickedCategory, clickedEvents, events, setRenderedArray, input})}
+            if (input.length > 0) {  filterBoth({clickedCategory, clickedEvents, events, setRenderedArray, input})}
             else {setRenderedArray([...events])}
             // Update the displayed events if the text is not longer than 0
         } else filterText({events, setRenderedArray, input})
@@ -94,7 +94,7 @@ export function filterCategories ({events, clickedEvents, clickedCategory, setRe
     // If the user is enrolled to events
     if (clickedFound) {
         // If the user has clicked at least 1 category
-        if (clickedCategory.length > 1){
+        if (clickedCategory.length > 1) {
             let categoryFiltered = events.filter(event => clickedCategory.some((category: CategoryWithID) => category.category === event.category))
             // Declares temporary array
             let concatenatedArray: EventProps[] = []
@@ -137,7 +137,7 @@ export function filterBoth ({clickedCategory, clickedEvents, events, setRendered
     const clickedFound = clickedCategory.find((item: CategoryWithID) => item.category === "PÅMELDT")
     if (clickedFound) {
         // If at least one category is clicked filters based on category
-        if (clickedCategory.length > 1){
+        if (clickedCategory.length > 1) {
             let categoryFiltered = events.filter(event => clickedCategory.some((category: CategoryWithID) => category.category === event.category))
             // Temporary array
             let concatenatedArray: EventProps[] = []

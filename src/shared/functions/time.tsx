@@ -49,7 +49,7 @@ export function stringEvent({startTime, endTime}: EventTimeProps): string { // s
     const hour     = new Date().getHours()
     const minute   = new Date().getMinutes()
 
-    if(startTime.length && endTime.length){
+    if (startTime.length && endTime.length) {
         //Concatenating start
         const startYear   = parseInt((startTime)[0] + (startTime)[1] + (startTime)[2] + (startTime)[3])
         const startMonth  = parseInt((startTime)[5] + (startTime)[6])-1
@@ -189,7 +189,7 @@ export function stringEvent({startTime, endTime}: EventTimeProps): string { // s
 
         const text = lang ? textNO : textEN
 
-        if(beyondTime(startTime) && !beyondTime(endTime)){
+        if (beyondTime(startTime) && !beyondTime(endTime)) {
             if (endYear === year) {
                 if (endMonth === month) {
                     if (endDay === day) {
@@ -226,7 +226,7 @@ export function stringEvent({startTime, endTime}: EventTimeProps): string { // s
         }
 
         // Event is this year
-        if(startYear === year) {
+        if (startYear === year) {
             // Event is this month
             if (startMonth === month) {
                 // Event is today
@@ -250,10 +250,10 @@ export function stringEvent({startTime, endTime}: EventTimeProps): string { // s
                     } else if (startHour === hour-2) {
                         return text[13]
                     // Event was x hours ago
-                    } else if (startHour < hour){
+                    } else if (startHour < hour) {
                         return text[14]
                     // Event is the next hour
-                    } else if (startHour === hour+1){
+                    } else if (startHour === hour+1) {
                         return text[15]
                     // Event starts in x hours
                     } else {
@@ -266,7 +266,7 @@ export function stringEvent({startTime, endTime}: EventTimeProps): string { // s
                 } else if (startDay < day) {
                     return text[18]
                 // Event is tomorrow
-                } else if (startDay === day+1){
+                } else if (startDay === day+1) {
                     // Event is in less than 24 hours
                     if (startHour <= hour) {
                         return text[19]
@@ -290,30 +290,30 @@ export function stringEvent({startTime, endTime}: EventTimeProps): string { // s
                 // If the event was last month, but youre not on the first day of the month
                 } else {return text[26]}
             // Event was 1 month ago
-            } else if (startMonth < month && month-startMonth === 1){
+            } else if (startMonth < month && month-startMonth === 1) {
                 return text[27]
             // Event was x months ago
-            } else if (startMonth < month){
+            } else if (startMonth < month) {
                 return text[28]
             // Event is next month
-            } else if (startMonth === month+1){
+            } else if (startMonth === month+1) {
                 return text[29]
             // Event is in x months
             } else {
                 return text[30]
             }
         // Event was last year
-        } else if (startYear === year-1){
+        } else if (startYear === year-1) {
             return text[31]
         // Event was x years ago
-        } else if (startYear < year){
+        } else if (startYear < year) {
             return text[32]
         //Event is next year
-        } else if (startYear === year+1){
+        } else if (startYear === year+1) {
             // Event is in less than 12 months
-            if(monthNextYear <= 12){
+            if (monthNextYear <= 12) {
                 // Event is in January
-                if(monthNextYear === 1){
+                if (monthNextYear === 1) {
                     // Less than one month till event
                     if (lessThanOneMonth <= 31) {
                         return text[33]
@@ -358,7 +358,7 @@ function lastDayOfMonth(month: number): number {
     switch (month) {
         case 2: {
             // 29 days in february if leapyear
-            if(leapYear(year)) return 29
+            if (leapYear(year)) return 29
             else return 28
         }
         case 4:     return 30
@@ -388,13 +388,13 @@ function beyondTime(eventTime: string): boolean { // True if the given time has 
     const eventMinute   = parseInt((eventTime)[14] + (eventTime)[15])
 
     if (eventYear >= year) {
-        if(eventYear > year) return false
+        if (eventYear > year) return false
         if (eventMonth >= month) {
-            if(eventMonth > month) return false
+            if (eventMonth > month) return false
             if (eventDay >= day) {
-                if(eventDay > day) return false
+                if (eventDay > day) return false
                 if (eventHour >= hour) {
-                    if(eventHour > hour) return false
+                    if (eventHour > hour) return false
                     if (eventMinute >= minute) return false
                     else return true
                 } else return true
@@ -421,25 +421,29 @@ export function endsSoon(endTime: string): boolean {
     const endHour     = parseInt((endTime)[11] + (endTime)[12])
     const endMinute   = parseInt((endTime)[14] + (endTime)[15])
 
-    if(endYear/2 <= year){
-        if (endYear != year){ return true
+    if (endYear/2 <= year) {
+        if (endYear != year) { return true
         } else {
-            if (endMonth/2 <= month){
-                if (endMonth != month){ return true
+            if (endMonth/2 <= month) {
+                if (endMonth != month) { return true
                 } else {
-                    if (endDay/2 <= day){
-                        if (endDay != day){ return true
+                    if (endDay/2 <= day) {
+                        if (endDay != day) { return true
                         } else {
-                            if (endHour/2 <= hour){
-                                if(endHour != hour){ return true
-                                }else{
-                                    if(endMinute/2 <= minute){
-                                        if(endMinute != minute){ return true
-                                        }else{return false}
-                                    }else{return false}}
-                            }else{return false}}
-                    }else{return false}}
-            }else{return false}}
+                            if (endHour/2 <= hour) {
+                                if (endHour != hour) { return true
+                                } else {
+                                    if (endMinute/2 <= minute) {
+                                        if (endMinute != minute) { return true
+                                        } else return false
+                                    } else return false
+                                }
+                            } else return false
+                        }
+                    } else return false
+                }
+            } else return false
+        }
     } else return false
 }
 
@@ -448,9 +452,9 @@ export function endsSoon(endTime: string): boolean {
  * @param {string} input
  * @returns View containing the endtime as a text
  */
-export function GetEndTime({input, lang, theme}: GetEndTimeProps){
+export function GetEndTime({input, lang, theme}: GetEndTimeProps) {
 
-    if (input != null){
+    if (input != null) {
         // Fetching endtime ciphers from api
         const hour1     = (input)[11]
         const hour2     = (input)[12]

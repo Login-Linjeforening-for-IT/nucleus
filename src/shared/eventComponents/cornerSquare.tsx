@@ -21,8 +21,8 @@ JSX.Element {
     let p1 = 10, p2 = 100, p3 = 13, p4 = 102, p5 = 0, p6 = 160, p7 = 70, 
     p8 = 345
 
-    if(type) {
-        while(corner != 0 && corner != 2) corner = random({min: 0, max: 3})
+    if (type) {
+        while (corner != 0 && corner != 2) corner = random({min: 0, max: 3})
         if (corner === 0 || corner === 2) {
             p1 = 0, p2 = 0, p3 = 13, p4 = 137, p5 = 0, p6 = 195, p7 = 70, 
             p8 = 380

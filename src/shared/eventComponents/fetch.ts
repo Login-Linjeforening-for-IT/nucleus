@@ -69,9 +69,9 @@ export function FetchJoinLink(string: string): string | null {
         var tikkioLink = string.slice(tikkioStart, tikkioEnd)
         var netLink = string.slice(netStart, netEnd)
 
-        if(formLink)    return formLink.trim()
-        if(tikkioLink)  return tikkioLink.trim()
-        if(netLink)     return netLink.trim()
+        if (formLink)    return formLink.trim()
+        if (tikkioLink)  return tikkioLink.trim()
+        if (netLink)     return netLink.trim()
 
         return null
     } else return null
@@ -131,7 +131,7 @@ fetchStoredProps): Promise<void> {
     //  Fetches cache
     let tempArray = await AsyncStorage.getItem(stored)
     // If cache exists
-    if (tempArray != null){
+    if (tempArray != null) {
         // Parses from string to objects
         let parsed = JSON.parse(tempArray)
         // Updates the renderedarray to equal cache
@@ -165,7 +165,7 @@ events}: getDataProps): Promise<void> {
         // Updates last fetch displayed on the screen
         .then(async() => setLastSave(await LastFetch()))
         // Setting the cache
-        if(events.length > 0) await AsyncStorage.setItem("cachedEvents", 
+        if (events.length > 0) await AsyncStorage.setItem("cachedEvents", 
             JSON.stringify(events))
         // Catches any errors (missing wifi)
     } catch (e) {
@@ -174,7 +174,7 @@ events}: getDataProps): Promise<void> {
             try {
                 // Tries to fetch event cache
             const cache: string | null = await AsyncStorage.getItem("cachedEvents")
-                if(cache){
+                if (cache) {
                     const events: EventProps[] = JSON.parse(cache)
                     // If cached events was found save them in event array
                     if (!events.length) setEvents([...events])

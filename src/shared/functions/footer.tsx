@@ -50,7 +50,7 @@ ExtendedBottomTabBarProps): JSX.Element {
                         }
                     }
 
-                    if (!options.focusedIcon || !options.themeIcon) return
+                    if (!options.focusedIcon || !options.icon) return
 
                     const onLongPress = () => {
                         navigation.emit({
@@ -74,7 +74,7 @@ ExtendedBottomTabBarProps): JSX.Element {
                                 style={MS.bMenuIcon} 
                                 source={isFocused 
                                     ? options.focusedIcon
-                                    : options.themeIcon} 
+                                    : options.icon} 
                             />
                         </TouchableOpacity>
                     )

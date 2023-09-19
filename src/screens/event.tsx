@@ -125,7 +125,7 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
         // If the filter is not null or there are categories clicked
         if (input.length || clickedCategory.length > 0) {
             // If the filter is not null but no categories are clicked
-            if(input.length && clickedCategory.length === 0)  {
+            if (input.length && clickedCategory.length === 0)  {
                 // If the length of the filter search text is equal 0
                 if (input.length === 0) {
                     // Resets filter input
@@ -140,9 +140,9 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
                     clickedCategory})
             }else{
                 // If the filter is not null and there are categories clicked
-                if(input.length && clickedCategory.length > 0){
+                if (input.length && clickedCategory.length > 0) {
                     // If the filter text is not empty calls filterBoth function
-                    if(input.length > 0) {
+                    if (input.length > 0) {
                         filterBoth({clickedCategory, clickedEvents, 
                         events, setRenderedArray, input})
                     }
@@ -155,9 +155,9 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
         // If the filter input is null only filter categories
         } else {
             // If the filter is not null but no categories are clicked
-            if(input.length && clickedCategory.length === 0 ) {
+            if (input.length && clickedCategory.length === 0 ) {
                 // If the filter length is 0
-                if(input.length === 0) {
+                if (input.length === 0) {
                     // Resets renderedArray
                     setRenderedArray([...events])
                     // Resets filter input
@@ -200,7 +200,7 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
         let interval: Interval = 0
 
         // Only when filter is closed to prevent "no match" issue
-        if(!search){
+        if (!search) {
             interval = setInterval(() => {
                 // Storing the current time
                 (async() => {
@@ -232,7 +232,7 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
     }
 
     // --- CHECKS FOR AND FIXES INCORRECT RENDER ---
-    if(events.length > 0 && events.length !== renderedArray.length){
+    if (events.length > 0 && events.length !== renderedArray.length) {
         // Fixes any errors if the user is not currently filtering
         if (!input.length) clickedCategory.length === 0 ? RenderEvents():null
         // Fixes any potential render errors after user has been searching
@@ -243,9 +243,9 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
 
     // --- SETUP CODE ONCE APP IS DOWNLOADED---
     // Displays when the API was last fetched successfully
-    if(lastSave === "") (async() => {setLastSave(await LastFetch())})()
+    if (lastSave === "") (async() => {setLastSave(await LastFetch())})()
     // Sets up initial notifications
-    if(!notification["SETUP"]) notificationSetup()
+    if (!notification["SETUP"]) notificationSetup()
 
     // --- DISPLAYS THE EVENTSCREEN ---
     return (

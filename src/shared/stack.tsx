@@ -1,5 +1,5 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
-import { ExtendedTabNavigationOptions, StackProps } from "@interfaces"
+import { ExtendedRouteOptions, StackProps } from "@interfaces"
 import { NavigationContainer } from "@react-navigation/native"
 import ProfileScreen from "@screens/menu/profile/profile"
 import SpecificEventScreen from "@screens/specificEvent"
@@ -95,8 +95,8 @@ export default function Navigator(): JSX.Element {
                                 focusedIcon: screen.focusedIcon,
 
                                 // Icon with color fit to active theme
-                                themeIcon: screen.icon
-                            }) as ExtendedTabNavigationOptions}
+                                icon: screen.icon
+                            }) as ExtendedRouteOptions}
                             name={screen.name}
                             component={screen.component}
                         />

@@ -339,7 +339,7 @@ index}: CommitteeImageTouchableProps): JSX.Element {
 
 function CommitteeContent({index, theme, relevantCommittee, isDark}: 
 CommitteeContentProps) {
-    return(
+    return (
         <View key={index}>
             <Text style={{
                 ...T.text30, 

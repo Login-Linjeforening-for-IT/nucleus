@@ -12,7 +12,7 @@ type CompareDatesProps = {
  */
 export default function CompareDates ({firstDate, secondDate}: 
 CompareDatesProps): boolean | number {
-    if(firstDate != null && secondDate != null){
+    if (firstDate != null && secondDate != null) {
         // Concatenating start:
         const firstYear   = (firstDate)[0] + (firstDate)[1] 
             + (firstDate)[2] + (firstDate)[3]
@@ -29,13 +29,13 @@ CompareDatesProps): boolean | number {
         const secondMinute   = (secondDate)[14] + (secondDate)[15]
 
         if (firstYear >= secondYear) {
-            if(firstYear > secondYear) return false
+            if (firstYear > secondYear) return false
             if (firstMonth >= secondMonth) {
-                if(firstMonth > secondMonth) return false
+                if (firstMonth > secondMonth) return false
                 if (firstDay >= secondDay) {
-                    if(firstDay > secondDay) return false
+                    if (firstDay > secondDay) return false
                     if (firstHour >= secondHour) {
-                        if(firstHour > secondHour) return false
+                        if (firstHour > secondHour) return false
                         if (firstMinute >= secondMinute) return false
                         else return true
                     } else return true
