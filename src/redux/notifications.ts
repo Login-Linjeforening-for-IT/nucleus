@@ -153,6 +153,10 @@ export const NotificationSlice = createSlice({
     // Declares slice reducer
     reducers: {
         // Change state of important notifications
+        setNotificationStateTrue: (state, action) => {
+            const category: NotificationCategory = action.payload.category
+            state[category] = true
+        },
         changeNotificationState: (state, action) => {
             const category: NotificationCategory = action.payload.category
             state[category] = !state[category]
@@ -161,7 +165,10 @@ export const NotificationSlice = createSlice({
 })
 
 // Exports the change function
-export const { changeNotificationState } = NotificationSlice.actions
+export const { 
+    setNotificationStateTrue, 
+    changeNotificationState 
+} = NotificationSlice.actions
 
 // Exports the notification slice
 export default NotificationSlice.reducer

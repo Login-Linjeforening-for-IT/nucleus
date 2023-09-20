@@ -89,7 +89,7 @@ export default function LoginScreen( { navigation }: ScreenProps): JSX.Element {
             name: val,
             check_textInputChange: true
             })
-        }else{
+        } else {
             setData({
             ...data,
             name: val,
@@ -105,7 +105,7 @@ export default function LoginScreen( { navigation }: ScreenProps): JSX.Element {
                 pass: val,
                 check_passInputChange: true
             })
-        }else{
+        } else {
             setData({
                 ...data,
                 check_passInputChange: false

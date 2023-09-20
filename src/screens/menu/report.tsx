@@ -60,7 +60,7 @@ const inputName = (val: string) => {
       name: val,
       check_nameInputChange: true
     })
-  }else{
+  } else {
     setData({
       ...data,
       name: val,
@@ -76,7 +76,7 @@ const inputContact = (val: string) => {
       contact: val,
       check_contactInputChange: true
     })
-  }else{
+  } else {
     setData({
       ...data,
       content: val,
@@ -92,7 +92,7 @@ const inputContent = (val: string) => {
       content: val,
       check_contentInputChange: true
     })
-  }else{
+  } else {
     setData({
       ...data,
       content: val,

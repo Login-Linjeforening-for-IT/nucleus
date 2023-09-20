@@ -35,8 +35,8 @@ JSX.Element {
     const { theme } = useSelector( (state: ReduxState) => state.theme )
 
     const setting = [
-        {id: 0, title: "Unsubscribe from maintenance"},
-        {id: 1, title: "Subscribe to maintenance"},
+        {id: 0, title: "Subscribe to maintenance"},
+        {id: 1, title: "Unsubscribe from maintenance"},
     ]
 
   return (

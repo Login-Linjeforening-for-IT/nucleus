@@ -16,8 +16,6 @@ import { GS } from "@styles/globalStyles"
 import { MS } from "@styles/menuStyles"
 import { BlurView } from "expo-blur"
 import en from "@text/en/ad.json"
-import NavigateFromPushNotification 
-from "@shared/notificationComponents/navigateFromPushNotification"
 import {
     TouchableOpacity,
     Dimensions,
@@ -58,10 +56,6 @@ export default function AdScreen({ navigation }: ScreenProps): JSX.Element {
     const dispatch = useDispatch()
     function eventPage () {navigation.navigate("EventScreen")}
     const isDark = theme === 0 || theme === 2 || theme === 3 ? true : false
-
-    // Allows for navigation to a specific page if the app is
-    // opened by a push notification
-    NavigateFromPushNotification({navigation})
 
     //  --- FETCHES CLICKED EVENTS WHEN SCREEN BECOMES VISIBLE ---
     useFocusEffect(
@@ -106,9 +100,6 @@ export default function AdScreen({ navigation }: ScreenProps): JSX.Element {
     // --- SETUP CODE ONCE APP IS DOWNLOADED---
     // Displays when the API was last fetched successfully
     if (lastSave === "") (async() => {setLastSave(await LastFetch())})()
-
-    // Sets up initial notifications
-    if (!notification["SETUP"]) notificationSetup()
 
     //  --- DISPLAYS THE EVENTSCREEN ---
     return (

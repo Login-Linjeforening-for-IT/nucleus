@@ -1,5 +1,6 @@
 // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 3/6
-// import messaging from "@react-native-firebase/messaging"
+import messaging from "@react-native-firebase/messaging"
+import subscribeToTopic from "@shared/notificationComponents/subscribeToTopic"
 // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 3/6
 
 type topicParams = {
@@ -23,7 +24,7 @@ export default async function topic({topicID, lang, status, category, catArray}:
 topicParams) {
 
     // COMMENT IN THIS BOX WHILE TESTING IN EXPO 4/6
-      return null
+    //   return null
     // COMMENT IN THIS BOX WHILE TESTING IN EXPO 4/6
     const granted = await messaging().requestPermission()
     var topic = lang ? "norwegian"+topicID:"english"+topicID
@@ -43,17 +44,17 @@ topicParams) {
                 await messaging().unsubscribeFromTopic("englishANNET")
 
                 // Subscribe to new language
-                await messaging().subscribeToTopic("norwegianIMPORTANT")
-                await messaging().subscribeToTopic("norwegianBEDPRES")
-                await messaging().subscribeToTopic("norwegianTEKKOM")
-                await messaging().subscribeToTopic("norwegianCTF")
-                await messaging().subscribeToTopic("norwegianSOCIAL")
-                await messaging().subscribeToTopic("norwegianKARRIEREDAG")
-                await messaging().subscribeToTopic("norwegianFADDERUKA")
-                await messaging().subscribeToTopic("norwegianLOGIN")
-                await messaging().subscribeToTopic("norwegianANNET")
+                await subscribeToTopic("norwegianIMPORTANT")
+                await subscribeToTopic("norwegianBEDPRES")
+                await subscribeToTopic("norwegianTEKKOM")
+                await subscribeToTopic("norwegianCTF")
+                await subscribeToTopic("norwegianSOCIAL")
+                await subscribeToTopic("norwegianKARRIEREDAG")
+                await subscribeToTopic("norwegianFADDERUKA")
+                await subscribeToTopic("norwegianLOGIN")
+                await subscribeToTopic("norwegianANNET")
                 return null
-            }else{
+            } else {
                 // Unsubscribe from old language
                 await messaging().unsubscribeFromTopic("englishIMPORTANT")
                 await messaging().unsubscribeFromTopic("norwegianBEDPRES")
@@ -66,35 +67,37 @@ topicParams) {
                 await messaging().unsubscribeFromTopic("norwegianANNET")
 
                 // Subscribe to new language
-                await messaging().subscribeToTopic("englishIMPORTANT")
-                await messaging().subscribeToTopic("englishBEDPRES")
-                await messaging().subscribeToTopic("englishTEKKOM")
-                await messaging().subscribeToTopic("englishCTF")
-                await messaging().subscribeToTopic("englishSOCIAL")
-                await messaging().subscribeToTopic("englishKARRIEREDAG")
-                await messaging().subscribeToTopic("englishFADDERUKA")
-                await messaging().subscribeToTopic("englishLOGIN")
-                await messaging().subscribeToTopic("englishANNET")
+                await subscribeToTopic("englishIMPORTANT")
+                await subscribeToTopic("englishBEDPRES")
+                await subscribeToTopic("englishTEKKOM")
+                await subscribeToTopic("englishCTF")
+                await subscribeToTopic("englishSOCIAL")
+                await subscribeToTopic("englishKARRIEREDAG")
+                await subscribeToTopic("englishFADDERUKA")
+                await subscribeToTopic("englishLOGIN")
+                await subscribeToTopic("englishANNET")
                 return null
             }
         } else if (topicID === "maintenance") {
-            if (!lang) await messaging().subscribeToTopic("maintenance")       // For maintainers of this project
-            else      await messaging().unsubscribeFromTopic("maintenance")   // When you no longer desire to be notified
+            // For maintainers of this project
+            if (!lang) await subscribeToTopic("maintenance")
+            // When you no longer desire to be notified
+            else await messaging().unsubscribeFromTopic("maintenance")
         } else {
             let cat = category ? category.toLowerCase() : null
 
-            if (status && catArray) {
+            if (status && Array.isArray(catArray)) {
                 // Subscribe to given topic for desired time intervals
-                await messaging().subscribeToTopic(`${topic}`)
-                if (catArray[0]) await messaging().subscribeToTopic(topic + cat + "10m")
-                if (catArray[1]) await messaging().subscribeToTopic(topic + cat + "30m")
-                if (catArray[2]) await messaging().subscribeToTopic(topic + cat + "1h")
-                if (catArray[3]) await messaging().subscribeToTopic(topic + cat + "2h")
-                if (catArray[4]) await messaging().subscribeToTopic(topic + cat + "3h")
-                if (catArray[5]) await messaging().subscribeToTopic(topic + cat + "6h")
-                if (catArray[6]) await messaging().subscribeToTopic(topic + cat + "1d")
-                if (catArray[7]) await messaging().subscribeToTopic(topic + cat + "2d")
-                if (catArray[8]) await messaging().subscribeToTopic(topic + cat + "1w")
+                await subscribeToTopic(`${topic}`)
+                if (catArray[0]) await subscribeToTopic(topic + cat + "10m")
+                if (catArray[1]) await subscribeToTopic(topic + cat + "30m")
+                if (catArray[2]) await subscribeToTopic(topic + cat + "1h")
+                if (catArray[3]) await subscribeToTopic(topic + cat + "2h")
+                if (catArray[4]) await subscribeToTopic(topic + cat + "3h")
+                if (catArray[5]) await subscribeToTopic(topic + cat + "6h")
+                if (catArray[6]) await subscribeToTopic(topic + cat + "1d")
+                if (catArray[7]) await subscribeToTopic(topic + cat + "2d")
+                if (catArray[8]) await subscribeToTopic(topic + cat + "1w")
             } else {
                 // Unsubscribe from given topic for all time intervals
                 await messaging().unsubscribeFromTopic(`${topic}`)

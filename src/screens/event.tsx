@@ -15,6 +15,8 @@ import { MS } from "@styles/menuStyles"
 import { BlurView } from "expo-blur"
 import NavigateFromPushNotification 
 from "@shared/notificationComponents/navigateFromPushNotification"
+import initializeNotifications 
+from "@shared/notificationComponents/notificationSetup"
 import Filter, {
     fetchRelevantCategories,
     filterCategories,
@@ -64,27 +66,35 @@ type HeaderComponentProps = {
  * @returns EventScreen
  */
 export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
-    // Events from api
-    const [events, setEvents] = useState<EventProps[]>([])
-    // Events currently displayed
-    const [renderedArray, setRenderedArray] = useState<EventProps[]>([])
     // Clicked events
     const [clickedEvents, setClickedEvents] = useState<EventProps[]>([])
     // Clicked categories
     const [clickedCategory, setClickedCategory] = useState<CategoryWithID[]>([])
-    // Last time API was fetched successfully
-    const [lastSave, setLastSave] = useState("")
     // Download state
     const [downloadState, setDownloadState] = useState(new Date())
+    // Events from api
+    const [events, setEvents] = useState<EventProps[]>([])
     // Filter text input declaration
     const [input, setInput] = useState("")
-    // Clears text input
-    const textInputRef = useRef(null)
+    // Last time API was fetched successfully
+    const [lastSave, setLastSave] = useState("")
+    // Push notification
+    const [pushNotification, setPushNotification] = useState(false)
+    const [pushNotificationContent, setPushNotificationContent] = 
+        useState<JSX.Element | undefined>(undefined)
+    // Notification state
+    const [shouldSetupNotifications, setShouldSetupNotifications] = useState(true)
     // Relevant categories to filter
     const [relevantCategories, setRelevantCategories] = 
     useState<CategoryWithID[]>([])
+    // Events currently displayed
+    const [renderedArray, setRenderedArray] = useState<EventProps[]>([])
     // Search bar visibility boolean
     const [search, setSearch] = useState(false)
+    // Clears text input
+    const textInputRef = useRef(null)
+    
+    // Redux states
     const notification =    useSelector( (state: ReduxState) => 
     state.notification)
     const { lang  } =       useSelector( (state: ReduxState) => state.lang)
@@ -95,7 +105,8 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
     const dispatch = useDispatch()
 
     // Navigates if the app is opened by a push notification
-    NavigateFromPushNotification({navigation})
+    NavigateFromPushNotification({navigation, theme, 
+        setPushNotification, setPushNotificationContent})
 
     // All categories to filter - DO NOT CHANGE IDS
     const category = [
@@ -138,7 +149,7 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
                 // Run filter function if the filter search text is not empty
                 Filter({input, setRenderedArray, events, clickedEvents, 
                     clickedCategory})
-            }else{
+            } else {
                 // If the filter is not null and there are categories clicked
                 if (input.length && clickedCategory.length > 0) {
                     // If the filter text is not empty calls filterBoth function
@@ -176,8 +187,10 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
     useEffect(() => {
         // Fetches API
         getData({setEvents, setRenderedArray, setLastSave, events})
+
         // Fetches clickedEvents
         fetchState(setClickedEvents)
+
         // Fetches categories available to filter
         fetchRelevantCategories({setRelevantCategories, clickedEvents, events, 
             category})
@@ -244,8 +257,12 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
     // --- SETUP CODE ONCE APP IS DOWNLOADED---
     // Displays when the API was last fetched successfully
     if (lastSave === "") (async() => {setLastSave(await LastFetch())})()
-    // Sets up initial notifications
-    if (!notification["SETUP"]) notificationSetup()
+
+    initializeNotifications({
+        shouldRun: shouldSetupNotifications,
+        setShouldSetupNotifications: setShouldSetupNotifications,
+        hasBeenSet: notification["SETUP"]
+    })
 
     // --- DISPLAYS THE EVENTSCREEN ---
     return (
@@ -255,6 +272,7 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
                 ...GS.content, 
                 backgroundColor: FetchColor({theme, variable: "DARKER"})
             }}>
+                {pushNotification && pushNotificationContent}
                 {search === true && Space(Dimensions.get("window").height/9)}
                 <FilterUI
                     textInputRef={textInputRef}
