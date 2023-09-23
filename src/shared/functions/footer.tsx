@@ -10,7 +10,7 @@ import { RouteProp } from "@react-navigation/native"
 export default function Footer({ state, descriptors, navigation }: 
 ExtendedBottomTabBarProps): JSX.Element {
     // Get the current theme
-    const { theme } = useSelector( (state: ReduxState) => state.theme )
+    const { theme } = useSelector((state: ReduxState) => state.theme)
 
     return (
         <>

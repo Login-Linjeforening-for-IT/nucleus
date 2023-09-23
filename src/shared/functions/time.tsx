@@ -22,7 +22,7 @@ type GetEndTimeProps = {
  * @returns Event start time, as a text inside a view
  */
 export default function EventTime({startTime, endTime}: EventTimeProps): JSX.Element {
-    const { theme } = useSelector( (state: ReduxState) => state.theme )
+    const { theme } = useSelector((state: ReduxState) => state.theme)
     const string = stringEvent({startTime, endTime})
 
     return (
@@ -41,7 +41,7 @@ export default function EventTime({startTime, endTime}: EventTimeProps): JSX.Ele
  * @returns Event start time, as a text inside a view
  */
 export function stringEvent({startTime, endTime}: EventTimeProps): string { // startTime
-    const { lang  } = useSelector( (state: ReduxState) => state.lang  )
+    const { lang  } = useSelector((state: ReduxState) => state.lang)
 
     const year     = new Date().getFullYear()
     const month    = new Date().getMonth()

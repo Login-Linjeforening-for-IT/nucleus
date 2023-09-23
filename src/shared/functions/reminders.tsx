@@ -12,8 +12,8 @@ import { T } from "@styles/text"
  */
 export default function Reminders() {
 
-    const { lang  } = useSelector( (state: ReduxState) => state.lang  )
-    const { theme } = useSelector( (state: ReduxState) => state.theme )
+    const { lang  } = useSelector((state: ReduxState) => state.lang)
+    const { theme } = useSelector((state: ReduxState) => state.theme)
     const [category, setCategory] = useState(-1)
 
     const categories = [

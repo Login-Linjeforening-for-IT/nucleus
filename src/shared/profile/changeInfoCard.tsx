@@ -54,7 +54,7 @@ trigger}: ChangeInfoCardProps) {
 
     // Profile info
     const { degree, schoolyear, mail, preferences, allergies } = 
-        useSelector( (state: ReduxState) => state.profile )
+        useSelector((state: ReduxState) => state.profile)
     const profile = { degree, schoolyear, mail, preferences, allergies }
 
     // Checks if any info has been edited by the user

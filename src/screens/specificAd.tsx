@@ -18,8 +18,8 @@ import AdInfo, {
 export default function SpecificAdScreen({ route, navigation }: 
 SpecificAdScreenProps): JSX.Element {
 
-    const { lang  } = useSelector( (state: ReduxState) => state.lang  )
-    const { theme } = useSelector( (state: ReduxState) => state.theme )
+    const { lang  } = useSelector((state: ReduxState) => state.lang)
+    const { theme } = useSelector((state: ReduxState) => state.theme)
     const { item } = route.params
 
     return (

@@ -14,8 +14,8 @@ import { T } from "@styles/text"
  */
 export default function Dropdown() {
 
-    const { lang  } = useSelector( (state: ReduxState) => state.lang  )
-    const { theme } = useSelector( (state: ReduxState) => state.theme )
+    const { lang  } = useSelector((state: ReduxState) => state.lang)
+    const { theme } = useSelector((state: ReduxState) => state.theme)
 
     const titleNO = {
         data: "Dataingeniør",
@@ -164,8 +164,8 @@ export default function Dropdown() {
  */
 export function DropdownBachelor() {
 
-    const { lang  } = useSelector( (state: ReduxState) => state.lang  )
-    const { theme } = useSelector( (state: ReduxState) => state.theme )
+    const { lang  } = useSelector((state: ReduxState) => state.lang)
+    const { theme } = useSelector((state: ReduxState) => state.theme)
 
     const titleNO = {
         data: "Dataingeniør",
@@ -235,7 +235,7 @@ export function DropdownBachelor() {
  */
 export function DropdownMaster() {
 
-    const { theme } = useSelector( (state: ReduxState) => state.theme )
+    const { theme } = useSelector((state: ReduxState) => state.theme)
 
     const [courses] = useState([
         {id: 0, title: "Information Security", link: "https://www.ntnu.no/studier/mis"},
@@ -291,8 +291,8 @@ export function DropdownMaster() {
  */
 export function DropdownPHD() {
 
-    const { lang  } = useSelector( (state: ReduxState) => state.lang  )
-    const { theme } = useSelector( (state: ReduxState) => state.theme )
+    const { lang  } = useSelector((state: ReduxState) => state.lang)
+    const { theme } = useSelector((state: ReduxState) => state.theme)
 
     const titleNO = {
         infosec: "Informasjonsikkerhet og kommunikasjonsteknologi",

@@ -26,6 +26,7 @@ import {
   Image,
   View,
   Text,
+  useWindowDimensions,
 } from "react-native"
 import { StaticImage } from "@shared/functions/social"
 
@@ -63,8 +64,8 @@ type CategoryProps = {
 export default function SpecificEventScreen({ route, navigation }: 
 SpecificEventScreenProps): JSX.Element {
 
-    const { lang  } = useSelector( (state: ReduxState) => state.lang  )
-    const { theme } = useSelector( (state: ReduxState) => state.theme )
+    const { lang  } = useSelector( (state: ReduxState) => state.lang)
+    const { theme } = useSelector( (state: ReduxState) => state.theme)
     const { item } = route.params
     let link
     const [event, setEvent]=useState<DetailedEventProps | EventProps>(item)
@@ -138,20 +139,19 @@ SpecificEventScreenProps): JSX.Element {
         <View style={{...GS.content, backgroundColor: FetchColor({theme, variable: "BACKGROUND"})}}>
             <ScrollView showsVerticalScrollIndicator={false}>
 
-            {Space((Dimensions.get("window").height/8)+5)}
+            {Space((Dimensions.get("window").height/8)-5)}
 
             {(item.image).includes(".svg") ?
-            <SvgUri
-                style={{alignSelf: "center"}}
-                width={(Dimensions.get("window").width)/1.2}
-                height={Dimensions.get("window").width/3}
-                uri={`https://cdn.login.no/img/events/${item.image}`}
-            />
-            :(item.image).includes(".png") ? <Image 
+                <SvgUri
+                    style={{alignSelf: "center"}}
+                    width={(Dimensions.get("window").width)/1.2}
+                    height={Dimensions.get("window").width/3}
+                    uri={`https://cdn.login.no/img/events/${item.image}`}
+                />
+            : (item.image).includes(".png") ? <Image 
                 style={ES.specificEventImage}
                 source={{uri: `https://cdn.login.no/img/events/${item.image}`}}
-            />:null}
-            <StaticImage item={item} />
+            />:<StaticImage item={item} />}
             {Space(10)}
 
             <CardSmaller>
@@ -312,16 +312,15 @@ SpecificEventScreenProps): JSX.Element {
                         </Text>
                     </View>
                     {Space(5)}
-                    {"description" in event && event.description ?
+                    {"description" in event && event.description &&
                         <RenderHTML
                             baseStyle={{
                                 maxWidth: "100%",
                                 color: FetchColor({theme, variable: "TEXTCOLOR"}),
                             }}
-                            contentWidth={300}
+                            contentWidth={0}
                             source={{html: event.description}}
                         />
-                        : null
                     }
                     {Space(10)}
                     <JoinButton

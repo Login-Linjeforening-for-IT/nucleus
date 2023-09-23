@@ -12,17 +12,20 @@ import React from "react"
  * @param {*} props     Content to put inside the card
  * @returns             Card with the props inside
  */
-export default function Cluster ({ noColor, space, children }: ClusterProps) {
-    const { theme } = useSelector( (state: ReduxState) => state.theme )
+export default function Cluster ({ noColor, marginVertical, marginHorizontal, 
+children }: ClusterProps) {
+    const { theme } = useSelector((state: ReduxState) => state.theme)
 
     return (
         <View style={{backgroundColor: !noColor
             ? FetchColor({theme, variable: "DARKER"})
             : ""
         }}>
-            <View style={space
-                ? {...ES.clusterContent, marginVertical: space}
-                : ES.clusterContent}>
+            <View style={{
+                ...ES.clusterContent, 
+                marginVertical: marginVertical, 
+                marginHorizontal: marginHorizontal
+            }}>
                 { children }
             </View>
         </View>
@@ -37,7 +40,7 @@ export default function Cluster ({ noColor, space, children }: ClusterProps) {
  */
 export function ClusterSmaller ({children}: React.PropsWithChildren<{}>) {
 
-    const { theme } = useSelector( (state: ReduxState) => state.theme )
+    const { theme } = useSelector((state: ReduxState) => state.theme)
 
     return (
         <View style={{

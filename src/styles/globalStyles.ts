@@ -169,4 +169,36 @@ export const GS = StyleSheet.create({
         position: "absolute",
         left: 15,
     },
+    notificationDropdown: {
+        position: "absolute",
+        width: "100%",
+        height: 70,
+        zIndex: 2,
+        borderRadius: 20,
+        paddingLeft: 14,
+        paddingTop: 2,
+        overflow: "hidden"
+    }, notificationDropdownTouchable: {
+        top: 100,
+        position: "absolute",
+        marginHorizontal: 16,
+        width: "92%",
+        zIndex: 3,
+        borderRadius: 20,
+        height: 70,
+    }, notificationDropdownBlur: {
+        top: 100,
+        position: "absolute",
+        marginHorizontal: 16,
+        width: "92%",
+        zIndex: 1,
+        borderRadius: 20,
+        height: 70,
+        overflow: "hidden"
+    }, notificationDropdownTitle: {
+        fontWeight: "500",
+        fontSize: 20
+    }, notificationDropdownBody: {
+        fontSize: 18
+    }
 })

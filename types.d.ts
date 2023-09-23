@@ -42,6 +42,7 @@ type ReduxState = {
     }
     notification: NotificationProps
     profile: ProfileProps
+    list: NotificationList[]
 }
 
 type ProfileProps = any
@@ -212,4 +213,10 @@ type NotificationProps = {
 
     // Key used for indexing
     [key: string]:      boolean
+}
+
+type NotificationList = {
+    title: string
+    body: string
+    data: DetailedEventProps
 }

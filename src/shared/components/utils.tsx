@@ -44,7 +44,7 @@ export default function Space (height: number): JSX.Element {
  */
 export function Line ({height, width, fill}: LineProps): JSX.Element {
 
-    const { theme } = useSelector( (state: ReduxState) => state.theme )
+    const { theme } = useSelector( (state: ReduxState) => state.theme)
 
     const line = (
         <View>

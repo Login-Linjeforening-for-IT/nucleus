@@ -50,8 +50,8 @@ export default function topicSwitchList({category, showLast}: TopicSwitchListPro
  * @returns Visual representation of switch as a cluster
  */
 function topicSwitch({topic, textNo, textEn}: TopicSwitchProps): JSX.Element {
-    const { lang  } = useSelector( (state: ReduxState) => state.lang  )
-    const { theme } = useSelector( (state: ReduxState) => state.theme )
+    const { lang  } = useSelector((state: ReduxState) => state.lang)
+    const { theme } = useSelector((state: ReduxState) => state.theme)
 
     return (
         <Cluster>

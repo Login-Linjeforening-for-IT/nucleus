@@ -19,9 +19,9 @@ type NotificationProps = {
  */
 export default function Notification ({category, skip}: NotificationProps) {
      // Fetches states
-    const notification = useSelector( (state: ReduxState) => state.notification )
-    const { lang  } = useSelector( (state: ReduxState) => state.lang  )
-    const { theme } = useSelector( (state: ReduxState) => state.theme )
+    const notification = useSelector( (state: ReduxState) => state.notification)
+    const { lang  } = useSelector( (state: ReduxState) => state.lang)
+    const { theme } = useSelector( (state: ReduxState) => state.theme)
     const dispatch = useDispatch()
 
     if (!skip) topic({category: category, lang, catArray: notification[category]})

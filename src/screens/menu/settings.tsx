@@ -31,10 +31,10 @@ type ContentProps = {
     lang: boolean
 }
 
-export default function SettingScreen( { navigation }: ScreenProps): JSX.Element {
+export default function SettingScreen({ navigation }: ScreenProps): JSX.Element {
 
-    const { lang  } = useSelector( (state: ReduxState) => state.lang  )
-    const { theme } = useSelector( (state: ReduxState) => state.theme )
+    const { lang  } = useSelector( (state: ReduxState) => state.lang)
+    const { theme } = useSelector( (state: ReduxState) => state.theme)
 
     return (
         <View>

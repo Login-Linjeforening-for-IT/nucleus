@@ -153,7 +153,7 @@ function EventCard ({
             }>
                 {(index === 0 && search === false)
                     && Space(Dimensions.get("window").height/8.1)}
-                <Cluster space={8}>
+                <Cluster marginVertical={8}>
                     {index === 0 ? Space(8):null}
                     <View style={ES.eventBack}>
                         <FullCategorySquare 

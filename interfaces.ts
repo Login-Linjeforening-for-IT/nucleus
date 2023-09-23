@@ -26,10 +26,6 @@ export interface ScreenProps {
     navigation: Navigation
 }
 
-export interface SpecificEventScreenProps extends ScreenProps {
-    item: EventProps
-}
-
 export type Navigation = NavigationHelpers<ParamListBase, 
 BottomTabNavigationEventMap>
 
@@ -48,5 +44,6 @@ export interface StackProps extends ExtendedRouteOptions {
 
 export interface ClusterProps extends React.PropsWithChildren<{}> {
     noColor?: boolean
-    space?: DimensionValue
+    marginVertical?: DimensionValue
+    marginHorizontal?: DimensionValue
 }

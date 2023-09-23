@@ -44,7 +44,7 @@ trigger}: ChangeProfileCardProps): JSX.Element {
     const dispatch = useDispatch()
 
     // Profile info
-    let { image } = useSelector( (state: ReduxState) => state.profile )
+    let { image } = useSelector((state: ReduxState) => state.profile)
 
     // Selected local profile image
     const [tempImage, setTempImage] = useState("")

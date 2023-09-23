@@ -1,4 +1,4 @@
-import { View, Image, TouchableOpacity, Platform, Text } from "react-native"
+import { View, Image, TouchableOpacity, Platform, Text, Dimensions } from "react-native"
 import FetchColor from "@styles/fetchTheme"
 import { useSelector } from "react-redux"
 import { MS } from "@styles/menuStyles"
@@ -58,20 +58,18 @@ export default function TopMenu({ navigation, title, screen, back }
                         />
                     </TouchableOpacity>
                 }
-                {
-                    title.length > 19 ? <Text
-                        style={{
-                            ...MS.smallMultilineTitle,
-                            color: FetchColor({
-                                theme, variable: "TITLETEXTCOLOR"})
-                        }}>
-                            {title}
-                        </Text>
-                    : <Text style={{
-                        ... MS.screenTitle,
-                        color: FetchColor({theme, variable: "TITLETEXTCOLOR"})}}
-                        >{title}</Text>
-                }
+                <Text
+                    style={{
+                        ...MS.smallMultilineTitle,
+                        top: title.length > 28
+                            ? Dimensions.get("window").height / 22
+                            : Dimensions.get("window").height / 17,
+                        color: FetchColor({
+                            theme, variable: "TITLETEXTCOLOR"})
+                    }}
+                >
+                    {title}
+                </Text>
             </View>
         </>
     )

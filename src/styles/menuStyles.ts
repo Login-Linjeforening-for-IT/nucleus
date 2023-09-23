@@ -39,14 +39,11 @@ export const MS = StyleSheet.create ({
     },
     // Small headertitle (for multiline)
     smallMultilineTitle: {
-        top: Dimensions.get("window").height / 20,
         position: "absolute",
-        left: 50,
-        right: 50,
-        marginLeft: "auto",
-        marginRight: "auto",
+        left: 60,
+        right: 60,
+        justifyContent: "center",
         textAlign: "center",
-        alignSelf: "flex-end",
         fontSize: 20,
     },
     // Top menu background view

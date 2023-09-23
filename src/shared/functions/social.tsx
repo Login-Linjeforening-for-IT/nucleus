@@ -111,7 +111,7 @@ export function AllComitees({lang, theme}: AllCommitteesProps): JSX.Element {
  * @returns Social media icons
  */
 export function Social() {
-    const { theme } = useSelector( (state: ReduxState) => state.theme )
+    const { theme } = useSelector((state: ReduxState) => state.theme)
     const isDark = theme === 0 || theme === 2 || theme === 3 ? true : false
 
     const media: mediaProps = {
@@ -214,8 +214,8 @@ export function styret(theme: number) {
  */
 export function Kontakt() {
 
-    const { lang  } = useSelector( (state: ReduxState) => state.lang  )
-    const { theme } = useSelector( (state: ReduxState) => state.theme )
+    const { lang  } = useSelector((state: ReduxState) => state.lang)
+    const { theme } = useSelector((state: ReduxState) => state.theme)
 
     const info = {
         contact: lang ? "Kontakt" : "Contact",
@@ -257,8 +257,8 @@ export function Kontakt() {
  */
 export function Copyright() {
 
-    const { lang  } = useSelector( (state: ReduxState) => state.lang  )
-    const { theme } = useSelector( (state: ReduxState) => state.theme )
+    const { lang  } = useSelector( (state: ReduxState) => state.lang)
+    const { theme } = useSelector( (state: ReduxState) => state.theme)
 
     return (
         <View>

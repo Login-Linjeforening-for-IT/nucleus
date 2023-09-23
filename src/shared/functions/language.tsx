@@ -11,8 +11,8 @@ import React from "react"
  * @returns View representing a switch which controls the language of the application
  */
 export default function Language() {    //Choose the language
-    const { lang  } = useSelector((state: ReduxState) => state.lang  )
-    const { theme } = useSelector((state: ReduxState) => state.theme )
+    const { lang  } = useSelector((state: ReduxState) => state.lang)
+    const { theme } = useSelector((state: ReduxState) => state.theme)
     const dispatch = useDispatch()
 
     topic({topicID: "langChange", lang})  // Sets up notifications to follow language

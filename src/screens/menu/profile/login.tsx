@@ -52,11 +52,11 @@ type PasswordUIProps = {
     showPass: () => void
 }
 
-export default function LoginScreen( { navigation }: ScreenProps): JSX.Element {
+export default function LoginScreen({ navigation }: ScreenProps): JSX.Element {
 
-    const { lang  } = useSelector( (state: ReduxState) => state.lang  )
-    const { login } = useSelector( (state: ReduxState) => state.login )
-    const { theme } = useSelector( (state: ReduxState) => state.theme )
+    const { lang  } = useSelector( (state: ReduxState) => state.lang)
+    const { login } = useSelector( (state: ReduxState) => state.login)
+    const { theme } = useSelector( (state: ReduxState) => state.theme)
 
     const dispatch = useDispatch()
 

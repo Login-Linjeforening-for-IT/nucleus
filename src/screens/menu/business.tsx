@@ -18,11 +18,11 @@ type ContentProps = {
     theme: number
 }
 
-export default function BusinessScreen( { navigation }: ScreenProps): 
+export default function BusinessScreen({ navigation }: ScreenProps): 
 JSX.Element {
 
-    const { lang  } = useSelector( (state: ReduxState) => state.lang  )
-    const { theme } = useSelector( (state: ReduxState) => state.theme )
+    const { lang  } = useSelector((state: ReduxState) => state.lang)
+    const { theme } = useSelector((state: ReduxState) => state.theme)
     const info = lang ? no.companies : en.companies
 
     return (

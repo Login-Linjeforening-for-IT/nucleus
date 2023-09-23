@@ -10,7 +10,7 @@ import React from "react"
  * @returns             Card with the props inside
  */
 export default function Card ({ children }: React.PropsWithChildren<{}>) {
-    const { theme } = useSelector( (state: ReduxState) => state.theme )
+    const { theme } = useSelector((state: ReduxState) => state.theme)
 
     const card = (
             <View style={{...ES.card, backgroundColor: FetchColor({theme, variable: "DARKER"})}}>
@@ -30,7 +30,7 @@ export default function Card ({ children }: React.PropsWithChildren<{}>) {
  */
 export function CardSmaller ({ children }: React.PropsWithChildren<{}>) {
 
-    const { theme } = useSelector( (state: ReduxState) => state.theme )
+    const { theme } = useSelector((state: ReduxState) => state.theme)
 
     const card = (
         <View style={{...ES.cardSmaller, backgroundColor: FetchColor({theme, variable: "DARKER"})}}>

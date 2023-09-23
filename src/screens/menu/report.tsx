@@ -25,10 +25,10 @@ import {
 } from "react-native"
 import { ClusterSmaller } from "@shared/functions/cluster"
 
-export default function ReportScreen( { navigation }: ScreenProps): JSX.Element {
+export default function ReportScreen({ navigation }: ScreenProps): JSX.Element {
 
-    const { lang  } = useSelector( (state: ReduxState) => state.lang  )
-    const { theme } = useSelector( (state: ReduxState) => state.theme )
+    const { lang  } = useSelector( (state: ReduxState) => state.lang)
+    const { theme } = useSelector( (state: ReduxState) => state.theme)
     const text = lang ? no : en 
     const sendForm = () => {
         if (data.name === data.name) {
@@ -39,67 +39,67 @@ export default function ReportScreen( { navigation }: ScreenProps): JSX.Element 
         }
     }
 
-const [data, setData] = useState({
-    name: "",
-    contact: "",
-    content: "",
-    check_nameInputChange: false,
-    check_contactInputChange: false,
-    check_contentInputChange: false,
-})
+    const [data, setData] = useState({
+        name: "",
+        contact: "",
+        content: "",
+        check_nameInputChange: false,
+        check_contactInputChange: false,
+        check_contentInputChange: false,
+    })
 
-const [database] = useState({
-    name: "admin",
-    pass: "admin"
-})
+    const database = {
+        name: "admin",
+        pass: "admin"
+    }
 
-const inputName = (val: string) => {
-  if (val.length > 1) {
-    setData({
-      ...data,
-      name: val,
-      check_nameInputChange: true
-    })
-  } else {
-    setData({
-      ...data,
-      name: val,
-      check_nameInputChange: false
-    })
-  }
-}
+    const inputName = (val: string) => {
+        if (val.length > 1) {
+            setData({
+            ...data,
+            name: val,
+            check_nameInputChange: true
+            })
+        } else {
+            setData({
+            ...data,
+            name: val,
+            check_nameInputChange: false
+            })
+        }
+    }
 
-const inputContact = (val: string) => {
-  if (val.length > 1) {
-    setData({
-      ...data,
-      contact: val,
-      check_contactInputChange: true
-    })
-  } else {
-    setData({
-      ...data,
-      content: val,
-      check_contactInputChange: false
-    })
-  }
-}
+    const inputContact = (val: string) => {
+        if (val.length > 1) {
+            setData({
+            ...data,
+            contact: val,
+            check_contactInputChange: true
+            })
+        } else {
+            setData({
+            ...data,
+            content: val,
+            check_contactInputChange: false
+            })
+        }
+    }
 
-const inputContent = (val: string) => {
-  if (val.length > 20) {
-    setData({
-      ...data,
-      content: val,
-      check_contentInputChange: true
-    })
-  } else {
-    setData({
-      ...data,
-      content: val,
-      check_contentInputChange: false
-    })
-  }
-}
+    const inputContent = (val: string) => {
+        if (val.length > 20) {
+            setData({
+            ...data,
+            content: val,
+            check_contentInputChange: true
+            })
+        } else {
+            setData({
+            ...data,
+            content: val,
+            check_contentInputChange: false
+            })
+        }
+    }
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>

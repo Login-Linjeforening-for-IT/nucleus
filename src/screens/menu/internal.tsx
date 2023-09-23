@@ -31,8 +31,8 @@ type ItemProps = {
 export default function InternalScreen({ navigation }: ScreenProps): 
 JSX.Element {
 
-    const { lang  } = useSelector( (state: ReduxState) => state.lang  )
-    const { theme } = useSelector( (state: ReduxState) => state.theme )
+    const { lang  } = useSelector( (state: ReduxState) => state.lang)
+    const { theme } = useSelector( (state: ReduxState) => state.theme)
 
     const setting = [
         {id: 0, title: "Subscribe to maintenance"},

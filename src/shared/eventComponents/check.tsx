@@ -11,7 +11,7 @@ import React from "react"
  */
 export default function Check() {   //Checkmark svg
 
-    const { theme } = useSelector( (state: ReduxState) => state.theme )
+    const { theme } = useSelector((state: ReduxState) => state.theme)
 
     return (
         <View style={ES.size}>
@@ -33,7 +33,7 @@ export default function Check() {   //Checkmark svg
  */
 export function SmallCheck() {   //Checkmark svg
 
-    const { theme } = useSelector( (state: ReduxState) => state.theme )
+    const { theme } = useSelector((state: ReduxState) => state.theme)
 
     return (
         <View style={ES.checkedIconCheckMark}>
@@ -58,7 +58,7 @@ export function SmallCheck() {   //Checkmark svg
  */
 export function CheckBox() {
 
-    const { theme } = useSelector( (state: ReduxState) => state.theme )
+    const { theme } = useSelector((state: ReduxState) => state.theme)
 
     return (
         <View style={ES.checkBox}>
@@ -84,7 +84,7 @@ export function CheckBox() {
  */
 export function CheckedBox() {
 
-    const { theme } = useSelector( (state: ReduxState) => state.theme )
+    const { theme } = useSelector((state: ReduxState) => state.theme)
 
     return (
         <View style={ES.checkedBox}>
