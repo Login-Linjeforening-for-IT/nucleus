@@ -1,0 +1,45 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "downlevelIteration": true,
+        "lib": [ "dom", "dom.iterable", "esnext" ],
+        "allowJs": true,
+        "skipLibCheck": true,
+        "strict": true,
+        "forceConsistentCasingInFileNames": true,
+        "noEmit": true,
+        "esModuleInterop": true,
+        "module": "esnext",
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "jsx": "preserve",
+        "incremental": true,
+        "plugins": [ { "name": "next" } ],
+        "paths": {
+            "@components/*": ["./src/shared/components/*"],
+            "@themes/*": ["./src/styles/themes/*"],
+            "@assets/*": ["./public/assets/*"],
+            "@text/*": ["./public/locales/*"],
+            "@screens/*": ["./src/screens/*"],
+            "@shared/*": ["./src/shared/*"],
+            "@styles/*": ["./src/styles/*"],
+            "@interfaces": ["./interfaces.ts"],
+            "@redux/*": ["./src/redux/*"],
+            "@nav/*": ["./src/nav/*"],
+            "@/*": ["./src/*"]
+        }
+    },
+    "include": [
+        "next-env.d.ts",
+        "**/*.ts",
+        "**/*.tsx",
+        ".next/types/**/*.ts",
+        "**/*.json",
+        "**/*.png"
+    ],
+    "exclude": [
+        "node_modules"
+    ],
+    "extends": "expo/tsconfig.base",
+}

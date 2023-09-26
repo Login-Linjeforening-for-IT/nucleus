@@ -1,0 +1,32 @@
+{
+    "screen": "Meny",
+    "nav": "menu",
+    "setting": [
+        {
+            "id": 1, 
+            "nav": "SettingScreen",
+            "title": "Innstillinger"
+        },
+        {
+            "id": 2, 
+            "nav": "ReportScreen",   
+            "title": "Varsle"
+        },
+        {
+            "id": 3, 
+            "nav": "AboutScreen",
+            "title": "Om oss"
+        },
+        {
+            "id": 4, 
+            "nav": "BusinessScreen",
+            "title": "For bedrifter"
+        },
+        {
+            "id": 5, 
+            "nav": "LoginScreen",
+            "title": "Innsida (verv)"
+        }
+    ],
+    "version": "Versjon"
+}

@@ -1,0 +1,57 @@
+{
+    "info": [
+        { 
+            "title": "Tema",
+            "description": "Endrer appens fargetema."
+        },
+        { 
+            "title": "Språk",
+            "description": "Endrer språk."
+        },
+        {  
+            "title": "Varslinger"
+        },
+        {
+            "title": "Viktig informasjon",
+            "description": "Motta varsel om viktig informasjon, som tid for årsmøte etc."
+        },
+        {
+            "title": "Nye arrangementer"
+        },
+        {
+            "title": "Bedpres",
+            "description": "Varsel hver gang det legges ut ny bedriftpresentasjon."
+        },
+        {
+            "title": "TekKom",
+            "description": "Varsel hver gang det legges ut en TekKom samling."
+        },
+        { 
+            "title": "CTF",
+            "description": "Varsel hver gang det legges ut en CTF."
+        },
+        {
+            "title": "Sosialt",
+            "description": "Varsel hver gang det legges ut et EvntKom arrangement."
+        },
+        {
+            "title": "Karrieredag",
+            "description": "Varsel hver gang det legges ut en karrieredag."
+        },
+        {
+            "title": "Fadderuka",
+            "description": "Varsel hver gang det legges ut et fadderuka arrangement."
+        },
+        {
+            "title": "Login",
+            "description": "Varsel hver gang det legges ut et arrangement angående foreningens drift."
+        },
+        {
+            "title": "Annet",
+            "description": "Varsel hver gang det legges ut et ukategorisert arrangement."
+        },
+        { 
+            "title": "Påminnelser"
+        }
+    ]
+}
