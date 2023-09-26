@@ -3,6 +3,7 @@ import { ExtendedRouteOptions, StackProps } from "@interfaces"
 import { NavigationContainer } from "@react-navigation/native"
 import ProfileScreen from "@screens/menu/profile/profile"
 import SpecificEventScreen from "@screens/specificEvent"
+// import NotificationScreen from "@screens/notifications"
 import LoginScreen from "@screens/menu/profile/login"
 import InternalScreen from "@screens/menu/internal"
 import BusinessScreen from "@screens/menu/business"
@@ -32,6 +33,7 @@ export default function Navigator(): JSX.Element {
     const isDark = theme === 0 || theme === 2 || theme === 3 ? true : false
 
     const screens = [
+        // { name: "NotificationScreen",   component: NotificationScreen},
         {
             name: "EventScreen",
             component: EventScreen,
