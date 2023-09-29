@@ -9,24 +9,29 @@
         },
         {
             "id": 2, 
+            "nav": "NotificationScreen",
+            "title": "Notifications"
+        },
+        {
+            "id": 3, 
             "nav": "ReportScreen",   
             "title": "Report" 
         },
         {
-            "id": 3, 
+            "id": 4, 
             "nav": "AboutScreen",     
             "title": "About Login"    
         },
         {
-            "id": 4, 
+            "id": 5, 
             "nav": "BusinessScreen",  
             "title": "For companies" 
         },
         {
-            "id": 5, 
+            "id": 6, 
             "nav": "LoginScreen",     
             "title": "Intranet (verv)"
         }
     ],
-    "version": "Version"
+    "version": "Version "
 }

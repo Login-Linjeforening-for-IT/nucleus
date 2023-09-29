@@ -37,7 +37,7 @@ export default function EventTime({startTime, endTime}: EventTimeProps): JSX.Ele
 /**
  * Function for displaying the event status, how long till it starts, how long its been ongoing, or how long till it ends
  * @param {string} startTime
- * @param {string} endTime
+ * @param endTime
  * @returns Event start time, as a text inside a view
  */
 export function stringEvent({startTime, endTime}: EventTimeProps): string { // startTime

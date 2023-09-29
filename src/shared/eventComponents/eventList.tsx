@@ -62,6 +62,7 @@ type FullCategorySquareProps = {
     item: EventProps
     theme: number
     lang: boolean
+    height?: number
 }
 
 export default function EventList ({
@@ -153,7 +154,7 @@ function EventCard ({
             }>
                 {(index === 0 && search === false)
                     && Space(Dimensions.get("window").height/8.1)}
-                <Cluster marginVertical={8} marginHorizontal={12}>
+                <Cluster marginVertical={8}>
                     {index === 0 ? Space(8):null}
                     <View style={ES.eventBack}>
                         <FullCategorySquare 
@@ -211,10 +212,10 @@ lastSave, lang, theme}: ListFooterProps): JSX.Element {
     )
 }
 
-function FullCategorySquare({item,theme, lang}: FullCategorySquareProps) {
+export function FullCategorySquare({item, theme, lang, height}: FullCategorySquareProps) {
     return (
         <View>
-            <CategorySquare category={item.category} />
+            <CategorySquare category={item.category} height={height} />
 
             <Text style={{
                 ...ES.eventCardDayText,

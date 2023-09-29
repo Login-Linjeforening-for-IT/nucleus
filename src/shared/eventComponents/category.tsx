@@ -3,16 +3,21 @@ import { ES } from "@styles/eventStyles"
 import { View } from "react-native"
 import React from "react"
 
+type CategorySquareProps = {
+    category: string
+    height?: number
+}
+
 /**
  * Function for drawing a small square of the category of the event
  * @param {string} category Category of the event, Format: "CATEGORY"
  * @returns                 Small circle of the categories color
  */
-export default function CategorySquare({category}: {category: string}): 
+export default function CategorySquare({category, height}: CategorySquareProps): 
 JSX.Element {
     return (
         <View style={ES.eventLight}>
-            <Svg width={45} height={65} fill={CategoryColor(category)}>
+            <Svg width={45} height={height ? 65 + height : 65} fill={CategoryColor(category)}>
                 <Rect width={40} height={65} ry={10}/>
             </Svg>
         </View>

@@ -105,7 +105,7 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
     const dispatch = useDispatch()
 
     // Navigates if the app is opened by a push notification
-    NavigateFromPushNotification({navigation, theme, 
+    NavigateFromPushNotification({navigation, theme,
         setPushNotification, setPushNotificationContent})
 
     // All categories to filter - DO NOT CHANGE IDS
@@ -365,6 +365,7 @@ function HeaderComponents({
 }: HeaderComponentProps): JSX.Element {
     const isDark = theme === 0 || theme === 2 || theme === 3 ? true : false
     if (!renderedArray.length) return <></>
+    
     return (
         <View style={MS.multiTop}>
             {clickedEvents.length > 0 ?

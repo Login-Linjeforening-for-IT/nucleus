@@ -1,9 +1,9 @@
 import FetchColor from "@styles/fetchTheme"
-import React, { useEffect } from "react"
+import React from "react"
 import { GS } from "@styles/globalStyles"
 import { View, Text, Platform, TouchableOpacity } from "react-native"
 import { BlurView } from "expo-blur"
-import { Navigation, ScreenProps } from "@interfaces"
+import { Navigation } from "@interfaces"
 
 type NotificationInAppProps = {
     title: string
@@ -14,7 +14,6 @@ type NotificationInAppProps = {
 
 export default function NotificationInApp(props: NotificationInAppProps, 
 navigation: Navigation): JSX.Element {
-    console.log(props)
     // useEffect(() => {
 
     // }, [])

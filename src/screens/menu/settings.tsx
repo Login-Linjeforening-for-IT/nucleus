@@ -60,7 +60,7 @@ function Content({theme, lang}: ContentProps): JSX.Element {
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
             {Space(Dimensions.get("window").height/8.1)}
-            <Cluster>
+            <Cluster marginHorizontal={0}>
                 <View style={GS.notificationBack}>
                     <View style={GS.view}>
                         <Text style={{
@@ -104,7 +104,6 @@ function Content({theme, lang}: ContentProps): JSX.Element {
             {Space(10)}
             <Text style={{
                 ...T.text30, 
-                left: 15, 
                 color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})
             }}>
                     {info[2].title}
@@ -116,7 +115,6 @@ function Content({theme, lang}: ContentProps): JSX.Element {
             {Space(10)}
             <Text style={{
                 ...T.text25, 
-                left: 15, 
                 color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})
             }}>
                 {info[4].title}
@@ -134,7 +132,7 @@ function Content({theme, lang}: ContentProps): JSX.Element {
 
             {Space(10)}
             <Text style={{
-                ...T.text25, left: 15, 
+                ...T.text25,
                 color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})
             }}>
                 {info[13].title}

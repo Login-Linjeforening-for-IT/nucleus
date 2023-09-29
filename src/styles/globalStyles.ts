@@ -4,6 +4,7 @@ export const GS = StyleSheet.create({
     // Main view of every screen
     content: {
         height: Dimensions.get("window").height + 200,
+        paddingHorizontal: 12
     },
     // ReportScreen description text
     reportInputContentText: {
@@ -80,7 +81,6 @@ export const GS = StyleSheet.create({
     },
     reminderDropdown: {
         flexDirection: "row",
-        paddingHorizontal: 15,
         alignItems: "center",
         height: 40,
         justifyContent: "space-between",

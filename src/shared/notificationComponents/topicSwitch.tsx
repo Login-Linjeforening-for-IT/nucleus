@@ -20,10 +20,9 @@ type TopicSwitchProps = {
 /**
 * List of switch for notification intervals on SES.
 *
-* @topic Topic user should be subscribed to, or unsubscribed from
-* @param {string} topic Topic user should be subscribed to or unsubscribed from
-* @param {string} topicTitle Title of the topics the list is for
-* @param {boolean} length Whether to include week option or not
+* @param topic Topic user should be subscribed to or unsubscribed from
+* @param topicTitle Title of the topics the list is for
+* @param length Whether to include week option or not
 * @returns Visual list of switches
 */
 export default function topicSwitchList({category, showLast}: TopicSwitchListProps): JSX.Element {

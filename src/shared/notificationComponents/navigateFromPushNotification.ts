@@ -5,11 +5,19 @@
 import { ScreenProps } from "@interfaces"
 import { useEffect, useState } from "react"
 import NotificationInApp from "@shared/notificationComponents/notificationInApp"
+import { useDispatch } from "react-redux"
+import AsyncStorage from "@react-native-async-storage/async-storage"
 
 interface PushNotificationProps extends ScreenProps {
     theme: number
     setPushNotification: React.Dispatch<React.SetStateAction<boolean>>
     setPushNotificationContent: React.Dispatch<React.SetStateAction<JSX.Element | undefined>>
+}
+
+type StoreNotificationProps = {
+    title: string
+    body: string
+    data: any
 }
 
 /**
@@ -36,23 +44,39 @@ setPushNotification, setPushNotificationContent }: PushNotificationProps) {
     // COMMENT IN THIS BOX WHILE TESTING IN EXPO 6/6
     return null
     // COMMENT IN THIS BOX WHILE TESTING IN EXPO 6/6
-    
-    const [event, setEvent] = useState<{ [key: string]: string } 
+
+    const [event, setEvent] = useState<{ [key: string]: any } 
     | undefined>(undefined)
 
     useEffect(() => {
         // Check whether the app was opened from a tapped notification
         const unsubscribeOnOpen = messaging().onNotificationOpenedApp(
             (remoteMessage: FirebaseMessagingTypes.RemoteMessage) => {
-            setEvent(remoteMessage.data)
+                if (remoteMessage && remoteMessage.notification 
+                    && remoteMessage.notification.title 
+                    && remoteMessage.notification.body) {
+                        const title = remoteMessage.notification.title
+                        const body = remoteMessage.notification.body
+                        const data = remoteMessage.data
+        
+                        StoreNotification({title, body, data})
+                        setEvent(remoteMessage.data)
+                }
         })
 
         // Check if the app was opened by a notification when it was terminated
         messaging().getInitialNotification().then((remoteMessage: 
             FirebaseMessagingTypes.RemoteMessage | null) => {
-            if (remoteMessage && 'data' in remoteMessage) {
-                setEvent(remoteMessage.data)
-            }
+                if (remoteMessage && remoteMessage.notification 
+                    && remoteMessage.notification.title 
+                    && remoteMessage.notification.body) {
+                        const title = remoteMessage.notification.title
+                        const body = remoteMessage.notification.body
+                        const data = remoteMessage.data
+        
+                        StoreNotification({title, body, data})
+                        setEvent(remoteMessage.data)
+                }
         })
 
         return unsubscribeOnOpen
@@ -69,7 +93,9 @@ setPushNotification, setPushNotificationContent }: PushNotificationProps) {
                 const body = remoteMessage.notification.body
                 const data = remoteMessage.data
 
-                setPushNotification(true);
+                StoreNotification({title, body, data})
+                setPushNotification(true)
+
                 const notificationElement = (
                     () => NotificationInApp({title, body, data, theme}, navigation)
                 )
@@ -85,4 +111,32 @@ setPushNotification, setPushNotificationContent }: PushNotificationProps) {
         setEvent(undefined)
         navigation.navigate("SpecificEventScreen", {item: temp})
     }
+}
+
+/**
+ * Stores notifications in the notification list
+ * 
+ * @param title Title of the notification
+ * @param body Body of the notification
+ * @param data Event data sent with the notification
+ */
+function StoreNotification({ title, body, data }: StoreNotificationProps) {
+    (async() => {
+        // Get the stored notification list from AsyncStorage
+        const storedString = await AsyncStorage.getItem("notificationList")
+        let storedArray = []
+
+        // Check if the list contained anything, and if so set it as the stored array
+        if (storedString) {
+            storedArray = JSON.parse(storedString);
+        }
+
+        // Add the new item to the array
+        const newItem = { title, body, data, time: new Date() }
+        storedArray.push(newItem)
+
+        console.log(storedArray.length)
+        // Store the updated array back to AsyncStorage
+        await AsyncStorage.setItem("notificationList", JSON.stringify(storedArray))
+    })()
 }

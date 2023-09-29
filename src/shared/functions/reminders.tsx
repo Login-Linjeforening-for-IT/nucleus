@@ -30,7 +30,7 @@ export default function Reminders() {
     const showCategory = (val: number) => {
         if (category === val) setCategory(-1)
         else setCategory(val)
-      }
+    }
 
     return (
         <View>

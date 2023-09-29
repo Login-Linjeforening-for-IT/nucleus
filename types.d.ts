@@ -42,7 +42,6 @@ type ReduxState = {
     }
     notification: NotificationProps
     profile: ProfileProps
-    list: NotificationList[]
 }
 
 type ProfileProps = any
@@ -219,4 +218,5 @@ type NotificationList = {
     title: string
     body: string
     data: DetailedEventProps
+    time: string
 }
