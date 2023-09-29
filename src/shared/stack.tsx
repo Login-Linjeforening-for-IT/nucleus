@@ -79,7 +79,6 @@ export default function Navigator(): JSX.Element {
                     headerShown: true,
                     headerTransparent: true,
                     header: Header,
-                    headerComponents: []
                 } as ExtendedRouteOptions}
                 // Sets the tab bar component
                 tabBar={props => <Footer 

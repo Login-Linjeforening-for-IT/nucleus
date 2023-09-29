@@ -35,7 +35,7 @@ export interface ExtendedRouteOptions extends Omit<BottomTabNavigationOptions, '
     focusedIcon?: ImageSourcePropType
     themeIcon?: ImageSourcePropType
     backIcon?: boolean
-    headerComponents?: ReactNode[]
+    headerComponents?: {bottom: JSX.Element[], right: JSX.Element[], left: JSX.Element[]}
     header?: (props: ExtendedBottomTabHeaderProps)=>ReactNode
 }
 

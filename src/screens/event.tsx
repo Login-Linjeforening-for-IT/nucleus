@@ -35,9 +35,12 @@ import {
     Dimensions,
     Platform,
 } from "react-native"
-import { ScreenProps } from "@interfaces"
+import { ExtendedRouteOptions, ScreenProps } from "@interfaces"
 import { ExtendedBottomTabHeaderProps } from "@interfaces"
 import { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs"
+import logoNavigation from "@shared/functions/logoNavigation"
+import Header from "@shared/functions/header"
+import filterButton from "@shared/eventComponents/filterButton"
 
 type HeaderComponentProps = {
     renderedArray: EventProps[]
@@ -112,11 +115,15 @@ export default function EventScreen({layout, options, route, navigation}: Extend
     ]
 
     useEffect(()=>{
-        navigation.setOptions({headerComponents:[
-            <View style={{width: 20, height: 20, backgroundColor: 'red'}}/>
-            ]} as Partial<BottomTabNavigationOptions>)
+        navigation.setOptions({
+            headerComponents: {
+                bottom: [FilterUI({textInputRef, setRenderedArray, setClickedCategory, relevantCategories, clickedCategory, theme, search, setInput, items: events})],
+                left: [logoNavigation(navigation, isDark)],
+                right: [filterButton(search, renderedArray, clickedCategory, input, toggleSearch, isDark)]
+            }
+        } as Partial<BottomTabNavigationOptions>)
             
-    },[navigation, FilterUI])
+    },[navigation, search, renderedArray, clickedCategory, input, toggleSearch, isDark, textInputRef, setRenderedArray, setClickedCategory, relevantCategories, clickedCategory, theme, search, setInput, events])
 
     //  --- FETCHES CLICKED EVENTS WHEN SCREEN BECOMES VISIBLE ---
     useFocusEffect(
