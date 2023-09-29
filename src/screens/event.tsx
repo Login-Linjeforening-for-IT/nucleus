@@ -36,6 +36,8 @@ import {
     Platform,
 } from "react-native"
 import { ScreenProps } from "@interfaces"
+import { ExtendedBottomTabHeaderProps } from "@interfaces"
+import { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs"
 
 type HeaderComponentProps = {
     renderedArray: EventProps[]
@@ -63,7 +65,7 @@ type HeaderComponentProps = {
  * @param {navigation} Navigation Navigation route
  * @returns EventScreen
  */
-export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
+export default function EventScreen({layout, options, route, navigation}: ExtendedBottomTabHeaderProps): JSX.Element {
     // Events from api
     const [events, setEvents] = useState<EventProps[]>([])
     // Events currently displayed
@@ -108,6 +110,13 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
         {id: 8, category: "LOGIN"},
         {id: 9, category: "ANNET"}
     ]
+
+    useEffect(()=>{
+        navigation.setOptions({headerComponents:[
+            <View style={{width: 20, height: 20, backgroundColor: 'red'}}/>
+            ]} as Partial<BottomTabNavigationOptions>)
+            
+    },[navigation, FilterUI])
 
     //  --- FETCHES CLICKED EVENTS WHEN SCREEN BECOMES VISIBLE ---
     useFocusEffect(
@@ -285,7 +294,7 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
                 {Space(Dimensions.get("window").height/3)}
             </View>
 
-            {Platform.OS === "ios" 
+            {/* {Platform.OS === "ios" 
                 ? <BlurView style={MS.topMenu} intensity={30}/>
                 : <View style={{
                     ...MS.topMenu, 
@@ -326,8 +335,8 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
                     input={input}
                     toggleSearch={toggleSearch}
                     search={search}
-                />
-            </View>
+                /> */}
+            {/* </View> */}
         </View>
     )
 }

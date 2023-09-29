@@ -1,17 +1,19 @@
-import { NavigationHelpers, ParamListBase } from "@react-navigation/native";
+import { NavigationHelpers, NavigationProp, ParamListBase } from "@react-navigation/native";
 import { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs';
 import { DimensionValue, ImageSourcePropType } from "react-native"
 import { RouteProp } from "@react-navigation/native"
 import { 
     BottomTabBarProps,
-    BottomTabNavigationEventMap
+    BottomTabNavigationEventMap,
+    BottomTabHeaderProps
 } from "@react-navigation/bottom-tabs/lib/typescript/src/types"
+import { ReactNode } from "react";
 
 export interface ExtendedTabNavigationOptions 
 extends BottomTabNavigationOptions {
     display?: boolean
     focusedIcon?: ImageSourcePropType
-    icon?: ImageSourcePropType
+    icon?: ImageSourcePropType  
 }
   
 export interface ExtendedDescriptor {
@@ -23,23 +25,30 @@ extends Omit<BottomTabBarProps, 'descriptors'> {
     descriptors: Record<string, ExtendedDescriptor>;
 }
 
-export interface ExtendedRouteOptions extends BottomTabNavigationOptions {
+export interface ExtendedBottomTabHeaderProps 
+    extends Omit<BottomTabHeaderProps, 'options'> {
+    options: ExtendedRouteOptions
+}
+
+export interface ExtendedRouteOptions extends Omit<BottomTabNavigationOptions, 'header'> {
     display?: boolean
     focusedIcon?: ImageSourcePropType
     themeIcon?: ImageSourcePropType
+    backIcon?: boolean
+    headerComponents?: ReactNode[]
+    header?: (props: ExtendedBottomTabHeaderProps)=>ReactNode
 }
 
 export interface ScreenProps {
     navigation: Navigation
 }
 
-export interface SpecificEventScreenProps {
-    navigation: Navigation
-    item: EventProps
-}
+// export interface SpecificEventScreenProps {
+//     navigation: Navigation
+//     item: EventProps
+// }
 
-export type Navigation = NavigationHelpers<ParamListBase, 
-BottomTabNavigationEventMap>
+export type Navigation = NavigationProp<ParamListBase>
 
 export interface SpecificEventScreenProps extends ExtendedBottomTabBarProps {
     route: RouteProp<RootStackParamList, 'SpecificEventScreen'>
