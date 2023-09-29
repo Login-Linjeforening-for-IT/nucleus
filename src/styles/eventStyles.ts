@@ -112,6 +112,7 @@ export const ES = StyleSheet.create({
     // View to change the flex direction to horizontally align items
     absoluteView: {
         flexDirection: "row",
+        display: 'flex'
     },
     // Position of specific event color circle
     eventLight: {
@@ -187,18 +188,16 @@ export const ES = StyleSheet.create({
     },
     // Filter view
     clusterFilterView: {
-        paddingTop: 10,
         flexDirection: "row",
     },
     // EventScreen filter text
     clusterFilterText: {
         alignSelf: "center",
         alignItems: "center",
-        marginTop: 10,
-        width: "100%",
-        paddingTop: 10,
         height: 30,
         color: "white", // White text color (should be moved to depend on theme)
+        display: 'flex',
+        flexGrow: 1
     },
     // Position of eventfilter check icon
     checkBox: {
@@ -241,8 +240,6 @@ export const ES = StyleSheet.create({
     },
     // Filter reset icon
     clusterFilterResetIcon: {
-        left: -45,
-        top: 10,
         height: 40,
         width: 40,
     },

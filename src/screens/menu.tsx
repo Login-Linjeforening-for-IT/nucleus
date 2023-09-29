@@ -7,8 +7,7 @@ import FetchColor from "@styles/fetchTheme"
 import { CS } from "@styles/clusterStyles"
 import { GS } from "@styles/globalStyles"
 import { useSelector } from "react-redux"
-import React, { useState } from "react"
-import TopMenu from "@shared/topMenu"
+import React, { useEffect, useState } from "react"
 import en from "@text/en/menu.json"
 import no from "@text/no/menu.json"
 import { T } from "@styles/text"
@@ -20,6 +19,8 @@ import {
   TouchableOpacity,
   Dimensions,
 } from "react-native"
+import LogoNavigation from "@shared/functions/logoNavigation"
+import { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs"
 
 type MenuItemProps = {
     index: number
@@ -46,8 +47,19 @@ export default function MenuScreen({ navigation }: ScreenProps): JSX.Element {
     const { theme } = useSelector( (state: ReduxState) => state.theme )
     const { id, name, image } = useSelector( (state: ReduxState) => 
     state.profile )
+    const isDark = theme === 0 || theme === 2 || theme === 3 ? true : false
     const profile = { id: 0, name: "Eirik Hanasand", image}
     const text = lang ? no : en
+
+    useEffect(()=>{
+        navigation.setOptions({
+            headerComponents: {
+                bottom: [],
+                left: [LogoNavigation(navigation, isDark)],
+                right: []
+            }
+        } as Partial<BottomTabNavigationOptions>)
+    }, [navigation])
 
     // Feedback options visibility boolean
     const [feedback, setFeedback] = useState(false)
@@ -85,11 +97,6 @@ export default function MenuScreen({ navigation }: ScreenProps): JSX.Element {
                 />
                 {Space(Dimensions.get("window").height / 10)}
             </View>
-            <TopMenu 
-                navigation={navigation} 
-                screen={text.nav}
-                title={text.screen}
-            />
         </View>
     )
 }

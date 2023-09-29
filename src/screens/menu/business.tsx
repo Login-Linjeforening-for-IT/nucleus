@@ -8,7 +8,6 @@ import no from "@text/no/companiesPage.json"
 import FetchColor from "@styles/fetchTheme"
 import { GS } from "@styles/globalStyles"
 import { useSelector } from "react-redux"
-import TopMenu from "@shared/topMenu"
 import { T } from "@styles/text"
 import { ScreenProps } from "@interfaces"
 import React from "react"
@@ -37,13 +36,7 @@ JSX.Element {
                     {Space(10)}
                     {Space(Dimensions.get("window").height/3)}
                     </ScrollView>
-                </View>
-            <TopMenu 
-                navigation={navigation} 
-                screen="business" 
-                title={info.title}
-                back={"MenuScreen"}
-            />
+            </View>
         </View>
     )
 }

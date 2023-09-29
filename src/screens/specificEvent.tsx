@@ -15,7 +15,6 @@ import { GS } from "@styles/globalStyles"
 import { SvgUri } from "react-native-svg"
 import { useSelector } from "react-redux"
 import { ES } from "@styles/eventStyles"
-import TopMenu from "@shared/topMenu"
 import { T } from "@styles/text"
 import {
   TouchableOpacity,
@@ -335,12 +334,6 @@ SpecificEventScreenProps): JSX.Element {
                 {Space(Dimensions.get("window").height/3)}
             </ScrollView>
         </View>
-        <TopMenu 
-            navigation={navigation} 
-            screen="ses" 
-            title={item.eventname} 
-            back={"EventScreen"}
-        />
     </View>
   )
 }

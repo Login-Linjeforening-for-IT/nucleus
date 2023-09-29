@@ -11,7 +11,6 @@ import { useSelector } from "react-redux"
 import no from "@text/no/report.json"
 import en from "@text/en/report.json"
 import React, { useState } from "react"
-import TopMenu from "@shared/topMenu"
 import { T } from "@styles/text"
 import {
     TouchableWithoutFeedback,
@@ -226,13 +225,6 @@ const inputContent = (val: string) => {
         </View>
         {Space(Dimensions.get("window").height/10)}
     </View>
-
-        <TopMenu 
-            navigation={navigation} 
-            screen={text.alert} 
-            title={text.alert} 
-            back={text.back}
-        />
         </View>
     </TouchableWithoutFeedback>
 

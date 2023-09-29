@@ -6,7 +6,6 @@ import { GS } from "@styles/globalStyles"
 import { useSelector } from "react-redux"
 import en from "@text/en/aboutPage.json"
 import no from "@text/no/aboutPage.json"
-import TopMenu from "@shared/topMenu"
 import React, {useState} from "react"
 import { T } from "@styles/text"
 import { ScreenProps } from "@interfaces"
@@ -217,12 +216,6 @@ export default function AboutScreen( { navigation }: ScreenProps): JSX.Element {
                     {Space(Dimensions.get("window").height/3)}
                 </ScrollView>
             </View>
-            <TopMenu 
-                navigation={navigation}
-                screen={text.nav}
-                title={text.screen} 
-                back={text.back}
-            />
         </View>
     )
 }

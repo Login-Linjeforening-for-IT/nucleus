@@ -3,14 +3,12 @@ import { ParamListBase } from "@react-navigation/native";
 import { MS } from "@styles/menuStyles";
 import { Image } from "react-native";
 import { TouchableOpacity } from "react-native";
-import { StackActions } from "@react-navigation/native";
-import { ReactNode } from "react";
 
-export default function (navigation: BottomTabNavigationProp<ParamListBase>, isDark: boolean): JSX.Element {
-
+export default function LogoNavigation (navigation: BottomTabNavigationProp<ParamListBase>, isDark: boolean): JSX.Element {
     return (
         <TouchableOpacity
-            onPress={() => { navigation.getState().index == 0 ? null : StackActions.popToTop() }}>
+            // TOTDO: Place initial screen name i state so 'Eventscreen ikke er hardcoded'
+            onPress={() => { navigation.getState().index == 0 ? null : navigation.navigate('EventScreen')}}>
             <Image
                 style={MS.tMenuIcon}
                 source={isDark

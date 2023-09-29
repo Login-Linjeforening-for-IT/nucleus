@@ -34,13 +34,14 @@ import {
     TouchableOpacity,
     Dimensions,
     Platform,
+    StatusBar as StatusBarReact
 } from "react-native"
 import { ExtendedRouteOptions, ScreenProps } from "@interfaces"
 import { ExtendedBottomTabHeaderProps } from "@interfaces"
 import { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs"
-import logoNavigation from "@shared/functions/logoNavigation"
-import Header from "@shared/functions/header"
-import filterButton from "@shared/eventComponents/filterButton"
+import LogoNavigation from "@shared/functions/logoNavigation"
+import FilterButton from "@shared/eventComponents/filterButton"
+import DownloadButton from "@shared/eventComponents/downloadButton"
 
 type HeaderComponentProps = {
     renderedArray: EventProps[]
@@ -114,12 +115,13 @@ export default function EventScreen({layout, options, route, navigation}: Extend
         {id: 9, category: "ANNET"}
     ]
 
+    // --- SET THE COMPONENTS OF THE HEADER ---
     useEffect(()=>{
         navigation.setOptions({
             headerComponents: {
                 bottom: [FilterUI({textInputRef, setRenderedArray, setClickedCategory, relevantCategories, clickedCategory, theme, search, setInput, items: events})],
-                left: [logoNavigation(navigation, isDark)],
-                right: [filterButton(search, renderedArray, clickedCategory, input, toggleSearch, isDark)]
+                left: [LogoNavigation(navigation, isDark)],
+                right: [FilterButton(search, renderedArray, clickedCategory, input, toggleSearch, isDark), DownloadButton(clickedEvents, setDownloadState, downloadState, calendarID, dispatch, isDark)]
             }
         } as Partial<BottomTabNavigationOptions>)
             
@@ -271,18 +273,6 @@ export default function EventScreen({layout, options, route, navigation}: Extend
                 ...GS.content, 
                 backgroundColor: FetchColor({theme, variable: "DARKER"})
             }}>
-                {search === true && Space(Dimensions.get("window").height/9)}
-                <FilterUI
-                    textInputRef={textInputRef}
-                    setRenderedArray={setRenderedArray}
-                    setClickedCategory={setClickedCategory}
-                    relevantCategories={relevantCategories}
-                    clickedCategory={clickedCategory}
-                    theme={theme}
-                    search={search}
-                    setInput={setInput}
-                    items={events}
-                />
 
                 <EventList
                     navigation={navigation}
@@ -298,110 +288,7 @@ export default function EventScreen({layout, options, route, navigation}: Extend
                     events={events}
                     ErrorMessage={ErrorMessage}
                 />
-                {Space(Dimensions.get("window").height/3)}
             </View>
-
-            {/* {Platform.OS === "ios" 
-                ? <BlurView style={MS.topMenu} intensity={30}/>
-                : <View style={{
-                    ...MS.topMenu, 
-                    backgroundColor: FetchColor({theme, 
-                        variable: "TRANSPARENTANDROID"})
-                }} />
-            }
-            <View style={{
-                ...MS.topMenu, 
-                backgroundColor: FetchColor({theme, variable: "TRANSPARENT"})
-            }}>
-                <TouchableOpacity style={MS.logoBackground}>
-                <Image 
-                    style={MS.tMenuIcon} 
-                    source={isDark
-                        ? require("@assets/logo/loginText.png")
-                        : require("@assets/logo/loginText-black.png")} 
-                />
-                </TouchableOpacity>
-                {
-                    <Text style={{
-                        ...MS.smallTitle, 
-                        left: "-5%", 
-                        color: FetchColor({theme, variable: "TITLETEXTCOLOR"})
-                    }}>
-                        {lang ? "Events" : "Arrangementer"}
-                    </Text>
-                }
-                <HeaderComponents 
-                    renderedArray={renderedArray}
-                    clickedEvents={clickedEvents}
-                    setDownloadState={setDownloadState}
-                    downloadState={downloadState}
-                    calendarID={calendarID}
-                    dispatch={dispatch}
-                    theme={theme}
-                    clickedCategory={clickedCategory}
-                    input={input}
-                    toggleSearch={toggleSearch}
-                    search={search}
-                /> */}
-            {/* </View> */}
-        </View>
-    )
-}
-
-function HeaderComponents({
-    renderedArray, 
-    clickedEvents, 
-    setDownloadState, 
-    downloadState, 
-    calendarID, 
-    dispatch, 
-    theme, 
-    clickedCategory, 
-    input, 
-    toggleSearch, 
-    search
-}: HeaderComponentProps): JSX.Element {
-    const isDark = theme === 0 || theme === 2 || theme === 3 ? true : false
-    if (!renderedArray.length) return <></>
-    return (
-        <View style={MS.multiTop}>
-            {clickedEvents.length > 0 ?
-                <TouchableOpacity 
-                    style={MS.touchableIcon} 
-                    onPress={async () => await handleDownload({
-                        setDownloadState, downloadState, clickedEvents, 
-                        calendarID, dispatch})}>
-                    <Image 
-                        style={MS.multiIcon}
-                        source={isDark
-                            ? timeSince(downloadState) >= 1000 
-                                ? require("@assets/icons/download.png")
-                                : require("@assets/icons/download-orange.png")
-                            : require("@assets/icons/download-black.png")} />
-                </TouchableOpacity>
-            :null}
-
-            {renderedArray.length > 0 || clickedCategory.length > 0 || 
-            input.length ?
-                <TouchableOpacity 
-                    style={MS.touchableIcon} 
-                    onPress={toggleSearch}
-                >
-                    {search
-                        ? <Image 
-                            style={MS.multiIcon} 
-                            source={require("@assets/icons/filter-orange.png")}
-                        />
-                        : <Image 
-                            style={MS.multiIcon} 
-                            source={isDark
-                                ? require("@assets/icons/filter.png") 
-                                : require("@assets/icons/filter-black.png")
-                            }
-                        />
-                    }
-                </TouchableOpacity>
-            :null}
         </View>
     )
 }

@@ -5,7 +5,8 @@ import { RouteProp } from "@react-navigation/native"
 import { 
     BottomTabBarProps,
     BottomTabNavigationEventMap,
-    BottomTabHeaderProps
+    BottomTabHeaderProps,
+    BottomTabNavigationProp
 } from "@react-navigation/bottom-tabs/lib/typescript/src/types"
 import { ReactNode } from "react";
 
@@ -35,7 +36,7 @@ export interface ExtendedRouteOptions extends Omit<BottomTabNavigationOptions, '
     focusedIcon?: ImageSourcePropType
     themeIcon?: ImageSourcePropType
     backIcon?: boolean
-    headerComponents?: {bottom: JSX.Element[], right: JSX.Element[], left: JSX.Element[]}
+    headerComponents?: {bottom?: JSX.Element[], right?: JSX.Element[], left?: JSX.Element[]}
     header?: (props: ExtendedBottomTabHeaderProps)=>ReactNode
 }
 
@@ -48,7 +49,7 @@ export interface ScreenProps {
 //     item: EventProps
 // }
 
-export type Navigation = NavigationProp<ParamListBase>
+export type Navigation = BottomTabNavigationProp<ParamListBase, string, undefined>
 
 export interface SpecificEventScreenProps extends ExtendedBottomTabBarProps {
     route: RouteProp<RootStackParamList, 'SpecificEventScreen'>
