@@ -51,6 +51,7 @@ export default function MenuScreen({ navigation }: ScreenProps): JSX.Element {
     const profile = { id: 0, name: "Eirik Hanasand", image}
     const text = lang ? no : en
 
+    // --- SET THE COMPONENTS OF THE HEADER ---
     useEffect(()=>{
         navigation.setOptions({
             headerComponents: {
