@@ -7,13 +7,13 @@ export const AS = StyleSheet.create({
     },
     adViewLeft: {
         alignItems: "center",
-        width: "22%",
+        width: "26%",
     },
     adViewMid: {
         justifyContent: "center",
         left: Platform.OS === "ios" ? 7.5 : 10,
-        paddingHorizontal: Platform.OS === "ios" ? 6 : 6,
-        width: "69.5%",
+        paddingHorizontal: 6,
+        width: "65.5%",
     },
     adViewRight: {
         width: "8.5%",

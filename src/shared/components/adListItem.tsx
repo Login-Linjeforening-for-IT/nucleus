@@ -21,7 +21,7 @@ AdListItemProps): JSX.Element {
     const isOrange = clickedAds.some(ads => ads.id === ad.id) ? true : false
 
     return (
-        <Cluster>
+        <Cluster marginVertical={4} marginHorizontal={12}>
             <View style={AS.adBack}>
                 <View style={AS.adViewLeft}>
                     <AdClusterImage url={ad.logo} />
