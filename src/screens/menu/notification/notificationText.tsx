@@ -2,8 +2,8 @@ import FetchColor from "@styles/fetchTheme"
 import { NS } from "./notificationStyles"
 import React from "react"
 import { View, Text } from "react-native"
+
 type NotificationTextProps = {
-    item: EventProps
     theme: number
     title: string
     body: string

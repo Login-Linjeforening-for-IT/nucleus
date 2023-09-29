@@ -3,7 +3,7 @@ import Space from "@shared/components/utils"
 import FetchColor from "@styles/fetchTheme"
 import { GS } from "@styles/globalStyles"
 import React, { useEffect, useState } from "react"
-import { Navigation, ScreenProps } from "@interfaces"
+import { Navigation, NotificationScreenProps, ScreenProps } from "@interfaces"
 import { useSelector } from "react-redux"
 import { FullCategorySquare } from "@shared/eventComponents/eventList"
 import TopMenu from "@shared/topMenu"
@@ -12,8 +12,7 @@ import { NS } from "@screens/menu/notification/notificationStyles"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import NotificationText from "@screens/menu/notification/notificationText"
 
-export default function NotificationScreen({back}: {back: string}, 
-{ navigation }: ScreenProps): JSX.Element {
+export default function NotificationScreen({navigation, back}: NotificationScreenProps): JSX.Element {
     const [list, setList] = useState(undefined)
     const { lang  } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
@@ -37,10 +36,10 @@ export default function NotificationScreen({back}: {back: string},
             <FlatList
                 showsVerticalScrollIndicator={false}
                 numColumns={1}
-                keyExtractor={(item, index) => `${index}`}
+                keyExtractor={(item, index) => index.toString()}
                 data={list}
                 renderItem={({item}) => (
-                    <Notification item={item} theme={theme} lang={lang} />
+                    <Notification item={item} theme={theme} lang={lang} navigation={navigation} />
                 )}
             />
         )
@@ -70,30 +69,34 @@ type NotificationInAppProps = {
     item: NotificationList
     theme: number
     lang: boolean
+    navigation: Navigation
 }
 
-function Notification(props: NotificationInAppProps, 
-navigation: Navigation): JSX.Element {
-    const { item } = props
+function Notification({item, theme, lang, navigation}: NotificationInAppProps): JSX.Element {
+
+    function navigateIfPossible() {
+        // Checks if the object has any properties, and if so navigates to SES
+        if (Object.keys(item.data).length) {
+            navigation.navigate("SpecificEventScreen", {item: item.data})
+        }
+    }
 
     return (
-        <TouchableOpacity onPress={() =>
-            navigation.navigate("SpecificEventScreen", {item: item})
-        }>
+        <TouchableOpacity onPress={navigateIfPossible}>
             <Cluster marginVertical={12}>
                 <View style={NS.notificationBack}>
                     <View style={NS.notificationViewLeft}>
                         <FullCategorySquare
                             item={item.data}
-                            theme={props.theme}
-                            lang={props.lang}
+                            theme={theme}
+                            lang={lang}
                             height={2*item.body.length}
                         />
                     </View>
                     <View style={NS.notificationViewMid}>
-                        <NotificationText item={item.data} title={item.title} body={item.body} theme={props.theme} />
+                        <NotificationText title={item.title} body={item.body} theme={theme} />
                     </View>
-                    <Text style={{...NS.time, right: 35, color: FetchColor({theme: props.theme, variable: "TITLETEXTCOLOR"})}}>
+                    <Text style={{...NS.time, right: 35, color: FetchColor({theme: theme, variable: "TITLETEXTCOLOR"})}}>
                         {displayTime(item.time)}
                     </Text>
                 </View>

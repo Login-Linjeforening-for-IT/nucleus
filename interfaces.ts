@@ -47,3 +47,8 @@ export interface ClusterProps extends React.PropsWithChildren<{}> {
     marginVertical?: DimensionValue
     marginHorizontal?: DimensionValue
 }
+
+export type NotificationScreenProps = {
+    back: string
+    navigation: Navigation
+}

@@ -1,5 +1,5 @@
 // COMMENT IN THIS BOX WHILE TESTING IN EXPO 6/6
-// import messaging, { FirebaseMessagingTypes } from "@react-native-firebase/messaging"
+import messaging, { FirebaseMessagingTypes } from "@react-native-firebase/messaging"
 // COMMENT IN THIS BOX WHILE TESTING IN EXPO 6/6
 
 import { ScreenProps } from "@interfaces"
@@ -42,7 +42,7 @@ type StoreNotificationProps = {
 export default function NavigateFromPushNotification({ navigation, theme, 
 setPushNotification, setPushNotificationContent }: PushNotificationProps) {
     // COMMENT IN THIS BOX WHILE TESTING IN EXPO 6/6
-    return null
+    // return null
     // COMMENT IN THIS BOX WHILE TESTING IN EXPO 6/6
 
     const [event, setEvent] = useState<{ [key: string]: any } 
@@ -131,11 +131,10 @@ function StoreNotification({ title, body, data }: StoreNotificationProps) {
             storedArray = JSON.parse(storedString);
         }
 
-        // Add the new item to the array
+        // Adds the new notification to the start of the list
         const newItem = { title, body, data, time: new Date() }
-        storedArray.push(newItem)
-
-        console.log(storedArray.length)
+        storedArray.unshift(newItem)
+        
         // Store the updated array back to AsyncStorage
         await AsyncStorage.setItem("notificationList", JSON.stringify(storedArray))
     })()
