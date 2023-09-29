@@ -33,42 +33,42 @@ export default function Navigator(): JSX.Element {
     const isDark = theme === 0 || theme === 2 || theme === 3 ? true : false
 
     const screens = [
-        { name: "NotificationScreen",   component: NotificationScreen},
         {
             name: "EventScreen",
             component: EventScreen,
             focusedIcon: require("@assets/menu/calendar-orange.png"),
             icon: isDark
-                ? require("@assets/menu/calendar777.png")
-                : require("@assets/menu/calendar-black.png")
+            ? require("@assets/menu/calendar777.png")
+            : require("@assets/menu/calendar-black.png")
         },
         {
             name: "AdScreen",
             component: AdScreen,
             focusedIcon: require("@assets/menu/business-orange.png"),
             icon: isDark
-                ? require("@assets/menu/business.png")
-                : require("@assets/menu/business-black.png")
+            ? require("@assets/menu/business.png")
+            : require("@assets/menu/business-black.png")
         },
         {
             name: "MenuScreen",
             component: MenuScreen,
             focusedIcon: require("@assets/menu/menu-orange.png"),
             icon: isDark
-                ? require("@assets/menu/menu.png")
-                : require("@assets/menu/menu-black.png")
+            ? require("@assets/menu/menu.png")
+            : require("@assets/menu/menu-black.png")
         },
         { name: "AboutScreen",          component: AboutScreen},
-        { name: "SpecificEventScreen",  component: SpecificEventScreen},
         { name: "BusinessScreen",       component: BusinessScreen},
-        { name: "SettingScreen",        component: SettingScreen},
         { name: "InternalScreen",       component: InternalScreen},
         { name: "LoginScreen",          component: LoginScreen},
+        { name: "NotificationScreen",   component: NotificationScreen},
         { name: "ProfileScreen",        component: ProfileScreen},
-        { name: "SpecificAdScreen",     component: SpecificAdScreen},
         { name: "ReportScreen",         component: ReportScreen},
+        { name: "SettingScreen",        component: SettingScreen},
+        { name: "SpecificAdScreen",     component: SpecificAdScreen},
+        { name: "SpecificEventScreen",  component: SpecificEventScreen},
     ]
-
+    
     return (
         <NavigationContainer>
             <Tab.Navigator
