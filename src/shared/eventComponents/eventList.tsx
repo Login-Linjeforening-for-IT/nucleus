@@ -213,6 +213,9 @@ lastSave, lang, theme}: ListFooterProps): JSX.Element {
 }
 
 export function FullCategorySquare({item, theme, lang, height}: FullCategorySquareProps) {
+    const day = "startt" in item ? `${item.startt[8]}${item.startt[9]}` : new Date().getDate()
+    const month = "startt" in item ? parseInt(item.startt[5] + item.startt[6]) : new Date().getMonth() + 1
+
     return (
         <View>
             <CategorySquare category={item.category} height={height} />
@@ -220,10 +223,10 @@ export function FullCategorySquare({item, theme, lang, height}: FullCategorySqua
             <Text style={{
                 ...ES.eventCardDayText,
                 color: FetchColor({theme, variable: "TEXTCOLOR"})
-            }}>{item.startt[8]}{item.startt[9]}</Text>
+            }}>{day}</Text>
 
             <Month
-                month={parseInt(item.startt[5] + item.startt[6])}
+                month={month}
                 color={FetchColor({theme, variable: "TEXTCOLOR"})}
                 lang={lang}
             />

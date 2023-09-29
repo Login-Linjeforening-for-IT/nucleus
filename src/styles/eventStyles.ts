@@ -91,8 +91,8 @@ export const ES = StyleSheet.create({
     // The header image on specificEventScreen
     specificEventImage: {
         alignSelf: "center",
-        width: Dimensions.get("window").width - 4,
-        resizeMode: "contain",
+        width: Dimensions.get("window").width - 24,
+        resizeMode: "stretch",
         height: 150,
     },
     //======================== EventComponentStyles ===================
@@ -262,4 +262,7 @@ export const ES = StyleSheet.create({
     row: {
         flexDirection: "row",
     },
+    sesContent: {
+        height: Dimensions.get("window").height + 200,
+    }
 })

@@ -136,7 +136,7 @@ SpecificEventScreenProps): JSX.Element {
 
   return (
     <View>
-        <View style={{...GS.content, backgroundColor: FetchColor({theme, variable: "BACKGROUND"})}}>
+        <View style={{...ES.sesContent, backgroundColor: FetchColor({theme, variable: "BACKGROUND"})}}>
             <ScrollView showsVerticalScrollIndicator={false}>
 
             {Space((Dimensions.get("window").height/8)-5)}
