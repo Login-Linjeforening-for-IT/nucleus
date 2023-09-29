@@ -1,5 +1,5 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
-import { ExtendedRouteOptions, StackProps } from "@interfaces"
+import { ExtendedRouteOptions, ExtendedTabNavigationOptions, StackProps } from "@interfaces"
 import { NavigationContainer } from "@react-navigation/native"
 import ProfileScreen from "@screens/menu/profile/profile"
 import SpecificEventScreen from "@screens/specificEvent"
@@ -17,6 +17,8 @@ import EventScreen from "@screens/event"
 import MenuScreen from "@screens/menu"
 import AdScreen from "@screens/ads"
 import React from "react"
+import Header from "@shared/functions/header"
+
 
 // Declares Tab to equal CBTN function
 const Tab = createBottomTabNavigator()
@@ -75,7 +77,11 @@ export default function Navigator(): JSX.Element {
                 // Set initialscreen at to not defaut to top of tab stack
                 initialRouteName={screens[0].name}
                 backBehavior="history"
-                screenOptions={{ headerShown: false }}
+                screenOptions={{ 
+                    headerShown: true,
+                    headerTransparent: true,
+                    header: props=> <Header {...props}/>
+                } as ExtendedRouteOptions}
                 // Sets the tab bar component
                 tabBar={props => <Footer 
                     state={props.state} 

@@ -210,13 +210,12 @@ export function fetchRelevantCategories ({setRelevantCategories, clickedEvents, 
  */
 export function FilterUI ({textInputRef, setRenderedArray, setClickedCategory,
 relevantCategories, clickedCategory, theme, search, setInput, items}: FilterUIProps): JSX.Element {
-    if (!search) return <></>
-    else return (
-        <View>
+    return (
+        <View style={search?{backgroundColor: FetchColor({theme, variable: "DARKER"})}:{display:'none'}}>
             <View style={ES.absoluteView}>
                 <TextInput
                     ref={textInputRef}
-                    style={{...ES.clusterFilterText, backgroundColor: FetchColor({theme, variable: "DARKER"})}}
+                    style={{...ES.clusterFilterText}}
                     maxLength={40}
                     placeholder="Søk.."
                     placeholderTextColor={FetchColor({theme, variable: "TITLETEXTCOLOR"})}
@@ -224,13 +223,14 @@ relevantCategories, clickedCategory, theme, search, setInput, items}: FilterUIPr
                     onChangeText={(val) => setInput(val)}
                     selectionColor={FetchColor({theme, variable: "ORANGE"})}
                 />
-                <TouchableOpacity onPress={() => {
+                <TouchableOpacity
+                onPress={() => {
                     setInput("")
                     setRenderedArray([...items])
                     setClickedCategory([])
                     if (textInputRef.current) textInputRef.current.clear()
                 }}>
-                        <Image style={ES.clusterFilterResetIcon} source={theme === 0 || theme === 2 || theme === 3 ? require("@assets/icons/reset.png") : require("@assets/icons/reset-black.png")} />
+                    <Image style={ES.clusterFilterResetIcon} source={theme === 0 || theme === 2 || theme === 3 ? require("@assets/icons/reset.png") : require("@assets/icons/reset-black.png")} />
                 </TouchableOpacity>
             </View>
 

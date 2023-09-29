@@ -8,7 +8,6 @@ import { PS } from "@styles/profileStyles"
 import { GS } from "@styles/globalStyles"
 import { useSelector } from "react-redux"
 import { ScreenProps } from "@interfaces"
-import TopMenu from "@shared/topMenu"
 import React, { useState } from "react"
 
 type ScrollProps = {
@@ -92,13 +91,6 @@ JSX.Element {
                 {Space(Dimensions.get("window").height/3)}
             </ScrollView>
         </View>
-
-        <TopMenu 
-            navigation={navigation} 
-            screen="profile" 
-            title={lang ? "Profil" : "Profile"} 
-            back={"MenuScreen"} 
-        />
     </View>
   )
 }

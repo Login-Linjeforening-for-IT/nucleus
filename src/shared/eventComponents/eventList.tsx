@@ -152,9 +152,9 @@ function EventCard ({
             <TouchableOpacity onPress={() =>
                     navigation.navigate("SpecificEventScreen", {item: item})
             }>
-                {(index === 0 && search === false)
-                    && Space(Dimensions.get("window").height/8.1)}
-                <Cluster marginVertical={8}>
+                {index === 0
+                    ? search===false? Space(Dimensions.get("window").height/8.1):Space(Dimensions.get("window").height/3.35) :null}
+                <Cluster space={8}>
                     {index === 0 ? Space(8):null}
                     <View style={ES.eventBack}>
                         <FullCategorySquare 

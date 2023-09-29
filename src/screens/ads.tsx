@@ -25,6 +25,8 @@ import {
     Image,
     Text,
 } from "react-native"
+import LogoNavigation from "@shared/functions/logoNavigation"
+import { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs"
 
 /**
  * Parent EventScreen function
@@ -56,6 +58,18 @@ export default function AdScreen({ navigation }: ScreenProps): JSX.Element {
     const dispatch = useDispatch()
     function eventPage () {navigation.navigate("EventScreen")}
     const isDark = theme === 0 || theme === 2 || theme === 3 ? true : false
+
+    // --- SET THE COMPONENTS OF THE HEADER ---
+    useEffect(()=>{
+        navigation.setOptions({
+            headerComponents: {
+                bottom: [],
+                left: [LogoNavigation(navigation, isDark)],
+                right: []
+            }
+        } as Partial<BottomTabNavigationOptions>)
+    }, [navigation])
+
 
     //  --- FETCHES CLICKED EVENTS WHEN SCREEN BECOMES VISIBLE ---
     useFocusEffect(
@@ -148,47 +162,6 @@ export default function AdScreen({ navigation }: ScreenProps): JSX.Element {
                 : <ErrorMessage argument="nomatch" theme={theme} lang={lang} />
         : <ErrorMessage argument="wifi" theme={theme} lang={lang} />}
         {Space(Dimensions.get("window").height/3)}
-        </View>
-
-        {Platform.OS === "ios" 
-            ? <BlurView style={MS.topMenu} intensity={30}/> 
-            : <View style={{...MS.topMenu, backgroundColor: 
-            FetchColor({theme, variable: "TRANSPARENTANDROID"})}}/>}
-        <View style={{
-            ...MS.topMenu, 
-            backgroundColor: FetchColor({theme, variable: "TRANSPARENT"})
-        }}>
-        <TouchableOpacity style={MS.logoBackground} onPress={() => eventPage()}>
-            <Image style={MS.tMenuIcon} source={isDark 
-                ? require("@assets/logo/loginText.png") 
-                : require("@assets/logo/loginText-black.png")}
-            />
-        </TouchableOpacity>
-        <Text style={{
-            ...MS.smallTitle,
-            left: "-5%", 
-            color: FetchColor({theme, variable: "TITLETEXTCOLOR"})
-        }}>
-            {lang ? "Jobbannonser" : "Job listings"}
-        </Text>
-        {renderedArray != null ?
-            <View style={MS.multiTop}>
-            {clickedAds.length > 0 ?
-                <TouchableOpacity style={MS.touchableIcon} onPress={async () => 
-                await handleDownload({setDownloadState, downloadState,
-                clickedEvents: clickedAds, calendarID, dispatch})}>
-                <Image 
-                    style={MS.multiIcon}
-                    source={isDark
-                        ? timeSince(downloadState) >= 1000 
-                            ? require("@assets/icons/download.png")
-                            : require("@assets/icons/download-orange.png") 
-                        : require("@assets/icons/download-black.png")} />
-                </TouchableOpacity>
-            :null}
-            </View>
-        :null}
-
         </View>
     </View>
     )

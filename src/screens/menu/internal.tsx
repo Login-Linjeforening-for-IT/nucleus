@@ -5,7 +5,6 @@ import FetchColor from "@styles/fetchTheme"
 import { GS } from "@styles/globalStyles"
 import { useSelector } from "react-redux"
 import { ScreenProps } from "@interfaces"
-import TopMenu from "@shared/topMenu"
 import { T } from "@styles/text"
 import React from "react"
 import {
@@ -56,12 +55,6 @@ JSX.Element {
             />
             {Space(Dimensions.get("window").height/3)}
         </View>
-        <TopMenu 
-            navigation={navigation}
-            screen="internal"
-            title={lang ? "Internt" : "Intranet"}
-            back={"MenuScreen"} 
-        />
     </View>
   )
 }

@@ -37,13 +37,7 @@ JSX.Element {
                     {Space(10)}
                     {Space(Dimensions.get("window").height/3)}
                     </ScrollView>
-                </View>
-            <TopMenu 
-                navigation={navigation} 
-                screen="business" 
-                title={info.title}
-                back={"MenuScreen"}
-            />
+            </View>
         </View>
     )
 }

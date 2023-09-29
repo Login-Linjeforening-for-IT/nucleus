@@ -58,7 +58,7 @@ export const MS = StyleSheet.create ({
     },
     // Size of top menu icons
     tMenuIcon: {
-        top: "50%",
+        // top: "50%",
         width: 32,
         height: 32,
     },
@@ -99,7 +99,6 @@ export const MS = StyleSheet.create ({
     },
     // Bottom menu icon TouchableOpacity
     bMenuIconTouchableOpacity: {
-        left: 15,
         width: 120,
         height: 65,
     },

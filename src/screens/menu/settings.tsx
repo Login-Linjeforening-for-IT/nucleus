@@ -11,7 +11,6 @@ import { useSelector } from "react-redux"
 import { ScreenProps } from "@interfaces"
 import en from "@text/en/settings.json"
 import no from "@text/no/settings.json"
-import TopMenu from "@shared/topMenu"
 import { T } from "@styles/text"
 import React from "react"
 
@@ -44,12 +43,6 @@ export default function SettingScreen({ navigation }: ScreenProps): JSX.Element 
             }}>
                 <Content theme={theme} lang={lang} />
             </View>
-            <TopMenu 
-                navigation={navigation}
-                screen="settings"
-                title={lang ? "Innstillinger" : "Settings"}
-                back={"MenuScreen"}
-            />
         </View>
     )
 }

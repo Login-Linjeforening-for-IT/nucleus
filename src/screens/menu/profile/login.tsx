@@ -9,7 +9,6 @@ import FetchColor from "@styles/fetchTheme"
 import { SS } from "@styles/settingStyles"
 import { GS } from "@styles/globalStyles"
 import React, { useState } from "react"
-import TopMenu from "@shared/topMenu"
 import { ScreenProps } from "@interfaces"
 import { T } from "@styles/text"
 import {
@@ -178,13 +177,6 @@ export default function LoginScreen({ navigation }: ScreenProps): JSX.Element {
             </View>
             {Space(Dimensions.get("window").height/3)}
         </View>
-
-        <TopMenu 
-            navigation={navigation} 
-            screen="login" 
-            title={lang ? "Login" : "Login"} 
-            back={"MenuScreen"} 
-        />
     </View>
   )
 }

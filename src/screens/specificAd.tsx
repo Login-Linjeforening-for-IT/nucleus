@@ -5,7 +5,6 @@ import Space from "@shared/components/utils"
 import FetchColor from "@styles/fetchTheme"
 import { GS } from "@styles/globalStyles"
 import { useSelector } from "react-redux"
-import TopMenu from "@shared/topMenu"
 import React from "react"
 import AdInfo, { 
     AdBanner, 
@@ -46,12 +45,6 @@ SpecificAdScreenProps): JSX.Element {
                     {Space(Dimensions.get("window").height / 3)}
                 </ScrollView>
             </View>
-            <TopMenu 
-                navigation={navigation}
-                screen="sas"
-                title={lang ? item.title_no : item.title_no}
-                back={"AdScreen"}
-            />
         </View>
     )
 }
