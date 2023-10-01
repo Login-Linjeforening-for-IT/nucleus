@@ -64,26 +64,8 @@ SpecificEventScreenProps): JSX.Element {
 
     const { lang  } = useSelector( (state: ReduxState) => state.lang)
     const { theme } = useSelector( (state: ReduxState) => state.theme)
-    const fakeItem = {
-        "eventID": 0,
-        "parent": 0,
-        "organizer": "TEKKOM",
-        "eventname": "TekKom samling",
-        "startt": "2023-10-03T18:00:00Z",
-        "audience": "LOGIN",
-        "category": "TEKKOM",
-        "image": "",
-        "fblink": "",
-        "discordlink": "",
-        "roomno": "A155, LL",
-        "campus": "Gjøvik",
-        "street": "",
-        "postcode": 0,
-        "city": "GJØVIK",
-        "fake": true
-    } as EventProps
 
-    const item = typeof route === "object" && "params" in route ? route.params.item : fakeItem
+    const item = route.params.item
     let link
 
     const [event, setEvent]=useState<DetailedEventProps | EventProps>(item)
