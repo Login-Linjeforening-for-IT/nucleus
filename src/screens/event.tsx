@@ -319,7 +319,7 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
                 </View>
                 )}
             </EventStack.Screen>
-            <EventStack.Screen name="SpecificEventScreen" component={() => SpecificEventScreen(item)} />
+            <EventStack.Screen name="SpecificEventScreen" children={(): any => <SpecificEventScreen {...item} />} />
         </EventStack.Navigator>
     )
 }
