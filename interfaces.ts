@@ -1,10 +1,9 @@
-import { NavigationHelpers, NavigationProp, ParamListBase } from "@react-navigation/native";
+import { ParamListBase } from "@react-navigation/native";
 import { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs';
 import { DimensionValue, ImageSourcePropType } from "react-native"
 import { RouteProp } from "@react-navigation/native"
 import { 
     BottomTabBarProps,
-    BottomTabNavigationEventMap,
     BottomTabHeaderProps,
     BottomTabNavigationProp
 } from "@react-navigation/bottom-tabs/lib/typescript/src/types"
@@ -43,11 +42,6 @@ export interface ExtendedRouteOptions extends Omit<BottomTabNavigationOptions, '
 export interface ScreenProps {
     navigation: Navigation
 }
-
-// export interface SpecificEventScreenProps {
-//     navigation: Navigation
-//     item: EventProps
-// }
 
 export type Navigation = BottomTabNavigationProp<ParamListBase, string, undefined>
 

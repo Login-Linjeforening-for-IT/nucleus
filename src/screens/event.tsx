@@ -4,7 +4,7 @@ import Space, { ErrorMessage } from "@shared/components/utils"
 import storeEvents from "@shared/eventComponents/storeEvents"
 import handleDownload from "@shared/eventComponents/calendar"
 import React, { useEffect, useState, useRef } from "react"
-import { useFocusEffect } from "@react-navigation/native"
+import { useFocusEffect, useRoute } from "@react-navigation/native"
 import EventList from "@shared/eventComponents/eventList"
 import { useDispatch, useSelector } from "react-redux"
 import { StatusBar } from "expo-status-bar"
@@ -38,7 +38,7 @@ import {
     Platform,
     StatusBar as StatusBarReact
 } from "react-native"
-import { ExtendedRouteOptions, ScreenProps } from "@interfaces"
+import { ExtendedRouteOptions, ScreenProps, SpecificEventScreenProps } from "@interfaces"
 import { ExtendedBottomTabHeaderProps } from "@interfaces"
 import { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs"
 import LogoNavigation from "@shared/functions/logoNavigation"
@@ -286,6 +286,7 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
         hasBeenSet: notification["SETUP"]
     })
 
+    const item: any = undefined
     // --- DISPLAYS THE EVENTSCREEN ---
     return (
         <EventStack.Navigator
@@ -318,7 +319,7 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
                 </View>
                 )}
             </EventStack.Screen>
-            <EventStack.Screen {...{name: "SpecificEventScreen", component: SpecificEventScreen}}></EventStack.Screen>
+            <EventStack.Screen name="SpecificEventScreen" component={() => SpecificEventScreen(item)} />
         </EventStack.Navigator>
     )
 }
