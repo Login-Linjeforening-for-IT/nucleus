@@ -21,6 +21,15 @@ import {
 } from "react-native"
 import LogoNavigation from "@shared/functions/logoNavigation"
 import { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs"
+import { createStackNavigator } from "@react-navigation/stack"
+import InternalScreen from "./menu/internal"
+import AboutScreen from "./menu/about"
+import BusinessScreen from "./menu/business"
+import LoginScreen from "./menu/profile/login"
+import NotificationScreen from "./menu/notification/notifications"
+import ProfileScreen from "./menu/profile/profile"
+import ReportScreen from "./menu/report"
+import SettingScreen from "./menu/settings"
 
 type MenuItemProps = {
     index: number
@@ -39,6 +48,19 @@ type ItemProps = {
     nav: string
     title: string
 }
+
+const MenuStack = createStackNavigator();
+const screens = {
+    "AboutScreen": AboutScreen,
+    "BusinessScreen": BusinessScreen,
+    "InternalScreen": InternalScreen,
+    "LoginScreen": LoginScreen,
+    "NotificationScreen": NotificationScreen,
+    "ProfileScreen": ProfileScreen,
+    "ReportScreen": ReportScreen,
+    "SettingScreen": SettingScreen
+}
+
 
 export default function MenuScreen({ navigation }: ScreenProps): JSX.Element {
 
@@ -71,34 +93,44 @@ export default function MenuScreen({ navigation }: ScreenProps): JSX.Element {
     }
 
     return (
-        <View>
-            <View style={{
-                ...GS.content, 
-                backgroundColor: FetchColor({theme, variable: "DARKER"})
-            }}>
-                <FlatList
-                style={{minHeight: "100%"}}
-                showsVerticalScrollIndicator={false}
-                numColumns={1}
-                keyExtractor={(item) => `${item.id}`}
-                data={text.setting}
-                renderItem={({item, index}) => (
-                    <MenuItem 
-                        index={index}
-                        item={item}
-                        navigation={navigation}
-                        theme={theme}
-                        lang={lang}
-                        setting={text.setting}
-                        feedback={feedback}
-                        toggleFeedback={toggleFeedback}
-                        login={login}
-                    />
-                    )}
-                />
-                {Space(Dimensions.get("window").height / 10)}
-            </View>
-        </View>
+        <MenuStack.Navigator
+        screenOptions={{headerShown: false, animationEnabled: false}}>
+            <MenuStack.Screen 
+                name="root">
+                {({navigation})=>{
+                    return(<View style={{
+                        ...GS.content, 
+                        backgroundColor: FetchColor({theme, variable: "DARKER"})
+                    }}>
+                        <FlatList
+                        style={{minHeight: "100%"}}
+                        showsVerticalScrollIndicator={false}
+                        numColumns={1}
+                        keyExtractor={(item) => `${item.id}`}
+                        data={text.setting}
+                        renderItem={({item, index}) => (
+                            <MenuItem 
+                                index={index}
+                                item={item}
+                                navigation={navigation}
+                                theme={theme}
+                                lang={lang}
+                                setting={text.setting}
+                                feedback={feedback}
+                                toggleFeedback={toggleFeedback}
+                                login={login}
+                            />
+                            )}
+                        />
+                        {Space(Dimensions.get("window").height / 10)}
+                    </View>)
+                }}
+            </MenuStack.Screen>
+            {text.setting.map((item, index)=>{
+                return (
+                <MenuStack.Screen {...{key: index, name: item.nav, initialParams: item, component: screens[item.nav]}}></MenuStack.Screen>
+            )})}
+        </MenuStack.Navigator>
     )
 }
 

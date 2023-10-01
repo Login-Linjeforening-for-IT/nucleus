@@ -36,9 +36,8 @@ function BlurWrapper(props: PropsWithChildren<BlurViewProps>) {
 
 
 export default function Header({ options, route }: ExtendedBottomTabHeaderProps): ReactNode {
-    const { lang } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    const title = options.title ? options.title[Number(lang)] : route.name;
+    const title = options.title ? options.title : route.name;
 
     return (
         <>

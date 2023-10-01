@@ -44,6 +44,8 @@ import { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs"
 import LogoNavigation from "@shared/functions/logoNavigation"
 import FilterButton from "@shared/eventComponents/filterButton"
 import DownloadButton from "@shared/eventComponents/downloadButton"
+import { createStackNavigator } from "@react-navigation/stack"
+import SpecificEventScreen from "./specificEvent"
 
 type HeaderComponentProps = {
     renderedArray: EventProps[]
@@ -58,6 +60,8 @@ type HeaderComponentProps = {
     toggleSearch: () => void
     search: boolean
 }
+
+const EventStack = createStackNavigator();
 
 /**
  * Parent EventScreen function
@@ -284,29 +288,37 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
 
     // --- DISPLAYS THE EVENTSCREEN ---
     return (
-        <View>
-            <StatusBar style={isDark ? "light" : "dark"} />
-            <View style={{
-                ...GS.content, 
-                backgroundColor: FetchColor({theme, variable: "DARKER"})
-            }}>
-                {pushNotification && pushNotificationContent}
-
-                <EventList
-                    navigation={navigation}
-                    renderedArray={renderedArray}
-                    clickedEvents={clickedEvents}
-                    search={search}
-                    theme={theme}
-                    lang={lang}
-                    relevantCategories={relevantCategories}
-                    notification={notification}
-                    setClickedEvents={setClickedEvents}
-                    lastSave={lastSave}
-                    events={events}
-                    ErrorMessage={ErrorMessage}
-                />
-            </View>
-        </View>
+        <EventStack.Navigator
+        screenOptions={{headerShown: false, animationEnabled: false}}>
+            <EventStack.Screen name="root">
+                {({navigation})=>(
+                    <View>
+                    <StatusBar style={isDark ? "light" : "dark"} />
+                    <View style={{
+                        ...GS.content, 
+                        backgroundColor: FetchColor({theme, variable: "DARKER"})
+                    }}>
+                        {pushNotification && pushNotificationContent}
+        
+                        <EventList
+                            navigation={navigation}
+                            renderedArray={renderedArray}
+                            clickedEvents={clickedEvents}
+                            search={search}
+                            theme={theme}
+                            lang={lang}
+                            relevantCategories={relevantCategories}
+                            notification={notification}
+                            setClickedEvents={setClickedEvents}
+                            lastSave={lastSave}
+                            events={events}
+                            ErrorMessage={ErrorMessage}
+                        />
+                    </View>
+                </View>
+                )}
+            </EventStack.Screen>
+            <EventStack.Screen {...{name: "SpecificEventScreen", component: SpecificEventScreen}}></EventStack.Screen>
+        </EventStack.Navigator>
     )
 }

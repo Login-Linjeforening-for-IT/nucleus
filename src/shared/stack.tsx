@@ -59,16 +59,7 @@ export default function Navigator(): JSX.Element {
             ? require("@assets/menu/menu.png")
             : require("@assets/menu/menu-black.png")
         },
-        { name: "AboutScreen",          component: AboutScreen},
-        { name: "BusinessScreen",       component: BusinessScreen},
-        { name: "InternalScreen",       component: InternalScreen},
-        { name: "LoginScreen",          component: LoginScreen},
-        { name: "NotificationScreen",   component: NotificationScreen},
-        { name: "ProfileScreen",        component: ProfileScreen},
-        { name: "ReportScreen",         component: ReportScreen},
-        { name: "SettingScreen",        component: SettingScreen},
         { name: "SpecificAdScreen",     component: SpecificAdScreen},
-        { name: "SpecificEventScreen",  component: SpecificEventScreen},
     ]
     
     return (
