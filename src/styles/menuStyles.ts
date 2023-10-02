@@ -36,7 +36,6 @@ export const MS = StyleSheet.create ({
     // Top menu background view
     topMenu: {
         position: "absolute",
-        top: 0,
         left: "-2.5%",
         width: "105%",
         flexDirection: "row",
@@ -84,7 +83,7 @@ export const MS = StyleSheet.create ({
     },
     // Bottom menu icons
     bMenuIcon: {
-        width: 90,
+        width: 80,
         height: 65,
         alignSelf: "center",
     },

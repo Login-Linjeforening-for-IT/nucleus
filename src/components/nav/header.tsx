@@ -7,55 +7,57 @@ import MS from '@styles/menuStyles';
 import GS from '@styles/globalStyles';
 import { useSelector } from 'react-redux';
 
-// Wraps the content in blur or transparent depending on OS
-function BlurWrapper(props: PropsWithChildren) {
-    const { theme } = useSelector((state: ReduxState) => state.theme)
-    
-    return (
-        <>
-            {Platform.OS === "ios"
-                ? <BlurView style={MS.topMenu} intensity={30}>{props.children}</BlurView>
-                : <View style={{
-                    paddingTop: StatusBar.currentHeight,
-                    height: Dimensions.get('window').height * 8 / 100 + (StatusBar.currentHeight ? StatusBar.currentHeight : 0),
-                    backgroundColor: FetchColor({
-                    theme,
-                    variable: "TRANSPARENT"
-                    })
-                                    }}>{props.children}</View>}
-        </>
-    )
-}
-
 
 export default function Header({ options, route }: ExtendedBottomTabHeaderProps): ReactNode {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const title = options.title ? options.title : route.name;
+    
+    return (
+        <BlurWrapper>
+            <View style={{...GS.headerView, top: 15}}>
+                <View style={GS.innerHeaderViewOne}>
+                    {options.headerComponents?.left?.map((node, index) => 
+                        <View style={{}} key={index}>{node}</View> 
+                        )}
+                </View>
+                {
+                    title.length > 40 
+                    ? <Text style={{color: FetchColor({ theme, variable: 'TITLETEXTCOLOR' }) }}>{title}</Text>
+                    : <Text style={{...GS.headerTitle, color: FetchColor({ theme, variable: 'TITLETEXTCOLOR' })}}>{title}</Text>
+                }
+                    <View style={GS.innerHeaderViewTwo}>
+                    {options.headerComponents?.right?.map((node, index) => 
+                        <View style={{}} key={index}>{node}</View>
+                    )}
+                </View>
+            </View>
+            {options.headerComponents?.bottom?.map((node, index) => 
+                <View style={{}} key={index}>{node}</View>
+            )}
+        </BlurWrapper>
+    )
+}
+
+// Wraps the content in blur or transparent depending on OS
+function BlurWrapper(props: PropsWithChildren) {
+    const { theme } = useSelector((state: ReduxState) => state.theme)
+    console.log(FetchColor({theme, variable: 'TRANSPARENT'}))
 
     return (
         <>
-            <BlurWrapper>
-                <View style={GS.headerView}>
-                    <View style={GS.innerHeaderViewOne}>
-                        {options.headerComponents?.left?.map((node, index) => 
-                            <View style={{}} key={index}>{node}</View> 
-                        )}
-                    </View>
-                    {
-                        title.length > 40 
-                            ? <Text style={{color: FetchColor({ theme, variable: 'TITLETEXTCOLOR' }) }}>{title}</Text>
-                            : <Text style={{alignSelf: 'center', fontSize: 30, color: FetchColor({ theme, variable: 'TITLETEXTCOLOR' })}}>{title}</Text>
-                    }
-                     <View style={GS.innerHeaderViewTwo}>
-                        {options.headerComponents?.right?.map((node, index) => 
-                            <View style={{}} key={index}>{node}</View>
-                        )}
-                    </View>
-                </View>
-                {options.headerComponents?.bottom?.map((node, index) => 
-                    <View style={{}} key={index}>{node}</View>
-                )}
-            </BlurWrapper>
+            {Platform.OS === "ios" ? <BlurView style={{
+                justifyContent: Platform.OS === "ios" ? "center" : undefined,
+                top: StatusBar.currentHeight ? StatusBar.currentHeight : 0,
+                height: Dimensions.get('window').height * 8 / 100 + (StatusBar.currentHeight ? StatusBar.currentHeight : 20),
+            }} intensity={30} /> : null}
+            <View style={{
+                position: "absolute",
+                width: "100%",
+                justifyContent: Platform.OS === "ios" ? "center" : undefined,
+                top: StatusBar.currentHeight ? StatusBar.currentHeight : 0,
+                height: Dimensions.get('window').height * 8 / 100 + (StatusBar.currentHeight ? StatusBar.currentHeight : 20),
+                backgroundColor: FetchColor({theme, variable: 'TRANSPARENT'})
+            }}>{props.children}</View>
         </>
     )
 }

@@ -20,8 +20,9 @@ ExtendedBottomTabBarProps): JSX.Element {
                 : <View style={{
                     ...MS.bMenu,
                     backgroundColor: FetchColor({theme,
-                        variable: "TRANSPARENTANDROID"})}}
-            />}
+                        variable: "TRANSPARENTANDROID"})
+                }} />
+            }
             {/* Transparent container for the icons */}
             <View style={{
                     ...MS.bMenu,

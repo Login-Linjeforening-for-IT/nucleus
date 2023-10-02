@@ -1,4 +1,5 @@
-import { StyleSheet, Dimensions } from "react-native"
+import { StatusBar } from "expo-status-bar"
+import { StyleSheet, Dimensions, Platform } from "react-native"
 
 export const GS = StyleSheet.create({
     // Main view of every screen
@@ -188,7 +189,11 @@ export const GS = StyleSheet.create({
         flexDirection: 'row-reverse', 
         alignItems: 'center', 
         justifyContent: 'space-evenly'
-    }
+    },
+    headerTitle: {
+        alignSelf: 'center', 
+        fontSize: 25,
+    },
 })
 
 export default GS

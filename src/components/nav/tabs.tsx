@@ -62,7 +62,7 @@ export default function Navigator(): JSX.Element {
                 screenOptions={{ 
                     headerShown: true,
                     headerTransparent: true,
-                    header: props=> <Header {...props}/>
+                    header: props => <Header {...props}/>
                 } as ExtendedRouteOptions}
                 // Sets the tab bar component
                 tabBar={props => <Footer 
