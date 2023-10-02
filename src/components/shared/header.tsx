@@ -1,23 +1,15 @@
-import FetchColor from '@styles/fetchTheme';                              // Function to fetch theme color
-import { useSelector } from 'react-redux';
-import { BlurView } from 'expo-blur';                                       // Blur effect
-import { Dimensions, Platform } from 'react-native';
-import {                                                                    // React native components
-    View,                                                                     // View component
-    Text,
-    StatusBar
-} from 'react-native';                                                      // React native
+import FetchColor from '@styles/fetchTheme';
+import React, { PropsWithChildren, ReactNode } from 'react';
+import { BlurView } from 'expo-blur';
+import { Dimensions, Platform, View, Text, StatusBar } from 'react-native';
 import { ExtendedBottomTabHeaderProps } from '@interfaces';
-import { PropsWithChildren, ReactNode } from 'react';
 import { MS } from '@styles/menuStyles';
-
-interface BlurViewProps {
-    theme: number
-}
+import { useSelector } from 'react-redux';
 
 // Wraps the content in blur or transparent depending on OS
-function BlurWrapper(props: PropsWithChildren<BlurViewProps>) {
-    const theme = props.theme
+function BlurWrapper(props: PropsWithChildren) {
+    const { theme } = useSelector((state: ReduxState) => state.theme)
+    
     return (
         <>
             {Platform.OS === "ios"
@@ -41,7 +33,7 @@ export default function Header({ options, route }: ExtendedBottomTabHeaderProps)
 
     return (
         <>
-            <BlurWrapper theme={theme}>
+            <BlurWrapper>
                 <View style={{ display: 'flex', flexDirection: 'row', paddingLeft: '5%' }}>
                     <View style={{ flex: 1, display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                         {options.headerComponents?.left?.map((node, index) => { return <View style={{}} key={index}>{node}</View> })}
