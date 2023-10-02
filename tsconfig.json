@@ -26,7 +26,7 @@
             "@styles/*": ["./src/styles/*"],
             "@interfaces": ["./interfaces.ts"],
             "@redux/*": ["./src/redux/*"],
-            "@nav/*": ["./src/nav/*"],
+            "@nav/*": ["./src/components/nav/*"],
             "@/*": ["./src/*"]
         }
     },
