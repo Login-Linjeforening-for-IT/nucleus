@@ -128,7 +128,7 @@ function StoreNotification({ title, body, data }: StoreNotificationProps) {
 
         // Check if the list contained anything, and if so set it as the stored array
         if (storedString) {
-            storedArray = JSON.parse(storedString);
+            storedArray = JSON.parse(storedString)
         }
 
         // Adds the new notification to the start of the list

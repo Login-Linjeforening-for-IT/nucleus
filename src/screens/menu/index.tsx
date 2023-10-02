@@ -49,7 +49,7 @@ type ItemProps = {
     title: string
 }
 
-const MenuStack = createStackNavigator();
+const MenuStack = createStackNavigator()
 const screens = {
     "AboutScreen": AboutScreen,
     "BusinessScreen": BusinessScreen,

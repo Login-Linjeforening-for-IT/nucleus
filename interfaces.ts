@@ -1,5 +1,5 @@
-import { ParamListBase } from "@react-navigation/native";
-import { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs';
+import { ParamListBase } from "@react-navigation/native"
+import { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs'
 import { DimensionValue, ImageSourcePropType } from "react-native"
 import { RouteProp } from "@react-navigation/native"
 import { 
@@ -7,7 +7,7 @@ import {
     BottomTabHeaderProps,
     BottomTabNavigationProp
 } from "@react-navigation/bottom-tabs/lib/typescript/src/types"
-import { ReactNode } from "react";
+import { ReactNode } from "react"
 
 export interface ExtendedTabNavigationOptions 
 extends BottomTabNavigationOptions {

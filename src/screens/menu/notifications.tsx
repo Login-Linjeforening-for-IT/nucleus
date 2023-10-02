@@ -106,22 +106,22 @@ function Notification({item, theme, lang, navigation}: NotificationInAppProps): 
 }
 
 function displayTime(time: string): string {
-    const date = new Date(time);
-    const currentTime = new Date();
+    const date = new Date(time)
+    const currentTime = new Date()
   
     // Calculate the time difference in milliseconds
-    const timeDifference = currentTime.getTime() - date.getTime();
+    const timeDifference = currentTime.getTime() - date.getTime()
   
     // Check if the time is within the last 24 hours
     if (timeDifference <= 24 * 60 * 60 * 1000) {
         // If within 24 hours, display the time
-        const hours = date.getHours().toString().padStart(2, '0');
-        const minutes = date.getMinutes().toString().padStart(2, '0');
-        return `${hours}:${minutes}`;
+        const hours = date.getHours().toString().padStart(2, '0')
+        const minutes = date.getMinutes().toString().padStart(2, '0')
+        return `${hours}:${minutes}`
     } else {
         // If not within 24 hours, display the date
-        const day = date.getDate().toString().padStart(2, '0');
-        const month = (date.getMonth() + 1).toString().padStart(2, '0');
-        return `${day}.${month}`;
+        const day = date.getDate().toString().padStart(2, '0')
+        const month = (date.getMonth() + 1).toString().padStart(2, '0')
+        return `${day}.${month}`
     }
 }

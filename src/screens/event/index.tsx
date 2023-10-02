@@ -1,16 +1,13 @@
-import notificationSetup from "@/utils/notificationSetup"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { ErrorMessage } from "@/components/shared/utils"
 import storeEvents from "@/utils/storeEvents"
 import React, { useEffect, useState, useRef } from "react"
-import { useFocusEffect, useRoute } from "@react-navigation/native"
+import { useFocusEffect } from "@react-navigation/native"
 import EventList from "@components/event/eventList"
 import { useDispatch, useSelector } from "react-redux"
 import { StatusBar } from "expo-status-bar"
-import { AnyAction, Dispatch } from "redux"
 import FetchColor from "@styles/fetchTheme"
 import GS from "@styles/globalStyles"
-import MS from "@styles/menuStyles"
 import NavigateFromPushNotification 
 from "@/utils/navigateFromPushNotification"
 import initializeNotifications 
@@ -21,22 +18,9 @@ import Filter, {
     filterBoth,
     FilterUI,
 } from "@/components/shared/filter"
-import LastFetch, { 
-    fetchState, 
-    fetchStored, 
-    getData, 
-} from "@/utils/fetch"
-import {
-    Text,
-    View,
-    Image,
-    TouchableOpacity,
-    Dimensions,
-    Platform,
-    StatusBar as StatusBarReact
-} from "react-native"
-import { ExtendedRouteOptions, ScreenProps, SpecificEventScreenProps } from "@interfaces"
-import { ExtendedBottomTabHeaderProps } from "@interfaces"
+import LastFetch, { fetchState, fetchStored, getData } from "@/utils/fetch"
+import { View, StatusBar as StatusBarReact } from "react-native"
+import { ScreenProps } from "@interfaces"
 import { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs"
 import LogoNavigation from "@/components/shared/logoNavigation"
 import FilterButton from "@/components/shared/filterButton"
@@ -44,7 +28,7 @@ import DownloadButton from "@/components/shared/downloadButton"
 import { createStackNavigator } from "@react-navigation/stack"
 import SpecificEventScreen from "./specificEvent"
 
-const EventStack = createStackNavigator<EventStackParamList>();
+const EventStack = createStackNavigator<EventStackParamList>()
 
 /**
  * Parent EventScreen function

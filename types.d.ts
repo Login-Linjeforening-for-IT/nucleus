@@ -108,7 +108,7 @@ type CTX = {
 type RootStackParamList = {
     SpecificEventScreen: { item: EventProps }
     SpecificAdScreen: { item: AdProps}
-};
+}
 
 type NotificationProps = {
 
@@ -222,6 +222,6 @@ type NotificationList = {
 }
 
 type EventStackParamList = {
-    root: undefined;
+    root: undefined
     SpecificEventScreen: {item: EventProps}
 }

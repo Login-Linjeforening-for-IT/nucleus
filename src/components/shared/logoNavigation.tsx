@@ -1,8 +1,8 @@
-import { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
-import { ParamListBase } from "@react-navigation/native";
-import MS from "@styles/menuStyles";
-import { Image } from "react-native";
-import { TouchableOpacity } from "react-native";
+import { BottomTabNavigationProp } from "@react-navigation/bottom-tabs"
+import { ParamListBase } from "@react-navigation/native"
+import MS from "@styles/menuStyles"
+import { Image } from "react-native"
+import { TouchableOpacity } from "react-native"
 
 export default function LogoNavigation (navigation: BottomTabNavigationProp<ParamListBase>, isDark: boolean): JSX.Element {
     return (

@@ -1,15 +1,15 @@
-import FetchColor from '@styles/fetchTheme';
-import GS from '@styles/globalStyles';
-import React, { PropsWithChildren, ReactNode } from 'react';
-import { BlurView } from 'expo-blur';
-import { Dimensions, Platform, View, Text, StatusBar } from 'react-native';
-import { ExtendedBottomTabHeaderProps } from '@interfaces';
-import { useSelector } from 'react-redux';
+import FetchColor from '@styles/fetchTheme'
+import GS from '@styles/globalStyles'
+import React, { PropsWithChildren, ReactNode } from 'react'
+import { BlurView } from 'expo-blur'
+import { Dimensions, Platform, View, Text, StatusBar } from 'react-native'
+import { ExtendedBottomTabHeaderProps } from '@interfaces'
+import { useSelector } from 'react-redux'
 
 
 export default function Header({ options, route }: ExtendedBottomTabHeaderProps): ReactNode {
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    const title = options.title ? options.title : route.name;
+    const title = options.title ? options.title : route.name
     
     return (
         <BlurWrapper>

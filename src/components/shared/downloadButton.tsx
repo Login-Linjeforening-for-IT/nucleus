@@ -1,9 +1,9 @@
-import MS from "@styles/menuStyles";
-import { TouchableOpacity } from "react-native";
+import MS from "@styles/menuStyles"
+import { TouchableOpacity } from "react-native"
 import handleDownload from "@/utils/calendar"
-import { AnyAction, Dispatch } from "redux";
-import { Image } from "react-native";
-import { timeSince } from "@/utils/fetch";
+import { AnyAction, Dispatch } from "redux"
+import { Image } from "react-native"
+import { timeSince } from "@/utils/fetch"
 
 export default function DownloadButton(clickedEvents: EventProps[], 
     setDownloadState: React.Dispatch<React.SetStateAction<Date>>, downloadState: 

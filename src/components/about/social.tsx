@@ -38,7 +38,10 @@ type personInfoProps = {
 }
 
 type MediaProps = {
-    [key: string]: { link: string; logo: ImageSourcePropType };
+    [key: string]: { 
+        link: string 
+        logo: ImageSourcePropType 
+    }
 }
 
 /**
