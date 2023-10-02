@@ -19,10 +19,10 @@ function BlurWrapper(props: PropsWithChildren) {
                     paddingTop: StatusBar.currentHeight,
                     height: Dimensions.get('window').height * 8 / 100 + (StatusBar.currentHeight ? StatusBar.currentHeight : 0),
                     backgroundColor: FetchColor({
-                        theme,
-                        variable: "TRANSPARENT"
+                    theme,
+                    variable: "TRANSPARENT"
                     })
-                }}>{props.children}</View>}
+                                    }}>{props.children}</View>}
         </>
     )
 }
@@ -36,18 +36,25 @@ export default function Header({ options, route }: ExtendedBottomTabHeaderProps)
         <>
             <BlurWrapper>
                 <View style={GS.headerView}>
-                    <View style={{ flex: 1, display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                        {options.headerComponents?.left?.map((node, index) => { return <View style={{}} key={index}>{node}</View> })}
+                    <View style={GS.innerHeaderViewOne}>
+                        {options.headerComponents?.left?.map((node, index) => 
+                            <View style={{}} key={index}>{node}</View> 
+                        )}
                     </View>
                     {
-                        title.length > 40 ? <Text style={{ color: FetchColor({ theme, variable: 'TITLETEXTCOLOR' }) }}>{title}</Text>
-                            : <Text style={{ alignSelf: 'center', color: FetchColor({ theme, variable: 'TITLETEXTCOLOR' }), fontSize: 30 }}>{title}</Text>
+                        title.length > 40 
+                            ? <Text style={{color: FetchColor({ theme, variable: 'TITLETEXTCOLOR' }) }}>{title}</Text>
+                            : <Text style={{alignSelf: 'center', fontSize: 30, color: FetchColor({ theme, variable: 'TITLETEXTCOLOR' })}}>{title}</Text>
                     }
-                    <View style={{ flex: 1, display: 'flex', flexDirection: 'row-reverse', alignItems: 'center', justifyContent: 'space-evenly' }}>
-                        {options.headerComponents?.right?.map((node, index) => { return <View style={{}} key={index}>{node}</View> })}
+                     <View style={GS.innerHeaderViewTwo}>
+                        {options.headerComponents?.right?.map((node, index) => 
+                            <View style={{}} key={index}>{node}</View>
+                        )}
                     </View>
                 </View>
-                {options.headerComponents?.bottom?.map((node, index) => { return <View style={{}} key={index}>{node}</View> })}
+                {options.headerComponents?.bottom?.map((node, index) => 
+                    <View style={{}} key={index}>{node}</View>
+                )}
             </BlurWrapper>
         </>
     )

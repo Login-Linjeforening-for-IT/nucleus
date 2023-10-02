@@ -175,6 +175,19 @@ export const GS = StyleSheet.create({
         display: 'flex', 
         flexDirection: 'row', 
         paddingLeft: '5%'
+    },
+    innerHeaderViewOne: {
+        flex: 1, 
+        display: 'flex', 
+        flexDirection: 'row', 
+        alignItems: 'center'
+    },
+    innerHeaderViewTwo: {
+        flex: 1, 
+        display: 'flex', 
+        flexDirection: 'row-reverse', 
+        alignItems: 'center', 
+        justifyContent: 'space-evenly'
     }
 })
 
