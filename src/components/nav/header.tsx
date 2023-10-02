@@ -41,21 +41,20 @@ export default function Header({ options, route }: ExtendedBottomTabHeaderProps)
 // Wraps the content in blur or transparent depending on OS
 function BlurWrapper(props: PropsWithChildren) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    console.log(FetchColor({theme, variable: 'TRANSPARENT'}))
 
     return (
         <>
             {Platform.OS === "ios" ? <BlurView style={{
                 justifyContent: Platform.OS === "ios" ? "center" : undefined,
                 top: StatusBar.currentHeight ? StatusBar.currentHeight : 0,
-                height: Dimensions.get('window').height * 8 / 100 + (StatusBar.currentHeight ? StatusBar.currentHeight : 20),
+                height: Dimensions.get('window').height * 8 / 100 + (StatusBar.currentHeight ? StatusBar.currentHeight : 80),
             }} intensity={30} /> : null}
             <View style={{
                 position: "absolute",
                 width: "100%",
                 justifyContent: Platform.OS === "ios" ? "center" : undefined,
                 top: StatusBar.currentHeight ? StatusBar.currentHeight : 0,
-                height: Dimensions.get('window').height * 8 / 100 + (StatusBar.currentHeight ? StatusBar.currentHeight : 20),
+                height: Dimensions.get('window').height * 8 / 100 + (StatusBar.currentHeight ? StatusBar.currentHeight : 80),
                 backgroundColor: FetchColor({theme, variable: 'TRANSPARENT'})
             }}>{props.children}</View>
         </>
