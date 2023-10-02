@@ -31,7 +31,6 @@ type EventListProps = {
     lastSave: string
     events: EventProps[]
     ErrorMessage: React.FC<ErrorMessageProps>
-    setEvent: React.Dispatch<React.SetStateAction<EventProps>>
 }
 
 type EventCardProps = {
@@ -47,7 +46,6 @@ type EventCardProps = {
     lastSave: string
     item: EventProps
     index: number
-    setEvent: React.Dispatch<React.SetStateAction<EventProps>>
 }
 
 type ListFooterProps = {
@@ -89,8 +87,7 @@ export default function EventList ({
     setClickedEvents,
     lastSave,
     events,
-    ErrorMessage,
-    setEvent
+    ErrorMessage
 }: EventListProps): JSX.Element {
     if (!renderedArray.length) return <ErrorMessage 
         argument="wifi" 
@@ -120,7 +117,6 @@ export default function EventList ({
                             lastSave={lastSave}
                             item={item}
                             index={index}
-                            setEvent={setEvent}
                         />
                     )}
                 />
@@ -145,8 +141,7 @@ function EventCard ({
     setClickedEvents,
     lastSave,
     item,
-    index,
-    setEvent
+    index
 }: EventCardProps): JSX.Element {
     const isOrange = clickedEvents.some(event => event.eventID === item.eventID) 
         ? true 
@@ -156,7 +151,6 @@ function EventCard ({
         <View>
             <TouchableOpacity onPress={() => {
                 navigation.navigate("SpecificEventScreen", {item: item})
-                setEvent(item)
             }}>
                 {index === 0
                     ? search===false

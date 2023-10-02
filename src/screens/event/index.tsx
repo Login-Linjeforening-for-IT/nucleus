@@ -87,27 +87,8 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
     const [search, setSearch] = useState(false)
     // Clears text input
     const textInputRef = useRef(null)
-    // Sets item for SpecificEventScreen
-    const fakeItem = {
-        "eventID": 0,
-        "parent": 0,
-        "organizer": "TEKKOM",
-        "eventname": "TekKom samling",
-        "startt": "2023-10-03T18:00:00Z",
-        "audience": "LOGIN",
-        "category": "TEKKOM",
-        "image": "",
-        "fblink": "",
-        "discordlink": "",
-        "roomno": "A155, LL",
-        "campus": "Gjøvik",
-        "street": "",
-        "postcode": 0,
-        "city": "GJØVIK",
-        "fake": true
-    } as EventProps
 
-    const [event, setEvent] = useState<EventProps>(fakeItem)
+    // const [event, setEvent] = useState<EventProps>()
     
     // Redux states
     const notification =    useSelector( (state: ReduxState) => 
@@ -291,12 +272,6 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
         hasBeenSet: notification["SETUP"]
     })
 
-    const item: any = undefined
-    const routeObj = {
-        params: {
-            item: event
-        }
-    }
     // --- DISPLAYS THE EVENTSCREEN ---
     return (
         <EventStack.Navigator
@@ -321,7 +296,6 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
                             relevantCategories={relevantCategories}
                             notification={notification}
                             setClickedEvents={setClickedEvents}
-                            setEvent={setEvent}
                             lastSave={lastSave}
                             events={events}
                             ErrorMessage={ErrorMessage}

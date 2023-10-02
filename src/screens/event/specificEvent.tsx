@@ -26,6 +26,7 @@ import {
   Text,
 } from "react-native"
 import { StaticImage } from "@/components/about/social"
+import { BottomTabScreenProps } from "@react-navigation/bottom-tabs"
 
 type handleLinkProps = {
     mazeref: string
@@ -58,8 +59,10 @@ type CategoryProps = {
  * @param param0
  * @returns
  */
-export default function SpecificEventScreen({ route, navigation }: 
-SpecificEventScreenProps): JSX.Element {
+export default function SpecificEventScreen({ route }: 
+BottomTabScreenProps<EventStackParamList>): JSX.Element {
+
+    if(!route.params){return <></>}
 
     const { lang  } = useSelector( (state: ReduxState) => state.lang)
     const { theme } = useSelector( (state: ReduxState) => state.theme)
@@ -70,12 +73,10 @@ SpecificEventScreenProps): JSX.Element {
     const [event, setEvent]=useState<DetailedEventProps | EventProps>(item)
 
     const getData=()=>{
-        if (!("fake" in item)) {
-            fetch("https://api.login.no/events/" + item.eventID)
-            // fetch("https://tekkom:rottejakt45@api.login.no:8443") //TESTING
-            .then(response => response.json())
-            .then(data=>setEvent(data))
-        }
+        fetch("https://api.login.no/events/" + item.eventID)
+        // fetch("https://tekkom:rottejakt45@api.login.no:8443") //TESTING
+        .then(response => response.json())
+        .then(data=>setEvent(data))
     }
     
 
