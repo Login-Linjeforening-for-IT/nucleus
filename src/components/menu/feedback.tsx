@@ -1,7 +1,7 @@
 import { Alert, View, Text, TouchableOpacity, Linking } from "react-native"
 import FetchColor from "@styles/fetchTheme"
-import { ES } from "@styles/eventStyles"
-import { T } from "@styles/text"
+import ES from "@styles/eventStyles"
+import T from "@styles/text"
 import React from "react"
 
 type FeedbackProps = {

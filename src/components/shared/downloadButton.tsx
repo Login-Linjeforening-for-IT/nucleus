@@ -1,4 +1,4 @@
-import { MS } from "@styles/menuStyles";
+import MS from "@styles/menuStyles";
 import { TouchableOpacity } from "react-native";
 import handleDownload from "@/utils/calendar"
 import { AnyAction, Dispatch } from "redux";

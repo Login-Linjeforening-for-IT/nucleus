@@ -39,3 +39,5 @@ export const CS = StyleSheet.create({
         resizeMode: "contain",
     },
 })
+
+export default CS

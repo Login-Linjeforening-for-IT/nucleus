@@ -152,3 +152,5 @@ export const T = StyleSheet.create({
         fontSize: 20,
     },
 })
+
+export default T

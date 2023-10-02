@@ -1,6 +1,6 @@
 import FetchColor from "@styles/fetchTheme"
 import React from "react"
-import { GS } from "@styles/globalStyles"
+import GS from "@styles/globalStyles"
 import { View, Text, Platform, TouchableOpacity } from "react-native"
 import { BlurView } from "expo-blur"
 import { Navigation } from "@interfaces"

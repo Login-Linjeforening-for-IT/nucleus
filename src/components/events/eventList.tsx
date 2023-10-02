@@ -6,9 +6,9 @@ import Space, { Month } from "@/components/shared/utils"
 import BellIcon from "@/components/events/bellIcon"
 import Cluster from "@/components/shared/cluster"
 import FetchColor from "@styles/fetchTheme"
-import { ES } from "@styles/eventStyles"
+import ES from "@styles/eventStyles"
 import { Navigation } from "@interfaces"
-import { T } from "@styles/text"
+import T from "@styles/text"
 import React from "react"
 import {
     TouchableOpacity,

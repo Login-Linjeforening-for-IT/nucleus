@@ -2,7 +2,7 @@ import { View, Text, TouchableOpacity } from "react-native"
 import topic from "@/utils/topic"
 import { useSelector, useDispatch } from "react-redux"
 import FetchColor from "@styles/fetchTheme"
-import { SS } from "@styles/settingStyles"
+import SS from "@styles/settingStyles"
 import { changeLang } from "@redux/lang"
 import React from "react"
 

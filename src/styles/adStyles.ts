@@ -92,3 +92,5 @@ export const AS = StyleSheet.create({
         aspectRatio: 3 / 2,
     },
 })
+
+export default AS

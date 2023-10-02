@@ -1,9 +1,8 @@
 import FetchColor from "@styles/fetchTheme"
-import { CS } from "@styles/clusterStyles"
-import { View, Image } from "react-native"
+import { View } from "react-native"
 import { ClusterProps } from "@interfaces"
 import { useSelector } from "react-redux"
-import { ES } from "@styles/eventStyles"
+import ES from "@styles/eventStyles"
 import React from "react"
 
 /**

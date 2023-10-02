@@ -2,10 +2,10 @@ import { PanGestureHandler } from "react-native-gesture-handler"
 import { useDispatch, useSelector } from "react-redux"
 import * as ImagePicker from "expo-image-picker"
 import FetchColor from "@styles/fetchTheme"
-import { PS } from "@styles/profileStyles"
+import PS from "@styles/profileStyles"
 import { setImage } from "@redux/profile"
 import React, { useState } from "react"
-import { T } from "@styles/text"
+import T from "@styles/text"
 
 import {
     TouchableOpacity,

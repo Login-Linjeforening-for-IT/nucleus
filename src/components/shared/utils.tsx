@@ -2,8 +2,8 @@ import FetchColor from "@styles/fetchTheme"
 import Svg, { Rect } from "react-native-svg"
 import { useSelector } from "react-redux"
 import { View, Text } from "react-native"
-import { ES } from "@styles/eventStyles"
-import { T } from "@styles/text"
+import ES from "@styles/eventStyles"
+import T from "@styles/text"
 import React from "react"
 
 type LineProps = {

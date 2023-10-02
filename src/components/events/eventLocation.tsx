@@ -1,8 +1,8 @@
 import FetchColor from "@styles/fetchTheme"
 import { View, Text } from "react-native"
 import { useSelector } from "react-redux"
-import { ES } from "@styles/eventStyles"
-import { T } from "@styles/text"
+import ES from "@styles/eventStyles"
+import T from "@styles/text"
 import React from "react"
 
 type EventLocationProps = {

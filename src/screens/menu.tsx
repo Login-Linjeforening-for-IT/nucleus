@@ -4,13 +4,13 @@ import Feedback from "@/components/menu/feedback"
 import Cluster from "@/components/shared/cluster"
 import Space from "@/components/shared/utils"
 import FetchColor from "@styles/fetchTheme"
-import { CS } from "@styles/clusterStyles"
-import { GS } from "@styles/globalStyles"
+import CS from "@styles/clusterStyles"
+import GS from "@styles/globalStyles"
 import { useSelector } from "react-redux"
 import React, { useEffect, useState } from "react"
 import en from "@text/menu/en.json"
 import no from "@text/menu/no.json"
-import { T } from "@styles/text"
+import T from "@styles/text"
 import {
   Text,
   View,

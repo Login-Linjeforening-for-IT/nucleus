@@ -1,5 +1,5 @@
 import Svg, { Rect, Circle } from "react-native-svg"
-import { ES } from "@styles/eventStyles"
+import ES from "@styles/eventStyles"
 import { View } from "react-native"
 import React from "react"
 

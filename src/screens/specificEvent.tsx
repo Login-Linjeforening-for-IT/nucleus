@@ -13,8 +13,8 @@ import FetchColor from "@styles/fetchTheme"
 import Card from "@/components/shared/card"
 import { SvgUri } from "react-native-svg"
 import { useSelector } from "react-redux"
-import { ES } from "@styles/eventStyles"
-import { T } from "@styles/text"
+import ES from "@styles/eventStyles"
+import T from "@styles/text"
 import {
   TouchableOpacity,
   ScrollView,
@@ -24,7 +24,6 @@ import {
   Image,
   View,
   Text,
-  useWindowDimensions,
 } from "react-native"
 import { StaticImage } from "@/components/about/social"
 

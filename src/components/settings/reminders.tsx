@@ -1,10 +1,10 @@
 import TopicSwitchList from "@/components/settings/topicSwitch"
 import { TouchableOpacity, Image, View, Text } from "react-native"
 import FetchColor from "@styles/fetchTheme"
-import { GS } from "@styles/globalStyles"
+import GS from "@styles/globalStyles"
 import { useSelector } from "react-redux"
 import React, {useState } from "react"
-import { T } from "@styles/text"
+import T from "@styles/text"
 
 /**
  * Creates a full dropdownmenu for reminders

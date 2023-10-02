@@ -101,3 +101,5 @@ export const SS = StyleSheet.create({
         height: 200,
     },
 })
+
+export default SS

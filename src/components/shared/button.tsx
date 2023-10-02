@@ -1,5 +1,5 @@
 import FetchColor from "@styles/fetchTheme"
-import { SS } from "@styles/settingStyles"
+import SS from "@styles/settingStyles"
 import { useSelector } from "react-redux"
 import React, { ReactNode } from "react"
 import { View } from "react-native"

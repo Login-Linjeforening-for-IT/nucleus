@@ -170,5 +170,12 @@ export const GS = StyleSheet.create({
     }, 
     notificationDropdownBody: {
         fontSize: 18
+    },
+    headerView: {
+        display: 'flex', 
+        flexDirection: 'row', 
+        paddingLeft: '5%'
     }
 })
+
+export default GS

@@ -3,7 +3,8 @@ import React, { PropsWithChildren, ReactNode } from 'react';
 import { BlurView } from 'expo-blur';
 import { Dimensions, Platform, View, Text, StatusBar } from 'react-native';
 import { ExtendedBottomTabHeaderProps } from '@interfaces';
-import { MS } from '@styles/menuStyles';
+import MS from '@styles/menuStyles';
+import GS from '@styles/globalStyles';
 import { useSelector } from 'react-redux';
 
 // Wraps the content in blur or transparent depending on OS
@@ -34,7 +35,7 @@ export default function Header({ options, route }: ExtendedBottomTabHeaderProps)
     return (
         <>
             <BlurWrapper>
-                <View style={{ display: 'flex', flexDirection: 'row', paddingLeft: '5%' }}>
+                <View style={GS.headerView}>
                     <View style={{ flex: 1, display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                         {options.headerComponents?.left?.map((node, index) => { return <View style={{}} key={index}>{node}</View> })}
                     </View>

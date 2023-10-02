@@ -6,11 +6,11 @@ import Cluster from "@/components/shared/cluster"
 import Button from "@/components/shared/button"
 import Space from "@/components/shared/utils"
 import FetchColor from "@styles/fetchTheme"
-import { SS } from "@styles/settingStyles"
-import { GS } from "@styles/globalStyles"
+import SS from "@styles/settingStyles"
+import GS from "@styles/globalStyles"
 import React, { useState } from "react"
 import { ScreenProps } from "@interfaces"
-import { T } from "@styles/text"
+import T from "@styles/text"
 import {
     Text,
     View,

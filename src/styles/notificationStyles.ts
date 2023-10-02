@@ -30,3 +30,5 @@ export const NS = StyleSheet.create({
         top: "30%",
     }
 })
+
+export default NS

@@ -1,7 +1,7 @@
 import { random } from "@/components/shared/utils"
 import Svg, { Rect } from "react-native-svg"
 import FetchColor from "@styles/fetchTheme"
-import { GS } from "@styles/globalStyles"
+import GS from "@styles/globalStyles"
 import { View } from "react-native"
 import React from "react"
 

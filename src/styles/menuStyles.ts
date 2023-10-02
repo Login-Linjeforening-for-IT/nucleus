@@ -99,3 +99,5 @@ export const MS = StyleSheet.create ({
         top: Platform.OS === "ios" ? null : -8,
     },
 })
+
+export default MS
