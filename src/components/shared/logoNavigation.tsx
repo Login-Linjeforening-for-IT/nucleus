@@ -7,7 +7,7 @@ import { TouchableOpacity } from "react-native";
 export default function LogoNavigation (navigation: BottomTabNavigationProp<ParamListBase>, isDark: boolean): JSX.Element {
     return (
         <TouchableOpacity
-            // TOTDO: Place initial screen name i state so 'Eventscreen ikke er hardcoded'
+            // TODO: Place initial screen name i state so 'Eventscreen ikke er hardcoded'
             onPress={() => { navigation.getState().index == 0 ? null : navigation.navigate('EventScreen')}}>
             <Image
                 style={MS.tMenuIcon}

@@ -175,7 +175,6 @@ export const GS = StyleSheet.create({
     headerView: {
         display: 'flex', 
         flexDirection: 'row', 
-        paddingLeft: '5%'
     },
     innerHeaderViewOne: {
         flex: 1, 
@@ -192,8 +191,13 @@ export const GS = StyleSheet.create({
     },
     headerTitle: {
         alignSelf: 'center', 
-        fontSize: 25,
+        fontSize: 20,
     },
+    blurBackgroundView: {
+        position: Platform.OS === "ios" ? "absolute" : undefined,
+        width: "100%",
+        justifyContent: Platform.OS === "ios" ? "center" : undefined,
+    }
 })
 
 export default GS

@@ -1,29 +1,6 @@
-import { StyleSheet, Dimensions, Platform } from "react-native"
-
+import { StyleSheet, Platform } from "react-native"
 
 export const MS = StyleSheet.create ({
-    // Big headertitle for EventScreen (due to filter causing problems)
-    filterScreenTitle: {
-        position: "absolute",
-        textAlign: "center",
-        left: 100,
-        top: Platform.OS === "ios" ? "50%" : "40%",
-        right: "-6%",
-        marginLeft: "auto",
-        marginRight: "auto",
-        fontSize: Platform.OS === "ios" ? 30 : 28,
-    },
-    smallTitle: {
-        position: "absolute",
-        textAlign: "center",
-        top: Dimensions.get("window").height / 18,
-        left: 0,
-        right: "-6%",
-        marginLeft: "auto",
-        marginRight: "auto",
-        alignSelf: "center",
-        fontSize: Platform.OS === "ios" ? 25 : 23,
-    },
     // Small headertitle (for multiline)
     smallMultilineTitle: {
         position: "absolute",
@@ -54,14 +31,6 @@ export const MS = StyleSheet.create ({
         width: 25,
         height: 25,
     },
-    multiTop: {
-        width: 90,
-        height: 60,
-        top: 35,
-        right: "5%",
-        flexDirection: "row",
-        justifyContent: "space-evenly",
-    },
     multiIcon: {
         height: 24,
         width: 24,
@@ -90,12 +59,6 @@ export const MS = StyleSheet.create ({
     logoBackground: {
         width: 100,
         alignItems: "center",
-    },
-    touchableIcon: {
-        justifyContent: "center",
-        alignItems: "center",
-        width: 35,
-        top: Platform.OS === "ios" ? null : -8,
     },
 })
 
