@@ -11,8 +11,8 @@ type EventTimeProps = {
 
 type GetEndTimeProps = {
     input: string
-    lang: boolean
     theme: number
+    lang: boolean
 }
 
 /**
@@ -452,7 +452,7 @@ export function endsSoon(endTime: string): boolean {
  * @param {string} input
  * @returns View containing the endtime as a text
  */
-export function GetEndTime({input, lang, theme}: GetEndTimeProps) {
+export function GetEndTime({input, theme, lang}: GetEndTimeProps) {
 
     if (input != null) {
         // Fetching endtime ciphers from api

@@ -66,7 +66,7 @@ export default function Person({person}: PersonProps): JSX.Element {
         <View>
             <Image style={{...GS.personImage}} source={{uri: obj.img}} />
             {Space(10)}
-            <View style={{position: "absolute", alignSelf: "center"}}>{CornerSquare({theme, corner})}</View>
+            <View style={{position: "absolute", alignSelf: "center"}}>{CornerSquare({corner})}</View>
             <Text style={T.leaderTitle}>{obj.title}</Text>
             {Space(5)}
             <Text style={{
@@ -206,7 +206,7 @@ export function Styret() {
                 source={{uri: "https://cdn.login.no/img/styret2.jpg"}}
             />
             <View style={{position: "absolute", alignSelf: "center"}}>
-                {CornerSquare({theme, corner, type: true})}
+                {CornerSquare({corner, type: true})}
             </View>
         </View>
     )

@@ -4,9 +4,9 @@ import FetchColor from "@styles/fetchTheme"
 import GS from "@styles/globalStyles"
 import { View } from "react-native"
 import React from "react"
+import { useSelector } from "react-redux"
 
 type CornerSquareProps = {
-    theme: number
     corner: number
     type?: boolean
 }
@@ -16,10 +16,12 @@ type CornerSquareProps = {
  * @param {string} category Category of the event, Format: "CATEGORY"
  * @returns Small circle of the categories color
  */
-export default function CornerSquare({theme, corner, type}: CornerSquareProps):
+export default function CornerSquare({corner, type}: CornerSquareProps):
 JSX.Element {
     let p1 = 10, p2 = 100, p3 = 13, p4 = 102, p5 = 0, p6 = 160, p7 = 70, 
     p8 = 345
+
+    const { theme } = useSelector((state: ReduxState) => state.theme)
 
     if (type) {
         while (corner != 0 && corner != 2) corner = random({min: 0, max: 3})

@@ -55,10 +55,10 @@ type FilterUIProps = {
     setClickedCategory: React.Dispatch<React.SetStateAction<CategoryWithID[]>>
     relevantCategories: CategoryWithID[]
     clickedCategory: CategoryWithID[]
-    theme: number
     search: boolean
     setInput: React.Dispatch<React.SetStateAction<string>>
     items: EventProps[]
+    theme: number
 }
 
 // --- PARENT FILTER FUNCTION ---
@@ -206,10 +206,11 @@ export function fetchRelevantCategories({setRelevantCategories, clickedEvents, e
  * @param {*} relevantCategories    Function to filter out relevant categories for the filter
  * @param {*} clickedCategory       Array containing all clicked categories
  *
- * @returns {JSX.Element} Filter UI
+ * @returns Filter UI
  */
 export function FilterUI({textInputRef, setRenderedArray, setClickedCategory,
-relevantCategories, clickedCategory, theme, search, setInput, items}: FilterUIProps): JSX.Element {
+relevantCategories, clickedCategory, search, setInput, items, theme}: FilterUIProps): JSX.Element {
+
     return (
         <View style={search?{backgroundColor: FetchColor({theme, variable: "DARKER"})}:{display:'none'}}>
             <View style={ES.absoluteView}>
@@ -236,12 +237,12 @@ relevantCategories, clickedCategory, theme, search, setInput, items}: FilterUIPr
 
             <View style={{...ES.clusterFilterView, backgroundColor: FetchColor({theme, variable: "DARKER"})}}>
                 <FlatList
-                scrollEnabled={false}
-                showsVerticalScrollIndicator={false}
-                numColumns={3}
-                keyExtractor={(item) => `${item.id}`}
-                data={relevantCategories}
-                renderItem={({item}) => (
+                    scrollEnabled={false}
+                    showsVerticalScrollIndicator={false}
+                    numColumns={3}
+                    keyExtractor={(item) => `${item.id}`}
+                    data={relevantCategories}
+                    renderItem={({item}) => (
                     <View style={ES.clusterCategoryView}>
                         {clickedCategory.includes(item) ?
                             <TouchableOpacity onPress={() => setClickedCategory(clickedCategory.filter((category: CategoryWithID) => category.id !== item.id))}>

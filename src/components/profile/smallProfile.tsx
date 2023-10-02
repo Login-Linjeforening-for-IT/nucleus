@@ -5,11 +5,10 @@ import CS from "@styles/clusterStyles"
 import { Navigation } from "@interfaces"
 import T from "@styles/text"
 import React from "react"
+import { useSelector } from "react-redux"
 
 type SmallProfileProps = {
     navigation: Navigation
-    theme: number
-    lang: boolean
     profile: ProfileProps
     login: boolean
 }
@@ -20,9 +19,11 @@ type SmallProfileProps = {
  * @param {string} category    Category of the event, Format: "CATEGORY"
  * @returns                     Small circle of the categories color
  */
-export default function SmallProfile({navigation, theme, lang, profile, login}:
+export default function SmallProfile({navigation, profile, login}:
 SmallProfileProps): JSX.Element {  // SVG showing the color of the category
 
+    const { theme } = useSelector((state: ReduxState) => state.theme)
+    const { lang } = useSelector((state: ReduxState) => state.lang)
     const isDark = theme === 0 || theme === 2 || theme === 3 ? true : false
 
     return (

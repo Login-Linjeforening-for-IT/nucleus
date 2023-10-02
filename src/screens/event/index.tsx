@@ -76,7 +76,6 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
     // Redux states
     const notification =    useSelector( (state: ReduxState) => 
     state.notification)
-    const { lang  } =       useSelector( (state: ReduxState) => state.lang)
     const { login } =       useSelector( (state: ReduxState) => state.login)
     const { theme } =       useSelector( (state: ReduxState) => state.theme)
     const { calendarID } =  useSelector( (state: ReduxState) => state.misc)
@@ -103,7 +102,7 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
     useEffect(()=>{
         navigation.setOptions({
             headerComponents: {
-                bottom: [FilterUI({textInputRef, setRenderedArray, setClickedCategory, relevantCategories, clickedCategory, theme, search, setInput, items: events})],
+                bottom: [FilterUI({textInputRef, setRenderedArray, setClickedCategory, relevantCategories, clickedCategory, search, setInput, items: events, theme})],
                 left: [LogoNavigation(navigation, isDark)],
                 right: [FilterButton(search, renderedArray, clickedCategory, input, toggleSearch, isDark), DownloadButton(clickedEvents, setDownloadState, downloadState, calendarID, dispatch, isDark)]
             }
@@ -268,7 +267,6 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
                         backgroundColor: FetchColor({theme, variable: "DARKER"})
                     }}>
                         {pushNotification && pushNotificationContent}
-        
                         <EventList
                             navigation={navigation}
                             renderedArray={renderedArray}

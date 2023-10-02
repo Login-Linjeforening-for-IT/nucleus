@@ -3,7 +3,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage"
 import EventLocation from "@components/event/eventLocation"
 import { FetchJoinLink } from "@/utils/fetch"
 import Space, { Month } from "@/components/shared/utils"
-import { SpecificEventScreenProps } from "@interfaces"
 import { CardSmaller } from "@/components/shared/card"
 import { GetEndTime } from "@components/event/time"
 import React, { useEffect, useState } from "react"
@@ -209,8 +208,7 @@ BottomTabScreenProps<EventStackParamList>): JSX.Element {
                     }}>
                         {text.end}
                     </Text>
-                    {"endt" in event && GetEndTime({input: event.endt, lang, 
-                    theme})}
+                    {"endt" in event && GetEndTime({input: event.endt, theme, lang})}
                 </View>
 
                 {Space(5)}
@@ -381,7 +379,7 @@ function Category({item}: CategoryProps) {
 function Map({event, handleLink}: MapProps) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
-    
+
     if (("mazeref" in event) && event.mazeref || (event.street === 
         "Orgkollektivet" || event.organizer === "HUSET")) {
         return (
