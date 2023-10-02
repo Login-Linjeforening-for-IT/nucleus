@@ -92,7 +92,6 @@ type SettingProps = {
 
 type ErrorMessageProps = {
     argument: "wifi" | "nomatch"
-    lang: boolean
 }
 
 type CategoryWithID = {

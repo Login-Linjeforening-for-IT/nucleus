@@ -24,7 +24,6 @@ import Animated, {
 } from "react-native-reanimated"
 
 type ChangeProfileCardProps = {
-    lang: boolean
     type?: string
     value?: number
     hide: () => void
@@ -36,10 +35,11 @@ type ChangeProfileCardProps = {
  * @param {string} category    Category of the event, Format: "CATEGORY"
  * @returns                     Small circle of the categories color
  */
-export default function ChangeProfileCard({lang, type, value, hide,
+export default function ChangeProfileCard({type, value, hide,
 trigger}: ChangeProfileCardProps): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
-
+    const { lang } = useSelector((state: ReduxState) => state.lang)
+    
     // Dispatch to change Redux states
     const dispatch = useDispatch()
 

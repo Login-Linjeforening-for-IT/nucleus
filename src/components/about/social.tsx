@@ -18,7 +18,6 @@ import ES from "@styles/eventStyles"
 
 type PersonProps = {
     person: string
-    lang: boolean
 }
 
 type MediaLogoProps = {
@@ -55,11 +54,13 @@ type MediaProps = {
  * @param {string} person
  * @returns Full object packed in a view component
  */
-export default function Person({person, lang}: PersonProps): JSX.Element {
+export default function Person({person}: PersonProps): JSX.Element {
 
+    const { theme } = useSelector((state: ReduxState) => state.theme)
+    const { lang } = useSelector((state: ReduxState) => state.lang)
     let obj = personInfo({person, lang})
     let corner = random({min: 0, max: 4})
-    const { theme } = useSelector((state: ReduxState) => state.theme)
+
 
     return (
         <View>
@@ -93,18 +94,18 @@ export default function Person({person, lang}: PersonProps): JSX.Element {
  * Function for displaying all committees
  * @returns View containing all committees
  */
-export function AllComitees({lang}: AllCommitteesProps): JSX.Element {
+export function AllComitees(): JSX.Element {
     return (
         <View>
-            <Person person="leader" lang={lang} />
-            <Person person="coleader" lang={lang} />
-            <Person person="secretary" lang={lang} />
-            <Person person="evntkom" lang={lang} />
-            <Person person="pr" lang={lang} />
-            <Person person="tekkom" lang={lang} />
-            <Person person="ctf" lang={lang} />
-            <Person person="eco" lang={lang} />
-            <Person person="bedkom" lang={lang} />
+            <Person person="leader" />
+            <Person person="coleader" />
+            <Person person="secretary" />
+            <Person person="evntkom" />
+            <Person person="pr" />
+            <Person person="tekkom" />
+            <Person person="ctf" />
+            <Person person="eco" />
+            <Person person="bedkom" />
         </View>
     )
 }

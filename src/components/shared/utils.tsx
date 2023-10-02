@@ -20,7 +20,6 @@ type randomProps = {
 type MonthProps = {
     month: number
     color: string
-    lang: boolean
 }
 
 /**
@@ -81,8 +80,10 @@ export function random({min, max}: randomProps): number {
  *
  * @returns {JSX.Element} Error message
  */
-export function ErrorMessage({argument, lang}: ErrorMessageProps): JSX.Element {
+export function ErrorMessage({argument}: ErrorMessageProps): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
+    const { lang } = useSelector((state: ReduxState) => state.lang)
+
     const text = {
         "wifi": lang 
         ? "Sjekk nettverkstilkoblingen din og prøv igjen. Kontakt TEKKOM dersom problemet vedvarer." 
@@ -106,7 +107,9 @@ export function ErrorMessage({argument, lang}: ErrorMessageProps): JSX.Element {
  * @param {hex} color       Hex color for the text based on theme
  * @returns
  */
-export function Month({month, color, lang}: MonthProps): JSX.Element {
+export function Month({month, color}: MonthProps): JSX.Element {
+    const { lang } = useSelector((state: ReduxState) => state.lang)
+
     const monthsEN = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", 
         "Jul", "Aug", "Sep", "Oct", "Nov", "Des"]
     const monthsNO = ["jan", "feb", "mar", "apr", "mai", "jun", 

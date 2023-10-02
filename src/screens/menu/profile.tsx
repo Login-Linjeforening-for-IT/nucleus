@@ -82,11 +82,10 @@ JSX.Element {
                 </Svg>
                 {Space(Dimensions.get("window").height/8)}
                 <Profile
-                    lang={lang}
                     profile={profile}
                 />
                 {Space(40)}
-                <ProfileInfo lang={lang} profile={profileInfo} />
+                <ProfileInfo profile={profileInfo} />
                 {Space(Dimensions.get("window").height/3)}
             </ScrollView>
         </View>

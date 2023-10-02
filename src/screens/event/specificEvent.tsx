@@ -35,20 +35,17 @@ type handleLinkProps = {
 }
 
 type JoinButtonProps = {
-    lang: boolean
     link: string
     updateStorage: () => Promise<void>
 }
 
 type MapProps = {
     event: DetailedEventProps | EventProps
-    lang: boolean
     handleLink: ({mazeref, street, organizer}: handleLinkProps) => void
 }
 
 type CategoryProps = {
     item: EventProps
-    lang: boolean
 }
 
 /**
@@ -174,7 +171,6 @@ BottomTabScreenProps<EventStackParamList>): JSX.Element {
                         <Month
                             month={parseInt(item.startt[5] + item.startt[6])}
                             color={FetchColor({theme, variable: "TEXTCOLOR"})}
-                            lang={lang}
                         />
                         </Text>
                         </View>
@@ -228,13 +224,12 @@ BottomTabScreenProps<EventStackParamList>): JSX.Element {
 
                     <Map
                         event={event}
-                        lang={lang}
                         handleLink={handleLink}
                     />
                 </View>
 
                 {Space(5)}
-                <Category item={item} lang={lang} />
+                <Category item={item} />
                 {Space(5)}
 
                 <View style={ES.specificEventInfoView}>
@@ -322,7 +317,6 @@ BottomTabScreenProps<EventStackParamList>): JSX.Element {
                     }
                     {Space(10)}
                     <JoinButton
-                        lang={lang}
                         link={link ? link : ""}
                         updateStorage={updateStorage}
                     />
@@ -335,9 +329,10 @@ BottomTabScreenProps<EventStackParamList>): JSX.Element {
   )
 }
 
-function JoinButton({lang, link, updateStorage}: JoinButtonProps) {
+function JoinButton({link, updateStorage}: JoinButtonProps) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
-
+    const { lang } = useSelector((state: ReduxState) => state.lang)
+    
     if (link.length) {
         return (
             <TouchableOpacity onPress={() => {
@@ -360,8 +355,9 @@ function JoinButton({lang, link, updateStorage}: JoinButtonProps) {
     }
 }
 
-function Category({item, lang}: CategoryProps) {
+function Category({item}: CategoryProps) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
+    const { lang } = useSelector((state: ReduxState) => state.lang)
 
     return (
         <View style={ES.specificEventInfoView}>
@@ -382,9 +378,10 @@ function Category({item, lang}: CategoryProps) {
     )
 }
 
-function Map({event, lang, handleLink}: MapProps) {
+function Map({event, handleLink}: MapProps) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
-
+    const { lang } = useSelector((state: ReduxState) => state.lang)
+    
     if (("mazeref" in event) && event.mazeref || (event.street === 
         "Orgkollektivet" || event.organizer === "HUSET")) {
         return (

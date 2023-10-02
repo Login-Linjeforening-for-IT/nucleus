@@ -30,7 +30,6 @@ type ContentProps = {
 
 export default function SettingScreen({ navigation }: ScreenProps): JSX.Element {
 
-    const { lang  } = useSelector( (state: ReduxState) => state.lang)
     const { theme } = useSelector( (state: ReduxState) => state.theme)
 
     return (
@@ -39,15 +38,16 @@ export default function SettingScreen({ navigation }: ScreenProps): JSX.Element 
                 ...GS.content, 
                 backgroundColor: FetchColor({theme, variable: "DARKER"})
             }}>
-                <Content lang={lang} />
+                <Content />
             </View>
         </View>
     )
 }
 
-function Content({lang}: ContentProps): JSX.Element {
-    const info = lang ? no.info : en.info
+function Content(): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
+    const { lang } = useSelector((state: ReduxState) => state.lang)
+    const info = lang ? no.info : en.info
 
     return (
         <ScrollView showsVerticalScrollIndicator={false}>

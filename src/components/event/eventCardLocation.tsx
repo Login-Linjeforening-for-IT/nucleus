@@ -6,7 +6,6 @@ import { useSelector } from "react-redux"
 
 type EventCardLocationProps = {
     item: EventProps
-    lang: boolean
 }
 
 /**
@@ -17,9 +16,10 @@ type EventCardLocationProps = {
  * @param {*} lang  User language
  * @returns
  */
-export default function EventCardLocation({item, lang}: 
+export default function EventCardLocation({item}: 
 EventCardLocationProps): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
+    const { lang } = useSelector((state: ReduxState) => state.lang)
     let time = " " + item.startt[11] + item.startt[12] + ":" + item.startt[14] + 
     item.startt[15] + ". "
     if (item.startt[11] + item.startt[12] + item.startt[14] + 

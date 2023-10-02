@@ -5,7 +5,6 @@ import { View, Text } from "react-native"
 import { useSelector } from "react-redux"
 
 type NotificationTextProps = {
-    theme: number
     title: string
     body: string
 }

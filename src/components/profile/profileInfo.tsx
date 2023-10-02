@@ -9,7 +9,6 @@ import T from "@styles/text"
 import { useSelector } from "react-redux"
 
 type ProfileInfoProps = {
-    lang: boolean
     profile: ProfileProps
 }
 
@@ -26,12 +25,12 @@ type ProfileInfoContentProps = {
  * @param {string} category    Category of the event, Format: "CATEGORY"
  * @returns                     Small circle of the categories color
  */
-export default function ProfileInfo({lang, profile}: ProfileInfoProps) {
+export default function ProfileInfo({profile}: ProfileInfoProps) {
     const [selectedIndex, setSelectedIndex] = useState(-1)
     const [previousIndex, setPreviousIndex] = useState(-1)
     const [profileInfo] = useState(profile)
     const profileInfoKeys = Object.keys(profileInfo)
-    const { theme } = useSelector((state: ReduxState) => state.theme)
+    const { lang } = useSelector((state: ReduxState) => state.lang)
 
     const typeNO = [ "Studieretning", "Studieår", "Epost", "Preferanser", "Allergier" ]
     const typeEN = ["Degree", "Study year", "Mail", "Preferences", "Allergies" ]
@@ -72,7 +71,6 @@ export default function ProfileInfo({lang, profile}: ProfileInfoProps) {
             ))}
             {typeof selectedIndex === "number" &&
                 <ChangeInfoCard
-                    lang={lang}
                     type={type[selectedIndex]}
                     value={selectedIndex}
                     hide={() => {

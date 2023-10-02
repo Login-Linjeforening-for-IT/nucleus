@@ -39,7 +39,7 @@ export default function NotificationScreen({navigation, back}: NotificationScree
                 keyExtractor={(item, index) => index.toString()}
                 data={list}
                 renderItem={({item}) => (
-                    <Notification item={item} lang={lang} navigation={navigation} />
+                    <Notification item={item} navigation={navigation} />
                 )}
             />
         )
@@ -67,11 +67,10 @@ export default function NotificationScreen({navigation, back}: NotificationScree
 
 type NotificationInAppProps = {
     item: NotificationList
-    lang: boolean
     navigation: Navigation
 }
 
-function Notification({item, lang, navigation}: NotificationInAppProps): JSX.Element {
+function Notification({item, navigation}: NotificationInAppProps): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
 
     function navigateIfPossible() {
@@ -88,7 +87,6 @@ function Notification({item, lang, navigation}: NotificationInAppProps): JSX.Ele
                     <View style={NS.notificationViewLeft}>
                         <FullCategorySquare
                             item={item.data}
-                            lang={lang}
                             height={2*item.body.length}
                         />
                     </View>

@@ -24,7 +24,6 @@ type EventListProps = {
     renderedArray: EventProps[]
     clickedEvents: EventProps[]
     search: boolean
-    lang: boolean
     relevantCategories: CategoryWithID[]
     notification: NotificationProps
     setClickedEvents: React.Dispatch<React.SetStateAction<EventProps[]>>
@@ -38,7 +37,6 @@ type EventCardProps = {
     renderedArray: EventProps[]
     clickedEvents: EventProps[]
     search: boolean
-    lang: boolean
     relevantCategories: CategoryWithID[]
     notification: NotificationProps
     setClickedEvents: React.Dispatch<React.SetStateAction<EventProps[]>>
@@ -53,18 +51,15 @@ type ListFooterProps = {
     search: boolean
     relevantCategories: CategoryWithID[]
     lastSave: string
-    lang: boolean
 }
 
 type FullCategorySquareProps = {
     item: EventProps
-    lang: boolean
     height?: number
 }
 
 type BellProps = {
     item: EventProps
-    lang: boolean
     notification: NotificationProps
     clickedEvents: EventProps[]
     isOrange: boolean
@@ -76,7 +71,6 @@ export default function EventList ({
     renderedArray,
     clickedEvents,
     search,
-    lang,
     relevantCategories,
     notification,
     setClickedEvents,
@@ -86,7 +80,6 @@ export default function EventList ({
 }: EventListProps): JSX.Element {
     if (!renderedArray.length) return <ErrorMessage 
         argument="wifi" 
-        lang={lang} 
     />
     else if (renderedArray.length > 0) {
         return (
@@ -103,7 +96,6 @@ export default function EventList ({
                             renderedArray={renderedArray}
                             clickedEvents={clickedEvents}
                             search={search}
-                            lang={lang}
                             relevantCategories={relevantCategories}
                             notification={notification}
                             setClickedEvents={setClickedEvents}
@@ -117,7 +109,6 @@ export default function EventList ({
         )
     } else return <ErrorMessage 
         argument={!events.length ? "wifi" : "nomatch"} 
-        lang={lang} 
     />
 }
 
@@ -126,7 +117,6 @@ function EventCard ({
     renderedArray,
     clickedEvents,
     search,
-    lang,
     relevantCategories,
     notification,
     setClickedEvents,
@@ -134,7 +124,6 @@ function EventCard ({
     item,
     index
 }: EventCardProps): JSX.Element {
-    const { theme } = useSelector((state: ReduxState) => state.theme)
     const isOrange = clickedEvents.some(event => event.eventID === item.eventID) 
         ? true 
         : false
@@ -153,15 +142,12 @@ function EventCard ({
                     <View style={ES.eventBack}>
                         <FullCategorySquare 
                             item={item} 
-                            lang={lang} 
                         />
                         <EventCardLocation 
                             item={item} 
-                            lang={lang} 
                         />
                         <Bell
                             item={item}
-                            lang={lang}
                             notification={notification}
                             clickedEvents={clickedEvents}
                             isOrange={isOrange}
@@ -175,7 +161,6 @@ function EventCard ({
                     search={search}
                     relevantCategories={relevantCategories}
                     lastSave={lastSave}
-                    lang={lang}
                 />
             </TouchableOpacity>
         </View>
@@ -183,8 +168,10 @@ function EventCard ({
 }
 
 export function ListFooter({index, renderedArray, search, relevantCategories, 
-lastSave, lang}: ListFooterProps): JSX.Element {
+lastSave}: ListFooterProps): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
+    const { lang } = useSelector((state: ReduxState) => state.lang)
+
     return (
         <>
             {index === renderedArray.length-1 && <Text style={{...T.contact, 
@@ -203,10 +190,11 @@ lastSave, lang}: ListFooterProps): JSX.Element {
     )
 }
 
-export function FullCategorySquare({item, lang, height}: FullCategorySquareProps) {
+export function FullCategorySquare({item, height}: FullCategorySquareProps) {
     const day = "startt" in item ? `${item.startt[8]}${item.startt[9]}` : new Date().getDate()
     const month = "startt" in item ? parseInt(item.startt[5] + item.startt[6]) : new Date().getMonth() + 1
     const { theme } = useSelector((state: ReduxState) => state.theme)
+    const { lang } = useSelector((state: ReduxState) => state.lang)
 
     return (
         <View>
@@ -220,15 +208,15 @@ export function FullCategorySquare({item, lang, height}: FullCategorySquareProps
             <Month
                 month={month}
                 color={FetchColor({theme, variable: "TEXTCOLOR"})}
-                lang={lang}
             />
         </View>
     )
 }
 
-function Bell({item, lang, notification, clickedEvents, isOrange, 
+function Bell({item, notification, clickedEvents, isOrange, 
 setClickedEvents}: BellProps): JSX.Element {
-    const { theme } = useSelector((state: ReduxState) => state.theme)
+    const { lang } = useSelector((state: ReduxState) => state.lang)
+    
     return (
         <View style={ES.view3}>
             <TouchableOpacity onPress={() => {

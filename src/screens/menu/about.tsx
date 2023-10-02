@@ -32,7 +32,6 @@ type getCommitteeImageProps = {
 
 type CommitteePersonProps = {
     committee: number
-    lang: boolean
 }
 
 type CommitteeImageTouchableProps = {
@@ -52,7 +51,6 @@ type CommitteeContentProps = {
     index: number
     relevantCommittee: CommitteeInfo
     isDark: boolean
-    lang: boolean
 }
 
 type CommitteeInfo = {
@@ -167,7 +165,6 @@ export default function AboutScreen({ navigation }: ScreenProps): JSX.Element {
                                     return <CommitteeContent
                                         key={index}
                                         index={index}
-                                        lang={lang}
                                         isDark={isDark}
                                         relevantCommittee={relevantCommittee}
                                     />
@@ -177,7 +174,6 @@ export default function AboutScreen({ navigation }: ScreenProps): JSX.Element {
 
                         <CommitteePerson 
                             committee={committee} 
-                            lang={lang}
                         />
 
                         {Space(10)}
@@ -261,12 +257,12 @@ function getCommitteeImage({id, style}: getCommitteeImageProps) {
     }
 }
 
-function CommitteePerson({committee, lang}: CommitteePersonProps) {
+function CommitteePerson({committee}: CommitteePersonProps) {
     const committees = ["evntkom", "tekkom", "pr", "ctf", "eco"]
 
     if (committees[committee-1]) {
-        return Person({person: committees[committee-1], lang})
-    } else return AllComitees({lang})
+        return Person({person: committees[committee-1]})
+    } else return AllComitees()
 }
 
 function CommitteeView({setCommittee, committee, isDark}: 
@@ -325,6 +321,7 @@ index}: CommitteeImageTouchableProps): JSX.Element {
 function CommitteeContent({index, relevantCommittee, isDark}: 
 CommitteeContentProps) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
+    
     return (
         <View key={index}>
             <Text style={{

@@ -8,7 +8,6 @@ import T from "@styles/text"
 import { useSelector } from "react-redux"
 
 type ProfileElementprops = {
-    lang: boolean
     profile: ProfileProps
 }
 
@@ -20,7 +19,6 @@ type SmallProfileImageProps = {
 type MainProfileInfoProps = {
     show: boolean
     profile: ProfileProps
-    lang: boolean
     year: string
 }
 
@@ -30,8 +28,9 @@ type MainProfileInfoProps = {
  * @param {string} category    Category of the event, Format: "CATEGORY"
  * @returns                     Small circle of the categories color
  */
-export default function Profile({lang, profile} : ProfileElementprops) {
+export default function Profile({profile} : ProfileElementprops) {
     const [show, setShow] = useState(false)
+    const { lang } = useSelector((state: ReduxState) => state.lang)
 
     let y
 
@@ -77,7 +76,6 @@ export default function Profile({lang, profile} : ProfileElementprops) {
                         <MainProfileInfo 
                             show={show}
                             profile={profile}
-                            lang={lang}
                             year={year}
                         />
                     </View>
@@ -86,7 +84,6 @@ export default function Profile({lang, profile} : ProfileElementprops) {
 
             {show &&
                 <ChangeProfileCard
-                    lang={lang}
                     hide={() => {console.log("hidden"); setShow(false)}}
                     trigger={true}
                 />
@@ -113,8 +110,9 @@ function SmallProfileImage({show, profile}: SmallProfileImageProps) {
     )
 }
 
-function MainProfileInfo({show, profile, lang, year}: MainProfileInfoProps) {
+function MainProfileInfo({show, profile, year}: MainProfileInfoProps) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
+    const { lang } = useSelector((state: ReduxState) => state.lang)
     if (!show) return (
         <>
             <Text style={{

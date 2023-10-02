@@ -9,14 +9,13 @@ type FeedbackProps = {
     index: number
     setting: SettingProps[]
     feedback: boolean
-    theme: number
-    lang: boolean
     toggleFeedback: () => void
 }
 
-export default function Feedback({index, setting, feedback, lang, 
+export default function Feedback({index, setting, feedback,
 toggleFeedback}: FeedbackProps) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
+    const { lang } = useSelector((state: ReduxState) => state.lang)
 
     if (index === setting.length-1 && !feedback) {
         return (
