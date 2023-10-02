@@ -22,14 +22,14 @@ import {
 import LogoNavigation from "@/components/shared/logoNavigation"
 import { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs"
 import { createStackNavigator } from "@react-navigation/stack"
-import InternalScreen from "./menu/internal"
-import AboutScreen from "./menu/about"
-import BusinessScreen from "./menu/business"
-import LoginScreen from "./menu/login"
-import NotificationScreen from "./menu/notifications"
-import ProfileScreen from "./menu/profile"
-import ReportScreen from "./menu/report"
-import SettingScreen from "./menu/settings"
+import InternalScreen from "./internal"
+import AboutScreen from "./about"
+import BusinessScreen from "./business"
+import LoginScreen from "./login"
+import NotificationScreen from "./notifications"
+import ProfileScreen from "./profile"
+import ReportScreen from "./report"
+import SettingScreen from "./settings"
 
 type MenuItemProps = {
     index: number

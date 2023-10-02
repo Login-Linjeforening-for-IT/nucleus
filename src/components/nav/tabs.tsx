@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { ExtendedRouteOptions, StackProps } from "@interfaces"
 import { NavigationContainer } from "@react-navigation/native"
-import SpecificAdScreen from "@screens/specificAd"
+import SpecificAdScreen from "@screens/ads/specificAd"
 import Footer from "@nav/footer"
 import { useSelector } from "react-redux"
 import EventScreen from "@screens/event"
