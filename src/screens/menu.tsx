@@ -8,8 +8,8 @@ import { CS } from "@styles/clusterStyles"
 import { GS } from "@styles/globalStyles"
 import { useSelector } from "react-redux"
 import React, { useEffect, useState } from "react"
-import en from "@text/en/menu.json"
-import no from "@text/no/menu.json"
+import en from "@text/menu/en.json"
+import no from "@text/menu/no.json"
 import { T } from "@styles/text"
 import {
   Text,

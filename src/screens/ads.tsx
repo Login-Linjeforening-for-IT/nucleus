@@ -15,7 +15,7 @@ import { ScreenProps } from "@interfaces"
 import { GS } from "@styles/globalStyles"
 import { MS } from "@styles/menuStyles"
 import { BlurView } from "expo-blur"
-import en from "@text/en/ad.json"
+import en from "@text/ads/en.json"
 import {
     TouchableOpacity,
     Dimensions,

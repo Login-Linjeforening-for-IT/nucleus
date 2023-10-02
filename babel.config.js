@@ -11,7 +11,7 @@ module.exports = function(api) {
                 "@interfaces": "./interfaces.ts",
                 "@themes": "./src/styles/themes",
                 "@assets": "./public/assets",
-                "@text": "./public/locales",
+                "@text": "./public/text",
                 "@screens": "./src/screens",
                 "@shared": "./src/shared",
                 "@styles": "./src/styles",
