@@ -9,13 +9,6 @@ import {
 } from "@react-navigation/bottom-tabs/lib/typescript/src/types"
 import { ReactNode } from "react"
 
-export interface ExtendedTabNavigationOptions 
-extends BottomTabNavigationOptions {
-    display?: boolean
-    focusedIcon?: ImageSourcePropType
-    icon?: ImageSourcePropType  
-}
-  
 export interface ExtendedDescriptor {
     options: ExtendedRouteOptions
 }
@@ -44,10 +37,6 @@ export interface ScreenProps {
 }
 
 export type Navigation = BottomTabNavigationProp<ParamListBase, string, undefined>
-
-export interface SpecificEventScreenProps extends ExtendedBottomTabBarProps {
-    route: RouteProp<RootStackParamList, 'SpecificEventScreen'>
-}
 
 export interface SpecificAdScreenProps extends ExtendedBottomTabBarProps {
     route: RouteProp<RootStackParamList, 'SpecificAdScreen'>

@@ -5,7 +5,6 @@ import no from "@text/companies/no.json"
 import Paragraph from "@/components/business/paragraph"
 import React from "react"
 import Space, { Line } from "@/components/shared/utils"
-import TopMenu from "@/components/shared/topMenu"
 import GS from "@styles/globalStyles"
 import { Kontakt } from "@/components/about/social"
 import { ScreenProps } from "@interfaces"
@@ -13,17 +12,10 @@ import T from "@styles/text"
 import { Text, View, ScrollView, Dimensions } from "react-native"
 import { useSelector } from "react-redux"
 
-type ContentProps = {
-    lang: boolean
-    theme: number
-}
-
 export default function BusinessScreen({ navigation }: ScreenProps): 
 JSX.Element {
 
-    const { lang  } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    const info = lang ? no.companies : en.companies
 
     return (
         <View>

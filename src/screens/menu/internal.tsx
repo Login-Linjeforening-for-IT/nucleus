@@ -29,7 +29,6 @@ type ItemProps = {
 export default function InternalScreen({ navigation }: ScreenProps): 
 JSX.Element {
 
-    const { lang  } = useSelector( (state: ReduxState) => state.lang)
     const { theme } = useSelector( (state: ReduxState) => state.theme)
 
     const setting = [
@@ -59,6 +58,8 @@ JSX.Element {
 }
 
 function Option({index, item}: OptionProps): JSX.Element {
+    const { theme } = useSelector((state: ReduxState) => state.theme)
+
     return (
         <View>
             {index === 0 ? Space(Dimensions.get("window").height/8): null}

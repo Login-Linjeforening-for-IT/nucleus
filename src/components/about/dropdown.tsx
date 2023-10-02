@@ -1,6 +1,3 @@
-// This file contains several dropdown menus mostly but not exclusively used by
-// the AboutScreen.
-
 import { View, Text, TouchableOpacity, Linking, Image } from "react-native"
 import FetchColor from "@styles/fetchTheme"
 import GS from "@styles/globalStyles"
@@ -54,21 +51,13 @@ export default function Dropdown() {
         {id: 2, title: title.phet, link: "https://www.ntnu.no/studier/phet"}
     ])
 
-    const [course, selectCourse] = useState({
-        selected: 0
-    })
+    const [course, selectCourse] = useState(0)
 
     const selectedDegree = (val: number) => {
-        if (course.selected === val) {
-            selectCourse({
-                ...course,
-                selected: -1,
-              })
+        if (course === val) {
+            selectCourse(-1)
         } else {
-            selectCourse({
-                ...course,
-                selected: val,
-              })
+            selectCourse(val)
         }
       }
 
@@ -76,7 +65,7 @@ export default function Dropdown() {
         <View>
             <TouchableOpacity onPress={() => selectedDegree(1)}>
                 <View style={{...GS.dropdown, backgroundColor: FetchColor({theme, variable: "CONTRAST"})}}>
-                { course.selected === 1 ?
+                { course === 1 ?
                     <Image style={GS.dropImage} source={require("@assets/icons/linkselected.png")} />
                 :
                     <Image style={GS.dropImage} source={require("@assets/icons/dropdown-orange.png")} />
@@ -86,7 +75,7 @@ export default function Dropdown() {
             </TouchableOpacity>
 
             <View>
-                { course.selected === 1 ?
+                { course === 1 ?
                     bcourses.map((selectedCourse, index) => {
                         return (
                             <TouchableOpacity key={index} onPress={() => Linking.openURL(selectedCourse.link)}>
@@ -103,7 +92,7 @@ export default function Dropdown() {
 
             <TouchableOpacity onPress={() => selectedDegree(2)}>
                 <View style={{...GS.dropdown, backgroundColor: FetchColor({theme, variable: "CONTRAST"})}}>
-                { course.selected  === 2 ?
+                { course  === 2 ?
                     <Image style={GS.dropImage} source={require("@assets/icons/linkselected.png")} />
                 :
                     <Image style={GS.dropImage} source={require("@assets/icons/dropdown-orange.png")} />
@@ -113,7 +102,7 @@ export default function Dropdown() {
             </TouchableOpacity>
 
             <View>
-                { course.selected === 2 ?
+                { course === 2 ?
                     mcourses.map((selectedCourse, index) => {
                         return (
                             <TouchableOpacity key={index} onPress={() => Linking.openURL(selectedCourse.link)}>
@@ -130,7 +119,7 @@ export default function Dropdown() {
 
             <TouchableOpacity onPress={() => selectedDegree(3)}>
                 <View style={{...GS.dropdown, backgroundColor: FetchColor({theme, variable: "CONTRAST"})}}>
-                { course.selected  === 3 ?
+                { course === 3 ?
                     <Image style={GS.dropImage} source={require("@assets/icons/linkselected.png")} />
                 :
                     <Image style={GS.dropImage} source={require("@assets/icons/dropdown-orange.png")} />
@@ -140,7 +129,7 @@ export default function Dropdown() {
             </TouchableOpacity>
 
             <View>
-                { course.selected === 3 ?
+                { course === 3 ?
                     pcourses.map((selectedCourse, index) => {
                         return (
                             <TouchableOpacity key={index} onPress={() => Linking.openURL(selectedCourse.link)}>

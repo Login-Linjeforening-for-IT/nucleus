@@ -1,5 +1,5 @@
 import { nativeApplicationVersion } from "expo-application"
-import { Navigation, ScreenProps } from "@interfaces"
+import { Navigation, NotificationScreenProps, ScreenProps } from "@interfaces"
 import Feedback from "@/components/menu/feedback"
 import Cluster from "@/components/shared/cluster"
 import Space from "@/components/shared/utils"
@@ -48,15 +48,14 @@ type ItemProps = {
 }
 
 const MenuStack = createStackNavigator()
-const screens = {
+
+const screens: Record<string, React.FC<any>> = {
+    "SettingScreen": SettingScreen,
+    "NotificationScreen": NotificationScreen,
     "AboutScreen": AboutScreen,
     "BusinessScreen": BusinessScreen,
-    "InternalScreen": InternalScreen,
-    "LoginScreen": LoginScreen,
-    "NotificationScreen": NotificationScreen,
-    "ProfileScreen": ProfileScreen,
     "ReportScreen": ReportScreen,
-    "SettingScreen": SettingScreen
+    "InternalScreen": InternalScreen,
 }
 
 
@@ -122,10 +121,9 @@ export default function MenuScreen({ navigation }: ScreenProps): JSX.Element {
                     </View>)
                 }}
             </MenuStack.Screen>
-            {text.setting.map((item, index)=>{
-                return (
-                <MenuStack.Screen {...{key: index, name: item.nav, initialParams: item, component: screens[item.nav]}}></MenuStack.Screen>
-            )})}
+            {text.setting.map((item)=> (
+                <MenuStack.Screen {...{key: item.nav, name: item.nav, initialParams: item, component: screens[item.nav]}}></MenuStack.Screen>
+            ))}
         </MenuStack.Navigator>
     )
 }
