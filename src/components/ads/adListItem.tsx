@@ -1,7 +1,7 @@
 import notificationArray from "@/utils/notificationArray"
 import { AdClusterLocation, AdClusterImage } from "@/components/ads/ad"
 import topic from "@/utils/topic"
-import BellIcon from "@/components/events/bellIcon"
+import BellIcon from "@components/event/bellIcon"
 import { TouchableOpacity, View} from "react-native"
 import Cluster from "@/components/shared/cluster"
 import AS from "@styles/adStyles"

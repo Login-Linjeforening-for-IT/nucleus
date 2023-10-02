@@ -1,4 +1,4 @@
-import { CheckBox, CheckedBox, SmallCheck } from "@/components/events/check"
+import { CheckBox, CheckedBox, SmallCheck } from "@components/event/check"
 import { removeDuplicatesAndOld } from "@/utils/fetch"
 import FetchColor from "@styles/fetchTheme"
 import ES from "@styles/eventStyles"

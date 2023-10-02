@@ -1,6 +1,6 @@
 import GreenLight, { RedLight } from "@/components/shared/light"
 import { CardSmaller } from "@/components/shared/card"
-import Check from "@/components/events/check"
+import Check from "@components/event/check"
 import Button from "@/components/shared/button"
 import Space from "@/components/shared/utils"
 import FetchColor from "@styles/fetchTheme"

@@ -1,7 +1,7 @@
 import notificationSetup from "@/utils/notificationSetup"
 import LastFetch, { fetchState, timeSince } from "@/utils/fetch"
 import AsyncStorage from "@react-native-async-storage/async-storage"
-import { ListFooter } from "@/components/events/eventList"
+import { ListFooter } from "@components/event/eventList"
 import Space, { ErrorMessage } from "@/components/shared/utils"
 import handleDownload from "@/utils/calendar"
 import storeAds from "@/utils/storeEvents"

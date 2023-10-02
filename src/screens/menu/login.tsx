@@ -1,7 +1,7 @@
 import GreenLight, { RedLight } from "@/components/shared/light"
 import { changeLoginStatus } from "@redux/loginStatus"
 import { useSelector, useDispatch } from "react-redux"
-import Check from "@/components/events/check"
+import Check from "@components/event/check"
 import Cluster from "@/components/shared/cluster"
 import Button from "@/components/shared/button"
 import Space from "@/components/shared/utils"
