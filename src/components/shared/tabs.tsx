@@ -49,7 +49,8 @@ export default function Navigator(): JSX.Element {
             icon: isDark
             ? require("@assets/menu/menu.png")
             : require("@assets/menu/menu-black.png")
-        }
+        },
+        { name: "SpecificAdScreen", component: SpecificAdScreen }
     ]
     
     return (
