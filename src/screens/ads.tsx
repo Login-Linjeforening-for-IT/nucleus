@@ -1,13 +1,13 @@
-import notificationSetup from "@shared/notificationComponents/notificationSetup"
-import LastFetch, { fetchState, timeSince } from "@shared/eventComponents/fetch"
+import notificationSetup from "@/utils/notificationSetup"
+import LastFetch, { fetchState, timeSince } from "@/utils/fetch"
 import AsyncStorage from "@react-native-async-storage/async-storage"
-import { ListFooter } from "@shared/eventComponents/eventList"
-import Space, { ErrorMessage } from "@shared/components/utils"
-import handleDownload from "@shared/eventComponents/calendar"
-import storeAds from "@shared/eventComponents/storeEvents"
+import { ListFooter } from "@/components/events/eventList"
+import Space, { ErrorMessage } from "@/components/shared/utils"
+import handleDownload from "@/utils/calendar"
+import storeAds from "@/utils/storeEvents"
 import { useFocusEffect } from "@react-navigation/native"
 import { useDispatch, useSelector } from "react-redux"
-import { AdListItem } from "@components/adListItem"
+import { AdListItem } from "@/components/ads/adListItem"
 import React, { useEffect, useState } from "react"
 import { StatusBar } from "expo-status-bar"
 import FetchColor from "@styles/fetchTheme"
@@ -25,7 +25,7 @@ import {
     Image,
     Text,
 } from "react-native"
-import LogoNavigation from "@shared/functions/logoNavigation"
+import LogoNavigation from "@/components/shared/logoNavigation"
 import { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs"
 
 /**

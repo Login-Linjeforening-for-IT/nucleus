@@ -1,11 +1,11 @@
-import notificationSetup from "@shared/notificationComponents/notificationSetup"
+import notificationSetup from "@/utils/notificationSetup"
 import AsyncStorage from "@react-native-async-storage/async-storage"
-import Space, { ErrorMessage } from "@shared/components/utils"
-import storeEvents from "@shared/eventComponents/storeEvents"
-import handleDownload from "@shared/eventComponents/calendar"
+import Space, { ErrorMessage } from "@/components/shared/utils"
+import storeEvents from "@/utils/storeEvents"
+import handleDownload from "@/utils/calendar"
 import React, { useEffect, useState, useRef } from "react"
 import { useFocusEffect, useRoute } from "@react-navigation/native"
-import EventList from "@shared/eventComponents/eventList"
+import EventList from "@/components/events/eventList"
 import { useDispatch, useSelector } from "react-redux"
 import { StatusBar } from "expo-status-bar"
 import { AnyAction, Dispatch } from "redux"
@@ -14,21 +14,21 @@ import { GS } from "@styles/globalStyles"
 import { MS } from "@styles/menuStyles"
 import { BlurView } from "expo-blur"
 import NavigateFromPushNotification 
-from "@shared/notificationComponents/navigateFromPushNotification"
+from "@/utils/navigateFromPushNotification"
 import initializeNotifications 
-from "@shared/notificationComponents/notificationSetup"
+from "@/utils/notificationSetup"
 import Filter, {
     fetchRelevantCategories,
     filterCategories,
     filterBoth,
     FilterUI,
-} from "@shared/eventComponents/filter"
+} from "@/components/shared/filter"
 import LastFetch, { 
     fetchState, 
     fetchStored, 
     getData, 
     timeSince 
-} from "@shared/eventComponents/fetch"
+} from "@/utils/fetch"
 import {
     Text,
     View,
@@ -41,9 +41,9 @@ import {
 import { ExtendedRouteOptions, ScreenProps, SpecificEventScreenProps } from "@interfaces"
 import { ExtendedBottomTabHeaderProps } from "@interfaces"
 import { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs"
-import LogoNavigation from "@shared/functions/logoNavigation"
-import FilterButton from "@shared/eventComponents/filterButton"
-import DownloadButton from "@shared/eventComponents/downloadButton"
+import LogoNavigation from "@/components/shared/logoNavigation"
+import FilterButton from "@/components/shared/filterButton"
+import DownloadButton from "@/components/shared/downloadButton"
 import { createStackNavigator } from "@react-navigation/stack"
 import SpecificEventScreen from "./specificEvent"
 

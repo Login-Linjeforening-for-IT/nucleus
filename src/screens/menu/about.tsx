@@ -1,6 +1,6 @@
-import Space, { Line } from "@shared/components/utils"
-import Dropdown from "@shared/functions/dropdown"
-import Cluster from "@shared/functions/cluster"
+import Space, { Line } from "@/components/shared/utils"
+import Dropdown from "@/components/about/dropdown"
+import Cluster from "@/components/shared/cluster"
 import FetchColor from "@styles/fetchTheme"
 import { GS } from "@styles/globalStyles"
 import { useSelector } from "react-redux"
@@ -9,12 +9,12 @@ import no from "@text/no/aboutPage.json"
 import React, {useState} from "react"
 import { T } from "@styles/text"
 import { ScreenProps } from "@interfaces"
-import person, { 
+import Person, { 
     AllComitees, 
     Social, 
-    styret, 
+    Styret, 
     Copyright
-} from "@shared/functions/social"
+} from "@/components/about/social"
 import {
     Text,
     View,
@@ -112,7 +112,7 @@ export default function AboutScreen({ navigation }: ScreenProps): JSX.Element {
                         {Space(10)}
                         <Dropdown/>
                         {Space(10)}
-                        {styret(theme)}
+                        <Styret theme={theme} />
                         {Space(15)}
                         <Text style={{
                             ...T.bold25, 
@@ -272,7 +272,7 @@ function CommitteePerson({committee, lang, theme}: CommitteePersonProps) {
     const committees = ["evntkom", "tekkom", "pr", "ctf", "eco"]
 
     if (committees[committee-1]) {
-        return person({person: committees[committee-1], lang, theme})
+        return Person({person: committees[committee-1], lang, theme})
     } else return AllComitees({lang,theme})
 }
 

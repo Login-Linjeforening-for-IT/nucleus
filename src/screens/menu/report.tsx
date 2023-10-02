@@ -1,8 +1,8 @@
-import GreenLight, { RedLight } from "@shared/eventComponents/light"
-import { CardSmaller } from "@shared/functions/card"
-import Check from "@shared/eventComponents/check"
-import Button from "@shared/functions/button"
-import Space from "@shared/components/utils"
+import GreenLight, { RedLight } from "@/components/shared/light"
+import { CardSmaller } from "@/components/shared/card"
+import Check from "@/components/events/check"
+import Button from "@/components/shared/button"
+import Space from "@/components/shared/utils"
 import FetchColor from "@styles/fetchTheme"
 import { ScreenProps } from "@interfaces"
 import { SS } from "@styles/settingStyles"
@@ -22,7 +22,7 @@ import {
     View,
     Text,
 } from "react-native"
-import { ClusterSmaller } from "@shared/functions/cluster"
+import { ClusterSmaller } from "@/components/shared/cluster"
 
 export default function ReportScreen({ navigation }: ScreenProps): JSX.Element {
 

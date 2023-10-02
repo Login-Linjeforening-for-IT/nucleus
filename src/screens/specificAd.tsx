@@ -1,7 +1,7 @@
 import { View, ScrollView, Dimensions } from "react-native"
 import { SpecificAdScreenProps } from "@interfaces"
-import Cluster from "@shared/functions/cluster"
-import Space from "@shared/components/utils"
+import Cluster from "@/components/shared/cluster"
+import Space from "@/components/shared/utils"
 import FetchColor from "@styles/fetchTheme"
 import { GS } from "@styles/globalStyles"
 import { useSelector } from "react-redux"
@@ -12,7 +12,7 @@ import AdInfo, {
     AdDescription, 
     AdUpdateInfo, 
     AdMedia 
-} from "@shared/components/ad"
+} from "@/components/ads/ad"
   
 export default function SpecificAdScreen({ route, navigation }: 
 SpecificAdScreenProps): JSX.Element {

@@ -1,16 +1,16 @@
-import CategorySquare, { CategoryCircle } from "@shared/eventComponents/category"
+import CategorySquare, { CategoryCircle } from "@/components/shared/category"
 import AsyncStorage from "@react-native-async-storage/async-storage"
-import EventLocation from "@shared/eventComponents/eventLocation"
-import { FetchJoinLink } from "@shared/eventComponents/fetch"
-import Space, { Month } from "@shared/components/utils"
+import EventLocation from "@/components/events/eventLocation"
+import { FetchJoinLink } from "@/utils/fetch"
+import Space, { Month } from "@/components/shared/utils"
 import { SpecificEventScreenProps } from "@interfaces"
-import { CardSmaller } from "@shared/functions/card"
-import { GetEndTime } from "@shared/functions/time"
+import { CardSmaller } from "@/components/shared/card"
+import { GetEndTime } from "@/components/events/time"
 import React, { useEffect, useState } from "react"
 import RenderHTML from "react-native-render-html"
-import EventTime from "@shared/functions/time"
+import EventTime from "@/components/events/time"
 import FetchColor from "@styles/fetchTheme"
-import Card from "@shared/functions/card"
+import Card from "@/components/shared/card"
 import { SvgUri } from "react-native-svg"
 import { useSelector } from "react-redux"
 import { ES } from "@styles/eventStyles"
@@ -26,7 +26,7 @@ import {
   Text,
   useWindowDimensions,
 } from "react-native"
-import { StaticImage } from "@shared/functions/social"
+import { StaticImage } from "@/components/about/social"
 
 type handleLinkProps = {
     mazeref: string
