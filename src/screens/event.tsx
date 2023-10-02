@@ -47,21 +47,7 @@ import DownloadButton from "@/components/shared/downloadButton"
 import { createStackNavigator } from "@react-navigation/stack"
 import SpecificEventScreen from "./specificEvent"
 
-type HeaderComponentProps = {
-    renderedArray: EventProps[]
-    clickedEvents: EventProps[]
-    setDownloadState: React.Dispatch<React.SetStateAction<Date>>
-    downloadState: Date
-    calendarID: string
-    dispatch: Dispatch<AnyAction>
-    theme: number
-    clickedCategory: CategoryWithID[]
-    input: string
-    toggleSearch: () => void
-    search: boolean
-}
-
-const EventStack = createStackNavigator();
+const EventStack = createStackNavigator<EventStackParamList>();
 
 /**
  * Parent EventScreen function
@@ -346,7 +332,7 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
                 </View>
                 )}
             </EventStack.Screen>
-            <EventStack.Screen name="SpecificEventScreen" children={(): any => <SpecificEventScreen {...item} route={routeObj} />} />
+            <EventStack.Screen name="SpecificEventScreen" component={SpecificEventScreen}></EventStack.Screen>
         </EventStack.Navigator>
     )
 }

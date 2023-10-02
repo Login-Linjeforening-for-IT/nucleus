@@ -3,7 +3,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage"
 import EventLocation from "@/components/events/eventLocation"
 import { FetchJoinLink } from "@/utils/fetch"
 import Space, { Month } from "@/components/shared/utils"
-import { SpecificEventScreenProps } from "@interfaces"
 import { CardSmaller } from "@/components/shared/card"
 import { GetEndTime } from "@/components/events/time"
 import React, { useEffect, useState } from "react"
@@ -24,9 +23,9 @@ import {
   Image,
   View,
   Text,
-  useWindowDimensions,
-} from "react-native"
+  } from "react-native"
 import { StaticImage } from "@/components/about/social"
+import { StackScreenProps } from "@react-navigation/stack"
 
 type handleLinkProps = {
     mazeref: string
@@ -54,12 +53,14 @@ type CategoryProps = {
     lang: boolean
 }
 
+type SpecificEventScreenProps = StackScreenProps<EventStackParamList>
+
 /**
  *
  * @param param0
  * @returns
  */
-export default function SpecificEventScreen({ route, navigation }: 
+export default function SpecificEventScreen({ route }: 
 SpecificEventScreenProps): JSX.Element {
 
     const { lang  } = useSelector( (state: ReduxState) => state.lang)

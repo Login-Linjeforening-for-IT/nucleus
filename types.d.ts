@@ -220,3 +220,13 @@ type NotificationList = {
     data: DetailedEventProps
     time: string
 }
+
+type EventStackParamList = {
+    root: undefined;
+    SpecificEventScreen: {item: EventProps}
+}
+
+type StackParamList = {
+    EventScreen: undefined;
+    AdScreen
+}
