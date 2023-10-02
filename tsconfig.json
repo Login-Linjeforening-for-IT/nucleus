@@ -17,7 +17,7 @@
         "incremental": true,
         "plugins": [ { "name": "next" } ],
         "paths": {
-            "@components/*": ["./src/shared/components/*"],
+            "@components/*": ["./src/components/*"],
             "@themes/*": ["./src/styles/themes/*"],
             "@assets/*": ["./public/assets/*"],
             "@text/*": ["./public/locales/*"],
