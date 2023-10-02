@@ -97,24 +97,6 @@ export const PS = StyleSheet.create({
     centeredLine: {
         alignItems: "center",
     },
-    saveButton: {
-        width: "100%",
-        height: "100%",
-        backgroundColor: "red",
-    },
-    cancelButton: {
-        right: 10,
-        position: "absolute",
-        width: "15%",
-        height: "120%",
-        backgroundColor: "blue",
-    },
-    infoCardTop: {
-        height: 50,
-        flexDirection: "row",
-        backgroundColor: "red",
-        justifyContent: "space-between",
-    },
     inputInfoView: {
         top: -40,
         flexDirection: "row",

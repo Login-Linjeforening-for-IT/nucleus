@@ -53,40 +53,11 @@ export const ES = StyleSheet.create({
         top: -10,
         fontSize: 15,
     },
-    // Eventlocation text on oldEventScreen
-    oldLoc: {
-        left: 5,
-        top: -5,
-        fontSize: 20,
-    },
-    // Position of checklight on eventScreen
-    greenLight: {
-        top: "12%",
-        alignSelf: "center",
-    },
-    // Renders big check icon
-    checkContent: {
-        left: 2,
-        top: "-30%",
-        alignSelf: "center",
-    },
-    // Small check icon inside filter
-    smallerCheckIcon: {
-        height: 20,
-        top: "0%",
-        alignSelf: "center",
-    },
     //======================== SpecificEventScreen ===================
     // Layout for specificEventScreen
     specificEventInfoView: {
         flexDirection: "row",
         alignItems: "center",
-    },
-    // Layout for the image on specificEventView
-    specificEventView1: {
-        alignItems: "center",
-        height: 100,
-        overflow: "hidden",
     },
     // The header image on specificEventScreen
     specificEventImage: {
@@ -149,42 +120,10 @@ export const ES = StyleSheet.create({
         marginHorizontal: 15,
         marginVertical: 4,
     },
-    // Card content styling
-    jobClusterContent: {
-        paddingTop: 3,
-        marginHorizontal: 15,
-        marginVertical: 6,
-    },
     // Smaller card
     clusterSmaller: {
         marginHorizontal: 10,
         borderRadius: 20,
-    },
-    // Small icons
-    smallSize: {
-        height: 20,
-        width: 20,
-    },
-    // EventScreen filter text
-    filterText: {
-        alignSelf: "center",
-        alignItems: "center",
-        marginTop: 10,
-        width: "95%",
-        paddingTop: 10,
-        marginHorizontal: 10,
-        height: 30,
-        borderTopRightRadius: 15,
-        borderTopLeftRadius: 15,
-        color: "white",
-    },
-    // Filter view
-    filterView: {
-        paddingTop: 10,
-        flexDirection: "row",
-        marginHorizontal: 10,
-        borderBottomLeftRadius: 15,
-        borderBottomRightRadius: 15,
     },
     // Filter view
     clusterFilterView: {
@@ -218,25 +157,11 @@ export const ES = StyleSheet.create({
         height: 0.004,
     },
     // View for categories inside the filter
-    categoryView: {
-        flexDirection: "row",
-        left: 30,
-        top: 7,
-        width: 122,
-    },
-    // View for categories inside the filter
     clusterCategoryView: {
         flexDirection: "row",
         left: "9%",
         top: 7,
         width: Dimensions.get("window").width / 3.1,
-    },
-    // Filter reset icon
-    filterResetIcon: {
-        left: -60,
-        top: 10,
-        height: 40,
-        width: 40,
     },
     // Filter reset icon
     clusterFilterResetIcon: {

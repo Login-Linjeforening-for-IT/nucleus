@@ -18,15 +18,6 @@ export const SS = StyleSheet.create({
         marginHorizontal: 108,
         marginVertical: 6,
     },
-    // Notifybutton in sharedComponents
-    notifyButton: {
-        alignSelf: "center",
-        width: 200,
-        borderRadius: 40,
-        backgroundColor: "red",
-        marginHorizontal: 108,
-        marginVertical: 6,
-    },
     // Button margin
     buttonContent: {
         marginVertical: 10,

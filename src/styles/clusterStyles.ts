@@ -26,19 +26,6 @@ export const CS = StyleSheet.create({
         flexDirection: "row",
         width: "60%",
     },
-    adViewLeft: {
-        justifyContent: "center",
-        width: "38%"
-    },
-    adViewMid: {
-        left: 5,
-        justifyContent: "center",
-        paddingHorizontal: 6,
-        width: "50%",
-    },
-    adViewRight: {
-        width: "10%",
-    },
     arrowView: {
         justifyContent: "center",
         alignItems: "center",

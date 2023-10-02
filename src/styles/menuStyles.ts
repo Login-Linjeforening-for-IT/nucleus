@@ -2,19 +2,6 @@ import { StyleSheet, Dimensions, Platform } from "react-native"
 
 
 export const MS = StyleSheet.create ({
-    // Big headertitle
-    screenTitle: {
-        position: "absolute",
-        textAlign: "center",
-        marginTop: Platform.OS === "ios"
-            ? Dimensions.get("window").height / 18
-            : Dimensions.get("window").height / 23,
-        left: 75,
-        right: 75,
-        marginLeft: "auto",
-        marginRight: "auto",
-        fontSize: 30,
-    },
     // Big headertitle for EventScreen (due to filter causing problems)
     filterScreenTitle: {
         position: "absolute",
@@ -58,7 +45,6 @@ export const MS = StyleSheet.create ({
     },
     // Size of top menu icons
     tMenuIcon: {
-        // top: "50%",
         width: 32,
         height: 32,
     },
@@ -68,12 +54,6 @@ export const MS = StyleSheet.create ({
         left: "140%",
         width: 25,
         height: 25,
-    },
-    filterIcon: {
-        top: "37%",
-        height: 60,
-        right: "-20%",
-        width: 140,
     },
     multiTop: {
         width: 90,

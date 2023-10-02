@@ -19,10 +19,6 @@ export const T = StyleSheet.create({
     text15: {
         fontSize: 15,
     },
-    // Text of size 15
-    text10: {
-        fontSize: 10,
-    },
     // Bold text of size 40
     bold40: {
         fontSize: 40,
@@ -57,12 +53,6 @@ export const T = StyleSheet.create({
         alignSelf: "center",
         fontSize: 30,
     },
-    // Centered text using inverted text color (used for some rare styling where
-    // colors dont match)
-    centeredOppositeColor: {
-        alignSelf: "center",
-        fontSize: 30,
-    },
     // Centered text of size 15
     centered15: {
         alignSelf: "center",
@@ -83,11 +73,6 @@ export const T = StyleSheet.create({
     contact: {
         alignSelf: "center",
         fontSize: 15,
-    },
-    // Centered text of size 24 (25 is a bit too wide)
-    centered24: {
-        alignSelf: "center",
-        fontSize: 24,
     },
     // Centered bold text of size 25 (used for a few words per line max)
     centeredBold25: {
@@ -155,12 +140,6 @@ export const T = StyleSheet.create({
     // DpecificEventInfo text (+10px from left)
     specificEventInfo: {
         fontSize: 20,
-    },
-    // Centered text of size 15 with 15 margin
-    margin15: {
-        alignSelf: "center",
-        fontSize: 15,
-        margin: 15,
     },
     // Text used for filter categories
     filterCategoryText: {
