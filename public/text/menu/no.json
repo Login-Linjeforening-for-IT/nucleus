@@ -14,18 +14,18 @@
         },
         {
             "id": 3, 
-            "nav": "ReportScreen",   
-            "title": "Varsle"
-        },
-        {
-            "id": 4, 
             "nav": "AboutScreen",
             "title": "Om oss"
         },
         {
-            "id": 5, 
+            "id": 4, 
             "nav": "BusinessScreen",
             "title": "For bedrifter"
+        },
+        {
+            "id": 5, 
+            "nav": "ReportScreen",   
+            "title": "Varsle"
         },
         {
             "id": 6, 

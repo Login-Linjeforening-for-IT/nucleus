@@ -14,18 +14,18 @@
         },
         {
             "id": 3, 
-            "nav": "ReportScreen",   
-            "title": "Report" 
-        },
-        {
-            "id": 4, 
             "nav": "AboutScreen",     
             "title": "About Login"    
         },
         {
-            "id": 5, 
+            "id": 4, 
             "nav": "BusinessScreen",  
             "title": "For companies" 
+        },
+        {
+            "id": 5, 
+            "nav": "ReportScreen",   
+            "title": "Report" 
         },
         {
             "id": 6, 
