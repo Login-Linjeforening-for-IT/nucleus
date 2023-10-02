@@ -33,7 +33,7 @@ JSX.Element {
             }}>
                 <ScrollView showsVerticalScrollIndicator={false}>
                     {Space(Dimensions.get("window").height/8.1)}
-                    <Content lang={lang} theme={theme} />
+                    <Content lang={lang} />
                     {Space(10)}
                     {Space(Dimensions.get("window").height/3)}
                     </ScrollView>
@@ -42,8 +42,9 @@ JSX.Element {
     )
 }
 
-function Content({lang, theme}: ContentProps): JSX.Element {
+function Content({lang}: ContentProps): JSX.Element {
     const info = lang ? no.companies : en.companies
+    const { theme } = useSelector((state: ReduxState) => state.theme)
     const isDark = theme === 0 || theme === 2 || theme === 3 ? true : false
 
     const logo = {

@@ -39,7 +39,7 @@ export default function NotificationScreen({navigation, back}: NotificationScree
                 keyExtractor={(item, index) => index.toString()}
                 data={list}
                 renderItem={({item}) => (
-                    <Notification item={item} theme={theme} lang={lang} navigation={navigation} />
+                    <Notification item={item} lang={lang} navigation={navigation} />
                 )}
             />
         )
@@ -67,12 +67,12 @@ export default function NotificationScreen({navigation, back}: NotificationScree
 
 type NotificationInAppProps = {
     item: NotificationList
-    theme: number
     lang: boolean
     navigation: Navigation
 }
 
-function Notification({item, theme, lang, navigation}: NotificationInAppProps): JSX.Element {
+function Notification({item, lang, navigation}: NotificationInAppProps): JSX.Element {
+    const { theme } = useSelector((state: ReduxState) => state.theme)
 
     function navigateIfPossible() {
         // Checks if the object has any properties, and if so navigates to SES
@@ -88,13 +88,12 @@ function Notification({item, theme, lang, navigation}: NotificationInAppProps): 
                     <View style={NS.notificationViewLeft}>
                         <FullCategorySquare
                             item={item.data}
-                            theme={theme}
                             lang={lang}
                             height={2*item.body.length}
                         />
                     </View>
                     <View style={NS.notificationViewMid}>
-                        <NotificationText title={item.title} body={item.body} theme={theme} />
+                        <NotificationText title={item.title} body={item.body} />
                     </View>
                     <Text style={{...NS.time, right: 35, color: FetchColor({theme: theme, variable: "TITLETEXTCOLOR"})}}>
                         {displayTime(item.time)}

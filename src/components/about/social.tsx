@@ -19,7 +19,6 @@ import ES from "@styles/eventStyles"
 type PersonProps = {
     person: string
     lang: boolean
-    theme: number
 }
 
 type MediaLogoProps = {
@@ -29,7 +28,6 @@ type MediaLogoProps = {
 
 type AllCommitteesProps = {
     lang: boolean
-    theme: number
 }
 
 type personInfoProps = {
@@ -57,10 +55,11 @@ type MediaProps = {
  * @param {string} person
  * @returns Full object packed in a view component
  */
-export default function Person({person, lang, theme}: PersonProps): JSX.Element {
+export default function Person({person, lang}: PersonProps): JSX.Element {
 
     let obj = personInfo({person, lang})
     let corner = random({min: 0, max: 4})
+    const { theme } = useSelector((state: ReduxState) => state.theme)
 
     return (
         <View>
@@ -94,18 +93,18 @@ export default function Person({person, lang, theme}: PersonProps): JSX.Element 
  * Function for displaying all committees
  * @returns View containing all committees
  */
-export function AllComitees({lang, theme}: AllCommitteesProps): JSX.Element {
+export function AllComitees({lang}: AllCommitteesProps): JSX.Element {
     return (
         <View>
-            <Person person="leader" lang={lang} theme={theme} />
-            <Person person="coleader" lang={lang} theme={theme} />
-            <Person person="secretary" lang={lang} theme={theme} />
-            <Person person="evntkom" lang={lang} theme={theme} />
-            <Person person="pr" lang={lang} theme={theme} />
-            <Person person="tekkom" lang={lang} theme={theme} />
-            <Person person="ctf" lang={lang} theme={theme} />
-            <Person person="eco" lang={lang} theme={theme} />
-            <Person person="bedkom" lang={lang} theme={theme} />
+            <Person person="leader" lang={lang} />
+            <Person person="coleader" lang={lang} />
+            <Person person="secretary" lang={lang} />
+            <Person person="evntkom" lang={lang} />
+            <Person person="pr" lang={lang} />
+            <Person person="tekkom" lang={lang} />
+            <Person person="ctf" lang={lang} />
+            <Person person="eco" lang={lang} />
+            <Person person="bedkom" lang={lang} />
         </View>
     )
 }
@@ -194,9 +193,10 @@ export function Social() {
  * @param {string} person
  * @returns Full object packed in a view component
  */
-export function Styret({theme}: {theme: number}) {
+export function Styret() {
 
     let corner = random({min: 0, max: 4})
+    const { theme } = useSelector((state: ReduxState) => state.theme)
 
     return (
         <View>

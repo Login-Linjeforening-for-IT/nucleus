@@ -22,7 +22,6 @@ import {
 } from "react-native"
 
 type UsernameUIProps = {
-    theme: number
     lang: boolean
     data: DataProps
     inputName: (val: string) => void
@@ -37,14 +36,12 @@ type DataProps = {
 }
 
 type InputProps = {
-    theme: number
     lang: boolean
     inputName: (val: string) => void
     data: DataProps
 }
 
 type PasswordUIProps = {
-    theme: number
     lang: boolean
     data: DataProps
     inputPass: (val: string) => void
@@ -137,7 +134,6 @@ export default function LoginScreen({ navigation }: ScreenProps): JSX.Element {
                 {Space(20)}
 
                 <UsernameUI 
-                    theme={theme}
                     lang={lang}
                     data={data}
                     inputName={inputName}
@@ -146,7 +142,6 @@ export default function LoginScreen({ navigation }: ScreenProps): JSX.Element {
                 {Space(10)}
 
                 <PasswordUI 
-                    theme={theme}
                     lang={lang}
                     data={data}
                     inputPass={inputPass}
@@ -181,13 +176,13 @@ export default function LoginScreen({ navigation }: ScreenProps): JSX.Element {
   )
 }
 
-function UsernameUI({theme, lang, data, inputName}: UsernameUIProps):
+function UsernameUI({lang, data, inputName}: UsernameUIProps):
 JSX.Element {
+
     return (
         <View style={SS.loginView}>
             <Cluster>
                 <UsernameInput
-                    theme={theme}
                     lang={lang}
                     inputName={inputName}
                     data={data}
@@ -197,8 +192,10 @@ JSX.Element {
     )
 }
 
-function UsernameInput({theme, lang, inputName, data}: InputProps): 
+function UsernameInput({lang, inputName, data}: InputProps): 
 JSX.Element {
+    const { theme } = useSelector((state: ReduxState) => state.theme)
+
     return (
         <View style={SS.loginView}>
             <TextInput
@@ -231,8 +228,10 @@ JSX.Element {
     )
 }
 
-function PasswordUI({theme, lang, data, inputPass, showPass}: PasswordUIProps): 
+function PasswordUI({lang, data, inputPass, showPass}: PasswordUIProps): 
 JSX.Element {
+    const { theme } = useSelector((state: ReduxState) => state.theme)
+
     return (
         <View style={SS.loginView}>
             <Cluster>

@@ -6,9 +6,9 @@ import CS from "@styles/clusterStyles"
 import PS from "@styles/profileStyles"
 import React, { useState } from "react"
 import T from "@styles/text"
+import { useSelector } from "react-redux"
 
 type ProfileInfoProps = {
-    theme: number
     lang: boolean
     profile: ProfileProps
 }
@@ -16,7 +16,6 @@ type ProfileInfoProps = {
 type ProfileInfoContentProps = {
     type: string[]
     index: number
-    theme: number
     profile: ProfileProps
     selectedIndex: number
 }
@@ -27,11 +26,12 @@ type ProfileInfoContentProps = {
  * @param {string} category    Category of the event, Format: "CATEGORY"
  * @returns                     Small circle of the categories color
  */
-export default function ProfileInfo({theme, lang, profile}: ProfileInfoProps) {
+export default function ProfileInfo({lang, profile}: ProfileInfoProps) {
     const [selectedIndex, setSelectedIndex] = useState(-1)
     const [previousIndex, setPreviousIndex] = useState(-1)
     const [profileInfo] = useState(profile)
     const profileInfoKeys = Object.keys(profileInfo)
+    const { theme } = useSelector((state: ReduxState) => state.theme)
 
     const typeNO = [ "Studieretning", "Studieår", "Epost", "Preferanser", "Allergier" ]
     const typeEN = ["Degree", "Study year", "Mail", "Preferences", "Allergies" ]
@@ -64,7 +64,6 @@ export default function ProfileInfo({theme, lang, profile}: ProfileInfoProps) {
                         <ProfileInfoContent 
                             type={type}
                             index={index}
-                            theme={theme}
                             profile={profile}
                             selectedIndex={selectedIndex}
                         />
@@ -73,7 +72,6 @@ export default function ProfileInfo({theme, lang, profile}: ProfileInfoProps) {
             ))}
             {typeof selectedIndex === "number" &&
                 <ChangeInfoCard
-                    theme={theme}
                     lang={lang}
                     type={type[selectedIndex]}
                     value={selectedIndex}
@@ -88,8 +86,9 @@ export default function ProfileInfo({theme, lang, profile}: ProfileInfoProps) {
     )
 }
 
-function ProfileInfoContent ({type, index, theme, profile, selectedIndex}: 
+function ProfileInfoContent ({type, index, profile, selectedIndex}: 
 ProfileInfoContentProps) {
+    const { theme } = useSelector((state: ReduxState) => state.theme)
 
     return (
         <Cluster noColor={true}>

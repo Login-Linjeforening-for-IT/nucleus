@@ -2,10 +2,10 @@ import FetchColor from "@styles/fetchTheme"
 import { View, Text } from "react-native"
 import ES from "@styles/eventStyles"
 import React from "react"
+import { useSelector } from "react-redux"
 
 type EventCardLocationProps = {
     item: EventProps
-    theme: number
     lang: boolean
 }
 
@@ -17,9 +17,9 @@ type EventCardLocationProps = {
  * @param {*} lang  User language
  * @returns
  */
-export default function EventCardLocation({item, theme, lang}: 
+export default function EventCardLocation({item, lang}: 
 EventCardLocationProps): JSX.Element {
-
+    const { theme } = useSelector((state: ReduxState) => state.theme)
     let time = " " + item.startt[11] + item.startt[12] + ":" + item.startt[14] + 
     item.startt[15] + ". "
     if (item.startt[11] + item.startt[12] + item.startt[14] + 

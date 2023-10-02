@@ -5,9 +5,9 @@ import FetchColor from "@styles/fetchTheme"
 import PS from "@styles/profileStyles"
 import React, { useState } from "react"
 import T from "@styles/text"
+import { useSelector } from "react-redux"
 
 type ProfileElementprops = {
-    theme: number
     lang: boolean
     profile: ProfileProps
 }
@@ -15,13 +15,11 @@ type ProfileElementprops = {
 type SmallProfileImageProps = {
     show: boolean
     profile: ProfileProps
-    theme: number
 }
 
 type MainProfileInfoProps = {
     show: boolean
     profile: ProfileProps
-    theme: number
     lang: boolean
     year: string
 }
@@ -32,7 +30,7 @@ type MainProfileInfoProps = {
  * @param {string} category    Category of the event, Format: "CATEGORY"
  * @returns                     Small circle of the categories color
  */
-export default function Profile({theme, lang, profile } : ProfileElementprops) {
+export default function Profile({lang, profile} : ProfileElementprops) {
     const [show, setShow] = useState(false)
 
     let y
@@ -73,14 +71,12 @@ export default function Profile({theme, lang, profile } : ProfileElementprops) {
                         <SmallProfileImage 
                             show={show}
                             profile={profile}
-                            theme={theme}
                         />
                     </View>
                     <View style={PS.rightTwin}>
                         <MainProfileInfo 
                             show={show}
                             profile={profile}
-                            theme={theme}
                             lang={lang}
                             year={year}
                         />
@@ -90,7 +86,6 @@ export default function Profile({theme, lang, profile } : ProfileElementprops) {
 
             {show &&
                 <ChangeProfileCard
-                    theme={theme}
                     lang={lang}
                     hide={() => {console.log("hidden"); setShow(false)}}
                     trigger={true}
@@ -100,7 +95,8 @@ export default function Profile({theme, lang, profile } : ProfileElementprops) {
         )
 }
 
-function SmallProfileImage({show, profile, theme}: SmallProfileImageProps) {
+function SmallProfileImage({show, profile}: SmallProfileImageProps) {
+    const { theme } = useSelector((state: ReduxState) => state.theme)
     return (
         <View style={PS.smallProfileImageView}>
             {!show &&
@@ -117,7 +113,8 @@ function SmallProfileImage({show, profile, theme}: SmallProfileImageProps) {
     )
 }
 
-function MainProfileInfo({show, profile, theme, lang, year}: MainProfileInfoProps) {
+function MainProfileInfo({show, profile, lang, year}: MainProfileInfoProps) {
+    const { theme } = useSelector((state: ReduxState) => state.theme)
     if (!show) return (
         <>
             <Text style={{

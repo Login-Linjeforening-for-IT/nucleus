@@ -15,7 +15,6 @@ import T from "@styles/text"
 import React from "react"
 
 type ClusterWithSwitchProps = {
-    theme: number
     obj: infoProps
     category: string
 }
@@ -26,7 +25,6 @@ type infoProps = {
 }
 
 type ContentProps = {
-    theme: number
     lang: boolean
 }
 
@@ -41,14 +39,15 @@ export default function SettingScreen({ navigation }: ScreenProps): JSX.Element 
                 ...GS.content, 
                 backgroundColor: FetchColor({theme, variable: "DARKER"})
             }}>
-                <Content theme={theme} lang={lang} />
+                <Content lang={lang} />
             </View>
         </View>
     )
 }
 
-function Content({theme, lang}: ContentProps): JSX.Element {
+function Content({lang}: ContentProps): JSX.Element {
     const info = lang ? no.info : en.info
+    const { theme } = useSelector((state: ReduxState) => state.theme)
 
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
@@ -103,7 +102,7 @@ function Content({theme, lang}: ContentProps): JSX.Element {
             </Text>
             {Space(10)}
 
-            <SwitchCluster theme={theme} obj={info[3]} category="IMPORTANT" />
+            <SwitchCluster obj={info[3]} category="IMPORTANT" />
 
             {Space(10)}
             <Text style={{
@@ -114,14 +113,14 @@ function Content({theme, lang}: ContentProps): JSX.Element {
             </Text>
             {Space(10)}
 
-            <SwitchCluster theme={theme} obj={info[5]}  category="BEDPRES" />
-            <SwitchCluster theme={theme} obj={info[6]}  category="TEKKOM" />
-            <SwitchCluster theme={theme} obj={info[7]}  category="CTF" />
-            <SwitchCluster theme={theme} obj={info[8]}  category="SOCIAL" />
-            <SwitchCluster theme={theme} obj={info[9]}  category="KARRIEREDAG" />
-            <SwitchCluster theme={theme} obj={info[10]} category="FADDERUKA" />
-            <SwitchCluster theme={theme} obj={info[11]} category="LOGIN" />
-            <SwitchCluster theme={theme} obj={info[12]} category="ANNET" />
+            <SwitchCluster obj={info[5]}  category="BEDPRES" />
+            <SwitchCluster obj={info[6]}  category="TEKKOM" />
+            <SwitchCluster obj={info[7]}  category="CTF" />
+            <SwitchCluster obj={info[8]}  category="SOCIAL" />
+            <SwitchCluster obj={info[9]}  category="KARRIEREDAG" />
+            <SwitchCluster obj={info[10]} category="FADDERUKA" />
+            <SwitchCluster obj={info[11]} category="LOGIN" />
+            <SwitchCluster obj={info[12]} category="ANNET" />
 
             {Space(10)}
             <Text style={{
@@ -138,7 +137,9 @@ function Content({theme, lang}: ContentProps): JSX.Element {
     )
 }
 
-function SwitchCluster({theme, obj, category}: ClusterWithSwitchProps) {
+function SwitchCluster({obj, category}: ClusterWithSwitchProps) {
+    const { theme } = useSelector((state: ReduxState) => state.theme)
+
     return (
         <Cluster>
             <View style={GS.notificationBack}>

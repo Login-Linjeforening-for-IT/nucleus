@@ -81,8 +81,8 @@ export function random({min, max}: randomProps): number {
  *
  * @returns {JSX.Element} Error message
  */
-export function ErrorMessage({argument, theme, lang}: ErrorMessageProps): JSX.Element {
-
+export function ErrorMessage({argument, lang}: ErrorMessageProps): JSX.Element {
+    const { theme } = useSelector((state: ReduxState) => state.theme)
     const text = {
         "wifi": lang 
         ? "Sjekk nettverkstilkoblingen din og prøv igjen. Kontakt TEKKOM dersom problemet vedvarer." 

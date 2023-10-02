@@ -18,7 +18,6 @@ import {
 
 type AdClusterLocationProps = {
     ad: AdProps
-    theme: number
 }
 
 type SocialProps = {
@@ -132,7 +131,8 @@ export function AdClusterImage({url}: {url: string}) {
  * @param {number} theme Theme of the app
  * @returns
  */
-export function AdClusterLocation({ad, theme}: AdClusterLocationProps) {
+export function AdClusterLocation({ad}: AdClusterLocationProps) {
+    const { theme } = useSelector((state: ReduxState) => state.theme)
     const tempName = ad.title_no
     const tempType = "Fulltid"
     const tempLoc = "Gjøvik, Oslo, Stavanger, Bergen, Trondheim, Login Loungen"

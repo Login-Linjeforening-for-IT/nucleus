@@ -6,18 +6,17 @@ import { TouchableOpacity, View} from "react-native"
 import Cluster from "@/components/shared/cluster"
 import AS from "@styles/adStyles"
 import React from "react"
+import { useSelector } from "react-redux"
 
 type AdListItemProps = {
     clickedAds: AdProps[]
     ad: AdProps
-    theme: number
-    lang: boolean
     setClickedAds: React.Dispatch<React.SetStateAction<any[]>>
 }
 
-export function AdListItem({clickedAds, ad, theme, lang, setClickedAds}: 
+export function AdListItem({clickedAds, ad, setClickedAds}: 
 AdListItemProps): JSX.Element {
-
+    const { theme } = useSelector((state: ReduxState) => state.theme)
     const isOrange = clickedAds.some(ads => ads.id === ad.id) ? true : false
 
     return (
@@ -27,7 +26,7 @@ AdListItemProps): JSX.Element {
                     <AdClusterImage url={ad.logo} />
                 </View>
                 <View style={AS.adViewMid}>
-                    <AdClusterLocation ad={ad} theme={theme} />
+                    <AdClusterLocation ad={ad} />
                 </View>
                 <View style={AS.adViewRight}>
                     <TouchableOpacity onPress={() => {
@@ -41,7 +40,7 @@ AdListItemProps): JSX.Element {
                             : [...clickedAds, ad])
                     }}>
                         <View style = {AS.bellPosition}>
-                            <BellIcon orange={isOrange} theme={theme} />
+                            <BellIcon orange={isOrange} />
                         </View>
                     </TouchableOpacity>
                 </View>

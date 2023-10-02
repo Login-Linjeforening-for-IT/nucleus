@@ -3,6 +3,7 @@ import FetchColor from "@styles/fetchTheme"
 import ES from "@styles/eventStyles"
 import T from "@styles/text"
 import React from "react"
+import { useSelector } from "react-redux"
 
 type FeedbackProps = {
     index: number
@@ -13,8 +14,10 @@ type FeedbackProps = {
     toggleFeedback: () => void
 }
 
-export default function Feedback({index, setting, feedback, theme, lang, 
+export default function Feedback({index, setting, feedback, lang, 
 toggleFeedback}: FeedbackProps) {
+    const { theme } = useSelector((state: ReduxState) => state.theme)
+
     if (index === setting.length-1 && !feedback) {
         return (
             <TouchableOpacity onPress={() => toggleFeedback()}>

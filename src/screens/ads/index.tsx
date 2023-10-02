@@ -129,7 +129,6 @@ export default function AdScreen({ navigation }: ScreenProps): JSX.Element {
                             <AdListItem 
                                 clickedAds={clickedAds}
                                 ad={ad}
-                                theme={theme}
                                 lang={lang}
                                 setClickedAds={setClickedAds}
                             />
@@ -140,7 +139,6 @@ export default function AdScreen({ navigation }: ScreenProps): JSX.Element {
                                 relevantCategories={[]}
                                 lastSave={lastSave}
                                 lang={lang}
-                                theme={theme}
                             />
                         </TouchableOpacity>
                     </View>
@@ -148,9 +146,9 @@ export default function AdScreen({ navigation }: ScreenProps): JSX.Element {
             />
             :
             ads.length === 0 
-                ? <ErrorMessage argument="wifi" theme={theme} lang={lang} />
-                : <ErrorMessage argument="nomatch" theme={theme} lang={lang} />
-        : <ErrorMessage argument="wifi" theme={theme} lang={lang} />}
+                ? <ErrorMessage argument="wifi" lang={lang} />
+                : <ErrorMessage argument="nomatch" lang={lang} />
+        : <ErrorMessage argument="wifi" lang={lang} />}
         {Space(Dimensions.get("window").height/3)}
         </View>
     </View>

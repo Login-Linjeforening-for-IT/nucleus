@@ -274,7 +274,6 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
                             renderedArray={renderedArray}
                             clickedEvents={clickedEvents}
                             search={search}
-                            theme={theme}
                             lang={lang}
                             relevantCategories={relevantCategories}
                             notification={notification}

@@ -35,7 +35,6 @@ type MenuItemProps = {
     index: number
     item: ItemProps
     navigation: Navigation
-    theme: number
     lang: boolean
     setting: SettingProps[]
     feedback: boolean
@@ -113,7 +112,6 @@ export default function MenuScreen({ navigation }: ScreenProps): JSX.Element {
                                 index={index}
                                 item={item}
                                 navigation={navigation}
-                                theme={theme}
                                 lang={lang}
                                 setting={text.setting}
                                 feedback={feedback}
@@ -134,9 +132,10 @@ export default function MenuScreen({ navigation }: ScreenProps): JSX.Element {
     )
 }
 
-function MenuItem({index, item, navigation, theme, lang, setting, feedback, 
+function MenuItem({index, item, navigation, lang, setting, feedback, 
 toggleFeedback, login}: MenuItemProps) {
     const info = lang ? no : en
+    const { theme } = useSelector((state: ReduxState) => state.theme)
 
     return (
         <View>
@@ -174,7 +173,6 @@ toggleFeedback, login}: MenuItemProps) {
                     index={index}
                     setting={setting}
                     feedback={feedback}
-                    theme={theme}
                     lang={lang}
                     toggleFeedback={toggleFeedback}
                 />

@@ -2,6 +2,7 @@ import FetchColor from "@styles/fetchTheme"
 import NS from "../../styles/notificationStyles"
 import React from "react"
 import { View, Text } from "react-native"
+import { useSelector } from "react-redux"
 
 type NotificationTextProps = {
     theme: number
@@ -14,7 +15,9 @@ type NotificationTextProps = {
  *
  * @returns JSX Element containing the text displayed for each notification
  */
-export default function NotificationText({title, body, theme}: NotificationTextProps) {
+export default function NotificationText({title, body}: NotificationTextProps) {
+    const { theme } = useSelector((state: ReduxState) => state.theme)
+    
     return (
         <View>
             <View>

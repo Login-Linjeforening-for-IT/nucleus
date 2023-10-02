@@ -18,7 +18,6 @@ import {
 
 type OptionProps = {
     index: number
-    theme: number
     item: ItemProps
 }
 
@@ -50,7 +49,7 @@ JSX.Element {
                 keyExtractor={(item) => `${item.id}`}
                 data={setting}
                 renderItem={({item, index}) => (
-                    <Option index={index} theme={theme} item={item} />
+                    <Option index={index} item={item} />
                 )}
             />
             {Space(Dimensions.get("window").height/3)}
@@ -59,7 +58,7 @@ JSX.Element {
   )
 }
 
-function Option({index, theme, item}: OptionProps): JSX.Element {
+function Option({index, item}: OptionProps): JSX.Element {
     return (
         <View>
             {index === 0 ? Space(Dimensions.get("window").height/8): null}

@@ -33,14 +33,12 @@ type getCommitteeImageProps = {
 type CommitteePersonProps = {
     committee: number
     lang: boolean
-    theme: number
 }
 
 type CommitteeImageTouchableProps = {
     setCommittee: React.Dispatch<React.SetStateAction<number>>
     committee: number
     isDark: boolean
-    theme: number
     index: number
 }
 
@@ -48,12 +46,10 @@ type CommitteeViewProps = {
     setCommittee: React.Dispatch<React.SetStateAction<number>>
     committee: number
     isDark: boolean
-    theme: number
 }
 
 type CommitteeContentProps = {
     index: number
-    theme: number
     relevantCommittee: CommitteeInfo
     isDark: boolean
     lang: boolean
@@ -112,7 +108,7 @@ export default function AboutScreen({ navigation }: ScreenProps): JSX.Element {
                         {Space(10)}
                         <Dropdown/>
                         {Space(10)}
-                        <Styret theme={theme} />
+                        <Styret />
                         {Space(15)}
                         <Text style={{
                             ...T.bold25, 
@@ -164,7 +160,6 @@ export default function AboutScreen({ navigation }: ScreenProps): JSX.Element {
                             setCommittee={setCommittee}
                             committee={committee}
                             isDark={isDark}
-                            theme={theme}
                         />
                         {
                             info.map((relevantCommittee, index) => {
@@ -172,7 +167,6 @@ export default function AboutScreen({ navigation }: ScreenProps): JSX.Element {
                                     return <CommitteeContent
                                         key={index}
                                         index={index}
-                                        theme={theme}
                                         lang={lang}
                                         isDark={isDark}
                                         relevantCommittee={relevantCommittee}
@@ -183,7 +177,6 @@ export default function AboutScreen({ navigation }: ScreenProps): JSX.Element {
 
                         <CommitteePerson 
                             committee={committee} 
-                            theme={theme} 
                             lang={lang}
                         />
 
@@ -268,16 +261,17 @@ function getCommitteeImage({id, style}: getCommitteeImageProps) {
     }
 }
 
-function CommitteePerson({committee, lang, theme}: CommitteePersonProps) {
+function CommitteePerson({committee, lang}: CommitteePersonProps) {
     const committees = ["evntkom", "tekkom", "pr", "ctf", "eco"]
 
     if (committees[committee-1]) {
-        return Person({person: committees[committee-1], lang, theme})
-    } else return AllComitees({lang,theme})
+        return Person({person: committees[committee-1], lang})
+    } else return AllComitees({lang})
 }
 
-function CommitteeView({setCommittee, committee, isDark, theme}: 
+function CommitteeView({setCommittee, committee, isDark}: 
 CommitteeViewProps) {
+    const { theme } = useSelector((state: ReduxState) => state.theme)
     let elements: JSX.Element[] = []
     
     for (let i = 0; i < 6; i+=3) {
@@ -287,21 +281,18 @@ CommitteeViewProps) {
                     setCommittee={setCommittee}
                     committee={committee}
                     isDark={isDark}
-                    theme={theme}
                     index={i}
                     />
                 <CommitteeImageTouchable 
                     setCommittee={setCommittee}
                     committee={committee}
                     isDark={isDark}
-                    theme={theme}
                     index={i+1}
                     />
                 <CommitteeImageTouchable 
                     setCommittee={setCommittee}
                     committee={committee}
                     isDark={isDark}
-                    theme={theme}
                     index={i+2}
                     />
             </View>
@@ -311,9 +302,10 @@ CommitteeViewProps) {
     return elements
 }
 
-function CommitteeImageTouchable({setCommittee, committee, isDark, theme, 
+function CommitteeImageTouchable({setCommittee, committee, isDark, 
 index}: CommitteeImageTouchableProps): JSX.Element {
     const image = committee === index ? "" : isDark ? "dark" : "gray"
+    const { theme } = useSelector((state: ReduxState) => state.theme)
 
     return (
         <TouchableOpacity onPress={() => setCommittee(index)}>
@@ -330,8 +322,9 @@ index}: CommitteeImageTouchableProps): JSX.Element {
     )
 }
 
-function CommitteeContent({index, theme, relevantCommittee, isDark}: 
+function CommitteeContent({index, relevantCommittee, isDark}: 
 CommitteeContentProps) {
+    const { theme } = useSelector((state: ReduxState) => state.theme)
     return (
         <View key={index}>
             <Text style={{

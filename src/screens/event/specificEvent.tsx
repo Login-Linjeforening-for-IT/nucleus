@@ -35,7 +35,6 @@ type handleLinkProps = {
 }
 
 type JoinButtonProps = {
-    theme: number
     lang: boolean
     link: string
     updateStorage: () => Promise<void>
@@ -45,12 +44,10 @@ type MapProps = {
     event: DetailedEventProps | EventProps
     lang: boolean
     handleLink: ({mazeref, street, organizer}: handleLinkProps) => void
-    theme: number
 }
 
 type CategoryProps = {
     item: EventProps
-    theme: number
     lang: boolean
 }
 
@@ -233,12 +230,11 @@ BottomTabScreenProps<EventStackParamList>): JSX.Element {
                         event={event}
                         lang={lang}
                         handleLink={handleLink}
-                        theme={theme}
                     />
                 </View>
 
                 {Space(5)}
-                <Category item={item} theme={theme} lang={lang} />
+                <Category item={item} lang={lang} />
                 {Space(5)}
 
                 <View style={ES.specificEventInfoView}>
@@ -326,7 +322,6 @@ BottomTabScreenProps<EventStackParamList>): JSX.Element {
                     }
                     {Space(10)}
                     <JoinButton
-                        theme={theme}
                         lang={lang}
                         link={link ? link : ""}
                         updateStorage={updateStorage}
@@ -340,7 +335,9 @@ BottomTabScreenProps<EventStackParamList>): JSX.Element {
   )
 }
 
-function JoinButton({theme, lang, link, updateStorage}: JoinButtonProps) {
+function JoinButton({lang, link, updateStorage}: JoinButtonProps) {
+    const { theme } = useSelector((state: ReduxState) => state.theme)
+
     if (link.length) {
         return (
             <TouchableOpacity onPress={() => {
@@ -363,7 +360,9 @@ function JoinButton({theme, lang, link, updateStorage}: JoinButtonProps) {
     }
 }
 
-function Category({item, theme, lang}: CategoryProps) {
+function Category({item, lang}: CategoryProps) {
+    const { theme } = useSelector((state: ReduxState) => state.theme)
+
     return (
         <View style={ES.specificEventInfoView}>
             <Text style={{
@@ -383,7 +382,9 @@ function Category({item, theme, lang}: CategoryProps) {
     )
 }
 
-function Map({event, lang, handleLink, theme}: MapProps) {
+function Map({event, lang, handleLink}: MapProps) {
+    const { theme } = useSelector((state: ReduxState) => state.theme)
+
     if (("mazeref" in event) && event.mazeref || (event.street === 
         "Orgkollektivet" || event.organizer === "HUSET")) {
         return (

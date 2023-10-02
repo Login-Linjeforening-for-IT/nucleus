@@ -92,7 +92,6 @@ type SettingProps = {
 
 type ErrorMessageProps = {
     argument: "wifi" | "nomatch"
-    theme: number
     lang: boolean
 }
 

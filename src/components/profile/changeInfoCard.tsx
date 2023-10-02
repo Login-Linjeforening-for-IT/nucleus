@@ -32,7 +32,6 @@ import {
 } from "@redux/profile"
 
 type ChangeInfoCardProps = {
-    theme: number
     lang: boolean
     type: string
     value: number
@@ -46,8 +45,9 @@ type ChangeInfoCardProps = {
  * @param {string} category    Category of the event, Format: "CATEGORY"
  * @returns                     Small circle of the categories color
  */
-export default function ChangeInfoCard({theme, lang, type, value, hide,
+export default function ChangeInfoCard({lang, type, value, hide,
 trigger}: ChangeInfoCardProps) {
+    const { theme } = useSelector((state: ReduxState) => state.theme)
 
     // Dispatch to change Redux states
     const dispatch = useDispatch()

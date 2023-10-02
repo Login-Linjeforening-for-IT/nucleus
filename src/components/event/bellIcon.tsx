@@ -1,18 +1,19 @@
 import { Image } from "react-native"
 import ES from "@styles/eventStyles"
 import React from "react"
+import { useSelector } from "react-redux"
 
 type BellIconProps = {
     orange?: boolean
-    theme: number
 }
 /**
  * Small bell icon used to subscribe to event and job advertisement updates
  *
  * @returns Bell icon
  */
-export default function BellIcon({orange, theme}: BellIconProps): JSX.Element {
+export default function BellIcon({orange}: BellIconProps): JSX.Element {
     let icon = require("@assets/icons/bell.png")
+    const { theme } = useSelector((state: ReduxState) => state.theme)
     let isDark = theme === 0 || theme === 2 || theme === 3 ? true : false
 
     if (orange)         icon = require("@assets/icons/bell-orange.png")
