@@ -2,8 +2,8 @@ import LastFetch from "@/utils/fetch"
 import Space from "@/components/shared/utils"
 import FetchColor from "@styles/fetchTheme"
 import { useSelector } from "react-redux"
-import { AS } from "@styles/adStyles"
-import { T } from "@styles/text"
+import AS from "@styles/adStyles"
+import T from "@styles/text"
 import React from "react"
 import {
     TouchableOpacity,

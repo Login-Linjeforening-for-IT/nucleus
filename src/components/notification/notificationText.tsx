@@ -1,5 +1,5 @@
 import FetchColor from "@styles/fetchTheme"
-import { NS } from "../../styles/notificationStyles"
+import NS from "../../styles/notificationStyles"
 import React from "react"
 import { View, Text } from "react-native"
 

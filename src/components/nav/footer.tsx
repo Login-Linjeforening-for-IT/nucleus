@@ -2,7 +2,7 @@ import { View, TouchableOpacity, Image, Platform } from "react-native"
 import { ExtendedBottomTabBarProps } from "@interfaces"
 import FetchColor from "@styles/fetchTheme"
 import { useSelector } from "react-redux"
-import { MS } from "@styles/menuStyles"
+import MS from "@styles/menuStyles"
 import {BlurView} from "expo-blur"
 import React from "react"
 import { RouteProp } from "@react-navigation/native"
@@ -20,8 +20,9 @@ ExtendedBottomTabBarProps): JSX.Element {
                 : <View style={{
                     ...MS.bMenu,
                     backgroundColor: FetchColor({theme,
-                        variable: "TRANSPARENTANDROID"})}}
-            />}
+                        variable: "TRANSPARENTANDROID"})
+                }} />
+            }
             {/* Transparent container for the icons */}
             <View style={{
                     ...MS.bMenu,

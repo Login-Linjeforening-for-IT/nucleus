@@ -1,4 +1,5 @@
-import { StyleSheet, Dimensions } from "react-native"
+import { StatusBar } from "expo-status-bar"
+import { StyleSheet, Dimensions, Platform } from "react-native"
 
 export const GS = StyleSheet.create({
     // Main view of every screen
@@ -170,5 +171,29 @@ export const GS = StyleSheet.create({
     }, 
     notificationDropdownBody: {
         fontSize: 18
-    }
+    },
+    headerView: {
+        display: 'flex', 
+        flexDirection: 'row', 
+        paddingLeft: '5%'
+    },
+    innerHeaderViewOne: {
+        flex: 1, 
+        display: 'flex', 
+        flexDirection: 'row', 
+        alignItems: 'center'
+    },
+    innerHeaderViewTwo: {
+        flex: 1, 
+        display: 'flex', 
+        flexDirection: 'row-reverse', 
+        alignItems: 'center', 
+        justifyContent: 'space-evenly'
+    },
+    headerTitle: {
+        alignSelf: 'center', 
+        fontSize: 25,
+    },
 })
+
+export default GS

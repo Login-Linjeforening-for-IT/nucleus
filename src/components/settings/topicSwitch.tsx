@@ -1,7 +1,7 @@
 import Notification from "@/components/settings/notification"
 import Cluster from "@/components/shared/cluster"
 import FetchColor from "@styles/fetchTheme"
-import { GS } from "@styles/globalStyles"
+import GS from "@styles/globalStyles"
 import { View, Text } from "react-native"
 import { useSelector } from "react-redux"
 import React from "react"

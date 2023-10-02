@@ -1,7 +1,7 @@
 import FetchColor from "@styles/fetchTheme"
 import { View, Text } from "react-native"
 import { useSelector } from "react-redux"
-import { T } from "@styles/text"
+import T from "@styles/text"
 import React from "react"
 
 type EventTimeProps = {

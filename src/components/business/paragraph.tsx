@@ -2,9 +2,9 @@ import { ImageSourcePropType } from "react-native"
 import { View, Text, Image } from "react-native"
 import Space from "@/components/shared/utils"
 import FetchColor from "@styles/fetchTheme"
-import { GS } from "@styles/globalStyles"
+import GS from "@styles/globalStyles"
 import { useSelector } from "react-redux"
-import { T } from "@styles/text"
+import T from "@styles/text"
 import React from "react"
 
 type ParagraphProps = {

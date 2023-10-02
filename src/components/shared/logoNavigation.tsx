@@ -1,6 +1,6 @@
 import { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
 import { ParamListBase } from "@react-navigation/native";
-import { MS } from "@styles/menuStyles";
+import MS from "@styles/menuStyles";
 import { Image } from "react-native";
 import { TouchableOpacity } from "react-native";
 

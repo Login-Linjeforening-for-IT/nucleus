@@ -1,8 +1,8 @@
 import { CheckBox, CheckedBox, SmallCheck } from "@/components/events/check"
 import { removeDuplicatesAndOld } from "@/utils/fetch"
 import FetchColor from "@styles/fetchTheme"
-import { ES } from "@styles/eventStyles"
-import { T } from "@styles/text"
+import ES from "@styles/eventStyles"
+import T from "@styles/text"
 import React from "react"
 import {
     TouchableOpacity,

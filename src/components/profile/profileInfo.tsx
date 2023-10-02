@@ -2,10 +2,10 @@ import { Image, View, Text, TouchableOpacity } from "react-native"
 import ChangeInfoCard from "@/components/profile/changeInfoCard"
 import Cluster from "@/components/shared/cluster"
 import FetchColor from "@styles/fetchTheme"
-import { CS } from "@styles/clusterStyles"
-import { PS } from "@styles/profileStyles"
+import CS from "@styles/clusterStyles"
+import PS from "@styles/profileStyles"
 import React, { useState } from "react"
-import { T } from "@styles/text"
+import T from "@styles/text"
 
 type ProfileInfoProps = {
     theme: number

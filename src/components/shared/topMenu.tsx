@@ -1,6 +1,6 @@
 import FetchColor from "@styles/fetchTheme"
 import { useSelector } from "react-redux"
-import { MS } from "@styles/menuStyles"
+import MS from "@styles/menuStyles"
 import { BlurView } from "expo-blur"
 import React from "react"
 import { Navigation } from "@interfaces"

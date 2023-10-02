@@ -1,5 +1,5 @@
-import { View, Image } from "react-native"
-import { ES } from "@styles/eventStyles"
+import { Image } from "react-native"
+import ES from "@styles/eventStyles"
 import React from "react"
 
 type BellIconProps = {

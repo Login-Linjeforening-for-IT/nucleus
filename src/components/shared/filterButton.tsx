@@ -1,4 +1,4 @@
-import { MS } from "@styles/menuStyles";
+import MS from "@styles/menuStyles";
 import { Image, TouchableOpacity } from "react-native";
 
 export default function FilterButton(search: boolean, renderedArray: EventProps[], clickedCategory: CategoryWithID[], input: string, toggleSearch: ()=>void, isDark: boolean){

@@ -2,10 +2,10 @@ import topic from "@/utils/topic"
 import Cluster from "@/components/shared/cluster"
 import Space from "@/components/shared/utils"
 import FetchColor from "@styles/fetchTheme"
-import { GS } from "@styles/globalStyles"
+import GS from "@styles/globalStyles"
 import { useSelector } from "react-redux"
 import { ScreenProps } from "@interfaces"
-import { T } from "@styles/text"
+import T from "@styles/text"
 import React from "react"
 import {
   Text,

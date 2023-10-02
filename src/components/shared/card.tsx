@@ -1,6 +1,6 @@
 import FetchColor from "@styles/fetchTheme"
 import { useSelector } from "react-redux"
-import { ES } from "@styles/eventStyles"
+import ES from "@styles/eventStyles"
 import { View } from "react-native"
 import React from "react"
   

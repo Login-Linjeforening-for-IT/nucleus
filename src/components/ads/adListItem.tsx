@@ -4,7 +4,7 @@ import topic from "@/utils/topic"
 import BellIcon from "@/components/events/bellIcon"
 import { TouchableOpacity, View} from "react-native"
 import Cluster from "@/components/shared/cluster"
-import { AS } from "@styles/adStyles"
+import AS from "@styles/adStyles"
 import React from "react"
 
 type AdListItemProps = {

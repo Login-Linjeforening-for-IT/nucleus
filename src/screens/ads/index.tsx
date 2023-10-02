@@ -12,19 +12,9 @@ import React, { useEffect, useState } from "react"
 import { StatusBar } from "expo-status-bar"
 import FetchColor from "@styles/fetchTheme"
 import { ScreenProps } from "@interfaces"
-import { GS } from "@styles/globalStyles"
-import { MS } from "@styles/menuStyles"
-import { BlurView } from "expo-blur"
+import GS from "@styles/globalStyles"
 import en from "@text/ads/en.json"
-import {
-    TouchableOpacity,
-    Dimensions,
-    FlatList,
-    Platform,
-    View,
-    Image,
-    Text,
-} from "react-native"
+import { TouchableOpacity, Dimensions, FlatList, View } from "react-native"
 import LogoNavigation from "@/components/shared/logoNavigation"
 import { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs"
 

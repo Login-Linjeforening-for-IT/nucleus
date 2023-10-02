@@ -1,6 +1,6 @@
 import FetchColor from "@styles/fetchTheme"
 import { View, Text } from "react-native"
-import { ES } from "@styles/eventStyles"
+import ES from "@styles/eventStyles"
 import React from "react"
 
 type EventCardLocationProps = {

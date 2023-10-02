@@ -188,3 +188,5 @@ export const ES = StyleSheet.create({
         height: Dimensions.get("window").height + 200,
     }
 })
+
+export default ES

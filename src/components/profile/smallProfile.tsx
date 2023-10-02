@@ -1,9 +1,9 @@
 import { Image, View, Text, TouchableOpacity } from "react-native"
 import FetchColor from "@styles/fetchTheme"
-import { PS } from "@styles/profileStyles"
-import { CS } from "@styles/clusterStyles"
+import PS from "@styles/profileStyles"
+import CS from "@styles/clusterStyles"
 import { Navigation } from "@interfaces"
-import { T } from "@styles/text"
+import T from "@styles/text"
 import React from "react"
 
 type SmallProfileProps = {

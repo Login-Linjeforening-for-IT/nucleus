@@ -2,9 +2,9 @@ import { Image, View, Text, TouchableOpacity } from "react-native"
 import ChangeProfileCard from "@/components/profile/changeProfileCard"
 import Space from "@/components/shared/utils"
 import FetchColor from "@styles/fetchTheme"
-import { PS } from "@styles/profileStyles"
+import PS from "@styles/profileStyles"
 import React, { useState } from "react"
-import { T } from "@styles/text"
+import T from "@styles/text"
 
 type ProfileElementprops = {
     theme: number

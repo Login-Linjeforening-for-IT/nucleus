@@ -1,7 +1,7 @@
 import { View, TouchableOpacity, Image } from "react-native"
 import { changeTheme, resetTheme } from "@redux/theme"
 import { useSelector, useDispatch } from "react-redux"
-import { SS } from "@styles/settingStyles"
+import SS from "@styles/settingStyles"
 import React from "react"
 
 /**

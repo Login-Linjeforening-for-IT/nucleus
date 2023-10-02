@@ -1,14 +1,14 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { ExtendedRouteOptions, StackProps } from "@interfaces"
 import { NavigationContainer } from "@react-navigation/native"
-import SpecificAdScreen from "@screens/specificAd"
-import Footer from "@/components/shared/footer"
+import SpecificAdScreen from "@screens/ads/specificAd"
+import Footer from "@nav/footer"
 import { useSelector } from "react-redux"
 import EventScreen from "@screens/event"
 import MenuScreen from "@screens/menu"
 import AdScreen from "@screens/ads"
 import React from "react"
-import Header from "@/components/shared/header"
+import Header from "@nav/header"
 
 
 // Declares Tab to equal CBTN function
@@ -49,7 +49,8 @@ export default function Navigator(): JSX.Element {
             icon: isDark
             ? require("@assets/menu/menu.png")
             : require("@assets/menu/menu-black.png")
-        }
+        },
+        { name: "SpecificAdScreen", component: SpecificAdScreen }
     ]
     
     return (
@@ -61,7 +62,7 @@ export default function Navigator(): JSX.Element {
                 screenOptions={{ 
                     headerShown: true,
                     headerTransparent: true,
-                    header: props=> <Header {...props}/>
+                    header: props => <Header {...props}/>
                 } as ExtendedRouteOptions}
                 // Sets the tab bar component
                 tabBar={props => <Footer 

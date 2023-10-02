@@ -5,13 +5,13 @@ import Button from "@/components/shared/button"
 import Space from "@/components/shared/utils"
 import FetchColor from "@styles/fetchTheme"
 import { ScreenProps } from "@interfaces"
-import { SS } from "@styles/settingStyles"
-import { GS } from "@styles/globalStyles"
+import SS from "@styles/settingStyles"
+import GS from "@styles/globalStyles"
 import { useSelector } from "react-redux"
 import no from "@text/report/no.json"
 import en from "@text/report/en.json"
 import React, { useState } from "react"
-import { T } from "@styles/text"
+import T from "@styles/text"
 import {
     TouchableWithoutFeedback,
     TouchableOpacity,

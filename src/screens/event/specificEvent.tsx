@@ -3,6 +3,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage"
 import EventLocation from "@/components/events/eventLocation"
 import { FetchJoinLink } from "@/utils/fetch"
 import Space, { Month } from "@/components/shared/utils"
+import { SpecificEventScreenProps } from "@interfaces"
 import { CardSmaller } from "@/components/shared/card"
 import { GetEndTime } from "@/components/events/time"
 import React, { useEffect, useState } from "react"
@@ -12,8 +13,8 @@ import FetchColor from "@styles/fetchTheme"
 import Card from "@/components/shared/card"
 import { SvgUri } from "react-native-svg"
 import { useSelector } from "react-redux"
-import { ES } from "@styles/eventStyles"
-import { T } from "@styles/text"
+import ES from "@styles/eventStyles"
+import T from "@styles/text"
 import {
   TouchableOpacity,
   ScrollView,
@@ -23,9 +24,8 @@ import {
   Image,
   View,
   Text,
-  } from "react-native"
+} from "react-native"
 import { StaticImage } from "@/components/about/social"
-import { StackScreenProps } from "@react-navigation/stack"
 
 type handleLinkProps = {
     mazeref: string
@@ -53,14 +53,12 @@ type CategoryProps = {
     lang: boolean
 }
 
-type SpecificEventScreenProps = StackScreenProps<EventStackParamList>
-
 /**
  *
  * @param param0
  * @returns
  */
-export default function SpecificEventScreen({ route }: 
+export default function SpecificEventScreen({ route, navigation }: 
 SpecificEventScreenProps): JSX.Element {
 
     const { lang  } = useSelector( (state: ReduxState) => state.lang)

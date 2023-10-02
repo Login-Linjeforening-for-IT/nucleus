@@ -1,9 +1,9 @@
 import CornerSquare from "@/components/about/cornerSquare"
 import Space, { random } from "@/components/shared/utils"
 import FetchColor from "@styles/fetchTheme"
-import { GS } from "@styles/globalStyles"
+import GS from "@styles/globalStyles"
 import { useSelector } from "react-redux"
-import { T } from "@styles/text"
+import T from "@styles/text"
 import React from "react"
 import {
     TouchableOpacity,
@@ -14,7 +14,7 @@ import {
     Text,
     ImageSourcePropType,
 } from "react-native"
-import { ES } from "@styles/eventStyles"
+import ES from "@styles/eventStyles"
 
 type PersonProps = {
     person: string

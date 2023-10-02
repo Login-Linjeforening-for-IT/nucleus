@@ -3,7 +3,7 @@ import { SpecificAdScreenProps } from "@interfaces"
 import Cluster from "@/components/shared/cluster"
 import Space from "@/components/shared/utils"
 import FetchColor from "@styles/fetchTheme"
-import { GS } from "@styles/globalStyles"
+import GS from "@styles/globalStyles"
 import { useSelector } from "react-redux"
 import React from "react"
 import AdInfo, { 
