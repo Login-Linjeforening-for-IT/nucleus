@@ -16,6 +16,7 @@ import {
     FlatList,
     Text,
     View,
+    Platform,
 } from "react-native"
 import { useSelector } from "react-redux"
 
@@ -78,7 +79,7 @@ export default function EventList ({
     events,
     ErrorMessage
 }: EventListProps): JSX.Element {
-    if (!renderedArray.length) return <ErrorMessage 
+    if (!renderedArray.length && !search) return <ErrorMessage 
         argument="wifi" 
     />
     else if (renderedArray.length > 0) {
@@ -134,18 +135,16 @@ function EventCard ({
                 navigation.navigate("SpecificEventScreen", {item: item})
             }}>
                 {index === 0
-                    ? search===false
-                    ? Space(Dimensions.get("window").height/8.1)
-                    : Space(Dimensions.get("window").height/3.35) :null}
+                    ? search === false
+                    ? Space(Dimensions.get("window").height / 9.5)
+                    : Space(Platform.OS === "ios" 
+                        ? Dimensions.get("window").height / 4 
+                        : Dimensions.get("window").height / 3.4) :null}
                 <Cluster marginVertical={8}>
-                    {index === 0 ? Space(8):null}
+                    {index === 0 ? Space(8) : null}
                     <View style={ES.eventBack}>
-                        <FullCategorySquare 
-                            item={item} 
-                        />
-                        <EventCardLocation 
-                            item={item} 
-                        />
+                        <FullCategorySquare item={item} />
+                        <EventCardLocation item={item} />
                         <Bell
                             item={item}
                             notification={notification}
