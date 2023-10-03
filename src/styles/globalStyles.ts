@@ -173,6 +173,12 @@ export const GS = StyleSheet.create({
         fontSize: 18
     },
     headerView: {
+        position: "absolute",
+        zIndex: 1,
+        // When filter is enabled
+        top: Dimensions.get("window").height / 17,
+        // When filter is disabled
+        // top: Platform.OS === "ios" ? 20 : 10,
         display: 'flex', 
         flexDirection: 'row', 
     },
@@ -194,9 +200,22 @@ export const GS = StyleSheet.create({
         fontSize: 20,
     },
     blurBackgroundView: {
-        position: Platform.OS === "ios" ? "absolute" : undefined,
+        position: "absolute",
         width: "100%",
-        justifyContent: Platform.OS === "ios" ? "center" : undefined,
+        justifyContent: "center",
+    },
+    blur: {
+        height: Dimensions.get('window').height * 8 / 100 + 20
+    },
+    customMenuIcon: {
+        right: Platform.OS === "ios" 
+            ? Dimensions.get("window").width / 40 
+            : Dimensions.get("window").width / 30
+    },
+    logo: {
+        left: Platform.OS === "ios"
+            ? Dimensions.get("window").width / 21.5
+            : Dimensions.get("window").width / 20
     }
 })
 

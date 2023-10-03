@@ -13,25 +13,34 @@ export default function Header({ options, route }: ExtendedBottomTabHeaderProps)
     
     return (
         <BlurWrapper>
-            <View style={{...GS.headerView, top: 15}}>
+            <View style={{...GS.headerView}}>
                 <View style={GS.innerHeaderViewOne}>
                     {options.headerComponents?.left?.map((node, index) => 
-                        <View style={{left: 10}} key={index}>{node}</View> 
+                        <View style={GS.logo} key={index}>{node}</View> 
                     )}
                 </View>
                 {
                     title.length > 40 
-                    ? <Text style={{...GS.headerTitle, color: FetchColor({ theme, variable: 'TITLETEXTCOLOR' }) }}>{title}</Text>
-                    : <Text style={{...GS.headerTitle, color: FetchColor({ theme, variable: 'TITLETEXTCOLOR' })}}>{title}</Text>
+                    ?   <Text style={{...GS.headerTitle, color: 
+                            FetchColor({ theme, variable: 'TITLETEXTCOLOR' })}}>
+                            {title}
+                        </Text>
+                    :   <Text style={{...GS.headerTitle, color: 
+                            FetchColor({ theme, variable: 'TITLETEXTCOLOR' })}}>
+                            {title}
+                        </Text>
                 }
                     <View style={GS.innerHeaderViewTwo}>
-                    {options.headerComponents?.right?.map((node, index) => 
-                        <View style={{}} key={index}>{node}</View>
-                    )}
+                    {options.headerComponents?.right?.map((node, index) => (
+                        <View style={index === 1
+                            ? {...GS.customMenuIcon, width: Platform.OS === "ios" ? 28 : 5} 
+                            : GS.customMenuIcon} key={index}>{node}
+                        </View>
+                    ))}
                 </View>
             </View>
             {options.headerComponents?.bottom?.map((node, index) => 
-                <View style={{}} key={index}>{node}</View>
+                <View key={index}>{node}</View>
             )}
         </BlurWrapper>
     )
@@ -43,14 +52,12 @@ function BlurWrapper(props: PropsWithChildren) {
 
     return (
         <>
-            {Platform.OS === "ios" ? <BlurView style={{
-                top: StatusBar.currentHeight ? StatusBar.currentHeight : 0,
-                height: Dimensions.get('window').height * 8 / 100 + (StatusBar.currentHeight ? StatusBar.currentHeight : 20),
-            }} intensity={30} /> : null}
+            <BlurView style={GS.blur} intensity={Platform.OS === "ios" ? 30 : 20} />
             <View style={{...GS.blurBackgroundView,
-                top: StatusBar.currentHeight ? StatusBar.currentHeight : 0,
-                height: Dimensions.get('window').height * 8 / 100 + (StatusBar.currentHeight ? StatusBar.currentHeight : 20),
-                backgroundColor: FetchColor({theme, variable: 'TRANSPARENT'})
+                height: Dimensions.get('window').height * 8 / 100 +          // TODO:
+                (StatusBar.currentHeight ? StatusBar.currentHeight -7 : 20), // 50 for both when searching, -7, 20 otherwise
+                backgroundColor: FetchColor({theme, variable: 
+                    Platform.OS === "ios" ? "TRANSPARENT" : 'TRANSPARENTANDROID'})
             }}>{props.children}</View>
         </>
     )

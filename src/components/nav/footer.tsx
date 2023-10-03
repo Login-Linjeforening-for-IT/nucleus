@@ -1,4 +1,4 @@
-import { View, TouchableOpacity, Image, Platform } from "react-native"
+import { View, TouchableOpacity, Image } from "react-native"
 import { ExtendedBottomTabBarProps } from "@interfaces"
 import FetchColor from "@styles/fetchTheme"
 import { useSelector } from "react-redux"
@@ -14,19 +14,15 @@ ExtendedBottomTabBarProps): JSX.Element {
 
     return (
         <>
-            {/*Create a blur element to blur tab backgound or android alternative*/}
-            {Platform.OS === "ios"
-                ? <BlurView style={MS.bMenu} intensity={30}/>
-                : <View style={{
+                <BlurView style={MS.bMenu} intensity={30}/>
+                <View style={{
                     ...MS.bMenu,
                     backgroundColor: FetchColor({theme,
                         variable: "TRANSPARENTANDROID"})
                 }} />
-            }
             {/* Transparent container for the icons */}
             <View style={{
                     ...MS.bMenu,
-                    backgroundColor: FetchColor({theme, variable: "TRANSPARENT"})
                 }}>
                 {/* Create the icons based on options passed from stack.js */}
                 {state.routes.map((route: RouteProp<RootStackParamList, any>, 
