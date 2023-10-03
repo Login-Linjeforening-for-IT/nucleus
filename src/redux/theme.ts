@@ -14,7 +14,7 @@ export const ThemeSlice = createSlice({
         // Function to change theme
         changeTheme: (state) => {
             // Increments state.theme by 1
-            state.theme+=1
+            state.theme += 1
         },
         // Function to reset theme
         resetTheme: (state) => {
