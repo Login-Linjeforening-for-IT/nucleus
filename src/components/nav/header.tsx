@@ -52,12 +52,14 @@ function BlurWrapper(props: PropsWithChildren) {
 
     return (
         <>
-            <BlurView style={GS.blur} intensity={Platform.OS === "ios" ? 30 : 20} />
+            <BlurView style={{
+                height: Dimensions.get('window').height * 8 / 100 +
+                (StatusBar.currentHeight ? StatusBar.currentHeight -7 : 20)
+            }} intensity={Platform.OS === "ios" ? 30 : 20} />
             <View style={{...GS.blurBackgroundView,
-                height: Dimensions.get('window').height * 8 / 100 +          // TODO:
+                height: Dimensions.get('window').height * 8 / 100 +
                 (StatusBar.currentHeight ? StatusBar.currentHeight -7 : 20), // 50 for both when searching, -7, 20 otherwise
-                backgroundColor: FetchColor({theme, variable: 
-                    Platform.OS === "ios" ? "TRANSPARENT" : 'TRANSPARENTANDROID'})
+                backgroundColor: FetchColor({theme, variable: "TRANSPARENTANDROID"})
             }}>{props.children}</View>
         </>
     )
