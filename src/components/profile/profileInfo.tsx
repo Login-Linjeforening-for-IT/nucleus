@@ -89,7 +89,7 @@ ProfileInfoContentProps) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
 
     return (
-        <Cluster noColor={true}>
+        <Cluster noColor={true} marginHorizontal={12}>
             <View style={{...CS.clusterBack}}>
                 <View style={CS.evenTwinLeft}>
                     <Text style={{

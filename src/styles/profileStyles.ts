@@ -1,6 +1,9 @@
 import { StyleSheet, Dimensions } from "react-native"
 
 export const PS = StyleSheet.create({
+    content: {
+        height: Dimensions.get("window").height + 200,
+    },
     profileBackground: {
         alignItems: "center",
         flexDirection: "row",
@@ -10,6 +13,7 @@ export const PS = StyleSheet.create({
         left: 0, 
         right: 0, 
         position: "absolute",
+        paddingHorizontal: 12,
     },
     leftTwin: {
         justifyContent: "center",
@@ -29,6 +33,7 @@ export const PS = StyleSheet.create({
         height: 100,
         width: 100,
         borderRadius: 100,
+        left: -3,
     },
     bigProfileImage: {
         width: Dimensions.get("window").width / 2,
@@ -37,12 +42,12 @@ export const PS = StyleSheet.create({
     },
     smallProfileLeftTriplet: {
         justifyContent: "center",
-        alignItems: "center",
-        width: "25%",
+        alignItems: "flex-start",
+        width: "18%",
     },
     smallProfileMiddleTriplet: {
         justifyContent: "center",
-        width: "68%",
+        width: "79%",
     },
     smallProfileRightTriplet: {
         justifyContent: "center",

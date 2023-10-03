@@ -42,7 +42,7 @@ JSX.Element {
   return (
     <View>
         <View style={{
-                ...GS.content, 
+                ...PS.content, 
                 backgroundColor: FetchColor({theme, variable: "DARKER"})
         }}>
             <View style={{
@@ -81,9 +81,7 @@ JSX.Element {
                     />
                 </Svg>
                 {Space(Dimensions.get("window").height/8)}
-                <Profile
-                    profile={profile}
-                />
+                <Profile profile={profile} />
                 {Space(40)}
                 <ProfileInfo profile={profileInfo} />
                 {Space(Dimensions.get("window").height/3)}
