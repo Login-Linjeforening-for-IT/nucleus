@@ -17,6 +17,8 @@ import en from "@text/ads/en.json"
 import { TouchableOpacity, Dimensions, FlatList, View } from "react-native"
 import LogoNavigation from "@/components/shared/logoNavigation"
 import { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs"
+import { createStackNavigator } from "@react-navigation/stack"
+import SpecificAdScreen from "./specificAd"
 
 /**
  * Parent EventScreen function
@@ -27,6 +29,9 @@ import { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs"
  * @param {navigation} Navigation Navigation route
  * @returns EventScreen
  */
+
+const AdStack = createStackNavigator<AdStackParamList>();
+
 export default function AdScreen({ navigation }: ScreenProps): JSX.Element {
     //  Ads from api
     const [ads, setAds] = useState([])
@@ -107,48 +112,62 @@ export default function AdScreen({ navigation }: ScreenProps): JSX.Element {
 
     //  --- DISPLAYS THE EVENTSCREEN ---
     return (
-    <View>
-        <StatusBar style={isDark ? "light" : "dark"} />
-        <View style={{
-            ...GS.content, 
-            backgroundColor: FetchColor({theme, variable: "DARKER"})
-        }}>
-        {renderedArray != null ?
-            renderedArray.length > 0 ?
-            <FlatList
-                style={{minHeight: "100%"}}
-                showsVerticalScrollIndicator={false}
-                numColumns={1}
-                keyExtractor={(ad) => `${ad.id}`}
-                data={renderedArray}
-                renderItem={({item: ad, index}) => (
-                    <View key={index}>
-                        <TouchableOpacity onPress={() => 
-                            navigation.navigate("SpecificAdScreen", {item: ad})}>
-                        {index === 0 && Space(Dimensions.get("window").height / 8.1)}
-                            <AdListItem 
-                                clickedAds={clickedAds}
-                                ad={ad}
-                                setClickedAds={setClickedAds}
-                            />
-                            <ListFooter
-                                index={index}
-                                renderedArray={renderedArray}
-                                search={false}
-                                relevantCategories={[]}
-                                lastSave={lastSave}
-                            />
-                        </TouchableOpacity>
+        <AdStack.Navigator
+        screenOptions={{
+            headerShown: false,
+            animationEnabled: false
+        }}
+        >
+            <AdStack.Screen
+            name="root"
+            >
+                {({navigation})=>{return(
+                    <View>
+                    <StatusBar style={isDark ? "light" : "dark"} />
+                    <View style={{
+                        ...GS.content, 
+                        backgroundColor: FetchColor({theme, variable: "DARKER"})
+                    }}>
+                    {renderedArray != null ?
+                        renderedArray.length > 0 ?
+                        <FlatList
+                            style={{minHeight: "100%"}}
+                            showsVerticalScrollIndicator={false}
+                            numColumns={1}
+                            keyExtractor={(ad) => `${ad.id}`}
+                            data={renderedArray}
+                            renderItem={({item: ad, index}) => (
+                                <View key={index}>
+                                    <TouchableOpacity onPress={() => 
+                                        navigation.navigate("SpecificAdScreen", {item: ad})}>
+                                    {index === 0 && Space(Dimensions.get("window").height / 8.1)}
+                                        <AdListItem 
+                                            clickedAds={clickedAds}
+                                            ad={ad}
+                                            setClickedAds={setClickedAds}
+                                        />
+                                        <ListFooter
+                                            index={index}
+                                            renderedArray={renderedArray}
+                                            search={false}
+                                            relevantCategories={[]}
+                                            lastSave={lastSave}
+                                        />
+                                    </TouchableOpacity>
+                                </View>
+                            )}
+                        />
+                        :
+                        ads.length === 0 
+                            ? <ErrorMessage argument="wifi" />
+                            : <ErrorMessage argument="nomatch" />
+                    : <ErrorMessage argument="wifi" />}
+                    {Space(Dimensions.get("window").height/3)}
                     </View>
-                )}
-            />
-            :
-            ads.length === 0 
-                ? <ErrorMessage argument="wifi" />
-                : <ErrorMessage argument="nomatch" />
-        : <ErrorMessage argument="wifi" />}
-        {Space(Dimensions.get("window").height/3)}
-        </View>
-    </View>
+                </View>
+                )}}
+            </AdStack.Screen>
+            <AdStack.Screen name="SpecificAdScreen" component={SpecificAdScreen}></AdStack.Screen>
+        </AdStack.Navigator>
     )
 }

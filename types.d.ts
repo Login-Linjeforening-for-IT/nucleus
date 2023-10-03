@@ -223,3 +223,8 @@ type EventStackParamList = {
     root: undefined
     SpecificEventScreen: {item: EventProps}
 }
+
+type AdStackParamList = {
+    root: undefined
+    SpecificAdScreen: {item: AdProps}
+}
