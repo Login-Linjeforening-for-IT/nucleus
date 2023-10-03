@@ -9,7 +9,14 @@ import MenuScreen from "@screens/menu"
 import AdScreen from "@screens/ads"
 import React from "react"
 import Header from "@nav/header"
-
+import InternalScreen from "@screens/menu/internal"
+import SettingScreen from "@screens/menu/settings"
+import NotificationScreen from "@screens/menu/notifications"
+import AboutScreen from "@screens/menu/about"
+import BusinessScreen from "@screens/menu/business"
+import ReportScreen from "@screens/menu/report"
+import LoginScreen from "@screens/menu/login"
+import ProfileScreen from "@screens/menu/profile"
 
 // Declares Tab to equal CBTN function
 const Tab = createBottomTabNavigator()
@@ -50,7 +57,15 @@ export default function Navigator(): JSX.Element {
             ? require("@assets/menu/menu.png")
             : require("@assets/menu/menu-black.png")
         },
-        { name: "SpecificAdScreen", component: SpecificAdScreen }
+        { name: "SettingScreen",        component: SettingScreen        },
+        { name: "NotificationScreen",   component: NotificationScreen   },
+        { name: "AboutScreen",          component: AboutScreen          },
+        { name: "BusinessScreen",       component: BusinessScreen       },
+        { name: "ReportScreen",         component: ReportScreen         },
+        { name: "LoginScreen",          component: LoginScreen          },
+        { name: "InternalScreen",       component: InternalScreen       },
+        { name: "SpecificAdScreen",     component: SpecificAdScreen     },
+        { name: "ProfileScreen",        component: ProfileScreen        },
     ]
     
     return (
@@ -62,7 +77,8 @@ export default function Navigator(): JSX.Element {
                 screenOptions={{ 
                     headerShown: true,
                     headerTransparent: true,
-                    header: props => <Header {...props}/>
+                    header: props => props.route.name !== "ProfileScreen" ? 
+                        <Header {...props} /> : null
                 } as ExtendedRouteOptions}
                 // Sets the tab bar component
                 tabBar={props => <Footer 

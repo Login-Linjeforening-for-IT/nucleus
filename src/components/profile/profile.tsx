@@ -94,6 +94,7 @@ export default function Profile({profile} : ProfileElementprops) {
 
 function SmallProfileImage({show, profile}: SmallProfileImageProps) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
+    
     return (
         <View style={PS.smallProfileImageView}>
             {!show &&

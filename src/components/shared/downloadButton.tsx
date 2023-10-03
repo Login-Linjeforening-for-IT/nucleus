@@ -12,7 +12,7 @@ export default function DownloadButton(clickedEvents: EventProps[],
         <>
             {clickedEvents.length > 0 ?
                 <TouchableOpacity
-                    onPress={async () => await handleDownload({
+                    onPress={async() => await handleDownload({
                         setDownloadState, downloadState, clickedEvents, 
                         calendarID, dispatch})}>
                     <Image

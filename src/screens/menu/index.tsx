@@ -27,9 +27,9 @@ import AboutScreen from "./about"
 import BusinessScreen from "./business"
 import LoginScreen from "./login"
 import NotificationScreen from "./notifications"
-import ProfileScreen from "./profile"
 import ReportScreen from "./report"
 import SettingScreen from "./settings"
+import SmallProfile from "@components/profile/smallProfile"
 
 type MenuItemProps = {
     index: number
@@ -55,7 +55,8 @@ const screens: Record<string, React.FC<any>> = {
     "AboutScreen": AboutScreen,
     "BusinessScreen": BusinessScreen,
     "ReportScreen": ReportScreen,
-    "InternalScreen": InternalScreen,
+    "LoginScreen": LoginScreen,
+    "InternalScreen": InternalScreen
 }
 
 
@@ -99,31 +100,43 @@ export default function MenuScreen({ navigation }: ScreenProps): JSX.Element {
                         ...GS.content, 
                         backgroundColor: FetchColor({theme, variable: "DARKER"})
                     }}>
+                        {Space(Dimensions.get("window").height/9)}
+                        {login ? SmallProfile({navigation, 
+                            profile, login}) : null}
                         <FlatList
-                        style={{minHeight: "100%"}}
-                        showsVerticalScrollIndicator={false}
-                        numColumns={1}
-                        keyExtractor={(item) => `${item.id}`}
-                        data={text.setting}
-                        renderItem={({item, index}) => (
-                            <MenuItem 
-                                index={index}
-                                item={item}
-                                navigation={navigation}
-                                setting={text.setting}
-                                feedback={feedback}
-                                toggleFeedback={toggleFeedback}
-                                login={login}
-                            />
-                            )}
+                            style={{minHeight: "100%"}}
+                            showsVerticalScrollIndicator={false}
+                            numColumns={1}
+                            keyExtractor={(item) => `${item.id}`}
+                            data={text.setting}
+                            renderItem={({item, index}) => {
+                                if (item.nav === "LoginScreen" && login) return null
+                                if (item.nav === "InternalScreen" && !login) return null
+                                return (
+                                    <MenuItem 
+                                        index={index}
+                                        item={item}
+                                        navigation={navigation}
+                                        setting={text.setting}
+                                        feedback={feedback}
+                                        toggleFeedback={toggleFeedback}
+                                        login={login}
+                                    />
+                                )
+                            }}
                         />
                         {Space(Dimensions.get("window").height / 10)}
                     </View>)
                 }}
             </MenuStack.Screen>
-            {text.setting.map((item)=> (
-                <MenuStack.Screen {...{key: item.nav, name: item.nav, initialParams: item, component: screens[item.nav]}}></MenuStack.Screen>
-            ))}
+            {text.setting.map((item) => (
+                    <MenuStack.Screen {...{key: item.title,
+                        name: item.title,
+                        initialParams: item,
+                        component: screens[item.nav]
+                    }} />
+                )   
+            )}
         </MenuStack.Navigator>
     )
 }
@@ -136,9 +149,6 @@ toggleFeedback, login}: MenuItemProps) {
 
     return (
         <View>
-            {index === 0 ? Space(Dimensions.get("window").height/8): null}
-            {/* {index === 0 ? SmallProfile(navigation, theme, lang, 
-                profile, login) : null} */}
             <TouchableOpacity onPress={() => item.id === 5 && login 
                 ? navigation.navigate("InternalScreen", item) 
                 : navigation.navigate(item.nav, item)}

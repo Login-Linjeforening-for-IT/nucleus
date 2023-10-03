@@ -1,4 +1,4 @@
-import { PanGestureHandler } from "react-native-gesture-handler"
+import { GestureHandlerRootView, PanGestureHandler } from "react-native-gesture-handler"
 import { useDispatch, useSelector } from "react-redux"
 import * as ImagePicker from "expo-image-picker"
 import FetchColor from "@styles/fetchTheme"
@@ -122,27 +122,29 @@ trigger}: ChangeProfileCardProps): JSX.Element {
 
     // Returns the visual card component
     return (
-        <PanGestureHandler onGestureEvent={gestureHandler}>
-            <Animated.View style={[PS.animatedProfileChangeCard, animation,
-                {backgroundColor: FetchColor({theme, variable: "DARKER"})}]}>
-                <View style={[PS.animatedView, {backgroundColor:
-                    FetchColor({theme, variable: "DARKER"})}]}>
-                    <TouchableOpacity onPress={selectImage}>
-                        <Image
-                            style={PS.bigProfileImage}
-                            source={tempImage || image
-                                ? {uri: tempImage ? tempImage : image}
-                                : theme === 0 || theme === 2 || theme === 3
-                                    ? require("@assets/icons/loginperson-white.png")
-                                    : require("@assets/icons/loginperson-black.png")}
-                        />
-                        <Text style={{...T.centered15, color: FetchColor({theme,
-                                            variable: "OPPOSITETEXTCOLOR"})}}>
-                            {lang ? "Velg bilde" : "Choose image"}
-                        </Text>
-                    </TouchableOpacity>
-                </View>
-            </Animated.View>
-        </PanGestureHandler>
+        <GestureHandlerRootView>
+            <PanGestureHandler onGestureEvent={gestureHandler}>
+                <Animated.View style={[PS.animatedProfileChangeCard, animation,
+                    {backgroundColor: FetchColor({theme, variable: "DARKER"})}]}>
+                    <View style={[PS.animatedView, {backgroundColor:
+                        FetchColor({theme, variable: "DARKER"})}]}>
+                        <TouchableOpacity onPress={selectImage}>
+                            <Image
+                                style={PS.bigProfileImage}
+                                source={tempImage || image
+                                    ? {uri: tempImage ? tempImage : image}
+                                    : theme === 0 || theme === 2 || theme === 3
+                                        ? require("@assets/icons/loginperson-white.png")
+                                        : require("@assets/icons/loginperson-black.png")}
+                            />
+                            <Text style={{...T.centered15, color: FetchColor({theme,
+                                                variable: "OPPOSITETEXTCOLOR"})}}>
+                                {lang ? "Velg bilde" : "Choose image"}
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
+                </Animated.View>
+            </PanGestureHandler>
+        </GestureHandlerRootView>
     )
 }

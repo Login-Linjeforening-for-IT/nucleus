@@ -11,6 +11,7 @@ import {
     Image,
     View,
     Text,
+    Platform,
 } from "react-native"
 
 type FilterProps = {
@@ -212,7 +213,7 @@ export function FilterUI({textInputRef, setRenderedArray, setClickedCategory,
 relevantCategories, clickedCategory, search, setInput, items, theme}: FilterUIProps): JSX.Element {
 
     return (
-        <View style={search?{backgroundColor: FetchColor({theme, variable: "DARKER"})}:{display:'none'}}>
+        <View style={search?{top: Platform.OS === "ios" ? 86 : 78, backgroundColor: FetchColor({theme, variable: "DARKER"})}:{display:'none'}}>
             <View style={ES.absoluteView}>
                 <TextInput
                     ref={textInputRef}

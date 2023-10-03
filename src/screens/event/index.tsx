@@ -259,7 +259,7 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
         <EventStack.Navigator
         screenOptions={{headerShown: false, animationEnabled: false}}>
             <EventStack.Screen name="root">
-                {({navigation})=>(
+                {({navigation}) => (
                     <View>
                     <StatusBar style={isDark ? "light" : "dark"} />
                     <View style={{
@@ -283,7 +283,10 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
                 </View>
                 )}
             </EventStack.Screen>
-            <EventStack.Screen name="SpecificEventScreen" component={SpecificEventScreen}></EventStack.Screen>
+            <EventStack.Screen 
+                name="SpecificEventScreen"
+                component={SpecificEventScreen}
+            />
         </EventStack.Navigator>
     )
 }

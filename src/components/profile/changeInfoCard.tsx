@@ -1,4 +1,4 @@
-import { PanGestureHandler } from "react-native-gesture-handler"
+import { GestureHandlerRootView, PanGestureHandler } from "react-native-gesture-handler"
 import { useDispatch, useSelector } from "react-redux"
 import FetchColor from "@styles/fetchTheme"
 import PS from "@styles/profileStyles"
@@ -170,57 +170,57 @@ trigger}: ChangeInfoCardProps) {
 
     // Returns the visual card component
     return (
-        <PanGestureHandler onGestureEvent={gestureHandler}>
-            <Animated.View
-                style={[
-                    PS.animatedCard, animation,
-                    {backgroundColor: FetchColor({theme, variable: "DARKER"})}
-                ]}>
-                <View style={[
-                    PS.animatedView,
-                    {backgroundColor: FetchColor({theme, variable: "DARKER"})}
-                ]}>
-                    <TextInput
-                        style={{
-                            ...PS.inputText,
-                            top: 25,
-                            fontSize: 20,
-                            color: FetchColor({theme, variable: "TEXTCOLOR"})
-                        }}
-                        placeholder = {findBestPlaceHolder()}
-                        placeholderTextColor={FetchColor({theme,
-                            variable: "TITLETEXTCOLOR"})}
-                        textAlign="center"
-                        keyboardType={value === 1
-                            ? "numeric"
-                            : value === 2
-                                ? "email-address"
-                                : "default"
-                        }
-                        onChangeText={(val) => handleText(val)}
-                        autoFocus={true}
-                        selectionColor={FetchColor({theme, variable: "ORANGE"})}
+        <GestureHandlerRootView>
+            <PanGestureHandler onGestureEvent={gestureHandler}>
+                <Animated.View
+                    style={[
+                        PS.animatedCard, animation,
+                        {backgroundColor: FetchColor({theme, variable: "DARKER"})}
+                    ]}>
+                    <View style={[
+                        PS.animatedView,
+                        {backgroundColor: FetchColor({theme, variable: "DARKER"})}
+                    ]}>
+                        <TextInput
+                            style={{
+                                ...PS.inputText,
+                                color: FetchColor({theme, variable: "TEXTCOLOR"})
+                            }}
+                            placeholder = {findBestPlaceHolder()}
+                            placeholderTextColor={FetchColor({theme,
+                                variable: "TITLETEXTCOLOR"})}
+                            textAlign="center"
+                            keyboardType={value === 1
+                                ? "numeric"
+                                : value === 2
+                                    ? "email-address"
+                                    : "default"
+                            }
+                            onChangeText={(val) => handleText(val)}
+                            autoFocus={true}
+                            selectionColor={FetchColor({theme, variable: "ORANGE"})}
 
-                    />
-                    <View style={PS.inputInfoView}>
-                        <TouchableOpacity style={{left: 20}} onPress={() => tryToHide()}>
-                            <Text style={{...T.centered15, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{lang ? "Avbryt" : "Cancel"}</Text>
-                        </TouchableOpacity>
-                        <Text style={{...T.centered15, color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})}}>{type}</Text>
-
-                        {edited ?
-                            <TouchableOpacity style={{right: 20, backgroundColor: "red"}} onPress={() => save()}>
-                                <Text style={{...T.centered15, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{lang ? "Lagre" : "Save"}</Text>
+                        />
+                        <View style={PS.inputInfoView}>
+                            <TouchableOpacity style={{left: 20}} onPress={() => tryToHide()}>
+                                <Text style={{...T.centered15, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{lang ? "Avbryt" : "Cancel"}</Text>
                             </TouchableOpacity>
-                        :
-                            <Text style={{...T.centered15, right: 20, color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})}}>{lang ? "Lagre" : "Save"}</Text>
-                        }
+                            <Text style={{...T.centered15, color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})}}>{type}</Text>
+
+                            {edited ?
+                                <TouchableOpacity style={{right: 20}} onPress={() => save()}>
+                                    <Text style={{...T.centered15, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{lang ? "Lagre" : "Save"}</Text>
+                                </TouchableOpacity>
+                            :
+                                <Text style={{...T.centered15, right: 20, color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})}}>{lang ? "Lagre" : "Save"}</Text>
+                            }
+                        </View>
+                        <View style={[PS.centeredLine, {top: 20}]}>
+                            {Line({height: 2, width: width*(2/3), fill: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})})}
+                        </View>
                     </View>
-                    <View style={[PS.centeredLine, {top: 20}]}>
-                        {Line({height: 2, width: width*(2/3), fill: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})})}
-                    </View>
-                </View>
-            </Animated.View>
-        </PanGestureHandler>
+                </Animated.View>
+            </PanGestureHandler>
+        </GestureHandlerRootView>
     )
 }

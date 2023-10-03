@@ -69,10 +69,11 @@ export const PS = StyleSheet.create({
         alignItems: "center",
     },
     inputText: {
-        top: 10,
         minWidth: "80%",
         height: 35,
         borderRadius: 20,
+        top: 25,
+        fontSize: 20,
     },
     animatedView: {
         top: -Dimensions.get("window").height / 4,
