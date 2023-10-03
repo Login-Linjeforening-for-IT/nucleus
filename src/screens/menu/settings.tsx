@@ -28,7 +28,7 @@ type ContentProps = {
     lang: boolean
 }
 
-export default function SettingScreen({ navigation }: ScreenProps): JSX.Element {
+export default function SettingScreen(): JSX.Element {
 
     const { theme } = useSelector( (state: ReduxState) => state.theme)
 

@@ -30,11 +30,12 @@ const Tab = createBottomTabNavigator()
  */
 export default function Navigator(): JSX.Element {
     const { theme } = useSelector( (state: ReduxState) => state.theme )
+    const { lang } = useSelector( (state: ReduxState) => state.lang )
     const isDark = theme === 0 || theme === 2 || theme === 3 ? true : false
 
     const screens = [
         {
-            name: "EventScreen",
+            name: "Events",
             component: EventScreen,
             focusedIcon: require("@assets/menu/calendar-orange.png"),
             icon: isDark
@@ -42,7 +43,7 @@ export default function Navigator(): JSX.Element {
             : require("@assets/menu/calendar-black.png")
         },
         {
-            name: "AdScreen",
+            name: "Ads",
             component: AdScreen,
             focusedIcon: require("@assets/menu/business-orange.png"),
             icon: isDark
@@ -50,7 +51,7 @@ export default function Navigator(): JSX.Element {
             : require("@assets/menu/business-black.png")
         },
         {
-            name: "MenuScreen",
+            name: lang ? "Meny" : "Menu",
             component: MenuScreen,
             focusedIcon: require("@assets/menu/menu-orange.png"),
             icon: isDark
