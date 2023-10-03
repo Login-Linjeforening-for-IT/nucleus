@@ -24,10 +24,10 @@ import {
 } from "react-native"
 import { ClusterSmaller } from "@/components/shared/cluster"
 
-export default function ReportScreen({ navigation }: ScreenProps): JSX.Element {
+export default function ReportScreen(): JSX.Element {
 
-    const { lang  } = useSelector( (state: ReduxState) => state.lang)
-    const { theme } = useSelector( (state: ReduxState) => state.theme)
+    const { lang  } = useSelector((state: ReduxState) => state.lang)
+    const { theme } = useSelector((state: ReduxState) => state.theme)
     const text = lang ? no : en 
     const sendForm = () => {
         if (data.name === data.name) {

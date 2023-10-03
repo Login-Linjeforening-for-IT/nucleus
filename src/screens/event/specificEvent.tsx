@@ -57,8 +57,8 @@ BottomTabScreenProps<EventStackParamList>): JSX.Element {
 
     if(!route.params){return <></>}
 
-    const { lang  } = useSelector( (state: ReduxState) => state.lang)
-    const { theme } = useSelector( (state: ReduxState) => state.theme)
+    const { lang  } = useSelector((state: ReduxState) => state.lang)
+    const { theme } = useSelector((state: ReduxState) => state.theme)
 
     const item = route.params.item
     let link

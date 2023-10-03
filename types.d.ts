@@ -42,6 +42,14 @@ type ReduxState = {
     }
     notification: NotificationProps
     profile: ProfileProps
+    event: {
+        events: EventProps[]
+        event: EventProps
+        clickedEvents: EventProps[]
+        lastFetch: string
+        search: boolean
+        category: CategoryWithID[]
+    }
 }
 
 type ProfileProps = any

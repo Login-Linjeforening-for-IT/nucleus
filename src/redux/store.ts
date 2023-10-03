@@ -5,6 +5,7 @@ import { persistReducer } from "redux-persist"
 import LoginReducer from "@redux/loginStatus"
 import ProfileReducer from "@redux/profile"
 import ThemeReducer from "@redux/theme"
+import EventReducer from "@redux/event"
 import LangReducer from "@redux/lang"
 import MiscReducer from "@redux/misc"
 import thunk from "redux-thunk"
@@ -19,8 +20,12 @@ const reducers = combineReducers({
     login: LoginReducer,
     // Notification reducer
     notification: NotificationReducer,
+    // Miscellaneous, only used for calendarID at this time
     misc: MiscReducer,
-    profile: ProfileReducer
+    // Profile reducer, handles all user specific information
+    profile: ProfileReducer,
+    // Event reducer, handles all event logic
+    event: EventReducer
 })
 
   // Function to localstore redux state
@@ -30,7 +35,7 @@ const saveState = {
     // Declares which storage to use, AsyncStorage has most active community
     storage: AsyncStorage,
     // Whitelists the names of the states to save
-    whitelist: ["lang", "login", "theme", "notification", "misc", "profile"]
+    whitelist: ["lang", "login", "theme", "notification", "misc", "profile", "event"]
 }
 
 // Persistor to remember the state

@@ -136,10 +136,10 @@ function EventCard ({
             }}>
                 {index === 0
                     ? search === false
-                    ? Space(Dimensions.get("window").height / 9.5)
+                    ? Space(Dimensions.get("window").height / (Platform.OS === "ios" ? 8.4 : 8))
                     : Space(Platform.OS === "ios" 
-                        ? Dimensions.get("window").height / 4.4 
-                        : Dimensions.get("window").height / 3.4) :null}
+                        ? Dimensions.get("window").height / 4
+                        : Dimensions.get("window").height / 3.6) : null}
                 <Cluster marginVertical={8}>
                     <View style={ES.eventBack}>
                         <FullCategorySquare item={item} />
@@ -192,7 +192,6 @@ export function FullCategorySquare({item, height}: FullCategorySquareProps) {
     const day = "startt" in item ? `${item.startt[8]}${item.startt[9]}` : new Date().getDate()
     const month = "startt" in item ? parseInt(item.startt[5] + item.startt[6]) : new Date().getMonth() + 1
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    const { lang } = useSelector((state: ReduxState) => state.lang)
 
     return (
         <View>
