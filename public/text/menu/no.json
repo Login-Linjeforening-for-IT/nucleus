@@ -30,6 +30,11 @@
         {
             "id": 6, 
             "nav": "LoginScreen",
+            "title": "Logg inn"
+        },
+        {
+            "id": 7, 
+            "nav": "InternalScreen",
             "title": "Innsida (verv)"
         }
     ],
