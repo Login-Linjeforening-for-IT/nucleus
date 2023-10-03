@@ -1,9 +1,8 @@
-const { getDefaultConfig } = require('expo/metro-config')
+import { getDefaultConfig } from 'expo/metro-config'
 
 /** @type {import('expo/metro-config').MetroConfig} */
 const config = getDefaultConfig(__dirname, {
-    // Enable CSS support.
     isCSSEnabled: true,
 })
 
-module.exports = config
+export default config
