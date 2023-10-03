@@ -138,10 +138,9 @@ function EventCard ({
                     ? search === false
                     ? Space(Dimensions.get("window").height / 9.5)
                     : Space(Platform.OS === "ios" 
-                        ? Dimensions.get("window").height / 4 
+                        ? Dimensions.get("window").height / 4.4 
                         : Dimensions.get("window").height / 3.4) :null}
                 <Cluster marginVertical={8}>
-                    {index === 0 ? Space(8) : null}
                     <View style={ES.eventBack}>
                         <FullCategorySquare item={item} />
                         <EventCardLocation item={item} />
