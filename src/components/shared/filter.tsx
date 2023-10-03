@@ -201,11 +201,11 @@ export function fetchRelevantCategories({setRelevantCategories, clickedEvents, e
 /**
  * User interface for the filter
  *
- * @param {*} textInputRef          Ref for text input
- * @param {*} setRenderedArray      Function to set the RenderedArray
- * @param {*} setClickedCategory    Function to set the ClickedCategory
- * @param {*} relevantCategories    Function to filter out relevant categories for the filter
- * @param {*} clickedCategory       Array containing all clicked categories
+ * @param textInputRef          Ref for text input
+ * @param setRenderedArray      Function to set the RenderedArray
+ * @param setClickedCategory    Function to set the ClickedCategory
+ * @param relevantCategories    Function to filter out relevant categories for the filter
+ * @param clickedCategory       Array containing all clicked categories
  *
  * @returns Filter UI
  */
@@ -213,7 +213,7 @@ export function FilterUI({textInputRef, setRenderedArray, setClickedCategory,
 relevantCategories, clickedCategory, search, setInput, items, theme}: FilterUIProps): JSX.Element {
 
     return (
-        <View style={search?{top: Platform.OS === "ios" ? 86 : 78, backgroundColor: FetchColor({theme, variable: "DARKER"})}:{display:'none'}}>
+        <View style={search?{top: 90, backgroundColor: FetchColor({theme, variable: "DARKER"})}:{display:'none'}}>
             <View style={ES.absoluteView}>
                 <TextInput
                     ref={textInputRef}

@@ -204,9 +204,6 @@ export const GS = StyleSheet.create({
         width: "100%",
         justifyContent: "center",
     },
-    blur: {
-        height: Dimensions.get('window').height * 8 / 100 + 20
-    },
     customMenuIcon: {
         right: Platform.OS === "ios" 
             ? Dimensions.get("window").width / 40 
