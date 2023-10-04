@@ -41,13 +41,7 @@ type MenuItemProps = {
     login: boolean
 }
 
-type ItemProps = {
-    id: number
-    nav: string
-    title: string
-}
-
-const MenuStack = createStackNavigator()
+const MenuStack = createStackNavigator<MenuStackParamList>()
 
 const screens: Record<string, React.FC<any>> = {
     "SettingScreen": SettingScreen,
@@ -69,7 +63,7 @@ export default function MenuScreen({ navigation }: ScreenProps): JSX.Element {
     state.profile )
     const isDark = theme === 0 || theme === 2 || theme === 3 ? true : false
     const profile = { id: 0, name: "Eirik Hanasand", image}
-    const text = lang ? no : en
+    const text: Setting = lang ? no as Setting : en as Setting
 
     // --- SET THE COMPONENTS OF THE HEADER ---
     useEffect(()=>{
@@ -129,14 +123,16 @@ export default function MenuScreen({ navigation }: ScreenProps): JSX.Element {
                     </View>)
                 }}
             </MenuStack.Screen>
-            {text.setting.map((item) => (
-                    <MenuStack.Screen {...{key: item.title,
-                        name: item.title,
-                        initialParams: item,
-                        component: screens[item.nav]
-                    }} />
-                )   
-            )}
+            {text.setting.map(item => {
+                console.log(screens[item.nav])
+                return(
+                    <MenuStack.Screen 
+                    name={item.nav as MenuRoutes}
+                    component={screens[item.nav]}
+                    key={item.id}
+                    />
+                )  
+            })}
         </MenuStack.Navigator>
     )
 }

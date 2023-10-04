@@ -57,16 +57,7 @@ export default function Navigator(): JSX.Element {
             icon: isDark
             ? require("@assets/menu/menu.png")
             : require("@assets/menu/menu-black.png")
-        },
-        { name: "SettingScreen",        component: SettingScreen        },
-        { name: "NotificationScreen",   component: NotificationScreen   },
-        { name: "AboutScreen",          component: AboutScreen          },
-        { name: "BusinessScreen",       component: BusinessScreen       },
-        { name: "ReportScreen",         component: ReportScreen         },
-        { name: "LoginScreen",          component: LoginScreen          },
-        { name: "InternalScreen",       component: InternalScreen       },
-        { name: "SpecificAdScreen",     component: SpecificAdScreen     },
-        { name: "ProfileScreen",        component: ProfileScreen        },
+        }
     ]
     
     return (
