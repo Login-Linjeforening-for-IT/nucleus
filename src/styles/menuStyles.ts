@@ -47,7 +47,7 @@ export const MS = StyleSheet.create ({
     },
     // Bottom menu icon TouchableOpacity
     bMenuIconTouchableOpacity: {
-        width: 120,
+        width: 90,
         height: 65,
     },
     // Bottom menu icons
