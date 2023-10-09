@@ -261,8 +261,8 @@ export function Kontakt() {
  */
 export function Copyright() {
 
-    const { lang  } = useSelector( (state: ReduxState) => state.lang)
-    const { theme } = useSelector( (state: ReduxState) => state.theme)
+    const { lang  } = useSelector((state: ReduxState) => state.lang)
+    const { theme } = useSelector((state: ReduxState) => state.theme)
 
     return (
         <View>

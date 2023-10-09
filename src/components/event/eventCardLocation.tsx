@@ -55,7 +55,7 @@ EventCardLocationProps): JSX.Element {
             </View>
             <View style={{flexDirection: "row"}}>
                 <Text style={{
-                    ...ES.loc, 
+                    ...ES.loc,
                     color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})
                 }}>
                     {info.trim()}

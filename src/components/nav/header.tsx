@@ -5,12 +5,13 @@ import { BlurView } from 'expo-blur'
 import { Dimensions, Platform, View, Text, StatusBar } from 'react-native'
 import { ExtendedBottomTabHeaderProps } from '@interfaces'
 import { useSelector } from 'react-redux'
+import { useRoute } from '@react-navigation/native'
 
 
 export default function Header({ options, route }: ExtendedBottomTabHeaderProps): ReactNode {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const title = options.title ? options.title : route.name
-    
+
     return (
         <BlurWrapper>
             <View style={{...GS.headerView}}>
@@ -49,16 +50,27 @@ export default function Header({ options, route }: ExtendedBottomTabHeaderProps)
 // Wraps the content in blur or transparent depending on OS
 function BlurWrapper(props: PropsWithChildren) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
+    const { search } = useSelector((state: ReduxState) => state.event)
+    const route = useRoute()
+
+    const height = Dimensions.get('window').height * 8 / 100 +
+    (StatusBar.currentHeight ? StatusBar.currentHeight - 7 : 20) + (search 
+        && route.name === "Events"
+        ? Platform.OS === "ios" 
+            ? 120
+            : 110
+        : Platform.OS === "ios"
+            ? 0
+            : 5)
 
     return (
         <>
-            <BlurView style={{
-                height: Dimensions.get('window').height * 8 / 100 +
-                (StatusBar.currentHeight ? StatusBar.currentHeight -7 : 20)
-            }} intensity={Platform.OS === "ios" ? 30 : 20} />
+            <BlurView 
+                style={{height: height}} 
+                intensity={Platform.OS === "ios" ? 30 : 20}
+            />
             <View style={{...GS.blurBackgroundView,
-                height: Dimensions.get('window').height * 8 / 100 +
-                (StatusBar.currentHeight ? StatusBar.currentHeight -7 : 20), // 50 for both when searching, -7, 20 otherwise
+                height: height,
                 backgroundColor: FetchColor({theme, variable: "TRANSPARENTANDROID"})
             }}>{props.children}</View>
         </>

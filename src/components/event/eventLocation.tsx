@@ -19,8 +19,8 @@ type EventLocationProps = {
  */
 export default function EventLocation({room, campus, street}: 
 EventLocationProps): JSX.Element {
-    const { lang  } = useSelector( (state: ReduxState) => state.lang)
-    const { theme } = useSelector( (state: ReduxState) => state.theme)
+    const { lang  } = useSelector((state: ReduxState) => state.lang)
+    const { theme } = useSelector((state: ReduxState) => state.theme)
 
     if (!room && !campus && !street) {
         return (

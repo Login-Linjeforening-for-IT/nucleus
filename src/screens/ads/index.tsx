@@ -45,11 +45,11 @@ export default function AdScreen({ navigation }: ScreenProps): JSX.Element {
     const [downloadState, setDownloadState] = useState(new Date())
     
     // Redux states
-    const notification =   useSelector( (state: ReduxState) => state.notification)
-    const { lang  } =      useSelector( (state: ReduxState) => state.lang)
-    const { login } =      useSelector( (state: ReduxState) => state.login)
-    const { theme } =      useSelector( (state: ReduxState) => state.theme)
-    const { calendarID } = useSelector( (state: ReduxState) => state.misc)
+    const notification =   useSelector((state: ReduxState) => state.notification)
+    const { lang  } =      useSelector((state: ReduxState) => state.lang)
+    const { login } =      useSelector((state: ReduxState) => state.login)
+    const { theme } =      useSelector((state: ReduxState) => state.theme)
+    const { calendarID } = useSelector((state: ReduxState) => state.misc)
     const dispatch = useDispatch()
     function eventPage () {navigation.navigate("EventScreen")}
     const isDark = theme === 0 || theme === 2 || theme === 3 ? true : false

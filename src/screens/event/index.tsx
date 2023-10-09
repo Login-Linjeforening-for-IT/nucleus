@@ -67,19 +67,18 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
     useState<CategoryWithID[]>([])
     // Events currently displayed
     const [renderedArray, setRenderedArray] = useState<EventProps[]>([])
-    // Search bar visibility boolean
-    const [search, setSearch] = useState(false)
     // Clears text input
     const textInputRef = useRef(null)
 
     // const [event, setEvent] = useState<EventProps>()
     
     // Redux states
-    const notification =    useSelector( (state: ReduxState) => 
+    const notification =    useSelector((state: ReduxState) => 
     state.notification)
-    const { login } =       useSelector( (state: ReduxState) => state.login)
-    const { theme } =       useSelector( (state: ReduxState) => state.theme)
-    const { calendarID } =  useSelector( (state: ReduxState) => state.misc)
+    const { login } =       useSelector((state: ReduxState) => state.login)
+    const { theme } =       useSelector((state: ReduxState) => state.theme)
+    const { calendarID } =  useSelector((state: ReduxState) => state.misc)
+    const { search } =      useSelector((state: ReduxState) => state.event)
     const isDark = theme === 0 || theme === 2 || theme === 3 ? true : false
     const dispatch = useDispatch()
 
@@ -105,11 +104,11 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
             headerComponents: {
                 bottom: [FilterUI({textInputRef, setRenderedArray, setClickedCategory, relevantCategories, clickedCategory, search, setInput, items: events, theme})],
                 left: [LogoNavigation(navigation, isDark)],
-                right: [FilterButton(search, renderedArray, clickedCategory, input, toggleSearch, isDark), DownloadButton(clickedEvents, setDownloadState, downloadState, calendarID, dispatch, isDark)]
+                right: [FilterButton({renderedArray, clickedCategory, input, isDark, dispatch, search}), DownloadButton(clickedEvents, setDownloadState, downloadState, calendarID, dispatch, isDark)]
             }
         } as Partial<BottomTabNavigationOptions>)
             
-    },[navigation, search, renderedArray, clickedCategory, input, toggleSearch, isDark, textInputRef, setRenderedArray, setClickedCategory, relevantCategories, clickedCategory, theme, search, setInput, events])
+    },[navigation, search, renderedArray, clickedCategory, input, isDark, textInputRef, setRenderedArray, setClickedCategory, relevantCategories, clickedCategory, theme, search, setInput, events])
 
     //  --- FETCHES CLICKED EVENTS WHEN SCREEN BECOMES VISIBLE ---
     useFocusEffect(
@@ -229,10 +228,6 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
         setRenderedArray([...events])
         // Updates cache
         await AsyncStorage.setItem("cachedEvents", JSON.stringify(events))
-    }
-
-    function toggleSearch() {
-        setSearch(prevSearch => !prevSearch)
     }
 
     // --- CHECKS FOR AND FIXES INCORRECT RENDER ---

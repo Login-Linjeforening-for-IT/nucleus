@@ -8,7 +8,6 @@ import Space from "@/components/shared/utils"
 import FetchColor from "@styles/fetchTheme"
 import GS from "@styles/globalStyles"
 import { useSelector } from "react-redux"
-import { ScreenProps } from "@interfaces"
 import en from "@text/settings/en.json"
 import no from "@text/settings/no.json"
 import T from "@styles/text"
@@ -30,7 +29,7 @@ type ContentProps = {
 
 export default function SettingScreen(): JSX.Element {
 
-    const { theme } = useSelector( (state: ReduxState) => state.theme)
+    const { theme } = useSelector((state: ReduxState) => state.theme)
 
     return (
         <View>

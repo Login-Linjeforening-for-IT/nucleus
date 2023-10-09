@@ -56,10 +56,10 @@ const screens: Record<string, React.FC<any>> = {
 
 export default function MenuScreen({ navigation }: ScreenProps): JSX.Element {
 
-    const { lang  } = useSelector( (state: ReduxState) => state.lang  )
-    const { login } = useSelector( (state: ReduxState) => state.login )
-    const { theme } = useSelector( (state: ReduxState) => state.theme )
-    const { id, name, image } = useSelector( (state: ReduxState) => 
+    const { lang  } = useSelector((state: ReduxState) => state.lang  )
+    const { login } = useSelector((state: ReduxState) => state.login )
+    const { theme } = useSelector((state: ReduxState) => state.theme )
+    const { id, name, image } = useSelector((state: ReduxState) => 
     state.profile )
     const isDark = theme === 0 || theme === 2 || theme === 3 ? true : false
     const profile = { id: 0, name: "Eirik Hanasand", image}

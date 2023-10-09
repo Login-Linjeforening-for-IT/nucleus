@@ -1,13 +1,28 @@
 import MS from "@styles/menuStyles"
 import { Image, TouchableOpacity } from "react-native"
+import { toggleSearch } from "@redux/event"
+import { useDispatch } from "react-redux"
+import { useSelector } from "react-redux"
 
-export default function FilterButton(search: boolean, renderedArray: EventProps[], clickedCategory: CategoryWithID[], input: string, toggleSearch: ()=>void, isDark: boolean){
+import { AnyAction, Dispatch } from "redux"
+
+type FilterButtonProps = {
+    renderedArray: EventProps[]
+    clickedCategory: CategoryWithID[]
+    input: string
+    isDark: boolean
+    dispatch: Dispatch<AnyAction>
+    search: boolean
+}
+
+export default function FilterButton({renderedArray, clickedCategory, input, isDark, dispatch, search}: FilterButtonProps){
+
     return (
         <>
             {renderedArray.length > 0 || clickedCategory.length > 0 || 
                 input.length ?
                     <TouchableOpacity
-                        onPress={toggleSearch}
+                        onPress={() => dispatch(toggleSearch())}
                     >
                         {search
                             ? <Image 
