@@ -48,7 +48,8 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
     // Clicked categories
     const [clickedCategory, setClickedCategory] = useState<CategoryWithID[]>([])
     // Download state
-    const [downloadState, setDownloadState] = useState(new Date())
+    const date = new Date()
+    const [downloadState, setDownloadState] = useState(date.setSeconds(date.getSeconds()-1))
     // Events from api
     const [events, setEvents] = useState<EventProps[]>([])
     // Filter text input declaration

@@ -9,14 +9,6 @@ import MenuScreen from "@screens/menu"
 import AdScreen from "@screens/ads"
 import React from "react"
 import Header from "@nav/header"
-import InternalScreen from "@screens/menu/internal"
-import SettingScreen from "@screens/menu/settings"
-import NotificationScreen from "@screens/menu/notifications"
-import AboutScreen from "@screens/menu/about"
-import BusinessScreen from "@screens/menu/business"
-import ReportScreen from "@screens/menu/report"
-import LoginScreen from "@screens/menu/login"
-import ProfileScreen from "@screens/menu/profile"
 
 // Declares Tab to equal CBTN function
 const Tab = createBottomTabNavigator()

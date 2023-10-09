@@ -19,6 +19,9 @@ module.exports = function(api) {
                     "@nav": "./src/components/nav",
                     "@": "./src/",
                 }
+            }],
+            ["babel-plugin-inline-import", {
+              "extensions": [".svg"]
             }]
         ],
     }

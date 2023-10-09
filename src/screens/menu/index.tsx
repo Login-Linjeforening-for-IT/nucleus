@@ -124,7 +124,6 @@ export default function MenuScreen({ navigation }: ScreenProps): JSX.Element {
                 }}
             </MenuStack.Screen>
             {text.setting.map(item => {
-                console.log(screens[item.nav])
                 return(
                     <MenuStack.Screen 
                     name={item.nav as MenuRoutes}

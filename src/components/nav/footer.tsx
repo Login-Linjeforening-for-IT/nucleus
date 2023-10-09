@@ -6,6 +6,9 @@ import MS from "@styles/menuStyles"
 import {BlurView} from "expo-blur"
 import React from "react"
 import { RouteProp } from "@react-navigation/native"
+import * as WebBrowser from 'expo-web-browser';
+import { SvgXml } from "react-native-svg"
+import USBicon from "@assets/menu/USB-temp-icon.svg"
 
 export default function Footer({ state, descriptors, navigation }: 
 ExtendedBottomTabBarProps): JSX.Element {
@@ -76,6 +79,21 @@ ExtendedBottomTabBarProps): JSX.Element {
                         </TouchableOpacity>
                     )
                 })}
+                <TouchableOpacity
+                    accessibilityRole="button"
+                    style={{...MS.bMenuIconTouchableOpacity, paddingLeft: 20}}
+                    onPress={async()=>{
+                        WebBrowser.openBrowserAsync("https://usb.login.no/").catch((reason)=>{
+                            console.log(reason)
+                        })
+                    }}
+                >
+                    <SvgXml
+                        width={MS.bMenuIconTouchableOpacity.width-50}
+                        height={MS.bMenuIconTouchableOpacity.height}
+                        xml={USBicon}
+                    />
+                </TouchableOpacity>
             </View>
         </>
     )
