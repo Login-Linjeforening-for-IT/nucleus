@@ -35,4 +35,9 @@ export default function storeEvents({events, clickedEvents}: StoreEventsProps) {
             }
         })()
     }
+    else{
+        (async()=>{
+            await AsyncStorage.setItem("clickedEvents", JSON.stringify([])); 
+    })()
+    }
 }

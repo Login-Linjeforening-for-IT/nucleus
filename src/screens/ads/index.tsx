@@ -78,7 +78,7 @@ export default function AdScreen({ navigation }: ScreenProps): JSX.Element {
     const addata = en.test
 
 
-    storeAds({events: ads, clickedEvents: clickedAds})
+    // storeAds({events: ads, clickedEvents: clickedAds})
 
     //  --- LOADING INITIAL DATA ---
     useEffect(() => {

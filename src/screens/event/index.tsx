@@ -49,7 +49,8 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
     const [clickedCategory, setClickedCategory] = useState<CategoryWithID[]>([])
     // Download state
     const date = new Date()
-    const [downloadState, setDownloadState] = useState(date.setSeconds(date.getSeconds()-1))
+    date.setSeconds(date.getSeconds()-1)
+    const [downloadState, setDownloadState] = useState(date)
     // Events from api
     const [events, setEvents] = useState<EventProps[]>([])
     // Filter text input declaration
@@ -69,8 +70,6 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
     const [renderedArray, setRenderedArray] = useState<EventProps[]>([])
     // Clears text input
     const textInputRef = useRef(null)
-
-    // const [event, setEvent] = useState<EventProps>()
     
     // Redux states
     const notification =    useSelector((state: ReduxState) => 
@@ -118,8 +117,11 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
             fetchState(setClickedEvents)
         }, [])
     )
-
-    storeEvents({events, clickedEvents})
+    
+    //  --- STORES EVENTS WHEN CLICKED EVENTS IS UPDATED ---
+    useEffect(()=>{
+        storeEvents({events, clickedEvents})
+    },[clickedEvents])
 
     //  --- LOADING FILTERED DATA WHEN FILTER CHANGES ---
     useEffect(() => {
