@@ -48,9 +48,7 @@
     "redux": "^4.2.1",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.4.2",
-    "typescript": "^5.1.3",
-    "expo-web-browser": "~12.3.2",
-    "expo-linking": "~5.0.2"
+    "typescript": "^5.1.3"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
