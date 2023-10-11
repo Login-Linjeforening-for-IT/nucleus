@@ -311,29 +311,29 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
                     <PanGestureHandler
                         onGestureEvent={(event: PanGestureHandlerGestureEvent) => 
                             handleSwipe({navigation, event,screenRight: "Ads"})}
-                    >
-                    <View>
-                    <StatusBar style={isDark ? "light" : "dark"} />
-                    <View style={{
-                        ...GS.content, 
-                        backgroundColor: FetchColor({theme, variable: "DARKER"})
-                    }}>
-                        {pushNotification && pushNotificationContent}
-                        <EventList
-                            navigation={navigation}
-                            renderedArray={renderedArray}
-                            clickedEvents={clickedEvents}
-                            search={search}
-                            relevantCategories={relevantCategories}
-                            notification={notification}
-                            setClickedEvents={setClickedEvents}
-                            lastSave={lastSave}
-                            events={events}
-                            ErrorMessage={ErrorMessage}
-                        />
+                        >
+                        <View>
+                        <StatusBar style={isDark ? "light" : "dark"} />
+                        <View style={{
+                            ...GS.content, 
+                            backgroundColor: FetchColor({theme, variable: "DARKER"})
+                        }}>
+                            {pushNotification && pushNotificationContent}
+                            <EventList
+                                navigation={navigation}
+                                renderedArray={renderedArray}
+                                clickedEvents={clickedEvents}
+                                search={search}
+                                relevantCategories={relevantCategories}
+                                notification={notification}
+                                setClickedEvents={setClickedEvents}
+                                lastSave={lastSave}
+                                events={events}
+                                ErrorMessage={ErrorMessage}
+                            />
+                        </View>
                     </View>
-                </View>
-                </PanGestureHandler>
+                    </PanGestureHandler>
                 </GestureHandlerRootView>
                 )}
             </EventStack.Screen>

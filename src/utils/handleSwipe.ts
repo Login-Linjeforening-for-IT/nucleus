@@ -22,12 +22,12 @@ HandleSwipeProps): void {
     const { velocityX, velocityY } = event.nativeEvent;
 
     if (Math.abs(velocityX) > Math.abs(velocityY)) {
-        if (velocityX > 400 && screenLeft) {
+        if (velocityX > 600 && screenLeft) {
             // Navigates to the screen to the left (root is always left)
             navigation.navigate(screenLeft)
         }
 
-        if (velocityX < -400 && screenRight) {
+        if (velocityX < -600 && screenRight) {
             // Navigates to the screen to the right
             navigation.navigate(screenRight)
         }

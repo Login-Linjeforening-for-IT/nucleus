@@ -25,10 +25,6 @@ type MediaLogoProps = {
     logo: ImageSourcePropType
 }
 
-type AllCommitteesProps = {
-    lang: boolean
-}
-
 type personInfoProps = {
     person: string
     lang: boolean
@@ -109,6 +105,7 @@ export function AllComitees(): JSX.Element {
         </View>
     )
 }
+
 /**
  * Function for displaying all of the social media you can reaxch Login on
  * @returns Social media icons

@@ -12,7 +12,12 @@ type initializeNotificationsProps = {
     setShouldSetupNotifications: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-// Sets up initial notifications
+/**
+ * Sets up initial notifications
+ * @param shouldRun Specifies if notifications should be initialised, starts as true and is set to false when the setup is completed 
+ * @param hasBeenSet Specifies if the notifications have already been initialized, in which case it will not run. Used between rerenders before hasBeenSet has updated
+ * @param setShouldSetupNotifications Setter function for the shouldRun variable
+ */
 export default function initializeNotifications ({shouldRun, hasBeenSet, 
 setShouldSetupNotifications }: initializeNotificationsProps) {
     if (shouldRun && !hasBeenSet) {

@@ -67,6 +67,9 @@ type BellProps = {
     setClickedEvents: React.Dispatch<React.SetStateAction<EventProps[]>>
 }
 
+/**
+ * Displays the event list
+ */
 export default function EventList ({
     navigation,
     renderedArray,
@@ -113,6 +116,9 @@ export default function EventList ({
     />
 }
 
+/**
+ * Displays one element of the event card array
+ */
 function EventCard ({
     navigation,
     renderedArray,
@@ -165,6 +171,9 @@ function EventCard ({
     )
 }
 
+/**
+ * Displays the footer last fetch time item
+ */
 export function ListFooter({index, renderedArray, search, relevantCategories, 
 lastSave}: ListFooterProps): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
@@ -188,6 +197,9 @@ lastSave}: ListFooterProps): JSX.Element {
     )
 }
 
+/**
+ * Displays the category square to the left of each event in the list on the EventScreen
+ */
 export function FullCategorySquare({item, height}: FullCategorySquareProps) {
     const day = "startt" in item ? `${item.startt[8]}${item.startt[9]}` : new Date().getDate()
     const month = "startt" in item ? parseInt(item.startt[5] + item.startt[6]) : new Date().getMonth() + 1
@@ -210,6 +222,9 @@ export function FullCategorySquare({item, height}: FullCategorySquareProps) {
     )
 }
 
+/**
+ * Displays the bell to the right of every event in the eventlist
+ */
 function Bell({item, notification, clickedEvents, isOrange, 
 setClickedEvents}: BellProps): JSX.Element {
     const { lang } = useSelector((state: ReduxState) => state.lang)

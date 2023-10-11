@@ -9,8 +9,8 @@ type StoreEventsProps = {
 
 /**
  * Stores firstcoming event and all clicked events
- * @param {*} events
- * @param {*} clickedEvents
+ * @param {*} events Events to store
+ * @param {*} clickedEvents Clicked events to store
  */
 export default function storeEvents({events, clickedEvents}: StoreEventsProps) {
     // Checks if any events are clicked

@@ -59,6 +59,11 @@ clickedEvents, calendarID, dispatch}: handleDownloadProps) {
     }
 }
 
+/**
+ * Adds the passed events to the default calendar of the phone
+ * @param events Events to add to calendar 
+ * @param calendarID ID of the calendar to add the events to 
+ */
 export async function updateCalendar({events, calendarID}: updateCalendarProps) {
     const { status } = await requestCalendarPermissionsAsync()
 

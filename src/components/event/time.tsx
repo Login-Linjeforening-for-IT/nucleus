@@ -17,8 +17,8 @@ type GetEndTimeProps = {
 
 /**
  * Function for displaying the event status, how long till it starts, how long its been ongoing, or how long till it ends
- * @param {string} startTime
- * @param {string} endTime
+ * @param {string} startTime Start time of the event
+ * @param {string} endTime End time of the event
  * @returns Event start time, as a text inside a view
  */
 export default function EventTime({startTime, endTime}: EventTimeProps): JSX.Element {
@@ -189,7 +189,7 @@ export function stringEvent({startTime, endTime}: EventTimeProps): string { // s
 
         const text = lang ? textNO : textEN
 
-        if (beyondTime(startTime) && !beyondTime(endTime)) {
+        if (new Date(startTime) < new Date() && !(new Date(endTime) < new Date())) {
             if (endYear === year) {
                 if (endMonth === month) {
                     if (endDay === day) {
@@ -354,97 +354,22 @@ function leapYear(year: number): boolean {         //Bool for leapyear
  * @returns The number of days in the given month
  */
 function lastDayOfMonth(month: number): number {
-    var year = new Date().getFullYear()
+    const year = new Date().getFullYear()
     switch (month) {
         case 2: {
             // 29 days in february if leapyear
-            if (leapYear(year)) return 29
-            else return 28
+            if (leapYear(year)) {
+                return 29
+            } else {
+                return 28
+            }
         }
-        case 4:     return 30
-        case 6:     return 30
-        case 9:     return 30
-        case 11:    return 30
-        default:    return 31
+        case 4: return 30
+        case 6: return 30
+        case 9: return 30
+        case 11: return 30
+        default: return 31
     }
-}
-
-/**
- * Function for checking if an event has passed, checks if current time is beyond eventTime
- * @param {string} eventTime
- * @returns Boolean, true if passed, otherwise false
- */
-function beyondTime(eventTime: string): boolean { // True if the given time has passed
-    var year     = new Date().getFullYear()
-    var month    = 1 + new Date().getMonth()
-    var day      = new Date().getDate()
-    var hour     = new Date().getHours()
-    var minute   = new Date().getMinutes()
-
-    const eventYear     = parseInt((eventTime)[0]  + (eventTime)[1] + (eventTime)[2] + (eventTime)[3])
-    const eventMonth    = parseInt((eventTime)[5]  + (eventTime)[6])
-    const eventDay      = parseInt((eventTime)[8]  + (eventTime)[9])
-    const eventHour     = parseInt((eventTime)[11] + (eventTime)[12])
-    const eventMinute   = parseInt((eventTime)[14] + (eventTime)[15])
-
-    if (eventYear >= year) {
-        if (eventYear > year) return false
-        if (eventMonth >= month) {
-            if (eventMonth > month) return false
-            if (eventDay >= day) {
-                if (eventDay > day) return false
-                if (eventHour >= hour) {
-                    if (eventHour > hour) return false
-                    if (eventMinute >= minute) return false
-                    else return true
-                } else return true
-            } else return true
-        } else return true
-    } else return true
-}
-
-/**
- * Function for checking if the event ends soon, true if more than half way
- *
- * @param {string} endTime Endtime of the event
- * @returns                Boolean
- */
-export function endsSoon(endTime: string): boolean {
-    const year     = new Date().getFullYear()
-    const month    = 1 + new Date().getMonth()
-    const day      = new Date().getDate()
-    const hour     = new Date().getHours()
-    const minute   = new Date().getMinutes()
-    const endYear     = parseInt((endTime)[0]  + (endTime)[1] + (endTime)[2] + (endTime)[3])
-    const endMonth    = parseInt((endTime)[5]  + (endTime)[6])
-    const endDay      = parseInt((endTime)[8]  + (endTime)[9])
-    const endHour     = parseInt((endTime)[11] + (endTime)[12])
-    const endMinute   = parseInt((endTime)[14] + (endTime)[15])
-
-    if (endYear/2 <= year) {
-        if (endYear != year) { return true
-        } else {
-            if (endMonth/2 <= month) {
-                if (endMonth != month) { return true
-                } else {
-                    if (endDay/2 <= day) {
-                        if (endDay != day) { return true
-                        } else {
-                            if (endHour/2 <= hour) {
-                                if (endHour != hour) { return true
-                                } else {
-                                    if (endMinute/2 <= minute) {
-                                        if (endMinute != minute) { return true
-                                        } else return false
-                                    } else return false
-                                }
-                            } else return false
-                        }
-                    } else return false
-                }
-            } else return false
-        }
-    } else return false
 }
 
 /**

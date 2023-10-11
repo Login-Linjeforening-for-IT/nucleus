@@ -13,6 +13,13 @@ type ParagraphProps = {
     body: string
 }
 
+/**
+ * Displays a paragraph of text with styling corresponding to the design of the app
+ * @param logo Logo of the topic of the paragraph 
+ * @param title Title of the paragraph
+ * @param body Text of the paragraph
+ * @returns 
+ */
 export default function Paragraph({ logo, title, body }: ParagraphProps) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
 
