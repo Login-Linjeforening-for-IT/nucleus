@@ -78,12 +78,11 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
     // const [event, setEvent] = useState<EventProps>()
     
     // Redux states
-    const notification =    useSelector((state: ReduxState) => 
-    state.notification)
-    const { login } =       useSelector((state: ReduxState) => state.login)
-    const { theme } =       useSelector((state: ReduxState) => state.theme)
-    const { calendarID } =  useSelector((state: ReduxState) => state.misc)
-    const { search } =      useSelector((state: ReduxState) => state.event)
+    const notification = useSelector((state: ReduxState) => state.notification)
+    const { login } = useSelector((state: ReduxState) => state.login)
+    const { theme } = useSelector((state: ReduxState) => state.theme)
+    const { calendarID } = useSelector((state: ReduxState) => state.misc)
+    const { search } = useSelector((state: ReduxState) => state.event)
     const isDark = theme === 0 || theme === 2 || theme === 3 ? true : false
     const dispatch = useDispatch()
 
@@ -284,7 +283,7 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
     // --- CHECKS FOR AND FIXES INCORRECT RENDER ---
     if (events.length > 0 && events.length !== renderedArray.length) {
         // Fixes any errors if the user is not currently filtering
-        if (!input.length) clickedCategory.length === 0 ? RenderEvents():null
+        if (!input.length) clickedCategory.length === 0 ? RenderEvents() : null
         // Fixes any potential render errors after user has been searching
         else if (input.length === 0 && clickedCategory.length === 0) {
             RenderEvents()
