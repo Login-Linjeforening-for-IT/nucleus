@@ -17,6 +17,12 @@ import en from "@text/ads/en.json"
 import { TouchableOpacity, Dimensions, FlatList, View } from "react-native"
 import LogoNavigation from "@/components/shared/logoNavigation"
 import { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs"
+import handleSwipe from "@/utils/handleSwipe"
+import { 
+    GestureHandlerRootView,
+    PanGestureHandler,
+     PanGestureHandlerGestureEvent 
+} from "react-native-gesture-handler"
 
 /**
  * Parent EventScreen function
@@ -105,50 +111,59 @@ export default function AdScreen({ navigation }: ScreenProps): JSX.Element {
     // Displays when the API was last fetched successfully
     if (lastSave === "") (async() => {setLastSave(await LastFetch())})()
 
-    //  --- DISPLAYS THE EVENTSCREEN ---
+    //  --- DISPLAYS THE ADSCREEN ---
     return (
-    <View>
-        <StatusBar style={isDark ? "light" : "dark"} />
-        <View style={{
-            ...GS.content, 
-            backgroundColor: FetchColor({theme, variable: "DARKER"})
-        }}>
-        {renderedArray != null ?
-            renderedArray.length > 0 ?
-            <FlatList
-                style={{minHeight: "100%"}}
-                showsVerticalScrollIndicator={false}
-                numColumns={1}
-                keyExtractor={(ad) => `${ad.id}`}
-                data={renderedArray}
-                renderItem={({item: ad, index}) => (
-                    <View key={index}>
-                        <TouchableOpacity onPress={() => 
-                            navigation.navigate("SpecificAdScreen", {item: ad})}>
-                        {index === 0 && Space(Dimensions.get("window").height / 8.1)}
-                            <AdListItem 
-                                clickedAds={clickedAds}
-                                ad={ad}
-                                setClickedAds={setClickedAds}
-                            />
-                            <ListFooter
-                                index={index}
-                                renderedArray={renderedArray}
-                                search={false}
-                                relevantCategories={[]}
-                                lastSave={lastSave}
-                            />
-                        </TouchableOpacity>
-                    </View>
-                )}
-            />
-            :
-            ads.length === 0 
-                ? <ErrorMessage argument="wifi" />
-                : <ErrorMessage argument="nomatch" />
-        : <ErrorMessage argument="wifi" />}
-        {Space(Dimensions.get("window").height/3)}
-        </View>
-    </View>
+        <GestureHandlerRootView>
+        <PanGestureHandler
+            onGestureEvent={(event: PanGestureHandlerGestureEvent) => 
+                handleSwipe({navigation, event, screenLeft: "Events", 
+                screenRight: lang ? "Meny" : "Menu"})}
+        >
+            <View>
+                <StatusBar style={isDark ? "light" : "dark"} />
+                <View style={{
+                    ...GS.content, 
+                    backgroundColor: FetchColor({theme, variable: "DARKER"})
+                }}>
+                {renderedArray != null ?
+                    renderedArray.length > 0 ?
+                    <FlatList
+                        style={{minHeight: "100%"}}
+                        showsVerticalScrollIndicator={false}
+                        numColumns={1}
+                        keyExtractor={(ad) => `${ad.id}`}
+                        data={renderedArray}
+                        renderItem={({item: ad, index}) => (
+                            
+                            <View key={index}>
+                                <TouchableOpacity onPress={() => 
+                                    navigation.navigate("SpecificAdScreen", {item: ad})}>
+                                {index === 0 && Space(Dimensions.get("window").height / 8.1)}
+                                    <AdListItem 
+                                        clickedAds={clickedAds}
+                                        ad={ad}
+                                        setClickedAds={setClickedAds}
+                                    />
+                                    <ListFooter
+                                        index={index}
+                                        renderedArray={renderedArray}
+                                        search={false}
+                                        relevantCategories={[]}
+                                        lastSave={lastSave}
+                                    />
+                                </TouchableOpacity>
+                            </View>
+                        )}
+                    />
+                    :
+                    ads.length === 0 
+                        ? <ErrorMessage argument="wifi" />
+                        : <ErrorMessage argument="nomatch" />
+                : <ErrorMessage argument="wifi" />}
+                {Space(Dimensions.get("window").height/3)}
+                </View>
+            </View>
+        </PanGestureHandler>
+        </GestureHandlerRootView>
     )
 }
