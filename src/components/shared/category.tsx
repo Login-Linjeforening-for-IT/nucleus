@@ -25,7 +25,7 @@ JSX.Element {
 }
 
 /**
- * // SVG showing the color of the category
+ * SVG showing the color of the category
  *
  * @param {string} category    Category of the event, Format: "CATEGORY"
  * @returns                     Small circle of the categories color
