@@ -81,7 +81,9 @@ function Content(): JSX.Element {
             </Text>
             {Space(15)}
             <View style={GS.row}>
-                <Text>{Line({height: 60, width: 5})}</Text>
+                <Text>
+                    <Line height={60} width={5} />
+                </Text>
                 <View>
                     <Text style={{
                         ...T.boldWithLine, 

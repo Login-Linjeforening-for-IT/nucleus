@@ -95,11 +95,12 @@ export default function AboutScreen({ navigation }: ScreenProps): JSX.Element {
                             {Space(5)}
                             <View style={GS.row}>
                                 <Text>
-                                    {lang 
-                                        ? Line({height: 58, width: 5}) 
+                                    {lang
+                                        ? <Line height={58} width={5} />
                                         : screenWidth < 390 
-                                            ? Line({height: 94, width: 5}) 
-                                            : Line({height: 92, width: 5})}
+                                            ? <Line height={94} width={5} />
+                                            : <Line height={92} width={5} />
+                                    }
                                 </Text>
                                 <View>
                                     <Text style={{
@@ -123,7 +124,9 @@ export default function AboutScreen({ navigation }: ScreenProps): JSX.Element {
                             </Text>
                             {Space(10)}
                             <View style={GS.row}>
-                            <Text>{Line({height: 58, width: 5})}</Text>
+                            <Text>
+                                <Line height={58} width={5} />
+                            </Text>
                             <View>
                                 <Text style={{
                                     ...T.boldWithLine, 
@@ -351,7 +354,12 @@ CommitteeContentProps) {
                 <>
                     {Space(10)}
                     <View style={GS.row}>
-                        <Text>{Line({height: relevantCommittee.quote.length / 2.15, width: 5})}</Text>
+                        <Text>
+                            <Line 
+                                height={relevantCommittee.quote.length / 2.15}
+                                width={5}
+                            />
+                        </Text>
                         <Text style={{
                             ...T.boldWithLine, 
                             color: FetchColor({theme, variable: "TEXTCOLOR"})

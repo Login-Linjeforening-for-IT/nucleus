@@ -199,13 +199,21 @@ export default function ReportScreen({ navigation }: ScreenProps): JSX.Element {
                                         />
                                         {data.check_contentInputChange ?
                                             <View>
-                                                <View style = {SS.reportGreenLight}><GreenLight/></View>
-                                                <View style = {SS.reportCheckContent}><Check/></View>
+                                                <View style = {SS.reportGreenLight}>
+                                                    <GreenLight/>
+                                                </View>
+                                                <View style = {SS.reportCheckContent}>
+                                                    <Check/>
+                                                </View>
                                             </View>
                                         :
                                             <View>
-                                                <View style = {SS.reportGreenLight}><RedLight/></View>
-                                                <View style = {SS.reportCheckContent}><Check/></View>
+                                                <View style = {SS.reportGreenLight}>
+                                                    <RedLight/>
+                                                </View>
+                                                <View style = {SS.reportCheckContent}>
+                                                    <Check/>
+                                                </View>
                                             </View>
                                         }
                                     </View>
