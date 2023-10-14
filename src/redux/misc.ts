@@ -12,7 +12,7 @@ export const MiscSlice = createSlice({
     // Declares slice reducer
     reducers: {
         // Function for setting the calendar ID
-        setCalendarID: (state, action) => {
+        setCalendarID(state, action) {
             // Sets the calendarID to the payload
             state.calendarID = action.payload
         }

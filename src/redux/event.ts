@@ -16,22 +16,22 @@ export const EventSlice = createSlice({
     // Declares reducers
     reducers: {
         // Function to set event array
-        setEvents: (state, action) => {
+        setEvents(state, action) {
             state.events = action.payload
         },
-        setEvent: (state, action) => {
+        setEvent(state, action) {
             state.event = action.payload
         },
-        setClickedEvents: (state, action) => {
+        setClickedEvents(state, action) {
             state.clickedEvents = action.payload
         },
-        setLastFetch: (state, action) => {
+        setLastFetch(state, action) {
             state.lastFetch = action.payload
         },
-        toggleSearch: (state) => {
+        toggleSearch(state) {
             state.search = !state.search
         },
-        setClickedCategories: (state, action) => {
+        setClickedCategories(state, action) {
             state.search = action.payload
         },
     }
