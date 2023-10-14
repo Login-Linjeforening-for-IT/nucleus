@@ -23,11 +23,13 @@ import {
     Text,
 } from "react-native"
 import { ClusterSmaller } from "@/components/shared/cluster"
+import { GestureHandlerRootView, PanGestureHandler, PanGestureHandlerGestureEvent } from "react-native-gesture-handler"
+import handleSwipe from "@/utils/handleSwipe"
 
 export default function ReportScreen({ navigation }: ScreenProps): JSX.Element {
 
-    const { lang  } = useSelector( (state: ReduxState) => state.lang)
-    const { theme } = useSelector( (state: ReduxState) => state.theme)
+    const { lang  } = useSelector((state: ReduxState) => state.lang)
+    const { theme } = useSelector((state: ReduxState) => state.theme)
     const text = lang ? no : en 
     const sendForm = () => {
         if (data.name === data.name) {
@@ -100,133 +102,147 @@ export default function ReportScreen({ navigation }: ScreenProps): JSX.Element {
         }
     }
 
-  return (
-    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-    <View>
-        <View style={{
-            ...GS.content, 
-            backgroundColor: FetchColor({theme, variable: "DARKER"})
-        }}>
-        <View>
-          {Space((Dimensions.get("window").height/8.1)+40)}
-          <Text style={{...T.centered, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{text.secure}</Text>
-          {Space(30)}
-
-          <View style={SS.loginView}>
-            <ClusterSmaller>
-              <View style={SS.loginView}>
-                    <TextInput
-                        style={{
-                            ...GS.inputText, 
-                            backgroundColor: FetchColor({theme, variable: "DARKER"}), 
-                            color: FetchColor({theme, variable: "TEXTCOLOR"})
-                        }}
-                        placeholder = {text.contact}
-                        placeholderTextColor={FetchColor({theme, variable: "TITLETEXTCOLOR"})}
-                        textAlign="center"
-                        onChangeText={(val) => inputName(val)}
-                        selectionColor={FetchColor({theme, variable: "ORANGE"})}
-                    />
-                    {data.check_nameInputChange ?
+    return (
+        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+            <GestureHandlerRootView>
+                <PanGestureHandler
+                        onGestureEvent={(event: PanGestureHandlerGestureEvent) => 
+                            handleSwipe({navigation, event, screenLeft: "root"})}
+                    >
+                    <View>
+                        <View style={{
+                            ...GS.content, 
+                            backgroundColor: FetchColor({theme, variable: "DARKER"})
+                        }}>
                         <View>
-                            <View style = {SS.greenLight}><GreenLight/></View>
-                            <View style = {SS.checkContent}><Check/></View>
+                            {Space((Dimensions.get("window").height/8.1)+40)}
+                            <Text style={{...T.centered, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{text.secure}</Text>
+                            {Space(30)}
+
+                            <View style={SS.loginView}>
+                                <ClusterSmaller>
+                                    <View style={SS.loginView}>
+                                        <TextInput
+                                            style={{
+                                                ...GS.inputText, 
+                                                backgroundColor: FetchColor({theme, variable: "DARKER"}), 
+                                                color: FetchColor({theme, variable: "TEXTCOLOR"})
+                                            }}
+                                            placeholder = {text.contact}
+                                            placeholderTextColor={FetchColor({theme, variable: "TITLETEXTCOLOR"})}
+                                            textAlign="center"
+                                            onChangeText={(val) => inputName(val)}
+                                            selectionColor={FetchColor({theme, variable: "ORANGE"})}
+                                        />
+                                        {data.check_nameInputChange ?
+                                            <View>
+                                                <View style = {SS.greenLight}><GreenLight/></View>
+                                                <View style = {SS.checkContent}><Check/></View>
+                                            </View>
+                                        :
+                                            <View>
+                                                <View style = {SS.greenLight}><RedLight/></View>
+                                                <View style = {SS.checkContent}><Check/></View>
+                                            </View>
+                                        }
+                                    </View>
+                                </ClusterSmaller>
+                                </View>
+
+                                {Space(20)}
+
+                                <View style={SS.loginView}>
+                                <CardSmaller>
+                                    <View style={SS.loginView}>
+                                    <TextInput
+                                    style={{
+                                        ...GS.inputText, 
+                                        backgroundColor: FetchColor({theme, variable: "DARKER"}), 
+                                        color: FetchColor({theme, variable: "TEXTCOLOR"})
+                                    }}
+                                    placeholder = {text.who}
+                                    placeholderTextColor={
+                                        FetchColor({theme, variable: "TITLETEXTCOLOR"})
+                                    }
+                                    textAlign="center"
+                                    onChangeText={(val) => inputContact(val)}
+                                    selectionColor={FetchColor({theme, variable: "ORANGE"})}
+                                    />
+                                        {data.check_contactInputChange ?
+                                    <View>
+                                    <View style = {SS.greenLight}><GreenLight/></View>
+                                    <View style = {SS.checkContent}><Check/></View>
+                                    </View>
+                                    :
+                                    <View>
+                                    <View style = {SS.greenLight}><RedLight/></View>
+                                    <View style = {SS.checkContent}><Check/></View>
+                                    </View>
+                                    }
+                                    </View>
+                                </CardSmaller>
+                                </View>
+
+                                {Space(20)}
+
+                                <View style={SS.reportContentView}>
+                                    <CardSmaller>
+                                    <View style={SS.reportContentView}>
+                                        <TextInput
+                                        multiline={true}
+                                        style={{...GS.reportInputContentText, color: FetchColor({theme, variable: "TEXTCOLOR"})}}
+                                        placeholder = {text.what}
+                                        placeholderTextColor={FetchColor({theme, variable: "TITLETEXTCOLOR"})}
+                                            textAlign="center"
+                                            onChangeText={(val) => inputContent(val)}
+                                            selectionColor={FetchColor({theme, variable: "ORANGE"})}
+                                        />
+                                        {data.check_contentInputChange ?
+                                            <View>
+                                                <View style = {SS.reportGreenLight}>
+                                                    <GreenLight/>
+                                                </View>
+                                                <View style = {SS.reportCheckContent}>
+                                                    <Check/>
+                                                </View>
+                                            </View>
+                                        :
+                                            <View>
+                                                <View style = {SS.reportGreenLight}>
+                                                    <RedLight/>
+                                                </View>
+                                                <View style = {SS.reportCheckContent}>
+                                                    <Check/>
+                                                </View>
+                                            </View>
+                                        }
+                                    </View>
+                                    </CardSmaller>
+                                </View>
+
+                                <View>
+                                {Space(40)}
+                                <TouchableOpacity
+                                    disabled ={!data.check_contentInputChange}
+                                    onPress={() => sendForm()}
+                                >
+                                    <Button>
+                                        <Text style={{
+                                            ...T.centered20, 
+                                            color: FetchColor({theme, variable: "TEXTCOLOR"})
+                                        }}>
+                                            {text.send}
+                                        </Text>
+                                    </Button>
+                                </TouchableOpacity>
+                                {Space(20)}
+                                </View>
+                            </View>
+                            {Space(Dimensions.get("window").height/10)}
                         </View>
-                    :
-                        <View>
-                            <View style = {SS.greenLight}><RedLight/></View>
-                            <View style = {SS.checkContent}><Check/></View>
-                        </View>
-                    }
-              </View>
-            </ClusterSmaller>
-          </View>
-
-          {Space(20)}
-
-          <View style={SS.loginView}>
-            <CardSmaller>
-              <View style={SS.loginView}>
-                <TextInput
-                style={{
-                    ...GS.inputText, 
-                    backgroundColor: FetchColor({theme, variable: "DARKER"}), 
-                    color: FetchColor({theme, variable: "TEXTCOLOR"})
-                }}
-                placeholder = {text.who}
-                placeholderTextColor={
-                    FetchColor({theme, variable: "TITLETEXTCOLOR"})
-                }
-                textAlign="center"
-                onChangeText={(val) => inputContact(val)}
-                selectionColor={FetchColor({theme, variable: "ORANGE"})}
-                />
-                  {data.check_contactInputChange ?
-                <View>
-                <View style = {SS.greenLight}><GreenLight/></View>
-                <View style = {SS.checkContent}><Check/></View>
-                </View>
-                :
-                <View>
-                <View style = {SS.greenLight}><RedLight/></View>
-                <View style = {SS.checkContent}><Check/></View>
-                </View>
-                }
-              </View>
-            </CardSmaller>
-          </View>
-
-          {Space(20)}
-
-            <View style={SS.reportContentView}>
-              <CardSmaller>
-                <View style={SS.reportContentView}>
-                    <TextInput
-                    multiline={true}
-                    style={{...GS.reportInputContentText, color: FetchColor({theme, variable: "TEXTCOLOR"})}}
-                    placeholder = {text.what}
-                    placeholderTextColor={FetchColor({theme, variable: "TITLETEXTCOLOR"})}
-                        textAlign="center"
-                        onChangeText={(val) => inputContent(val)}
-                        selectionColor={FetchColor({theme, variable: "ORANGE"})}
-                    />
-                    {data.check_contentInputChange ?
-                        <View>
-                            <View style = {SS.reportGreenLight}><GreenLight/></View>
-                            <View style = {SS.reportCheckContent}><Check/></View>
-                        </View>
-                    :
-                        <View>
-                            <View style = {SS.reportGreenLight}><RedLight/></View>
-                            <View style = {SS.reportCheckContent}><Check/></View>
-                        </View>
-                    }
-                </View>
-              </CardSmaller>
-            </View>
-
-          <View>
-          {Space(40)}
-            <TouchableOpacity
-                disabled ={!data.check_contentInputChange}
-                onPress={() => sendForm()}
-            >
-                <Button>
-                    <Text style={{
-                        ...T.centered20, 
-                        color: FetchColor({theme, variable: "TEXTCOLOR"})
-                    }}>
-                        {text.send}
-                    </Text>
-                </Button>
-            </TouchableOpacity>
-            {Space(20)}
-          </View>
-        </View>
-        {Space(Dimensions.get("window").height/10)}
-    </View>
-        </View>
-    </TouchableWithoutFeedback>
-
-  )
+                    </View>
+                </PanGestureHandler>
+            </GestureHandlerRootView>
+        </TouchableWithoutFeedback>
+        )
 }

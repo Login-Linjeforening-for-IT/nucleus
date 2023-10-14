@@ -24,6 +24,8 @@ import {
     Linking,
     Dimensions,
 } from "react-native"
+import { GestureHandlerRootView, PanGestureHandler, PanGestureHandlerGestureEvent } from "react-native-gesture-handler"
+import handleSwipe from "@/utils/handleSwipe"
 
 type getCommitteeImageProps = {
     style: string
@@ -71,141 +73,151 @@ export default function AboutScreen({ navigation }: ScreenProps): JSX.Element {
     const info = text.committeeSection.info
 
     return (
-        <View>
-            <View style={{
-                ...GS.content, 
-                backgroundColor: FetchColor({theme, variable: "DARKER"})
-            }}>
-                <ScrollView showsVerticalScrollIndicator={false}>
-                    {Space(Dimensions.get("window").height/8.1)}
-                    <Cluster>
-                        <Text style={{
-                            ...T.bold40, 
-                            color: FetchColor({theme, variable: "TEXTCOLOR"})
-                        }}>
-                            {text.title}
-                        </Text>
-                        {Space(5)}
-                        <View style={GS.row}>
+        <GestureHandlerRootView>
+        <PanGestureHandler
+            onGestureEvent={(event: PanGestureHandlerGestureEvent) => 
+                handleSwipe({navigation, event, screenLeft: "root"})}
+        >
+            <View>
+                <View style={{
+                    ...GS.content, 
+                    backgroundColor: FetchColor({theme, variable: "DARKER"})
+                }}>
+                    <ScrollView showsVerticalScrollIndicator={false}>
+                        {Space(Dimensions.get("window").height/8.1)}
+                        <Cluster>
+                            <Text style={{
+                                ...T.bold40, 
+                                color: FetchColor({theme, variable: "TEXTCOLOR"})
+                            }}>
+                                {text.title}
+                            </Text>
+                            {Space(5)}
+                            <View style={GS.row}>
+                                <Text>
+                                    {lang
+                                        ? <Line height={58} width={5} />
+                                        : screenWidth < 390 
+                                            ? <Line height={94} width={5} />
+                                            : <Line height={92} width={5} />
+                                    }
+                                </Text>
+                                <View>
+                                    <Text style={{
+                                        ...T.boldWithLine, 
+                                        color: FetchColor({theme, variable: "TEXTCOLOR"})
+                                    }}>
+                                        {text.intro}
+                                    </Text>
+                                </View>
+                            </View>
+                            {Space(10)}
+                            <Dropdown/>
+                            {Space(10)}
+                            <Styret />
+                            {Space(15)}
+                            <Text style={{
+                                ...T.bold25, 
+                                color: FetchColor({theme, variable: "TEXTCOLOR"})
+                            }}>
+                                {text.about.title}
+                            </Text>
+                            {Space(10)}
+                            <View style={GS.row}>
                             <Text>
-                                {lang 
-                                    ? Line({height: 58, width: 5}) 
-                                    : screenWidth < 390 
-                                        ? Line({height: 94, width: 5}) 
-                                        : Line({height: 92, width: 5})}
+                                <Line height={58} width={5} />
                             </Text>
                             <View>
                                 <Text style={{
                                     ...T.boldWithLine, 
                                     color: FetchColor({theme, variable: "TEXTCOLOR"})
                                 }}>
-                                    {text.intro}
+                                    {text.about.intro}
                                 </Text>
                             </View>
-                        </View>
-                        {Space(10)}
-                        <Dropdown/>
-                        {Space(10)}
-                        <Styret />
-                        {Space(15)}
-                        <Text style={{
-                            ...T.bold25, 
-                            color: FetchColor({theme, variable: "TEXTCOLOR"})
-                        }}>
-                            {text.about.title}
-                        </Text>
-                        {Space(10)}
-                        <View style={GS.row}>
-                        <Text>{Line({height: 58, width: 5})}</Text>
-                        <View>
+                            </View>
+                            {Space(10)}
                             <Text style={{
-                                ...T.boldWithLine, 
-                                color: FetchColor({theme, variable: "TEXTCOLOR"})
-                            }}>
-                                {text.about.intro}
+                                ...T.paragraph, 
+                                color: FetchColor({theme, variable: "TEXTCOLOR"})}}>
+                                {text.about.body.p1}
                             </Text>
-                        </View>
-                        </View>
-                        {Space(10)}
-                        <Text style={{
-                            ...T.paragraph, 
-                            color: FetchColor({theme, variable: "TEXTCOLOR"})}}>
-                            {text.about.body.p1}
-                        </Text>
-                        {Space(10)}
-                        <Text style={{
-                            ...T.paragraph, 
-                            color: FetchColor({theme, variable: "TEXTCOLOR"})
-                        }}>
-                            {text.about.body.p2}
-                        </Text>
-                        {Space(15)}
-                        <Text style={{
-                            ...T.bold25, 
-                            color: FetchColor({theme, variable: "TEXTCOLOR"})
-                        }}>
-                            {text.committeeSection.title}
-                        </Text>
-                        {Space(10)}
-                        <Text style={{
-                            ...T.boldParagraph, 
-                            color: FetchColor({theme, variable: "TEXTCOLOR"})
-                        }}>
-                            {text.committeeSection.intro}
-                        </Text>
-                        {Space(10)}
-                        <CommitteeView
-                            setCommittee={setCommittee}
-                            committee={committee}
-                            isDark={isDark}
-                        />
-                        {
-                            info.map((relevantCommittee, index) => {
-                                if (relevantCommittee.id === committee) {
-                                    return <CommitteeContent
-                                        key={index}
-                                        index={index}
-                                        isDark={isDark}
-                                        relevantCommittee={relevantCommittee}
-                                    />
-                                }
-                            })
-                        }
-
-                        <CommitteePerson 
-                            committee={committee} 
-                        />
-
-                        {Space(10)}
-                        <Text style={{
-                            ...T.text25, 
-                            color: FetchColor({theme, variable: "TEXTCOLOR"})
-                        }}>
-                            {text.publicDocs.title}
-                        </Text>
-                        <View>
+                            {Space(10)}
                             <Text style={{
                                 ...T.paragraph, 
                                 color: FetchColor({theme, variable: "TEXTCOLOR"})
                             }}>
-                                {text.publicDocs.body}
-                                {<Text 
-                                    style={T.orange15} 
-                                    onPress={() => Linking.openURL("https://wiki.login.no")}
-                                >
-                                    {text.publicDocs.wiki}
-                                </Text>}.
+                                {text.about.body.p2}
                             </Text>
-                        </View>
+                            {Space(15)}
+                            <Text style={{
+                                ...T.bold25, 
+                                color: FetchColor({theme, variable: "TEXTCOLOR"})
+                            }}>
+                                {text.committeeSection.title}
+                            </Text>
+                            {Space(10)}
+                            <Text style={{
+                                ...T.boldParagraph, 
+                                color: FetchColor({theme, variable: "TEXTCOLOR"})
+                            }}>
+                                {text.committeeSection.intro}
+                            </Text>
+                            {Space(10)}
+                            <CommitteeView
+                                setCommittee={setCommittee}
+                                committee={committee}
+                                isDark={isDark}
+                            />
+                            {
+                                info.map((relevantCommittee, index) => {
+                                    if (relevantCommittee.id === committee) {
+                                        return <CommitteeContent
+                                            key={index}
+                                            index={index}
+                                            isDark={isDark}
+                                            relevantCommittee={relevantCommittee}
+                                        />
+                                    }
+                                })
+                            }
+
+                            <CommitteePerson 
+                                committee={committee} 
+                            />
+
+                            {Space(10)}
+                            <Text style={{
+                                ...T.text25, 
+                                color: FetchColor({theme, variable: "TEXTCOLOR"})
+                            }}>
+                                {text.publicDocs.title}
+                            </Text>
+                            <View>
+                                <Text style={{
+                                    ...T.paragraph, 
+                                    color: FetchColor({theme, variable: "TEXTCOLOR"})
+                                }}>
+                                    {text.publicDocs.body}
+                                    {<Text 
+                                        style={T.orange15} 
+                                        onPress={() => Linking.openURL("https://wiki.login.no")}
+                                    >
+                                        {text.publicDocs.wiki}
+                                    </Text>}.
+                                </Text>
+                            </View>
+                            {Space(10)}
+                            <Social/>
+                            <Copyright/>
+                        </Cluster>
                         {Space(10)}
-                        <Social/>
-                        <Copyright/>
-                    </Cluster>
-                    {Space(10)}
-                    {Space(Dimensions.get("window").height/3)}
-                </ScrollView>
+                        {Space(Dimensions.get("window").height/3)}
+                    </ScrollView>
+                </View>
             </View>
-        </View>
+        </PanGestureHandler>
+        </GestureHandlerRootView>
     )
 }
 
@@ -342,7 +354,12 @@ CommitteeContentProps) {
                 <>
                     {Space(10)}
                     <View style={GS.row}>
-                        <Text>{Line({height: relevantCommittee.quote.length / 2.15, width: 5})}</Text>
+                        <Text>
+                            <Line 
+                                height={relevantCommittee.quote.length / 2.15}
+                                width={5}
+                            />
+                        </Text>
                         <Text style={{
                             ...T.boldWithLine, 
                             color: FetchColor({theme, variable: "TEXTCOLOR"})

@@ -213,7 +213,7 @@ export function FilterUI({textInputRef, setRenderedArray, setClickedCategory,
 relevantCategories, clickedCategory, search, setInput, items, theme}: FilterUIProps): JSX.Element {
 
     return (
-        <View style={search?{top: 90, backgroundColor: FetchColor({theme, variable: "DARKER"})}:{display:'none'}}>
+        <View style={search ? {top: Platform.OS === "ios" ? 40 : 30} : {display:'none'}}>
             <View style={ES.absoluteView}>
                 <TextInput
                     ref={textInputRef}
@@ -236,7 +236,7 @@ relevantCategories, clickedCategory, search, setInput, items, theme}: FilterUIPr
                 </TouchableOpacity>
             </View>
 
-            <View style={{...ES.clusterFilterView, backgroundColor: FetchColor({theme, variable: "DARKER"})}}>
+            <View style={ES.clusterFilterView}>
                 <FlatList
                     scrollEnabled={false}
                     showsVerticalScrollIndicator={false}

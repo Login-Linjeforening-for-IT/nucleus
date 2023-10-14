@@ -8,11 +8,13 @@ import Space from "@/components/shared/utils"
 import FetchColor from "@styles/fetchTheme"
 import GS from "@styles/globalStyles"
 import { useSelector } from "react-redux"
-import { ScreenProps } from "@interfaces"
 import en from "@text/settings/en.json"
 import no from "@text/settings/no.json"
 import T from "@styles/text"
 import React from "react"
+import { ScreenProps } from "@interfaces"
+import { GestureHandlerRootView, PanGestureHandler, PanGestureHandlerGestureEvent } from "react-native-gesture-handler"
+import handleSwipe from "@/utils/handleSwipe"
 
 type ClusterWithSwitchProps = {
     obj: infoProps
@@ -28,19 +30,26 @@ type ContentProps = {
     lang: boolean
 }
 
-export default function SettingScreen(): JSX.Element {
+export default function SettingScreen({ navigation }: ScreenProps): JSX.Element {
 
-    const { theme } = useSelector( (state: ReduxState) => state.theme)
+    const { theme } = useSelector((state: ReduxState) => state.theme)
 
     return (
-        <View>
-            <View style={{
-                ...GS.content, 
-                backgroundColor: FetchColor({theme, variable: "DARKER"})
-            }}>
-                <Content />
-            </View>
-        </View>
+        <GestureHandlerRootView>
+            <PanGestureHandler
+                onGestureEvent={(event: PanGestureHandlerGestureEvent) => 
+                    handleSwipe({navigation, event, screenLeft: "root"})}
+            >
+                <View>
+                    <View style={{
+                        ...GS.content, 
+                        backgroundColor: FetchColor({theme, variable: "DARKER"})
+                    }}>
+                        <Content />
+                    </View>
+                </View>
+            </PanGestureHandler>
+        </GestureHandlerRootView>
     )
 }
 

@@ -14,6 +14,8 @@ import {
   TouchableOpacity,
   Dimensions,
 } from "react-native"
+import { GestureHandlerRootView, PanGestureHandler, PanGestureHandlerGestureEvent } from "react-native-gesture-handler"
+import handleSwipe from "@/utils/handleSwipe"
 
 
 type OptionProps = {
@@ -26,35 +28,41 @@ type ItemProps = {
     title: string
 }
 
-export default function InternalScreen({ navigation }: ScreenProps): 
-JSX.Element {
+export default function InternalScreen({ navigation }: ScreenProps): JSX.Element {
 
-    const { theme } = useSelector( (state: ReduxState) => state.theme)
+    const { theme } = useSelector((state: ReduxState) => state.theme)
 
     const setting = [
         {id: 0, title: "Subscribe to maintenance"},
         {id: 1, title: "Unsubscribe from maintenance"},
     ]
 
-  return (
-    <View>
-        <View style={{
-                ...GS.content, 
-                backgroundColor: FetchColor({theme, variable: "DARKER"})
-        }}>
-            <FlatList
-                showsVerticalScrollIndicator={false}
-                numColumns={1}
-                keyExtractor={(item) => `${item.id}`}
-                data={setting}
-                renderItem={({item, index}) => (
-                    <Option index={index} item={item} />
-                )}
-            />
-            {Space(Dimensions.get("window").height/3)}
-        </View>
-    </View>
-  )
+    return (
+        <GestureHandlerRootView>
+            <PanGestureHandler
+                onGestureEvent={(event: PanGestureHandlerGestureEvent) => 
+                    handleSwipe({navigation, event, screenLeft: "root"})}
+            >
+            <View>
+                <View style={{
+                        ...GS.content, 
+                        backgroundColor: FetchColor({theme, variable: "DARKER"})
+                }}>
+                    <FlatList
+                        showsVerticalScrollIndicator={false}
+                        numColumns={1}
+                        keyExtractor={(item) => `${item.id}`}
+                        data={setting}
+                        renderItem={({item, index}) => (
+                            <Option index={index} item={item} />
+                        )}
+                    />
+                    {Space(Dimensions.get("window").height/3)}
+                </View>
+            </View>
+            </PanGestureHandler>
+        </GestureHandlerRootView>
+    )
 }
 
 function Option({index, item}: OptionProps): JSX.Element {

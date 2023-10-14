@@ -1,6 +1,5 @@
 import { removeDuplicatesAndOld } from "@/utils/fetch"
 import AsyncStorage from "@react-native-async-storage/async-storage"
-import CompareDates from "@/utils/compareDates"
 
 type StoreEventsProps = {
     events: EventProps[]
@@ -9,8 +8,8 @@ type StoreEventsProps = {
 
 /**
  * Stores firstcoming event and all clicked events
- * @param {*} events
- * @param {*} clickedEvents
+ * @param events Events to store
+ * @param clickedEvents Clicked events to store
  */
 export default function storeEvents({events, clickedEvents}: StoreEventsProps) {
     // Checks if any events are clicked
@@ -25,7 +24,10 @@ export default function storeEvents({events, clickedEvents}: StoreEventsProps) {
             if (unique) {
                 // Finds the firstcoming event
                 for (let i = 0; i < unique.length; i++) {
-                    if (CompareDates({firstDate: (unique[i]).startt, secondDate: (unique[storedID]).startt}) === true) storedID = i
+
+                    if (new Date((unique[i]).startt) < new Date((unique[storedID]).startt)) {
+                        storedID = i
+                    }
                 }
 
                 // Stores clicked events

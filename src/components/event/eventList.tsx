@@ -67,6 +67,9 @@ type BellProps = {
     setClickedEvents: React.Dispatch<React.SetStateAction<EventProps[]>>
 }
 
+/**
+ * Displays the event list
+ */
 export default function EventList ({
     navigation,
     renderedArray,
@@ -113,6 +116,9 @@ export default function EventList ({
     />
 }
 
+/**
+ * Displays one element of the event card array
+ */
 function EventCard ({
     navigation,
     renderedArray,
@@ -136,10 +142,10 @@ function EventCard ({
             }}>
                 {index === 0
                     ? search === false
-                    ? Space(Dimensions.get("window").height / 9.5)
+                    ? Space(Dimensions.get("window").height / (Platform.OS === "ios" ? 8.4 : 8))
                     : Space(Platform.OS === "ios" 
-                        ? Dimensions.get("window").height / 4.4 
-                        : Dimensions.get("window").height / 3.4) :null}
+                        ? Dimensions.get("window").height / 4
+                        : Dimensions.get("window").height / 3.6) : null}
                 <Cluster marginVertical={8}>
                     <View style={ES.eventBack}>
                         <FullCategorySquare item={item} />
@@ -165,6 +171,9 @@ function EventCard ({
     )
 }
 
+/**
+ * Displays the footer last fetch time item
+ */
 export function ListFooter({index, renderedArray, search, relevantCategories, 
 lastSave}: ListFooterProps): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
@@ -188,11 +197,13 @@ lastSave}: ListFooterProps): JSX.Element {
     )
 }
 
+/**
+ * Displays the category square to the left of each event in the list on the EventScreen
+ */
 export function FullCategorySquare({item, height}: FullCategorySquareProps) {
     const day = "startt" in item ? `${item.startt[8]}${item.startt[9]}` : new Date().getDate()
     const month = "startt" in item ? parseInt(item.startt[5] + item.startt[6]) : new Date().getMonth() + 1
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    const { lang } = useSelector((state: ReduxState) => state.lang)
 
     return (
         <View>
@@ -211,6 +222,9 @@ export function FullCategorySquare({item, height}: FullCategorySquareProps) {
     )
 }
 
+/**
+ * Displays the bell to the right of every event in the eventlist
+ */
 function Bell({item, notification, clickedEvents, isOrange, 
 setClickedEvents}: BellProps): JSX.Element {
     const { lang } = useSelector((state: ReduxState) => state.lang)

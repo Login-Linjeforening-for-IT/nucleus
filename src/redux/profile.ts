@@ -19,34 +19,34 @@ export const ProfileSlice = createSlice({
     },
     // Declares slice reducer
     reducers: {
-        setID: (state, action) => {
+        setID(state, action) {
             state.id = action.payload
         },
-        setName: (state, action) => {
+        setName(state, action) {
             state.name = action.payload
         },
-        setAllergies: (state, action) => {
+        setAllergies(state, action) {
             state.allergies = action.payload
         },
-        setPreferences: (state, action) => {
+        setPreferences(state, action) {
             state.preferences = action.payload
         },
-        setMail: (state, action) => {
+        setMail(state, action) {
             state.mail = action.payload
         },
-        setBan: (state, action) => {
+        setBan(state, action) {
             state.ban = action.payload
         },
-        setJoinedevents: (state, action) => {
+        setJoinedevents(state, action) {
             state.joinedevents = action.payload
         },
-        setSchoolyear: (state, action) => {
+        setSchoolyear(state, action) {
             state.schoolyear = action.payload
         },
-        setDegree: (state, action) => {
+        setDegree(state, action) {
             state.degree = action.payload
         },
-        setImage: (state, action) => {
+        setImage(state, action) {
             state.image = action.payload
         }
     }

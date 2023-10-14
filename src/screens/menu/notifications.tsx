@@ -11,6 +11,8 @@ import { View, Text, FlatList, Dimensions, TouchableOpacity } from "react-native
 import NS from "@styles/notificationStyles"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import NotificationText from "@/components/notification/notificationText"
+import { GestureHandlerRootView, PanGestureHandler, PanGestureHandlerGestureEvent } from "react-native-gesture-handler"
+import handleSwipe from "@/utils/handleSwipe"
 
 export default function NotificationScreen({navigation, back}: NotificationScreenProps): JSX.Element {
     const [list, setList] = useState(undefined)
@@ -46,22 +48,35 @@ export default function NotificationScreen({navigation, back}: NotificationScree
     }
 
     return (
-        <View>
-            <View style={{
-                    ...GS.content, 
-                    backgroundColor: FetchColor({theme, variable: "DARKER"})
-            }}>
-                {Space(Dimensions.get("window").height/8.1)}
-                {Array.isArray(list) ? <List /> : <Text style={{...NS.error, color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})}}>{lang ? "Du har ingen varslinger nå. Kom tilbake senere." : "You have no notifications at this time. Check back later."}</Text>}
-                {Space(Dimensions.get("window").height/3)}
-            </View>
-            <TopMenu 
-                navigation={navigation}
-                screen="notifications"
-                title={lang ? "Varslinger" : "Notifications"}
-                back={back} 
-            />
-        </View>
+        <GestureHandlerRootView>
+            <PanGestureHandler
+                onGestureEvent={(event: PanGestureHandlerGestureEvent) => 
+                    handleSwipe({navigation, event, screenLeft: "root"})}
+            >
+                <View>
+                    <View style={{
+                            ...GS.content, 
+                            backgroundColor: FetchColor({theme, variable: "DARKER"})
+                    }}>
+                        {Space(Dimensions.get("window").height/8.1)}
+                        {Array.isArray(list) 
+                            ? <List /> 
+                            : <Text style={{...NS.error, color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})}}>
+                                {lang 
+                                    ? "Du har ingen varslinger nå. Kom tilbake senere." 
+                                    : "You have no notifications at this time. Check back later."}
+                            </Text>}
+                        {Space(Dimensions.get("window").height/3)}
+                    </View>
+                    <TopMenu 
+                        navigation={navigation}
+                        screen="notifications"
+                        title={lang ? "Varslinger" : "Notifications"}
+                        back={back} 
+                    />
+                </View>
+            </PanGestureHandler>
+        </GestureHandlerRootView>
     )
 }
 

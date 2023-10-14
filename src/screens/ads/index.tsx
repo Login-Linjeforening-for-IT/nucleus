@@ -19,6 +19,12 @@ import LogoNavigation from "@/components/shared/logoNavigation"
 import { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs"
 import { createStackNavigator } from "@react-navigation/stack"
 import SpecificAdScreen from "./specificAd"
+import handleSwipe from "@/utils/handleSwipe"
+import { 
+    GestureHandlerRootView,
+    PanGestureHandler,
+     PanGestureHandlerGestureEvent 
+} from "react-native-gesture-handler"
 
 /**
  * Parent EventScreen function
@@ -45,11 +51,11 @@ export default function AdScreen({ navigation }: ScreenProps): JSX.Element {
     const [downloadState, setDownloadState] = useState(new Date())
     
     // Redux states
-    const notification =   useSelector( (state: ReduxState) => state.notification)
-    const { lang  } =      useSelector( (state: ReduxState) => state.lang)
-    const { login } =      useSelector( (state: ReduxState) => state.login)
-    const { theme } =      useSelector( (state: ReduxState) => state.theme)
-    const { calendarID } = useSelector( (state: ReduxState) => state.misc)
+    const notification =   useSelector((state: ReduxState) => state.notification)
+    const { lang  } =      useSelector((state: ReduxState) => state.lang)
+    const { login } =      useSelector((state: ReduxState) => state.login)
+    const { theme } =      useSelector((state: ReduxState) => state.theme)
+    const { calendarID } = useSelector((state: ReduxState) => state.misc)
     const dispatch = useDispatch()
     function eventPage () {navigation.navigate("EventScreen")}
     const isDark = theme === 0 || theme === 2 || theme === 3 ? true : false
@@ -110,7 +116,7 @@ export default function AdScreen({ navigation }: ScreenProps): JSX.Element {
     // Displays when the API was last fetched successfully
     if (lastSave === "") (async() => {setLastSave(await LastFetch())})()
 
-    //  --- DISPLAYS THE EVENTSCREEN ---
+    //  --- DISPLAYS THE ADSCREEN ---
     return (
         <AdStack.Navigator
         screenOptions={{
@@ -121,51 +127,59 @@ export default function AdScreen({ navigation }: ScreenProps): JSX.Element {
             <AdStack.Screen
             name="root"
             >
-                {({navigation})=>{return(
-                    <View>
-                    <StatusBar style={isDark ? "light" : "dark"} />
-                    <View style={{
-                        ...GS.content, 
-                        backgroundColor: FetchColor({theme, variable: "DARKER"})
-                    }}>
-                    {renderedArray != null ?
-                        renderedArray.length > 0 ?
-                        <FlatList
-                            style={{minHeight: "100%"}}
-                            showsVerticalScrollIndicator={false}
-                            numColumns={1}
-                            keyExtractor={(ad) => `${ad.id}`}
-                            data={renderedArray}
-                            renderItem={({item: ad, index}) => (
-                                <View key={index}>
-                                    <TouchableOpacity onPress={() => 
-                                        navigation.navigate("SpecificAdScreen", {item: ad})}>
-                                    {index === 0 && Space(Dimensions.get("window").height / 8.1)}
-                                        <AdListItem 
-                                            clickedAds={clickedAds}
-                                            ad={ad}
-                                            setClickedAds={setClickedAds}
-                                        />
-                                        <ListFooter
-                                            index={index}
-                                            renderedArray={renderedArray}
-                                            search={false}
-                                            relevantCategories={[]}
-                                            lastSave={lastSave}
-                                        />
-                                    </TouchableOpacity>
-                                </View>
-                            )}
-                        />
-                        :
-                        ads.length === 0 
-                            ? <ErrorMessage argument="wifi" />
-                            : <ErrorMessage argument="nomatch" />
-                    : <ErrorMessage argument="wifi" />}
-                    {Space(Dimensions.get("window").height/3)}
-                    </View>
-                </View>
-                )}}
+                {({navigation}) => (
+                    <GestureHandlerRootView>
+                        <PanGestureHandler
+                            onGestureEvent={(event: PanGestureHandlerGestureEvent) => 
+                                handleSwipe({navigation, event, screenLeft: "Events", 
+                                screenRight: lang ? "Meny" : "Menu"})}
+                        >
+                            <View>
+                            <StatusBar style={isDark ? "light" : "dark"} />
+                            <View style={{
+                                ...GS.content, 
+                                backgroundColor: FetchColor({theme, variable: "DARKER"})
+                            }}>
+                            {renderedArray != null ?
+                                renderedArray.length > 0 ?
+                                <FlatList
+                                    style={{minHeight: "100%"}}
+                                    showsVerticalScrollIndicator={false}
+                                    numColumns={1}
+                                    keyExtractor={(ad) => `${ad.id}`}
+                                    data={renderedArray}
+                                    renderItem={({item: ad, index}) => (
+                                        <View key={index}>
+                                            <TouchableOpacity onPress={() => 
+                                                navigation.navigate("SpecificAdScreen", {item: ad})}>
+                                            {index === 0 && Space(Dimensions.get("window").height / 8.1)}
+                                                <AdListItem 
+                                                    clickedAds={clickedAds}
+                                                    ad={ad}
+                                                    setClickedAds={setClickedAds}
+                                                />
+                                                <ListFooter
+                                                    index={index}
+                                                    renderedArray={renderedArray}
+                                                    search={false}
+                                                    relevantCategories={[]}
+                                                    lastSave={lastSave}
+                                                />
+                                            </TouchableOpacity>
+                                        </View>
+                                    )}
+                                />
+                                :
+                                ads.length === 0 
+                                    ? <ErrorMessage argument="wifi" />
+                                    : <ErrorMessage argument="nomatch" />
+                            : <ErrorMessage argument="wifi" />}
+                            {Space(Dimensions.get("window").height/3)}
+                            </View>
+                        </View>
+                    </PanGestureHandler>
+                </GestureHandlerRootView>
+                )}
             </AdStack.Screen>
             <AdStack.Screen name="SpecificAdScreen" component={SpecificAdScreen}></AdStack.Screen>
         </AdStack.Navigator>

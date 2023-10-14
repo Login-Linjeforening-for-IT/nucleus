@@ -12,7 +12,7 @@ export const LangSlice = createSlice({
     // Declares slice reducer
     reducers: {
         // Function to change language
-        changeLang: (state) => {
+        changeLang(state) {
             state.lang = !state.lang
         },
     }

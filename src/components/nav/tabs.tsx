@@ -29,9 +29,10 @@ const Tab = createBottomTabNavigator()
  * @returns Application with navigation
  */
 export default function Navigator(): JSX.Element {
-    const { theme } = useSelector( (state: ReduxState) => state.theme )
-    const { lang } = useSelector( (state: ReduxState) => state.lang )
+    const { theme } = useSelector((state: ReduxState) => state.theme )
+    const { lang } = useSelector((state: ReduxState) => state.lang )
     const isDark = theme === 0 || theme === 2 || theme === 3 ? true : false
+
 
     const screens = [
         {
@@ -68,7 +69,7 @@ export default function Navigator(): JSX.Element {
         { name: "SpecificAdScreen",     component: SpecificAdScreen     },
         { name: "ProfileScreen",        component: ProfileScreen        },
     ]
-    
+
     return (
         <NavigationContainer>
             <Tab.Navigator
@@ -93,19 +94,19 @@ export default function Navigator(): JSX.Element {
                 {screens.map((screen: StackProps) => {
                     return (
                         <Tab.Screen 
-                            key={screen.name} 
-                            options={({
-                                // Set true if it should be shown in tab bar
-                                display: true,
-
-                                // Icon to use while the screen is visible
-                                focusedIcon: screen.focusedIcon,
-
-                                // Icon with color fit to active theme
-                                icon: screen.icon
-                            }) as ExtendedRouteOptions}
-                            name={screen.name}
-                            component={screen.component}
+                        key={screen.name} 
+                        options={({
+                            // Set true if it should be shown in tab bar
+                            display: true,
+                            
+                            // Icon to use while the screen is visible
+                            focusedIcon: screen.focusedIcon,
+                            
+                            // Icon with color fit to active theme
+                            icon: screen.icon
+                        }) as ExtendedRouteOptions}
+                        name={screen.name}
+                        component={screen.component}
                         />
                     )
                 })}

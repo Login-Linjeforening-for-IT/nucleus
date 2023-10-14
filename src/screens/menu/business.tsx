@@ -11,6 +11,12 @@ import { ScreenProps } from "@interfaces"
 import T from "@styles/text"
 import { Text, View, ScrollView, Dimensions } from "react-native"
 import { useSelector } from "react-redux"
+import { 
+    GestureHandlerRootView,
+    PanGestureHandler, 
+    PanGestureHandlerGestureEvent 
+} from "react-native-gesture-handler"
+import handleSwipe from "@/utils/handleSwipe"
 
 export default function BusinessScreen({ navigation }: ScreenProps): 
 JSX.Element {
@@ -18,19 +24,26 @@ JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
 
     return (
-        <View>
-            <View style={{
-                ...GS.content, 
-                backgroundColor: FetchColor({theme, variable: "DARKER"})
-            }}>
-                <ScrollView showsVerticalScrollIndicator={false}>
-                    {Space(Dimensions.get("window").height/8.1)}
-                    <Content />
-                    {Space(10)}
-                    {Space(Dimensions.get("window").height/3)}
-                    </ScrollView>
-            </View>
-        </View>
+        <GestureHandlerRootView>
+            <PanGestureHandler
+                onGestureEvent={(event: PanGestureHandlerGestureEvent) => 
+                    handleSwipe({navigation, event, screenLeft: "root"})}
+                    >
+                <View>
+                    <View style={{
+                        ...GS.content, 
+                        backgroundColor: FetchColor({theme, variable: "DARKER"})
+                    }}>
+                        <ScrollView showsVerticalScrollIndicator={false}>
+                            {Space(Dimensions.get("window").height/8.1)}
+                            <Content />
+                            {Space(10)}
+                            {Space(Dimensions.get("window").height/3)}
+                            </ScrollView>
+                    </View>
+                </View>
+            </PanGestureHandler>
+        </GestureHandlerRootView>
     )
 }
 
@@ -68,7 +81,9 @@ function Content(): JSX.Element {
             </Text>
             {Space(15)}
             <View style={GS.row}>
-                <Text>{Line({height: 60, width: 5})}</Text>
+                <Text>
+                    <Line height={60} width={5} />
+                </Text>
                 <View>
                     <Text style={{
                         ...T.boldWithLine, 

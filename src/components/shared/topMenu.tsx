@@ -27,7 +27,7 @@ type TopMenuProps = {
 export default function TopMenu({ navigation, title, screen, back }
 : TopMenuProps) {
 
-    const { theme } = useSelector( (state: ReduxState) => state.theme)
+    const { theme } = useSelector((state: ReduxState) => state.theme)
     const goBack = () => { navigation.navigate(back ? back : "EventScreen")}
     const eventPage = () => { navigation.navigate("EventScreen") }
 

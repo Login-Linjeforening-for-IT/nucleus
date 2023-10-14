@@ -27,6 +27,12 @@ import FilterButton from "@/components/shared/filterButton"
 import DownloadButton from "@/components/shared/downloadButton"
 import { createStackNavigator } from "@react-navigation/stack"
 import SpecificEventScreen from "./specificEvent"
+import { 
+    GestureHandlerRootView,
+    PanGestureHandler,
+    PanGestureHandlerGestureEvent 
+} from "react-native-gesture-handler"
+import handleSwipe from "@/utils/handleSwipe"
 
 const EventStack = createStackNavigator<EventStackParamList>()
 
@@ -66,19 +72,17 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
     useState<CategoryWithID[]>([])
     // Events currently displayed
     const [renderedArray, setRenderedArray] = useState<EventProps[]>([])
-    // Search bar visibility boolean
-    const [search, setSearch] = useState(false)
     // Clears text input
     const textInputRef = useRef(null)
 
     // const [event, setEvent] = useState<EventProps>()
     
     // Redux states
-    const notification =    useSelector( (state: ReduxState) => 
-    state.notification)
-    const { login } =       useSelector( (state: ReduxState) => state.login)
-    const { theme } =       useSelector( (state: ReduxState) => state.theme)
-    const { calendarID } =  useSelector( (state: ReduxState) => state.misc)
+    const notification = useSelector((state: ReduxState) => state.notification)
+    const { login } = useSelector((state: ReduxState) => state.login)
+    const { theme } = useSelector((state: ReduxState) => state.theme)
+    const { calendarID } = useSelector((state: ReduxState) => state.misc)
+    const { search } = useSelector((state: ReduxState) => state.event)
     const isDark = theme === 0 || theme === 2 || theme === 3 ? true : false
     const dispatch = useDispatch()
 
@@ -102,13 +106,54 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
     useEffect(()=>{
         navigation.setOptions({
             headerComponents: {
-                bottom: [FilterUI({textInputRef, setRenderedArray, setClickedCategory, relevantCategories, clickedCategory, search, setInput, items: events, theme})],
+                bottom: [FilterUI({
+                    textInputRef, 
+                    setRenderedArray,
+                    setClickedCategory, 
+                    relevantCategories, 
+                    clickedCategory, 
+                    search, 
+                    setInput, 
+                    items: events, 
+                    theme
+                })],
                 left: [LogoNavigation(navigation, isDark)],
-                right: [FilterButton(search, renderedArray, clickedCategory, input, toggleSearch, isDark), DownloadButton(clickedEvents, setDownloadState, downloadState, calendarID, dispatch, isDark)]
+                right: [FilterButton({
+                    renderedArray, 
+                    clickedCategory, 
+                    input, 
+                    isDark, 
+                    dispatch, 
+                    search
+                }), 
+                DownloadButton(
+                    clickedEvents, 
+                    setDownloadState, 
+                    downloadState, 
+                    calendarID, 
+                    dispatch, 
+                    isDark
+                )]
             }
         } as Partial<BottomTabNavigationOptions>)
             
-    },[navigation, search, renderedArray, clickedCategory, input, toggleSearch, isDark, textInputRef, setRenderedArray, setClickedCategory, relevantCategories, clickedCategory, theme, search, setInput, events])
+    },[
+        navigation, 
+        search, 
+        renderedArray, 
+        clickedCategory, 
+        input, 
+        isDark, 
+        textInputRef, 
+        setRenderedArray, 
+        setClickedCategory, 
+        relevantCategories, 
+        clickedCategory, 
+        theme, 
+        search, 
+        setInput, 
+        events
+    ])
 
     //  --- FETCHES CLICKED EVENTS WHEN SCREEN BECOMES VISIBLE ---
     useFocusEffect(
@@ -137,8 +182,13 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
                     setRenderedArray([...events])
                 }
                 // Run filter function if the filter search text is not empty
-                Filter({input, setRenderedArray, events, clickedEvents, 
-                    clickedCategory})
+                Filter({
+                    input,
+                    setRenderedArray, 
+                    events, 
+                    clickedEvents, 
+                    clickedCategory
+                })
             } else {
                 // If the filter is not null and there are categories clicked
                 if (input.length && clickedCategory.length > 0) {
@@ -230,14 +280,10 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
         await AsyncStorage.setItem("cachedEvents", JSON.stringify(events))
     }
 
-    function toggleSearch() {
-        setSearch(prevSearch => !prevSearch)
-    }
-
     // --- CHECKS FOR AND FIXES INCORRECT RENDER ---
     if (events.length > 0 && events.length !== renderedArray.length) {
         // Fixes any errors if the user is not currently filtering
-        if (!input.length) clickedCategory.length === 0 ? RenderEvents():null
+        if (!input.length) clickedCategory.length === 0 ? RenderEvents() : null
         // Fixes any potential render errors after user has been searching
         else if (input.length === 0 && clickedCategory.length === 0) {
             RenderEvents()
@@ -260,27 +306,34 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
         screenOptions={{headerShown: false, animationEnabled: false}}>
             <EventStack.Screen name="root">
                 {({navigation}) => (
-                    <View>
-                    <StatusBar style={isDark ? "light" : "dark"} />
-                    <View style={{
-                        ...GS.content, 
-                        backgroundColor: FetchColor({theme, variable: "DARKER"})
-                    }}>
-                        {pushNotification && pushNotificationContent}
-                        <EventList
-                            navigation={navigation}
-                            renderedArray={renderedArray}
-                            clickedEvents={clickedEvents}
-                            search={search}
-                            relevantCategories={relevantCategories}
-                            notification={notification}
-                            setClickedEvents={setClickedEvents}
-                            lastSave={lastSave}
-                            events={events}
-                            ErrorMessage={ErrorMessage}
-                        />
+                    <GestureHandlerRootView>
+                    <PanGestureHandler
+                        onGestureEvent={(event: PanGestureHandlerGestureEvent) => 
+                            handleSwipe({navigation, event,screenRight: "Ads"})}
+                        >
+                        <View>
+                        <StatusBar style={isDark ? "light" : "dark"} />
+                        <View style={{
+                            ...GS.content, 
+                            backgroundColor: FetchColor({theme, variable: "DARKER"})
+                        }}>
+                            {pushNotification && pushNotificationContent}
+                            <EventList
+                                navigation={navigation}
+                                renderedArray={renderedArray}
+                                clickedEvents={clickedEvents}
+                                search={search}
+                                relevantCategories={relevantCategories}
+                                notification={notification}
+                                setClickedEvents={setClickedEvents}
+                                lastSave={lastSave}
+                                events={events}
+                                ErrorMessage={ErrorMessage}
+                            />
+                        </View>
                     </View>
-                </View>
+                    </PanGestureHandler>
+                </GestureHandlerRootView>
                 )}
             </EventStack.Screen>
             <EventStack.Screen 

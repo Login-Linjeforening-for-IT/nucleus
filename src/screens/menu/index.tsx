@@ -30,6 +30,8 @@ import NotificationScreen from "./notifications"
 import ReportScreen from "./report"
 import SettingScreen from "./settings"
 import SmallProfile from "@components/profile/smallProfile"
+import { GestureHandlerRootView, PanGestureHandler, PanGestureHandlerGestureEvent } from "react-native-gesture-handler"
+import handleSwipe from "@/utils/handleSwipe"
 
 type MenuItemProps = {
     index: number
@@ -62,10 +64,10 @@ const screens: Record<string, React.FC<any>> = {
 
 export default function MenuScreen({ navigation }: ScreenProps): JSX.Element {
 
-    const { lang  } = useSelector( (state: ReduxState) => state.lang  )
-    const { login } = useSelector( (state: ReduxState) => state.login )
-    const { theme } = useSelector( (state: ReduxState) => state.theme )
-    const { id, name, image } = useSelector( (state: ReduxState) => 
+    const { lang  } = useSelector((state: ReduxState) => state.lang  )
+    const { login } = useSelector((state: ReduxState) => state.login )
+    const { theme } = useSelector((state: ReduxState) => state.theme )
+    const { id, name, image } = useSelector((state: ReduxState) => 
     state.profile )
     const isDark = theme === 0 || theme === 2 || theme === 3 ? true : false
     const profile = { id: 0, name: "Eirik Hanasand", image}
@@ -95,38 +97,47 @@ export default function MenuScreen({ navigation }: ScreenProps): JSX.Element {
         screenOptions={{headerShown: false, animationEnabled: false}}>
             <MenuStack.Screen 
                 name="root">
-                {({navigation})=>{
-                    return(<View style={{
-                        ...GS.content, 
-                        backgroundColor: FetchColor({theme, variable: "DARKER"})
-                    }}>
-                        {Space(Dimensions.get("window").height/9)}
-                        {login ? SmallProfile({navigation, 
-                            profile, login}) : null}
-                        <FlatList
-                            style={{minHeight: "100%"}}
-                            showsVerticalScrollIndicator={false}
-                            numColumns={1}
-                            keyExtractor={(item) => `${item.id}`}
-                            data={text.setting}
-                            renderItem={({item, index}) => {
-                                if (item.nav === "LoginScreen" && login) return null
-                                if (item.nav === "InternalScreen" && !login) return null
-                                return (
-                                    <MenuItem 
-                                        index={index}
-                                        item={item}
-                                        navigation={navigation}
-                                        setting={text.setting}
-                                        feedback={feedback}
-                                        toggleFeedback={toggleFeedback}
-                                        login={login}
-                                    />
-                                )
-                            }}
-                        />
-                        {Space(Dimensions.get("window").height / 10)}
-                    </View>)
+                {({navigation})=> {
+                    return(
+                        <GestureHandlerRootView>
+                        <PanGestureHandler
+                            onGestureEvent={(event: PanGestureHandlerGestureEvent) => 
+                                handleSwipe({navigation, event, screenLeft: "Ads"})}
+                        >
+                            <View style={{
+                                ...GS.content, 
+                                backgroundColor: FetchColor({theme, variable: "DARKER"})
+                            }}>
+                                {Space(Dimensions.get("window").height/9)}
+                                {login ? SmallProfile({navigation, 
+                                    profile, login}) : null}
+                                <FlatList
+                                    style={{minHeight: "100%"}}
+                                    showsVerticalScrollIndicator={false}
+                                    numColumns={1}
+                                    keyExtractor={(item) => `${item.id}`}
+                                    data={text.setting}
+                                    renderItem={({item, index}) => {
+                                        if (item.nav === "LoginScreen" && login) return null
+                                        if (item.nav === "InternalScreen" && !login) return null
+                                        return (
+                                            <MenuItem 
+                                                index={index}
+                                                item={item}
+                                                navigation={navigation}
+                                                setting={text.setting}
+                                                feedback={feedback}
+                                                toggleFeedback={toggleFeedback}
+                                                login={login}
+                                            />
+                                        )
+                                    }}
+                                />
+                                {Space(Dimensions.get("window").height / 10)}
+                            </View>
+                        </PanGestureHandler>
+                        </GestureHandlerRootView>
+                    )
                 }}
             </MenuStack.Screen>
             {text.setting.map((item) => (

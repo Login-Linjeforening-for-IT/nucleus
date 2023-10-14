@@ -12,7 +12,7 @@ export const LoginSlice = createSlice({
     // Declares slice reducer
     reducers: {
         // Function to change login status
-        changeLoginStatus: (state) => {
+        changeLoginStatus(state) {
             state.login = !state.login
         }
     }

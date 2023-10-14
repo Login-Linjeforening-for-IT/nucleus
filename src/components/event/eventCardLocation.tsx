@@ -11,9 +11,9 @@ type EventCardLocationProps = {
 /**
  * Visual representation of the location on the Event Card
  *
- * @param {*} item  Event
- * @param {*} theme Theme of the app
- * @param {*} lang  User language
+ * @param item Event
+ * @param theme Theme of the app
+ * @param lang User language
  * @returns
  */
 export default function EventCardLocation({item}: 
@@ -55,7 +55,7 @@ EventCardLocationProps): JSX.Element {
             </View>
             <View style={{flexDirection: "row"}}>
                 <Text style={{
-                    ...ES.loc, 
+                    ...ES.loc,
                     color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})
                 }}>
                     {info.trim()}

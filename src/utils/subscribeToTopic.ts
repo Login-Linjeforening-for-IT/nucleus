@@ -2,6 +2,10 @@
 import messaging from "@react-native-firebase/messaging"
 // COMMENT IN THIS BOX WHILE TESTING IN EXPO 6/6
 
+/**
+ * Subscribes the user to the passed topic
+ * @param topic topic to subscribe to
+ */
 export default async function subscribeToTopic(topic: string) {
     // COMMENT IN THIS BOX WHILE TESTING IN EXPO 6/6
     return null

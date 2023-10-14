@@ -20,6 +20,8 @@ import {
     TextInput,
     Alert,
 } from "react-native"
+import { GestureHandlerRootView, PanGestureHandler, PanGestureHandlerGestureEvent } from "react-native-gesture-handler"
+import handleSwipe from "@/utils/handleSwipe"
 
 type UsernameUIProps = {
     data: DataProps
@@ -47,9 +49,9 @@ type PasswordUIProps = {
 
 export default function LoginScreen({ navigation }: ScreenProps): JSX.Element {
 
-    const { lang  } = useSelector( (state: ReduxState) => state.lang)
-    const { login } = useSelector( (state: ReduxState) => state.login)
-    const { theme } = useSelector( (state: ReduxState) => state.theme)
+    const { lang  } = useSelector((state: ReduxState) => state.lang)
+    const { login } = useSelector((state: ReduxState) => state.login)
+    const { theme } = useSelector((state: ReduxState) => state.theme)
 
     const dispatch = useDispatch()
 
@@ -113,62 +115,69 @@ export default function LoginScreen({ navigation }: ScreenProps): JSX.Element {
         })
     }
 
-  return (
-    <View>
-        <View style={{
-            ...GS.content, 
-            backgroundColor: FetchColor({theme, variable: "DARKER"})
-        }}>
-            {Space(Dimensions.get("window").height/8.1)}
-            <View>
-                {Space(80)}
-                <Text style={{
-                    ...T.centered50,
-                    color: FetchColor({theme, variable: "TEXTCOLOR"})
-                }}>
-                    {lang ? "Innsida" : "Intranet"}
-                </Text>
-                {Space(20)}
-
-                <UsernameUI 
-                    data={data}
-                    inputName={inputName}
-                />
-
-                {Space(10)}
-
-                <PasswordUI 
-                    data={data}
-                    inputPass={inputPass}
-                    showPass={showPass}
-                />
+    return (
+        <GestureHandlerRootView>
+            <PanGestureHandler
+                onGestureEvent={(event: PanGestureHandlerGestureEvent) => 
+                    handleSwipe({navigation, event, screenLeft: "root"})}
+            >
                 <View>
-                    {Space(20)}
-                    <TouchableOpacity
-                        disabled ={!data.name || !data.pass}
-                    onPress={() => internalPage()}>
-                        <Button>
+                    <View style={{
+                        ...GS.content, 
+                        backgroundColor: FetchColor({theme, variable: "DARKER"})
+                    }}>
+                        {Space(Dimensions.get("window").height/8.1)}
+                        <View>
+                            {Space(80)}
                             <Text style={{
-                                ...T.centered20, 
+                                ...T.centered50,
                                 color: FetchColor({theme, variable: "TEXTCOLOR"})
                             }}>
-                                LOGIN
+                                {lang ? "Innsida" : "Intranet"}
                             </Text>
-                        </Button>
-                    </TouchableOpacity>
+                            {Space(20)}
+
+                            <UsernameUI 
+                                data={data}
+                                inputName={inputName}
+                            />
+
+                            {Space(10)}
+
+                            <PasswordUI 
+                                data={data}
+                                inputPass={inputPass}
+                                showPass={showPass}
+                            />
+                            <View>
+                                {Space(20)}
+                                <TouchableOpacity
+                                    disabled ={!data.name || !data.pass}
+                                onPress={() => internalPage()}>
+                                    <Button>
+                                        <Text style={{
+                                            ...T.centered20, 
+                                            color: FetchColor({theme, variable: "TEXTCOLOR"})
+                                        }}>
+                                            LOGIN
+                                        </Text>
+                                    </Button>
+                                </TouchableOpacity>
+                            </View>
+                            {Space(40)}
+                            <View style={SS.makeNotificationImage}>
+                                <Image 
+                                    style={GS.smallImage} 
+                                    source={require("@assets/logo/loginText.png")}
+                                />
+                            </View>
+                        </View>
+                        {Space(Dimensions.get("window").height/3)}
+                    </View>
                 </View>
-                {Space(40)}
-                <View style={SS.makeNotificationImage}>
-                    <Image 
-                        style={GS.smallImage} 
-                        source={require("@assets/logo/loginText.png")}
-                    />
-                </View>
-            </View>
-            {Space(Dimensions.get("window").height/3)}
-        </View>
-    </View>
-  )
+            </PanGestureHandler>
+        </GestureHandlerRootView>
+    )
 }
 
 function UsernameUI({data, inputName}: UsernameUIProps):

@@ -199,24 +199,48 @@ trigger}: ChangeInfoCardProps) {
                             onChangeText={(val) => handleText(val)}
                             autoFocus={true}
                             selectionColor={FetchColor({theme, variable: "ORANGE"})}
-
                         />
                         <View style={PS.inputInfoView}>
                             <TouchableOpacity style={{left: 20}} onPress={() => tryToHide()}>
-                                <Text style={{...T.centered15, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{lang ? "Avbryt" : "Cancel"}</Text>
+                                <Text style={{
+                                    ...T.centered15, 
+                                    color: FetchColor({theme, variable: "TEXTCOLOR"})
+                                }}>
+                                    {lang ? "Avbryt" : "Cancel"}
+                                </Text>
                             </TouchableOpacity>
-                            <Text style={{...T.centered15, color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})}}>{type}</Text>
+                            <Text style={{
+                                ...T.centered15, 
+                                color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})
+                            }}>
+                                {type}
+                            </Text>
 
                             {edited ?
                                 <TouchableOpacity style={{right: 20}} onPress={() => save()}>
-                                    <Text style={{...T.centered15, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{lang ? "Lagre" : "Save"}</Text>
+                                    <Text style={{
+                                        ...T.centered15, 
+                                        color: FetchColor({theme, variable: "TEXTCOLOR"})
+                                    }}>
+                                        {lang ? "Lagre" : "Save"}
+                                    </Text>
                                 </TouchableOpacity>
                             :
-                                <Text style={{...T.centered15, right: 20, color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})}}>{lang ? "Lagre" : "Save"}</Text>
+                                <Text style={{
+                                    ...T.centered15, 
+                                    right: 20, 
+                                    color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})
+                                }}>
+                                    {lang ? "Lagre" : "Save"}
+                                </Text>
                             }
                         </View>
                         <View style={[PS.centeredLine, {top: 20}]}>
-                            {Line({height: 2, width: width*(2/3), fill: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})})}
+                            <Line 
+                                height={2} 
+                                width={width*(2/3)} 
+                                fill={FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})} 
+                            />
                         </View>
                     </View>
                 </Animated.View>

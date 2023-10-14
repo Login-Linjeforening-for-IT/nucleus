@@ -37,16 +37,16 @@ export default function Space(height: number): JSX.Element {
  * Function for drawing a dynamic line, can be adjusted as you wish using 
  * the height and width
  *
- * @param {number} height Height of the line
- * @param {number} width Width of the line
- * @param {string} fill Color of the line
+ * @param height Height of the line
+ * @param width Width of the line
+ * @param fill Color of the line
  * @returns View of the given size based on theme
  */
 export function Line({height, width, fill}: LineProps): JSX.Element {
 
-    const { theme } = useSelector( (state: ReduxState) => state.theme)
+    const { theme } = useSelector((state: ReduxState) => state.theme)
 
-    const line = (
+    return (
         <View>
             <Svg
                 width={width}
@@ -56,8 +56,6 @@ export function Line({height, width, fill}: LineProps): JSX.Element {
             </Svg>
         </View>
     )
-
-    return line
 }
 
 /**
