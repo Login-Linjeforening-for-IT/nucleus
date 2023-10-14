@@ -9,7 +9,7 @@ import React from "react"
  * Function for drawing a check svg icon
  * @returns Svg
  */
-export default function Check() {   //Checkmark svg
+export default function Check() {
 
     const { theme } = useSelector((state: ReduxState) => state.theme)
 
@@ -31,7 +31,7 @@ export default function Check() {   //Checkmark svg
  * 
  * @returns Small svg
  */
-export function SmallCheck() {   //Checkmark svg
+export function SmallCheck() {
 
     const { theme } = useSelector((state: ReduxState) => state.theme)
 
