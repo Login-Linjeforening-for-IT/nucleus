@@ -2,7 +2,7 @@ import FetchColor from "@styles/fetchTheme"
 import { View, Text } from "react-native"
 import { useSelector } from "react-redux"
 import T from "@styles/text"
-import React from "react"
+import React, { useEffect, useState } from "react"
 
 type EventTimeProps = {
     startTime: string
@@ -12,7 +12,6 @@ type EventTimeProps = {
 type GetEndTimeProps = {
     input: string
     theme: number
-    lang: boolean
 }
 
 /**
@@ -23,11 +22,11 @@ type GetEndTimeProps = {
  */
 export default function EventTime({startTime, endTime}: EventTimeProps): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    const string = displayedEventTime(startTime, endTime)
+    const [string, setString] = useState(displayedEventTime(startTime, endTime))
 
     return (
         <View>
-            <Text style={{...T.text25, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>
+            <Text style={{...T.text20, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>
                 {string}
             </Text>
         </View>
@@ -39,8 +38,8 @@ export default function EventTime({startTime, endTime}: EventTimeProps): JSX.Ele
  * @param {string} input
  * @returns View containing the endtime as a text
  */
-export function GetEndTime({input, theme, lang}: GetEndTimeProps) {
-    let endTime = lang ? "Feil ved henting av sluttid." :  "Error fetching endtime."
+export function GetEndTime({input, theme}: GetEndTimeProps) {
+    let endTime = "..."
 
     if (input) {
         endTime = `${input[11]}${input[12]}:${input[14]}${input[15]}`
@@ -65,10 +64,11 @@ export function GetEndTime({input, theme, lang}: GetEndTimeProps) {
  * @returns The event time that should be displayed
  */
 function displayedEventTime(startTime: string, endTime: string) {
-    
+    startTime="2023-12-17T17:26:39.363Z"
+
     const { lang } = useSelector((state: ReduxState) => state.lang)
-    const textEN = ["Starts in", "Tomorrow", "Next", "Ends in", "Ends tomorrow", "Ended", "Yesterday", "Last", " ago", "month", "day", "hour", "minute", "second"]
-    const textNO = ["Starter om", "I morgen", "Neste", "Slutter om", "Slutter i morgen", "Sluttet for", "I går", "Sist", " siden", "måned", "dag", "time", "minutt", "sekund"]
+    const textEN = ["Starts in", "Tomorrow", "Next", "Ends in", "Ends tomorrow", "Ended", "Yesterday", "Last", " ago", "month", "days", "h", "min", "s"]
+    const textNO = ["Starter om", "I morgen", "Neste", "Slutter om", "Slutter i morgen", "Sluttet for", "I går", "Sist", " siden", "måned", "dager", "t", "min", "s"]
     const text = lang ? textNO : textEN
     let lookup
 
@@ -108,7 +108,7 @@ function displayedEventTime(startTime: string, endTime: string) {
     function pluralize(word: string, count: number) {
         if (!count) return ''
     
-        const textNO = [word[word.length - 1] === 'e' ? 'r' : "er", " og", "time", "minutt"]
+        const textNO = [word[word.length - 1] === 'e' ? 'r' : "er", " og", "t", "min"]
         const textEN = ['s', " and", "hour", "minute"]
         const text = lang ? textNO : textEN
         const suffix = word.includes(text[2]) ? ',' : word.includes(text[3]) ? text[1] : ''
@@ -119,9 +119,8 @@ function displayedEventTime(startTime: string, endTime: string) {
 
     if (months > 1) return `${lookup.type}${pluralize(text[9], months)}`
     if (months) return `${lookup.month} ${text[9]}`
-    if (days > 1) return `${lookup.type}${pluralize(text[10], days)}`
+    if (days > 1) return `${lookup.type} ${days} ${text[10]}`
     if (days) return lookup.day
     
-    return `${lookup.type}${pluralize(text[11], hours)}${pluralize(text[12], 
-        minutes)}${pluralize(text[13], seconds)}${lookup.end}`
+    return `${lookup.type} ${hours}${text[11]} ${minutes}${text[12]} ${seconds}${text[13]}${lookup.end}`
 }

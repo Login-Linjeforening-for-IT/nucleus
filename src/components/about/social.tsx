@@ -2,6 +2,7 @@ import CornerSquare from "@/components/about/cornerSquare"
 import Space, { random } from "@/components/shared/utils"
 import FetchColor from "@styles/fetchTheme"
 import GS from "@styles/globalStyles"
+import ES from "@styles/eventStyles"
 import { useSelector } from "react-redux"
 import T from "@styles/text"
 import React from "react"
@@ -14,7 +15,6 @@ import {
     Text,
     ImageSourcePropType,
 } from "react-native"
-import ES from "@styles/eventStyles"
 
 type PersonProps = {
     person: string
@@ -56,7 +56,6 @@ export default function Person({person}: PersonProps): JSX.Element {
     const { lang } = useSelector((state: ReduxState) => state.lang)
     let obj = personInfo({person, lang})
     let corner = random({min: 0, max: 4})
-
 
     return (
         <View>
@@ -154,27 +153,17 @@ export function Social() {
     }
 
     return (
-        Object.entries(media).map(([link], index) => {
-            return index % 3 === 0 && (
-                <View key={link} style={GS.socialView}>
-                    <MediaLogo 
-                        key={link} 
-                        link={link} 
-                        logo={media[Object.keys(media)[index]].logo} 
-                    />
-                    <MediaLogo 
-                        key={media[Object.keys(media)[index + 1]].link} 
-                        link={media[Object.keys(media)[index + 1]].link} 
-                        logo={media[Object.keys(media)[index + 1]].logo}
-                    />
-                    <MediaLogo 
-                        key={media[Object.keys(media)[index + 2]].link} 
-                        link={media[Object.keys(media)[index + 2]].link}
-                        logo={media[Object.keys(media)[index + 2]].logo}
-                    />
-                </View>
+        <View style={{flexDirection: "row", justifyContent: "center"}}>
+            {Object.entries(media).map(([link], index) => {
+            return (
+                <MediaLogo 
+                    key={link} 
+                    link={link} 
+                    logo={media[Object.keys(media)[index]].logo} 
+                />
             )
-        })
+        })}
+        </View>
     )
 }
 
@@ -188,13 +177,11 @@ export function Social() {
  * - Discord link
  * - CDN image link
  *
- * @param {string} person
+ * @param person
  * @returns Full object packed in a view component
  */
 export function Styret() {
-
     let corner = random({min: 0, max: 4})
-    const { theme } = useSelector((state: ReduxState) => state.theme)
 
     return (
         <View>
@@ -203,7 +190,7 @@ export function Styret() {
                 source={{uri: "https://cdn.login.no/img/styret2.jpg"}}
             />
             <View style={{position: "absolute", alignSelf: "center"}}>
-                {CornerSquare({corner, type: true})}
+                <CornerSquare corner={corner} type={true} />
             </View>
         </View>
     )
@@ -239,7 +226,7 @@ export function Kontakt() {
             style={{
                 ...T.orangeCentered15, 
                 color: FetchColor({theme, variable: "ORANGE"})}} 
-            onPress={async() => {Linking.openURL("mailto:kontakt@login.no")
+            onPress={() => {Linking.openURL("mailto:kontakt@login.no")
             .catch(() => lang 
                 ? Alert.alert("Kunne ikke åpne mail!", "Mail: kontakt@login.no")
                 : Alert.alert("Could not open mail!", "Reach us at kontakt@login.no"))
@@ -358,7 +345,7 @@ function personInfo({person, lang}: personInfoProps) {
         name: "Ida Førland",
         tag: "idaforland",
         dclink: "https://discordapp.com/users/470279697465606159",
-        img: `https://cdn.login.no/img/portraits/portrett_pr-leder.jpg`
+        img: `https://cdn.login.no/img/portraits/portrett_bedkom-leder.jpg`
     }
 
     let tekkom_leader = {
@@ -390,7 +377,7 @@ function personInfo({person, lang}: personInfoProps) {
         name: "Bjørn Kristian Strand",
         tag: "bk_suup",
         dclink: "https://discordapp.com/users/353992260507140097",
-        img: `https://cdn.login.no/img/portraits/portrett_placeholder.jpg`
+        img: `https://cdn.login.no/img/portraits/portrett_bedkom-leder.jpg`
     }
 
     switch (p) {
@@ -412,10 +399,10 @@ export function StaticImage({item}: {item: EventProps}): JSX.Element {
     const images = {
         tekkom:  require(`../../../public/assets/committee/tekkom/tekkom.png`),
         ctf:     require(`../../../public/assets/committee/ctfkom/ctf.png`),
+        bedpres: require(`../../../public/assets/committee/bedkom/bedkom.png`),
         social:  require(`../../../public/assets/categories/sosialt.png`),
         login:   require(`../../../public/assets/categories/login.png`),
         annet:   require(`../../../public/assets/categories/annet.png`),
-        bedpres: require(`../../../public/assets/categories/bedpresBig.png`)
     }
 
     switch (item.category) {

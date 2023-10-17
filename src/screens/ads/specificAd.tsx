@@ -1,5 +1,4 @@
 import { View, ScrollView, Dimensions } from "react-native"
-import { SpecificAdScreenProps } from "@interfaces"
 import Cluster from "@/components/shared/cluster"
 import Space from "@/components/shared/utils"
 import FetchColor from "@styles/fetchTheme"
@@ -35,24 +34,19 @@ export default function SpecificAdScreen({ route, navigation }: BottomTabScreenP
                 <View>
                     <View style={{
                         ...GS.content,
-                        backgroundColor: FetchColor({theme, variable: "BACKGROUND"})
+                        backgroundColor: FetchColor({theme, variable: "BACKGROUND"}),
+                        paddingTop: Dimensions.get("window").height/8.1,
+                        paddingBottom: Dimensions.get("window").height / 3
                     }}>
                         <ScrollView showsVerticalScrollIndicator={false}>
-                            {Space(Dimensions.get("window").height/8.1)}
-                            <Cluster>
+                            <Cluster marginHorizontal={12} marginVertical={12}>
                                 <AdBanner url={item.banner_image} />
-                                {Space(10)}
                                 <AdTitle ad={item} />
-                                {Space(10)}
                                 <AdInfo props={item} />
-                                {Space(10)}
                                 <AdDescription ad={item} />
-                                {Space(10)}
                                 <AdMedia ad={item} />
                                 <AdUpdateInfo ad={item} />
-                                {Space(10)}
                             </Cluster>
-                            {Space(Dimensions.get("window").height / 3)}
                         </ScrollView>
                     </View>
                 </View>

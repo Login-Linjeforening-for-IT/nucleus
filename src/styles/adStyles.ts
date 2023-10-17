@@ -70,6 +70,7 @@ export const AS = StyleSheet.create({
     },
     adTitleView: {
         flexDirection: "row",
+        marginBottom: 10
     },
     adInfoInsideView: {
         flexDirection: "row",

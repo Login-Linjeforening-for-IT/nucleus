@@ -217,7 +217,7 @@ BottomTabScreenProps<EventStackParamList>): JSX.Element {
                             }}>
                                 {text.end}
                             </Text>
-                            {"endt" in event && GetEndTime({input: event.endt, theme, lang})}
+                            {"endt" in event && GetEndTime({input: event.endt, theme})}
                         </View>
 
                         {Space(5)}
@@ -229,15 +229,10 @@ BottomTabScreenProps<EventStackParamList>): JSX.Element {
                                 street={event.street}
                             />
 
-                            <Map
-                                event={event}
-                                handleLink={handleLink}
-                            />
+                            <Map event={event} handleLink={handleLink} />
                         </View>
 
-                        {Space(5)}
                         <Category item={item} />
-                        {Space(5)}
 
                         <View style={ES.specificEventInfoView}>
                             <Text style={{

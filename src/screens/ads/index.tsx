@@ -6,7 +6,7 @@ import Space, { ErrorMessage } from "@/components/shared/utils"
 import handleDownload from "@/utils/calendar"
 import storeAds from "@/utils/storeEvents"
 import { useFocusEffect } from "@react-navigation/native"
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 import { AdListItem } from "@/components/ads/adListItem"
 import React, { useEffect, useState } from "react"
 import { StatusBar } from "expo-status-bar"
@@ -56,8 +56,6 @@ export default function AdScreen({ navigation }: ScreenProps): JSX.Element {
     const { login } =      useSelector((state: ReduxState) => state.login)
     const { theme } =      useSelector((state: ReduxState) => state.theme)
     const { calendarID } = useSelector((state: ReduxState) => state.misc)
-    const dispatch = useDispatch()
-    function eventPage () {navigation.navigate("EventScreen")}
     const isDark = theme === 0 || theme === 2 || theme === 3 ? true : false
 
     // --- SET THE COMPONENTS OF THE HEADER ---

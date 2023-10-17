@@ -72,9 +72,9 @@ export function FetchJoinLink(string: string): string | null {
         if (formLink)    return formLink.trim()
         if (tikkioLink)  return tikkioLink.trim()
         if (netLink)     return netLink.trim()
+    }
 
-        return null
-    } else return null
+    return null
 }
 
 /**

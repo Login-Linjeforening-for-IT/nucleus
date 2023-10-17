@@ -28,8 +28,10 @@ export default function TopMenu({ navigation, title, screen, back }
 : TopMenuProps) {
 
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    const goBack = () => { navigation.navigate(back ? back : "EventScreen")}
-    const eventPage = () => { navigation.navigate("EventScreen") }
+    const goBack = () => { 
+        navigation.navigate(back ? back : "Events")
+    }
+    const eventPage = () => { navigation.navigate("Events") }
 
     return (
         <>
@@ -55,7 +57,7 @@ export default function TopMenu({ navigation, title, screen, back }
                 :
                     <TouchableOpacity
                         style={MS.logoBackground}
-                        onPress={() => screen != "event" && eventPage()}
+                        onPress={() => screen != "Events" && eventPage()}
                     >
                         <Image
                             style={MS.tMenuIcon}

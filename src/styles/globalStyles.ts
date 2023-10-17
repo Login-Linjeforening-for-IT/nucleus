@@ -47,9 +47,8 @@ export const GS = StyleSheet.create({
     },
     // Used anywhere there is a small image
     smallImage: {
-        top: -30,
         alignSelf: "center",
-        height: 120,
+        height: 150,
         width: 150,
     },
     parentCommitteeView: {
@@ -133,7 +132,7 @@ export const GS = StyleSheet.create({
         justifyContent: "center",
     },
     socialPartView: {
-        width: "30%",
+        width: "15%",
         alignItems: "center",
     },
     notificationDropdown: {

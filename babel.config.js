@@ -13,6 +13,7 @@ module.exports = function(api) {
                     "@assets": "./public/assets",
                     "@text": "./public/text",
                     "@screens": "./src/screens",
+                    "@utils": "./src/utils",
                     "@shared": "./src/shared",
                     "@styles": "./src/styles",
                     "@redux": "./src/redux",

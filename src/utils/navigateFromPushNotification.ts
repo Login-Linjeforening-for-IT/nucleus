@@ -1,11 +1,10 @@
 // COMMENT IN THIS BOX WHILE TESTING IN EXPO 6/6
-// import messaging, { FirebaseMessagingTypes } from "@react-native-firebase/messaging"
+import messaging, { FirebaseMessagingTypes } from "@react-native-firebase/messaging"
 // COMMENT IN THIS BOX WHILE TESTING IN EXPO 6/6
 
 import { ScreenProps } from "@interfaces"
 import { useEffect, useState } from "react"
 import NotificationInApp from "@/components/shared/notificationInApp"
-import { useDispatch } from "react-redux"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 
 interface PushNotificationProps extends ScreenProps {
@@ -42,7 +41,7 @@ type StoreNotificationProps = {
 export default function NavigateFromPushNotification({ navigation, theme, 
 setPushNotification, setPushNotificationContent }: PushNotificationProps) {
     // COMMENT IN THIS BOX WHILE TESTING IN EXPO 6/6
-    return null
+    // return null
     // COMMENT IN THIS BOX WHILE TESTING IN EXPO 6/6
 
     const [event, setEvent] = useState<{ [key: string]: any } 

@@ -8,7 +8,7 @@ import messaging from "@react-native-firebase/messaging"
  */
 export default async function subscribeToTopic(topic: string) {
     // COMMENT IN THIS BOX WHILE TESTING IN EXPO 6/6
-    return null
+    // return null
     // COMMENT IN THIS BOX WHILE TESTING IN EXPO 6/6
 
     try {

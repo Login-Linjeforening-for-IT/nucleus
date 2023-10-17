@@ -58,6 +58,7 @@ export const ES = StyleSheet.create({
     specificEventInfoView: {
         flexDirection: "row",
         alignItems: "center",
+        marginVertical: 5
     },
     // The header image on specificEventScreen
     specificEventImage: {

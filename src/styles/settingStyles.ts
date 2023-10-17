@@ -96,10 +96,6 @@ export const SS = StyleSheet.create({
         alignSelf: "center",
         flexDirection: "row",
     },
-    makeNotificationImage: {
-        width: 400,
-        height: 200,
-    },
 })
 
 export default SS

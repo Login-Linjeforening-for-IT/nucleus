@@ -70,8 +70,10 @@ export async function updateCalendar({events, calendarID}: updateCalendarProps) 
     if (status === "granted") {
         const calendarEvents = await getEventsAsync(
             [calendarID],
-            new Date(Date.now() - 86400000),      // Start date = 24 hours ago
-            new Date(Date.now() + 31536000000)    // End date = 1 year from now
+            // Start date = 24 hours ago
+            new Date(Date.now() - 86400000),
+            // End date = 1 year from now
+            new Date(Date.now() + 31536000000)
         )
 
         const formattedEvents = await eventsToCalendarFormat({events, calendarID})

@@ -135,13 +135,9 @@ export default function LoginScreen({ navigation }: ScreenProps): JSX.Element {
                             }}>
                                 {lang ? "Innsida" : "Intranet"}
                             </Text>
+                            
                             {Space(20)}
-
-                            <UsernameUI 
-                                data={data}
-                                inputName={inputName}
-                            />
-
+                            <UsernameUI data={data} inputName={inputName} />
                             {Space(10)}
 
                             <PasswordUI 
@@ -165,7 +161,7 @@ export default function LoginScreen({ navigation }: ScreenProps): JSX.Element {
                                 </TouchableOpacity>
                             </View>
                             {Space(40)}
-                            <View style={SS.makeNotificationImage}>
+                            <View>
                                 <Image 
                                     style={GS.smallImage} 
                                     source={require("@assets/logo/loginText.png")}
@@ -182,14 +178,10 @@ export default function LoginScreen({ navigation }: ScreenProps): JSX.Element {
 
 function UsernameUI({data, inputName}: UsernameUIProps):
 JSX.Element {
-
     return (
         <View style={SS.loginView}>
             <Cluster>
-                <UsernameInput
-                    inputName={inputName}
-                    data={data}
-                />
+                <UsernameInput inputName={inputName} data={data} />
             </Cluster>
         </View>
     )
@@ -209,8 +201,8 @@ JSX.Element {
                     color: FetchColor({theme, variable: "TEXTCOLOR"})
                 }}
                 placeholder={lang 
-                    ? "         brukernavn"
-                    : "         username"
+                    ? "     brukernavn"
+                    : "     username"
                 }
                 placeholderTextColor={"#555"}
                 textAlign="center"
@@ -219,13 +211,13 @@ JSX.Element {
                 />
             {data.check_textInputChange ?
                 <View>
-                    <View style = {SS.greenLight}><GreenLight/></View>
-                    <View style = {SS.checkContent}><Check/></View>
+                    <View style={SS.greenLight}><GreenLight/></View>
+                    <View style={SS.checkContent}><Check/></View>
                 </View>
             :
                 <View>
-                <View style = {SS.greenLight}><RedLight/></View>
-                <View style = {SS.checkContent}><Check/></View>
+                <View style={SS.greenLight}><RedLight/></View>
+                <View style={SS.checkContent}><Check/></View>
                 </View>
             }
         </View>
@@ -247,7 +239,7 @@ JSX.Element {
                         backgroundColor: FetchColor({theme, variable: "DARKER"}),
                         color: FetchColor({theme, variable: "TEXTCOLOR"})
                     }}
-                    placeholder={lang ? "         passord" : "         password"}
+                    placeholder={lang ? "passord" : "password"}
                     placeholderTextColor={"#555"}
                     secureTextEntry = {data.secureTextEntry ? true : false}
                     textAlign="center"

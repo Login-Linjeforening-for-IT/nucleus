@@ -4,7 +4,7 @@ import FetchColor from "@styles/fetchTheme"
 import { useSelector } from "react-redux"
 import AS from "@styles/adStyles"
 import T from "@styles/text"
-import React from "react"
+import React, { useEffect, useState } from "react"
 import {
     TouchableOpacity,
     Dimensions,
@@ -33,15 +33,25 @@ type SocialProps = {
 export default function AdInfo({props}: {props: AdProps}) {
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
+    const [deadline, setDeadline] = useState("")
     const loc = props.city
     const type = props.job_type
-    const deadline = LastFetch(props.application_deadline)
+   
+    useEffect(() => {
+        (async() => {
+            const fetch = await LastFetch(props.application_deadline)
+
+            if (fetch) {
+                setDeadline(fetch)
+            }
+        })()
+    }, [])
 
     return (
-        <View>
+        <View style={{marginBottom: 10}}>
             <View style={AS.adInfoInsideView}>
                 <Text style={{
-                    ...AS.adInfoType, width: lang ? "35%" : "20%", 
+                    ...AS.adInfoType, width: lang ? "40%" : "25%", 
                     color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})
                 }}>
                     {lang ? "Sted: " : "Location: "}
@@ -56,7 +66,7 @@ export default function AdInfo({props}: {props: AdProps}) {
             <View style={AS.adInfoInsideView}>
                 <Text style={{
                     ...AS.adInfoType, 
-                    width: lang ? "35%" : "20%",
+                    width: lang ? "40%" : "25%",
                     color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})
                 }}>
                     {lang ? "Ansettelsesform: " : "Position: "}
@@ -71,7 +81,7 @@ export default function AdInfo({props}: {props: AdProps}) {
             <View style={AS.adInfoInsideView}>
                 <Text style={{
                     ...AS.adInfoType, 
-                    width: lang ? "35%" : "20%", 
+                    width: lang ? "40%" : "25%", 
                     color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})
                 }}>
                     {lang ? "Frist: " : "Deadline: "}
@@ -80,7 +90,7 @@ export default function AdInfo({props}: {props: AdProps}) {
                     ...AS.adInfo, 
                     color: FetchColor({theme, variable: "TEXTCOLOR"})
                 }}>
-                    {!deadline}
+                    {deadline}
                 </Text>
             </View>
         </View>
@@ -95,7 +105,7 @@ export default function AdInfo({props}: {props: AdProps}) {
 export function AdBanner({url}: {url: string}) {
 
     return (
-        <View>
+        <View style={{marginBottom: 10}}>
             <Image
                 style={AS.adBanner}
                 source={{uri: url
@@ -197,7 +207,7 @@ export function AdDescription({ad}: {ad: AdProps}) {
         : ad.description_long_en
 
     return (
-        <View>
+        <View style={{marginBottom: 10}}>
             <Text style={{
                 ...AS.adInfoBold, 
                 color: FetchColor({theme, variable: "TEXTCOLOR"})
@@ -281,7 +291,7 @@ export function AdMedia({ad}: {ad: AdProps}) {
     ]
 
     return (
-        <View>
+        <View style={{marginBottom: 10}}>
             <View style={AS.socialView}>
                 {social.map((platform: SocialProps) => {
                     if (platform.url.length) return (
@@ -370,7 +380,7 @@ export function AdUpdateInfo({ad}: {ad: AdProps}) {
     const text = lang ? textNO : textEN
 
     return (
-        <View>
+        <View style={{marginBottom: 10}}>
             <Text style={{
                 ...T.contact, 
                 color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})
