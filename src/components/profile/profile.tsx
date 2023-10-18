@@ -67,10 +67,7 @@ export default function Profile({profile} : ProfileElementprops) {
             <TouchableOpacity onPress={() => handlePress()}>
                 <View style={PS.profileBackground}>
                     <View style={PS.leftTwin}>
-                        <SmallProfileImage 
-                            show={show}
-                            profile={profile}
-                        />
+                        <SmallProfileImage show={show} profile={profile} />
                     </View>
                     <View style={PS.rightTwin}>
                         <MainProfileInfo 
@@ -114,6 +111,7 @@ function SmallProfileImage({show, profile}: SmallProfileImageProps) {
 function MainProfileInfo({show, profile, year}: MainProfileInfoProps) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
+
     if (!show) return (
         <>
             <Text style={{
