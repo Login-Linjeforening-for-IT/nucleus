@@ -45,13 +45,16 @@ type ReduxState = {
     profile: ProfileProps
     event: {
         events: EventProps[]
-        event: EventProps
+        event: DetailedEventProps
         clickedEvents: EventProps[]
         renderedEvents: EventProps[]
         lastFetch: string
         lastSave: string
         search: boolean
         categories: CategoryWithID[]
+        clickedCategories: CategoryWithID[]
+        input: string
+        downloadState: Date
     }
 }
 

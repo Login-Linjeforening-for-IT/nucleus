@@ -89,8 +89,8 @@ export function CheckedBox() {
     return (
         <View style={ES.checkedBox}>
             <Svg 
-                width="24" 
-                height="24" 
+                width={24}
+                height={24}
                 fill={FetchColor({theme, variable: "ORANGE"})} 
                 stroke={FetchColor({theme, variable: "ORANGE"})} 
                 strokeWidth={1}

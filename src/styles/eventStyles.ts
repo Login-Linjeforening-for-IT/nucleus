@@ -1,14 +1,6 @@
 import { StyleSheet, Dimensions, Platform } from "react-native"
 
 export const ES = StyleSheet.create({
-    // ========================= EventScreen =========================
-    // Left side card view
-    view: {
-        top: "-2%",
-        justifyContent: "center",
-        height: "120%",
-        borderRadius: 10,
-    },
     // Middle card view
     view2: {
         top: 5,
@@ -183,6 +175,7 @@ export const ES = StyleSheet.create({
     },
     // When all u need is a row
     row: {
+        top: 4,
         flexDirection: "row",
     },
     sesContent: {

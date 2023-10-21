@@ -31,6 +31,8 @@ import {
     PanGestureHandlerGestureEvent 
 } from "react-native-gesture-handler"
 import handleSwipe from "@/utils/handleSwipe"
+import { useDispatch } from "react-redux"
+import { setClickedEvents } from "@redux/event"
 
 type handleLinkProps = {
     mazeref: string
@@ -40,7 +42,6 @@ type handleLinkProps = {
 
 type JoinButtonProps = {
     link: string
-    updateStorage: () => Promise<void>
 }
 
 type MapProps = {
@@ -49,7 +50,7 @@ type MapProps = {
 }
 
 type CategoryProps = {
-    item: EventProps
+    event: EventProps
 }
 
 /**
@@ -57,44 +58,26 @@ type CategoryProps = {
  * @param param0
  * @returns
  */
-export default function SpecificEventScreen({ route, navigation }: 
+export default function SpecificEventScreen({ navigation }: 
 BottomTabScreenProps<EventStackParamList>): JSX.Element {
-
-    if(!route.params) return <></>
 
     const { lang  } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
-
-    const item = route.params.item
-    let link
-
-    const [event, setEvent]=useState<DetailedEventProps | EventProps>(item)
+    const stored = useSelector((state: ReduxState) => state.event)
+    const [event, setEvent]=useState<DetailedEventProps | EventProps>(stored.event)
 
     function getData() {
-        fetch("https://api.login.no/events/" + item.eventID)
-        // fetch("https://tekkom:rottejakt45@api.login.no:8443") //TESTING
+        fetch(`https://api.login.no/events/${event.eventID}`)
         .then(response => response.json())
         .then(data => setEvent(data))
     }
     
+    useEffect(() => { getData() }, [event])
 
+    let link
+    
     if ("description" in event) {
         link = FetchJoinLink(event.description)
-    }
-    
-    useEffect(() => { getData() }, [item])
-    
-    async function updateStorage() {
-        let stored = await AsyncStorage.getItem("clickedEvents")
-        let storedClickedEvents = stored ? JSON.parse(stored) : []
-        if (storedClickedEvents) {
-            storedClickedEvents.push(item)
-            await AsyncStorage.setItem("clickedEvents", 
-            JSON.stringify(storedClickedEvents))
-        } else {
-            await AsyncStorage.setItem("clickedEvents", 
-            JSON.stringify([item]))
-        }
     }
 
     function handleLink({mazeref, street, organizer}: handleLinkProps) {
@@ -143,17 +126,17 @@ BottomTabScreenProps<EventStackParamList>): JSX.Element {
                 <View style={{...ES.sesContent, backgroundColor: FetchColor({theme, variable: "BACKGROUND"})}}>
                     <ScrollView showsVerticalScrollIndicator={false}>
                     <Space height={Dimensions.get("window").height / 8 - 5} />
-                    {(item.image).includes(".svg") ?
+                    {(event.image).includes(".svg") ?
                         <SvgUri
                             style={{alignSelf: "center"}}
                             width={(Dimensions.get("window").width)/1.2}
                             height={Dimensions.get("window").width/3}
-                            uri={`https://cdn.login.no/img/events/${item.image}`}
+                            uri={`https://cdn.login.no/img/events/${event.image}`}
                         />
-                    : (item.image).includes(".png") ? <Image 
+                    : (event.image).includes(".png") ? <Image 
                         style={ES.specificEventImage}
-                        source={{uri: `https://cdn.login.no/img/events/${item.image}`}}
-                    />:<StaticImage item={item} />}
+                        source={{uri: `https://cdn.login.no/img/events/${event.image}`}}
+                    /> : <StaticImage event={event} />}
                     <Space height={10} />
 
                     <CardSmaller>
@@ -161,13 +144,13 @@ BottomTabScreenProps<EventStackParamList>): JSX.Element {
                             <Card>
                                 <View style={{left: -10}}>
 
-                                <CategorySquare category={item.category} />
+                                <CategorySquare category={event.category} />
                                 <Text style={{
                                     ...ES.eventCardDayText, 
                                     color: FetchColor({theme, variable: "TEXTCOLOR"})
                                 }}>
-                                    {item.startt[8]}
-                                    {item.startt[9]}
+                                    {event.startt[8]}
+                                    {event.startt[9]}
                                 </Text>
 
                                 <Text style={{
@@ -175,14 +158,14 @@ BottomTabScreenProps<EventStackParamList>): JSX.Element {
                                     color: FetchColor({theme, variable: "TEXTCOLOR"})
                                 }}>
                                 <Month
-                                    month={parseInt(item.startt[5] + item.startt[6])}
+                                    month={parseInt(event.startt[5] + event.startt[6])}
                                     color={FetchColor({theme, variable: "TEXTCOLOR"})}
                                 />
                                 </Text>
                                 </View>
                             </Card>
                             <Text>
-                                {EventTime({startTime: item.startt, 
+                                {EventTime({startTime: event.startt, 
                                     endTime: "endt" in event ? event.endt : ""})}
                             </Text>
                         </View>
@@ -201,8 +184,8 @@ BottomTabScreenProps<EventStackParamList>): JSX.Element {
                                 ...T.specificEventInfo, 
                                 color: FetchColor({theme, variable: "TEXTCOLOR"})
                             }}>
-                            {item.startt[11]}{item.startt[12]}:{item.startt[14]}
-                            {item.startt[15]}
+                            {event.startt[11]}{event.startt[12]}:{event.startt[14]}
+                            {event.startt[15]}
                             </Text>
                         </View>
 
@@ -230,7 +213,7 @@ BottomTabScreenProps<EventStackParamList>): JSX.Element {
                             <Map event={event} handleLink={handleLink} />
                         </View>
 
-                        <Category item={item} />
+                        <Category event={event} />
 
                         <View style={ES.specificEventInfoView}>
                             <Text style={{
@@ -243,14 +226,14 @@ BottomTabScreenProps<EventStackParamList>): JSX.Element {
                                 ...T.specificEventInfo, 
                                 color: FetchColor({theme, variable: "TEXTCOLOR"})
                             }}>
-                                {item.organizer}{("organizerlink" in event && 
+                                {event.organizer}{("organizerlink" in event && 
                                 event.organizerlink) || event.discordlink 
                                 || event.fblink ? " - " : null}
                             </Text>
                             {event.discordlink && <TouchableOpacity 
                                 style={{minWidth: 70}} 
                                 onPress={() => 
-                                    {Linking.openURL(`${item.discordlink}`)}}>
+                                    {Linking.openURL(`${event.discordlink}`)}}>
                                     <View style={ES.row}>
                                         <Text style={{
                                             ...T.mazemap, 
@@ -302,7 +285,7 @@ BottomTabScreenProps<EventStackParamList>): JSX.Element {
                                     ...T.centered20, 
                                     color: FetchColor({theme, variable: "TEXTCOLOR"})
                                 }}>
-                                    {item.eventname}
+                                    {event.eventname}
                                 </Text>
                             </View>
                             <Space height={5} />
@@ -319,7 +302,6 @@ BottomTabScreenProps<EventStackParamList>): JSX.Element {
                             <Space height={10} />
                             <JoinButton
                                 link={link ? link : ""}
-                                updateStorage={updateStorage}
                             />
                         </Card>
                         <Space height={Dimensions.get("window").height / 3 + 10} />
@@ -330,10 +312,18 @@ BottomTabScreenProps<EventStackParamList>): JSX.Element {
     )
 }
 
-function JoinButton({link, updateStorage}: JoinButtonProps) {
+function JoinButton({link}: JoinButtonProps) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
+    const { event, clickedEvents } = useSelector((state: ReduxState) => state.event)
+    const dispatch = useDispatch()
     
+    function updateStorage() {
+        if (!clickedEvents.some(clicked => clicked.eventID === event.eventID)) {
+            dispatch(setClickedEvents([...clickedEvents, event]))
+        }
+    }
+
     if (link.length) {
         return (
             <TouchableOpacity onPress={() => {
@@ -356,7 +346,7 @@ function JoinButton({link, updateStorage}: JoinButtonProps) {
     }
 }
 
-function Category({item}: CategoryProps) {
+function Category({event}: CategoryProps) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
 
@@ -368,12 +358,12 @@ function Category({item}: CategoryProps) {
             }}>
                 {lang ? "Kategori:      " : "Category:      "}
             </Text>
-            {CategoryCircle(item.category)}
+            {CategoryCircle(event.category)}
             <Text style={{
                 ...T.specificEventInfo, 
                 color: FetchColor({theme, variable: "TEXTCOLOR"})
             }}>
-                {item.category}
+                {event.category}
             </Text>
         </View>
     )

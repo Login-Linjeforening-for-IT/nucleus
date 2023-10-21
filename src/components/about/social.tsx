@@ -390,7 +390,7 @@ function personInfo({person, lang}: personInfoProps) {
     }
 }
 
-export function StaticImage({item}: {item: EventProps}): JSX.Element {
+export function StaticImage({event}: {event: EventProps}): JSX.Element {
     const images: Record<string, ImageSourcePropType> = {
         tekkom:  require(`../../../public/assets/committee/tekkom/tekkom.png`),
         ctf:     require(`../../../public/assets/committee/ctfkom/ctf.png`),
@@ -400,7 +400,7 @@ export function StaticImage({item}: {item: EventProps}): JSX.Element {
         annet:   require(`../../../public/assets/categories/annet.png`),
     }
 
-    const image = images[item.category.toUpperCase()] || images.annet;
+    const image = images[event.category.toUpperCase()] || images.annet;
 
     return <Image style={ES.specificEventImage} source={image} />
 }
