@@ -18,7 +18,7 @@ import Filter, {
     filterBoth,
     FilterUI,
 } from "@/components/shared/filter"
-import LastFetch, { fetchState, fetchStored, getData } from "@/utils/fetch"
+import LastFetch, { fetchClicked, fetchStored, getData } from "@/utils/fetch"
 import { View, StatusBar as StatusBarReact } from "react-native"
 import { ScreenProps } from "@interfaces"
 import { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs"
@@ -33,6 +33,7 @@ import {
     PanGestureHandlerGestureEvent 
 } from "react-native-gesture-handler"
 import handleSwipe from "@/utils/handleSwipe"
+import { setClickedEvents } from "@redux/event"
 
 const EventStack = createStackNavigator<EventStackParamList>()
 
@@ -49,8 +50,6 @@ const EventStack = createStackNavigator<EventStackParamList>()
  * @returns EventScreen
  */
 export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
-    // Clicked events
-    const [clickedEvents, setClickedEvents] = useState<EventProps[]>([])
     // Clicked categories
     const [clickedCategory, setClickedCategory] = useState<CategoryWithID[]>([])
     // Download state
@@ -80,6 +79,7 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
     // Redux states
     const notification = useSelector((state: ReduxState) => state.notification)
     const { login } = useSelector((state: ReduxState) => state.login)
+    const { clickedEvents } = useSelector((state: ReduxState) => state.event)
     const { theme, isDark } = useSelector((state: ReduxState) => state.theme)
     const { calendarID } = useSelector((state: ReduxState) => state.misc)
     const { search } = useSelector((state: ReduxState) => state.event)
@@ -159,7 +159,13 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
         // Callback to avoid too many rerenders
         React.useCallback(() => {
             // Function to fetch clicked events
-            fetchState(setClickedEvents)
+            (async() => {
+                const clicked = await fetchClicked()
+
+                if (clicked) {
+                    dispatch(setClickedEvents(clicked))
+                }
+            })()
         }, [])
     )
 
@@ -225,10 +231,16 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
     // --- LOADING INITIAL DATA ---
     useEffect(() => {
         // Fetches API
-        getData({setEvents, setRenderedArray, setLastSave, events})
+        getData({setEvents, setRenderedArray, setLastSave, events});
 
         // Fetches clickedEvents
-        fetchState(setClickedEvents)
+        (async() => {
+            const clicked = await fetchClicked()
+
+            if (clicked) {
+                dispatch(setClickedEvents(clicked))
+            }
+        })()
 
         // Fetches categories available to filter
         fetchRelevantCategories({setRelevantCategories, clickedEvents, events, 
@@ -320,11 +332,9 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
                             <EventList
                                 navigation={navigation}
                                 renderedArray={renderedArray}
-                                clickedEvents={clickedEvents}
                                 search={search}
                                 relevantCategories={relevantCategories}
                                 notification={notification}
-                                setClickedEvents={setClickedEvents}
                                 lastSave={lastSave}
                                 events={events}
                                 ErrorMessage={ErrorMessage}

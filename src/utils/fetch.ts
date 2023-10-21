@@ -106,14 +106,15 @@ EventProps[]): EventProps[] {
 /**
  * Fetches the cache if it exists, then parses from string to object and updates
  * the passed array
- * @param setClickedEvents
  */
-export async function fetchState(setClickedEvents: 
-React.Dispatch<React.SetStateAction<EventProps[]>>): Promise<void> {
+export async function fetchClicked(): Promise<EventProps[]> {
     let foundState = await AsyncStorage.getItem("clickedEvents")
+
     if (foundState != null) {
         let parsed = JSON.parse(foundState)
-        setClickedEvents(parsed)
+        return parsed
+    } else {
+        return []
     }
 }
 

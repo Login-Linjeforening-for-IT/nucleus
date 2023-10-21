@@ -1,5 +1,5 @@
 import notificationSetup from "@/utils/notificationSetup"
-import LastFetch, { fetchState, timeSince } from "@/utils/fetch"
+import LastFetch, { fetchClicked, timeSince } from "@/utils/fetch"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { ListFooter } from "@components/event/eventList"
 import Space, { ErrorMessage } from "@/components/shared/utils"
@@ -25,6 +25,8 @@ import {
     PanGestureHandler,
      PanGestureHandlerGestureEvent 
 } from "react-native-gesture-handler"
+import { setClickedEvents } from "@redux/event"
+import { useDispatch } from "react-redux"
 
 /**
  * Parent EventScreen function
@@ -56,6 +58,7 @@ export default function AdScreen({ navigation }: ScreenProps): JSX.Element {
     const { login } = useSelector((state: ReduxState) => state.login)
     const { theme, isDark } = useSelector((state: ReduxState) => state.theme)
     const { calendarID } = useSelector((state: ReduxState) => state.misc)
+    const dispatch = useDispatch()
 
     // --- SET THE COMPONENTS OF THE HEADER ---
     useEffect(()=>{
@@ -74,7 +77,13 @@ export default function AdScreen({ navigation }: ScreenProps): JSX.Element {
         // Callback to avoid too many rerenders
         React.useCallback(() => {
             // Function to fetch clicked ads
-            fetchState(setClickedAds)
+            (async() => {
+                const clicked = await fetchClicked()
+
+                if (clicked) {
+                    dispatch(setClickedEvents(clicked))
+                }
+            })()
         }, [])
     )
 
@@ -92,7 +101,7 @@ export default function AdScreen({ navigation }: ScreenProps): JSX.Element {
             await AsyncStorage.setItem("cachedAds", JSON.stringify(addata))
         })
         // Fetches clickedAds
-        // fetchState(setClickedAds)
+        // fetchClicked(setClickedAds)
         // ads.length 
         //     ? setRenderedArray([...ads]) 
         //     : fetchStored(setRenderedArray, setAds, "ads")

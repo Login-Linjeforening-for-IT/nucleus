@@ -19,15 +19,15 @@ import {
     Platform,
 } from "react-native"
 import { useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
+import { setClickedEvents } from "@redux/event"
 
 type EventListProps = {
     navigation: Navigation
     renderedArray: EventProps[]
-    clickedEvents: EventProps[]
     search: boolean
     relevantCategories: CategoryWithID[]
     notification: NotificationProps
-    setClickedEvents: React.Dispatch<React.SetStateAction<EventProps[]>>
     lastSave: string
     events: EventProps[]
     ErrorMessage: React.FC<ErrorMessageProps>
@@ -36,11 +36,9 @@ type EventListProps = {
 type EventCardProps = {
     navigation: Navigation
     renderedArray: EventProps[]
-    clickedEvents: EventProps[]
     search: boolean
     relevantCategories: CategoryWithID[]
     notification: NotificationProps
-    setClickedEvents: React.Dispatch<React.SetStateAction<EventProps[]>>
     lastSave: string
     item: EventProps
     index: number
@@ -62,9 +60,6 @@ type FullCategorySquareProps = {
 type BellProps = {
     item: EventProps
     notification: NotificationProps
-    clickedEvents: EventProps[]
-    isOrange: boolean
-    setClickedEvents: React.Dispatch<React.SetStateAction<EventProps[]>>
 }
 
 /**
@@ -73,18 +68,18 @@ type BellProps = {
 export default function EventList ({
     navigation,
     renderedArray,
-    clickedEvents,
     search,
     relevantCategories,
     notification,
-    setClickedEvents,
     lastSave,
     events,
     ErrorMessage
 }: EventListProps): JSX.Element {
-    if (!renderedArray.length && !search) return <ErrorMessage 
-        argument="wifi" 
-    />
+
+    if (!renderedArray.length && !search) {
+        return <ErrorMessage argument="wifi" />
+    }
+
     else if (renderedArray.length > 0) {
         return (
             <View>
@@ -98,11 +93,9 @@ export default function EventList ({
                         <EventCard
                             navigation={navigation}
                             renderedArray={renderedArray}
-                            clickedEvents={clickedEvents}
                             search={search}
                             relevantCategories={relevantCategories}
                             notification={notification}
-                            setClickedEvents={setClickedEvents}
                             lastSave={lastSave}
                             item={item}
                             index={index}
@@ -122,19 +115,13 @@ export default function EventList ({
 function EventCard ({
     navigation,
     renderedArray,
-    clickedEvents,
     search,
     relevantCategories,
     notification,
-    setClickedEvents,
     lastSave,
     item,
     index
-}: EventCardProps): JSX.Element {
-    const isOrange = clickedEvents.some(event => event.eventID === item.eventID) 
-        ? true 
-        : false
-
+}: EventCardProps): JSX.Element {    
     return (
         <View>
             <TouchableOpacity onPress={() => {
@@ -151,13 +138,7 @@ function EventCard ({
                     <View style={ES.eventBack}>
                         <FullCategorySquare item={item} />
                         <EventCardLocation item={item} />
-                        <Bell
-                            item={item}
-                            notification={notification}
-                            clickedEvents={clickedEvents}
-                            isOrange={isOrange}
-                            setClickedEvents={setClickedEvents}
-                        />
+                        <Bell item={item} notification={notification} />
                     </View>
                 </Cluster>
                 <ListFooter
@@ -222,9 +203,13 @@ export function FullCategorySquare({item, height}: FullCategorySquareProps) {
 /**
  * Displays the bell to the right of every event in the eventlist
  */
-function Bell({item, notification, clickedEvents, isOrange, 
-setClickedEvents}: BellProps): JSX.Element {
+function Bell({item, notification}: BellProps): JSX.Element {
+    const { clickedEvents } = useSelector((state: ReduxState) => state.event)
     const { lang } = useSelector((state: ReduxState) => state.lang)
+    const dispatch = useDispatch()
+    const isOrange = clickedEvents.some(event => event.eventID === item.eventID) 
+        ? true 
+        : false
     
     return (
         <View style={ES.view3}>
@@ -232,11 +217,11 @@ setClickedEvents}: BellProps): JSX.Element {
                 topic({topicID: `${item.eventID}`, lang, status: false, 
                     category: (item.category).toLowerCase(), catArray: 
                     notificationArray({notification, category: item.category})})
-                setClickedEvents(
+                dispatch(setClickedEvents(
                     clickedEvents.some(event => event.eventID === item.eventID)
                     ? clickedEvents.filter((x) => x.eventID !== item.eventID)
                     : [...clickedEvents, item]
-                )
+                ))
             }}>
                 <View style = {ES.bellPosition}>
                     <BellIcon orange={isOrange} />
