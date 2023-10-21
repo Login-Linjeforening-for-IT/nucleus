@@ -53,7 +53,7 @@ toggleFeedback}: FeedbackProps) {
                         </Text>
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={async() => {
+                <TouchableOpacity onPress={() => {
                     Linking.openURL("mailto:kontakt@login.no")
                         .catch(() => lang
                         ? Alert.alert("Kunne ikke åpne mail!", 
