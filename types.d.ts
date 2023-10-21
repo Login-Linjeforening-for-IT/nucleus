@@ -52,6 +52,8 @@ type ReduxState = {
         lastSave: string
         search: boolean
         categories: CategoryWithID[]
+        clickedCategories: CategoryWithID[]
+        input: string
     }
 }
 

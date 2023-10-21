@@ -1,11 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"
 
-type fetchStoredProps = {
-    setRenderedEvents: React.Dispatch<React.SetStateAction<EventProps[]>>
-    setState: React.Dispatch<React.SetStateAction<EventProps[]>>
-    value?: string
-}
-
 /**
  * Function for checking when the API was last fetched successfully.
  *
@@ -70,32 +64,6 @@ export function FetchJoinLink(string: string): string | null {
 }
 
 /**
-* Function for removing old events and duplicates
-*
-* - Category
-* - Text
-* - Category
-*
-* @param {array} APIevents Events from API
-* @param {array} Events Events to filter
-* @returns Filtered events
-*/
-export function removeDuplicatesAndOld(APIevents: EventProps[], events: 
-EventProps[]): EventProps[] {
-
-    // Removes old events and preserves newer version of all events
-    let realEvents = APIevents.filter(APIevent => events.some(
-        event => APIevent.eventID === event.eventID))
-
-    // Removes duplicates
-    let filteredEvents = realEvents.filter((event, index) => {
-        return realEvents.findIndex(obj => obj.eventID === event.eventID) === index
-    })
-
-    return filteredEvents
-}
-
-/**
  * Fetches the cache if it exists, then parses from string to object and updates
  * the passed array
  */
@@ -111,36 +79,11 @@ export async function fetchClicked(): Promise<EventProps[]> {
 }
 
 /**
- * Fetches localstorage for desired value, updates state and rendered array
- * Used for fetching events and ads when thre is no internet connection.
- *
- * @param setRenderedEvents The rendered array to be updated
- * @param setState          The state to be updated
- * @param value             The value to find in localstorage
- */
-export async function fetchStored({setRenderedEvents, setState, value}: 
-fetchStoredProps): Promise<void> {
-    const stored = value === "ads" ? "cachedsAd" : "cachedEvents"
-    //  Fetches cache
-    let tempArray = await AsyncStorage.getItem(stored)
-    // If cache exists
-    if (tempArray != null) {
-        // Parses from string to objects
-        let parsed = JSON.parse(tempArray)
-        // Updates the renderedEvents to equal cache
-        setRenderedEvents([...parsed])
-        // Updates the events array to equal cache
-        setState([...parsed])
-    }
-}
-
-/**
  * Fetches data from API, formats the response, sets the cache, updates the 
  * events on the screen, catches any errors and fetches localstorage, and 
  * handles errors.
  */
 export async function getData(): Promise<EventProps[]> {
-
     try {
         // PRODUCTION
         const response = await fetch("https://api.login.no/events")

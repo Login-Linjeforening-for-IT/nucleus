@@ -1,6 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { ErrorMessage } from "@/components/shared/utils"
-import storeEvents from "@/utils/storeEvents"
 import React, { useEffect, useState, useRef } from "react"
 import { useFocusEffect } from "@react-navigation/native"
 import EventList from "@components/event/eventList"
@@ -12,17 +11,13 @@ import NavigateFromPushNotification
 from "@/utils/navigateFromPushNotification"
 import initializeNotifications 
 from "@/utils/notificationSetup"
-import Filter, {
-    filterCategories,
-    filterBoth,
-    FilterUI,
-} from "@/components/shared/filter"
-import LastFetch, { fetchClicked, fetchStored, getData } from "@/utils/fetch"
+import { FilterUI} from "@/components/shared/filter"
+import LastFetch, { fetchClicked, getData } from "@/utils/fetch"
 import { View, StatusBar as StatusBarReact } from "react-native"
 import { ScreenProps } from "@interfaces"
 import { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs"
 import LogoNavigation from "@/components/shared/logoNavigation"
-import FilterButton from "@/components/shared/filterButton"
+import { FilterButton } from "@/components/shared/filter"
 import DownloadButton from "@/components/shared/downloadButton"
 import { createStackNavigator } from "@react-navigation/stack"
 import SpecificEventScreen from "./specificEvent"
@@ -53,8 +48,6 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
     const [clickedCategory, setClickedCategory] = useState<CategoryWithID[]>([])
     // Download state
     const [downloadState, setDownloadState] = useState(new Date())
-    // Filter text input declaration
-    const [input, setInput] = useState("")
     // Push notification
     const [pushNotification, setPushNotification] = useState(false)
     const [pushNotificationContent, setPushNotificationContent] = 
@@ -66,7 +59,7 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
     
     // Redux states
     const notification = useSelector((state: ReduxState) => state.notification)
-    const { events, clickedEvents, search, lastSave, renderedEvents } = useSelector((state: ReduxState) => state.event)
+    const { events, clickedEvents, search, lastSave, renderedEvents, input } = useSelector((state: ReduxState) => state.event)
     const { theme, isDark } = useSelector((state: ReduxState) => state.theme)
     const dispatch = useDispatch()
 
@@ -82,14 +75,9 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
                     textInputRef={textInputRef}
                     setClickedCategory={setClickedCategory}
                     clickedCategory={clickedCategory}
-                    setInput={setInput}
                 />],
                 left: [<LogoNavigation navigation={navigation} />],
-                right: [<FilterButton
-                    clickedCategory={clickedCategory}
-                    input={input}
-                    dispatch={dispatch}
-                />, 
+                right: [<FilterButton/>, 
                 <DownloadButton
                     clickedEvents={clickedEvents}
                     setDownloadState={setDownloadState}
@@ -105,7 +93,6 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
         textInputRef, 
         setClickedCategory, 
         clickedCategory, 
-        setInput, 
     ])
 
     //  --- FETCHES CLICKED EVENTS WHEN SCREEN BECOMES VISIBLE ---
@@ -128,65 +115,6 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
             })()
         }, [])
     )
-
-    storeEvents({events, clickedEvents})
-
-    //  --- LOADING FILTERED DATA WHEN FILTER CHANGES ---
-    useEffect(() => {
-        // If the filter is not null or there are categories clicked
-        if (input.length || clickedCategory.length > 0) {
-            // If the filter is not null but no categories are clicked
-            if (input.length && clickedCategory.length === 0)  {
-                // If the length of the filter search text is equal 0
-                if (input.length === 0) {
-                    // Resets filter input
-                    setInput("")
-                    // Resets clicked categories
-                    setClickedCategory([])
-                    // Resets renderedEvents to all events
-                    dispatch(setRenderedEvents([...events]))
-                }
-                // Run filter function if the filter search text is not empty
-                Filter({
-                    input,
-                    setRenderedEvents: dispatch(setRenderedEvents), 
-                    events, 
-                    clickedEvents, 
-                    clickedCategory
-                })
-            } else {
-                // If the filter is not null and there are categories clicked
-                if (input.length && clickedCategory.length > 0) {
-                    // If the filter text is not empty calls filterBoth function
-                    if (input.length > 0) {
-                        filterBoth({clickedCategory, clickedEvents, 
-                        events, setRenderedEvents: dispatch(setRenderedEvents), input})
-                    }
-                    // When categories are clicked but there is no input text
-                    else {filterCategories({events, clickedEvents, 
-                        clickedCategory, setRenderedEvents})}
-                } else {filterCategories({events, clickedEvents, 
-                    clickedCategory, setRenderedEvents: dispatch(setRenderedEvents)})}
-            }
-        // If the filter input is null only filter categories
-        } else {
-            // If the filter is not null but no categories are clicked
-            if (input.length && clickedCategory.length === 0 ) {
-                // If the filter length is 0
-                if (input.length === 0) {
-                    // Resets renderedEvents
-                    setRenderedEvents([...events])
-                    // Resets filter input
-                    setInput("")
-                    // Resets clicked categories
-                    setClickedCategory([])
-                }
-                // Resets if there is no text to filter
-            } else setRenderedEvents([...events])
-        }
-
-        // Listens to changes in these arrays
-    }, [input, clickedCategory])
 
     // --- LOADING INITIAL DATA ---
     useEffect(() => {
