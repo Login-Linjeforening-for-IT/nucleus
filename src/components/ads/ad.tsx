@@ -38,13 +38,11 @@ export default function AdInfo({props}: {props: AdProps}) {
     const type = props.job_type
    
     useEffect(() => {
-        (async() => {
-            const fetch = await LastFetch(props.application_deadline)
+        const fetch = LastFetch(props.application_deadline)
 
-            if (fetch) {
-                setDeadline(fetch)
-            }
-        })()
+        if (fetch) {
+            setDeadline(fetch)
+        }
     }, [])
 
     return (
@@ -308,7 +306,7 @@ export function AdMedia({ad}: {ad: AdProps}) {
             </View>
             <Space height={10} /> 
             <View style={AS.socialView}>
-                {ad.application_url ?
+                {ad.application_url &&
                     <TouchableOpacity onPress={() => 
                     Linking.openURL(ad.application_url)}>
                     <View style={{
@@ -322,7 +320,7 @@ export function AdMedia({ad}: {ad: AdProps}) {
                             {lang ? "Søk nå":"Apply"}
                         </Text>
                     </View>
-                </TouchableOpacity>:null
+                </TouchableOpacity>
                 }
             </View>
             <Space height={10} /> 
