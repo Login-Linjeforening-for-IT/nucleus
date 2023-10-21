@@ -57,12 +57,12 @@ export default function Reminders() {
                             />
                     </View>
                     </TouchableOpacity>
-                    {category === index ? 
+                    {category === index &&
                         <TopicSwitchList 
                             category={cat.source} 
                             showLast={index > 1 ? true:false} 
                         />
-                    :null}
+                    }
                 </View>
             ))}
         </View>
