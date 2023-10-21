@@ -108,7 +108,9 @@ async function calendarExists(calendarID: string) {
         try {
             const calendars = await getCalendarsAsync(EntityTypes.EVENT)
             return calendars.find(calendar => calendar.id === calendarID)
-        } catch (e) {console.log(e)}
+        } catch (e) {
+            console.log(e)
+        }
     }
 }
 
@@ -143,7 +145,9 @@ async function createCalendar(events: EventProps[]) {
             await updateCalendar({events, calendarID: newCalendarID})
 
             return newCalendarID
-        } catch (e) {console.log(e)}
+        } catch (e) {
+            console.log(e)
+        }
     }
 }
 
@@ -200,7 +204,9 @@ async function getDefaultCalendarSource() {
         try {
             const defaultCalendar = await getDefaultCalendarAsync()
             return defaultCalendar.source
-        } catch (e) {console.log(e)}
+        } catch (e) {
+            console.log(e)
+        }
     }
 }
 
@@ -217,5 +223,7 @@ async function getDefaultCalendarSource() {
 async function executeDownload({clickedEvents, calendarID, dispatch}: executeDownloadProps) {
     if (typeof await calendarExists(calendarID) != "undefined") {
         await updateCalendar({events: clickedEvents, calendarID})
-    } else dispatch(setCalendarID(await createCalendar(clickedEvents)))
+    } else {
+        dispatch(setCalendarID(await createCalendar(clickedEvents)))
+    }
 }
