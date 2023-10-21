@@ -101,7 +101,7 @@ function DropdownItem({title, course, selectedDegree, courses, degree}: Dropdown
             </TouchableOpacity>
 
             <View>
-                { course === degree ?
+                { course === degree &&
                     courses.map((selectedCourse, index) => {
                         return (
                             <TouchableOpacity key={index} onPress={() => Linking.openURL(selectedCourse.link)}>
@@ -124,7 +124,6 @@ function DropdownItem({title, course, selectedDegree, courses, degree}: Dropdown
                             </TouchableOpacity>
                         )
                     })
-                : null
                 }
             </View>
         </>

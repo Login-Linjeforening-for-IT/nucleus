@@ -335,7 +335,7 @@ CommitteeContentProps) {
                 {relevantCommittee.title}
             </Text>
 
-            {relevantCommittee.quote.length ?
+            {relevantCommittee.quote.length > 0 &&
                 <>
                     <Space height={10} /> 
                     <View style={GS.row}>
@@ -354,7 +354,6 @@ CommitteeContentProps) {
                     </View>
                     <Space height={10} /> 
                 </>
-                :null
             }
 
             <Text style={{

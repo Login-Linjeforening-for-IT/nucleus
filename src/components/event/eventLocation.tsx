@@ -54,7 +54,7 @@ EventLocationProps): JSX.Element {
                     maxWidth: "70%", color: FetchColor({theme, variable: 
                     "TEXTCOLOR"})
                 }}>
-                        {room ? room + ", ":null}{campus}{street}
+                        {room ? room + ", " : null}{campus}{street}
                 </Text>
             </View>
         )

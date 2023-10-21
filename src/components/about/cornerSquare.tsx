@@ -37,8 +37,8 @@ JSX.Element {
     return (
         <View style={type ? {
             ...GS.aboutImage,
-            top: corner === 1 || corner === 3 ? 100:null, 
-            maxWidth: corner === 1 || corner === 3 ? 100:null, 
+            top: corner === 1 || corner === 3 ? 100 : null, 
+            maxWidth: corner === 1 || corner === 3 ? 100 : null, 
             transform: [{ rotate: `${90*corner}deg` }]}
             : {
                 ...GS.personImage, 
@@ -47,7 +47,7 @@ JSX.Element {
             <View style={{maxHeight: 220}}>
                 {/** ORANGE */}
                 <Svg 
-                    style={{left: type ? p1:null, bottom: type ? p2 : null}} 
+                    style={{left: type ? p1 : null, bottom: type ? p2 : null}} 
                     width={type ? 150:115} 
                     height={type?150:115} 
                     fill={FetchColor({theme, variable: "ORANGE"})}

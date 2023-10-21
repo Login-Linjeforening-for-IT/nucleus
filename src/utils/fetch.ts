@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"
 
 type fetchStoredProps = {
-    setRenderedArray: React.Dispatch<React.SetStateAction<EventProps[]>>
+    setRenderedEvents: React.Dispatch<React.SetStateAction<EventProps[]>>
     setState: React.Dispatch<React.SetStateAction<EventProps[]>>
     value?: string
 }
@@ -114,11 +114,11 @@ export async function fetchClicked(): Promise<EventProps[]> {
  * Fetches localstorage for desired value, updates state and rendered array
  * Used for fetching events and ads when thre is no internet connection.
  *
- * @param {*} setRenderedArray  The rendered array to be updated
- * @param {*} setState          The state to be updated
- * @param {*} value             The value to find in localstorage
+ * @param setRenderedEvents The rendered array to be updated
+ * @param setState          The state to be updated
+ * @param value             The value to find in localstorage
  */
-export async function fetchStored({setRenderedArray, setState, value}: 
+export async function fetchStored({setRenderedEvents, setState, value}: 
 fetchStoredProps): Promise<void> {
     const stored = value === "ads" ? "cachedsAd" : "cachedEvents"
     //  Fetches cache
@@ -127,8 +127,8 @@ fetchStoredProps): Promise<void> {
     if (tempArray != null) {
         // Parses from string to objects
         let parsed = JSON.parse(tempArray)
-        // Updates the renderedarray to equal cache
-        setRenderedArray([...parsed])
+        // Updates the renderedEvents to equal cache
+        setRenderedEvents([...parsed])
         // Updates the events array to equal cache
         setState([...parsed])
     }
