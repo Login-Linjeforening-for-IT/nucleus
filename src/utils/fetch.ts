@@ -12,7 +12,7 @@ type fetchStoredProps = {
  * @returns String
  */
 export default function LastFetch(param?: string) {
-    const utc: string = param ? param : new Date().toISOString()
+    const utc = param ? param : new Date().toISOString()
     const time = new Date(utc)
 
     // Checking and fixing missing 0

@@ -302,7 +302,7 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
 
     // --- SETUP CODE ONCE APP IS DOWNLOADED---
     // Displays when the API was last fetched successfully
-    if (lastSave === "") (async() => {dispatch(setLastSave(await LastFetch()))})()
+    if (lastSave === "") (async() => {dispatch(setLastSave(LastFetch()))})()
 
     initializeNotifications({
         shouldRun: shouldSetupNotifications,
