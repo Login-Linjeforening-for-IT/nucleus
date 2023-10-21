@@ -27,7 +27,7 @@ type TopMenuProps = {
 export default function TopMenu({ navigation, title, screen, back }
 : TopMenuProps) {
 
-    const { theme } = useSelector((state: ReduxState) => state.theme)
+    const { theme, isDark } = useSelector((state: ReduxState) => state.theme)
     const goBack = () => { 
         navigation.navigate(back ? back : "Events")
     }
@@ -61,7 +61,7 @@ export default function TopMenu({ navigation, title, screen, back }
                     >
                         <Image
                             style={MS.tMenuIcon}
-                            source={theme === 0 || theme === 2 || theme === 3
+                            source={isDark
                                 ? require("@assets/logo/loginText.png")
                                 : require("@assets/logo/loginText-black.png")}
                         />

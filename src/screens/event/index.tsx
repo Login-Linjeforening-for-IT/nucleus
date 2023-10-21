@@ -79,10 +79,9 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
     // Redux states
     const notification = useSelector((state: ReduxState) => state.notification)
     const { login } = useSelector((state: ReduxState) => state.login)
-    const { clickedEvents } = useSelector((state: ReduxState) => state.event)
+    const { clickedEvents, search } = useSelector((state: ReduxState) => state.event)
     const { theme, isDark } = useSelector((state: ReduxState) => state.theme)
     const { calendarID } = useSelector((state: ReduxState) => state.misc)
-    const { search } = useSelector((state: ReduxState) => state.event)
     const dispatch = useDispatch()
 
     // Navigates if the app is opened by a push notification
@@ -105,34 +104,28 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
     useEffect(()=>{
         navigation.setOptions({
             headerComponents: {
-                bottom: [FilterUI({
-                    textInputRef, 
-                    setRenderedArray,
-                    setClickedCategory, 
-                    relevantCategories, 
-                    clickedCategory, 
-                    search, 
-                    setInput, 
-                    items: events, 
-                    theme
-                })],
+                bottom: [<FilterUI
+                    textInputRef={textInputRef}
+                    setRenderedArray={setRenderedArray}
+                    setClickedCategory={setClickedCategory}
+                    relevantCategories={relevantCategories}
+                    clickedCategory={clickedCategory}
+                    setInput={setInput}
+                    items={events}
+                />],
                 left: [<LogoNavigation navigation={navigation} />],
-                right: [FilterButton({
-                    renderedArray, 
-                    clickedCategory, 
-                    input, 
-                    isDark, 
-                    dispatch, 
-                    search
-                }), 
-                DownloadButton(
-                    clickedEvents, 
-                    setDownloadState, 
-                    downloadState, 
-                    calendarID, 
-                    dispatch, 
-                    isDark
-                )]
+                right: [<FilterButton
+                    renderedArray={renderedArray}
+                    clickedCategory={clickedCategory}
+                    input={input}
+                    dispatch={dispatch}
+                />, 
+                <DownloadButton
+                    clickedEvents={clickedEvents}
+                    setDownloadState={setDownloadState}
+                    downloadState={downloadState}
+                    calendarID={calendarID}
+                />]
             }
         } as Partial<BottomTabNavigationOptions>)
             
@@ -332,7 +325,6 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
                             <EventList
                                 navigation={navigation}
                                 renderedArray={renderedArray}
-                                search={search}
                                 relevantCategories={relevantCategories}
                                 notification={notification}
                                 lastSave={lastSave}

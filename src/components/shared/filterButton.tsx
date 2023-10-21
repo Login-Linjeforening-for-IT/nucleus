@@ -3,17 +3,20 @@ import { Image, TouchableOpacity } from "react-native"
 import { toggleSearch } from "@redux/event"
 
 import { AnyAction, Dispatch } from "redux"
+import { useDispatch } from "react-redux"
+import { useSelector } from "react-redux"
 
 type FilterButtonProps = {
     renderedArray: EventProps[]
     clickedCategory: CategoryWithID[]
     input: string
-    isDark: boolean
     dispatch: Dispatch<AnyAction>
-    search: boolean
 }
 
-export default function FilterButton({renderedArray, clickedCategory, input, isDark, dispatch, search}: FilterButtonProps){
+export default function FilterButton({renderedArray, clickedCategory, input}: FilterButtonProps){
+    const { isDark } = useSelector((state: ReduxState) => state.theme)
+    const { search } = useSelector((state: ReduxState) => state.event)
+    const dispatch = useDispatch()
 
     if (!renderedArray.length && !clickedCategory.length && !input.length) {
         return <></>

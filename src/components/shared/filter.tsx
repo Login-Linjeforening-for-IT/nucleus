@@ -13,6 +13,7 @@ import {
     Text,
     Platform,
 } from "react-native"
+import { useSelector } from "react-redux"
 
 type FilterProps = {
     input: string
@@ -56,10 +57,8 @@ type FilterUIProps = {
     setClickedCategory: React.Dispatch<React.SetStateAction<CategoryWithID[]>>
     relevantCategories: CategoryWithID[]
     clickedCategory: CategoryWithID[]
-    search: boolean
     setInput: React.Dispatch<React.SetStateAction<string>>
     items: EventProps[]
-    theme: number
 }
 
 // --- PARENT FILTER FUNCTION ---
@@ -210,7 +209,9 @@ export function fetchRelevantCategories({setRelevantCategories, clickedEvents, e
  * @returns Filter UI
  */
 export function FilterUI({textInputRef, setRenderedArray, setClickedCategory,
-relevantCategories, clickedCategory, search, setInput, items, theme}: FilterUIProps): JSX.Element {
+relevantCategories, clickedCategory, setInput, items}: FilterUIProps): JSX.Element {
+    const { theme, isDark } = useSelector((state: ReduxState) => state.theme)
+    const { search } = useSelector((state: ReduxState) => state.event)
 
     return (
         <View style={search ? {top: Platform.OS === "ios" ? 40 : 30} : {display:'none'}}>
@@ -232,7 +233,7 @@ relevantCategories, clickedCategory, search, setInput, items, theme}: FilterUIPr
                     setClickedCategory([])
                     if (textInputRef.current) textInputRef.current.clear()
                 }}>
-                    <Image style={ES.clusterFilterResetIcon} source={theme === 0 || theme === 2 || theme === 3 ? require("@assets/icons/reset.png") : require("@assets/icons/reset-black.png")} />
+                    <Image style={ES.clusterFilterResetIcon} source={isDark ? require("@assets/icons/reset.png") : require("@assets/icons/reset-black.png")} />
                 </TouchableOpacity>
             </View>
 

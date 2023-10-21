@@ -25,7 +25,6 @@ import { setClickedEvents } from "@redux/event"
 type EventListProps = {
     navigation: Navigation
     renderedArray: EventProps[]
-    search: boolean
     relevantCategories: CategoryWithID[]
     notification: NotificationProps
     lastSave: string
@@ -36,7 +35,6 @@ type EventListProps = {
 type EventCardProps = {
     navigation: Navigation
     renderedArray: EventProps[]
-    search: boolean
     relevantCategories: CategoryWithID[]
     notification: NotificationProps
     lastSave: string
@@ -47,7 +45,6 @@ type EventCardProps = {
 type ListFooterProps = {
     index: number
     renderedArray: EventProps[]
-    search: boolean
     relevantCategories: CategoryWithID[]
     lastSave: string
 }
@@ -68,13 +65,13 @@ type BellProps = {
 export default function EventList ({
     navigation,
     renderedArray,
-    search,
     relevantCategories,
     notification,
     lastSave,
     events,
     ErrorMessage
 }: EventListProps): JSX.Element {
+    const { search } = useSelector((state: ReduxState) => state.event)
 
     if (!renderedArray.length && !search) {
         return <ErrorMessage argument="wifi" />
@@ -93,7 +90,6 @@ export default function EventList ({
                         <EventCard
                             navigation={navigation}
                             renderedArray={renderedArray}
-                            search={search}
                             relevantCategories={relevantCategories}
                             notification={notification}
                             lastSave={lastSave}
@@ -115,13 +111,14 @@ export default function EventList ({
 function EventCard ({
     navigation,
     renderedArray,
-    search,
     relevantCategories,
     notification,
     lastSave,
     item,
     index
-}: EventCardProps): JSX.Element {    
+}: EventCardProps): JSX.Element {
+    const { search } = useSelector((state: ReduxState) => state.event)
+
     return (
         <View>
             <TouchableOpacity onPress={() => {
@@ -144,7 +141,6 @@ function EventCard ({
                 <ListFooter
                     index={index}
                     renderedArray={renderedArray}
-                    search={search}
                     relevantCategories={relevantCategories}
                     lastSave={lastSave}
                 />
@@ -156,10 +152,11 @@ function EventCard ({
 /**
  * Displays the footer last fetch time item
  */
-export function ListFooter({index, renderedArray, search, relevantCategories, 
+export function ListFooter({index, renderedArray, relevantCategories, 
 lastSave}: ListFooterProps): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
+    const { search } = useSelector((state: ReduxState) => state.event)
 
     return (
         <>

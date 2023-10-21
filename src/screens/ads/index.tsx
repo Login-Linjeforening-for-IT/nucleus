@@ -167,7 +167,6 @@ export default function AdScreen({ navigation }: ScreenProps): JSX.Element {
                                                 <ListFooter
                                                     index={index}
                                                     renderedArray={renderedArray}
-                                                    search={false}
                                                     relevantCategories={[]}
                                                     lastSave={lastSave}
                                                 />

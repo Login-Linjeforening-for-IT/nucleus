@@ -1,13 +1,22 @@
 import MS from "@styles/menuStyles"
 import { TouchableOpacity } from "react-native"
 import handleDownload from "@/utils/calendar"
-import { AnyAction, Dispatch } from "redux"
 import { Image } from "react-native"
 import { timeSince } from "@/utils/fetch"
+import { useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 
-export default function DownloadButton(clickedEvents: EventProps[], 
-    setDownloadState: React.Dispatch<React.SetStateAction<Date>>, downloadState: 
-    Date, calendarID: string, dispatch: Dispatch<AnyAction>, isDark: boolean){
+type DownloadButtonProps = {
+    clickedEvents: EventProps[]
+    setDownloadState: React.Dispatch<React.SetStateAction<Date>>
+    downloadState: Date
+    calendarID: string
+}
+
+export default function DownloadButton({clickedEvents, setDownloadState, 
+downloadState, calendarID}: DownloadButtonProps){
+    const { isDark } = useSelector((state: ReduxState) => state.theme)
+    const dispatch = useDispatch()
     return(
         <>
             {clickedEvents.length > 0 ?
