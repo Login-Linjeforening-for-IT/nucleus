@@ -47,10 +47,11 @@ type ReduxState = {
         events: EventProps[]
         event: EventProps
         clickedEvents: EventProps[]
+        renderedEvents: EventProps[]
         lastFetch: string
         lastSave: string
         search: boolean
-        category: CategoryWithID[]
+        categories: CategoryWithID[]
     }
 }
 
