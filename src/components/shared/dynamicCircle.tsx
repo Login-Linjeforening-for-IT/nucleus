@@ -18,7 +18,7 @@ type DynamicCircleProps = {
  *
  * @param { number } height   Height of the circle
  * @param { number } width    Width of the cirle
- * @param { hex } color       Color of the circle
+ * @param { hex    } color    Color of the circle
  * @param { number } left     Distance from the left
  * @param { number } right    Distance from the right
  * @param { number } top      Distance from top
