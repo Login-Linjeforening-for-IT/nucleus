@@ -15,8 +15,6 @@ import {
 } from "expo-calendar"
 
 type handleDownloadProps = {
-    setDownloadState: React.Dispatch<React.SetStateAction<Date>>
-    downloadState: Date
     clickedEvents: EventProps[]
     calendarID: string
     dispatch: Dispatch<AnyAction>
@@ -44,12 +42,9 @@ type executeDownloadProps = {
  *
  * @see executeDownload Executes the download if permitted
  */
-export default async function handleDownload({setDownloadState, downloadState,
-clickedEvents, calendarID, dispatch}: handleDownloadProps) {
-    if (downloadState === null || timeSince(downloadState) >= 1000) {
-        setDownloadState(new Date())
-        await executeDownload({clickedEvents, calendarID, dispatch})
-    }
+export default async function handleDownload({clickedEvents, calendarID, 
+dispatch}: handleDownloadProps) {
+    await executeDownload({clickedEvents, calendarID, dispatch})
 }
 
 /**

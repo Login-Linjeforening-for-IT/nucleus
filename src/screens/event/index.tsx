@@ -12,7 +12,7 @@ from "@/utils/navigateFromPushNotification"
 import initializeNotifications 
 from "@/utils/notificationSetup"
 import { FilterUI} from "@/components/shared/filter"
-import LastFetch, { fetchClicked, getData } from "@/utils/fetch"
+import LastFetch, { getData } from "@/utils/fetch"
 import { View, StatusBar as StatusBarReact } from "react-native"
 import { ScreenProps } from "@interfaces"
 import { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs"
@@ -27,7 +27,7 @@ import {
     PanGestureHandlerGestureEvent 
 } from "react-native-gesture-handler"
 import handleSwipe from "@/utils/handleSwipe"
-import { setClickedEvents, setEvents, setLastFetch, setLastSave, setRenderedEvents } from "@redux/event"
+import { setEvents, setLastFetch, setLastSave } from "@redux/event"
 
 const EventStack = createStackNavigator<EventStackParamList>()
 
@@ -44,16 +44,12 @@ const EventStack = createStackNavigator<EventStackParamList>()
  * @returns EventScreen
  */
 export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
-    // Download state
-    const [downloadState, setDownloadState] = useState(new Date())
     // Push notification
     const [pushNotification, setPushNotification] = useState(false)
     const [pushNotificationContent, setPushNotificationContent] = 
         useState<JSX.Element | undefined>(undefined)
     // Notification state
     const [shouldSetupNotifications, setShouldSetupNotifications] = useState(true)
-    // Clears text input
-    const textInputRef = useRef(null)
     
     // Redux states
     const notification = useSelector((state: ReduxState) => state.notification)
@@ -69,18 +65,12 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
     useEffect(()=>{
         navigation.setOptions({
             headerComponents: {
-                bottom: [<FilterUI textInputRef={textInputRef}/>],
+                bottom: [<FilterUI />],
                 left: [<LogoNavigation navigation={navigation} />],
-                right: [
-                    <FilterButton/>, 
-                    <DownloadButton
-                        setDownloadState={setDownloadState}
-                        downloadState={downloadState}
-                    />
-                ]
+                right: [<FilterButton/>, <DownloadButton/>]
             }
         } as Partial<BottomTabNavigationOptions>)
-    }, [navigation, input, textInputRef])
+    }, [navigation, input])
 
     //  --- FETCHES CLICKED EVENTS WHEN SCREEN BECOMES VISIBLE ---
     useFocusEffect(
@@ -89,15 +79,10 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
             // Function to fetch clicked events
             (async() => {
                 const events = await getData()
-                const clicked = await fetchClicked()
 
                 if (events) {
                     dispatch(setEvents(events))
                     dispatch(setLastFetch(LastFetch()))
-                }
-
-                if (clicked) {
-                    dispatch(setClickedEvents(clicked))
                 }
             })()
         }, [])
@@ -109,15 +94,10 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
         // Fetches clickedEvents
         (async() => {
             const events = await getData()
-            const clicked = await fetchClicked()
 
             if (events) {
-                dispatch(setEvents(clicked))
+                dispatch(setEvents(events))
                 dispatch(setLastFetch(LastFetch()))
-            }
-
-            if (clicked) {
-                dispatch(setClickedEvents(clicked))
             }
         })()
 
