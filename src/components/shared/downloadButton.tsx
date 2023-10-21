@@ -6,15 +6,15 @@ import { timeSince } from "@/utils/fetch"
 import { useSelector, useDispatch } from "react-redux"
 
 type DownloadButtonProps = {
-    clickedEvents: EventProps[]
     setDownloadState: React.Dispatch<React.SetStateAction<Date>>
     downloadState: Date
 }
 
-export default function DownloadButton({clickedEvents, setDownloadState, 
-downloadState}: DownloadButtonProps){
+export default function DownloadButton({setDownloadState, downloadState}: 
+DownloadButtonProps){
     const { isDark } = useSelector((state: ReduxState) => state.theme)
     const { calendarID } = useSelector((state: ReduxState) => state.misc)
+    const { clickedEvents } = useSelector((state: ReduxState) => state.event)
     const dispatch = useDispatch()
 
     return(

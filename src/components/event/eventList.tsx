@@ -51,11 +51,8 @@ type BellProps = {
 /**
  * Displays the event list
  */
-export default function EventList ({
-    navigation,
-    notification,
-    ErrorMessage
-}: EventListProps): JSX.Element {
+export default function EventList ({navigation, notification, ErrorMessage}: 
+EventListProps): JSX.Element {
     const { events, search, renderedEvents } = useSelector((state: ReduxState) => state.event)
 
     if (!renderedEvents.length && !search) {
@@ -90,12 +87,8 @@ export default function EventList ({
 /**
  * Displays one element of the event card array
  */
-function EventCard ({
-    navigation,
-    notification,
-    item,
-    index
-}: EventCardProps): JSX.Element {
+function EventCard ({navigation, notification, item, index}: EventCardProps): 
+JSX.Element {
     const { search } = useSelector((state: ReduxState) => state.event)
 
     return (
@@ -126,7 +119,7 @@ function EventCard ({
 /**
  * Displays the footer last fetch time item
  */
-export function ListFooter({index}: ListFooterProps): JSX.Element {
+export function ListFooter ({index}: ListFooterProps): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const { search, lastFetch, renderedEvents, categories } = useSelector((state: ReduxState) => state.event)
@@ -148,7 +141,7 @@ export function ListFooter({index}: ListFooterProps): JSX.Element {
 /**
  * Displays the category square to the left of each event in the list on the EventScreen
  */
-export function FullCategorySquare({item, height}: FullCategorySquareProps) {
+export function FullCategorySquare({item, height}: FullCategorySquareProps): JSX.Element {
     const day = "startt" in item ? `${item.startt[8]}${item.startt[9]}` : new Date().getDate()
     const month = "startt" in item ? parseInt(item.startt[5] + item.startt[6]) : new Date().getMonth() + 1
     const { theme } = useSelector((state: ReduxState) => state.theme)
@@ -193,7 +186,7 @@ function Bell({item, notification}: BellProps): JSX.Element {
                     : [...clickedEvents, item]
                 ))
             }}>
-                <View style = {ES.bellPosition}>
+                <View style={ES.bellPosition} >
                     <BellIcon orange={isOrange} />
                 </View>
             </TouchableOpacity>

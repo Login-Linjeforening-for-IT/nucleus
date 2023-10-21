@@ -44,8 +44,6 @@ const EventStack = createStackNavigator<EventStackParamList>()
  * @returns EventScreen
  */
 export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
-    // Clicked categories
-    const [clickedCategory, setClickedCategory] = useState<CategoryWithID[]>([])
     // Download state
     const [downloadState, setDownloadState] = useState(new Date())
     // Push notification
@@ -59,7 +57,7 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
     
     // Redux states
     const notification = useSelector((state: ReduxState) => state.notification)
-    const { events, clickedEvents, search, lastSave, renderedEvents, input } = useSelector((state: ReduxState) => state.event)
+    const { search, lastSave, input } = useSelector((state: ReduxState) => state.event)
     const { theme, isDark } = useSelector((state: ReduxState) => state.theme)
     const dispatch = useDispatch()
 
@@ -71,29 +69,18 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
     useEffect(()=>{
         navigation.setOptions({
             headerComponents: {
-                bottom: [<FilterUI
-                    textInputRef={textInputRef}
-                    setClickedCategory={setClickedCategory}
-                    clickedCategory={clickedCategory}
-                />],
+                bottom: [<FilterUI textInputRef={textInputRef}/>],
                 left: [<LogoNavigation navigation={navigation} />],
-                right: [<FilterButton/>, 
-                <DownloadButton
-                    clickedEvents={clickedEvents}
-                    setDownloadState={setDownloadState}
-                    downloadState={downloadState}
-                />]
+                right: [
+                    <FilterButton/>, 
+                    <DownloadButton
+                        setDownloadState={setDownloadState}
+                        downloadState={downloadState}
+                    />
+                ]
             }
         } as Partial<BottomTabNavigationOptions>)
-            
-    },[
-        navigation, 
-        clickedCategory, 
-        input, 
-        textInputRef, 
-        setClickedCategory, 
-        clickedCategory, 
-    ])
+    }, [navigation, input, textInputRef])
 
     //  --- FETCHES CLICKED EVENTS WHEN SCREEN BECOMES VISIBLE ---
     useFocusEffect(
@@ -162,31 +149,13 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
         return () => clearInterval(interval)
     }, [search])
 
-    // --- RESETS RENDERED EVENTS
-    async function RenderEvents() {
-        // Updates the rendered array
-        dispatch(setRenderedEvents([...events]))
-        // Updates cache
-        await AsyncStorage.setItem("cachedEvents", JSON.stringify(events))
-    }
-
-    // --- CHECKS FOR AND FIXES INCORRECT RENDER ---
-    if (events.length > 0 && events.length !== renderedEvents.length) {
-        // Fixes any errors if the user is not currently filtering
-        if (!input.length) clickedCategory.length === 0 ? RenderEvents() : null
-        // Fixes any potential render errors after user has been searching
-        else if (input.length === 0 && clickedCategory.length === 0) {
-            RenderEvents()
-        }
-    }
-
     // --- SETUP CODE ONCE APP IS DOWNLOADED---
     // Displays when the API was last fetched successfully
     if (lastSave === "") {(async() => {dispatch(setLastSave(LastFetch()))})()
 }
     initializeNotifications({
         shouldRun: shouldSetupNotifications,
-        setShouldSetupNotifications: setShouldSetupNotifications,
+        setShouldSetupNotifications,
         hasBeenSet: notification["SETUP"]
     })
 

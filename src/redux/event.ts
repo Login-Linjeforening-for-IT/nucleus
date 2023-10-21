@@ -46,6 +46,7 @@ export const EventSlice = createSlice({
     reducers: {
         // Sets the event array
         setEvents(state, action) {
+            console.log(state.clickedCategories)
             state.events = action.payload
             state.categories = setCategories(state.events, state.clickedEvents)
         },
@@ -56,7 +57,7 @@ export const EventSlice = createSlice({
         // Sets the clicked events
         setClickedEvents(state, action) {
             state.clickedEvents = action.payload
-            if (state.clickedEvents.length === 0) {
+            if (!state.clickedEvents.length) {
                 state.categories = setCategories(state.events, state.clickedEvents)
             }
         },
@@ -153,26 +154,18 @@ function setCategories(events: EventProps[], clickedEvents: EventProps[]) {
 
 // --- PARENT FILTER FUNCTION ---
 function Filter({input, events, clickedEvents, clickedCategories}: FilterProps) {
-    // If the input is not empty
-    if (input.length) {
-        // If the user has clicked something
-        if (clickedCategories.length > 0) {
-            // Filter both text and categories if the text is longer than 0
-            if (input.length > 0) {
-                return filterBoth({clickedCategories, clickedEvents, events, input})
-            } else {
-                return events
-            }
-            // Update the displayed events if the text is not longer than 0
-        } else {
-            return filterText({events, input})
-        }
-        // If no categories are clicked only filter text
-    } else if (clickedCategories.length > 0) {
+    // Filters both on input and clicked categories if both are provided
+    if (input.length && clickedCategories.length) {
+        return filterBoth({clickedCategories, clickedEvents, events, input})
+    // Filters on text if only text is provided
+    } else if (input.length) {
+        return filterText({events, input})
+    // Filters on categories if only categories are provided
+    } else if (clickedCategories.length) {
         return filterCategories({events, clickedEvents, clickedCategories})
     }
-    // if the filter is null but categories are clicked only filter categories
-    // If both are null or 0 update the displayed events
+
+    // Returns events if there is nothing to be filtered
     return events
 }
 
@@ -195,39 +188,24 @@ function filterText ({events, input}: FilterTextProps) {
  * @returns Events filtered by category
  */
 function filterCategories ({events, clickedEvents, clickedCategories}: FilterCategoriesProps) {
-    // True or false if user is enrolled to some events
+    // True or false if user is enrolled to any event
     const clickedFound = clickedCategories.find((object: CategoryWithID) => object.category === "PÅMELDT")
-    // If the user is enrolled to events
-    if (clickedFound) {
-        // If the user has clicked at least 1 category
-        if (clickedCategories.length > 1) {
-            const categoryFiltered = events.filter(event => clickedCategories.some((category: CategoryWithID) => category.category === event.category))
-            // Declares temporary array
-            let concatenatedArray: EventProps[] = []
+    
+    // Filters based on category
+    const categoryFiltered = events.filter(event => clickedCategories.some((category: CategoryWithID) => category.category === event.category))
 
-            // Goes through every clicked event
-            clickedEvents.forEach(event => {
-                // Checks for duplicates
-                const duplicateExists = categoryFiltered.some(catEvent => catEvent.eventID === event.eventID)
-                // Removes duplicates
-                if (!duplicateExists) {
-                    concatenatedArray.push(event)
-                }
-            })
-
-            // Combines categoryFiltered and concatenatedArray
-            concatenatedArray = categoryFiltered.concat(concatenatedArray)
-            return removeDuplicatesAndOld(events, concatenatedArray)
-        } else {
-            // If only PÅMELDT is clicked only render the events in the clickedEvents array
-            const categoryFiltered = clickedEvents.filter(event => clickedCategories.some((category: CategoryWithID) => event.category === event.category))
-            return removeDuplicatesAndOld(events, categoryFiltered)
-        }
-    } else {
-        // If the PÅMELDT category is not active
-        const categoryFiltered = events.filter(event => clickedCategories.some((category: CategoryWithID) => category.category === event.category))
+    // Returns if the user is not enrolled to any events
+    if (!clickedFound) {
         return removeDuplicatesAndOld(events, categoryFiltered)
     }
+
+    // Returns clickedEvents if the user has only clicked this
+    if (clickedCategories.length < 2) {
+        return removeDuplicatesAndOld(events, clickedEvents)
+    }
+
+    // Combines categoryFiltered and concatenatedArray and returns them without duplicates
+    return removeDuplicatesAndOld(events, categoryFiltered.concat(clickedEvents))
 }
 
 /**
@@ -238,44 +216,10 @@ function filterCategories ({events, clickedEvents, clickedCategories}: FilterCat
  * @param input
  * @returns Events filtered by both category and text
  */
-function filterBoth({clickedCategories, clickedEvents, events, input}: filterBothProps) {
-    // If PÅMELDT is clicked
-    const clickedFound = clickedCategories.find((item: CategoryWithID) => item.category === "PÅMELDT")
-
-    // If PÅMELDT is not clicked filter events normally
-    if (!clickedFound) {
-        // Filters categories
-        let filtered = events.filter(event => clickedCategories.some((category: CategoryWithID) => category.category === event.category))
-        // Filters text
-        filtered = filtered.filter(event => event.eventname.toLowerCase().includes(input.toLowerCase()))
-        return removeDuplicatesAndOld(events, filtered)
-    }
-
-    // Filter text
-    if (!clickedCategories.length) {
-        const filtered = clickedEvents.filter(event => event.eventname.toLowerCase().includes(input.toLowerCase()))
-        return removeDuplicatesAndOld(events, filtered)
-    }
-
-    // If at least one category is clicked filters based on category
-    const categoryFiltered = events.filter(event => clickedCategories.some((category: CategoryWithID) => category.category === event.category))
-
-    // Temporary array
-    const concatenatedArray: EventProps[] = []
-
-    // Goes through every clickedEvent
-    clickedEvents.forEach(event => {
-        // Checks for duplicates
-        const duplicateExists = categoryFiltered.some(catEvent => catEvent.eventID === event.eventID)
-        // If no duplicate pushes to temporary array
-        if (!duplicateExists) concatenatedArray.push(event)
-    })
-
-    // Concatinates clickedEvents and filtered events
-    const newConcatenatedArray = categoryFiltered.concat(concatenatedArray)
-    const filtered = newConcatenatedArray.filter(event => event.eventname.toLowerCase().includes(input.toLowerCase()))
-
-    return removeDuplicatesAndOld(events, filtered)
+function filterBoth ({clickedCategories, clickedEvents, events, input}: filterBothProps) {
+    const categoryFiltered = filterCategories ({events, clickedEvents, clickedCategories})
+    const textFiltered = filterText ({events: categoryFiltered, input})
+    return removeDuplicatesAndOld(events, textFiltered)
 }
 
 /**
@@ -285,12 +229,12 @@ function filterBoth({clickedCategories, clickedEvents, events, input}: filterBot
 * @param events Events to filter
 * @returns Filtered events
 */
-export function removeDuplicatesAndOld(APIevents: EventProps[], events: 
+export function removeDuplicatesAndOld (APIevents: EventProps[], events: 
     EventProps[]): EventProps[] {
     
     // Removes old events and preserves newer version of all events
-    const realEvents = APIevents.filter(APIevent => events.some(
-        event => APIevent.eventID === event.eventID))
+    const realEvents = APIevents.filter(APIevent => 
+        events.some(event => APIevent.eventID === event.eventID))
 
     // Removes duplicates
     const filteredEvents = realEvents.filter((event, index) => {

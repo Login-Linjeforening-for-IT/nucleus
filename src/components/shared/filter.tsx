@@ -4,7 +4,7 @@ import MS from "@styles/menuStyles"
 import T from "@styles/text"
 import React from "react"
 import { CheckBox, CheckedBox, SmallCheck } from "@components/event/check"
-import { reset, setInput, toggleSearch } from "@redux/event"
+import { reset, setClickedCategories, setInput, toggleSearch } from "@redux/event"
 import { useSelector, useDispatch } from "react-redux"
 import {
     TouchableOpacity,
@@ -18,24 +18,16 @@ import {
 
 type FilterUIProps = {
     textInputRef: React.RefObject<TextInput>
-    setClickedCategory: React.Dispatch<React.SetStateAction<CategoryWithID[]>>
-    clickedCategory: CategoryWithID[]
 }
 
 /**
  * User interface for the filter
- *
- * @param textInputRef       Ref for text input
- * @param setRenderedEvents  Function to set the renderedEvents
- * @param setClickedCategory Function to set the ClickedCategory
- * @param categories         Function to filter out relevant categories for the filter
- * @param clickedCategory    Array containing all clicked categories
- *
+ * @param textInputRef Ref for text input
  * @returns Filter UI
  */
-export function FilterUI({textInputRef, setClickedCategory, clickedCategory}: FilterUIProps): JSX.Element {
+export function FilterUI({textInputRef}: FilterUIProps): JSX.Element {
     const { theme, isDark } = useSelector((state: ReduxState) => state.theme)
-    const { search, categories } = useSelector((state: ReduxState) => state.event)
+    const { search, categories, clickedCategories } = useSelector((state: ReduxState) => state.event)
     const dispatch = useDispatch()
 
     return (
@@ -68,8 +60,8 @@ export function FilterUI({textInputRef, setClickedCategory, clickedCategory}: Fi
                     data={categories}
                     renderItem={({item}) => (
                     <View style={ES.clusterCategoryView}>
-                        {clickedCategory.includes(item) ?
-                            <TouchableOpacity onPress={() => setClickedCategory(clickedCategory.filter((category: CategoryWithID) => category.id !== item.id))}>
+                        {clickedCategories.includes(item) ?
+                            <TouchableOpacity onPress={() => dispatch(setClickedCategories(clickedCategories.filter((category: CategoryWithID) => category.id !== item.id)))}>
                                 <View>
                                     <Text style={{...T.filterCategoryText, color: FetchColor({theme, variable: "TITLETEXTCOLOR"})}}>{item.category}</Text>
                                     <View><CheckedBox/></View>
@@ -77,7 +69,7 @@ export function FilterUI({textInputRef, setClickedCategory, clickedCategory}: Fi
                                 </View>
                             </TouchableOpacity>
                         :
-                            <TouchableOpacity onPress={() => setClickedCategory([...clickedCategory, item])}>
+                            <TouchableOpacity onPress={() => dispatch(setClickedCategories([...clickedCategories, item]))}>
                                 <Text style={{...T.filterCategoryText, color: FetchColor({theme, variable: "TITLETEXTCOLOR"})}}>{item.category}</Text>
                                 <CheckBox/>
                             </TouchableOpacity>
