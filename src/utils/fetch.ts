@@ -64,21 +64,6 @@ export function FetchJoinLink(string: string): string | null {
 }
 
 /**
- * Fetches the cache if it exists, then parses from string to object and updates
- * the passed array
- */
-export async function fetchClicked(): Promise<EventProps[]> {
-    let foundState = await AsyncStorage.getItem("clickedEvents")
-
-    if (foundState != null) {
-        let parsed = JSON.parse(foundState)
-        return parsed
-    } else {
-        return []
-    }
-}
-
-/**
  * Fetches data from API, formats the response, sets the cache, updates the 
  * events on the screen, catches any errors and fetches localstorage, and 
  * handles errors.
@@ -117,6 +102,6 @@ export async function getData(): Promise<EventProps[]> {
  */
 export function timeSince(downloadState: Date): number {
     const now = new Date()
-    const before = downloadState
+    const before = new Date(downloadState)
     return now.valueOf() - before.valueOf()
 }
