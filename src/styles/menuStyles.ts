@@ -44,6 +44,7 @@ export const MS = StyleSheet.create ({
         width: "100%",
         height: "10%",
         flexDirection: "row",
+        justifyContent: "center"
     },
     // Bottom menu icon TouchableOpacity
     bMenuIconTouchableOpacity: {
