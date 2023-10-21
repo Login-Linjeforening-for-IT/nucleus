@@ -112,6 +112,7 @@ export const T = StyleSheet.create({
     leaderName: {
         left: "17.5%",
         fontSize: 20,
+        marginBottom: 5
     },
     // Committee leader discord text
     discord: {

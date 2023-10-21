@@ -68,7 +68,6 @@ export default function Person({person}: PersonProps): JSX.Element {
             }}>
                 {obj.name}
             </Text>
-            <Space height={5} />
             <TouchableOpacity onPress={() => Linking.openURL(obj.dclink)}>
                 <Text style={{...T.discord, color: FetchColor({theme, variable: "DISCORD"})}}>
                     {<Image 
