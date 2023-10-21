@@ -40,13 +40,13 @@ export const EventSlice = createSlice({
         search: false,
         categories: [] as CategoryWithID[],
         clickedCategories: [] as CategoryWithID[],
-        input: ""
+        input: "",
+        downloadState: new Date()
     },
     // Declares reducers
     reducers: {
         // Sets the event array
         setEvents(state, action) {
-            console.log(state.clickedCategories)
             state.events = action.payload
             state.categories = setCategories(state.events, state.clickedEvents)
         },
@@ -57,9 +57,7 @@ export const EventSlice = createSlice({
         // Sets the clicked events
         setClickedEvents(state, action) {
             state.clickedEvents = action.payload
-            if (!state.clickedEvents.length) {
-                state.categories = setCategories(state.events, state.clickedEvents)
-            }
+            state.categories = setCategories(state.events, state.clickedEvents)
         },
         // Sets the events to be displayed
         setRenderedEvents(state, action) {
@@ -102,6 +100,9 @@ export const EventSlice = createSlice({
                 clickedEvents: state.clickedEvents, 
                 clickedCategories: state.clickedCategories
             })
+        },
+        setDownloadState(state) {
+            state.downloadState = new Date()
         }
     }
 })
@@ -118,6 +119,7 @@ export const {
     setLastSave,
     setRenderedEvents,
     toggleSearch,
+    setDownloadState
 } = EventSlice.actions
 
 // Exports the Event slice itself
@@ -145,6 +147,7 @@ function setCategories(events: EventProps[], clickedEvents: EventProps[]) {
         events.some(events => events.category === category.category))
 
     // Adds enrolled (PÅMELDT) filter option if relevant, since no event has this attribute naturally
+
     if (clickedEvents.length > 0) {
         categories.unshift({id: 1, category: "PÅMELDT"})
     }
@@ -153,7 +156,7 @@ function setCategories(events: EventProps[], clickedEvents: EventProps[]) {
 }
 
 // --- PARENT FILTER FUNCTION ---
-function Filter({input, events, clickedEvents, clickedCategories}: FilterProps) {
+function Filter ({input, events, clickedEvents, clickedCategories}: FilterProps) {
     // Filters both on input and clicked categories if both are provided
     if (input.length && clickedCategories.length) {
         return filterBoth({clickedCategories, clickedEvents, events, input})
@@ -188,7 +191,8 @@ function filterText ({events, input}: FilterTextProps) {
  * @returns Events filtered by category
  */
 function filterCategories ({events, clickedEvents, clickedCategories}: FilterCategoriesProps) {
-    // True or false if user is enrolled to any event
+
+    // Checks if user is filtering by enrolled (PÅMELDT)
     const clickedFound = clickedCategories.find((object: CategoryWithID) => object.category === "PÅMELDT")
     
     // Filters based on category
