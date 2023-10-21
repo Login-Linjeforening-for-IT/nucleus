@@ -2,7 +2,7 @@ import FetchColor from "@styles/fetchTheme"
 import ES from "@styles/eventStyles"
 import MS from "@styles/menuStyles"
 import T from "@styles/text"
-import React from "react"
+import React, { useRef } from "react"
 import { CheckBox, CheckedBox, SmallCheck } from "@components/event/check"
 import { reset, setClickedCategories, setInput, toggleSearch } from "@redux/event"
 import { useSelector, useDispatch } from "react-redux"
@@ -16,19 +16,15 @@ import {
     Platform,
 } from "react-native"
 
-type FilterUIProps = {
-    textInputRef: React.RefObject<TextInput>
-}
-
 /**
  * User interface for the filter
- * @param textInputRef Ref for text input
  * @returns Filter UI
  */
-export function FilterUI({textInputRef}: FilterUIProps): JSX.Element {
+export function FilterUI(): JSX.Element {
     const { theme, isDark } = useSelector((state: ReduxState) => state.theme)
     const { search, categories, clickedCategories } = useSelector((state: ReduxState) => state.event)
     const dispatch = useDispatch()
+    const textInputRef = useRef<TextInput | null>(null)    
 
     return (
         <View style={search ? {top: Platform.OS === "ios" ? 40 : 30} : {display:'none'}}>
