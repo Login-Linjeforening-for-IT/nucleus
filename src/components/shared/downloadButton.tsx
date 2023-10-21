@@ -3,8 +3,7 @@ import { TouchableOpacity } from "react-native"
 import handleDownload from "@/utils/calendar"
 import { Image } from "react-native"
 import { timeSince } from "@/utils/fetch"
-import { useSelector } from "react-redux"
-import { useDispatch } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 
 type DownloadButtonProps = {
     clickedEvents: EventProps[]
