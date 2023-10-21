@@ -15,6 +15,7 @@ type EventLocationProps = {
  * Function for finding the eventlocation of an event
  * @param {string} room     Room where the event takes place
  * @param {string} campus   Campus where the event takes place
+ * @param {string} street   Address where the event takes place
  * @returns                 View containing the event location as a text
  */
 export default function EventLocation({room, campus, street}: 
