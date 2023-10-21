@@ -24,7 +24,6 @@ type Course = {
  * @returns View
  */
 export default function Dropdown() {
-
     const { lang  } = useSelector((state: ReduxState) => state.lang)
 
     const titleNO = {
