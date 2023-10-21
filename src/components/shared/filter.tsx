@@ -58,7 +58,6 @@ type FilterUIProps = {
     relevantCategories: CategoryWithID[]
     clickedCategory: CategoryWithID[]
     setInput: React.Dispatch<React.SetStateAction<string>>
-    items: EventProps[]
 }
 
 // --- PARENT FILTER FUNCTION ---
@@ -209,9 +208,9 @@ export function fetchRelevantCategories({setRelevantCategories, clickedEvents, e
  * @returns Filter UI
  */
 export function FilterUI({textInputRef, setRenderedArray, setClickedCategory,
-relevantCategories, clickedCategory, setInput, items}: FilterUIProps): JSX.Element {
+relevantCategories, clickedCategory, setInput}: FilterUIProps): JSX.Element {
     const { theme, isDark } = useSelector((state: ReduxState) => state.theme)
-    const { search } = useSelector((state: ReduxState) => state.event)
+    const { events, search } = useSelector((state: ReduxState) => state.event)
 
     return (
         <View style={search ? {top: Platform.OS === "ios" ? 40 : 30} : {display:'none'}}>
@@ -229,7 +228,7 @@ relevantCategories, clickedCategory, setInput, items}: FilterUIProps): JSX.Eleme
                 <TouchableOpacity
                 onPress={() => {
                     setInput("")
-                    setRenderedArray([...items])
+                    setRenderedArray([...events])
                     setClickedCategory([])
                     if (textInputRef.current) textInputRef.current.clear()
                 }}>

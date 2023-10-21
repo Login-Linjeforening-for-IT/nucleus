@@ -33,7 +33,7 @@ import {
     PanGestureHandlerGestureEvent 
 } from "react-native-gesture-handler"
 import handleSwipe from "@/utils/handleSwipe"
-import { setClickedEvents } from "@redux/event"
+import { setClickedEvents, setEvents, setLastFetch, setLastSave } from "@redux/event"
 
 const EventStack = createStackNavigator<EventStackParamList>()
 
@@ -54,12 +54,8 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
     const [clickedCategory, setClickedCategory] = useState<CategoryWithID[]>([])
     // Download state
     const [downloadState, setDownloadState] = useState(new Date())
-    // Events from api
-    const [events, setEvents] = useState<EventProps[]>([])
     // Filter text input declaration
     const [input, setInput] = useState("")
-    // Last time API was fetched successfully
-    const [lastSave, setLastSave] = useState("")
     // Push notification
     const [pushNotification, setPushNotification] = useState(false)
     const [pushNotificationContent, setPushNotificationContent] = 
@@ -79,7 +75,7 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
     // Redux states
     const notification = useSelector((state: ReduxState) => state.notification)
     const { login } = useSelector((state: ReduxState) => state.login)
-    const { clickedEvents, search } = useSelector((state: ReduxState) => state.event)
+    const { events, clickedEvents, search, lastSave } = useSelector((state: ReduxState) => state.event)
     const { theme, isDark } = useSelector((state: ReduxState) => state.theme)
     const { calendarID } = useSelector((state: ReduxState) => state.misc)
     const dispatch = useDispatch()
@@ -111,7 +107,6 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
                     relevantCategories={relevantCategories}
                     clickedCategory={clickedCategory}
                     setInput={setInput}
-                    items={events}
                 />],
                 left: [<LogoNavigation navigation={navigation} />],
                 right: [<FilterButton
@@ -153,7 +148,13 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
         React.useCallback(() => {
             // Function to fetch clicked events
             (async() => {
+                const events = await getData()
                 const clicked = await fetchClicked()
+
+                if (events) {
+                    dispatch(setEvents(events))
+                    dispatch(setLastFetch(LastFetch()))
+                }
 
                 if (clicked) {
                     dispatch(setClickedEvents(clicked))
@@ -224,11 +225,15 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
     // --- LOADING INITIAL DATA ---
     useEffect(() => {
         // Fetches API
-        getData({setEvents, setRenderedArray, setLastSave, events});
-
         // Fetches clickedEvents
         (async() => {
+            const events = await getData()
             const clicked = await fetchClicked()
+
+            if (events) {
+                dispatch(setEvents(clicked))
+                dispatch(setLastFetch(LastFetch()))
+            }
 
             if (clicked) {
                 dispatch(setClickedEvents(clicked))
@@ -261,11 +266,12 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
             interval = setInterval(() => {
                 // Storing the current time
                 (async() => {
-                    // Storing in AsyncStorage
-                    await AsyncStorage.setItem("lastFetch", 
-                    new Date().toISOString())
-                    // Fetches cache
-                    getData({setEvents, setRenderedArray, setLastSave, events})
+                    const events = await getData()
+
+                    if (events) {
+                        dispatch(setEvents(events))
+                        dispatch(setLastFetch(LastFetch()))
+                    }
                 })()
                 // Runs every 10 seconds
             }, 10000)
@@ -296,7 +302,7 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
 
     // --- SETUP CODE ONCE APP IS DOWNLOADED---
     // Displays when the API was last fetched successfully
-    if (lastSave === "") (async() => {setLastSave(await LastFetch())})()
+    if (lastSave === "") (async() => {dispatch(setLastSave(await LastFetch()))})()
 
     initializeNotifications({
         shouldRun: shouldSetupNotifications,
@@ -320,19 +326,18 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
                         <View style={{
                             ...GS.content, 
                             backgroundColor: FetchColor({theme, variable: "DARKER"})
-                        }}>
-                            {pushNotification && pushNotificationContent}
-                            <EventList
-                                navigation={navigation}
-                                renderedArray={renderedArray}
-                                relevantCategories={relevantCategories}
-                                notification={notification}
-                                lastSave={lastSave}
-                                events={events}
-                                ErrorMessage={ErrorMessage}
-                            />
+                            }}>
+                                {pushNotification && pushNotificationContent}
+                                <EventList
+                                    navigation={navigation}
+                                    renderedArray={renderedArray}
+                                    relevantCategories={relevantCategories}
+                                    notification={notification}
+                                    events={events}
+                                    ErrorMessage={ErrorMessage}
+                                />
+                            </View>
                         </View>
-                    </View>
                     </PanGestureHandler>
                 </GestureHandlerRootView>
                 )}

@@ -1,11 +1,5 @@
-import notificationSetup from "@/utils/notificationSetup"
-import LastFetch, { fetchClicked, timeSince } from "@/utils/fetch"
-import AsyncStorage from "@react-native-async-storage/async-storage"
 import { ListFooter } from "@components/event/eventList"
 import Space, { ErrorMessage } from "@/components/shared/utils"
-import handleDownload from "@/utils/calendar"
-import storeAds from "@/utils/storeEvents"
-import { useFocusEffect } from "@react-navigation/native"
 import { useSelector } from "react-redux"
 import { AdListItem } from "@/components/ads/adListItem"
 import React, { useEffect, useState } from "react"
@@ -13,7 +7,6 @@ import { StatusBar } from "expo-status-bar"
 import FetchColor from "@styles/fetchTheme"
 import { ScreenProps } from "@interfaces"
 import GS from "@styles/globalStyles"
-import en from "@text/ads/en.json"
 import { TouchableOpacity, Dimensions, FlatList, View } from "react-native"
 import LogoNavigation from "@/components/shared/logoNavigation"
 import { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs"
@@ -25,8 +18,6 @@ import {
     PanGestureHandler,
      PanGestureHandlerGestureEvent 
 } from "react-native-gesture-handler"
-import { setClickedEvents } from "@redux/event"
-import { useDispatch } from "react-redux"
 
 /**
  * Parent EventScreen function
@@ -47,18 +38,11 @@ export default function AdScreen({ navigation }: ScreenProps): JSX.Element {
     const [renderedArray, setRenderedArray] = useState<any>([])
     //  Clicked Ads
     const [clickedAds, setClickedAds] = useState<any[]>([])
-    //  Last time API was fetched successfully
-    const [lastSave, setLastSave] = useState("")
     //  Download state
-    const [downloadState, setDownloadState] = useState(new Date())
     
     // Redux states
-    const notification = useSelector((state: ReduxState) => state.notification)
     const { lang  } = useSelector((state: ReduxState) => state.lang)
-    const { login } = useSelector((state: ReduxState) => state.login)
     const { theme, isDark } = useSelector((state: ReduxState) => state.theme)
-    const { calendarID } = useSelector((state: ReduxState) => state.misc)
-    const dispatch = useDispatch()
 
     // --- SET THE COMPONENTS OF THE HEADER ---
     useEffect(()=>{
@@ -70,57 +54,6 @@ export default function AdScreen({ navigation }: ScreenProps): JSX.Element {
             }
         } as Partial<BottomTabNavigationOptions>)
     }, [navigation])
-
-
-    //  --- FETCHES CLICKED EVENTS WHEN SCREEN BECOMES VISIBLE ---
-    useFocusEffect(
-        // Callback to avoid too many rerenders
-        React.useCallback(() => {
-            // Function to fetch clicked ads
-            (async() => {
-                const clicked = await fetchClicked()
-
-                if (clicked) {
-                    dispatch(setClickedEvents(clicked))
-                }
-            })()
-        }, [])
-    )
-
-    const addata = en.test
-
-
-    storeAds({events: ads, clickedEvents: clickedAds})
-
-    //  --- LOADING INITIAL DATA ---
-    useEffect(() => {
-        //  Fetches API
-        // getData(setAds, setRenderedArray, setLastSave, ads)
-        setRenderedArray([...addata])
-        if (addata.length > 0) (async() => {
-            await AsyncStorage.setItem("cachedAds", JSON.stringify(addata))
-        })
-        // Fetches clickedAds
-        // fetchClicked(setClickedAds)
-        // ads.length 
-        //     ? setRenderedArray([...ads]) 
-        //     : fetchStored(setRenderedArray, setAds, "ads")
-    //  Renders when the screen is loaded
-    }, [])
-
-    // --- RESETS RENDERED EVENTS
-    async function RenderAds() {
-
-        // Updates the rendered array
-        setRenderedArray([...ads])
-
-        // Updates cache
-        await AsyncStorage.setItem("cachedAds", JSON.stringify(ads))
-    }
-
-    // --- SETUP CODE ONCE APP IS DOWNLOADED---
-    // Displays when the API was last fetched successfully
-    if (lastSave === "") (async() => {setLastSave(await LastFetch())})()
 
     //  --- DISPLAYS THE ADSCREEN ---
     return (
@@ -168,7 +101,6 @@ export default function AdScreen({ navigation }: ScreenProps): JSX.Element {
                                                     index={index}
                                                     renderedArray={renderedArray}
                                                     relevantCategories={[]}
-                                                    lastSave={lastSave}
                                                 />
                                             </TouchableOpacity>
                                         </View>

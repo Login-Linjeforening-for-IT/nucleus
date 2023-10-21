@@ -60,7 +60,7 @@ type CategoryProps = {
 export default function SpecificEventScreen({ route, navigation }: 
 BottomTabScreenProps<EventStackParamList>): JSX.Element {
 
-    if(!route.params){return <></>}
+    if(!route.params) return <></>
 
     const { lang  } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
@@ -70,11 +70,11 @@ BottomTabScreenProps<EventStackParamList>): JSX.Element {
 
     const [event, setEvent]=useState<DetailedEventProps | EventProps>(item)
 
-    const getData=()=>{
+    function getData() {
         fetch("https://api.login.no/events/" + item.eventID)
         // fetch("https://tekkom:rottejakt45@api.login.no:8443") //TESTING
         .then(response => response.json())
-        .then(data=>setEvent(data))
+        .then(data => setEvent(data))
     }
     
 

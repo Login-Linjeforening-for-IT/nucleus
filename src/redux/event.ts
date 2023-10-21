@@ -10,6 +10,7 @@ export const EventSlice = createSlice({
         event: {} as EventProps,
         clickedEvents: [] as EventProps[],
         lastFetch: "",
+        lastSave: "",
         search: false,
         category: [] as CategoryWithID[]
     },
@@ -28,6 +29,9 @@ export const EventSlice = createSlice({
         setLastFetch(state, action) {
             state.lastFetch = action.payload
         },
+        setLastSave(state, action) {
+            state.lastFetch = action.payload
+        },
         toggleSearch(state) {
             state.search = !state.search
         },
@@ -38,8 +42,8 @@ export const EventSlice = createSlice({
 })
 
 // Exports functions
-export const { setEvents, setEvent, setClickedEvents, setLastFetch, toggleSearch, 
-    setClickedCategories } = EventSlice.actions
+export const { setEvents, setEvent, setClickedEvents, setLastFetch, setLastSave,
+    toggleSearch, setClickedCategories } = EventSlice.actions
 
 // Exports the Event slice itself
 export default EventSlice.reducer

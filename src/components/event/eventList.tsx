@@ -27,7 +27,6 @@ type EventListProps = {
     renderedArray: EventProps[]
     relevantCategories: CategoryWithID[]
     notification: NotificationProps
-    lastSave: string
     events: EventProps[]
     ErrorMessage: React.FC<ErrorMessageProps>
 }
@@ -37,7 +36,6 @@ type EventCardProps = {
     renderedArray: EventProps[]
     relevantCategories: CategoryWithID[]
     notification: NotificationProps
-    lastSave: string
     item: EventProps
     index: number
 }
@@ -46,7 +44,6 @@ type ListFooterProps = {
     index: number
     renderedArray: EventProps[]
     relevantCategories: CategoryWithID[]
-    lastSave: string
 }
 
 type FullCategorySquareProps = {
@@ -67,7 +64,6 @@ export default function EventList ({
     renderedArray,
     relevantCategories,
     notification,
-    lastSave,
     events,
     ErrorMessage
 }: EventListProps): JSX.Element {
@@ -92,7 +88,6 @@ export default function EventList ({
                             renderedArray={renderedArray}
                             relevantCategories={relevantCategories}
                             notification={notification}
-                            lastSave={lastSave}
                             item={item}
                             index={index}
                         />
@@ -113,7 +108,6 @@ function EventCard ({
     renderedArray,
     relevantCategories,
     notification,
-    lastSave,
     item,
     index
 }: EventCardProps): JSX.Element {
@@ -142,7 +136,6 @@ function EventCard ({
                     index={index}
                     renderedArray={renderedArray}
                     relevantCategories={relevantCategories}
-                    lastSave={lastSave}
                 />
             </TouchableOpacity>
         </View>
@@ -152,17 +145,17 @@ function EventCard ({
 /**
  * Displays the footer last fetch time item
  */
-export function ListFooter({index, renderedArray, relevantCategories, 
-lastSave}: ListFooterProps): JSX.Element {
+export function ListFooter({index, renderedArray, relevantCategories}: 
+ListFooterProps): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
-    const { search } = useSelector((state: ReduxState) => state.event)
+    const { search, lastFetch } = useSelector((state: ReduxState) => state.event)
 
     return (
         <>
             {index === renderedArray.length-1 && <Text style={{...T.contact, 
                 color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})}}>
-                    {lang ? "Oppdatert kl:":"Updated:"} {lastSave}.
+                    {lang ? "Oppdatert kl:":"Updated:"} {lastFetch}.
                 </Text>}
             {index === renderedArray.length - 1 && 
                 <Space height={Dimensions.get("window").height / 3 + 20}/>}

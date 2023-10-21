@@ -6,21 +6,13 @@ type fetchStoredProps = {
     value?: string
 }
 
-type getDataProps = {
-    setEvents: React.Dispatch<React.SetStateAction<EventProps[]>>
-    setRenderedArray: React.Dispatch<React.SetStateAction<EventProps[]>>
-    setLastSave: React.Dispatch<React.SetStateAction<string>>
-    events: EventProps[]
-}
-
 /**
  * Function for checking when the API was last fetched successfully.
  *
  * @returns String
  */
-export default async function LastFetch(param?: string) {
-    const stored = await AsyncStorage.getItem("lastFetch")
-    const utc: string = param ? param : stored ? stored : new Date().toISOString()
+export default function LastFetch(param?: string) {
+    const utc: string = param ? param : new Date().toISOString()
     const time = new Date(utc)
 
     // Checking and fixing missing 0
@@ -45,7 +37,7 @@ export async function fetchEventDetails(event: EventProps):
 Promise<DetailedEventProps> {
     const response = await fetch(`https://api.login.no/events/${event.eventID}`)
     const eventDetails = await response.json()
-    return{...event, ...eventDetails}
+    return {...event, ...eventDetails}
 }
 
 /**
@@ -147,43 +139,31 @@ fetchStoredProps): Promise<void> {
  * events on the screen, catches any errors and fetches localstorage, and 
  * handles errors.
  */
-export async function getData({setEvents, setRenderedArray, setLastSave, 
-events}: getDataProps): Promise<void> {
+export async function getData(): Promise<EventProps[]> {
+
     try {
         // PRODUCTION
-        fetch("https://api.login.no/events")
+        const response = await fetch("https://api.login.no/events")
         // TESTING
-        //fetch("https://tekkom:rottejakt45@api.login.no:8443/events")
-        // Formatting the response
-        .then(response=>response.json())
-        // Setting the response
-        .then((data) => {
-            setEvents(data)
-            return data
-        })
-        // Updates the renderedarray to equal cache
-        .then((events: EventProps[]) => setRenderedArray([...events]))
-        // Updates last fetch displayed on the screen
-        .then(async() => setLastSave(await LastFetch()))
-        // Setting the cache
-        if (events.length > 0) await AsyncStorage.setItem("cachedEvents", 
-            JSON.stringify(events))
+        // const response = await fetch("https://tekkom:rottejakt45@api.login.no:8443/events")
+
+        // Checks if response is ok, otherwise throws error
+        if (!response.ok) {
+            throw new Error('Failed to fetch events from API')
+        }
+
+        return response.json()
         // Catches any errors (missing wifi)
     } catch (e) {
         // Immediately invoked function expression (IIFE)
-        (async() => {
-            try {
-                // Tries to fetch event cache
-            const cache: string | null = await AsyncStorage.getItem("cachedEvents")
-                if (cache) {
-                    const events: EventProps[] = JSON.parse(cache)
-                    // If cached events was found save them in event array
-                    if (!events.length) setEvents([...events])
-                }
-                // If cache was not found tell the user cache wasnt found
-                // (custom in app notification needs to go here)
-            } catch (e) {console.warn("Failed to fetch cache: " + e)}
-        })
+        const cache: string | null = await AsyncStorage.getItem("cachedEvents");
+
+        if (cache) {
+            const events: EventProps[] = JSON.parse(cache)
+            return events
+        }
+
+        return []
     }
 }
 
