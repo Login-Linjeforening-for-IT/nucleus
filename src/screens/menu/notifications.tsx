@@ -58,7 +58,7 @@ export default function NotificationScreen({navigation, back}: NotificationScree
                             ...GS.content, 
                             backgroundColor: FetchColor({theme, variable: "DARKER"})
                     }}>
-                        {Space(Dimensions.get("window").height/8.1)}
+                        <Space height={Dimensions.get("window").height / 8.1} />
                         {Array.isArray(list) 
                             ? <List /> 
                             : <Text style={{...NS.error, color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})}}>
@@ -66,7 +66,7 @@ export default function NotificationScreen({navigation, back}: NotificationScree
                                     ? "Du har ingen varslinger nå. Kom tilbake senere." 
                                     : "You have no notifications at this time. Check back later."}
                             </Text>}
-                        {Space(Dimensions.get("window").height/3)}
+                            <Space height={Dimensions.get("window").height / 3} />
                     </View>
                     <TopMenu 
                         navigation={navigation}

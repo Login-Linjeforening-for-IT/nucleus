@@ -120,14 +120,14 @@ function MainProfileInfo({show, profile, year}: MainProfileInfoProps) {
             }}>
                 {profile.name}
             </Text>
-            {Space(5)}
+            <Space height={5} />
             <Text style={{
                 ...T.text15,
                 color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})
             }}>
                 {year + profile.degree}
             </Text>
-            {Space(5)}
+            <Space height={5} />
             <Text style={{
                 ...T.text15,
                 color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})

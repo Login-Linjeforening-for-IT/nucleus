@@ -60,7 +60,8 @@ function Content(): JSX.Element {
 
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
-            {Space(Dimensions.get("window").height/8.1)}
+            <Space height={10} /> 
+            <Space height={Dimensions.get("window").height / 8.1} /> 
             <Cluster marginHorizontal={0}>
                 <View style={GS.notificationBack}>
                     <View style={GS.view}>
@@ -102,26 +103,23 @@ function Content(): JSX.Element {
                 </View>
             </Cluster>
 
-            {Space(10)}
+            <Space height={10} />
             <Text style={{
                 ...T.text30, 
                 color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})
             }}>
                     {info[2].title}
             </Text>
-            {Space(10)}
-
+            <Space height={10} />
             <SwitchCluster obj={info[3]} category="IMPORTANT" />
-
-            {Space(10)}
+            <Space height={10} />
             <Text style={{
                 ...T.text25, 
                 color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})
             }}>
                 {info[4].title}
             </Text>
-            {Space(10)}
-
+            <Space height={10} />
             <SwitchCluster obj={info[5]}  category="BEDPRES" />
             <SwitchCluster obj={info[6]}  category="TEKKOM" />
             <SwitchCluster obj={info[7]}  category="CTF" />
@@ -131,17 +129,16 @@ function Content(): JSX.Element {
             <SwitchCluster obj={info[11]} category="LOGIN" />
             <SwitchCluster obj={info[12]} category="ANNET" />
 
-            {Space(10)}
+            <Space height={10} />
             <Text style={{
                 ...T.text25,
                 color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})
             }}>
                 {info[13].title}
             </Text>
-            {Space(10)}
+            <Space height={10} />
             <Reminders/>
-            {Space(8)}
-            {Space((Dimensions.get("window").height/3))}
+            <Space height={Dimensions.get("window").height / 3 + 8} />
         </ScrollView>
     )
 }
@@ -168,7 +165,7 @@ function SwitchCluster({obj, category}: ClusterWithSwitchProps) {
                 </View>
                 <Notification category={category}/>
             </View>
-            {Space(5)}
+            <Space height={5} />
         </Cluster>
     )
 }

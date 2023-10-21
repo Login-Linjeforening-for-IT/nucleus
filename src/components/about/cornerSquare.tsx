@@ -24,7 +24,10 @@ JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
 
     if (type) {
-        while (corner != 0 && corner != 2) corner = random({min: 0, max: 3})
+        while (corner != 0 && corner != 2) {
+            corner = random({min: 0, max: 3})
+        }
+        
         if (corner === 0 || corner === 2) {
             p1 = 0, p2 = 0, p3 = 13, p4 = 137, p5 = 0, p6 = 195, p7 = 70, 
             p8 = 380

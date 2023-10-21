@@ -126,9 +126,9 @@ export default function LoginScreen({ navigation }: ScreenProps): JSX.Element {
                         ...GS.content, 
                         backgroundColor: FetchColor({theme, variable: "DARKER"})
                     }}>
-                        {Space(Dimensions.get("window").height/8.1)}
+                        <Space height={Dimensions.get("window").height / 8.1} /> 
                         <View>
-                            {Space(80)}
+                            <Space height={80} /> 
                             <Text style={{
                                 ...T.centered50,
                                 color: FetchColor({theme, variable: "TEXTCOLOR"})
@@ -136,9 +136,9 @@ export default function LoginScreen({ navigation }: ScreenProps): JSX.Element {
                                 {lang ? "Innsida" : "Intranet"}
                             </Text>
                             
-                            {Space(20)}
+                            <Space height={20} /> 
                             <UsernameUI data={data} inputName={inputName} />
-                            {Space(10)}
+                            <Space height={10} /> 
 
                             <PasswordUI 
                                 data={data}
@@ -146,7 +146,7 @@ export default function LoginScreen({ navigation }: ScreenProps): JSX.Element {
                                 showPass={showPass}
                             />
                             <View>
-                                {Space(20)}
+                                <Space height={20} /> 
                                 <TouchableOpacity
                                     disabled ={!data.name || !data.pass}
                                 onPress={() => internalPage()}>
@@ -160,7 +160,7 @@ export default function LoginScreen({ navigation }: ScreenProps): JSX.Element {
                                     </Button>
                                 </TouchableOpacity>
                             </View>
-                            {Space(40)}
+                            <Space height={40} /> 
                             <View>
                                 <Image 
                                     style={GS.smallImage} 
@@ -168,7 +168,7 @@ export default function LoginScreen({ navigation }: ScreenProps): JSX.Element {
                                 />
                             </View>
                         </View>
-                        {Space(Dimensions.get("window").height/3)}
+                        <Space height={Dimensions.get("window").height / 3} /> 
                     </View>
                 </View>
             </PanGestureHandler>

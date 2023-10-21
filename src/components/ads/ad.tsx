@@ -220,7 +220,7 @@ export function AdDescription({ad}: {ad: AdProps}) {
             }}>
                 {shortDescription}
             </Text>
-            {Space(10)}
+            <Space height={10} /> 
             <Text style={{
                 ...AS.adInfoBold, 
                 color: FetchColor({theme, variable: "TEXTCOLOR"})
@@ -231,7 +231,7 @@ export function AdDescription({ad}: {ad: AdProps}) {
                 }}>
                     {skills}
                 </Text>
-            {Space(10)}
+                <Space height={10} /> 
             <Text style={{
                 ...AS.adInfoBold, 
                 color: FetchColor({theme, variable: "TEXTCOLOR"})
@@ -307,7 +307,7 @@ export function AdMedia({ad}: {ad: AdProps}) {
                     )
                 })}
             </View>
-            {Space(10)}
+            <Space height={10} /> 
             <View style={AS.socialView}>
                 {ad.application_url ?
                     <TouchableOpacity onPress={() => 
@@ -326,7 +326,7 @@ export function AdMedia({ad}: {ad: AdProps}) {
                 </TouchableOpacity>:null
                 }
             </View>
-            {Space(10)}
+            <Space height={10} /> 
         </View>
     )
 }
@@ -387,7 +387,7 @@ export function AdUpdateInfo({ad}: {ad: AdProps}) {
             }}>
                 {text[0]} {!updated}.
             </Text>
-            {Space(5)}
+            <Space height={5} /> 
             <Text style={{
                 ...T.contact,
                 color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})

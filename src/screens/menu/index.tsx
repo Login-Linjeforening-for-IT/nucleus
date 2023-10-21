@@ -108,7 +108,7 @@ export default function MenuScreen({ navigation }: ScreenProps): JSX.Element {
                                 ...GS.content, 
                                 backgroundColor: FetchColor({theme, variable: "DARKER"})
                             }}>
-                                {Space(Dimensions.get("window").height/9)}
+                                <Space height={Dimensions.get("window").height / 9} /> 
                                 {login ? SmallProfile({navigation, 
                                     profile, login}) : null}
                                 <FlatList
@@ -133,7 +133,7 @@ export default function MenuScreen({ navigation }: ScreenProps): JSX.Element {
                                         )
                                     }}
                                 />
-                                {Space(Dimensions.get("window").height / 10)}
+                                <Space height={Dimensions.get("window").height / 10} /> 
                             </View>
                         </PanGestureHandler>
                         </GestureHandlerRootView>
@@ -186,7 +186,7 @@ toggleFeedback, login}: MenuItemProps) {
                 </Cluster>
             </TouchableOpacity>
             <View>
-                {Space(10)}
+                <Space height={10} /> 
                 <Feedback
                     index={index}
                     setting={setting}

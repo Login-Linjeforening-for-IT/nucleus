@@ -57,7 +57,7 @@ export default function InternalScreen({ navigation }: ScreenProps): JSX.Element
                             <Option index={index} item={item} />
                         )}
                     />
-                    {Space(Dimensions.get("window").height/3)}
+                    <Space height={Dimensions.get("window").height / 3}/>
                 </View>
             </View>
             </PanGestureHandler>
@@ -70,7 +70,7 @@ function Option({index, item}: OptionProps): JSX.Element {
 
     return (
         <View>
-            {index === 0 ? Space(Dimensions.get("window").height/8): null}
+            {index === 0 && <Space height={Dimensions.get("window").height/8} />}
             <TouchableOpacity onPress={() => topic({topicID: 
                 "maintenance", lang: index === 1 ? true : undefined})}>
                 <Cluster>

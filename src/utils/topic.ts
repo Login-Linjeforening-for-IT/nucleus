@@ -1,5 +1,5 @@
 // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 3/6
-import messaging from "@react-native-firebase/messaging"
+// import messaging from "@react-native-firebase/messaging"
 import subscribeToTopic from "@utils/subscribeToTopic"
 // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 3/6
 
@@ -24,7 +24,7 @@ export default async function topic({topicID, lang, status, category, catArray}:
 topicParams) {
 
     // COMMENT IN THIS BOX WHILE TESTING IN EXPO 4/6
-    //   return null
+    return null
     // COMMENT IN THIS BOX WHILE TESTING IN EXPO 4/6
     const granted = await messaging().requestPermission()
     var topic = lang ? "norwegian"+topicID:"english"+topicID

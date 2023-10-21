@@ -142,10 +142,11 @@ function EventCard ({
             }}>
                 {index === 0
                     ? search === false
-                    ? Space(Dimensions.get("window").height / (Platform.OS === "ios" ? 8.4 : 8))
-                    : Space(Platform.OS === "ios" 
+                        ? <Space height={Dimensions.get("window").height / (Platform.OS === "ios" ? 8.4 : 8)} />
+                        : <Space height={Platform.OS === "ios" 
                         ? Dimensions.get("window").height / 4
-                        : Dimensions.get("window").height / 3.6) : null}
+                        : Dimensions.get("window").height / 3.6} />
+                    : null}
                 <Cluster marginVertical={8}>
                     <View style={ES.eventBack}>
                         <FullCategorySquare item={item} />
@@ -185,14 +186,10 @@ lastSave}: ListFooterProps): JSX.Element {
                 color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})}}>
                     {lang ? "Oppdatert kl:":"Updated:"} {lastSave}.
                 </Text>}
-            {index === renderedArray.length-1 
-                && Space((Dimensions.get("window").height/3)+20)}
-            {index === renderedArray.length-1 
-                && search === true ? Space(152.5):null}
-            {index === renderedArray.length-1 && search === true 
-                ? Space(40*(Math.ceil(relevantCategories.length / 3)))
-                : null
-            }
+            {index === renderedArray.length - 1 && 
+                <Space height={Dimensions.get("window").height / 3 + 20}/>}
+            {index === renderedArray.length - 1 && search === true &&
+                <Space height={40 * (Math.ceil(relevantCategories.length / 3)) + 152.5} />}
         </>
     )
 }

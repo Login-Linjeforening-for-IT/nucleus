@@ -150,7 +150,7 @@ export default function AdScreen({ navigation }: ScreenProps): JSX.Element {
                                         <View key={index}>
                                             <TouchableOpacity onPress={() => 
                                                 navigation.navigate("SpecificAdScreen", {item: ad})}>
-                                            {index === 0 && Space(Dimensions.get("window").height / 8.1)}
+                                            {index === 0 && <Space height={Dimensions.get("window").height / 8.1} />}
                                                 <AdListItem 
                                                     clickedAds={clickedAds}
                                                     ad={ad}
@@ -172,7 +172,7 @@ export default function AdScreen({ navigation }: ScreenProps): JSX.Element {
                                     ? <ErrorMessage argument="wifi" />
                                     : <ErrorMessage argument="nomatch" />
                             : <ErrorMessage argument="wifi" />}
-                            {Space(Dimensions.get("window").height/3)}
+                            <Space height={Dimensions.get("window").height / 3}/>
                             </View>
                         </View>
                     </PanGestureHandler>

@@ -40,7 +40,7 @@ export default function Paragraph({ logo, title, body }: ParagraphProps) {
                 }}>
                     {body}
                 </Text>
-              {Space(25)}
+                <Space height={25} />
         </View>
     )
 }

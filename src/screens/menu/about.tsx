@@ -84,7 +84,7 @@ export default function AboutScreen({ navigation }: ScreenProps): JSX.Element {
                     backgroundColor: FetchColor({theme, variable: "DARKER"})
                 }}>
                     <ScrollView showsVerticalScrollIndicator={false}>
-                        {Space(Dimensions.get("window").height/8.1)}
+                        <Space height={Dimensions.get("window").height / 8.1} /> 
                         <Cluster>
                             <Text style={{
                                 ...T.bold40, 
@@ -92,7 +92,7 @@ export default function AboutScreen({ navigation }: ScreenProps): JSX.Element {
                             }}>
                                 {text.title}
                             </Text>
-                            {Space(5)}
+                            <Space height={5} />
                             <View style={GS.row}>
                                 <Text>
                                     {lang
@@ -111,18 +111,18 @@ export default function AboutScreen({ navigation }: ScreenProps): JSX.Element {
                                     </Text>
                                 </View>
                             </View>
-                            {Space(10)}
+                            <Space height={10} />
                             <Dropdown/>
-                            {Space(10)}
+                            <Space height={10} />
                             <Styret />
-                            {Space(15)}
+                            <Space height={15} />
                             <Text style={{
                                 ...T.bold25, 
                                 color: FetchColor({theme, variable: "TEXTCOLOR"})
                             }}>
                                 {text.about.title}
                             </Text>
-                            {Space(10)}
+                            <Space height={10} />
                             <View style={GS.row}>
                             <Text>
                                 <Line height={58} width={5} />
@@ -136,34 +136,34 @@ export default function AboutScreen({ navigation }: ScreenProps): JSX.Element {
                                 </Text>
                             </View>
                             </View>
-                            {Space(10)}
+                            <Space height={10} />
                             <Text style={{
                                 ...T.paragraph, 
                                 color: FetchColor({theme, variable: "TEXTCOLOR"})}}>
                                 {text.about.body.p1}
                             </Text>
-                            {Space(10)}
+                            <Space height={10} />
                             <Text style={{
                                 ...T.paragraph, 
                                 color: FetchColor({theme, variable: "TEXTCOLOR"})
                             }}>
                                 {text.about.body.p2}
                             </Text>
-                            {Space(15)}
+                            <Space height={15} />
                             <Text style={{
                                 ...T.bold25, 
                                 color: FetchColor({theme, variable: "TEXTCOLOR"})
                             }}>
                                 {text.committeeSection.title}
                             </Text>
-                            {Space(10)}
+                            <Space height={10} />
                             <Text style={{
                                 ...T.boldParagraph, 
                                 color: FetchColor({theme, variable: "TEXTCOLOR"})
                             }}>
                                 {text.committeeSection.intro}
                             </Text>
-                            {Space(10)}
+                            <Space height={10} />
                             <CommitteeView
                                 setCommittee={setCommittee}
                                 committee={committee}
@@ -182,11 +182,8 @@ export default function AboutScreen({ navigation }: ScreenProps): JSX.Element {
                                 })
                             }
 
-                            <CommitteePerson 
-                                committee={committee} 
-                            />
-
-                            {Space(10)}
+                            <CommitteePerson committee={committee} />
+                            <Space height={10} /> 
                             <Text style={{
                                 ...T.text25, 
                                 color: FetchColor({theme, variable: "TEXTCOLOR"})
@@ -207,12 +204,11 @@ export default function AboutScreen({ navigation }: ScreenProps): JSX.Element {
                                     </Text>}.
                                 </Text>
                             </View>
-                            {Space(10)}
+                            <Space height={10} /> 
                             <Social/>
                             <Copyright/>
                         </Cluster>
-                        {Space(10)}
-                        {Space(Dimensions.get("window").height/3)}
+                        <Space height={Dimensions.get("window").height / 3 + 10} /> 
                     </ScrollView>
                 </View>
             </View>
@@ -352,7 +348,7 @@ CommitteeContentProps) {
 
             {relevantCommittee.quote.length ?
                 <>
-                    {Space(10)}
+                    <Space height={10} /> 
                     <View style={GS.row}>
                         <Text>
                             <Line 
@@ -367,7 +363,7 @@ CommitteeContentProps) {
                             {relevantCommittee.quote}
                         </Text>
                     </View>
-                    {Space(10)}
+                    <Space height={10} /> 
                 </>
                 :null
             }
@@ -378,7 +374,7 @@ CommitteeContentProps) {
             }}>
                 {relevantCommittee.description}
             </Text>
-            {Space(15)}
+            <Space height={15} /> 
         </View>
     )
 }

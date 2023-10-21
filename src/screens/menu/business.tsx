@@ -35,10 +35,9 @@ JSX.Element {
                         backgroundColor: FetchColor({theme, variable: "DARKER"})
                     }}>
                         <ScrollView showsVerticalScrollIndicator={false}>
-                            {Space(Dimensions.get("window").height/8.1)}
+                            <Space height={Dimensions.get("window").height / 8.1 + 10} /> 
                             <Content />
-                            {Space(10)}
-                            {Space(Dimensions.get("window").height/3)}
+                            <Space height={Dimensions.get("window").height / 3 + 10} /> 
                             </ScrollView>
                     </View>
                 </View>
@@ -79,7 +78,7 @@ function Content(): JSX.Element {
             }}>
                 {info.title}
             </Text>
-            {Space(15)}
+            <Space height={15} /> 
             <View style={GS.row}>
                 <Text>
                     <Line height={60} width={5} />
@@ -94,7 +93,7 @@ function Content(): JSX.Element {
                 </View>
             </View>
 
-            {Space(10)}
+            <Space height={10} /> 
 
             <Paragraph 
                 logo={logo.bedpres}
@@ -122,7 +121,7 @@ function Content(): JSX.Element {
                 body={info.profiling.body}
             />
 
-            {Space(10)}
+            <Space height={10} /> 
 
             <Kontakt/>
         </Cluster>

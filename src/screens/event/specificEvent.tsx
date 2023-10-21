@@ -142,9 +142,7 @@ BottomTabScreenProps<EventStackParamList>): JSX.Element {
             <View>
                 <View style={{...ES.sesContent, backgroundColor: FetchColor({theme, variable: "BACKGROUND"})}}>
                     <ScrollView showsVerticalScrollIndicator={false}>
-
-                    {Space((Dimensions.get("window").height/8)-5)}
-
+                    <Space height={Dimensions.get("window").height / 8 - 5} />
                     {(item.image).includes(".svg") ?
                         <SvgUri
                             style={{alignSelf: "center"}}
@@ -156,7 +154,7 @@ BottomTabScreenProps<EventStackParamList>): JSX.Element {
                         style={ES.specificEventImage}
                         source={{uri: `https://cdn.login.no/img/events/${item.image}`}}
                     />:<StaticImage item={item} />}
-                    {Space(10)}
+                    <Space height={10} />
 
                     <CardSmaller>
                         <View style={ES.specificEventInfoView}>
@@ -190,7 +188,7 @@ BottomTabScreenProps<EventStackParamList>): JSX.Element {
                         </View>
                     </CardSmaller>
 
-                        {Space(5)}
+                    <Space height={5} />
                     <Card>
                         <View style={ES.specificEventInfoView}>
                             <Text style={{
@@ -208,7 +206,7 @@ BottomTabScreenProps<EventStackParamList>): JSX.Element {
                             </Text>
                         </View>
 
-                        {Space(5)}
+                        <Space height={5} />
 
                         <View style={ES.specificEventInfoView}>
                             <Text style={{
@@ -220,7 +218,7 @@ BottomTabScreenProps<EventStackParamList>): JSX.Element {
                             {"endt" in event && GetEndTime({input: event.endt, theme})}
                         </View>
 
-                        {Space(5)}
+                        <Space height={5} />
 
                         <View style={{flexDirection: "row"}}>
                             <EventLocation
@@ -295,10 +293,10 @@ BottomTabScreenProps<EventStackParamList>): JSX.Element {
                         </View>
                     </Card>
 
-                    {Space(5)}
+                    <Space height={5} />
                         <Card>
                             <View>
-                                {Space(5)}
+                            <Space height={5} />
                                 <Text style={{
                                     ...T.centered20, 
                                     color: FetchColor({theme, variable: "TEXTCOLOR"})
@@ -306,7 +304,7 @@ BottomTabScreenProps<EventStackParamList>): JSX.Element {
                                     {item.eventname}
                                 </Text>
                             </View>
-                            {Space(5)}
+                            <Space height={5} />
                             {"description" in event && event.description &&
                                 <RenderHTML
                                     baseStyle={{
@@ -317,14 +315,13 @@ BottomTabScreenProps<EventStackParamList>): JSX.Element {
                                     source={{html: event.description}}
                                 />
                             }
-                            {Space(10)}
+                            <Space height={10} />
                             <JoinButton
                                 link={link ? link : ""}
                                 updateStorage={updateStorage}
                             />
                         </Card>
-                        {Space(10)}
-                        {Space(Dimensions.get("window").height/3)}
+                        <Space height={Dimensions.get("window").height / 3 + 10} />
                     </ScrollView>
                 </View>
             </View>

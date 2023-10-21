@@ -115,9 +115,9 @@ export default function ReportScreen({ navigation }: ScreenProps): JSX.Element {
                             backgroundColor: FetchColor({theme, variable: "DARKER"})
                         }}>
                         <View>
-                            {Space((Dimensions.get("window").height/8.1)+40)}
+                        <Space height={Dimensions.get("window").height / 8.1 + 40} />
                             <Text style={{...T.centered, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{text.secure}</Text>
-                            {Space(30)}
+                            <Space height={30} />
 
                             <View style={SS.loginView}>
                                 <ClusterSmaller>
@@ -149,8 +149,7 @@ export default function ReportScreen({ navigation }: ScreenProps): JSX.Element {
                                 </ClusterSmaller>
                                 </View>
 
-                                {Space(20)}
-
+                                <Space height={20} />
                                 <View style={SS.loginView}>
                                 <CardSmaller>
                                     <View style={SS.loginView}>
@@ -183,7 +182,7 @@ export default function ReportScreen({ navigation }: ScreenProps): JSX.Element {
                                 </CardSmaller>
                                 </View>
 
-                                {Space(20)}
+                                <Space height={20} />
 
                                 <View style={SS.reportContentView}>
                                     <CardSmaller>
@@ -221,7 +220,7 @@ export default function ReportScreen({ navigation }: ScreenProps): JSX.Element {
                                 </View>
 
                                 <View>
-                                {Space(40)}
+                                <Space height={40} />
                                 <TouchableOpacity
                                     disabled ={!data.check_contentInputChange}
                                     onPress={() => sendForm()}
@@ -235,10 +234,10 @@ export default function ReportScreen({ navigation }: ScreenProps): JSX.Element {
                                         </Text>
                                     </Button>
                                 </TouchableOpacity>
-                                {Space(20)}
+                                <Space height={20} />
                                 </View>
                             </View>
-                            {Space(Dimensions.get("window").height/10)}
+                            <Space height={Dimensions.get("window").height/10} />
                         </View>
                     </View>
                 </PanGestureHandler>

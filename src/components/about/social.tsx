@@ -60,17 +60,17 @@ export default function Person({person}: PersonProps): JSX.Element {
     return (
         <View>
             <Image style={{...GS.personImage}} source={{uri: obj.img}} />
-            {Space(10)}
+            <Space height={10} />
             <View style={{position: "absolute", alignSelf: "center"}}>{CornerSquare({corner})}</View>
             <Text style={T.leaderTitle}>{obj.title}</Text>
-            {Space(5)}
+            <Space height={5} />
             <Text style={{
                 ...T.leaderName, 
                 color: FetchColor({theme, variable: "TEXTCOLOR"})
             }}>
                 {obj.name}
             </Text>
-            {Space(5)}
+            <Space height={5} />
             <TouchableOpacity onPress={() => Linking.openURL(obj.dclink)}>
                 <Text style={{...T.discord, color: FetchColor({theme, variable: "DISCORD"})}}>
                     {<Image 
@@ -80,7 +80,7 @@ export default function Person({person}: PersonProps): JSX.Element {
                     {obj.tag}
                 </Text>
             </TouchableOpacity>
-            {Space(25)}
+            <Space height={25} />
         </View>
     )
 }
@@ -234,7 +234,8 @@ export function Kontakt() {
         >
             kontakt@login.no
         </Text>
-        <Text/>{Space(12)}
+        <Text/>
+        <Space height={12} /> 
     </View>
     )
 }

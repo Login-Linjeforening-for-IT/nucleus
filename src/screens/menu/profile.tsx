@@ -87,11 +87,11 @@ JSX.Element {
                                     fill="url(#gradient)" 
                                 />
                             </Svg>
-                            {Space(Dimensions.get("window").height/8)}
+                            <Space height={Dimensions.get("window").height / 8} />
                             <Profile profile={profile} />
-                            {Space(40)}
+                            <Space height={40} />
                             <ProfileInfo profile={profileInfo} />
-                            {Space(Dimensions.get("window").height/3)}
+                            <Space height={Dimensions.get("window").height / 3} />
                         </ScrollView>
                     </View>
                 </View>
