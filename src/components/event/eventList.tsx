@@ -23,16 +23,12 @@ import { setClickedEvents } from "@redux/event"
 
 type EventListProps = {
     navigation: Navigation
-    renderedArray: EventProps[]
-    relevantCategories: CategoryWithID[]
     notification: NotificationProps
     ErrorMessage: React.FC<ErrorMessageProps>
 }
 
 type EventCardProps = {
     navigation: Navigation
-    renderedArray: EventProps[]
-    relevantCategories: CategoryWithID[]
     notification: NotificationProps
     item: EventProps
     index: number
@@ -40,8 +36,6 @@ type EventCardProps = {
 
 type ListFooterProps = {
     index: number
-    renderedArray: EventProps[]
-    relevantCategories: CategoryWithID[]
 }
 
 type FullCategorySquareProps = {
@@ -59,18 +53,16 @@ type BellProps = {
  */
 export default function EventList ({
     navigation,
-    renderedArray,
-    relevantCategories,
     notification,
     ErrorMessage
 }: EventListProps): JSX.Element {
-    const { events, search } = useSelector((state: ReduxState) => state.event)
+    const { events, search, renderedEvents } = useSelector((state: ReduxState) => state.event)
 
-    if (!renderedArray.length && !search) {
+    if (!renderedEvents.length && !search) {
         return <ErrorMessage argument="wifi" />
     }
 
-    else if (renderedArray.length > 0) {
+    else if (renderedEvents.length > 0) {
         return (
             <View>
                 <FlatList
@@ -78,12 +70,10 @@ export default function EventList ({
                     showsVerticalScrollIndicator={false}
                     numColumns={1}
                     keyExtractor={(item) => `${item.eventID}`}
-                    data={renderedArray}
+                    data={renderedEvents}
                     renderItem={({item, index}) => (
                         <EventCard
                             navigation={navigation}
-                            renderedArray={renderedArray}
-                            relevantCategories={relevantCategories}
                             notification={notification}
                             item={item}
                             index={index}
@@ -102,8 +92,6 @@ export default function EventList ({
  */
 function EventCard ({
     navigation,
-    renderedArray,
-    relevantCategories,
     notification,
     item,
     index
@@ -129,11 +117,7 @@ function EventCard ({
                         <Bell item={item} notification={notification} />
                     </View>
                 </Cluster>
-                <ListFooter
-                    index={index}
-                    renderedArray={renderedArray}
-                    relevantCategories={relevantCategories}
-                />
+                <ListFooter index={index} />
             </TouchableOpacity>
         </View>
     )
@@ -142,22 +126,21 @@ function EventCard ({
 /**
  * Displays the footer last fetch time item
  */
-export function ListFooter({index, renderedArray, relevantCategories}: 
-ListFooterProps): JSX.Element {
+export function ListFooter({index}: ListFooterProps): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
-    const { search, lastFetch } = useSelector((state: ReduxState) => state.event)
+    const { search, lastFetch, renderedEvents, categories } = useSelector((state: ReduxState) => state.event)
 
     return (
         <>
-            {index === renderedArray.length-1 && <Text style={{...T.contact, 
+            {index === renderedEvents.length-1 && <Text style={{...T.contact, 
                 color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})}}>
                     {lang ? "Oppdatert kl:":"Updated:"} {lastFetch}.
                 </Text>}
-            {index === renderedArray.length - 1 && 
+            {index === renderedEvents.length - 1 && 
                 <Space height={Dimensions.get("window").height / 3 + 20}/>}
-            {index === renderedArray.length - 1 && search === true &&
-                <Space height={40 * (Math.ceil(relevantCategories.length / 3)) + 152.5} />}
+            {index === renderedEvents.length - 1 && search === true &&
+                <Space height={40 * (Math.ceil(categories.length / 3)) + 152.5} />}
         </>
     )
 }

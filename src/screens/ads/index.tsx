@@ -32,14 +32,6 @@ import {
 const AdStack = createStackNavigator<AdStackParamList>();
 
 export default function AdScreen({ navigation }: ScreenProps): JSX.Element {
-    //  Ads from api
-    const [ads, setAds] = useState([])
-    //  Ads currently displayed
-    const [renderedArray, setRenderedArray] = useState<any>([])
-    //  Clicked Ads
-    const [clickedAds, setClickedAds] = useState<any[]>([])
-    //  Download state
-    
     // Redux states
     const { lang  } = useSelector((state: ReduxState) => state.lang)
     const { theme, isDark } = useSelector((state: ReduxState) => state.theme)
@@ -63,9 +55,7 @@ export default function AdScreen({ navigation }: ScreenProps): JSX.Element {
             animationEnabled: false
         }}
         >
-            <AdStack.Screen
-            name="root"
-            >
+            <AdStack.Screen name="root">
                 {({navigation}) => (
                     <GestureHandlerRootView>
                         <PanGestureHandler
@@ -97,11 +87,7 @@ export default function AdScreen({ navigation }: ScreenProps): JSX.Element {
                                                     ad={ad}
                                                     setClickedAds={setClickedAds}
                                                 />
-                                                <ListFooter
-                                                    index={index}
-                                                    renderedArray={renderedArray}
-                                                    relevantCategories={[]}
-                                                />
+                                                <ListFooter index={index} />
                                             </TouchableOpacity>
                                         </View>
                                     )}

@@ -13,7 +13,6 @@ from "@/utils/navigateFromPushNotification"
 import initializeNotifications 
 from "@/utils/notificationSetup"
 import Filter, {
-    fetchRelevantCategories,
     filterCategories,
     filterBoth,
     FilterUI,
@@ -33,7 +32,7 @@ import {
     PanGestureHandlerGestureEvent 
 } from "react-native-gesture-handler"
 import handleSwipe from "@/utils/handleSwipe"
-import { setClickedEvents, setEvents, setLastFetch, setLastSave } from "@redux/event"
+import { setClickedEvents, setEvents, setLastFetch, setLastSave, setRenderedEvents } from "@redux/event"
 
 const EventStack = createStackNavigator<EventStackParamList>()
 
@@ -62,36 +61,18 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
         useState<JSX.Element | undefined>(undefined)
     // Notification state
     const [shouldSetupNotifications, setShouldSetupNotifications] = useState(true)
-    // Relevant categories to filter
-    const [relevantCategories, setRelevantCategories] = 
-    useState<CategoryWithID[]>([])
-    // Events currently displayed
-    const [renderedArray, setRenderedArray] = useState<EventProps[]>([])
     // Clears text input
     const textInputRef = useRef(null)
     
     // Redux states
     const notification = useSelector((state: ReduxState) => state.notification)
-    const { events, clickedEvents, search, lastSave } = useSelector((state: ReduxState) => state.event)
+    const { events, clickedEvents, search, lastSave, renderedEvents } = useSelector((state: ReduxState) => state.event)
     const { theme, isDark } = useSelector((state: ReduxState) => state.theme)
-    const { calendarID } = useSelector((state: ReduxState) => state.misc)
     const dispatch = useDispatch()
 
     // Navigates if the app is opened by a push notification
     NavigateFromPushNotification({navigation, theme,
         setPushNotification, setPushNotificationContent})
-
-    // All categories to filter - DO NOT CHANGE IDS
-    const category = [
-        {id: 2, category: "TEKKOM"},
-        {id: 3, category: "SOCIAL"},
-        {id: 4, category: "CTF"},
-        {id: 5, category: "KARRIEREDAG"},
-        {id: 6, category: "FADDERUKA"},
-        {id: 7, category: "BEDPRES"},
-        {id: 8, category: "LOGIN"},
-        {id: 9, category: "ANNET"}
-    ]
 
     // --- SET THE COMPONENTS OF THE HEADER ---
     useEffect(()=>{
@@ -99,15 +80,12 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
             headerComponents: {
                 bottom: [<FilterUI
                     textInputRef={textInputRef}
-                    setRenderedArray={setRenderedArray}
                     setClickedCategory={setClickedCategory}
-                    relevantCategories={relevantCategories}
                     clickedCategory={clickedCategory}
                     setInput={setInput}
                 />],
                 left: [<LogoNavigation navigation={navigation} />],
                 right: [<FilterButton
-                    renderedArray={renderedArray}
                     clickedCategory={clickedCategory}
                     input={input}
                     dispatch={dispatch}
@@ -116,20 +94,16 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
                     clickedEvents={clickedEvents}
                     setDownloadState={setDownloadState}
                     downloadState={downloadState}
-                    calendarID={calendarID}
                 />]
             }
         } as Partial<BottomTabNavigationOptions>)
             
     },[
         navigation, 
-        renderedArray, 
         clickedCategory, 
         input, 
         textInputRef, 
-        setRenderedArray, 
         setClickedCategory, 
-        relevantCategories, 
         clickedCategory, 
         setInput, 
     ])
@@ -169,13 +143,13 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
                     setInput("")
                     // Resets clicked categories
                     setClickedCategory([])
-                    // Resets renderedArray to all events
-                    setRenderedArray([...events])
+                    // Resets renderedEvents to all events
+                    dispatch(setRenderedEvents([...events]))
                 }
                 // Run filter function if the filter search text is not empty
                 Filter({
                     input,
-                    setRenderedArray, 
+                    setRenderedEvents: dispatch(setRenderedEvents), 
                     events, 
                     clickedEvents, 
                     clickedCategory
@@ -186,13 +160,13 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
                     // If the filter text is not empty calls filterBoth function
                     if (input.length > 0) {
                         filterBoth({clickedCategory, clickedEvents, 
-                        events, setRenderedArray, input})
+                        events, setRenderedEvents: dispatch(setRenderedEvents), input})
                     }
                     // When categories are clicked but there is no input text
                     else {filterCategories({events, clickedEvents, 
-                        clickedCategory, setRenderedArray})}
+                        clickedCategory, setRenderedEvents})}
                 } else {filterCategories({events, clickedEvents, 
-                    clickedCategory, setRenderedArray})}
+                    clickedCategory, setRenderedEvents: dispatch(setRenderedEvents)})}
             }
         // If the filter input is null only filter categories
         } else {
@@ -200,15 +174,15 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
             if (input.length && clickedCategory.length === 0 ) {
                 // If the filter length is 0
                 if (input.length === 0) {
-                    // Resets renderedArray
-                    setRenderedArray([...events])
+                    // Resets renderedEvents
+                    setRenderedEvents([...events])
                     // Resets filter input
                     setInput("")
                     // Resets clicked categories
                     setClickedCategory([])
                 }
                 // Resets if there is no text to filter
-            } else setRenderedArray([...events])
+            } else setRenderedEvents([...events])
         }
 
         // Listens to changes in these arrays
@@ -232,22 +206,8 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
             }
         })()
 
-        // Fetches categories available to filter
-        fetchRelevantCategories({setRelevantCategories, clickedEvents, events, 
-            category})
-        events.length 
-            ? setRenderedArray([...events]) 
-            : fetchStored({setRenderedArray, setState: setEvents})
     // Renders when the screen is loaded
     }, [])
-
-    //  --- UPDATES FILTER ON EVENT CHANGE ---
-    useEffect(() => {
-        // Updates relevant categories to filter
-        fetchRelevantCategories({setRelevantCategories, clickedEvents, events, 
-            category})
-        // Listens for changes in these arrays
-    }, [events.length, clickedEvents.length])
 
     // --- FETCHES API AND UPDATES CACHE EVERY 10 SECONDS ---
     useEffect(() => {
@@ -277,13 +237,13 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
     // --- RESETS RENDERED EVENTS
     async function RenderEvents() {
         // Updates the rendered array
-        setRenderedArray([...events])
+        dispatch(setRenderedEvents([...events]))
         // Updates cache
         await AsyncStorage.setItem("cachedEvents", JSON.stringify(events))
     }
 
     // --- CHECKS FOR AND FIXES INCORRECT RENDER ---
-    if (events.length > 0 && events.length !== renderedArray.length) {
+    if (events.length > 0 && events.length !== renderedEvents.length) {
         // Fixes any errors if the user is not currently filtering
         if (!input.length) clickedCategory.length === 0 ? RenderEvents() : null
         // Fixes any potential render errors after user has been searching
@@ -322,8 +282,6 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
                                 {pushNotification && pushNotificationContent}
                                 <EventList
                                     navigation={navigation}
-                                    renderedArray={renderedArray}
-                                    relevantCategories={relevantCategories}
                                     notification={notification}
                                     ErrorMessage={ErrorMessage}
                                 />

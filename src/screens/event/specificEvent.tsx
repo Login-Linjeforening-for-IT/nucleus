@@ -245,11 +245,12 @@ BottomTabScreenProps<EventStackParamList>): JSX.Element {
                             }}>
                                 {item.organizer}{("organizerlink" in event && 
                                 event.organizerlink) || event.discordlink 
-                                || event.fblink ? " - ":null}
+                                || event.fblink ? " - " : null}
                             </Text>
-                            {event.discordlink ?
-                            <TouchableOpacity style={{minWidth: 70}} onPress={() => 
-                            {Linking.openURL(`${item.discordlink}`)}}>
+                            {event.discordlink && <TouchableOpacity 
+                                style={{minWidth: 70}} 
+                                onPress={() => 
+                                    {Linking.openURL(`${item.discordlink}`)}}>
                                     <View style={ES.row}>
                                         <Text style={{
                                             ...T.mazemap, 
@@ -259,26 +260,26 @@ BottomTabScreenProps<EventStackParamList>): JSX.Element {
                                         </Text>
                                     </View>
                                 </TouchableOpacity>
-                            :null}
-                            {event.fblink && !event.discordlink ?
-                            <TouchableOpacity 
-                                style={{minWidth: 70}} 
-                                onPress={() => {
-                                    Linking.openURL(`${event.discordlink}`)
-                                }}>
-                                    <View style={ES.row}>
-                                        <Text style={{
-                                            ...T.mazemap, 
-                                            color: FetchColor({theme, variable: "ORANGE"})
-                                        }}>
-                                            Facebook
-                                        </Text>
-                                    </View>
+                            }
+                            {event.fblink && !event.discordlink &&
+                                <TouchableOpacity 
+                                    style={{minWidth: 70}} 
+                                    onPress={() => {
+                                        Linking.openURL(`${event.discordlink}`)
+                                    }}>
+                                        <View style={ES.row}>
+                                            <Text style={{
+                                                ...T.mazemap, 
+                                                color: FetchColor({theme, variable: "ORANGE"})
+                                            }}>
+                                                Facebook
+                                            </Text>
+                                        </View>
                                 </TouchableOpacity>
-                            :null}
-                            {("organizerlink" in event && event.organizerlink) && (event.discordlink || event.fblink) ?
-                            <Text style={{...T.specificEventInfo, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{" - "}</Text>:null}
-                            {("organizerlink" in event) && event.organizerlink ?
+                            }
+                            {("organizerlink" in event && event.organizerlink) && (event.discordlink || event.fblink) &&
+                            <Text style={{...T.specificEventInfo, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{" - "}</Text>}
+                            {("organizerlink" in event) && event.organizerlink &&
                             <TouchableOpacity style={{minWidth: 70}} onPress={() => {Linking.openURL(`${event.organizerlink}`)}}>
                                     <View style={ES.row}>
                                         <Text style={{
@@ -289,7 +290,7 @@ BottomTabScreenProps<EventStackParamList>): JSX.Element {
                                         </Text>
                                     </View>
                                 </TouchableOpacity>
-                            :null}
+                            }
                         </View>
                     </Card>
 

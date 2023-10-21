@@ -10,16 +10,17 @@ type DownloadButtonProps = {
     clickedEvents: EventProps[]
     setDownloadState: React.Dispatch<React.SetStateAction<Date>>
     downloadState: Date
-    calendarID: string
 }
 
 export default function DownloadButton({clickedEvents, setDownloadState, 
-downloadState, calendarID}: DownloadButtonProps){
+downloadState}: DownloadButtonProps){
     const { isDark } = useSelector((state: ReduxState) => state.theme)
+    const { calendarID } = useSelector((state: ReduxState) => state.misc)
     const dispatch = useDispatch()
+
     return(
         <>
-            {clickedEvents.length > 0 ?
+            {clickedEvents.length > 0 &&
                 <TouchableOpacity
                     onPress={async() => await handleDownload({
                         setDownloadState, downloadState, clickedEvents, 
@@ -32,7 +33,7 @@ downloadState, calendarID}: DownloadButtonProps){
                                 : require("@assets/icons/download-orange.png")
                             : require("@assets/icons/download-black.png")} />
                 </TouchableOpacity>
-            :null}
+            }
         </>
     )
 }

@@ -7,18 +7,17 @@ import { useDispatch } from "react-redux"
 import { useSelector } from "react-redux"
 
 type FilterButtonProps = {
-    renderedArray: EventProps[]
     clickedCategory: CategoryWithID[]
     input: string
     dispatch: Dispatch<AnyAction>
 }
 
-export default function FilterButton({renderedArray, clickedCategory, input}: FilterButtonProps){
+export default function FilterButton({clickedCategory, input}: FilterButtonProps){
     const { isDark } = useSelector((state: ReduxState) => state.theme)
-    const { search } = useSelector((state: ReduxState) => state.event)
+    const { search, renderedEvents } = useSelector((state: ReduxState) => state.event)
     const dispatch = useDispatch()
 
-    if (!renderedArray.length && !clickedCategory.length && !input.length) {
+    if (!renderedEvents.length && !clickedCategory.length && !input.length) {
         return <></>
     }
     
