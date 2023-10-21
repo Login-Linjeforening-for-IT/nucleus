@@ -69,12 +69,9 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
     const [renderedArray, setRenderedArray] = useState<EventProps[]>([])
     // Clears text input
     const textInputRef = useRef(null)
-
-    // const [event, setEvent] = useState<EventProps>()
     
     // Redux states
     const notification = useSelector((state: ReduxState) => state.notification)
-    const { login } = useSelector((state: ReduxState) => state.login)
     const { events, clickedEvents, search, lastSave } = useSelector((state: ReduxState) => state.event)
     const { theme, isDark } = useSelector((state: ReduxState) => state.theme)
     const { calendarID } = useSelector((state: ReduxState) => state.misc)
@@ -126,20 +123,15 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
             
     },[
         navigation, 
-        search, 
         renderedArray, 
         clickedCategory, 
         input, 
-        isDark, 
         textInputRef, 
         setRenderedArray, 
         setClickedCategory, 
         relevantCategories, 
         clickedCategory, 
-        theme, 
-        search, 
         setInput, 
-        events
     ])
 
     //  --- FETCHES CLICKED EVENTS WHEN SCREEN BECOMES VISIBLE ---
@@ -302,8 +294,8 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
 
     // --- SETUP CODE ONCE APP IS DOWNLOADED---
     // Displays when the API was last fetched successfully
-    if (lastSave === "") (async() => {dispatch(setLastSave(LastFetch()))})()
-
+    if (lastSave === "") {(async() => {dispatch(setLastSave(LastFetch()))})()
+}
     initializeNotifications({
         shouldRun: shouldSetupNotifications,
         setShouldSetupNotifications: setShouldSetupNotifications,
@@ -333,7 +325,6 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
                                     renderedArray={renderedArray}
                                     relevantCategories={relevantCategories}
                                     notification={notification}
-                                    events={events}
                                     ErrorMessage={ErrorMessage}
                                 />
                             </View>

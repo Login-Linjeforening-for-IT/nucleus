@@ -18,8 +18,7 @@ import {
     View,
     Platform,
 } from "react-native"
-import { useSelector } from "react-redux"
-import { useDispatch } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { setClickedEvents } from "@redux/event"
 
 type EventListProps = {
@@ -27,7 +26,6 @@ type EventListProps = {
     renderedArray: EventProps[]
     relevantCategories: CategoryWithID[]
     notification: NotificationProps
-    events: EventProps[]
     ErrorMessage: React.FC<ErrorMessageProps>
 }
 
@@ -64,10 +62,9 @@ export default function EventList ({
     renderedArray,
     relevantCategories,
     notification,
-    events,
     ErrorMessage
 }: EventListProps): JSX.Element {
-    const { search } = useSelector((state: ReduxState) => state.event)
+    const { events, search } = useSelector((state: ReduxState) => state.event)
 
     if (!renderedArray.length && !search) {
         return <ErrorMessage argument="wifi" />
@@ -95,9 +92,9 @@ export default function EventList ({
                 />
             </View>
         )
-    } else return <ErrorMessage 
-        argument={!events.length ? "wifi" : "nomatch"} 
-    />
+    } else {
+        return <ErrorMessage argument={!events.length ? "wifi" : "nomatch"} />
+    }
 }
 
 /**
