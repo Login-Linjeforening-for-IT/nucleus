@@ -60,10 +60,8 @@ export default function Person({person}: PersonProps): JSX.Element {
     return (
         <View>
             <Image style={{...GS.personImage}} source={{uri: obj.img}} />
-            <Space height={10} />
             <View style={{position: "absolute", alignSelf: "center"}}>{CornerSquare({corner})}</View>
             <Text style={T.leaderTitle}>{obj.title}</Text>
-            <Space height={5} />
             <Text style={{
                 ...T.leaderName, 
                 color: FetchColor({theme, variable: "TEXTCOLOR"})
@@ -395,9 +393,7 @@ function personInfo({person, lang}: personInfoProps) {
 }
 
 export function StaticImage({item}: {item: EventProps}): JSX.Element {
-    let image = null
-
-    const images = {
+    const images: Record<string, ImageSourcePropType> = {
         tekkom:  require(`../../../public/assets/committee/tekkom/tekkom.png`),
         ctf:     require(`../../../public/assets/committee/ctfkom/ctf.png`),
         bedpres: require(`../../../public/assets/committee/bedkom/bedkom.png`),
@@ -406,14 +402,7 @@ export function StaticImage({item}: {item: EventProps}): JSX.Element {
         annet:   require(`../../../public/assets/categories/annet.png`),
     }
 
-    switch (item.category) {
-        case "TEKKOM":  image = images.tekkom;  break
-        case "CTF":     image = images.ctf;     break
-        case "SOCIAL":  image = images.social;  break
-        case "LOGIN":   image = images.login;   break
-        case "BEDPRES": image = images.bedpres; break
-        default:        image = images.annet;   break
-    }
+    const image = images[item.category.toUpperCase()] || images.annet;
 
     return <Image style={ES.specificEventImage} source={image} />
 }

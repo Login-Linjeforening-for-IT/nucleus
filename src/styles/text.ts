@@ -106,6 +106,7 @@ export const T = StyleSheet.create({
         color: "#fd8738",
         fontSize: 20,
         fontWeight: "bold",
+        marginBottom: 5
     },
     // Committee leader name text
     leaderName: {

@@ -125,6 +125,7 @@ export const GS = StyleSheet.create({
         alignSelf: "center",
         width: 220,
         height: 220,
+        marginBottom: 10
     },
     socialView: {
         flexDirection: "row",
