@@ -19,7 +19,7 @@ import {
     Platform,
 } from "react-native"
 import { useSelector, useDispatch } from "react-redux"
-import { setClickedEvents } from "@redux/event"
+import { setClickedEvents, setEvent, toggleSearch } from "@redux/event"
 
 type EventListProps = {
     navigation: Navigation
@@ -90,11 +90,14 @@ EventListProps): JSX.Element {
 function EventCard ({navigation, notification, item, index}: EventCardProps): 
 JSX.Element {
     const { search } = useSelector((state: ReduxState) => state.event)
+    const dispatch = useDispatch()
 
     return (
         <View>
             <TouchableOpacity onPress={() => {
-                navigation.navigate("SpecificEventScreen", {item: item})
+                search && dispatch(toggleSearch())
+                dispatch(setEvent(item))
+                navigation.navigate("SpecificEventScreen")
             }}>
                 {index === 0
                     ? search === false
@@ -176,7 +179,7 @@ function Bell({item, notification}: BellProps): JSX.Element {
     
     return (
         <View style={ES.view3}>
-            <TouchableOpacity onPress={() => {
+            <TouchableOpacity style={{paddingBottom: 10}} onPress={() => {
                 topic({topicID: `${item.eventID}`, lang, status: false, 
                     category: (item.category).toLowerCase(), catArray: 
                     notificationArray({notification, category: item.category})})
