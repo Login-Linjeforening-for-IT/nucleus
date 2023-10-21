@@ -116,7 +116,7 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
                     items: events, 
                     theme
                 })],
-                left: [LogoNavigation(navigation, isDark)],
+                left: [<LogoNavigation navigation={navigation} />],
                 right: [FilterButton({
                     renderedArray, 
                     clickedCategory, 

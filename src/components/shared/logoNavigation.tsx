@@ -3,8 +3,15 @@ import { ParamListBase } from "@react-navigation/native"
 import MS from "@styles/menuStyles"
 import { Image } from "react-native"
 import { TouchableOpacity } from "react-native"
+import { useSelector } from "react-redux"
 
-export default function LogoNavigation (navigation: BottomTabNavigationProp<ParamListBase>, isDark: boolean): JSX.Element {
+type LogoNavigationProps = {
+    navigation: BottomTabNavigationProp<ParamListBase>
+}
+
+export default function LogoNavigation ({navigation}: LogoNavigationProps): JSX.Element {
+    const { isDark } = useSelector((state: ReduxState) => state.theme )
+
     return (
         <TouchableOpacity
             // TODO: Place initial screen name i state so 'Eventscreen ikke er hardcoded'

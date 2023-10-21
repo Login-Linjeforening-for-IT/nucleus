@@ -62,7 +62,7 @@ export default function AdScreen({ navigation }: ScreenProps): JSX.Element {
         navigation.setOptions({
             headerComponents: {
                 bottom: [],
-                left: [LogoNavigation(navigation, isDark)],
+                left: [<LogoNavigation navigation={navigation} />],
                 right: []
             }
         } as Partial<BottomTabNavigationOptions>)
