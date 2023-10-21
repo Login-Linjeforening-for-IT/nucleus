@@ -25,7 +25,7 @@ export default function Paragraph({ logo, title, body }: ParagraphProps) {
 
     return (
         <View>
-              <View style={GS.row}>
+            <View style={GS.row}>
                 <Image style={GS.medium} source={logo} />
                 <Text style={{
                     ...T.bold28, 
@@ -33,14 +33,14 @@ export default function Paragraph({ logo, title, body }: ParagraphProps) {
                 }}>
                     {title}
                 </Text>
-              </View>
-              <Text style={{
-                    ...T.paragraph, 
-                    color: FetchColor({theme, variable: "TEXTCOLOR"})
-                }}>
-                    {body}
-                </Text>
-                <Space height={25} />
+            </View>
+            <Text style={{
+                ...T.paragraph, 
+                color: FetchColor({theme, variable: "TEXTCOLOR"})
+            }}>
+                {body}
+            </Text>
+            <Space height={25} />
         </View>
     )
 }
