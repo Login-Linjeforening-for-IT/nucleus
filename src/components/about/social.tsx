@@ -107,8 +107,7 @@ export function AllComitees(): JSX.Element {
  * @returns Social media icons
  */
 export function Social() {
-    const { theme } = useSelector((state: ReduxState) => state.theme)
-    const isDark = theme === 0 || theme === 2 || theme === 3 ? true : false
+    const { isDark } = useSelector((state: ReduxState) => state.theme)
 
     const media: MediaProps = {
         discord: {

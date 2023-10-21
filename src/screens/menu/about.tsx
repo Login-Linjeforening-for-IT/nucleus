@@ -39,20 +39,17 @@ type CommitteePersonProps = {
 type CommitteeImageTouchableProps = {
     setCommittee: React.Dispatch<React.SetStateAction<number>>
     committee: number
-    isDark: boolean
     index: number
 }
 
 type CommitteeViewProps = {
     setCommittee: React.Dispatch<React.SetStateAction<number>>
     committee: number
-    isDark: boolean
 }
 
 type CommitteeContentProps = {
     index: number
     relevantCommittee: CommitteeInfo
-    isDark: boolean
 }
 
 type CommitteeInfo = {
@@ -67,7 +64,6 @@ export default function AboutScreen({ navigation }: ScreenProps): JSX.Element {
     const { login } = useSelector((state: ReduxState) => state.login)
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const screenWidth = Dimensions.get("window").width
-    const isDark = theme === 0 || theme === 2 || theme === 3 ? true : false
     const [committee, setCommittee] = useState(0)
     const text = lang ? no : en
     const info = text.committeeSection.info
@@ -167,7 +163,6 @@ export default function AboutScreen({ navigation }: ScreenProps): JSX.Element {
                             <CommitteeView
                                 setCommittee={setCommittee}
                                 committee={committee}
-                                isDark={isDark}
                             />
                             {
                                 info.map((relevantCommittee, index) => {
@@ -175,7 +170,6 @@ export default function AboutScreen({ navigation }: ScreenProps): JSX.Element {
                                         return <CommitteeContent
                                             key={index}
                                             index={index}
-                                            isDark={isDark}
                                             relevantCommittee={relevantCommittee}
                                         />
                                     }
@@ -273,9 +267,7 @@ function CommitteePerson({committee}: CommitteePersonProps) {
     } else return AllComitees()
 }
 
-function CommitteeView({setCommittee, committee, isDark}: 
-CommitteeViewProps) {
-    const { theme } = useSelector((state: ReduxState) => state.theme)
+function CommitteeView({setCommittee, committee}: CommitteeViewProps) {
     let elements: JSX.Element[] = []
     
     for (let i = 0; i < 6; i+=3) {
@@ -284,19 +276,16 @@ CommitteeViewProps) {
                 <CommitteeImageTouchable 
                     setCommittee={setCommittee}
                     committee={committee}
-                    isDark={isDark}
                     index={i}
                     />
                 <CommitteeImageTouchable 
                     setCommittee={setCommittee}
                     committee={committee}
-                    isDark={isDark}
                     index={i+1}
                     />
                 <CommitteeImageTouchable 
                     setCommittee={setCommittee}
                     committee={committee}
-                    isDark={isDark}
                     index={i+2}
                     />
             </View>
@@ -306,10 +295,10 @@ CommitteeViewProps) {
     return elements
 }
 
-function CommitteeImageTouchable({setCommittee, committee, isDark, 
+function CommitteeImageTouchable({setCommittee, committee, 
 index}: CommitteeImageTouchableProps): JSX.Element {
+    const { theme, isDark } = useSelector((state: ReduxState) => state.theme)
     const image = committee === index ? "" : isDark ? "dark" : "gray"
-    const { theme } = useSelector((state: ReduxState) => state.theme)
 
     return (
         <TouchableOpacity onPress={() => setCommittee(index)}>
@@ -326,9 +315,9 @@ index}: CommitteeImageTouchableProps): JSX.Element {
     )
 }
 
-function CommitteeContent({index, relevantCommittee, isDark}: 
+function CommitteeContent({index, relevantCommittee}: 
 CommitteeContentProps) {
-    const { theme } = useSelector((state: ReduxState) => state.theme)
+    const { theme, isDark } = useSelector((state: ReduxState) => state.theme)
     
     return (
         <View key={index}>

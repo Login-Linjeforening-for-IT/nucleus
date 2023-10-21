@@ -14,8 +14,7 @@ type BellIconProps = {
  */
 export default function BellIcon({orange}: BellIconProps): JSX.Element {
     let icon = require("@assets/icons/bell.png")
-    const { theme } = useSelector((state: ReduxState) => state.theme)
-    let isDark = theme === 0 || theme === 2 || theme === 3 ? true : false
+    const { isDark } = useSelector((state: ReduxState) => state.theme)
 
     if (orange)         icon = require("@assets/icons/bell-orange.png")
     else if (!isDark)   icon = require("@assets/icons/bell-black.png")

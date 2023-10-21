@@ -22,9 +22,8 @@ type SmallProfileProps = {
 export default function SmallProfile({navigation, profile, login}:
 SmallProfileProps): JSX.Element {  // SVG showing the color of the category
 
-    const { theme } = useSelector((state: ReduxState) => state.theme)
+    const { theme, isDark } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
-    const isDark = theme === 0 || theme === 2 || theme === 3 ? true : false
 
     return (
         <TouchableOpacity onPress={() => login

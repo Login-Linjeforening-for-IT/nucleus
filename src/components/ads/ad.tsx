@@ -253,9 +253,8 @@ export function AdDescription({ad}: {ad: AdProps}) {
  * @returns Social media icons
  */
 export function AdMedia({ad}: {ad: AdProps}) {
-    const { theme } = useSelector((state: ReduxState) => state.theme)
+    const { theme, isDark } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
-    const isDark = theme === 0 || theme === 2 || theme === 3 ? true : false
 
     const social = [
         {
