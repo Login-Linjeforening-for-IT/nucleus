@@ -30,6 +30,7 @@ type DetailedEventProps = EventProps & DetailedProps
 type ReduxState = {
     theme: {
         theme: number
+        isDark: boolean
     }
     login: {
         login: boolean
