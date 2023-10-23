@@ -34,14 +34,14 @@ export default function Navigator(): JSX.Element {
             ? require("@assets/menu/calendar777.png")
             : require("@assets/menu/calendar-black.png")
         },
-        {
-            name: "AdScreen",
-            component: AdScreen,
-            focusedIcon: require("@assets/menu/business-orange.png"),
-            icon: isDark
-            ? require("@assets/menu/business.png")
-            : require("@assets/menu/business-black.png")
-        },
+        // {
+        //     name: "AdScreen",
+        //     component: AdScreen,
+        //     focusedIcon: require("@assets/menu/business-orange.png"),
+        //     icon: isDark
+        //     ? require("@assets/menu/business.png")
+        //     : require("@assets/menu/business-black.png")
+        // },
         {
             name: "MenuScreen",
             component: MenuScreen,

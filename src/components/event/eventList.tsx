@@ -55,6 +55,8 @@ export default function EventList ({navigation, notification, ErrorMessage}:
 EventListProps): JSX.Element {
     const { events, search, renderedEvents } = useSelector((state: ReduxState) => state.event)
 
+    console.log(useSelector((state: ReduxState) => state.event.renderedEvents))
+
     if (!renderedEvents.length && !search) {
         return <ErrorMessage argument="wifi" />
     }

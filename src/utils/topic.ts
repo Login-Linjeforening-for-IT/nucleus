@@ -1,6 +1,6 @@
 // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 3/6
 // import messaging from "@react-native-firebase/messaging"
-import subscribeToTopic from "@utils/subscribeToTopic"
+// import subscribeToTopic from "@utils/subscribeToTopic"
 // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 3/6
 
 type topicParams = {

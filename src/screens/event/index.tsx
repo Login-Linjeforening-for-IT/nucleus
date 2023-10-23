@@ -62,17 +62,6 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
     NavigateFromPushNotification({navigation, theme,
         setPushNotification, setPushNotificationContent})
 
-    // --- SET THE COMPONENTS OF THE HEADER ---
-    useEffect(()=>{
-        navigation.setOptions({
-            headerComponents: {
-                bottom: [<FilterUI />],
-                left: [<LogoNavigation navigation={navigation} />],
-                right: [<FilterButton/>, <DownloadButton/>]
-            }
-        } as Partial<BottomTabNavigationOptions>)
-    }, [navigation, input])
-
     //  --- FETCHES CLICKED EVENTS WHEN SCREEN BECOMES VISIBLE ---
     useFocusEffect(
         // Callback to avoid too many rerenders
