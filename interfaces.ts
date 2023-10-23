@@ -8,6 +8,7 @@ import {
     BottomTabNavigationProp
 } from "@react-navigation/bottom-tabs/lib/typescript/src/types"
 import { ReactNode } from "react"
+import { StackHeaderProps, StackNavigationOptions } from "@react-navigation/stack"
 
 export interface ExtendedDescriptor {
     options: ExtendedRouteOptions
@@ -29,7 +30,12 @@ export interface ExtendedRouteOptions extends Omit<BottomTabNavigationOptions, '
     icon?: ImageSourcePropType
     themeIcon?: ImageSourcePropType
     headerComponents?: {bottom?: JSX.Element[], right?: JSX.Element[], left?: JSX.Element[]}
-    header?: (props: ExtendedBottomTabHeaderProps)=>ReactNode
+    header?: (props: ExtendedBottomTabHeaderProps | StackHeaderProps)=>ReactNode
+}
+
+export interface ExtendedStackRouteOptions extends Omit<StackNavigationOptions, 'header'> {
+    headerComponents?: {bottom?: JSX.Element[], right?: JSX.Element[], left?: JSX.Element[]}
+    header?: (props: StackHeaderProps)=>ReactNode
 }
 
 export interface ScreenProps {

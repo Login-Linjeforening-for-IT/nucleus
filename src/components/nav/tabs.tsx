@@ -59,7 +59,7 @@ export default function Navigator(): JSX.Element {
                 initialRouteName={screens[0].name}
                 backBehavior="history"
                 screenOptions={{ 
-                    headerShown: true,
+                    headerShown: false,
                     headerTransparent: true,
                     header: props => props.route.name !== "ProfileScreen" ? 
                         <Header {...props} /> : null

@@ -20,13 +20,14 @@ import Filter, {
 } from "@/components/shared/filter"
 import LastFetch, { fetchState, fetchStored, getData } from "@/utils/fetch"
 import { View, StatusBar as StatusBarReact } from "react-native"
-import { ScreenProps } from "@interfaces"
+import { ExtendedRouteOptions, ExtendedStackRouteOptions, ScreenProps } from "@interfaces"
 import { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs"
 import LogoNavigation from "@/components/shared/logoNavigation"
 import FilterButton from "@/components/shared/filterButton"
 import DownloadButton from "@/components/shared/downloadButton"
 import { createStackNavigator } from "@react-navigation/stack"
 import SpecificEventScreen from "./specificEvent"
+import Header from "@components/nav/header"
 
 const EventStack = createStackNavigator<EventStackParamList>()
 
@@ -255,7 +256,11 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
     // --- DISPLAYS THE EVENTSCREEN ---
     return (
         <EventStack.Navigator
-        screenOptions={{headerShown: false, animationEnabled: false}}>
+        screenOptions={{
+            animationEnabled: false,
+            header: props => props.route.name !== "ProfileScreen" ? 
+                <Header {...props} /> : null
+            } as ExtendedStackRouteOptions}>
             <EventStack.Screen name="root">
                 {({navigation}) => (
                     <View>
