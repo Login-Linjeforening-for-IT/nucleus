@@ -30,6 +30,7 @@ import NotificationScreen from "./notifications"
 import ReportScreen from "./report"
 import SettingScreen from "./settings"
 import SmallProfile from "@components/profile/smallProfile"
+import Header from "@components/nav/header"
 
 type MenuItemProps = {
     index: number
@@ -86,10 +87,24 @@ export default function MenuScreen({ navigation }: ScreenProps): JSX.Element {
 
     return (
         <MenuStack.Navigator
-        screenOptions={{headerShown: false, animationEnabled: false}}>
+        screenOptions={{
+            animationEnabled: false,
+            headerTransparent: true,
+            header: props => <Header {...props} />
+            }}>
             <MenuStack.Screen 
-                name="root">
+                name="MenuScreen">
                 {({navigation})=>{
+
+                    // --- SET THE COMPONENTS OF THE HEADER ---
+                    useEffect(()=>{
+                        navigation.setOptions({
+                            headerComponents: {
+                                bottom: [],
+                                left: [LogoNavigation(navigation, isDark)],
+                                right: []
+                            }} as Partial<BottomTabNavigationOptions>)   
+                        },[navigation, isDark])
                     return(<View style={{
                         ...GS.content, 
                         backgroundColor: FetchColor({theme, variable: "DARKER"})

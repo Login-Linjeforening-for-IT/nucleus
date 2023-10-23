@@ -9,9 +9,9 @@ import { RouteProp } from "@react-navigation/native"
 import * as WebBrowser from 'expo-web-browser';
 import { SvgXml } from "react-native-svg"
 import USBicon from "@assets/menu/USB-temp-icon.svg"
+import { BottomTabBarProps } from "@react-navigation/bottom-tabs"
 
-export default function Footer({ state, descriptors, navigation }: 
-ExtendedBottomTabBarProps): JSX.Element {
+export default function Footer({ state, descriptors, navigation }: BottomTabBarProps): JSX.Element {
     // Get the current theme
     const { theme } = useSelector((state: ReduxState) => state.theme)
 
@@ -28,11 +28,9 @@ ExtendedBottomTabBarProps): JSX.Element {
                     ...MS.bMenu,
                 }}>
                 {/* Create the icons based on options passed from stack.js */}
-                {state.routes.map((route: RouteProp<RootStackParamList, any>, 
+                {state.routes.map((route, 
                     index: number) => {
                     const { options } = descriptors[route.key]
-                    
-                    if (!options.display) return
 
                     const isFocused = state.index === index
                     // Emitt the normal tab events
@@ -49,9 +47,6 @@ ExtendedBottomTabBarProps): JSX.Element {
                             navigation.navigate(route.name, {merge: true})
                         }
                     }
-
-                    if (!options.focusedIcon || !options.icon) return
-
                     const onLongPress = () => {
                         navigation.emit({
                             type: "tabLongPress",
@@ -70,12 +65,7 @@ ExtendedBottomTabBarProps): JSX.Element {
                             onPress={onPress}
                             onLongPress={onLongPress}
                         >
-                            <Image 
-                                style={MS.bMenuIcon} 
-                                source={isFocused 
-                                    ? options.focusedIcon
-                                    : options.icon} 
-                            />
+                            {options.tabBarIcon?options.tabBarIcon({focused: isFocused, color: '', size: 0}):null}
                         </TouchableOpacity>
                     )
                 })}
@@ -89,7 +79,7 @@ ExtendedBottomTabBarProps): JSX.Element {
                     }}
                 >
                     <SvgXml
-                        width={MS.bMenuIconTouchableOpacity.width-50}
+                        width={MS.bMenuIconTouchableOpacity.width-55}
                         height={MS.bMenuIconTouchableOpacity.height}
                         xml={USBicon}
                     />

@@ -1,14 +1,14 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { ExtendedRouteOptions, StackProps } from "@interfaces"
 import { NavigationContainer } from "@react-navigation/native"
-import SpecificAdScreen from "@screens/ads/specificAd"
 import Footer from "@nav/footer"
 import { useSelector } from "react-redux"
 import EventScreen from "@screens/event"
 import MenuScreen from "@screens/menu"
 import AdScreen from "@screens/ads"
 import React from "react"
-import Header from "@nav/header"
+import { Image } from "react-native"
+import MS from "@styles/menuStyles"
 
 // Declares Tab to equal CBTN function
 const Tab = createBottomTabNavigator()
@@ -27,7 +27,7 @@ export default function Navigator(): JSX.Element {
 
     const screens = [
         {
-            name: "Events",
+            name: "EventScreen",
             component: EventScreen,
             focusedIcon: require("@assets/menu/calendar-orange.png"),
             icon: isDark
@@ -35,7 +35,7 @@ export default function Navigator(): JSX.Element {
             : require("@assets/menu/calendar-black.png")
         },
         {
-            name: "Ads",
+            name: "AdScreen",
             component: AdScreen,
             focusedIcon: require("@assets/menu/business-orange.png"),
             icon: isDark
@@ -43,7 +43,7 @@ export default function Navigator(): JSX.Element {
             : require("@assets/menu/business-black.png")
         },
         {
-            name: lang ? "Meny" : "Menu",
+            name: "MenuScreen",
             component: MenuScreen,
             focusedIcon: require("@assets/menu/menu-orange.png"),
             icon: isDark
@@ -59,11 +59,8 @@ export default function Navigator(): JSX.Element {
                 initialRouteName={screens[0].name}
                 backBehavior="history"
                 screenOptions={{ 
-                    headerShown: false,
-                    headerTransparent: true,
-                    header: props => props.route.name !== "ProfileScreen" ? 
-                        <Header {...props} /> : null
-                } as ExtendedRouteOptions}
+                    headerShown: false
+                }}
                 // Sets the tab bar component
                 tabBar={props => <Footer 
                     state={props.state} 
@@ -73,21 +70,23 @@ export default function Navigator(): JSX.Element {
                 />}
             >
                 {/* Maps over all screens, returning each of */}
-                {screens.map((screen: StackProps) => {
+                {screens.map((screen: StackProps, index) => {
                     return (
                         <Tab.Screen 
                             key={screen.name} 
                             options={({
-                                // Set true if it should be shown in tab bar
-                                display: true,
-
-                                // Icon to use while the screen is visible
-                                focusedIcon: screen.focusedIcon,
-
-                                // Icon with color fit to active theme
-                                icon: screen.icon
-                            }) as ExtendedRouteOptions}
-                            name={screen.name}
+                                tabBarIcon: ({focused})=>{
+                                    return (
+                                        <Image
+                                            style={MS.bMenuIcon} 
+                                            source={focused 
+                                                ? screen.focusedIcon
+                                                : screen.icon} 
+                                        />
+                                    )
+                                }
+                            })}
+                            name={index.toString()}
                             component={screen.component}
                         />
                     )

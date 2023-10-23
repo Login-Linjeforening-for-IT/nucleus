@@ -2,7 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage"
 import { ErrorMessage } from "@/components/shared/utils"
 import storeEvents from "@/utils/storeEvents"
 import React, { useEffect, useState, useRef } from "react"
-import { useFocusEffect } from "@react-navigation/native"
+import { useFocusEffect, useRoute } from "@react-navigation/native"
 import EventList from "@components/event/eventList"
 import { useDispatch, useSelector } from "react-redux"
 import { StatusBar } from "expo-status-bar"
@@ -19,9 +19,9 @@ import Filter, {
     FilterUI,
 } from "@/components/shared/filter"
 import LastFetch, { fetchState, fetchStored, getData } from "@/utils/fetch"
-import { View, StatusBar as StatusBarReact } from "react-native"
-import { ExtendedRouteOptions, ExtendedStackRouteOptions, ScreenProps } from "@interfaces"
-import { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs"
+import { View } from "react-native"
+import { ScreenProps } from "@interfaces"
+import { BottomTabBarProps, BottomTabNavigationOptions } from "@react-navigation/bottom-tabs"
 import LogoNavigation from "@/components/shared/logoNavigation"
 import FilterButton from "@/components/shared/filterButton"
 import DownloadButton from "@/components/shared/downloadButton"
@@ -43,7 +43,9 @@ const EventStack = createStackNavigator<EventStackParamList>()
  * @param {navigation} Navigation Navigation route
  * @returns EventScreen
  */
-export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
+export default function EventScreen({ navigation }: BottomTabBarProps): JSX.Element {
+    const route = useRoute()
+
     // Clicked events
     const [clickedEvents, setClickedEvents] = useState<EventProps[]>([])
     // Clicked categories
@@ -79,6 +81,7 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
     const { theme } =       useSelector((state: ReduxState) => state.theme)
     const { calendarID } =  useSelector((state: ReduxState) => state.misc)
     const { search } =      useSelector((state: ReduxState) => state.event)
+    const { lang } =        useSelector((state: ReduxState) => state.lang)
     const isDark = theme === 0 || theme === 2 || theme === 3 ? true : false
     const dispatch = useDispatch()
 
@@ -98,17 +101,7 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
         {id: 9, category: "ANNET"}
     ]
 
-    // --- SET THE COMPONENTS OF THE HEADER ---
-    useEffect(()=>{
-        navigation.setOptions({
-            headerComponents: {
-                bottom: [FilterUI({textInputRef, setRenderedArray, setClickedCategory, relevantCategories, clickedCategory, search, setInput, items: events, theme})],
-                left: [LogoNavigation(navigation, isDark)],
-                right: [FilterButton({renderedArray, clickedCategory, input, isDark, dispatch, search}), DownloadButton(clickedEvents, setDownloadState, downloadState, calendarID, dispatch, isDark)]
-            }
-        } as Partial<BottomTabNavigationOptions>)
-            
-    },[navigation, search, renderedArray, clickedCategory, input, isDark, textInputRef, setRenderedArray, setClickedCategory, relevantCategories, clickedCategory, theme, search, setInput, events])
+    
 
     //  --- FETCHES CLICKED EVENTS WHEN SCREEN BECOMES VISIBLE ---
     useFocusEffect(
@@ -258,11 +251,24 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
         <EventStack.Navigator
         screenOptions={{
             animationEnabled: false,
-            header: props => props.route.name !== "ProfileScreen" ? 
-                <Header {...props} /> : null
-            } as ExtendedStackRouteOptions}>
-            <EventStack.Screen name="root">
-                {({navigation}) => (
+            headerTransparent: true,
+            header: props => <Header {...props} />
+            }}>
+            <EventStack.Screen 
+                name="EventScreen"
+            >
+                {({navigation}) => {
+                    // --- SET THE COMPONENTS OF THE HEADER ---
+                    useEffect(()=>{
+                        navigation.setOptions({
+                            headerComponents: {
+                                bottom: [FilterUI({textInputRef, setRenderedArray, setClickedCategory, relevantCategories, clickedCategory, search, setInput, items: events, theme})],
+                                left: [LogoNavigation(navigation, isDark)],
+                                right: [FilterButton({renderedArray, clickedCategory, input, isDark, dispatch, search}), DownloadButton(clickedEvents, setDownloadState, downloadState, calendarID, dispatch, isDark)]
+                            }} as Partial<BottomTabNavigationOptions>)   
+                        },[navigation, search, renderedArray, clickedCategory, input, isDark, textInputRef, setRenderedArray, setClickedCategory, relevantCategories, clickedCategory, theme, search, setInput, events])
+                    
+                    return (
                     <View>
                     <StatusBar style={isDark ? "light" : "dark"} />
                     <View style={{
@@ -284,7 +290,7 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
                         />
                     </View>
                 </View>
-                )}
+                )}}
             </EventStack.Screen>
             <EventStack.Screen 
                 name="SpecificEventScreen"

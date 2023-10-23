@@ -5,7 +5,7 @@ import { ListFooter } from "@components/event/eventList"
 import Space, { ErrorMessage } from "@/components/shared/utils"
 import handleDownload from "@/utils/calendar"
 import storeAds from "@/utils/storeEvents"
-import { useFocusEffect } from "@react-navigation/native"
+import { useFocusEffect, useRoute } from "@react-navigation/native"
 import { useDispatch, useSelector } from "react-redux"
 import { AdListItem } from "@/components/ads/adListItem"
 import React, { useEffect, useState } from "react"
@@ -19,6 +19,7 @@ import LogoNavigation from "@/components/shared/logoNavigation"
 import { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs"
 import { createStackNavigator } from "@react-navigation/stack"
 import SpecificAdScreen from "./specificAd"
+import Header from "@components/nav/header"
 
 /**
  * Parent EventScreen function
@@ -114,14 +115,27 @@ export default function AdScreen({ navigation }: ScreenProps): JSX.Element {
     return (
         <AdStack.Navigator
         screenOptions={{
-            headerShown: false,
-            animationEnabled: false
-        }}
+            animationEnabled: false,
+            headerTransparent: true,
+            header: props => <Header {...props} />
+            }}
         >
             <AdStack.Screen
-            name="root"
+            name="AdScreen"
+            options={{}}
             >
-                {({navigation})=>{return(
+                {({navigation})=>{
+                    // --- SET THE COMPONENTS OF THE HEADER ---
+                    useEffect(()=>{
+                        navigation.setOptions({
+                            headerComponents: {
+                                bottom: [],
+                                left: [LogoNavigation(navigation, isDark)],
+                                right: []
+                            }} as Partial<BottomTabNavigationOptions>)   
+                        },[navigation, isDark])
+                    
+                    return(
                     <View>
                     <StatusBar style={isDark ? "light" : "dark"} />
                     <View style={{

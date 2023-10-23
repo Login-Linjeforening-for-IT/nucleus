@@ -228,12 +228,12 @@ type NotificationList = {
 }
 
 type EventStackParamList = {
-    root: undefined
+    EventScreen: undefined
     SpecificEventScreen: {item: EventProps}
 }
 
 type AdStackParamList = {
-    root: undefined
+    AdScreen: undefined
     SpecificAdScreen: {item: AdProps}
 }
 
@@ -265,4 +265,4 @@ type ItemProps = {
 
 type MenuStackParamList = {
     [k in MenuRoutes]+?: ItemProps;
-} & {root: undefined}
+} & {MenuScreen: undefined}
