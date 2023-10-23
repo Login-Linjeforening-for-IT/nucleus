@@ -15,7 +15,11 @@ import MS from '@styles/menuStyles'
 export default function Header({ options, route, navigation }: HeaderProps): ReactNode {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang  } = useSelector((state: ReduxState) => state.lang)
-    const title = route.name && (lang ? require('@text/no.json').screens[route.name] : require('@text/en.json').screens[route.name])
+    const { event } = useSelector((state: ReduxState) => state.event)
+    let title = route.name && (lang ? require('@text/no.json').screens[route.name] : require('@text/en.json').screens[route.name])
+
+    if (!title) title = event.eventname
+
     const isDark = theme === 0 || theme === 2 || theme === 3 ? true : false
     const  [backIcon, setBackIcon] = useState(isDark 
         ? require('@assets/icons/goback777.png')

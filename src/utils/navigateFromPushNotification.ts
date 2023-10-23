@@ -1,12 +1,10 @@
 // COMMENT IN THIS BOX WHILE TESTING IN EXPO 6/6
-import messaging, { FirebaseMessagingTypes } from "@react-native-firebase/messaging"
+// import messaging, { FirebaseMessagingTypes } from "@react-native-firebase/messaging"
 // COMMENT IN THIS BOX WHILE TESTING IN EXPO 6/6
 
-import { ScreenProps } from "@interfaces"
 import { useEffect, useState } from "react"
 import NotificationInApp from "@/components/shared/notificationInApp"
 import AsyncStorage from "@react-native-async-storage/async-storage"
-import { BottomTabBarProps } from "@react-navigation/bottom-tabs"
 
 interface PushNotificationProps {
     navigation: any

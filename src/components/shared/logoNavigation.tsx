@@ -14,7 +14,7 @@ export default function LogoNavigation ({navigation}: LogoNavigationProps): JSX.
 
     return (
         <TouchableOpacity
-            // TODO: Place initial screen name i state so 'Eventscreen ikke er hardcoded'
+            // TODO: Place initial screen name in state so 'Eventscreen' is not hardcoded
             onPress={() => { navigation.getState().index == 0 ? null : navigation.navigate('EventScreen')}}>
             <Image
                 style={MS.tMenuIcon}

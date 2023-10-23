@@ -1,5 +1,5 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
-import { ExtendedRouteOptions, StackProps } from "@interfaces"
+import { StackProps } from "@interfaces"
 import { NavigationContainer } from "@react-navigation/native"
 import Footer from "@nav/footer"
 import { useSelector } from "react-redux"
@@ -22,8 +22,6 @@ const Tab = createBottomTabNavigator()
  */
 export default function Navigator(): JSX.Element {
     const { isDark } = useSelector((state: ReduxState) => state.theme )
-    const { lang } = useSelector((state: ReduxState) => state.lang )
-
 
     const screens = [
         {
@@ -31,24 +29,24 @@ export default function Navigator(): JSX.Element {
             component: EventScreen,
             focusedIcon: require("@assets/menu/calendar-orange.png"),
             icon: isDark
-            ? require("@assets/menu/calendar777.png")
-            : require("@assets/menu/calendar-black.png")
+                ? require("@assets/menu/calendar777.png")
+                : require("@assets/menu/calendar-black.png")
         },
-        // {
-        //     name: "AdScreen",
-        //     component: AdScreen,
-        //     focusedIcon: require("@assets/menu/business-orange.png"),
-        //     icon: isDark
-        //     ? require("@assets/menu/business.png")
-        //     : require("@assets/menu/business-black.png")
-        // },
+        {
+            name: "AdScreen",
+            component: AdScreen,
+            focusedIcon: require("@assets/menu/business-orange.png"),
+            icon: isDark
+                ? require("@assets/menu/business.png")
+                : require("@assets/menu/business-black.png")
+        },
         {
             name: "MenuScreen",
             component: MenuScreen,
             focusedIcon: require("@assets/menu/menu-orange.png"),
             icon: isDark
-            ? require("@assets/menu/menu.png")
-            : require("@assets/menu/menu-black.png")
+                ? require("@assets/menu/menu.png")
+                : require("@assets/menu/menu-black.png")
         }
     ]
 
@@ -58,9 +56,7 @@ export default function Navigator(): JSX.Element {
                 // Set initialscreen at to not defaut to top of tab stack
                 initialRouteName={screens[0].name}
                 backBehavior="history"
-                screenOptions={{ 
-                    headerShown: false
-                }}
+                screenOptions={{headerShown: false}}
                 // Sets the tab bar component
                 tabBar={props => <Footer 
                     state={props.state} 

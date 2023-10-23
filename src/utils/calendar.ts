@@ -1,4 +1,4 @@
-import { fetchEventDetails, timeSince } from "@/utils/fetch"
+import { fetchEventDetails } from "@/utils/fetch"
 import { setCalendarID } from "@redux/misc"
 import { Platform } from "react-native"
 import { AnyAction, Dispatch } from "redux"
@@ -100,8 +100,8 @@ async function calendarExists(calendarID: string) {
     try {
         const calendars = await getCalendarsAsync(EntityTypes.EVENT)
         return calendars.find(calendar => calendar.id === calendarID)
-    } catch (e) {
-        console.log(e)
+    } catch (error) {
+        console.log(error)
     }
 }
 
@@ -137,8 +137,8 @@ async function createCalendar(events: EventProps[]) {
         await updateCalendar({events, calendarID: newCalendarID})
 
         return newCalendarID
-    } catch (e) {
-        console.log(e)
+    } catch (error) {
+        console.log(error)
     }
 }
 
@@ -198,8 +198,8 @@ async function getDefaultCalendarSource() {
     try {
         const defaultCalendar = await getDefaultCalendarAsync()
         return defaultCalendar.source
-    } catch (e) {
-        console.log(e)
+    } catch (error) {
+        console.log(error)
     }
 }
 

@@ -1,12 +1,10 @@
-import { View, TouchableOpacity, Image } from "react-native"
-import { ExtendedBottomTabBarProps } from "@interfaces"
+import { View, TouchableOpacity } from "react-native"
 import FetchColor from "@styles/fetchTheme"
 import { useSelector } from "react-redux"
 import MS from "@styles/menuStyles"
-import {BlurView} from "expo-blur"
+import { BlurView } from "expo-blur"
 import React from "react"
-import { RouteProp } from "@react-navigation/native"
-import * as WebBrowser from 'expo-web-browser';
+import { openBrowserAsync } from 'expo-web-browser';
 import { SvgXml } from "react-native-svg"
 import USBicon from "@assets/menu/USB-temp-icon.svg"
 import { BottomTabBarProps } from "@react-navigation/bottom-tabs"
@@ -73,13 +71,13 @@ export default function Footer({ state, descriptors, navigation }: BottomTabBarP
                     accessibilityRole="button"
                     style={{...MS.bMenuIconTouchableOpacity, paddingLeft: 20}}
                     onPress={async()=>{
-                        WebBrowser.openBrowserAsync("https://usb.login.no/").catch((reason)=>{
-                            console.log(reason)
+                        openBrowserAsync("https://usb.login.no/").catch((error)=>{
+                            console.log(error)
                         })
                     }}
                 >
                     <SvgXml
-                        width={MS.bMenuIconTouchableOpacity.width-55}
+                        width={MS.bMenuIconTouchableOpacity.width - 55}
                         height={MS.bMenuIconTouchableOpacity.height}
                         xml={USBicon}
                     />

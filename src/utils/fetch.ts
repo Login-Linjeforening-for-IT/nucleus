@@ -82,8 +82,8 @@ export async function getData(): Promise<EventProps[]> {
 
         return response.json()
         // Catches any errors (missing wifi)
-    } catch (e) {
-        // Immediately invoked function expression (IIFE)
+    } catch (error) {
+        // Tries to fetch cache
         const cache: string | null = await AsyncStorage.getItem("cachedEvents");
 
         if (cache) {
