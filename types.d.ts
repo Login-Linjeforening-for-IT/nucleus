@@ -234,11 +234,41 @@ type NotificationList = {
 }
 
 type EventStackParamList = {
-    root: undefined
+    EventScreen: undefined
     SpecificEventScreen: {item: EventProps}
 }
 
 type AdStackParamList = {
-    root: undefined
+    AdScreen: undefined
     SpecificAdScreen: {item: AdProps}
 }
+
+type Setting = {
+    screen: string;
+    nav: string;
+    setting: 
+        {
+            id: number;
+            nav: MenuRoutes;
+            title: string
+        }[]
+}
+
+type MenuRoutes = 
+    "SettingScreen"|
+    "NotificationScreen"|
+    "AboutScreen"|
+    "BusinessScreen"|
+    "ReportScreen"|
+    "LoginScreen"|
+    "InternalScreen"
+
+type ItemProps = {
+    id: number
+    nav: MenuRoutes
+    title: string
+}
+
+type MenuStackParamList = {
+    [k in MenuRoutes]+?: ItemProps;
+} & {MenuScreen: undefined}

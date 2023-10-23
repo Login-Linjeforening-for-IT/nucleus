@@ -6,8 +6,10 @@ import { ScreenProps } from "@interfaces"
 import { useEffect, useState } from "react"
 import NotificationInApp from "@/components/shared/notificationInApp"
 import AsyncStorage from "@react-native-async-storage/async-storage"
+import { BottomTabBarProps } from "@react-navigation/bottom-tabs"
 
-interface PushNotificationProps extends ScreenProps {
+interface PushNotificationProps {
+    navigation: any
     theme: number
     setPushNotification: React.Dispatch<React.SetStateAction<boolean>>
     setPushNotificationContent: React.Dispatch<React.SetStateAction<JSX.Element | undefined>>

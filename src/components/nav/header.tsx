@@ -1,24 +1,40 @@
 import FetchColor from '@styles/fetchTheme'
 import GS from '@styles/globalStyles'
-import React, { PropsWithChildren, ReactNode } from 'react'
+import React, { PropsWithChildren, ReactNode, useState } from 'react'
 import { BlurView } from 'expo-blur'
 import { Dimensions, Platform, View, Text, StatusBar } from 'react-native'
-import { ExtendedBottomTabHeaderProps } from '@interfaces'
+import { HeaderProps} from '@interfaces'
 import { useSelector } from 'react-redux'
 import { useRoute } from '@react-navigation/native'
+import { TouchableOpacity } from 'react-native'
+import { Image } from "react-native"
+import MS from '@styles/menuStyles'
 
 
-export default function Header({ options, route }: ExtendedBottomTabHeaderProps): ReactNode {
+
+export default function Header({ options, route, navigation }: HeaderProps): ReactNode {
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    const title = options.title ? options.title : route.name
+    const { lang  } = useSelector((state: ReduxState) => state.lang)
+    const title = route.name && (lang ? require('@text/no.json').screens[route.name] : require('@text/en.json').screens[route.name])
+    const isDark = theme === 0 || theme === 2 || theme === 3 ? true : false
+    const  [backIcon, setBackIcon] = useState(isDark 
+        ? require('@assets/icons/goback777.png')
+        : require('@assets/icons/goback111.png'))
 
     return (
         <BlurWrapper>
             <View style={{...GS.headerView}}>
                 <View style={GS.innerHeaderViewOne}>
-                    {options.headerComponents?.left?.map((node, index) => 
+                    {options.headerComponents?.left ? options.headerComponents?.left.map((node, index) => 
                         <View style={GS.logo} key={index}>{node}</View> 
-                    )}
+                    ) : 
+                    <TouchableOpacity onPress={()=>{
+                        setBackIcon(require('@assets/icons/goback-orange.png'))
+                        navigation.goBack()
+                    }}>
+                        <Image style={MS.tMenuIcon} source={backIcon}></Image>
+                    </TouchableOpacity>
+                    }
                 </View>
                 {
                     title.length > 40 

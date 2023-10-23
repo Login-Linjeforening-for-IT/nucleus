@@ -1,0 +1,16 @@
+{
+    "screens": {
+        "EventScreen": "Arrangementer",
+        "AdScreen": "Jobbanonser",
+        "MenuScreen": "Meny",
+        "SpecificEventScreen": "Title",
+        "SpecificAdScreen": "Title",
+        "SettingScreen": "Innstillinger",
+        "NotificationScreen": "Notefikasjoner",
+        "AboutScreen": "Om oss",
+        "BusinessScreen": "Title",
+        "ReportScreen": "Rapporter",
+        "LoginScreen": "Login",
+        "InternalScreen": "Innsida"
+    }
+}

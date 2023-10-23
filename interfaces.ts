@@ -4,10 +4,12 @@ import { DimensionValue, ImageSourcePropType } from "react-native"
 import { RouteProp } from "@react-navigation/native"
 import { 
     BottomTabBarProps,
+    BottomTabDescriptorMap,
     BottomTabHeaderProps,
     BottomTabNavigationProp
 } from "@react-navigation/bottom-tabs/lib/typescript/src/types"
 import { ReactNode } from "react"
+import { StackHeaderProps, StackNavigationOptions } from "@react-navigation/stack"
 
 export interface ExtendedDescriptor {
     options: ExtendedRouteOptions
@@ -24,12 +26,16 @@ export interface ExtendedBottomTabHeaderProps
 }
 
 export interface ExtendedRouteOptions extends Omit<BottomTabNavigationOptions, 'header'> {
-    display?: boolean
-    focusedIcon?: ImageSourcePropType
-    icon?: ImageSourcePropType
+    focusedIcon: ImageSourcePropType
+    icon: ImageSourcePropType
     themeIcon?: ImageSourcePropType
-    headerComponents?: {bottom?: JSX.Element[], right?: JSX.Element[], left?: JSX.Element[]}
+    
     header?: (props: ExtendedBottomTabHeaderProps)=>ReactNode
+}
+
+export interface ExtendedStackRouteOptions extends Omit<StackNavigationOptions, 'header'> {
+    headerComponents?: {bottom?: JSX.Element[], right?: JSX.Element[], left?: JSX.Element[]}
+    header?: (props: StackHeaderProps)=>ReactNode
 }
 
 export interface ScreenProps {
@@ -57,3 +63,17 @@ export type NotificationScreenProps = {
     back: string
     navigation: Navigation
 }
+
+export interface HeaderProps extends Omit<StackHeaderProps, 'options'> {
+    options: StackRouteOptions & {headerComponents?: {bottom?: JSX.Element[], right?: JSX.Element[], left?: JSX.Element[]}}
+}
+
+export interface StackRouteOptions extends Omit<StackNavigationOptions, 'header'> {
+    header?: (props: HeaderProps) => React.ReactNode;
+}
+
+export interface ExtendedBottomTabBarProps extends Omit<BottomTabBarProps, 'descriptors'> {
+    
+}
+
+export type TabBarProps = BottomTabNavigationProp<{'eventScreen': undefined}>

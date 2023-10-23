@@ -1,0 +1,16 @@
+{
+    "screens": {
+        "EventScreen": "Events",
+        "AdScreen": "Ads",
+        "MenuScreen": "Menu",
+        "SpecificEventScreen": "Title",
+        "SpecificAdScreen": "Title",
+        "SettingScreen": "Settings",
+        "NotificationScreen": "Notefications",
+        "AboutScreen": "About",
+        "BusinessScreen": "Title",
+        "ReportScreen": "Report",
+        "LoginScreen": "Login",
+        "InternalScreen": "Internal"
+    }
+}

@@ -43,13 +43,7 @@ type MenuItemProps = {
     login: boolean
 }
 
-type ItemProps = {
-    id: number
-    nav: string
-    title: string
-}
-
-const MenuStack = createStackNavigator()
+const MenuStack = createStackNavigator<MenuStackParamList>()
 
 const screens: Record<string, React.FC<any>> = {
     "SettingScreen": SettingScreen,
@@ -70,7 +64,7 @@ export default function MenuScreen({ navigation }: ScreenProps): JSX.Element {
     const { id, name, image } = useSelector((state: ReduxState) => 
     state.profile )
     const profile = { id: 0, name: "Eirik Hanasand", image}
-    const text = lang ? no : en
+    const text: Setting = lang ? no as Setting : en as Setting
 
     // --- SET THE COMPONENTS OF THE HEADER ---
     useEffect(()=>{
@@ -93,10 +87,24 @@ export default function MenuScreen({ navigation }: ScreenProps): JSX.Element {
 
     return (
         <MenuStack.Navigator
-        screenOptions={{headerShown: false, animationEnabled: false}}>
+        screenOptions={{
+            animationEnabled: false,
+            headerTransparent: true,
+            header: props => <Header {...props} />
+            }}>
             <MenuStack.Screen 
-                name="root">
+                name="MenuScreen">
                 {({navigation})=> {
+
+                    // --- SET THE COMPONENTS OF THE HEADER ---
+                    useEffect(()=>{
+                        navigation.setOptions({
+                            headerComponents: {
+                                bottom: [],
+                                left: [LogoNavigation(navigation, isDark)],
+                                right: []
+                            }} as Partial<BottomTabNavigationOptions>)   
+                        },[navigation, isDark])
                     return(
                         <GestureHandlerRootView>
                         <PanGestureHandler
@@ -139,14 +147,15 @@ export default function MenuScreen({ navigation }: ScreenProps): JSX.Element {
                     )
                 }}
             </MenuStack.Screen>
-            {text.setting.map((item) => (
-                    <MenuStack.Screen {...{key: item.title,
-                        name: item.title,
-                        initialParams: item,
-                        component: screens[item.nav]
-                    }} />
-                )   
-            )}
+            {text.setting.map(item => {
+                return(
+                    <MenuStack.Screen 
+                    name={item.nav as MenuRoutes}
+                    component={screens[item.nav]}
+                    key={item.id}
+                    />
+                )  
+            })}
         </MenuStack.Navigator>
     )
 }

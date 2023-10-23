@@ -18,6 +18,7 @@ import {
     PanGestureHandler,
      PanGestureHandlerGestureEvent 
 } from "react-native-gesture-handler"
+import Header from "@components/nav/header"
 
 /**
  * Parent EventScreen function
@@ -47,7 +48,52 @@ export default function AdScreen({ navigation }: ScreenProps): JSX.Element {
         } as Partial<BottomTabNavigationOptions>)
     }, [navigation])
 
-    //  --- DISPLAYS THE ADSCREEN ---
+
+    //  --- FETCHES CLICKED EVENTS WHEN SCREEN BECOMES VISIBLE ---
+    useFocusEffect(
+        // Callback to avoid too many rerenders
+        React.useCallback(() => {
+            // Function to fetch clicked ads
+            fetchState(setClickedAds)
+        }, [])
+    )
+
+    const addata = en.test
+
+
+    storeAds({events: ads, clickedEvents: clickedAds})
+
+    //  --- LOADING INITIAL DATA ---
+    useEffect(() => {
+        //  Fetches API
+        // getData(setAds, setRenderedArray, setLastSave, ads)
+        setRenderedArray([...addata])
+        if (addata.length > 0) (async() => {
+            await AsyncStorage.setItem("cachedAds", JSON.stringify(addata))
+        })
+        // Fetches clickedAds
+        // fetchState(setClickedAds)
+        // ads.length 
+        //     ? setRenderedArray([...ads]) 
+        //     : fetchStored(setRenderedArray, setAds, "ads")
+    //  Renders when the screen is loaded
+    }, [])
+
+    // --- RESETS RENDERED EVENTS
+    async function RenderAds() {
+
+        // Updates the rendered array
+        setRenderedArray([...ads])
+
+        // Updates cache
+        await AsyncStorage.setItem("cachedAds", JSON.stringify(ads))
+    }
+
+    // --- SETUP CODE ONCE APP IS DOWNLOADED---
+    // Displays when the API was last fetched successfully
+    if (lastSave === "") (async() => {setLastSave(await LastFetch())})()
+
+    //  --- DISPLAYS THE EVENTSCREEN ---
     return (
         <AdStack.Navigator
         screenOptions={{
@@ -103,6 +149,66 @@ export default function AdScreen({ navigation }: ScreenProps): JSX.Element {
                     </PanGestureHandler>
                 </GestureHandlerRootView>
                 )}
+            <AdStack.Screen
+            name="AdScreen"
+            options={{}}
+            >
+                {({navigation})=>{
+                    // --- SET THE COMPONENTS OF THE HEADER ---
+                    useEffect(()=>{
+                        navigation.setOptions({
+                            headerComponents: {
+                                bottom: [],
+                                left: [LogoNavigation(navigation, isDark)],
+                                right: []
+                            }} as Partial<BottomTabNavigationOptions>)   
+                        },[navigation, isDark])
+                    
+                    return(
+                    <View>
+                    <StatusBar style={isDark ? "light" : "dark"} />
+                    <View style={{
+                        ...GS.content, 
+                        backgroundColor: FetchColor({theme, variable: "DARKER"})
+                    }}>
+                    {renderedArray != null ?
+                        renderedArray.length > 0 ?
+                        <FlatList
+                            style={{minHeight: "100%"}}
+                            showsVerticalScrollIndicator={false}
+                            numColumns={1}
+                            keyExtractor={(ad) => `${ad.id}`}
+                            data={renderedArray}
+                            renderItem={({item: ad, index}) => (
+                                <View key={index}>
+                                    <TouchableOpacity onPress={() => 
+                                        navigation.navigate("SpecificAdScreen", {item: ad})}>
+                                    {index === 0 && Space(Dimensions.get("window").height / 8.1)}
+                                        <AdListItem 
+                                            clickedAds={clickedAds}
+                                            ad={ad}
+                                            setClickedAds={setClickedAds}
+                                        />
+                                        <ListFooter
+                                            index={index}
+                                            renderedArray={renderedArray}
+                                            search={false}
+                                            relevantCategories={[]}
+                                            lastSave={lastSave}
+                                        />
+                                    </TouchableOpacity>
+                                </View>
+                            )}
+                        />
+                        :
+                        ads.length === 0 
+                            ? <ErrorMessage argument="wifi" />
+                            : <ErrorMessage argument="nomatch" />
+                    : <ErrorMessage argument="wifi" />}
+                    {Space(Dimensions.get("window").height/3)}
+                    </View>
+                </View>
+                )}}
             </AdStack.Screen>
             <AdStack.Screen name="SpecificAdScreen" component={SpecificAdScreen}></AdStack.Screen>
         </AdStack.Navigator>

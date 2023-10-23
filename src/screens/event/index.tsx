@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { ErrorMessage } from "@/components/shared/utils"
 import React, { useEffect, useState, useRef } from "react"
-import { useFocusEffect } from "@react-navigation/native"
+import { useFocusEffect, useRoute } from "@react-navigation/native"
 import EventList from "@components/event/eventList"
 import { useDispatch, useSelector } from "react-redux"
 import { StatusBar } from "expo-status-bar"
@@ -15,7 +15,7 @@ import { FilterUI} from "@/components/shared/filter"
 import LastFetch, { getData } from "@/utils/fetch"
 import { View, StatusBar as StatusBarReact } from "react-native"
 import { ScreenProps } from "@interfaces"
-import { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs"
+import { BottomTabBarProps, BottomTabNavigationOptions } from "@react-navigation/bottom-tabs"
 import LogoNavigation from "@/components/shared/logoNavigation"
 import { FilterButton } from "@/components/shared/filter"
 import DownloadButton from "@/components/shared/downloadButton"
@@ -28,6 +28,7 @@ import {
 } from "react-native-gesture-handler"
 import handleSwipe from "@/utils/handleSwipe"
 import { setEvents, setLastFetch, setLastSave } from "@redux/event"
+import Header from "@components/nav/header"
 
 const EventStack = createStackNavigator<EventStackParamList>()
 
@@ -142,9 +143,26 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
     // --- DISPLAYS THE EVENTSCREEN ---
     return (
         <EventStack.Navigator
-        screenOptions={{headerShown: false, animationEnabled: false}}>
-            <EventStack.Screen name="root">
-                {({navigation}) => (
+        screenOptions={{
+            animationEnabled: false,
+            headerTransparent: true,
+            header: props => <Header {...props} />
+            }}>
+            <EventStack.Screen 
+                name="EventScreen"
+            >
+                {({navigation}) => {
+                    // --- SET THE COMPONENTS OF THE HEADER ---
+                    useEffect(()=>{
+                        navigation.setOptions({
+                            headerComponents: {
+                                bottom: [],
+                                left: [LogoNavigation(navigation)],
+                                right: []
+                            }} as Partial<BottomTabNavigationOptions>)   
+                        },[navigation, isDark])
+                    
+                    return (
                     <GestureHandlerRootView>
                     <PanGestureHandler
                         onGestureEvent={(event: PanGestureHandlerGestureEvent) => 
@@ -166,7 +184,7 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
                         </View>
                     </PanGestureHandler>
                 </GestureHandlerRootView>
-                )}
+                )}}
             </EventStack.Screen>
             <EventStack.Screen 
                 name="SpecificEventScreen"
