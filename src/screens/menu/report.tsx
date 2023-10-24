@@ -12,6 +12,8 @@ import no from "@text/menu/report/no.json"
 import en from "@text/menu/report/en.json"
 import React, { useState } from "react"
 import T from "@styles/text"
+import { ClusterSmaller } from "@/components/shared/cluster"
+import handleSwipe from "@/utils/handleSwipe"
 import {
     TouchableWithoutFeedback,
     TouchableOpacity,
@@ -22,9 +24,11 @@ import {
     View,
     Text,
 } from "react-native"
-import { ClusterSmaller } from "@/components/shared/cluster"
-import { GestureHandlerRootView, PanGestureHandler, PanGestureHandlerGestureEvent } from "react-native-gesture-handler"
-import handleSwipe from "@/utils/handleSwipe"
+import { 
+    GestureHandlerRootView, 
+    PanGestureHandler, 
+    PanGestureHandlerGestureEvent 
+} from "react-native-gesture-handler"
 
 export default function ReportScreen({ navigation }: ScreenProps): JSX.Element {
 

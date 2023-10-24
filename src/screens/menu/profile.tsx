@@ -8,7 +8,11 @@ import PS from "@styles/profileStyles"
 import { useSelector } from "react-redux"
 import { ScreenProps } from "@interfaces"
 import React, { useState } from "react"
-import { GestureHandlerRootView, PanGestureHandler, PanGestureHandlerGestureEvent } from "react-native-gesture-handler"
+import { 
+    GestureHandlerRootView, 
+    PanGestureHandler, 
+    PanGestureHandlerGestureEvent 
+} from "react-native-gesture-handler"
 import handleSwipe from "@/utils/handleSwipe"
 
 type ScrollProps = {

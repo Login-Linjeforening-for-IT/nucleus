@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import FetchColor from "@styles/fetchTheme"
 import PS from "@styles/profileStyles"
 import { Line } from "@/components/shared/utils"
-import React, {useEffect, useState} from "react"
+import React, { useEffect, useState } from "react"
 import T from "@styles/text"
 
 import {

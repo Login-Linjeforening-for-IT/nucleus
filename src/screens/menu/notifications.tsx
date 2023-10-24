@@ -3,7 +3,7 @@ import Space from "@/components/shared/utils"
 import FetchColor from "@styles/fetchTheme"
 import GS from "@styles/globalStyles"
 import React, { useEffect, useState } from "react"
-import { Navigation, NotificationScreenProps, ScreenProps } from "@interfaces"
+import { Navigation, NotificationScreenProps } from "@interfaces"
 import { useSelector } from "react-redux"
 import { FullCategorySquare } from "@components/event/eventList"
 import TopMenu from "@/components/shared/topMenu"
@@ -11,7 +11,11 @@ import { View, Text, FlatList, Dimensions, TouchableOpacity } from "react-native
 import NS from "@styles/notificationStyles"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import NotificationText from "@/components/notification/notificationText"
-import { GestureHandlerRootView, PanGestureHandler, PanGestureHandlerGestureEvent } from "react-native-gesture-handler"
+import { 
+    GestureHandlerRootView, 
+    PanGestureHandler, 
+    PanGestureHandlerGestureEvent 
+} from "react-native-gesture-handler"
 import handleSwipe from "@/utils/handleSwipe"
 
 export default function NotificationScreen({navigation, back}: NotificationScreenProps): JSX.Element {

@@ -1,4 +1,3 @@
-import { StatusBar } from "expo-status-bar"
 import { StyleSheet, Dimensions, Platform } from "react-native"
 
 export const GS = StyleSheet.create({

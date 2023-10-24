@@ -11,12 +11,12 @@ import { ScreenProps } from "@interfaces"
 import T from "@styles/text"
 import { Text, View, ScrollView, Dimensions } from "react-native"
 import { useSelector } from "react-redux"
+import handleSwipe from "@/utils/handleSwipe"
 import { 
     GestureHandlerRootView,
     PanGestureHandler, 
     PanGestureHandlerGestureEvent 
 } from "react-native-gesture-handler"
-import handleSwipe from "@/utils/handleSwipe"
 
 export default function BusinessScreen({ navigation }: ScreenProps): 
 JSX.Element {

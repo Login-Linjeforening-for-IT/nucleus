@@ -2,14 +2,13 @@ import { ParamListBase } from "@react-navigation/native"
 import { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs'
 import { DimensionValue, ImageSourcePropType } from "react-native"
 import { RouteProp } from "@react-navigation/native"
+import { ReactNode } from "react"
+import { StackHeaderProps, StackNavigationOptions } from "@react-navigation/stack"
 import { 
     BottomTabBarProps,
-    BottomTabDescriptorMap,
     BottomTabHeaderProps,
     BottomTabNavigationProp
 } from "@react-navigation/bottom-tabs/lib/typescript/src/types"
-import { ReactNode } from "react"
-import { StackHeaderProps, StackNavigationOptions } from "@react-navigation/stack"
 
 export interface ExtendedDescriptor {
     options: ExtendedRouteOptions

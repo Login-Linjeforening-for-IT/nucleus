@@ -9,6 +9,7 @@ import no from "@text/menu/about/no.json"
 import React, {useState} from "react"
 import T from "@styles/text"
 import { ScreenProps } from "@interfaces"
+import handleSwipe from "@/utils/handleSwipe"
 import Person, { 
     AllComitees, 
     Social, 
@@ -24,8 +25,11 @@ import {
     Linking,
     Dimensions,
 } from "react-native"
-import { GestureHandlerRootView, PanGestureHandler, PanGestureHandlerGestureEvent } from "react-native-gesture-handler"
-import handleSwipe from "@/utils/handleSwipe"
+import { 
+    GestureHandlerRootView,
+    PanGestureHandler,
+    PanGestureHandlerGestureEvent
+} from "react-native-gesture-handler"
 
 type getCommitteeImageProps = {
     style: string

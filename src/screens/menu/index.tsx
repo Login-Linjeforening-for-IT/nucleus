@@ -1,5 +1,5 @@
 import { nativeApplicationVersion } from "expo-application"
-import { Navigation, NotificationScreenProps, ScreenProps } from "@interfaces"
+import { Navigation } from "@interfaces"
 import Feedback from "@/components/menu/feedback"
 import Cluster from "@/components/shared/cluster"
 import Space from "@/components/shared/utils"

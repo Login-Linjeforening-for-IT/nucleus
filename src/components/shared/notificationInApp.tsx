@@ -3,7 +3,6 @@ import React from "react"
 import GS from "@styles/globalStyles"
 import { View, Text, Platform, TouchableOpacity } from "react-native"
 import { BlurView } from "expo-blur"
-import { Navigation } from "@interfaces"
 
 type NotificationInAppProps = {
     title: string
@@ -12,8 +11,7 @@ type NotificationInAppProps = {
     theme: number
 }
 
-export default function NotificationInApp(props: NotificationInAppProps, 
-navigation: Navigation): JSX.Element {
+export default function NotificationInApp(props: NotificationInAppProps): JSX.Element {
     // useEffect(() => {
 
     // }, [])

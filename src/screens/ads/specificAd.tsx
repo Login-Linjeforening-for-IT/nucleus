@@ -1,6 +1,5 @@
 import { View, ScrollView, Dimensions } from "react-native"
 import Cluster from "@/components/shared/cluster"
-import Space from "@/components/shared/utils"
 import FetchColor from "@styles/fetchTheme"
 import GS from "@styles/globalStyles"
 import { useSelector } from "react-redux"

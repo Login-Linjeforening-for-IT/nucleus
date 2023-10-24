@@ -1,5 +1,4 @@
 import CategorySquare, { CategoryCircle } from "@/components/shared/category"
-import AsyncStorage from "@react-native-async-storage/async-storage"
 import EventLocation from "@components/event/eventLocation"
 import { FetchJoinLink } from "@/utils/fetch"
 import Space, { Month } from "@/components/shared/utils"

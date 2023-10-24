@@ -20,7 +20,11 @@ import {
     TextInput,
     Alert,
 } from "react-native"
-import { GestureHandlerRootView, PanGestureHandler, PanGestureHandlerGestureEvent } from "react-native-gesture-handler"
+import { 
+    GestureHandlerRootView, 
+    PanGestureHandler, 
+    PanGestureHandlerGestureEvent 
+} from "react-native-gesture-handler"
 import handleSwipe from "@/utils/handleSwipe"
 
 type UsernameUIProps = {
