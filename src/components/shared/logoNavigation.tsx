@@ -14,9 +14,12 @@ export default function LogoNavigation ({navigation}: LogoNavigationProps): JSX.
     const state = navigation.getState()
     
     return (
-        <TouchableOpacity
-            // TODO: Place initial screen name in state so 'Eventscreen' is not hardcoded
-            onPress={() => { state.routeNames[state.index] == 'EventScreen' ? null : navigation.navigate('EventScreen')}}>
+        // TODO: Place initial screen name in state so 'Eventscreen' is not hardcoded
+        <TouchableOpacity onPress={() => { 
+            state.routeNames[state.index] == 'EventScreen' 
+                ? null
+                : navigation.navigate('EventScreen')
+        }}>
             <Image
                 style={MS.tMenuIcon}
                 source={isDark
