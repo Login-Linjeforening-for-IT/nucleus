@@ -28,7 +28,7 @@ export default function LastFetch(param?: string) {
  * @returns                 All details for passed event
  */
 export async function fetchEventDetails(event: EventProps): 
-Promise<DetailedEventProps> {
+Promise<DetailedEvent> {
     const response = await fetch(`https://api.login.no/events/${event.eventID}`)
     const eventDetails = await response.json()
     return {...event, ...eventDetails}

@@ -44,7 +44,7 @@ type JoinButtonProps = {
 }
 
 type MapProps = {
-    event: DetailedEventProps | EventProps
+    event: DetailedEvent | EventProps
     handleLink: ({mazeref, street, organizer}: handleLinkProps) => void
 }
 
@@ -63,7 +63,7 @@ BottomTabScreenProps<EventStackParamList>): JSX.Element {
     const { lang  } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const stored = useSelector((state: ReduxState) => state.event)
-    const [event, setEvent]=useState<DetailedEventProps | EventProps>(stored.event)
+    const [event, setEvent]=useState<DetailedEvent | EventProps>(stored.event)
 
     function getData() {
         fetch(`https://api.login.no/events/${event.eventID}`)

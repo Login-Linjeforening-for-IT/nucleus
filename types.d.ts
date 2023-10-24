@@ -16,7 +16,7 @@ type EventProps = {
     city: string
 }
 
-type DetailedProps = {
+type ExtraEventProps = {
     endt: string
     publisht: string
     description: string
@@ -25,7 +25,7 @@ type DetailedProps = {
     mazeref: string
 }
 
-type DetailedEventProps = EventProps & DetailedProps
+type DetailedEvent = EventProps & ExtraEventProps
 
 type ReduxState = {
     theme: {
@@ -45,7 +45,7 @@ type ReduxState = {
     profile: ProfileProps
     event: {
         events: EventProps[]
-        event: DetailedEventProps
+        event: DetailedEvent
         clickedEvents: EventProps[]
         renderedEvents: EventProps[]
         lastFetch: string
@@ -62,35 +62,36 @@ type ProfileProps = any
 
 type AdProps = {
     id: number
+    highlight: boolean
     title_no: string
     title_en: string
     position_title_no: string
     position_title_en: string
+    job_type: string
+    time_publish: string
+    application_deadline: string
+    organization_shortname: string
+    organization_name_no: string
+    organization_name_en: string
+    organization_logo: string
+    skills: string[]
+    cities: string[]
+}
+
+type ExtraAdProps = {
+    visible: boolean
     description_short_no: string
     description_short_en: string
     description_long_no: string
     description_long_en: string
-    job_type: string
-    application_deadline: string
     banner_image: string
     organization: string
     application_url: string
-    created_at: string
     updated_at: string
-    shortname: string
-    name_no: string
-    name_en: string
-    description_no: string
-    description_en: string
-    link_homepage: string
-    link_linkedin: string
-    link_facebook: string
-    link_instagram: string
-    link_discord: string
-    logo: string
-    city: string
-    skill: string
+    created_at: string
+    deleted_at: string
 }
+type DetailedAd = AdProps & ExtraAdProps
 
 type CategoryProps = 
     "tekkom"
@@ -243,7 +244,7 @@ type NotificationProps = {
 type NotificationList = {
     title: string
     body: string
-    data: DetailedEventProps
+    data: DetailedEvent
     time: string
 }
 
