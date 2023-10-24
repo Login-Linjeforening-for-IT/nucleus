@@ -64,7 +64,6 @@ export function GetEndTime({input, theme}: GetEndTimeProps) {
  * @returns The event time that should be displayed
  */
 function displayedEventTime(startTime: string, endTime: string) {
-    startTime="2023-12-17T17:26:39.363Z"
 
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const textEN = ["Starts in", "Tomorrow", "Next", "Ends in", "Ends tomorrow", "Ended", "Yesterday", "Last", " ago", "month", "days", "h", "min", "s"]
