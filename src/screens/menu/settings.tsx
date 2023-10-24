@@ -12,13 +12,7 @@ import en from "@text/menu/settings/en.json"
 import no from "@text/menu/settings/no.json"
 import T from "@styles/text"
 import React from "react"
-import { ScreenProps } from "@interfaces"
-import handleSwipe from "@/utils/handleSwipe"
-import { 
-    GestureHandlerRootView, 
-    PanGestureHandler, 
-    PanGestureHandlerGestureEvent 
-} from "react-native-gesture-handler"
+import Swipe from "@components/nav/swipe"
 
 type ClusterWithSwitchProps = {
     obj: infoProps
@@ -30,26 +24,21 @@ type infoProps = {
     description?: string 
 }
 
-export default function SettingScreen({ navigation }: ScreenProps): JSX.Element {
+export default function SettingScreen(): JSX.Element {
 
     const { theme } = useSelector((state: ReduxState) => state.theme)
 
     return (
-        <GestureHandlerRootView>
-            <PanGestureHandler
-                onGestureEvent={(event: PanGestureHandlerGestureEvent) => 
-                    handleSwipe({navigation, event, screenLeft: "MenuScreen"})}
-            >
-                <View>
-                    <View style={{
-                        ...GS.content, 
-                        backgroundColor: FetchColor({theme, variable: "DARKER"})
-                    }}>
-                        <Content />
-                    </View>
+        <Swipe left="MenuScreen">
+            <View>
+                <View style={{
+                    ...GS.content, 
+                    backgroundColor: FetchColor({theme, variable: "DARKER"})
+                }}>
+                    <Content />
                 </View>
-            </PanGestureHandler>
-        </GestureHandlerRootView>
+            </View>
+        </Swipe>
     )
 }
 

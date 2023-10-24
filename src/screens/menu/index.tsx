@@ -23,7 +23,6 @@ import ProfileScreen from "./profile"
 import ReportScreen from "./report"
 import SettingScreen from "./settings"
 import SmallProfile from "@components/profile/smallProfile"
-import handleSwipe from "@/utils/handleSwipe"
 import Header from "@components/nav/header"
 import {
   Text,
@@ -33,11 +32,7 @@ import {
   TouchableOpacity,
   Dimensions,
 } from "react-native"
-import { 
-    GestureHandlerRootView, 
-    PanGestureHandler, 
-    PanGestureHandlerGestureEvent 
-} from "react-native-gesture-handler"
+import Swipe from "@components/nav/swipe"
 
 type MenuItemProps = {
     index: number
@@ -100,11 +95,7 @@ export default function MenuScreen(): JSX.Element {
                             }} as Partial<BottomTabNavigationOptions>)   
                         },[navigation])
                     return(
-                        <GestureHandlerRootView>
-                        <PanGestureHandler
-                            onGestureEvent={(event: PanGestureHandlerGestureEvent) => 
-                                handleSwipe({navigation, event, screenLeft: "AdScreenRoot"})}
-                        >
+                        <Swipe left="AdScreenRoot">
                             <View style={{
                                 ...GS.content, 
                                 backgroundColor: FetchColor({theme, variable: "DARKER"})
@@ -136,8 +127,7 @@ export default function MenuScreen(): JSX.Element {
                                 />
                                 <Space height={Dimensions.get("window").height / 10} /> 
                             </View>
-                        </PanGestureHandler>
-                        </GestureHandlerRootView>
+                        </Swipe>
                     )
                 }}
             </MenuStack.Screen>

@@ -11,6 +11,7 @@ import GS from "@styles/globalStyles"
 import React, { useState } from "react"
 import { ScreenProps } from "@interfaces"
 import T from "@styles/text"
+import Swipe from "@components/nav/swipe"
 import {
     Text,
     View,
@@ -20,12 +21,6 @@ import {
     TextInput,
     Alert,
 } from "react-native"
-import { 
-    GestureHandlerRootView, 
-    PanGestureHandler, 
-    PanGestureHandlerGestureEvent 
-} from "react-native-gesture-handler"
-import handleSwipe from "@/utils/handleSwipe"
 
 type UsernameUIProps = {
     data: DataProps
@@ -59,7 +54,7 @@ export default function LoginScreen({ navigation }: ScreenProps): JSX.Element {
 
     const dispatch = useDispatch()
 
-    const internalPage = () => {
+    function internalPage() {
         if (data.name === database.name && data.pass === database.pass) {
             dispatch(changeLoginStatus())
             navigation.navigate("InternalScreen")
@@ -76,12 +71,12 @@ export default function LoginScreen({ navigation }: ScreenProps): JSX.Element {
         secureTextEntry: true
     })
 
-    const [database] = useState({
+    const database = {
         name: "admin",
         pass: "admin"
-    })
+    }
 
-    const inputName = (val: string) => {
+    function inputName (val: string) {
         if (val.length > 0) {
             setData({
             ...data,
@@ -97,7 +92,7 @@ export default function LoginScreen({ navigation }: ScreenProps): JSX.Element {
         }
     }
 
-    const inputPass = (val: string) => {
+    function inputPass (val: string) {
         if (val.length > 0) {
             setData({
                 ...data,
@@ -112,7 +107,7 @@ export default function LoginScreen({ navigation }: ScreenProps): JSX.Element {
         }
     }
 
-    const showPass = () => {
+    function showPass() {
         setData({
             ...data,
             secureTextEntry: !data.secureTextEntry
@@ -120,63 +115,58 @@ export default function LoginScreen({ navigation }: ScreenProps): JSX.Element {
     }
 
     return (
-        <GestureHandlerRootView>
-            <PanGestureHandler
-                onGestureEvent={(event: PanGestureHandlerGestureEvent) => 
-                    handleSwipe({navigation, event, screenLeft: "MenuScreen"})}
-            >
-                <View>
-                    <View style={{
-                        ...GS.content, 
-                        backgroundColor: FetchColor({theme, variable: "DARKER"})
-                    }}>
-                        <Space height={Dimensions.get("window").height / 8.1} /> 
-                        <View>
-                            <Space height={80} /> 
-                            <Text style={{
-                                ...T.centered50,
-                                color: FetchColor({theme, variable: "TEXTCOLOR"})
-                            }}>
-                                {lang ? "Innsida" : "Intranet"}
-                            </Text>
-                            
-                            <Space height={20} /> 
-                            <UsernameUI data={data} inputName={inputName} />
-                            <Space height={10} /> 
+        <Swipe left="MenuScreen">
+            <View>
+                <View style={{
+                    ...GS.content, 
+                    backgroundColor: FetchColor({theme, variable: "DARKER"})
+                }}>
+                    <Space height={Dimensions.get("window").height / 8.1} /> 
+                    <View>
+                        <Space height={80} /> 
+                        <Text style={{
+                            ...T.centered50,
+                            color: FetchColor({theme, variable: "TEXTCOLOR"})
+                        }}>
+                            {lang ? "Innsida" : "Intranet"}
+                        </Text>
+                        
+                        <Space height={20} /> 
+                        <UsernameUI data={data} inputName={inputName} />
+                        <Space height={10} /> 
 
-                            <PasswordUI 
-                                data={data}
-                                inputPass={inputPass}
-                                showPass={showPass}
-                            />
-                            <View>
-                                <Space height={20} /> 
-                                <TouchableOpacity
-                                    disabled ={!data.name || !data.pass}
-                                onPress={() => internalPage()}>
-                                    <Button>
-                                        <Text style={{
-                                            ...T.centered20, 
-                                            color: FetchColor({theme, variable: "TEXTCOLOR"})
-                                        }}>
-                                            LOGIN
-                                        </Text>
-                                    </Button>
-                                </TouchableOpacity>
-                            </View>
-                            <Space height={40} /> 
-                            <View>
-                                <Image 
-                                    style={GS.smallImage} 
-                                    source={require("@assets/logo/loginText.png")}
-                                />
-                            </View>
+                        <PasswordUI 
+                            data={data}
+                            inputPass={inputPass}
+                            showPass={showPass}
+                        />
+                        <View>
+                            <Space height={20} /> 
+                            <TouchableOpacity
+                                disabled ={!data.name || !data.pass}
+                            onPress={() => internalPage()}>
+                                <Button>
+                                    <Text style={{
+                                        ...T.centered20, 
+                                        color: FetchColor({theme, variable: "TEXTCOLOR"})
+                                    }}>
+                                        LOGIN
+                                    </Text>
+                                </Button>
+                            </TouchableOpacity>
                         </View>
-                        <Space height={Dimensions.get("window").height / 3} /> 
+                        <Space height={40} /> 
+                        <View>
+                            <Image 
+                                style={GS.smallImage} 
+                                source={require("@assets/logo/loginText.png")}
+                            />
+                        </View>
                     </View>
+                    <Space height={Dimensions.get("window").height / 3} /> 
                 </View>
-            </PanGestureHandler>
-        </GestureHandlerRootView>
+            </View>
+        </Swipe>
     )
 }
 

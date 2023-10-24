@@ -10,8 +10,6 @@ import { TouchableOpacity } from 'react-native'
 import { Image } from "react-native"
 import MS from '@styles/menuStyles'
 
-
-
 export default function Header({ options, route, navigation }: HeaderProps): ReactNode {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang  } = useSelector((state: ReduxState) => state.lang)

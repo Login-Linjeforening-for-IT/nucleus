@@ -7,6 +7,7 @@ import { useSelector } from "react-redux"
 import { ScreenProps } from "@interfaces"
 import T from "@styles/text"
 import React from "react"
+import Swipe from "@components/nav/swipe"
 import {
   Text,
   View,
@@ -14,8 +15,6 @@ import {
   TouchableOpacity,
   Dimensions,
 } from "react-native"
-import { GestureHandlerRootView, PanGestureHandler, PanGestureHandlerGestureEvent } from "react-native-gesture-handler"
-import handleSwipe from "@/utils/handleSwipe"
 
 
 type OptionProps = {
@@ -38,11 +37,7 @@ export default function InternalScreen({ navigation }: ScreenProps): JSX.Element
     ]
 
     return (
-        <GestureHandlerRootView>
-            <PanGestureHandler
-                onGestureEvent={(event: PanGestureHandlerGestureEvent) => 
-                    handleSwipe({navigation, event, screenLeft: "MenuScreen"})}
-            >
+        <Swipe left="MenuScreen">
             <View>
                 <View style={{
                         ...GS.content, 
@@ -60,8 +55,7 @@ export default function InternalScreen({ navigation }: ScreenProps): JSX.Element
                     <Space height={Dimensions.get("window").height / 3}/>
                 </View>
             </View>
-            </PanGestureHandler>
-        </GestureHandlerRootView>
+        </Swipe>
     )
 }
 

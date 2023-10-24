@@ -25,13 +25,9 @@ import {
 } from "react-native"
 import { StaticImage } from "@/components/about/social"
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs"
-import { 
-    PanGestureHandler,
-    PanGestureHandlerGestureEvent 
-} from "react-native-gesture-handler"
-import handleSwipe from "@/utils/handleSwipe"
 import { useDispatch } from "react-redux"
 import { setClickedEvents } from "@redux/event"
+import Swipe from "@components/nav/swipe"
 
 type handleLinkProps = {
     mazeref: string
@@ -117,10 +113,7 @@ BottomTabScreenProps<EventStackParamList>): JSX.Element {
     const text = lang ? textNO : textEN
 
     return (
-        <PanGestureHandler
-            onGestureEvent={(event: PanGestureHandlerGestureEvent) => 
-                handleSwipe({navigation, event, screenLeft: "EventScreen"})}
-        >
+        <Swipe left="EventScreen">
             <View>
                 <View style={{...ES.sesContent, backgroundColor: FetchColor({theme, variable: "BACKGROUND"})}}>
                     <ScrollView showsVerticalScrollIndicator={false}>
@@ -306,7 +299,7 @@ BottomTabScreenProps<EventStackParamList>): JSX.Element {
                     </ScrollView>
                 </View>
             </View>
-        </PanGestureHandler>
+        </Swipe>
     )
 }
 

@@ -8,8 +8,6 @@ import en from "@text/menu/about/en.json"
 import no from "@text/menu/about/no.json"
 import React, {useState} from "react"
 import T from "@styles/text"
-import { ScreenProps } from "@interfaces"
-import handleSwipe from "@/utils/handleSwipe"
 import Person, { 
     AllComitees, 
     Social, 
@@ -25,11 +23,7 @@ import {
     Linking,
     Dimensions,
 } from "react-native"
-import { 
-    GestureHandlerRootView,
-    PanGestureHandler,
-    PanGestureHandlerGestureEvent
-} from "react-native-gesture-handler"
+import Swipe from "@components/nav/swipe"
 
 type getCommitteeImageProps = {
     style: string
@@ -63,9 +57,8 @@ type CommitteeInfo = {
     description: string
 }
 
-export default function AboutScreen({ navigation }: ScreenProps): JSX.Element {
+export default function AboutScreen(): JSX.Element {
     const { lang  } = useSelector((state: ReduxState) => state.lang)
-    const { login } = useSelector((state: ReduxState) => state.login)
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const screenWidth = Dimensions.get("window").width
     const [committee, setCommittee] = useState(0)
@@ -73,11 +66,7 @@ export default function AboutScreen({ navigation }: ScreenProps): JSX.Element {
     const info = text.committeeSection.info
 
     return (
-        <GestureHandlerRootView>
-        <PanGestureHandler
-            onGestureEvent={(event: PanGestureHandlerGestureEvent) => 
-                handleSwipe({navigation, event, screenLeft: "MenuScreen"})}
-        >
+        <Swipe left="MenuScreen">
             <View>
                 <View style={{
                     ...GS.content, 
@@ -210,8 +199,7 @@ export default function AboutScreen({ navigation }: ScreenProps): JSX.Element {
                     </ScrollView>
                 </View>
             </View>
-        </PanGestureHandler>
-        </GestureHandlerRootView>
+        </Swipe>
     )
 }
 

@@ -4,6 +4,8 @@ import FetchColor from "@styles/fetchTheme"
 import GS from "@styles/globalStyles"
 import { useSelector } from "react-redux"
 import React from "react"
+import { BottomTabScreenProps } from "@react-navigation/bottom-tabs"
+import Swipe from "@components/nav/swipe"
 import AdInfo, { 
     AdBanner, 
     AdTitle, 
@@ -11,13 +13,6 @@ import AdInfo, {
     AdUpdateInfo, 
     AdMedia 
 } from "@/components/ads/ad"
-import { BottomTabScreenProps } from "@react-navigation/bottom-tabs"
-import { 
-    GestureHandlerRootView, 
-    PanGestureHandler, 
-    PanGestureHandlerGestureEvent 
-} from "react-native-gesture-handler"
-import handleSwipe from "@/utils/handleSwipe"
   
 export default function SpecificAdScreen({ route, navigation }: BottomTabScreenProps<AdStackParamList, 'SpecificAdScreen'>): JSX.Element {
 
@@ -25,11 +20,7 @@ export default function SpecificAdScreen({ route, navigation }: BottomTabScreenP
     const { item } = route.params
 
     return (
-        <GestureHandlerRootView>
-            <PanGestureHandler
-                onGestureEvent={(event: PanGestureHandlerGestureEvent) =>
-                    handleSwipe({navigation, event, screenLeft: "AdScreen"})}
-            >
+        <Swipe left="AdScreen">
                 <View>
                     <View style={{
                         ...GS.content,
@@ -49,7 +40,6 @@ export default function SpecificAdScreen({ route, navigation }: BottomTabScreenP
                         </ScrollView>
                     </View>
                 </View>
-            </PanGestureHandler>
-        </GestureHandlerRootView>
+        </Swipe>
     )
 }

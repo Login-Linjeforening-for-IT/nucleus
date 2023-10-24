@@ -17,14 +17,9 @@ import { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs"
 import LogoNavigation from "@/components/shared/logoNavigation"
 import { createStackNavigator } from "@react-navigation/stack"
 import SpecificEventScreen from "./specificEvent"
-import handleSwipe from "@/utils/handleSwipe"
 import { setEvents, setLastFetch, setLastSave } from "@redux/event"
 import Header from "@components/nav/header"
-import {
-    GestureHandlerRootView,
-    PanGestureHandler,
-    PanGestureHandlerGestureEvent
-} from "react-native-gesture-handler"
+import Swipe from "@components/nav/swipe"
 
 const EventStack = createStackNavigator<EventStackParamList>()
 
@@ -148,27 +143,22 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
                     },[navigation])
 
                     return (
-                        <GestureHandlerRootView>
-                            <PanGestureHandler
-                                onGestureEvent={(event: PanGestureHandlerGestureEvent) => 
-                                    handleSwipe({navigation, event,screenRight: "AdScreenRoot"})}
-                                >
-                                <View>
-                                    <StatusBar style={isDark ? "light" : "dark"} />
-                                    <View style={{
-                                        ...GS.content, 
-                                        backgroundColor: FetchColor({theme, variable: "DARKER"})
-                                    }}>
-                                        {pushNotification && pushNotificationContent}
-                                        <EventList
-                                            navigation={navigation}
-                                            notification={notification}
-                                            ErrorMessage={ErrorMessage}
-                                        />
-                                    </View>
+                        <Swipe right="AdScreenRoot">
+                            <View>
+                                <StatusBar style={isDark ? "light" : "dark"} />
+                                <View style={{
+                                    ...GS.content, 
+                                    backgroundColor: FetchColor({theme, variable: "DARKER"})
+                                }}>
+                                    {pushNotification && pushNotificationContent}
+                                    <EventList
+                                        navigation={navigation}
+                                        notification={notification}
+                                        ErrorMessage={ErrorMessage}
+                                    />
                                 </View>
-                            </PanGestureHandler>
-                        </GestureHandlerRootView>
+                            </View>
+                        </Swipe>
                     )}}
             </EventStack.Screen>
             <EventStack.Screen 

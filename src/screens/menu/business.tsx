@@ -11,12 +11,7 @@ import { ScreenProps } from "@interfaces"
 import T from "@styles/text"
 import { Text, View, ScrollView, Dimensions } from "react-native"
 import { useSelector } from "react-redux"
-import handleSwipe from "@/utils/handleSwipe"
-import { 
-    GestureHandlerRootView,
-    PanGestureHandler, 
-    PanGestureHandlerGestureEvent 
-} from "react-native-gesture-handler"
+import Swipe from "@components/nav/swipe"
 
 export default function BusinessScreen({ navigation }: ScreenProps): 
 JSX.Element {
@@ -24,25 +19,20 @@ JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
 
     return (
-        <GestureHandlerRootView>
-            <PanGestureHandler
-                onGestureEvent={(event: PanGestureHandlerGestureEvent) => 
-                    handleSwipe({navigation, event, screenLeft: "MenuScreen"})}
-                    >
-                <View>
-                    <View style={{
-                        ...GS.content, 
-                        backgroundColor: FetchColor({theme, variable: "DARKER"})
-                    }}>
-                        <ScrollView showsVerticalScrollIndicator={false}>
-                            <Space height={Dimensions.get("window").height / 8.1 + 10} /> 
-                            <Content />
-                            <Space height={Dimensions.get("window").height / 3 + 10} /> 
-                            </ScrollView>
-                    </View>
+        <Swipe left="MenuScreen">
+            <View>
+                <View style={{
+                    ...GS.content, 
+                    backgroundColor: FetchColor({theme, variable: "DARKER"})
+                }}>
+                    <ScrollView showsVerticalScrollIndicator={false}>
+                        <Space height={Dimensions.get("window").height / 8.1 + 10} /> 
+                        <Content />
+                        <Space height={Dimensions.get("window").height / 3 + 10} /> 
+                        </ScrollView>
                 </View>
-            </PanGestureHandler>
-        </GestureHandlerRootView>
+            </View>
+        </Swipe>
     )
 }
 
