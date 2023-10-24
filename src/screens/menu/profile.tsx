@@ -5,7 +5,6 @@ import Profile from "@/components/profile/profile"
 import Space from "@/components/shared/utils"
 import FetchColor from "@styles/fetchTheme"
 import PS from "@styles/profileStyles"
-import GS from "@styles/globalStyles"
 import { useSelector } from "react-redux"
 import { ScreenProps } from "@interfaces"
 import React, { useState } from "react"
@@ -22,30 +21,47 @@ type ScrollProps = {
 
 export default function ProfileScreen({ navigation }: ScreenProps): 
 JSX.Element {
-    const { lang  } = useSelector((state: ReduxState) => state.lang)
-    const { login } = useSelector((state: ReduxState) => state.login)
     const { theme } = useSelector((state: ReduxState) => state.theme)
 
-    const { id, ban, joinedevents, name, allergies, preferences, mail, 
-        schoolyear, degree, image } = useSelector((state: ReduxState) => 
-        state.profile )
+    const { 
+        id,
+        ban,
+        joinedevents,
+        name,
+        allergies,
+        preferences,
+        mail,
+        schoolyear,
+        degree,
+        image
+    } = useSelector((state: ReduxState) => state.profile )
 
-    const profile = { id: 0, ban, joinedevents: 40, name, allergies, 
-        preferences, mail, schoolyear, degree, image }
+    const profile = { 
+        allergies,
+        ban,
+        degree,
+        id: 0,
+        image,
+        joinedevents: 40,
+        mail,
+        name,
+        preferences,
+        schoolyear
+    }
 
     const profileInfo = { degree, schoolyear, mail, preferences, allergies }
 
     const [scrollPosition, setScrollPosition] = useState(0)
 
-    const handleScroll = (event: ScrollProps) => {
+    function handleScroll(event: ScrollProps) {
         setScrollPosition(-event.nativeEvent.contentOffset.y)
-      }
+    }
 
     return (
         <GestureHandlerRootView>
             <PanGestureHandler
                 onGestureEvent={(event: PanGestureHandlerGestureEvent) => 
-                    handleSwipe({navigation, event, screenLeft: "root"})}
+                    handleSwipe({navigation, event, screenLeft: "MenuScreen"})}
             >
                 <View>
                     <View style={{
@@ -56,7 +72,7 @@ JSX.Element {
                             ...PS.profileView,
                             backgroundColor: FetchColor({theme, variable: "ORANGE"}), 
                             height: scrollPosition
-                        }}/>
+                        }} />
                         <ScrollView 
                             scrollEventThrottle={40} 
                             onScroll={handleScroll} 

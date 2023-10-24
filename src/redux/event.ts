@@ -48,6 +48,7 @@ export const EventSlice = createSlice({
         // Sets the event array
         setEvents(state, action) {
             state.events = action.payload
+            state.renderedEvents = action.payload
             state.categories = setCategories(state.events, state.clickedEvents)
         },
         // Sets the event to be displayed on SES

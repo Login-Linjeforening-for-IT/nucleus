@@ -11,6 +11,20 @@ import React, { useEffect, useState } from "react"
 import en from "@text/menu/en.json"
 import no from "@text/menu/no.json"
 import T from "@styles/text"
+import LogoNavigation from "@/components/shared/logoNavigation"
+import { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs"
+import { createStackNavigator } from "@react-navigation/stack"
+import AboutScreen from "./about"
+import BusinessScreen from "./business"
+import NotificationScreen from "./notifications"
+import InternalScreen from "./internal"
+import LoginScreen from "./login"
+import ProfileScreen from "./profile"
+import ReportScreen from "./report"
+import SettingScreen from "./settings"
+import SmallProfile from "@components/profile/smallProfile"
+import handleSwipe from "@/utils/handleSwipe"
+import Header from "@components/nav/header"
 import {
   Text,
   View,
@@ -19,20 +33,11 @@ import {
   TouchableOpacity,
   Dimensions,
 } from "react-native"
-import LogoNavigation from "@/components/shared/logoNavigation"
-import { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs"
-import { createStackNavigator } from "@react-navigation/stack"
-import InternalScreen from "./internal"
-import AboutScreen from "./about"
-import BusinessScreen from "./business"
-import LoginScreen from "./login"
-import NotificationScreen from "./notifications"
-import ReportScreen from "./report"
-import SettingScreen from "./settings"
-import SmallProfile from "@components/profile/smallProfile"
-import { GestureHandlerRootView, PanGestureHandler, PanGestureHandlerGestureEvent } from "react-native-gesture-handler"
-import handleSwipe from "@/utils/handleSwipe"
-import Header from "@components/nav/header"
+import { 
+    GestureHandlerRootView, 
+    PanGestureHandler, 
+    PanGestureHandlerGestureEvent 
+} from "react-native-gesture-handler"
 
 type MenuItemProps = {
     index: number
@@ -47,6 +52,7 @@ type MenuItemProps = {
 const MenuStack = createStackNavigator<MenuStackParamList>()
 
 const screens: Record<string, React.FC<any>> = {
+    "ProfileScreen": ProfileScreen,
     "SettingScreen": SettingScreen,
     "NotificationScreen": NotificationScreen,
     "AboutScreen": AboutScreen,
@@ -57,7 +63,7 @@ const screens: Record<string, React.FC<any>> = {
 }
 
 
-export default function MenuScreen({ navigation }: ScreenProps): JSX.Element {
+export default function MenuScreen(): JSX.Element {
 
     const { lang  } = useSelector((state: ReduxState) => state.lang  )
     const { login } = useSelector((state: ReduxState) => state.login )
@@ -77,15 +83,13 @@ export default function MenuScreen({ navigation }: ScreenProps): JSX.Element {
 
     return (
         <MenuStack.Navigator
-        screenOptions={{
-            animationEnabled: false,
-            headerTransparent: true,
-            header: props => <Header {...props} />
+            screenOptions={{
+                animationEnabled: false,
+                headerTransparent: true,
+                header: props => <Header {...props} />
             }}>
-            <MenuStack.Screen 
-                name="MenuScreen">
+            <MenuStack.Screen name="MenuScreen">
                 {({navigation})=> {
-
                     // --- SET THE COMPONENTS OF THE HEADER ---
                     useEffect(()=>{
                         navigation.setOptions({
@@ -99,7 +103,7 @@ export default function MenuScreen({ navigation }: ScreenProps): JSX.Element {
                         <GestureHandlerRootView>
                         <PanGestureHandler
                             onGestureEvent={(event: PanGestureHandlerGestureEvent) => 
-                                handleSwipe({navigation, event, screenLeft: "Ads"})}
+                                handleSwipe({navigation, event, screenLeft: "AdScreenRoot"})}
                         >
                             <View style={{
                                 ...GS.content, 
@@ -140,9 +144,9 @@ export default function MenuScreen({ navigation }: ScreenProps): JSX.Element {
             {text.setting.map(item => {
                 return(
                     <MenuStack.Screen 
-                    name={item.nav as MenuRoutes}
-                    component={screens[item.nav]}
-                    key={item.id}
+                        name={item.nav as MenuRoutes}
+                        component={screens[item.nav]}
+                        key={item.id}
                     />
                 )  
             })}

@@ -120,7 +120,7 @@ BottomTabScreenProps<EventStackParamList>): JSX.Element {
     return (
         <PanGestureHandler
             onGestureEvent={(event: PanGestureHandlerGestureEvent) => 
-                handleSwipe({navigation, event, screenLeft: "root"})}
+                handleSwipe({navigation, event, screenLeft: "EventScreen"})}
         >
             <View>
                 <View style={{...ES.sesContent, backgroundColor: FetchColor({theme, variable: "BACKGROUND"})}}>
@@ -143,7 +143,6 @@ BottomTabScreenProps<EventStackParamList>): JSX.Element {
                         <View style={ES.specificEventInfoView}>
                             <Card>
                                 <View style={{left: -10}}>
-
                                 <CategorySquare category={event.category} />
                                 <Text style={{
                                     ...ES.eventCardDayText, 

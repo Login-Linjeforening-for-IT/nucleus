@@ -29,7 +29,7 @@ export default function SpecificAdScreen({ route, navigation }: BottomTabScreenP
         <GestureHandlerRootView>
             <PanGestureHandler
                 onGestureEvent={(event: PanGestureHandlerGestureEvent) =>
-                    handleSwipe({navigation, event, screenLeft: "root"})}
+                    handleSwipe({navigation, event, screenLeft: "AdScreen"})}
             >
                 <View>
                     <View style={{
