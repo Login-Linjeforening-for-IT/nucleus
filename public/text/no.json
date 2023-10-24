@@ -9,6 +9,7 @@
         "BusinessScreen": "For bedrifter",
         "ReportScreen": "Rapporter",
         "LoginScreen": "Login",
-        "InternalScreen": "Innsida"
+        "InternalScreen": "Innsida",
+        "ProfileScreen": "Profil"
     }
 }

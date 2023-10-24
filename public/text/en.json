@@ -9,6 +9,7 @@
         "BusinessScreen": "For companies",
         "ReportScreen": "Report",
         "LoginScreen": "Login",
-        "InternalScreen": "Internal"
+        "InternalScreen": "Internal",
+        "ProfileScreen": "Profile"
     }
 }

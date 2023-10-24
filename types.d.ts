@@ -92,9 +92,23 @@ type AdProps = {
     skill: string
 }
 
-type CategoryProps = "tekkom" | "social" | "ctf" | "karrieredag" | "fadderuka" |
-    "bedpres" | "login" | "annet" | "TEKKOM" | "SOCIAL" | "CTF" | "KARRIEREDAG" |
-    "FADDERUKA" | "BEDPRES" | "LOGIN" | "ANNET"
+type CategoryProps = 
+    "tekkom"
+    | "social"
+    | "ctf"
+    | "karrieredag"
+    | "fadderuka"
+    | "bedpres"
+    | "login"
+    | "annet"
+    | "TEKKOM"
+    | "SOCIAL"
+    | "CTF"
+    | "KARRIEREDAG"
+    | "FADDERUKA"
+    | "BEDPRES"
+    | "LOGIN"
+    | "ANNET"
 
 type Interval = NodeJS.Timeout | number
 
@@ -255,13 +269,14 @@ type Setting = {
 }
 
 type MenuRoutes = 
-    "SettingScreen"|
-    "NotificationScreen"|
-    "AboutScreen"|
-    "BusinessScreen"|
-    "ReportScreen"|
-    "LoginScreen"|
-    "InternalScreen"
+    "ProfileScreen"
+    | "SettingScreen"
+    | "NotificationScreen"
+    | "AboutScreen"
+    | "BusinessScreen"
+    | "ReportScreen"
+    | "LoginScreen"
+    | "InternalScreen" 
 
 type ItemProps = {
     id: number

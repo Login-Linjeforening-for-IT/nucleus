@@ -4,36 +4,41 @@
     "setting": [
         {
             "id": 1, 
+            "nav": "ProfileScreen",   
+            "title": "Profile" 
+        },
+        {
+            "id": 2, 
             "nav": "SettingScreen",   
             "title": "Settings" 
         },
         {
-            "id": 2, 
+            "id": 3, 
             "nav": "NotificationScreen",
             "title": "Notifications"
         },
         {
-            "id": 3, 
+            "id": 4, 
             "nav": "AboutScreen",     
             "title": "About Login"    
         },
         {
-            "id": 4, 
+            "id": 5, 
             "nav": "BusinessScreen",  
             "title": "For companies" 
         },
         {
-            "id": 5, 
+            "id": 6, 
             "nav": "ReportScreen",   
             "title": "Report" 
         },
         {
-            "id": 6, 
+            "id": 7, 
             "nav": "LoginScreen",     
             "title": "Login"
         },
         {
-            "id": 7, 
+            "id": 8, 
             "nav": "InternalScreen",
             "title": "Intranet (verv)"
         }

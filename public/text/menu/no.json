@@ -4,36 +4,41 @@
     "setting": [
         {
             "id": 1, 
+            "nav": "ProfileScreen",
+            "title": "Profil"
+        },
+        {
+            "id": 2, 
             "nav": "SettingScreen",
             "title": "Innstillinger"
         },
         {
-            "id": 2, 
+            "id": 3, 
             "nav": "NotificationScreen",
             "title": "Varslinger"
         },
         {
-            "id": 3, 
+            "id": 4, 
             "nav": "AboutScreen",
             "title": "Om oss"
         },
         {
-            "id": 4, 
+            "id": 5, 
             "nav": "BusinessScreen",
             "title": "For bedrifter"
         },
         {
-            "id": 5, 
+            "id": 6, 
             "nav": "ReportScreen",   
             "title": "Varsle"
         },
         {
-            "id": 6, 
+            "id": 7, 
             "nav": "LoginScreen",
             "title": "Logg inn"
         },
         {
-            "id": 7, 
+            "id": 8, 
             "nav": "InternalScreen",
             "title": "Innsida (verv)"
         }
