@@ -31,5 +31,5 @@ HandleSwipeProps): void {
             // Navigates to the screen to the right
             navigation.navigate(screenRight)
         }
-      }
+    }
 }

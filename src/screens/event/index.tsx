@@ -17,14 +17,14 @@ import { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs"
 import LogoNavigation from "@/components/shared/logoNavigation"
 import { createStackNavigator } from "@react-navigation/stack"
 import SpecificEventScreen from "./specificEvent"
-import { 
-    GestureHandlerRootView,
-    PanGestureHandler,
-    PanGestureHandlerGestureEvent 
-} from "react-native-gesture-handler"
 import handleSwipe from "@/utils/handleSwipe"
 import { setEvents, setLastFetch, setLastSave } from "@redux/event"
 import Header from "@components/nav/header"
+import {
+    GestureHandlerRootView,
+    PanGestureHandler,
+    PanGestureHandlerGestureEvent
+} from "react-native-gesture-handler"
 
 const EventStack = createStackNavigator<EventStackParamList>()
 
@@ -145,31 +145,31 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
                                 left: [<LogoNavigation navigation={navigation}/>],
                                 right: []
                             }} as Partial<BottomTabNavigationOptions>)   
-                        },[navigation])
-                    
+                    },[navigation])
+
                     return (
-                    <GestureHandlerRootView>
-                    <PanGestureHandler
-                        onGestureEvent={(event: PanGestureHandlerGestureEvent) => 
-                            handleSwipe({navigation, event,screenRight: "AdScreenRoot"})}
-                        >
-                        <View>
-                        <StatusBar style={isDark ? "light" : "dark"} />
-                        <View style={{
-                            ...GS.content, 
-                            backgroundColor: FetchColor({theme, variable: "DARKER"})
-                            }}>
-                                {pushNotification && pushNotificationContent}
-                                <EventList
-                                    navigation={navigation}
-                                    notification={notification}
-                                    ErrorMessage={ErrorMessage}
-                                />
-                            </View>
-                        </View>
-                    </PanGestureHandler>
-                </GestureHandlerRootView>
-                )}}
+                        <GestureHandlerRootView>
+                            <PanGestureHandler
+                                onGestureEvent={(event: PanGestureHandlerGestureEvent) => 
+                                    handleSwipe({navigation, event,screenRight: "AdScreenRoot"})}
+                                >
+                                <View>
+                                    <StatusBar style={isDark ? "light" : "dark"} />
+                                    <View style={{
+                                        ...GS.content, 
+                                        backgroundColor: FetchColor({theme, variable: "DARKER"})
+                                    }}>
+                                        {pushNotification && pushNotificationContent}
+                                        <EventList
+                                            navigation={navigation}
+                                            notification={notification}
+                                            ErrorMessage={ErrorMessage}
+                                        />
+                                    </View>
+                                </View>
+                            </PanGestureHandler>
+                        </GestureHandlerRootView>
+                    )}}
             </EventStack.Screen>
             <EventStack.Screen 
                 name="SpecificEventScreen"
