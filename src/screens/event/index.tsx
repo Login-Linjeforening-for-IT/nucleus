@@ -119,10 +119,12 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
         return () => clearInterval(interval)
     }, [search])
 
-    // --- SETUP CODE ONCE APP IS DOWNLOADED---
-    // Displays when the API was last fetched successfully
-    if (lastSave === "") {(async() => {dispatch(setLastSave(LastFetch()))})()
-}
+    useEffect(()=>{
+        // --- SETUP CODE ONCE APP IS DOWNLOADED---
+        // Displays when the API was last fetched successfully
+        if (lastSave === "") {(async() => {dispatch(setLastSave(LastFetch()))})()
+    }
+    }, [lastSave])
     initializeNotifications({
         shouldRun: shouldSetupNotifications,
         setShouldSetupNotifications,
@@ -146,16 +148,16 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
                         navigation.setOptions({
                             headerComponents: {
                                 bottom: [],
-                                left: [LogoNavigation(navigation)],
+                                left: [<LogoNavigation navigation={navigation}/>],
                                 right: []
                             }} as Partial<BottomTabNavigationOptions>)   
-                        },[navigation, isDark])
+                        },[navigation])
                     
                     return (
                     <GestureHandlerRootView>
                     <PanGestureHandler
                         onGestureEvent={(event: PanGestureHandlerGestureEvent) => 
-                            handleSwipe({navigation, event,screenRight: "Ads"})}
+                            handleSwipe({navigation, event,screenRight: "AdScreenRoot"})}
                         >
                         <View>
                         <StatusBar style={isDark ? "light" : "dark"} />

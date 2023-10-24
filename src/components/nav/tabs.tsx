@@ -82,7 +82,7 @@ export default function Navigator(): JSX.Element {
                                     )
                                 }
                             })}
-                            name={index.toString()}
+                            name={screen.name+"Root"}
                             component={screen.component}
                         />
                     )

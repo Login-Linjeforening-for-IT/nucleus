@@ -35,17 +35,6 @@ const AdStack = createStackNavigator<AdStackParamList>();
 export default function AdScreen({ navigation }: ScreenProps): JSX.Element {
     const { theme, isDark } = useSelector((state: ReduxState) => state.theme)
 
-    // --- SET THE COMPONENTS OF THE HEADER ---
-    useEffect(()=>{
-        navigation.setOptions({
-            headerComponents: {
-                bottom: [],
-                left: [<LogoNavigation navigation={navigation} />],
-                right: []
-            }
-        } as Partial<BottomTabNavigationOptions>)
-    }, [navigation])
-
 
     //  --- FETCHES CLICKED EVENTS WHEN SCREEN BECOMES VISIBLE ---
     useFocusEffect(
@@ -104,7 +93,7 @@ export default function AdScreen({ navigation }: ScreenProps): JSX.Element {
                                 left: [<LogoNavigation navigation={navigation} />],
                                 right: []
                             }} as Partial<BottomTabNavigationOptions>)   
-                        },[navigation, isDark])
+                        },[navigation])
                     
                     return(
                     <View>

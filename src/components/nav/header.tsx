@@ -20,7 +20,9 @@ export default function Header({ options, route, navigation }: HeaderProps): Rea
 
     if (!title) title = event.eventname
 
-    const isDark = theme === 0 || theme === 2 || theme === 3 ? true : false
+
+    const { isDark } = useSelector((state: ReduxState) => state.theme )
+    console.log(isDark, theme)
     const  [backIcon, setBackIcon] = useState(isDark 
         ? require('@assets/icons/goback777.png')
         : require('@assets/icons/goback111.png'))

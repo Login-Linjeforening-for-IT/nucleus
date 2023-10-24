@@ -58,7 +58,6 @@ EventListProps): JSX.Element {
     if (!renderedEvents.length && !search) {
         return <ErrorMessage argument="wifi" />
     }
-
     else if (renderedEvents.length > 0) {
         return (
             <View>

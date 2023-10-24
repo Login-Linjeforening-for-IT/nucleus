@@ -32,6 +32,7 @@ import SettingScreen from "./settings"
 import SmallProfile from "@components/profile/smallProfile"
 import { GestureHandlerRootView, PanGestureHandler, PanGestureHandlerGestureEvent } from "react-native-gesture-handler"
 import handleSwipe from "@/utils/handleSwipe"
+import Header from "@components/nav/header"
 
 type MenuItemProps = {
     index: number
@@ -66,17 +67,6 @@ export default function MenuScreen({ navigation }: ScreenProps): JSX.Element {
     const profile = { id: 0, name: "Eirik Hanasand", image}
     const text: Setting = lang ? no as Setting : en as Setting
 
-    // --- SET THE COMPONENTS OF THE HEADER ---
-    useEffect(()=>{
-        navigation.setOptions({
-            headerComponents: {
-                bottom: [],
-                left: [<LogoNavigation navigation={navigation} />],
-                right: []
-            }
-        } as Partial<BottomTabNavigationOptions>)
-    }, [navigation])
-
     // Feedback options visibility boolean
     const [feedback, setFeedback] = useState(false)
 
@@ -101,10 +91,10 @@ export default function MenuScreen({ navigation }: ScreenProps): JSX.Element {
                         navigation.setOptions({
                             headerComponents: {
                                 bottom: [],
-                                left: [LogoNavigation(navigation, isDark)],
+                                left: [<LogoNavigation navigation={navigation}/>],
                                 right: []
                             }} as Partial<BottomTabNavigationOptions>)   
-                        },[navigation, isDark])
+                        },[navigation])
                     return(
                         <GestureHandlerRootView>
                         <PanGestureHandler
