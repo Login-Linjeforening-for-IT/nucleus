@@ -119,7 +119,7 @@ export default function LoginScreen({ navigation }: ScreenProps): JSX.Element {
         <GestureHandlerRootView>
             <PanGestureHandler
                 onGestureEvent={(event: PanGestureHandlerGestureEvent) => 
-                    handleSwipe({navigation, event, screenLeft: "root"})}
+                    handleSwipe({navigation, event, screenLeft: "MenuScreen"})}
             >
                 <View>
                     <View style={{

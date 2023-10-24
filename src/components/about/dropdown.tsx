@@ -66,7 +66,7 @@ export default function Dropdown() {
 
     const [course, selectCourse] = useState(0)
 
-    const selectedDegree = (val: number) => {
+    function selectedDegree(val: number) {
         if (course === val) {
             selectCourse(-1)
         } else {

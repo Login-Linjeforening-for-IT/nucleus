@@ -32,7 +32,7 @@ export default function Footer({ state, descriptors, navigation }: BottomTabBarP
 
                     const isFocused = state.index === index
                     // Emitt the normal tab events
-                    const onPress = () => {
+                    function onPress() {
                         const event = navigation.emit({
                             type: "tabPress",
                             target: route.key,
@@ -45,7 +45,8 @@ export default function Footer({ state, descriptors, navigation }: BottomTabBarP
                             navigation.navigate(route.name, {merge: true})
                         }
                     }
-                    const onLongPress = () => {
+
+                    function onLongPress() {
                         navigation.emit({
                             type: "tabLongPress",
                             target: route.key,

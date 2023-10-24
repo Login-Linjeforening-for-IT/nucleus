@@ -119,7 +119,7 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
         return () => clearInterval(interval)
     }, [search])
 
-    useEffect(()=>{
+    useEffect(() => {
         // --- SETUP CODE ONCE APP IS DOWNLOADED---
         // Displays when the API was last fetched successfully
         if (lastSave === "") {(async() => {dispatch(setLastSave(LastFetch()))})()
@@ -139,9 +139,7 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
             headerTransparent: true,
             header: props => <Header {...props} />
             }}>
-            <EventStack.Screen 
-                name="EventScreen"
-            >
+            <EventStack.Screen name="EventScreen">
                 {({navigation}) => {
                     // --- SET THE COMPONENTS OF THE HEADER ---
                     useEffect(()=>{

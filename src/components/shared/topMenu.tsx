@@ -28,10 +28,10 @@ export default function TopMenu({ navigation, title, screen, back }
 : TopMenuProps) {
 
     const { theme, isDark } = useSelector((state: ReduxState) => state.theme)
-    const goBack = () => { 
+    function goBack() { 
         navigation.navigate(back ? back : "Events")
     }
-    const eventPage = () => { navigation.navigate("Events") }
+    function eventPage() { navigation.navigate("Events") }
 
     return (
         <>

@@ -47,7 +47,7 @@ export default function ProfileInfo({profile}: ProfileInfoProps) {
      * @param {int} selectedIndex Stores clicked index
      * @param {int} index Index of most recent click
      */
-    const handleClick = (index: number) => {
+    function handleClick(index: number) {
         if (selectedIndex === index) {
             setSelectedIndex(-1)
         } else {

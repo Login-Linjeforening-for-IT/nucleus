@@ -22,7 +22,7 @@ export default function Header({ options, route, navigation }: HeaderProps): Rea
 
 
     const { isDark } = useSelector((state: ReduxState) => state.theme )
-    console.log(isDark, theme)
+
     const  [backIcon, setBackIcon] = useState(isDark 
         ? require('@assets/icons/goback777.png')
         : require('@assets/icons/goback111.png'))

@@ -86,7 +86,7 @@ trigger}: ChangeProfileCardProps): JSX.Element {
     })
 
     // Slides the card up from the bottom
-    const slideUp = () => {
+    function slideUp() {
         translateY.value = withTiming(windowHeight/3.6)
     }
 
@@ -96,7 +96,7 @@ trigger}: ChangeProfileCardProps): JSX.Element {
         setShouldTrigger(false)
     }
 
-    const selectImage = async () => {
+    async function selectImage() {
         // No permissions request is necessary for launching the image library
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -113,7 +113,8 @@ trigger}: ChangeProfileCardProps): JSX.Element {
 
     // Tries to hide the component, checks to avoid double calls
     const [hiding, setHiding] = useState(false)
-    const tryToHide = () => {
+
+    function tryToHide() {
         if (!hiding) {
             setHiding(true)
             runOnJS(() => hide())

@@ -30,8 +30,8 @@ export default function ReportScreen({ navigation }: ScreenProps): JSX.Element {
 
     const { lang  } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    const text = lang ? no : en 
-    const sendForm = () => {
+    const text = lang ? no : en
+    function sendForm() {
         if (data.name === data.name) {
             // Takk for beskjed. / Thanks for letting us know.
             Alert.alert(text.soon, text.temp)
@@ -49,12 +49,7 @@ export default function ReportScreen({ navigation }: ScreenProps): JSX.Element {
         check_contentInputChange: false,
     })
 
-    const database = {
-        name: "admin",
-        pass: "admin"
-    }
-
-    const inputName = (val: string) => {
+    function inputName(val: string) {
         if (val.length > 1) {
             setData({
             ...data,
@@ -70,7 +65,7 @@ export default function ReportScreen({ navigation }: ScreenProps): JSX.Element {
         }
     }
 
-    const inputContact = (val: string) => {
+    function inputContact(val: string) {
         if (val.length > 1) {
             setData({
             ...data,
@@ -86,7 +81,7 @@ export default function ReportScreen({ navigation }: ScreenProps): JSX.Element {
         }
     }
 
-    const inputContent = (val: string) => {
+    function inputContent(val: string) {
         if (val.length > 20) {
             setData({
             ...data,
@@ -107,7 +102,7 @@ export default function ReportScreen({ navigation }: ScreenProps): JSX.Element {
             <GestureHandlerRootView>
                 <PanGestureHandler
                         onGestureEvent={(event: PanGestureHandlerGestureEvent) => 
-                            handleSwipe({navigation, event, screenLeft: "root"})}
+                            handleSwipe({navigation, event, screenLeft: "MenuScreen"})}
                     >
                     <View>
                         <View style={{

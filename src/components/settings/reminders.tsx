@@ -27,7 +27,7 @@ export default function Reminders() {
         {id: 8, source: "annet",       title: lang ? "Annet" : "Other"}
     ]
 
-    const showCategory = (val: number) => {
+    function showCategory(val: number) {
         if (category === val) setCategory(-1)
         else setCategory(val)
     }

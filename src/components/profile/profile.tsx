@@ -58,7 +58,7 @@ export default function Profile({profile} : ProfileElementprops) {
 
     const year = y + " "
 
-    const handlePress = () => {
+    function handlePress() {
         setShow(true)
     }
 

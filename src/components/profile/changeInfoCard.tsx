@@ -73,7 +73,7 @@ trigger}: ChangeInfoCardProps) {
 
     // Tries to hide the component, checks to avoid double calls
     const [hiding, setHiding] = useState(false)
-    const tryToHide = () => {
+    function tryToHide() {
         if (!hiding) {
             setHiding(true)
             runOnJS(() => hide())
@@ -108,7 +108,7 @@ trigger}: ChangeInfoCardProps) {
     })
 
     // Slides the card up from the bottom
-    const slideUp = () => {
+    function slideUp() {
         translateY.value = withTiming(0)
     }
 
@@ -130,12 +130,12 @@ trigger}: ChangeInfoCardProps) {
     }, [])
 
     // Checks if the keyboard did hide, and if so closes the component
-    const _keyboardDidHide = () => {
+    function _keyboardDidHide() {
         translateY.value = withTiming(height)
         tryToHide()
     }
 
-    const checkChange = () => {
+    function checkChange () {
         // if (profile[value] != text && text.length > 0) {
         //     setEdited(true)
         // } else {
@@ -143,12 +143,12 @@ trigger}: ChangeInfoCardProps) {
         // }
     }
 
-    const handleText = (val: string) => {
+    function handleText(val: string) {
         setText(val)
         checkChange()
     }
 
-    const save = () => {
+    function save() {
         switch (value) {
             case 0: dispatch(setDegree(text));       break
             case 1: dispatch(setSchoolyear(text));   break
@@ -158,7 +158,7 @@ trigger}: ChangeInfoCardProps) {
         }
     }
 
-    const findBestPlaceHolder = () => {
+    function findBestPlaceHolder() {
         switch (value) {
             case 0: return (profile.degree      ? profile.degree      : type)
             case 1: return (profile.schoolyear  ? profile.schoolyear  : type)
