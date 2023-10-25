@@ -1,19 +1,22 @@
 import { StyleSheet, Dimensions, Platform } from "react-native"
 
 export const AS = StyleSheet.create({
+    content: {
+        height: Dimensions.get("window").height + 200,
+    },
     adBack: {
         flexDirection: "row",
         alignItems: "center",
     },
     adViewLeft: {
         alignItems: "center",
-        width: "26%",
+        width: "23.5%",
     },
     adViewMid: {
         justifyContent: "center",
         left: Platform.OS === "ios" ? 7.5 : 10,
         paddingHorizontal: 6,
-        width: "65.5%",
+        width: "68%",
     },
     adViewRight: {
         width: "8.5%",
@@ -26,10 +29,11 @@ export const AS = StyleSheet.create({
         fontSize: Platform.OS === "ios" ? 20 : 17,
     },
     specificAdTitle: {
-        maxWidth: "90%",
+        maxWidth: "72.5%",
         left: 10,
         alignSelf: "center",
-        maxHeight: Platform.OS === "ios" ? 20 * 3 : 17 * 2.5,
+        // Limits to 3 lines (same as image height)
+        // maxHeight: Platform.OS === "ios" ? 24 * 3 : 17 * 2.5,
         fontSize: Platform.OS === "ios" ? 20 : 17,
     },
     adInfoType: {
@@ -82,12 +86,13 @@ export const AS = StyleSheet.create({
         top: 1.7,
         height: 60,
         aspectRatio: 3 / 2,
-        resizeMode: "contain",
+        resizeMode: "stretch",
     },
     adBanner: {
         width: "100%",
         aspectRatio: 10 / 4,
-        resizeMode: "contain",
+        resizeMode: "stretch",
+        marginBottom: 12
     },
     adClusterImage: {
         aspectRatio: 3 / 2,

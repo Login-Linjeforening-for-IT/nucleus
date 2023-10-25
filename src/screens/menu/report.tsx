@@ -4,7 +4,6 @@ import Check from "@components/event/check"
 import Button from "@/components/shared/button"
 import Space from "@/components/shared/utils"
 import FetchColor from "@styles/fetchTheme"
-import { ScreenProps } from "@interfaces"
 import SS from "@styles/settingStyles"
 import GS from "@styles/globalStyles"
 import { useSelector } from "react-redux"
@@ -25,7 +24,7 @@ import {
 } from "react-native"
 import Swipe from "@components/nav/swipe"
 
-export default function ReportScreen({ navigation }: ScreenProps): JSX.Element {
+export default function ReportScreen(): JSX.Element {
 
     const { lang  } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)

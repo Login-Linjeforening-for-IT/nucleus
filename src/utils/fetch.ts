@@ -1,5 +1,3 @@
-import AsyncStorage from "@react-native-async-storage/async-storage"
-
 /**
  * Function for checking when the API was last fetched successfully.
  *
@@ -68,11 +66,12 @@ export function FetchJoinLink(string: string): string | null {
  * events on the screen, catches any errors and fetches localstorage, and 
  * handles errors.
  */
-export async function getData(): Promise<EventProps[]> {
+export async function fetchEvents(): Promise<EventProps[]> {
     try {
-        // PRODUCTION
+        // Prod
         const response = await fetch("https://api.login.no/events")
-        // TESTING
+
+        // Dev
         // const response = await fetch("https://tekkom:rottejakt45@api.login.no:8443/events")
 
         // Checks if response is ok, otherwise throws error
@@ -81,18 +80,58 @@ export async function getData(): Promise<EventProps[]> {
         }
 
         return response.json()
-        // Catches any errors (missing wifi)
+
+    // Catches and logs errors. Errors are handled by Redux.
     } catch (error) {
-        // Tries to fetch cache
-        const cache: string | null = await AsyncStorage.getItem("cachedEvents");
-
-        if (cache) {
-            const events: EventProps[] = JSON.parse(cache)
-            return events
-        }
-
+        console.log(error)
         return []
     }
+}
+
+/**
+ * Fetches data from API, formats the response, sets the cache, updates the 
+ * events on the screen, catches any errors and fetches localstorage, and 
+ * handles errors.
+ */
+export async function fetchAds(): Promise<AdProps[]> {
+    try {
+        // Prod
+        // const response = await fetch("https://api.login.no/ads")
+
+        // Dev
+        const response = await fetch("http://10.212.174.46/api/jobs/")
+
+        // Checks if response is ok, otherwise throws error
+        if (!response.ok) {
+            throw new Error('Failed to fetch ads from API')
+        }
+
+        return response.json()
+
+    // Catches and logs errors. Errors are handled by Redux.
+    } catch (error) {
+        console.log(error)
+        return []
+    }
+}
+
+/**
+ * Fetches the specific ad page for additional details
+ *
+ * @param {object} ad    Ad to fetch details for
+ *
+ * @returns                 All details for passed event
+ */
+export async function fetchAdDetails(ad: AdProps): Promise<DetailedAd> {
+
+    // Prod
+    // const response = await fetch(`https://api.login.no/ads/${ad.id}`)
+    
+    // Dev
+    const response = await fetch(`http://10.212.174.46/api/jobs/${ad.id}`)
+    const adDetails = await response.json()
+
+    return {...ad, ...adDetails.job, ...adDetails.organization}
 }
 
 /**

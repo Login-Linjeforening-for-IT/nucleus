@@ -56,6 +56,19 @@ type ReduxState = {
         input: string
         downloadState: Date
     }
+    ad: {
+        ads: AdProps[]
+        ad: DetailedAd
+        clickedAds: AdProps[]
+        renderedAds: AdProps[]
+        lastFetch: string
+        lastSave: string
+        search: boolean
+        skills: string[]
+        clickedSkills: string[]
+        input: string
+        downloadState: Date
+    }
 }
 
 type ProfileProps = any
@@ -91,7 +104,24 @@ type ExtraAdProps = {
     created_at: string
     deleted_at: string
 }
-type DetailedAd = AdProps & ExtraAdProps
+
+type AdOrganizationProps = {
+    shortname: string
+    name_no: string
+    name_en: string
+    description_no: string
+    description_en: string
+    link_homepage: string
+    link_linkedin: string
+    link_facebook: string
+    link_instagram: string
+    logo: string
+    updated_at: string
+    created_at: string
+    deleted_at: string
+  }
+
+type DetailedAd = AdProps & ExtraAdProps & AdOrganizationProps
 
 type CategoryProps = 
     "tekkom"
@@ -119,10 +149,6 @@ type SettingProps = {
     title: string
 }
 
-type ErrorMessageProps = {
-    argument: "wifi" | "nomatch"
-}
-
 type CategoryWithID = {
     category: string
     id: number
@@ -130,11 +156,6 @@ type CategoryWithID = {
 
 type CTX = {
     startY: number
-}
-
-type RootStackParamList = {
-    SpecificEventScreen: { item: EventProps }
-    SpecificAdScreen: { item: AdProps}
 }
 
 type NotificationProps = {
@@ -250,12 +271,12 @@ type NotificationList = {
 
 type EventStackParamList = {
     EventScreen: undefined
-    SpecificEventScreen: {item: EventProps}
+    SpecificEventScreen: undefined
 }
 
 type AdStackParamList = {
     AdScreen: undefined
-    SpecificAdScreen: {item: AdProps}
+    SpecificAdScreen: undefined
 }
 
 type Setting = {
@@ -288,3 +309,7 @@ type ItemProps = {
 type MenuStackParamList = {
     [k in MenuRoutes]+?: ItemProps;
 } & {MenuScreen: undefined}
+
+type ListFooterProps = {
+    index: number
+}

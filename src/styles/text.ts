@@ -66,7 +66,7 @@ export const T = StyleSheet.create({
     },
     // Centered text of size 20
     centered20: {
-        alignSelf: "center",
+        textAlign: "center",
         fontSize: 20,
     },
     // Centered text of size 20 for the contact screen

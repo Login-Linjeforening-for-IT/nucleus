@@ -7,14 +7,12 @@ import React from "react"
 import Space, { Line } from "@/components/shared/utils"
 import GS from "@styles/globalStyles"
 import { Kontakt } from "@/components/about/social"
-import { ScreenProps } from "@interfaces"
 import T from "@styles/text"
 import { Text, View, ScrollView, Dimensions } from "react-native"
 import { useSelector } from "react-redux"
 import Swipe from "@components/nav/swipe"
 
-export default function BusinessScreen({ navigation }: ScreenProps): 
-JSX.Element {
+export default function BusinessScreen(): JSX.Element {
 
     const { theme } = useSelector((state: ReduxState) => state.theme)
 

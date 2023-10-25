@@ -27,7 +27,7 @@ export const ES = StyleSheet.create({
         fontSize: Platform.OS === "ios" ? 20 : 18,
     },
     // Eventday text on eventScreen
-    eventCardDayText: {
+    eventClusterDayText: {
         textAlign: "center",
         width: 45,
         top: -3,

@@ -1,4 +1,3 @@
-import { ErrorMessage } from "@/components/shared/utils"
 import React, { useEffect, useState } from "react"
 import { useFocusEffect } from "@react-navigation/native"
 import EventList from "@components/event/eventList"
@@ -10,7 +9,7 @@ import NavigateFromPushNotification
 from "@/utils/navigateFromPushNotification"
 import initializeNotifications 
 from "@/utils/notificationSetup"
-import LastFetch, { getData } from "@/utils/fetch"
+import LastFetch, { fetchEvents } from "@/utils/fetch"
 import { View, StatusBar as StatusBarReact } from "react-native"
 import { ScreenProps } from "@interfaces"
 import { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs"
@@ -24,7 +23,7 @@ import Swipe from "@components/nav/swipe"
 const EventStack = createStackNavigator<EventStackParamList>()
 
 /**
- * Parent EventScreen function
+ * Parent EventScreen component
  *
  * Handles:
  * - Displaying events
@@ -45,7 +44,7 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
     
     // Redux states
     const notification = useSelector((state: ReduxState) => state.notification)
-    const { search, lastSave, input } = useSelector((state: ReduxState) => state.event)
+    const { search, lastSave } = useSelector((state: ReduxState) => state.event)
     const { theme, isDark } = useSelector((state: ReduxState) => state.theme)
     const dispatch = useDispatch()
 
@@ -53,13 +52,13 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
     NavigateFromPushNotification({navigation, theme,
         setPushNotification, setPushNotificationContent})
 
-    //  --- FETCHES CLICKED EVENTS WHEN SCREEN BECOMES VISIBLE ---
+    // Fetches events when screen is focused
     useFocusEffect(
         // Callback to avoid too many rerenders
         React.useCallback(() => {
-            // Function to fetch clicked events
+            // IIFE to fetch clicked events
             (async() => {
-                const events = await getData()
+                const events = await fetchEvents()
 
                 if (events) {
                     dispatch(setEvents(events))
@@ -69,12 +68,11 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
         }, [])
     )
 
-    // --- LOADING INITIAL DATA ---
+    // Loads initial data
     useEffect(() => {
-        // Fetches API
-        // Fetches clickedEvents
+        // IIFE to fetch API
         (async() => {
-            const events = await getData()
+            const events = await fetchEvents()
 
             if (events) {
                 dispatch(setEvents(events))
@@ -94,7 +92,7 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
             interval = setInterval(() => {
                 // Storing the current time
                 (async() => {
-                    const events = await getData()
+                    const events = await fetchEvents()
 
                     if (events) {
                         dispatch(setEvents(events))
@@ -151,11 +149,7 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
                                     backgroundColor: FetchColor({theme, variable: "DARKER"})
                                 }}>
                                     {pushNotification && pushNotificationContent}
-                                    <EventList
-                                        navigation={navigation}
-                                        notification={notification}
-                                        ErrorMessage={ErrorMessage}
-                                    />
+                                    <EventList notification={notification} />
                                 </View>
                             </View>
                         </Swipe>

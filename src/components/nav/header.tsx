@@ -14,10 +14,11 @@ export default function Header({ options, route, navigation }: HeaderProps): Rea
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang  } = useSelector((state: ReduxState) => state.lang)
     const { event } = useSelector((state: ReduxState) => state.event)
+    const { ad } = useSelector((state: ReduxState) => state.ad )
     let title = route.name && (lang ? require('@text/no.json').screens[route.name] : require('@text/en.json').screens[route.name])
 
-    if (!title) title = event.eventname
-
+    if (!title && route.name === "SpecificEventScreen") title = event.eventname
+    if (!title && route.name === "SpecificAdScreen") title = lang ? ad.title_no : ad.title_en
 
     const { isDark } = useSelector((state: ReduxState) => state.theme )
 

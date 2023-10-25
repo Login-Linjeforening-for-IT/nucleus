@@ -1,41 +1,40 @@
 import { View, ScrollView, Dimensions } from "react-native"
 import Cluster from "@/components/shared/cluster"
 import FetchColor from "@styles/fetchTheme"
-import GS from "@styles/globalStyles"
+import AS from "@styles/adStyles"
 import { useSelector } from "react-redux"
 import React from "react"
-import { BottomTabScreenProps } from "@react-navigation/bottom-tabs"
 import Swipe from "@components/nav/swipe"
 import AdInfo, { 
-    AdBanner, 
-    AdTitle, 
-    AdDescription, 
-    AdUpdateInfo, 
-    AdMedia 
+    AdBanner,
+    AdDescription,
+    AdMedia,
+    AdTitle,
+    AdUpdateInfo
 } from "@/components/ads/ad"
   
-export default function SpecificAdScreen({ route, navigation }: BottomTabScreenProps<AdStackParamList, 'SpecificAdScreen'>): JSX.Element {
+export default function SpecificAdScreen(): JSX.Element {
 
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    const { item } = route.params
+    const { ad } = useSelector((state: ReduxState) => state.ad )
 
     return (
         <Swipe left="AdScreen">
                 <View>
                     <View style={{
-                        ...GS.content,
-                        backgroundColor: FetchColor({theme, variable: "BACKGROUND"}),
-                        paddingTop: Dimensions.get("window").height/8.1,
+                        ...AS.content,
+                        backgroundColor: FetchColor({theme, variable: "DARKER"}),
+                        paddingTop: Dimensions.get("window").height / 9.7,
                         paddingBottom: Dimensions.get("window").height / 3
                     }}>
                         <ScrollView showsVerticalScrollIndicator={false}>
                             <Cluster marginHorizontal={12} marginVertical={12}>
-                                <AdBanner url={item.banner_image} />
-                                <AdTitle ad={item} />
-                                <AdInfo props={item} />
-                                <AdDescription ad={item} />
-                                <AdMedia ad={item} />
-                                <AdUpdateInfo ad={item} />
+                                <AdBanner url={ad.banner_image} />
+                                <AdTitle ad={ad} />
+                                <AdInfo ad={ad} />
+                                <AdDescription ad={ad} />
+                                <AdMedia ad={ad} />
+                                <AdUpdateInfo ad={ad} />
                             </Cluster>
                         </ScrollView>
                     </View>

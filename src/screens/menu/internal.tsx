@@ -4,7 +4,6 @@ import Space from "@/components/shared/utils"
 import FetchColor from "@styles/fetchTheme"
 import GS from "@styles/globalStyles"
 import { useSelector } from "react-redux"
-import { ScreenProps } from "@interfaces"
 import T from "@styles/text"
 import React from "react"
 import Swipe from "@components/nav/swipe"
@@ -27,7 +26,7 @@ type ItemProps = {
     title: string
 }
 
-export default function InternalScreen({ navigation }: ScreenProps): JSX.Element {
+export default function InternalScreen(): JSX.Element {
 
     const { theme } = useSelector((state: ReduxState) => state.theme)
 

@@ -24,7 +24,6 @@ import {
   Text,
 } from "react-native"
 import { StaticImage } from "@/components/about/social"
-import { BottomTabScreenProps } from "@react-navigation/bottom-tabs"
 import { useDispatch } from "react-redux"
 import { setClickedEvents } from "@redux/event"
 import Swipe from "@components/nav/swipe"
@@ -53,21 +52,20 @@ type CategoryProps = {
  * @param param0
  * @returns
  */
-export default function SpecificEventScreen({ navigation }: 
-BottomTabScreenProps<EventStackParamList>): JSX.Element {
+export default function SpecificEventScreen(): JSX.Element {
 
     const { lang  } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const stored = useSelector((state: ReduxState) => state.event)
     const [event, setEvent]=useState<DetailedEvent | EventProps>(stored.event)
 
-    function getData() {
+    function fetchEvent() {
         fetch(`https://api.login.no/events/${event.eventID}`)
         .then(response => response.json())
         .then(data => setEvent(data))
     }
     
-    useEffect(() => { getData() }, [event])
+    useEffect(() => { fetchEvent() }, [event])
 
     let link
     
@@ -137,7 +135,7 @@ BottomTabScreenProps<EventStackParamList>): JSX.Element {
                                 <View style={{left: -10}}>
                                 <CategorySquare category={event.category} />
                                 <Text style={{
-                                    ...ES.eventCardDayText, 
+                                    ...ES.eventClusterDayText, 
                                     color: FetchColor({theme, variable: "TEXTCOLOR"})
                                 }}>
                                     {event.startt[8]}

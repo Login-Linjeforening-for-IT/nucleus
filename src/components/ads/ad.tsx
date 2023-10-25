@@ -5,6 +5,9 @@ import { useSelector } from "react-redux"
 import AS from "@styles/adStyles"
 import T from "@styles/text"
 import React, { useEffect, useState } from "react"
+import { SvgUri } from "react-native-svg"
+import capitalizeFirstLetter from "@utils/capitalizeFirstLetter"
+import RenderHTML from "react-native-render-html"
 import {
     TouchableOpacity,
     Dimensions,
@@ -30,15 +33,15 @@ type SocialProps = {
  * @param props
  * @returns               Small banner image
  */
-export default function AdInfo({props}: {props: AdProps}) {
+export default function AdInfo({ad}: {ad: AdProps}) {
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const [deadline, setDeadline] = useState("")
-    const loc = props.city
-    const type = props.job_type
+    const loc = ad.cities.map(city => capitalizeFirstLetter(city)).join(", ")
+    const type = capitalizeFirstLetter(ad.job_type)
    
     useEffect(() => {
-        const fetch = LastFetch(props.application_deadline)
+        const fetch = LastFetch(ad.application_deadline)
 
         if (fetch) {
             setDeadline(fetch)
@@ -102,16 +105,39 @@ export default function AdInfo({props}: {props: AdProps}) {
  */
 export function AdBanner({url}: {url: string}) {
 
-    return (
-        <View style={{marginBottom: 10}}>
-            <Image
-                style={AS.adBanner}
-                source={{uri: url
-                    ? url
-                    : "https://cdn.login.no/img/ads/adbanner.png"}}
-                />
-        </View>
-    )
+    if (url?.endsWith(".svg")) {
+        return <SvgUri
+            style={{alignSelf: "center", backgroundColor: "white"}}
+            width={(Dimensions.get("window").width) / 1.2}
+            height={Dimensions.get("window").width / 3}
+            uri={`https://cdn.login.no/img/events/${url}`}
+        />
+    }
+
+    if ((url?.endsWith(".png") 
+        || url?.endsWith(".jpg") 
+        || url?.endsWith(".jpg") 
+        || url?.endsWith(".jpeg") 
+        || url?.endsWith(".gif")
+    ) && !url?.startsWith("http")) {
+        return <Image 
+            style={AS.adBanner}
+            source={{uri: `https://cdn.login.no/img/events/${url}`}}
+        />
+    }
+
+    if ((url?.endsWith(".png") 
+        || url?.endsWith(".jpg") 
+        || url?.endsWith(".jpeg") 
+        || url?.endsWith(".gif")
+    ) && url?.includes("http")) {
+        return <Image style={AS.adBanner} source={{uri: url}} />
+    }
+
+    return <Image
+        style={AS.adBanner}
+        source={{uri: "https://cdn.login.no/img/ads/adbanner.png"}} 
+    />
 }
 
 /**
@@ -119,15 +145,49 @@ export function AdBanner({url}: {url: string}) {
  * @param {string} banner Link to the advertisement banner
  * @returns               Small banner image
  */
-export function AdClusterImage({url}: {url: string}) {
+export function AdClusterImage({url}: {url: string | undefined}) {
 
+    // Handles svg icons
+    if (url?.endsWith(".svg")) {
+        return <SvgUri
+            style={{alignSelf: "center", backgroundColor: "white"}}
+            width={90}
+            height={60}
+            uri={`https://cdn.login.no/img/events/${url}`}
+        />
+    }
+
+    // Handles png, jpg and gif icons from Login CDN
+    if ((url?.endsWith(".png") 
+        || url?.endsWith(".jpg") 
+        || url?.endsWith(".jpeg") 
+        || url?.endsWith(".gif")
+    ) && !url?.startsWith("http")) {
+        return <Image 
+            style={AS.adBannerSmall}
+            source={{uri: `https://cdn.login.no/img/events/${url}`}}
+        />
+    }
+
+    // Handles png, jpg and gif icons from extern location
+    if ((url?.endsWith(".png") 
+        || url?.endsWith(".jpg") 
+        || url?.endsWith(".jpeg") 
+        || url?.endsWith(".gif")
+    ) && url?.includes("http")) {
+        return <Image 
+            style={AS.adBannerSmall}
+            source={{uri: url}}
+        />
+    }
+
+    // Handles missing asset (default png)
     return (
         <View style={AS.adClusterImage}>
             <Image
                 style={AS.adBannerSmall}
-                source={{uri: url
-                    ? url
-                    : "https://cdn.login.no/img/ads/adcompany.png"}}/>
+                source={{uri: "https://cdn.login.no/img/ads/adcompany.png"}} 
+            />
         </View>
     )
 }
@@ -136,34 +196,32 @@ export function AdClusterImage({url}: {url: string}) {
  * Visual representation of the location on the Ad Cluster
  *
  * @param {AdProps} ad  Ad object
- * @param {number} theme Theme of the app
  * @returns
  */
 export function AdClusterLocation({ad}: AdClusterLocationProps) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    const tempName = ad.title_no
-    const tempType = "Fulltid"
-    const tempLoc = "Gjøvik, Oslo, Stavanger, Bergen, Trondheim, Login Loungen"
-    let name = tempName
-    let info = tempType + ", " + tempLoc
+    const type = capitalizeFirstLetter(ad.job_type)
+    const location = ad.cities.map(city => capitalizeFirstLetter(city)).join(", ")
+    let name =  ad.title_no
+    let info = `${type}${location ? `. ${location}`:''}`
     let halfWidth = Platform.OS === "ios" 
         ? Dimensions.get("window").width / 9 
         : Dimensions.get("window").width / 8.7805
-    if (tempName.length > halfWidth / 1.7 
-    && (tempType + tempLoc).length > (halfWidth*1.25)) {
-        name = tempName.length > halfWidth / 1.1 
-        ? tempName.substring(0, halfWidth / 1.1) + "..." 
-        : tempName
+    if (name.length > halfWidth / 1.7 
+    && (type + location).length > (halfWidth*1.25)) {
+        name = name.length > halfWidth / 1.1 
+        ? name.substring(0, halfWidth / 1.1) + "..." 
+        : name
         info = info.substring(0, halfWidth / 1.3) + "..."
-    } else if (tempName.length > halfWidth) {
-        name = tempName.substring(0, halfWidth) + "..."
+    } else if (name.length > halfWidth) {
+        name = name.substring(0, halfWidth) + "..."
     } else if (info.length > (Platform.OS === "ios" 
-        ? halfWidth*1.45 
-        : halfWidth*1.5)) 
+        ? halfWidth * 1.45 
+        : halfWidth * 1.5)) 
     {
         info = info.substring(0, Platform.OS === "ios" 
-            ? halfWidth*1.45 
-            : halfWidth*1.5) + "..."
+            ? halfWidth * 1.45 
+            : halfWidth * 1.5) + "..."
     }
 
     return (
@@ -193,12 +251,12 @@ export function AdClusterLocation({ad}: AdClusterLocationProps) {
  * @param {AdProps} ad Ad object
  * @returns Ad description element
  */
-export function AdDescription({ad}: {ad: AdProps}) {
+export function AdDescription({ad}: {ad: DetailedAd}) {
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    const skills = ad.skill
+    const skills = ad.skills.join(", ")
     const shortDescription = lang 
-        ? ad.description_short_no 
+        ? ad.description_short_no
         : ad.description_short_en
     const LongDescription = lang 
         ? ad.description_long_no 
@@ -236,12 +294,14 @@ export function AdDescription({ad}: {ad: AdProps}) {
                 }}>
                     Om stillingen
                 </Text>
-            <Text style={{
-                ...T.paragraph, 
-                color: FetchColor({theme, variable: "TEXTCOLOR"})
-                }}>
-                    {LongDescription}
-                </Text>
+            {LongDescription && <RenderHTML
+                baseStyle={{
+                    maxWidth: "100%",
+                    color: FetchColor({theme, variable: "TEXTCOLOR"}),
+                }}
+                contentWidth={0}
+                source={{html: LongDescription}}
+            />}
         </View>
     )
 }
@@ -250,17 +310,17 @@ export function AdDescription({ad}: {ad: AdProps}) {
  * Function for displaying all of the social media you can reaxch Login on
  * @returns Social media icons
  */
-export function AdMedia({ad}: {ad: AdProps}) {
+export function AdMedia({ad}: {ad: DetailedAd}) {
     const { theme, isDark } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
 
     const social = [
-        {
-            url: ad.link_discord,
-            source: isDark 
-                ? require("@assets/social/discord-white.png")
-                : require("@assets/social/discord-black.png")
-        },
+        // {
+        //     url: ad.link_discord,
+        //     source: isDark 
+        //         ? require("@assets/social/discord-white.png")
+        //         : require("@assets/social/discord-black.png")
+        // },
         {
             url: ad.link_instagram,
             source: isDark
@@ -291,7 +351,7 @@ export function AdMedia({ad}: {ad: AdProps}) {
         <View style={{marginBottom: 10}}>
             <View style={AS.socialView}>
                 {social.map((platform: SocialProps) => {
-                    if (platform.url.length) return (
+                    if (platform.url?.length) return (
                         <View key={platform.url}>
                             <TouchableOpacity onPress={() => 
                                 Linking.openURL(platform.url)}>
@@ -333,24 +393,64 @@ export function AdMedia({ad}: {ad: AdProps}) {
  * @param {string} banner Link to the advertisement banner
  * @returns               Small banner image
  */
-export function AdTitle({ad}: {ad: AdProps}) {
+export function AdTitle({ad}: {ad: DetailedAd}) {
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    const bannerURL  = ad.banner_image
+    const logo = ad.logo
     const title = (lang 
         ? ad.title_no + " hos "
         : ad.title_en + " at "
     ) + ad.organization
 
+    function Logo() {
+        // Handles svg icons
+        if (logo?.endsWith(".svg")) {
+            return <SvgUri
+                style={{alignSelf: "center", backgroundColor: "white"}}
+                width={90}
+                height={60}
+                uri={`https://cdn.login.no/img/events/${logo}`}
+            />
+        }
+
+        // Handles png, jpg and gif icons from Login CDN
+        if ((logo?.endsWith(".png") 
+            || logo?.endsWith(".jpg") 
+            || logo?.endsWith(".jpeg") 
+            || logo?.endsWith(".gif")
+        ) && !logo?.startsWith("http")) {
+            return <Image 
+                style={AS.adBannerSmall}
+                source={{uri: `https://cdn.login.no/img/events/${logo}`}}
+            />
+        }
+
+        // Handles png, jpg and gif icons from extern location
+        if ((logo?.endsWith(".png") 
+            || logo?.endsWith(".jpg") 
+            || logo?.endsWith(".jpeg") 
+            || logo?.endsWith(".gif")
+        ) && logo?.includes("http")) {
+            return <Image 
+                style={AS.adBannerSmall}
+                source={{uri: logo}}
+            />
+        }
+
+        // Handles missing asset (default png)
+        return (
+            <View style={AS.adClusterImage}>
+                <Image
+                    style={AS.adBannerSmall}
+                    source={{uri: "https://cdn.login.no/img/ads/adcompany.png"}} 
+                />
+            </View>
+        )
+    }
+
     return (
         <View style={AS.adTitleView}>
-            <Image 
-                style={AS.adBannerSmall}
-                source={{uri: bannerURL 
-                    ? bannerURL
-                    : "https://cdn.login.no/img/ads/adcompany.png"
-                }}
-            />
+            <Logo />
             <Text style={{
                 ...AS.specificAdTitle, 
                 color: FetchColor({theme, variable: "TEXTCOLOR"})
@@ -366,9 +466,10 @@ export function AdTitle({ad}: {ad: AdProps}) {
  * @param {string} banner Link to the advertisement banner
  * @returns               Small banner image
  */
-export function AdUpdateInfo({ad}: {ad: AdProps}) {
+export function AdUpdateInfo({ad}: {ad: DetailedAd}) {
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
+
     const updated = LastFetch(ad.updated_at)
     const created = LastFetch(ad.created_at)
 
@@ -379,17 +480,17 @@ export function AdUpdateInfo({ad}: {ad: AdProps}) {
     return (
         <View style={{marginBottom: 10}}>
             <Text style={{
-                ...T.contact, 
+                ...T.contact,
+                marginBottom: 5,
                 color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})
             }}>
-                {text[0]} {!updated}.
+                {text[0]} {updated}.
             </Text>
-            <Space height={5} /> 
             <Text style={{
                 ...T.contact,
                 color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})
             }}>
-                {text[1]} {!created}.
+                {text[1]} {created}.
             </Text>
         </View>
     )

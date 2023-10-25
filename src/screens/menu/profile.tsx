@@ -6,7 +6,6 @@ import Space from "@/components/shared/utils"
 import FetchColor from "@styles/fetchTheme"
 import PS from "@styles/profileStyles"
 import { useSelector } from "react-redux"
-import { ScreenProps } from "@interfaces"
 import React, { useState } from "react"
 import Swipe from "@components/nav/swipe"
 
@@ -18,8 +17,7 @@ type ScrollProps = {
     }
 }
 
-export default function ProfileScreen({ navigation }: ScreenProps): 
-JSX.Element {
+export default function ProfileScreen(): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
 
     const { 

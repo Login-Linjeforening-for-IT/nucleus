@@ -1,9 +1,9 @@
 import notificationArray from "@/utils/notificationArray"
-import EventCardLocation from "@components/event/eventCardLocation"
+import EventClusterLocation from "@components/event/eventClusterLocation"
 import CategorySquare from "@/components/shared/category"
 import topic from "@/utils/topic"
-import Space, { Month } from "@/components/shared/utils"
-import BellIcon from "@components/event/bellIcon"
+import Space, { ErrorMessage, Month } from "@/components/shared/utils"
+import BellIcon from "@components/shared/bellIcon"
 import Cluster from "@/components/shared/cluster"
 import FetchColor from "@styles/fetchTheme"
 import ES from "@styles/eventStyles"
@@ -20,21 +20,15 @@ import {
 } from "react-native"
 import { useSelector, useDispatch } from "react-redux"
 import { setClickedEvents, setEvent, toggleSearch } from "@redux/event"
+import { useNavigation } from "@react-navigation/native"
 
 type EventListProps = {
-    navigation: Navigation
     notification: NotificationProps
-    ErrorMessage: React.FC<ErrorMessageProps>
 }
 
-type EventCardProps = {
-    navigation: Navigation
+type EventClusterProps = {
     notification: NotificationProps
     item: EventProps
-    index: number
-}
-
-type ListFooterProps = {
     index: number
 }
 
@@ -51,8 +45,7 @@ type BellProps = {
 /**
  * Displays the event list
  */
-export default function EventList ({navigation, notification, ErrorMessage}: 
-EventListProps): JSX.Element {
+export default function EventList ({notification}: EventListProps): JSX.Element {
     const { events, search, renderedEvents } = useSelector((state: ReduxState) => state.event)
 
     if (!renderedEvents.length && !search) {
@@ -67,8 +60,7 @@ EventListProps): JSX.Element {
                     keyExtractor={(item) => `${item.eventID}`}
                     data={renderedEvents}
                     renderItem={({item, index}) => (
-                        <EventCard
-                            navigation={navigation}
+                        <EventCluster
                             notification={notification}
                             item={item}
                             index={index}
@@ -85,9 +77,10 @@ EventListProps): JSX.Element {
 /**
  * Displays one element of the event card array
  */
-function EventCard ({navigation, notification, item, index}: EventCardProps): 
+function EventCluster ({notification, item, index}: EventClusterProps): 
 JSX.Element {
     const { search } = useSelector((state: ReduxState) => state.event)
+    const navigation = useNavigation()
     const dispatch = useDispatch()
 
     return (
@@ -107,12 +100,12 @@ JSX.Element {
                 <Cluster marginVertical={8}>
                     <View style={ES.eventBack}>
                         <FullCategorySquare item={item} />
-                        <EventCardLocation item={item} />
+                        <EventClusterLocation item={item} />
                         <Bell item={item} notification={notification} />
                     </View>
                 </Cluster>
-                <ListFooter index={index} />
             </TouchableOpacity>
+            <ListFooter index={index} />
         </View>
     )
 }
@@ -152,7 +145,7 @@ export function FullCategorySquare({item, height}: FullCategorySquareProps): JSX
             <CategorySquare category={item.category} height={height} />
 
             <Text style={{
-                ...ES.eventCardDayText,
+                ...ES.eventClusterDayText,
                 color: FetchColor({theme, variable: "TEXTCOLOR"})
             }}>{day}</Text>
 

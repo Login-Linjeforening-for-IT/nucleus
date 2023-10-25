@@ -26,6 +26,10 @@ type SpaceProps = {
     height: number
 }
 
+type ErrorMessageProps = {
+    argument: "wifi" | "nomatch"
+}
+
 /**
  * Function for creating an empty view, for adding spaces between objects such 
  * as views paragraphs etc
@@ -96,7 +100,7 @@ export function ErrorMessage({argument}: ErrorMessageProps): JSX.Element {
     return (
         <View style={{alignSelf: "center", maxWidth: "80%"}}>
             <View style={{height : "45%"}}/>
-            <Text style={{...T.centeredBold20, color: FetchColor({theme, 
+            <Text style={{...T.centered20, color: FetchColor({theme, 
                 variable: "TEXTCOLOR"})}}>
                 {text[argument]}
             </Text>

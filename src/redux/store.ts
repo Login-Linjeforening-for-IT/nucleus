@@ -8,6 +8,7 @@ import ThemeReducer from "@redux/theme"
 import EventReducer from "@redux/event"
 import LangReducer from "@redux/lang"
 import MiscReducer from "@redux/misc"
+import AdReducer from "@redux/ad"
 import thunk from "redux-thunk"
 
 // Combines all reducers
@@ -25,7 +26,9 @@ const reducers = combineReducers({
     // Profile reducer, handles all user specific information
     profile: ProfileReducer,
     // Event reducer, handles all event logic
-    event: EventReducer
+    event: EventReducer,
+    // Ad reducer, handles all ad logic
+    ad: AdReducer
 })
 
   // Function to localstore redux state
@@ -35,7 +38,16 @@ const saveState = {
     // Declares which storage to use, AsyncStorage has most active community
     storage: AsyncStorage,
     // Whitelists the names of the states to save
-    whitelist: ["lang", "login", "theme", "notification", "misc", "profile", "event"]
+    whitelist: [
+        "ad",
+        "event", 
+        "lang",
+        "login",
+        "misc",
+        "notification",
+        "profile",
+        "theme"
+    ]
 }
 
 // Persistor to remember the state

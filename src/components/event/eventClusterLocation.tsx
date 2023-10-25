@@ -4,7 +4,7 @@ import ES from "@styles/eventStyles"
 import React from "react"
 import { useSelector } from "react-redux"
 
-type EventCardLocationProps = {
+type EventClusterLocationProps = {
     item: EventProps
 }
 
@@ -16,8 +16,8 @@ type EventCardLocationProps = {
  * @param lang User language
  * @returns
  */
-export default function EventCardLocation({item}: 
-EventCardLocationProps): JSX.Element {
+export default function EventClusterLocation({item}: 
+EventClusterLocationProps): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
     let time = " " + item.startt[11] + item.startt[12] + ":" + item.startt[14] + 
