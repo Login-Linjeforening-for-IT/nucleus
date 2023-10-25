@@ -41,7 +41,7 @@ export const AdSlice = createSlice({
         skills: [] as string[],
         clickedSkills: [] as string[],
         input: "",
-        downloadState: new Date()
+        downloadState: new Date(),
     },
     // Declares reducers
     reducers: {
@@ -120,7 +120,7 @@ export const {
     setLastSave,
     setRenderedAds,
     toggleSearch,
-    setDownloadState
+    setDownloadState,
 } = AdSlice.actions
 
 // Exports the Ad slice itself

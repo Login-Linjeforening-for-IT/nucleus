@@ -15,10 +15,13 @@ export default function Header({ options, route, navigation }: HeaderProps): Rea
     const { lang  } = useSelector((state: ReduxState) => state.lang)
     const { event } = useSelector((state: ReduxState) => state.event)
     const { ad } = useSelector((state: ReduxState) => state.ad )
-    let title = route.name && (lang ? require('@text/no.json').screens[route.name] : require('@text/en.json').screens[route.name])
+    let title = route.name && (lang 
+            ? require('@text/no.json').screens[route.name] 
+            : require('@text/en.json').screens[route.name])
 
     if (!title && route.name === "SpecificEventScreen") title = event.eventname
     if (!title && route.name === "SpecificAdScreen") title = lang ? ad.title_no : ad.title_en
+    if (route.name === "ProfileScreen") return <></>
 
     const { isDark } = useSelector((state: ReduxState) => state.theme )
 
@@ -68,15 +71,21 @@ export default function Header({ options, route, navigation }: HeaderProps): Rea
     )
 }
 
-// Wraps the content in blur or transparent depending on OS
+// Wraps the content in blur
 function BlurWrapper(props: PropsWithChildren) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    const { search } = useSelector((state: ReduxState) => state.event)
+    const event = useSelector((state: ReduxState) => state.event)
+    const ad = useSelector((state: ReduxState) => state.ad)
     const route = useRoute()
-
-    const height = Dimensions.get('window').height * 8 / 100 +
-    (StatusBar.currentHeight ? StatusBar.currentHeight - 7 : 20) + (search 
-        && route.name === "Events"
+    const defaultHeight = Dimensions.get('window').height * 8 / 100 + (StatusBar.currentHeight ? StatusBar.currentHeight - 7 : 0)
+    const isSearchingEvents = event.search && route.name === "EventScreen"
+    const isSearchingAds = ad.search && route.name === "AdScreen"
+    const extraHeight = isSearchingEvents 
+        ? 5 * event.categories.length 
+        : isSearchingAds 
+            ? 14.5 * ad.skills.length
+            : 1
+    const height = defaultHeight + extraHeight + (isSearchingEvents || isSearchingAds
         ? Platform.OS === "ios" 
             ? 120
             : 110

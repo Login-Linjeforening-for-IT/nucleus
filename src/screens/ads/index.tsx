@@ -19,6 +19,8 @@ import { setAds, setLastFetch, setLastSave } from "@redux/ad"
 import Header from "@components/nav/header"
 import Swipe from "@components/nav/swipe"
 import AdList from "@components/ads/adList"
+import { FilterButton, FilterUI } from "@components/shared/filter"
+import DownloadButton from "@components/shared/downloadButton"
 
 const AdStack = createStackNavigator<AdStackParamList>()
 
@@ -141,9 +143,9 @@ export default function AdScreen({ navigation }: ScreenProps): JSX.Element {
                     useEffect(()=>{
                         navigation.setOptions({
                             headerComponents: {
-                                bottom: [],
-                                left: [<LogoNavigation navigation={navigation}/>],
-                                right: []
+                                bottom: [<FilterUI />],
+                                left: [<LogoNavigation />],
+                                right: [<FilterButton />, <DownloadButton />]
                             }} as Partial<BottomTabNavigationOptions>)   
                     },[navigation])
 

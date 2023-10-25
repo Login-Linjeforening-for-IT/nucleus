@@ -1,16 +1,12 @@
-import { BottomTabNavigationProp } from "@react-navigation/bottom-tabs"
-import { ParamListBase } from "@react-navigation/native"
+import { useNavigation } from "@react-navigation/native"
 import MS from "@styles/menuStyles"
 import { Image } from "react-native"
 import { TouchableOpacity } from "react-native"
 import { useSelector } from "react-redux"
 
-type LogoNavigationProps = {
-    navigation: BottomTabNavigationProp<ParamListBase>
-}
-
-export default function LogoNavigation ({navigation}: LogoNavigationProps): JSX.Element {
+export default function LogoNavigation (): JSX.Element {
     const { isDark } = useSelector((state: ReduxState) => state.theme )
+    const navigation = useNavigation()
     const state = navigation.getState()
     
     return (

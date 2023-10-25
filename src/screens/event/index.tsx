@@ -19,6 +19,8 @@ import SpecificEventScreen from "./specificEvent"
 import { setEvents, setLastFetch, setLastSave } from "@redux/event"
 import Header from "@components/nav/header"
 import Swipe from "@components/nav/swipe"
+import { FilterButton, FilterUI } from "@components/shared/filter"
+import DownloadButton from "@components/shared/downloadButton"
 
 const EventStack = createStackNavigator<EventStackParamList>()
 
@@ -120,7 +122,7 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
         hasBeenSet: notification["SETUP"]
     })
 
-    // --- DISPLAYS THE EVENTSCREEN ---
+    // Displays the EventScreen
     return (
         <EventStack.Navigator
         screenOptions={{
@@ -130,13 +132,13 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
             }}>
             <EventStack.Screen name="EventScreen">
                 {({navigation}) => {
-                    // --- SET THE COMPONENTS OF THE HEADER ---
+                    // Sets the component of the header
                     useEffect(()=>{
                         navigation.setOptions({
                             headerComponents: {
-                                bottom: [],
-                                left: [<LogoNavigation navigation={navigation}/>],
-                                right: []
+                                bottom: [<FilterUI />],
+                                left: [<LogoNavigation />],
+                                right: [<FilterButton />, <DownloadButton />]
                             }} as Partial<BottomTabNavigationOptions>)   
                     },[navigation])
 

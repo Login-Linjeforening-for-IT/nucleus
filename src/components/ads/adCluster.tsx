@@ -23,7 +23,7 @@ type Ad = {
 }
 
 export default function AdCluster({ad, index}: Ad): JSX.Element {
-    const { search, clickedAds } = useSelector((state: ReduxState) => state.ad)
+    const { search, clickedAds, skills } = useSelector((state: ReduxState) => state.ad)
     const dispatch = useDispatch()
     const isOrange = clickedAds.some(ads => ads.id === ad.id) ? true : false
     const navigation = useNavigation()
@@ -46,8 +46,8 @@ export default function AdCluster({ad, index}: Ad): JSX.Element {
                     ? search === false
                         ? <Space height={Dimensions.get("window").height / (Platform.OS === "ios" ? 8.4 : 8)} />
                         : <Space height={Platform.OS === "ios" 
-                        ? Dimensions.get("window").height / 4
-                        : Dimensions.get("window").height / 3.6} />
+                            ? Dimensions.get("window").height / (skills.length / 23.2)
+                            : Dimensions.get("window").height / (skills.length / 23.2)} />
                     : null}
                 <Cluster marginVertical={4}>
                     <View style={AS.adBack}>
@@ -90,8 +90,7 @@ export function ListFooter ({index}: ListFooterProps): JSX.Element {
                 </Text>}
             {index === renderedAds.length - 1 && 
                 <Space height={Dimensions.get("window").height / 3 + 20}/>}
-            {index === renderedAds.length - 1 && search === true &&
-                <Space height={40 * (Math.ceil(skills.length / 3)) + 152.5} />}
+            
         </>
     )
 }

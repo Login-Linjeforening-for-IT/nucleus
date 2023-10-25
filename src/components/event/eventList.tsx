@@ -126,8 +126,6 @@ export function ListFooter ({index}: ListFooterProps): JSX.Element {
                 </Text>}
             {index === renderedEvents.length - 1 && 
                 <Space height={Dimensions.get("window").height / 3 + 20}/>}
-            {index === renderedEvents.length - 1 && search === true &&
-                <Space height={40 * (Math.ceil(categories.length / 3)) + 152.5} />}
         </>
     )
 }

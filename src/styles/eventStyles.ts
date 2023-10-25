@@ -155,6 +155,7 @@ export const ES = StyleSheet.create({
         left: "9%",
         top: 7,
         width: Dimensions.get("window").width / 3.1,
+        alignItems: "center"
     },
     // Filter reset icon
     clusterFilterResetIcon: {

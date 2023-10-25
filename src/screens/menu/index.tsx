@@ -89,9 +89,7 @@ export default function MenuScreen(): JSX.Element {
                     useEffect(()=>{
                         navigation.setOptions({
                             headerComponents: {
-                                bottom: [],
-                                left: [<LogoNavigation navigation={navigation}/>],
-                                right: []
+                                left: [<LogoNavigation />],
                             }} as Partial<BottomTabNavigationOptions>)   
                         },[navigation])
                     return(
@@ -110,6 +108,7 @@ export default function MenuScreen(): JSX.Element {
                                     keyExtractor={(item) => `${item.id}`}
                                     data={text.setting}
                                     renderItem={({item, index}) => {
+                                        if (item.nav === "ProfileScreen") return null
                                         if (item.nav === "LoginScreen" && login) return null
                                         if (item.nav === "InternalScreen" && !login) return null
                                         return (

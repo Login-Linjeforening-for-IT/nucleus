@@ -205,7 +205,7 @@ export const GS = StyleSheet.create({
     },
     customMenuIcon: {
         right: Platform.OS === "ios" 
-            ? Dimensions.get("window").width / 40 
+            ? Dimensions.get("window").width / 50 
             : Dimensions.get("window").width / 30
     },
     logo: {
