@@ -4,10 +4,10 @@ import { useSelector } from "react-redux"
 import { View, Text } from "react-native"
 import ES from "@styles/eventStyles"
 import T from "@styles/text"
-import React from "react"
+import React, { ReactNode } from "react"
 
 type LineProps = {
-    height: number
+    children: ReactNode
     width: number
     fill?: string
 }
@@ -45,23 +45,21 @@ export default function Space({height}: SpaceProps): JSX.Element {
  * Function for drawing a dynamic line, can be adjusted as you wish using 
  * the height and width
  *
- * @param height Height of the line
  * @param width Width of the line
  * @param fill Color of the line
+ * @param children The content that should have a line to the right
  * @returns View of the given size based on theme
  */
-export function Line({height, width, fill}: LineProps): JSX.Element {
+export function Line({width, fill, children}: LineProps): JSX.Element {
 
     const { theme } = useSelector((state: ReduxState) => state.theme)
 
     return (
-        <View>
-            <Svg
-                width={width}
-                height={height}
-                fill={fill ? fill : FetchColor({theme, variable: "ORANGE"})}>
-                <Rect x="1" y="1" width={width} height={height}/>
-            </Svg>
+        <View style={{
+            borderLeftWidth: width,
+            borderColor: fill ? fill : FetchColor({theme, variable: "ORANGE"})
+        }}>
+            {children}
         </View>
     )
 }

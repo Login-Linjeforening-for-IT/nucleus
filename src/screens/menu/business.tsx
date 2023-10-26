@@ -66,19 +66,14 @@ function Content(): JSX.Element {
                 {info.title}
             </Text>
             <Space height={15} /> 
-            <View style={GS.row}>
-                <Text>
-                    <Line height={60} width={5} />
-                </Text>
-                <View>
-                    <Text style={{
+            <Line width={5}>
+                <Text style={{
                         ...T.boldWithLine, 
                         color: FetchColor({theme, variable: "TEXTCOLOR"})
                     }}>
                         {info.intro}
-                    </Text>
-                </View>
-            </View>
+                </Text>
+            </Line>
 
             <Space height={10} /> 
 
