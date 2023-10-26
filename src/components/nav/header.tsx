@@ -91,7 +91,7 @@ function BlurWrapper(props: PropsWithChildren) {
             ? 120
             : 110
         : Platform.OS === "ios"
-            ? 0
+            ? 20
             : 5)
 
     return (
