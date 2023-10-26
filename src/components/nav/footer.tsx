@@ -1,9 +1,9 @@
-import { View, TouchableOpacity } from "react-native"
+import { View, TouchableOpacity, Keyboard } from "react-native"
 import FetchColor from "@styles/fetchTheme"
 import { useSelector } from "react-redux"
 import MS from "@styles/menuStyles"
 import { BlurView } from "expo-blur"
-import React from "react"
+import { useState } from "react"
 import { openBrowserAsync } from 'expo-web-browser';
 import { SvgXml } from "react-native-svg"
 import USBicon from "@assets/menu/USB-temp-icon.svg"
@@ -12,6 +12,13 @@ import { BottomTabBarProps } from "@react-navigation/bottom-tabs"
 export default function Footer({ state, descriptors, navigation }: BottomTabBarProps): JSX.Element {
     // Get the current theme
     const { theme } = useSelector((state: ReduxState) => state.theme)
+    const [ keyboardVisible, setKeyboardVisible] = useState(false)
+
+    Keyboard.addListener('keyboardDidShow', ()=>setKeyboardVisible(true))
+    Keyboard.addListener('keyboardDidHide', ()=>setKeyboardVisible(false))
+
+    if(keyboardVisible)return (<></>)
+
 
     return (
         <>
