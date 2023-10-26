@@ -44,8 +44,8 @@ function Content(): JSX.Element {
             ? require("@assets/committee/eventkom/bedpres-white.png")
             : require("@assets/committee/eventkom/bedpres-black.png"),
         pr: isDark
-            ? require("@assets/committee/prkom/pr-white.png")
-            : require("@assets/committee/prkom/pr-black.png"),
+            ? require("@assets/committee/bedkom/pr-white.png")
+            : require("@assets/committee/bedkom/pr-black.png"),
         ctf: isDark
             ? require("@assets/committee/ctfkom/ctfkom-white.png")
             : require("@assets/committee/ctfkom/ctfkom-black.png"),
