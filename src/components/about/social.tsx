@@ -363,7 +363,7 @@ function personInfo({person, lang}: personInfoProps) {
         name: "Bjørn Kristian Strand",
         tag: "bk_suup",
         dclink: "https://discordapp.com/users/353992260507140097",
-        img: `https://cdn.login.no/img/portraits/portrett_bedkom-leder.jpg`
+        img: `https://cdn.login.no/img/portraits/portrett_pr-leder.jpg`
     }
 
     switch (p) {
