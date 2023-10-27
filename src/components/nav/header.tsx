@@ -15,6 +15,7 @@ export default function Header({ options, route, navigation }: HeaderProps): Rea
     const { lang  } = useSelector((state: ReduxState) => state.lang)
     const { event } = useSelector((state: ReduxState) => state.event)
     const { ad } = useSelector((state: ReduxState) => state.ad )
+    const orangeIcon = require('@assets/icons/goback-orange.png')
     let title = route.name && (lang 
             ? require('@text/no.json').screens[route.name] 
             : require('@text/en.json').screens[route.name])
@@ -37,7 +38,7 @@ export default function Header({ options, route, navigation }: HeaderProps): Rea
                         <View style={GS.logo} key={index}>{node}</View> 
                     ) : 
                     <TouchableOpacity onPress={()=>{
-                        setBackIcon(require('@assets/icons/goback-orange.png'))
+                        setBackIcon(orangeIcon)
                         navigation.goBack()
                     }}>
                         <Image style={MS.tMenuIcon} source={backIcon}></Image>
@@ -90,7 +91,7 @@ function BlurWrapper(props: PropsWithChildren) {
             ? 120
             : 110
         : Platform.OS === "ios"
-            ? 0
+            ? 20
             : 5)
 
     return (

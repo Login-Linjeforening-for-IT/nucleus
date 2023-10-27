@@ -11,6 +11,7 @@ import T from "@styles/text"
 import { Text, View, ScrollView, Dimensions } from "react-native"
 import { useSelector } from "react-redux"
 import Swipe from "@components/nav/swipe"
+import { TextWithLinks } from "@components/shared/link"
 
 export default function BusinessScreen(): JSX.Element {
 
@@ -38,6 +39,8 @@ function Content(): JSX.Element {
     const { theme, isDark } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const info = lang ? no.companies : en.companies
+    const color = FetchColor({theme, variable: "TEXTCOLOR"})
+    const orange = FetchColor({theme, variable: "ORANGE"})
 
     const logo = {
         bedpres: isDark
@@ -59,29 +62,20 @@ function Content(): JSX.Element {
 
     return (
         <Cluster>
-            <Text style={{
-                ...T.bold40, 
-                color: FetchColor({theme, variable: "TEXTCOLOR"})
-            }}>
+            <Text style={{...T.bold40, color: color}}>
                 {info.title}
             </Text>
             <Space height={15} /> 
-            <View style={GS.row}>
-                <Text>
-                    <Line height={60} width={5} />
-                </Text>
-                <View>
-                    <Text style={{
-                        ...T.boldWithLine, 
-                        color: FetchColor({theme, variable: "TEXTCOLOR"})
-                    }}>
-                        {info.intro}
-                    </Text>
-                </View>
-            </View>
+            <Line width={5}>
+                <TextWithLinks 
+                    style={{...T.boldWithLine, color: color, lineHeight: 18}} 
+                    linkStyle={{...T.boldWithLine, color: orange}} 
+                    text={info.intro} 
+                />
+            </Line>
 
             <Space height={10} /> 
-
+            
             <Paragraph 
                 logo={logo.bedpres}
                 title={info.bedpres.title}

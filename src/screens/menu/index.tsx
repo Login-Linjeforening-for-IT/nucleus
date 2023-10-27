@@ -144,16 +144,14 @@ export default function MenuScreen(): JSX.Element {
 }
 
 function MenuItem({index, item, navigation, setting, feedback, 
-toggleFeedback, login}: MenuItemProps) {
+toggleFeedback}: MenuItemProps) {
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const info = lang ? no : en
 
     return (
         <View>
-            <TouchableOpacity onPress={() => item.id === 5 && login 
-                ? navigation.navigate("InternalScreen", item) 
-                : navigation.navigate(item.nav, item)}
+            <TouchableOpacity onPress={() => navigation.navigate(item.nav, item)}
             >
                 <Cluster>
                     <View style={{...CS.clusterBack}}>

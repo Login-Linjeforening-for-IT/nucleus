@@ -1,5 +1,5 @@
 import CornerSquare from "@/components/about/cornerSquare"
-import Space, { random } from "@/components/shared/utils"
+import { random } from "@/components/shared/utils"
 import FetchColor from "@styles/fetchTheme"
 import GS from "@styles/globalStyles"
 import ES from "@styles/eventStyles"
@@ -10,11 +10,11 @@ import {
     TouchableOpacity,
     Linking,
     Image,
-    Alert,
     View,
     Text,
     ImageSourcePropType,
 } from "react-native"
+import Link, { TextLink } from "@components/shared/link"
 
 type PersonProps = {
     person: string
@@ -58,9 +58,11 @@ export default function Person({person}: PersonProps): JSX.Element {
     let corner = random({min: 0, max: 4})
 
     return (
-        <View>
+        <View style={{marginBottom: 20}}>
             <Image style={{...GS.personImage}} source={{uri: obj.img}} />
-            <View style={{position: "absolute", alignSelf: "center"}}>{CornerSquare({corner})}</View>
+            <View style={{position: "absolute", alignSelf: "center"}}>
+                <CornerSquare corner={corner} />
+            </View>
             <Text style={T.leaderTitle}>{obj.title}</Text>
             <Text style={{
                 ...T.leaderName, 
@@ -68,16 +70,15 @@ export default function Person({person}: PersonProps): JSX.Element {
             }}>
                 {obj.name}
             </Text>
-            <TouchableOpacity onPress={() => Linking.openURL(obj.dclink)}>
+            <Link url={obj.dclink}>
                 <Text style={{...T.discord, color: FetchColor({theme, variable: "DISCORD"})}}>
-                    {<Image 
+                    <Image 
                         style={GS.tiny} 
                         source={require("@assets/social/discord-colored.png")}
-                    />}
+                    />
                     {obj.tag}
                 </Text>
-            </TouchableOpacity>
-            <Space height={25} />
+            </Link>
         </View>
     )
 }
@@ -150,15 +151,13 @@ export function Social() {
 
     return (
         <View style={{flexDirection: "row", justifyContent: "center"}}>
-            {Object.entries(media).map(([link], index) => {
-            return (
+            {Object.entries(media).map(([link], index) => (
                 <MediaLogo 
                     key={link} 
                     link={link} 
                     logo={media[Object.keys(media)[index]].logo} 
                 />
-            )
-        })}
+        ))}
         </View>
     )
 }
@@ -200,6 +199,7 @@ export function Kontakt() {
 
     const { lang  } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
+    const color = FetchColor({theme, variable: "TEXTCOLOR"})
 
     const info = {
         contact: lang ? "Kontakt" : "Contact",
@@ -210,29 +210,18 @@ export function Kontakt() {
     }
 
     return (
-    <View>
-        <Text/>
-        <Text style={{...T.centeredBold25, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{info.contact}</Text>
-        <Text style={{...T.centered15, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{info.name}</Text>
-        <Text style={{...T.centered15, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{info.address}</Text>
-        <Text style={{...T.centered15, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{info.location}</Text>
-        <Text style={{...T.centered15, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{info.post}</Text>
-        <Text/>
-        <Text 
-            style={{
-                ...T.orangeCentered15, 
-                color: FetchColor({theme, variable: "ORANGE"})}} 
-            onPress={() => {Linking.openURL("mailto:kontakt@login.no")
-            .catch(() => lang 
-                ? Alert.alert("Kunne ikke åpne mail!", "Mail: kontakt@login.no")
-                : Alert.alert("Could not open mail!", "Reach us at kontakt@login.no"))
-            }}
-        >
-            kontakt@login.no
-        </Text>
-        <Text/>
-        <Space height={12} /> 
-    </View>
+        <View>
+            <Text style={{...T.centeredBold25, color: color}}>{info.contact}</Text>
+            <Text style={{...T.centered15, color: color}}>{info.name}</Text>
+            <Text style={{...T.centered15, color: color}}>{info.address}</Text>
+            <Text style={{...T.centered15, color: color}}>{info.location}</Text>
+            <Text style={{...T.centered15, color: color}}>{info.post}</Text>
+            <TextLink 
+                url="mailto:kontakt@login.no"
+                text="kontakt@login.no" 
+                style={{...T.orange15, top: 3.2, alignSelf: "center", marginBottom: 20}}
+            />
+        </View>
     )
 }
 
