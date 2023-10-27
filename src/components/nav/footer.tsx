@@ -12,13 +12,6 @@ import { BottomTabBarProps } from "@react-navigation/bottom-tabs"
 export default function Footer({ state, descriptors, navigation }: BottomTabBarProps): JSX.Element {
     // Get the current theme
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    const [ keyboardVisible, setKeyboardVisible] = useState(false)
-
-    Keyboard.addListener('keyboardDidShow', ()=>setKeyboardVisible(true))
-    Keyboard.addListener('keyboardDidHide', ()=>setKeyboardVisible(false))
-
-    if(keyboardVisible)return (<></>)
-
 
     return (
         <>
