@@ -123,8 +123,6 @@ export const T = StyleSheet.create({
     // Bold text with line next to it
     boldWithLine: {
         left: 5,
-        justifyContent: "center",
-        maxWidth: "98%",
         fontSize: 15,
         fontWeight: "bold",
     },

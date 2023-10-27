@@ -82,24 +82,14 @@ export default function AboutScreen(): JSX.Element {
                                 {text.title}
                             </Text>
                             <Space height={5} />
-                            <View style={GS.row}>
-                                <Text>
-                                    {lang
-                                        ? <Line height={58} width={5} />
-                                        : screenWidth < 390 
-                                            ? <Line height={94} width={5} />
-                                            : <Line height={92} width={5} />
-                                    }
-                                </Text>
-                                <View>
-                                    <Text style={{
+                            <Line width={5}>
+                                <Text style={{
                                         ...T.boldWithLine, 
                                         color: FetchColor({theme, variable: "TEXTCOLOR"})
                                     }}>
                                         {text.intro}
-                                    </Text>
-                                </View>
-                            </View>
+                                </Text>
+                            </Line>
                             <Space height={10} />
                             <Dropdown/>
                             <Space height={10} />
@@ -112,19 +102,14 @@ export default function AboutScreen(): JSX.Element {
                                 {text.about.title}
                             </Text>
                             <Space height={10} />
-                            <View style={GS.row}>
-                            <Text>
-                                <Line height={58} width={5} />
-                            </Text>
-                            <View>
+                            <Line width={5}>
                                 <Text style={{
-                                    ...T.boldWithLine, 
-                                    color: FetchColor({theme, variable: "TEXTCOLOR"})
-                                }}>
-                                    {text.about.intro}
+                                        ...T.boldWithLine, 
+                                        color: FetchColor({theme, variable: "TEXTCOLOR"})
+                                    }}>
+                                        {text.about.intro}
                                 </Text>
-                            </View>
-                            </View>
+                            </Line>
                             <Space height={10} />
                             <Text style={{
                                 ...T.paragraph, 
@@ -328,20 +313,14 @@ CommitteeContentProps) {
             {relevantCommittee.quote.length > 0 &&
                 <>
                     <Space height={10} /> 
-                    <View style={GS.row}>
-                        <Text>
-                            <Line 
-                                height={relevantCommittee.quote.length / 2.15}
-                                width={5}
-                            />
-                        </Text>
-                        <Text style={{
-                            ...T.boldWithLine, 
-                            color: FetchColor({theme, variable: "TEXTCOLOR"})
-                        }}>
-                            {relevantCommittee.quote}
-                        </Text>
-                    </View>
+                        <Line width={5}>
+                            <Text style={{
+                                ...T.boldWithLine, 
+                                color: FetchColor({theme, variable: "TEXTCOLOR"})
+                            }}>
+                                {relevantCommittee.quote}
+                            </Text>
+                        </Line>
                     <Space height={10} /> 
                 </>
             }
