@@ -124,12 +124,11 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
 
     // Displays the EventScreen
     return (
-        <EventStack.Navigator
-        screenOptions={{
+        <EventStack.Navigator screenOptions={{
             animationEnabled: false,
             headerTransparent: true,
             header: props => <Header {...props} />
-            }}>
+        }}>
             <EventStack.Screen name="EventScreen">
                 {({navigation}) => {
                     // Sets the component of the header
