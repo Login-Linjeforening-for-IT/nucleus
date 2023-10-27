@@ -4,6 +4,7 @@ import GS from "@styles/globalStyles"
 import { useSelector } from "react-redux"
 import React, {useState } from "react"
 import T from "@styles/text"
+import Link from "@components/shared/link"
 
 type DropdownItemProps = {
     title: string
@@ -104,7 +105,7 @@ function DropdownItem({title, course, selectedDegree, courses, degree}: Dropdown
                 { course === degree &&
                     courses.map((selectedCourse, index) => {
                         return (
-                            <TouchableOpacity key={index} onPress={() => Linking.openURL(selectedCourse.link)}>
+                            <Link key={index} url={selectedCourse.link}>
                                 <View style={{
                                     ...GS.dropdownContent, 
                                     backgroundColor: FetchColor({theme, variable: "CONTRAST"})
@@ -121,7 +122,7 @@ function DropdownItem({title, course, selectedDegree, courses, degree}: Dropdown
                                         source={require("@assets/icons/linkicon-white.png")} 
                                     />
                                 </View>
-                            </TouchableOpacity>
+                            </Link>
                         )
                     })
                 }

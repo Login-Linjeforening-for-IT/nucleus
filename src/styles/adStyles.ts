@@ -68,6 +68,7 @@ export const AS = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-evenly",
+        marginTop: 5
     },
     loc: {
         fontSize: Platform.OS === "ios" ? 15 : 13,

@@ -20,10 +20,10 @@ import {
     Image,
     ScrollView,
     TouchableOpacity,
-    Linking,
     Dimensions,
 } from "react-native"
 import Swipe from "@components/nav/swipe"
+import { TextLink } from "@components/shared/link"
 
 type getCommitteeImageProps = {
     style: string
@@ -168,12 +168,10 @@ export default function AboutScreen(): JSX.Element {
                                     color: FetchColor({theme, variable: "TEXTCOLOR"})
                                 }}>
                                     {text.publicDocs.body}
-                                    {<Text 
-                                        style={T.orange15} 
-                                        onPress={() => Linking.openURL("https://wiki.login.no")}
-                                    >
-                                        {text.publicDocs.wiki}
-                                    </Text>}.
+                                    <TextLink 
+                                        url="https://wiki.login.no" 
+                                        text={text.publicDocs.wiki} 
+                                    />.
                                 </Text>
                             </View>
                             <Space height={10} /> 

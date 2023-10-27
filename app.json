@@ -79,7 +79,8 @@
                 "NOTIFICATIONS",
                 "READ_CALENDAR",
                 "WRITE_CALENDAR"
-            ]
+            ],
+            "softwareKeyboardLayoutMode":"pan"
         },
         "web": {
             "favicon": "./public/assets/logo/favicon.ico"
