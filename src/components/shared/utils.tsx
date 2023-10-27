@@ -6,9 +6,18 @@ import ES from "@styles/eventStyles"
 import T from "@styles/text"
 import React, { ReactNode } from "react"
 
+
+// Ony children or height can be defined at the same time. Both cant be arguments at the same time
 type LineProps = {
     children: ReactNode
     width: number
+    height?: never
+    fill?: string
+} |
+{
+    children?: never
+    width: number
+    height: number
     fill?: string
 }
 
@@ -46,18 +55,20 @@ export default function Space({height}: SpaceProps): JSX.Element {
  * the height and width
  *
  * @param width Width of the line
+ * @param height The height of the line if children is undefined
  * @param fill Color of the line
  * @param children The content that should have a line to the right
  * @returns View of the given size based on theme
  */
-export function Line({width, fill, children}: LineProps): JSX.Element {
+export function Line({width, fill, children, height}: LineProps): JSX.Element {
 
     const { theme } = useSelector((state: ReduxState) => state.theme)
 
     return (
         <View style={{
             borderLeftWidth: width,
-            borderColor: fill ? fill : FetchColor({theme, variable: "ORANGE"})
+            borderColor: fill ? fill : FetchColor({theme, variable: "ORANGE"}),
+            height: height ? height : 'auto'
         }}>
             {children}
         </View>
