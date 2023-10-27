@@ -8,6 +8,7 @@ import React, { useEffect, useState } from "react"
 import { SvgUri } from "react-native-svg"
 import capitalizeFirstLetter from "@utils/capitalizeFirstLetter"
 import RenderHTML from "react-native-render-html"
+import Link from "@components/shared/link"
 import {
     TouchableOpacity,
     Dimensions,
@@ -353,37 +354,34 @@ export function AdMedia({ad}: {ad: DetailedAd}) {
                 {social.map((platform: SocialProps) => {
                     if (platform.url?.length) return (
                         <View key={platform.url}>
-                            <TouchableOpacity onPress={() => 
-                                Linking.openURL(platform.url)}>
+                            <Link url={platform.url}>
                                 <Image 
                                     style={AS.socialMediaImage} 
                                     source={platform.source}
                                 />
-                            </TouchableOpacity>
+                            </Link>
                         </View>
                     )
                 })}
             </View>
-            <Space height={10} /> 
             <View style={AS.socialView}>
                 {ad.application_url &&
                     <TouchableOpacity onPress={() => 
-                    Linking.openURL(ad.application_url)}>
-                    <View style={{
-                        ...AS.adButton,
-                        backgroundColor: FetchColor({theme, variable: "ORANGE"})
-                    }}>
-                        <Text style={{
-                            ...AS.adButtonText,
-                            color: FetchColor({theme, variable: "TEXTCOLOR"})
+                        Linking.openURL(ad.application_url)}>
+                        <View style={{
+                            ...AS.adButton,
+                            backgroundColor: FetchColor({theme, variable: "ORANGE"})
                         }}>
-                            {lang ? "Søk nå":"Apply"}
-                        </Text>
-                    </View>
-                </TouchableOpacity>
+                            <Text style={{
+                                ...AS.adButtonText,
+                                color: FetchColor({theme, variable: "TEXTCOLOR"})
+                            }}>
+                                {lang ? "Søk nå":"Apply"}
+                            </Text>
+                        </View>
+                    </TouchableOpacity>
                 }
             </View>
-            <Space height={10} /> 
         </View>
     )
 }

@@ -10,7 +10,7 @@ import React from "react"
 type ParagraphProps = {
     logo: ImageSourcePropType
     title: string
-    body: string
+    body: JSX.Element | string
 }
 
 /**
