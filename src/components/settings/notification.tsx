@@ -13,9 +13,9 @@ type NotificationProps = {
 /**
  * Function for displaying a notification switch
  *
- * @param {string} category         Category the switch should control
- * @param {string} topicID          Topic the user interacted with
- * @returns                         Notification switch as view
+ * @param {string} category Category the switch should control
+ * @param {string} topicID Topic the user interacted with
+ * @returns Notification switch component
  */
 export default function Notification ({category, skip}: NotificationProps) {
      // Fetches states

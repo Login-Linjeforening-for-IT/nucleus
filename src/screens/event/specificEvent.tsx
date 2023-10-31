@@ -1,5 +1,4 @@
 import CategorySquare, { CategoryCircle } from "@/components/shared/category"
-import EventLocation from "@components/event/eventLocation"
 import { FetchJoinLink } from "@/utils/fetch"
 import Space, { Month } from "@/components/shared/utils"
 import { CardSmaller } from "@/components/shared/card"
@@ -14,14 +13,14 @@ import { useSelector } from "react-redux"
 import ES from "@styles/eventStyles"
 import T from "@styles/text"
 import {
-  TouchableOpacity,
-  ScrollView,
-  Dimensions,
-  Linking,
-  Alert,
-  Image,
-  View,
-  Text,
+    Alert,
+    Dimensions,
+    Image,
+    Linking,
+    ScrollView,
+    Text,
+    TouchableOpacity,
+    View,
 } from "react-native"
 import { StaticImage } from "@/components/about/social"
 import { useDispatch } from "react-redux"
@@ -39,12 +38,17 @@ type JoinButtonProps = {
 }
 
 type MapProps = {
-    event: DetailedEvent | EventProps
+    event: DetailedEvent
     handleLink: ({mazeref, street, organizer}: handleLinkProps) => void
 }
 
 type CategoryProps = {
     event: EventProps
+}
+
+type DescriptionProps = {
+    no: string
+    en: string
 }
 
 /**
@@ -58,19 +62,24 @@ export default function SpecificEventScreen(): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const stored = useSelector((state: ReduxState) => state.event)
     const [event, setEvent]=useState<DetailedEvent | EventProps>(stored.event)
+    const name = lang ? event.name_no : event.name_en
+    let description = ""
 
     function fetchEvent() {
-        fetch(`https://api.login.no/events/${event.eventID}`)
+        fetch(`https://api.login.no/events/${event.id}`)
         .then(response => response.json())
         .then(data => setEvent(data))
     }
     
-    useEffect(() => { fetchEvent() }, [event])
+    useEffect(() => { 
+        fetchEvent() 
+    }, [event])
 
     let link
     
-    if ("description" in event) {
-        link = FetchJoinLink(event.description)
+    if ("description_no" in event && "description_en" in event) {
+        link = FetchJoinLink(lang ? event.description_no : event.description_en)
+        description = lang ? event.description_no : event.description_en
     }
 
     function handleLink({mazeref, street, organizer}: handleLinkProps) {
@@ -116,16 +125,16 @@ export default function SpecificEventScreen(): JSX.Element {
                 <View style={{...ES.sesContent, backgroundColor: FetchColor({theme, variable: "BACKGROUND"})}}>
                     <ScrollView showsVerticalScrollIndicator={false}>
                     <Space height={Dimensions.get("window").height / 8 - 5} />
-                    {(event.image).includes(".svg") ?
+                    {(event.image_small).includes(".svg") ?
                         <SvgUri
                             style={{alignSelf: "center"}}
                             width={(Dimensions.get("window").width)/1.2}
                             height={Dimensions.get("window").width/3}
-                            uri={`https://cdn.login.no/img/events/${event.image}`}
+                            uri={`https://cdn.login.no/img/events/${event.image_small}`}
                         />
-                    : (event.image).includes(".png") ? <Image 
+                    : (event.image_small).includes(".png") ? <Image 
                         style={ES.specificEventImage}
-                        source={{uri: `https://cdn.login.no/img/events/${event.image}`}}
+                        source={{uri: `https://cdn.login.no/img/events/${event.image_small}`}}
                     /> : <StaticImage event={event} />}
                     <Space height={10} />
 
@@ -133,13 +142,13 @@ export default function SpecificEventScreen(): JSX.Element {
                         <View style={ES.specificEventInfoView}>
                             <Card>
                                 <View style={{left: -10}}>
-                                <CategorySquare category={event.category} />
+                                <CategorySquare category={event.category_name_no} />
                                 <Text style={{
                                     ...ES.eventClusterDayText, 
                                     color: FetchColor({theme, variable: "TEXTCOLOR"})
                                 }}>
-                                    {event.startt[8]}
-                                    {event.startt[9]}
+                                    {event.time_start[8]}
+                                    {event.time_start[9]}
                                 </Text>
 
                                 <Text style={{
@@ -147,20 +156,19 @@ export default function SpecificEventScreen(): JSX.Element {
                                     color: FetchColor({theme, variable: "TEXTCOLOR"})
                                 }}>
                                 <Month
-                                    month={parseInt(event.startt[5] + event.startt[6])}
+                                    month={parseInt(event.time_start[5] + event.time_start[6])}
                                     color={FetchColor({theme, variable: "TEXTCOLOR"})}
                                 />
                                 </Text>
                                 </View>
                             </Card>
-                            <Text>
-                                {EventTime({startTime: event.startt, 
-                                    endTime: "endt" in event ? event.endt : ""})}
-                            </Text>
+                            <EventTime 
+                                time_start={event.time_start}
+                                time_end={"time_end" in event ? event.time_end : ""} 
+                            />
                         </View>
                     </CardSmaller>
 
-                    <Space height={5} />
                     <Card>
                         <View style={ES.specificEventInfoView}>
                             <Text style={{
@@ -173,12 +181,10 @@ export default function SpecificEventScreen(): JSX.Element {
                                 ...T.specificEventInfo, 
                                 color: FetchColor({theme, variable: "TEXTCOLOR"})
                             }}>
-                            {event.startt[11]}{event.startt[12]}:{event.startt[14]}
-                            {event.startt[15]}
+                            {event.time_start[11]}{event.time_start[12]}:
+                            {event.time_start[14]}{event.time_start[15]}
                             </Text>
                         </View>
-
-                        <Space height={5} />
 
                         <View style={ES.specificEventInfoView}>
                             <Text style={{
@@ -187,18 +193,22 @@ export default function SpecificEventScreen(): JSX.Element {
                             }}>
                                 {text.end}
                             </Text>
-                            {"endt" in event && GetEndTime({input: event.endt, theme})}
+                            {"time_end" in event && <GetEndTime time_end={event.time_end} />}
                         </View>
 
-                        <Space height={5} />
-
                         <View style={{flexDirection: "row"}}>
-                            <EventLocation
-                                room={event.roomno}
-                                campus={event.campus}
-                                street={event.street}
-                            />
-
+                            <Text style={{
+                                ...T.specificEventInfo, 
+                                color: FetchColor({theme, variable: "TEXTCOLOR"})
+                            }}>
+                                    {lang ? "Lokasjon:   " : "Location:     "}
+                            </Text>
+                            <Text style={{
+                                ...T.specificEventInfo, 
+                                color: FetchColor({theme, variable: "TEXTCOLOR"})
+                            }}>
+                                TBA!
+                            </Text>
                             <Map event={event} handleLink={handleLink} />
                         </View>
 
@@ -233,7 +243,7 @@ export default function SpecificEventScreen(): JSX.Element {
                                     </View>
                                 </TouchableOpacity>
                             }
-                            {event.fblink && !event.discordlink &&
+                            {event.link && !event.discordlink &&
                                 <TouchableOpacity 
                                     style={{minWidth: 70}} 
                                     onPress={() => {
@@ -266,33 +276,21 @@ export default function SpecificEventScreen(): JSX.Element {
                         </View>
                     </Card>
 
-                    <Space height={5} />
-                        <Card>
-                            <View>
-                            <Space height={5} />
-                                <Text style={{
-                                    ...T.centered20, 
-                                    color: FetchColor({theme, variable: "TEXTCOLOR"})
-                                }}>
-                                    {event.eventname}
-                                </Text>
-                            </View>
-                            <Space height={5} />
-                            {"description" in event && event.description &&
-                                <RenderHTML
-                                    baseStyle={{
-                                        maxWidth: "100%",
-                                        color: FetchColor({theme, variable: "TEXTCOLOR"}),
-                                    }}
-                                    contentWidth={0}
-                                    source={{html: event.description}}
-                                />
-                            }
-                            <Space height={10} />
-                            <JoinButton
-                                link={link ? link : ""}
-                            />
-                        </Card>
+                    <Card>
+                        <View>
+                        <Space height={5} />
+                            <Text style={{
+                                ...T.centered20, 
+                                color: FetchColor({theme, variable: "TEXTCOLOR"})
+                            }}>
+                                {name}
+                            </Text>
+                        </View>
+                        <Space height={5} />
+                        <Description description={lang ? event.description_no : event.description_en} />
+                        <Space height={10} />
+                        <JoinButton link={link ? link : ""} />
+                    </Card>
                         <Space height={Dimensions.get("window").height / 3 + 10} />
                     </ScrollView>
                 </View>
@@ -308,7 +306,7 @@ function JoinButton({link}: JoinButtonProps) {
     const dispatch = useDispatch()
     
     function updateStorage() {
-        if (!clickedEvents.some(clicked => clicked.eventID === event.eventID)) {
+        if (!clickedEvents.some(clicked => clicked.id === event.id)) {
             dispatch(setClickedEvents([...clickedEvents, event]))
         }
     }
@@ -338,6 +336,7 @@ function JoinButton({link}: JoinButtonProps) {
 function Category({event}: CategoryProps) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
+    const category = lang ? event.category_name_no  : event.category_name_en
 
     return (
         <View style={ES.specificEventInfoView}>
@@ -347,12 +346,12 @@ function Category({event}: CategoryProps) {
             }}>
                 {lang ? "Kategori:      " : "Category:      "}
             </Text>
-            {CategoryCircle(event.category)}
+            <CategoryCircle category={category} />
             <Text style={{
                 ...T.specificEventInfo, 
                 color: FetchColor({theme, variable: "TEXTCOLOR"})
             }}>
-                {event.category}
+                {category}
             </Text>
         </View>
     )
@@ -362,8 +361,9 @@ function Map({event, handleLink}: MapProps) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
 
-    if (("mazeref" in event) && event.mazeref || (event.street === 
-        "Orgkollektivet" || event.organizer === "HUSET")) {
+    if (("mazeref" in event) && event.mazeref || (
+        event.location_name_no === "Orgkollektivet" 
+        || event.location_name_no === "HUSET")) {
         return (
             <TouchableOpacity 
                 style={{minWidth: 70}} 
@@ -393,4 +393,19 @@ function Map({event, handleLink}: MapProps) {
             </TouchableOpacity>
         )
     }
+}
+
+function Description({description}: {description: string}) {
+    const { theme } = useSelector((state: ReduxState) => state.theme) 
+
+    return (
+        <RenderHTML
+            baseStyle={{
+                maxWidth: "100%",
+                color: FetchColor({theme, variable: "TEXTCOLOR"}),
+            }}
+            contentWidth={0}
+            source={{html: description}}
+        />
+    )
 }

@@ -33,7 +33,7 @@ export const ES = StyleSheet.create({
         top: -3,
         fontSize: Platform.OS === "ios" ? 25 : 22,
     },
-    // Eventname text on eventScreen
+    // Event name text on eventScreen
     title: {
         left: 5,
         top: -5,
@@ -50,7 +50,7 @@ export const ES = StyleSheet.create({
     specificEventInfoView: {
         flexDirection: "row",
         alignItems: "center",
-        marginVertical: 5
+        marginBottom: 5
     },
     // The header image on specificEventScreen
     specificEventImage: {

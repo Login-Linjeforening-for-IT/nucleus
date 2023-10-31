@@ -150,7 +150,11 @@ export function Social() {
     }
 
     return (
-        <View style={{flexDirection: "row", justifyContent: "center"}}>
+        <View style={{
+            flexDirection: "row", 
+            justifyContent: "center", 
+            marginTop: 10
+        }}>
             {Object.entries(media).map(([link], index) => (
                 <MediaLogo 
                     key={link} 
@@ -265,9 +269,6 @@ function MediaLogo({link, logo}: MediaLogoProps) {
  * @returns cdn link as string
  */
 function personInfo({person, lang}: personInfoProps) {
-
-    let p = person.toLowerCase()
-
     const titleNO = {
         leader: "Leader",
         coleader: "Deputy chairwoman",
@@ -294,7 +295,7 @@ function personInfo({person, lang}: personInfoProps) {
 
     const title = lang ? titleNO : titleEN
 
-    let leader = {
+    const leader = {
         title: title.leader,
         name: "Tormod Mork Müller",
         tag: "backsiide",
@@ -302,7 +303,7 @@ function personInfo({person, lang}: personInfoProps) {
         img: `https://cdn.login.no/img%2Fportraits%2Fportrett_leder.jpg`
     }
 
-    let coleader = {
+    const coleader = {
         title: title.coleader,
         name: "Kristina Kataki",
         tag: "Kataki#7254",
@@ -310,7 +311,7 @@ function personInfo({person, lang}: personInfoProps) {
         img: `https://cdn.login.no/img%2Fportraits%2Fportrett_nestleder.jpg`,
     }
 
-    let secretary = {
+    const secretary = {
         title: title.secretary,
         name: "Aleksander Aaboen",
         tag: "aleksanderaa#2130",
@@ -318,7 +319,7 @@ function personInfo({person, lang}: personInfoProps) {
         img: `https://cdn.login.no/img%2Fportraits%2Fportrett_sekret%C3%A6r.jpg`,
     }
 
-    let eventkom_leader = {
+    const eventkom_leader = {
         title: title.evntkom,
         name: "Sander Hauge",
         tag: "sandiss",
@@ -326,7 +327,7 @@ function personInfo({person, lang}: personInfoProps) {
         img: `https://cdn.login.no/img/portraits/portrett_eventkom-leder.jpg`,
     }
 
-    let bedkom_leader = {
+    const bedkom_leader = {
         title: title.bedkom,
         name: "Ida Førland",
         tag: "idaforland",
@@ -334,7 +335,7 @@ function personInfo({person, lang}: personInfoProps) {
         img: `https://cdn.login.no/img/portraits/portrett_bedkom-leder.jpg`
     }
 
-    let tekkom_leader = {
+    const tekkom_leader = {
         title: title.tekkom,
         name: "Eirik Hanasand",
         tag: "eirikhanasand",
@@ -342,7 +343,7 @@ function personInfo({person, lang}: personInfoProps) {
         img: `https://cdn.login.no/img/portraits/portrett_tekkom-leder.jpg`,
     }
 
-    let ctfkom_leader = {
+    const ctfkom_leader = {
         title: title.ctf,
         name: "Eskil Refsgaard",
         tag: "rrefsgaard",
@@ -350,7 +351,7 @@ function personInfo({person, lang}: personInfoProps) {
         img: `https://cdn.login.no/img/portraits/portrett_ctfkom-leder.jpg`,
     }
 
-    let satkom_leader = {
+    const satkom_leader = {
         title: title.satkom,
         name: "Trygve Sollund",
         tag: "spikeupine",
@@ -358,7 +359,7 @@ function personInfo({person, lang}: personInfoProps) {
         img: `https://cdn.login.no/img%2Fportraits%2Fportrett_%C3%B8konomi.jpg`
     }
 
-    let pr_leader = {
+    const pr_leader = {
         title: title.pr,
         name: "Bjørn Kristian Strand",
         tag: "bk_suup",
@@ -366,7 +367,7 @@ function personInfo({person, lang}: personInfoProps) {
         img: `https://cdn.login.no/img/portraits/portrett_pr-leder.jpg`
     }
 
-    switch (p) {
+    switch (person.toLowerCase()) {
         case "leader":      return leader
         case "coleader":    return coleader
         case "secretary":   return secretary
@@ -389,7 +390,7 @@ export function StaticImage({event}: {event: EventProps}): JSX.Element {
         annet:   require(`../../../public/assets/categories/annet.png`),
     }
 
-    const image = images[event.category.toUpperCase()] || images.annet;
+    const image = images[event.category_name_no.toUpperCase()] || images.annet;
 
     return <Image style={ES.specificEventImage} source={image} />
 }

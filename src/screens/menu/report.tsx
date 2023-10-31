@@ -48,51 +48,27 @@ export default function ReportScreen(): JSX.Element {
     })
 
     function inputName(val: string) {
-        if (val.length > 1) {
-            setData({
+        setData({
             ...data,
             name: val,
-            check_nameInputChange: true
-            })
-        } else {
-            setData({
-            ...data,
-            name: val,
-            check_nameInputChange: false
-            })
-        }
+            check_nameInputChange: val.length > 1 ? true : false
+        })
     }
 
     function inputContact(val: string) {
-        if (val.length > 1) {
-            setData({
+        setData({
             ...data,
-            contact: val,
-            check_contactInputChange: true
-            })
-        } else {
-            setData({
-            ...data,
-            content: val,
-            check_contactInputChange: false
-            })
-        }
+            name: val,
+            check_contactInputChange: val.length > 1 ? true : false
+        })
     }
 
     function inputContent(val: string) {
-        if (val.length > 20) {
-            setData({
+        setData({
             ...data,
             content: val,
-            check_contentInputChange: true
-            })
-        } else {
-            setData({
-            ...data,
-            content: val,
-            check_contentInputChange: false
-            })
-        }
+            check_contentInputChange: val.length > 20 ? true : false
+        })
     }
 
     return (
@@ -208,25 +184,23 @@ export default function ReportScreen(): JSX.Element {
                                 </CardSmaller>
                             </View>
 
-                            <View>
-                            <Space height={40} />
-                            <TouchableOpacity
-                                disabled ={!data.check_contentInputChange}
-                                onPress={() => sendForm()}
-                            >
-                                <Button>
-                                    <Text style={{
-                                        ...T.centered20, 
-                                        color: FetchColor({theme, variable: "TEXTCOLOR"})
-                                    }}>
-                                        {text.send}
-                                    </Text>
-                                </Button>
-                            </TouchableOpacity>
-                            <Space height={20} />
+                            <View style={{marginTop: 40, marginBottom: 20}}>
+                                <TouchableOpacity
+                                    disabled ={!data.check_contentInputChange}
+                                    onPress={() => sendForm()}
+                                >
+                                    <Button>
+                                        <Text style={{
+                                            ...T.centered20, 
+                                            color: FetchColor({theme, variable: "TEXTCOLOR"})
+                                        }}>
+                                            {text.send}
+                                        </Text>
+                                    </Button>
+                                </TouchableOpacity>
                             </View>
                         </View>
-                        <Space height={Dimensions.get("window").height/10} />
+                        <Space height={Dimensions.get("window").height / 10} />
                     </View>
                 </View>
             </Swipe>

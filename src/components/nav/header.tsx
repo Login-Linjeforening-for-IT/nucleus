@@ -20,7 +20,7 @@ export default function Header({ options, route, navigation }: HeaderProps): Rea
             ? require('@text/no.json').screens[route.name] 
             : require('@text/en.json').screens[route.name])
 
-    if (!title && route.name === "SpecificEventScreen") title = event.eventname
+    if (!title && route.name === "SpecificEventScreen") title = lang ? event.name_no : event.name_en
     if (!title && route.name === "SpecificAdScreen") title = lang ? ad.title_no : ad.title_en
     if (route.name === "ProfileScreen") return <></>
 

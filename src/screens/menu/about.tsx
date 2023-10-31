@@ -111,17 +111,16 @@ export default function AboutScreen(): JSX.Element {
                                 </Text>
                             </Line>
                             <Space height={10} />
-                            <Dropdown/>
+                            <Dropdown />
                             <Space height={10} />
                             <Styret />
-                            <Space height={15} />
                             <Text style={{
-                                ...T.bold25, 
+                                ...T.bold25,
+                                marginVertical: 15,
                                 color: FetchColor({theme, variable: "TEXTCOLOR"})
                             }}>
                                 {text.about.title}
                             </Text>
-                            <Space height={10} />
                             <Line width={5}>
                                 <Text style={{
                                         ...T.boldWithLine, 
@@ -130,34 +129,33 @@ export default function AboutScreen(): JSX.Element {
                                         {text.about.intro}
                                 </Text>
                             </Line>
-                            <Space height={10} />
                             <Text style={{
-                                ...T.paragraph, 
+                                ...T.paragraph,
+                                marginTop: 10,
                                 color: FetchColor({theme, variable: "TEXTCOLOR"})}}>
                                 {text.about.body.p1}
                             </Text>
-                            <Space height={10} />
                             <Text style={{
                                 ...T.paragraph, 
+                                marginTop: 10,
                                 color: FetchColor({theme, variable: "TEXTCOLOR"})
                             }}>
                                 {text.about.body.p2}
                             </Text>
-                            <Space height={15} />
                             <Text style={{
                                 ...T.bold25, 
+                                marginTop: 15,
                                 color: FetchColor({theme, variable: "TEXTCOLOR"})
                             }}>
                                 {text.committeeSection.title}
                             </Text>
-                            <Space height={10} />
                             <Text style={{
-                                ...T.boldParagraph, 
+                                ...T.boldParagraph,
+                                marginVertical: 10,
                                 color: FetchColor({theme, variable: "TEXTCOLOR"})
                             }}>
                                 {text.committeeSection.intro}
                             </Text>
-                            <Space height={10} />
                             <CommitteeView
                                 setCommittee={setCommittee}
                                 committee={committee}
@@ -175,9 +173,9 @@ export default function AboutScreen(): JSX.Element {
                             }
 
                             <CommitteePerson committee={committee} />
-                            <Space height={10} /> 
                             <Text style={{
-                                ...T.text25, 
+                                ...T.text25,
+                                margintop: 10,
                                 color: FetchColor({theme, variable: "TEXTCOLOR"})
                             }}>
                                 {text.publicDocs.title}
@@ -194,9 +192,8 @@ export default function AboutScreen(): JSX.Element {
                                     />.
                                 </Text>
                             </View>
-                            <Space height={10} /> 
-                            <Social/>
-                            <Copyright/>
+                            <Social />
+                            <Copyright />
                         </Cluster>
                         <Space height={Dimensions.get("window").height / 3 + 10} /> 
                     </ScrollView>

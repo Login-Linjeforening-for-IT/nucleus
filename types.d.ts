@@ -1,31 +1,60 @@
 type EventProps = {
-    eventID: number
-    parent: number
-    organizer: string
-    eventname: string
-    startt: string
-    audience: string
-    category: CategoryProps
-    image: string
-    fblink: string
-    discordlink: string
-    roomno: string
-    campus: string
-    street: string
-    postcode: number
-    city: string
+    id: number
+    name_no: string
+    name_en: string
+    highlight: boolean
+    canceled: boolean
+    full: boolean
+    time_type: string
+    time_start: string
+    time_end: string
+    time_publish: string
+    image_small: string
+    location_name_no: string
+    location_name_en: string
+    category_color: string
+    category_name_no: string
+    category_name_en: string
 }
 
-type ExtraEventProps = {
-    endt: string
-    publisht: string
-    description: string
-    organizerlogo: string
-    organizerlink: string
-    mazeref: string
+type DetailedEventResponse = {
+    event: DetailedEvent
+    category: Category
+    organizations: Organization[]
+    audiences: Audience[]
 }
 
-type DetailedEvent = EventProps & ExtraEventProps
+type Organization = {
+    shortname: string
+    logo: string
+    name_no: string
+    name_en: string
+    description_no: string
+    description_en: string
+    link_homepage: string
+    link_linkedin: string
+    link_facebook: string
+    link_instagram: string
+}
+
+type Audience = {
+    id: number
+    name_no: string
+    name_en: string
+    description_no: string
+    description_en: string
+}
+
+type Category = {
+    id: number
+    color: string
+    name_no: string
+    name_en: string
+    description_no: string
+    description_en: string
+    updated_at: string
+    created_at: string
+}
 
 type ReduxState = {
     theme: {
@@ -140,6 +169,43 @@ type CategoryProps =
     | "BEDPRES"
     | "LOGIN"
     | "ANNET"
+
+type DetailedEvent = {
+    id: number
+    visible: boolean
+    name_no: string
+    name_en: string
+    description_no: string
+    description_en: string
+    informational_no: string
+    informational_en: string
+    time_type: string
+    time_start: string
+    time_end: string
+    time_publish: string
+    time_signup_release: string
+    time_signup_deadline: string
+    canceled: boolean
+    digital: boolean
+    highlight: boolean
+    image_small: string
+    image_banner: string
+    link_facebook: string
+    link_discord: string
+    link_signup: string
+    link_stream: string
+    capacity: number | null
+    full: boolean
+    category: number
+    location: null,
+    parent: null,
+    rule: null,
+    updated_at: string
+    created_at: string
+    deleted_at: string
+    category_name_no: string
+    category_name_en: string
+}
 
 type Interval = NodeJS.Timeout | number
 

@@ -145,7 +145,10 @@ function setCategories(events: EventProps[], clickedEvents: EventProps[]) {
     ]
 
     const categories = catArray.filter((category: CategoryWithID) =>
-        events.some(events => events.category === category.category))
+        events.some(events => 
+            events.category_name_no === category.category 
+            || events.category_name_en === category.category
+            ))
 
     // Adds enrolled (PÅMELDT) filter option if relevant, since no event has this attribute naturally
 
@@ -180,7 +183,11 @@ function Filter ({input, events, clickedEvents, clickedCategories}: FilterProps)
  * @returns Filtered events
  */
 function filterText ({events, input}: FilterTextProps) {
-    const textFiltered = events.filter(event => event.eventname.toLowerCase().includes(input.toLowerCase()))
+    const textFiltered = events.filter(event => 
+        event.name_no.toLowerCase().includes(input.toLowerCase()) 
+        || event.name_en.toLowerCase().includes(input.toLowerCase())
+    )
+
     return removeDuplicatesAndOld(events, textFiltered)
 }
 
@@ -197,7 +204,11 @@ function filterCategories ({events, clickedEvents, clickedCategories}: FilterCat
     const clickedFound = clickedCategories.find((object: CategoryWithID) => object.category === "PÅMELDT")
     
     // Filters based on category
-    const categoryFiltered = events.filter(event => clickedCategories.some((category: CategoryWithID) => category.category === event.category))
+    const categoryFiltered = events.filter(event => 
+        clickedCategories.some((category: CategoryWithID) => 
+        category.category === event.category_name_no 
+        || category.category === event.category_name_en
+    ))
 
     // Returns if the user is not enrolled to any events
     if (!clickedFound) {
@@ -239,11 +250,11 @@ export function removeDuplicatesAndOld (APIevents: EventProps[], events:
     
     // Removes old events and preserves newer version of all events
     const realEvents = APIevents.filter(APIevent => 
-        events.some(event => APIevent.eventID === event.eventID))
+        events.some(event => APIevent.id === event.id))
 
     // Removes duplicates
     const filteredEvents = realEvents.filter((event, index) => {
-        return realEvents.findIndex(obj => obj.eventID === event.eventID) === index
+        return realEvents.findIndex(obj => obj.id === event.id) === index
     })
 
     return filteredEvents

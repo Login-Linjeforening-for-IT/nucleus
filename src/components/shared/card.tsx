@@ -12,15 +12,13 @@ import React from "react"
 export default function Card({ children }: React.PropsWithChildren<{}>) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
 
-    const card = (
-            <View style={{...ES.card, backgroundColor: FetchColor({theme, variable: "DARKER"})}}>
-                <View style={ES.cardContent}>
-                    { children }
-                </View>
+    return (
+        <View style={{...ES.card, backgroundColor: FetchColor({theme, variable: "DARKER"})}}>
+            <View style={ES.cardContent}>
+                { children }
             </View>
+        </View>
     )
-
-    return card
 }
 
 /**
@@ -32,13 +30,11 @@ export function CardSmaller({ children }: React.PropsWithChildren<{}>) {
 
     const { theme } = useSelector((state: ReduxState) => state.theme)
 
-    const card = (
+    return (
         <View style={{...ES.cardSmaller, backgroundColor: FetchColor({theme, variable: "DARKER"})}}>
             <View>
                 { children }
             </View>
         </View>
     )
-
-    return card
 }

@@ -1,6 +1,6 @@
 type notificationArrayProps = {
     notification: NotificationProps
-    category: CategoryProps
+    category: string
 }
 
 /**

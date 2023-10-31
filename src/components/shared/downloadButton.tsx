@@ -9,6 +9,7 @@ import { useState } from "react"
 
 export default function DownloadButton(){
     const { isDark } = useSelector((state: ReduxState) => state.theme)
+    const { lang } = useSelector((state: ReduxState) => state.lang)
     const { calendarID } = useSelector((state: ReduxState) => state.misc)
     const { clickedEvents, downloadState } = useSelector((state: ReduxState) => state.event)
     const dark: ImageSourcePropType = require("@assets/icons/download.png")
@@ -33,7 +34,7 @@ export default function DownloadButton(){
                             flashOrange()
                             dispatch(setDownloadState())
                             await handleDownload({clickedEvents, 
-                                calendarID, dispatch})
+                                calendarID, dispatch, lang})
                         }
                         }}>
                     <Image style={MS.multiIcon} source={icon} />

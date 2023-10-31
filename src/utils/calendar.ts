@@ -18,22 +18,26 @@ type handleDownloadProps = {
     clickedEvents: EventProps[]
     calendarID: string
     dispatch: Dispatch<AnyAction>
+    lang: boolean
 }
 
 type updateCalendarProps = {
     events: EventProps[]
     calendarID: string
+    lang: boolean
 }
 
 type eventsToCalendarFormatProps = {
     events: EventProps[]
     calendarID: string
+    lang: boolean
 }
 
 type executeDownloadProps = {
     clickedEvents: EventProps[]
     calendarID: string
     dispatch: Dispatch<AnyAction>
+    lang: boolean
 }
 
 /**
@@ -43,8 +47,8 @@ type executeDownloadProps = {
  * @see executeDownload Executes the download if permitted
  */
 export default async function handleDownload({clickedEvents, calendarID, 
-dispatch}: handleDownloadProps) {
-    await executeDownload({clickedEvents, calendarID, dispatch})
+dispatch, lang}: handleDownloadProps) {
+    await executeDownload({clickedEvents, calendarID, dispatch, lang})
 }
 
 /**
@@ -52,7 +56,7 @@ dispatch}: handleDownloadProps) {
  * @param events Events to add to calendar 
  * @param calendarID ID of the calendar to add the events to 
  */
-export async function updateCalendar({events, calendarID}: updateCalendarProps) {
+export async function updateCalendar({events, calendarID, lang}: updateCalendarProps) {
     const { status } = await requestCalendarPermissionsAsync()
 
     if (status !== "granted") return
@@ -65,7 +69,7 @@ export async function updateCalendar({events, calendarID}: updateCalendarProps) 
         new Date(Date.now() + 31536000000)
     )
 
-    const formattedEvents = await eventsToCalendarFormat({events, calendarID})
+    const formattedEvents = await eventsToCalendarFormat({events, calendarID, lang})
 
     for (const event of formattedEvents) {
         // Find the matching event in the formatted events array
@@ -110,7 +114,7 @@ async function calendarExists(calendarID: string) {
  *
  * @param {array} events Events to include in the calendar
  */
-async function createCalendar(events: EventProps[]) {
+async function createCalendar(events: EventProps[], lang: boolean) {
     const { status } = await requestCalendarPermissionsAsync()
 
     if (status !== "granted") return
@@ -124,7 +128,7 @@ async function createCalendar(events: EventProps[]) {
             throw new Error("Default calendar source is undefined")
         }
 
-        const newCalendarID = await createCalendarAsync({
+        const calendarID = await createCalendarAsync({
             title: "Login",
             color: "#fd8738",
             entityType: EntityTypes.EVENT,
@@ -134,9 +138,9 @@ async function createCalendar(events: EventProps[]) {
             ownerAccount: "personal",
             accessLevel: CalendarAccessLevel.OWNER,
         })
-        await updateCalendar({events, calendarID: newCalendarID})
+        await updateCalendar({events, calendarID, lang})
 
-        return newCalendarID
+        return calendarID
     } catch (error) {
         console.log(error)
     }
@@ -148,30 +152,29 @@ async function createCalendar(events: EventProps[]) {
  * @param {array} events      Events to format
  * @returns                   Native calendar objects
  */
-async function eventsToCalendarFormat({events, calendarID}: 
+async function eventsToCalendarFormat({events, calendarID, lang}: 
 eventsToCalendarFormatProps) {
     let formattedEvents = []
-
+    
     for (const event of events) {
         const APIevent = await fetchEventDetails(event)
-        const room = APIevent.roomno ? APIevent.roomno + ", ":""
-        const campus = APIevent.campus ? APIevent.campus + ", ":""
-        const street = APIevent.street ? APIevent.street:""
-        let loc = room + campus + street
+        let location = lang ? event.location_name_no : event.location_name_en
+        const title = lang ? APIevent.name_no : APIevent.name_en
+        const notes = lang ? APIevent.description_no : APIevent.description_en
 
-        if (!loc.length) loc = `https://login.no/events/${event.eventID}`
+        if (!location.length) location = `https://login.no/events/${event.id}`
         
-        const startDate = new Date(APIevent.startt)
-        const endDate = new Date(APIevent.endt)
+        const time_start = new Date(APIevent.time_start)
+        const time_end = new Date(APIevent.time_end)
         const obj = {
             calendarId: calendarID,
             allDay: false,
-            id: `${APIevent.eventID}`,
-            title: APIevent.eventname,
-            notes: APIevent.description,
-            location: loc,
-            startDate: startDate,
-            endDate: endDate,
+            id: `${APIevent.id}`,
+            title,
+            notes,
+            location,
+            startDate: time_start,
+            endDate: time_end,
             timeZone: "Europe/Oslo",
             status: "CONFIRMED",
             availability: "BUSY",
@@ -213,10 +216,10 @@ async function getDefaultCalendarSource() {
  * @see updateCalendar  Updates the events for a calendar that is found
  * @see createCalendar  Creates a new calendar if no calendar is to be found
  */
-async function executeDownload({clickedEvents, calendarID, dispatch}: executeDownloadProps) {
+async function executeDownload({clickedEvents, calendarID, dispatch, lang}: executeDownloadProps) {
     if (typeof await calendarExists(calendarID) != "undefined") {
-        await updateCalendar({events: clickedEvents, calendarID})
+        await updateCalendar({events: clickedEvents, calendarID, lang})
     } else {
-        dispatch(setCalendarID(await createCalendar(clickedEvents)))
+        dispatch(setCalendarID(await createCalendar(clickedEvents, lang)))
     }
 }

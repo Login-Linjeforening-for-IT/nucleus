@@ -1,3 +1,10 @@
+import en from "@text/shared/link/en.json"
+import no from "@text/shared/link/no.json"
+import { useSelector } from "react-redux";
+import T from "@styles/text";
+import { ReactNode } from "react";
+import FetchColor from "@styles/fetchTheme";
+import AS from "@styles/adStyles";
 import { 
     Alert,
     Linking,
@@ -7,13 +14,6 @@ import {
     TouchableOpacity,
     View
  } from "react-native";
-import en from "@text/shared/link/en.json"
-import no from "@text/shared/link/no.json"
-import { useSelector } from "react-redux";
-import T from "@styles/text";
-import { ReactNode } from "react";
-import FetchColor from "@styles/fetchTheme";
-import AS from "@styles/adStyles";
 
 type LinkProps = {
     url: string
