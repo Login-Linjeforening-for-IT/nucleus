@@ -1,10 +1,10 @@
-import { View, Text, TouchableOpacity, Linking, Image } from "react-native"
 import FetchColor from "@styles/fetchTheme"
 import GS from "@styles/globalStyles"
-import { useSelector } from "react-redux"
 import React, {useState } from "react"
 import T from "@styles/text"
 import Link from "@components/shared/link"
+import { useSelector } from "react-redux"
+import { View, Text, TouchableOpacity, Image } from "react-native"
 
 type DropdownItemProps = {
     title: string

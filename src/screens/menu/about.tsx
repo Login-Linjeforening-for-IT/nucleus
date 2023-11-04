@@ -44,12 +44,6 @@ type CommitteePersonProps = {
     committee: number
 }
 
-type CommitteeImageTouchableProps = {
-    setCommittee: React.Dispatch<React.SetStateAction<number>>
-    committee: number
-    index: number
-}
-
 type CommitteeViewProps = {
     setCommittee: React.Dispatch<React.SetStateAction<number>>
     committee: number
@@ -80,7 +74,6 @@ const committeeImages = [
 export default function AboutScreen(): JSX.Element {
     const { lang  } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    const screenWidth = Dimensions.get("window").width
     const [committee, setCommittee] = useState(0)
     const text = lang ? no : en
     const info = text.committeeSection.info

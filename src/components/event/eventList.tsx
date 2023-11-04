@@ -7,7 +7,6 @@ import BellIcon from "@components/shared/bellIcon"
 import Cluster from "@/components/shared/cluster"
 import FetchColor from "@styles/fetchTheme"
 import ES from "@styles/eventStyles"
-import { Navigation } from "@interfaces"
 import T from "@styles/text"
 import React from "react"
 import {

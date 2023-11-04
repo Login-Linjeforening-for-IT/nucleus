@@ -1,20 +1,20 @@
 import CornerSquare from "@/components/about/cornerSquare"
-import { random } from "@/components/shared/utils"
+import ES from "@styles/eventStyles"
 import FetchColor from "@styles/fetchTheme"
 import GS from "@styles/globalStyles"
-import ES from "@styles/eventStyles"
-import { useSelector } from "react-redux"
+import Link, { TextLink } from "@components/shared/link"
 import T from "@styles/text"
 import React from "react"
+import { useSelector } from "react-redux"
+import { random } from "@/components/shared/utils"
 import {
-    TouchableOpacity,
-    Linking,
     Image,
-    View,
-    Text,
     ImageSourcePropType,
+    Linking,
+    Text,
+    TouchableOpacity,
+    View,
 } from "react-native"
-import Link, { TextLink } from "@components/shared/link"
 
 type PersonProps = {
     person: string
@@ -60,9 +60,7 @@ export default function Person({person}: PersonProps): JSX.Element {
     return (
         <View style={{marginBottom: 20}}>
             <Image style={{...GS.personImage}} source={{uri: obj.img}} />
-            <View style={{position: "absolute", alignSelf: "center"}}>
-                <CornerSquare corner={corner} />
-            </View>
+            <CornerSquare corner={corner} />
             <Text style={T.leaderTitle}>{obj.title}</Text>
             <Text style={{
                 ...T.leaderName, 
@@ -188,9 +186,7 @@ export function Styret() {
                 style={{...GS.aboutImage}} 
                 source={{uri: "https://cdn.login.no/img/styret2.jpg"}}
             />
-            <View style={{position: "absolute", alignSelf: "center"}}>
-                <CornerSquare corner={corner} type={true} />
-            </View>
+            <CornerSquare corner={corner} type={true} />
         </View>
     )
 }
