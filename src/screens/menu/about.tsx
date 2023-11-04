@@ -110,9 +110,7 @@ export default function AboutScreen(): JSX.Element {
                                         {text.intro}
                                 </Text>
                             </Line>
-                            <Space height={10} />
                             <Dropdown />
-                            <Space height={10} />
                             <Styret />
                             <Text style={{
                                 ...T.bold25,
@@ -175,7 +173,7 @@ export default function AboutScreen(): JSX.Element {
                             <CommitteePerson committee={committee} />
                             <Text style={{
                                 ...T.text25,
-                                margintop: 10,
+                                marginTop: 10,
                                 color: FetchColor({theme, variable: "TEXTCOLOR"})
                             }}>
                                 {text.publicDocs.title}
@@ -204,26 +202,23 @@ export default function AboutScreen(): JSX.Element {
 }
 
 function CommitteeImage({id, theme, style}: getCommitteeImageProps){
-
-    let color: string;
-    switch (theme) {
-        case "dark":    color = '#ffffff'; break;
-        case "gray":    color = '#555555'; break;
-        case "light":   color = '#000000'; break;
-        default:        color = '#fd8738'; break;
+    const colors: { [key: string]: string } = {
+        dark: '#ffffff',
+        gray: '#555555',
+        light: '#000000'
     }
 
-    return(
-        <SvgXml xml={committeeImages[id]} color={color} style={style}/>
-    )
+    return <SvgXml xml={committeeImages[id]} color={colors[theme] || '#fd8738'} style={style} />
 }
 
 function CommitteePerson({committee}: CommitteePersonProps) {
     const committees = ["evntkom", "tekkom", "pr", "ctf", "eco"]
 
-    if (committees[committee-1]) {
-        return Person({person: committees[committee-1]})
-    } else return AllComitees()
+    if (committees[committee - 1]) {
+        return Person({person: committees[committee - 1]})
+    }
+
+    return AllComitees()
 }
 
 function CommitteeView({setCommittee, committee}: CommitteeViewProps) {
@@ -243,20 +238,22 @@ function CommitteeView({setCommittee, committee}: CommitteeViewProps) {
             {rows.map((row, rowIndex)=>(
                 <View key={rowIndex} style={{display: 'flex', width: '100%', flexDirection: 'row', justifyContent: 'space-between'}}>
                     {row.map((xml, index)=>(
-                            <TouchableOpacity key={index} 
-                                              onPress={()=>{
-                                                setCommittee(rowIndex*numCols+index)
-                                              }}
-                                                    style={{...GS.committee, 
-                                                    backgroundColor: FetchColor({theme, variable: "CONTRAST"}), 
-                                                    width: Dimensions.get('window').width/numCols-Dimensions.get('window').width/numCols*15/100,
-                                                    aspectRatio: 1,  
-                                                    justifyContent: 'space-between',
-                                                    marginLeft: 'auto',
-                                                    marginRight: 'auto'
-                                                    }}>
-                                <CommitteeImage id={rowIndex*numCols+index} theme={committee==rowIndex*numCols+index?"":isDark?"dark":"gray"} style={{alignSelf: 'center', marginTop: 'auto', marginBottom: 'auto', width: '80%', aspectRatio: 1}}/>
-                            </TouchableOpacity>
+                        <TouchableOpacity key={index} 
+                            onPress={()=>{setCommittee(rowIndex*numCols+index)}}
+                            style={{...GS.committee, 
+                                backgroundColor: FetchColor({theme, variable: "CONTRAST"}), 
+                                width: Dimensions.get('window').width/numCols-Dimensions.get('window').width/numCols*15/100,
+                                aspectRatio: 1,  
+                                justifyContent: 'space-between',
+                                marginLeft: 'auto',
+                                marginRight: 'auto'
+                            }}>
+                            <CommitteeImage 
+                                id={rowIndex*numCols+index} 
+                                theme={committee == rowIndex * numCols + index ? "" : isDark ? "dark" : "gray"}
+                                style={{alignSelf: 'center', marginTop: 'auto', marginBottom: 'auto', width: '80%', aspectRatio: 1}}
+                            />
+                        </TouchableOpacity>
                         ))}
                 </View>
             ))}

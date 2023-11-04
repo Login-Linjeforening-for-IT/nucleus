@@ -76,7 +76,7 @@ export default function Dropdown() {
     }
 
       return (
-        <View>
+        <View style={{marginVertical: 10}}>
             <DropdownItem title="Bachelor" course={course} selectedDegree={selectedDegree} courses={bcourses} degree={1} />
             <DropdownItem title="Master" course={course} selectedDegree={selectedDegree} courses={mcourses} degree={2} />
             <DropdownItem title="Ph.d" course={course} selectedDegree={selectedDegree} courses={pcourses} degree={3} />

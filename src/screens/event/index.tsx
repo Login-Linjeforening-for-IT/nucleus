@@ -150,7 +150,7 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
                                     backgroundColor: FetchColor({theme, variable: "DARKER"})
                                 }}>
                                     {pushNotification && pushNotificationContent}
-                                    <EventList notification={notification} />
+                                    {/* <EventList notification={notification} /> */}
                                 </View>
                             </View>
                         </Swipe>

@@ -18,6 +18,7 @@ type EventClusterLocationProps = {
  */
 export default function EventClusterLocation({item}: 
 EventClusterLocationProps): JSX.Element {
+    return <></>
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
     let time = " " + item.time_start[11] + item.time_start[12] + ":" + 
@@ -26,6 +27,7 @@ EventClusterLocationProps): JSX.Element {
         item.time_start[15] === "0000") time = "  "
     const location_no = item.location_name_no ? item.location_name_no : "Mer info TBA!"
     const location_en = item.location_name_en ? item.location_name_en : "More info TBA!"
+    console.log(location_no, location_en)
     const location = (lang ? location_no : location_en).trim()
     const info = (time + lang ? location_no : location_en).trim()
 
