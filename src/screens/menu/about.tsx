@@ -232,10 +232,13 @@ function CommitteeView({setCommittee, committee}: CommitteeViewProps) {
                 <View key={rowIndex} style={{display: 'flex', width: '100%', flexDirection: 'row', justifyContent: 'space-between'}}>
                     {row.map((xml, index)=>(
                         <TouchableOpacity key={index} 
-                            onPress={()=>{setCommittee(rowIndex*numCols+index)}}
-                            style={{...GS.committee, 
+                            onPress={() => {
+                                setCommittee(rowIndex * numCols + index)
+                            }}
+                            style={{
+                                ...GS.committee, 
                                 backgroundColor: FetchColor({theme, variable: "CONTRAST"}), 
-                                width: Dimensions.get('window').width/numCols-Dimensions.get('window').width/numCols*15/100,
+                                width: Dimensions.get('window').width / numCols - Dimensions.get('window').width / numCols * 15 / 100,
                                 aspectRatio: 1,  
                                 justifyContent: 'space-between',
                                 marginLeft: 'auto',
