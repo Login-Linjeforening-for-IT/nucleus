@@ -16,6 +16,7 @@ import {
     View,
     Platform,
 } from "react-native"
+import { Navigation } from "@interfaces"
 
 type Ad = {
     ad: AdProps
@@ -26,7 +27,7 @@ export default function AdCluster({ad, index}: Ad): JSX.Element {
     const { search, clickedAds, skills } = useSelector((state: ReduxState) => state.ad)
     const dispatch = useDispatch()
     const isOrange = clickedAds.some(ads => ads.id === ad.id) ? true : false
-    const navigation = useNavigation()
+    const navigation: Navigation = useNavigation()
     const logo = ad.organization_logo ? ad.organization_logo : undefined
 
     function handleClick() {

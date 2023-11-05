@@ -25,7 +25,7 @@ export interface ScreenProps {
     navigation: Navigation
 }
 
-export type Navigation = BottomTabNavigationProp<ParamListBase, string, undefined>
+export type Navigation = BottomTabNavigationProp<ParamListBase, string, string>
 
 export interface StackProps extends ExtendedRouteOptions {
     name: string

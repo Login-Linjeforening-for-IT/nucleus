@@ -20,6 +20,7 @@ import {
 import { useSelector, useDispatch } from "react-redux"
 import { setClickedEvents, setEvent, toggleSearch } from "@redux/event"
 import { useNavigation } from "@react-navigation/native"
+import { Navigation } from "@interfaces"
 
 type EventListProps = {
     notification: NotificationProps
@@ -79,7 +80,7 @@ export default function EventList ({notification}: EventListProps): JSX.Element 
 function EventCluster ({notification, item, index}: EventClusterProps): 
 JSX.Element {
     const { search } = useSelector((state: ReduxState) => state.event)
-    const navigation = useNavigation()
+    const navigation: Navigation = useNavigation()
     const dispatch = useDispatch()
 
     return (
