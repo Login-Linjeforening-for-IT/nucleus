@@ -3,7 +3,7 @@ import { View, Dimensions,ScrollView } from "react-native"
 import ProfileInfo from "@/components/profile/profileInfo"
 import Profile from "@/components/profile/profile"
 import Space from "@/components/shared/utils"
-import FetchColor from "@styles/fetchTheme"
+
 import PS from "@styles/profileStyles"
 import { useSelector } from "react-redux"
 import React, { useState } from "react"
@@ -59,11 +59,11 @@ export default function ProfileScreen(): JSX.Element {
             <View>
                 <View style={{
                         ...PS.content, 
-                        backgroundColor: FetchColor({theme, variable: "DARKER"})
+                        backgroundColor: theme.darker
                 }}>
                     <View style={{
                         ...PS.profileView,
-                        backgroundColor: FetchColor({theme, variable: "ORANGE"}), 
+                        backgroundColor: theme.orange, 
                         height: scrollPosition
                     }} />
                     <ScrollView 
@@ -81,11 +81,11 @@ export default function ProfileScreen(): JSX.Element {
                             >
                                 <Stop 
                                     offset="40%" 
-                                    stopColor={FetchColor({theme, variable: "ORANGE"})} 
+                                    stopColor={theme.orange} 
                                 />
                                 <Stop 
                                     offset={theme === 1 ? "86%" : "100%"} 
-                                    stopColor={FetchColor({theme, variable: "DARKER"})}
+                                    stopColor={theme.darker}
                                 />
                             </LinearGradient>
                             <Rect 

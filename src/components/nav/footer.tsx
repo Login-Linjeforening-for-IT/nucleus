@@ -1,5 +1,4 @@
 import { View, TouchableOpacity } from "react-native"
-import FetchColor from "@styles/fetchTheme"
 import { useSelector } from "react-redux"
 import MS from "@styles/menuStyles"
 import { BlurView } from "expo-blur"
@@ -17,8 +16,7 @@ export default function Footer({ state, descriptors, navigation }: BottomTabBarP
                 <BlurView style={MS.bMenu} intensity={30}/>
                 <View style={{
                     ...MS.bMenu,
-                    backgroundColor: FetchColor({theme,
-                        variable: "TRANSPARENTANDROID"})
+                    backgroundColor: theme.transparentAndroid
                 }} />
             {/* Transparent container for the icons */}
             <View style={{

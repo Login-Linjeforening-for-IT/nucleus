@@ -1,7 +1,6 @@
 import { changeNotificationState } from "@redux/notifications"
 import topic from "@/utils/topic"
 import { useSelector, useDispatch } from "react-redux"
-import FetchColor from "@styles/fetchTheme"
 import { View, Switch } from "react-native"
 import React from "react"
 
@@ -29,14 +28,12 @@ export default function Notification ({category, skip}: NotificationProps) {
     return (
         <View>
             <Switch
-                trackColor={{ true: FetchColor({theme, variable: "TRACKCOLOR"})}}
+                trackColor={{ true: theme.trackColor}}
                 thumbColor={notification[category]
-                    ? FetchColor({theme, variable: "SWITCHOFFSTATE"})
-                    : FetchColor({theme, variable: "SWITCHONSTATE"})
+                    ? theme.switchOffState
+                    : theme.switchOnState
                 }
-                ios_backgroundColor={
-                    FetchColor({theme, variable: "TRACKBACKGROUNDCOLOR"})
-                }
+                ios_backgroundColor={theme.trackBackgroundColor}
                 onValueChange={(value) => {
                     dispatch(changeNotificationState({value, category}))
                 }}

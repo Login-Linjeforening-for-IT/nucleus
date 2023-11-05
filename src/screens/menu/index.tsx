@@ -3,7 +3,7 @@ import { Navigation } from "@interfaces"
 import Feedback from "@/components/menu/feedback"
 import Cluster from "@/components/shared/cluster"
 import Space from "@/components/shared/utils"
-import FetchColor from "@styles/fetchTheme"
+
 import CS from "@styles/clusterStyles"
 import GS from "@styles/globalStyles"
 import { useSelector } from "react-redux"
@@ -96,7 +96,7 @@ export default function MenuScreen(): JSX.Element {
                         <Swipe left="AdScreenRoot">
                             <View style={{
                                 ...GS.content, 
-                                backgroundColor: FetchColor({theme, variable: "DARKER"})
+                                backgroundColor: theme.darker
                             }}>
                                 <Space height={Dimensions.get("window").height / 9} /> 
                                 {login ? SmallProfile({navigation, 
@@ -158,8 +158,7 @@ toggleFeedback}: MenuItemProps) {
                         <View style={CS.twinLeft}>
                             <Text style={{
                                 ...T.text20, 
-                                color: FetchColor({theme, variable: 
-                            "TEXTCOLOR"})}}>
+                                color: theme.textColor}}>
                                     {item.title}
                             </Text>
                         </View>
@@ -186,7 +185,7 @@ toggleFeedback}: MenuItemProps) {
             {index === setting.length-1 
             ?   <Text style={{
                     ...T.contact, 
-                    color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})
+                    color: theme.oppositeTextColor
                 }}>
                     {info.version}{nativeApplicationVersion}
                 </Text>

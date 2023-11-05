@@ -5,7 +5,6 @@ import topic from "@/utils/topic"
 import Space, { ErrorMessage, Month } from "@/components/shared/utils"
 import BellIcon from "@components/shared/bellIcon"
 import Cluster from "@/components/shared/cluster"
-import FetchColor from "@styles/fetchTheme"
 import ES from "@styles/eventStyles"
 import T from "@styles/text"
 import React from "react"
@@ -121,7 +120,7 @@ export function ListFooter ({index}: ListFooterProps): JSX.Element {
     return (
         <>
             {index === renderedEvents.length-1 && <Text style={{...T.contact, 
-                color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})}}>
+                color: theme.oppositeTextColor}}>
                     {lang ? "Oppdatert kl:":"Updated:"} {lastFetch}.
                 </Text>}
             {index === renderedEvents.length - 1 && 
@@ -144,12 +143,12 @@ export function FullCategorySquare({item, height}: FullCategorySquareProps): JSX
 
             <Text style={{
                 ...ES.eventClusterDayText,
-                color: FetchColor({theme, variable: "TEXTCOLOR"})
+                color: theme.textColor
             }}>{day}</Text>
 
             <Month
                 month={month}
-                color={FetchColor({theme, variable: "TEXTCOLOR"})}
+                color={theme.textColor}
             />
         </View>
     )

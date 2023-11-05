@@ -1,4 +1,3 @@
-import FetchColor from "@styles/fetchTheme"
 import { View, Text } from "react-native"
 import { useSelector } from "react-redux"
 import T from "@styles/text"
@@ -29,7 +28,7 @@ export default function EventTime({time_start, time_end}: EventTimeProps): JSX.E
 
     return (
         <View>
-            <Text style={{...T.text20, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>
+            <Text style={{...T.text20, color: theme.textColor}}>
                 {string}
             </Text>
         </View>
@@ -53,7 +52,7 @@ export function GetEndTime({time_end}: GetEndTimeProps) {
         <View>
             <Text style={{
                 ...T.specificEventInfo,
-                color: FetchColor({theme, variable: "TEXTCOLOR"})
+                color: theme.textColor
             }}>
                 {endTime}
             </Text>

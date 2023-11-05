@@ -1,7 +1,6 @@
 import { GestureHandlerRootView, PanGestureHandler } from "react-native-gesture-handler"
 import { useDispatch, useSelector } from "react-redux"
 import * as ImagePicker from "expo-image-picker"
-import FetchColor from "@styles/fetchTheme"
 import PS from "@styles/profileStyles"
 import { setImage } from "@redux/profile"
 import React, { useState } from "react"
@@ -37,7 +36,7 @@ type ChangeProfileCardProps = {
  */
 export default function ChangeProfileCard({type, value, hide,
 trigger}: ChangeProfileCardProps): JSX.Element {
-    const { theme } = useSelector((state: ReduxState) => state.theme)
+    const { theme, isDark } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
     
     // Dispatch to change Redux states
@@ -126,20 +125,19 @@ trigger}: ChangeProfileCardProps): JSX.Element {
         <GestureHandlerRootView>
             <PanGestureHandler onGestureEvent={gestureHandler}>
                 <Animated.View style={[PS.animatedProfileChangeCard, animation,
-                    {backgroundColor: FetchColor({theme, variable: "DARKER"})}]}>
+                    {backgroundColor: theme.darker}]}>
                     <View style={[PS.animatedView, {backgroundColor:
-                        FetchColor({theme, variable: "DARKER"})}]}>
+                        theme.darker}]}>
                         <TouchableOpacity onPress={selectImage}>
                             <Image
                                 style={PS.bigProfileImage}
                                 source={tempImage || image
                                     ? {uri: tempImage ? tempImage : image}
-                                    : theme === 0 || theme === 2 || theme === 3
+                                    : isDark
                                         ? require("@assets/icons/loginperson-white.png")
                                         : require("@assets/icons/loginperson-black.png")}
                             />
-                            <Text style={{...T.centered15, color: FetchColor({theme,
-                                                variable: "OPPOSITETEXTCOLOR"})}}>
+                            <Text style={{...T.centered15, color: theme.oppositeTextColor}}>
                                 {lang ? "Velg bilde" : "Choose image"}
                             </Text>
                         </TouchableOpacity>

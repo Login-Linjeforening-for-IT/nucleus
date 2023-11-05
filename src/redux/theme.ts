@@ -1,4 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit"
+import Dark from "@themes/dark"
+import Light from "@themes/light"
+import Abyss from "@themes/abyss"
+import Sunset from "@themes/sunset"
+import Easter from "@themes/easter"
+import Christmas from "@themes/christmas"
 
 // Declares the theme slice
 export const ThemeSlice = createSlice({
@@ -7,28 +13,32 @@ export const ThemeSlice = createSlice({
     // Initial state of the slice
     initialState: {
         // Default 0 (dark theme)
-        theme: 0,
-        isDark: true
+        value: 0,
+        isDark: true,
+        theme: Dark
     },
     // Declares reducers
     reducers: {
         // Function to change theme
         changeTheme(state) {
             // Increments state.theme by 1
-            state.theme += 1
-            state.isDark = isDark(state.theme)
+            state.value += 1
+            state.isDark = isDark(state.value)
+            state.theme = findTheme(state.value)
         },
         // Function to reset theme
         resetTheme(state) {
             // Sets it to 0 (dark theme)
-            state.theme = 0
-            state.isDark = isDark(state.theme)
+            state.value = 0
+            state.isDark = isDark(state.value)
+            state.theme = Dark
         },
         // Function to change to a specific theme using a number prop
         setTheme(state, action) {
             // Changes theme based on number given
-            state.theme = action.payload
-            state.isDark = isDark(state.theme)
+            state.value = action.payload
+            state.isDark = isDark(state.value)
+            state.theme = findTheme(state.value)
         }
     }
 })
@@ -40,6 +50,18 @@ export const ThemeSlice = createSlice({
  */
 function isDark(theme: number) {
     return theme === 0 || theme === 2 || theme === 3 ? true : false
+}
+
+function findTheme(theme: number): Theme {
+    switch (theme) {
+        case 1: return Light
+        case 2: return Abyss
+        case 3: return Sunset
+        case 4: return Christmas
+        case 5: return Easter
+    }
+
+    return Dark
 }
 
 // Exports functions

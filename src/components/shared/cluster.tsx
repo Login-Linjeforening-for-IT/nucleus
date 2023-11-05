@@ -1,4 +1,3 @@
-import FetchColor from "@styles/fetchTheme"
 import { View } from "react-native"
 import { ClusterProps } from "@interfaces"
 import { useSelector } from "react-redux"
@@ -17,7 +16,7 @@ children }: ClusterProps) {
 
     return (
         <View style={{backgroundColor: !noColor
-            ? FetchColor({theme, variable: "DARKER"})
+            ? theme.darker
             : ""
         }}>
             <View style={{
@@ -44,7 +43,7 @@ export function ClusterSmaller ({children}: React.PropsWithChildren<{}>) {
     return (
         <View style={{
                 ...ES.clusterSmaller,
-                backgroundColor: FetchColor({theme, variable: "DARKER"})}}>
+                backgroundColor: theme.darker}}>
             <View>
                 { children }
             </View>

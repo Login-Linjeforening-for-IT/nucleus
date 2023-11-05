@@ -5,7 +5,7 @@ import Check from "@components/event/check"
 import Cluster from "@/components/shared/cluster"
 import Button from "@/components/shared/button"
 import Space from "@/components/shared/utils"
-import FetchColor from "@styles/fetchTheme"
+
 import SS from "@styles/settingStyles"
 import GS from "@styles/globalStyles"
 import React, { useState } from "react"
@@ -119,14 +119,14 @@ export default function LoginScreen({ navigation }: ScreenProps): JSX.Element {
             <View>
                 <View style={{
                     ...GS.content, 
-                    backgroundColor: FetchColor({theme, variable: "DARKER"})
+                    backgroundColor: theme.darker
                 }}>
                     <Space height={Dimensions.get("window").height / 8.1} /> 
                     <View>
                         <Space height={80} /> 
                         <Text style={{
                             ...T.centered50,
-                            color: FetchColor({theme, variable: "TEXTCOLOR"})
+                            color: theme.textColor
                         }}>
                             {lang ? "Innsida" : "Intranet"}
                         </Text>
@@ -148,7 +148,7 @@ export default function LoginScreen({ navigation }: ScreenProps): JSX.Element {
                                 <Button>
                                     <Text style={{
                                         ...T.centered20, 
-                                        color: FetchColor({theme, variable: "TEXTCOLOR"})
+                                        color: theme.textColor
                                     }}>
                                         LOGIN
                                     </Text>
@@ -191,8 +191,8 @@ JSX.Element {
             <TextInput
                 style={{
                     ...GS.inputText,
-                    backgroundColor: FetchColor({theme, variable: "DARKER"}),
-                    color: FetchColor({theme, variable: "TEXTCOLOR"})
+                    backgroundColor: theme.darker,
+                    color: theme.textColor
                 }}
                 placeholder={lang 
                     ? "     brukernavn"
@@ -201,7 +201,7 @@ JSX.Element {
                 placeholderTextColor={"#555"}
                 textAlign="center"
                 onChangeText={(val) => inputName(val)}
-                selectionColor={FetchColor({theme, variable: "ORANGE"})}
+                selectionColor={theme.orange}
                 />
             {data.check_textInputChange ?
                 <View>
@@ -230,15 +230,15 @@ JSX.Element {
                 <TextInput
                     style={{
                         ...GS.inputText,
-                        backgroundColor: FetchColor({theme, variable: "DARKER"}),
-                        color: FetchColor({theme, variable: "TEXTCOLOR"})
+                        backgroundColor: theme.darker,
+                        color: theme.textColor
                     }}
                     placeholder={lang ? "passord" : "password"}
                     placeholderTextColor={"#555"}
                     secureTextEntry = {data.secureTextEntry ? true : false}
                     textAlign="center"
                     onChangeText={(val) => inputPass(val)}
-                    selectionColor={FetchColor({theme, variable: "ORANGE"})}
+                    selectionColor={theme.orange}
                 />
                 {data.check_passInputChange ?
                     <TouchableOpacity onPress={showPass}>

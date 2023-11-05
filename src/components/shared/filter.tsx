@@ -1,4 +1,3 @@
-import FetchColor from "@styles/fetchTheme"
 import ES from "@styles/eventStyles"
 import MS from "@styles/menuStyles"
 import React, { useRef } from "react"
@@ -51,10 +50,10 @@ export function FilterUI(): JSX.Element {
                     style={{...ES.clusterFilterText}}
                     maxLength={40}
                     placeholder={lang ? "Søk.." : "Search.."}
-                    placeholderTextColor={FetchColor({theme, variable: "TITLETEXTCOLOR"})}
+                    placeholderTextColor={theme.titleTextColor}
                     textAlign="center"
                     onChangeText={(val) => dispatch(setInput(val))}
-                    selectionColor={FetchColor({theme, variable: "ORANGE"})}
+                    selectionColor={theme.orange}
                 />
                 <TouchableOpacity onPress={() => {
                     isSearchingEvents && dispatch(resetEvents())
@@ -152,7 +151,7 @@ function FilterCategoriesOrSkills() {
                             <View style={{width: Dimensions.get("window").width / 4.2}}>
                                 <Text style={{
                                     ...T.filterCategoryText,
-                                    color: FetchColor({theme, variable: "TITLETEXTCOLOR"})
+                                    color: theme.titleTextColor
                                 }}>
                                     {item.category}
                                 </Text>
@@ -165,7 +164,7 @@ function FilterCategoriesOrSkills() {
                             <View style={{width: Dimensions.get("window").width / 4.2}}>
                                 <Text style={{
                                     ...T.filterCategoryText,
-                                    color: FetchColor({theme, variable: "TITLETEXTCOLOR"})
+                                    color: theme.titleTextColor
                                 }}>
                                     {item.category}
                                 </Text>

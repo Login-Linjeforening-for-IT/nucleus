@@ -1,7 +1,6 @@
 import AS from "@styles/adStyles"
 import BellIcon from "@components/shared/bellIcon"
 import Cluster from "@/components/shared/cluster"
-import FetchColor from "@styles/fetchTheme"
 import React from "react"
 import Space from "@/components/shared/utils"
 import T from "@styles/text"
@@ -86,7 +85,7 @@ export function ListFooter ({index}: ListFooterProps): JSX.Element {
     return (
         <>
             {index === renderedAds.length - 1 && <Text style={{...T.contact, 
-                color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})}}>
+                color: theme.oppositeTextColor}}>
                     {lang ? "Oppdatert kl:":"Updated:"} {lastFetch}.
                 </Text>}
             {index === renderedAds.length - 1 && 

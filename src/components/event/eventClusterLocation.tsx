@@ -1,4 +1,3 @@
-import FetchColor from "@styles/fetchTheme"
 import { View, Text } from "react-native"
 import ES from "@styles/eventStyles"
 import React from "react"
@@ -36,7 +35,7 @@ EventClusterLocationProps): JSX.Element {
             <View style = {{...ES.title}}>
                 <Text style={{
                     ...ES.title, 
-                    color: FetchColor({theme, variable: "TEXTCOLOR"})
+                    color: theme.textColor
                 }}>
                     {location}
                 </Text>
@@ -44,7 +43,7 @@ EventClusterLocationProps): JSX.Element {
             <View style={{flexDirection: "row"}}>
                 <Text style={{
                     ...ES.loc,
-                    color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})
+                    color: theme.oppositeTextColor
                 }}>
                     {info}
                 </Text>

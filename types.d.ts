@@ -58,8 +58,9 @@ type Category = {
 
 type ReduxState = {
     theme: {
-        theme: number
+        value: number
         isDark: boolean
+        theme: Theme
     }
     login: {
         login: boolean
@@ -378,4 +379,21 @@ type MenuStackParamList = {
 
 type ListFooterProps = {
     index: number
+}
+
+type Theme = {
+    background: string
+    darker: string
+    contrast: string
+    transparent: string
+    transparentAndroid: string
+    orange: string
+    discord: string
+    textColor: string
+    titleTextColor: string
+    oppositeTextColor: string
+    switchOnState: string
+    switchOffState: string
+    trackColor: string
+    trackBackgroundColor: string
 }

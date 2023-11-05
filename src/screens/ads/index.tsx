@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { useFocusEffect } from "@react-navigation/native"
 import { useDispatch, useSelector } from "react-redux"
 import { StatusBar } from "expo-status-bar"
-import FetchColor from "@styles/fetchTheme"
+
 import GS from "@styles/globalStyles"
 import NavigateFromPushNotification 
 from "@/utils/navigateFromPushNotification"
@@ -155,7 +155,7 @@ export default function AdScreen({ navigation }: ScreenProps): JSX.Element {
                                 <StatusBar style={isDark ? "light" : "dark"} />
                                 <View style={{
                                     ...GS.content, 
-                                    backgroundColor: FetchColor({theme, variable: "DARKER"})
+                                    backgroundColor: theme.darker
                                 }}>
                                     {pushNotification && pushNotificationContent}
                                     <AdList />

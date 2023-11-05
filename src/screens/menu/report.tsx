@@ -3,7 +3,7 @@ import { CardSmaller } from "@/components/shared/card"
 import Check from "@components/event/check"
 import Button from "@/components/shared/button"
 import Space from "@/components/shared/utils"
-import FetchColor from "@styles/fetchTheme"
+
 import SS from "@styles/settingStyles"
 import GS from "@styles/globalStyles"
 import { useSelector } from "react-redux"
@@ -77,11 +77,11 @@ export default function ReportScreen(): JSX.Element {
                 <View>
                     <View style={{
                         ...GS.content, 
-                        backgroundColor: FetchColor({theme, variable: "DARKER"})
+                        backgroundColor: theme.darker
                     }}>
                     <View>
                     <Space height={Dimensions.get("window").height / 8.1 + 40} />
-                        <Text style={{...T.centered, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{text.secure}</Text>
+                        <Text style={{...T.centered, color: theme.textColor}}>{text.secure}</Text>
                         <Space height={30} />
 
                         <View style={SS.loginView}>
@@ -90,14 +90,14 @@ export default function ReportScreen(): JSX.Element {
                                     <TextInput
                                         style={{
                                             ...GS.inputText, 
-                                            backgroundColor: FetchColor({theme, variable: "DARKER"}), 
-                                            color: FetchColor({theme, variable: "TEXTCOLOR"})
+                                            backgroundColor: theme.darker, 
+                                            color: theme.textColor
                                         }}
                                         placeholder = {text.contact}
-                                        placeholderTextColor={FetchColor({theme, variable: "TITLETEXTCOLOR"})}
+                                        placeholderTextColor={theme.titleTextColor}
                                         textAlign="center"
                                         onChangeText={(val) => inputName(val)}
-                                        selectionColor={FetchColor({theme, variable: "ORANGE"})}
+                                        selectionColor={theme.orange}
                                     />
                                     {data.check_nameInputChange ?
                                         <View>
@@ -121,16 +121,14 @@ export default function ReportScreen(): JSX.Element {
                                 <TextInput
                                 style={{
                                     ...GS.inputText, 
-                                    backgroundColor: FetchColor({theme, variable: "DARKER"}), 
-                                    color: FetchColor({theme, variable: "TEXTCOLOR"})
+                                    backgroundColor: theme.darker, 
+                                    color: theme.textColor
                                 }}
                                 placeholder = {text.who}
-                                placeholderTextColor={
-                                    FetchColor({theme, variable: "TITLETEXTCOLOR"})
-                                }
+                                placeholderTextColor={theme.titleTextColor}
                                 textAlign="center"
                                 onChangeText={(val) => inputContact(val)}
-                                selectionColor={FetchColor({theme, variable: "ORANGE"})}
+                                selectionColor={theme.orange}
                                 />
                                     {data.check_contactInputChange ?
                                 <View>
@@ -154,12 +152,12 @@ export default function ReportScreen(): JSX.Element {
                                 <View style={SS.reportContentView}>
                                     <TextInput
                                     multiline={true}
-                                    style={{...GS.reportInputContentText, color: FetchColor({theme, variable: "TEXTCOLOR"})}}
+                                    style={{...GS.reportInputContentText, color: theme.textColor}}
                                     placeholder = {text.what}
-                                    placeholderTextColor={FetchColor({theme, variable: "TITLETEXTCOLOR"})}
+                                    placeholderTextColor={theme.titleTextColor}
                                         textAlign="center"
                                         onChangeText={(val) => inputContent(val)}
-                                        selectionColor={FetchColor({theme, variable: "ORANGE"})}
+                                        selectionColor={theme.orange}
                                     />
                                     {data.check_contentInputChange ?
                                         <View>
@@ -192,7 +190,7 @@ export default function ReportScreen(): JSX.Element {
                                     <Button>
                                         <Text style={{
                                             ...T.centered20, 
-                                            color: FetchColor({theme, variable: "TEXTCOLOR"})
+                                            color: theme.textColor
                                         }}>
                                             {text.send}
                                         </Text>

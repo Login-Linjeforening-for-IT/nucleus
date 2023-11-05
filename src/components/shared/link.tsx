@@ -3,7 +3,6 @@ import no from "@text/shared/link/no.json"
 import { useSelector } from "react-redux";
 import T from "@styles/text";
 import { ReactNode } from "react";
-import FetchColor from "@styles/fetchTheme";
 import AS from "@styles/adStyles";
 import { 
     Alert,
@@ -118,11 +117,11 @@ export function LinkButton({ url, text }: LinkButtonProps) {
             Linking.openURL(url)}>
             <View style={{
                 ...AS.adButton,
-                backgroundColor: FetchColor({theme, variable: "ORANGE"})
+                backgroundColor: theme.orange
             }}>
                 <Text style={{
                     ...AS.adButtonText,
-                    color: FetchColor({theme, variable: "TEXTCOLOR"})
+                    color: theme.textColor
                 }}>
                     {text}
                 </Text>

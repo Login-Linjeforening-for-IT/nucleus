@@ -1,4 +1,3 @@
-import FetchColor from "@styles/fetchTheme"
 import GS from "@styles/globalStyles"
 import React from "react"
 import { useSelector } from "react-redux"
@@ -17,8 +16,6 @@ type CornerSquareProps = {
 export default function CornerSquare({corner, type}: CornerSquareProps):
 JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    const orange = FetchColor({theme, variable: "ORANGE"})
-    const darker = FetchColor({theme, variable: "DARKER"})
     const horizontal = corner === 0 || corner === 2
 
     return (
@@ -35,18 +32,18 @@ JSX.Element {
                 : {...GS.personImage, transform: [{ rotate: `${90 * corner}deg` }]}
             }>
                 {/** ORANGE */}
-                <View style={{width: 83, height: 13, backgroundColor: orange}} />
-                <View style={{width: 13, height: 70, backgroundColor: orange}} />
+                <View style={{width: 83, height: 13, backgroundColor: theme.orange}} />
+                <View style={{width: 13, height: 70, backgroundColor: theme.orange}} />
 
                 {/** DARK INSIDE */}
-                <View style={{width: 13, height: 70, left: 13, top: -70, backgroundColor: darker}} />
-                <View style={{width: 70, height: 13, left: 13, top: -140, backgroundColor: darker}} />
+                <View style={{width: 13, height: 70, left: 13, top: -70, backgroundColor: theme.darker}} />
+                <View style={{width: 70, height: 13, left: 13, top: -140, backgroundColor: theme.darker}} />
 
                 {/** DARK EDGE BOTTOM */}
-                <View style={{width: 26, height: 13, top: -83, backgroundColor: darker}} />
+                <View style={{width: 26, height: 13, top: -83, backgroundColor: theme.darker}} />
 
                 {/** DARK EDGE TOP */}
-                <View style={{width: 13, height: 26, left: 83, top: -179, backgroundColor: darker}} />
+                <View style={{width: 13, height: 26, left: 83, top: -179, backgroundColor: theme.darker}} />
             </View>
         </View>
     )

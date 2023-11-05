@@ -1,7 +1,7 @@
 import topic from "@/utils/topic"
 import Cluster from "@/components/shared/cluster"
 import Space from "@/components/shared/utils"
-import FetchColor from "@styles/fetchTheme"
+
 import GS from "@styles/globalStyles"
 import { useSelector } from "react-redux"
 import T from "@styles/text"
@@ -40,7 +40,7 @@ export default function InternalScreen(): JSX.Element {
             <View>
                 <View style={{
                         ...GS.content, 
-                        backgroundColor: FetchColor({theme, variable: "DARKER"})
+                        backgroundColor: theme.darker
                 }}>
                     <FlatList
                         showsVerticalScrollIndicator={false}
@@ -69,7 +69,7 @@ function Option({index, item}: OptionProps): JSX.Element {
                 <Cluster>
                     <Text style={{
                         ...T.centered20, 
-                        color: FetchColor({theme, variable: "TEXTCOLOR"})
+                        color: theme.textColor
                         }}>
                         {item.title}
                     </Text>

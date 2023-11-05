@@ -1,6 +1,6 @@
 import Cluster from "@/components/shared/cluster"
 import Space from "@/components/shared/utils"
-import FetchColor from "@styles/fetchTheme"
+
 import GS from "@styles/globalStyles"
 import React, { useEffect, useState } from "react"
 import { Navigation, NotificationScreenProps } from "@interfaces"
@@ -51,12 +51,12 @@ export default function NotificationScreen({navigation, back}: NotificationScree
             <View>
                 <View style={{
                         ...GS.content, 
-                        backgroundColor: FetchColor({theme, variable: "DARKER"})
+                        backgroundColor: theme.darker
                 }}>
                     <Space height={Dimensions.get("window").height / 8.1} />
                     {Array.isArray(list) 
                         ? <List /> 
-                        : <Text style={{...NS.error, color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})}}>
+                        : <Text style={{...NS.error, color: theme.oppositeTextColor}}>
                             {lang 
                                 ? "Du har ingen varslinger nå. Kom tilbake senere." 
                                 : "You have no notifications at this time. Check back later."}
@@ -102,7 +102,7 @@ function Notification({item, navigation}: NotificationInAppProps): JSX.Element {
                     <View style={NS.notificationViewMid}>
                         <NotificationText title={item.title} body={item.body} />
                     </View>
-                    <Text style={{...NS.time, right: 35, color: FetchColor({theme: theme, variable: "TITLETEXTCOLOR"})}}>
+                    <Text style={{...NS.time, right: 35, color: theme.titleTextColor}}>
                         {displayTime(item.time)}
                     </Text>
                 </View>

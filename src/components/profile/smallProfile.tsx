@@ -1,5 +1,4 @@
 import { Image, View, Text, TouchableOpacity } from "react-native"
-import FetchColor from "@styles/fetchTheme"
 import PS from "@styles/profileStyles"
 import CS from "@styles/clusterStyles"
 import { Navigation } from "@interfaces"
@@ -48,13 +47,13 @@ SmallProfileProps): JSX.Element {  // SVG showing the color of the category
                         <>
                             <Text style={{
                                 ...T.text20,
-                                color: FetchColor({theme, variable: "TEXTCOLOR"})
+                                color: theme.textColor
                             }}>
                                 {profile.name}
                             </Text>
                             <Text style={{
                                 ...T.text15,
-                                color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})
+                                color: theme.oppositeTextColor
                             }}>
                                 {lang ? "Vis profil" : "Show profile"}
                             </Text>
@@ -62,7 +61,7 @@ SmallProfileProps): JSX.Element {  // SVG showing the color of the category
                     :
                         <Text style={{
                             ...T.text25,
-                            color: FetchColor({theme, variable: "TEXTCOLOR"})
+                            color: theme.textColor
                         }}>
                             Login
                         </Text>

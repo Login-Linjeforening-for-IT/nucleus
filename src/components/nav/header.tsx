@@ -1,4 +1,3 @@
-import FetchColor from '@styles/fetchTheme'
 import GS from '@styles/globalStyles'
 import React, { PropsWithChildren, ReactNode, useState } from 'react'
 import { BlurView } from 'expo-blur'
@@ -48,11 +47,11 @@ export default function Header({ options, route, navigation }: HeaderProps): Rea
                 {
                     title.length > 40 
                     ?   <Text style={{...GS.headerTitle, color: 
-                            FetchColor({ theme, variable: 'TITLETEXTCOLOR' })}}>
+                            theme.titleTextColor}}>
                             {title}
                         </Text>
                     :   <Text style={{...GS.headerTitle, color: 
-                            FetchColor({ theme, variable: 'TITLETEXTCOLOR' })}}>
+                        theme.titleTextColor}}>
                             {title}
                         </Text>
                 }
@@ -102,7 +101,7 @@ function BlurWrapper(props: PropsWithChildren) {
             />
             <View style={{...GS.blurBackgroundView,
                 height: height,
-                backgroundColor: FetchColor({theme, variable: "TRANSPARENTANDROID"})
+                backgroundColor: theme.transparentAndroid
             }}>{props.children}</View>
         </>
     )

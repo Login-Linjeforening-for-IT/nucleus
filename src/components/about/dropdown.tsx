@@ -1,6 +1,5 @@
-import FetchColor from "@styles/fetchTheme"
 import GS from "@styles/globalStyles"
-import React, {useState } from "react"
+import React, { useState } from "react"
 import T from "@styles/text"
 import Link from "@components/shared/link"
 import { useSelector } from "react-redux"
@@ -93,9 +92,9 @@ function DropdownItem({title, course, selectedDegree, courses, degree}: Dropdown
     return (
         <>
             <TouchableOpacity onPress={() => selectedDegree(degree)}>
-                <View style={{...GS.dropdown, backgroundColor: FetchColor({theme, variable: "CONTRAST"})}}>
+                <View style={{...GS.dropdown, backgroundColor: theme.contrast}}>
                     <Image style={GS.dropImage} source={arrow} />
-                    <Text style={{...T.centered, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>
+                    <Text style={{...T.centered, color: theme.textColor}}>
                         {title}
                     </Text>
                 </View>
@@ -108,12 +107,12 @@ function DropdownItem({title, course, selectedDegree, courses, degree}: Dropdown
                             <Link key={index} url={selectedCourse.link}>
                                 <View style={{
                                     ...GS.dropdownContent, 
-                                    backgroundColor: FetchColor({theme, variable: "CONTRAST"})
+                                    backgroundColor: theme.contrast
                                 }}>
                                     <Text style={{
                                         ...T.text15, 
                                         maxWidth: "91%", 
-                                        color: FetchColor({theme, variable: "TEXTCOLOR"})
+                                        color: theme.textColor
                                     }}>
                                         {selectedCourse.title}
                                     </Text>

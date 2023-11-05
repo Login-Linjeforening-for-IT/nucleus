@@ -6,7 +6,6 @@ import { GetEndTime } from "@components/event/time"
 import React, { useEffect, useState } from "react"
 import RenderHTML from "react-native-render-html"
 import EventTime from "@components/event/time"
-import FetchColor from "@styles/fetchTheme"
 import Card from "@/components/shared/card"
 import { SvgUri } from "react-native-svg"
 import { useSelector } from "react-redux"
@@ -122,7 +121,7 @@ export default function SpecificEventScreen(): JSX.Element {
     return (
         <Swipe left="EventScreen">
             <View>
-                <View style={{...ES.sesContent, backgroundColor: FetchColor({theme, variable: "BACKGROUND"})}}>
+                <View style={{...ES.sesContent, backgroundColor: theme.background}}>
                     <ScrollView showsVerticalScrollIndicator={false}>
                     <Space height={Dimensions.get("window").height / 8 - 5} />
                     {(event.image_small).includes(".svg") ?
@@ -145,7 +144,7 @@ export default function SpecificEventScreen(): JSX.Element {
                                 <CategorySquare category={event.category_name_no} />
                                 <Text style={{
                                     ...ES.eventClusterDayText, 
-                                    color: FetchColor({theme, variable: "TEXTCOLOR"})
+                                    color: theme.textColor
                                 }}>
                                     {event.time_start[8]}
                                     {event.time_start[9]}
@@ -153,11 +152,11 @@ export default function SpecificEventScreen(): JSX.Element {
 
                                 <Text style={{
                                     ...ES.monthText, 
-                                    color: FetchColor({theme, variable: "TEXTCOLOR"})
+                                    color: theme.textColor
                                 }}>
                                 <Month
                                     month={parseInt(event.time_start[5] + event.time_start[6])}
-                                    color={FetchColor({theme, variable: "TEXTCOLOR"})}
+                                    color={theme.textColor}
                                 />
                                 </Text>
                                 </View>
@@ -173,13 +172,13 @@ export default function SpecificEventScreen(): JSX.Element {
                         <View style={ES.specificEventInfoView}>
                             <Text style={{
                                 ...T.specificEventInfo, 
-                                color: FetchColor({theme, variable: "TEXTCOLOR"})
+                                color: theme.textColor
                             }}>
                                 {text.start}
                             </Text>
                             <Text style={{
                                 ...T.specificEventInfo, 
-                                color: FetchColor({theme, variable: "TEXTCOLOR"})
+                                color: theme.textColor
                             }}>
                             {event.time_start[11]}{event.time_start[12]}:
                             {event.time_start[14]}{event.time_start[15]}
@@ -189,7 +188,7 @@ export default function SpecificEventScreen(): JSX.Element {
                         <View style={ES.specificEventInfoView}>
                             <Text style={{
                                 ...T.specificEventInfo, 
-                                color: FetchColor({theme, variable: "TEXTCOLOR"})
+                                color: theme.textColor
                             }}>
                                 {text.end}
                             </Text>
@@ -199,13 +198,13 @@ export default function SpecificEventScreen(): JSX.Element {
                         <View style={{flexDirection: "row"}}>
                             <Text style={{
                                 ...T.specificEventInfo, 
-                                color: FetchColor({theme, variable: "TEXTCOLOR"})
+                                color: theme.textColor
                             }}>
                                     {lang ? "Lokasjon:   " : "Location:     "}
                             </Text>
                             <Text style={{
                                 ...T.specificEventInfo, 
-                                color: FetchColor({theme, variable: "TEXTCOLOR"})
+                                color: theme.textColor
                             }}>
                                 TBA!
                             </Text>
@@ -217,13 +216,13 @@ export default function SpecificEventScreen(): JSX.Element {
                         <View style={ES.specificEventInfoView}>
                             <Text style={{
                                 ...T.specificEventInfo, 
-                                color: FetchColor({theme, variable: "TEXTCOLOR"})
+                                color: theme.textColor
                             }}>
                                 {text.host}
                             </Text>
                             <Text style={{
                                 ...T.specificEventInfo, 
-                                color: FetchColor({theme, variable: "TEXTCOLOR"})
+                                color: theme.textColor
                             }}>
                                 {event.organizer}{("organizerlink" in event && 
                                 event.organizerlink) || event.discordlink 
@@ -236,7 +235,7 @@ export default function SpecificEventScreen(): JSX.Element {
                                     <View style={ES.row}>
                                         <Text style={{
                                             ...T.mazemap, 
-                                            color: FetchColor({theme, variable: "ORANGE"})
+                                            color: theme.orange
                                         }}>
                                             Discord
                                         </Text>
@@ -252,7 +251,7 @@ export default function SpecificEventScreen(): JSX.Element {
                                         <View style={ES.row}>
                                             <Text style={{
                                                 ...T.mazemap, 
-                                                color: FetchColor({theme, variable: "ORANGE"})
+                                                color: theme.orange
                                             }}>
                                                 Facebook
                                             </Text>
@@ -260,13 +259,13 @@ export default function SpecificEventScreen(): JSX.Element {
                                 </TouchableOpacity>
                             }
                             {("organizerlink" in event && event.organizerlink) && (event.discordlink || event.fblink) &&
-                            <Text style={{...T.specificEventInfo, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{" - "}</Text>}
+                            <Text style={{...T.specificEventInfo, color: theme.textColor}}>{" - "}</Text>}
                             {("organizerlink" in event) && event.organizerlink &&
                             <TouchableOpacity style={{minWidth: 70}} onPress={() => {Linking.openURL(`${event.organizerlink}`)}}>
                                     <View style={ES.row}>
                                         <Text style={{
                                             ...T.mazemap, 
-                                            color: FetchColor({theme, variable: "ORANGE"})
+                                            color: theme.orange
                                         }}>
                                             {text.more}
                                         </Text>
@@ -281,7 +280,7 @@ export default function SpecificEventScreen(): JSX.Element {
                         <Space height={5} />
                             <Text style={{
                                 ...T.centered20, 
-                                color: FetchColor({theme, variable: "TEXTCOLOR"})
+                                color: theme.textColor
                             }}>
                                 {name}
                             </Text>
@@ -319,11 +318,11 @@ function JoinButton({link}: JoinButtonProps) {
             }}>
                 <View style={{
                     ...ES.eventButton, 
-                    backgroundColor: FetchColor({theme, variable: "ORANGE"})
+                    backgroundColor: theme.orange
                 }}>
                     <Text style={{
                         ...T.centered20, 
-                        color: FetchColor({theme, variable: "TEXTCOLOR"})
+                        color: theme.textColor
                     }}>
                         {lang ? "Meld meg på":"Join event"}
                     </Text>
@@ -342,14 +341,14 @@ function Category({event}: CategoryProps) {
         <View style={ES.specificEventInfoView}>
             <Text style={{
                 ...T.specificEventInfo, 
-                color: FetchColor({theme, variable: "TEXTCOLOR"})
+                color: theme.textColor
             }}>
                 {lang ? "Kategori:      " : "Category:      "}
             </Text>
             <CategoryCircle category={category} />
             <Text style={{
                 ...T.specificEventInfo, 
-                color: FetchColor({theme, variable: "TEXTCOLOR"})
+                color: theme.textColor
             }}>
                 {category}
             </Text>
@@ -375,14 +374,14 @@ function Map({event, handleLink}: MapProps) {
                     <Text 
                         style={{
                             ...T.specificEventInfo, 
-                            color: FetchColor({theme, variable: "TEXTCOLOR"})
+                            color: theme.textColor
                         }}>
                             {" - "}
                         </Text>
                     <Text 
                         style={{
                             ...T.mazemap, 
-                            color: FetchColor({theme, variable: "ORANGE"})
+                            color: theme.orange
                         }}>
                                 {lang ? "Kart" : "Map"}
                     </Text>
@@ -402,7 +401,7 @@ function Description({description}: {description: string}) {
         <RenderHTML
             baseStyle={{
                 maxWidth: "100%",
-                color: FetchColor({theme, variable: "TEXTCOLOR"}),
+                color: theme.textColor,
             }}
             contentWidth={0}
             source={{html: description}}

@@ -1,6 +1,5 @@
 import CornerSquare from "@/components/about/cornerSquare"
 import ES from "@styles/eventStyles"
-import FetchColor from "@styles/fetchTheme"
 import GS from "@styles/globalStyles"
 import Link, { TextLink } from "@components/shared/link"
 import T from "@styles/text"
@@ -62,14 +61,11 @@ export default function Person({person}: PersonProps): JSX.Element {
             <Image style={{...GS.personImage}} source={{uri: obj.img}} />
             <CornerSquare corner={corner} />
             <Text style={T.leaderTitle}>{obj.title}</Text>
-            <Text style={{
-                ...T.leaderName, 
-                color: FetchColor({theme, variable: "TEXTCOLOR"})
-            }}>
+            <Text style={{...T.leaderName, color: theme.textColor}}>
                 {obj.name}
             </Text>
             <Link url={obj.dclink}>
-                <Text style={{...T.discord, color: FetchColor({theme, variable: "DISCORD"})}}>
+                <Text style={{...T.discord, color: theme.discord}}>
                     <Image 
                         style={GS.tiny} 
                         source={require("@assets/social/discord-colored.png")}
@@ -199,7 +195,7 @@ export function Kontakt() {
 
     const { lang  } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    const color = FetchColor({theme, variable: "TEXTCOLOR"})
+    const color = theme.textColor
 
     const info = {
         contact: lang ? "Kontakt" : "Contact",
@@ -236,7 +232,7 @@ export function Copyright() {
 
     return (
         <View>
-            <Text style={{...T.copyright, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>
+            <Text style={{...T.copyright, color: theme.textColor}}>
                 {lang 
                     ? "Opphavsrett © 2022-2023 Login - Linjeforeningen for IT, NO 811 940 372"
                     : "Copyright © 2022-2023 Login - Linjeforeningen for IT, NO 811 940 372"
