@@ -1,9 +1,9 @@
 import CategorySquare, { CategoryCircle } from "@/components/shared/category"
-import { FetchJoinLink } from "@/utils/fetch"
+import { FetchJoinLink, fetchEventDetails } from "@/utils/fetch"
 import Space, { Month } from "@/components/shared/utils"
 import { CardSmaller } from "@/components/shared/card"
 import { GetEndTime } from "@components/event/time"
-import React, { useEffect, useState } from "react"
+import React from "react"
 import RenderHTML from "react-native-render-html"
 import EventTime from "@components/event/time"
 import Card from "@/components/shared/card"
@@ -23,12 +23,12 @@ import {
 } from "react-native"
 import { StaticImage } from "@/components/about/social"
 import { useDispatch } from "react-redux"
-import { setClickedEvents } from "@redux/event"
+import { setClickedEvents, setEvent } from "@redux/event"
 import Swipe from "@components/nav/swipe"
 
 type handleLinkProps = {
     mazeref: string
-    street: string
+    location: string | null
     organizer: string
 }
 
@@ -38,16 +38,11 @@ type JoinButtonProps = {
 
 type MapProps = {
     event: DetailedEvent
-    handleLink: ({mazeref, street, organizer}: handleLinkProps) => void
+    handleLink: ({mazeref, location, organizer}: handleLinkProps) => void
 }
 
 type CategoryProps = {
-    event: EventProps
-}
-
-type DescriptionProps = {
-    no: string
-    en: string
+    event: DetailedEvent
 }
 
 /**
@@ -56,23 +51,20 @@ type DescriptionProps = {
  * @returns
  */
 export default function SpecificEventScreen(): JSX.Element {
-
     const { lang  } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    const stored = useSelector((state: ReduxState) => state.event)
-    const [event, setEvent]=useState<DetailedEvent | EventProps>(stored.event)
+    const { event } = useSelector((state: ReduxState) => state.event)
     const name = lang ? event.name_no : event.name_en
     let description = ""
+    const dispatch = useDispatch()
 
-    function fetchEvent() {
-        fetch(`https://api.login.no/events/${event.id}`)
-        .then(response => response.json())
-        .then(data => setEvent(data))
-    }
-    
-    useEffect(() => { 
-        fetchEvent() 
-    }, [event])
+    // if (deepLinkID) {
+    //     const response = fetchEventDetails(deepLinkID)
+
+    //     if (response) {
+    //         dispatch(setEvent(response))
+    //     }
+    // }
 
     let link
     
@@ -81,7 +73,7 @@ export default function SpecificEventScreen(): JSX.Element {
         description = lang ? event.description_no : event.description_en
     }
 
-    function handleLink({mazeref, street, organizer}: handleLinkProps) {
+    function handleLink({mazeref, location, organizer}: handleLinkProps) {
         if (mazeref.length) {
             Linking.openURL(`https://use.mazemap.com/#v=1&campusid=55&sharepoitype=poi&sharepoi=${mazeref}`).catch(() => {
                 Alert.alert("Mazemap kunne ikke åpnes", `Send en mail til tekkom@login.no dersom problemet vedvarer. Feilkode: M${mazeref}`)
@@ -89,7 +81,7 @@ export default function SpecificEventScreen(): JSX.Element {
             return
         }
 
-        if (street === "Orgkollektivet") {
+        if (location === "Orgkollektivet") {
             Linking.openURL("https://link.mazemap.com/tBlfH1oY").catch(() =>{
                 Alert.alert("Mazemap kunne ikke åpnes", "Send en mail til tekkom@login.no dersom problemet vedvarer. Feilkode: wZDe8byp")
             })
@@ -120,179 +112,177 @@ export default function SpecificEventScreen(): JSX.Element {
 
     return (
         <Swipe left="EventScreen">
-            <View>
-                <View style={{...ES.sesContent, backgroundColor: theme.background}}>
-                    <ScrollView showsVerticalScrollIndicator={false}>
-                    <Space height={Dimensions.get("window").height / 8 - 5} />
-                    {(event.image_small).includes(".svg") ?
-                        <SvgUri
-                            style={{alignSelf: "center"}}
-                            width={(Dimensions.get("window").width)/1.2}
-                            height={Dimensions.get("window").width/3}
-                            uri={`https://cdn.login.no/img/events/${event.image_small}`}
-                        />
-                    : (event.image_small).includes(".png") ? <Image 
-                        style={ES.specificEventImage}
-                        source={{uri: `https://cdn.login.no/img/events/${event.image_small}`}}
-                    /> : <StaticImage event={event} />}
-                    <Space height={10} />
+            <View style={{...ES.sesContent, backgroundColor: theme.background}}>
+                <ScrollView showsVerticalScrollIndicator={false}>
+                <Space height={Dimensions.get("window").height / 8 - 5} />
+                {(event.image_small).includes(".svg") ?
+                    <SvgUri
+                        style={{alignSelf: "center"}}
+                        width={(Dimensions.get("window").width)/1.2}
+                        height={Dimensions.get("window").width/3}
+                        uri={`https://cdn.login.no/img/events/${event.image_small}`}
+                    />
+                : (event.image_small).includes(".png") ? <Image 
+                    style={ES.specificEventImage}
+                    source={{uri: `https://cdn.login.no/img/events/${event.image_small}`}}
+                /> : <StaticImage event={event} />}
+                <Space height={10} />
 
-                    <CardSmaller>
-                        <View style={ES.specificEventInfoView}>
-                            <Card>
-                                <View style={{left: -10}}>
-                                <CategorySquare category={event.category_name_no} />
-                                <Text style={{
-                                    ...ES.eventClusterDayText, 
-                                    color: theme.textColor
-                                }}>
-                                    {event.time_start[8]}
-                                    {event.time_start[9]}
-                                </Text>
+                <CardSmaller>
+                    <View style={ES.specificEventInfoView}>
+                        <Card>
+                            <View style={{left: -10}}>
+                            <CategorySquare category={event.category_name_no} />
+                            <Text style={{
+                                ...ES.eventClusterDayText, 
+                                color: theme.textColor
+                            }}>
+                                {event.time_start[8]}
+                                {event.time_start[9]}
+                            </Text>
 
-                                <Text style={{
-                                    ...ES.monthText, 
-                                    color: theme.textColor
-                                }}>
-                                <Month
-                                    month={parseInt(event.time_start[5] + event.time_start[6])}
-                                    color={theme.textColor}
-                                />
-                                </Text>
-                                </View>
-                            </Card>
-                            <EventTime 
-                                time_start={event.time_start}
-                                time_end={"time_end" in event ? event.time_end : ""} 
+                            <Text style={{
+                                ...ES.monthText, 
+                                color: theme.textColor
+                            }}>
+                            <Month
+                                month={parseInt(event.time_start[5] + event.time_start[6])}
+                                color={theme.textColor}
                             />
-                        </View>
-                    </CardSmaller>
+                            </Text>
+                            </View>
+                        </Card>
+                        <EventTime 
+                            time_start={event.time_start}
+                            time_end={"time_end" in event ? event.time_end : ""} 
+                        />
+                    </View>
+                </CardSmaller>
 
-                    <Card>
-                        <View style={ES.specificEventInfoView}>
-                            <Text style={{
-                                ...T.specificEventInfo, 
-                                color: theme.textColor
-                            }}>
-                                {text.start}
-                            </Text>
-                            <Text style={{
-                                ...T.specificEventInfo, 
-                                color: theme.textColor
-                            }}>
-                            {event.time_start[11]}{event.time_start[12]}:
-                            {event.time_start[14]}{event.time_start[15]}
-                            </Text>
-                        </View>
+                <Card>
+                    <View style={ES.specificEventInfoView}>
+                        <Text style={{
+                            ...T.specificEventInfo, 
+                            color: theme.textColor
+                        }}>
+                            {text.start}
+                        </Text>
+                        <Text style={{
+                            ...T.specificEventInfo, 
+                            color: theme.textColor
+                        }}>
+                        {event.time_start[11]}{event.time_start[12]}:
+                        {event.time_start[14]}{event.time_start[15]}
+                        </Text>
+                    </View>
 
-                        <View style={ES.specificEventInfoView}>
-                            <Text style={{
-                                ...T.specificEventInfo, 
-                                color: theme.textColor
-                            }}>
-                                {text.end}
-                            </Text>
-                            {"time_end" in event && <GetEndTime time_end={event.time_end} />}
-                        </View>
+                    <View style={ES.specificEventInfoView}>
+                        <Text style={{
+                            ...T.specificEventInfo, 
+                            color: theme.textColor
+                        }}>
+                            {text.end}
+                        </Text>
+                        {"time_end" in event && <GetEndTime time_end={event.time_end} />}
+                    </View>
 
-                        <View style={{flexDirection: "row"}}>
-                            <Text style={{
-                                ...T.specificEventInfo, 
-                                color: theme.textColor
-                            }}>
-                                    {lang ? "Lokasjon:   " : "Location:     "}
-                            </Text>
-                            <Text style={{
-                                ...T.specificEventInfo, 
-                                color: theme.textColor
-                            }}>
-                                TBA!
-                            </Text>
-                            <Map event={event} handleLink={handleLink} />
-                        </View>
+                    <View style={{flexDirection: "row"}}>
+                        <Text style={{
+                            ...T.specificEventInfo, 
+                            color: theme.textColor
+                        }}>
+                                {lang ? "Lokasjon:   " : "Location:     "}
+                        </Text>
+                        <Text style={{
+                            ...T.specificEventInfo, 
+                            color: theme.textColor
+                        }}>
+                            TBA!
+                        </Text>
+                        <Map event={event} handleLink={handleLink} />
+                    </View>
 
-                        <Category event={event} />
+                    <Category event={event} />
 
-                        <View style={ES.specificEventInfoView}>
-                            <Text style={{
-                                ...T.specificEventInfo, 
-                                color: theme.textColor
-                            }}>
-                                {text.host}
-                            </Text>
-                            <Text style={{
-                                ...T.specificEventInfo, 
-                                color: theme.textColor
-                            }}>
-                                {event.organizer}{("organizerlink" in event && 
-                                event.organizerlink) || event.discordlink 
-                                || event.fblink ? " - " : null}
-                            </Text>
-                            {event.discordlink && <TouchableOpacity 
-                                style={{minWidth: 70}} 
-                                onPress={() => 
-                                    {Linking.openURL(`${event.discordlink}`)}}>
-                                    <View style={ES.row}>
-                                        <Text style={{
-                                            ...T.mazemap, 
-                                            color: theme.orange
-                                        }}>
-                                            Discord
-                                        </Text>
-                                    </View>
-                                </TouchableOpacity>
-                            }
-                            {event.link && !event.discordlink &&
-                                <TouchableOpacity 
-                                    style={{minWidth: 70}} 
-                                    onPress={() => {
-                                        Linking.openURL(`${event.discordlink}`)
+                    <View style={ES.specificEventInfoView}>
+                        <Text style={{
+                            ...T.specificEventInfo, 
+                            color: theme.textColor
+                        }}>
+                            {text.host}
+                        </Text>
+                        <Text style={{
+                            ...T.specificEventInfo, 
+                            color: theme.textColor
+                        }}>
+                            {event.organization_name_en || event.organization_name_short}{("link_homepage" in event && 
+                            event.link_homepage) || event.link_discord 
+                            || event.link_facebook ? " - " : null}
+                        </Text>
+                        {event.link_discord && <TouchableOpacity 
+                            style={{minWidth: 70}} 
+                            onPress={() => 
+                                {Linking.openURL(`${event.link_discord}`)}}>
+                                <View style={ES.row}>
+                                    <Text style={{
+                                        ...T.mazemap, 
+                                        color: theme.orange
                                     }}>
-                                        <View style={ES.row}>
-                                            <Text style={{
-                                                ...T.mazemap, 
-                                                color: theme.orange
-                                            }}>
-                                                Facebook
-                                            </Text>
-                                        </View>
-                                </TouchableOpacity>
-                            }
-                            {("organizerlink" in event && event.organizerlink) && (event.discordlink || event.fblink) &&
-                            <Text style={{...T.specificEventInfo, color: theme.textColor}}>{" - "}</Text>}
-                            {("organizerlink" in event) && event.organizerlink &&
-                            <TouchableOpacity style={{minWidth: 70}} onPress={() => {Linking.openURL(`${event.organizerlink}`)}}>
+                                        Discord
+                                    </Text>
+                                </View>
+                            </TouchableOpacity>
+                        }
+                        {event.link_signup && !event.link_discord &&
+                            <TouchableOpacity 
+                                style={{minWidth: 70}} 
+                                onPress={() => {
+                                    Linking.openURL(`${event.link_discord}`)
+                                }}>
                                     <View style={ES.row}>
                                         <Text style={{
                                             ...T.mazemap, 
                                             color: theme.orange
                                         }}>
-                                            {text.more}
+                                            Facebook
                                         </Text>
                                     </View>
-                                </TouchableOpacity>
-                            }
-                        </View>
-                    </Card>
+                            </TouchableOpacity>
+                        }
+                        {("link_homepage" in event && event.link_homepage) && (event.link_discord || event.link_facebook) &&
+                        <Text style={{...T.specificEventInfo, color: theme.textColor}}> - </Text>}
+                        {("link_homepage" in event) && event.link_homepage &&
+                        <TouchableOpacity style={{minWidth: 70}} onPress={() => {Linking.openURL(`${event.link_homepage}`)}}>
+                                <View style={ES.row}>
+                                    <Text style={{
+                                        ...T.mazemap, 
+                                        color: theme.orange
+                                    }}>
+                                        {text.more}
+                                    </Text>
+                                </View>
+                            </TouchableOpacity>
+                        }
+                    </View>
+                </Card>
 
-                    <Card>
-                        <View>
-                        <Space height={5} />
-                            <Text style={{
-                                ...T.centered20, 
-                                color: theme.textColor
-                            }}>
-                                {name}
-                            </Text>
-                        </View>
-                        <Space height={5} />
-                        <Description description={lang ? event.description_no : event.description_en} />
-                        <Space height={10} />
-                        <JoinButton link={link ? link : ""} />
-                    </Card>
-                        <Space height={Dimensions.get("window").height / 3 + 10} />
-                    </ScrollView>
-                </View>
+                <Card>
+                    <View>
+                    <Space height={5} />
+                        <Text style={{
+                            ...T.centered20, 
+                            color: theme.textColor
+                        }}>
+                            {name}
+                        </Text>
+                    </View>
+                    <Space height={5} />
+                    <Description description={lang ? event.description_no : event.description_en} />
+                    <Space height={10} />
+                    <JoinButton link={link ? link : ""} />
+                </Card>
+                    <Space height={Dimensions.get("window").height / 3 + 10} />
+                </ScrollView>
             </View>
         </Swipe>
     )
@@ -359,17 +349,18 @@ function Category({event}: CategoryProps) {
 function Map({event, handleLink}: MapProps) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
+    const mazeref = "mazeref" in event ? event.mazeref : ""
 
     if (("mazeref" in event) && event.mazeref || (
-        event.location_name_no === "Orgkollektivet" 
-        || event.location_name_no === "HUSET")) {
+        event.location === "Orgkollektivet" 
+        || event.location === "HUSET")) {
         return (
             <TouchableOpacity 
                 style={{minWidth: 70}} 
                 onPress={() => {handleLink({mazeref: "mazeref" in event 
                     ? event.mazeref 
                     : "", 
-                street: event.street, organizer: event.organizer})}}>
+                location: event.location, organizer: event.organization_name_short || event.organization_name_en})}}>
                 <View style={ES.row}>
                     <Text 
                         style={{
@@ -397,14 +388,9 @@ function Map({event, handleLink}: MapProps) {
 function Description({description}: {description: string}) {
     const { theme } = useSelector((state: ReduxState) => state.theme) 
 
-    return (
-        <RenderHTML
-            baseStyle={{
-                maxWidth: "100%",
-                color: theme.textColor,
-            }}
-            contentWidth={0}
-            source={{html: description}}
-        />
-    )
+    return <RenderHTML
+        baseStyle={{maxWidth: "100%", color: theme.textColor}}
+        contentWidth={0}
+        source={{html: description}}
+    />
 }

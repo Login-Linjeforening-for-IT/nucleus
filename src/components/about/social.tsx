@@ -372,7 +372,7 @@ function personInfo({person, lang}: personInfoProps) {
     }
 }
 
-export function StaticImage({event}: {event: EventProps}): JSX.Element {
+export function StaticImage({event}: {event: DetailedEvent}): JSX.Element {
     const images: Record<string, ImageSourcePropType> = {
         tekkom:  require(`../../../public/assets/committee/tekkom/tekkom.png`),
         ctf:     require(`../../../public/assets/committee/ctfkom/ctf.png`),

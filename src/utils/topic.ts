@@ -27,7 +27,7 @@ topicParams) {
     return null
     // COMMENT IN THIS BOX WHILE TESTING IN EXPO 4/6
     const granted = await messaging().requestPermission()
-    var topic = lang ? "norwegian"+topicID:"english"+topicID
+    const topic = lang ? `norwegian${topicID}` : `english${topicID}`
 
     if (granted) {
         if (topicID === "langChange") {

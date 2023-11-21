@@ -58,13 +58,14 @@ export default function EventList ({notification}: EventListProps): JSX.Element 
                     numColumns={1}
                     keyExtractor={(item) => `${item.id}`}
                     data={renderedEvents}
-                    renderItem={({item, index}) => (
+                    renderItem={({item, index}) =>
                         <EventCluster
                             notification={notification}
                             item={item}
                             index={index}
+                            key={index}
                         />
-                    )}
+                    }
                 />
             </View>
         )

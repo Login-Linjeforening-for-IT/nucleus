@@ -157,7 +157,7 @@ eventsToCalendarFormatProps) {
     let formattedEvents = []
     
     for (const event of events) {
-        const APIevent = await fetchEventDetails(event)
+        const APIevent = await fetchEventDetails(event.id)
         let location = lang ? event.location_name_no : event.location_name_en
         const title = lang ? APIevent.name_no : APIevent.name_en
         const notes = lang ? APIevent.description_no : APIevent.description_en

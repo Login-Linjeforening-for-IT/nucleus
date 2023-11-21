@@ -198,14 +198,31 @@ type DetailedEvent = {
     capacity: number | null
     full: boolean
     category: number
-    location: null,
+    location: string | null,
     parent: null,
-    rule: null,
+    rule: string | null,
     updated_at: string
     created_at: string
     deleted_at: string
     category_name_no: string
     category_name_en: string
+    audiences: string[]
+    color: string
+    category_id: number
+    category_name_no: string
+    category_name_en: string
+    mazeref: string
+    location_no: string
+    location_en: string
+    location_url: string
+    organization_name_short: string
+    organization_name_en: string
+    organization_logo: string
+    link_homepage: string
+    rule_no: string
+    rule_en: string
+    rule_details_no: string
+    rule_details_en: string
 }
 
 type Interval = NodeJS.Timeout | number
