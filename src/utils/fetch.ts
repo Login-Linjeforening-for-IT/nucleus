@@ -74,6 +74,8 @@ Promise<DetailedEvent> {
         rule_no, rule_en, rule_details_no, rule_details_en
     }
 
+    console.log({...eventDetails.event, ...details})
+
     return {...eventDetails.event, ...details}
 }
 
@@ -83,7 +85,7 @@ Promise<DetailedEvent> {
  * @param {string} string String containing forms, tikkio or nettskjema link
  * @returns Link as string
  */
-export function FetchJoinLink(string: string): string | null {
+export function FetchJoinLink(string: string): string {
     if (string != undefined) {
         const formStart = string.lastIndexOf("https://forms")
         const formEnd = string.lastIndexOf("</a>")
@@ -103,7 +105,7 @@ export function FetchJoinLink(string: string): string | null {
         if (netLink)     return netLink.trim()
     }
 
-    return null
+    return ""
 }
 
 /**
