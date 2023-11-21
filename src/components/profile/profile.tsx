@@ -1,7 +1,7 @@
 import { Image, View, Text, TouchableOpacity } from "react-native"
 import ChangeProfileCard from "@/components/profile/changeProfileCard"
 import Space from "@/components/shared/utils"
-import FetchColor from "@styles/fetchTheme"
+
 import PS from "@styles/profileStyles"
 import React, { useState } from "react"
 import T from "@styles/text"
@@ -115,21 +115,21 @@ function MainProfileInfo({show, profile, year}: MainProfileInfoProps) {
         <>
             <Text style={{
                 ...T.text20,
-                color: FetchColor({theme, variable: "TEXTCOLOR"})
+                color: theme.textColor
             }}>
                 {profile.name}
             </Text>
             <Space height={5} />
             <Text style={{
                 ...T.text15,
-                color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})
+                color: theme.oppositeTextColor
             }}>
                 {year + profile.degree}
             </Text>
             <Space height={5} />
             <Text style={{
                 ...T.text15,
-                color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})
+                color: theme.oppositeTextColor
             }}>
                 ID: {profile.id} · {profile.joinedevents} {lang 
                     ? "Arrangementer"

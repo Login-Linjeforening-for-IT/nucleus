@@ -1,6 +1,6 @@
 import Cluster from "@/components/shared/cluster"
 import en from "@text/menu/companies/en.json"
-import FetchColor from "@styles/fetchTheme"
+
 import no from "@text/menu/companies/no.json"
 import Paragraph from "@/components/business/paragraph"
 import React from "react"
@@ -22,7 +22,7 @@ export default function BusinessScreen(): JSX.Element {
             <View>
                 <View style={{
                     ...GS.content, 
-                    backgroundColor: FetchColor({theme, variable: "DARKER"})
+                    backgroundColor: theme.darker
                 }}>
                     <ScrollView showsVerticalScrollIndicator={false}>
                         <Space height={Dimensions.get("window").height / 8.1 + 10} /> 
@@ -39,8 +39,8 @@ function Content(): JSX.Element {
     const { theme, isDark } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const info = lang ? no.companies : en.companies
-    const color = FetchColor({theme, variable: "TEXTCOLOR"})
-    const orange = FetchColor({theme, variable: "ORANGE"})
+    const color = theme.textColor
+    const orange = theme.orange
 
     const logo = {
         bedpres: isDark

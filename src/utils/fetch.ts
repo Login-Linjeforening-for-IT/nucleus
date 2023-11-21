@@ -1,3 +1,6 @@
+const api = "http://10.212.174.46/api/"
+const testapi = "http://10.212.174.46/api/"
+
 /**
  * Function for checking when the API was last fetched successfully.
  *
@@ -25,11 +28,53 @@ export default function LastFetch(param?: string) {
  *
  * @returns                 All details for passed event
  */
-export async function fetchEventDetails(event: EventProps): 
+export async function fetchEventDetails(id: number): 
 Promise<DetailedEvent> {
-    const response = await fetch(`https://api.login.no/events/${event.eventID}`)
+    // Fetches events
+    // const response = await fetch(`${api}events/${event.id}`)
+
+    // Test API
+    const response = await fetch(`${testapi}events/${id}`)
     const eventDetails = await response.json()
-    return {...event, ...eventDetails}
+
+    let mazemap = null
+    let location_no = null
+    let location_en = null
+    let location_url = null
+    let rule_no = null
+    let rule_en = null
+    let rule_details_no = null
+    let rule_details_en = null
+
+    if (eventDetails.location) {
+        mazemap = eventDetails.location.name_no ? eventDetails.location.name_no : null
+        location_no = eventDetails.location.name_no ? eventDetails.location.name_no : null
+        location_en = eventDetails.location.name_en ? eventDetails.location.name_en : null
+        location_url = eventDetails.location.url ? eventDetails.location.url : null
+    }
+
+    if (eventDetails.rule) {
+        rule_no = eventDetails.rule.name_no ? eventDetails.rule.name_no : null
+        rule_en = eventDetails.rule.name_en ? eventDetails.rule.name_en : null
+        rule_details_no = eventDetails.rule.name_no ? eventDetails.rule.name_no : null
+        rule_details_en = eventDetails.rule.name_en ? eventDetails.rule.name_en : null
+    }
+
+    const details = {
+        audiences: eventDetails.audiences,
+        color: eventDetails.category.color,
+        category_id: eventDetails.category.id,
+        category_name_no: eventDetails.category.name_no,
+        category_name_en: eventDetails.category.name_en,
+        mazemap, location_no, location_en, location_url,
+        organization_name_short: eventDetails.organizations[0].shortname,
+        organization_name_en: eventDetails.organizations[0].name_en,
+        organization_logo: eventDetails.organizations[0].logo,
+        link_homepage: eventDetails.organizations[0].link_homepage,
+        rule_no, rule_en, rule_details_no, rule_details_en
+    }
+
+    return {...eventDetails.event, ...details}
 }
 
 /**
@@ -40,18 +85,18 @@ Promise<DetailedEvent> {
  */
 export function FetchJoinLink(string: string): string | null {
     if (string != undefined) {
-        let formStart = string.lastIndexOf("https://forms")
-        let formEnd = string.lastIndexOf("</a>")
+        const formStart = string.lastIndexOf("https://forms")
+        const formEnd = string.lastIndexOf("</a>")
 
-        let tikkioStart = string.lastIndexOf("https://tikkio")
-        let tikkioEnd = string.lastIndexOf("</a>")
+        const tikkioStart = string.lastIndexOf("https://tikkio")
+        const tikkioEnd = string.lastIndexOf("</a>")
 
-        let netStart = string.lastIndexOf("https://nettskjema.no")
-        let netEnd = string.lastIndexOf("</a>")
+        const netStart = string.lastIndexOf("https://nettskjema.no")
+        const netEnd = string.lastIndexOf("</a>")
 
-        var formLink = string.slice(formStart, formEnd)
-        var tikkioLink = string.slice(tikkioStart, tikkioEnd)
-        var netLink = string.slice(netStart, netEnd)
+        const formLink = string.slice(formStart, formEnd)
+        const tikkioLink = string.slice(tikkioStart, tikkioEnd)
+        const netLink = string.slice(netStart, netEnd)
 
         if (formLink)    return formLink.trim()
         if (tikkioLink)  return tikkioLink.trim()
@@ -68,8 +113,11 @@ export function FetchJoinLink(string: string): string | null {
  */
 export async function fetchEvents(): Promise<EventProps[]> {
     try {
-        // Prod
-        const response = await fetch("https://api.login.no/events")
+        // Fetches events
+        // const response = await fetch(`${api}events`)
+
+        // Test API
+        const response = await fetch(`${testapi}events`)
 
         // Dev
         // const response = await fetch("https://tekkom:rottejakt45@api.login.no:8443/events")

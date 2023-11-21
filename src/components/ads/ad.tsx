@@ -1,6 +1,5 @@
 import LastFetch from "@/utils/fetch"
 import Space from "@/components/shared/utils"
-import FetchColor from "@styles/fetchTheme"
 import { useSelector } from "react-redux"
 import AS from "@styles/adStyles"
 import T from "@styles/text"
@@ -54,13 +53,13 @@ export default function AdInfo({ad}: {ad: AdProps}) {
             <View style={AS.adInfoInsideView}>
                 <Text style={{
                     ...AS.adInfoType, width: lang ? "40%" : "25%", 
-                    color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})
+                    color: theme.oppositeTextColor
                 }}>
                     {lang ? "Sted: " : "Location: "}
                 </Text>
                 <Text style={{
                     ...AS.adInfo, 
-                    color: FetchColor({theme, variable: "TEXTCOLOR"})
+                    color: theme.textColor
                 }}>
                     {loc}
                 </Text>
@@ -69,13 +68,13 @@ export default function AdInfo({ad}: {ad: AdProps}) {
                 <Text style={{
                     ...AS.adInfoType, 
                     width: lang ? "40%" : "25%",
-                    color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})
+                    color: theme.oppositeTextColor
                 }}>
                     {lang ? "Ansettelsesform: " : "Position: "}
                 </Text>
                 <Text style={{
                     ...AS.adInfo, 
-                    color: FetchColor({theme, variable: "TEXTCOLOR"})
+                    color: theme.textColor
                 }}>
                     {type}
                 </Text>
@@ -84,13 +83,13 @@ export default function AdInfo({ad}: {ad: AdProps}) {
                 <Text style={{
                     ...AS.adInfoType, 
                     width: lang ? "40%" : "25%", 
-                    color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})
+                    color: theme.oppositeTextColor
                 }}>
                     {lang ? "Frist: " : "Deadline: "}
                 </Text>
                 <Text style={{
                     ...AS.adInfo, 
-                    color: FetchColor({theme, variable: "TEXTCOLOR"})
+                    color: theme.textColor
                 }}>
                     {deadline}
                 </Text>
@@ -230,7 +229,7 @@ export function AdClusterLocation({ad}: AdClusterLocationProps) {
             <View style = {{...AS.title}}>
                 <Text style={{
                     ...AS.title, 
-                    color: FetchColor({theme, variable: "TEXTCOLOR"})
+                    color: theme.textColor
                 }}>
                     {name}
                 </Text>
@@ -238,7 +237,7 @@ export function AdClusterLocation({ad}: AdClusterLocationProps) {
             <View style={{flexDirection: "row"}}>
                 <Text style={{
                     ...AS.loc,
-                    color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})
+                    color: theme.oppositeTextColor
                 }}>
                     {info}
                 </Text>
@@ -267,38 +266,38 @@ export function AdDescription({ad}: {ad: DetailedAd}) {
         <View style={{marginBottom: 10}}>
             <Text style={{
                 ...AS.adInfoBold, 
-                color: FetchColor({theme, variable: "TEXTCOLOR"})
+                color: theme.textColor
             }}>
                 Kort fortalt
             </Text>
             <Text style={{
                 ...T.paragraph, 
-                color: FetchColor({theme, variable: "TEXTCOLOR"})
+                color: theme.textColor
             }}>
                 {shortDescription}
             </Text>
             <Space height={10} /> 
             <Text style={{
                 ...AS.adInfoBold, 
-                color: FetchColor({theme, variable: "TEXTCOLOR"})
+                color: theme.textColor
                 }}>{lang ? "Ferdigheter" : "Skills"}</Text>
             <Text style={{
                 ...T.paragraph, 
-                color: FetchColor({theme, variable: "TEXTCOLOR"})
+                color: theme.textColor
                 }}>
                     {skills}
                 </Text>
                 <Space height={10} /> 
             <Text style={{
                 ...AS.adInfoBold, 
-                color: FetchColor({theme, variable: "TEXTCOLOR"})
+                color: theme.textColor
                 }}>
                     Om stillingen
                 </Text>
             {LongDescription && <RenderHTML
                 baseStyle={{
                     maxWidth: "100%",
-                    color: FetchColor({theme, variable: "TEXTCOLOR"}),
+                    color: theme.textColor,
                 }}
                 contentWidth={0}
                 source={{html: LongDescription}}
@@ -370,11 +369,11 @@ export function AdMedia({ad}: {ad: DetailedAd}) {
                         Linking.openURL(ad.application_url)}>
                         <View style={{
                             ...AS.adButton,
-                            backgroundColor: FetchColor({theme, variable: "ORANGE"})
+                            backgroundColor: theme.orange
                         }}>
                             <Text style={{
                                 ...AS.adButtonText,
-                                color: FetchColor({theme, variable: "TEXTCOLOR"})
+                                color: theme.textColor
                             }}>
                                 {lang ? "Søk nå":"Apply"}
                             </Text>
@@ -451,7 +450,7 @@ export function AdTitle({ad}: {ad: DetailedAd}) {
             <Logo />
             <Text style={{
                 ...AS.specificAdTitle, 
-                color: FetchColor({theme, variable: "TEXTCOLOR"})
+                color: theme.textColor
             }}>
                 {title}
             </Text>
@@ -480,13 +479,13 @@ export function AdUpdateInfo({ad}: {ad: DetailedAd}) {
             <Text style={{
                 ...T.contact,
                 marginBottom: 5,
-                color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})
+                color: theme.oppositeTextColor
             }}>
                 {text[0]} {updated}.
             </Text>
             <Text style={{
                 ...T.contact,
-                color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})
+                color: theme.oppositeTextColor
             }}>
                 {text[1]} {created}.
             </Text>

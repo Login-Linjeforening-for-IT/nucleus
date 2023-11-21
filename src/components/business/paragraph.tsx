@@ -1,7 +1,6 @@
 import { ImageSourcePropType } from "react-native"
 import { View, Text, Image } from "react-native"
 import Space from "@/components/shared/utils"
-import FetchColor from "@styles/fetchTheme"
 import GS from "@styles/globalStyles"
 import { useSelector } from "react-redux"
 import T from "@styles/text"
@@ -29,14 +28,14 @@ export default function Paragraph({ logo, title, body }: ParagraphProps) {
                 <Image style={GS.medium} source={logo} />
                 <Text style={{
                     ...T.bold28, 
-                    color: FetchColor({theme, variable: "TEXTCOLOR"})
+                    color: theme.textColor
                 }}>
                     {title}
                 </Text>
             </View>
             <Text style={{
                 ...T.paragraph, 
-                color: FetchColor({theme, variable: "TEXTCOLOR"})
+                color: theme.textColor
             }}>
                 {body}
             </Text>

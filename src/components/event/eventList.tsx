@@ -5,9 +5,7 @@ import topic from "@/utils/topic"
 import Space, { ErrorMessage, Month } from "@/components/shared/utils"
 import BellIcon from "@components/shared/bellIcon"
 import Cluster from "@/components/shared/cluster"
-import FetchColor from "@styles/fetchTheme"
 import ES from "@styles/eventStyles"
-import { Navigation } from "@interfaces"
 import T from "@styles/text"
 import React from "react"
 import {
@@ -21,6 +19,7 @@ import {
 import { useSelector, useDispatch } from "react-redux"
 import { setClickedEvents, setEvent, toggleSearch } from "@redux/event"
 import { useNavigation } from "@react-navigation/native"
+import { Navigation } from "@interfaces"
 
 type EventListProps = {
     notification: NotificationProps
@@ -33,7 +32,7 @@ type EventClusterProps = {
 }
 
 type FullCategorySquareProps = {
-    item: EventProps
+    item: EventProps | DetailedEvent
     height?: number
 }
 
@@ -57,15 +56,16 @@ export default function EventList ({notification}: EventListProps): JSX.Element 
                     style={{minHeight: "100%"}}
                     showsVerticalScrollIndicator={false}
                     numColumns={1}
-                    keyExtractor={(item) => `${item.eventID}`}
+                    keyExtractor={(item) => `${item.id}`}
                     data={renderedEvents}
-                    renderItem={({item, index}) => (
+                    renderItem={({item, index}) =>
                         <EventCluster
                             notification={notification}
                             item={item}
                             index={index}
+                            key={index}
                         />
-                    )}
+                    }
                 />
             </View>
         )
@@ -80,7 +80,7 @@ export default function EventList ({notification}: EventListProps): JSX.Element 
 function EventCluster ({notification, item, index}: EventClusterProps): 
 JSX.Element {
     const { search } = useSelector((state: ReduxState) => state.event)
-    const navigation = useNavigation()
+    const navigation: Navigation = useNavigation()
     const dispatch = useDispatch()
 
     return (
@@ -116,12 +116,12 @@ JSX.Element {
 export function ListFooter ({index}: ListFooterProps): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
-    const { search, lastFetch, renderedEvents, categories } = useSelector((state: ReduxState) => state.event)
+    const { search, lastFetch, renderedEvents } = useSelector((state: ReduxState) => state.event)
 
     return (
         <>
             {index === renderedEvents.length-1 && <Text style={{...T.contact, 
-                color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})}}>
+                color: theme.oppositeTextColor}}>
                     {lang ? "Oppdatert kl:":"Updated:"} {lastFetch}.
                 </Text>}
             {index === renderedEvents.length - 1 && 
@@ -134,22 +134,22 @@ export function ListFooter ({index}: ListFooterProps): JSX.Element {
  * Displays the category square to the left of each event in the list on the EventScreen
  */
 export function FullCategorySquare({item, height}: FullCategorySquareProps): JSX.Element {
-    const day = "startt" in item ? `${item.startt[8]}${item.startt[9]}` : new Date().getDate()
-    const month = "startt" in item ? parseInt(item.startt[5] + item.startt[6]) : new Date().getMonth() + 1
+    const day = "time_start" in item ? `${item.time_start[8]}${item.time_start[9]}` : new Date().getDate()
+    const month = "time_start" in item ? parseInt(item.time_start[5] + item.time_start[6]) : new Date().getMonth() + 1
     const { theme } = useSelector((state: ReduxState) => state.theme)
 
     return (
         <View>
-            <CategorySquare category={item.category} height={height} />
+            <CategorySquare category={item.category_name_no} height={height} />
 
             <Text style={{
                 ...ES.eventClusterDayText,
-                color: FetchColor({theme, variable: "TEXTCOLOR"})
+                color: theme.textColor
             }}>{day}</Text>
 
             <Month
                 month={month}
-                color={FetchColor({theme, variable: "TEXTCOLOR"})}
+                color={theme.textColor}
             />
         </View>
     )
@@ -162,19 +162,20 @@ function Bell({item, notification}: BellProps): JSX.Element {
     const { clickedEvents } = useSelector((state: ReduxState) => state.event)
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const dispatch = useDispatch()
-    const isOrange = clickedEvents.some(event => event.eventID === item.eventID) 
+    const category = lang ? item.category_name_no : item.category_name_en
+    const isOrange = clickedEvents.some(event => event.id === item.id) 
         ? true 
         : false
     
     return (
         <View style={ES.view3}>
             <TouchableOpacity style={{paddingBottom: 10}} onPress={() => {
-                topic({topicID: `${item.eventID}`, lang, status: false, 
-                    category: (item.category).toLowerCase(), catArray: 
-                    notificationArray({notification, category: item.category})})
+                topic({topicID: `${item.id}`, lang, status: false, 
+                    category: (category).toLowerCase(), catArray: 
+                    notificationArray({notification, category})})
                 dispatch(setClickedEvents(
-                    clickedEvents.some(event => event.eventID === item.eventID)
-                    ? clickedEvents.filter((x) => x.eventID !== item.eventID)
+                    clickedEvents.some(event => event.id === item.id)
+                    ? clickedEvents.filter((x) => x.id !== item.id)
                     : [...clickedEvents, item]
                 ))
             }}>

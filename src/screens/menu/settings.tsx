@@ -5,7 +5,7 @@ import Reminders from "@/components/settings/reminders"
 import Language from "@/components/settings/language"
 import Cluster from "@/components/shared/cluster"
 import Space from "@/components/shared/utils"
-import FetchColor from "@styles/fetchTheme"
+
 import GS from "@styles/globalStyles"
 import { useSelector } from "react-redux"
 import en from "@text/menu/settings/en.json"
@@ -33,7 +33,7 @@ export default function SettingScreen(): JSX.Element {
             <View>
                 <View style={{
                     ...GS.content, 
-                    backgroundColor: FetchColor({theme, variable: "DARKER"})
+                    backgroundColor: theme.darker
                 }}>
                     <Content />
                 </View>
@@ -56,14 +56,13 @@ function Content(): JSX.Element {
                     <View style={GS.view}>
                         <Text style={{
                             ...GS.notificationText, 
-                            color: FetchColor({theme, variable: "TEXTCOLOR"})
+                            color: theme.textColor
                         }}>
                             {info[0].title}
                         </Text>
                         <Text style={{
                             ...GS.notificationTip, 
-                            color: FetchColor({theme, 
-                            variable: "OPPOSITETEXTCOLOR"})
+                            color: theme.oppositeTextColor
                         }}>
                             {info[0].description}
                         </Text>
@@ -77,13 +76,13 @@ function Content(): JSX.Element {
                 <View style={GS.view}>
                     <Text style={{
                         ...GS.notificationText, 
-                        color: FetchColor({theme, variable: "TEXTCOLOR"})
+                        color: theme.textColor
                         }}>
                             {info[1].title}
                         </Text>
                     <Text style={{
                         ...GS.notificationTip, 
-                        color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})
+                        color: theme.oppositeTextColor
                         }}>
                             {info[1].description}
                         </Text>
@@ -95,7 +94,7 @@ function Content(): JSX.Element {
             <Space height={10} />
             <Text style={{
                 ...T.text30, 
-                color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})
+                color: theme.oppositeTextColor
             }}>
                     {info[2].title}
             </Text>
@@ -104,7 +103,7 @@ function Content(): JSX.Element {
             <Space height={10} />
             <Text style={{
                 ...T.text25, 
-                color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})
+                color: theme.oppositeTextColor
             }}>
                 {info[4].title}
             </Text>
@@ -121,7 +120,7 @@ function Content(): JSX.Element {
             <Space height={10} />
             <Text style={{
                 ...T.text25,
-                color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})
+                color: theme.oppositeTextColor
             }}>
                 {info[13].title}
             </Text>
@@ -141,13 +140,13 @@ function SwitchCluster({obj, category}: ClusterWithSwitchProps) {
                 <View style={GS.view}>
                     <Text style={{
                         ...GS.notificationText, 
-                        color: FetchColor({theme, variable: "TEXTCOLOR"})
+                        color: theme.textColor
                     }}>
                         {obj.title}
                     </Text>
                     <Text style={{
                         ...GS.notificationTip, 
-                        color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})
+                        color: theme.oppositeTextColor
                     }}>
                         {obj.description}
                     </Text>

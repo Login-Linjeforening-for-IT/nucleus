@@ -1,6 +1,5 @@
 import Notification from "@/components/settings/notification"
 import Cluster from "@/components/shared/cluster"
-import FetchColor from "@styles/fetchTheme"
 import GS from "@styles/globalStyles"
 import { View, Text } from "react-native"
 import { useSelector } from "react-redux"
@@ -56,7 +55,7 @@ function TopicSwitch ({topic, textNo, textEn}: TopicSwitchProps): JSX.Element {
             <View style={GS.notificationBack}>
                 <View style={GS.view}>
                     <Text style={{...GS.notificationText, color:
-                        FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})}}>
+                        theme.oppositeTextColor}}>
                         {lang ? textNo : textEn}
                     </Text>
                 </View>

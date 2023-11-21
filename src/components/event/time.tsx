@@ -1,33 +1,31 @@
-import FetchColor from "@styles/fetchTheme"
 import { View, Text } from "react-native"
 import { useSelector } from "react-redux"
 import T from "@styles/text"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 
 type EventTimeProps = {
-    startTime: string
-    endTime: string
+    time_start: string
+    time_end: string
 }
 
 type GetEndTimeProps = {
-    input: string
-    theme: number
+    time_end: string
 }
 
 /**
  * Displays the event time on the SES
- * @param startTime Start time of the event
- * @param endTime End time of the event
+ * @param time_start Start time of the event
+ * @param time_end End time of the event
  * @returns Event start time as a React component
  */
-export default function EventTime({startTime, endTime}: EventTimeProps): JSX.Element {
+export default function EventTime({time_start, time_end}: EventTimeProps): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    const [string, setString] = useState(displayedEventTime(startTime, endTime))
+    let time = displayedEventTime(time_start, time_end)
 
     return (
         <View>
-            <Text style={{...T.text20, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>
-                {string}
+            <Text style={{...T.text20, color: theme.textColor}}>
+                {time}
             </Text>
         </View>
     )
@@ -35,21 +33,22 @@ export default function EventTime({startTime, endTime}: EventTimeProps): JSX.Ele
 
 /**
  * Function for rendering the end time of an event
- * @param {string} input
+ * @param {string} time_end
  * @returns View containing the endtime as a text
  */
-export function GetEndTime({input, theme}: GetEndTimeProps) {
+export function GetEndTime({time_end}: GetEndTimeProps) {
+    const { theme } = useSelector((state: ReduxState) => state.theme)
     let endTime = "..."
 
-    if (input) {
-        endTime = `${input[11]}${input[12]}:${input[14]}${input[15]}`
+    if (time_end) {
+        endTime = `${time_end[11]}${time_end[12]}:${time_end[14]}${time_end[15]}`
     }
 
     return (
         <View>
             <Text style={{
                 ...T.specificEventInfo,
-                color: FetchColor({theme, variable: "TEXTCOLOR"})
+                color: theme.textColor
             }}>
                 {endTime}
             </Text>
@@ -59,11 +58,11 @@ export function GetEndTime({input, theme}: GetEndTimeProps) {
 
 /**
  * Displays the event time; How long till it starts, how long its been ongoing, or how long since it ended
- * @param startTime Starttime of the event
- * @param endTime End time of the event
+ * @param time_start Start time of the event
+ * @param time_end End time of the event
  * @returns The event time that should be displayed
  */
-function displayedEventTime(startTime: string, endTime: string) {
+function displayedEventTime(time_start: string, time_end: string) {
 
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const textEN = ["Starts in", "Tomorrow", "Next", "Ends in", "Ends tomorrow", "Ended", "Yesterday", "Last", " ago", "month", "days", "h", "min", "s"]
@@ -71,17 +70,17 @@ function displayedEventTime(startTime: string, endTime: string) {
     const text = lang ? textNO : textEN
     let lookup
 
-    if (new Date(endTime) < new Date()) {
+    if (new Date(time_end) < new Date()) {
         lookup = { 
-            time: (new Date().getTime() - new Date(endTime).getTime()) / 60000, 
+            time: (new Date().getTime() - new Date(time_end).getTime()) / 60000, 
             type: text[5],
             day: text[6],
             month: text[7],
             end: text[8]
         }
-    } else if (new Date(startTime) < new Date() && (new Date(endTime) > new Date())) {
+    } else if (new Date(time_start) < new Date() && (new Date(time_end) > new Date())) {
         lookup = { 
-            time: (new Date(endTime).getTime() - new Date().getTime()) / 60000, 
+            time: (new Date(time_end).getTime() - new Date().getTime()) / 60000, 
             type: text[3],
             day: text[4],
             month: text[2],
@@ -89,7 +88,7 @@ function displayedEventTime(startTime: string, endTime: string) {
         }
     } else {
         lookup = { 
-            time: (new Date(startTime).getTime() - new Date().getTime()) / 60000, 
+            time: (new Date(time_start).getTime() - new Date().getTime()) / 60000, 
             type: text[0],
             day: text[1],
             month: text[2],

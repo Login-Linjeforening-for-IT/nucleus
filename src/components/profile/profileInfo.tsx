@@ -1,7 +1,7 @@
 import { Image, View, Text, TouchableOpacity } from "react-native"
 import ChangeInfoCard from "@/components/profile/changeInfoCard"
 import Cluster from "@/components/shared/cluster"
-import FetchColor from "@styles/fetchTheme"
+
 import CS from "@styles/clusterStyles"
 import PS from "@styles/profileStyles"
 import React, { useState } from "react"
@@ -94,8 +94,7 @@ ProfileInfoContentProps) {
                 <View style={CS.evenTwinLeft}>
                     <Text style={{
                         ...T.text20,
-                        color: FetchColor({theme,
-                            variable: "TEXTCOLOR"})
+                        color: theme.textColor
                     }}>
                         {type[index]}
                     </Text>
@@ -104,8 +103,7 @@ ProfileInfoContentProps) {
                     <View style={{...CS.twinLeft, top: 6.75, left: -20}}>
                         <Text style={{
                                 ...T.text15, textAlign: "right",
-                                color: FetchColor({theme,
-                                    variable: "OPPOSITETEXTCOLOR"})
+                                color: theme.oppositeTextColor
                         }}>
                             {index === 0 && profile.degree}
                             {index === 1 && profile.schoolyear}

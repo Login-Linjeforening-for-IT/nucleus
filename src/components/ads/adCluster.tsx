@@ -1,7 +1,6 @@
 import AS from "@styles/adStyles"
 import BellIcon from "@components/shared/bellIcon"
 import Cluster from "@/components/shared/cluster"
-import FetchColor from "@styles/fetchTheme"
 import React from "react"
 import Space from "@/components/shared/utils"
 import T from "@styles/text"
@@ -16,6 +15,7 @@ import {
     View,
     Platform,
 } from "react-native"
+import { Navigation } from "@interfaces"
 
 type Ad = {
     ad: AdProps
@@ -26,7 +26,7 @@ export default function AdCluster({ad, index}: Ad): JSX.Element {
     const { search, clickedAds, skills } = useSelector((state: ReduxState) => state.ad)
     const dispatch = useDispatch()
     const isOrange = clickedAds.some(ads => ads.id === ad.id) ? true : false
-    const navigation = useNavigation()
+    const navigation: Navigation = useNavigation()
     const logo = ad.organization_logo ? ad.organization_logo : undefined
 
     function handleClick() {
@@ -85,7 +85,7 @@ export function ListFooter ({index}: ListFooterProps): JSX.Element {
     return (
         <>
             {index === renderedAds.length - 1 && <Text style={{...T.contact, 
-                color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})}}>
+                color: theme.oppositeTextColor}}>
                     {lang ? "Oppdatert kl:":"Updated:"} {lastFetch}.
                 </Text>}
             {index === renderedAds.length - 1 && 

@@ -1,7 +1,6 @@
 import Space, { Line } from "@/components/shared/utils"
 import Dropdown from "@/components/about/dropdown"
 import Cluster from "@/components/shared/cluster"
-import FetchColor from "@styles/fetchTheme"
 import GS from "@styles/globalStyles"
 import { useSelector } from "react-redux"
 import en from "@text/menu/about/en.json"
@@ -44,12 +43,6 @@ type CommitteePersonProps = {
     committee: number
 }
 
-type CommitteeImageTouchableProps = {
-    setCommittee: React.Dispatch<React.SetStateAction<number>>
-    committee: number
-    index: number
-}
-
 type CommitteeViewProps = {
     setCommittee: React.Dispatch<React.SetStateAction<number>>
     committee: number
@@ -80,7 +73,6 @@ const committeeImages = [
 export default function AboutScreen(): JSX.Element {
     const { lang  } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    const screenWidth = Dimensions.get("window").width
     const [committee, setCommittee] = useState(0)
     const text = lang ? no : en
     const info = text.committeeSection.info
@@ -90,14 +82,14 @@ export default function AboutScreen(): JSX.Element {
             <View>
                 <View style={{
                     ...GS.content, 
-                    backgroundColor: FetchColor({theme, variable: "DARKER"})
+                    backgroundColor: theme.darker
                 }}>
                     <ScrollView showsVerticalScrollIndicator={false}>
                         <Space height={Dimensions.get("window").height / 8.1} /> 
                         <Cluster>
                             <Text style={{
                                 ...T.bold40, 
-                                color: FetchColor({theme, variable: "TEXTCOLOR"})
+                                color: theme.textColor
                             }}>
                                 {text.title}
                             </Text>
@@ -105,59 +97,55 @@ export default function AboutScreen(): JSX.Element {
                             <Line width={5}>
                                 <Text style={{
                                         ...T.boldWithLine, 
-                                        color: FetchColor({theme, variable: "TEXTCOLOR"})
+                                        color: theme.textColor
                                     }}>
                                         {text.intro}
                                 </Text>
                             </Line>
-                            <Space height={10} />
-                            <Dropdown/>
-                            <Space height={10} />
+                            <Dropdown />
                             <Styret />
-                            <Space height={15} />
                             <Text style={{
-                                ...T.bold25, 
-                                color: FetchColor({theme, variable: "TEXTCOLOR"})
+                                ...T.bold25,
+                                marginVertical: 15,
+                                color: theme.textColor
                             }}>
                                 {text.about.title}
                             </Text>
-                            <Space height={10} />
                             <Line width={5}>
                                 <Text style={{
                                         ...T.boldWithLine, 
-                                        color: FetchColor({theme, variable: "TEXTCOLOR"})
+                                        color: theme.textColor
                                     }}>
                                         {text.about.intro}
                                 </Text>
                             </Line>
-                            <Space height={10} />
                             <Text style={{
-                                ...T.paragraph, 
-                                color: FetchColor({theme, variable: "TEXTCOLOR"})}}>
+                                ...T.paragraph,
+                                marginTop: 10,
+                                color: theme.textColor}}>
                                 {text.about.body.p1}
                             </Text>
-                            <Space height={10} />
                             <Text style={{
                                 ...T.paragraph, 
-                                color: FetchColor({theme, variable: "TEXTCOLOR"})
+                                marginTop: 10,
+                                color: theme.textColor
                             }}>
                                 {text.about.body.p2}
                             </Text>
-                            <Space height={15} />
                             <Text style={{
                                 ...T.bold25, 
-                                color: FetchColor({theme, variable: "TEXTCOLOR"})
+                                marginTop: 15,
+                                color: theme.textColor
                             }}>
                                 {text.committeeSection.title}
                             </Text>
-                            <Space height={10} />
                             <Text style={{
-                                ...T.boldParagraph, 
-                                color: FetchColor({theme, variable: "TEXTCOLOR"})
+                                ...T.boldParagraph,
+                                marginVertical: 10,
+                                color: theme.textColor
                             }}>
                                 {text.committeeSection.intro}
                             </Text>
-                            <Space height={10} />
                             <CommitteeView
                                 setCommittee={setCommittee}
                                 committee={committee}
@@ -175,17 +163,17 @@ export default function AboutScreen(): JSX.Element {
                             }
 
                             <CommitteePerson committee={committee} />
-                            <Space height={10} /> 
                             <Text style={{
-                                ...T.text25, 
-                                color: FetchColor({theme, variable: "TEXTCOLOR"})
+                                ...T.text25,
+                                marginTop: 10,
+                                color: theme.textColor
                             }}>
                                 {text.publicDocs.title}
                             </Text>
                             <View>
                                 <Text style={{
                                     ...T.paragraph, 
-                                    color: FetchColor({theme, variable: "TEXTCOLOR"})
+                                    color: theme.textColor
                                 }}>
                                     {text.publicDocs.body}
                                     <TextLink 
@@ -194,9 +182,8 @@ export default function AboutScreen(): JSX.Element {
                                     />.
                                 </Text>
                             </View>
-                            <Space height={10} /> 
-                            <Social/>
-                            <Copyright/>
+                            <Social />
+                            <Copyright />
                         </Cluster>
                         <Space height={Dimensions.get("window").height / 3 + 10} /> 
                     </ScrollView>
@@ -207,26 +194,23 @@ export default function AboutScreen(): JSX.Element {
 }
 
 function CommitteeImage({id, theme, style}: getCommitteeImageProps){
-
-    let color: string;
-    switch (theme) {
-        case "dark":    color = '#ffffff'; break;
-        case "gray":    color = '#555555'; break;
-        case "light":   color = '#000000'; break;
-        default:        color = '#fd8738'; break;
+    const colors: { [key: string]: string } = {
+        dark: '#ffffff',
+        gray: '#555555',
+        light: '#000000'
     }
 
-    return(
-        <SvgXml xml={committeeImages[id]} color={color} style={style}/>
-    )
+    return <SvgXml xml={committeeImages[id]} color={colors[theme] || '#fd8738'} style={style} />
 }
 
 function CommitteePerson({committee}: CommitteePersonProps) {
     const committees = ["evntkom", "tekkom", "pr", "ctf", "eco"]
 
-    if (committees[committee-1]) {
-        return Person({person: committees[committee-1]})
-    } else return AllComitees()
+    if (committees[committee - 1]) {
+        return Person({person: committees[committee - 1]})
+    }
+
+    return AllComitees()
 }
 
 function CommitteeView({setCommittee, committee}: CommitteeViewProps) {
@@ -236,30 +220,35 @@ function CommitteeView({setCommittee, committee}: CommitteeViewProps) {
     const { theme, isDark } = useSelector((state: ReduxState) => state.theme)
 
     let rows: string[][] = []
-    for (let i = 0; i < committeeImages.length; i+=numCols) {
-        rows.push(committeeImages.slice(i, i+numCols))
+    for (let i = 0; i < committeeImages.length; i += numCols) {
+        rows.push(committeeImages.slice(i, i + numCols))
     }
 
 
     return (
-        <View style={{display: "flex", aspectRatio: numCols/numRows, justifyContent: 'space-between'}}>
-            {rows.map((row, rowIndex)=>(
+        <View style={{display: "flex", aspectRatio: numCols / numRows, justifyContent: 'space-between'}}>
+            {rows.map((row, rowIndex) => (
                 <View key={rowIndex} style={{display: 'flex', width: '100%', flexDirection: 'row', justifyContent: 'space-between'}}>
-                    {row.map((xml, index)=>(
-                            <TouchableOpacity key={index} 
-                                              onPress={()=>{
-                                                setCommittee(rowIndex*numCols+index)
-                                              }}
-                                                    style={{...GS.committee, 
-                                                    backgroundColor: FetchColor({theme, variable: "CONTRAST"}), 
-                                                    width: Dimensions.get('window').width/numCols-Dimensions.get('window').width/numCols*15/100,
-                                                    aspectRatio: 1,  
-                                                    justifyContent: 'space-between',
-                                                    marginLeft: 'auto',
-                                                    marginRight: 'auto'
-                                                    }}>
-                                <CommitteeImage id={rowIndex*numCols+index} theme={committee==rowIndex*numCols+index?"":isDark?"dark":"gray"} style={{alignSelf: 'center', marginTop: 'auto', marginBottom: 'auto', width: '80%', aspectRatio: 1}}/>
-                            </TouchableOpacity>
+                    {row.map((xml, index) => (
+                        <TouchableOpacity key={index} 
+                            onPress={() => {
+                                setCommittee(rowIndex * numCols + index)
+                            }}
+                            style={{
+                                ...GS.committee, 
+                                backgroundColor: theme.contrast, 
+                                width: Dimensions.get('window').width / numCols - Dimensions.get('window').width / numCols * 15 / 100,
+                                aspectRatio: 1,  
+                                justifyContent: 'space-between',
+                                marginLeft: 'auto',
+                                marginRight: 'auto'
+                            }}>
+                            <CommitteeImage 
+                                id={rowIndex*numCols+index} 
+                                theme={committee == rowIndex * numCols + index ? "" : isDark ? "dark" : "gray"}
+                                style={{alignSelf: 'center', marginTop: 'auto', marginBottom: 'auto', width: '80%', aspectRatio: 1}}
+                            />
+                        </TouchableOpacity>
                         ))}
                 </View>
             ))}
@@ -273,10 +262,7 @@ CommitteeContentProps) {
     
     return (
         <View key={index}>
-            <Text style={{
-                ...T.text30, 
-                color: FetchColor({theme, variable: "TEXTCOLOR"})
-            }}>
+            <Text style={{...T.text30, color: theme.textColor}}>
                 <CommitteeImage id={relevantCommittee.id} style={GS.small} theme={isDark?"dark":"gray"}/>
                 {relevantCommittee.title}
             </Text>
@@ -287,7 +273,7 @@ CommitteeContentProps) {
                         <Line width={5}>
                             <Text style={{
                                 ...T.boldWithLine, 
-                                color: FetchColor({theme, variable: "TEXTCOLOR"})
+                                color: theme.textColor
                             }}>
                                 {relevantCommittee.quote}
                             </Text>
@@ -296,10 +282,7 @@ CommitteeContentProps) {
                 </>
             }
 
-            <Text style={{
-                ...T.paragraph, 
-                color: FetchColor({theme, variable: "TEXTCOLOR"})
-            }}>
+            <Text style={{...T.paragraph, color: theme.textColor}}>
                 {relevantCommittee.description}
             </Text>
             <Space height={15} /> 

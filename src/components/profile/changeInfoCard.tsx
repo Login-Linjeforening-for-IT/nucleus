@@ -1,6 +1,6 @@
 import { GestureHandlerRootView, PanGestureHandler } from "react-native-gesture-handler"
 import { useDispatch, useSelector } from "react-redux"
-import FetchColor from "@styles/fetchTheme"
+
 import PS from "@styles/profileStyles"
 import { Line } from "@/components/shared/utils"
 import React, { useEffect, useState } from "react"
@@ -175,20 +175,19 @@ trigger}: ChangeInfoCardProps) {
                 <Animated.View
                     style={[
                         PS.animatedCard, animation,
-                        {backgroundColor: FetchColor({theme, variable: "DARKER"})}
+                        {backgroundColor: theme.darker}
                     ]}>
                     <View style={[
                         PS.animatedView,
-                        {backgroundColor: FetchColor({theme, variable: "DARKER"})}
+                        {backgroundColor: theme.darker}
                     ]}>
                         <TextInput
                             style={{
                                 ...PS.inputText,
-                                color: FetchColor({theme, variable: "TEXTCOLOR"})
+                                color: theme.textColor
                             }}
                             placeholder = {findBestPlaceHolder()}
-                            placeholderTextColor={FetchColor({theme,
-                                variable: "TITLETEXTCOLOR"})}
+                            placeholderTextColor={theme.titleTextColor}
                             textAlign="center"
                             keyboardType={value === 1
                                 ? "numeric"
@@ -198,20 +197,20 @@ trigger}: ChangeInfoCardProps) {
                             }
                             onChangeText={(val) => handleText(val)}
                             autoFocus={true}
-                            selectionColor={FetchColor({theme, variable: "ORANGE"})}
+                            selectionColor={theme.orange}
                         />
                         <View style={PS.inputInfoView}>
                             <TouchableOpacity style={{left: 20}} onPress={() => tryToHide()}>
                                 <Text style={{
                                     ...T.centered15, 
-                                    color: FetchColor({theme, variable: "TEXTCOLOR"})
+                                    color: theme.textColor
                                 }}>
                                     {lang ? "Avbryt" : "Cancel"}
                                 </Text>
                             </TouchableOpacity>
                             <Text style={{
                                 ...T.centered15, 
-                                color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})
+                                color: theme.oppositeTextColor
                             }}>
                                 {type}
                             </Text>
@@ -220,7 +219,7 @@ trigger}: ChangeInfoCardProps) {
                                 <TouchableOpacity style={{right: 20}} onPress={() => save()}>
                                     <Text style={{
                                         ...T.centered15, 
-                                        color: FetchColor({theme, variable: "TEXTCOLOR"})
+                                        color: theme.textColor
                                     }}>
                                         {lang ? "Lagre" : "Save"}
                                     </Text>
@@ -229,7 +228,7 @@ trigger}: ChangeInfoCardProps) {
                                 <Text style={{
                                     ...T.centered15, 
                                     right: 20, 
-                                    color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})
+                                    color: theme.oppositeTextColor
                                 }}>
                                     {lang ? "Lagre" : "Save"}
                                 </Text>
@@ -239,7 +238,7 @@ trigger}: ChangeInfoCardProps) {
                             <Line 
                                 height={2} 
                                 width={width*(2/3)} 
-                                fill={FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})} 
+                                fill={theme.oppositeTextColor} 
                             />
                         </View>
                     </View>

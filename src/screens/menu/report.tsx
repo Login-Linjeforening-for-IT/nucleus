@@ -3,7 +3,7 @@ import { CardSmaller } from "@/components/shared/card"
 import Check from "@components/event/check"
 import Button from "@/components/shared/button"
 import Space from "@/components/shared/utils"
-import FetchColor from "@styles/fetchTheme"
+
 import SS from "@styles/settingStyles"
 import GS from "@styles/globalStyles"
 import { useSelector } from "react-redux"
@@ -48,51 +48,27 @@ export default function ReportScreen(): JSX.Element {
     })
 
     function inputName(val: string) {
-        if (val.length > 1) {
-            setData({
+        setData({
             ...data,
             name: val,
-            check_nameInputChange: true
-            })
-        } else {
-            setData({
-            ...data,
-            name: val,
-            check_nameInputChange: false
-            })
-        }
+            check_nameInputChange: val.length > 1 ? true : false
+        })
     }
 
     function inputContact(val: string) {
-        if (val.length > 1) {
-            setData({
+        setData({
             ...data,
-            contact: val,
-            check_contactInputChange: true
-            })
-        } else {
-            setData({
-            ...data,
-            content: val,
-            check_contactInputChange: false
-            })
-        }
+            name: val,
+            check_contactInputChange: val.length > 1 ? true : false
+        })
     }
 
     function inputContent(val: string) {
-        if (val.length > 20) {
-            setData({
+        setData({
             ...data,
             content: val,
-            check_contentInputChange: true
-            })
-        } else {
-            setData({
-            ...data,
-            content: val,
-            check_contentInputChange: false
-            })
-        }
+            check_contentInputChange: val.length > 20 ? true : false
+        })
     }
 
     return (
@@ -101,11 +77,11 @@ export default function ReportScreen(): JSX.Element {
                 <View>
                     <View style={{
                         ...GS.content, 
-                        backgroundColor: FetchColor({theme, variable: "DARKER"})
+                        backgroundColor: theme.darker
                     }}>
                     <View>
                     <Space height={Dimensions.get("window").height / 8.1 + 40} />
-                        <Text style={{...T.centered, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{text.secure}</Text>
+                        <Text style={{...T.centered, color: theme.textColor}}>{text.secure}</Text>
                         <Space height={30} />
 
                         <View style={SS.loginView}>
@@ -114,14 +90,14 @@ export default function ReportScreen(): JSX.Element {
                                     <TextInput
                                         style={{
                                             ...GS.inputText, 
-                                            backgroundColor: FetchColor({theme, variable: "DARKER"}), 
-                                            color: FetchColor({theme, variable: "TEXTCOLOR"})
+                                            backgroundColor: theme.darker, 
+                                            color: theme.textColor
                                         }}
                                         placeholder = {text.contact}
-                                        placeholderTextColor={FetchColor({theme, variable: "TITLETEXTCOLOR"})}
+                                        placeholderTextColor={theme.titleTextColor}
                                         textAlign="center"
                                         onChangeText={(val) => inputName(val)}
-                                        selectionColor={FetchColor({theme, variable: "ORANGE"})}
+                                        selectionColor={theme.orange}
                                     />
                                     {data.check_nameInputChange ?
                                         <View>
@@ -145,16 +121,14 @@ export default function ReportScreen(): JSX.Element {
                                 <TextInput
                                 style={{
                                     ...GS.inputText, 
-                                    backgroundColor: FetchColor({theme, variable: "DARKER"}), 
-                                    color: FetchColor({theme, variable: "TEXTCOLOR"})
+                                    backgroundColor: theme.darker, 
+                                    color: theme.textColor
                                 }}
                                 placeholder = {text.who}
-                                placeholderTextColor={
-                                    FetchColor({theme, variable: "TITLETEXTCOLOR"})
-                                }
+                                placeholderTextColor={theme.titleTextColor}
                                 textAlign="center"
                                 onChangeText={(val) => inputContact(val)}
-                                selectionColor={FetchColor({theme, variable: "ORANGE"})}
+                                selectionColor={theme.orange}
                                 />
                                     {data.check_contactInputChange ?
                                 <View>
@@ -178,12 +152,12 @@ export default function ReportScreen(): JSX.Element {
                                 <View style={SS.reportContentView}>
                                     <TextInput
                                     multiline={true}
-                                    style={{...GS.reportInputContentText, color: FetchColor({theme, variable: "TEXTCOLOR"})}}
+                                    style={{...GS.reportInputContentText, color: theme.textColor}}
                                     placeholder = {text.what}
-                                    placeholderTextColor={FetchColor({theme, variable: "TITLETEXTCOLOR"})}
+                                    placeholderTextColor={theme.titleTextColor}
                                         textAlign="center"
                                         onChangeText={(val) => inputContent(val)}
-                                        selectionColor={FetchColor({theme, variable: "ORANGE"})}
+                                        selectionColor={theme.orange}
                                     />
                                     {data.check_contentInputChange ?
                                         <View>
@@ -208,25 +182,23 @@ export default function ReportScreen(): JSX.Element {
                                 </CardSmaller>
                             </View>
 
-                            <View>
-                            <Space height={40} />
-                            <TouchableOpacity
-                                disabled ={!data.check_contentInputChange}
-                                onPress={() => sendForm()}
-                            >
-                                <Button>
-                                    <Text style={{
-                                        ...T.centered20, 
-                                        color: FetchColor({theme, variable: "TEXTCOLOR"})
-                                    }}>
-                                        {text.send}
-                                    </Text>
-                                </Button>
-                            </TouchableOpacity>
-                            <Space height={20} />
+                            <View style={{marginTop: 40, marginBottom: 20}}>
+                                <TouchableOpacity
+                                    disabled ={!data.check_contentInputChange}
+                                    onPress={() => sendForm()}
+                                >
+                                    <Button>
+                                        <Text style={{
+                                            ...T.centered20, 
+                                            color: theme.textColor
+                                        }}>
+                                            {text.send}
+                                        </Text>
+                                    </Button>
+                                </TouchableOpacity>
                             </View>
                         </View>
-                        <Space height={Dimensions.get("window").height/10} />
+                        <Space height={Dimensions.get("window").height / 10} />
                     </View>
                 </View>
             </Swipe>

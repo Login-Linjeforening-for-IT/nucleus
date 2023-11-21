@@ -1,9 +1,7 @@
-import { View, TouchableOpacity, Keyboard } from "react-native"
-import FetchColor from "@styles/fetchTheme"
+import { View, TouchableOpacity } from "react-native"
 import { useSelector } from "react-redux"
 import MS from "@styles/menuStyles"
 import { BlurView } from "expo-blur"
-import { useState } from "react"
 import { openBrowserAsync } from 'expo-web-browser';
 import { SvgXml } from "react-native-svg"
 import USBicon from "@assets/menu/USB-temp-icon.svg"
@@ -18,8 +16,7 @@ export default function Footer({ state, descriptors, navigation }: BottomTabBarP
                 <BlurView style={MS.bMenu} intensity={30}/>
                 <View style={{
                     ...MS.bMenu,
-                    backgroundColor: FetchColor({theme,
-                        variable: "TRANSPARENTANDROID"})
+                    backgroundColor: theme.transparentAndroid
                 }} />
             {/* Transparent container for the icons */}
             <View style={{

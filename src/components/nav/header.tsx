@@ -1,4 +1,3 @@
-import FetchColor from '@styles/fetchTheme'
 import GS from '@styles/globalStyles'
 import React, { PropsWithChildren, ReactNode, useState } from 'react'
 import { BlurView } from 'expo-blur'
@@ -20,7 +19,7 @@ export default function Header({ options, route, navigation }: HeaderProps): Rea
             ? require('@text/no.json').screens[route.name] 
             : require('@text/en.json').screens[route.name])
 
-    if (!title && route.name === "SpecificEventScreen") title = event.eventname
+    if (!title && route.name === "SpecificEventScreen") title = lang ? event.name_no : event.name_en
     if (!title && route.name === "SpecificAdScreen") title = lang ? ad.title_no : ad.title_en
     if (route.name === "ProfileScreen") return <></>
 
@@ -48,11 +47,11 @@ export default function Header({ options, route, navigation }: HeaderProps): Rea
                 {
                     title.length > 40 
                     ?   <Text style={{...GS.headerTitle, color: 
-                            FetchColor({ theme, variable: 'TITLETEXTCOLOR' })}}>
+                            theme.titleTextColor}}>
                             {title}
                         </Text>
                     :   <Text style={{...GS.headerTitle, color: 
-                            FetchColor({ theme, variable: 'TITLETEXTCOLOR' })}}>
+                        theme.titleTextColor}}>
                             {title}
                         </Text>
                 }
@@ -102,7 +101,7 @@ function BlurWrapper(props: PropsWithChildren) {
             />
             <View style={{...GS.blurBackgroundView,
                 height: height,
-                backgroundColor: FetchColor({theme, variable: "TRANSPARENTANDROID"})
+                backgroundColor: theme.transparentAndroid
             }}>{props.children}</View>
         </>
     )

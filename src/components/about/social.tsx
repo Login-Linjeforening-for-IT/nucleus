@@ -1,20 +1,19 @@
 import CornerSquare from "@/components/about/cornerSquare"
-import { random } from "@/components/shared/utils"
-import FetchColor from "@styles/fetchTheme"
-import GS from "@styles/globalStyles"
 import ES from "@styles/eventStyles"
-import { useSelector } from "react-redux"
+import GS from "@styles/globalStyles"
+import Link, { TextLink } from "@components/shared/link"
 import T from "@styles/text"
 import React from "react"
+import { useSelector } from "react-redux"
+import { random } from "@/components/shared/utils"
 import {
-    TouchableOpacity,
-    Linking,
     Image,
-    View,
-    Text,
     ImageSourcePropType,
+    Linking,
+    Text,
+    TouchableOpacity,
+    View,
 } from "react-native"
-import Link, { TextLink } from "@components/shared/link"
 
 type PersonProps = {
     person: string
@@ -60,18 +59,13 @@ export default function Person({person}: PersonProps): JSX.Element {
     return (
         <View style={{marginBottom: 20}}>
             <Image style={{...GS.personImage}} source={{uri: obj.img}} />
-            <View style={{position: "absolute", alignSelf: "center"}}>
-                <CornerSquare corner={corner} />
-            </View>
+            <CornerSquare corner={corner} />
             <Text style={T.leaderTitle}>{obj.title}</Text>
-            <Text style={{
-                ...T.leaderName, 
-                color: FetchColor({theme, variable: "TEXTCOLOR"})
-            }}>
+            <Text style={{...T.leaderName, color: theme.textColor}}>
                 {obj.name}
             </Text>
             <Link url={obj.dclink}>
-                <Text style={{...T.discord, color: FetchColor({theme, variable: "DISCORD"})}}>
+                <Text style={{...T.discord, color: theme.discord}}>
                     <Image 
                         style={GS.tiny} 
                         source={require("@assets/social/discord-colored.png")}
@@ -150,7 +144,11 @@ export function Social() {
     }
 
     return (
-        <View style={{flexDirection: "row", justifyContent: "center"}}>
+        <View style={{
+            flexDirection: "row", 
+            justifyContent: "center", 
+            marginTop: 10
+        }}>
             {Object.entries(media).map(([link], index) => (
                 <MediaLogo 
                     key={link} 
@@ -184,9 +182,7 @@ export function Styret() {
                 style={{...GS.aboutImage}} 
                 source={{uri: "https://cdn.login.no/img/styret2.jpg"}}
             />
-            <View style={{position: "absolute", alignSelf: "center"}}>
-                <CornerSquare corner={corner} type={true} />
-            </View>
+            <CornerSquare corner={corner} type={true} />
         </View>
     )
 }
@@ -199,7 +195,7 @@ export function Kontakt() {
 
     const { lang  } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    const color = FetchColor({theme, variable: "TEXTCOLOR"})
+    const color = theme.textColor
 
     const info = {
         contact: lang ? "Kontakt" : "Contact",
@@ -236,7 +232,7 @@ export function Copyright() {
 
     return (
         <View>
-            <Text style={{...T.copyright, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>
+            <Text style={{...T.copyright, color: theme.textColor}}>
                 {lang 
                     ? "Opphavsrett © 2022-2023 Login - Linjeforeningen for IT, NO 811 940 372"
                     : "Copyright © 2022-2023 Login - Linjeforeningen for IT, NO 811 940 372"
@@ -265,9 +261,6 @@ function MediaLogo({link, logo}: MediaLogoProps) {
  * @returns cdn link as string
  */
 function personInfo({person, lang}: personInfoProps) {
-
-    let p = person.toLowerCase()
-
     const titleNO = {
         leader: "Leader",
         coleader: "Deputy chairwoman",
@@ -294,7 +287,7 @@ function personInfo({person, lang}: personInfoProps) {
 
     const title = lang ? titleNO : titleEN
 
-    let leader = {
+    const leader = {
         title: title.leader,
         name: "Tormod Mork Müller",
         tag: "backsiide",
@@ -302,7 +295,7 @@ function personInfo({person, lang}: personInfoProps) {
         img: `https://cdn.login.no/img%2Fportraits%2Fportrett_leder.jpg`
     }
 
-    let coleader = {
+    const coleader = {
         title: title.coleader,
         name: "Kristina Kataki",
         tag: "Kataki#7254",
@@ -310,7 +303,7 @@ function personInfo({person, lang}: personInfoProps) {
         img: `https://cdn.login.no/img%2Fportraits%2Fportrett_nestleder.jpg`,
     }
 
-    let secretary = {
+    const secretary = {
         title: title.secretary,
         name: "Aleksander Aaboen",
         tag: "aleksanderaa#2130",
@@ -318,7 +311,7 @@ function personInfo({person, lang}: personInfoProps) {
         img: `https://cdn.login.no/img%2Fportraits%2Fportrett_sekret%C3%A6r.jpg`,
     }
 
-    let eventkom_leader = {
+    const eventkom_leader = {
         title: title.evntkom,
         name: "Sander Hauge",
         tag: "sandiss",
@@ -326,7 +319,7 @@ function personInfo({person, lang}: personInfoProps) {
         img: `https://cdn.login.no/img/portraits/portrett_eventkom-leder.jpg`,
     }
 
-    let bedkom_leader = {
+    const bedkom_leader = {
         title: title.bedkom,
         name: "Ida Førland",
         tag: "idaforland",
@@ -334,7 +327,7 @@ function personInfo({person, lang}: personInfoProps) {
         img: `https://cdn.login.no/img/portraits/portrett_bedkom-leder.jpg`
     }
 
-    let tekkom_leader = {
+    const tekkom_leader = {
         title: title.tekkom,
         name: "Eirik Hanasand",
         tag: "eirikhanasand",
@@ -342,7 +335,7 @@ function personInfo({person, lang}: personInfoProps) {
         img: `https://cdn.login.no/img/portraits/portrett_tekkom-leder.jpg`,
     }
 
-    let ctfkom_leader = {
+    const ctfkom_leader = {
         title: title.ctf,
         name: "Eskil Refsgaard",
         tag: "rrefsgaard",
@@ -350,7 +343,7 @@ function personInfo({person, lang}: personInfoProps) {
         img: `https://cdn.login.no/img/portraits/portrett_ctfkom-leder.jpg`,
     }
 
-    let satkom_leader = {
+    const satkom_leader = {
         title: title.satkom,
         name: "Trygve Sollund",
         tag: "spikeupine",
@@ -358,7 +351,7 @@ function personInfo({person, lang}: personInfoProps) {
         img: `https://cdn.login.no/img%2Fportraits%2Fportrett_%C3%B8konomi.jpg`
     }
 
-    let pr_leader = {
+    const pr_leader = {
         title: title.pr,
         name: "Bjørn Kristian Strand",
         tag: "bk_suup",
@@ -366,7 +359,7 @@ function personInfo({person, lang}: personInfoProps) {
         img: `https://cdn.login.no/img/portraits/portrett_pr-leder.jpg`
     }
 
-    switch (p) {
+    switch (person.toLowerCase()) {
         case "leader":      return leader
         case "coleader":    return coleader
         case "secretary":   return secretary
@@ -379,7 +372,7 @@ function personInfo({person, lang}: personInfoProps) {
     }
 }
 
-export function StaticImage({event}: {event: EventProps}): JSX.Element {
+export function StaticImage({event}: {event: DetailedEvent}): JSX.Element {
     const images: Record<string, ImageSourcePropType> = {
         tekkom:  require(`../../../public/assets/committee/tekkom/tekkom.png`),
         ctf:     require(`../../../public/assets/committee/ctfkom/ctf.png`),
@@ -389,7 +382,7 @@ export function StaticImage({event}: {event: EventProps}): JSX.Element {
         annet:   require(`../../../public/assets/categories/annet.png`),
     }
 
-    const image = images[event.category.toUpperCase()] || images.annet;
+    const image = images[event.category_name_no.toUpperCase()] || images.annet;
 
     return <Image style={ES.specificEventImage} source={image} />
 }

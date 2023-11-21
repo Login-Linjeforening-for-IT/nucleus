@@ -30,7 +30,7 @@ JSX.Element {
  * @param {string} category    Category of the event, Format: "CATEGORY"
  * @returns                     Small circle of the categories color
  */
-export function CategoryCircle(category: string): JSX.Element {
+export function CategoryCircle({category}: {category: string}): JSX.Element {
     return (
         <View style={{...ES.specificEventLight, left: -10}}>
             <Svg height="100%" width="100%" viewBox="0 0 100 100" >
@@ -47,13 +47,21 @@ export function CategoryCircle(category: string): JSX.Element {
  */
 function CategoryColor(category: string): string {
     switch (category) {
-        case "TEKKOM":          return "#A206C9" // purple
-        case "SOCIAL":          return "#D62F43" // red
-        case "CTF":             return "#2DA62B" // green
-        case "KARRIEREDAG":     return "#02DEDE" // light blue
-        case "FADDERUKA":       return "#FA75A6" // pink
-        case "BEDPRES":         return "#4060E3" // dark blue
-        case "LOGIN":           return "#FD8738" // orange
-        default:                return "#555B5F" // gray
+        // purple
+        case "TEKKOM":          return "#A206C9"
+        // red
+        case "SOCIAL":          return "#D62F43"
+        // green
+        case "CTF":             return "#2DA62B"
+        // light blue
+        case "KARRIEREDAG":     return "#02DEDE"
+        // pink
+        case "FADDERUKA":       return "#FA75A6"
+        // dark blue
+        case "BEDPRES":         return "#4060E3"
+        // orange
+        case "LOGIN":           return "#FD8738"
+        // gray
+        default:                return "#555B5F"
     }
 }

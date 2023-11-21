@@ -1,3 +1,4 @@
+import { Navigation } from "@interfaces"
 import { useNavigation } from "@react-navigation/native"
 import handleSwipe from "@utils/handleSwipe"
 import { ReactNode } from "react"
@@ -17,7 +18,7 @@ type SwipeProps = {
 export default function Swipe({children, left, right}: SwipeProps) {
     if (Platform.OS !== "ios") return <View>{children}</View>
 
-    const navigation = useNavigation()
+    const navigation: Navigation = useNavigation()
 
     function handleGesture(event: PanGestureHandlerGestureEvent) {
         handleSwipe({navigation, event, screenLeft: left, screenRight: right})

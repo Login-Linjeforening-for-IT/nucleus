@@ -1,8 +1,8 @@
 import { ParamListBase } from "@react-navigation/native"
-import { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs'
+import type { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs'
 import { DimensionValue, ImageSourcePropType } from "react-native"
 import { ReactNode } from "react"
-import { StackHeaderProps, StackNavigationOptions } from "@react-navigation/stack"
+import type { StackHeaderProps, StackNavigationOptions } from "@react-navigation/stack"
 import { 
     BottomTabHeaderProps,
     BottomTabNavigationProp
@@ -25,7 +25,7 @@ export interface ScreenProps {
     navigation: Navigation
 }
 
-export type Navigation = BottomTabNavigationProp<ParamListBase, string, undefined>
+export type Navigation = BottomTabNavigationProp<ParamListBase, string, string>
 
 export interface StackProps extends ExtendedRouteOptions {
     name: string

@@ -8,7 +8,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage"
 
 interface PushNotificationProps {
     navigation: any
-    theme: number
+    theme: Theme
     setPushNotification: React.Dispatch<React.SetStateAction<boolean>>
     setPushNotificationContent: React.Dispatch<React.SetStateAction<JSX.Element | undefined>>
 }

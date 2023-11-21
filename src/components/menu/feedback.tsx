@@ -1,5 +1,4 @@
-import { Alert, View, Text, TouchableOpacity, Linking } from "react-native"
-import FetchColor from "@styles/fetchTheme"
+import { View, Text, TouchableOpacity } from "react-native"
 import ES from "@styles/eventStyles"
 import T from "@styles/text"
 import React from "react"
@@ -26,8 +25,7 @@ toggleFeedback}: FeedbackProps) {
                         style={{
                             ...T.contact,
                             textDecorationLine: "underline",
-                            color: FetchColor({theme, variable: 
-                                "OPPOSITETEXTCOLOR"})
+                            color: theme.oppositeTextColor
                         }}>
                         {lang ? "Gi tilbakemelding" : "Give feedback"}
                     </Text>
@@ -45,8 +43,7 @@ toggleFeedback}: FeedbackProps) {
                     style={{
                         ...T.contact,
                         textDecorationLine: "underline",
-                        color: FetchColor({theme, 
-                        variable: "OPPOSITETEXTCOLOR"})
+                        color: theme.oppositeTextColor
                     }}
                 />
                 <TextLink 
@@ -55,8 +52,7 @@ toggleFeedback}: FeedbackProps) {
                     style={{
                         ...T.contact,
                         textDecorationLine: "underline",
-                        color: FetchColor({theme, 
-                        variable: "OPPOSITETEXTCOLOR"})
+                        color: theme.oppositeTextColor
                     }}
                 />
             </View>

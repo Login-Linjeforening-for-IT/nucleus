@@ -1,6 +1,6 @@
 import { View, ScrollView, Dimensions } from "react-native"
 import Cluster from "@/components/shared/cluster"
-import FetchColor from "@styles/fetchTheme"
+
 import AS from "@styles/adStyles"
 import { useSelector } from "react-redux"
 import React from "react"
@@ -23,7 +23,7 @@ export default function SpecificAdScreen(): JSX.Element {
                 <View>
                     <View style={{
                         ...AS.content,
-                        backgroundColor: FetchColor({theme, variable: "DARKER"}),
+                        backgroundColor: theme.darker,
                         paddingTop: Dimensions.get("window").height / 9.7,
                         paddingBottom: Dimensions.get("window").height / 3
                     }}>

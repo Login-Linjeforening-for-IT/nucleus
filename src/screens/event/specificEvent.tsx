@@ -1,36 +1,34 @@
 import CategorySquare, { CategoryCircle } from "@/components/shared/category"
-import EventLocation from "@components/event/eventLocation"
-import { FetchJoinLink } from "@/utils/fetch"
+import { FetchJoinLink, fetchEventDetails } from "@/utils/fetch"
 import Space, { Month } from "@/components/shared/utils"
 import { CardSmaller } from "@/components/shared/card"
 import { GetEndTime } from "@components/event/time"
-import React, { useEffect, useState } from "react"
+import React from "react"
 import RenderHTML from "react-native-render-html"
 import EventTime from "@components/event/time"
-import FetchColor from "@styles/fetchTheme"
 import Card from "@/components/shared/card"
 import { SvgUri } from "react-native-svg"
 import { useSelector } from "react-redux"
 import ES from "@styles/eventStyles"
 import T from "@styles/text"
 import {
-  TouchableOpacity,
-  ScrollView,
-  Dimensions,
-  Linking,
-  Alert,
-  Image,
-  View,
-  Text,
+    Alert,
+    Dimensions,
+    Image,
+    Linking,
+    ScrollView,
+    Text,
+    TouchableOpacity,
+    View,
 } from "react-native"
 import { StaticImage } from "@/components/about/social"
 import { useDispatch } from "react-redux"
-import { setClickedEvents } from "@redux/event"
+import { setClickedEvents, setEvent } from "@redux/event"
 import Swipe from "@components/nav/swipe"
 
 type handleLinkProps = {
     mazeref: string
-    street: string
+    location: string | null
     organizer: string
 }
 
@@ -39,12 +37,12 @@ type JoinButtonProps = {
 }
 
 type MapProps = {
-    event: DetailedEvent | EventProps
-    handleLink: ({mazeref, street, organizer}: handleLinkProps) => void
+    event: DetailedEvent
+    handleLink: ({mazeref, location, organizer}: handleLinkProps) => void
 }
 
 type CategoryProps = {
-    event: EventProps
+    event: DetailedEvent
 }
 
 /**
@@ -53,27 +51,29 @@ type CategoryProps = {
  * @returns
  */
 export default function SpecificEventScreen(): JSX.Element {
-
     const { lang  } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    const stored = useSelector((state: ReduxState) => state.event)
-    const [event, setEvent]=useState<DetailedEvent | EventProps>(stored.event)
+    const { event } = useSelector((state: ReduxState) => state.event)
+    const name = lang ? event.name_no : event.name_en
+    let description = ""
+    const dispatch = useDispatch()
 
-    function fetchEvent() {
-        fetch(`https://api.login.no/events/${event.eventID}`)
-        .then(response => response.json())
-        .then(data => setEvent(data))
-    }
-    
-    useEffect(() => { fetchEvent() }, [event])
+    // if (deepLinkID) {
+    //     const response = fetchEventDetails(deepLinkID)
+
+    //     if (response) {
+    //         dispatch(setEvent(response))
+    //     }
+    // }
 
     let link
     
-    if ("description" in event) {
-        link = FetchJoinLink(event.description)
+    if ("description_no" in event && "description_en" in event) {
+        link = FetchJoinLink(lang ? event.description_no : event.description_en)
+        description = lang ? event.description_no : event.description_en
     }
 
-    function handleLink({mazeref, street, organizer}: handleLinkProps) {
+    function handleLink({mazeref, location, organizer}: handleLinkProps) {
         if (mazeref.length) {
             Linking.openURL(`https://use.mazemap.com/#v=1&campusid=55&sharepoitype=poi&sharepoi=${mazeref}`).catch(() => {
                 Alert.alert("Mazemap kunne ikke åpnes", `Send en mail til tekkom@login.no dersom problemet vedvarer. Feilkode: M${mazeref}`)
@@ -81,7 +81,7 @@ export default function SpecificEventScreen(): JSX.Element {
             return
         }
 
-        if (street === "Orgkollektivet") {
+        if (location === "Orgkollektivet") {
             Linking.openURL("https://link.mazemap.com/tBlfH1oY").catch(() =>{
                 Alert.alert("Mazemap kunne ikke åpnes", "Send en mail til tekkom@login.no dersom problemet vedvarer. Feilkode: wZDe8byp")
             })
@@ -112,190 +112,174 @@ export default function SpecificEventScreen(): JSX.Element {
 
     return (
         <Swipe left="EventScreen">
-            <View>
-                <View style={{...ES.sesContent, backgroundColor: FetchColor({theme, variable: "BACKGROUND"})}}>
-                    <ScrollView showsVerticalScrollIndicator={false}>
-                    <Space height={Dimensions.get("window").height / 8 - 5} />
-                    {(event.image).includes(".svg") ?
-                        <SvgUri
-                            style={{alignSelf: "center"}}
-                            width={(Dimensions.get("window").width)/1.2}
-                            height={Dimensions.get("window").width/3}
-                            uri={`https://cdn.login.no/img/events/${event.image}`}
-                        />
-                    : (event.image).includes(".png") ? <Image 
-                        style={ES.specificEventImage}
-                        source={{uri: `https://cdn.login.no/img/events/${event.image}`}}
-                    /> : <StaticImage event={event} />}
-                    <Space height={10} />
+            <View style={{...ES.sesContent, backgroundColor: theme.background}}>
+                <ScrollView showsVerticalScrollIndicator={false}>
+                <Space height={Dimensions.get("window").height / 8 - 5} />
+                {(event.image_small).includes(".svg") ?
+                    <SvgUri
+                        style={{alignSelf: "center"}}
+                        width={(Dimensions.get("window").width)/1.2}
+                        height={Dimensions.get("window").width/3}
+                        uri={`https://cdn.login.no/img/events/${event.image_small}`}
+                    />
+                : (event.image_small).includes(".png") ? <Image 
+                    style={ES.specificEventImage}
+                    source={{uri: `https://cdn.login.no/img/events/${event.image_small}`}}
+                /> : <StaticImage event={event} />}
+                <Space height={10} />
 
-                    <CardSmaller>
-                        <View style={ES.specificEventInfoView}>
-                            <Card>
-                                <View style={{left: -10}}>
-                                <CategorySquare category={event.category} />
-                                <Text style={{
-                                    ...ES.eventClusterDayText, 
-                                    color: FetchColor({theme, variable: "TEXTCOLOR"})
-                                }}>
-                                    {event.startt[8]}
-                                    {event.startt[9]}
-                                </Text>
-
-                                <Text style={{
-                                    ...ES.monthText, 
-                                    color: FetchColor({theme, variable: "TEXTCOLOR"})
-                                }}>
-                                <Month
-                                    month={parseInt(event.startt[5] + event.startt[6])}
-                                    color={FetchColor({theme, variable: "TEXTCOLOR"})}
-                                />
-                                </Text>
-                                </View>
-                            </Card>
-                            <Text>
-                                {EventTime({startTime: event.startt, 
-                                    endTime: "endt" in event ? event.endt : ""})}
-                            </Text>
-                        </View>
-                    </CardSmaller>
-
-                    <Space height={5} />
-                    <Card>
-                        <View style={ES.specificEventInfoView}>
-                            <Text style={{
-                                ...T.specificEventInfo, 
-                                color: FetchColor({theme, variable: "TEXTCOLOR"})
-                            }}>
-                                {text.start}
-                            </Text>
-                            <Text style={{
-                                ...T.specificEventInfo, 
-                                color: FetchColor({theme, variable: "TEXTCOLOR"})
-                            }}>
-                            {event.startt[11]}{event.startt[12]}:{event.startt[14]}
-                            {event.startt[15]}
-                            </Text>
-                        </View>
-
-                        <Space height={5} />
-
-                        <View style={ES.specificEventInfoView}>
-                            <Text style={{
-                                ...T.specificEventInfo, 
-                                color: FetchColor({theme, variable: "TEXTCOLOR"})
-                            }}>
-                                {text.end}
-                            </Text>
-                            {"endt" in event && GetEndTime({input: event.endt, theme})}
-                        </View>
-
-                        <Space height={5} />
-
-                        <View style={{flexDirection: "row"}}>
-                            <EventLocation
-                                room={event.roomno}
-                                campus={event.campus}
-                                street={event.street}
-                            />
-
-                            <Map event={event} handleLink={handleLink} />
-                        </View>
-
-                        <Category event={event} />
-
-                        <View style={ES.specificEventInfoView}>
-                            <Text style={{
-                                ...T.specificEventInfo, 
-                                color: FetchColor({theme, variable: "TEXTCOLOR"})
-                            }}>
-                                {text.host}
-                            </Text>
-                            <Text style={{
-                                ...T.specificEventInfo, 
-                                color: FetchColor({theme, variable: "TEXTCOLOR"})
-                            }}>
-                                {event.organizer}{("organizerlink" in event && 
-                                event.organizerlink) || event.discordlink 
-                                || event.fblink ? " - " : null}
-                            </Text>
-                            {event.discordlink && <TouchableOpacity 
-                                style={{minWidth: 70}} 
-                                onPress={() => 
-                                    {Linking.openURL(`${event.discordlink}`)}}>
-                                    <View style={ES.row}>
-                                        <Text style={{
-                                            ...T.mazemap, 
-                                            color: FetchColor({theme, variable: "ORANGE"})
-                                        }}>
-                                            Discord
-                                        </Text>
-                                    </View>
-                                </TouchableOpacity>
-                            }
-                            {event.fblink && !event.discordlink &&
-                                <TouchableOpacity 
-                                    style={{minWidth: 70}} 
-                                    onPress={() => {
-                                        Linking.openURL(`${event.discordlink}`)
-                                    }}>
-                                        <View style={ES.row}>
-                                            <Text style={{
-                                                ...T.mazemap, 
-                                                color: FetchColor({theme, variable: "ORANGE"})
-                                            }}>
-                                                Facebook
-                                            </Text>
-                                        </View>
-                                </TouchableOpacity>
-                            }
-                            {("organizerlink" in event && event.organizerlink) && (event.discordlink || event.fblink) &&
-                            <Text style={{...T.specificEventInfo, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{" - "}</Text>}
-                            {("organizerlink" in event) && event.organizerlink &&
-                            <TouchableOpacity style={{minWidth: 70}} onPress={() => {Linking.openURL(`${event.organizerlink}`)}}>
-                                    <View style={ES.row}>
-                                        <Text style={{
-                                            ...T.mazemap, 
-                                            color: FetchColor({theme, variable: "ORANGE"})
-                                        }}>
-                                            {text.more}
-                                        </Text>
-                                    </View>
-                                </TouchableOpacity>
-                            }
-                        </View>
-                    </Card>
-
-                    <Space height={5} />
+                <CardSmaller>
+                    <View style={ES.specificEventInfoView}>
                         <Card>
-                            <View>
-                            <Space height={5} />
-                                <Text style={{
-                                    ...T.centered20, 
-                                    color: FetchColor({theme, variable: "TEXTCOLOR"})
-                                }}>
-                                    {event.eventname}
-                                </Text>
-                            </View>
-                            <Space height={5} />
-                            {"description" in event && event.description &&
-                                <RenderHTML
-                                    baseStyle={{
-                                        maxWidth: "100%",
-                                        color: FetchColor({theme, variable: "TEXTCOLOR"}),
-                                    }}
-                                    contentWidth={0}
-                                    source={{html: event.description}}
-                                />
-                            }
-                            <Space height={10} />
-                            <JoinButton
-                                link={link ? link : ""}
+                            <View style={{left: -10}}>
+                            <CategorySquare category={event.category_name_no} />
+                            <Text style={{
+                                ...ES.eventClusterDayText, 
+                                color: theme.textColor
+                            }}>
+                                {event.time_start[8]}
+                                {event.time_start[9]}
+                            </Text>
+
+                            <Text style={{
+                                ...ES.monthText, 
+                                color: theme.textColor
+                            }}>
+                            <Month
+                                month={parseInt(event.time_start[5] + event.time_start[6])}
+                                color={theme.textColor}
                             />
+                            </Text>
+                            </View>
                         </Card>
-                        <Space height={Dimensions.get("window").height / 3 + 10} />
-                    </ScrollView>
-                </View>
+                        <EventTime 
+                            time_start={event.time_start}
+                            time_end={event.time_end} 
+                        />
+                    </View>
+                </CardSmaller>
+
+                <Card>
+                    <View style={ES.specificEventInfoView}>
+                        <Text style={{
+                            ...T.specificEventInfo, 
+                            color: theme.textColor
+                        }}>
+                            {text.start}
+                        </Text>
+                        <Text style={{
+                            ...T.specificEventInfo, 
+                            color: theme.textColor
+                        }}>
+                        {event.time_start[11]}{event.time_start[12]}:
+                        {event.time_start[14]}{event.time_start[15]}
+                        </Text>
+                    </View>
+
+                    <View style={ES.specificEventInfoView}>
+                        <Text style={{
+                            ...T.specificEventInfo, 
+                            color: theme.textColor
+                        }}>
+                            {text.end}
+                        </Text>
+                        {"time_end" in event && <GetEndTime time_end={event.time_end} />}
+                    </View>
+
+                    <View style={{flexDirection: "row"}}>
+                        <Text style={{
+                            ...T.specificEventInfo, 
+                            color: theme.textColor
+                        }}>
+                                {lang ? "Lokasjon:   " : "Location:     "}
+                        </Text>
+                        <Text style={{
+                            ...T.specificEventInfo, 
+                            color: theme.textColor
+                        }}>
+                            TBA!
+                        </Text>
+                        <Map event={event} handleLink={handleLink} />
+                    </View>
+
+                    <Category event={event} />
+
+                    <View style={ES.specificEventInfoView}>
+                        <Text style={{
+                            ...T.specificEventInfo, 
+                            color: theme.textColor
+                        }}>
+                            {text.host}
+                        </Text>
+                        <Text style={{
+                            ...T.specificEventInfo, 
+                            color: theme.textColor
+                        }}>
+                            {event.organization_name_en || event.organization_name_short}{("link_homepage" in event && 
+                            event.link_homepage) || event.link_discord 
+                            || event.link_facebook ? " - " : null}
+                        </Text>
+                        {event.link_discord && <TouchableOpacity 
+                            style={{minWidth: 70}} 
+                            onPress={() => 
+                                {Linking.openURL(`${event.link_discord}`)}}>
+                                <View style={ES.row}>
+                                    <Text style={{
+                                        ...T.mazemap, 
+                                        color: theme.orange
+                                    }}>
+                                        Discord
+                                    </Text>
+                                </View>
+                            </TouchableOpacity>
+                        }
+                        {event.link_signup && !event.link_discord &&
+                            <TouchableOpacity 
+                                style={{minWidth: 70}} 
+                                onPress={() => {
+                                    Linking.openURL(`${event.link_discord}`)
+                                }}>
+                                    <View style={ES.row}>
+                                        <Text style={{
+                                            ...T.mazemap, 
+                                            color: theme.orange
+                                        }}>
+                                            Facebook
+                                        </Text>
+                                    </View>
+                            </TouchableOpacity>
+                        }
+                        {("link_homepage" in event && event.link_homepage) && (event.link_discord || event.link_facebook) &&
+                        <Text style={{...T.specificEventInfo, color: theme.textColor}}> - </Text>}
+                        {("link_homepage" in event) && event.link_homepage &&
+                        <TouchableOpacity style={{minWidth: 70}} onPress={() => {Linking.openURL(`${event.link_homepage}`)}}>
+                                <View style={ES.row}>
+                                    <Text style={{
+                                        ...T.mazemap, 
+                                        color: theme.orange
+                                    }}>
+                                        {text.more}
+                                    </Text>
+                                </View>
+                            </TouchableOpacity>
+                        }
+                    </View>
+                </Card>
+
+                <Card>
+                    <View>
+                    <Space height={5} />
+                        <Text style={{...T.centered20, color: theme.textColor}}>
+                            {name}
+                        </Text>
+                    </View>
+                    <Space height={5} />
+                    <Description description={lang ? event.description_no : event.description_en} />
+                    <Space height={10} />
+                    <JoinButton link={link ? link : ""} />
+                </Card>
+                <Space height={Dimensions.get("window").height / 3 + 10} />
+                </ScrollView>
             </View>
         </Swipe>
     )
@@ -308,7 +292,7 @@ function JoinButton({link}: JoinButtonProps) {
     const dispatch = useDispatch()
     
     function updateStorage() {
-        if (!clickedEvents.some(clicked => clicked.eventID === event.eventID)) {
+        if (!clickedEvents.some(clicked => clicked.id === event.id)) {
             dispatch(setClickedEvents([...clickedEvents, event]))
         }
     }
@@ -321,11 +305,11 @@ function JoinButton({link}: JoinButtonProps) {
             }}>
                 <View style={{
                     ...ES.eventButton, 
-                    backgroundColor: FetchColor({theme, variable: "ORANGE"})
+                    backgroundColor: theme.orange
                 }}>
                     <Text style={{
                         ...T.centered20, 
-                        color: FetchColor({theme, variable: "TEXTCOLOR"})
+                        color: theme.textColor
                     }}>
                         {lang ? "Meld meg på":"Join event"}
                     </Text>
@@ -338,21 +322,22 @@ function JoinButton({link}: JoinButtonProps) {
 function Category({event}: CategoryProps) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
+    const category = lang ? event.category_name_no  : event.category_name_en
 
     return (
         <View style={ES.specificEventInfoView}>
             <Text style={{
                 ...T.specificEventInfo, 
-                color: FetchColor({theme, variable: "TEXTCOLOR"})
+                color: theme.textColor
             }}>
                 {lang ? "Kategori:      " : "Category:      "}
             </Text>
-            {CategoryCircle(event.category)}
+            <CategoryCircle category={category} />
             <Text style={{
                 ...T.specificEventInfo, 
-                color: FetchColor({theme, variable: "TEXTCOLOR"})
+                color: theme.textColor
             }}>
-                {event.category}
+                {category}
             </Text>
         </View>
     )
@@ -361,29 +346,29 @@ function Category({event}: CategoryProps) {
 function Map({event, handleLink}: MapProps) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
+    const mazeref = "mazeref" in event ? event.mazeref : ""
 
-    if (("mazeref" in event) && event.mazeref || (event.street === 
-        "Orgkollektivet" || event.organizer === "HUSET")) {
+    if (("mazeref" in event) && event.mazeref || (
+        event.location === "Orgkollektivet" || event.location === "HUSET")) {
         return (
             <TouchableOpacity 
                 style={{minWidth: 70}} 
-                onPress={() => {handleLink({mazeref: "mazeref" in event 
-                    ? event.mazeref 
-                    : "", 
-                street: event.street, organizer: event.organizer})}}>
+                onPress={() => {handleLink({
+                    mazeref, 
+                    location: event.location, 
+                    organizer: event.organization_name_short || event.organization_name_en
+                })
+            }}>
                 <View style={ES.row}>
                     <Text 
                         style={{
                             ...T.specificEventInfo, 
-                            color: FetchColor({theme, variable: "TEXTCOLOR"})
+                            color: theme.textColor
                         }}>
                             {" - "}
                         </Text>
                     <Text 
-                        style={{
-                            ...T.mazemap, 
-                            color: FetchColor({theme, variable: "ORANGE"})
-                        }}>
+                        style={{...T.mazemap, color: theme.orange}}>
                                 {lang ? "Kart" : "Map"}
                     </Text>
                     <Image 
@@ -393,4 +378,14 @@ function Map({event, handleLink}: MapProps) {
             </TouchableOpacity>
         )
     }
+}
+
+function Description({description}: {description: string}) {
+    const { theme } = useSelector((state: ReduxState) => state.theme) 
+
+    return <RenderHTML
+        baseStyle={{maxWidth: "100%", color: theme.textColor}}
+        contentWidth={0}
+        source={{html: description}}
+    />
 }
