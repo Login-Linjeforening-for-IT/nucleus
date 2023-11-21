@@ -20,16 +20,12 @@ type GetEndTimeProps = {
  */
 export default function EventTime({time_start, time_end}: EventTimeProps): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    const [string, setString] = useState(displayedEventTime(time_start, time_end))
-
-    useEffect(() => {
-        setString(displayedEventTime(time_start, time_end))
-    }, [displayedEventTime(time_start, time_end)])
+    let time = displayedEventTime(time_start, time_end)
 
     return (
         <View>
             <Text style={{...T.text20, color: theme.textColor}}>
-                {string}
+                {time}
             </Text>
         </View>
     )

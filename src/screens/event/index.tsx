@@ -3,7 +3,6 @@ import { useFocusEffect } from "@react-navigation/native"
 import EventList from "@components/event/eventList"
 import { useDispatch, useSelector } from "react-redux"
 import { StatusBar } from "expo-status-bar"
-
 import GS from "@styles/globalStyles"
 import NavigateFromPushNotification 
 from "@/utils/navigateFromPushNotification"

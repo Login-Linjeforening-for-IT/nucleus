@@ -37,24 +37,41 @@ Promise<DetailedEvent> {
     const response = await fetch(`${testapi}events/${id}`)
     const eventDetails = await response.json()
 
+    let mazemap = null
+    let location_no = null
+    let location_en = null
+    let location_url = null
+    let rule_no = null
+    let rule_en = null
+    let rule_details_no = null
+    let rule_details_en = null
+
+    if (eventDetails.location) {
+        mazemap = eventDetails.location.name_no ? eventDetails.location.name_no : null
+        location_no = eventDetails.location.name_no ? eventDetails.location.name_no : null
+        location_en = eventDetails.location.name_en ? eventDetails.location.name_en : null
+        location_url = eventDetails.location.url ? eventDetails.location.url : null
+    }
+
+    if (eventDetails.rule) {
+        rule_no = eventDetails.rule.name_no ? eventDetails.rule.name_no : null
+        rule_en = eventDetails.rule.name_en ? eventDetails.rule.name_en : null
+        rule_details_no = eventDetails.rule.name_no ? eventDetails.rule.name_no : null
+        rule_details_en = eventDetails.rule.name_en ? eventDetails.rule.name_en : null
+    }
+
     const details = {
         audiences: eventDetails.audiences,
         color: eventDetails.category.color,
         category_id: eventDetails.category.id,
         category_name_no: eventDetails.category.name_no,
         category_name_en: eventDetails.category.name_en,
-        mazemap: eventDetails.location.mazemap_poi_id,
-        location_no: eventDetails.location.name_no,
-        location_en: eventDetails.location.name_en,
-        location_url: eventDetails.location.url,
+        mazemap, location_no, location_en, location_url,
         organization_name_short: eventDetails.organizations[0].shortname,
         organization_name_en: eventDetails.organizations[0].name_en,
         organization_logo: eventDetails.organizations[0].logo,
         link_homepage: eventDetails.organizations[0].link_homepage,
-        rule_no: eventDetails.rule.name_no,
-        rule_en: eventDetails.rule.name_en,
-        rule_details_no: eventDetails.rule.name_no,
-        rule_details_en: eventDetails.rule.name_en
+        rule_no, rule_en, rule_details_no, rule_details_en
     }
 
     return {...eventDetails.event, ...details}

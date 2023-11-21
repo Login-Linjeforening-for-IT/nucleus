@@ -154,7 +154,7 @@ export default function SpecificEventScreen(): JSX.Element {
                         </Card>
                         <EventTime 
                             time_start={event.time_start}
-                            time_end={"time_end" in event ? event.time_end : ""} 
+                            time_end={event.time_end} 
                         />
                     </View>
                 </CardSmaller>
@@ -269,10 +269,7 @@ export default function SpecificEventScreen(): JSX.Element {
                 <Card>
                     <View>
                     <Space height={5} />
-                        <Text style={{
-                            ...T.centered20, 
-                            color: theme.textColor
-                        }}>
+                        <Text style={{...T.centered20, color: theme.textColor}}>
                             {name}
                         </Text>
                     </View>
@@ -281,7 +278,7 @@ export default function SpecificEventScreen(): JSX.Element {
                     <Space height={10} />
                     <JoinButton link={link ? link : ""} />
                 </Card>
-                    <Space height={Dimensions.get("window").height / 3 + 10} />
+                <Space height={Dimensions.get("window").height / 3 + 10} />
                 </ScrollView>
             </View>
         </Swipe>
@@ -352,15 +349,16 @@ function Map({event, handleLink}: MapProps) {
     const mazeref = "mazeref" in event ? event.mazeref : ""
 
     if (("mazeref" in event) && event.mazeref || (
-        event.location === "Orgkollektivet" 
-        || event.location === "HUSET")) {
+        event.location === "Orgkollektivet" || event.location === "HUSET")) {
         return (
             <TouchableOpacity 
                 style={{minWidth: 70}} 
-                onPress={() => {handleLink({mazeref: "mazeref" in event 
-                    ? event.mazeref 
-                    : "", 
-                location: event.location, organizer: event.organization_name_short || event.organization_name_en})}}>
+                onPress={() => {handleLink({
+                    mazeref, 
+                    location: event.location, 
+                    organizer: event.organization_name_short || event.organization_name_en
+                })
+            }}>
                 <View style={ES.row}>
                     <Text 
                         style={{
@@ -370,10 +368,7 @@ function Map({event, handleLink}: MapProps) {
                             {" - "}
                         </Text>
                     <Text 
-                        style={{
-                            ...T.mazemap, 
-                            color: theme.orange
-                        }}>
+                        style={{...T.mazemap, color: theme.orange}}>
                                 {lang ? "Kart" : "Map"}
                     </Text>
                     <Image 
