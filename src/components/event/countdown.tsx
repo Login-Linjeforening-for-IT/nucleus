@@ -15,7 +15,7 @@ export default function Countdown() {
             <View style={ES.specificEventInfoView}>
                 <Card>
                     <View style={{left: -10}}>
-                    <CategorySquare category={event.category_name_no} />
+                    <CategorySquare color={event.category_color} />
                     <Text style={{
                         ...ES.eventClusterDayText, 
                         color: theme.textColor

@@ -24,9 +24,9 @@ export default function LastFetch(param?: string) {
 /**
  * Fetches the specific event page for additional details
  *
- * @param {object} event    Event to fetch details for
+ * @param {number} id Event id fetch details for
  *
- * @returns                 All details for passed event
+ * @returns All details for passed event
  */
 export async function fetchEventDetails(id: number): 
 Promise<DetailedEvent> {
@@ -62,7 +62,6 @@ Promise<DetailedEvent> {
 
     const details = {
         audiences: eventDetails.audiences,
-        color: eventDetails.category.color,
         category_id: eventDetails.category.id,
         category_name_no: eventDetails.category.name_no,
         category_name_en: eventDetails.category.name_en,
@@ -73,8 +72,6 @@ Promise<DetailedEvent> {
         link_homepage: eventDetails.organizations[0].link_homepage,
         rule_no, rule_en, rule_details_no, rule_details_en
     }
-
-    console.log({...eventDetails.event, ...details})
 
     return {...eventDetails.event, ...details}
 }
@@ -123,6 +120,7 @@ export async function fetchEvents(): Promise<EventProps[]> {
 
         // Dev
         // const response = await fetch("https://tekkom:rottejakt45@api.login.no:8443/events")
+        
 
         // Checks if response is ok, otherwise throws error
         if (!response.ok) {

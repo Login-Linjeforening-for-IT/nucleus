@@ -1,4 +1,4 @@
-import { CategoryCircle } from "@components/shared/category"
+import { CategoryCircle, Title } from "@components/shared/category"
 import ES from "@styles/eventStyles"
 import { Text, View } from "react-native"
 import { useSelector } from "react-redux"
@@ -12,17 +12,9 @@ export default function Category() {
 
     return (
         <View style={ES.specificEventInfoView}>
-            <Text style={{
-                ...T.specificEventInfo, 
-                color: theme.textColor
-            }}>
-                {lang ? "Kategori:      " : "Category:      "}
-            </Text>
-            <CategoryCircle category={category} />
-            <Text style={{
-                ...T.specificEventInfo, 
-                color: theme.textColor
-            }}>
+            <Title />
+            <CategoryCircle color={event.category_color} />
+            <Text style={{...T.specificEventInfo, color: theme.textColor}}>
                 {category}
             </Text>
         </View>

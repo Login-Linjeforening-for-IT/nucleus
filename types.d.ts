@@ -207,8 +207,8 @@ type DetailedEvent = {
     category_name_no: string
     category_name_en: string
     audiences: string[]
-    color: string
     category_id: number
+    category_color: string
     category_name_no: string
     category_name_en: string
     mazeref: string
