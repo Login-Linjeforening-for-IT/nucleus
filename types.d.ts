@@ -25,7 +25,7 @@ type DetailedEventResponse = {
 }
 
 type Organization = {
-    shortname: string
+    shortname: string | null
     logo: string
     name_no: string
     name_en: string

@@ -13,15 +13,11 @@ export default function BasicInfo() {
     const { lang } = useSelector((state: ReduxState) => state.lang)
 
     const textNO = {
-        start: "Starter:      ",
-        end: "Slutter:       ",
         host: "Arrangør:   ",
         more: "Mer info"
     }
 
     const textEN = {
-        start: "Starts:         ",
-        end: "Ends:           ",
         host: "Organizer:   ",
         more: "More info"
     }
@@ -30,48 +26,9 @@ export default function BasicInfo() {
     
     return (
         <Card>
-            <View style={ES.specificEventInfoView}>
-                <Text style={{
-                    ...T.specificEventInfo, 
-                    color: theme.textColor
-                }}>
-                    {text.start}
-                </Text>
-                <Text style={{
-                    ...T.specificEventInfo, 
-                    color: theme.textColor
-                }}>
-                {event.time_start[11]}{event.time_start[12]}:
-                {event.time_start[14]}{event.time_start[15]}
-                </Text>
-            </View>
-
-            <View style={ES.specificEventInfoView}>
-                <Text style={{
-                    ...T.specificEventInfo, 
-                    color: theme.textColor
-                }}>
-                    {text.end}
-                </Text>
-                {"time_end" in event && <GetEndTime time_end={event.time_end} />}
-            </View>
-
-            <View style={{flexDirection: "row"}}>
-                <Text style={{
-                    ...T.specificEventInfo, 
-                    color: theme.textColor
-                }}>
-                        {lang ? "Lokasjon:   " : "Location:     "}
-                </Text>
-                <Text style={{
-                    ...T.specificEventInfo, 
-                    color: theme.textColor
-                }}>
-                    TBA!
-                </Text>
-                <Map />
-            </View>
-
+            <Start />
+            <End />
+            <Location />
             <Category />
 
             <View style={ES.specificEventInfoView}>
@@ -135,5 +92,58 @@ export default function BasicInfo() {
                 }
             </View>
         </Card>
+    )
+}
+
+function Start() {
+    const { event } = useSelector((state: ReduxState) => state.event)
+    const { theme } = useSelector((state: ReduxState) => state.theme)
+    const { lang } = useSelector((state: ReduxState) => state.lang)
+    const start = lang ? "Starter:      " : "Starts:         "
+
+    return (
+        <View style={ES.specificEventInfoView}>
+            <Text style={{...T.specificEventInfo, color: theme.textColor}}>
+                {start}
+            </Text>
+            <Text style={{...T.specificEventInfo, color: theme.textColor}}>
+            {event.time_start[11]}{event.time_start[12]}:
+            {event.time_start[14]}{event.time_start[15]}
+            </Text>
+        </View>
+    )
+}
+
+function End() {
+    const { event } = useSelector((state: ReduxState) => state.event)
+    const { theme } = useSelector((state: ReduxState) => state.theme)
+    const { lang } = useSelector((state: ReduxState) => state.lang)
+    const end = lang ? "Slutter:       " : "Ends:           "
+
+    return (
+        <View style={ES.specificEventInfoView}>
+            <Text style={{...T.specificEventInfo, color: theme.textColor}}>
+                {end}
+            </Text>
+            {"time_end" in event && <GetEndTime time_end={event.time_end} />}
+        </View>
+    )
+}
+
+function Location() {
+    const { theme } = useSelector((state: ReduxState) => state.theme)
+    const { lang } = useSelector((state: ReduxState) => state.lang)
+    const text = lang ? "Lokasjon:   " : "Location:     "
+
+    return (
+        <View style={{flexDirection: "row"}}>
+            <Text style={{...T.specificEventInfo, color: theme.textColor}}>
+                {text}
+            </Text>
+            <Text style={{...T.specificEventInfo, color: theme.textColor}}>
+                TBA!
+            </Text>
+            <Map />
+        </View>
     )
 }

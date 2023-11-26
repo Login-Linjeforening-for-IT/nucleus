@@ -45,32 +45,86 @@ Promise<DetailedEvent> {
     let rule_en = null
     let rule_details_no = null
     let rule_details_en = null
+    let organization_logo = null
+    let organization_name_short = null
+    let link_homepage = null
+    let organization_name_en = null
+    let category_name_no = null
+    let category_name_en = null
 
-    if (eventDetails.location) {
-        mazemap = eventDetails.location.name_no ? eventDetails.location.name_no : null
-        location_no = eventDetails.location.name_no ? eventDetails.location.name_no : null
-        location_en = eventDetails.location.name_en ? eventDetails.location.name_en : null
-        location_url = eventDetails.location.url ? eventDetails.location.url : null
+    if ('category' in eventDetails) {
+        if ('name_no' in eventDetails.category) {
+            category_name_no = eventDetails.category.name_no
+        }
+        if ('name_en' in eventDetails.category) {
+            category_name_en = eventDetails.category.name_en
+        }
     }
 
-    if (eventDetails.rule) {
-        rule_no = eventDetails.rule.name_no ? eventDetails.rule.name_no : null
-        rule_en = eventDetails.rule.name_en ? eventDetails.rule.name_en : null
-        rule_details_no = eventDetails.rule.name_no ? eventDetails.rule.name_no : null
-        rule_details_en = eventDetails.rule.name_en ? eventDetails.rule.name_en : null
+    if ('location' in eventDetails) {
+        if ('name_no' in eventDetails.location) {
+            location_no = eventDetails.location.name_no
+        }
+        if ('name_en' in eventDetails.location) {
+            location_en = eventDetails.location.name_en
+        }
+        if ('mazemap_poi_id' in eventDetails.location) {
+            mazemap = eventDetails.location.mazemap_poi_id
+        }
+        if ('url' in eventDetails.location) {
+            location_url = eventDetails.location.url
+        }
+    }
+
+    if ('rule' in eventDetails) {
+        if ('name_no' in eventDetails.rule) {
+            rule_no = eventDetails.rule.name_no
+        }
+        if ('name_en' in eventDetails.rule) {
+            rule_en = eventDetails.rule.name_en
+        }
+        if ('description_no' in eventDetails.rule) {
+            rule_details_no = eventDetails.rule.description_no
+        }
+        if ('description_en' in eventDetails.rule) {
+            rule_details_en = eventDetails.rule.description_en
+        }
+    }
+
+    if ('organizations' in eventDetails) {
+        if (eventDetails.organizations.length) {
+            if ('shortname' in eventDetails.organizations[0]) {
+                organization_name_short = eventDetails.organizations[0].shortname 
+            }
+            if ('logo' in eventDetails.organizations[0]) {
+                organization_logo = eventDetails.organizations[0].logo
+            }
+            if ('link_homepage' in eventDetails.organizations[0]) {
+                link_homepage = eventDetails.organizations[0].link_homepage
+            }
+            if ('organization_name_en' in eventDetails.organizations[0]) {
+                organization_name_en = eventDetails.organizations[0].name_en
+            }
+        }
     }
 
     const details = {
         audiences: eventDetails.audiences,
         category_id: eventDetails.category.id,
-        category_name_no: eventDetails.category.name_no,
-        category_name_en: eventDetails.category.name_en,
-        mazemap, location_no, location_en, location_url,
-        organization_name_short: eventDetails.organizations[0].shortname,
-        organization_name_en: eventDetails.organizations[0].name_en,
-        organization_logo: eventDetails.organizations[0].logo,
-        link_homepage: eventDetails.organizations[0].link_homepage,
-        rule_no, rule_en, rule_details_no, rule_details_en
+        category_name_no,
+        category_name_en,
+        mazemap, 
+        location_no, 
+        location_en, 
+        location_url,
+        rule_no,
+        rule_en,
+        rule_details_no,
+        rule_details_en,
+        organization_logo,
+        organization_name_short,
+        organization_name_en,
+        link_homepage,
     }
 
     return {...eventDetails.event, ...details}

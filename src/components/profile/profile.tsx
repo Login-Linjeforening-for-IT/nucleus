@@ -89,7 +89,7 @@ export default function Profile({profile} : ProfileElementprops) {
 }
 
 function SmallProfileImage({show, profile}: SmallProfileImageProps) {
-    const { theme } = useSelector((state: ReduxState) => state.theme)
+    const { isDark } = useSelector((state: ReduxState) => state.theme)
     
     return (
         <View style={PS.smallProfileImageView}>
@@ -98,7 +98,7 @@ function SmallProfileImage({show, profile}: SmallProfileImageProps) {
                     style={PS.midProfileImage}
                     source={profile.image
                         ? {uri: profile.image}
-                        : theme === 0 || theme === 2 || theme === 3
+                        : isDark
                             ? require("@assets/icons/loginperson-white.png")
                             : require("@assets/icons/loginperson-black.png")}
                 />
@@ -113,24 +113,15 @@ function MainProfileInfo({show, profile, year}: MainProfileInfoProps) {
 
     if (!show) return (
         <>
-            <Text style={{
-                ...T.text20,
-                color: theme.textColor
-            }}>
+            <Text style={{...T.text20, color: theme.textColor}}>
                 {profile.name}
             </Text>
             <Space height={5} />
-            <Text style={{
-                ...T.text15,
-                color: theme.oppositeTextColor
-            }}>
+            <Text style={{...T.text15,color: theme.oppositeTextColor}}>
                 {year + profile.degree}
             </Text>
             <Space height={5} />
-            <Text style={{
-                ...T.text15,
-                color: theme.oppositeTextColor
-            }}>
+            <Text style={{ ...T.text15, color: theme.oppositeTextColor}}>
                 ID: {profile.id} · {profile.joinedevents} {lang 
                     ? "Arrangementer"
                     : "Events"}

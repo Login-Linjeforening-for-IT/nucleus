@@ -50,7 +50,7 @@ export const ES = StyleSheet.create({
     specificEventInfoView: {
         flexDirection: "row",
         alignItems: "center",
-        marginBottom: 5
+        marginBottom: 5,
     },
     // The header image on specificEventScreen
     specificEventImage: {

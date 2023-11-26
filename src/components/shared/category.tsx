@@ -54,6 +54,7 @@ export function CategoryCircle({color}: {color: string}): JSX.Element {
         height: 20, 
         width: 20, 
         backgroundColor: `#${color}`, 
-        borderRadius: 100
+        borderRadius: 100,
+        marginRight: -5
     }} />
 }

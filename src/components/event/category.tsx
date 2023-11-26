@@ -11,7 +11,7 @@ export default function Category() {
     const category = lang ? event.category_name_no  : event.category_name_en
 
     return (
-        <View style={ES.specificEventInfoView}>
+        <View style={{...ES.specificEventInfoView, top: 2.5}}>
             <Title />
             <CategoryCircle color={event.category_color} />
             <Text style={{...T.specificEventInfo, color: theme.textColor}}>
