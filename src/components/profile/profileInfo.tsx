@@ -1,7 +1,6 @@
 import { Image, View, Text, TouchableOpacity } from "react-native"
 import ChangeInfoCard from "@/components/profile/changeInfoCard"
 import Cluster from "@/components/shared/cluster"
-
 import CS from "@styles/clusterStyles"
 import PS from "@styles/profileStyles"
 import React, { useState } from "react"
@@ -69,14 +68,14 @@ export default function ProfileInfo({profile}: ProfileInfoProps) {
                     </TouchableOpacity>
                 </View>
             ))}
-            {typeof selectedIndex === "number" &&
+            {selectedIndex > 0 &&
                 <ChangeInfoCard
                     type={type[selectedIndex]}
                     value={selectedIndex}
                     hide={() => {
                         setSelectedIndex(-1)
-                        setPreviousIndex(-1)}
-                    }
+                        setPreviousIndex(-1)
+                    }}
                     trigger={true}
                 />
             }
@@ -99,14 +98,11 @@ ProfileInfoContentProps) {
                 <View style={CS.evenTwinRight}>
                     <View style={{...CS.twinLeft, top: 6.75, left: -20}}>
                         <Text style={{
-                            ...T.text15, textAlign: "right",
+                            ...T.text15, 
+                            textAlign: "right",
                             color: theme.oppositeTextColor
                         }}>
-                            {index === 0 && profile.degree}
-                            {index === 1 && profile.schoolyear}
-                            {index === 2 && profile.mail}
-                            {index === 3 && profile.preferences}
-                            {index === 4 && profile.allergies}
+                            {Object.keys(profile)[index] || ''}
                         </Text>
                     </View>
                     <View style={CS.twinRight}>
