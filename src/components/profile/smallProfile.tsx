@@ -24,6 +24,8 @@ SmallProfileProps): JSX.Element {  // SVG showing the color of the category
     const { theme, isDark } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
 
+    if (!login) return <></>
+
     return (
         <TouchableOpacity onPress={() => login
             ? navigation.navigate("ProfileScreen")

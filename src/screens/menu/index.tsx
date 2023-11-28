@@ -65,7 +65,7 @@ export default function MenuScreen(): JSX.Element {
     const { theme, isDark } = useSelector((state: ReduxState) => state.theme )
     const { id, name, image } = useSelector((state: ReduxState) => 
     state.profile )
-    const profile = { id: 0, name: "Eirik Hanasand", image}
+    const profile = { id, name, image}
     const text: Setting = lang ? no as Setting : en as Setting
 
     // Feedback options visibility boolean
@@ -98,9 +98,8 @@ export default function MenuScreen(): JSX.Element {
                                 ...GS.content, 
                                 backgroundColor: theme.darker
                             }}>
-                                <Space height={Dimensions.get("window").height / 9} /> 
-                                {login ? SmallProfile({navigation, 
-                                    profile, login}) : null}
+                                <Space height={Dimensions.get("window").height / 9} />
+                                <SmallProfile navigation={navigation} profile={profile} login={login} />
                                 <FlatList
                                     style={{minHeight: "100%"}}
                                     showsVerticalScrollIndicator={false}
@@ -130,15 +129,13 @@ export default function MenuScreen(): JSX.Element {
                     )
                 }}
             </MenuStack.Screen>
-            {text.setting.map(item => {
-                return(
-                    <MenuStack.Screen 
-                        name={item.nav as MenuRoutes}
-                        component={screens[item.nav]}
-                        key={item.id}
-                    />
-                )  
-            })}
+            {text.setting.map(item => (
+                <MenuStack.Screen 
+                    name={item.nav as MenuRoutes}
+                    component={screens[item.nav]}
+                    key={item.id}
+                />  
+            ))}
         </MenuStack.Navigator>
     )
 }
