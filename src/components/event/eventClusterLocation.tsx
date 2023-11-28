@@ -32,18 +32,12 @@ EventClusterLocationProps): JSX.Element {
     return (
         <View style={ES.view2}>
             <View style = {{...ES.title}}>
-                <Text style={{
-                    ...ES.title, 
-                    color: theme.textColor
-                }}>
+                <Text style={{...ES.title, color: theme.textColor}}>
                     {location}
                 </Text>
             </View>
             <View style={{flexDirection: "row"}}>
-                <Text style={{
-                    ...ES.loc,
-                    color: theme.oppositeTextColor
-                }}>
+                <Text style={{...ES.loc, color: theme.oppositeTextColor}}>
                     {info}
                 </Text>
             </View>

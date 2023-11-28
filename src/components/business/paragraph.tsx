@@ -26,17 +26,11 @@ export default function Paragraph({ logo, title, body }: ParagraphProps) {
         <View>
             <View style={GS.row}>
                 <Image style={GS.medium} source={logo} />
-                <Text style={{
-                    ...T.bold28, 
-                    color: theme.textColor
-                }}>
+                <Text style={{...T.bold28, color: theme.textColor}}>
                     {title}
                 </Text>
             </View>
-            <Text style={{
-                ...T.paragraph, 
-                color: theme.textColor
-            }}>
+            <Text style={{...T.paragraph, color: theme.textColor}}>
                 {body}
             </Text>
             <Space height={25} />

@@ -44,10 +44,7 @@ export default function TopMenu({ navigation, title, screen, back }
                 : <View style={{
                     ...MS.topMenu,
                     backgroundColor: theme.transparentAndroid}}/>}
-            <View style={{
-                    ...MS.topMenu,
-                    backgroundColor: theme.transparent
-            }}>
+            <View style={{...MS.topMenu, backgroundColor: theme.transparent}}>
                 {back ?
                     <TouchableOpacity onPress={() => goBack()}>
                         <Image

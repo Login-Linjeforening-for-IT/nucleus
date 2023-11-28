@@ -141,16 +141,10 @@ export function FullCategorySquare({item, height}: FullCategorySquareProps): JSX
     return (
         <View>
             <CategorySquare color={item.category_color} height={height} />
-
-            <Text style={{
-                ...ES.eventClusterDayText,
-                color: theme.textColor
-            }}>{day}</Text>
-
-            <Month
-                month={month}
-                color={theme.textColor}
-            />
+            <Text style={{...ES.eventClusterDayText, color: theme.textColor}}>
+                {day}
+            </Text>
+            <Month month={month} color={theme.textColor} />
         </View>
     )
 }

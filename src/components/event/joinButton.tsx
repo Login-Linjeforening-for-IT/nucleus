@@ -24,14 +24,8 @@ export default function JoinButton() {
                 updateStorage()
                 Linking.openURL(link)
             }}>
-                <View style={{
-                    ...ES.eventButton, 
-                    backgroundColor: theme.orange
-                }}>
-                    <Text style={{
-                        ...T.centered20, 
-                        color: theme.textColor
-                    }}>
+                <View style={{...ES.eventButton, backgroundColor: theme.orange}}>
+                    <Text style={{...T.centered20, color: theme.textColor}}>
                         {lang ? "Meld meg på":"Join event"}
                     </Text>
                 </View>

@@ -78,56 +78,32 @@ export default function LoginScreen({ navigation }: ScreenProps): JSX.Element {
 
     function inputName (val: string) {
         if (val.length > 0) {
-            setData({
-            ...data,
-            name: val,
-            check_textInputChange: true
-            })
+            setData({...data, name: val, check_textInputChange: true})
         } else {
-            setData({
-            ...data,
-            name: val,
-            check_textInputChange: false
-            })
+            setData({...data, name: val, check_textInputChange: false})
         }
     }
 
     function inputPass (val: string) {
         if (val.length > 0) {
-            setData({
-                ...data,
-                pass: val,
-                check_passInputChange: true
-            })
+            setData({...data, pass: val, check_passInputChange: true})
         } else {
-            setData({
-                ...data,
-                check_passInputChange: false
-            })
+            setData({...data, check_passInputChange: false})
         }
     }
 
     function showPass() {
-        setData({
-            ...data,
-            secureTextEntry: !data.secureTextEntry
-        })
+        setData({...data, secureTextEntry: !data.secureTextEntry})
     }
 
     return (
         <Swipe left="MenuScreen">
             <View>
-                <View style={{
-                    ...GS.content, 
-                    backgroundColor: theme.darker
-                }}>
+                <View style={{...GS.content, backgroundColor: theme.darker}}>
                     <Space height={Dimensions.get("window").height / 8.1} /> 
                     <View>
                         <Space height={80} /> 
-                        <Text style={{
-                            ...T.centered50,
-                            color: theme.textColor
-                        }}>
+                        <Text style={{...T.centered50, color: theme.textColor}}>
                             {lang ? "Innsida" : "Intranet"}
                         </Text>
                         
@@ -135,7 +111,7 @@ export default function LoginScreen({ navigation }: ScreenProps): JSX.Element {
                         <UsernameUI data={data} inputName={inputName} />
                         <Space height={10} /> 
 
-                        <PasswordUI 
+                        <PasswordUI
                             data={data}
                             inputPass={inputPass}
                             showPass={showPass}
@@ -267,7 +243,7 @@ JSX.Element {
                     </TouchableOpacity>
                 :
                 <View>
-                    <View style = {SS.noPassLight}><RedLight/></View>
+                    <View style = {SS.noPassLight}><RedLight /></View>
                     <View style = {{...SS.noPassCheck}}>
                     <Image 
                         style={SS.noPassImage} 

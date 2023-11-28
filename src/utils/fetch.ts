@@ -11,12 +11,12 @@ export default function LastFetch(param?: string) {
     const time = new Date(utc)
 
     // Checking and fixing missing 0
-    let day = time.getDate().toString().padStart(2, '0')
-    let month = (time.getMonth() + 1).toString().padStart(2, '0')
-    let year = time.getFullYear()
+    const day = time.getDate().toString().padStart(2, '0')
+    const month = (time.getMonth() + 1).toString().padStart(2, '0')
+    const year = time.getFullYear()
     
-    let hour = time.getHours().toString().padStart(2, '0')
-    let minute = time.getMinutes().toString().padStart(2, '0')
+    const hour = time.getHours().toString().padStart(2, '0')
+    const minute = time.getMinutes().toString().padStart(2, '0')
 
     return `${hour}:${minute}, ${day}/${month}, ${year}`
 }

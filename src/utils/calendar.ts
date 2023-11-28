@@ -178,9 +178,7 @@ eventsToCalendarFormatProps) {
             timeZone: "Europe/Oslo",
             status: "CONFIRMED",
             availability: "BUSY",
-            alarms: [
-                { relativeOffset: -30 }
-            ]
+            alarms: [{ relativeOffset: -30 }]
         }
         formattedEvents.push(obj)
     }

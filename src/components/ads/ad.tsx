@@ -57,10 +57,7 @@ export default function AdInfo({ad}: {ad: AdProps}) {
                 }}>
                     {lang ? "Sted: " : "Location: "}
                 </Text>
-                <Text style={{
-                    ...AS.adInfo, 
-                    color: theme.textColor
-                }}>
+                <Text style={{...AS.adInfo, color: theme.textColor}}>
                     {loc}
                 </Text>
             </View>
@@ -72,10 +69,7 @@ export default function AdInfo({ad}: {ad: AdProps}) {
                 }}>
                     {lang ? "Ansettelsesform: " : "Position: "}
                 </Text>
-                <Text style={{
-                    ...AS.adInfo, 
-                    color: theme.textColor
-                }}>
+                <Text style={{...AS.adInfo, color: theme.textColor}}>
                     {type}
                 </Text>
             </View>
@@ -87,10 +81,7 @@ export default function AdInfo({ad}: {ad: AdProps}) {
                 }}>
                     {lang ? "Frist: " : "Deadline: "}
                 </Text>
-                <Text style={{
-                    ...AS.adInfo, 
-                    color: theme.textColor
-                }}>
+                <Text style={{...AS.adInfo, color: theme.textColor}}>
                     {deadline}
                 </Text>
             </View>
@@ -227,18 +218,12 @@ export function AdClusterLocation({ad}: AdClusterLocationProps) {
     return (
         <View style={AS.locationView}>
             <View style = {{...AS.title}}>
-                <Text style={{
-                    ...AS.title, 
-                    color: theme.textColor
-                }}>
+                <Text style={{...AS.title, color: theme.textColor}}>
                     {name}
                 </Text>
             </View>
             <View style={{flexDirection: "row"}}>
-                <Text style={{
-                    ...AS.loc,
-                    color: theme.oppositeTextColor
-                }}>
+                <Text style={{...AS.loc,color: theme.oppositeTextColor}}>
                     {info}
                 </Text>
             </View>
@@ -264,41 +249,25 @@ export function AdDescription({ad}: {ad: DetailedAd}) {
 
     return (
         <View style={{marginBottom: 10}}>
-            <Text style={{
-                ...AS.adInfoBold, 
-                color: theme.textColor
-            }}>
+            <Text style={{...AS.adInfoBold, color: theme.textColor}}>
                 Kort fortalt
             </Text>
-            <Text style={{
-                ...T.paragraph, 
-                color: theme.textColor
-            }}>
+            <Text style={{...T.paragraph, color: theme.textColor}}>
                 {shortDescription}
             </Text>
             <Space height={10} /> 
-            <Text style={{
-                ...AS.adInfoBold, 
-                color: theme.textColor
-                }}>{lang ? "Ferdigheter" : "Skills"}</Text>
-            <Text style={{
-                ...T.paragraph, 
-                color: theme.textColor
-                }}>
-                    {skills}
-                </Text>
-                <Space height={10} /> 
-            <Text style={{
-                ...AS.adInfoBold, 
-                color: theme.textColor
-                }}>
-                    Om stillingen
-                </Text>
+            <Text style={{...AS.adInfoBold, color: theme.textColor}}>
+                {lang ? "Ferdigheter" : "Skills"}
+            </Text>
+            <Text style={{...T.paragraph, color: theme.textColor}}>
+                {skills}
+            </Text>
+            <Space height={10} /> 
+            <Text style={{...AS.adInfoBold, color: theme.textColor}}>
+                Om stillingen
+            </Text>
             {LongDescription && <RenderHTML
-                baseStyle={{
-                    maxWidth: "100%",
-                    color: theme.textColor,
-                }}
+                baseStyle={{maxWidth: "100%",color: theme.textColor}}
                 contentWidth={0}
                 source={{html: LongDescription}}
             />}
@@ -428,10 +397,7 @@ export function AdTitle({ad}: {ad: DetailedAd}) {
             || logo?.endsWith(".jpeg") 
             || logo?.endsWith(".gif")
         ) && logo?.includes("http")) {
-            return <Image 
-                style={AS.adBannerSmall}
-                source={{uri: logo}}
-            />
+            return <Image style={AS.adBannerSmall} source={{uri: logo}} />
         }
 
         // Handles missing asset (default png)
@@ -448,10 +414,7 @@ export function AdTitle({ad}: {ad: DetailedAd}) {
     return (
         <View style={AS.adTitleView}>
             <Logo />
-            <Text style={{
-                ...AS.specificAdTitle, 
-                color: theme.textColor
-            }}>
+            <Text style={{...AS.specificAdTitle, color: theme.textColor}}>
                 {title}
             </Text>
         </View>
@@ -483,10 +446,7 @@ export function AdUpdateInfo({ad}: {ad: DetailedAd}) {
             }}>
                 {text[0]} {updated}.
             </Text>
-            <Text style={{
-                ...T.contact,
-                color: theme.oppositeTextColor
-            }}>
+            <Text style={{...T.contact,color: theme.oppositeTextColor}}>
                 {text[1]} {created}.
             </Text>
         </View>

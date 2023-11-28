@@ -119,10 +119,7 @@ export function LinkButton({ url, text }: LinkButtonProps) {
                 ...AS.adButton,
                 backgroundColor: theme.orange
             }}>
-                <Text style={{
-                    ...AS.adButtonText,
-                    color: theme.textColor
-                }}>
+                <Text style={{...AS.adButtonText, color: theme.textColor}}>
                     {text}
                 </Text>
             </View>

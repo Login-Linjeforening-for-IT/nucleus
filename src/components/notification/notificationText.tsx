@@ -19,18 +19,12 @@ export default function NotificationText({title, body}: NotificationTextProps) {
     return (
         <View>
             <View>
-                <Text style={{
-                    ...NS.title, 
-                    color: theme.textColor
-                }}>
+                <Text style={{...NS.title, color: theme.textColor}}>
                     {title}
                 </Text>
             </View>
             <View style={{flexDirection: "row"}}>
-                <Text style={{
-                    ...NS.loc,
-                    color: theme.oppositeTextColor
-                }}>
+                <Text style={{...NS.loc, color: theme.oppositeTextColor}}>
                     {body}
                 </Text>
             </View>

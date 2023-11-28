@@ -21,10 +21,7 @@ export default function Language() {
     return (
         <View>
             <TouchableOpacity onPress={() =>  dispatch(changeLang()) }>
-                <Text style={{
-                    ...SS.langSwitch,
-                    color: theme.textColor
-                }}>
+                <Text style={{...SS.langSwitch, color: theme.textColor}}>
                     {lang ? "EN" : "NO"}
                 </Text>
             </TouchableOpacity>

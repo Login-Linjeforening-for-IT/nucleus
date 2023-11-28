@@ -38,10 +38,7 @@ export default function InternalScreen(): JSX.Element {
     return (
         <Swipe left="MenuScreen">
             <View>
-                <View style={{
-                        ...GS.content, 
-                        backgroundColor: theme.darker
-                }}>
+                <View style={{...GS.content, backgroundColor: theme.darker}}>
                     <FlatList
                         showsVerticalScrollIndicator={false}
                         numColumns={1}
@@ -67,10 +64,7 @@ function Option({index, item}: OptionProps): JSX.Element {
             <TouchableOpacity onPress={() => topic({topicID: 
                 "maintenance", lang: index === 1 ? true : undefined})}>
                 <Cluster>
-                    <Text style={{
-                        ...T.centered20, 
-                        color: theme.textColor
-                        }}>
+                    <Text style={{...T.centered20, color: theme.textColor}}>
                         {item.title}
                     </Text>
                 </Cluster>

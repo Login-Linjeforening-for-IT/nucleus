@@ -20,25 +20,25 @@ export default function SpecificAdScreen(): JSX.Element {
 
     return (
         <Swipe left="AdScreen">
-                <View>
-                    <View style={{
-                        ...AS.content,
-                        backgroundColor: theme.darker,
-                        paddingTop: Dimensions.get("window").height / 9.7,
-                        paddingBottom: Dimensions.get("window").height / 3
-                    }}>
-                        <ScrollView showsVerticalScrollIndicator={false}>
-                            <Cluster marginHorizontal={12} marginVertical={12}>
-                                <AdBanner url={ad.banner_image} />
-                                <AdTitle ad={ad} />
-                                <AdInfo ad={ad} />
-                                <AdDescription ad={ad} />
-                                <AdMedia ad={ad} />
-                                <AdUpdateInfo ad={ad} />
-                            </Cluster>
-                        </ScrollView>
-                    </View>
+            <View>
+                <View style={{
+                    ...AS.content,
+                    backgroundColor: theme.darker,
+                    paddingTop: Dimensions.get("window").height / 9.7,
+                    paddingBottom: Dimensions.get("window").height / 3
+                }}>
+                    <ScrollView showsVerticalScrollIndicator={false}>
+                        <Cluster marginHorizontal={12} marginVertical={12}>
+                            <AdBanner url={ad.banner_image} />
+                            <AdTitle ad={ad} />
+                            <AdInfo ad={ad} />
+                            <AdDescription ad={ad} />
+                            <AdMedia ad={ad} />
+                            <AdUpdateInfo ad={ad} />
+                        </Cluster>
+                    </ScrollView>
                 </View>
+            </View>
         </Swipe>
     )
 }

@@ -16,18 +16,12 @@ export default function Countdown() {
                 <Card>
                     <View style={{left: -10}}>
                     <CategorySquare color={event.category_color} />
-                    <Text style={{
-                        ...ES.eventClusterDayText, 
-                        color: theme.textColor
-                    }}>
+                    <Text style={{...ES.eventClusterDayText, color: theme.textColor}}>
                         {event.time_start[8]}
                         {event.time_start[9]}
                     </Text>
 
-                    <Text style={{
-                        ...ES.monthText, 
-                        color: theme.textColor
-                    }}>
+                    <Text style={{...ES.monthText, color: theme.textColor}}>
                     <Month
                         month={parseInt(event.time_start[5] + event.time_start[6])}
                         color={theme.textColor}
@@ -35,10 +29,7 @@ export default function Countdown() {
                     </Text>
                     </View>
                 </Card>
-                <EventTime
-                    time_start={event.time_start}
-                    time_end={event.time_end} 
-                />
+                <EventTime time_start={event.time_start} time_end={event.time_end} />
             </View>
         </CardSmaller>
     )

@@ -26,15 +26,11 @@ export default function Map() {
             }}>
                 <View style={ES.row}>
                     <Text 
-                        style={{
-                            ...T.specificEventInfo, 
-                            color: theme.textColor
-                        }}>
+                        style={{...T.specificEventInfo, color: theme.textColor}}>
                             {" - "}
                         </Text>
-                    <Text 
-                        style={{...T.mazemap, color: theme.orange}}>
-                                {lang ? "Kart" : "Map"}
+                    <Text style={{...T.mazemap, color: theme.orange}}>
+                        {lang ? "Kart" : "Map"}
                     </Text>
                     <Image 
                         style={ES.mazemapIcon} 

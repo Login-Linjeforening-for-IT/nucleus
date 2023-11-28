@@ -1,6 +1,5 @@
 import Cluster from "@/components/shared/cluster"
 import en from "@text/menu/companies/en.json"
-
 import no from "@text/menu/companies/no.json"
 import Paragraph from "@/components/business/paragraph"
 import React from "react"
@@ -20,10 +19,7 @@ export default function BusinessScreen(): JSX.Element {
     return (
         <Swipe left="MenuScreen">
             <View>
-                <View style={{
-                    ...GS.content, 
-                    backgroundColor: theme.darker
-                }}>
+                <View style={{...GS.content, backgroundColor: theme.darker}}>
                     <ScrollView showsVerticalScrollIndicator={false}>
                         <Space height={Dimensions.get("window").height / 8.1 + 10} /> 
                         <Content />

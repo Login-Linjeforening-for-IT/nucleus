@@ -43,9 +43,7 @@ export default function Reminders() {
                         ...GS.reminderDropdown, 
                         backgroundColor: theme.darker
                     }}>
-                        <Text style={{
-                            ...T.text20, 
-                            color: theme.textColor}}>
+                        <Text style={{...T.text20, color: theme.textColor}}>
                                 {cat.title}
                         </Text>
                         <Image

@@ -92,18 +92,15 @@ ProfileInfoContentProps) {
         <Cluster noColor={true} marginHorizontal={12}>
             <View style={{...CS.clusterBack}}>
                 <View style={CS.evenTwinLeft}>
-                    <Text style={{
-                        ...T.text20,
-                        color: theme.textColor
-                    }}>
+                    <Text style={{...T.text20, color: theme.textColor}}>
                         {type[index]}
                     </Text>
                 </View>
                 <View style={CS.evenTwinRight}>
                     <View style={{...CS.twinLeft, top: 6.75, left: -20}}>
                         <Text style={{
-                                ...T.text15, textAlign: "right",
-                                color: theme.oppositeTextColor
+                            ...T.text15, textAlign: "right",
+                            color: theme.oppositeTextColor
                         }}>
                             {index === 0 && profile.degree}
                             {index === 1 && profile.schoolyear}

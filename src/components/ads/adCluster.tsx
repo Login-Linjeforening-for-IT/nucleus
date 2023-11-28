@@ -8,13 +8,7 @@ import { AdClusterLocation, AdClusterImage } from "@/components/ads/ad"
 import { setAd, setClickedAds, toggleSearch } from "@redux/ad"
 import { useNavigation } from "@react-navigation/native"
 import { useSelector, useDispatch } from "react-redux"
-import {
-    TouchableOpacity,
-    Dimensions,
-    Text,
-    View,
-    Platform,
-} from "react-native"
+import { TouchableOpacity, Dimensions, Text, View, Platform } from "react-native"
 import { Navigation } from "@interfaces"
 
 type Ad = {
@@ -80,7 +74,7 @@ export default function AdCluster({ad, index}: Ad): JSX.Element {
 export function ListFooter ({index}: ListFooterProps): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
-    const { search, lastFetch, renderedAds, skills } = useSelector((state: ReduxState) => state.ad)
+    const { lastFetch, renderedAds, skills } = useSelector((state: ReduxState) => state.ad)
 
     return (
         <>

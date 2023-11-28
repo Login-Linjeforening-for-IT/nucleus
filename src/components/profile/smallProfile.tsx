@@ -45,10 +45,7 @@ SmallProfileProps): JSX.Element {  // SVG showing the color of the category
                 <View style={PS.smallProfileMiddleTriplet}>
                     {typeof profile.id === "number" ?
                         <>
-                            <Text style={{
-                                ...T.text20,
-                                color: theme.textColor
-                            }}>
+                            <Text style={{...T.text20, color: theme.textColor}}>
                                 {profile.name}
                             </Text>
                             <Text style={{
@@ -59,10 +56,7 @@ SmallProfileProps): JSX.Element {  // SVG showing the color of the category
                             </Text>
                         </>
                     :
-                        <Text style={{
-                            ...T.text25,
-                            color: theme.textColor
-                        }}>
+                        <Text style={{...T.text25, color: theme.textColor}}>
                             Login
                         </Text>
                     }

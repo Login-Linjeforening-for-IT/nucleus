@@ -1,7 +1,7 @@
 import { View, Text } from "react-native"
 import { useSelector } from "react-redux"
 import T from "@styles/text"
-import React, { useEffect, useState } from "react"
+import React from "react"
 
 type EventTimeProps = {
     time_start: string

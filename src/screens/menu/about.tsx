@@ -80,17 +80,11 @@ export default function AboutScreen(): JSX.Element {
     return (
         <Swipe left="MenuScreen">
             <View>
-                <View style={{
-                    ...GS.content, 
-                    backgroundColor: theme.darker
-                }}>
+                <View style={{...GS.content, backgroundColor: theme.darker}}>
                     <ScrollView showsVerticalScrollIndicator={false}>
                         <Space height={Dimensions.get("window").height / 8.1} /> 
                         <Cluster>
-                            <Text style={{
-                                ...T.bold40, 
-                                color: theme.textColor
-                            }}>
+                            <Text style={{...T.bold40, color: theme.textColor}}>
                                 {text.title}
                             </Text>
                             <Space height={5} />

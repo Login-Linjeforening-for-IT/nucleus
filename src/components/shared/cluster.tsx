@@ -15,10 +15,7 @@ children }: ClusterProps) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
 
     return (
-        <View style={{backgroundColor: !noColor
-            ? theme.darker
-            : ""
-        }}>
+        <View style={{backgroundColor: !noColor ? theme.darker: ""}}>
             <View style={{
                 ...ES.clusterContent, 
                 marginVertical: marginVertical, 
@@ -41,9 +38,7 @@ export function ClusterSmaller ({children}: React.PropsWithChildren<{}>) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
 
     return (
-        <View style={{
-                ...ES.clusterSmaller,
-                backgroundColor: theme.darker}}>
+        <View style={{...ES.clusterSmaller, backgroundColor: theme.darker}}>
             <View>
                 { children }
             </View>

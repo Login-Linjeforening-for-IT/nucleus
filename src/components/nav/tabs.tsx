@@ -71,16 +71,14 @@ export default function Navigator(): JSX.Element {
                         <Tab.Screen 
                             key={screen.name} 
                             options={({
-                                tabBarIcon: ({focused})=>{
-                                    return (
-                                        <Image
-                                            style={MS.bMenuIcon} 
-                                            source={focused 
-                                                ? screen.focusedIcon
-                                                : screen.icon} 
-                                        />
-                                    )
-                                }
+                                tabBarIcon: ({focused}) => (
+                                    <Image
+                                        style={MS.bMenuIcon} 
+                                        source={focused 
+                                            ? screen.focusedIcon
+                                            : screen.icon} 
+                                    />
+                                )
                             })}
                             name={screen.name+"Root"}
                             component={screen.component}

@@ -75,10 +75,7 @@ export default function ReportScreen(): JSX.Element {
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
             <Swipe left="MenuScreen">
                 <View>
-                    <View style={{
-                        ...GS.content, 
-                        backgroundColor: theme.darker
-                    }}>
+                    <View style={{...GS.content, backgroundColor: theme.darker}}>
                     <View>
                     <Space height={Dimensions.get("window").height / 8.1 + 40} />
                         <Text style={{...T.centered, color: theme.textColor}}>{text.secure}</Text>
@@ -130,16 +127,16 @@ export default function ReportScreen(): JSX.Element {
                                 onChangeText={(val) => inputContact(val)}
                                 selectionColor={theme.orange}
                                 />
-                                    {data.check_contactInputChange ?
-                                <View>
-                                <View style = {SS.greenLight}><GreenLight/></View>
-                                <View style = {SS.checkContent}><Check/></View>
-                                </View>
+                                {data.check_contactInputChange ?
+                                    <View>
+                                        <View style = {SS.greenLight}><GreenLight/></View>
+                                        <View style = {SS.checkContent}><Check/></View>
+                                    </View>
                                 :
-                                <View>
-                                <View style = {SS.greenLight}><RedLight/></View>
-                                <View style = {SS.checkContent}><Check/></View>
-                                </View>
+                                    <View>
+                                        <View style = {SS.greenLight}><RedLight/></View>
+                                        <View style = {SS.checkContent}><Check/></View>
+                                    </View>
                                 }
                                 </View>
                             </CardSmaller>
@@ -151,10 +148,10 @@ export default function ReportScreen(): JSX.Element {
                                 <CardSmaller>
                                 <View style={SS.reportContentView}>
                                     <TextInput
-                                    multiline={true}
-                                    style={{...GS.reportInputContentText, color: theme.textColor}}
-                                    placeholder = {text.what}
-                                    placeholderTextColor={theme.titleTextColor}
+                                        multiline={true}
+                                        style={{...GS.reportInputContentText, color: theme.textColor}}
+                                        placeholder = {text.what}
+                                        placeholderTextColor={theme.titleTextColor}
                                         textAlign="center"
                                         onChangeText={(val) => inputContent(val)}
                                         selectionColor={theme.orange}

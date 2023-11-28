@@ -156,18 +156,14 @@ toggleFeedback}: MenuItemProps) {
                 <Cluster>
                     <View style={{...CS.clusterBack}}>
                         <View style={CS.twinLeft}>
-                            <Text style={{
-                                ...T.text20, 
-                                color: theme.textColor}}>
-                                    {item.title}
+                            <Text style={{...T.text20, color: theme.textColor}}>
+                                {item.title}
                             </Text>
                         </View>
                         <View style={CS.twinRight}>
                             <Image 
                                 style={CS.arrowImage}
-                                source={
-                                    require("@assets/icons/dropdownBase.png")
-                                }
+                                source={require("@assets/icons/dropdownBase.png")}
                             />
                         </View>
                     </View>
@@ -183,10 +179,7 @@ toggleFeedback}: MenuItemProps) {
                 />
             </View>
             {index === setting.length-1 
-            ?   <Text style={{
-                    ...T.contact, 
-                    color: theme.oppositeTextColor
-                }}>
+            ?   <Text style={{...T.contact, color: theme.oppositeTextColor}}>
                     {info.version}{nativeApplicationVersion}
                 </Text>
             : null}

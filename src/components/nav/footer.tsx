@@ -19,9 +19,7 @@ export default function Footer({ state, descriptors, navigation }: BottomTabBarP
                     backgroundColor: theme.transparentAndroid
                 }} />
             {/* Transparent container for the icons */}
-            <View style={{
-                    ...MS.bMenu,
-                }}>
+            <View style={MS.bMenu}>
                 {/* Create the icons based on options passed from stack.js */}
                 {state.routes.map((route, 
                     index: number) => {
@@ -44,10 +42,7 @@ export default function Footer({ state, descriptors, navigation }: BottomTabBarP
                     }
 
                     function onLongPress() {
-                        navigation.emit({
-                            type: "tabLongPress",
-                            target: route.key,
-                        })
+                        navigation.emit({type: "tabLongPress", target: route.key})
                     }
 
                     return (

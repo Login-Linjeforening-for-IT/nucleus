@@ -74,37 +74,28 @@ function Content(): JSX.Element {
             <Cluster>
                 <View style={GS.notificationBack}>
                 <View style={GS.view}>
-                    <Text style={{
-                        ...GS.notificationText, 
-                        color: theme.textColor
-                        }}>
+                    <Text style={{...GS.notificationText, color: theme.textColor}}>
                             {info[1].title}
                         </Text>
                     <Text style={{
                         ...GS.notificationTip, 
                         color: theme.oppositeTextColor
-                        }}>
-                            {info[1].description}
-                        </Text>
+                    }}>
+                        {info[1].description}
+                    </Text>
                 </View>
                     <Language/>
                 </View>
             </Cluster>
 
             <Space height={10} />
-            <Text style={{
-                ...T.text30, 
-                color: theme.oppositeTextColor
-            }}>
+            <Text style={{...T.text30, color: theme.oppositeTextColor}}>
                     {info[2].title}
             </Text>
             <Space height={10} />
             <SwitchCluster obj={info[3]} category="IMPORTANT" />
             <Space height={10} />
-            <Text style={{
-                ...T.text25, 
-                color: theme.oppositeTextColor
-            }}>
+            <Text style={{...T.text25, color: theme.oppositeTextColor}}>
                 {info[4].title}
             </Text>
             <Space height={10} />
@@ -118,10 +109,7 @@ function Content(): JSX.Element {
             <SwitchCluster obj={info[12]} category="ANNET" />
 
             <Space height={10} />
-            <Text style={{
-                ...T.text25,
-                color: theme.oppositeTextColor
-            }}>
+            <Text style={{...T.text25,color: theme.oppositeTextColor}}>
                 {info[13].title}
             </Text>
             <Space height={10} />

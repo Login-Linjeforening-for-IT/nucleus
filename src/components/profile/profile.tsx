@@ -70,11 +70,7 @@ export default function Profile({profile} : ProfileElementprops) {
                         <SmallProfileImage show={show} profile={profile} />
                     </View>
                     <View style={PS.rightTwin}>
-                        <MainProfileInfo 
-                            show={show}
-                            profile={profile}
-                            year={year}
-                        />
+                        <MainProfileInfo show={show} profile={profile} year={year} />
                     </View>
                 </View>
             </TouchableOpacity>
