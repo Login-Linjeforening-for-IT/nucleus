@@ -58,7 +58,6 @@ export const GS = StyleSheet.create({
     },
     committee: {
         borderRadius: 10,
-        // margin: Dimensions.get('window').width/120
     },
     image80: {
         alignSelf: "center",

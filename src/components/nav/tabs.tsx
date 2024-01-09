@@ -66,8 +66,7 @@ export default function Navigator(): JSX.Element {
                 />}
             >
                 {/* Maps over all screens, returning each of */}
-                {screens.map((screen: StackProps, index) => {
-                    return (
+                {screens.map((screen: StackProps) => (
                         <Tab.Screen 
                             key={screen.name} 
                             options={({
@@ -83,8 +82,7 @@ export default function Navigator(): JSX.Element {
                             name={screen.name+"Root"}
                             component={screen.component}
                         />
-                    )
-                })}
+                ))}
             </Tab.Navigator>
         </NavigationContainer>
     )

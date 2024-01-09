@@ -138,7 +138,7 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
                                 left: [<LogoNavigation />],
                                 right: [<FilterButton />, <DownloadButton />]
                             }} as Partial<BottomTabNavigationOptions>)   
-                    },[navigation])
+                    }, [navigation])
 
                     return (
                         <Swipe right="AdScreenRoot">

@@ -80,8 +80,9 @@ function BlurWrapper(props: PropsWithChildren) {
     const defaultHeight = Dimensions.get('window').height * 8 / 100 + (StatusBar.currentHeight ? StatusBar.currentHeight - 7 : 0)
     const isSearchingEvents = event.search && route.name === "EventScreen"
     const isSearchingAds = ad.search && route.name === "AdScreen"
+    const categories = typeof event.categories.length == 'number' ? event.categories.length : 0
     const extraHeight = isSearchingEvents 
-        ? 5 * event.categories.length 
+        ? 5 * categories
         : isSearchingAds 
             ? 14.5 * ad.skills.length
             : 1
