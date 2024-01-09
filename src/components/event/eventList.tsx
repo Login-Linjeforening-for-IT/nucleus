@@ -200,7 +200,7 @@ function Bell({item, notification}: BellProps): JSX.Element {
                 ))
             }}>
                 <View style={ES.bellPosition} >
-                    <BellIcon orange={isOrange} />
+                    <BellIcon orange={isOrange} canceled={item.canceled} />
                 </View>
             </TouchableOpacity>
         </View>
