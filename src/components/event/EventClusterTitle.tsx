@@ -3,7 +3,7 @@ import ES from "@styles/eventStyles"
 import React from "react"
 import { useSelector } from "react-redux"
 
-type EventClusterLocationProps = {
+type EventClusterTitleProps = {
     item: EventProps
 }
 
@@ -15,8 +15,8 @@ type EventClusterLocationProps = {
  * @param lang User language
  * @returns
  */
-export default function EventClusterLocation({item}: 
-EventClusterLocationProps): JSX.Element {
+export default function EventClusterTitle({item}: 
+    EventClusterTitleProps): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
     let time = " " + item.time_start[11] + item.time_start[12] + ":" + 
@@ -26,6 +26,7 @@ EventClusterLocationProps): JSX.Element {
     const location_no = item.location_name_no ? item.location_name_no : "Mer info TBA!"
     const location_en = item.location_name_en ? item.location_name_en : "More info TBA!"
 
+    const title = lang ? item.name_no : item.name_en
     const location = (lang ? location_no : location_en).trim()
     const info = (time + lang ? location_no : location_en).trim()
 
@@ -33,7 +34,7 @@ EventClusterLocationProps): JSX.Element {
         <View style={ES.view2}>
             <View style = {{...ES.title}}>
                 <Text style={{...ES.title, color: theme.textColor}}>
-                    {location}
+                    {title}
                 </Text>
             </View>
             <View style={{flexDirection: "row"}}>

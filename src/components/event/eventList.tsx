@@ -1,5 +1,5 @@
 import notificationArray from "@/utils/notificationArray"
-import EventClusterLocation from "@components/event/eventClusterLocation"
+import EventClusterTitle from "@components/event/EventClusterTitle"
 import CategorySquare from "@/components/shared/category"
 import topic from "@/utils/topic"
 import Space, { ErrorMessage, Month } from "@/components/shared/utils"
@@ -100,7 +100,7 @@ JSX.Element {
                 <Cluster marginVertical={8}>
                     <View style={ES.eventBack}>
                         <FullCategorySquare item={item} />
-                        <EventClusterLocation item={item} />
+                        <EventClusterTitle item={item} />
                         <Bell item={item} notification={notification} />
                     </View>
                 </Cluster>
