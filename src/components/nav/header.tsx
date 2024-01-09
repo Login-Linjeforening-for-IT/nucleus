@@ -36,7 +36,7 @@ export default function Header({ options, route, navigation }: HeaderProps): Rea
                     {options.headerComponents?.left ? options.headerComponents?.left.map((node, index) => 
                         <View style={GS.logo} key={index}>{node}</View> 
                     ) : 
-                    <TouchableOpacity onPress={()=>{
+                    <TouchableOpacity onPress={() => {
                         setBackIcon(orangeIcon)
                         navigation.goBack()
                     }}>
