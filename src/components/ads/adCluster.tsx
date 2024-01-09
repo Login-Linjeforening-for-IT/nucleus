@@ -10,6 +10,7 @@ import { useNavigation } from "@react-navigation/native"
 import { useSelector, useDispatch } from "react-redux"
 import { TouchableOpacity, Dimensions, Text, View, Platform } from "react-native"
 import { Navigation } from "@interfaces"
+import { LinearGradient } from "expo-linear-gradient"
 
 type Ad = {
     ad: AdProps
@@ -17,7 +18,7 @@ type Ad = {
 }
 
 export default function AdCluster({ad, index}: Ad): JSX.Element {
-    const { search, clickedAds, skills } = useSelector((state: ReduxState) => state.ad)
+    const { search, clickedAds } = useSelector((state: ReduxState) => state.ad)
     const dispatch = useDispatch()
     const isOrange = clickedAds.some(ads => ads.id === ad.id) ? true : false
     const navigation: Navigation = useNavigation()
@@ -36,14 +37,11 @@ export default function AdCluster({ad, index}: Ad): JSX.Element {
                 dispatch(setAd(ad))
                 navigation.navigate("SpecificAdScreen")
             }}>
-                {index === 0
-                    ? search === false
-                        ? <Space height={Dimensions.get("window").height / (Platform.OS === "ios" ? 8.4 : 8)} />
-                        : <Space height={Platform.OS === "ios" 
-                            ? Dimensions.get("window").height / (skills.length / 23.2)
-                            : Dimensions.get("window").height / (skills.length / 23.2)} />
-                    : null}
-                <Cluster marginVertical={4}>
+                <LinearGradient start={[0, 0.5]}
+                  end={[1, 0.5]}
+                  colors={ad.highlight?['#FF512F', '#F09819', '#FF512F']:['#000000cc', '#000000cc']}
+                  style={{borderRadius: 5, marginBottom: ad.highlight?4:0}}>
+                <Cluster marginVertical={4} highlight={ad.highlight}>
                     <View style={AS.adBack}>
                         <View style={AS.adViewLeft}>
                             <AdClusterImage url={logo} />
@@ -51,15 +49,14 @@ export default function AdCluster({ad, index}: Ad): JSX.Element {
                         <View style={AS.adViewMid}>
                             <AdClusterLocation ad={ad} />
                         </View>
-                        <View style={AS.adViewRight}>
-                            <TouchableOpacity onPress={handleClick}>
-                                <View style = {AS.bellPosition}>
-                                    <BellIcon orange={isOrange} />
-                                </View>
-                            </TouchableOpacity>
-                        </View>
+                        <TouchableOpacity onPress={handleClick}>
+                            <View style = {AS.bellPosition}>
+                                <BellIcon orange={isOrange} />
+                            </View>
+                        </TouchableOpacity>
                     </View>
                 </Cluster>
+                </LinearGradient>
             </TouchableOpacity>
             <ListFooter index={index} />
         </>
@@ -83,7 +80,7 @@ export function ListFooter ({index}: ListFooterProps): JSX.Element {
                     {lang ? "Oppdatert kl:":"Updated:"} {lastFetch}.
                 </Text>}
             {index === renderedAds.length - 1 && 
-                <Space height={Dimensions.get("window").height / 3 + 20}/>}
+                <Space height={Dimensions.get("window").height / 5 + 25}/>}
             
         </>
     )

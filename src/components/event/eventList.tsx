@@ -20,6 +20,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { setClickedEvents, setEvent, toggleSearch } from "@redux/event"
 import { useNavigation } from "@react-navigation/native"
 import { Navigation } from "@interfaces"
+import { LinearGradient } from "expo-linear-gradient"
 
 type EventListProps = {
     notification: NotificationProps
@@ -52,6 +53,12 @@ export default function EventList ({notification}: EventListProps): JSX.Element 
     } else if (renderedEvents.length > 0) {
         return (
             <View>
+                {search === false
+                    ? <Space height={Dimensions.get("window").height / (Platform.OS === "ios" ? 8.4 : 8)} />
+                    : <Space height={Platform.OS === "ios" 
+                    ? Dimensions.get("window").height / 4
+                    : Dimensions.get("window").height / 3.6} />
+                }
                 <FlatList
                     style={{minHeight: "100%"}}
                     showsVerticalScrollIndicator={false}
@@ -84,26 +91,25 @@ JSX.Element {
     const dispatch = useDispatch()
 
     return (
-        <View>
+        <View style={item.highlight&&{marginVertical: 2}}>
             <TouchableOpacity onPress={() => {
                 search && dispatch(toggleSearch())
                 dispatch(setEvent(item))
                 navigation.navigate("SpecificEventScreen")
             }}>
-                {index === 0
-                    ? search === false
-                        ? <Space height={Dimensions.get("window").height / (Platform.OS === "ios" ? 8.4 : 8)} />
-                        : <Space height={Platform.OS === "ios" 
-                        ? Dimensions.get("window").height / 4
-                        : Dimensions.get("window").height / 3.6} />
-                    : null}
-                <Cluster marginVertical={8}>
+                <LinearGradient start={[0, 0.5]}
+                  end={[1, 0.5]}
+                  // The non highlited items get wraped in an transparrent container
+                  colors={item.highlight?['#FF512F', '#F09819', '#FF512F']:['#000000cc', '#000000cc']}
+                  style={{borderRadius: 5, marginBottom: item.highlight?4:0}}>
+                <Cluster marginVertical={8} highlight={item.highlight}>
                     <View style={ES.eventBack}>
                         <FullCategorySquare item={item} />
                         <EventClusterTitle item={item} />
                         <Bell item={item} notification={notification} />
                     </View>
                 </Cluster>
+                </LinearGradient>
             </TouchableOpacity>
             <ListFooter index={index} />
         </View>

@@ -7,19 +7,17 @@ export const AS = StyleSheet.create({
     adBack: {
         flexDirection: "row",
         alignItems: "center",
+        marginHorizontal: 2
     },
     adViewLeft: {
         alignItems: "center",
-        width: "23.5%",
     },
     adViewMid: {
         justifyContent: "center",
         left: Platform.OS === "ios" ? 7.5 : 10,
         paddingHorizontal: 6,
-        width: "68%",
-    },
-    adViewRight: {
-        width: "8.5%",
+        marginRight: 'auto',
+        width: '55%'
     },
     locationView: {
         justifyContent: "center",
@@ -81,7 +79,7 @@ export const AS = StyleSheet.create({
         flexDirection: "row",
     },
     bellPosition: {
-        left: -4.2,
+        // left: -4.2,
     },
     adBannerSmall: {
         top: 1.7,

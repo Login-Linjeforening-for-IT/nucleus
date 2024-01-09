@@ -3,7 +3,7 @@ import { StyleSheet, Dimensions, Platform } from "react-native"
 export const GS = StyleSheet.create({
     // Main view of every screen
     content: {
-        height: Dimensions.get("window").height + 200,
+        height: Dimensions.get("window").height+30,
         paddingHorizontal: 12
     },
     // ReportScreen description text

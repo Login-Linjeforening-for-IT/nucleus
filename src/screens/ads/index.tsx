@@ -154,7 +154,8 @@ export default function AdScreen({ navigation }: ScreenProps): JSX.Element {
                             <View>
                                 <StatusBar style={isDark ? "light" : "dark"} />
                                 <View style={{
-                                    ...GS.content, 
+                                    ...GS.content,
+                                    paddingHorizontal: 5,
                                     backgroundColor: theme.darker
                                 }}>
                                     {pushNotification && pushNotificationContent}
