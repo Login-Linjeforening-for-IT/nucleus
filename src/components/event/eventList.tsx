@@ -20,6 +20,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { setClickedEvents, setEvent, toggleSearch } from "@redux/event"
 import { useNavigation } from "@react-navigation/native"
 import { Navigation } from "@interfaces"
+import Seperator from "./seperator"
 
 type EventListProps = {
     notification: NotificationProps
@@ -41,15 +42,48 @@ type BellProps = {
     notification: NotificationProps
 }
 
+type SeperatedEventsProps = {
+    item: EventProps
+    index: number
+}
+
 /**
  * Displays the event list
  */
 export default function EventList ({notification}: EventListProps): JSX.Element {
     const { events, search, renderedEvents } = useSelector((state: ReduxState) => state.event)
 
+    function SeperatedEvents({item, index}: SeperatedEventsProps) {
+        const previousStart = index > 0 && 'time_start' in renderedEvents[index - 1] ? renderedEvents[index - 1].time_start : undefined
+        const previousTimeDifference = previousStart ? (new Date(previousStart).valueOf() - new Date().valueOf()) / 1000 : 0
+        const timeDifference = (new Date(item.time_start).valueOf() - new Date().valueOf()) / 1000
+
+        if (!previousStart) console.log(previousStart)
+
+        return (
+            <>
+                {index === 0
+                    ? search === false
+                        ? <Space height={Dimensions.get("window").height / (Platform.OS === "ios" ? 8.4 : 8)} />
+                        : <Space height={Platform.OS === "ios" 
+                        ? Dimensions.get("window").height / 4
+                        : Dimensions.get("window").height / 3.6} />
+                    : null}
+                <Seperator timeDifference={timeDifference} previousTimeDifference={previousTimeDifference} />
+                <EventCluster
+                    notification={notification}
+                    item={item}
+                    index={index}
+                    key={index}
+                />
+            </>
+        )
+    }
+
     if (!renderedEvents.length && !search) {
         return <ErrorMessage argument="wifi" />
     } else if (renderedEvents.length > 0) {
+        console.log(renderedEvents[0])
         return (
             <View>
                 <FlatList
@@ -59,8 +93,7 @@ export default function EventList ({notification}: EventListProps): JSX.Element 
                     keyExtractor={(item) => `${item.id}`}
                     data={renderedEvents}
                     renderItem={({item, index}) =>
-                        <EventCluster
-                            notification={notification}
+                        <SeperatedEvents
                             item={item}
                             index={index}
                             key={index}
@@ -90,13 +123,6 @@ JSX.Element {
                 dispatch(setEvent(item))
                 navigation.navigate("SpecificEventScreen")
             }}>
-                {index === 0
-                    ? search === false
-                        ? <Space height={Dimensions.get("window").height / (Platform.OS === "ios" ? 8.4 : 8)} />
-                        : <Space height={Platform.OS === "ios" 
-                        ? Dimensions.get("window").height / 4
-                        : Dimensions.get("window").height / 3.6} />
-                    : null}
                 <Cluster marginVertical={8}>
                     <View style={ES.eventBack}>
                         <FullCategorySquare item={item} />
