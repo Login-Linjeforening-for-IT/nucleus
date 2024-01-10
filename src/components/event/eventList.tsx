@@ -48,6 +48,16 @@ type BellProps = {
 export default function EventList ({notification}: EventListProps): JSX.Element {
     const { events, search, renderedEvents } = useSelector((state: ReduxState) => state.event)
 
+    const highlight: EventProps[] = [], nonHighlight: EventProps[] = []
+    for(let i = 0; i<renderedEvents.length; i++){
+        if(renderedEvents[i].highlight){
+            highlight.push(renderedEvents[i]);
+        }
+        else{
+            nonHighlight.push(renderedEvents[i]);
+        }
+    }
+
     if (!renderedEvents.length && !search) {
         return <ErrorMessage argument="wifi" />
     } else if (renderedEvents.length > 0) {
@@ -64,7 +74,7 @@ export default function EventList ({notification}: EventListProps): JSX.Element 
                     showsVerticalScrollIndicator={false}
                     numColumns={1}
                     keyExtractor={(item) => `${item.id}`}
-                    data={renderedEvents}
+                    data={highlight}
                     renderItem={({item, index}) =>
                         <EventCluster
                             notification={notification}
@@ -73,7 +83,21 @@ export default function EventList ({notification}: EventListProps): JSX.Element 
                             key={index}
                         />
                     }
-                />
+                /><FlatList
+                style={{minHeight: "100%"}}
+                showsVerticalScrollIndicator={false}
+                numColumns={1}
+                keyExtractor={(item) => `${item.id}`}
+                data={nonHighlight}
+                renderItem={({item, index}) =>
+                    <EventCluster
+                        notification={notification}
+                        item={item}
+                        index={index}
+                        key={index}
+                    />
+                }
+            />
             </View>
         )
     } else {
