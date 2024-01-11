@@ -12,6 +12,9 @@ export default function AdList (): JSX.Element {
     const { ads, search, renderedAds } = useSelector((state: ReduxState) => state.ad)
     const { skills } = useSelector((state: ReduxState) => state.ad)
 
+    let adList: AdProps[] = [...renderedAds] // Copies renderedEvents because it's read only
+    adList.sort((a, b)=>(Number(b.highlight)-Number(a.highlight)))
+
     if (!renderedAds.length && !search) {
         return <ErrorMessage argument="wifi" />
     } else if (renderedAds.length > 0) {
@@ -27,7 +30,7 @@ export default function AdList (): JSX.Element {
                     showsVerticalScrollIndicator={false}
                     numColumns={1}
                     keyExtractor={(ad) => `${ad.id}`}
-                    data={renderedAds}
+                    data={adList}
                     renderItem={({item, index}) => (
                         <AdCluster index={index} ad={item} />
                     )}
