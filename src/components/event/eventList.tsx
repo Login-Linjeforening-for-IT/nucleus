@@ -58,8 +58,6 @@ export default function EventList ({notification}: EventListProps): JSX.Element 
         const previousTimeDifference = previousStart ? (new Date(previousStart).valueOf() - new Date().valueOf()) / 1000 : 0
         const timeDifference = (new Date(item.time_start).valueOf() - new Date().valueOf()) / 1000
 
-        if (!previousStart) console.log(previousStart)
-
         return (
             <>
                 {index === 0
@@ -83,7 +81,6 @@ export default function EventList ({notification}: EventListProps): JSX.Element 
     if (!renderedEvents.length && !search) {
         return <ErrorMessage argument="wifi" />
     } else if (renderedEvents.length > 0) {
-        console.log(renderedEvents[0])
         return (
             <View>
                 <FlatList
