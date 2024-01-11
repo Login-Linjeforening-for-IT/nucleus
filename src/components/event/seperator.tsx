@@ -26,12 +26,13 @@ export default function Seperator({timeDifference, previousTimeDifference}: Sepe
     if (!content) return null
 
     return (
-        <View style={{flexDirection: "row", justifyContent: "center", top: 5}}>
-            <Line width={width} height={1} fill={theme.oppositeTextColor} />
-            <Text style={{top: -8, color: theme.oppositeTextColor, marginHorizontal: 8}}>
+        <View style={{justifyContent: "center", top: -5, left: 3}}>
+            <Text style={{color: theme.oppositeTextColor, backgroundColor: theme.darker, alignSelf: "center", paddingHorizontal: 8, top: 2, zIndex: 1}}>
                 {content}
             </Text>
-            <Line width={width} height={1} fill={theme.oppositeTextColor} />
+            <View style={{top: -5,}}>
+                <Line width={Dimensions.get("window").width * 0.92} height={1} fill={theme.oppositeTextColor} />
+            </View>
         </View>
     )
-}
+}   
