@@ -38,6 +38,7 @@ export const ES = StyleSheet.create({
         left: 5,
         top: -5,
         fontSize: 20,
+        maxHeight: 45
     },
     // Eventlocation text on eventScreen
     loc: {
@@ -113,7 +114,7 @@ export const ES = StyleSheet.create({
     },
     // Card content styling
     clusterContent: {
-        paddingTop: 3,
+        paddingTop: 6,
         marginHorizontal: 15,
         marginVertical: 4,
     },

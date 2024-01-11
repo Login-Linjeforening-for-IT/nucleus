@@ -104,7 +104,7 @@ JSX.Element {
                   end={[1, 0.5]}
                   // The non highlited items get wraped in an transparrent container
                   colors={item.highlight?['#FF512F', '#F09819', '#FF512F']:['#000000cc', '#000000cc']}
-                  style={{borderRadius: 5, marginBottom: item.highlight?4:0}}>
+                  style={{borderRadius: 5, marginBottom: item.highlight?4:0, position: 'relative'}}>
                 <Cluster marginVertical={8} highlight={item.highlight}>
                     <View style={ES.eventBack}>
                         <FullCategorySquare item={item} />
