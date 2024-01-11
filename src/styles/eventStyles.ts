@@ -110,7 +110,7 @@ export const ES = StyleSheet.create({
     },
     clusterWraper: {
         borderRadius: 5, 
-        paddingHorizontal: 2
+        paddingHorizontal: 2,
     },
     // Card content styling
     clusterContent: {
