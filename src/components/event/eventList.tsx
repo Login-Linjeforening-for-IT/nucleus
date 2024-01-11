@@ -48,8 +48,9 @@ type BellProps = {
 export default function EventList ({notification}: EventListProps): JSX.Element {
     const { events, search, renderedEvents } = useSelector((state: ReduxState) => state.event)
 
-    let eventList: EventProps[] = [...renderedEvents] // Copies renderedEvents because it's read only
-    eventList.sort((a, b)=>(Number(b.highlight)-Number(a.highlight)))
+    // Copies renderedEvents because it's read only
+    let eventList: EventProps[] = [...renderedEvents]
+    eventList.sort((a, b) => (Number(b.highlight) - Number(a.highlight)))
 
     if (!renderedEvents.length && !search) {
         return <ErrorMessage argument="wifi" />
@@ -94,7 +95,7 @@ JSX.Element {
     const dispatch = useDispatch()
 
     return (
-        <View style={item.highlight&&{marginVertical: 2}}>
+        <View style={item.highlight && {marginVertical: 2}}>
             <TouchableOpacity onPress={() => {
                 search && dispatch(toggleSearch())
                 dispatch(setEvent(item))
@@ -103,15 +104,16 @@ JSX.Element {
                 <LinearGradient start={[0, 0.5]}
                   end={[1, 0.5]}
                   // The non highlited items get wraped in an transparrent container
-                  colors={item.highlight?['#FF512F', '#F09819', '#FF512F']:['#000000cc', '#000000cc']}
-                  style={{borderRadius: 5, marginBottom: item.highlight?4:0}}>
-                <Cluster marginVertical={8} highlight={item.highlight}>
-                    <View style={ES.eventBack}>
-                        <FullCategorySquare item={item} />
-                        <EventClusterTitle item={item} />
-                        <Bell item={item} notification={notification} />
-                    </View>
-                </Cluster>
+                  colors={item.highlight ? ['#FF512F', '#F09819', '#FF512F'] : ['#000000cc', '#000000cc']}
+                  style={{borderRadius: 5, marginBottom: item.highlight ? 2 : 0
+                }}>
+                    <Cluster marginVertical={8} highlight={item.highlight}>
+                        <View style={ES.eventBack}>
+                            <FullCategorySquare item={item} />
+                            <EventClusterTitle item={item} />
+                            <Bell item={item} notification={notification} />
+                        </View>
+                    </Cluster>
                 </LinearGradient>
             </TouchableOpacity>
             <ListFooter index={index} />
