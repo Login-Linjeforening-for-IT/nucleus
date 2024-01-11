@@ -20,6 +20,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { setClickedEvents, setEvent, toggleSearch } from "@redux/event"
 import { useNavigation } from "@react-navigation/native"
 import { Navigation } from "@interfaces"
+import { LinearGradient } from "expo-linear-gradient"
 import Seperator from "./seperator"
 
 type EventListProps = {
@@ -53,23 +54,14 @@ type SeperatedEventsProps = {
 export default function EventList ({notification}: EventListProps): JSX.Element {
     const { events, search, renderedEvents } = useSelector((state: ReduxState) => state.event)
 
+    // Copies renderedEvents because it's read only
+    let eventList: EventProps[] = [...renderedEvents]
+    eventList.sort((a, b) => (Number(b.highlight) - Number(a.highlight)))
+
     function SeperatedEvents({item, index}: SeperatedEventsProps) {
-        const previousStart = index > 0 && 'time_start' in renderedEvents[index - 1] ? renderedEvents[index - 1].time_start : undefined
-        const previousTimeDifference = previousStart ? (new Date(previousStart).valueOf() - new Date().valueOf()) / 1000 : 0
-        const timeDifference = (new Date(item.time_start).valueOf() - new Date().valueOf()) / 1000
-
-        if (!previousStart) console.log(previousStart)
-
         return (
             <>
-                {index === 0
-                    ? search === false
-                        ? <Space height={Dimensions.get("window").height / (Platform.OS === "ios" ? 8.4 : 8)} />
-                        : <Space height={Platform.OS === "ios" 
-                        ? Dimensions.get("window").height / 4
-                        : Dimensions.get("window").height / 3.6} />
-                    : null}
-                <Seperator timeDifference={timeDifference} previousTimeDifference={previousTimeDifference} />
+                <Seperator item={item} index={index} eventList={eventList}/>
                 <EventCluster
                     notification={notification}
                     item={item}
@@ -83,15 +75,21 @@ export default function EventList ({notification}: EventListProps): JSX.Element 
     if (!renderedEvents.length && !search) {
         return <ErrorMessage argument="wifi" />
     } else if (renderedEvents.length > 0) {
-        console.log(renderedEvents[0])
+        
         return (
             <View>
+                {search === false
+                    ? <Space height={Dimensions.get("window").height / (Platform.OS === "ios" ? 8.4 : 8)} />
+                    : <Space height={Platform.OS === "ios" 
+                    ? Dimensions.get("window").height / 4
+                    : Dimensions.get("window").height / 3.6} />
+                }
                 <FlatList
                     style={{minHeight: "100%"}}
                     showsVerticalScrollIndicator={false}
                     numColumns={1}
                     keyExtractor={(item) => `${item.id}`}
-                    data={renderedEvents}
+                    data={eventList}
                     renderItem={({item, index}) =>
                         <SeperatedEvents
                             item={item}
@@ -117,19 +115,26 @@ JSX.Element {
     const dispatch = useDispatch()
 
     return (
-        <View>
+        <View style={item.highlight && {marginVertical: 2}}>
             <TouchableOpacity onPress={() => {
                 search && dispatch(toggleSearch())
                 dispatch(setEvent(item))
                 navigation.navigate("SpecificEventScreen")
             }}>
-                <Cluster marginVertical={8}>
-                    <View style={ES.eventBack}>
-                        <FullCategorySquare item={item} />
-                        <EventClusterTitle item={item} />
-                        <Bell item={item} notification={notification} />
-                    </View>
-                </Cluster>
+                <LinearGradient start={[0, 0.5]}
+                  end={[1, 0.5]}
+                  // The non highlited items get wraped in an transparrent container
+                  colors={item.highlight ? ['#FF512F', '#F09819', '#FF512F'] : ['#000000cc', '#000000cc']}
+                  style={{borderRadius: 5, marginBottom: item.highlight ? 2 : 0
+                }}>
+                    <Cluster marginVertical={8} highlight={item.highlight}>
+                        <View style={ES.eventBack}>
+                            <FullCategorySquare item={item} />
+                            <EventClusterTitle item={item} />
+                            <Bell item={item} notification={notification} />
+                        </View>
+                    </Cluster>
+                </LinearGradient>
             </TouchableOpacity>
             <ListFooter index={index} />
         </View>
