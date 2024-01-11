@@ -173,10 +173,6 @@ export const GS = StyleSheet.create({
     headerView: {
         position: "absolute",
         zIndex: 1,
-        // When filter is enabled
-        top: Dimensions.get("window").height / 17,
-        // When filter is disabled
-        // top: Platform.OS === "ios" ? 20 : 10,
         display: 'flex', 
         flexDirection: 'row', 
     },
