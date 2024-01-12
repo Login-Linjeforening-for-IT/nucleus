@@ -1,13 +1,12 @@
 import Cluster from "@/components/shared/cluster"
 import Space from "@/components/shared/utils"
-
 import GS from "@styles/globalStyles"
 import React, { useEffect, useState } from "react"
 import { Navigation, NotificationScreenProps } from "@interfaces"
 import { useSelector } from "react-redux"
 import { FullCategorySquare } from "@components/event/eventList"
 import TopMenu from "@/components/shared/topMenu"
-import { View, Text, FlatList, Dimensions, TouchableOpacity } from "react-native"
+import { View, Text, Dimensions, TouchableOpacity } from "react-native"
 import NS from "@styles/notificationStyles"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import NotificationText from "@/components/notification/notificationText"
@@ -33,17 +32,8 @@ export default function NotificationScreen({navigation, back}: NotificationScree
     }, [list])
 
     function List(): JSX.Element {
-        return (
-            <FlatList
-                showsVerticalScrollIndicator={false}
-                numColumns={1}
-                keyExtractor={(item, index) => index.toString()}
-                data={list}
-                renderItem={({item}) => (
-                    <Notification item={item} navigation={navigation} />
-                )}
-            />
-        )
+        if (!list) return <></>
+        return list.map((item) => <Notification item={item} navigation={navigation} />)
     }
 
     return (

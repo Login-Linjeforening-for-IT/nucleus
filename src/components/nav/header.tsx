@@ -42,7 +42,7 @@ export default function Header({ options, route, navigation }: HeaderProps): Rea
                         setBackIcon(orangeIcon)
                         navigation.goBack()
                     }}>
-                        <Image style={MS.tMenuIcon} source={backIcon}></Image>
+                        <Image style={{...MS.tMenuIcon, left: 5}} source={backIcon}></Image>
                     </TouchableOpacity>
                     }
                 </View>

@@ -13,7 +13,6 @@ export const MS = StyleSheet.create ({
     // Top menu background view
     topMenu: {
         position: "absolute",
-        left: "-2.5%",
         width: "105%",
         flexDirection: "row",
         justifyContent: "space-between",
@@ -23,13 +22,6 @@ export const MS = StyleSheet.create ({
     tMenuIcon: {
         width: 32,
         height: 32,
-    },
-    // Size of goBack icon
-    goBack: {
-        top: "52%",
-        left: "140%",
-        width: 25,
-        height: 25,
     },
     multiIcon: {
         height: 24,

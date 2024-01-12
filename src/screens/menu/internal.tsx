@@ -1,19 +1,12 @@
 import topic from "@/utils/topic"
 import Cluster from "@/components/shared/cluster"
 import Space from "@/components/shared/utils"
-
 import GS from "@styles/globalStyles"
 import { useSelector } from "react-redux"
 import T from "@styles/text"
 import React from "react"
 import Swipe from "@components/nav/swipe"
-import {
-  Text,
-  View,
-  FlatList,
-  TouchableOpacity,
-  Dimensions,
-} from "react-native"
+import { Text, View, TouchableOpacity, Dimensions } from "react-native"
 
 
 type OptionProps = {
@@ -39,15 +32,7 @@ export default function InternalScreen(): JSX.Element {
         <Swipe left="MenuScreen">
             <View>
                 <View style={{...GS.content, backgroundColor: theme.darker}}>
-                    <FlatList
-                        showsVerticalScrollIndicator={false}
-                        numColumns={1}
-                        keyExtractor={(item) => `${item.id}`}
-                        data={setting}
-                        renderItem={({item, index}) => (
-                            <Option index={index} item={item} />
-                        )}
-                    />
+                    {setting.map((item, index) => <Option index={index} item={item} />)}
                     <Space height={Dimensions.get("window").height / 3}/>
                 </View>
             </View>

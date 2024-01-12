@@ -3,7 +3,6 @@ import { Navigation } from "@interfaces"
 import Feedback from "@/components/menu/feedback"
 import Cluster from "@/components/shared/cluster"
 import Space from "@/components/shared/utils"
-
 import CS from "@styles/clusterStyles"
 import GS from "@styles/globalStyles"
 import { useSelector } from "react-redux"
@@ -28,7 +27,6 @@ import {
   Text,
   View,
   Image,
-  FlatList,
   TouchableOpacity,
   Dimensions,
 } from "react-native"
@@ -100,29 +98,23 @@ export default function MenuScreen(): JSX.Element {
                             }}>
                                 <Space height={Dimensions.get("window").height / 9} />
                                 <SmallProfile navigation={navigation} profile={profile} login={login} />
-                                <FlatList
-                                    style={{minHeight: "100%"}}
-                                    showsVerticalScrollIndicator={false}
-                                    numColumns={1}
-                                    keyExtractor={(item) => `${item.id}`}
-                                    data={text.setting}
-                                    renderItem={({item, index}) => {
-                                        if (item.nav === "ProfileScreen") return null
-                                        if (item.nav === "LoginScreen" && login) return null
-                                        if (item.nav === "InternalScreen" && !login) return null
-                                        return (
-                                            <MenuItem 
-                                                index={index}
-                                                item={item}
-                                                navigation={navigation}
-                                                setting={text.setting}
-                                                feedback={feedback}
-                                                toggleFeedback={toggleFeedback}
-                                                login={login}
-                                            />
-                                        )
-                                    }}
-                                />
+                                {text.setting.map((item, index) => {
+                                    if (item.nav === "ProfileScreen") return null
+                                    if (item.nav === "LoginScreen" && login) return null
+                                    if (item.nav === "InternalScreen" && !login) return null
+                                    return (
+                                        <MenuItem 
+                                            index={index}
+                                            item={item}
+                                            navigation={navigation}
+                                            setting={text.setting}
+                                            feedback={feedback}
+                                            toggleFeedback={toggleFeedback}
+                                            login={login}
+                                            key={index}
+                                        />
+                                    )
+                                })}
                                 <Space height={Dimensions.get("window").height / 10} /> 
                             </View>
                         </Swipe>

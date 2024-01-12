@@ -38,7 +38,6 @@ export const ES = StyleSheet.create({
         left: 5,
         top: -5,
         fontSize: 20,
-        maxHeight: 45
     },
     // Eventlocation text on eventScreen
     loc: {

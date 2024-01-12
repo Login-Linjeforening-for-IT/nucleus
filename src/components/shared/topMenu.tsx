@@ -48,7 +48,6 @@ export default function TopMenu({ navigation, title, screen, back }
                 {back ?
                     <TouchableOpacity onPress={() => goBack()}>
                         <Image
-                            style={MS.goBack}
                             source={require("@assets/icons/goback777.png")}
                         />
                     </TouchableOpacity>

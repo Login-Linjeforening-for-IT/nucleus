@@ -36,7 +36,7 @@ export interface ClusterProps extends React.PropsWithChildren<{}> {
     noColor?: boolean
     marginVertical?: DimensionValue
     marginHorizontal?: DimensionValue
-    highlight: boolean
+    highlight?: boolean
 }
 
 export type NotificationScreenProps = {
