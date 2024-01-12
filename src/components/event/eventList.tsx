@@ -58,10 +58,10 @@ export default function EventList ({notification}: EventListProps): JSX.Element 
     let eventList: EventProps[] = [...renderedEvents]
     eventList.sort((a, b) => (Number(b.highlight) - Number(a.highlight)))
 
-    function SeperatedEvents({item, index}: SeperatedEventsProps) {
+    function SeperatedEvents({item, index}: SeperatedEventsProps) { 
         return (
             <>
-                <Seperator item={item} index={index} eventList={eventList}/>
+                <Seperator item={item} index={index} />
                 <EventCluster
                     notification={notification}
                     item={item}
@@ -75,7 +75,6 @@ export default function EventList ({notification}: EventListProps): JSX.Element 
     if (!renderedEvents.length && !search) {
         return <ErrorMessage argument="wifi" />
     } else if (renderedEvents.length > 0) {
-        
         return (
             <View>
                 {search === false
@@ -147,7 +146,7 @@ JSX.Element {
 export function ListFooter ({index}: ListFooterProps): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
-    const { search, lastFetch, renderedEvents } = useSelector((state: ReduxState) => state.event)
+    const { lastFetch, renderedEvents } = useSelector((state: ReduxState) => state.event)
 
     return (
         <>
@@ -156,7 +155,7 @@ export function ListFooter ({index}: ListFooterProps): JSX.Element {
                     {lang ? "Oppdatert kl:":"Updated:"} {lastFetch}.
                 </Text>}
             {index === renderedEvents.length - 1 && 
-                <Space height={Dimensions.get("window").height / 3 + 20}/>}
+                <Space height={Dimensions.get("window").height / 3 + 40}/>}
         </>
     )
 }
