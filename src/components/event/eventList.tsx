@@ -69,3 +69,98 @@ export default function EventList ({notification}: EventListProps): JSX.Element 
         return <ErrorMessage argument={!events.length ? "wifi" : "nomatch"} />
     }
 }
+
+/**
+ * Displays one element of the event card array
+ */
+function EventCluster ({notification, item, index}: EventClusterProps): 
+JSX.Element {
+    const { search } = useSelector((state: ReduxState) => state.event)
+    const navigation: Navigation = useNavigation()
+    const dispatch = useDispatch()
+
+    return (
+        <View>
+            <TouchableOpacity onPress={() => {
+                search && dispatch(toggleSearch())
+                dispatch(setEvent(item))
+                navigation.navigate("SpecificEventScreen")
+            }}>
+                <Cluster marginVertical={4}>
+                    <View style={ES.eventBack}>
+                        <FullCategorySquare item={item} />
+                        <EventClusterTitle item={item} />
+                        <Bell item={item} notification={notification} />
+                    </View>
+                </Cluster>
+            </TouchableOpacity>
+            <ListFooter index={index} />
+        </View>
+    )
+}
+
+/**
+ * Displays the footer last fetch time item
+ */
+export function ListFooter ({index}: ListFooterProps): JSX.Element {
+    const { theme } = useSelector((state: ReduxState) => state.theme)
+    const { lang } = useSelector((state: ReduxState) => state.lang)
+    const { search, lastFetch, renderedEvents } = useSelector((state: ReduxState) => state.event)
+
+    return (
+        <>
+            {index === renderedEvents.length-1 && <Text style={{...T.contact, 
+                color: theme.oppositeTextColor}}>
+                    {lang ? "Oppdatert kl:":"Updated:"} {lastFetch}.
+                </Text>}
+            {index === renderedEvents.length - 1 && 
+                <Space height={Dimensions.get("window").height / 3 + 20}/>}
+        </>
+    )
+}
+
+/**
+ * Displays the category square to the left of each event in the list on the EventScreen
+ */
+export function FullCategorySquare({item, height}: FullCategorySquareProps): JSX.Element {
+    const startDate = item?.time_start ? new Date(item.time_start) : new Date()
+    const endDate = item?.time_type=="default" ? new Date(item.time_end) : undefined
+
+    return (
+        <View style={{minWidth: 65, flexDirection: 'row'}}>
+            <CategorySquare color={item.category_color} height={height} startDate={startDate} endDate={endDate}/>
+        </View>
+    )
+}
+
+/**
+ * Displays the bell to the right of every event in the eventlist
+ */
+function Bell({item, notification}: BellProps): JSX.Element {
+    const { clickedEvents } = useSelector((state: ReduxState) => state.event)
+    const { lang } = useSelector((state: ReduxState) => state.lang)
+    const dispatch = useDispatch()
+    const category = lang ? item.category_name_no : item.category_name_en
+    const isOrange = clickedEvents.some(event => event.id === item.id) 
+        ? true 
+        : false
+    
+    return (
+        <View style={ES.view3}>
+            <TouchableOpacity style={{paddingBottom: 10}} onPress={() => {
+                topic({topicID: `${item.id}`, lang, status: false, 
+                    category: (category).toLowerCase(), catArray: 
+                    notificationArray({notification, category})})
+                dispatch(setClickedEvents(
+                    clickedEvents.some(event => event.id === item.id)
+                    ? clickedEvents.filter((x) => x.id !== item.id)
+                    : [...clickedEvents, item]
+                ))
+            }}>
+                <View style={ES.bellPosition} >
+                    <BellIcon orange={isOrange} />
+                </View>
+            </TouchableOpacity>
+        </View>
+    )
+}
