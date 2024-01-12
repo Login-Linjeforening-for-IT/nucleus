@@ -3,7 +3,7 @@ import { StyleSheet, Dimensions, Platform } from "react-native"
 export const GS = StyleSheet.create({
     // Main view of every screen
     content: {
-        height: Dimensions.get("window").height + 200,
+        height: Dimensions.get("window").height+30,
         paddingHorizontal: 12
     },
     // ReportScreen description text
@@ -173,10 +173,6 @@ export const GS = StyleSheet.create({
     headerView: {
         position: "absolute",
         zIndex: 1,
-        // When filter is enabled
-        top: Dimensions.get("window").height / 17,
-        // When filter is disabled
-        // top: Platform.OS === "ios" ? 20 : 10,
         display: 'flex', 
         flexDirection: 'row', 
     },

@@ -141,7 +141,7 @@ export function AdClusterImage({url}: {url: string | undefined}) {
     // Handles svg icons
     if (url?.endsWith(".svg")) {
         return <SvgUri
-            style={{alignSelf: "center", backgroundColor: "white"}}
+            style={{alignSelf: "center", backgroundColor: "white", borderRadius: 5}}
             width={90}
             height={60}
             uri={`https://cdn.login.no/img/events/${url}`}

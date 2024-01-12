@@ -59,7 +59,8 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
         React.useCallback(() => {
             // IIFE to fetch clicked events
             (async() => {
-                const events = await fetchEvents()
+                let events = await fetchEvents()
+            events[events.length-1].highlight = true
 
                 if (events) {
                     dispatch(setEvents(events))
@@ -73,7 +74,8 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
     useEffect(() => {
         // IIFE to fetch API
         (async() => {
-            const events = await fetchEvents()
+            let events = await fetchEvents()
+            events[events.length-1].highlight = true
 
             if (events) {
                 dispatch(setEvents(events))
@@ -93,7 +95,8 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
             interval = setInterval(() => {
                 // Storing the current time
                 (async() => {
-                    const events = await fetchEvents()
+                    let events = await fetchEvents()
+            events[events.length-1].highlight = true
 
                     if (events) {
                         dispatch(setEvents(events))
@@ -145,7 +148,8 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
                             <View>
                                 <StatusBar style={isDark ? "light" : "dark"} />
                                 <View style={{
-                                    ...GS.content, 
+                                    ...GS.content,
+                                    paddingHorizontal: 5,
                                     backgroundColor: theme.darker
                                 }}>
                                     {pushNotification && pushNotificationContent}

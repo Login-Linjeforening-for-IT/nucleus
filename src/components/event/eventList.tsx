@@ -20,6 +20,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { setClickedEvents, setEvent, toggleSearch } from "@redux/event"
 import { useNavigation } from "@react-navigation/native"
 import { Navigation } from "@interfaces"
+import { LinearGradient } from "expo-linear-gradient"
 import Seperator from "./seperator"
 
 type EventListProps = {
@@ -53,21 +54,14 @@ type SeperatedEventsProps = {
 export default function EventList ({notification}: EventListProps): JSX.Element {
     const { events, search, renderedEvents } = useSelector((state: ReduxState) => state.event)
 
-    function SeperatedEvents({item, index}: SeperatedEventsProps) {
-        const previousStart = index > 0 && 'time_start' in renderedEvents[index - 1] ? renderedEvents[index - 1].time_start : undefined
-        const previousTimeDifference = previousStart ? (new Date(previousStart).valueOf() - new Date().valueOf()) / 1000 : 0
-        const timeDifference = (new Date(item.time_start).valueOf() - new Date().valueOf()) / 1000
+    // Copies renderedEvents because it's read only
+    let eventList: EventProps[] = [...renderedEvents]
+    eventList.sort((a, b) => (Number(b.highlight) - Number(a.highlight)))
 
+    function SeperatedEvents({item, index}: SeperatedEventsProps) { 
         return (
             <>
-                {index === 0
-                    ? search === false
-                        ? <Space height={Dimensions.get("window").height / (Platform.OS === "ios" ? 8.4 : 8)} />
-                        : <Space height={Platform.OS === "ios" 
-                        ? Dimensions.get("window").height / 4
-                        : Dimensions.get("window").height / 3.6} />
-                    : null}
-                <Seperator timeDifference={timeDifference} previousTimeDifference={previousTimeDifference} />
+                <Seperator item={item} index={index} />
                 <EventCluster
                     notification={notification}
                     item={item}
@@ -83,12 +77,18 @@ export default function EventList ({notification}: EventListProps): JSX.Element 
     } else if (renderedEvents.length > 0) {
         return (
             <View>
+                {search === false
+                    ? <Space height={Dimensions.get("window").height / (Platform.OS === "ios" ? 8.4 : 8)} />
+                    : <Space height={Platform.OS === "ios" 
+                    ? Dimensions.get("window").height / 4
+                    : Dimensions.get("window").height / 3.6} />
+                }
                 <FlatList
                     style={{minHeight: "100%"}}
                     showsVerticalScrollIndicator={false}
                     numColumns={1}
                     keyExtractor={(item) => `${item.id}`}
-                    data={renderedEvents}
+                    data={eventList}
                     renderItem={({item, index}) =>
                         <SeperatedEvents
                             item={item}
@@ -114,19 +114,26 @@ JSX.Element {
     const dispatch = useDispatch()
 
     return (
-        <View>
+        <View style={item.highlight && {marginVertical: 2}}>
             <TouchableOpacity onPress={() => {
                 search && dispatch(toggleSearch())
                 dispatch(setEvent(item))
                 navigation.navigate("SpecificEventScreen")
             }}>
-                <Cluster marginVertical={8}>
-                    <View style={ES.eventBack}>
-                        <FullCategorySquare item={item} />
-                        <EventClusterTitle item={item} />
-                        <Bell item={item} notification={notification} />
-                    </View>
-                </Cluster>
+                <LinearGradient start={[0, 0.5]}
+                  end={[1, 0.5]}
+                  // The non highlited items get wraped in an transparrent container
+                  colors={item.highlight ? ['#FF512F', '#F09819', '#FF512F'] : ['#000000cc', '#000000cc']}
+                  style={{borderRadius: 5, marginBottom: item.highlight ? 2 : 0
+                }}>
+                    <Cluster marginVertical={8} highlight={item.highlight}>
+                        <View style={ES.eventBack}>
+                            <FullCategorySquare item={item} />
+                            <EventClusterTitle item={item} />
+                            <Bell item={item} notification={notification} />
+                        </View>
+                    </Cluster>
+                </LinearGradient>
             </TouchableOpacity>
             <ListFooter index={index} />
         </View>
@@ -179,16 +186,29 @@ function Bell({item, notification}: BellProps): JSX.Element {
     const { clickedEvents } = useSelector((state: ReduxState) => state.event)
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const dispatch = useDispatch()
-    const category = lang ? item.category_name_no : item.category_name_en
+    // Uses available language if possible, otherwise uses other language
+    const category = lang 
+        ? (item.category_name_no || item.category_name_en) 
+        : (item.category_name_en || item.category_name_no)
+    // Checks if the bell should be orange instead of gray
     const isOrange = clickedEvents.some(event => event.id === item.id) 
         ? true 
         : false
+    
+    // Prevents X from being clickable
+    if (item.canceled) return (
+        <View style={ES.view3}>
+            <View style={ES.bellPosition} >
+                <BellIcon orange={isOrange} canceled={item.canceled} />
+            </View>
+        </View>
+    )
     
     return (
         <View style={ES.view3}>
             <TouchableOpacity style={{paddingBottom: 10}} onPress={() => {
                 topic({topicID: `${item.id}`, lang, status: false, 
-                    category: (category).toLowerCase(), catArray: 
+                    category: category.toLowerCase(), catArray: 
                     notificationArray({notification, category})})
                 dispatch(setClickedEvents(
                     clickedEvents.some(event => event.id === item.id)
@@ -197,7 +217,7 @@ function Bell({item, notification}: BellProps): JSX.Element {
                 ))
             }}>
                 <View style={ES.bellPosition} >
-                    <BellIcon orange={isOrange} />
+                    <BellIcon orange={isOrange} canceled={item.canceled} />
                 </View>
             </TouchableOpacity>
         </View>
