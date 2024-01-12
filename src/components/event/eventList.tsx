@@ -146,7 +146,7 @@ JSX.Element {
 export function ListFooter ({index}: ListFooterProps): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
-    const { search, lastFetch, renderedEvents } = useSelector((state: ReduxState) => state.event)
+    const { lastFetch, renderedEvents } = useSelector((state: ReduxState) => state.event)
 
     return (
         <>
@@ -155,7 +155,7 @@ export function ListFooter ({index}: ListFooterProps): JSX.Element {
                     {lang ? "Oppdatert kl:":"Updated:"} {lastFetch}.
                 </Text>}
             {index === renderedEvents.length - 1 && 
-                <Space height={Dimensions.get("window").height / 3 + 20}/>}
+                <Space height={Dimensions.get("window").height / 3 + 40}/>}
         </>
     )
 }
