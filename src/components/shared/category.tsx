@@ -1,4 +1,4 @@
-import { View, Text} from "react-native"
+import { View, Text, Platform} from "react-native"
 import React from "react"
 import { useSelector } from "react-redux"
 import T from "@styles/text"
@@ -18,7 +18,7 @@ type CategorySquareProps = {
  * @param {string} height Custom height
  * @returns Small square with rounded corners of the passed color
  */
-export default function CategorySquare({color, height, startDate, endDate}: CategorySquareProps): JSX.Element {
+export default function CategorySquare({color, startDate, endDate}: CategorySquareProps): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const startDay = startDate.getDate()
     const startMonth = startDate.getMonth()
@@ -28,7 +28,7 @@ export default function CategorySquare({color, height, startDate, endDate}: Cate
         <View style={{
             minWidth: 40,
             padding: 5,
-            // height: height ? 65 + height : 65,
+            height: Platform.OS === "ios" ? 65 : undefined, 
             borderRadius: 10, 
             backgroundColor: `#${color}`,
             justifyContent: 'center',
@@ -36,7 +36,7 @@ export default function CategorySquare({color, height, startDate, endDate}: Cate
         }}>
             <Text style={{...ES.eventClusterDayText, color: theme.textColor}}>
                 {startDay}
-                {endDay&&"-"+endDay}
+                {endDay && "-" + endDay}
             </Text>
             <Month month={startMonth} color={theme.textColor} />
         </View>)

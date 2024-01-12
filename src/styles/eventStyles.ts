@@ -20,11 +20,11 @@ export const ES = StyleSheet.create({
     },
     // Eventmonth text on specificEventScreen
     monthText: {
-        fontSize: Platform.OS === "ios" ? 20 : 18,
+        fontSize: Platform.OS === "ios" ? 18 : 18,
     },
     // Eventday text on eventScreen
     eventClusterDayText: {
-        fontSize: Platform.OS === "ios" ? 25 : 22,
+        fontSize: Platform.OS === "ios" ? 20 : 22,
     },
     // Event name text on eventScreen
     title: {
