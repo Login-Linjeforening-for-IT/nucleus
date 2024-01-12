@@ -46,11 +46,11 @@ JSX.Element {
                   colors={item.highlight ? ['#FF512F', '#F09819', '#FF512F'] : ['#000000cc', '#000000cc']}
                   style={{borderRadius: 5, marginBottom: item.highlight ? 2 : 0
                 }}>
-                    <Cluster marginVertical={8} highlight={item.highlight}>
-                        <View style={{...ES.eventBack, left: embed ? -5 : 0}}>
+                    <Cluster marginVertical={4} highlight={item.highlight}>
+                        <View style={ES.eventBack}>
                             <FullCategorySquare item={item} />
                             <EventClusterTitle item={item} />
-                            <Bell item={item} notification={notification} embed={embed} />
+                            <Bell item={item} notification={notification} />
                         </View>
                     </Cluster>
                 </LinearGradient>
@@ -84,17 +84,12 @@ function ListFooter ({index}: ListFooterProps): JSX.Element {
  * Displays the category square to the left of each event in the list on the EventScreen
  */
 function FullCategorySquare({item, height}: FullCategorySquareProps): JSX.Element {
-    const day = "time_start" in item ? `${item.time_start[8]}${item.time_start[9]}` : new Date().getDate()
-    const month = "time_start" in item ? parseInt(item.time_start[5] + item.time_start[6]) : new Date().getMonth() + 1
-    const { theme } = useSelector((state: ReduxState) => state.theme)
+    const startDate = item?.time_start ? new Date(item.time_start) : new Date()
+    const endDate = item?.time_type=="default" ? new Date(item.time_end) : undefined
 
     return (
-        <View>
-            <CategorySquare color={item.category_color} height={height} />
-            <Text style={{...ES.eventClusterDayText, color: theme.textColor}}>
-                {day}
-            </Text>
-            <Month month={month} color={theme.textColor} />
+        <View style={{minWidth: 65, flexDirection: 'row'}}>
+            <CategorySquare color={item.category_color} height={height} startDate={startDate} endDate={endDate}/>
         </View>
     )
 }

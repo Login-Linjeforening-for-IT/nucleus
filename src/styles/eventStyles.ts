@@ -99,13 +99,11 @@ export const ES = StyleSheet.create({
     },
     clusterWraper: {
         borderRadius: 5, 
-        paddingHorizontal: 2,
+        // paddingHorizontal: 2,
+        // margin: 4
     },
     // Card content styling
     clusterContent: {
-        // paddingTop: 3,
-        // marginHorizontal: 15,
-        // marginVertical: 4,
     },
     // Smaller card
     clusterSmaller: {

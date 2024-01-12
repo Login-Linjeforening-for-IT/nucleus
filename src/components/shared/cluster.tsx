@@ -15,7 +15,7 @@ children, highlight }: ClusterProps) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
 
     return (
-        <View style={{backgroundColor: !noColor ? theme.darker : "", margin: highlight ? 4 : 0, ...ES.clusterWraper,}}>
+        <View style={{backgroundColor: !noColor ? theme.darker : "", margin: highlight ? 4 : 0, paddingHorizontal: !highlight?6:4, ...ES.clusterWraper,}}>
             <View style={{...ES.clusterContent, marginVertical, marginHorizontal}}>
                 { children }
             </View>
