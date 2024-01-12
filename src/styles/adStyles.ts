@@ -24,7 +24,7 @@ export const AS = StyleSheet.create({
     },
     title: {
         maxHeight: Platform.OS === "ios" ? 20 * 3 : 17 * 2.5,
-        fontSize: Platform.OS === "ios" ? 20 : 17,
+        fontSize: 18
     },
     specificAdTitle: {
         maxWidth: "72.5%",
@@ -69,6 +69,7 @@ export const AS = StyleSheet.create({
         marginTop: 5
     },
     loc: {
+        top: 3,
         fontSize: Platform.OS === "ios" ? 15 : 13,
     },
     adTitleView: {

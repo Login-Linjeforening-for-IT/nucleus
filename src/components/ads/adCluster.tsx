@@ -37,7 +37,7 @@ export default function AdCluster({ad, index, embed}: Ad): JSX.Element {
             : 0
         : ad.highlight
         ? -3
-        : -10
+        : -5
 
     function handleClick() {
         dispatch(setClickedAds(clickedAds.some(ads => ads.id === ad.id)
