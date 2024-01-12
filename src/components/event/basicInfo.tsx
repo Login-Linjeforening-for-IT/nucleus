@@ -24,7 +24,7 @@ export default function BasicInfo() {
             <Location />
             <Category />
             <View style={ES.specificEventInfoView}>
-            <Text style={{ ...T.specificEventInfo, color: theme.textColor }}>{text.host}</Text>
+                <Text style={{ ...T.specificEventInfo, color: theme.textColor }}>{text.host}</Text>
                 <Text style={{ ...T.specificEventInfoContent, color: theme.textColor }}>
                     {event.organization_name_short}
                     {event.link_stream && ' - '}
