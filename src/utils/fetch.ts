@@ -131,35 +131,6 @@ Promise<DetailedEvent> {
 }
 
 /**
- * Function for returning a forms, tikkio or nettskjema link from a string
- *
- * @param {string} string String containing forms, tikkio or nettskjema link
- * @returns Link as string
- */
-export function FetchJoinLink(string: string): string {
-    if (string != undefined) {
-        const formStart = string.lastIndexOf("https://forms")
-        const formEnd = string.lastIndexOf("</a>")
-
-        const tikkioStart = string.lastIndexOf("https://tikkio")
-        const tikkioEnd = string.lastIndexOf("</a>")
-
-        const netStart = string.lastIndexOf("https://nettskjema.no")
-        const netEnd = string.lastIndexOf("</a>")
-
-        const formLink = string.slice(formStart, formEnd)
-        const tikkioLink = string.slice(tikkioStart, tikkioEnd)
-        const netLink = string.slice(netStart, netEnd)
-
-        if (formLink)    return formLink.trim()
-        if (tikkioLink)  return tikkioLink.trim()
-        if (netLink)     return netLink.trim()
-    }
-
-    return ""
-}
-
-/**
  * Fetches data from API, formats the response, sets the cache, updates the 
  * events on the screen, catches any errors and fetches localstorage, and 
  * handles errors.
