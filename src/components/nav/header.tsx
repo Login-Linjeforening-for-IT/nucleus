@@ -18,20 +18,22 @@ export default function Header({ options, route, navigation }: HeaderProps): Rea
     let title = route.name && (lang 
             ? require('@text/no.json').screens[route.name] 
             : require('@text/en.json').screens[route.name])
-
+    
     if (!title && route.name === "SpecificEventScreen") title = lang ? event.name_no : event.name_en
     if (!title && route.name === "SpecificAdScreen") title = lang ? ad.title_no : ad.title_en
     if (route.name === "ProfileScreen") return <></>
 
     const { isDark } = useSelector((state: ReduxState) => state.theme )
-
     const  [backIcon, setBackIcon] = useState(isDark 
         ? require('@assets/icons/goback777.png')
         : require('@assets/icons/goback111.png'))
 
     return (
         <BlurWrapper>
-            <View style={{...GS.headerView}}>
+            <View style={{...GS.headerView, top: title.length > 40 ? 
+                Dimensions.get("window").height / 17 - 12
+                : Dimensions.get("window").height / 17
+            }}>
                 <View style={GS.innerHeaderViewOne}>
                     {options.headerComponents?.left ? options.headerComponents?.left.map((node, index) => 
                         <View style={GS.logo} key={index}>{node}</View> 
@@ -44,17 +46,10 @@ export default function Header({ options, route, navigation }: HeaderProps): Rea
                     </TouchableOpacity>
                     }
                 </View>
-                {
-                    title.length > 40 
-                    ?   <Text style={{...GS.headerTitle, color: 
-                            theme.titleTextColor}}>
+                <Text style={{...GS.headerTitle, color: theme.titleTextColor, 
+                            maxWidth: 300, textAlign: "center"}}>
                             {title}
                         </Text>
-                    :   <Text style={{...GS.headerTitle, color: 
-                        theme.titleTextColor}}>
-                            {title}
-                        </Text>
-                }
                     <View style={GS.innerHeaderViewTwo}>
                     {options.headerComponents?.right?.map((node, index) => (
                         <View style={index === 1
