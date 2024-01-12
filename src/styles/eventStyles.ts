@@ -128,8 +128,7 @@ export const ES = StyleSheet.create({
     },
     // Position of eventfilter check icon
     checkBox: {
-        top: "-50%",
-        right: 20,
+        top: "-45%",
     },
     // Eventfilter checked icon
     checkedBox: {
@@ -138,19 +137,15 @@ export const ES = StyleSheet.create({
     },
     // Checkmark on check icon
     checkedIconCheckMark: {
-        right: 18,
-        // Extremely small height as it cannot be 0 (should be revised
-        // to use absolute positioning so it doesnt depend on height)
-        top: "-1000000%",
-        height: 0.004,
+        top: 2,
+        left: 1
     },
     // View for categories inside the filter
     clusterCategoryView: {
         flexDirection: "row",
-        left: "9%",
-        top: 7,
+        left: 6,
         width: Dimensions.get("window").width / 3.1,
-        alignItems: "center"
+        alignItems: "center",
     },
     // Filter reset icon
     clusterFilterResetIcon: {

@@ -14,13 +14,15 @@ export default function Header({ options, route, navigation }: HeaderProps): Rea
     const { lang  } = useSelector((state: ReduxState) => state.lang)
     const { event } = useSelector((state: ReduxState) => state.event)
     const { ad } = useSelector((state: ReduxState) => state.ad )
+    const SES = route.name === "SpecificEventScreen"
+    const SAD = route.name === "SpecificAdScreen"
     const orangeIcon = require('@assets/icons/goback-orange.png')
-    let title = route.name && (lang 
+    let title = route.name && (lang
             ? require('@text/no.json').screens[route.name]
             : require('@text/en.json').screens[route.name])
     
-    if (!title && route.name === "SpecificEventScreen") title = lang ? event.name_no : event.name_en
-    if (!title && route.name === "SpecificAdScreen") title = lang ? ad.title_no : ad.title_en
+    if (!title && SES) title = lang ? event.name_no : event.name_en
+    if (!title && SAD) title = lang ? ad.title_no : ad.title_en
     if (route.name === "ProfileScreen") return <></>
 
     const { isDark } = useSelector((state: ReduxState) => state.theme )
@@ -47,7 +49,7 @@ export default function Header({ options, route, navigation }: HeaderProps): Rea
                     }
                 </View>
                 <Text style={{...GS.headerTitle, color: theme.titleTextColor, 
-                            width: 150, textAlign: "center"}}>
+                            width: SES ? 300 : 150, textAlign: "center"}}>
                             {title}
                         </Text>
                     <View style={GS.innerHeaderViewTwo}>
@@ -69,25 +71,19 @@ export default function Header({ options, route, navigation }: HeaderProps): Rea
 // Wraps the content in blur
 function BlurWrapper(props: PropsWithChildren) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
+    const { lang } = useSelector((state: ReduxState) => state.lang)
     const event = useSelector((state: ReduxState) => state.event)
     const ad = useSelector((state: ReduxState) => state.ad)
     const route = useRoute()
     const defaultHeight = Dimensions.get('window').height * 8 / 100 + (StatusBar.currentHeight ? StatusBar.currentHeight - 7 : 0)
     const isSearchingEvents = event.search && route.name === "EventScreen"
     const isSearchingAds = ad.search && route.name === "AdScreen"
-    const categories = typeof event.categories.length == 'number' ? event.categories.length : 0
-    const extraHeight = isSearchingEvents 
-        ? 5 * categories
-        : isSearchingAds 
-            ? 14.5 * ad.skills.length
-            : 1
+    const cat = lang ? event.categories.no : event.categories.en
+    const categories = cat.length || 0
+    const extraHeight = (isSearchingEvents && 6 * categories) || (isSearchingAds && 10 * ad.skills.length) || 0
     const height = defaultHeight + extraHeight + (isSearchingEvents || isSearchingAds
-        ? Platform.OS === "ios" 
-            ? 120
-            : 110
-        : Platform.OS === "ios"
-            ? 20
-            : 5)
+        ? Platform.OS === "ios" ? 120 : 110
+        : Platform.OS === "ios" ? 20 : 5)
 
     return (
         <>

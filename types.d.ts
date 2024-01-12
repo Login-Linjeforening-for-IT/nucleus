@@ -81,8 +81,11 @@ type ReduxState = {
         lastFetch: string
         lastSave: string
         search: boolean
-        categories: CategoryWithID[]
-        clickedCategories: CategoryWithID[]
+        categories: {
+            no: string[]
+            en: string[]
+        }
+        clickedCategories: string[]
         input: string
         downloadState: Date
     }
@@ -231,11 +234,6 @@ type SettingProps = {
     id: number
     nav: string
     title: string
-}
-
-type CategoryWithID = {
-    category: string
-    id: number
 }
 
 type CTX = {

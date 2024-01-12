@@ -28,11 +28,22 @@ export default function Seperator({item, usedIndexes}: SeperatorProps) {
 
     return (
         <View style={{justifyContent: "center", top: -5, left: 5}}>
-            <Text style={{color: theme.oppositeTextColor, backgroundColor: theme.darker, alignSelf: "center", paddingHorizontal: 8, top: 3, zIndex: 1}}>
+            <Text style={{color: 
+                theme.oppositeTextColor, 
+                backgroundColor: theme.darker, 
+                alignSelf: "center", 
+                paddingHorizontal: 8, 
+                top: 3, 
+                zIndex: 1
+            }}>
                 {content}
             </Text>
             <View style={{top: -5}}>
-                <Line width={Dimensions.get("window").width * 0.945} height={1} fill={theme.oppositeTextColor} />
+                <Line 
+                    width={Dimensions.get("window").width * 0.945} 
+                    height={1} 
+                    fill={theme.oppositeTextColor}
+                />
             </View>
         </View>
     )

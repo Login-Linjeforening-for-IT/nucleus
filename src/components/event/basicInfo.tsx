@@ -1,6 +1,6 @@
 import Card from "@components/shared/card"
 import ES from "@styles/eventStyles"
-import { Linking, Text, TouchableOpacity, View } from "react-native"
+import { Text, View } from "react-native"
 import { GetEndTime } from "./time"
 import Category from "./category"
 import Map from "./map"
@@ -12,7 +12,6 @@ export default function BasicInfo() {
     const { event } = useSelector((state: ReduxState) => state.event)
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
-    // const linkAfter
     const textNO = { host: "Arrangør:   ", more: "Mer info"}
     const textEN = { host: "Organizer:   ", more: "More info"}
     const text = lang ? textNO : textEN

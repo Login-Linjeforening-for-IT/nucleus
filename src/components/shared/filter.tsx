@@ -8,17 +8,16 @@ import { reset as resetAds } from "@redux/ad"
 import { toggleSearch as adToggleSearch } from "@redux/ad"
 import { setClickedSkills } from "@redux/ad"
 import { useSelector, useDispatch } from "react-redux"
+import { useRoute } from "@react-navigation/native"
 import {
     TouchableOpacity,
     TextInput,
-    FlatList,
     Image,
     View,
     Text,
-    Platform,
     Dimensions,
+    ScrollView,
 } from "react-native"
-import { useRoute } from "@react-navigation/native"
 
 /**
  * User interface for the filter
@@ -38,11 +37,9 @@ export function FilterUI(): JSX.Element {
     const isSearchingEvents = route.name === "EventScreen" && event.search
     const isSearchingAds = route.name === "AdScreen" && ad.search
     const isSearching = isSearchingEvents || isSearchingAds
-    const top = Platform.OS === "ios" 
-        ? ad.skills.length * 1.5
-        : ad.skills.length * 1.35
+    const top = (isSearchingAds && 43) || 40
 
-        return (
+    return (
         <View style={isSearching ? {top: top} : { display: 'none' }}>
             <View style={ES.absoluteView}>
                 <TextInput
@@ -109,73 +106,86 @@ export function FilterButton(){
  * @returns 
  */
 function FilterCategoriesOrSkills() {
+    const { lang } = useSelector((state: ReduxState) => state.lang)
+    const event = useSelector((state: ReduxState) => state.event)
+    const ad = useSelector((state: ReduxState) => state.ad)
+    const route = useRoute()
+    const cat = lang ? event.categories.no : event.categories.en
+    // Clones cat because it is read only
+    const categories = [...cat]
+    event.clickedEvents.length && categories.unshift(lang ? "Påmeldt" : "Enrolled")
+    const skills = ad.skills
+    const isFilteringOnEventScreen = event.search && route.name === "EventScreen"
+    const item = isFilteringOnEventScreen ? categories : skills
+
+    return (
+        <ScrollView style={ES.clusterFilterView} scrollEnabled={item.length > 9 ? true : false}>
+            {item.map((text, index) => {
+                if (index % 3 === 0) {
+                    return (
+                        <View key={index / 3} style={{ flexDirection: "row"}}>
+                            <FilterItem text={text} />
+                            <FilterItem text={item[index+1]} />
+                            <FilterItem text={item[index+2]} />
+                        </View>
+                    )
+                }
+            })}
+        </ScrollView>
+    )
+}
+
+/**
+ * Displays a small checkbox in the filter UI. 
+ * @param text Text to display on the screen
+ * @returns 
+ */
+function FilterItem({text}: {text: string}) {
+    if (!text) return null
+
     const { theme } = useSelector((state: ReduxState) => state.theme)
+    const { lang } = useSelector((state: ReduxState) => state.lang)
     const event = useSelector((state: ReduxState) => state.event)
     const ad = useSelector((state: ReduxState) => state.ad)
     const dispatch = useDispatch()
     const route = useRoute()
-    const categories = event.categories
-    const skills = ad.skills.map((skill, index) => ({ id: index, category: skill }))
+    const cat = lang ? event.categories.no : event.categories.en
+    // Clones cat because it is read only
+    const categories = [...cat]
+    event.clickedEvents.length && categories.unshift(lang ? "Påmeldt" : "Enrolled")
     const isFilteringOnEventScreen = event.search && route.name === "EventScreen"
-    const item = isFilteringOnEventScreen ? categories : skills
+    const checked = event.search && event.clickedCategories.includes(text) ||
+    ad.search && ad.clickedSkills.includes(text)
 
-    function handleUnchecked(item: CategoryWithID) {
+    function handleUnchecked(item: string) {
         if (isFilteringOnEventScreen) {
-            dispatch(setClickedCategories(event.clickedCategories.filter((category: CategoryWithID) => category.id !== item.id)))
+            dispatch(setClickedCategories(event.clickedCategories.filter((category: string) => category !== item)))
         } else {
-            dispatch(setClickedSkills(ad.clickedSkills.filter((skill: string) => skill !== item.category)))
+            dispatch(setClickedSkills(ad.clickedSkills.filter((skill: string) => skill !== item)))
         }
     }
 
-    function handleChecked(item: CategoryWithID) {
+    function handleChecked(item: string) {
         if (isFilteringOnEventScreen) {
             dispatch(setClickedCategories([...event.clickedCategories, item]))
         } else {
-            dispatch(setClickedSkills([...ad.clickedSkills, item.category]))
+            dispatch(setClickedSkills([...ad.clickedSkills, item]))
         }
     }
 
     return (
-        <View style={ES.clusterFilterView}>
-            <FlatList
-                scrollEnabled={false}
-                showsVerticalScrollIndicator={false}
-                numColumns={3}
-                keyExtractor={(item) => `${item.id}`}
-                data={item}
-                renderItem={({item}) => (
-                    <View style={ES.clusterCategoryView}>
-                    {event.search && event.clickedCategories.includes(item) ||
-                     ad.search && ad.clickedSkills.includes(item.category) ?
-                        <TouchableOpacity onPress={() => handleUnchecked(item)}>
-                            <View style={{width: Dimensions.get("window").width / 4.2}}>
-                                <Text style={{
-                                    ...T.filterCategoryText,
-                                    color: theme.titleTextColor
-                                }}>
-                                    {item.category}
-                                </Text>
-                                <View><CheckedBox /></View>
-                                <View><SmallCheck /></View>
-                            </View>
-                        </TouchableOpacity>
-                    :
-                        <TouchableOpacity onPress={() => handleChecked(item)}>
-                            <View style={{width: Dimensions.get("window").width / 4.2}}>
-                                <Text style={{
-                                    ...T.filterCategoryText,
-                                    color: theme.titleTextColor
-                                }}>
-                                    {item.category}
-                                </Text>
-                                <CheckBox />
-                            </View>
-                        </TouchableOpacity>
-                    }
+        <View style={ES.clusterCategoryView}>
+            <TouchableOpacity onPress={() => checked ? handleUnchecked(text) : handleChecked(text)}>
+                <View style={{flexDirection: "row", maxHeight: 50, minHeight: 30, alignItems: "center", width: Dimensions.get("window").width / 4}}>
+                    {checked ? <CheckedBox /> : <CheckBox />}
+                    <Text style={{
+                        ...T.filterCategoryText,
+                        color: theme.titleTextColor
+                    }}>
+                        {text}
+                    </Text>
                 </View>
-                )}
-            />
-            
+            </TouchableOpacity>
         </View>
     )
 }

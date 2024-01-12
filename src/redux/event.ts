@@ -4,7 +4,7 @@ type FilterProps = {
     input: string
     events: EventProps[]
     clickedEvents: EventProps[]
-    clickedCategories: CategoryWithID[]
+    clickedCategories: string[]
 }
 
 type FilterTextProps = {
@@ -15,11 +15,11 @@ type FilterTextProps = {
 type FilterCategoriesProps = {
     events: EventProps[]
     clickedEvents: EventProps[]
-    clickedCategories: CategoryWithID[]
+    clickedCategories: string[]
 }
 
 type filterBothProps = {
-    clickedCategories: CategoryWithID[]
+    clickedCategories: string[]
     clickedEvents: EventProps[]
     events: EventProps[]
     input: string
@@ -38,8 +38,11 @@ export const EventSlice = createSlice({
         lastFetch: "",
         lastSave: "",
         search: false,
-        categories: [] as CategoryWithID[],
-        clickedCategories: [] as CategoryWithID[],
+        categories: {
+            no: [] as string[],
+            en: [] as string[],
+        },
+        clickedCategories: [] as string[],
         input: "",
         downloadState: new Date()
     },
@@ -144,17 +147,15 @@ function setCategories(events: EventProps[], clickedEvents: EventProps[]) {
         {id: 9, category: "ANNET"}
     ]
 
-    const categories = catArray.filter((category: CategoryWithID) =>
-        events.some(events => 
-            events.category_name_no === category.category 
-            || events.category_name_en === category.category
-            ))
-
-    // Adds enrolled (PÅMELDT) filter option if relevant, since no event has this attribute naturally
-
-    if (clickedEvents.length > 0) {
-        categories.unshift({id: 1, category: "PÅMELDT"})
+    const categories = {
+        no: [] as string[],
+        en: [] as string[]
     }
+
+    events.forEach(event => {
+        if (!categories.no.includes(event.category_name_no)) categories.no.push(event.category_name_no)
+        if (!categories.en.includes(event.category_name_en)) categories.en.push(event.category_name_en)
+    })
 
     return categories
 }
@@ -199,15 +200,14 @@ function filterText ({events, input}: FilterTextProps) {
  * @returns Events filtered by category
  */
 function filterCategories ({events, clickedEvents, clickedCategories}: FilterCategoriesProps) {
-
     // Checks if user is filtering by enrolled (PÅMELDT)
-    const clickedFound = clickedCategories.find((object: CategoryWithID) => object.category === "PÅMELDT")
+    const clickedFound = clickedCategories.find((category: string) => category === "Påmeldt")
     
     // Filters based on category
     const categoryFiltered = events.filter(event => 
-        clickedCategories.some((category: CategoryWithID) => 
-        category.category === event.category_name_no 
-        || category.category === event.category_name_en
+        clickedCategories.some((category: string) => 
+        category === event.category_name_no 
+        || category === event.category_name_en
     ))
 
     // Returns if the user is not enrolled to any events
