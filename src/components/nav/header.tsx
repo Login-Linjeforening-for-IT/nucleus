@@ -16,7 +16,7 @@ export default function Header({ options, route, navigation }: HeaderProps): Rea
     const { ad } = useSelector((state: ReduxState) => state.ad )
     const orangeIcon = require('@assets/icons/goback-orange.png')
     let title = route.name && (lang 
-            ? require('@text/no.json').screens[route.name] 
+            ? require('@text/no.json').screens[route.name]
             : require('@text/en.json').screens[route.name])
     
     if (!title && route.name === "SpecificEventScreen") title = lang ? event.name_no : event.name_en
@@ -47,7 +47,7 @@ export default function Header({ options, route, navigation }: HeaderProps): Rea
                     }
                 </View>
                 <Text style={{...GS.headerTitle, color: theme.titleTextColor, 
-                            maxWidth: 300, textAlign: "center"}}>
+                            width: 150, textAlign: "center"}}>
                             {title}
                         </Text>
                     <View style={GS.innerHeaderViewTwo}>

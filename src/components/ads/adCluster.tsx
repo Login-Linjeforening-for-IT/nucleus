@@ -24,20 +24,9 @@ export default function AdCluster({ad, index, embed}: Ad): JSX.Element {
     const isOrange = clickedAds.some(ads => ads.id === ad.id) ? true : false
     const navigation: Navigation = useNavigation()
     const logo = ad.organization_logo ? ad.organization_logo : undefined
-    const left = embed ?
-        ad.highlight
-            ? 3
-            : 0
-        : ad.highlight
-            ? 3
-            : 0
-    const top = embed ?
-        ad.highlight
-            ? -3
-            : 0
-        : ad.highlight
-        ? -3
-        : -5
+    const top = embed 
+        ? ad.highlight ? -3 : 0
+        : ad.highlight ? 0 : -5
 
     function handleClick() {
         dispatch(setClickedAds(clickedAds.some(ads => ads.id === ad.id)
@@ -57,7 +46,7 @@ export default function AdCluster({ad, index, embed}: Ad): JSX.Element {
                   colors={ad.highlight?['#FF512F', '#F09819', '#FF512F']:['#000000cc', '#000000cc']}
                   style={{borderRadius: 5, marginBottom: ad.highlight ? 4 : 0}}>
                 <Cluster marginVertical={4} highlight={ad.highlight}>
-                <View style={{...AS.adBack, left, top}}>
+                <View style={{...AS.adBack, top}}>
                         <View style={AS.adViewLeft}>
                             <AdClusterImage url={logo} />
                         </View>

@@ -34,7 +34,7 @@ JSX.Element {
     const dispatch = useDispatch()
 
     return (
-        <View style={item.highlight && {marginVertical: 2}}>
+        <View style={item.highlight && {marginVertical: 2, top: -2}}>
             <TouchableOpacity onPress={() => {
                 search && dispatch(toggleSearch())
                 dispatch(setEvent(item))
