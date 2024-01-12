@@ -64,7 +64,7 @@ export const ES = StyleSheet.create({
         width: 30,
     },
     bellPosition: {
-        top: 6,
+        top: 15,
     },
     // View to change the flex direction to horizontally align items
     absoluteView: {

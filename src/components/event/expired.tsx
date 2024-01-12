@@ -43,7 +43,7 @@ export function ExpiredEvent(id: {id: number}) {
             <Cluster marginVertical={8}>
                 <View style={{...ES.eventBack, left: -5}}>
                     <View>
-                        <CategorySquare color="333" />
+                        <CategorySquare color="333" startDate={id.id} />
                         <Text style={{...ES.eventClusterDayText, color: theme.textColor, top: 10}}>
                         {id.id}
                         </Text>

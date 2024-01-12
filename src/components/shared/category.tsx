@@ -3,13 +3,12 @@ import React from "react"
 import { useSelector } from "react-redux"
 import T from "@styles/text"
 import { Month } from "./utils"
-import ES from "@styles/eventStyles"
 
 type CategorySquareProps = {
     color: string
     height?: number
-    startDate: Date
-    endDate: Date | undefined
+    startDate: Date | number
+    endDate?: Date | undefined
 }
 
 /**
@@ -20,8 +19,8 @@ type CategorySquareProps = {
  */
 export default function CategorySquare({color, startDate, endDate}: CategorySquareProps): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    const startDay = startDate.getDate()
-    const startMonth = startDate.getMonth()
+    const startDay = typeof startDate === "number" ? startDate : startDate.getDate()
+    const startMonth = typeof startDate === "number" ? '' : startDate.getMonth()
     const endDay = endDate?.getDate()
 
     return (
@@ -37,7 +36,7 @@ export default function CategorySquare({color, startDate, endDate}: CategorySqua
                 {startDay}
                 {endDay && "-" + endDay}
             </Text>
-            <Month month={startMonth} color={theme.textColor} />
+            {startMonth && <Month month={startMonth} color={theme.textColor} />}
         </View>)
 }
 
