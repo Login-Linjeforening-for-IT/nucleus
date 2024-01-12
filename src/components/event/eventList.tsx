@@ -187,16 +187,29 @@ function Bell({item, notification}: BellProps): JSX.Element {
     const { clickedEvents } = useSelector((state: ReduxState) => state.event)
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const dispatch = useDispatch()
-    const category = lang ? item.category_name_no : item.category_name_en
+    // Uses available language if possible, otherwise uses other language
+    const category = lang 
+        ? (item.category_name_no || item.category_name_en) 
+        : (item.category_name_en || item.category_name_no)
+    // Checks if the bell should be orange instead of gray
     const isOrange = clickedEvents.some(event => event.id === item.id) 
         ? true 
         : false
+    
+    // Prevents X from being clickable
+    if (item.canceled) return (
+        <View style={ES.view3}>
+            <View style={ES.bellPosition} >
+                <BellIcon orange={isOrange} canceled={item.canceled} />
+            </View>
+        </View>
+    )
     
     return (
         <View style={ES.view3}>
             <TouchableOpacity style={{paddingBottom: 10}} onPress={() => {
                 topic({topicID: `${item.id}`, lang, status: false, 
-                    category: (category).toLowerCase(), catArray: 
+                    category: category.toLowerCase(), catArray: 
                     notificationArray({notification, category})})
                 dispatch(setClickedEvents(
                     clickedEvents.some(event => event.id === item.id)
@@ -205,7 +218,7 @@ function Bell({item, notification}: BellProps): JSX.Element {
                 ))
             }}>
                 <View style={ES.bellPosition} >
-                    <BellIcon orange={isOrange} />
+                    <BellIcon orange={isOrange} canceled={item.canceled} />
                 </View>
             </TouchableOpacity>
         </View>
