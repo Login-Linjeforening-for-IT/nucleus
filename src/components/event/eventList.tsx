@@ -18,11 +18,6 @@ type EventListProps = {
     notification: NotificationProps
 }
 
-type FullCategorySquareProps = {
-    item: EventProps | DetailedEvent
-    height?: number
-}
-
 type SeperatedEventsProps = {
     item: EventProps
     index: number
@@ -73,43 +68,4 @@ export default function EventList ({notification}: EventListProps): JSX.Element 
     } else {
         return <ErrorMessage argument={!events.length ? "wifi" : "nomatch"} />
     }
-}
-
-/**
- * Displays the footer last fetch time item
- */
-export function ListFooter ({index}: ListFooterProps): JSX.Element {
-    const { theme } = useSelector((state: ReduxState) => state.theme)
-    const { lang } = useSelector((state: ReduxState) => state.lang)
-    const { lastFetch, renderedEvents } = useSelector((state: ReduxState) => state.event)
-
-    return (
-        <>
-            {index === renderedEvents.length-1 && <Text style={{...T.contact, 
-                color: theme.oppositeTextColor}}>
-                    {lang ? "Oppdatert kl:":"Updated:"} {lastFetch}.
-                </Text>}
-            {index === renderedEvents.length - 1 && 
-                <Space height={Dimensions.get("window").height / 7}/>}
-        </>
-    )
-}
-
-/**
- * Displays the category square to the left of each event in the list on the EventScreen
- */
-export function FullCategorySquare({item, height}: FullCategorySquareProps): JSX.Element {
-    const day = "time_start" in item ? `${item.time_start[8]}${item.time_start[9]}` : new Date().getDate()
-    const month = "time_start" in item ? parseInt(item.time_start[5] + item.time_start[6]) : new Date().getMonth() + 1
-    const { theme } = useSelector((state: ReduxState) => state.theme)
-
-    return (
-        <View>
-            <CategorySquare color={item.category_color} height={height} />
-            <Text style={{...ES.eventClusterDayText, color: theme.textColor}}>
-                {day}
-            </Text>
-            <Month month={month} color={theme.textColor} />
-        </View>
-    )
 }
