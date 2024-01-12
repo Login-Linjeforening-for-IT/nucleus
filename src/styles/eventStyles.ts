@@ -80,7 +80,6 @@ export const ES = StyleSheet.create({
     },
     // Position of specific event color circle
     specificEventLight: {
-        // left: 8, // not sure if this is used or not
         height: 20,
         width: 20,
     },
@@ -102,8 +101,6 @@ export const ES = StyleSheet.create({
     },
     clusterWraper: {
         borderRadius: 5, 
-        // paddingHorizontal: 2,
-        // margin: 4
     },
     // Card content styling
     clusterContent: {
