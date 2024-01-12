@@ -28,12 +28,17 @@ export default function AdCluster({ad, index, embed}: Ad): JSX.Element {
         ad.highlight
             ? 3
             : 0
-        : 0
+        : ad.highlight
+            ? 3
+            : 0
     const top = embed ?
         ad.highlight
             ? -3
             : 0
-        : 0
+        : ad.highlight
+        ? -3
+        : -10
+
     function handleClick() {
         dispatch(setClickedAds(clickedAds.some(ads => ads.id === ad.id)
         ? clickedAds.filter((x) => x.id !== ad.id)
