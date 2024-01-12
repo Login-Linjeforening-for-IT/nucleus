@@ -141,6 +141,10 @@ export const T = StyleSheet.create({
     specificEventInfo: {
         fontSize: 20,
     },
+    specificEventInfoContent: {
+        fontSize: 20,
+        maxWidth: 240
+    },
     // Text used for filter categories
     filterCategoryText: {
         left: 10,
