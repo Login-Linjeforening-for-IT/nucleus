@@ -179,7 +179,7 @@ export default function AboutScreen(): JSX.Element {
                             <Social />
                             <Copyright />
                         </Cluster>
-                        <Space height={Dimensions.get("window").height / 3 + 10} /> 
+                        <Space height={Dimensions.get("window").height / 7} /> 
                     </ScrollView>
                 </View>
             </View>

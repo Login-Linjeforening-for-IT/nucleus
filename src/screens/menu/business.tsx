@@ -23,7 +23,7 @@ export default function BusinessScreen(): JSX.Element {
                     <ScrollView showsVerticalScrollIndicator={false}>
                         <Space height={Dimensions.get("window").height / 8.1 + 10} /> 
                         <Content />
-                        <Space height={Dimensions.get("window").height / 3 + 10} /> 
+                        <Space height={Dimensions.get("window").height / 7} /> 
                         </ScrollView>
                 </View>
             </View>
