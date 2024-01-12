@@ -3,10 +3,10 @@ import { StyleSheet, Dimensions, Platform } from "react-native"
 export const ES = StyleSheet.create({
     // Middle card view
     view2: {
-        top: 5,
         justifyContent: "center",
-        alignItems: "flex-start",
-        width: "72%",
+        marginLeft: 10,
+        maxWidth: '70%',
+        maxHeight: 55
     },
     // Right side card view
     view3: {
@@ -17,32 +17,22 @@ export const ES = StyleSheet.create({
     // Card height and direction on eventscreen
     eventBack: {
         flexDirection: "row",
-        height: 55,
     },
     // Eventmonth text on specificEventScreen
     monthText: {
-        width: 45,
-        textAlign: "center",
-        bottom: 7,
         fontSize: Platform.OS === "ios" ? 20 : 18,
     },
     // Eventday text on eventScreen
     eventClusterDayText: {
-        textAlign: "center",
-        width: 45,
-        top: -3,
         fontSize: Platform.OS === "ios" ? 25 : 22,
     },
     // Event name text on eventScreen
     title: {
-        left: 5,
-        top: -5,
+        maxHeight: 45,
         fontSize: 20,
     },
     // Eventlocation text on eventScreen
     loc: {
-        left: 10,
-        top: -10,
         fontSize: 15,
     },
     //======================== SpecificEventScreen ===================
@@ -109,9 +99,9 @@ export const ES = StyleSheet.create({
     },
     // Card content styling
     clusterContent: {
-        paddingTop: 3,
-        marginHorizontal: 15,
-        marginVertical: 4,
+        // paddingTop: 3,
+        // marginHorizontal: 15,
+        // marginVertical: 4,
     },
     // Smaller card
     clusterSmaller: {

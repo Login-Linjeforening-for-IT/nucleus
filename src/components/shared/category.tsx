@@ -1,11 +1,15 @@
-import { View, Text, Platform } from "react-native"
+import { View, Text} from "react-native"
 import React from "react"
 import { useSelector } from "react-redux"
 import T from "@styles/text"
+import { Month } from "./utils"
+import ES from "@styles/eventStyles"
 
 type CategorySquareProps = {
     color: string
     height?: number
+    startDate: Date
+    endDate: Date | undefined
 }
 
 /**
@@ -14,19 +18,28 @@ type CategorySquareProps = {
  * @param {string} height Custom height
  * @returns Small square with rounded corners of the passed color
  */
-export default function CategorySquare({color, height}: CategorySquareProps): 
-JSX.Element {
+export default function CategorySquare({color, height, startDate, endDate}: CategorySquareProps): JSX.Element {
+    const { theme } = useSelector((state: ReduxState) => state.theme)
+    const startDay = startDate.getDate()
+    const startMonth = startDate.getMonth()
+    const endDay = endDate?.getDate()
 
-    return <View style={{
-        width: 40, 
-        height: height ? 65 + height : 65, 
-        borderRadius: 10, 
-        backgroundColor: `#${color}`, 
-        alignSelf: "center",
-        top: Platform.OS === "ios" ? -9 : -8,
-        zIndex: -100,
-        position: 'absolute'
-    }} />
+    return (
+        <View style={{
+            minWidth: 40,
+            padding: 5,
+            // height: height ? 65 + height : 65,
+            borderRadius: 10, 
+            backgroundColor: `#${color}`,
+            justifyContent: 'center',
+            alignItems: 'center',
+        }}>
+            <Text style={{...ES.eventClusterDayText, color: theme.textColor}}>
+                {startDay}
+                {endDay&&"-"+endDay}
+            </Text>
+            <Month month={startMonth} color={theme.textColor} />
+        </View>)
 }
 
 /**

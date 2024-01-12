@@ -2,7 +2,7 @@ import notificationArray from "@/utils/notificationArray"
 import EventClusterTitle from "@components/event/EventClusterTitle"
 import CategorySquare from "@/components/shared/category"
 import topic from "@/utils/topic"
-import Space, { ErrorMessage, Month } from "@/components/shared/utils"
+import Space, { ErrorMessage} from "@/components/shared/utils"
 import BellIcon from "@components/shared/bellIcon"
 import Cluster from "@/components/shared/cluster"
 import ES from "@styles/eventStyles"
@@ -58,7 +58,7 @@ export default function EventList ({notification}: EventListProps): JSX.Element 
         const previousTimeDifference = previousStart ? (new Date(previousStart).valueOf() - new Date().valueOf()) / 1000 : 0
         const timeDifference = (new Date(item.time_start).valueOf() - new Date().valueOf()) / 1000
 
-        if (!previousStart) console.log(previousStart)
+        // if (!previousStart) console.log(previousStart)
 
         return (
             <>
@@ -83,7 +83,7 @@ export default function EventList ({notification}: EventListProps): JSX.Element 
     if (!renderedEvents.length && !search) {
         return <ErrorMessage argument="wifi" />
     } else if (renderedEvents.length > 0) {
-        console.log(renderedEvents[0])
+        // console.log(renderedEvents[0])
         return (
             <View>
                 <FlatList
@@ -123,7 +123,7 @@ JSX.Element {
                 dispatch(setEvent(item))
                 navigation.navigate("SpecificEventScreen")
             }}>
-                <Cluster marginVertical={8}>
+                <Cluster marginVertical={4}>
                     <View style={ES.eventBack}>
                         <FullCategorySquare item={item} />
                         <EventClusterTitle item={item} />
@@ -160,17 +160,12 @@ export function ListFooter ({index}: ListFooterProps): JSX.Element {
  * Displays the category square to the left of each event in the list on the EventScreen
  */
 export function FullCategorySquare({item, height}: FullCategorySquareProps): JSX.Element {
-    const day = "time_start" in item ? `${item.time_start[8]}${item.time_start[9]}` : new Date().getDate()
-    const month = "time_start" in item ? parseInt(item.time_start[5] + item.time_start[6]) : new Date().getMonth() + 1
-    const { theme } = useSelector((state: ReduxState) => state.theme)
+    const startDate = item?.time_start ? new Date(item.time_start) : new Date()
+    const endDate = item?.time_type=="default" ? new Date(item.time_end) : undefined
 
     return (
-        <View>
-            <CategorySquare color={item.category_color} height={height} />
-            <Text style={{...ES.eventClusterDayText, color: theme.textColor}}>
-                {day}
-            </Text>
-            <Month month={month} color={theme.textColor} />
+        <View style={{minWidth: 65, flexDirection: 'row'}}>
+            <CategorySquare color={item.category_color} height={height} startDate={startDate} endDate={endDate}/>
         </View>
     )
 }

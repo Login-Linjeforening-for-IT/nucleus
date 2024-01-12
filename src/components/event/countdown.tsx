@@ -8,25 +8,16 @@ import { useSelector } from "react-redux"
 
 export default function Countdown() {
     const { event } = useSelector((state: ReduxState) => state.event)
-    const { theme } = useSelector((state: ReduxState) => state.theme)
+
+    const startDate = event?.time_start ? new Date(event.time_start) : new Date()
+    const endDate = event?.time_type=="default" ? new Date(event.time_end) : undefined
 
     return (
         <CardSmaller>
             <View style={ES.specificEventInfoView}>
                 <Card>
-                    <View style={{left: -10}}>
-                    <CategorySquare color={event.category_color} />
-                    <Text style={{...ES.eventClusterDayText, color: theme.textColor}}>
-                        {event.time_start[8]}
-                        {event.time_start[9]}
-                    </Text>
-
-                    <Text style={{...ES.monthText, color: theme.textColor}}>
-                    <Month
-                        month={parseInt(event.time_start[5] + event.time_start[6])}
-                        color={theme.textColor}
-                    />
-                    </Text>
+                    <View style={{}}>
+                        <CategorySquare color={event.category_color} startDate={startDate} endDate={endDate}/>
                     </View>
                 </Card>
                 <EventTime time_start={event.time_start} time_end={event.time_end} />
