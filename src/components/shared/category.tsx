@@ -26,7 +26,7 @@ export default function CategorySquare({color, startDate, endDate}: CategorySqua
 
     return (
         <View style={{
-            minWidth: 40,
+            width: endDay ? 66 : 42,
             padding: 5,
             height: Platform.OS === "ios" ? 65 : undefined, 
             borderRadius: 10, 
