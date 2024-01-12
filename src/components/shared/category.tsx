@@ -26,15 +26,14 @@ export default function CategorySquare({color, startDate, endDate}: CategorySqua
 
     return (
         <View style={{
-            width: endDay ? 66 : 42,
-            padding: 5,
+            width: endDay ? 62 : 38,
             height: Platform.OS === "ios" ? 65 : undefined, 
             borderRadius: 10, 
             backgroundColor: `#${color}`,
             justifyContent: 'center',
             alignItems: 'center',
         }}>
-            <Text style={{...ES.eventClusterDayText, color: theme.textColor}}>
+            <Text style={{fontSize: Platform.OS === "ios" ? 20 : 22, color: theme.textColor}}>
                 {startDay}
                 {endDay && "-" + endDay}
             </Text>

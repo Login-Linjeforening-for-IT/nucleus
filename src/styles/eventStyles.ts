@@ -4,7 +4,7 @@ export const ES = StyleSheet.create({
     // Middle card view
     view2: {
         justifyContent: "center",
-        marginLeft: 10,
+        marginLeft: 5,
         maxWidth: '70%',
         maxHeight: 55
     },
@@ -20,7 +20,7 @@ export const ES = StyleSheet.create({
     },
     // Eventmonth text on specificEventScreen
     monthText: {
-        fontSize: Platform.OS === "ios" ? 18 : 18,
+        fontSize: Platform.OS === "ios" ? 16 : 18,
     },
     // Eventday text on eventScreen
     eventClusterDayText: {
@@ -28,12 +28,15 @@ export const ES = StyleSheet.create({
     },
     // Event name text on eventScreen
     title: {
-        maxHeight: 45,
-        fontSize: 20,
+        maxHeight: 48,
+        fontSize: 18,
+        lineHeight: 24
     },
     // Eventlocation text on eventScreen
     loc: {
+        top: 3,
         fontSize: 15,
+        maxHeight: 17
     },
     //======================== SpecificEventScreen ===================
     // Layout for specificEventScreen
