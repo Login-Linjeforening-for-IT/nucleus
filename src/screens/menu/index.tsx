@@ -29,6 +29,7 @@ import {
   Image,
   TouchableOpacity,
   Dimensions,
+  Platform,
 } from "react-native"
 import Swipe from "@components/nav/swipe"
 
@@ -50,9 +51,9 @@ const screens: Record<string, React.FC<any>> = {
     "NotificationScreen": NotificationScreen,
     "AboutScreen": AboutScreen,
     "BusinessScreen": BusinessScreen,
-    "ReportScreen": ReportScreen,
-    "LoginScreen": LoginScreen,
-    "InternalScreen": InternalScreen
+    // "ReportScreen": ReportScreen,
+    // "LoginScreen": LoginScreen,
+    // "InternalScreen": InternalScreen
 }
 
 
@@ -96,8 +97,8 @@ export default function MenuScreen(): JSX.Element {
                                 ...GS.content, 
                                 backgroundColor: theme.darker
                             }}>
-                                <Space height={Dimensions.get("window").height / 9} />
-                                <SmallProfile navigation={navigation} profile={profile} login={login} />
+                                <Space height={Dimensions.get("window").height / (Platform.OS === "ios" ? 8.4 : 8)} />
+                                {/* <SmallProfile navigation={navigation} profile={profile} login={login} /> */}
                                 {text.setting.map((item, index) => {
                                     if (item.nav === "ProfileScreen") return null
                                     if (item.nav === "LoginScreen" && login) return null

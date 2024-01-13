@@ -31,10 +31,7 @@ export default function SettingScreen(): JSX.Element {
     return (
         <Swipe left="MenuScreen">
             <View>
-                <View style={{
-                    ...GS.content, 
-                    backgroundColor: theme.darker
-                }}>
+                <View style={{...GS.content, backgroundColor: theme.darker}}>
                     <Content />
                 </View>
             </View>
@@ -114,7 +111,7 @@ function Content(): JSX.Element {
             </Text>
             <Space height={10} />
             <Reminders/>
-            <Space height={Dimensions.get("window").height / 3 + 8} />
+            <Space height={Dimensions.get("window").height / 7} />
         </ScrollView>
     )
 }

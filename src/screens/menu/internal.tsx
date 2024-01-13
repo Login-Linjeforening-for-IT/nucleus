@@ -32,7 +32,7 @@ export default function InternalScreen(): JSX.Element {
         <Swipe left="MenuScreen">
             <View>
                 <View style={{...GS.content, backgroundColor: theme.darker}}>
-                    {setting.map((item, index) => <Option index={index} item={item} />)}
+                    {setting.map((item, index) => <Option index={index} item={item} key={index} />)}
                     <Space height={Dimensions.get("window").height / 3}/>
                 </View>
             </View>
