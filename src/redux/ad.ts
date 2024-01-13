@@ -169,9 +169,12 @@ function Filter ({input, ads, clickedAds, clickedSkills}: FilterProps) {
  * @returns Filtered ads
  */
 function filterText ({ads, input}: FilterTextProps) {
-    const titles_no = ads.filter(ad => ad.title_no.toLowerCase().includes(input.toLowerCase()))
-    const titles_en = ads.filter(ad => ad.title_en.toLowerCase().includes(input.toLowerCase()))
-    return removeDuplicatesAndOld(ads, [...titles_no, ...titles_en])
+    const textFiltered = ads.filter(ad => 
+        ad.title_no.toLowerCase().includes(input.toLowerCase()) 
+        || ad.title_en.toLowerCase().includes(input.toLowerCase())
+    )
+
+    return removeDuplicatesAndOld(ads, textFiltered)
 }
 
 /**

@@ -2,9 +2,9 @@ import ES from "@styles/eventStyles"
 import MS from "@styles/menuStyles"
 import React, { useRef } from "react"
 import T from "@styles/text"
-import { CheckBox, CheckedBox, SmallCheck } from "@components/event/check"
-import { reset as resetEvents, setClickedCategories, setInput, toggleSearch as eventToggleSearch } from "@redux/event"
-import { reset as resetAds } from "@redux/ad"
+import { CheckBox, CheckedBox } from "@components/event/check"
+import { reset as resetEvents, setClickedCategories, setInput as setEvents, toggleSearch as eventToggleSearch } from "@redux/event"
+import { reset as resetAds, setInput as setAds } from "@redux/ad"
 import { toggleSearch as adToggleSearch } from "@redux/ad"
 import { setClickedSkills } from "@redux/ad"
 import { useSelector, useDispatch } from "react-redux"
@@ -49,7 +49,7 @@ export function FilterUI(): JSX.Element {
                     placeholder={lang ? "Søk.." : "Search.."}
                     placeholderTextColor={theme.titleTextColor}
                     textAlign="center"
-                    onChangeText={(val) => dispatch(setInput(val))}
+                    onChangeText={(val) => dispatch(isSearchingEvents ? setEvents(val) : setAds(val))}
                     selectionColor={theme.orange}
                 />
                 <TouchableOpacity onPress={() => {

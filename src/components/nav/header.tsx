@@ -80,7 +80,7 @@ function BlurWrapper(props: PropsWithChildren) {
     const isSearchingAds = ad.search && route.name === "AdScreen"
     const cat = lang ? event.categories.no : event.categories.en
     const categories = cat.length || 0
-    const extraHeight = (isSearchingEvents && 6 * categories) || (isSearchingAds && 10 * ad.skills.length) || 0
+    const extraHeight = (isSearchingEvents && 6 * categories) || (isSearchingAds && 9.5 * ad.skills.length) || 0
     const height = defaultHeight + extraHeight + (isSearchingEvents || isSearchingAds
         ? Platform.OS === "ios" ? 120 : 110
         : Platform.OS === "ios" ? 20 : 5)

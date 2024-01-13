@@ -54,7 +54,7 @@ export default function AdCluster({ad, index, embed}: Ad): JSX.Element {
                             <AdClusterLocation ad={ad} />
                         </View>
                         <TouchableOpacity onPress={handleClick}>
-                            <View style = {{...AS.bellPosition, left: -3}}>
+                            <View style = {{left: -3}}>
                                 <BellIcon orange={isOrange} />
                             </View>
                         </TouchableOpacity>
