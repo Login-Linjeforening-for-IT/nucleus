@@ -129,6 +129,6 @@ export function Month({month, color}: MonthProps): JSX.Element {
         "Jul", "Aug", "Sep", "Okt", "Nov", "Des"]
 
     return <Text style={{...ES.monthText, color: color}}>
-        {lang ? monthsNO[month - 1]: monthsEN[month - 1]}
+        {lang ? monthsNO[month]: monthsEN[month]}
     </Text>
 }

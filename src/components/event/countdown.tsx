@@ -1,8 +1,7 @@
 import Card, { CardSmaller } from "@components/shared/card"
 import CategorySquare from "@components/shared/category"
-import { Month } from "@components/shared/utils"
 import ES from "@styles/eventStyles"
-import { Text, View } from "react-native"
+import { View } from "react-native"
 import EventTime from "./time"
 import { useSelector } from "react-redux"
 
