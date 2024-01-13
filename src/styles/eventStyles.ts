@@ -36,7 +36,7 @@ export const ES = StyleSheet.create({
     loc: {
         top: 3,
         fontSize: 15,
-        maxHeight: 17
+        maxHeight: 19
     },
     //======================== SpecificEventScreen ===================
     // Layout for specificEventScreen
