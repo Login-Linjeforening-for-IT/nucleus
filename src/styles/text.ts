@@ -147,8 +147,8 @@ export const T = StyleSheet.create({
     },
     // Text used for filter categories
     filterCategoryText: {
-        left: 10,
         fontSize: 12,
+        left: 5,
     },
     // Mazemap text on SES
     mazemap: {

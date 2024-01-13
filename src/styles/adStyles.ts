@@ -79,9 +79,6 @@ export const AS = StyleSheet.create({
     adInfoInsideView: {
         flexDirection: "row",
     },
-    bellPosition: {
-        // left: -4.2,
-    },
     adBannerSmall: {
         top: 1.7,
         height: 60,

@@ -9,7 +9,7 @@ import EventClusterTitle from "./EventClusterTitle"
 import Bell from "./bell"
 import ES from "@styles/eventStyles"
 import CategorySquare from "@components/shared/category"
-import Space, { Month } from "@components/shared/utils"
+import Space from "@components/shared/utils"
 import T from "@styles/text"
 
 type EventClusterProps = {
@@ -27,7 +27,7 @@ type FullCategorySquareProps = {
 /**
  * Displays one element of the event card array
  */
-export default function EventCluster ({notification, item, index, embed}: EventClusterProps): 
+export default function EventCluster ({notification, item, index}: EventClusterProps): 
 JSX.Element {
     const { search } = useSelector((state: ReduxState) => state.event)
     const navigation: Navigation = useNavigation()
