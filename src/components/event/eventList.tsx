@@ -49,7 +49,7 @@ export default function EventList ({notification}: EventListProps): JSX.Element 
                     ? <Space height={Dimensions.get("window").height / (Platform.OS === "ios" ? 8.4 : 8)} />
                     : <Space height={Platform.OS === "ios" 
                     ? Dimensions.get("window").height / 3.6
-                    : Dimensions.get("window").height / 3.4} />
+                    : Dimensions.get("window").height / 3} />
                 }
                 {eventList.map((event, index) => {
                     return <SeperatedEvents item={event} index={index} key={index} usedIndexes={usedIndexes}/>

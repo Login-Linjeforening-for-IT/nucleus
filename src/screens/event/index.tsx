@@ -59,8 +59,7 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
         React.useCallback(() => {
             // IIFE to fetch clicked events
             (async() => {
-                let events = await fetchEvents()
-            events[events.length-1].highlight = true
+                const events = await fetchEvents()
 
                 if (events) {
                     dispatch(setEvents(events))
@@ -74,8 +73,7 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
     useEffect(() => {
         // IIFE to fetch API
         (async() => {
-            let events = await fetchEvents()
-            events[events.length-1].highlight = true
+            const events = await fetchEvents()
 
             if (events) {
                 dispatch(setEvents(events))
@@ -95,8 +93,7 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
             interval = setInterval(() => {
                 // Storing the current time
                 (async() => {
-                    let events = await fetchEvents()
-            events[events.length-1].highlight = true
+                    const events = await fetchEvents()
 
                     if (events) {
                         dispatch(setEvents(events))
