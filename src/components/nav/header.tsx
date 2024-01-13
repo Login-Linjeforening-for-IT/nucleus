@@ -15,14 +15,14 @@ export default function Header({ options, route, navigation }: HeaderProps): Rea
     const { event } = useSelector((state: ReduxState) => state.event)
     const { ad } = useSelector((state: ReduxState) => state.ad )
     const SES = route.name === "SpecificEventScreen"
-    const SAD = route.name === "SpecificAdScreen"
+    const SAS = route.name === "SpecificAdScreen"
     const orangeIcon = require('@assets/icons/goback-orange.png')
     let title = route.name && (lang
             ? require('@text/no.json').screens[route.name]
             : require('@text/en.json').screens[route.name])
     
     if (!title && SES) title = lang ? event.name_no : event.name_en
-    if (!title && SAD) title = lang ? ad.title_no : ad.title_en
+    if (!title && SAS) title = lang ? ad.title_no : ad.title_en
     if (route.name === "ProfileScreen") return <></>
 
     const { isDark } = useSelector((state: ReduxState) => state.theme )
