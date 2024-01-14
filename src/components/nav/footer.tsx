@@ -12,7 +12,7 @@ export default function Footer({ state, descriptors, navigation }: BottomTabBarP
     const { theme } = useSelector((state: ReduxState) => state.theme)
 
     return (
-        <>
+        <View>
                 <BlurView style={MS.bMenu} intensity={30}/>
                 <View style={{
                     ...MS.bMenu,
@@ -76,6 +76,6 @@ export default function Footer({ state, descriptors, navigation }: BottomTabBarP
                     />
                 </TouchableOpacity>
             </View>
-        </>
+        </View>
     )
 }
