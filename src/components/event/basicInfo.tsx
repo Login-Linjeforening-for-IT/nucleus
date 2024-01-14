@@ -7,7 +7,6 @@ import Map from "./map"
 import T from "@styles/text"
 import { useSelector } from "react-redux"
 import { TextLink } from "@components/shared/link"
-import InfoBlock from "@components/shared/infoBlock"
 
 export default function BasicInfo() {
     const { event } = useSelector((state: ReduxState) => state.event)
@@ -37,7 +36,6 @@ export default function BasicInfo() {
                     {event.link_homepage && <TextLink style={{fontSize: 20, color: "#fd8738", top: 3}} text={text.more} url={event.link_homepage} />}
                 </Text>
             </View>
-            <InfoBlock infoText="HEllo"></InfoBlock>
         </Card>
     )
 }
