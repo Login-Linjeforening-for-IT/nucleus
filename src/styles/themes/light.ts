@@ -12,7 +12,8 @@ const Light = {
     switchOnState: "#fff",
     switchOffState: "#fd8738",
     trackColor: "#909090",
-    trackBackgroundColor: "#909090"
+    trackBackgroundColor: "#909090",
+    dark: "000"
 }
 
 export default Light

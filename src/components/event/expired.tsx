@@ -15,7 +15,7 @@ type ExpiredProps = {
  * Displays a generic event if the event has expired or is otherwise unavailable
  * when being referred to from another event.
  * 
- * Note: Coded in a modular way for easy support of cancelled ads in the future.
+ * Note: Coded in a modular way for easy support of canceled ads in the future.
  * 
  * @param id Id of the event that has expired or is unavailable
  * @param type event | ad

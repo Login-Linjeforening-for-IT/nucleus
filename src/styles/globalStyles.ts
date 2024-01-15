@@ -216,8 +216,11 @@ export const GS = StyleSheet.create({
     },
     animatedCard: {
         position: "absolute",
-        zIndex: 2000,
-        height: 200
+        zIndex: 2,
+        bottom: 0,
+        height: Dimensions.get("window").height / 1.48,
+        width: "100%", 
+        borderRadius: 20
     },
 })
 

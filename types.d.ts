@@ -412,4 +412,5 @@ type Theme = {
     switchOffState: string
     trackColor: string
     trackBackgroundColor: string
+    dark: string
 }

@@ -50,7 +50,7 @@ export default function SpecificEventScreen(): JSX.Element {
             <View style={{...ES.sesContent, backgroundColor: theme.background}}>
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <Space height={Dimensions.get("window").height / 8 - 5} />
-                    <Tag />
+                    <Tag event={event} />
                     <SpecificEventImage />
                     <Space height={10} />
                     <Countdown />
