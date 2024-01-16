@@ -1,26 +1,35 @@
-import { Image, View } from "react-native"
+import { Image, Text, View } from "react-native"
+import { SvgXml } from "react-native-svg"
+import { useSelector } from "react-redux"
+import infoSvg from "@assets/icons/info.svg"
 
 type InfoBlockProps = {
     infoText: string
 }
 
 export default function InfoBlock({infoText}: InfoBlockProps){
+    const { theme } = useSelector((state: ReduxState) => state.theme)
     
     return (
         <View style={{
-            backgroundColor: '#0d47a1',
-            height: 50,
+            backgroundColor: '#003946',
+            minHeight: 50,
             width: '100%',
             borderRadius: 5,
-            overflow: 'hidden'
+            overflow: 'hidden',
+            flexDirection: 'row',
+            alignItems: 'center',
         }}>
             <View style={{
-                backgroundColor: '#2196f3',
                 width: '15%',
-                height: '100%'
+                justifyContent: 'center',
+                alignItems: 'center',
             }}>
-                <Image style={{width: 40, height:40}} source={require('@assets/icons/info-svgrepo-com.png')}></Image>
+                <SvgXml xml={infoSvg}></SvgXml>
             </View>
+            <Text style={{color: "#dcf9ff", fontSize: 20, paddingVertical: 10, width: '80%'}}>
+                {infoText}
+            </Text>
         </View>
     )
 }
