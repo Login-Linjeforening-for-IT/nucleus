@@ -233,10 +233,7 @@ export function Copyright() {
     return (
         <View>
             <Text style={{...T.copyright, color: theme.textColor}}>
-                {lang 
-                    ? "Opphavsrett © 2022-2023 Login - Linjeforeningen for IT, NO 811 940 372"
-                    : "Copyright © 2022-2023 Login - Linjeforeningen for IT, NO 811 940 372"
-                }
+                {`${lang ? "Copyright" : "Opphavsrett"} © 2022-${new Date().getFullYear()} Login - Linjeforeningen for IT, NO 811 940 372`}
             </Text>
         </View>
     )
