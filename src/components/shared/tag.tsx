@@ -20,7 +20,7 @@ export default function Tags({event}: TagsProps) {
 
     return (
         <View style={{flexDirection: "row"}}>
-            {tags.map((tag) => <Tag text={tag} key={tag} />)}
+            {tags.map((tag) => <Tag text={tag === "Cyberdays" && lang ? "Cyberdagene" : tag} key={tag} />)}
         </View>
     )
 }
