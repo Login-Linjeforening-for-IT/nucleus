@@ -13,7 +13,7 @@ const Sunset = {
     switchOffState: "#red",
     trackColor: "#4e0107",
     trackBackgroundColor: "#4e0107EE",
-    dark: "000"
+    dark: "#1f0003"
 }
 
 export default Sunset

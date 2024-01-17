@@ -13,7 +13,7 @@ const Abyss = {
     switchOffState: "#fd8738",
     trackColor: "#111",
     trackBackgroundColor: "#000",
-    dark: "000"
+    dark: '#000712'
 }
 
 export default Abyss

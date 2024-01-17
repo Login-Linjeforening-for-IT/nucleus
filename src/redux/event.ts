@@ -53,7 +53,7 @@ export const EventSlice = createSlice({
         setEvents(state, action) {
             state.events = action.payload
             state.renderedEvents = action.payload
-            state.categories = setCategories(state.events, state.clickedEvents)
+            state.categories = setCategories(state.events)
         },
         // Sets the event to be displayed on SES
         setEvent(state, action) {
@@ -62,7 +62,7 @@ export const EventSlice = createSlice({
         // Sets the clicked events
         setClickedEvents(state, action) {
             state.clickedEvents = action.payload
-            state.categories = setCategories(state.events, state.clickedEvents)
+            state.categories = setCategories(state.events)
         },
         // Sets the events to be displayed
         setRenderedEvents(state, action) {
@@ -139,18 +139,7 @@ export default EventSlice.reducer
  * @param clickedEvents
  * @param events
  */
-function setCategories(events: EventProps[], clickedEvents: EventProps[]) {
-    // All categories to filter - DO NOT CHANGE IDS
-    const catArray = [
-        {id: 2, category: "TEKKOM"},
-        {id: 3, category: "SOCIAL"},
-        {id: 4, category: "CTF"},
-        {id: 5, category: "KARRIEREDAG"},
-        {id: 6, category: "FADDERUKA"},
-        {id: 7, category: "BEDPRES"},
-        {id: 8, category: "LOGIN"},
-        {id: 9, category: "ANNET"}
-    ]
+function setCategories(events: EventProps[]) {
 
     const categories = {
         no: [] as string[],

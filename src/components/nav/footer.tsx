@@ -9,7 +9,7 @@ import { BottomTabBarProps } from "@react-navigation/bottom-tabs"
 
 export default function Footer({ state, descriptors, navigation }: BottomTabBarProps): JSX.Element {
     // Get the current theme
-    const { theme } = useSelector((state: ReduxState) => state.theme)
+    const { theme, value } = useSelector((state: ReduxState) => state.theme)
     const { tag } = useSelector((state: ReduxState) => state.event)
 
     if (tag) {

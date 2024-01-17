@@ -13,7 +13,7 @@ const Easter = {
     switchOffState: "#ffe66b",
     trackColor: "#FFFFE020",
     trackBackgroundColor: "#FFFFE010",
-    dark: "000"
+    dark: "#000"
 }
 
 export default Easter

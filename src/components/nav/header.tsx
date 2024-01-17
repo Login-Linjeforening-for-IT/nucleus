@@ -8,12 +8,15 @@ import { useRoute } from '@react-navigation/native'
 import { TouchableOpacity } from 'react-native'
 import { Image } from "react-native"
 import MS from '@styles/menuStyles'
+import { useDispatch } from 'react-redux'
+import { setTag } from '@redux/event'
 
 export default function Header({ options, route, navigation }: HeaderProps): ReactNode {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang  } = useSelector((state: ReduxState) => state.lang)
-    const { event } = useSelector((state: ReduxState) => state.event)
+    const { event, tag } = useSelector((state: ReduxState) => state.event)
     const { ad } = useSelector((state: ReduxState) => state.ad )
+    const dispatch = useDispatch()
     const SES = route.name === "SpecificEventScreen"
     const SAS = route.name === "SpecificAdScreen"
     const orangeIcon = require('@assets/icons/goback-orange.png')
@@ -42,6 +45,7 @@ export default function Header({ options, route, navigation }: HeaderProps): Rea
                     ) : 
                     <TouchableOpacity onPress={() => {
                         setBackIcon(orangeIcon)
+                        if (tag) dispatch(setTag(''))
                         navigation.goBack()
                     }}>
                         <Image style={{...MS.tMenuIcon, left: 5}} source={backIcon}></Image>
