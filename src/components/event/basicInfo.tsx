@@ -39,7 +39,7 @@ export default function BasicInfo() {
                     {event.link_homepage && <TextLink style={{fontSize: 20, color: "#fd8738", top: 3}} text={text.more} url={event.link_homepage} />}
                 </Text>
             </View>
-            {info&&<InfoBlock infoText={info}></InfoBlock>}
+            {info&&<InfoBlock infoText={info} />}
         </Card>
     )
 }
