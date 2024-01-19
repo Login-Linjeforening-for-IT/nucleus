@@ -1,4 +1,4 @@
-import { Dimensions, Text, TouchableOpacity } from "react-native"
+import { Dimensions, Platform, Text, TouchableOpacity } from "react-native"
 import GS from "@styles/globalStyles"
 import no from "@text/tag/no.json"
 import en from "@text/tag/en.json"
@@ -84,7 +84,7 @@ export default function TagInfo() {
     }
 
     return (
-        <TouchableOpacity activeOpacity={1} onPress={() => changeVisibility()} style={{backgroundColor: theme.transparentAndroid, height: "100%", width: "100%", position: "absolute", zIndex: tag ? 1 : -1}}>
+        <TouchableOpacity activeOpacity={1} onPress={() => changeVisibility()} style={{backgroundColor: theme.transparentAndroid, height: Platform.OS=="ios" ? "100%" : "95%", width: "100%", position: "absolute", zIndex: tag ? 1 : -1}}>
             <Animated.View style={[GS.animatedCard, animation, {backgroundColor: theme.dark, alignItems: "center"}]}>
                 <Text style={{fontSize: 20, color: theme.textColor, marginVertical: 5}}>{tag}</Text>
                 <Text style={{fontSize: 18, color: theme.textColor}}>{getInfo()}</Text>

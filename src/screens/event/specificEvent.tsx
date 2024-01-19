@@ -2,7 +2,7 @@ import Space from "@/components/shared/utils"
 import React from "react"
 import { useSelector } from "react-redux"
 import ES from "@styles/eventStyles"
-import { Dimensions, ScrollView, View } from "react-native"
+import { Dimensions, Platform, ScrollView, View } from "react-native"
 import Swipe from "@components/nav/swipe"
 import SpecificEventImage from "@components/event/specificEventImage"
 import Countdown from "@components/event/countdown"
@@ -49,7 +49,7 @@ export default function SpecificEventScreen(): JSX.Element {
         <Swipe left="EventScreen">
             <View style={{...ES.sesContent, backgroundColor: theme.background}}>
                 <ScrollView showsVerticalScrollIndicator={false}>
-                    <Space height={Dimensions.get("window").height / 8 - 5} />
+                    <Space height={Platform.OS=="ios" ? Dimensions.get("window").height / 8 - 5 : Dimensions.get("window").height / 7} />
                     <Tag event={event} />
                     <SpecificEventImage />
                     <Space height={10} />
