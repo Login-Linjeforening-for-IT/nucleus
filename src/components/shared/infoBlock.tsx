@@ -25,9 +25,9 @@ export default function InfoBlock({infoText}: InfoBlockProps){
                 justifyContent: 'center',
                 alignItems: 'center',
             }}>
-                <SvgXml xml={infoSvg}></SvgXml>
+                <SvgXml xml={infoSvg} color={event.canceled ? "#ff4040" : "#62c4d7"}></SvgXml>
             </View>
-            <Text style={{color: "#dcf9ff", fontSize: 20, paddingVertical: 10, width: '80%'}}>
+            <Text style={{color: event.canceled ? '#ffd0d0' : "#dcf9ff", fontSize: 20, paddingVertical: 10, width: '80%'}}>
                 {infoText}
             </Text>
         </View>
