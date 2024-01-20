@@ -7,6 +7,7 @@ import Map from "./map"
 import T from "@styles/text"
 import { useSelector } from "react-redux"
 import { TextLink } from "@components/shared/link"
+import InfoBlock from "@components/shared/infoBlock"
 
 export default function BasicInfo() {
     const { event } = useSelector((state: ReduxState) => state.event)
@@ -15,6 +16,8 @@ export default function BasicInfo() {
     const textNO = { host: "Arrangør:   ", more: "Mer info"}
     const textEN = { host: "Organizer:   ", more: "More info"}
     const text = lang ? textNO : textEN
+
+    const info = lang ? event.informational_no : event.informational_en
     
     return (
         <Card>
@@ -36,6 +39,7 @@ export default function BasicInfo() {
                     {event.link_homepage && <TextLink style={{fontSize: 20, color: "#fd8738", top: 3}} text={text.more} url={event.link_homepage} />}
                 </Text>
             </View>
+            {info&&<InfoBlock infoText={info} />}
         </Card>
     )
 }
