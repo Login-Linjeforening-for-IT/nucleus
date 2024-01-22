@@ -42,7 +42,7 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
         useState<JSX.Element | undefined>(undefined)
     // Notification state
     const [shouldSetupNotifications, setShouldSetupNotifications] = useState(true)
-    
+
     // Redux states
     const notification = useSelector((state: ReduxState) => state.notification)
     const { search, lastSave } = useSelector((state: ReduxState) => state.event)

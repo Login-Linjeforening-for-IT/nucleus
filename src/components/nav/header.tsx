@@ -27,6 +27,11 @@ export default function Header({ options, route, navigation }: HeaderProps): Rea
     if (!title && SES) title = lang ? event.name_no : event.name_en
     if (!title && SAS) title = lang ? ad.title_no : ad.title_en
     if (route.name === "ProfileScreen") return <></>
+    // if (tag && !SES) {
+    //     setTimeout(() => {
+    //         if (tag && !SES) dispatch(setTag(''))
+    //     }, 500);
+    // }
 
     const { isDark } = useSelector((state: ReduxState) => state.theme )
     const  [backIcon, setBackIcon] = useState(isDark 

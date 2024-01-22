@@ -220,7 +220,7 @@ export const GS = StyleSheet.create({
         bottom: 0,
         height: Dimensions.get("window").height / 1.48,
         width: "100%", 
-        borderRadius: 20
+        borderRadius: 20,
     },
 })
 
