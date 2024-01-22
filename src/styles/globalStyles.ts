@@ -218,7 +218,7 @@ export const GS = StyleSheet.create({
         position: "absolute",
         zIndex: 2,
         bottom: 0,
-        height: Dimensions.get("window").height / 1.48,
+        height: Platform.OS=="ios" ? Dimensions.get("window").height / 1.48 : Dimensions.get("window").height / 1.40,
         width: "100%", 
         borderRadius: 20,
     },
