@@ -5,6 +5,7 @@ import React from "react"
 import { setTag } from "@redux/event"
 import { useDispatch } from "react-redux"
 import getTags from "@utils/getTags"
+import { useNavigation } from "@react-navigation/native"
 
 type TagsProps = {
     event: DetailedEvent
@@ -26,11 +27,12 @@ export default function Tags({event}: TagsProps) {
 }
 
 function Tag({text}: TagProps) {
+    const navigation = useNavigation()
     const dispatch = useDispatch()
 
     return (
         <View style={{left: 12, marginRight: 5, bottom: 6}}>
-            <TouchableOpacity onPress={() => dispatch(setTag(text))}>
+            <TouchableOpacity onPress={() => navigation.navigate("InfoModal")}>
                 <View style={{backgroundColor: "#d3b65450", flexDirection: "row", alignSelf: "baseline", padding: 3, borderRadius: 5, paddingHorizontal: 5}}>
                     <Text style={{color: "#d3b654", marginRight: 5}}>{text}</Text>
                     <Image style={GS.tag} source={require("@assets/icons/tag.png")} />
