@@ -32,7 +32,9 @@ function Tag({text}: TagProps) {
 
     return (
         <View style={{left: 12, marginRight: 5, bottom: 6}}>
-            <TouchableOpacity onPress={() => navigation.navigate("InfoModal")}>
+            <TouchableOpacity onPress={() => {
+                                        navigation.navigate("InfoModal")
+                                        dispatch(setTag(text))}}>
                 <View style={{backgroundColor: "#d3b65450", flexDirection: "row", alignSelf: "baseline", padding: 3, borderRadius: 5, paddingHorizontal: 5}}>
                     <Text style={{color: "#d3b654", marginRight: 5}}>{text}</Text>
                     <Image style={GS.tag} source={require("@assets/icons/tag.png")} />

@@ -12,7 +12,6 @@ import { useDispatch } from "react-redux"
 import { fetchEventDetails } from "@utils/fetch"
 import { setEvent } from "@redux/event"
 import Tag from "@components/shared/tag"
-import TagInfo from "@components/shared/tagInfo"
 
 /**
  *
@@ -59,7 +58,6 @@ export default function SpecificEventScreen(): JSX.Element {
                     <Space height={Dimensions.get("window").height / 3 + 10} />
                 </ScrollView>
             </View>
-            <TagInfo />
         </Swipe>
     )
 }
