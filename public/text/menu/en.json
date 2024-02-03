@@ -26,24 +26,24 @@
             "id": 5, 
             "nav": "BusinessScreen",  
             "title": "For companies" 
+        },
+        {
+            "id": 6, 
+            "nav": "LoginScreen",     
+            "title": "Login"
+        },
+        {
+            "id": 7, 
+            "nav": "InternalScreen",
+            "title": "Intranet (verv)"
         }
     ],
     "version": "Version ",
     "unusedScreens": [
         {
-            "id": 6, 
+            "id": 8, 
             "nav": "ReportScreen",   
             "title": "Report" 
-        },
-        {
-            "id": 7, 
-            "nav": "LoginScreen",     
-            "title": "Login"
-        },
-        {
-            "id": 8, 
-            "nav": "InternalScreen",
-            "title": "Intranet (verv)"
         }
     ]
 }

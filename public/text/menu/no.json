@@ -26,24 +26,24 @@
             "id": 5, 
             "nav": "BusinessScreen",
             "title": "For bedrifter"
+        },
+        {
+            "id": 6, 
+            "nav": "LoginScreen",
+            "title": "Logg inn"
+        },
+        {
+            "id": 7, 
+            "nav": "InternalScreen",
+            "title": "Innsida (verv)"
         }
     ],
     "version": "Versjon ",
     "unusedScreens": [
         {
-            "id": 6, 
+            "id": 8, 
             "nav": "ReportScreen",   
             "title": "Varsle"
-        },
-        {
-            "id": 7, 
-            "nav": "LoginScreen",
-            "title": "Logg inn"
-        },
-        {
-            "id": 8, 
-            "nav": "InternalScreen",
-            "title": "Innsida (verv)"
         }
     ]
 }
