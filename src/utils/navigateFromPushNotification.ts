@@ -96,7 +96,7 @@ setPushNotification, setPushNotificationContent }: PushNotificationProps) {
                 setPushNotification(true)
 
                 const notificationElement = (
-                    () => NotificationInApp({title, body, data, theme}, navigation)
+                    () => NotificationInApp({title, body, data, theme})
                 )
                 setPushNotificationContent(notificationElement)
             }

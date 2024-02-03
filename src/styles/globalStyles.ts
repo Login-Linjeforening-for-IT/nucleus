@@ -207,7 +207,21 @@ export const GS = StyleSheet.create({
         left: Platform.OS === "ios"
             ? Dimensions.get("window").width / 21.5
             : Dimensions.get("window").width / 20
-    }
+    },
+    tag: {
+        width: 15,
+        height: 15,
+        top: 1,
+        resizeMode: "contain",
+    },
+    animatedCard: {
+        position: "absolute",
+        zIndex: 2,
+        bottom: 0,
+        height: Platform.OS=="ios" ? Dimensions.get("window").height / 1.48 : Dimensions.get("window").height / 1.40,
+        width: "100%", 
+        borderRadius: 20,
+    },
 })
 
 export default GS

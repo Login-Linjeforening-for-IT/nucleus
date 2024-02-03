@@ -67,21 +67,21 @@ export default function Navigator(): JSX.Element {
             >
                 {/* Maps over all screens, returning each of */}
                 {screens.map((screen: StackProps) => (
-                        <Tab.Screen 
-                            key={screen.name} 
-                            options={({
-                                tabBarIcon: ({focused}) => (
-                                    <Image
-                                        style={MS.bMenuIcon} 
-                                        source={focused 
-                                            ? screen.focusedIcon
-                                            : screen.icon} 
-                                    />
-                                )
-                            })}
-                            name={screen.name+"Root"}
-                            component={screen.component}
-                        />
+                    <Tab.Screen 
+                        key={screen.name} 
+                        options={({
+                            tabBarIcon: ({focused}) => (
+                                <Image
+                                    style={MS.bMenuIcon} 
+                                    source={focused 
+                                        ? screen.focusedIcon
+                                        : screen.icon} 
+                                />
+                            )
+                        })}
+                        name={screen.name+"Root"}
+                        component={screen.component}
+                    />
                 ))}
             </Tab.Navigator>
         </NavigationContainer>

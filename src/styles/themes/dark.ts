@@ -12,7 +12,8 @@ const Dark = {
     switchOnState: "#f1f1f1",
     switchOffState: "#fd8738",
     trackColor: "#181818",
-    trackBackgroundColor: "#080808"
+    trackBackgroundColor: "#080808",
+    dark: "#000"
 }
 
 export default Dark

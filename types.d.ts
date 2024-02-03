@@ -88,6 +88,7 @@ type ReduxState = {
         clickedCategories: string[]
         input: string
         downloadState: Date
+        tag: string
     }
     ad: {
         ads: AdProps[]
@@ -411,4 +412,5 @@ type Theme = {
     switchOffState: string
     trackColor: string
     trackBackgroundColor: string
+    dark: string
 }
