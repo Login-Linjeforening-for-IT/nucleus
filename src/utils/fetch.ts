@@ -1,5 +1,5 @@
 const api = "http://10.212.174.46/api/"
-const testapi = "http://10.212.174.46/api/"
+const testapi = "http://testapi.login.no/api/"
 
 /**
  * Function for checking when the API was last fetched successfully.
