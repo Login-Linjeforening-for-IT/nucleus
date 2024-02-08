@@ -352,16 +352,6 @@ type NotificationList = {
     time: string
 }
 
-type EventStackParamList = {
-    EventScreen: undefined
-    SpecificEventScreen: undefined
-}
-
-type AdStackParamList = {
-    AdScreen: undefined
-    SpecificAdScreen: undefined
-}
-
 type Setting = {
     screen: string;
     nav: string;
@@ -372,26 +362,6 @@ type Setting = {
             title: string
         }[]
 }
-
-type MenuRoutes = 
-    "ProfileScreen"
-    | "SettingScreen"
-    | "NotificationScreen"
-    | "AboutScreen"
-    | "BusinessScreen"
-    | "ReportScreen"
-    | "LoginScreen"
-    | "InternalScreen" 
-
-type ItemProps = {
-    id: number
-    nav: MenuRoutes
-    title: string
-}
-
-type MenuStackParamList = {
-    [k in MenuRoutes]+?: ItemProps;
-} & {MenuScreen: undefined}
 
 type ListFooterProps = {
     index: number

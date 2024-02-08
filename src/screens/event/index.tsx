@@ -20,6 +20,7 @@ import Header from "@components/nav/header"
 import Swipe from "@components/nav/swipe"
 import { FilterButton, FilterUI } from "@components/shared/filter"
 import DownloadButton from "@components/shared/downloadButton"
+import { EventStackParamList } from "@utils/screenTypes"
 
 const EventStack = createStackNavigator<EventStackParamList>()
 

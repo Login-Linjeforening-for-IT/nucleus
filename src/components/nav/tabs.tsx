@@ -9,9 +9,12 @@ import AdScreen from "@screens/ads"
 import React from "react"
 import { Image } from "react-native"
 import MS from "@styles/menuStyles"
+import linking from "@utils/linking"
+import { TabParamList } from "@utils/screenTypes"
+
 
 // Declares Tab to equal CBTN function
-const Tab = createBottomTabNavigator()
+const Tab = createBottomTabNavigator<TabParamList>()
 
 // Declares Navigator, wraps in container and declares all navigation routes
 /**
@@ -48,10 +51,10 @@ export default function Navigator(): JSX.Element {
                 ? require("@assets/menu/menu.png")
                 : require("@assets/menu/menu-black.png")
         }
-    ]
+    ] as const
 
     return (
-        <NavigationContainer>
+        <NavigationContainer linking={linking}>
             <Tab.Navigator
                 // Set initialscreen at to not defaut to top of tab stack
                 initialRouteName={screens[0].name}
