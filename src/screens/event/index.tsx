@@ -20,7 +20,7 @@ import Header from "@components/nav/header"
 import Swipe from "@components/nav/swipe"
 import { FilterButton, FilterUI } from "@components/shared/filter"
 import DownloadButton from "@components/shared/downloadButton"
-import { EventStackParamList } from "@utils/screenTypes"
+import { EventScreenProps, EventStackParamList, TabBarProps, TabParamList } from "@utils/screenTypes"
 
 const EventStack = createStackNavigator<EventStackParamList>()
 
@@ -36,7 +36,7 @@ const EventStack = createStackNavigator<EventStackParamList>()
  * @param {navigation} Navigation Navigation route
  * @returns EventScreen
  */
-export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
+export default function EventScreen({ navigation }: EventScreenProps<'EventScreen'>): JSX.Element {
     // Push notification
     const [pushNotification, setPushNotification] = useState(false)
     const [pushNotificationContent, setPushNotificationContent] = 

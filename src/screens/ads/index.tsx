@@ -21,6 +21,7 @@ import Swipe from "@components/nav/swipe"
 import AdList from "@components/ads/adList"
 import { FilterButton, FilterUI } from "@components/shared/filter"
 import DownloadButton from "@components/shared/downloadButton"
+import { AdStackParamList } from "@utils/screenTypes"
 
 const AdStack = createStackNavigator<AdStackParamList>()
 
