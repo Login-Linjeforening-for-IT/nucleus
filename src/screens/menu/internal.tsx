@@ -1,59 +1,94 @@
-import topic from "@/utils/topic"
-import Cluster from "@/components/shared/cluster"
+import Cluster, { ClusterSmaller } from "@/components/shared/cluster"
 import Space from "@/components/shared/utils"
 import GS from "@styles/globalStyles"
 import { useSelector } from "react-redux"
 import T from "@styles/text"
-import React from "react"
+import React, { useEffect, useState } from "react"
 import Swipe from "@components/nav/swipe"
-import { Text, View, TouchableOpacity, Dimensions } from "react-native"
-
-
-type OptionProps = {
-    index: number
-    item: ItemProps
-}
-
-type ItemProps = {
-    id: number
-    title: string
-}
+import { View, TouchableOpacity, Dimensions, TouchableWithoutFeedback, Keyboard } from "react-native"
+import getFirebaseStatus from "@utils/getFirebaseStatus"
+import Text from "@components/shared/text"
+import ManageTopics from "@components/notification/manageTopics"
+import TopicManager from "@utils/topicManager"
 
 export default function InternalScreen(): JSX.Element {
 
     const { theme } = useSelector((state: ReduxState) => state.theme)
+    const { lang } = useSelector((state: ReduxState) => state.lang)
+    const [displayToken, setDisplayToken] = useState(false)
+    const copyText = `(click ${displayToken ? 'token' : 'box'} to copy, or here to ${displayToken ? 'hide' : 'reveal'})`
+    const [firebase, setFirebase] = useState<Status>({token: 'Pending...', topics: ['Pending', '...'] })
+    const warning = lang 
+        ? ['ADVARSEL', 'Med denne tokenen kan HVEM SOM HELST sende EVIG MANGE varslinger til telefonen din.'] 
+        : ['WARNING', 'With this token, ANYONE can send an INFINITE AMOUNT of notifications to your phone.']
 
-    const setting = [
-        {id: 0, title: "Subscribe to maintenance"},
-        {id: 1, title: "Unsubscribe from maintenance"},
-    ]
+    // Loads initial data
+    useEffect(() => {
+        // Function to fetch Firebase status
+        async function fetchFirebaseStatus() {
+            const firebaseStatus: Status = await getFirebaseStatus()
+            if (firebaseStatus) {
+                setFirebase(firebaseStatus)
+            }
+        }
+
+        // Fetch initial data
+        fetchFirebaseStatus()
+
+        // Setup interval to fetch topics every second
+        const intervalId = setInterval(fetchFirebaseStatus, 1000)
+
+        // Cleanup function to clear the interval when the component unmounts
+        return () => clearInterval(intervalId)
+    }, [])
 
     return (
-        <Swipe left="MenuScreen">
-            <View>
-                <View style={{...GS.content, backgroundColor: theme.darker}}>
-                    {setting.map((item, index) => <Option index={index} item={item} key={index} />)}
-                    <Space height={Dimensions.get("window").height / 3}/>
+        <TouchableWithoutFeedback style={{backgroundColor: 'red', zIndex: 10, height: 1000, width: 1000}} onPress={() => Keyboard.dismiss()}>
+            <Swipe left="MenuScreen">
+                <View>
+                    <View style={{...GS.content, backgroundColor: theme.darker}}>
+                        <Space height={Dimensions.get("window").height / 11}/>
+                        <ManageTopics />
+                        <Space height={Dimensions.get("window").height / 11}/>
+                        <Text style={{...T.centered15, color: theme.textColor}}>
+                            Subscribed topics
+                        </Text>
+                        <ClusterSmaller>
+                            <Text style={{...T.text15, color: theme.oppositeTextColor}} copyable={true}>
+                                {firebase.topics}
+                            </Text>
+                        </ClusterSmaller>
+                        <Space height={50}/>
+                        <TouchableOpacity onPress={() => TopicManager({topic: 'maintenance'})}>
+                            <Cluster>
+                                <Text style={{...T.centered20, color: theme.textColor}}>
+                                    Subscribe to maintenance
+                                </Text>
+                            </Cluster>
+                        </TouchableOpacity>
+                        <Space height={50}/>
+                        <Text style={{...T.centered15, color: theme.oppositeTextColor}}>
+                            Device token
+                        </Text>
+                        <Space height={5}/>
+                        <ClusterSmaller>
+                            <Text style={{
+                                ...T.centered10, 
+                                color: displayToken ? theme.oppositeTextColor : theme.dark, 
+                                backgroundColor: displayToken ? undefined : theme.dark
+                            }} copyable={true} warning={warning}>
+                                {firebase.token}
+                            </Text>
+                        </ClusterSmaller>
+                        <Space height={5}/>
+                        <TouchableOpacity onPress={() => setDisplayToken(!displayToken)}>
+                            <Text style={{...T.centered10, color: theme.oppositeTextColor}}>
+                                {copyText}
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
-            </View>
-        </Swipe>
-    )
-}
-
-function Option({index, item}: OptionProps): JSX.Element {
-    const { theme } = useSelector((state: ReduxState) => state.theme)
-
-    return (
-        <View>
-            {index === 0 && <Space height={Dimensions.get("window").height/8} />}
-            <TouchableOpacity onPress={() => topic({topicID: 
-                "maintenance", lang: index === 1 ? true : undefined})}>
-                <Cluster>
-                    <Text style={{...T.centered20, color: theme.textColor}}>
-                        {item.title}
-                    </Text>
-                </Cluster>
-            </TouchableOpacity>
-        </View>
+            </Swipe>
+        </TouchableWithoutFeedback>
     )
 }

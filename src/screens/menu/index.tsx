@@ -22,9 +22,9 @@ import ProfileScreen from "./profile"
 import ReportScreen from "./report"
 import SettingScreen from "./settings"
 import SmallProfile from "@components/profile/smallProfile"
+import Text from "@components/shared/text"
 import Header from "@components/nav/header"
 import {
-  Text,
   View,
   Image,
   TouchableOpacity,
@@ -138,6 +138,7 @@ toggleFeedback}: MenuItemProps) {
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const info = lang ? no : en
+    const version = `${info.version}${nativeApplicationVersion}`
 
     return (
         <View>
@@ -170,7 +171,7 @@ toggleFeedback}: MenuItemProps) {
             </View>
             {index === setting.length-1 
             ?   <Text style={{...T.contact, color: theme.oppositeTextColor}}>
-                    {info.version}{nativeApplicationVersion}
+                    {version}
                 </Text>
             : null}
         </View>
