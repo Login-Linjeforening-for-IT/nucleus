@@ -12,7 +12,6 @@ GoogleService-Info.plist
 
 # Expo
 .expo/
-dist/
 web-build/
 
 # Native
@@ -39,6 +38,7 @@ yarn-error.*
 .env*.local
 
 # typescript
+dist/
 *.tsbuildinfo
 
 # OSX
@@ -97,3 +97,6 @@ yarn-error.log
 
 # testing
 /coverage
+
+.config.ts
+.config.js
