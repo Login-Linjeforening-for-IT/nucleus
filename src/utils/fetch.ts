@@ -172,7 +172,7 @@ export async function fetchAds(): Promise<AdProps[]> {
         // const response = await fetch("https://api.login.no/ads")
 
         // Dev
-        const response = await fetch("http://10.212.174.46/api/jobs/")
+        const response = await fetch(`${testapi}/jobs`)
 
         // Checks if response is ok, otherwise throws error
         if (!response.ok) {
@@ -201,7 +201,7 @@ export async function fetchAdDetails(ad: AdProps): Promise<DetailedAd> {
     // const response = await fetch(`https://api.login.no/ads/${ad.id}`)
     
     // Dev
-    const response = await fetch(`http://10.212.174.46/api/jobs/${ad.id}`)
+    const response = await fetch(`${testapi}/jobs/${ad.id}`)
     const adDetails = await response.json()
 
     return {...ad, ...adDetails.job, ...adDetails.organization}
