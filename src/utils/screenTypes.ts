@@ -43,9 +43,20 @@ export type ItemProps = {
     title: string
 }
 
+export type MenuProps<T extends keyof MenuStackParamList> = 
+    StackScreenProps<MenuStackParamList, T>
+
 export type MenuStackParamList = {
-    [k in MenuRoutes]+?: ItemProps;
-} & {MenuScreen: undefined}
+    ProfileScreen: undefined,
+    SettingScreen: undefined,
+    NotificationScreen: undefined,
+    AboutScreen: undefined,
+    BusinessScreen: undefined,
+    ReportScreen: undefined,
+    LoginScreen: undefined,
+    InternalScreen: undefined,
+    MenuScreen: undefined
+}
 
 export type TabParamList = {
     EventScreen: NavigatorScreenParams<EventStackParamList>

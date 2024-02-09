@@ -10,8 +10,9 @@ import NS from "@styles/notificationStyles"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import NotificationText from "@/components/notification/notificationText"
 import Swipe from "@components/nav/swipe"
+import { MenuProps } from "@utils/screenTypes"
 
-export default function NotificationScreen({navigation, back}: NotificationScreenProps): JSX.Element {
+export default function NotificationScreen({navigation}: MenuProps<'NotificationScreen'>): JSX.Element {
     const [list, setList] = useState(undefined)
     const { lang  } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
@@ -52,12 +53,6 @@ export default function NotificationScreen({navigation, back}: NotificationScree
                         </Text>}
                         <Space height={Dimensions.get("window").height / 3} />
                 </View>
-                <TopMenu 
-                    navigation={navigation}
-                    screen="notifications"
-                    title={lang ? "Varslinger" : "Notifications"}
-                    back={back} 
-                />
             </View>
         </Swipe>
     )

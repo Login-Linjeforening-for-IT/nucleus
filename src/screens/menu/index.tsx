@@ -32,7 +32,7 @@ import {
   Platform,
 } from "react-native"
 import Swipe from "@components/nav/swipe"
-import { ItemProps, MenuStackParamList } from "@utils/screenTypes"
+import { ItemProps, MenuRoutes, MenuStackParamList } from "@utils/screenTypes"
 
 type MenuItemProps = {
     index: number

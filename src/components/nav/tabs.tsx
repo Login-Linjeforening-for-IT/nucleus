@@ -1,20 +1,64 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { StackProps } from "@interfaces"
-import { NavigationContainer } from "@react-navigation/native"
+import { NavigationContainer, RouteConfigComponent } from "@react-navigation/native"
 import Footer from "@nav/footer"
 import { useSelector } from "react-redux"
 import EventScreen from "@screens/event"
 import MenuScreen from "@screens/menu"
 import AdScreen from "@screens/ads"
-import React from "react"
+import React, { ReactNode } from "react"
 import { Image } from "react-native"
 import MS from "@styles/menuStyles"
 import linking from "@utils/linking"
-import { TabParamList } from "@utils/screenTypes"
+import { AdStackParamList, EventStackParamList, MenuRoutes, MenuStackParamList, TabParamList } from "@utils/screenTypes"
+import { createStackNavigator } from "@react-navigation/stack"
+import ProfileScreen from "@screens/menu/profile"
+import SettingScreen from "@screens/menu/settings"
+import NotificationScreen from "@screens/menu/notifications"
+import AboutScreen from "@screens/menu/about"
+import BusinessScreen from "@screens/menu/business"
+import LoginScreen from "@screens/menu/login"
+import InternalScreen from "@screens/menu/internal"
+import ReportScreen from "@screens/menu/report"
 
 
 // Declares Tab to equal CBTN function
 const Tab = createBottomTabNavigator<TabParamList>()
+const EventStack = createStackNavigator<EventStackParamList>()
+const AdStack = createStackNavigator<AdStackParamList>()
+const MenuStack = createStackNavigator<MenuStackParamList>()
+
+function Events() {
+    return (
+        <EventStack.Navigator>
+            <EventStack.Screen name="EventScreen" component={EventScreen}/>
+        </EventStack.Navigator>
+    )
+}
+
+function Ads() {
+    return (
+        <AdStack.Navigator>
+            <AdStack.Screen name="AdScreen" component={AdScreen}/>
+        </AdStack.Navigator>
+    )
+}
+
+function Menu() {
+    return (
+        <MenuStack.Navigator>
+            <MenuStack.Screen name="MenuScreen" component={MenuScreen}/>
+            <MenuStack.Screen name="ProfileScreen" component={ProfileScreen}/>
+            <MenuStack.Screen name="SettingScreen" component={SettingScreen}/>
+            <MenuStack.Screen name="NotificationScreen" component={NotificationScreen}/>
+            <MenuStack.Screen name="AboutScreen" component={AboutScreen}/>
+            <MenuStack.Screen name="BusinessScreen" component={BusinessScreen}/>
+            <MenuStack.Screen name="LoginScreen" component={LoginScreen}/>
+            <MenuStack.Screen name="InternalScreen" component={InternalScreen}/>
+            <MenuStack.Screen name="ReportScreen" component={ReportScreen}/>
+        </MenuStack.Navigator>
+    )
+}
 
 // Declares Navigator, wraps in container and declares all navigation routes
 /**

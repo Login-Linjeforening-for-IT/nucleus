@@ -21,6 +21,7 @@ import {
     TextInput,
     Alert,
 } from "react-native"
+import { MenuProps } from "@utils/screenTypes"
 
 type UsernameUIProps = {
     data: DataProps
@@ -46,7 +47,7 @@ type PasswordUIProps = {
     showPass: () => void
 }
 
-export default function LoginScreen({ navigation }: ScreenProps): JSX.Element {
+export default function LoginScreen({ navigation }: MenuProps<'LoginScreen'>): JSX.Element {
 
     const { lang  } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
