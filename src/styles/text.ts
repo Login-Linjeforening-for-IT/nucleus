@@ -15,6 +15,10 @@ export const T = StyleSheet.create({
         color: "red",
         fontSize: 15,
     },
+    // Text of size 10
+    text10: {
+        fontSize: 10,
+    },
     // Text of size 15
     text15: {
         fontSize: 15,
@@ -52,6 +56,11 @@ export const T = StyleSheet.create({
     centered: {
         alignSelf: "center",
         fontSize: 30,
+    },
+    // Centered text of size 10
+    centered10: {
+        alignSelf: "center",
+        fontSize: 10,
     },
     // Centered text of size 15
     centered15: {

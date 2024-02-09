@@ -414,3 +414,13 @@ type Theme = {
     trackBackgroundColor: string
     dark: string
 }
+
+type Status = {
+    token: string
+    topics: string[]
+}
+
+type TopicManagerResult = {
+    result: boolean
+    feedback: string
+}

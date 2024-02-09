@@ -13,12 +13,12 @@ export default async function subscribeToTopic(topic: string) {
 
     try {
         await messaging().subscribeToTopic(topic)
-        console.log("Subscribed to:", topic)
+        return { result: true, feedback: `Subscribed to ${topic}`}
     } catch (e: any) {
         if (e.message.includes('TOO_MANY_SUBSCRIBERS')) {
-            console.warn('Too many subscribers for topic:', topic)
+            return { result: false, feedback: `Too many subscribers for topic: ${topic}`}
         } else {
-            console.error('Subscription to topic failed:', e)
+            return { result: false, feedback: `Subscription to topic failed: ${e}`}
         }
     }
 }

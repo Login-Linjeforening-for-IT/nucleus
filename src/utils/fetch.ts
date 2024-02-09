@@ -141,7 +141,7 @@ export async function fetchEvents(): Promise<EventProps[]> {
         // const response = await fetch(`${api}events`)
 
         // Test API
-        const response = await fetch(`${testapi}events`)
+        const response = await fetch(`${testapi}events/`)
 
         // Dev
         // const response = await fetch("https://tekkom:rottejakt45@api.login.no:8443/events")
