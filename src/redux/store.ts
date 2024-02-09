@@ -9,7 +9,7 @@ import EventReducer from "@redux/event"
 import LangReducer from "@redux/lang"
 import MiscReducer from "@redux/misc"
 import AdReducer from "@redux/ad"
-import thunk from "redux-thunk"
+import {thunk} from "redux-thunk"
 
 // Combines all reducers
 const reducers = combineReducers({
@@ -57,8 +57,8 @@ const persistedReducer = persistReducer(saveState, reducers)
 const Store = configureStore({
     // The combinded reducer
     reducer: persistedReducer,
-    // Middleware to interact with AsyncStorage
-    middleware: [thunk]
+    // Middleware to interact with AsyncStorage (must be of any type to do underlying API type error)
+    middleware: () => [thunk] as any
 })
 
 // Exporting the full Redux Store

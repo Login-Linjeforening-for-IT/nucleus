@@ -28,7 +28,7 @@ export default function CategorySquare({color, startDate, endDate}: CategorySqua
             width: endDay ? 62 : 38,
             height: Platform.OS === "ios" ? 65 : 65, 
             borderRadius: 10, 
-            backgroundColor: `#${color}`,
+            backgroundColor: color,
             justifyContent: 'center',
             alignItems: 'center',
         }}>
