@@ -5,7 +5,6 @@ import { BlurView } from "expo-blur"
 import { openBrowserAsync } from 'expo-web-browser';
 import { SvgXml } from "react-native-svg"
 import USBicon from "@assets/menu/USB-temp-icon.svg"
-import { BottomTabBarProps } from "@react-navigation/bottom-tabs"
 import { ReactNode } from "react";
 import { NavigationHelpers, ParamListBase, TabNavigationState } from "@react-navigation/native";
 import { BottomTabDescriptorMap, BottomTabNavigationEventMap } from "@react-navigation/bottom-tabs/lib/typescript/src/types";

@@ -1,16 +1,15 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
-import { StackProps } from "@interfaces"
-import { NavigationContainer, RouteConfigComponent } from "@react-navigation/native"
+import { NavigationContainer } from "@react-navigation/native"
 import Footer from "@nav/footer"
 import { useSelector } from "react-redux"
 import EventScreen from "@screens/event"
 import MenuScreen from "@screens/menu"
 import AdScreen from "@screens/ads"
-import React, { ReactNode } from "react"
+import React from "react"
 import { Image } from "react-native"
 import MS from "@styles/menuStyles"
 import linking from "@utils/linking"
-import { AdStackParamList, EventStackParamList, MenuRoutes, MenuStackParamList, TabParamList } from "@utils/screenTypes"
+import { AdStackParamList, EventStackParamList, MenuStackParamList, TabParamList } from "@utils/screenTypes"
 import { createStackNavigator } from "@react-navigation/stack"
 import ProfileScreen from "@screens/menu/profile"
 import SettingScreen from "@screens/menu/settings"
@@ -20,6 +19,9 @@ import BusinessScreen from "@screens/menu/business"
 import LoginScreen from "@screens/menu/login"
 import InternalScreen from "@screens/menu/internal"
 import ReportScreen from "@screens/menu/report"
+import SpecificEventScreen from "@screens/event/specificEvent"
+import SpecificAdScreen from "@screens/ads/specificAd"
+import Header from "./header"
 
 
 // Declares Tab to equal CBTN function
@@ -30,23 +32,34 @@ const MenuStack = createStackNavigator<MenuStackParamList>()
 
 function Events() {
     return (
-        <EventStack.Navigator>
+        <EventStack.Navigator screenOptions={{
+            animationEnabled: false,
+            headerTransparent: true,
+            header: props => <Header {...props}/>}}>
             <EventStack.Screen name="EventScreen" component={EventScreen}/>
+            <EventStack.Screen name="SpecificEventScreen" component={SpecificEventScreen}/>
         </EventStack.Navigator>
     )
 }
 
 function Ads() {
     return (
-        <AdStack.Navigator>
+        <AdStack.Navigator screenOptions={{
+            animationEnabled: false,
+            headerTransparent: true,
+            header: props => <Header {...props}/>}}>
             <AdStack.Screen name="AdScreen" component={AdScreen}/>
+            <AdStack.Screen name="SpecificAdScreen" component={SpecificAdScreen}/>
         </AdStack.Navigator>
     )
 }
 
 function Menu() {
     return (
-        <MenuStack.Navigator>
+        <MenuStack.Navigator screenOptions={{
+            animationEnabled: false,
+            headerTransparent: true,
+            header: props => <Header {...props}/>}}>
             <MenuStack.Screen name="MenuScreen" component={MenuScreen}/>
             <MenuStack.Screen name="ProfileScreen" component={ProfileScreen}/>
             <MenuStack.Screen name="SettingScreen" component={SettingScreen}/>
@@ -67,41 +80,14 @@ function Menu() {
  * 
  * @returns Application with navigation
  */
-export default function Navigator(): JSX.Element {
+export default function Navigator({}): JSX.Element {
     const { isDark } = useSelector((state: ReduxState) => state.theme )
-
-    const screens = [
-        {
-            name: "EventScreen",
-            component: EventScreen,
-            focusedIcon: require("@assets/menu/calendar-orange.png"),
-            icon: isDark
-                ? require("@assets/menu/calendar777.png")
-                : require("@assets/menu/calendar-black.png")
-        },
-        {
-            name: "AdScreen",
-            component: AdScreen,
-            focusedIcon: require("@assets/menu/business-orange.png"),
-            icon: isDark
-                ? require("@assets/menu/business.png")
-                : require("@assets/menu/business-black.png")
-        },
-        {
-            name: "MenuScreen",
-            component: MenuScreen,
-            focusedIcon: require("@assets/menu/menu-orange.png"),
-            icon: isDark
-                ? require("@assets/menu/menu.png")
-                : require("@assets/menu/menu-black.png")
-        }
-    ] as const
 
     return (
         <NavigationContainer linking={linking}>
             <Tab.Navigator
                 // Set initialscreen at to not defaut to top of tab stack
-                initialRouteName={screens[0].name}
+                initialRouteName={"EventNav"}
                 backBehavior="history"
                 screenOptions={{headerShown: false}}
                 // Sets the tab bar component
@@ -109,27 +95,50 @@ export default function Navigator(): JSX.Element {
                     state={props.state} 
                     descriptors={props.descriptors} 
                     navigation={props.navigation} 
-                    insets={props.insets} 
                 />}
             >
-                {/* Maps over all screens, returning each of */}
-                {screens.map((screen: StackProps) => (
-                    <Tab.Screen 
-                        key={screen.name} 
-                        options={({
-                            tabBarIcon: ({focused}) => (
-                                <Image
-                                    style={MS.bMenuIcon} 
-                                    source={focused 
-                                        ? screen.focusedIcon
-                                        : screen.icon} 
-                                />
-                            )
-                        })}
-                        name={screen.name+"Root"}
-                        component={screen.component}
-                    />
-                ))}
+                <Tab.Screen name="EventNav" 
+                            component={Events} 
+                            options={({
+                                tabBarIcon: ({focused}) => (
+                                    <Image
+                                        style={MS.bMenuIcon} 
+                                        source={focused 
+                                            ? require("@assets/menu/calendar-orange.png")
+                                            : isDark
+                                                ? require("@assets/menu/calendar777.png")
+                                                : require("@assets/menu/calendar-black.png")} 
+                                    />
+                                )
+                        })}/>
+                <Tab.Screen name="AdNav" 
+                            component={Ads} 
+                            options={({
+                                tabBarIcon: ({focused}) => (
+                                    <Image
+                                        style={MS.bMenuIcon} 
+                                        source={focused 
+                                            ? require("@assets/menu/business-orange.png")
+                                            : isDark
+                                                ? require("@assets/menu/business.png")
+                                                : require("@assets/menu/business-black.png")}
+                                    />
+                                )
+                        })}/>
+                <Tab.Screen name="MenuNav" 
+                            component={Menu}
+                            options={({
+                                tabBarIcon: ({focused}) => (
+                                    <Image
+                                        style={MS.bMenuIcon} 
+                                        source={focused 
+                                            ? require("@assets/menu/calendar-orange.png")
+                                            : isDark
+                                                ? require("@assets/menu/menu.png")
+                                                : require("@assets/menu/menu-black.png")}
+                                    />
+                                )
+                        })}/>
             </Tab.Navigator>
         </NavigationContainer>
     )

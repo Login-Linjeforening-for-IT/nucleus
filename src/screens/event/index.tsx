@@ -9,20 +9,13 @@ from "@/utils/navigateFromPushNotification"
 import initializeNotifications 
 from "@/utils/notificationSetup"
 import LastFetch, { fetchEvents } from "@/utils/fetch"
-import { View, StatusBar as StatusBarReact } from "react-native"
-import { ScreenProps } from "@interfaces"
-import { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs"
+import { View } from "react-native"
 import LogoNavigation from "@/components/shared/logoNavigation"
-import { createStackNavigator } from "@react-navigation/stack"
-import SpecificEventScreen from "./specificEvent"
 import { setEvents, setLastFetch, setLastSave } from "@redux/event"
-import Header from "@components/nav/header"
 import Swipe from "@components/nav/swipe"
 import { FilterButton, FilterUI } from "@components/shared/filter"
 import DownloadButton from "@components/shared/downloadButton"
-import { EventScreenProps, EventStackParamList, TabBarProps, TabParamList } from "@utils/screenTypes"
-
-const EventStack = createStackNavigator<EventStackParamList>()
+import { EventScreenProps } from "@utils/screenTypes"
 
 /**
  * Parent EventScreen component
@@ -122,45 +115,32 @@ export default function EventScreen({ navigation }: EventScreenProps<'EventScree
         hasBeenSet: notification["SETUP"]
     })
 
+    // Sets the component of the header
+    useEffect(()=>{
+        navigation.setOptions({
+            headerShown: true,
+            headerTransparent: true,
+            headerComponents: {
+                bottom: [<FilterUI />],
+                left: [<LogoNavigation />],
+                right: [<FilterButton />, <DownloadButton />]
+            }})   
+    }, [navigation])
+
     // Displays the EventScreen
     return (
-        <EventStack.Navigator screenOptions={{
-            animationEnabled: false,
-            headerTransparent: true,
-            header: props => <Header {...props} />
-        }}>
-            <EventStack.Screen name="EventScreen">
-                {({navigation}) => {
-                    // Sets the component of the header
-                    useEffect(()=>{
-                        navigation.setOptions({
-                            headerComponents: {
-                                bottom: [<FilterUI />],
-                                left: [<LogoNavigation />],
-                                right: [<FilterButton />, <DownloadButton />]
-                            }} as Partial<BottomTabNavigationOptions>)   
-                    }, [navigation])
-
-                    return (
-                        <Swipe right="AdScreenRoot">
-                            <View>
-                                <StatusBar style={isDark ? "light" : "dark"} />
-                                <View style={{
-                                    ...GS.content,
-                                    paddingHorizontal: 5,
-                                    backgroundColor: theme.darker
-                                }}>
-                                    {pushNotification && pushNotificationContent}
-                                    <EventList notification={notification} />
-                                </View>
-                            </View>
-                        </Swipe>
-                    )}}
-            </EventStack.Screen>
-            <EventStack.Screen 
-                name="SpecificEventScreen"
-                component={SpecificEventScreen}
-            />
-        </EventStack.Navigator>
+        <Swipe right="AdScreenRoot">
+            <View>
+                <StatusBar style={isDark ? "light" : "dark"} />
+                <View style={{
+                    ...GS.content,
+                    paddingHorizontal: 5,
+                    backgroundColor: theme.darker
+                }}>
+                    {pushNotification && pushNotificationContent}
+                    <EventList notification={notification} />
+                </View>
+            </View>
+        </Swipe>
     )
 }

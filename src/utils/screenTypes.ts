@@ -8,7 +8,7 @@ export type TabBarProps<T extends keyof TabParamList> =
 export type EventScreenProps<T extends keyof EventStackParamList> = 
     CompositeScreenProps<
         StackScreenProps<EventStackParamList, T>,
-        TabBarProps<keyof TabParamList>
+        BottomTabScreenProps<TabParamList>
     >
 
 export type EventStackParamList = {
@@ -59,7 +59,7 @@ export type MenuStackParamList = {
 }
 
 export type TabParamList = {
-    EventScreen: NavigatorScreenParams<EventStackParamList>
-    AdScreen: NavigatorScreenParams<AdStackParamList>
-    MenuScreen: NavigatorScreenParams<MenuStackParamList>
+    EventNav: NavigatorScreenParams<EventStackParamList>
+    AdNav: NavigatorScreenParams<AdStackParamList>
+    MenuNav: NavigatorScreenParams<MenuStackParamList>
 }
