@@ -54,7 +54,7 @@ export default function InternalScreen(): JSX.Element {
                             Subscribed topics
                         </Text>
                         <ClusterSmaller>
-                            <Text style={{...T.text15, color: theme.oppositeTextColor}} copyable={true}>
+                            <Text style={{...T.centered15, color: theme.oppositeTextColor}} copyable={true}>
                                 {firebase.topics}
                             </Text>
                         </ClusterSmaller>

@@ -26,7 +26,7 @@ export default async function TopicManager({topic, unsub}: TopicManagerProps) {
     
         if (granted) {
             if (unsub) {
-                await messaging().unsubscribeFromTopic(topic) // error occurs here
+                await messaging().unsubscribeFromTopic(topic)
                 return { result: true, feedback: `Unsubscribed from ${topic}`}
             } 
             

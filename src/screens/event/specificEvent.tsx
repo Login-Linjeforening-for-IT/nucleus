@@ -62,7 +62,7 @@ export default function SpecificEventScreen(): JSX.Element {
                     <Text style={{
                         alignSelf: 'center', 
                         fontSize: 15, 
-                        backgroundColor: theme.oppositeTextColor,
+                        color: theme.oppositeTextColor,
                         marginTop: 10
                     }}>Event ID: {event.id}</Text>
                     <Space height={Dimensions.get("window").height / 3} />

@@ -1,5 +1,5 @@
 import messaging from '@react-native-firebase/messaging'
-import config from '../../.config.js'
+import config from '../../config.json'
 
 export default async function getFirebaseStatus(): Promise<Status> {
     const authorized = await messaging().hasPermission()
@@ -24,9 +24,9 @@ export default async function getFirebaseStatus(): Promise<Status> {
             return { token: token, topics: Object.keys(data.rel.topics)}
 
         } catch (error) {
-            return { token: `Error fetching token or topics: ${error}`, topics: ['Unavailable', ''] }
+            return { token: `Error fetching token or topics: ${error}`, topics: ['Unavailable'] }
         }
     } else {
-        return { token: 'User has not granted permission to access FCM topics.', topics: ['Unavailable', ''] }
+        return { token: 'User has not granted permission to access device token.', topics: ['Unavailable'] }
     }
 }

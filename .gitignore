@@ -1,14 +1,14 @@
+# Secrets
+config.json
+google-services.json
+GoogleService-Info.plist
+
 # vscode
 .vscode
 android
 ios
-google-services.json
-GoogleService-Info.plist
 *.aab
 *.ipa
-
-# macOS
-.DS_Store
 
 # Expo
 .expo/
@@ -97,6 +97,3 @@ yarn-error.log
 
 # testing
 /coverage
-
-.config.ts
-.config.js
