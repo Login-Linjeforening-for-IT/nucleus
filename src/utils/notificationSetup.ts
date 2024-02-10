@@ -37,15 +37,11 @@ export async function notificationSetup() {
     const granted = await messaging().requestPermission()
 
     if (granted) {
-        await subscribeToTopic("norwegianIMPORTANT")
-        await subscribeToTopic("norwegianBEDPRES")
-        await subscribeToTopic("norwegianTEKKOM")
-        await subscribeToTopic("norwegianCTF")
-        await subscribeToTopic("norwegianSOCIAL")
-        await subscribeToTopic("norwegianKARRIEREDAG")
-        await subscribeToTopic("norwegianFADDERUKA")
-        await subscribeToTopic("norwegianLOGIN")
-        await subscribeToTopic("norwegianANNET")
+        const topics = ["IMPORTANT", "BEDPRES", "TEKKOM", "CTF", "SOCIAL", "KARRIEREDAG", "FADDERUKA", "LOGIN", "ANNET"]
+
+        for (const topic of topics) {
+            await subscribeToTopic(`n${topic}`)
+        }
     }
 
     dispatch(setNotificationStateTrue({category: "SETUP"}))

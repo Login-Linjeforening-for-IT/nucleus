@@ -63,7 +63,7 @@ export default function SpecificEventScreen(): JSX.Element {
                         alignSelf: 'center', 
                         fontSize: 15, 
                         color: theme.oppositeTextColor,
-                        marginTop: 10
+                        marginVertical: 10
                     }}>Event ID: {event.id}</Text>
                     <Space height={Dimensions.get("window").height / 3} />
                 </ScrollView>

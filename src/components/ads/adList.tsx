@@ -12,7 +12,8 @@ export default function AdList (): JSX.Element {
     const { ads, search, renderedAds } = useSelector((state: ReduxState) => state.ad)
     const { skills } = useSelector((state: ReduxState) => state.ad)
 
-    let adList: AdProps[] = [...renderedAds] // Copies renderedEvents because it's read only
+    // Copies renderedEvents because it's read only
+    let adList: AdProps[] = [...renderedAds]
     adList.sort((a, b)=>(Number(b.highlight)-Number(a.highlight)))
 
     if (!renderedAds.length && !search) {
