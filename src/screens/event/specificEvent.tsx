@@ -1,5 +1,5 @@
 import Space from "@/components/shared/utils"
-import React from "react"
+import React, { useEffect } from "react"
 import { useSelector } from "react-redux"
 import ES from "@styles/eventStyles"
 import { Dimensions, Platform, ScrollView, View } from "react-native"
@@ -13,37 +13,23 @@ import { fetchEventDetails } from "@utils/fetch"
 import { setEvent } from "@redux/event"
 import Tag from "@components/shared/tag"
 import TagInfo from "@components/shared/tagInfo"
+import { EventScreenProps } from "@utils/screenTypes"
 
 /**
  *
  * @param param0
  * @returns
  */
-export default function SpecificEventScreen(): JSX.Element {
+export default function SpecificEventScreen({ navigation, route: {params: {eventID}} }: EventScreenProps<'SpecificEventScreen'>): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const { event } = useSelector((state: ReduxState) => state.event)
-
-    // if (deepLinkID) {
-    //     const response = fetchEventDetails(deepLinkID)
-
-    //     if (response) {
-    //         dispatch(setEvent(response))
-    //     }
-    // }
-
+    
     const dispatch = useDispatch()
-    const descriptionCheck = lang ? 'description_no' : 'description_en'
 
-    async function getDetails() {
-        const response = await fetchEventDetails(event.id)
-
-        if (response) dispatch(setEvent(response))
-    }
-
-    if (!(descriptionCheck in event)) {
-        getDetails()
-    }
+    useEffect(()=>{const fetching = fetchEventDetails(eventID).then((event)=>{
+        dispatch(setEvent(event))
+    })}, [navigation])
 
     return (
         <Swipe left="EventScreen">

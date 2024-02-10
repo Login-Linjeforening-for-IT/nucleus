@@ -13,7 +13,7 @@ export type EventScreenProps<T extends keyof EventStackParamList> =
 
 export type EventStackParamList = {
     EventScreen: undefined
-    SpecificEventScreen: undefined
+    SpecificEventScreen: {eventID: number}
 }
 
 declare global {
