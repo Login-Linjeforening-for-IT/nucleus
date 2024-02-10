@@ -1,7 +1,7 @@
 import Cluster, { ClusterSmaller } from "@/components/shared/cluster"
 import Space from "@/components/shared/utils"
 import GS from "@styles/globalStyles"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import T from "@styles/text"
 import React, { useEffect, useState } from "react"
 import Swipe from "@components/nav/swipe"
@@ -10,17 +10,27 @@ import getFirebaseStatus from "@utils/getFirebaseStatus"
 import Text from "@components/shared/text"
 import ManageTopics from "@components/notification/manageTopics"
 import TopicManager from "@utils/topicManager"
+import { changeLoginStatus } from "@redux/loginStatus"
+import { useNavigation } from "@react-navigation/native"
+import { Navigation } from "@interfaces"
 
 export default function InternalScreen(): JSX.Element {
 
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
+    const dispatch = useDispatch()
+    const navigation: Navigation = useNavigation()
     const [displayToken, setDisplayToken] = useState(false)
     const copyText = `(click ${displayToken ? 'token' : 'box'} to copy, or here to ${displayToken ? 'hide' : 'reveal'})`
     const [firebase, setFirebase] = useState<Status>({token: 'Pending...', topics: ['Pending', '...'] })
     const warning = lang 
         ? ['ADVARSEL', 'Med denne tokenen kan HVEM SOM HELST sende EVIG MANGE varslinger til telefonen din.'] 
         : ['WARNING', 'With this token, ANYONE can send an INFINITE AMOUNT of notifications to your phone.']
+
+    function handleLogout() {
+        dispatch(changeLoginStatus())
+        navigation.goBack()
+    }
 
     // Loads initial data
     useEffect(() => {
@@ -84,6 +94,11 @@ export default function InternalScreen(): JSX.Element {
                         <TouchableOpacity onPress={() => setDisplayToken(!displayToken)}>
                             <Text style={{...T.centered10, color: theme.oppositeTextColor}}>
                                 {copyText}
+                            </Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => handleLogout()}>
+                            <Text style={{...T.centered10, top: 85, padding: 15, color: theme.oppositeTextColor}}>
+                                Logout
                             </Text>
                         </TouchableOpacity>
                     </View>
