@@ -1,11 +1,10 @@
-import notificationArray from "@/utils/notificationArray"
-import topic from "@/utils/topic"
 import BellIcon from "@components/shared/bellIcon"
 import ES from "@styles/eventStyles"
 import React from "react"
 import { TouchableOpacity, View } from "react-native"
 import { useSelector, useDispatch } from "react-redux"
 import { setClickedEvents } from "@redux/event"
+import TopicManager from "@utils/topicManager"
 
 type BellProps = {
     item: EventProps
@@ -22,9 +21,13 @@ export default function Bell({item, notification, embed}: BellProps): JSX.Elemen
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const dispatch = useDispatch()
     // Uses available language if possible, otherwise uses other language
-    const category = lang 
-        ? (item.category_name_no || item.category_name_en) 
-        : (item.category_name_en || item.category_name_no)
+    
+    function isClicked() {
+        for (const event of clickedEvents) {
+            if (event.id === item.id) return true
+        }
+        return false
+    }
     // Checks if the bell should be orange instead of gray
     const isOrange = clickedEvents.some(event => event.id === item.id) 
         ? true 
@@ -42,9 +45,7 @@ export default function Bell({item, notification, embed}: BellProps): JSX.Elemen
     return (
         <View style={{...ES.view3, right: embed ? 0 : 5}}>
             <TouchableOpacity style={{paddingBottom: 10}} onPress={() => {
-                topic({topicID: `${item.id}`, lang, status: false, 
-                    category: category.toLowerCase(), catArray: 
-                    notificationArray({notification, category})})
+                TopicManager({topic: `${lang ? 'n' : 'e'}${item.id}`, unsub: isClicked() ? true : false})
                 dispatch(setClickedEvents(
                     clickedEvents.some(event => event.id === item.id)
                     ? clickedEvents.filter((x) => x.id !== item.id)

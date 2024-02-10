@@ -32,7 +32,6 @@ topicParams) {
     const topics = ["IMPORTANT", "BEDPRES", "TEKKOM", "CTF", "SOCIAL", "KARRIEREDAG", "FADDERUKA", "LOGIN", "ANNET"]
     const intervals = ["10m", "30m", "1h", "2h", "3h", "6h", "1d", "2d", "1w"]
 
-    
     if (topicID === "langChange") {
         if (!lang) {
             for (const topic of topics) {
