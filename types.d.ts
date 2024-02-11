@@ -1,3 +1,11 @@
+// Configured in this file to be globally accessable.
+declare module '*.svg' {
+    const content: string;
+    export default content;
+}
+
+// Types globally used in the app
+
 type EventProps = {
     id: number
     name_no: string
