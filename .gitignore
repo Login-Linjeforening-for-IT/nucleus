@@ -9,6 +9,7 @@ android
 ios
 *.aab
 *.ipa
+*.apk
 
 # Expo
 .expo/
