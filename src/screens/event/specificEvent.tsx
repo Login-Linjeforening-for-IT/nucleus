@@ -14,6 +14,7 @@ import { setEvent } from "@redux/event"
 import Tag from "@components/shared/tag"
 import TagInfo from "@components/shared/tagInfo"
 import { EventScreenProps } from "@utils/screenTypes"
+import { useIsFocused, useRoute } from "@react-navigation/native"
 
 /**
  *
@@ -27,9 +28,13 @@ export default function SpecificEventScreen({ navigation, route: {params: {event
     
     const dispatch = useDispatch()
 
-    useEffect(()=>{const fetching = fetchEventDetails(eventID).then((event)=>{
+    const focused = useIsFocused()
+    
+    useEffect(()=>{
+        if (focused) {const fetching = fetchEventDetails(eventID).then((event)=>{
         dispatch(setEvent(event))
-    })}, [navigation])
+        console.log(navigation.getState())
+    })}}, [focused])
 
     return (
         <Swipe left="EventScreen">

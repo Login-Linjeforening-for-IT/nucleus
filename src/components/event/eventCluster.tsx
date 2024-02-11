@@ -1,6 +1,5 @@
 import Cluster from "@components/shared/cluster"
-import { Navigation } from "@interfaces"
-import { NavigationProp, StackActions, useNavigation, useRoute } from "@react-navigation/native"
+import { useNavigation } from "@react-navigation/native"
 import { toggleSearch } from "@redux/event"
 import { LinearGradient } from "expo-linear-gradient"
 import { Dimensions, Text, TouchableOpacity, View } from "react-native"
@@ -11,7 +10,7 @@ import ES from "@styles/eventStyles"
 import CategorySquare from "@components/shared/category"
 import Space from "@components/shared/utils"
 import T from "@styles/text"
-import { EventScreenProps, EventStackParamList } from "@utils/screenTypes"
+import { EventStackParamList } from "@utils/screenTypes"
 import { StackNavigationProp } from "@react-navigation/stack"
 
 type EventClusterProps = {
@@ -39,7 +38,6 @@ JSX.Element {
         <View style={item.highlight && {marginVertical: 2, top: -2}}>
             <TouchableOpacity onPress={() => {
                 search && dispatch(toggleSearch())
-                // const pushAction = StackActions.push("SpecificEventScreen", {eventID})
                 navigation.push("SpecificEventScreen", {eventID: item.id})
             }}>
                 <LinearGradient start={[0, 0.5]}

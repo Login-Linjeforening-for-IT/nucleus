@@ -2,6 +2,7 @@
 .vscode
 android
 ios
+config.json
 google-services.json
 GoogleService-Info.plist
 *.aab
