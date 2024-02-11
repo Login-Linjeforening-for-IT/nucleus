@@ -1,7 +1,7 @@
 import GS from "@styles/globalStyles"
 import React from "react"
 import { useSelector } from "react-redux"
-import { View } from "react-native"
+import { Platform, View } from "react-native"
 
 type CornerSquareProps = {
     corner: number
@@ -23,10 +23,12 @@ JSX.Element {
             <View style={type 
                 ? {
                     transform: [{ rotate: `${90 * corner}deg` }],
+                    left: Platform.OS === 'ios' ? undefined : "-90%",
+                    top: Platform.OS === 'ios' ? undefined : "15%",
                     width: horizontal ? "100%" : undefined, 
                     height: horizontal ? undefined : "180%", 
                     aspectRatio: horizontal ? 1.5 : 0.66,
-                    right: horizontal ? undefined : "40%",
+                    right: horizontal ? undefined : Platform.OS === 'ios' ? "45%" : "-10%",
                     bottom: horizontal ? undefined : "30.3%",
                 }
                 : {...GS.personImage, transform: [{ rotate: `${90 * corner}deg` }]}
