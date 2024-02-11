@@ -97,11 +97,11 @@ function BlurWrapper(props: PropsWithChildren) {
     return (
         <>
             <BlurView 
-                style={{height: height}} 
-                intensity={Platform.OS === "ios" ? 30 : 20}
+                style={{height}} 
+                experimentalBlurMethod='dimezisBlurView' 
+                intensity={Platform.OS === "ios" ? 30 : 20} 
             />
-            <View style={{...GS.blurBackgroundView,
-                height: height,
+            <View style={{...GS.blurBackgroundView, height,
                 backgroundColor: theme.transparentAndroid
             }}>{props.children}</View>
         </>
