@@ -5,7 +5,6 @@ import Check from "@components/event/check"
 import Cluster from "@/components/shared/cluster"
 import Button from "@/components/shared/button"
 import Space from "@/components/shared/utils"
-
 import SS from "@styles/settingStyles"
 import GS from "@styles/globalStyles"
 import React, { useState } from "react"

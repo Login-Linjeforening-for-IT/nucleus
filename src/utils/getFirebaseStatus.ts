@@ -3,7 +3,7 @@ import config from '../../config.json'
 
 export default async function getFirebaseStatus(): Promise<Status> {
     const authorized = await messaging().hasPermission()
-
+    
     if (!authorized) {
         return { token: 'User has not granted permission to access device token.', topics: ['Unavailable'] }
     }
@@ -18,7 +18,6 @@ export default async function getFirebaseStatus(): Promise<Status> {
                 headers: {
                     Authorization: `Bearer ${config.api_key}`,
                     'Content-Type': 'application/json',
-                    // access_token_auth: 'true'
                 },
             }
         )
