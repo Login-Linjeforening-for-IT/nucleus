@@ -27,11 +27,6 @@ export default function Header({ options, route, navigation }: HeaderProps): Rea
     if (!title && SES) title = lang ? event.name_no : event.name_en
     if (!title && SAS) title = lang ? ad.title_no : ad.title_en
     if (route.name === "ProfileScreen") return <></>
-    // if (tag && !SES) {
-    //     setTimeout(() => {
-    //         if (tag && !SES) dispatch(setTag(''))
-    //     }, 500);
-    // }
 
     const { isDark } = useSelector((state: ReduxState) => state.theme )
     const  [backIcon, setBackIcon] = useState(isDark 
@@ -50,7 +45,7 @@ export default function Header({ options, route, navigation }: HeaderProps): Rea
                     ) : 
                     <TouchableOpacity onPress={() => {
                         setBackIcon(orangeIcon)
-                        if (tag) dispatch(setTag(''))
+                        if (tag.title) dispatch(setTag({ title: "", body: "" }))
                         navigation.goBack()
                     }}>
                         <Image style={{...MS.tMenuIcon, left: 5}} source={backIcon}></Image>
@@ -91,17 +86,17 @@ function BlurWrapper(props: PropsWithChildren) {
     const categories = cat.length || 0
     const extraHeight = (isSearchingEvents && 6 * categories) || (isSearchingAds && 9.5 * ad.skills.length) || 0
     const height = defaultHeight + extraHeight + (isSearchingEvents || isSearchingAds
-        ? Platform.OS === "ios" ? 120 : 110
+        ? Platform.OS === "ios" ? isSearchingEvents ? 115 : 70 : isSearchingEvents ? 120 : 70
         : Platform.OS === "ios" ? 20 : 5)
 
     return (
         <>
             <BlurView 
-                style={{height: height}} 
-                intensity={Platform.OS === "ios" ? 30 : 20}
+                style={{height}} 
+                experimentalBlurMethod='dimezisBlurView' 
+                intensity={Platform.OS === "ios" ? 30 : 20} 
             />
-            <View style={{...GS.blurBackgroundView,
-                height: height,
+            <View style={{...GS.blurBackgroundView, height,
                 backgroundColor: theme.transparentAndroid
             }}>{props.children}</View>
         </>

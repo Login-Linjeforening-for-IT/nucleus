@@ -17,6 +17,7 @@ import {
     Text,
     Dimensions,
     ScrollView,
+    Platform,
 } from "react-native"
 
 /**
@@ -37,7 +38,7 @@ export function FilterUI(): JSX.Element {
     const isSearchingEvents = route.name === "EventScreen" && event.search
     const isSearchingAds = route.name === "AdScreen" && ad.search
     const isSearching = isSearchingEvents || isSearchingAds
-    const top = (isSearchingAds && 43) || 40
+    const top = (isSearchingAds && 35) || Platform.OS === 'ios' ? 40 : 35
 
     return (
         <View style={isSearching ? {top: top} : { display: 'none' }}>
@@ -110,14 +111,32 @@ function FilterCategoriesOrSkills() {
     const event = useSelector((state: ReduxState) => state.event)
     const ad = useSelector((state: ReduxState) => state.ad)
     const route = useRoute()
-    const cat = lang ? event.categories.no : event.categories.en
+    const cat = bestCategories()
+
+    function bestCategories() {
+        if (lang) {
+            if (event.categories.no.length > event.categories.en.length) {
+                return event.categories.no
+            } else {
+                return event.categories.en
+            }
+        } else {
+            if (event.categories.en.length > event.categories.no.length) {
+                return event.categories.en
+            } else {
+                return event.categories.no
+            }
+        }
+    }
+
+
     // Clones cat because it is read only
     const categories = [...cat]
     event.clickedEvents.length && categories.unshift(lang ? "Påmeldt" : "Enrolled")
     const skills = ad.skills
     const isFilteringOnEventScreen = event.search && route.name === "EventScreen"
     const item = isFilteringOnEventScreen ? categories : skills
-
+    
     return (
         <ScrollView style={ES.clusterFilterView} scrollEnabled={item.length > 9 ? true : false}>
             {item.map((text, index) => {

@@ -1,6 +1,5 @@
 import { View, ScrollView, Dimensions } from "react-native"
 import Cluster from "@/components/shared/cluster"
-
 import AS from "@styles/adStyles"
 import { useSelector } from "react-redux"
 import React from "react"

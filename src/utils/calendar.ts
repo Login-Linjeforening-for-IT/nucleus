@@ -1,7 +1,7 @@
 import { fetchEventDetails } from "@/utils/fetch"
 import { setCalendarID } from "@redux/misc"
 import { Platform } from "react-native"
-import { AnyAction, Dispatch } from "redux"
+import { UnknownAction, Dispatch } from "redux"
 import {
     requestCalendarPermissionsAsync,
     getDefaultCalendarAsync,
@@ -17,7 +17,7 @@ import {
 type handleDownloadProps = {
     clickedEvents: EventProps[]
     calendarID: string
-    dispatch: Dispatch<AnyAction>
+    dispatch: Dispatch<UnknownAction>
     lang: boolean
 }
 
@@ -36,7 +36,7 @@ type eventsToCalendarFormatProps = {
 type executeDownloadProps = {
     clickedEvents: EventProps[]
     calendarID: string
-    dispatch: Dispatch<AnyAction>
+    dispatch: Dispatch<UnknownAction>
     lang: boolean
 }
 

@@ -5,7 +5,6 @@ import Reminders from "@/components/settings/reminders"
 import Language from "@/components/settings/language"
 import Cluster from "@/components/shared/cluster"
 import Space from "@/components/shared/utils"
-
 import GS from "@styles/globalStyles"
 import { useSelector } from "react-redux"
 import en from "@text/menu/settings/en.json"

@@ -2,7 +2,6 @@ import RenderHTML from "react-native-render-html"
 import { useSelector } from "react-redux"
 import Embed from "@components/event/embed"
 
-
 export default function Description() {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { event } = useSelector((state: ReduxState) => state.event)
@@ -10,9 +9,11 @@ export default function Description() {
     const description = lang ? event.description_no : event.description_en
     if (!description) return null
 
+    const fixedDesc = description.replace(/\\n/g, '<br>')
     const embededEvent = /(\[:\w+\]\(\d+\))/
     const findNumber = /\((\d+)\)/
-    const split = description.split(embededEvent)
+    const split = fixedDesc.split(embededEvent)
+    const color = theme.textColor
 
     return split.map((content, index) => {
         const match = content.match(findNumber)
@@ -21,8 +22,8 @@ export default function Description() {
         if (!content.includes('[:event]') && !content.includes('[:jobad]')) {
             return <RenderHTML
                 key={index}
-                baseStyle={{maxWidth: "100%", color: theme.textColor}}
-                contentWidth={0}
+                baseStyle={{color}}
+                contentWidth={10}
                 source={{html: content}}
             />
         }

@@ -1,19 +1,18 @@
+# Secrets
+config.json
+google-services.json
+GoogleService-Info.plist
+
 # vscode
 .vscode
 android
 ios
-config.json
-google-services.json
-GoogleService-Info.plist
 *.aab
 *.ipa
-
-# macOS
-.DS_Store
+*.apk
 
 # Expo
 .expo/
-dist/
 web-build/
 
 # Native
@@ -40,6 +39,7 @@ yarn-error.*
 .env*.local
 
 # typescript
+dist/
 *.tsbuildinfo
 
 # OSX

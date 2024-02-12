@@ -17,8 +17,10 @@ import InternalScreen from "./internal"
 import LoginScreen from "./login"
 import ProfileScreen from "./profile"
 import SettingScreen from "./settings"
+import SmallProfile from "@components/profile/smallProfile"
+import Text from "@components/shared/text"
+import Header from "@components/nav/header"
 import {
-  Text,
   View,
   Image,
   TouchableOpacity,
@@ -39,7 +41,21 @@ type MenuItemProps = {
     login: boolean
 }
 
-export default function MenuScreen({ navigation }: MenuProps<'MenuScreen'>): JSX.Element {
+const MenuStack = createStackNavigator<MenuStackParamList>()
+
+const screens: Record<string, React.FC<any>> = {
+    "ProfileScreen": ProfileScreen,
+    "SettingScreen": SettingScreen,
+    // "NotificationScreen": NotificationScreen,
+    "AboutScreen": AboutScreen,
+    "BusinessScreen": BusinessScreen,
+    // "LoginScreen": LoginScreen,
+    // "InternalScreen": InternalScreen
+    // "ReportScreen": ReportScreen,
+}
+
+
+export default function MenuScreen(): JSX.Element {
 
     const { lang  } = useSelector((state: ReduxState) => state.lang  )
     const { login } = useSelector((state: ReduxState) => state.login )
@@ -100,6 +116,7 @@ toggleFeedback}: MenuItemProps) {
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const info = lang ? no : en
+    const version = `${info.version}${nativeApplicationVersion}`
 
     return (
         <View>
@@ -132,7 +149,7 @@ toggleFeedback}: MenuItemProps) {
             </View>
             {index === setting.length-1 
             ?   <Text style={{...T.contact, color: theme.oppositeTextColor}}>
-                    {info.version}{nativeApplicationVersion}
+                    {version}
                 </Text>
             : null}
         </View>

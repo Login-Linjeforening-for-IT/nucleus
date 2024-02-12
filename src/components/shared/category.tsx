@@ -22,19 +22,21 @@ export default function CategorySquare({color, startDate, endDate}: CategorySqua
     const startDay = typeof startDate === "number" ? startDate : startDate.getDate()
     const startMonth = typeof startDate === "number" ? '' : startDate.getMonth()
     const endDay = endDate?.getDate()
-
+    const multiday = endDay && startDay != endDay ? true : false
+ 
     return (
         <View style={{
-            width: endDay ? 62 : 38,
+            width: multiday ? 62 : 38,
             height: Platform.OS === "ios" ? 65 : 65, 
-            borderRadius: 10, 
-            backgroundColor: `#${color}`,
+            borderRadius: 10,
+            overflow: 'hidden',
+            backgroundColor: color,
             justifyContent: 'center',
             alignItems: 'center',
         }}>
             <Text style={{fontSize: Platform.OS === "ios" ? 20 : 22, color: theme.textColor}}>
                 {startDay}
-                {endDay && "-" + endDay}
+                {multiday && "-" + endDay}
             </Text>
             {startMonth && <Month month={startMonth} color={theme.textColor} />}
         </View>)
@@ -64,8 +66,9 @@ export function CategoryCircle({color}: {color: string}): JSX.Element {
         right: 10,
         height: 20, 
         width: 20, 
-        backgroundColor: `#${color}`, 
+        backgroundColor: color,
         borderRadius: 100,
+        overflow: 'hidden',
         marginRight: -5
     }} />
 }

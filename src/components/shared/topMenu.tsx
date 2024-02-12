@@ -1,4 +1,3 @@
-
 import { useSelector } from "react-redux"
 import MS from "@styles/menuStyles"
 import { BlurView } from "expo-blur"

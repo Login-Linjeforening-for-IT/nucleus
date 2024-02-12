@@ -12,7 +12,8 @@ export default function AdList (): JSX.Element {
     const { ads, search, renderedAds } = useSelector((state: ReduxState) => state.ad)
     const { skills } = useSelector((state: ReduxState) => state.ad)
 
-    let adList: AdProps[] = [...renderedAds] // Copies renderedEvents because it's read only
+    // Copies renderedEvents because it's read only
+    let adList: AdProps[] = [...renderedAds]
     adList.sort((a, b)=>(Number(b.highlight)-Number(a.highlight)))
 
     if (!renderedAds.length && !search) {
@@ -21,10 +22,8 @@ export default function AdList (): JSX.Element {
         return (
             <ScrollView showsVerticalScrollIndicator={false}>
                 {search === false
-                    ? <Space height={Dimensions.get("window").height / (Platform.OS === "ios" ? 8.4 : 8)} />
-                    : <Space height={Platform.OS === "ios" 
-                        ? Dimensions.get("window").height / (skills.length / 33)
-                        : Dimensions.get("window").height / (skills.length / 40)} />
+                    ? <Space height={Dimensions.get("window").height / (Platform.OS === "ios" ? 8 : 7.5)} />
+                    : <Space height={Dimensions.get("window").height / (Platform.OS === "ios" ? 4.2 : 3.1)} />
                 }
                 {adList.map((ad, index) => <AdCluster index={index} ad={ad} key={index} />)}
             </ScrollView>

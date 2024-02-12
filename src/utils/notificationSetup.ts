@@ -2,14 +2,17 @@ import { setNotificationStateTrue } from "@redux/notifications"
 import { useDispatch } from "react-redux"
 
 // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 1/6
-// import messaging from "@react-native-firebase/messaging"
-// import subscribeToTopic from "@utils/subscribeToTopic"
+import messaging from "@react-native-firebase/messaging"
+import subscribeToTopic from "@utils/subscribeToTopic"
+import { Dispatch, UnknownAction } from "redux"
+import { resetTheme } from "@redux/theme"
 // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 1/6
 
 type initializeNotificationsProps = {
     shouldRun: boolean
-    hasBeenSet: boolean
+    hasBeenSet: boolean[]
     setShouldSetupNotifications: React.Dispatch<React.SetStateAction<boolean>>
+    dispatch: Dispatch<UnknownAction>
 }
 
 /**
@@ -19,8 +22,9 @@ type initializeNotificationsProps = {
  * @param setShouldSetupNotifications Setter function for the shouldRun variable
  */
 export default function initializeNotifications ({shouldRun, hasBeenSet, 
-setShouldSetupNotifications }: initializeNotificationsProps) {
-    if (shouldRun && !hasBeenSet) {
+setShouldSetupNotifications, dispatch }: initializeNotificationsProps) {
+    if (shouldRun && !hasBeenSet[1]) {
+        dispatch(resetTheme())
         notificationSetup()
         setShouldSetupNotifications(false) 
     } 
@@ -37,15 +41,11 @@ export async function notificationSetup() {
     const granted = await messaging().requestPermission()
 
     if (granted) {
-        await subscribeToTopic("norwegianIMPORTANT")
-        await subscribeToTopic("norwegianBEDPRES")
-        await subscribeToTopic("norwegianTEKKOM")
-        await subscribeToTopic("norwegianCTF")
-        await subscribeToTopic("norwegianSOCIAL")
-        await subscribeToTopic("norwegianKARRIEREDAG")
-        await subscribeToTopic("norwegianFADDERUKA")
-        await subscribeToTopic("norwegianLOGIN")
-        await subscribeToTopic("norwegianANNET")
+        const topics = ["IMPORTANT", "BEDPRES", "TEKKOM", "CTF", "SOCIAL", "KARRIEREDAG", "FADDERUKA", "LOGIN", "ANNET"]
+
+        for (const topic of topics) {
+            await subscribeToTopic(`n${topic}`)
+        }
     }
 
     dispatch(setNotificationStateTrue({category: "SETUP"}))

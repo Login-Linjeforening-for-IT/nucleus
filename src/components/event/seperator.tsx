@@ -9,16 +9,26 @@ type SeperatorProps = {
 
 export default function Seperator({item, usedIndexes}: SeperatorProps) {
     if (item.highlight) return null
-
+    
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
-
+    
     const timeDifference = (new Date(item.time_start).valueOf() - new Date().valueOf()) / 1000
-    const options_no = ["Neste uke", "Flere uker til", "Om en måned", "Lenge til"]
-    const options_en = ["Next week", "In multiple weeks", "Next month", "In a long time"]
+    
+    const options_no = ["Neste uke", "Flere uker til", "Neste måned", "Flere måneder til", "Lenge til"]
+    const options_en = ["Next week", "In multiple weeks", "Next month", "In several months", "In a long time"]
     const options = lang ? options_no : options_en
-    const timestamps = [604800, 1209600, 24192002, 48384004]
-    const index = timestamps.findIndex((duration: number) => timeDifference < duration)
+    const timestamps = [604800, 1209600, 2629743, 5184000, 7776000]
+    const index = timestamps.findIndex((duration: number, index: number) => (
+        (timeDifference > duration) && !betterIndexExists(index, timeDifference)
+    ))
+
+    function betterIndexExists(index: number, current: number) {
+        for (let i = index; i < timestamps.length; i++) {
+            if (timestamps[i+1] < current) return true
+        }
+        return false
+    }
 
     if (usedIndexes.includes(index)) return null
     else usedIndexes.push(index)

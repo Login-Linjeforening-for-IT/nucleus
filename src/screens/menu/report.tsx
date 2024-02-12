@@ -3,7 +3,6 @@ import { CardSmaller } from "@/components/shared/card"
 import Check from "@components/event/check"
 import Button from "@/components/shared/button"
 import Space from "@/components/shared/utils"
-
 import SS from "@styles/settingStyles"
 import GS from "@styles/globalStyles"
 import { useSelector } from "react-redux"

@@ -120,5 +120,5 @@ function displayedEventTime(time_start: string, time_end: string) {
     if (days > 1) return `${lookup.type} ${days} ${text[10]}`
     if (days) return lookup.day
     
-    return `${lookup.type} ${hours}${text[11]} ${minutes}${text[12]} ${seconds}${text[13]}${lookup.end}`
+    return `${lookup.type} ${hours > 0 ? `${hours}${text[11]} ` : ''}${minutes > 0 ? `${minutes}${text[12]} ` : ''}${seconds > 0 ? `${seconds}${text[13]} ` : ''}${lookup.end}`
 }

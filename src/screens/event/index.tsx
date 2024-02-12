@@ -15,6 +15,7 @@ import { setEvents, setLastFetch, setLastSave } from "@redux/event"
 import Swipe from "@components/nav/swipe"
 import { FilterButton, FilterUI } from "@components/shared/filter"
 import DownloadButton from "@components/shared/downloadButton"
+const EventStack = createStackNavigator<EventStackParamList>()
 import { EventScreenProps } from "@utils/screenTypes"
 
 /**
@@ -109,23 +110,31 @@ export default function EventScreen({ navigation }: EventScreenProps<'EventScree
         if (lastSave === "") {(async() => {dispatch(setLastSave(LastFetch()))})()
     }
     }, [lastSave])
+
     initializeNotifications({
         shouldRun: shouldSetupNotifications,
         setShouldSetupNotifications,
         hasBeenSet: notification["SETUP"]
     })
 
-    // Sets the component of the header
-    useEffect(()=>{
-        navigation.setOptions({
-            headerShown: true,
+    // Displays the EventScreen
+    return (
+        <EventStack.Navigator screenOptions={{
+            animationEnabled: false,
             headerTransparent: true,
-            headerComponents: {
-                bottom: [<FilterUI />],
-                left: [<LogoNavigation />],
-                right: [<FilterButton />, <DownloadButton />]
-            }})   
-    }, [navigation])
+            header: props => <Header {...props} />
+        }}>
+            <EventStack.Screen name="EventScreen">
+                {({navigation}) => {
+                    // Sets the component of the header
+                    useEffect(()=>{
+                        navigation.setOptions({
+                            headerComponents: {
+                                bottom: [<FilterUI />],
+                                left: [<LogoNavigation />],
+                                right: [<FilterButton />, <DownloadButton />]
+                            }} as Partial<BottomTabNavigationOptions>)   
+                    }, [navigation])
 
     // Displays the EventScreen
     return (

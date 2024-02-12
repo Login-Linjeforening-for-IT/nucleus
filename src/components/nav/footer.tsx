@@ -1,4 +1,4 @@
-import { View, TouchableOpacity } from "react-native"
+import { View, TouchableOpacity, Platform } from "react-native"
 import { useSelector } from "react-redux"
 import MS from "@styles/menuStyles"
 import { BlurView } from "expo-blur"
@@ -29,7 +29,7 @@ export default function Footer({ state, descriptors, navigation }: FooterProps):
 
 function Wrapper({children}: WrapperProps) {
     const { tag } = useSelector((state: ReduxState) => state.event)
-    if (tag) return <View>{children}</View>
+    if (tag.title) return <View>{children}</View>
     else return <>{children}</>
 }
 
@@ -37,7 +37,7 @@ function Content({ state, descriptors, navigation }: FooterProps) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     return (
         <>
-            <BlurView style={MS.bMenu} intensity={30}/>
+            <BlurView style={MS.bMenu} experimentalBlurMethod='dimezisBlurView' intensity={Platform.OS === 'ios' ? 30 : 20}/>
             <View style={{
                 ...MS.bMenu,
                 backgroundColor: theme.transparentAndroid

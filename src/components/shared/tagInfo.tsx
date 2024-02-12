@@ -1,4 +1,4 @@
-import { Dimensions, Platform, Text, TouchableOpacity } from "react-native"
+import { Platform, Text, TouchableOpacity } from "react-native"
 import GS from "@styles/globalStyles"
 import no from "@text/tag/no.json"
 import en from "@text/tag/en.json"
@@ -47,13 +47,18 @@ export default function TagInfo() {
 
 
     function getInfo() {
-        const keys = Object.keys(TagInfo)
         const values = Object.values(TagInfo)
-        const index = keys.indexOf(tag)
-        return values[index]
+
+        for (const value of values) {
+            if (value.title === tag.title) {
+                return value.body
+            }
+        }
+
+        return ''
     }
     
-    // Animates the sliding
+    // Animates the sliding 
     const animation = useAnimatedStyle(() => {
         const interpolatedOpacity = interpolate(translateY.value, [200, 400], [1, 0])
         opacity.value = interpolatedOpacity
@@ -80,7 +85,7 @@ export default function TagInfo() {
         if (visible) {
             runOnJS(slideDown)()
             setTimeout(() => {
-                runOnJS(dispatch)(setTag(''))
+                runOnJS(dispatch)(setTag({ title: "", body: "" }))
             }, 120);
             setTimeout(() => {
                 runOnJS(setVisible)(false)
@@ -101,11 +106,11 @@ export default function TagInfo() {
                 height: Platform.OS=="ios" ? "100%" : "95%",
                 width: "100%",
                 position: "absolute",
-                zIndex: tag ? 1 : -1,
+                zIndex: tag.title ? 1 : -1,
             }}>
             <Animated.View style={[GS.animatedCard, animation, {backgroundColor: theme.dark, alignItems: "center"}]}>
-                <Text style={{fontSize: 20, color: theme.textColor, marginTop: 5}}>{tag}</Text>
-                <Text style={{fontSize: 18, color: theme.textColor, margin: 5, marginHorizontal: 12}}>{getInfo()}</Text>
+                <Text style={{fontSize: 20, color: theme.textColor, marginTop: 5}}>{tag.title || ''}</Text>
+                <Text style={{fontSize: 18, color: theme.textColor, margin: 5, marginHorizontal: 12}}>{getInfo() || ''}</Text>
             </Animated.View>
         </TouchableOpacity>
     )

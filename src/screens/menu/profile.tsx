@@ -3,7 +3,6 @@ import { View, Dimensions,ScrollView } from "react-native"
 import ProfileInfo from "@/components/profile/profileInfo"
 import Profile from "@/components/profile/profile"
 import Space from "@/components/shared/utils"
-
 import PS from "@styles/profileStyles"
 import { useSelector } from "react-redux"
 import React, { useState } from "react"

@@ -60,7 +60,7 @@ function findTheme(theme: number): Theme {
         case 4: return Christmas
         case 5: return Easter
     }
-    console.log(Dark)
+
     return Dark
 }
 

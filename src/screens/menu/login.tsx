@@ -5,13 +5,13 @@ import Check from "@components/event/check"
 import Cluster from "@/components/shared/cluster"
 import Button from "@/components/shared/button"
 import Space from "@/components/shared/utils"
-
 import SS from "@styles/settingStyles"
 import GS from "@styles/globalStyles"
 import React, { useState } from "react"
 import { ScreenProps } from "@interfaces"
 import T from "@styles/text"
 import Swipe from "@components/nav/swipe"
+import login from "@utils/login"
 import {
     Text,
     View,
@@ -54,13 +54,14 @@ export default function LoginScreen({ navigation }: MenuProps<'LoginScreen'>): J
 
     const dispatch = useDispatch()
 
-    function internalPage() {
-        if (data.name === database.name && data.pass === database.pass) {
+    async function internalPage() {
+        if (await login({username: data.name, password: data.pass})) {
             dispatch(changeLoginStatus())
             navigation.navigate("InternalScreen")
-        } else {
-            Alert.alert("Feil brukernavn eller passord")
+            return
         }
+        
+        Alert.alert("Feil brukernavn eller passord")
     }
 
     const [data, setData] = useState({
@@ -70,11 +71,6 @@ export default function LoginScreen({ navigation }: MenuProps<'LoginScreen'>): J
         check_passInputChange: false,
         secureTextEntry: true
     })
-
-    const database = {
-        name: "admin",
-        pass: "admin"
-    }
 
     function inputName (val: string) {
         if (val.length > 0) {
@@ -132,12 +128,6 @@ export default function LoginScreen({ navigation }: MenuProps<'LoginScreen'>): J
                             </TouchableOpacity>
                         </View>
                         <Space height={40} /> 
-                        <View>
-                            <Image 
-                                style={GS.smallImage} 
-                                source={require("@assets/logo/loginText.png")}
-                            />
-                        </View>
                     </View>
                     <Space height={Dimensions.get("window").height / 3} /> 
                 </View>

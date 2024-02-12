@@ -44,8 +44,8 @@ export const EventSlice = createSlice({
         },
         clickedCategories: [] as string[],
         input: "",
-        downloadState: new Date(),
-        tag: ""
+        downloadState: "",
+        tag: { title: "", body: "" }
     },
     // Declares reducers
     reducers: {
@@ -107,7 +107,7 @@ export const EventSlice = createSlice({
             })
         },
         setDownloadState(state) {
-            state.downloadState = new Date()
+            state.downloadState = new Date().toString()
         },
         setTag(state, action) {
             state.tag = action.payload

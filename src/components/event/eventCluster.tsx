@@ -14,7 +14,6 @@ import { EventStackParamList } from "@utils/screenTypes"
 import { StackNavigationProp } from "@react-navigation/stack"
 
 type EventClusterProps = {
-    notification: NotificationProps
     item: EventProps
     index: number
     embed?:boolean
@@ -28,7 +27,7 @@ type FullCategorySquareProps = {
 /**
  * Displays one element of the event card array
  */
-export default function EventCluster ({notification, item, index}: EventClusterProps): 
+export default function EventCluster ({item, index}: EventClusterProps): 
 JSX.Element {
     const { search } = useSelector((state: ReduxState) => state.event)
     const navigation = useNavigation<StackNavigationProp<EventStackParamList>>()
@@ -50,7 +49,7 @@ JSX.Element {
                         <View style={ES.eventBack}>
                             <FullCategorySquare item={item} />
                             <EventClusterTitle item={item} />
-                            <Bell item={item} notification={notification} />
+                            <Bell item={item} />
                         </View>
                     </Cluster>
                 </LinearGradient>
@@ -88,7 +87,7 @@ function FullCategorySquare({item, height}: FullCategorySquareProps): JSX.Elemen
     const endDate = item?.time_type=="default" ? new Date(item.time_end) : undefined
 
     return (
-        <View style={{width: 65, flexDirection: 'row'}}>
+        <View style={{flexDirection: 'row'}}>
             <CategorySquare color={item.category_color} height={height} startDate={startDate} endDate={endDate}/>
         </View>
     )
