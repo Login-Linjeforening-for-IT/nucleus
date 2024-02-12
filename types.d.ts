@@ -252,107 +252,192 @@ type CTX = {
 type NotificationProps = {
 
     // Notification categories
-    SETUP:              boolean
-    IMPORTANT:          boolean
-    TEKKOM:             boolean
-    CTF:                boolean
-    SOCIAL:             boolean
-    BEDPRES:            boolean
-    KARRIEREDAG:        boolean
-    FADDERUKA:          boolean
-    LOGIN:              boolean
-    ANNET:              boolean
+    SETUP:              boolean[]
+    IMPORTANT:          boolean[]
+    TEKKOM:             boolean[]
+    CTF:                boolean[]
+    SOCIAL:             boolean[]
+    BEDPRES:            boolean[]
+    KARRIEREDAG:        boolean[]
+    FADDERUKA:          boolean[]
+    LOGIN:              boolean[]
+    ANNET:              boolean[]
 
     // TekKom
-    tekkom10m:          boolean
-    tekkom30m:          boolean
-    tekkom1h:           boolean
-    tekkom2h:           boolean
-    tekkom3h:           boolean
-    tekkom6h:           boolean
-    tekkom1d:           boolean
-    tekkom2d:           boolean
+    tekkom10m:          boolean[]
+    tekkom30m:          boolean[]
+    tekkom1h:           boolean[]
+    tekkom2h:           boolean[]
+    tekkom3h:           boolean[]
+    tekkom6h:           boolean[]
+    tekkom1d:           boolean[]
+    tekkom2d:           boolean[]
 
     // Ctf
-    ctf10m:             boolean
-    ctf30m:             boolean
-    ctf1h:              boolean
-    ctf2h:              boolean
-    ctf3h:              boolean
-    ctf6h:              boolean
-    ctf1d:              boolean
-    ctf2d:              boolean
+    ctf10m:             boolean[]
+    ctf30m:             boolean[]
+    ctf1h:              boolean[]
+    ctf2h:              boolean[]
+    ctf3h:              boolean[]
+    ctf6h:              boolean[]
+    ctf1d:              boolean[]
+    ctf2d:              boolean[]
 
     // Social
-    social10m:          boolean
-    social30m:          boolean
-    social1h:           boolean
-    social2h:           boolean
-    social3h:           boolean
-    social6h:           boolean
-    social1d:           boolean
-    social2d:           boolean
-    social1w:           boolean
+    social10m:          boolean[]
+    social30m:          boolean[]
+    social1h:           boolean[]
+    social2h:           boolean[]
+    social3h:           boolean[]
+    social6h:           boolean[]
+    social1d:           boolean[]
+    social2d:           boolean[]
+    social1w:           boolean[]
 
     // Karrieredag
-    karrieredag10m:     boolean
-    karrieredag30m:     boolean
-    karrieredag1h:      boolean
-    karrieredag2h:      boolean
-    karrieredag3h:      boolean
-    karrieredag6h:      boolean
-    karrieredag1d:      boolean
-    karrieredag2d:      boolean
-    karrieredag1w:      boolean
+    karrieredag10m:     boolean[]
+    karrieredag30m:     boolean[]
+    karrieredag1h:      boolean[]
+    karrieredag2h:      boolean[]
+    karrieredag3h:      boolean[]
+    karrieredag6h:      boolean[]
+    karrieredag1d:      boolean[]
+    karrieredag2d:      boolean[]
+    karrieredag1w:      boolean[]
 
     // Fadderuka
-    fadderuka10m:       boolean
-    fadderuka30m:       boolean
-    fadderuka1h:        boolean
-    fadderuka2h:        boolean
-    fadderuka3h:        boolean
-    fadderuka6h:        boolean
-    fadderuka1d:        boolean
-    fadderuka2d:        boolean
-    fadderuka1w:        boolean
+    fadderuka10m:       boolean[]
+    fadderuka30m:       boolean[]
+    fadderuka1h:        boolean[]
+    fadderuka2h:        boolean[]
+    fadderuka3h:        boolean[]
+    fadderuka6h:        boolean[]
+    fadderuka1d:        boolean[]
+    fadderuka2d:        boolean[]
+    fadderuka1w:        boolean[]
 
     // Bedpres
-    bedpres10m:         boolean
-    bedpres30m:         boolean
-    bedpres1h:          boolean
-    bedpres2h:          boolean
-    bedpres3h:          boolean
-    bedpres6h:          boolean
-    bedpres1d:          boolean
-    bedpres2d:          boolean
-    bedpres1w:          boolean
+    bedpres10m:         boolean[]
+    bedpres30m:         boolean[]
+    bedpres1h:          boolean[]
+    bedpres2h:          boolean[]
+    bedpres3h:          boolean[]
+    bedpres6h:          boolean[]
+    bedpres1d:          boolean[]
+    bedpres2d:          boolean[]
+    bedpres1w:          boolean[]
 
     // Login
-    login10m:           boolean
-    login30m:           boolean
-    login1h:            boolean
-    login2h:            boolean
-    login3h:            boolean
-    login6h:            boolean
-    login1d:            boolean
-    login2d:            boolean
-    login1w:            boolean
+    login10m:           boolean[]
+    login30m:           boolean[]
+    login1h:            boolean[]
+    login2h:            boolean[]
+    login3h:            boolean[]
+    login6h:            boolean[]
+    login1d:            boolean[]
+    login2d:            boolean[]
+    login1w:            boolean[]
 
     // Annet
-    annet10m:           boolean
-    annet30m:           boolean
-    annet1h:            boolean
-    annet2h:            boolean
-    annet3h:            boolean
-    annet6h:            boolean
-    annet1d:            boolean
-    annet2d:            boolean
-    annet1w:            boolean
+    annet10m:           boolean[]
+    annet30m:           boolean[]
+    annet1h:            boolean[]
+    annet2h:            boolean[]
+    annet3h:            boolean[]
+    annet6h:            boolean[]
+    annet1d:            boolean[]
+    annet2d:            boolean[]
+    annet1w:            boolean[]
 
     // Key used for indexing
-    [key: string]:      boolean
+    [key: string]:      boolean[]
 }
 
+type ObjectifiedNotificationProps = {
+    annet: {
+      annet10m: boolean[],
+      annet1d: boolean[],
+      annet1h: boolean[],
+      annet1w: boolean[],
+      annet2d: boolean[],
+      annet2h: boolean[],
+      annet30m: boolean[],
+      annet3h: boolean[],
+      annet6h: boolean[]
+    },
+    bedpres: {
+      bedpres10m: boolean[],
+      bedpres1d: boolean[],
+      bedpres1h: boolean[],
+      bedpres1w: boolean[],
+      bedpres2d: boolean[],
+      bedpres2h: boolean[],
+      bedpres30m: boolean[],
+      bedpres3h: boolean[],
+      bedpres6h: boolean[]
+    },
+    ctf: {
+      ctf10m: boolean[],
+      ctf1d: boolean[],
+      ctf1h: boolean[],
+      ctf2d: boolean[],
+      ctf2h: boolean[],
+      ctf30m: boolean[],
+      ctf3h: boolean[],
+      ctf6h: boolean[]
+    },
+    fadderuka: {
+      fadderuka10m: boolean[],
+      fadderuka1d: boolean[],
+      fadderuka1h: boolean[],
+      fadderuka1w: boolean[],
+      fadderuka2d: boolean[],
+      fadderuka2h: boolean[],
+      fadderuka30m: boolean[],
+      fadderuka3h: boolean[],
+      fadderuka6h: boolean[]
+    },
+    important: {},
+    karrieredag: {
+      karrieredag10m: boolean[],
+      karrieredag1d: boolean[],
+      karrieredag1h: boolean[],
+      karrieredag1w: boolean[],
+      karrieredag2d: boolean[],
+      karrieredag2h: boolean[],
+      karrieredag30m: boolean[],
+      karrieredag3h: boolean[],
+      karrieredag6h: boolean[]
+    },
+    login: {
+      login10m: boolean[],
+      login1d: boolean[],
+      login1h: boolean[],
+      login1w: boolean[],
+      login2d: boolean[],
+      login2h: boolean[],
+      login30m: boolean[],
+      login3h: boolean[],
+      login6h: boolean[]
+    },
+    setup: {},
+    social: {
+      social10m: boolean[],
+      social1d: boolean[],
+      social1h: boolean[],
+      social1w: boolean[],
+      social2d: boolean[],
+      social2h: boolean[],
+      social30m: boolean[],
+      social3h: boolean[],
+      social6h: boolean[]
+    }
+    
+     // Key used for indexing
+    [key: string]: any
+  }
+
+  
 type NotificationList = {
     title: string
     body: string

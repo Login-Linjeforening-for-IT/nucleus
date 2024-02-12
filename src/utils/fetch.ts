@@ -1,4 +1,4 @@
-const api = "https://workerbee.login.no/"
+const api = "https://workerbee.login.no/api/"
 const testapi = "https://testapi.login.no/api/"
 
 /**

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux"
 import T from "@styles/text"
 import React, { useEffect, useState } from "react"
 import Swipe from "@components/nav/swipe"
-import { View, TouchableOpacity, Dimensions, TouchableWithoutFeedback, Keyboard } from "react-native"
+import { View, TouchableOpacity, Dimensions, TouchableWithoutFeedback, Keyboard, ScrollView } from "react-native"
 import getFirebaseStatus from "@utils/getFirebaseStatus"
 import Text from "@components/shared/text"
 import ManageTopics from "@components/notification/manageTopics"
@@ -53,7 +53,7 @@ export default function InternalScreen(): JSX.Element {
     }, [])
 
     return (
-        <TouchableWithoutFeedback style={{backgroundColor: 'red', zIndex: 10, height: 1000, width: 1000}} onPress={() => Keyboard.dismiss()}>
+        <ScrollView>
             <Swipe left="MenuScreen">
                 <View>
                     <View style={{...GS.content, backgroundColor: theme.darker}}>
@@ -104,6 +104,6 @@ export default function InternalScreen(): JSX.Element {
                     </View>
                 </View>
             </Swipe>
-        </TouchableWithoutFeedback>
+        </ScrollView>
     )
 }

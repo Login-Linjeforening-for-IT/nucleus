@@ -58,15 +58,13 @@ function Content(): JSX.Element {
 
     return (
         <Cluster>
-            <Text style={{...T.bold40, color: color}}>
-                {info.title}
-            </Text>
+            <Text style={{...T.bold40, color: color}}>{info.title}</Text>
             <Space height={15} /> 
             <Line width={5}>
                 <TextWithLinks 
                     style={{...T.boldWithLine, color: color, lineHeight: 18}} 
                     linkStyle={{...T.boldWithLine, color: orange}} 
-                    text={info.intro} 
+                    text={info.intro}
                 />
             </Line>
 

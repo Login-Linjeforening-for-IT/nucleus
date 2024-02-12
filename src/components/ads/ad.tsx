@@ -101,7 +101,7 @@ export function AdBanner({url}: {url: string}) {
             style={{alignSelf: "center", backgroundColor: "white"}}
             width={(Dimensions.get("window").width) / 1.2}
             height={Dimensions.get("window").width / 3}
-            uri={`https://cdn.login.no/img/events/${url}`}
+            uri={`https://cdn.login.no/img/organizations/${url}`}
         />
     }
 
@@ -113,7 +113,7 @@ export function AdBanner({url}: {url: string}) {
     ) && !url?.startsWith("http")) {
         return <Image 
             style={AS.adBanner}
-            source={{uri: `https://cdn.login.no/img/events/${url}`}}
+            source={{uri: `https://cdn.login.no/img/organizations/${url}`}}
         />
     }
 
@@ -144,7 +144,7 @@ export function AdClusterImage({url}: {url: string | undefined}) {
             style={{alignSelf: "center", backgroundColor: "white", borderRadius: 5}}
             width={90}
             height={60}
-            uri={`https://cdn.login.no/img/events/${url}`}
+            uri={`https://cdn.login.no/img/organizations/${url}`}
         />
     }
 
@@ -156,7 +156,7 @@ export function AdClusterImage({url}: {url: string | undefined}) {
     ) && !url?.startsWith("http")) {
         return <Image 
             style={AS.adBannerSmall}
-            source={{uri: `https://cdn.login.no/img/events/${url}`}}
+            source={{uri: `https://cdn.login.no/img/organizations/${url}`}}
         />
     }
 
@@ -177,7 +177,7 @@ export function AdClusterImage({url}: {url: string | undefined}) {
         <View style={AS.adClusterImage}>
             <Image
                 style={AS.adBannerSmall}
-                source={{uri: "https://cdn.login.no/img/ads/adcompany.png"}} 
+                source={{uri: "https://cdn.login.no/img/organizations/adcompany.png"}} 
             />
         </View>
     )
@@ -239,7 +239,7 @@ export function AdClusterLocation({ad}: AdClusterLocationProps) {
 export function AdDescription({ad}: {ad: DetailedAd}) {
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    const skills = ad.skills.join(", ")
+    const skills = ad.skills ? ad.skills.join(", ") : []
     const shortDescription = lang 
         ? ad.description_short_no
         : ad.description_short_en
@@ -362,20 +362,17 @@ export function AdMedia({ad}: {ad: DetailedAd}) {
 export function AdTitle({ad}: {ad: DetailedAd}) {
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
+    const title = lang ? ad.title_no || ad.title_en : ad.title_en || ad.title_no
     const logo = ad.logo
-    const title = (lang 
-        ? ad.title_no + " hos "
-        : ad.title_en + " at "
-    ) + ad.organization
 
     function Logo() {
         // Handles svg icons
         if (logo?.endsWith(".svg")) {
             return <SvgUri
-                style={{alignSelf: "center", backgroundColor: "white"}}
+                style={{alignSelf: "center", backgroundColor: "white", marginTop: 12}}
                 width={90}
                 height={60}
-                uri={`https://cdn.login.no/img/events/${logo}`}
+                uri={`https://cdn.login.no/img/organizations/${logo}`}
             />
         }
 
@@ -387,7 +384,7 @@ export function AdTitle({ad}: {ad: DetailedAd}) {
         ) && !logo?.startsWith("http")) {
             return <Image 
                 style={AS.adBannerSmall}
-                source={{uri: `https://cdn.login.no/img/events/${logo}`}}
+                source={{uri: `https://cdn.login.no/img/organizations/${logo}`}}
             />
         }
 

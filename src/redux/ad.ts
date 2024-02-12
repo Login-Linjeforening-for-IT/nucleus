@@ -136,9 +136,11 @@ function setSkills(ads: AdProps[], clickedAds: AdProps[]) {
     const skills: Set<string> = new Set(clickedAds.length ? ["Påmeldt"] : [])
 
     ads.forEach((ad) => {
-        ad.skills.forEach(skill => {
-            skills.add(skill)
-        });
+        if (ad.skills) {
+            ad.skills.forEach(skill => {
+                skills.add(skill)
+            })
+        }
     })
 
     return Array.from(skills)

@@ -26,7 +26,8 @@ export default function EventClusterTitle({item}:
     const location_no = item.location_name_no ? item.location_name_no : "Mer info TBA!"
     const location_en = item.location_name_en ? item.location_name_en : "More info TBA!"
 
-    const title = lang ? item.name_no : item.name_en
+    // Uses language name as default, and other language as fallback
+    const title = lang ? (item.name_no || item.name_en) : (item.name_en || item.name_no)
     const info = (time + lang ? location_no : location_en).trim()
 
     return (

@@ -50,104 +50,104 @@ export const NotificationSlice = createSlice({
          * Notification categories.
          */
 
-        SETUP:             false,
-        IMPORTANT:          true,
-        TEKKOM:             true,
-        CTF:                true,
-        SOCIAL:             true,
-        BEDPRES:            true,
-        KARRIEREDAG:        true,
-        FADDERUKA:          true,
-        LOGIN:              true,
-        ANNET:              true,
+        SETUP:             [false, true],
+        IMPORTANT:          [true, true],
+        TEKKOM:             [true, true],
+        CTF:                [true, true],
+        SOCIAL:             [true, true],
+        BEDPRES:            [true, true],
+        KARRIEREDAG:        [true, true],
+        FADDERUKA:          [true, true],
+        LOGIN:              [true, true],
+        ANNET:              [true, true],
 
         // Notification preferences - for automatic notifications
 
         // TekKom
-        tekkom10m:          false,
-        tekkom30m:          false,
-        tekkom1h:           false,
-        tekkom2h:           false,
-        tekkom3h:           false,
-        tekkom6h:           false,
-        tekkom1d:           false,
-        tekkom2d:           false,
+        tekkom10m:          [false, true],
+        tekkom30m:          [false, true],
+        tekkom1h:           [false, true],
+        tekkom2h:           [false, true],
+        tekkom3h:           [false, true],
+        tekkom6h:           [false, true],
+        tekkom1d:           [false, true],
+        tekkom2d:           [false, true],
 
         // Ctf
-        ctf10m:             false,
-        ctf30m:             false,
-        ctf1h:              false,
-        ctf2h:              false,
-        ctf3h:              false,
-        ctf6h:              false,
-        ctf1d:              false,
-        ctf2d:              false,
+        ctf10m:             [false, true],
+        ctf30m:             [false, true],
+        ctf1h:              [false, true],
+        ctf2h:              [false, true],
+        ctf3h:              [false, true],
+        ctf6h:              [false, true],
+        ctf1d:              [false, true],
+        ctf2d:              [false, true],
 
         // Social
-        social10m:          false,
-        social30m:          false,
-        social1h:           false,
-        social2h:           false,
-        social3h:           false,
-        social6h:           false,
-        social1d:           false,
-        social2d:           false,
-        social1w:           false,
+        social10m:          [false, true],
+        social30m:          [false, true],
+        social1h:           [false, true],
+        social2h:           [false, true],
+        social3h:           [false, true],
+        social6h:           [false, true],
+        social1d:           [false, true],
+        social2d:           [false, true],
+        social1w:           [false, true],
 
         // Karrieredag
-        karrieredag10m:     false,
-        karrieredag30m:     false,
-        karrieredag1h:      false,
-        karrieredag2h:      false,
-        karrieredag3h:      false,
-        karrieredag6h:      false,
-        karrieredag1d:      false,
-        karrieredag2d:      false,
-        karrieredag1w:      false,
+        karrieredag10m:     [false, true],
+        karrieredag30m:     [false, true],
+        karrieredag1h:      [false, true],
+        karrieredag2h:      [false, true],
+        karrieredag3h:      [false, true],
+        karrieredag6h:      [false, true],
+        karrieredag1d:      [false, true],
+        karrieredag2d:      [false, true],
+        karrieredag1w:      [false, true],
 
         // Fadderuka
-        fadderuka10m:       false,
-        fadderuka30m:       false,
-        fadderuka1h:        false,
-        fadderuka2h:        false,
-        fadderuka3h:        false,
-        fadderuka6h:        false,
-        fadderuka1d:        false,
-        fadderuka2d:        false,
-        fadderuka1w:        false,
+        fadderuka10m:       [false, true],
+        fadderuka30m:       [false, true],
+        fadderuka1h:        [false, true],
+        fadderuka2h:        [false, true],
+        fadderuka3h:        [false, true],
+        fadderuka6h:        [false, true],
+        fadderuka1d:        [false, true],
+        fadderuka2d:        [false, true],
+        fadderuka1w:        [false, true],
 
         // Bedpres
-        bedpres10m:         false,
-        bedpres30m:         false,
-        bedpres1h:          false,
-        bedpres2h:          false,
-        bedpres3h:          false,
-        bedpres6h:          false,
-        bedpres1d:          false,
-        bedpres2d:          false,
-        bedpres1w:          false,
+        bedpres10m:         [false, true],
+        bedpres30m:         [false, true],
+        bedpres1h:          [false, true],
+        bedpres2h:          [false, true],
+        bedpres3h:          [false, true],
+        bedpres6h:          [false, true],
+        bedpres1d:          [false, true],
+        bedpres2d:          [false, true],
+        bedpres1w:          [false, true],
 
         // Login
-        login10m:           false,
-        login30m:           false,
-        login1h:            false,
-        login2h:            false,
-        login3h:            false,
-        login6h:            false,
-        login1d:            false,
-        login2d:            false,
-        login1w:            false,
+        login10m:           [false, true],
+        login30m:           [false, true],
+        login1h:            [false, true],
+        login2h:            [false, true],
+        login3h:            [false, true],
+        login6h:            [false, true],
+        login1d:            [false, true],
+        login2d:            [false, true],
+        login1w:            [false, true],
 
         // Annet
-        annet10m:           false,
-        annet30m:           false,
-        annet1h:            false,
-        annet2h:            false,
-        annet3h:            false,
-        annet6h:            false,
-        annet1d:            false,
-        annet2d:            false,
-        annet1w:            false,
+        annet10m:           [false, true],
+        annet30m:           [false, true],
+        annet1h:            [false, true],
+        annet2h:            [false, true],
+        annet3h:            [false, true],
+        annet6h:            [false, true],
+        annet1d:            [false, true],
+        annet2d:            [false, true],
+        annet1w:            [false, true],
     },
 
     // Declares slice reducer
@@ -155,19 +155,24 @@ export const NotificationSlice = createSlice({
         // Change state of important notifications
         setNotificationStateTrue(state, action) {
             const category: NotificationCategory = action.payload.category
-            state[category] = true
+            state[category] = [true, true]
         },
         changeNotificationState(state, action) {
             const category: NotificationCategory = action.payload.category
-            state[category] = !state[category]
+            state[category] = [!state[category][0], true]
         },
+        setNotificationDidUpdateOnFirebase(state, action) {
+            const category: NotificationCategory = action.payload.category
+            state[category] = [state[category][0], false]
+        }
     }
 })
 
 // Exports the change function
 export const { 
     setNotificationStateTrue, 
-    changeNotificationState 
+    changeNotificationState,
+    setNotificationDidUpdateOnFirebase
 } = NotificationSlice.actions
 
 // Exports the notification slice

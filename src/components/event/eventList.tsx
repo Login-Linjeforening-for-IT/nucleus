@@ -29,7 +29,7 @@ export default function EventList ({notification}: EventListProps): JSX.Element 
         return (
             <>
                 <Seperator item={item} usedIndexes={usedIndexes} />
-                <EventCluster
+                <EventCluster 
                     notification={notification}
                     item={item}
                     index={index}

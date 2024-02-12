@@ -11,6 +11,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { TouchableOpacity, Dimensions, Text, View } from "react-native"
 import { Navigation } from "@interfaces"
 import { LinearGradient } from "expo-linear-gradient"
+import TopicManager from "@utils/topicManager"
 
 type Ad = {
     ad: AdProps
@@ -20,6 +21,7 @@ type Ad = {
 
 export default function AdCluster({ad, index, embed}: Ad): JSX.Element {
     const { search, clickedAds } = useSelector((state: ReduxState) => state.ad)
+    const { lang } = useSelector((state: ReduxState) => state.lang)
     const dispatch = useDispatch()
     const isOrange = clickedAds.some(ads => ads.id === ad.id) ? true : false
     const navigation: Navigation = useNavigation()
@@ -28,10 +30,18 @@ export default function AdCluster({ad, index, embed}: Ad): JSX.Element {
         ? ad.highlight ? -3 : 0
         : ad.highlight ? 0 : -5
 
-    function handleClick() {
+    function isClicked() {
+        for (const clickedAd of clickedAds) {
+            if (ad.id === clickedAd.id) return true
+        }
+        return false
+    }
+
+    async function handleClick() {
         dispatch(setClickedAds(clickedAds.some(ads => ads.id === ad.id)
         ? clickedAds.filter((x) => x.id !== ad.id)
         : [...clickedAds, ad]))
+        await TopicManager({topic: `${lang ? 'n' : 'e'}a${ad.id}`, unsub: isClicked() ? true : false})
     }
 
     return (

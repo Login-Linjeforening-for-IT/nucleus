@@ -18,6 +18,7 @@ export default async function getFirebaseStatus(): Promise<Status> {
                 headers: {
                     Authorization: `Bearer ${config.api_key}`,
                     'Content-Type': 'application/json',
+                    // access_token_auth: 'true'
                 },
             }
         )

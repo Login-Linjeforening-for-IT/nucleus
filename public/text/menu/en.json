@@ -21,14 +21,6 @@
             "id": 5, 
             "nav": "BusinessScreen",  
             "title": "For companies" 
-        }
-    ],
-    "version": "Version ",
-    "unusedScreens": [
-        {
-            "id": 3, 
-            "nav": "NotificationScreen",
-            "title": "Notifications"
         },
         {
             "id": 6, 
@@ -39,6 +31,14 @@
             "id": 7, 
             "nav": "InternalScreen",
             "title": "Intranet (verv)"
+        }
+    ],
+    "version": "Version ",
+    "unusedScreens": [
+        {
+            "id": 3, 
+            "nav": "NotificationScreen",
+            "title": "Notifications"
         },
         {
             "id": 8, 

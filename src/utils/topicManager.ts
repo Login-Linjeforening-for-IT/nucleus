@@ -24,16 +24,25 @@ export default async function TopicManager({topic, unsub}: TopicManagerProps) {
     try {
         const granted = await messaging().requestPermission()
     
-        if (granted) {
-            if (unsub) {
-                await messaging().unsubscribeFromTopic(topic)
-                return { result: true, feedback: `Unsubscribed from ${topic}`}
-            } 
-            
-            return await subscribeToTopic(topic)
+        if (!granted) {
+            console.log("You must enable notifications for this feature.")
+            return { result: false, feedback: 'You must enable notifications for this feature.'}
         }
 
-        return { result: false, feedback: 'Result escaped logs.'}
+        if (unsub) {
+            if (topic.includes(',')) {
+                const topics = topic.split(',')
+                for (const topic of topics) {
+                    await messaging().unsubscribeFromTopic(topic)
+                }
+            } else {
+                await messaging().unsubscribeFromTopic(topic)
+            }
+
+            return { result: true, feedback: `Unsubscribed from ${topic}`}
+        } 
+        
+        return await subscribeToTopic(topic)
     } catch (error: unknown) {
         if (typeof error === 'string') return { result: false, feedback: error}
         if (typeof error === 'object' && error != null) return { result: false, feedback: error.toString()}

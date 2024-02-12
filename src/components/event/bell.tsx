@@ -8,7 +8,6 @@ import TopicManager from "@utils/topicManager"
 
 type BellProps = {
     item: EventProps
-    notification: NotificationProps
     embed?: boolean
 }
 
@@ -16,12 +15,12 @@ type BellProps = {
 /**
  * Displays the bell to the right of every event in the eventlist
  */
-export default function Bell({item, notification, embed}: BellProps): JSX.Element {
+export default function Bell({item, embed}: BellProps): JSX.Element {
     const { clickedEvents } = useSelector((state: ReduxState) => state.event)
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const dispatch = useDispatch()
     // Uses available language if possible, otherwise uses other language
-    
+
     function isClicked() {
         for (const event of clickedEvents) {
             if (event.id === item.id) return true
@@ -44,8 +43,8 @@ export default function Bell({item, notification, embed}: BellProps): JSX.Elemen
     
     return (
         <View style={{...ES.view3, right: embed ? 0 : 5}}>
-            <TouchableOpacity style={{paddingBottom: 10}} onPress={() => {
-                TopicManager({topic: `${lang ? 'n' : 'e'}${item.id}`, unsub: isClicked() ? true : false})
+            <TouchableOpacity style={{paddingBottom: 10}} onPress={async() => {
+                await TopicManager({topic: `${lang ? 'n' : 'e'}${item.id}`, unsub: isClicked() ? true : false})
                 dispatch(setClickedEvents(
                     clickedEvents.some(event => event.id === item.id)
                     ? clickedEvents.filter((x) => x.id !== item.id)

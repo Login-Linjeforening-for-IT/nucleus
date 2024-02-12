@@ -13,10 +13,8 @@ import Space from "@components/shared/utils"
 import T from "@styles/text"
 
 type EventClusterProps = {
-    notification: NotificationProps
     item: EventProps
     index: number
-    embed?:boolean
 }
 
 type FullCategorySquareProps = {
@@ -27,8 +25,7 @@ type FullCategorySquareProps = {
 /**
  * Displays one element of the event card array
  */
-export default function EventCluster ({notification, item, index}: EventClusterProps): 
-JSX.Element {
+export default function EventCluster ({item, index}: EventClusterProps) {
     const { search } = useSelector((state: ReduxState) => state.event)
     const navigation: Navigation = useNavigation()
     const dispatch = useDispatch()
@@ -50,7 +47,7 @@ JSX.Element {
                         <View style={ES.eventBack}>
                             <FullCategorySquare item={item} />
                             <EventClusterTitle item={item} />
-                            <Bell item={item} notification={notification} />
+                            <Bell item={item} />
                         </View>
                     </Cluster>
                 </LinearGradient>
