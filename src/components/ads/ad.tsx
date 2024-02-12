@@ -446,6 +446,9 @@ export function AdUpdateInfo({ad}: {ad: DetailedAd}) {
             <Text style={{...T.contact,color: theme.oppositeTextColor}}>
                 {text[1]} {created}.
             </Text>
+            <Text style={{...T.contact, marginVertical: 5, color: theme.oppositeTextColor}}>
+                Ad ID: {ad.id}
+            </Text>
         </View>
     )
 }
