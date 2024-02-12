@@ -17,6 +17,7 @@ import {
     Text,
     Dimensions,
     ScrollView,
+    Platform,
 } from "react-native"
 
 /**
@@ -37,7 +38,7 @@ export function FilterUI(): JSX.Element {
     const isSearchingEvents = route.name === "EventScreen" && event.search
     const isSearchingAds = route.name === "AdScreen" && ad.search
     const isSearching = isSearchingEvents || isSearchingAds
-    const top = (isSearchingAds && 35) || 40
+    const top = (isSearchingAds && 35) || Platform.OS === 'ios' ? 40 : 35
 
     return (
         <View style={isSearching ? {top: top} : { display: 'none' }}>
