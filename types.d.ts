@@ -96,7 +96,10 @@ type ReduxState = {
         clickedCategories: string[]
         input: string
         downloadState: Date
-        tag: string
+        tag: {
+            title: string
+            body: string
+        }
     }
     ad: {
         ads: AdProps[]
@@ -517,4 +520,9 @@ type Status = {
 type TopicManagerResult = {
     result: boolean
     feedback: string
+}
+
+type Tag = {
+    title: string
+    body: string
 }

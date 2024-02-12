@@ -15,6 +15,7 @@ import T from "@styles/text"
 type EventClusterProps = {
     item: EventProps
     index: number
+    embed?:boolean
 }
 
 type FullCategorySquareProps = {
@@ -25,7 +26,8 @@ type FullCategorySquareProps = {
 /**
  * Displays one element of the event card array
  */
-export default function EventCluster ({item, index}: EventClusterProps) {
+export default function EventCluster ({item, index}: EventClusterProps): 
+JSX.Element {
     const { search } = useSelector((state: ReduxState) => state.event)
     const navigation: Navigation = useNavigation()
     const dispatch = useDispatch()
@@ -81,8 +83,8 @@ function ListFooter ({index}: ListFooterProps): JSX.Element {
  * Displays the category square to the left of each event in the list on the EventScreen
  */
 function FullCategorySquare({item, height}: FullCategorySquareProps): JSX.Element {
-    const startDate = item.time_start ? new Date(item.time_start) : new Date()
-    const endDate = item.time_type=="default" ? new Date(item.time_end) : undefined
+    const startDate = item?.time_start ? new Date(item.time_start) : new Date()
+    const endDate = item?.time_type=="default" ? new Date(item.time_end) : undefined
 
     return (
         <View style={{flexDirection: 'row'}}>

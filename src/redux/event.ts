@@ -45,7 +45,7 @@ export const EventSlice = createSlice({
         clickedCategories: [] as string[],
         input: "",
         downloadState: "",
-        tag: ""
+        tag: { title: "", body: "" }
     },
     // Declares reducers
     reducers: {

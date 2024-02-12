@@ -29,7 +29,7 @@ export default function Footer({ state, descriptors, navigation }: FooterProps):
 
 function Wrapper({children}: WrapperProps) {
     const { tag } = useSelector((state: ReduxState) => state.event)
-    if (tag) return <View>{children}</View>
+    if (tag.title) return <View>{children}</View>
     else return <>{children}</>
 }
 

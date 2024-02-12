@@ -37,11 +37,11 @@ export default function AdCluster({ad, index, embed}: Ad): JSX.Element {
         return false
     }
 
-    async function handleClick() {
+    function handleClick() {
         dispatch(setClickedAds(clickedAds.some(ads => ads.id === ad.id)
         ? clickedAds.filter((x) => x.id !== ad.id)
         : [...clickedAds, ad]))
-        await TopicManager({topic: `${lang ? 'n' : 'e'}a${ad.id}`, unsub: isClicked() ? true : false})
+        TopicManager({topic: `${lang ? 'n' : 'e'}a${ad.id}`, unsub: isClicked() ? true : false})
     }
 
     return (

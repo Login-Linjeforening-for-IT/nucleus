@@ -19,7 +19,8 @@ export default function Bell({item, embed}: BellProps): JSX.Element {
     const { clickedEvents } = useSelector((state: ReduxState) => state.event)
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const dispatch = useDispatch()
-    // Uses available language if possible, otherwise uses other language
+    const prefix = lang ? 'n' : 'e'
+    const topic = `${prefix}${item.id}`
 
     function isClicked() {
         for (const event of clickedEvents) {
@@ -40,17 +41,20 @@ export default function Bell({item, embed}: BellProps): JSX.Element {
             </View>
         </View>
     )
+
+    
+    function handleClick() {
+        dispatch(setClickedEvents(
+            clickedEvents.some(event => event.id === item.id)
+            ? clickedEvents.filter((x) => x.id !== item.id)
+            : [...clickedEvents, item]
+            ))
+        TopicManager({topic, unsub: isClicked() ? true : false})
+    }
     
     return (
         <View style={{...ES.view3, right: embed ? 0 : 5}}>
-            <TouchableOpacity style={{paddingBottom: 10}} onPress={async() => {
-                await TopicManager({topic: `${lang ? 'n' : 'e'}${item.id}`, unsub: isClicked() ? true : false})
-                dispatch(setClickedEvents(
-                    clickedEvents.some(event => event.id === item.id)
-                    ? clickedEvents.filter((x) => x.id !== item.id)
-                    : [...clickedEvents, item]
-                ))
-            }}>
+            <TouchableOpacity style={{paddingBottom: 30}} onPress={handleClick}>
                 <View style={ES.bellPosition} >
                     <BellIcon orange={isOrange} canceled={item.canceled} />
                 </View>
