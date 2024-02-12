@@ -1,4 +1,4 @@
-import Svg, { Rect, Path } from "react-native-svg"
+import Svg, { Path } from "react-native-svg"
 import { useSelector } from "react-redux"
 import ES from "@styles/eventStyles"
 import { View } from "react-native"

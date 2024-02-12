@@ -62,7 +62,6 @@ export default function Navigator(): JSX.Element {
                     state={props.state} 
                     descriptors={props.descriptors} 
                     navigation={props.navigation} 
-                    insets={props.insets} 
                 />}
             >
                 {/* Maps over all screens, returning each of */}

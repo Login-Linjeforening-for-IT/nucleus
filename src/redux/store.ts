@@ -9,7 +9,7 @@ import EventReducer from "@redux/event"
 import LangReducer from "@redux/lang"
 import MiscReducer from "@redux/misc"
 import AdReducer from "@redux/ad"
-import {thunk} from "redux-thunk"
+import { thunk } from "redux-thunk"
 
 // Combines all reducers
 const reducers = combineReducers({

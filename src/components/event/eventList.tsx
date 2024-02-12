@@ -30,7 +30,6 @@ export default function EventList ({notification}: EventListProps): JSX.Element 
             <>
                 <Seperator item={item} usedIndexes={usedIndexes} />
                 <EventCluster 
-                    notification={notification}
                     item={item}
                     index={index}
                     key={index}

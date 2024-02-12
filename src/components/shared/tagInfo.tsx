@@ -1,4 +1,4 @@
-import { Dimensions, Platform, Text, TouchableOpacity } from "react-native"
+import { Platform, Text, TouchableOpacity } from "react-native"
 import GS from "@styles/globalStyles"
 import no from "@text/tag/no.json"
 import en from "@text/tag/en.json"

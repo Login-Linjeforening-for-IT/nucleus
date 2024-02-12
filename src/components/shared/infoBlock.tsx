@@ -1,4 +1,4 @@
-import { Image, Text, View } from "react-native"
+import { Text, View } from "react-native"
 import { SvgXml } from "react-native-svg"
 import { useSelector } from "react-redux"
 import infoSvg from "@assets/icons/info.svg"

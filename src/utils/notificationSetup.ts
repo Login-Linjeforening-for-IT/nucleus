@@ -4,12 +4,15 @@ import { useDispatch } from "react-redux"
 // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 1/6
 import messaging from "@react-native-firebase/messaging"
 import subscribeToTopic from "@utils/subscribeToTopic"
+import { Dispatch, UnknownAction } from "redux"
+import { resetTheme } from "@redux/theme"
 // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 1/6
 
 type initializeNotificationsProps = {
     shouldRun: boolean
-    hasBeenSet: boolean
+    hasBeenSet: boolean[]
     setShouldSetupNotifications: React.Dispatch<React.SetStateAction<boolean>>
+    dispatch: Dispatch<UnknownAction>
 }
 
 /**
@@ -19,8 +22,9 @@ type initializeNotificationsProps = {
  * @param setShouldSetupNotifications Setter function for the shouldRun variable
  */
 export default function initializeNotifications ({shouldRun, hasBeenSet, 
-setShouldSetupNotifications }: initializeNotificationsProps) {
-    if (shouldRun && !hasBeenSet) {
+setShouldSetupNotifications, dispatch }: initializeNotificationsProps) {
+    if (shouldRun && !hasBeenSet[1]) {
+        dispatch(resetTheme())
         notificationSetup()
         setShouldSetupNotifications(false) 
     } 

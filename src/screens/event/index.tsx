@@ -20,7 +20,6 @@ import Header from "@components/nav/header"
 import Swipe from "@components/nav/swipe"
 import { FilterButton, FilterUI } from "@components/shared/filter"
 import DownloadButton from "@components/shared/downloadButton"
-
 const EventStack = createStackNavigator<EventStackParamList>()
 
 /**
@@ -115,10 +114,12 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
         if (lastSave === "") {(async() => {dispatch(setLastSave(LastFetch()))})()
     }
     }, [lastSave])
+
     initializeNotifications({
         shouldRun: shouldSetupNotifications,
         setShouldSetupNotifications,
-        hasBeenSet: notification["SETUP"]
+        hasBeenSet: notification["SETUP"],
+        dispatch
     })
 
     // Displays the EventScreen
