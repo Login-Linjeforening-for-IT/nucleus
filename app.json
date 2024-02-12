@@ -58,7 +58,7 @@
         "ios": {
             "supportsTablet": true,
             "bundleIdentifier": "com.eirikhanasand.Login",
-            "buildNumber": "79",
+            "buildNumber": "80",
             "googleServicesFile": "./GoogleService-Info.plist",
             "infoPlist": {
                 "UIBackgroundModes": [
@@ -74,7 +74,7 @@
             },
             "package": "com.login.Login",
             "googleServicesFile": "./google-services.json",
-            "versionCode": 54,
+            "versionCode": 55,
             "permissions": [
                 "NOTIFICATIONS",
                 "READ_CALENDAR",

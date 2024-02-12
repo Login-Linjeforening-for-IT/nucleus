@@ -30,7 +30,7 @@ export default function DownloadButton(){
             {clickedEvents.length > 0 &&
                 <TouchableOpacity
                     onPress={async() => {
-                        if (timeSince(downloadState) >= 1000) {
+                        if (timeSince(downloadState || 1000) >= 1000) {
                             flashOrange()
                             dispatch(setDownloadState())
                             await handleDownload({clickedEvents, 
