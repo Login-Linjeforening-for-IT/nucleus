@@ -86,7 +86,7 @@ function BlurWrapper(props: PropsWithChildren) {
     const categories = cat.length || 0
     const extraHeight = (isSearchingEvents && 6 * categories) || (isSearchingAds && 9.5 * ad.skills.length) || 0
     const height = defaultHeight + extraHeight + (isSearchingEvents || isSearchingAds
-        ? Platform.OS === "ios" ? 120 : 110
+        ? Platform.OS === "ios" ? 75 : 50
         : Platform.OS === "ios" ? 20 : 5)
 
     return (

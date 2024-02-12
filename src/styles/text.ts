@@ -144,7 +144,8 @@ export const T = StyleSheet.create({
     // Copyright text (size: 17)
     copyright: {
         textAlign: "center",
-        fontSize: 17,
+        fontSize: 10,
+        marginVertical: 10
     },
     // DpecificEventInfo text (+10px from left)
     specificEventInfo: {

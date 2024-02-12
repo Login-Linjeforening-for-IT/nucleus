@@ -22,10 +22,8 @@ export default function AdList (): JSX.Element {
         return (
             <ScrollView showsVerticalScrollIndicator={false}>
                 {search === false
-                    ? <Space height={Dimensions.get("window").height / (Platform.OS === "ios" ? 8.4 : 8)} />
-                    : <Space height={Platform.OS === "ios" 
-                        ? Dimensions.get("window").height / (skills.length / 33)
-                        : Dimensions.get("window").height / (skills.length / 40)} />
+                    ? <Space height={Dimensions.get("window").height / (Platform.OS === "ios" ? 3.4 : 3.4)} />
+                    : <Space height={Dimensions.get("window").height / (Platform.OS === "ios" ? 4.1 : 3.5)} />
                 }
                 {adList.map((ad, index) => <AdCluster index={index} ad={ad} key={index} />)}
             </ScrollView>
