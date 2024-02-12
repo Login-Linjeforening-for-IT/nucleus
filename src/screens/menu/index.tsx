@@ -41,25 +41,12 @@ type MenuItemProps = {
     login: boolean
 }
 
-const MenuStack = createStackNavigator<MenuStackParamList>()
 
-const screens: Record<string, React.FC<any>> = {
-    "ProfileScreen": ProfileScreen,
-    "SettingScreen": SettingScreen,
-    // "NotificationScreen": NotificationScreen,
-    "AboutScreen": AboutScreen,
-    "BusinessScreen": BusinessScreen,
-    // "LoginScreen": LoginScreen,
-    // "InternalScreen": InternalScreen
-    // "ReportScreen": ReportScreen,
-}
-
-
-export default function MenuScreen(): JSX.Element {
+export default function MenuScreen({ navigation }: MenuProps<'MenuScreen'>): JSX.Element {
 
     const { lang  } = useSelector((state: ReduxState) => state.lang  )
     const { login } = useSelector((state: ReduxState) => state.login )
-    const { theme, isDark } = useSelector((state: ReduxState) => state.theme )
+    const { theme } = useSelector((state: ReduxState) => state.theme )
     const { id, name, image } = useSelector((state: ReduxState) => 
     state.profile )
     const profile = { id, name, image}

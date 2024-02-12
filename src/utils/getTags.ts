@@ -14,6 +14,7 @@ type getTagsProps = {
  */
 export default function getTags({event, lang}: getTagsProps) {
     const description = lang ? event.description_no : event.description_en
+    console.log(lang)
     const storedTags = lang ? no : en
     const tags: Tag[] = []
     

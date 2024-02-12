@@ -1,6 +1,6 @@
 // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 3/6
-import messaging from "@react-native-firebase/messaging"
-import subscribeToTopic from "@utils/subscribeToTopic"
+// import messaging from "@react-native-firebase/messaging"
+// import subscribeToTopic from "@utils/subscribeToTopic"
 // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 3/6
 
 type TopicManagerProps = {
@@ -19,7 +19,7 @@ type TopicManagerProps = {
  */
 export default async function TopicManager({topic, unsub}: TopicManagerProps) {
     // COMMENT IN THIS BOX WHILE TESTING IN EXPO 4/6
-    // return null
+    return null
     // COMMENT IN THIS BOX WHILE TESTING IN EXPO 4/6
     try {
         const granted = await messaging().requestPermission()

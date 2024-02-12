@@ -2,8 +2,8 @@ import { setNotificationStateTrue } from "@redux/notifications"
 import { useDispatch } from "react-redux"
 
 // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 1/6
-import messaging from "@react-native-firebase/messaging"
-import subscribeToTopic from "@utils/subscribeToTopic"
+// import messaging from "@react-native-firebase/messaging"
+// import subscribeToTopic from "@utils/subscribeToTopic"
 import { Dispatch, UnknownAction } from "redux"
 import { resetTheme } from "@redux/theme"
 // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 1/6
