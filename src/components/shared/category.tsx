@@ -28,7 +28,8 @@ export default function CategorySquare({color, startDate, endDate}: CategorySqua
         <View style={{
             width: multiday ? 62 : 38,
             height: Platform.OS === "ios" ? 65 : 65, 
-            borderRadius: 10, 
+            borderRadius: 10,
+            overflow: 'hidden',
             backgroundColor: color,
             justifyContent: 'center',
             alignItems: 'center',
@@ -67,6 +68,7 @@ export function CategoryCircle({color}: {color: string}): JSX.Element {
         width: 20, 
         backgroundColor: color,
         borderRadius: 100,
+        overflow: 'hidden',
         marginRight: -5
     }} />
 }
