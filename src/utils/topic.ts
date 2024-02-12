@@ -3,8 +3,9 @@
  * We allow the first request, then store the most recent request at all times
  * while the first one is working. For example if we have 10 requests, number 1
  * will execute, and 2 will be stored, then when 3 comes in, 3 will override 2,
- * so we are left with request 1 and 10. When number 1 is done, number 10 will
- * run. If this keeps going, the loop will be infinite until the requests stop.
+ * which continues until we are left with request 1 and 10. When number 1 is 
+ * done, number 10 will run. If this keeps going, the loop will be infinite 
+ * until the requests stop.
  * 
  * When a request comes in, it first sets up throttling so all other requests
  * are stored or dropped if they are not the last one nor unique. Then we check
@@ -198,7 +199,7 @@ topicParams) {
         }
     } else {
         if (notificationStateQueue) {
-            executeLastRequest(notificationStateQueue)
+            await executeLastRequest(notificationStateQueue)
         }
     }
 }
