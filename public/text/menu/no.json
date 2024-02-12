@@ -21,11 +21,6 @@
             "id": 5, 
             "nav": "BusinessScreen",
             "title": "For bedrifter"
-        },
-        {
-            "id": 7, 
-            "nav": "InternalScreen",
-            "title": "Innsida (verv)"
         }
     ],
     "version": "Versjon ",
@@ -39,6 +34,11 @@
             "id": 6, 
             "nav": "LoginScreen",
             "title": "Logg inn"
+        },
+        {
+            "id": 7, 
+            "nav": "InternalScreen",
+            "title": "Innsida (verv)"
         },
         {
             "id": 8, 

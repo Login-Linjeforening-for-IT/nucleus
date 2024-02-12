@@ -51,8 +51,8 @@ const screens: Record<string, React.FC<any>> = {
     // "NotificationScreen": NotificationScreen,
     "AboutScreen": AboutScreen,
     "BusinessScreen": BusinessScreen,
-    "LoginScreen": LoginScreen,
-    "InternalScreen": InternalScreen
+    // "LoginScreen": LoginScreen,
+    // "InternalScreen": InternalScreen
     // "ReportScreen": ReportScreen,
 }
 
