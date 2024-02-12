@@ -13,7 +13,7 @@ export default function Category() {
     return (
         <View style={{...ES.specificEventInfoView, top: 2.5}}>
             <Title />
-            <CategoryCircle color={event.category_color} />
+            <CategoryCircle color={event.color} />
             <Text style={{...T.specificEventInfo, color: theme.textColor}}>
                 {category}
             </Text>

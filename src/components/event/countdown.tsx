@@ -16,7 +16,7 @@ export default function Countdown() {
             <View style={ES.specificEventInfoView}>
                 <Card>
                     <View style={{}}>
-                        <CategorySquare color={event.category_color} startDate={startDate} endDate={endDate}/>
+                        <CategorySquare color={event.color} startDate={startDate} endDate={endDate}/>
                     </View>
                 </Card>
                 <EventTime time_start={event.time_start} time_end={event.time_end} />

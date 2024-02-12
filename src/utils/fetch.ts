@@ -51,6 +51,7 @@ Promise<DetailedEvent> {
     let organization_name_en = null
     let category_name_no = null
     let category_name_en = null
+    let color = null
 
     if ('category' in eventDetails) {
         if ('name_no' in eventDetails.category) {
@@ -58,6 +59,9 @@ Promise<DetailedEvent> {
         }
         if ('name_en' in eventDetails.category) {
             category_name_en = eventDetails.category.name_en
+        }
+        if ('color' in eventDetails.category) {
+            color = eventDetails.category.color
         }
     }
 
@@ -125,6 +129,7 @@ Promise<DetailedEvent> {
         organization_name_short,
         organization_name_en,
         link_homepage,
+        color
     }
 
     return {...eventDetails.event, ...details}

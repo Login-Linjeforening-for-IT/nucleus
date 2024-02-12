@@ -235,6 +235,7 @@ type DetailedEvent = {
     rule_en: string
     rule_details_no: string
     rule_details_en: string
+    color: string
 }
 
 type Interval = NodeJS.Timeout | number

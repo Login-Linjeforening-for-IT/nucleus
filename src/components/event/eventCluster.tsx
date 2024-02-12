@@ -81,8 +81,8 @@ function ListFooter ({index}: ListFooterProps): JSX.Element {
  * Displays the category square to the left of each event in the list on the EventScreen
  */
 function FullCategorySquare({item, height}: FullCategorySquareProps): JSX.Element {
-    const startDate = item?.time_start ? new Date(item.time_start) : new Date()
-    const endDate = item?.time_type=="default" ? new Date(item.time_end) : undefined
+    const startDate = item.time_start ? new Date(item.time_start) : new Date()
+    const endDate = item.time_type=="default" ? new Date(item.time_end) : undefined
 
     return (
         <View style={{flexDirection: 'row'}}>

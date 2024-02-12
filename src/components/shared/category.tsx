@@ -65,7 +65,7 @@ export function CategoryCircle({color}: {color: string}): JSX.Element {
         right: 10,
         height: 20, 
         width: 20, 
-        backgroundColor: `#${color}`, 
+        backgroundColor: color,
         borderRadius: 100,
         marginRight: -5
     }} />
