@@ -5,6 +5,7 @@ export const ES = StyleSheet.create({
     view2: {
         justifyContent: "center",
         marginLeft: 5,
+        top: 2,
         maxWidth: '70%',
         maxHeight: 55
     },
@@ -51,6 +52,7 @@ export const ES = StyleSheet.create({
         width: Dimensions.get("window").width - 24,
         resizeMode: "stretch",
         height: 150,
+        marginTop: 8
     },
     //======================== EventComponentStyles ===================
     // Middle sized icons

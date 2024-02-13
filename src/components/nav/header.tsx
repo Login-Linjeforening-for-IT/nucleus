@@ -32,13 +32,10 @@ export default function Header({ options, route, navigation }: HeaderProps): Rea
     const  [backIcon, setBackIcon] = useState(isDark 
         ? require('@assets/icons/goback777.png')
         : require('@assets/icons/goback111.png'))
-
+    
     return (
         <BlurWrapper>
-            <View style={{...GS.headerView, top: title.length > 40 ? 
-                Dimensions.get("window").height / 17 - 12
-                : Dimensions.get("window").height / 17
-            }}>
+            <View style={{...GS.headerView, top: Dimensions.get("window").height / 17}}>
                 <View style={GS.innerHeaderViewOne}>
                     {options.headerComponents?.left ? options.headerComponents?.left.map((node, index) => 
                         <View style={GS.logo} key={index}>{node}</View> 
@@ -79,7 +76,7 @@ function BlurWrapper(props: PropsWithChildren) {
     const event = useSelector((state: ReduxState) => state.event)
     const ad = useSelector((state: ReduxState) => state.ad)
     const route = useRoute()
-    const defaultHeight = Dimensions.get('window').height * 8 / 100 + (StatusBar.currentHeight ? StatusBar.currentHeight - 7 : 0)
+    const defaultHeight = Dimensions.get('window').height * 8 / 85 + (StatusBar.currentHeight ? StatusBar.currentHeight - 2 : 0)
     const isSearchingEvents = event.search && route.name === "EventScreen"
     const isSearchingAds = ad.search && route.name === "AdScreen"
     const cat = lang ? event.categories.no : event.categories.en

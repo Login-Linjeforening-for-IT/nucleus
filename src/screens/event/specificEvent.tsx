@@ -65,7 +65,7 @@ export default function SpecificEventScreen(): JSX.Element {
                         color: theme.oppositeTextColor,
                         marginVertical: 10
                     }}>Event ID: {event.id}</Text>
-                    <Space height={Dimensions.get("window").height / 3} />
+                    <Space height={Dimensions.get("window").height / (Platform.OS === 'ios' ? 3 : 2.75)} />
                 </ScrollView>
             </View>
             <TagInfo />

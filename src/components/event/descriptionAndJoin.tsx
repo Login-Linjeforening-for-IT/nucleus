@@ -10,7 +10,7 @@ export default function DescriptionAndJoin() {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { event } = useSelector((state: ReduxState) => state.event)
     const { lang } = useSelector((state: ReduxState) => state.lang)
-    const name = lang ? event.name_no : event.name_en
+    const name = lang ? event.name_no || event.name_en : event.name_en || event.name_no
 
     return (
         <Card>

@@ -192,7 +192,7 @@ function filterSkills ({ads, clickedAds, clickedSkills}: FilterCategoriesProps) 
     const clickedFound = clickedSkills.find((skill: string) => skill === "Påmeldt")
     
     // Filters based on category
-    const skillFiltered = ads.filter(ad => clickedSkills.some((skill: string) => ad.skills.includes(skill)))
+    const skillFiltered = ads.filter(ad => clickedSkills.some((skill: string) => ad.skills?.includes(skill)))
 
     // Returns if the user is not enrolled to any ads
     if (!clickedFound) {

@@ -45,7 +45,7 @@ export default function EventList ({notification}: EventListProps): JSX.Element 
         return (
             <ScrollView showsVerticalScrollIndicator={false}>
                 {search === false
-                    ? <Space height={Dimensions.get("window").height / (Platform.OS === "ios" ? 8.4 : 8)} />
+                    ? <Space height={Dimensions.get("window").height / (Platform.OS === "ios" ? 8.4 : 7)} />
                     : <Space height={Dimensions.get("window").height / (Platform.OS === "ios" ? 3.6 : 3.2)} />
                 }
                 {eventList.map((event, index) => {

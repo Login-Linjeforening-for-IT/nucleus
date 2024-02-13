@@ -16,9 +16,27 @@ export default function BasicInfo() {
     const textNO = { host: "Arrangør:   ", more: "Mer info"}
     const textEN = { host: "Organizer:   ", more: "More info"}
     const text = lang ? textNO : textEN
-
     const info = lang ? event.informational_no : event.informational_en
-    
+    const host = findOrgName()
+
+    function findOrgName() {
+        if (event.id === 20) console.log(event)
+        switch (event.organization_name_short) {
+            case 'board': return lang ? 'Styret' : 'The Board'
+            case 'tekkom': return 'TekKom'
+            case 'bedkom': return 'BedKom'
+            case 'satkom': return 'SATkom'
+            case 'eventkom':
+            case 'evntkom': return 'EvntKom'
+            case 'ctfkom': return 'CTFkom'
+            case 's2g': return 'S2G'
+            case 'idi': return 'IDI'
+            default: return event.organization_name_short || lang 
+                ? event.category_name_no || event.category_name_en 
+                : event.category_name_en || event.category_name_no
+        }
+    }
+
     return (
         <Card>
             <Start />
@@ -28,7 +46,7 @@ export default function BasicInfo() {
             <View style={ES.specificEventInfoView}>
                 <Text style={{ ...T.specificEventInfo, color: theme.textColor }}>{text.host}</Text>
                 <Text style={{ ...T.specificEventInfoContent, color: theme.textColor }}>
-                    {event.organization_name_short}
+                    {host}
                     {event.link_stream && ' - '}
                     {event.link_stream && <TextLink style={{fontSize: 20, color: "#fd8738", top: 3}} text="Stream" url={event.link_stream} />}
                     {event.link_discord && ' - '}
@@ -39,7 +57,7 @@ export default function BasicInfo() {
                     {event.link_homepage && <TextLink style={{fontSize: 20, color: "#fd8738", top: 3}} text={text.more} url={event.link_homepage} />}
                 </Text>
             </View>
-            {info&&<InfoBlock infoText={info} />}
+            {info && <InfoBlock infoText={info} />}
         </Card>
     )
 }
@@ -81,8 +99,13 @@ function End() {
 
 function Location() {
     const { theme } = useSelector((state: ReduxState) => state.theme)
+    const { event } = useSelector((state: ReduxState) => state.event)
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const text = lang ? "Lokasjon:   " : "Location:     "
+    // Uses best available location
+    const location = lang 
+        ? event.location_no || event.location_en 
+        : event.location_en || event.location_no
 
     return (
         <View style={{flexDirection: "row"}}>
@@ -90,7 +113,7 @@ function Location() {
                 {text}
             </Text>
             <Text style={{...T.specificEventInfo, color: theme.textColor}}>
-                TBA!
+                {location || 'TBA!'}
             </Text>
             <Map />
         </View>

@@ -145,10 +145,10 @@ export function Social() {
             justifyContent: "center", 
             marginTop: 10
         }}>
-            {Object.entries(media).map(([link], index) => (
+            {Object.values(media).map((item, index) => (
                 <MediaLogo 
-                    key={link} 
-                    link={link} 
+                    key={item.link} 
+                    link={item.link} 
                     logo={media[Object.keys(media)[index]].logo} 
                 />
         ))}
@@ -198,16 +198,20 @@ export function Kontakt() {
         name: "Login - Linjeforeningen for IT",
         address: "Teknologivegen 22",
         location: lang ? "Bygg A, rom 155" : "Building A, room 155",
-        post: "2815 GJØVIK"
+        post: "2815 GJØVIK",
+        duns: "D-U-N-S: 345129409",
+        orgnr: "NO 811 940 372"
     }
 
     return (
         <View>
-            <Text style={{...T.centeredBold25, color: color}}>{info.contact}</Text>
+            <Text style={{...T.centeredBold20, color: color}}>{info.contact}</Text>
             <Text style={{...T.centered15, color: color}}>{info.name}</Text>
             <Text style={{...T.centered15, color: color}}>{info.address}</Text>
             <Text style={{...T.centered15, color: color}}>{info.location}</Text>
             <Text style={{...T.centered15, color: color}}>{info.post}</Text>
+            <Text style={{...T.centered15, color: color}}>{info.duns}</Text>
+            <Text style={{...T.centered15, color: color}}>{info.orgnr}</Text>
             <TextLink 
                 url="mailto:kontakt@login.no"
                 text="kontakt@login.no" 
@@ -229,7 +233,7 @@ export function Copyright() {
     return (
         <View>
             <Text style={{...T.copyright, color: theme.oppositeTextColor}}>
-                {`${lang ? "Copyright" : "Opphavsrett"} © 2022-${new Date().getFullYear()} Login - Linjeforeningen for IT, NO 811 940 372`}
+                {`${lang ? "Copyright" : "Opphavsrett"} © 2022-${new Date().getFullYear()} Login - Linjeforeningen for IT\nD-U-N-S: 345129409\nNO 811 940 372`}
             </Text>
         </View>
     )
@@ -250,12 +254,13 @@ export function StaticImage({event}: {event: DetailedEvent}): JSX.Element {
         tekkom:  require(`../../../public/assets/committee/tekkom/tekkom.png`),
         ctf:     require(`../../../public/assets/committee/ctfkom/ctf.png`),
         bedpres: require(`../../../public/assets/committee/bedkom/bedkom.png`),
+        sosialt:  require(`../../../public/assets/categories/sosialt.png`),
         social:  require(`../../../public/assets/categories/sosialt.png`),
         login:   require(`../../../public/assets/categories/login.png`),
         annet:   require(`../../../public/assets/categories/annet.png`),
     }
-
-    const image = images[event.category_name_no.toUpperCase()] || images.annet;
+    if (event.id === 26) console.log(event.category_name_no)
+    const image = images[event.category_name_no.toLowerCase()] || images.annet;
 
     return <Image style={ES.specificEventImage} source={image} />
 }

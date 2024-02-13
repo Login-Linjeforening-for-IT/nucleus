@@ -428,25 +428,26 @@ export function AdUpdateInfo({ad}: {ad: DetailedAd}) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
 
     const updated = LastFetch(ad.updated_at)
-    const created = LastFetch(ad.created_at)
-
+    const created = LastFetch(ad.time_publish)
+    const didUpdate = created !== updated
     const textNO = ["Oppdatert kl:", "Opprettet kl:"]
     const textEN = ["Updated:", "Created:"]
     const text = lang ? textNO : textEN
 
     return (
         <View style={{marginBottom: 10}}>
-            <Text style={{
+            {didUpdate && <Text style={{
                 ...T.contact,
+                fontSize: 12,
                 marginBottom: 5,
                 color: theme.oppositeTextColor
             }}>
                 {text[0]} {updated}.
-            </Text>
-            <Text style={{...T.contact,color: theme.oppositeTextColor}}>
+            </Text>}
+            <Text style={{...T.contact, fontSize: 12,color: theme.oppositeTextColor}}>
                 {text[1]} {created}.
             </Text>
-            <Text style={{...T.contact, marginVertical: 5, color: theme.oppositeTextColor}}>
+            <Text style={{...T.contact, fontSize: 12, marginVertical: 5, color: theme.oppositeTextColor}}>
                 Ad ID: {ad.id}
             </Text>
         </View>
