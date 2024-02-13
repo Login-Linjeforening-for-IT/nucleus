@@ -138,7 +138,7 @@ export default function AdScreen({ navigation }: ScreenProps): JSX.Element {
                     },[navigation])
 
                     return (
-                        <Swipe right="AdScreenRoot">
+                        <Swipe left="EventScreenRoot" right="MenuScreenRoot">
                             <View>
                                 <StatusBar style={isDark ? "light" : "dark"} />
                                 <View style={{

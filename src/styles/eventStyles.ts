@@ -13,6 +13,7 @@ export const ES = StyleSheet.create({
     view3: {
         position: "absolute",
         right: 5,
+        top: -3,
         height: "100%",
     },
     // Card height and direction on eventscreen
