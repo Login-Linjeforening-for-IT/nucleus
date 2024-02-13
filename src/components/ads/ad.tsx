@@ -191,9 +191,10 @@ export function AdClusterImage({url}: {url: string | undefined}) {
  */
 export function AdClusterLocation({ad}: AdClusterLocationProps) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
+    const { lang } = useSelector((state: ReduxState) => state.lang)
     const type = capitalizeFirstLetter(ad.job_type)
     const location = ad.cities.map(city => capitalizeFirstLetter(city)).join(", ")
-    let name =  ad.title_no
+    let name =  lang ? ad.title_no || ad.title_en : ad.title_en || ad.title_no
     let info = `${type}${location ? `. ${location}`:''}`
     let halfWidth = Platform.OS === "ios" 
         ? Dimensions.get("window").width / 9 
@@ -240,12 +241,16 @@ export function AdDescription({ad}: {ad: DetailedAd}) {
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const skills = ad.skills ? ad.skills.join(", ") : []
-    const shortDescription = lang 
-        ? ad.description_short_no
-        : ad.description_short_en
-    const LongDescription = lang 
-        ? ad.description_long_no 
-        : ad.description_long_en
+    
+    const tempShort = lang 
+        ? ad.description_short_no || ad.description_short_en
+        : ad.description_short_en || ad.description_short_no
+    const tempLong = lang 
+        ? ad.description_long_no || ad.description_long_en
+        : ad.description_long_en || ad.description_long_no
+
+    const shortDescription = tempShort ? tempShort.replace(/\\n/g, '<br>') : ''
+    const LongDescription = tempLong ? tempLong.replace(/\\n/g, '<br>') : ''
 
     return (
         <View style={{marginBottom: 10}}>

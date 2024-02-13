@@ -137,7 +137,7 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
                             headerComponents: {
                                 bottom: [<FilterUI />],
                                 left: [<LogoNavigation />],
-                                right: [<FilterButton />, <DownloadButton />]
+                                right: [<FilterButton />, <DownloadButton screen="event" />]
                             }} as Partial<BottomTabNavigationOptions>)   
                     }, [navigation])
 

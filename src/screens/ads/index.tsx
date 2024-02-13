@@ -133,7 +133,7 @@ export default function AdScreen({ navigation }: ScreenProps): JSX.Element {
                             headerComponents: {
                                 bottom: [<FilterUI />],
                                 left: [<LogoNavigation />],
-                                right: [<FilterButton />, <DownloadButton />]
+                                right: [<FilterButton />, <DownloadButton screen="ad" />]
                             }} as Partial<BottomTabNavigationOptions>)   
                     },[navigation])
 
