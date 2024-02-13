@@ -5,7 +5,7 @@ import Paragraph from "@/components/business/paragraph"
 import React from "react"
 import Space, { Line } from "@/components/shared/utils"
 import GS from "@styles/globalStyles"
-import { Kontakt } from "@/components/about/social"
+import { Contact } from "@/components/about/social"
 import T from "@styles/text"
 import { Text, View, ScrollView, Dimensions } from "react-native"
 import { useSelector } from "react-redux"
@@ -98,7 +98,7 @@ function Content(): JSX.Element {
 
             <Space height={10} /> 
 
-            <Kontakt/>
+            <Contact/>
         </Cluster>
     )
 }

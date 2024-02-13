@@ -1,7 +1,7 @@
 import { View, ScrollView, Dimensions } from "react-native"
 import Cluster from "@/components/shared/cluster"
 import AS from "@styles/adStyles"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import React from "react"
 import Swipe from "@components/nav/swipe"
 import AdInfo, { 
@@ -11,11 +11,26 @@ import AdInfo, {
     AdTitle,
     AdUpdateInfo
 } from "@/components/ads/ad"
+import { setAd } from "@redux/ad"
+import { fetchAdDetails } from "@utils/fetch"
   
 export default function SpecificAdScreen(): JSX.Element {
 
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { ad } = useSelector((state: ReduxState) => state.ad )
+
+    const dispatch = useDispatch()
+    const descriptionCheck = 'description_short_no' || 'description_short_en' || 'description_long_no' || 'description_long_en'
+
+    async function getDetails() {
+        const response = await fetchAdDetails(ad)
+
+        if (response) dispatch(setAd(response))
+    }
+
+    if (!(descriptionCheck in ad)) {
+        getDetails()
+    }
 
     return (
         <Swipe left="AdScreen">

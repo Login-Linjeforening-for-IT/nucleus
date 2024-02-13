@@ -41,8 +41,8 @@ export default function SpecificEventScreen({ navigation, route: {params: {event
             <View style={{...ES.sesContent, backgroundColor: theme.background}}>
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <Space height={Platform.OS=="ios" 
-                        ? Dimensions.get("window").height / 8 - 5 
-                        : Dimensions.get("window").height / 7
+                        ? Dimensions.get("window").height / 8.5
+                        : Dimensions.get("window").height / 6.15
                     } />
                     <Tag event={event} />
                     <SpecificEventImage />
@@ -56,7 +56,7 @@ export default function SpecificEventScreen({ navigation, route: {params: {event
                         color: theme.oppositeTextColor,
                         marginVertical: 10
                     }}>Event ID: {event.id}</Text>
-                    <Space height={Dimensions.get("window").height / 3} />
+                    <Space height={Dimensions.get("window").height / (Platform.OS === 'ios' ? 3 : 2.75)} />
                 </ScrollView>
             </View>
             <TagInfo />

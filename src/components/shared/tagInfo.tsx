@@ -72,7 +72,7 @@ export default function TagInfo() {
     // Slides the card up from the bottom
     function slideUp() {
         setTimeout(() => {
-            translateY.value = withTiming(200, { duration: 300 } )
+            translateY.value = withTiming(180, { duration: 300 } )
         }, 350 + (initial ? initialDelay : 0))
         setInitial(false)
     }

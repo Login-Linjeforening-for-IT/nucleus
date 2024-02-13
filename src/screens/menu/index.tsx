@@ -73,7 +73,7 @@ export default function MenuScreen({ navigation }: MenuProps<'MenuScreen'>): JSX
                 ...GS.content, 
                 backgroundColor: theme.darker
             }}>
-                <Space height={Dimensions.get("window").height / (Platform.OS === "ios" ? 8.4 : 8)} />
+                <Space height={Dimensions.get("window").height / 8} />
                 {/* <SmallProfile navigation={navigation} profile={profile} login={login} /> */}
                 {text.setting.map((item, index) => {
                     if (item.nav === "ProfileScreen") return null

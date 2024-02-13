@@ -6,7 +6,8 @@ export default function Description() {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { event } = useSelector((state: ReduxState) => state.event)
     const { lang } = useSelector((state: ReduxState) => state.lang)
-    const description = lang ? event.description_no : event.description_en
+    const description = lang ? event.description_no || event.description_en : event.description_en || event.description_no
+
     if (!description) return null
 
     const fixedDesc = description.replace(/\\n/g, '<br>')
