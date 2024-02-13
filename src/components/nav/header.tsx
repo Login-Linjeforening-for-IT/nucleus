@@ -99,8 +99,8 @@ function BlurWrapper(props: PropsWithChildren) {
                 ? 130 // Extraheight during eventSearch on Android
                 :  59.5 // Extraheight during adSearch on Android
         : Platform.OS === "ios" 
-            ? 20 // Extraheight for header on iOS while not searching
-            : 5 // Extraheight for header on Android while not searching
+            ? 20 // Extra base height for header on iOS while not searching
+            : 5  // Extra base height for header on Android while not searching
         )
 
     return (
