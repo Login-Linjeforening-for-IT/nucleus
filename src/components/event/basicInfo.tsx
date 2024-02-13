@@ -20,7 +20,6 @@ export default function BasicInfo() {
     const host = findOrgName()
 
     function findOrgName() {
-        if (event.id === 20) console.log(event)
         switch (event.organization_name_short) {
             case 'board': return lang ? 'Styret' : 'The Board'
             case 'tekkom': return 'TekKom'
