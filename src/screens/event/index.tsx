@@ -119,12 +119,12 @@ export default function EventScreen({ navigation }: EventScreenProps<'EventScree
             }})   
     }, [navigation])
 
-    initializeNotifications({
-        shouldRun: shouldSetupNotifications,
-        hasBeenSet: notification["SETUP"],
-        setShouldSetupNotifications: setShouldSetupNotifications,
-        dispatch: dispatch
-    })
+    // initializeNotifications({
+    //     shouldRun: shouldSetupNotifications,
+    //     hasBeenSet: notification["SETUP"],
+    //     setShouldSetupNotifications: setShouldSetupNotifications,
+    //     dispatch: dispatch
+    // })
 
     // Displays the EventScreen
     return (
