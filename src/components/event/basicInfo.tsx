@@ -66,15 +66,15 @@ function Start() {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const start = lang ? "Starter:      " : "Starts:         "
-
+    
     return (
         <View style={ES.specificEventInfoView}>
             <Text style={{...T.specificEventInfo, color: theme.textColor}}>
                 {start}
             </Text>
             <Text style={{...T.specificEventInfo, color: theme.textColor}}>
-            {event.time_start[11]}{event.time_start[12]}:
-            {event.time_start[14]}{event.time_start[15]}
+            {(event!={}) && `${event.time_start[11]}${event.time_start[12]}:
+            ${event.time_start[14]}${event.time_start[15]}`}
             </Text>
         </View>
     )

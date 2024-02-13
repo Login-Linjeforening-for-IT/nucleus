@@ -14,10 +14,11 @@ type getTagsProps = {
  */
 export default function getTags({event, lang}: getTagsProps) {
     const description = lang ? event.description_no : event.description_en
-    console.log(lang)
     const storedTags = lang ? no : en
     const tags: Tag[] = []
     
+    if(!Object.keys(event).length) return tags
+
     if (description) {
         if (description.toLowerCase().includes("prog & pils") && !Object.keys(tags).includes("P&P")) tags.push(storedTags["P&P"])
         if (description.toLowerCase().includes("prog og pils") && !Object.keys(tags).includes("P&P")) tags.push(storedTags["P&P"])

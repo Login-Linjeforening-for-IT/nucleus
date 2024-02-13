@@ -7,7 +7,7 @@ import { useSelector } from "react-redux"
 export default function SpecificEventImage() {
     const { event } = useSelector((state: ReduxState) => state.event)
 
-    if ((event.image_small).includes(".svg")) {
+    if ((event.image_small)?.includes(".svg")) {
         return (
             <SvgUri
                 style={{alignSelf: "center", marginTop: 8}}
@@ -16,7 +16,7 @@ export default function SpecificEventImage() {
                 uri={`https://cdn.login.no/img/events/${event.image_small}`}
             />
         )
-    } else if (event.image_small.includes(".png")){
+    } else if (event.image_small?.includes(".png")){
         return <Image
             style={ES.specificEventImage}
             source={{uri: `https://cdn.login.no/img/events/${event.image_small}`}}

@@ -256,7 +256,7 @@ export function StaticImage({event}: {event: DetailedEvent}): JSX.Element {
         login:   require(`../../../public/assets/categories/login.png`),
         annet:   require(`../../../public/assets/categories/annet.png`),
     }
-    const image = images[event.category_name_no.toLowerCase()] || images.annet;
+    const image = images[event.category_name_no?.toLowerCase()] || images.annet;
 
     return <Image style={ES.specificEventImage} source={image} />
 }

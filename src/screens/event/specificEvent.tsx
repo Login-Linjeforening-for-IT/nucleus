@@ -33,7 +33,6 @@ export default function SpecificEventScreen({ navigation, route: {params: {event
     useEffect(()=>{
         if (focused) {const fetching = fetchEventDetails(eventID).then((event)=>{
         dispatch(setEvent(event))
-        console.log(navigation.getState())
     })}}, [focused])
 
     return (

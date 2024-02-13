@@ -109,15 +109,15 @@ export default function EventScreen({ navigation }: EventScreenProps<'EventScree
     }
     }, [lastSave])
 
-    // // Sets the component of the header
-    // useEffect(()=>{
-    //     navigation.setOptions({
-    //         headerComponents: {
-    //             bottom: [<FilterUI />],
-    //             left: [<LogoNavigation />],
-    //             right: [<FilterButton />, <DownloadButton />]
-    //         }})   
-    // }, [navigation])
+    // Sets the component of the header
+    useEffect(()=>{
+        navigation.setOptions({
+            headerComponents: {
+                bottom: [<FilterUI />],
+                left: [<LogoNavigation />],
+                right: [<FilterButton />, <DownloadButton screen="event"/>]
+            }})   
+    }, [navigation])
 
     initializeNotifications({
         shouldRun: shouldSetupNotifications,

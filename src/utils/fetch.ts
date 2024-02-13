@@ -37,6 +37,7 @@ Promise<DetailedEvent> {
     // const response = await fetch(`${testapi}events/${id}`)
     const eventDetails = await response.json()
 
+    // console.log(eventDetails)
     let mazemap = null
     let location_no = null
     let location_en = null
