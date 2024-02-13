@@ -76,15 +76,32 @@ function BlurWrapper(props: PropsWithChildren) {
     const event = useSelector((state: ReduxState) => state.event)
     const ad = useSelector((state: ReduxState) => state.ad)
     const route = useRoute()
-    const defaultHeight = Dimensions.get('window').height * 8 / 85 + (StatusBar.currentHeight ? StatusBar.currentHeight - 2 : 0)
+    const defaultHeight = 
+    Dimensions.get('window').height * 8 // Base decrementor for both platforms
+    / (Platform.OS === 'ios' ? 85 // Base height of header on iOS
+    : 100 // Base height of header on Android
+    ) + (StatusBar.currentHeight ? StatusBar.currentHeight - 2 // Subtractor for Statusbar visible on Android
+     : 0 // Defaults to 0 if no statusbar is visible on Android
+    )
     const isSearchingEvents = event.search && route.name === "EventScreen"
     const isSearchingAds = ad.search && route.name === "AdScreen"
     const cat = lang ? event.categories.no : event.categories.en
-    const categories = cat.length || 0
-    const extraHeight = (isSearchingEvents && 6 * categories) || (isSearchingAds && 9.5 * ad.skills.length) || 0
+    const categories = cat.length || 0 // Defaults to 0 categories
+    const extraHeight = (isSearchingEvents && 6 // Base height for eventSearch on both platforms
+        * categories) || (isSearchingAds && 9.5 // Base height for adSearch on both platforms
+    * ad.skills.length) || 0 // Defaults to 0 skills
     const height = defaultHeight + extraHeight + (isSearchingEvents || isSearchingAds
-        ? Platform.OS === "ios" ? isSearchingEvents ? 115 : 70 : isSearchingEvents ? 120 : 70
-        : Platform.OS === "ios" ? 20 : 5)
+        ? Platform.OS === "ios" 
+            ? isSearchingEvents 
+                ? 130 // Extraheight during eventSearch on iOS
+                :  70 // Extraheight for adSearch on iOS
+            : isSearchingEvents 
+                ? 130 // Extraheight during eventSearch on Android
+                :  59.5 // Extraheight during adSearch on Android
+        : Platform.OS === "ios" 
+            ? 20 // Extraheight for header on iOS while not searching
+            : 5 // Extraheight for header on Android while not searching
+        )
 
     return (
         <>

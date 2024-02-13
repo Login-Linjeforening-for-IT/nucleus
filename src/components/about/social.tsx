@@ -187,7 +187,7 @@ export function Styret() {
  * Function for displaying the contact info of Login - Linjeforeningen for IT as a text inside a view
  * @returns Contact info
  */
-export function Kontakt() {
+export function Contact() {
 
     const { lang  } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
@@ -198,20 +198,17 @@ export function Kontakt() {
         name: "Login - Linjeforeningen for IT",
         address: "Teknologivegen 22",
         location: lang ? "Bygg A, rom 155" : "Building A, room 155",
-        post: "2815 GJØVIK",
-        duns: "D-U-N-S: 345129409",
-        orgnr: "NO 811 940 372"
+        post: "2815 GJØVIK"
     }
 
     return (
         <View>
             <Text style={{...T.centeredBold20, color: color}}>{info.contact}</Text>
             <Text style={{...T.centered15, color: color}}>{info.name}</Text>
-            <Text style={{...T.centered15, color: color}}>{info.address}</Text>
             <Text style={{...T.centered15, color: color}}>{info.location}</Text>
+            <Text style={{...T.centered15, color: color}}>{info.address}</Text>
             <Text style={{...T.centered15, color: color}}>{info.post}</Text>
-            <Text style={{...T.centered15, color: color}}>{info.duns}</Text>
-            <Text style={{...T.centered15, color: color}}>{info.orgnr}</Text>
+
             <TextLink 
                 url="mailto:kontakt@login.no"
                 text="kontakt@login.no" 
@@ -233,7 +230,7 @@ export function Copyright() {
     return (
         <View>
             <Text style={{...T.copyright, color: theme.oppositeTextColor}}>
-                {`${lang ? "Copyright" : "Opphavsrett"} © 2022-${new Date().getFullYear()} Login - Linjeforeningen for IT\nD-U-N-S: 345129409\nNO 811 940 372`}
+                {`${lang ? "Opphavsrett" : "Copyright"} © 2022-${new Date().getFullYear()} Login - Linjeforeningen for IT\nD-U-N-S 345 129 409\nNO 811 940 372`}
             </Text>
         </View>
     )

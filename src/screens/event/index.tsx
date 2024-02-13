@@ -60,7 +60,7 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
             (async() => {
                 const events = await fetchEvents()
 
-                if (events) {
+                if (events.length) {
                     dispatch(setEvents(events))
                     dispatch(setLastFetch(LastFetch()))
                 }
@@ -74,7 +74,7 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
         (async() => {
             const events = await fetchEvents()
 
-            if (events) {
+            if (events.length) {
                 dispatch(setEvents(events))
                 dispatch(setLastFetch(LastFetch()))
             }
@@ -94,7 +94,7 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
                 (async() => {
                     const events = await fetchEvents()
 
-                    if (events) {
+                    if (events.length) {
                         dispatch(setEvents(events))
                         dispatch(setLastFetch(LastFetch()))
                     }

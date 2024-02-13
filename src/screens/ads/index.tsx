@@ -56,7 +56,7 @@ export default function AdScreen({ navigation }: ScreenProps): JSX.Element {
             (async() => {
                 const ads = await fetchAds()
 
-                if (ads) {
+                if (ads.length) {
                     dispatch(setAds(ads))
                     dispatch(setLastFetch(LastFetch()))
                 }
@@ -70,7 +70,7 @@ export default function AdScreen({ navigation }: ScreenProps): JSX.Element {
         (async() => {
             const ads = await fetchAds()
 
-            if (ads) {
+            if (ads.length) {
                 dispatch(setAds(ads))
                 dispatch(setLastFetch(LastFetch()))
             }
@@ -90,7 +90,7 @@ export default function AdScreen({ navigation }: ScreenProps): JSX.Element {
                 (async() => {
                     const ads = await fetchAds()
 
-                    if (ads) {
+                    if (ads.length) {
                         const detailedAdPromises = ads.map(async(ad) => {
                             const details = await fetchAdDetails(ad)
                             return details
