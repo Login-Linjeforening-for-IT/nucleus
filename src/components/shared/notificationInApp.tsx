@@ -1,4 +1,3 @@
-import FetchColor from "@styles/fetchTheme"
 import React from "react"
 import GS from "@styles/globalStyles"
 import { View, Text, Platform, TouchableOpacity } from "react-native"
@@ -8,7 +7,7 @@ type NotificationInAppProps = {
     title: string
     body: string
     data: any
-    theme: number
+    theme: Theme
 }
 
 export default function NotificationInApp(props: NotificationInAppProps): JSX.Element {
@@ -24,8 +23,7 @@ export default function NotificationInApp(props: NotificationInAppProps): JSX.El
                     ? <BlurView style={GS.notificationDropdownBlur} intensity={50}/>
                     : <View style={{
                         ...GS.notificationDropdown,
-                        backgroundColor: FetchColor({theme: props.theme,
-                            variable: "TRANSPARENTANDROID"})}}
+                        backgroundColor: props.theme.transparentAndroid}}
                 />}
             <TouchableOpacity style={GS.notificationDropdownTouchable} onPress={() => {
                 // navigation.navigate("SpecificEventScreen", {item: props})
@@ -33,13 +31,13 @@ export default function NotificationInApp(props: NotificationInAppProps): JSX.El
                 <View style={GS.notificationDropdown}>
                     <Text style={{
                         ...GS.notificationDropdownTitle,
-                        color: FetchColor({theme: props.theme, variable: "TEXTCOLOR"}),
+                        color: props.theme.textColor,
                     }}>
                         {title}
                     </Text>
                     <Text style={{
                         ...GS.notificationDropdownBody,
-                        color: FetchColor({theme: props.theme, variable: "TEXTCOLOR"}),
+                        color: props.theme.textColor,
                     }}>
                         {body}
                     </Text>

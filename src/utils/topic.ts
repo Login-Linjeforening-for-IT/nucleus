@@ -1,15 +1,124 @@
-// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 3/6
-// import messaging from "@react-native-firebase/messaging"
-// import subscribeToTopic from "@utils/subscribeToTopic"
-// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 3/6
+/**
+ * This is a complex file, therefore a queue system has been implemented.
+ * We allow the first request, then store the most recent request at all times
+ * while the first one is working. For example if we have 10 requests, number 1
+ * will execute, and 2 will be stored, then when 3 comes in, 3 will override 2,
+ * which continues until we are left with request 1 and 10. When number 1 is 
+ * done, number 10 will run. If this keeps going, the loop will be infinite 
+ * until the requests stop.
+ * 
+ * When a request comes in, it first sets up throttling so all other requests
+ * are stored or dropped if they are not the last one nor unique. Then we check
+ * if the request is for a language change or a notification state change. These
+ * are handled differently, and therefore have different queues.
+ * 
+ * Language changes require all currently subscribed topics to be converted to
+ * the new language, except events (might be implemented in the future). The
+ * topics for the previous language will be unsubscribed, as the new ones are
+ * added. When everything has completed, the function will execute again if
+ * there is another language request in the queue.
+ * 
+ * Notification state requests will check all notification states, not just
+ * itself, due to the nature of the state being an array, and Redux update
+ * limits. This is the type where throttling is the most important, as you can
+ * see how hundreds of request can quickly accumulate as one button click equals
+ * about 60 requests. However with throttling, you will only get a few requests
+ * per second, even when the user is subscribing in complex patterns in a fast
+ * manner. After executing successfully, the function will check if there are
+ * more notification state requests that have not been processed yet, and if so
+ * execute the last one.
+ * 
+ *                      +----------------------------------+
+ *                      |              topic()             |
+ *                      +----------------------------------+
+ *                                       |
+ *                      +----------------------------------+
+ *                      |         Check Throttling         |
+ *                      |         and Queuing Logic        |
+ *                      +----------------------------------+
+ *                                        |
+ *                    +-------------------+-------------------+
+ *                    |                                       |
+ *       +------------+-------------+           +-------------+------------+
+ *       |                          |           |                          |
+ *       |   Process Notification   |           |      Process Language    |
+ *       |      State Requests      |           |      Change Requests     |
+ *       |                          |           |                          |
+ *       +------------+-------------+           +-------------+------------+
+ *                    |                                       |
+ *                    +-------------------+-------------------+
+ *                                        |
+ *                           +------------+-------------+
+ *                           |                          |
+ *                           |     Find and proceed     |
+ *                           |    with changed states   |
+ *                           |                          |
+ *                           +--------------------------+
+ *                                        |
+ *                           +------------+-------------+
+ *                           |                          |
+ *                           |       Topic Manager      |
+ *                           |                          |
+ *                           +--------------------------+
+ *                                        |
+ *                           +------------+-------------+
+ *                           |                          |
+ *                           |   Update Subscriptions   |
+ *                           |   and Unsubscriptions    |
+ *                           |                          |
+ *                           +--------------------------+
+ *                                        |
+ *                           +------------+-------------+
+ *                           |                          |
+ *                           |    Redux State Updates   |
+ *                           |                          |
+ *                           +--------------------------+
+ *                                        |
+ *                           +------------+-------------+
+ *                           |                          |
+ *                           |     Execute Pending      |
+ *                           |     Request if Queued    |
+ *                           |                          |
+ *                           +--------------------------+
+ *                                        |
+ *                           +------------+-------------+   
+ *                           |                          |
+ *                           |    Check Throttling      |   
+ *                           |    and Queuing Logic     |   
+ *                           |                          |   
+ *                           +--------------------------+   
+ *                                        |
+ *                           +------------+-------------+
+ *                           |                          |
+ *                           |    Process Notification  |
+ *                           |     Change Requests in   |
+ *                           |       Queue (repeat)     |
+ *                           |                          |
+ *                           +--------------------------+
+ *                                        |
+ *                           +------------+-------------+
+ *                           |                          |
+ *                           |     Lift Throttling      |
+ *                           |     When Empty Queue     |
+ *                           |                          |
+ *                           +--------------------------+
+ */
+
+import { Dispatch, UnknownAction } from "redux"
+import TopicManager from "./topicManager"
+import { setNotificationDidUpdateOnFirebase } from "@redux/notifications"
 
 type topicParams = {
     topicID?: string
     lang: boolean | undefined
-    status?: boolean
-    category?: string
-    catArray?: boolean[] | boolean
+    notification?: NotificationProps
+    dispatch?: Dispatch<UnknownAction>
 }
+
+// Global throttling variable to keep track of all function calls
+let throttled = [false, false]
+let langChangeQueue: topicParams | null
+let notificationStateQueue: topicParams | null
 
 /**
  * **Function for subscribing and unsubscribing from notification topics**
@@ -20,97 +129,84 @@ type topicParams = {
  * @param lang Language, 1 for norwegian, 0 for english
  * @param status  true/false Subscribe or unsubscribe from given topic.
  */
-export default async function topic({topicID, lang, status, category, catArray}:
+export default async function topic({topicID, lang, notification, dispatch}:
 topicParams) {
+    const isLangChange = topicID === "langChange"
+    // Drops excessive language changes
+    if (isLangChange && throttled[0]) {
+        langChangeQueue = { topicID, lang, notification, dispatch }
+        return
+    }
 
-    // COMMENT IN THIS BOX WHILE TESTING IN EXPO 4/6
-    return null
-    // COMMENT IN THIS BOX WHILE TESTING IN EXPO 4/6
-    const granted = await messaging().requestPermission()
-    var topic = lang ? "norwegian"+topicID:"english"+topicID
+    // Drops excessive notification state changes
+    if (throttled[1]) {
+        notificationStateQueue = { topicID, lang, notification, dispatch }
+        return
+    }
 
-    if (granted) {
-        if (topicID === "langChange") {
-            if (lang) {
-                // Unsubscribe from old language
-                await messaging().unsubscribeFromTopic("englishIMPORTANT")
-                await messaging().unsubscribeFromTopic("englishBEDPRES")
-                await messaging().unsubscribeFromTopic("englishTEKKOM")
-                await messaging().unsubscribeFromTopic("englishCTF")
-                await messaging().unsubscribeFromTopic("englishSOCIAL")
-                await messaging().unsubscribeFromTopic("englishKARRIEREDAG")
-                await messaging().unsubscribeFromTopic("englishFADDERUKA")
-                await messaging().unsubscribeFromTopic("englishLOGIN")
-                await messaging().unsubscribeFromTopic("englishANNET")
+    // Enables throttling for called topic type
+    isLangChange ? throttled[0] = true : throttled[1] = true
 
-                // Subscribe to new language
-                await subscribeToTopic("norwegianIMPORTANT")
-                await subscribeToTopic("norwegianBEDPRES")
-                await subscribeToTopic("norwegianTEKKOM")
-                await subscribeToTopic("norwegianCTF")
-                await subscribeToTopic("norwegianSOCIAL")
-                await subscribeToTopic("norwegianKARRIEREDAG")
-                await subscribeToTopic("norwegianFADDERUKA")
-                await subscribeToTopic("norwegianLOGIN")
-                await subscribeToTopic("norwegianANNET")
-                return null
-            } else {
-                // Unsubscribe from old language
-                await messaging().unsubscribeFromTopic("englishIMPORTANT")
-                await messaging().unsubscribeFromTopic("norwegianBEDPRES")
-                await messaging().unsubscribeFromTopic("norwegianTEKKOM")
-                await messaging().unsubscribeFromTopic("norwegianCTF")
-                await messaging().unsubscribeFromTopic("norwegianSOCIAL")
-                await messaging().unsubscribeFromTopic("norwegianKARRIEREDAG")
-                await messaging().unsubscribeFromTopic("norwegianFADDERUKA")
-                await messaging().unsubscribeFromTopic("norwegianLOGIN")
-                await messaging().unsubscribeFromTopic("norwegianANNET")
+    // Empties queue at the start as any duplicate requests at this stage will
+    // already be accounted for and handled by the current execution.
+    isLangChange ? langChangeQueue = null : notificationStateQueue = null
 
-                // Subscribe to new language
-                await subscribeToTopic("englishIMPORTANT")
-                await subscribeToTopic("englishBEDPRES")
-                await subscribeToTopic("englishTEKKOM")
-                await subscribeToTopic("englishCTF")
-                await subscribeToTopic("englishSOCIAL")
-                await subscribeToTopic("englishKARRIEREDAG")
-                await subscribeToTopic("englishFADDERUKA")
-                await subscribeToTopic("englishLOGIN")
-                await subscribeToTopic("englishANNET")
-                return null
-            }
-        } else if (topicID === "maintenance") {
-            // For maintainers of this project
-            if (!lang) await subscribeToTopic("maintenance")
-            // When you no longer desire to be notified
-            else await messaging().unsubscribeFromTopic("maintenance")
-        } else {
-            let cat = category ? category.toLowerCase() : null
-
-            if (status && Array.isArray(catArray)) {
-                // Subscribe to given topic for desired time intervals
-                await subscribeToTopic(`${topic}`)
-                if (catArray[0]) await subscribeToTopic(topic + cat + "10m")
-                if (catArray[1]) await subscribeToTopic(topic + cat + "30m")
-                if (catArray[2]) await subscribeToTopic(topic + cat + "1h")
-                if (catArray[3]) await subscribeToTopic(topic + cat + "2h")
-                if (catArray[4]) await subscribeToTopic(topic + cat + "3h")
-                if (catArray[5]) await subscribeToTopic(topic + cat + "6h")
-                if (catArray[6]) await subscribeToTopic(topic + cat + "1d")
-                if (catArray[7]) await subscribeToTopic(topic + cat + "2d")
-                if (catArray[8]) await subscribeToTopic(topic + cat + "1w")
-            } else {
-                // Unsubscribe from given topic for all time intervals
-                await messaging().unsubscribeFromTopic(`${topic}`)
-                await messaging().unsubscribeFromTopic(topic + cat + "10m")
-                await messaging().unsubscribeFromTopic(topic + cat + "30m")
-                await messaging().unsubscribeFromTopic(topic + cat + "1h")
-                await messaging().unsubscribeFromTopic(topic + cat + "2h")
-                await messaging().unsubscribeFromTopic(topic + cat + "3h")
-                await messaging().unsubscribeFromTopic(topic + cat + "6h")
-                await messaging().unsubscribeFromTopic(topic + cat + "1d")
-                await messaging().unsubscribeFromTopic(topic + cat + "2d")
-                await messaging().unsubscribeFromTopic(topic + cat + "1w")
+    // Handles language change by shifting all subscribed topics to new language
+    // and unsubscribing them from the old language
+    if (isLangChange && notification) {
+        const keys = Object.keys(notification)
+        const values = Object.values(notification)
+        const sub = lang ? 'e' : 'n'
+        const unsub = lang ? 'n' : 'e'
+        for (let i = 0; i < keys.length; i++) {
+            if (values[i][0]) {
+                await TopicManager({topic: `${unsub}${keys[i]}`, unsub: true})
+                await TopicManager({topic: `${sub}${keys[i]}`})
             }
         }
+    }
+
+    if (notification && !isLangChange && dispatch) {
+        const keys = Object.keys(notification);
+        const values = Object.values(notification);
+        const prefix = lang ? 'n' : 'e'
+
+        for (let i = 0; i < keys.length; i++) {
+            if (values[i][1]) {
+                const topic = `${prefix}${keys[i]}`
+
+                try {
+                    const response = await TopicManager({ topic, unsub: !values[i][0] });
+    
+                    // Check if the result is successful
+                    if (response.result) {
+                        // Updates Redux if the topic was updated successfully
+                        dispatch(setNotificationDidUpdateOnFirebase({ category: keys[i] }));
+                    }
+                } catch (error) {
+                    console.error('Error processing topic:', error);
+                }
+            }
+        }
+    }
+
+    // Stops throtteling the finished type
+    topicID === "langChange" ? throttled[0] = false : throttled[1] = false
+
+    if (isLangChange) {
+        if (langChangeQueue) {
+            await executeLastRequest(langChangeQueue)
+        }
+    } else {
+        if (notificationStateQueue) {
+            await executeLastRequest(notificationStateQueue)
+        }
+    }
+}
+
+// Executes the last request to make sure all changes are accounted for
+async function executeLastRequest(request: topicParams) {
+    if (request) {
+        await topic(request)
     }
 }

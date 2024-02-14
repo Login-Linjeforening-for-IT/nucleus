@@ -62,31 +62,26 @@ export default function Navigator(): JSX.Element {
                     state={props.state} 
                     descriptors={props.descriptors} 
                     navigation={props.navigation} 
-                    insets={props.insets} 
                 />}
             >
                 {/* Maps over all screens, returning each of */}
-                {screens.map((screen: StackProps, index) => {
-                    return (
-                        <Tab.Screen 
-                            key={screen.name} 
-                            options={({
-                                tabBarIcon: ({focused})=>{
-                                    return (
-                                        <Image
-                                            style={MS.bMenuIcon} 
-                                            source={focused 
-                                                ? screen.focusedIcon
-                                                : screen.icon} 
-                                        />
-                                    )
-                                }
-                            })}
-                            name={screen.name+"Root"}
-                            component={screen.component}
-                        />
-                    )
-                })}
+                {screens.map((screen: StackProps) => (
+                    <Tab.Screen 
+                        key={screen.name} 
+                        options={({
+                            tabBarIcon: ({focused}) => (
+                                <Image
+                                    style={MS.bMenuIcon} 
+                                    source={focused 
+                                        ? screen.focusedIcon
+                                        : screen.icon} 
+                                />
+                            )
+                        })}
+                        name={screen.name+"Root"}
+                        component={screen.component}
+                    />
+                ))}
             </Tab.Navigator>
         </NavigationContainer>
     )

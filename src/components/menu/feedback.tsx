@@ -1,9 +1,9 @@
-import { Alert, View, Text, TouchableOpacity, Linking } from "react-native"
-import FetchColor from "@styles/fetchTheme"
+import { View, Text, TouchableOpacity } from "react-native"
 import ES from "@styles/eventStyles"
 import T from "@styles/text"
 import React from "react"
 import { useSelector } from "react-redux"
+import { TextLink } from "@components/shared/link"
 
 type FeedbackProps = {
     index: number
@@ -20,13 +20,12 @@ toggleFeedback}: FeedbackProps) {
     if (index === setting.length-1 && !feedback) {
         return (
             <TouchableOpacity onPress={() => toggleFeedback()}>
-                <View>
+                <View style={{marginBottom: 10}}>
                     <Text
                         style={{
                             ...T.contact,
                             textDecorationLine: "underline",
-                            color: FetchColor({theme, variable: 
-                                "OPPOSITETEXTCOLOR"})
+                            color: theme.oppositeTextColor
                         }}>
                         {lang ? "Gi tilbakemelding" : "Give feedback"}
                     </Text>
@@ -37,42 +36,25 @@ toggleFeedback}: FeedbackProps) {
 
     if (index === setting.length-1 && feedback) {
         return (
-            <View style={{...ES.row, justifyContent: "space-evenly"}}>
-                <TouchableOpacity onPress={() =>
-                    Linking.openURL(
-                        "https://discordapp.com/users/376827396764073997")}>
-                    <View style={{backgroundColor: FetchColor({theme, 
-                        variable: "BACKGROUND"})}}>
-                        <Text style={{
-                            ...T.contact,
-                            textDecorationLine: "underline",
-                            color: FetchColor({theme, variable: 
-                                "OPPOSITETEXTCOLOR"})
-                        }}>
-                            Discord
-                        </Text>
-                    </View>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => {
-                    Linking.openURL("mailto:kontakt@login.no")
-                        .catch(() => lang
-                        ? Alert.alert("Kunne ikke åpne mail!", 
-                            "Mail: kontakt@login.no")
-                        : Alert.alert("Could not open mail!", 
-                            "Reach us at kontakt@login.no"))
-                }}>
-                    <View>
-                        <Text
-                            style={{
-                                ...T.contact,
-                                textDecorationLine: "underline",
-                                color: FetchColor({theme, 
-                                    variable: "OPPOSITETEXTCOLOR"})}}
-                        >
-                            Mail
-                        </Text>
-                    </View>
-                </TouchableOpacity>
+            <View style={{...ES.row, justifyContent: "space-evenly", marginBottom: 10}}>
+                <TextLink 
+                    url="https://discordapp.com/users/376827396764073997"
+                    text="Discord" 
+                    style={{
+                        ...T.contact,
+                        textDecorationLine: "underline",
+                        color: theme.oppositeTextColor
+                    }}
+                />
+                <TextLink 
+                    url="mailto:kontakt@login.no" 
+                    text="Mail" 
+                    style={{
+                        ...T.contact,
+                        textDecorationLine: "underline",
+                        color: theme.oppositeTextColor
+                    }}
+                />
             </View>
         )
     }

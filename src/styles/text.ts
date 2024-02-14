@@ -15,6 +15,10 @@ export const T = StyleSheet.create({
         color: "red",
         fontSize: 15,
     },
+    // Text of size 10
+    text10: {
+        fontSize: 10,
+    },
     // Text of size 15
     text15: {
         fontSize: 15,
@@ -52,6 +56,11 @@ export const T = StyleSheet.create({
     centered: {
         alignSelf: "center",
         fontSize: 30,
+    },
+    // Centered text of size 10
+    centered10: {
+        alignSelf: "center",
+        fontSize: 10,
     },
     // Centered text of size 15
     centered15: {
@@ -123,8 +132,6 @@ export const T = StyleSheet.create({
     // Bold text with line next to it
     boldWithLine: {
         left: 5,
-        justifyContent: "center",
-        maxWidth: "98%",
         fontSize: 15,
         fontWeight: "bold",
     },
@@ -137,16 +144,21 @@ export const T = StyleSheet.create({
     // Copyright text (size: 17)
     copyright: {
         textAlign: "center",
-        fontSize: 17,
+        fontSize: 10,
+        marginVertical: 10
     },
     // DpecificEventInfo text (+10px from left)
     specificEventInfo: {
         fontSize: 20,
     },
+    specificEventInfoContent: {
+        fontSize: 20,
+        maxWidth: 240
+    },
     // Text used for filter categories
     filterCategoryText: {
-        left: 10,
         fontSize: 12,
+        left: 5,
     },
     // Mazemap text on SES
     mazemap: {

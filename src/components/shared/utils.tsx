@@ -1,14 +1,21 @@
-import FetchColor from "@styles/fetchTheme"
-import Svg, { Rect } from "react-native-svg"
 import { useSelector } from "react-redux"
 import { View, Text } from "react-native"
 import ES from "@styles/eventStyles"
 import T from "@styles/text"
-import React from "react"
+import React, { ReactNode } from "react"
 
+
+// Ony children or height can be defined at the same time. Both cant be arguments at the same time
 type LineProps = {
-    height: number
+    children: ReactNode
     width: number
+    height?: never
+    fill?: string
+} |
+{
+    children?: never
+    width: number
+    height: number
     fill?: string
 }
 
@@ -45,23 +52,23 @@ export default function Space({height}: SpaceProps): JSX.Element {
  * Function for drawing a dynamic line, can be adjusted as you wish using 
  * the height and width
  *
- * @param height Height of the line
  * @param width Width of the line
+ * @param height The height of the line if children is undefined
  * @param fill Color of the line
+ * @param children The content that should have a line to the right
  * @returns View of the given size based on theme
  */
-export function Line({height, width, fill}: LineProps): JSX.Element {
+export function Line({width, fill, children, height}: LineProps): JSX.Element {
 
     const { theme } = useSelector((state: ReduxState) => state.theme)
 
     return (
-        <View>
-            <Svg
-                width={width}
-                height={height}
-                fill={fill ? fill : FetchColor({theme, variable: "ORANGE"})}>
-                <Rect x="1" y="1" width={width} height={height}/>
-            </Svg>
+        <View style={{
+            borderLeftWidth: width,
+            borderColor: fill ? fill : theme.orange,
+            height: height ? height : 'auto'
+        }}>
+            {children}
         </View>
     )
 }
@@ -98,10 +105,8 @@ export function ErrorMessage({argument}: ErrorMessageProps): JSX.Element {
     }
 
     return (
-        <View style={{alignSelf: "center", maxWidth: "80%"}}>
-            <View style={{height : "45%"}}/>
-            <Text style={{...T.centered20, color: FetchColor({theme, 
-                variable: "TEXTCOLOR"})}}>
+        <View style={{alignSelf: "center", justifyContent: "center", display: "flex", flex: 1}}>
+            <Text style={{...T.centered20, color: theme.textColor}}>
                 {text[argument]}
             </Text>
         </View>
@@ -118,10 +123,10 @@ export function Month({month, color}: MonthProps): JSX.Element {
 
     const monthsEN = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", 
         "Jul", "Aug", "Sep", "Oct", "Nov", "Des"]
-    const monthsNO = ["jan", "feb", "mar", "apr", "mai", "jun", 
-        "jul", "aug", "sep", "okt", "nov", "des"]
+    const monthsNO = ["Jan", "Feb", "Mar", "Apr", "Mai", "Jun", 
+        "Jul", "Aug", "Sep", "Okt", "Nov", "Des"]
 
     return <Text style={{...ES.monthText, color: color}}>
-        {lang ? monthsNO[month - 1]: monthsEN[month - 1]}
+        {lang ? monthsNO[month]: monthsEN[month]}
     </Text>
 }

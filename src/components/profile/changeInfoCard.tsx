@@ -1,6 +1,5 @@
 import { GestureHandlerRootView, PanGestureHandler } from "react-native-gesture-handler"
 import { useDispatch, useSelector } from "react-redux"
-import FetchColor from "@styles/fetchTheme"
 import PS from "@styles/profileStyles"
 import { Line } from "@/components/shared/utils"
 import React, { useEffect, useState } from "react"
@@ -38,16 +37,25 @@ type ChangeInfoCardProps = {
     trigger: boolean
 }
 
+type SaveProps = {
+    edited: boolean
+    save: () => void
+}
+
+type CancelProps = {
+    tryToHide: () => void
+}
+
 /**
  * Function for drawing a very small square of the category of the event
  *
  * @param {string} category    Category of the event, Format: "CATEGORY"
  * @returns                     Small circle of the categories color
  */
-export default function ChangeInfoCard({type, value, hide,
-trigger}: ChangeInfoCardProps) {
+export default function ChangeInfoCard({type, value, hide, trigger}: 
+ChangeInfoCardProps) {
+
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    const { lang } = useSelector((state: ReduxState) => state.lang)
 
     // Dispatch to change Redux states
     const dispatch = useDispatch()
@@ -136,11 +144,11 @@ trigger}: ChangeInfoCardProps) {
     }
 
     function checkChange () {
-        // if (profile[value] != text && text.length > 0) {
-        //     setEdited(true)
-        // } else {
-        //     setEdited(false)
-        // }
+        if (Object.values(profile)[value] != text && text.length > 0) {
+            setEdited(true)
+        } else {
+            setEdited(false)
+        }
     }
 
     function handleText(val: string) {
@@ -172,23 +180,14 @@ trigger}: ChangeInfoCardProps) {
     return (
         <GestureHandlerRootView>
             <PanGestureHandler onGestureEvent={gestureHandler}>
-                <Animated.View
-                    style={[
-                        PS.animatedCard, animation,
-                        {backgroundColor: FetchColor({theme, variable: "DARKER"})}
-                    ]}>
-                    <View style={[
-                        PS.animatedView,
-                        {backgroundColor: FetchColor({theme, variable: "DARKER"})}
-                    ]}>
-                        <TextInput
-                            style={{
-                                ...PS.inputText,
-                                color: FetchColor({theme, variable: "TEXTCOLOR"})
-                            }}
+                <Animated.View style={[
+                    PS.animatedCard, animation,
+                    {backgroundColor: theme.darker}
+                ]}>
+                    <View style={{...PS.animatedView, backgroundColor: theme.darker}}>
+                        <TextInput style={{...PS.inputText, color: theme.textColor}}
                             placeholder = {findBestPlaceHolder()}
-                            placeholderTextColor={FetchColor({theme,
-                                variable: "TITLETEXTCOLOR"})}
+                            placeholderTextColor={theme.titleTextColor}
                             textAlign="center"
                             keyboardType={value === 1
                                 ? "numeric"
@@ -198,53 +197,66 @@ trigger}: ChangeInfoCardProps) {
                             }
                             onChangeText={(val) => handleText(val)}
                             autoFocus={true}
-                            selectionColor={FetchColor({theme, variable: "ORANGE"})}
+                            selectionColor={theme.orange}
                         />
                         <View style={PS.inputInfoView}>
-                            <TouchableOpacity style={{left: 20}} onPress={() => tryToHide()}>
-                                <Text style={{
-                                    ...T.centered15, 
-                                    color: FetchColor({theme, variable: "TEXTCOLOR"})
-                                }}>
-                                    {lang ? "Avbryt" : "Cancel"}
-                                </Text>
-                            </TouchableOpacity>
+                            <Cancel tryToHide={tryToHide} />
                             <Text style={{
                                 ...T.centered15, 
-                                color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})
+                                color: theme.oppositeTextColor
                             }}>
                                 {type}
                             </Text>
-
-                            {edited ?
-                                <TouchableOpacity style={{right: 20}} onPress={() => save()}>
-                                    <Text style={{
-                                        ...T.centered15, 
-                                        color: FetchColor({theme, variable: "TEXTCOLOR"})
-                                    }}>
-                                        {lang ? "Lagre" : "Save"}
-                                    </Text>
-                                </TouchableOpacity>
-                            :
-                                <Text style={{
-                                    ...T.centered15, 
-                                    right: 20, 
-                                    color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})
-                                }}>
-                                    {lang ? "Lagre" : "Save"}
-                                </Text>
-                            }
+                            <Save edited={edited} save={save} />
                         </View>
                         <View style={[PS.centeredLine, {top: 20}]}>
                             <Line 
                                 height={2} 
                                 width={width*(2/3)} 
-                                fill={FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})} 
+                                fill={theme.oppositeTextColor} 
                             />
                         </View>
                     </View>
                 </Animated.View>
             </PanGestureHandler>
         </GestureHandlerRootView>
+    )
+}
+
+function Save({edited, save}: SaveProps) {
+    const { lang } = useSelector((state: ReduxState) => state.lang)
+    const { theme } = useSelector((state: ReduxState) => state.theme)
+
+    if (edited) {
+        return (
+            <TouchableOpacity style={{right: 20}} onPress={() => save()}>
+            <Text style={{...T.centered15, color: theme.textColor}}>
+                {lang ? "Lagre" : "Save"}
+            </Text>
+        </TouchableOpacity>
+        )
+    } else {
+        return (
+            <Text style={{
+                ...T.centered15, 
+                right: 20, 
+                color: theme.oppositeTextColor
+            }}>
+                {lang ? "Lagre" : "Save"}
+            </Text>
+        )
+    }
+}
+
+function Cancel({tryToHide}: CancelProps) {
+    const { lang } = useSelector((state: ReduxState) => state.lang)
+    const { theme } = useSelector((state: ReduxState) => state.theme)
+
+    return (
+        <TouchableOpacity style={{left: 20}} onPress={() => tryToHide()}>
+            <Text style={{...T.centered15, color: theme.textColor}}>
+                {lang ? "Avbryt" : "Cancel"}
+            </Text>
+        </TouchableOpacity>
     )
 }

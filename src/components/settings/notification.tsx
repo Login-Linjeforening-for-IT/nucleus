@@ -1,7 +1,6 @@
 import { changeNotificationState } from "@redux/notifications"
 import topic from "@/utils/topic"
 import { useSelector, useDispatch } from "react-redux"
-import FetchColor from "@styles/fetchTheme"
 import { View, Switch } from "react-native"
 import React from "react"
 
@@ -13,9 +12,9 @@ type NotificationProps = {
 /**
  * Function for displaying a notification switch
  *
- * @param {string} category         Category the switch should control
- * @param {string} topicID          Topic the user interacted with
- * @returns                         Notification switch as view
+ * @param {string} category Category the switch should control
+ * @param {string} topicID Topic the user interacted with
+ * @returns Notification switch component
  */
 export default function Notification ({category, skip}: NotificationProps) {
      // Fetches states
@@ -24,23 +23,21 @@ export default function Notification ({category, skip}: NotificationProps) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const dispatch = useDispatch()
 
-    if (!skip) topic({category: category, lang, catArray: notification[category]})
+    if (!skip) topic({lang, notification, dispatch})
 
     return (
         <View>
             <Switch
-                trackColor={{ true: FetchColor({theme, variable: "TRACKCOLOR"})}}
-                thumbColor={notification[category]
-                    ? FetchColor({theme, variable: "SWITCHOFFSTATE"})
-                    : FetchColor({theme, variable: "SWITCHONSTATE"})
+                trackColor={{ true: theme.trackColor}}
+                thumbColor={notification[category][0]
+                    ? theme.switchOffState
+                    : theme.switchOnState
                 }
-                ios_backgroundColor={
-                    FetchColor({theme, variable: "TRACKBACKGROUNDCOLOR"})
-                }
+                ios_backgroundColor={theme.trackBackgroundColor}
                 onValueChange={(value) => {
                     dispatch(changeNotificationState({value, category}))
                 }}
-                value={notification[category]}
+                value={notification[category][0]}
             />
         </View>
     )

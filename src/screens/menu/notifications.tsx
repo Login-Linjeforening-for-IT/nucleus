@@ -1,13 +1,11 @@
 import Cluster from "@/components/shared/cluster"
 import Space from "@/components/shared/utils"
-import FetchColor from "@styles/fetchTheme"
 import GS from "@styles/globalStyles"
 import React, { useEffect, useState } from "react"
 import { Navigation, NotificationScreenProps } from "@interfaces"
 import { useSelector } from "react-redux"
-import { FullCategorySquare } from "@components/event/eventList"
 import TopMenu from "@/components/shared/topMenu"
-import { View, Text, FlatList, Dimensions, TouchableOpacity } from "react-native"
+import { View, Text, Dimensions, TouchableOpacity } from "react-native"
 import NS from "@styles/notificationStyles"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import NotificationText from "@/components/notification/notificationText"
@@ -32,35 +30,26 @@ export default function NotificationScreen({navigation, back}: NotificationScree
         })(), 10000)
     }, [list])
 
-    function List(): JSX.Element {
-        return (
-            <FlatList
-                showsVerticalScrollIndicator={false}
-                numColumns={1}
-                keyExtractor={(item, index) => index.toString()}
-                data={list}
-                renderItem={({item}) => (
-                    <Notification item={item} navigation={navigation} />
-                )}
-            />
-        )
-    }
+    // function List(): JSX.Element {
+    //     if (!list) return <></>
+    //     return list.map((item) => <Notification item={item} navigation={navigation} />)
+    // }
 
     return (
         <Swipe left="MenuScreen">
             <View>
                 <View style={{
                         ...GS.content, 
-                        backgroundColor: FetchColor({theme, variable: "DARKER"})
+                        backgroundColor: theme.darker
                 }}>
                     <Space height={Dimensions.get("window").height / 8.1} />
-                    {Array.isArray(list) 
+                    {/* {Array.isArray(list) 
                         ? <List /> 
-                        : <Text style={{...NS.error, color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})}}>
+                        : <Text style={{...NS.error, color: theme.oppositeTextColor}}>
                             {lang 
                                 ? "Du har ingen varslinger nå. Kom tilbake senere." 
                                 : "You have no notifications at this time. Check back later."}
-                        </Text>}
+                        </Text>} */}
                         <Space height={Dimensions.get("window").height / 3} />
                 </View>
                 <TopMenu 
@@ -94,15 +83,15 @@ function Notification({item, navigation}: NotificationInAppProps): JSX.Element {
             <Cluster marginVertical={12}>
                 <View style={NS.notificationBack}>
                     <View style={NS.notificationViewLeft}>
-                        <FullCategorySquare
+                        {/* <FullCategorySquare
                             item={item.data}
                             height={2*item.body.length}
-                        />
+                        /> */}
                     </View>
                     <View style={NS.notificationViewMid}>
                         <NotificationText title={item.title} body={item.body} />
                     </View>
-                    <Text style={{...NS.time, right: 35, color: FetchColor({theme: theme, variable: "TITLETEXTCOLOR"})}}>
+                    <Text style={{...NS.time, right: 35, color: theme.titleTextColor}}>
                         {displayTime(item.time)}
                     </Text>
                 </View>

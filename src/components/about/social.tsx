@@ -1,19 +1,19 @@
 import CornerSquare from "@/components/about/cornerSquare"
-import Space, { random } from "@/components/shared/utils"
-import FetchColor from "@styles/fetchTheme"
-import GS from "@styles/globalStyles"
 import ES from "@styles/eventStyles"
-import { useSelector } from "react-redux"
+import GS from "@styles/globalStyles"
+import Link, { TextLink } from "@components/shared/link"
 import T from "@styles/text"
 import React from "react"
+import { useSelector } from "react-redux"
+import { random } from "@/components/shared/utils"
+import personInfo from "@utils/personInfo"
 import {
-    TouchableOpacity,
-    Linking,
     Image,
-    Alert,
-    View,
-    Text,
     ImageSourcePropType,
+    Linking,
+    Text,
+    TouchableOpacity,
+    View,
 } from "react-native"
 
 type PersonProps = {
@@ -23,11 +23,6 @@ type PersonProps = {
 type MediaLogoProps = {
     link: string
     logo: ImageSourcePropType
-}
-
-type personInfoProps = {
-    person: string
-    lang: boolean
 }
 
 type MediaProps = {
@@ -58,26 +53,22 @@ export default function Person({person}: PersonProps): JSX.Element {
     let corner = random({min: 0, max: 4})
 
     return (
-        <View>
+        <View style={{marginBottom: 20}}>
             <Image style={{...GS.personImage}} source={{uri: obj.img}} />
-            <View style={{position: "absolute", alignSelf: "center"}}>{CornerSquare({corner})}</View>
+            <CornerSquare corner={corner} />
             <Text style={T.leaderTitle}>{obj.title}</Text>
-            <Text style={{
-                ...T.leaderName, 
-                color: FetchColor({theme, variable: "TEXTCOLOR"})
-            }}>
+            <Text style={{...T.leaderName, color: theme.textColor}}>
                 {obj.name}
             </Text>
-            <TouchableOpacity onPress={() => Linking.openURL(obj.dclink)}>
-                <Text style={{...T.discord, color: FetchColor({theme, variable: "DISCORD"})}}>
-                    {<Image 
+            <Link url={obj.dclink}>
+                <Text style={{...T.discord, color: theme.discord}}>
+                    <Image 
                         style={GS.tiny} 
                         source={require("@assets/social/discord-colored.png")}
-                    />}
+                    />
                     {obj.tag}
                 </Text>
-            </TouchableOpacity>
-            <Space height={25} />
+            </Link>
         </View>
     )
 }
@@ -149,16 +140,18 @@ export function Social() {
     }
 
     return (
-        <View style={{flexDirection: "row", justifyContent: "center"}}>
-            {Object.entries(media).map(([link], index) => {
-            return (
+        <View style={{
+            flexDirection: "row", 
+            justifyContent: "center", 
+            marginTop: 10
+        }}>
+            {Object.values(media).map((item, index) => (
                 <MediaLogo 
-                    key={link} 
-                    link={link} 
+                    key={item.link} 
+                    link={item.link} 
                     logo={media[Object.keys(media)[index]].logo} 
                 />
-            )
-        })}
+        ))}
         </View>
     )
 }
@@ -185,9 +178,7 @@ export function Styret() {
                 style={{...GS.aboutImage}} 
                 source={{uri: "https://cdn.login.no/img/styret2.jpg"}}
             />
-            <View style={{position: "absolute", alignSelf: "center"}}>
-                <CornerSquare corner={corner} type={true} />
-            </View>
+            <CornerSquare corner={corner} type={true} />
         </View>
     )
 }
@@ -196,10 +187,11 @@ export function Styret() {
  * Function for displaying the contact info of Login - Linjeforeningen for IT as a text inside a view
  * @returns Contact info
  */
-export function Kontakt() {
+export function Contact() {
 
     const { lang  } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
+    const color = theme.textColor
 
     const info = {
         contact: lang ? "Kontakt" : "Contact",
@@ -210,29 +202,19 @@ export function Kontakt() {
     }
 
     return (
-    <View>
-        <Text/>
-        <Text style={{...T.centeredBold25, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{info.contact}</Text>
-        <Text style={{...T.centered15, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{info.name}</Text>
-        <Text style={{...T.centered15, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{info.address}</Text>
-        <Text style={{...T.centered15, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{info.location}</Text>
-        <Text style={{...T.centered15, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>{info.post}</Text>
-        <Text/>
-        <Text 
-            style={{
-                ...T.orangeCentered15, 
-                color: FetchColor({theme, variable: "ORANGE"})}} 
-            onPress={() => {Linking.openURL("mailto:kontakt@login.no")
-            .catch(() => lang 
-                ? Alert.alert("Kunne ikke åpne mail!", "Mail: kontakt@login.no")
-                : Alert.alert("Could not open mail!", "Reach us at kontakt@login.no"))
-            }}
-        >
-            kontakt@login.no
-        </Text>
-        <Text/>
-        <Space height={12} /> 
-    </View>
+        <View>
+            <Text style={{...T.centeredBold20, color: color}}>{info.contact}</Text>
+            <Text style={{...T.centered15, color: color}}>{info.name}</Text>
+            <Text style={{...T.centered15, color: color}}>{info.location}</Text>
+            <Text style={{...T.centered15, color: color}}>{info.address}</Text>
+            <Text style={{...T.centered15, color: color}}>{info.post}</Text>
+
+            <TextLink 
+                url="mailto:kontakt@login.no"
+                text="kontakt@login.no" 
+                style={{...T.orange15, top: 3.2, alignSelf: "center", marginBottom: 20}}
+            />
+        </View>
     )
 }
 
@@ -247,11 +229,8 @@ export function Copyright() {
 
     return (
         <View>
-            <Text style={{...T.copyright, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>
-                {lang 
-                    ? "Opphavsrett © 2022-2023 Login - Linjeforeningen for IT, NO 811 940 372"
-                    : "Copyright © 2022-2023 Login - Linjeforeningen for IT, NO 811 940 372"
-                }
+            <Text style={{...T.copyright, color: theme.oppositeTextColor}}>
+                {`${lang ? "Opphavsrett" : "Copyright"} © 2022-${new Date().getFullYear()} Login - Linjeforeningen for IT\nD-U-N-S 345 129 409\nNO 811 940 372`}
             </Text>
         </View>
     )
@@ -267,140 +246,17 @@ function MediaLogo({link, logo}: MediaLogoProps) {
     )
 }
 
-// TODO: Move this to a seperate file. Use object and a .ts file since it does
-// not include any React elements.
-/**
- * Function for returning the cdn string for each board member.
- *
- * @param {string} verv
- * @returns cdn link as string
- */
-function personInfo({person, lang}: personInfoProps) {
-
-    let p = person.toLowerCase()
-
-    const titleNO = {
-        leader: "Leader",
-        coleader: "Deputy chairwoman",
-        secretary: "Secretary",
-        evntkom: "EvntKom leader",
-        bedkom: "BedKom leder",
-        tekkom: "TekKom leder",
-        ctf: "CTFkom leader",
-        satkom: "SatKom leader",
-        pr: "PR leader"
-    }
-
-    const titleEN = {
-        leader: "Leder",
-        coleader: "Nestleder",
-        secretary: "Sekretær",
-        evntkom: "EvntKom leder",
-        bedkom: "BedKom leader",
-        tekkom: "TekKom leader",
-        ctf: "CTFkom leder",
-        satkom: "SatKom leder",
-        pr: "PR leader"
-    }
-
-    const title = lang ? titleNO : titleEN
-
-    let leader = {
-        title: title.leader,
-        name: "Tormod Mork Müller",
-        tag: "backsiide",
-        dclink: "https://discordapp.com/users/210124409816612876",
-        img: `https://cdn.login.no/img%2Fportraits%2Fportrett_leder.jpg`
-    }
-
-    let coleader = {
-        title: title.coleader,
-        name: "Kristina Kataki",
-        tag: "Kataki#7254",
-        dclink: "https://discordapp.com/users/877108421772582962",
-        img: `https://cdn.login.no/img%2Fportraits%2Fportrett_nestleder.jpg`,
-    }
-
-    let secretary = {
-        title: title.secretary,
-        name: "Aleksander Aaboen",
-        tag: "aleksanderaa#2130",
-        dclink: "https://discordapp.com/users/610784035777544202",
-        img: `https://cdn.login.no/img%2Fportraits%2Fportrett_sekret%C3%A6r.jpg`,
-    }
-
-    let eventkom_leader = {
-        title: title.evntkom,
-        name: "Sander Hauge",
-        tag: "sandiss",
-        dclink: "https://discordapp.com/users/171972901501796352",
-        img: `https://cdn.login.no/img/portraits/portrett_eventkom-leder.jpg`,
-    }
-
-    let bedkom_leader = {
-        title: title.bedkom,
-        name: "Ida Førland",
-        tag: "idaforland",
-        dclink: "https://discordapp.com/users/470279697465606159",
-        img: `https://cdn.login.no/img/portraits/portrett_bedkom-leder.jpg`
-    }
-
-    let tekkom_leader = {
-        title: title.tekkom,
-        name: "Eirik Hanasand",
-        tag: "eirikhanasand",
-        dclink: "https://discordapp.com/users/376827396764073997",
-        img: `https://cdn.login.no/img/portraits/portrett_tekkom-leder.jpg`,
-    }
-
-    let ctfkom_leader = {
-        title: title.ctf,
-        name: "Eskil Refsgaard",
-        tag: "rrefsgaard",
-        dclink: "https://discordapp.com/users/522483274933731331",
-        img: `https://cdn.login.no/img/portraits/portrett_ctfkom-leder.jpg`,
-    }
-
-    let satkom_leader = {
-        title: title.satkom,
-        name: "Trygve Sollund",
-        tag: "spikeupine",
-        dclink: "https://discordapp.com/users/209395476288634881",
-        img: `https://cdn.login.no/img%2Fportraits%2Fportrett_%C3%B8konomi.jpg`
-    }
-
-    let pr_leader = {
-        title: title.pr,
-        name: "Bjørn Kristian Strand",
-        tag: "bk_suup",
-        dclink: "https://discordapp.com/users/353992260507140097",
-        img: `https://cdn.login.no/img/portraits/portrett_bedkom-leder.jpg`
-    }
-
-    switch (p) {
-        case "leader":      return leader
-        case "coleader":    return coleader
-        case "secretary":   return secretary
-        case "evntkom":     return eventkom_leader
-        case "pr":          return pr_leader
-        case "ctf":         return ctfkom_leader
-        case "eco":         return satkom_leader
-        case "bedkom":      return bedkom_leader
-        default:            return tekkom_leader
-    }
-}
-
-export function StaticImage({event}: {event: EventProps}): JSX.Element {
+export function StaticImage({event}: {event: DetailedEvent}): JSX.Element {
     const images: Record<string, ImageSourcePropType> = {
         tekkom:  require(`../../../public/assets/committee/tekkom/tekkom.png`),
         ctf:     require(`../../../public/assets/committee/ctfkom/ctf.png`),
         bedpres: require(`../../../public/assets/committee/bedkom/bedkom.png`),
+        sosialt:  require(`../../../public/assets/categories/sosialt.png`),
         social:  require(`../../../public/assets/categories/sosialt.png`),
         login:   require(`../../../public/assets/categories/login.png`),
         annet:   require(`../../../public/assets/categories/annet.png`),
     }
-
-    const image = images[event.category.toUpperCase()] || images.annet;
+    const image = images[event.category_name_no.toLowerCase()] || images.annet;
 
     return <Image style={ES.specificEventImage} source={image} />
 }

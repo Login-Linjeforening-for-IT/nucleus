@@ -5,7 +5,6 @@ import Reminders from "@/components/settings/reminders"
 import Language from "@/components/settings/language"
 import Cluster from "@/components/shared/cluster"
 import Space from "@/components/shared/utils"
-import FetchColor from "@styles/fetchTheme"
 import GS from "@styles/globalStyles"
 import { useSelector } from "react-redux"
 import en from "@text/menu/settings/en.json"
@@ -31,10 +30,7 @@ export default function SettingScreen(): JSX.Element {
     return (
         <Swipe left="MenuScreen">
             <View>
-                <View style={{
-                    ...GS.content, 
-                    backgroundColor: FetchColor({theme, variable: "DARKER"})
-                }}>
+                <View style={{...GS.content, backgroundColor: theme.darker}}>
                     <Content />
                 </View>
             </View>
@@ -56,14 +52,13 @@ function Content(): JSX.Element {
                     <View style={GS.view}>
                         <Text style={{
                             ...GS.notificationText, 
-                            color: FetchColor({theme, variable: "TEXTCOLOR"})
+                            color: theme.textColor
                         }}>
                             {info[0].title}
                         </Text>
                         <Text style={{
                             ...GS.notificationTip, 
-                            color: FetchColor({theme, 
-                            variable: "OPPOSITETEXTCOLOR"})
+                            color: theme.oppositeTextColor
                         }}>
                             {info[0].description}
                         </Text>
@@ -75,37 +70,28 @@ function Content(): JSX.Element {
             <Cluster>
                 <View style={GS.notificationBack}>
                 <View style={GS.view}>
-                    <Text style={{
-                        ...GS.notificationText, 
-                        color: FetchColor({theme, variable: "TEXTCOLOR"})
-                        }}>
+                    <Text style={{...GS.notificationText, color: theme.textColor}}>
                             {info[1].title}
                         </Text>
                     <Text style={{
                         ...GS.notificationTip, 
-                        color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})
-                        }}>
-                            {info[1].description}
-                        </Text>
+                        color: theme.oppositeTextColor
+                    }}>
+                        {info[1].description}
+                    </Text>
                 </View>
                     <Language/>
                 </View>
             </Cluster>
 
             <Space height={10} />
-            <Text style={{
-                ...T.text30, 
-                color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})
-            }}>
+            <Text style={{...T.text30, color: theme.oppositeTextColor}}>
                     {info[2].title}
             </Text>
             <Space height={10} />
             <SwitchCluster obj={info[3]} category="IMPORTANT" />
             <Space height={10} />
-            <Text style={{
-                ...T.text25, 
-                color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})
-            }}>
+            <Text style={{...T.text25, color: theme.oppositeTextColor}}>
                 {info[4].title}
             </Text>
             <Space height={10} />
@@ -119,15 +105,12 @@ function Content(): JSX.Element {
             <SwitchCluster obj={info[12]} category="ANNET" />
 
             <Space height={10} />
-            <Text style={{
-                ...T.text25,
-                color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})
-            }}>
+            <Text style={{...T.text25,color: theme.oppositeTextColor}}>
                 {info[13].title}
             </Text>
             <Space height={10} />
             <Reminders/>
-            <Space height={Dimensions.get("window").height / 3 + 8} />
+            <Space height={Dimensions.get("window").height / 7} />
         </ScrollView>
     )
 }
@@ -141,13 +124,13 @@ function SwitchCluster({obj, category}: ClusterWithSwitchProps) {
                 <View style={GS.view}>
                     <Text style={{
                         ...GS.notificationText, 
-                        color: FetchColor({theme, variable: "TEXTCOLOR"})
+                        color: theme.textColor
                     }}>
                         {obj.title}
                     </Text>
                     <Text style={{
                         ...GS.notificationTip, 
-                        color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})
+                        color: theme.oppositeTextColor
                     }}>
                         {obj.description}
                     </Text>

@@ -1,16 +1,16 @@
 import Cluster from "@/components/shared/cluster"
 import en from "@text/menu/companies/en.json"
-import FetchColor from "@styles/fetchTheme"
 import no from "@text/menu/companies/no.json"
 import Paragraph from "@/components/business/paragraph"
 import React from "react"
 import Space, { Line } from "@/components/shared/utils"
 import GS from "@styles/globalStyles"
-import { Kontakt } from "@/components/about/social"
+import { Contact } from "@/components/about/social"
 import T from "@styles/text"
 import { Text, View, ScrollView, Dimensions } from "react-native"
 import { useSelector } from "react-redux"
 import Swipe from "@components/nav/swipe"
+import { TextWithLinks } from "@components/shared/link"
 
 export default function BusinessScreen(): JSX.Element {
 
@@ -19,14 +19,11 @@ export default function BusinessScreen(): JSX.Element {
     return (
         <Swipe left="MenuScreen">
             <View>
-                <View style={{
-                    ...GS.content, 
-                    backgroundColor: FetchColor({theme, variable: "DARKER"})
-                }}>
+                <View style={{...GS.content, backgroundColor: theme.darker}}>
                     <ScrollView showsVerticalScrollIndicator={false}>
                         <Space height={Dimensions.get("window").height / 8.1 + 10} /> 
                         <Content />
-                        <Space height={Dimensions.get("window").height / 3 + 10} /> 
+                        <Space height={Dimensions.get("window").height / 7} /> 
                         </ScrollView>
                 </View>
             </View>
@@ -38,14 +35,16 @@ function Content(): JSX.Element {
     const { theme, isDark } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const info = lang ? no.companies : en.companies
+    const color = theme.textColor
+    const orange = theme.orange
 
     const logo = {
         bedpres: isDark
             ? require("@assets/committee/eventkom/bedpres-white.png")
             : require("@assets/committee/eventkom/bedpres-black.png"),
         pr: isDark
-            ? require("@assets/committee/prkom/pr-white.png")
-            : require("@assets/committee/prkom/pr-black.png"),
+            ? require("@assets/committee/bedkom/pr-white.png")
+            : require("@assets/committee/bedkom/pr-black.png"),
         ctf: isDark
             ? require("@assets/committee/ctfkom/ctfkom-white.png")
             : require("@assets/committee/ctfkom/ctfkom-black.png"),
@@ -59,29 +58,18 @@ function Content(): JSX.Element {
 
     return (
         <Cluster>
-            <Text style={{
-                ...T.bold40, 
-                color: FetchColor({theme, variable: "TEXTCOLOR"})
-            }}>
-                {info.title}
-            </Text>
+            <Text style={{...T.bold40, color: color}}>{info.title}</Text>
             <Space height={15} /> 
-            <View style={GS.row}>
-                <Text>
-                    <Line height={60} width={5} />
-                </Text>
-                <View>
-                    <Text style={{
-                        ...T.boldWithLine, 
-                        color: FetchColor({theme, variable: "TEXTCOLOR"})
-                    }}>
-                        {info.intro}
-                    </Text>
-                </View>
-            </View>
+            <Line width={5}>
+                <TextWithLinks 
+                    style={{...T.boldWithLine, color: color, lineHeight: 18}} 
+                    linkStyle={{...T.boldWithLine, color: orange}} 
+                    text={info.intro}
+                />
+            </Line>
 
             <Space height={10} /> 
-
+            
             <Paragraph 
                 logo={logo.bedpres}
                 title={info.bedpres.title}
@@ -110,7 +98,7 @@ function Content(): JSX.Element {
 
             <Space height={10} /> 
 
-            <Kontakt/>
+            <Contact/>
         </Cluster>
     )
 }

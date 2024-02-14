@@ -1,0 +1,15 @@
+<svg viewBox="0 0 75 76" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M30 58L20 64" stroke="currentColor" stroke-width="3"/>
+<path d="M30 42L12 31" stroke="currentColor" stroke-width="3"/>
+<path d="M38 35L31 14" stroke="currentColor" stroke-width="3"/>
+<path d="M53 37L64 20" stroke="currentColor" stroke-width="3"/>
+<path d="M56 59L63 65" stroke="currentColor" stroke-width="3"/>
+<path d="M14 74C17.3137 74 20 71.3137 20 68C20 64.6863 17.3137 62 14 62C10.6863 62 8 64.6863 8 68C8 71.3137 10.6863 74 14 74Z" stroke="currentColor" stroke-width="3"/>
+<path d="M8 34C11.3137 34 14 31.3137 14 28C14 24.6863 11.3137 22 8 22C4.68629 22 2 24.6863 2 28C2 31.3137 4.68629 34 8 34Z" stroke="currentColor" stroke-width="3"/>
+<path d="M29 14C32.3137 14 35 11.3137 35 8C35 4.68629 32.3137 2 29 2C25.6863 2 23 4.68629 23 8C23 11.3137 25.6863 14 29 14Z" stroke="currentColor" stroke-width="3"/>
+<path d="M67 21C70.3137 21 73 18.3137 73 15C73 11.6863 70.3137 9 67 9C63.6863 9 61 11.6863 61 15C61 18.3137 63.6863 21 67 21Z" stroke="currentColor" stroke-width="3"/>
+<path d="M67 74C70.3137 74 73 71.3137 73 68C73 64.6863 70.3137 62 67 62C63.6863 62 61 64.6863 61 68C61 71.3137 63.6863 74 67 74Z" stroke="currentColor" stroke-width="3"/>
+<path d="M44 65C52.2843 65 59 58.2843 59 50C59 41.7157 52.2843 35 44 35C35.7157 35 29 41.7157 29 50C29 58.2843 35.7157 65 44 65Z" stroke="currentColor" stroke-width="3"/>
+<path d="M44 51C46.7614 51 49 48.7614 49 46C49 43.2386 46.7614 41 44 41C41.2386 41 39 43.2386 39 46C39 48.7614 41.2386 51 44 51Z" fill="currentColor" stroke="currentColor"/>
+<path d="M35.5 61.5C35.5 53.2037 52.9526 53.2037 52.9526 61.5Z" fill="currentColor" stroke="currentColor" stroke-width="3"/>
+</svg>

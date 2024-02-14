@@ -1,6 +1,5 @@
 import TopicSwitchList from "@/components/settings/topicSwitch"
 import { TouchableOpacity, Image, View, Text } from "react-native"
-import FetchColor from "@styles/fetchTheme"
 import GS from "@styles/globalStyles"
 import { useSelector } from "react-redux"
 import React, {useState } from "react"
@@ -42,11 +41,9 @@ export default function Reminders() {
                     >
                     <View style={{
                         ...GS.reminderDropdown, 
-                        backgroundColor: FetchColor({theme, variable: "DARKER"})
+                        backgroundColor: theme.darker
                     }}>
-                        <Text style={{
-                            ...T.text20, 
-                            color: FetchColor({theme, variable: "TEXTCOLOR"})}}>
+                        <Text style={{...T.text20, color: theme.textColor}}>
                                 {cat.title}
                         </Text>
                         <Image

@@ -1,3 +1,6 @@
+const api = "https://workerbee.login.no/api/"
+const testapi = "https://testapi.login.no/api/"
+
 /**
  * Function for checking when the API was last fetched successfully.
  *
@@ -8,12 +11,12 @@ export default function LastFetch(param?: string) {
     const time = new Date(utc)
 
     // Checking and fixing missing 0
-    let day = time.getDate().toString().padStart(2, '0')
-    let month = (time.getMonth() + 1).toString().padStart(2, '0')
-    let year = time.getFullYear()
+    const day = time.getDate().toString().padStart(2, '0')
+    const month = (time.getMonth() + 1).toString().padStart(2, '0')
+    const year = time.getFullYear()
     
-    let hour = time.getHours().toString().padStart(2, '0')
-    let minute = time.getMinutes().toString().padStart(2, '0')
+    const hour = time.getHours().toString().padStart(2, '0')
+    const minute = time.getMinutes().toString().padStart(2, '0')
 
     return `${hour}:${minute}, ${day}/${month}, ${year}`
 }
@@ -21,44 +24,115 @@ export default function LastFetch(param?: string) {
 /**
  * Fetches the specific event page for additional details
  *
- * @param {object} event    Event to fetch details for
+ * @param {number} id Event id fetch details for
  *
- * @returns                 All details for passed event
+ * @returns All details for passed event
  */
-export async function fetchEventDetails(event: EventProps): 
+export async function fetchEventDetails(id: number): 
 Promise<DetailedEvent> {
-    const response = await fetch(`https://api.login.no/events/${event.eventID}`)
+    // Fetches events
+    const response = await fetch(`${api}events/${id}`)
+
+    // Test API
+    // const response = await fetch(`${testapi}events/${id}`)
     const eventDetails = await response.json()
-    return {...event, ...eventDetails}
-}
 
-/**
- * Function for returning a forms, tikkio or nettskjema link from a string
- *
- * @param {string} string String containing forms, tikkio or nettskjema link
- * @returns Link as string
- */
-export function FetchJoinLink(string: string): string | null {
-    if (string != undefined) {
-        let formStart = string.lastIndexOf("https://forms")
-        let formEnd = string.lastIndexOf("</a>")
+    let mazemap = null
+    let location_no = null
+    let location_en = null
+    let location_url = null
+    let rule_no = null
+    let rule_en = null
+    let rule_details_no = null
+    let rule_details_en = null
+    let organization_logo = null
+    let organization_name_short = null
+    let link_homepage = null
+    let organization_name_en = null
+    let category_name_no = null
+    let category_name_en = null
+    let color = null
 
-        let tikkioStart = string.lastIndexOf("https://tikkio")
-        let tikkioEnd = string.lastIndexOf("</a>")
-
-        let netStart = string.lastIndexOf("https://nettskjema.no")
-        let netEnd = string.lastIndexOf("</a>")
-
-        var formLink = string.slice(formStart, formEnd)
-        var tikkioLink = string.slice(tikkioStart, tikkioEnd)
-        var netLink = string.slice(netStart, netEnd)
-
-        if (formLink)    return formLink.trim()
-        if (tikkioLink)  return tikkioLink.trim()
-        if (netLink)     return netLink.trim()
+    if ('category' in eventDetails) {
+        if ('name_no' in eventDetails.category) {
+            category_name_no = eventDetails.category.name_no
+        }
+        if ('name_en' in eventDetails.category) {
+            category_name_en = eventDetails.category.name_en
+        }
+        if ('color' in eventDetails.category) {
+            color = eventDetails.category.color
+        }
     }
 
-    return null
+    if ('location' in eventDetails) {
+        if ('name_no' in eventDetails.location) {
+            location_no = eventDetails.location.name_no
+        }
+        if ('name_en' in eventDetails.location) {
+            location_en = eventDetails.location.name_en
+        }
+        if ('mazemap_poi_id' in eventDetails.location) {
+            mazemap = eventDetails.location.mazemap_poi_id
+        }
+        if ('url' in eventDetails.location) {
+            location_url = eventDetails.location.url
+        }
+    }
+
+    if ('rule' in eventDetails) {
+        if ('name_no' in eventDetails.rule) {
+            rule_no = eventDetails.rule.name_no
+        }
+        if ('name_en' in eventDetails.rule) {
+            rule_en = eventDetails.rule.name_en
+        }
+        if ('description_no' in eventDetails.rule) {
+            rule_details_no = eventDetails.rule.description_no
+        }
+        if ('description_en' in eventDetails.rule) {
+            rule_details_en = eventDetails.rule.description_en
+        }
+    }
+
+    if ('organizations' in eventDetails) {
+        if (eventDetails.organizations.length) {
+            if ('shortname' in eventDetails.organizations[0]) {
+                organization_name_short = eventDetails.organizations[0].shortname 
+            }
+            if ('logo' in eventDetails.organizations[0]) {
+                organization_logo = eventDetails.organizations[0].logo
+            }
+            if ('link_homepage' in eventDetails.organizations[0]) {
+                link_homepage = eventDetails.organizations[0].link_homepage
+            }
+            if ('organization_name_en' in eventDetails.organizations[0]) {
+                organization_name_en = eventDetails.organizations[0].name_en
+            }
+        }
+    }
+
+    const details = {
+        audiences: eventDetails.audiences,
+        category_id: eventDetails.category.id,
+        category_name_no,
+        category_name_en,
+        mazemap, 
+        location_no, 
+        location_en, 
+        location_url,
+        rule_no,
+        rule_en,
+        rule_details_no,
+        rule_details_en,
+        organization_logo,
+        organization_name_short,
+        organization_name_en,
+        link_homepage,
+        color
+    }
+
+    return {...eventDetails.event, ...details}
 }
 
 /**
@@ -68,11 +142,15 @@ export function FetchJoinLink(string: string): string | null {
  */
 export async function fetchEvents(): Promise<EventProps[]> {
     try {
-        // Prod
-        const response = await fetch("https://api.login.no/events")
+        // Fetches events
+        const response = await fetch(`${api}events`)
+
+        // Test API
+        // const response = await fetch(`${testapi}events/`)
 
         // Dev
         // const response = await fetch("https://tekkom:rottejakt45@api.login.no:8443/events")
+        
 
         // Checks if response is ok, otherwise throws error
         if (!response.ok) {
@@ -96,10 +174,10 @@ export async function fetchEvents(): Promise<EventProps[]> {
 export async function fetchAds(): Promise<AdProps[]> {
     try {
         // Prod
-        // const response = await fetch("https://api.login.no/ads")
+        const response = await fetch(`${api}jobs/`)
 
         // Dev
-        const response = await fetch("http://10.212.174.46/api/jobs/")
+        // const response = await fetch(`${testapi}jobs/`)
 
         // Checks if response is ok, otherwise throws error
         if (!response.ok) {
@@ -125,10 +203,10 @@ export async function fetchAds(): Promise<AdProps[]> {
 export async function fetchAdDetails(ad: AdProps): Promise<DetailedAd> {
 
     // Prod
-    // const response = await fetch(`https://api.login.no/ads/${ad.id}`)
+    const response = await fetch(`${api}jobs/${ad.id}`)
     
     // Dev
-    const response = await fetch(`http://10.212.174.46/api/jobs/${ad.id}`)
+    // const response = await fetch(`${testapi}jobs/${ad.id}`)
     const adDetails = await response.json()
 
     return {...ad, ...adDetails.job, ...adDetails.organization}

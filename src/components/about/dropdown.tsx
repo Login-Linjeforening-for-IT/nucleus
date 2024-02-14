@@ -1,9 +1,9 @@
-import { View, Text, TouchableOpacity, Linking, Image } from "react-native"
-import FetchColor from "@styles/fetchTheme"
 import GS from "@styles/globalStyles"
-import { useSelector } from "react-redux"
-import React, {useState } from "react"
+import React, { useState } from "react"
 import T from "@styles/text"
+import Link from "@components/shared/link"
+import { useSelector } from "react-redux"
+import { View, Text, TouchableOpacity, Image } from "react-native"
 
 type DropdownItemProps = {
     title: string
@@ -75,7 +75,7 @@ export default function Dropdown() {
     }
 
       return (
-        <View>
+        <View style={{marginVertical: 10}}>
             <DropdownItem title="Bachelor" course={course} selectedDegree={selectedDegree} courses={bcourses} degree={1} />
             <DropdownItem title="Master" course={course} selectedDegree={selectedDegree} courses={mcourses} degree={2} />
             <DropdownItem title="Ph.d" course={course} selectedDegree={selectedDegree} courses={pcourses} degree={3} />
@@ -92,9 +92,9 @@ function DropdownItem({title, course, selectedDegree, courses, degree}: Dropdown
     return (
         <>
             <TouchableOpacity onPress={() => selectedDegree(degree)}>
-                <View style={{...GS.dropdown, backgroundColor: FetchColor({theme, variable: "CONTRAST"})}}>
+                <View style={{...GS.dropdown, backgroundColor: theme.contrast}}>
                     <Image style={GS.dropImage} source={arrow} />
-                    <Text style={{...T.centered, color: FetchColor({theme, variable: "TEXTCOLOR"})}}>
+                    <Text style={{...T.centered, color: theme.textColor}}>
                         {title}
                     </Text>
                 </View>
@@ -104,15 +104,15 @@ function DropdownItem({title, course, selectedDegree, courses, degree}: Dropdown
                 { course === degree &&
                     courses.map((selectedCourse, index) => {
                         return (
-                            <TouchableOpacity key={index} onPress={() => Linking.openURL(selectedCourse.link)}>
+                            <Link key={index} url={selectedCourse.link}>
                                 <View style={{
                                     ...GS.dropdownContent, 
-                                    backgroundColor: FetchColor({theme, variable: "CONTRAST"})
+                                    backgroundColor: theme.contrast
                                 }}>
                                     <Text style={{
                                         ...T.text15, 
                                         maxWidth: "91%", 
-                                        color: FetchColor({theme, variable: "TEXTCOLOR"})
+                                        color: theme.textColor
                                     }}>
                                         {selectedCourse.title}
                                     </Text>
@@ -121,7 +121,7 @@ function DropdownItem({title, course, selectedDegree, courses, degree}: Dropdown
                                         source={require("@assets/icons/linkicon-white.png")} 
                                     />
                                 </View>
-                            </TouchableOpacity>
+                            </Link>
                         )
                     })
                 }

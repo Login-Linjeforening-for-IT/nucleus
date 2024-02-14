@@ -1,6 +1,5 @@
 import LastFetch from "@/utils/fetch"
 import Space from "@/components/shared/utils"
-import FetchColor from "@styles/fetchTheme"
 import { useSelector } from "react-redux"
 import AS from "@styles/adStyles"
 import T from "@styles/text"
@@ -8,6 +7,7 @@ import React, { useEffect, useState } from "react"
 import { SvgUri } from "react-native-svg"
 import capitalizeFirstLetter from "@utils/capitalizeFirstLetter"
 import RenderHTML from "react-native-render-html"
+import Link from "@components/shared/link"
 import {
     TouchableOpacity,
     Dimensions,
@@ -53,14 +53,11 @@ export default function AdInfo({ad}: {ad: AdProps}) {
             <View style={AS.adInfoInsideView}>
                 <Text style={{
                     ...AS.adInfoType, width: lang ? "40%" : "25%", 
-                    color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})
+                    color: theme.oppositeTextColor
                 }}>
                     {lang ? "Sted: " : "Location: "}
                 </Text>
-                <Text style={{
-                    ...AS.adInfo, 
-                    color: FetchColor({theme, variable: "TEXTCOLOR"})
-                }}>
+                <Text style={{...AS.adInfo, color: theme.textColor}}>
                     {loc}
                 </Text>
             </View>
@@ -68,14 +65,11 @@ export default function AdInfo({ad}: {ad: AdProps}) {
                 <Text style={{
                     ...AS.adInfoType, 
                     width: lang ? "40%" : "25%",
-                    color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})
+                    color: theme.oppositeTextColor
                 }}>
                     {lang ? "Ansettelsesform: " : "Position: "}
                 </Text>
-                <Text style={{
-                    ...AS.adInfo, 
-                    color: FetchColor({theme, variable: "TEXTCOLOR"})
-                }}>
+                <Text style={{...AS.adInfo, color: theme.textColor}}>
                     {type}
                 </Text>
             </View>
@@ -83,14 +77,11 @@ export default function AdInfo({ad}: {ad: AdProps}) {
                 <Text style={{
                     ...AS.adInfoType, 
                     width: lang ? "40%" : "25%", 
-                    color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})
+                    color: theme.oppositeTextColor
                 }}>
                     {lang ? "Frist: " : "Deadline: "}
                 </Text>
-                <Text style={{
-                    ...AS.adInfo, 
-                    color: FetchColor({theme, variable: "TEXTCOLOR"})
-                }}>
+                <Text style={{...AS.adInfo, color: theme.textColor}}>
                     {deadline}
                 </Text>
             </View>
@@ -110,7 +101,7 @@ export function AdBanner({url}: {url: string}) {
             style={{alignSelf: "center", backgroundColor: "white"}}
             width={(Dimensions.get("window").width) / 1.2}
             height={Dimensions.get("window").width / 3}
-            uri={`https://cdn.login.no/img/events/${url}`}
+            uri={`https://cdn.login.no/img/organizations/${url}`}
         />
     }
 
@@ -122,7 +113,7 @@ export function AdBanner({url}: {url: string}) {
     ) && !url?.startsWith("http")) {
         return <Image 
             style={AS.adBanner}
-            source={{uri: `https://cdn.login.no/img/events/${url}`}}
+            source={{uri: `https://cdn.login.no/img/organizations/${url}`}}
         />
     }
 
@@ -150,10 +141,10 @@ export function AdClusterImage({url}: {url: string | undefined}) {
     // Handles svg icons
     if (url?.endsWith(".svg")) {
         return <SvgUri
-            style={{alignSelf: "center", backgroundColor: "white"}}
+            style={{alignSelf: "center", backgroundColor: "white", borderRadius: 5}}
             width={90}
             height={60}
-            uri={`https://cdn.login.no/img/events/${url}`}
+            uri={`https://cdn.login.no/img/organizations/${url}`}
         />
     }
 
@@ -165,7 +156,7 @@ export function AdClusterImage({url}: {url: string | undefined}) {
     ) && !url?.startsWith("http")) {
         return <Image 
             style={AS.adBannerSmall}
-            source={{uri: `https://cdn.login.no/img/events/${url}`}}
+            source={{uri: `https://cdn.login.no/img/organizations/${url}`}}
         />
     }
 
@@ -186,7 +177,7 @@ export function AdClusterImage({url}: {url: string | undefined}) {
         <View style={AS.adClusterImage}>
             <Image
                 style={AS.adBannerSmall}
-                source={{uri: "https://cdn.login.no/img/ads/adcompany.png"}} 
+                source={{uri: "https://cdn.login.no/img/organizations/adcompany.png"}} 
             />
         </View>
     )
@@ -200,9 +191,10 @@ export function AdClusterImage({url}: {url: string | undefined}) {
  */
 export function AdClusterLocation({ad}: AdClusterLocationProps) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
+    const { lang } = useSelector((state: ReduxState) => state.lang)
     const type = capitalizeFirstLetter(ad.job_type)
     const location = ad.cities.map(city => capitalizeFirstLetter(city)).join(", ")
-    let name =  ad.title_no
+    let name =  lang ? ad.title_no || ad.title_en : ad.title_en || ad.title_no
     let info = `${type}${location ? `. ${location}`:''}`
     let halfWidth = Platform.OS === "ios" 
         ? Dimensions.get("window").width / 9 
@@ -227,18 +219,12 @@ export function AdClusterLocation({ad}: AdClusterLocationProps) {
     return (
         <View style={AS.locationView}>
             <View style = {{...AS.title}}>
-                <Text style={{
-                    ...AS.title, 
-                    color: FetchColor({theme, variable: "TEXTCOLOR"})
-                }}>
+                <Text style={{...AS.title, color: theme.textColor}}>
                     {name}
                 </Text>
             </View>
             <View style={{flexDirection: "row"}}>
-                <Text style={{
-                    ...AS.loc,
-                    color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})
-                }}>
+                <Text style={{...AS.loc,color: theme.oppositeTextColor}}>
                     {info}
                 </Text>
             </View>
@@ -254,51 +240,39 @@ export function AdClusterLocation({ad}: AdClusterLocationProps) {
 export function AdDescription({ad}: {ad: DetailedAd}) {
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    const skills = ad.skills.join(", ")
-    const shortDescription = lang 
-        ? ad.description_short_no
-        : ad.description_short_en
-    const LongDescription = lang 
-        ? ad.description_long_no 
-        : ad.description_long_en
+    const skills = ad.skills ? ad.skills.join(", ") : []
+    
+    const tempShort = lang 
+        ? ad.description_short_no || ad.description_short_en
+        : ad.description_short_en || ad.description_short_no
+    const tempLong = lang 
+        ? ad.description_long_no || ad.description_long_en
+        : ad.description_long_en || ad.description_long_no
+
+    const shortDescription = tempShort ? tempShort.replace(/\\n/g, '<br>') : ''
+    const LongDescription = tempLong ? tempLong.replace(/\\n/g, '<br>') : ''
 
     return (
         <View style={{marginBottom: 10}}>
-            <Text style={{
-                ...AS.adInfoBold, 
-                color: FetchColor({theme, variable: "TEXTCOLOR"})
-            }}>
+            <Text style={{...AS.adInfoBold, color: theme.textColor}}>
                 Kort fortalt
             </Text>
-            <Text style={{
-                ...T.paragraph, 
-                color: FetchColor({theme, variable: "TEXTCOLOR"})
-            }}>
+            <Text style={{...T.paragraph, color: theme.textColor}}>
                 {shortDescription}
             </Text>
             <Space height={10} /> 
-            <Text style={{
-                ...AS.adInfoBold, 
-                color: FetchColor({theme, variable: "TEXTCOLOR"})
-                }}>{lang ? "Ferdigheter" : "Skills"}</Text>
-            <Text style={{
-                ...T.paragraph, 
-                color: FetchColor({theme, variable: "TEXTCOLOR"})
-                }}>
-                    {skills}
-                </Text>
-                <Space height={10} /> 
-            <Text style={{
-                ...AS.adInfoBold, 
-                color: FetchColor({theme, variable: "TEXTCOLOR"})
-                }}>
-                    Om stillingen
-                </Text>
+            <Text style={{...AS.adInfoBold, color: theme.textColor}}>
+                {lang ? "Ferdigheter" : "Skills"}
+            </Text>
+            <Text style={{...T.paragraph, color: theme.textColor}}>
+                {skills}
+            </Text>
+            <Space height={10} /> 
+            <Text style={{...AS.adInfoBold, color: theme.textColor}}>
+                Om stillingen
+            </Text>
             {LongDescription && <RenderHTML
-                baseStyle={{
-                    maxWidth: "100%",
-                    color: FetchColor({theme, variable: "TEXTCOLOR"}),
-                }}
+                baseStyle={{maxWidth: "100%",color: theme.textColor}}
                 contentWidth={0}
                 source={{html: LongDescription}}
             />}
@@ -353,37 +327,34 @@ export function AdMedia({ad}: {ad: DetailedAd}) {
                 {social.map((platform: SocialProps) => {
                     if (platform.url?.length) return (
                         <View key={platform.url}>
-                            <TouchableOpacity onPress={() => 
-                                Linking.openURL(platform.url)}>
+                            <Link url={platform.url}>
                                 <Image 
                                     style={AS.socialMediaImage} 
                                     source={platform.source}
                                 />
-                            </TouchableOpacity>
+                            </Link>
                         </View>
                     )
                 })}
             </View>
-            <Space height={10} /> 
             <View style={AS.socialView}>
                 {ad.application_url &&
                     <TouchableOpacity onPress={() => 
-                    Linking.openURL(ad.application_url)}>
-                    <View style={{
-                        ...AS.adButton,
-                        backgroundColor: FetchColor({theme, variable: "ORANGE"})
-                    }}>
-                        <Text style={{
-                            ...AS.adButtonText,
-                            color: FetchColor({theme, variable: "TEXTCOLOR"})
+                        Linking.openURL(ad.application_url)}>
+                        <View style={{
+                            ...AS.adButton,
+                            backgroundColor: theme.orange
                         }}>
-                            {lang ? "Søk nå":"Apply"}
-                        </Text>
-                    </View>
-                </TouchableOpacity>
+                            <Text style={{
+                                ...AS.adButtonText,
+                                color: theme.textColor
+                            }}>
+                                {lang ? "Søk nå":"Apply"}
+                            </Text>
+                        </View>
+                    </TouchableOpacity>
                 }
             </View>
-            <Space height={10} /> 
         </View>
     )
 }
@@ -396,20 +367,17 @@ export function AdMedia({ad}: {ad: DetailedAd}) {
 export function AdTitle({ad}: {ad: DetailedAd}) {
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
+    const title = lang ? ad.title_no || ad.title_en : ad.title_en || ad.title_no
     const logo = ad.logo
-    const title = (lang 
-        ? ad.title_no + " hos "
-        : ad.title_en + " at "
-    ) + ad.organization
 
     function Logo() {
         // Handles svg icons
         if (logo?.endsWith(".svg")) {
             return <SvgUri
-                style={{alignSelf: "center", backgroundColor: "white"}}
+                style={{alignSelf: "center", backgroundColor: "white", marginTop: 12}}
                 width={90}
                 height={60}
-                uri={`https://cdn.login.no/img/events/${logo}`}
+                uri={`https://cdn.login.no/img/organizations/${logo}`}
             />
         }
 
@@ -421,7 +389,7 @@ export function AdTitle({ad}: {ad: DetailedAd}) {
         ) && !logo?.startsWith("http")) {
             return <Image 
                 style={AS.adBannerSmall}
-                source={{uri: `https://cdn.login.no/img/events/${logo}`}}
+                source={{uri: `https://cdn.login.no/img/organizations/${logo}`}}
             />
         }
 
@@ -431,10 +399,7 @@ export function AdTitle({ad}: {ad: DetailedAd}) {
             || logo?.endsWith(".jpeg") 
             || logo?.endsWith(".gif")
         ) && logo?.includes("http")) {
-            return <Image 
-                style={AS.adBannerSmall}
-                source={{uri: logo}}
-            />
+            return <Image style={AS.adBannerSmall} source={{uri: logo}} />
         }
 
         // Handles missing asset (default png)
@@ -451,10 +416,7 @@ export function AdTitle({ad}: {ad: DetailedAd}) {
     return (
         <View style={AS.adTitleView}>
             <Logo />
-            <Text style={{
-                ...AS.specificAdTitle, 
-                color: FetchColor({theme, variable: "TEXTCOLOR"})
-            }}>
+            <Text style={{...AS.specificAdTitle, color: theme.textColor}}>
                 {title}
             </Text>
         </View>
@@ -471,26 +433,27 @@ export function AdUpdateInfo({ad}: {ad: DetailedAd}) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
 
     const updated = LastFetch(ad.updated_at)
-    const created = LastFetch(ad.created_at)
-
+    const created = LastFetch(ad.time_publish)
+    const didUpdate = created !== updated
     const textNO = ["Oppdatert kl:", "Opprettet kl:"]
     const textEN = ["Updated:", "Created:"]
     const text = lang ? textNO : textEN
 
     return (
         <View style={{marginBottom: 10}}>
-            <Text style={{
+            {didUpdate && <Text style={{
                 ...T.contact,
+                fontSize: 12,
                 marginBottom: 5,
-                color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})
+                color: theme.oppositeTextColor
             }}>
                 {text[0]} {updated}.
-            </Text>
-            <Text style={{
-                ...T.contact,
-                color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})
-            }}>
+            </Text>}
+            <Text style={{...T.contact, fontSize: 12,color: theme.oppositeTextColor}}>
                 {text[1]} {created}.
+            </Text>
+            <Text style={{...T.contact, fontSize: 12, marginVertical: 5, color: theme.oppositeTextColor}}>
+                Ad ID: {ad.id}
             </Text>
         </View>
     )

@@ -41,7 +41,7 @@ export const AdSlice = createSlice({
         skills: [] as string[],
         clickedSkills: [] as string[],
         input: "",
-        downloadState: new Date(),
+        downloadState: "",
     },
     // Declares reducers
     reducers: {
@@ -103,7 +103,7 @@ export const AdSlice = createSlice({
             })
         },
         setDownloadState(state) {
-            state.downloadState = new Date()
+            state.downloadState = new Date().toString()
         }
     }
 })
@@ -136,9 +136,11 @@ function setSkills(ads: AdProps[], clickedAds: AdProps[]) {
     const skills: Set<string> = new Set(clickedAds.length ? ["Påmeldt"] : [])
 
     ads.forEach((ad) => {
-        ad.skills.forEach(skill => {
-            skills.add(skill)
-        });
+        if (ad.skills) {
+            ad.skills.forEach(skill => {
+                skills.add(skill)
+            })
+        }
     })
 
     return Array.from(skills)
@@ -169,9 +171,12 @@ function Filter ({input, ads, clickedAds, clickedSkills}: FilterProps) {
  * @returns Filtered ads
  */
 function filterText ({ads, input}: FilterTextProps) {
-    const titles_no = ads.filter(ad => ad.title_no.toLowerCase().includes(input.toLowerCase()))
-    const titles_en = ads.filter(ad => ad.title_en.toLowerCase().includes(input.toLowerCase()))
-    return removeDuplicatesAndOld(ads, [...titles_no, ...titles_en])
+    const textFiltered = ads.filter(ad => 
+        ad.title_no.toLowerCase().includes(input.toLowerCase()) 
+        || ad.title_en.toLowerCase().includes(input.toLowerCase())
+    )
+
+    return removeDuplicatesAndOld(ads, textFiltered)
 }
 
 /**
@@ -187,7 +192,7 @@ function filterSkills ({ads, clickedAds, clickedSkills}: FilterCategoriesProps) 
     const clickedFound = clickedSkills.find((skill: string) => skill === "Påmeldt")
     
     // Filters based on category
-    const skillFiltered = ads.filter(ad => clickedSkills.some((skill: string) => ad.skills.includes(skill)))
+    const skillFiltered = ads.filter(ad => clickedSkills.some((skill: string) => ad.skills?.includes(skill)))
 
     // Returns if the user is not enrolled to any ads
     if (!clickedFound) {

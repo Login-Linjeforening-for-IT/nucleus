@@ -4,7 +4,7 @@ type FilterProps = {
     input: string
     events: EventProps[]
     clickedEvents: EventProps[]
-    clickedCategories: CategoryWithID[]
+    clickedCategories: string[]
 }
 
 type FilterTextProps = {
@@ -15,11 +15,11 @@ type FilterTextProps = {
 type FilterCategoriesProps = {
     events: EventProps[]
     clickedEvents: EventProps[]
-    clickedCategories: CategoryWithID[]
+    clickedCategories: string[]
 }
 
 type filterBothProps = {
-    clickedCategories: CategoryWithID[]
+    clickedCategories: string[]
     clickedEvents: EventProps[]
     events: EventProps[]
     input: string
@@ -38,10 +38,14 @@ export const EventSlice = createSlice({
         lastFetch: "",
         lastSave: "",
         search: false,
-        categories: [] as CategoryWithID[],
-        clickedCategories: [] as CategoryWithID[],
+        categories: {
+            no: [] as string[],
+            en: [] as string[],
+        },
+        clickedCategories: [] as string[],
         input: "",
-        downloadState: new Date()
+        downloadState: "",
+        tag: { title: "", body: "" }
     },
     // Declares reducers
     reducers: {
@@ -49,7 +53,7 @@ export const EventSlice = createSlice({
         setEvents(state, action) {
             state.events = action.payload
             state.renderedEvents = action.payload
-            state.categories = setCategories(state.events, state.clickedEvents)
+            state.categories = setCategories(state.events)
         },
         // Sets the event to be displayed on SES
         setEvent(state, action) {
@@ -58,7 +62,7 @@ export const EventSlice = createSlice({
         // Sets the clicked events
         setClickedEvents(state, action) {
             state.clickedEvents = action.payload
-            state.categories = setCategories(state.events, state.clickedEvents)
+            state.categories = setCategories(state.events)
         },
         // Sets the events to be displayed
         setRenderedEvents(state, action) {
@@ -103,7 +107,10 @@ export const EventSlice = createSlice({
             })
         },
         setDownloadState(state) {
-            state.downloadState = new Date()
+            state.downloadState = new Date().toString()
+        },
+        setTag(state, action) {
+            state.tag = action.payload
         }
     }
 })
@@ -120,7 +127,8 @@ export const {
     setLastSave,
     setRenderedEvents,
     toggleSearch,
-    setDownloadState
+    setDownloadState,
+    setTag
 } = EventSlice.actions
 
 // Exports the Event slice itself
@@ -131,27 +139,17 @@ export default EventSlice.reducer
  * @param clickedEvents
  * @param events
  */
-function setCategories(events: EventProps[], clickedEvents: EventProps[]) {
-    // All categories to filter - DO NOT CHANGE IDS
-    const catArray = [
-        {id: 2, category: "TEKKOM"},
-        {id: 3, category: "SOCIAL"},
-        {id: 4, category: "CTF"},
-        {id: 5, category: "KARRIEREDAG"},
-        {id: 6, category: "FADDERUKA"},
-        {id: 7, category: "BEDPRES"},
-        {id: 8, category: "LOGIN"},
-        {id: 9, category: "ANNET"}
-    ]
+function setCategories(events: EventProps[]) {
 
-    const categories = catArray.filter((category: CategoryWithID) =>
-        events.some(events => events.category === category.category))
-
-    // Adds enrolled (PÅMELDT) filter option if relevant, since no event has this attribute naturally
-
-    if (clickedEvents.length > 0) {
-        categories.unshift({id: 1, category: "PÅMELDT"})
+    const categories = {
+        no: [] as string[],
+        en: [] as string[]
     }
+
+    events.forEach(event => {
+        if (!categories.no.includes(event.category_name_no)) categories.no.push(event.category_name_no)
+        if (!categories.en.includes(event.category_name_en)) categories.en.push(event.category_name_en)
+    })
 
     return categories
 }
@@ -180,7 +178,11 @@ function Filter ({input, events, clickedEvents, clickedCategories}: FilterProps)
  * @returns Filtered events
  */
 function filterText ({events, input}: FilterTextProps) {
-    const textFiltered = events.filter(event => event.eventname.toLowerCase().includes(input.toLowerCase()))
+    const textFiltered = events.filter(event => 
+        event.name_no.toLowerCase().includes(input.toLowerCase()) 
+        || event.name_en.toLowerCase().includes(input.toLowerCase())
+    )
+
     return removeDuplicatesAndOld(events, textFiltered)
 }
 
@@ -192,12 +194,15 @@ function filterText ({events, input}: FilterTextProps) {
  * @returns Events filtered by category
  */
 function filterCategories ({events, clickedEvents, clickedCategories}: FilterCategoriesProps) {
-
     // Checks if user is filtering by enrolled (PÅMELDT)
-    const clickedFound = clickedCategories.find((object: CategoryWithID) => object.category === "PÅMELDT")
+    const clickedFound = clickedCategories.find((category: string) => category === "Påmeldt")
     
     // Filters based on category
-    const categoryFiltered = events.filter(event => clickedCategories.some((category: CategoryWithID) => category.category === event.category))
+    const categoryFiltered = events.filter(event => 
+        clickedCategories.some((category: string) => 
+        category === event.category_name_no 
+        || category === event.category_name_en
+    ))
 
     // Returns if the user is not enrolled to any events
     if (!clickedFound) {
@@ -239,11 +244,11 @@ export function removeDuplicatesAndOld (APIevents: EventProps[], events:
     
     // Removes old events and preserves newer version of all events
     const realEvents = APIevents.filter(APIevent => 
-        events.some(event => APIevent.eventID === event.eventID))
+        events.some(event => APIevent.id === event.id))
 
     // Removes duplicates
     const filteredEvents = realEvents.filter((event, index) => {
-        return realEvents.findIndex(obj => obj.eventID === event.eventID) === index
+        return realEvents.findIndex(obj => obj.id === event.id) === index
     })
 
     return filteredEvents

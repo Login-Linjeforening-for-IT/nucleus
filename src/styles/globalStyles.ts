@@ -3,7 +3,7 @@ import { StyleSheet, Dimensions, Platform } from "react-native"
 export const GS = StyleSheet.create({
     // Main view of every screen
     content: {
-        height: Dimensions.get("window").height + 200,
+        height: Dimensions.get("window").height+30,
         paddingHorizontal: 12
     },
     // ReportScreen description text
@@ -43,6 +43,7 @@ export const GS = StyleSheet.create({
     // Right view of notificationScreen
     view2: {
         justifyContent: "center",
+        marginVertical: 2,
     },
     // Used anywhere there is a small image
     smallImage: {
@@ -58,7 +59,6 @@ export const GS = StyleSheet.create({
     },
     committee: {
         borderRadius: 10,
-        width: "125%",
     },
     image80: {
         alignSelf: "center",
@@ -174,10 +174,6 @@ export const GS = StyleSheet.create({
     headerView: {
         position: "absolute",
         zIndex: 1,
-        // When filter is enabled
-        top: Dimensions.get("window").height / 17,
-        // When filter is disabled
-        // top: Platform.OS === "ios" ? 20 : 10,
         display: 'flex', 
         flexDirection: 'row', 
     },
@@ -212,7 +208,21 @@ export const GS = StyleSheet.create({
         left: Platform.OS === "ios"
             ? Dimensions.get("window").width / 21.5
             : Dimensions.get("window").width / 20
-    }
+    },
+    tag: {
+        width: 15,
+        height: 15,
+        top: 1,
+        resizeMode: "contain",
+    },
+    animatedCard: {
+        position: "absolute",
+        zIndex: 2,
+        bottom: 0,
+        height: Platform.OS=="ios" ? Dimensions.get("window").height / 1.48 : Dimensions.get("window").height / 1.40,
+        width: "100%", 
+        borderRadius: 20,
+    },
 })
 
 export default GS

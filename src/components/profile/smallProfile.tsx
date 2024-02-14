@@ -1,5 +1,4 @@
 import { Image, View, Text, TouchableOpacity } from "react-native"
-import FetchColor from "@styles/fetchTheme"
 import PS from "@styles/profileStyles"
 import CS from "@styles/clusterStyles"
 import { Navigation } from "@interfaces"
@@ -25,6 +24,8 @@ SmallProfileProps): JSX.Element {  // SVG showing the color of the category
     const { theme, isDark } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
 
+    if (!login) return <></>
+
     return (
         <TouchableOpacity onPress={() => login
             ? navigation.navigate("ProfileScreen")
@@ -46,24 +47,18 @@ SmallProfileProps): JSX.Element {  // SVG showing the color of the category
                 <View style={PS.smallProfileMiddleTriplet}>
                     {typeof profile.id === "number" ?
                         <>
-                            <Text style={{
-                                ...T.text20,
-                                color: FetchColor({theme, variable: "TEXTCOLOR"})
-                            }}>
+                            <Text style={{...T.text20, color: theme.textColor}}>
                                 {profile.name}
                             </Text>
                             <Text style={{
                                 ...T.text15,
-                                color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})
+                                color: theme.oppositeTextColor
                             }}>
                                 {lang ? "Vis profil" : "Show profile"}
                             </Text>
                         </>
                     :
-                        <Text style={{
-                            ...T.text25,
-                            color: FetchColor({theme, variable: "TEXTCOLOR"})
-                        }}>
+                        <Text style={{...T.text25, color: theme.textColor}}>
                             Login
                         </Text>
                     }

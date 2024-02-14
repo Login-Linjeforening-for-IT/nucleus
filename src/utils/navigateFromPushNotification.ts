@@ -1,6 +1,6 @@
-// COMMENT IN THIS BOX WHILE TESTING IN EXPO 6/6
-// import messaging, { FirebaseMessagingTypes } from "@react-native-firebase/messaging"
-// COMMENT IN THIS BOX WHILE TESTING IN EXPO 6/6
+// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 6/6
+import messaging, { FirebaseMessagingTypes } from "@react-native-firebase/messaging"
+// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 6/6
 
 import { useEffect, useState } from "react"
 import NotificationInApp from "@/components/shared/notificationInApp"
@@ -8,7 +8,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage"
 
 interface PushNotificationProps {
     navigation: any
-    theme: number
+    theme: Theme
     setPushNotification: React.Dispatch<React.SetStateAction<boolean>>
     setPushNotificationContent: React.Dispatch<React.SetStateAction<JSX.Element | undefined>>
 }
@@ -41,7 +41,7 @@ type StoreNotificationProps = {
 export default function NavigateFromPushNotification({ navigation, theme, 
 setPushNotification, setPushNotificationContent }: PushNotificationProps) {
     // COMMENT IN THIS BOX WHILE TESTING IN EXPO 6/6
-    return null
+    // return null
     // COMMENT IN THIS BOX WHILE TESTING IN EXPO 6/6
 
     const [event, setEvent] = useState<{ [key: string]: any } 
@@ -96,7 +96,7 @@ setPushNotification, setPushNotificationContent }: PushNotificationProps) {
                 setPushNotification(true)
 
                 const notificationElement = (
-                    () => NotificationInApp({title, body, data, theme}, navigation)
+                    () => NotificationInApp({title, body, data, theme})
                 )
                 setPushNotificationContent(notificationElement)
             }

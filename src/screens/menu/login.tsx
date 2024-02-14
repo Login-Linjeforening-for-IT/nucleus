@@ -5,13 +5,13 @@ import Check from "@components/event/check"
 import Cluster from "@/components/shared/cluster"
 import Button from "@/components/shared/button"
 import Space from "@/components/shared/utils"
-import FetchColor from "@styles/fetchTheme"
 import SS from "@styles/settingStyles"
 import GS from "@styles/globalStyles"
 import React, { useState } from "react"
 import { ScreenProps } from "@interfaces"
 import T from "@styles/text"
 import Swipe from "@components/nav/swipe"
+import login from "@utils/login"
 import {
     Text,
     View,
@@ -49,18 +49,18 @@ type PasswordUIProps = {
 export default function LoginScreen({ navigation }: ScreenProps): JSX.Element {
 
     const { lang  } = useSelector((state: ReduxState) => state.lang)
-    const { login } = useSelector((state: ReduxState) => state.login)
     const { theme } = useSelector((state: ReduxState) => state.theme)
 
     const dispatch = useDispatch()
 
-    function internalPage() {
-        if (data.name === database.name && data.pass === database.pass) {
+    async function internalPage() {
+        if (await login({username: data.name, password: data.pass})) {
             dispatch(changeLoginStatus())
             navigation.navigate("InternalScreen")
-        } else {
-            Alert.alert("Feil brukernavn eller passord")
+            return
         }
+        
+        Alert.alert("Feil brukernavn eller passord")
     }
 
     const [data, setData] = useState({
@@ -71,63 +71,34 @@ export default function LoginScreen({ navigation }: ScreenProps): JSX.Element {
         secureTextEntry: true
     })
 
-    const database = {
-        name: "admin",
-        pass: "admin"
-    }
-
     function inputName (val: string) {
         if (val.length > 0) {
-            setData({
-            ...data,
-            name: val,
-            check_textInputChange: true
-            })
+            setData({...data, name: val, check_textInputChange: true})
         } else {
-            setData({
-            ...data,
-            name: val,
-            check_textInputChange: false
-            })
+            setData({...data, name: val, check_textInputChange: false})
         }
     }
 
     function inputPass (val: string) {
         if (val.length > 0) {
-            setData({
-                ...data,
-                pass: val,
-                check_passInputChange: true
-            })
+            setData({...data, pass: val, check_passInputChange: true})
         } else {
-            setData({
-                ...data,
-                check_passInputChange: false
-            })
+            setData({...data, check_passInputChange: false})
         }
     }
 
     function showPass() {
-        setData({
-            ...data,
-            secureTextEntry: !data.secureTextEntry
-        })
+        setData({...data, secureTextEntry: !data.secureTextEntry})
     }
 
     return (
         <Swipe left="MenuScreen">
             <View>
-                <View style={{
-                    ...GS.content, 
-                    backgroundColor: FetchColor({theme, variable: "DARKER"})
-                }}>
+                <View style={{...GS.content, backgroundColor: theme.darker}}>
                     <Space height={Dimensions.get("window").height / 8.1} /> 
                     <View>
                         <Space height={80} /> 
-                        <Text style={{
-                            ...T.centered50,
-                            color: FetchColor({theme, variable: "TEXTCOLOR"})
-                        }}>
+                        <Text style={{...T.centered50, color: theme.textColor}}>
                             {lang ? "Innsida" : "Intranet"}
                         </Text>
                         
@@ -135,7 +106,7 @@ export default function LoginScreen({ navigation }: ScreenProps): JSX.Element {
                         <UsernameUI data={data} inputName={inputName} />
                         <Space height={10} /> 
 
-                        <PasswordUI 
+                        <PasswordUI
                             data={data}
                             inputPass={inputPass}
                             showPass={showPass}
@@ -148,7 +119,7 @@ export default function LoginScreen({ navigation }: ScreenProps): JSX.Element {
                                 <Button>
                                     <Text style={{
                                         ...T.centered20, 
-                                        color: FetchColor({theme, variable: "TEXTCOLOR"})
+                                        color: theme.textColor
                                     }}>
                                         LOGIN
                                     </Text>
@@ -156,12 +127,6 @@ export default function LoginScreen({ navigation }: ScreenProps): JSX.Element {
                             </TouchableOpacity>
                         </View>
                         <Space height={40} /> 
-                        <View>
-                            <Image 
-                                style={GS.smallImage} 
-                                source={require("@assets/logo/loginText.png")}
-                            />
-                        </View>
                     </View>
                     <Space height={Dimensions.get("window").height / 3} /> 
                 </View>
@@ -191,8 +156,8 @@ JSX.Element {
             <TextInput
                 style={{
                     ...GS.inputText,
-                    backgroundColor: FetchColor({theme, variable: "DARKER"}),
-                    color: FetchColor({theme, variable: "TEXTCOLOR"})
+                    backgroundColor: theme.darker,
+                    color: theme.textColor
                 }}
                 placeholder={lang 
                     ? "     brukernavn"
@@ -201,7 +166,7 @@ JSX.Element {
                 placeholderTextColor={"#555"}
                 textAlign="center"
                 onChangeText={(val) => inputName(val)}
-                selectionColor={FetchColor({theme, variable: "ORANGE"})}
+                selectionColor={theme.orange}
                 />
             {data.check_textInputChange ?
                 <View>
@@ -230,15 +195,15 @@ JSX.Element {
                 <TextInput
                     style={{
                         ...GS.inputText,
-                        backgroundColor: FetchColor({theme, variable: "DARKER"}),
-                        color: FetchColor({theme, variable: "TEXTCOLOR"})
+                        backgroundColor: theme.darker,
+                        color: theme.textColor
                     }}
                     placeholder={lang ? "passord" : "password"}
                     placeholderTextColor={"#555"}
                     secureTextEntry = {data.secureTextEntry ? true : false}
                     textAlign="center"
                     onChangeText={(val) => inputPass(val)}
-                    selectionColor={FetchColor({theme, variable: "ORANGE"})}
+                    selectionColor={theme.orange}
                 />
                 {data.check_passInputChange ?
                     <TouchableOpacity onPress={showPass}>
@@ -267,7 +232,7 @@ JSX.Element {
                     </TouchableOpacity>
                 :
                 <View>
-                    <View style = {SS.noPassLight}><RedLight/></View>
+                    <View style = {SS.noPassLight}><RedLight /></View>
                     <View style = {{...SS.noPassCheck}}>
                     <Image 
                         style={SS.noPassImage} 

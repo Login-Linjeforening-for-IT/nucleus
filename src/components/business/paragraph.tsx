@@ -1,7 +1,6 @@
 import { ImageSourcePropType } from "react-native"
 import { View, Text, Image } from "react-native"
 import Space from "@/components/shared/utils"
-import FetchColor from "@styles/fetchTheme"
 import GS from "@styles/globalStyles"
 import { useSelector } from "react-redux"
 import T from "@styles/text"
@@ -10,7 +9,7 @@ import React from "react"
 type ParagraphProps = {
     logo: ImageSourcePropType
     title: string
-    body: string
+    body: JSX.Element | string
 }
 
 /**
@@ -27,17 +26,11 @@ export default function Paragraph({ logo, title, body }: ParagraphProps) {
         <View>
             <View style={GS.row}>
                 <Image style={GS.medium} source={logo} />
-                <Text style={{
-                    ...T.bold28, 
-                    color: FetchColor({theme, variable: "TEXTCOLOR"})
-                }}>
+                <Text style={{...T.bold28, color: theme.textColor}}>
                     {title}
                 </Text>
             </View>
-            <Text style={{
-                ...T.paragraph, 
-                color: FetchColor({theme, variable: "TEXTCOLOR"})
-            }}>
+            <Text style={{...T.paragraph, color: theme.textColor}}>
                 {body}
             </Text>
             <Space height={25} />

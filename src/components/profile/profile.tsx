@@ -1,7 +1,6 @@
 import { Image, View, Text, TouchableOpacity } from "react-native"
 import ChangeProfileCard from "@/components/profile/changeProfileCard"
 import Space from "@/components/shared/utils"
-import FetchColor from "@styles/fetchTheme"
 import PS from "@styles/profileStyles"
 import React, { useState } from "react"
 import T from "@styles/text"
@@ -70,11 +69,7 @@ export default function Profile({profile} : ProfileElementprops) {
                         <SmallProfileImage show={show} profile={profile} />
                     </View>
                     <View style={PS.rightTwin}>
-                        <MainProfileInfo 
-                            show={show}
-                            profile={profile}
-                            year={year}
-                        />
+                        <MainProfileInfo show={show} profile={profile} year={year} />
                     </View>
                 </View>
             </TouchableOpacity>
@@ -89,7 +84,7 @@ export default function Profile({profile} : ProfileElementprops) {
 }
 
 function SmallProfileImage({show, profile}: SmallProfileImageProps) {
-    const { theme } = useSelector((state: ReduxState) => state.theme)
+    const { isDark } = useSelector((state: ReduxState) => state.theme)
     
     return (
         <View style={PS.smallProfileImageView}>
@@ -98,7 +93,7 @@ function SmallProfileImage({show, profile}: SmallProfileImageProps) {
                     style={PS.midProfileImage}
                     source={profile.image
                         ? {uri: profile.image}
-                        : theme === 0 || theme === 2 || theme === 3
+                        : isDark
                             ? require("@assets/icons/loginperson-white.png")
                             : require("@assets/icons/loginperson-black.png")}
                 />
@@ -113,24 +108,15 @@ function MainProfileInfo({show, profile, year}: MainProfileInfoProps) {
 
     if (!show) return (
         <>
-            <Text style={{
-                ...T.text20,
-                color: FetchColor({theme, variable: "TEXTCOLOR"})
-            }}>
+            <Text style={{...T.text20, color: theme.textColor}}>
                 {profile.name}
             </Text>
             <Space height={5} />
-            <Text style={{
-                ...T.text15,
-                color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})
-            }}>
+            <Text style={{...T.text15,color: theme.oppositeTextColor}}>
                 {year + profile.degree}
             </Text>
             <Space height={5} />
-            <Text style={{
-                ...T.text15,
-                color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})
-            }}>
+            <Text style={{ ...T.text15, color: theme.oppositeTextColor}}>
                 ID: {profile.id} · {profile.joinedevents} {lang 
                     ? "Arrangementer"
                     : "Events"}

@@ -1,8 +1,8 @@
-import { NavigationProp } from "@react-navigation/native"
+import { Navigation } from "@interfaces"
 import { PanGestureHandlerGestureEvent } from "react-native-gesture-handler"
 
 type HandleSwipeProps = {
-    navigation: NavigationProp<ReactNavigation.RootParamList>
+    navigation: Navigation
     event: PanGestureHandlerGestureEvent
     screenLeft?: string
     screenRight?: string

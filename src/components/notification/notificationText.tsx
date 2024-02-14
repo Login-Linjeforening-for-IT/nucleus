@@ -1,4 +1,3 @@
-import FetchColor from "@styles/fetchTheme"
 import NS from "../../styles/notificationStyles"
 import React from "react"
 import { View, Text } from "react-native"
@@ -20,18 +19,12 @@ export default function NotificationText({title, body}: NotificationTextProps) {
     return (
         <View>
             <View>
-                <Text style={{
-                    ...NS.title, 
-                    color: FetchColor({theme, variable: "TEXTCOLOR"})
-                }}>
+                <Text style={{...NS.title, color: theme.textColor}}>
                     {title}
                 </Text>
             </View>
             <View style={{flexDirection: "row"}}>
-                <Text style={{
-                    ...NS.loc,
-                    color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})
-                }}>
+                <Text style={{...NS.loc, color: theme.oppositeTextColor}}>
                     {body}
                 </Text>
             </View>

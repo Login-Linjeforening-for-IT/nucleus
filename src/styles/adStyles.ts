@@ -7,26 +7,24 @@ export const AS = StyleSheet.create({
     adBack: {
         flexDirection: "row",
         alignItems: "center",
+        marginHorizontal: 2
     },
     adViewLeft: {
         alignItems: "center",
-        width: "23.5%",
     },
     adViewMid: {
         justifyContent: "center",
         left: Platform.OS === "ios" ? 7.5 : 10,
         paddingHorizontal: 6,
-        width: "68%",
-    },
-    adViewRight: {
-        width: "8.5%",
+        marginRight: 'auto',
+        width: '55%'
     },
     locationView: {
         justifyContent: "center",
     },
     title: {
         maxHeight: Platform.OS === "ios" ? 20 * 3 : 17 * 2.5,
-        fontSize: Platform.OS === "ios" ? 20 : 17,
+        fontSize: 18
     },
     specificAdTitle: {
         maxWidth: "72.5%",
@@ -68,8 +66,10 @@ export const AS = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-evenly",
+        marginTop: 5
     },
     loc: {
+        top: 3,
         fontSize: Platform.OS === "ios" ? 15 : 13,
     },
     adTitleView: {
@@ -78,9 +78,6 @@ export const AS = StyleSheet.create({
     },
     adInfoInsideView: {
         flexDirection: "row",
-    },
-    bellPosition: {
-        left: -4.2,
     },
     adBannerSmall: {
         top: 1.7,

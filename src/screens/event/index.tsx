@@ -3,7 +3,6 @@ import { useFocusEffect } from "@react-navigation/native"
 import EventList from "@components/event/eventList"
 import { useDispatch, useSelector } from "react-redux"
 import { StatusBar } from "expo-status-bar"
-import FetchColor from "@styles/fetchTheme"
 import GS from "@styles/globalStyles"
 import NavigateFromPushNotification 
 from "@/utils/navigateFromPushNotification"
@@ -21,7 +20,6 @@ import Header from "@components/nav/header"
 import Swipe from "@components/nav/swipe"
 import { FilterButton, FilterUI } from "@components/shared/filter"
 import DownloadButton from "@components/shared/downloadButton"
-
 const EventStack = createStackNavigator<EventStackParamList>()
 
 /**
@@ -43,7 +41,7 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
         useState<JSX.Element | undefined>(undefined)
     // Notification state
     const [shouldSetupNotifications, setShouldSetupNotifications] = useState(true)
-    
+
     // Redux states
     const notification = useSelector((state: ReduxState) => state.notification)
     const { search, lastSave } = useSelector((state: ReduxState) => state.event)
@@ -62,7 +60,7 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
             (async() => {
                 const events = await fetchEvents()
 
-                if (events) {
+                if (events.length) {
                     dispatch(setEvents(events))
                     dispatch(setLastFetch(LastFetch()))
                 }
@@ -76,7 +74,7 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
         (async() => {
             const events = await fetchEvents()
 
-            if (events) {
+            if (events.length) {
                 dispatch(setEvents(events))
                 dispatch(setLastFetch(LastFetch()))
             }
@@ -96,7 +94,7 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
                 (async() => {
                     const events = await fetchEvents()
 
-                    if (events) {
+                    if (events.length) {
                         dispatch(setEvents(events))
                         dispatch(setLastFetch(LastFetch()))
                     }
@@ -116,20 +114,21 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
         if (lastSave === "") {(async() => {dispatch(setLastSave(LastFetch()))})()
     }
     }, [lastSave])
+
     initializeNotifications({
         shouldRun: shouldSetupNotifications,
         setShouldSetupNotifications,
-        hasBeenSet: notification["SETUP"]
+        hasBeenSet: notification["SETUP"],
+        dispatch
     })
 
     // Displays the EventScreen
     return (
-        <EventStack.Navigator
-        screenOptions={{
+        <EventStack.Navigator screenOptions={{
             animationEnabled: false,
             headerTransparent: true,
             header: props => <Header {...props} />
-            }}>
+        }}>
             <EventStack.Screen name="EventScreen">
                 {({navigation}) => {
                     // Sets the component of the header
@@ -138,17 +137,18 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
                             headerComponents: {
                                 bottom: [<FilterUI />],
                                 left: [<LogoNavigation />],
-                                right: [<FilterButton />, <DownloadButton />]
+                                right: [<FilterButton />, <DownloadButton screen="event" />]
                             }} as Partial<BottomTabNavigationOptions>)   
-                    },[navigation])
+                    }, [navigation])
 
                     return (
                         <Swipe right="AdScreenRoot">
                             <View>
                                 <StatusBar style={isDark ? "light" : "dark"} />
                                 <View style={{
-                                    ...GS.content, 
-                                    backgroundColor: FetchColor({theme, variable: "DARKER"})
+                                    ...GS.content,
+                                    paddingHorizontal: 5,
+                                    backgroundColor: theme.darker
                                 }}>
                                     {pushNotification && pushNotificationContent}
                                     <EventList notification={notification} />

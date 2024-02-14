@@ -3,7 +3,6 @@ import { Navigation } from "@interfaces"
 import Feedback from "@/components/menu/feedback"
 import Cluster from "@/components/shared/cluster"
 import Space from "@/components/shared/utils"
-import FetchColor from "@styles/fetchTheme"
 import CS from "@styles/clusterStyles"
 import GS from "@styles/globalStyles"
 import { useSelector } from "react-redux"
@@ -23,14 +22,14 @@ import ProfileScreen from "./profile"
 import ReportScreen from "./report"
 import SettingScreen from "./settings"
 import SmallProfile from "@components/profile/smallProfile"
+import Text from "@components/shared/text"
 import Header from "@components/nav/header"
 import {
-  Text,
   View,
   Image,
-  FlatList,
   TouchableOpacity,
   Dimensions,
+  Platform,
 } from "react-native"
 import Swipe from "@components/nav/swipe"
 
@@ -49,12 +48,12 @@ const MenuStack = createStackNavigator<MenuStackParamList>()
 const screens: Record<string, React.FC<any>> = {
     "ProfileScreen": ProfileScreen,
     "SettingScreen": SettingScreen,
-    "NotificationScreen": NotificationScreen,
+    // "NotificationScreen": NotificationScreen,
     "AboutScreen": AboutScreen,
     "BusinessScreen": BusinessScreen,
-    "ReportScreen": ReportScreen,
-    "LoginScreen": LoginScreen,
-    "InternalScreen": InternalScreen
+    // "LoginScreen": LoginScreen,
+    // "InternalScreen": InternalScreen
+    // "ReportScreen": ReportScreen,
 }
 
 
@@ -65,7 +64,7 @@ export default function MenuScreen(): JSX.Element {
     const { theme, isDark } = useSelector((state: ReduxState) => state.theme )
     const { id, name, image } = useSelector((state: ReduxState) => 
     state.profile )
-    const profile = { id: 0, name: "Eirik Hanasand", image}
+    const profile = { id, name, image}
     const text: Setting = lang ? no as Setting : en as Setting
 
     // Feedback options visibility boolean
@@ -96,81 +95,66 @@ export default function MenuScreen(): JSX.Element {
                         <Swipe left="AdScreenRoot">
                             <View style={{
                                 ...GS.content, 
-                                backgroundColor: FetchColor({theme, variable: "DARKER"})
+                                backgroundColor: theme.darker
                             }}>
-                                <Space height={Dimensions.get("window").height / 9} /> 
-                                {login ? SmallProfile({navigation, 
-                                    profile, login}) : null}
-                                <FlatList
-                                    style={{minHeight: "100%"}}
-                                    showsVerticalScrollIndicator={false}
-                                    numColumns={1}
-                                    keyExtractor={(item) => `${item.id}`}
-                                    data={text.setting}
-                                    renderItem={({item, index}) => {
-                                        if (item.nav === "ProfileScreen") return null
-                                        if (item.nav === "LoginScreen" && login) return null
-                                        if (item.nav === "InternalScreen" && !login) return null
-                                        return (
-                                            <MenuItem 
-                                                index={index}
-                                                item={item}
-                                                navigation={navigation}
-                                                setting={text.setting}
-                                                feedback={feedback}
-                                                toggleFeedback={toggleFeedback}
-                                                login={login}
-                                            />
-                                        )
-                                    }}
-                                />
+                                <Space height={Dimensions.get("window").height / 8} />
+                                {/* <SmallProfile navigation={navigation} profile={profile} login={login} /> */}
+                                {text.setting.map((item, index) => {
+                                    if (item.nav === "ProfileScreen") return null
+                                    if (item.nav === "LoginScreen" && login) return null
+                                    if (item.nav === "InternalScreen" && !login) return null
+                                    return (
+                                        <MenuItem 
+                                            index={index}
+                                            item={item}
+                                            navigation={navigation}
+                                            setting={text.setting}
+                                            feedback={feedback}
+                                            toggleFeedback={toggleFeedback}
+                                            login={login}
+                                            key={index}
+                                        />
+                                    )
+                                })}
                                 <Space height={Dimensions.get("window").height / 10} /> 
                             </View>
                         </Swipe>
                     )
                 }}
             </MenuStack.Screen>
-            {text.setting.map(item => {
-                return(
-                    <MenuStack.Screen 
-                        name={item.nav as MenuRoutes}
-                        component={screens[item.nav]}
-                        key={item.id}
-                    />
-                )  
-            })}
+            {text.setting.map(item => (
+                <MenuStack.Screen 
+                    name={item.nav as MenuRoutes}
+                    component={screens[item.nav]}
+                    key={item.id}
+                />  
+            ))}
         </MenuStack.Navigator>
     )
 }
 
 function MenuItem({index, item, navigation, setting, feedback, 
-toggleFeedback, login}: MenuItemProps) {
+toggleFeedback}: MenuItemProps) {
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const info = lang ? no : en
+    const version = `${info.version}${nativeApplicationVersion}`
 
     return (
         <View>
-            <TouchableOpacity onPress={() => item.id === 5 && login 
-                ? navigation.navigate("InternalScreen", item) 
-                : navigation.navigate(item.nav, item)}
+            <TouchableOpacity onPress={() => navigation.navigate(item.nav, item)}
             >
                 <Cluster>
                     <View style={{...CS.clusterBack}}>
                         <View style={CS.twinLeft}>
-                            <Text style={{
-                                ...T.text20, 
-                                color: FetchColor({theme, variable: 
-                            "TEXTCOLOR"})}}>
-                                    {item.title}
+                            <Text style={{...T.text20, color: theme.textColor}}>
+                                {item.title}
                             </Text>
                         </View>
                         <View style={CS.twinRight}>
                             <Image 
                                 style={CS.arrowImage}
-                                source={
-                                    require("@assets/icons/dropdownBase.png")
-                                }
+                                source={require("@assets/icons/dropdownBase.png")}
                             />
                         </View>
                     </View>
@@ -186,11 +170,8 @@ toggleFeedback, login}: MenuItemProps) {
                 />
             </View>
             {index === setting.length-1 
-            ?   <Text style={{
-                    ...T.contact, 
-                    color: FetchColor({theme, variable: "OPPOSITETEXTCOLOR"})
-                }}>
-                    {info.version}{nativeApplicationVersion}
+            ?   <Text style={{...T.contact, color: theme.oppositeTextColor}}>
+                    {version}
                 </Text>
             : null}
         </View>

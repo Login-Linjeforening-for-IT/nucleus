@@ -1,8 +1,8 @@
 import { ParamListBase } from "@react-navigation/native"
-import { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs'
+import type { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs'
 import { DimensionValue, ImageSourcePropType } from "react-native"
 import { ReactNode } from "react"
-import { StackHeaderProps, StackNavigationOptions } from "@react-navigation/stack"
+import type { StackHeaderProps, StackNavigationOptions } from "@react-navigation/stack"
 import { 
     BottomTabHeaderProps,
     BottomTabNavigationProp
@@ -18,14 +18,14 @@ export interface ExtendedRouteOptions extends Omit<BottomTabNavigationOptions, '
     icon: ImageSourcePropType
     themeIcon?: ImageSourcePropType
     
-    header?: (props: ExtendedBottomTabHeaderProps)=>ReactNode
+    header?: (props: ExtendedBottomTabHeaderProps) => ReactNode
 }
 
 export interface ScreenProps {
     navigation: Navigation
 }
 
-export type Navigation = BottomTabNavigationProp<ParamListBase, string, undefined>
+export type Navigation = BottomTabNavigationProp<ParamListBase, string, string>
 
 export interface StackProps extends ExtendedRouteOptions {
     name: string
@@ -36,6 +36,7 @@ export interface ClusterProps extends React.PropsWithChildren<{}> {
     noColor?: boolean
     marginVertical?: DimensionValue
     marginHorizontal?: DimensionValue
+    highlight?: boolean
 }
 
 export type NotificationScreenProps = {

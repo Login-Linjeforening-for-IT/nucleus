@@ -1,4 +1,3 @@
-import FetchColor from "@styles/fetchTheme"
 import { View } from "react-native"
 import { ClusterProps } from "@interfaces"
 import { useSelector } from "react-redux"
@@ -12,19 +11,12 @@ import React from "react"
  * @returns             Card with the props inside
  */
 export default function Cluster ({ noColor, marginVertical, marginHorizontal, 
-children }: ClusterProps) {
+children, highlight }: ClusterProps) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
 
     return (
-        <View style={{backgroundColor: !noColor
-            ? FetchColor({theme, variable: "DARKER"})
-            : ""
-        }}>
-            <View style={{
-                ...ES.clusterContent, 
-                marginVertical: marginVertical, 
-                marginHorizontal: marginHorizontal
-            }}>
+        <View style={{backgroundColor: !noColor ? theme.darker : "", margin: highlight ? 4 : 0, paddingHorizontal: !highlight?6:4, ...ES.clusterWraper,}}>
+            <View style={{...ES.clusterContent, marginVertical, marginHorizontal}}>
                 { children }
             </View>
         </View>
@@ -42,9 +34,7 @@ export function ClusterSmaller ({children}: React.PropsWithChildren<{}>) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
 
     return (
-        <View style={{
-                ...ES.clusterSmaller,
-                backgroundColor: FetchColor({theme, variable: "DARKER"})}}>
+        <View style={{...ES.clusterSmaller, backgroundColor: theme.darker}}>
             <View>
                 { children }
             </View>

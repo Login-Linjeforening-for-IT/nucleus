@@ -1,4 +1,3 @@
-import FetchColor from "@styles/fetchTheme"
 import { useSelector } from "react-redux"
 import MS from "@styles/menuStyles"
 import { BlurView } from "expo-blur"
@@ -43,18 +42,11 @@ export default function TopMenu({ navigation, title, screen, back }
                 ? <BlurView style={MS.topMenu} intensity={30}/>
                 : <View style={{
                     ...MS.topMenu,
-                    backgroundColor: FetchColor({
-                        theme, variable: "TRANSPARENTANDROID"})}}/>}
-            <View style={{
-                    ...MS.topMenu,
-                    backgroundColor: FetchColor({
-                        theme,
-                        variable: "TRANSPARENT" })
-            }}>
+                    backgroundColor: theme.transparentAndroid}}/>}
+            <View style={{...MS.topMenu, backgroundColor: theme.transparent}}>
                 {back ?
                     <TouchableOpacity onPress={() => goBack()}>
                         <Image
-                            style={MS.goBack}
                             source={require("@assets/icons/goback777.png")}
                         />
                     </TouchableOpacity>
@@ -77,8 +69,7 @@ export default function TopMenu({ navigation, title, screen, back }
                         top: title.length > 28
                             ? Dimensions.get("window").height / 22
                             : Dimensions.get("window").height / 17,
-                        color: FetchColor({
-                            theme, variable: "TITLETEXTCOLOR"})
+                        color: theme.titleTextColor
                     }}
                 >
                     {title}

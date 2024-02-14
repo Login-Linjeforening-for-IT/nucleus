@@ -1,10 +1,11 @@
-import { Image } from "react-native"
+import { Image, Text } from "react-native"
 import ES from "@styles/eventStyles"
 import React from "react"
 import { useSelector } from "react-redux"
 
 type BellIconProps = {
     orange?: boolean
+    canceled?: boolean
 }
 
 /**
@@ -12,7 +13,9 @@ type BellIconProps = {
  *
  * @returns Bell icon
  */
-export default function BellIcon({orange}: BellIconProps): JSX.Element {
+export default function BellIcon({orange, canceled}: BellIconProps): JSX.Element {
+    if (canceled) return <Text style={{fontSize: 20, left: -2}}>❌</Text>
+
     let icon = require("@assets/icons/bell.png")
     const { isDark } = useSelector((state: ReduxState) => state.theme)
 
