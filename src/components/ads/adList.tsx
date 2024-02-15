@@ -3,12 +3,10 @@ import AdCluster from "./adCluster"
 import { ErrorMessage } from "@components/shared/utils"
 import Space from "@/components/shared/utils"
 import { Dimensions, Platform } from "react-native"
-import Refresh from "@components/event/refresh"
-import { useState } from "react"
-import handleRefresh from "@utils/handleRefresh"
+import { useCallback, useState } from "react"
 import LastFetch, { fetchAdDetails, fetchAds } from "@utils/fetch"
 import { setAds, setLastFetch } from "@redux/ad"
-import { ScrollView } from "react-native-gesture-handler"
+import { RefreshControl, ScrollView } from "react-native-gesture-handler"
 
 /**
  * Displays the ad list
@@ -35,6 +33,15 @@ export default function AdList (): JSX.Element {
         }
     }
 
+    const onRefresh = useCallback(async () => {
+        setRefresh(true);
+        const details = await getDetails()
+
+        if (details) {
+            setRefresh(false)
+        }
+    }, [refresh]);
+
     // Copies renderedEvents because it's read only
     let adList: AdProps[] = [...renderedAds]
     adList.sort((a, b)=>(Number(b.highlight)-Number(a.highlight)))
@@ -45,19 +52,19 @@ export default function AdList (): JSX.Element {
     
     if (renderedAds.length > 0) {
         return (
-            <ScrollView 
-                showsVerticalScrollIndicator={false} 
-                onScroll={(event) => handleRefresh({event, setRefresh, getDetails})} 
-                scrollEventThrottle={100}
-                onTouchMove={(e) => {e.preventDefault()}}
-            >
+            <>
                 <Space height={Dimensions.get("window").height / (search 
-                    ? (Platform.OS === "ios" ? 3.85 : 3.1)
-                    : (Platform.OS === "ios" ? 8.2 : 7.8) 
+                        ? (Platform.OS === "ios" ? 3.85 : 3.1)
+                        : (Platform.OS === "ios" ? 8.2 : 7.8) 
                 )} />
-                <Refresh display={refresh}/>
-                {adList.map((ad, index) => <AdCluster index={index} ad={ad} key={index} />)}
-            </ScrollView>
+                <ScrollView 
+                    showsVerticalScrollIndicator={false} 
+                    scrollEventThrottle={100}
+                    refreshControl={<RefreshControl refreshing={refresh} onRefresh={onRefresh} />}
+                >
+                    {adList.map((ad, index) => <AdCluster index={index} ad={ad} key={index} />)}
+                </ScrollView>
+            </>
         )
     } 
     

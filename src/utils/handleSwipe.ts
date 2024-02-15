@@ -22,8 +22,6 @@ export default function handleSwipe({navigation, event, screenLeft, screenRight,
 HandleSwipeProps): void {
     const { velocityX, velocityY } = event.nativeEvent;
 
-    console.log("ayopog", velocityY)
-
     if (Math.abs(velocityX) > Math.abs(velocityY)) {
         if (velocityX > 600 && screenLeft) {
             // Navigates to the screen to the left (root is always left)

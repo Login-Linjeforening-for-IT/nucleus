@@ -1,9 +1,9 @@
 import { View, Dimensions } from "react-native"
-import { ScrollView } from "react-native-gesture-handler"
+import { RefreshControl, ScrollView } from "react-native-gesture-handler"
 import Cluster from "@/components/shared/cluster"
 import AS from "@styles/adStyles"
 import { useDispatch, useSelector } from "react-redux"
-import React, { useState } from "react"
+import React, { useCallback, useState } from "react"
 import Swipe from "@components/nav/swipe"
 import AdInfo, { 
     AdBanner,
@@ -14,8 +14,6 @@ import AdInfo, {
 } from "@/components/ads/ad"
 import { setAd } from "@redux/ad"
 import { fetchAdDetails } from "@utils/fetch"
-import Refresh from "@components/event/refresh"
-import handleRefresh from "@utils/handleRefresh"
   
 export default function SpecificAdScreen(): JSX.Element {
 
@@ -34,6 +32,15 @@ export default function SpecificAdScreen(): JSX.Element {
             return true
         }
     }
+    
+    const onRefresh = useCallback(async () => {
+        setRefresh(true);
+        const details = await getDetails()
+
+        if (details) {
+            setRefresh(false)
+        }
+    }, [refresh]);
 
     if (!(descriptionCheck in ad)) {
         getDetails()
@@ -50,11 +57,10 @@ export default function SpecificAdScreen(): JSX.Element {
                 }}>
                     <ScrollView 
                         showsVerticalScrollIndicator={false} 
-                        onScroll={(event) => handleRefresh({event, setRefresh, getDetails})} 
                         scrollEventThrottle={100}
+                        refreshControl={<RefreshControl refreshing={refresh} onRefresh={onRefresh} />}
                     >
                         <Cluster marginHorizontal={12} marginVertical={12}>
-                            <Refresh display={refresh}/>
                             <AdBanner url={ad.banner_image} />
                             <AdTitle ad={ad} />
                             <AdInfo ad={ad} />

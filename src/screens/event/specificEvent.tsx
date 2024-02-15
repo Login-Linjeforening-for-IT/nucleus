@@ -1,9 +1,9 @@
 import Space from "@/components/shared/utils"
-import React, { useRef, useState } from "react"
+import React, { useCallback, useState } from "react"
 import { useSelector } from "react-redux"
 import ES from "@styles/eventStyles"
 import { Dimensions, Platform, View, Text } from "react-native"
-import { ScrollView } from "react-native-gesture-handler"
+import { RefreshControl, ScrollView } from "react-native-gesture-handler"
 import Swipe from "@components/nav/swipe"
 import SpecificEventImage from "@components/event/specificEventImage"
 import Countdown from "@components/event/countdown"
@@ -14,8 +14,6 @@ import { fetchEventDetails } from "@utils/fetch"
 import { setEvent } from "@redux/event"
 import Tag from "@components/shared/tag"
 import TagInfo from "@components/shared/tagInfo"
-import Refresh from "@components/event/refresh"
-import handleRefresh from "@utils/handleRefresh"
 
 /**
  *
@@ -46,6 +44,15 @@ export default function SpecificEventScreen(): JSX.Element {
             return true
         }
     }
+    
+    const onRefresh = useCallback(async () => {
+        setRefresh(true);
+        const details = await getDetails()
+
+        if (details) {
+            setRefresh(false)
+        }
+    }, [refresh]);
 
     if (!(descriptionCheck in event)) {
         getDetails()
@@ -54,16 +61,15 @@ export default function SpecificEventScreen(): JSX.Element {
     return (
         <Swipe left="EventScreen">
             <View style={{...ES.sesContent, backgroundColor: theme.background}}>
+                <Space height={Platform.OS=="ios" 
+                    ? Dimensions.get("window").height / 8.5
+                    : Dimensions.get("window").height / 6.15
+                } />
                 <ScrollView 
                     showsVerticalScrollIndicator={false} 
-                    onScroll={(event) => handleRefresh({event, setRefresh, getDetails})} 
                     scrollEventThrottle={100}
+                    refreshControl={<RefreshControl refreshing={refresh} onRefresh={onRefresh} />}
                 >
-                    <Space height={Platform.OS=="ios" 
-                        ? Dimensions.get("window").height / 8.5
-                        : Dimensions.get("window").height / 6.15
-                    } />
-                    <Refresh display={refresh}/>
                     <Tag event={event} />
                     <SpecificEventImage />
                     <Space height={10} />
