@@ -51,8 +51,8 @@ export default function AdList (): JSX.Element {
                 scrollEventThrottle={100}
             >
                 <Space height={Dimensions.get("window").height / (search 
-                    ? (Platform.OS === "ios" ? 8.2 : 7.8) 
-                    : (Platform.OS === "ios" ? 3.85 : 3.1)
+                    ? (Platform.OS === "ios" ? 3.85 : 3.1)
+                    : (Platform.OS === "ios" ? 8.2 : 7.8) 
                 )} />
                 <Refresh display={refresh}/>
                 {adList.map((ad, index) => <AdCluster index={index} ad={ad} key={index} />)}
