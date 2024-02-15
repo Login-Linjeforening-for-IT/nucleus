@@ -16,9 +16,9 @@ import {
     View,
     Text,
     Dimensions,
-    ScrollView,
     Platform,
 } from "react-native"
+import { ScrollView } from "react-native-gesture-handler"
 
 /**
  * User interface for the filter

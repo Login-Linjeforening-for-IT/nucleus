@@ -1,4 +1,5 @@
-import { Text, View, ScrollView, Dimensions } from "react-native"
+import { Text, View, Dimensions } from "react-native"
+import { ScrollView } from "react-native-gesture-handler"
 import Notification from "@/components/settings/notification"
 import ThemeSwitch from "@/components/settings/themeSwitch"
 import Reminders from "@/components/settings/reminders"

@@ -1,4 +1,5 @@
-import { View, ScrollView, Dimensions } from "react-native"
+import { View, Dimensions } from "react-native"
+import { ScrollView } from "react-native-gesture-handler"
 import Cluster from "@/components/shared/cluster"
 import AS from "@styles/adStyles"
 import { useDispatch, useSelector } from "react-redux"

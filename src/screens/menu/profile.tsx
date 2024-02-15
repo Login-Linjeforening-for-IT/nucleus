@@ -1,5 +1,6 @@
 import Svg, { LinearGradient, Rect, Stop } from "react-native-svg"
-import { View, Dimensions,ScrollView } from "react-native"
+import { View, Dimensions } from "react-native"
+import { ScrollView } from "react-native-gesture-handler"
 import ProfileInfo from "@/components/profile/profileInfo"
 import Profile from "@/components/profile/profile"
 import Space from "@/components/shared/utils"
@@ -53,7 +54,7 @@ export default function ProfileScreen(): JSX.Element {
                         height: scrollPosition
                     }} />
                     <ScrollView 
-                        scrollEventThrottle={40} 
+                        scrollEventThrottle={100} 
                         onScroll={handleScroll} 
                         showsVerticalScrollIndicator={false}
                     >

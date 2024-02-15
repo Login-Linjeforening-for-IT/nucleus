@@ -1,4 +1,3 @@
-import { ScrollView } from "react-native"
 import { useDispatch, useSelector } from "react-redux"
 import AdCluster from "./adCluster"
 import { ErrorMessage } from "@components/shared/utils"
@@ -9,6 +8,7 @@ import { useState } from "react"
 import handleRefresh from "@utils/handleRefresh"
 import LastFetch, { fetchAdDetails, fetchAds } from "@utils/fetch"
 import { setAds, setLastFetch } from "@redux/ad"
+import { ScrollView } from "react-native-gesture-handler"
 
 /**
  * Displays the ad list
@@ -49,6 +49,7 @@ export default function AdList (): JSX.Element {
                 showsVerticalScrollIndicator={false} 
                 onScroll={(event) => handleRefresh({event, setRefresh, getDetails})} 
                 scrollEventThrottle={100}
+                onTouchMove={(e) => {e.preventDefault()}}
             >
                 <Space height={Dimensions.get("window").height / (search 
                     ? (Platform.OS === "ios" ? 3.85 : 3.1)
