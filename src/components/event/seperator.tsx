@@ -8,8 +8,6 @@ type SeperatorProps = {
 }
 
 export default function Seperator({item, usedIndexes}: SeperatorProps) {
-    if (item.highlight) return null
-    
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
     
