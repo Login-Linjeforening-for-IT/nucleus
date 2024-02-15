@@ -26,9 +26,6 @@ export default function EventList ({notification}: EventListProps): JSX.Element 
     const { events, search, renderedEvents } = useSelector((state: ReduxState) => state.event)
     const [refresh, setRefresh] = useState(false)
     const dispatch = useDispatch()
-    // Copies renderedEvents because it's read only
-    // let eventList: EventProps[] = [...renderedEvents]
-    // eventList.sort((a, b) => (Number(b.highlight) - Number(a.highlight)))
 
     function SeperatedEvents({item, index, usedIndexes}: SeperatedEventsProps) { 
         return (
@@ -55,25 +52,33 @@ export default function EventList ({notification}: EventListProps): JSX.Element 
 
     if (!renderedEvents.length && !search) {
         return <ErrorMessage argument="wifi" />
-    } else if (renderedEvents.length > 0) {
+    } 
+    
+    if (renderedEvents.length > 0) {
         const usedIndexes: number[] = []
+
         return (
             <ScrollView 
                 showsVerticalScrollIndicator={false} 
                 onScroll={(event) => handleRefresh({event, setRefresh, getDetails})} 
                 scrollEventThrottle={100}
             >
-                {search === false
-                    ? <Space height={Dimensions.get("window").height / (Platform.OS === "ios" ? 8.2 : 7.8)} />
-                    : <Space height={Dimensions.get("window").height / (Platform.OS === "ios" ? 3.85 : 3.1)} />
-                }
+                <Space height={Dimensions.get("window").height / (search 
+                    ? (Platform.OS === "ios" ? 8.2 : 7.8) 
+                    : (Platform.OS === "ios" ? 3.85 : 3.1)
+                )} />
                 <Refresh display={refresh}/>
                 {renderedEvents.map((event, index) => (
-                    <SeperatedEvents item={event} index={index} key={index} usedIndexes={usedIndexes}/>
+                    <SeperatedEvents 
+                        item={event} 
+                        index={index} 
+                        key={index} 
+                        usedIndexes={usedIndexes}
+                    />
                 ))}
             </ScrollView>
         )
-    } else {
-        return <ErrorMessage argument={!events.length ? "wifi" : "nomatch"} />
     }
+
+    return <ErrorMessage argument={!events.length ? "wifi" : "nomatch"} />
 }

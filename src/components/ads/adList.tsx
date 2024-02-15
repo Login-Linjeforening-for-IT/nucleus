@@ -15,7 +15,6 @@ import { setAds, setLastFetch } from "@redux/ad"
  */
 export default function AdList (): JSX.Element {
     const { ads, search, renderedAds } = useSelector((state: ReduxState) => state.ad)
-    const { skills } = useSelector((state: ReduxState) => state.ad)
     const [refresh, setRefresh] = useState(false)
     const dispatch = useDispatch()
     
@@ -42,22 +41,24 @@ export default function AdList (): JSX.Element {
 
     if (!renderedAds.length && !search) {
         return <ErrorMessage argument="wifi" />
-    } else if (renderedAds.length > 0) {
+    } 
+    
+    if (renderedAds.length > 0) {
         return (
             <ScrollView 
                 showsVerticalScrollIndicator={false} 
                 onScroll={(event) => handleRefresh({event, setRefresh, getDetails})} 
                 scrollEventThrottle={100}
             >
-                {search === false
-                    ? <Space height={Dimensions.get("window").height / (Platform.OS === "ios" ? 8 : 7.5)} />
-                    : <Space height={Dimensions.get("window").height / (Platform.OS === "ios" ? 3.85 : 3.1)} />
-                }
+                <Space height={Dimensions.get("window").height / (search 
+                    ? (Platform.OS === "ios" ? 8.2 : 7.8) 
+                    : (Platform.OS === "ios" ? 3.85 : 3.1)
+                )} />
                 <Refresh display={refresh}/>
                 {adList.map((ad, index) => <AdCluster index={index} ad={ad} key={index} />)}
             </ScrollView>
         )
-    } else {
-        return <ErrorMessage argument={!ads.length ? "wifi" : "nomatch"} />
-    }
+    } 
+    
+    return <ErrorMessage argument={!ads.length ? "wifi" : "nomatch"} />
 }
