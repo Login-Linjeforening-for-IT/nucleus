@@ -3,7 +3,7 @@ import Space from "@/components/shared/utils"
 import { useSelector } from "react-redux"
 import AS from "@styles/adStyles"
 import T from "@styles/text"
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useMemo, useState } from "react"
 import { SvgUri } from "react-native-svg"
 import capitalizeFirstLetter from "@utils/capitalizeFirstLetter"
 import RenderHTML from "react-native-render-html"
@@ -95,6 +95,7 @@ export default function AdInfo({ad}: {ad: AdProps}) {
  * @returns               Small banner image
  */
 export function AdBanner({url}: {url: string}) {
+    if (!url) return <></>
 
     if (url?.endsWith(".svg")) {
         return <SvgUri
@@ -240,44 +241,50 @@ export function AdClusterLocation({ad}: AdClusterLocationProps) {
 export function AdDescription({ad}: {ad: DetailedAd}) {
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    const skills = ad.skills ? ad.skills.join(", ") : []
+
+    const content = useMemo(() => {
+        const skills = ad.skills ? ad.skills.join(", ") : []
     
-    const tempShort = lang 
-        ? ad.description_short_no || ad.description_short_en
-        : ad.description_short_en || ad.description_short_no
-    const tempLong = lang 
-        ? ad.description_long_no || ad.description_long_en
-        : ad.description_long_en || ad.description_long_no
+        const tempShort = lang 
+            ? ad.description_short_no || ad.description_short_en
+            : ad.description_short_en || ad.description_short_no
+        const tempLong = lang 
+            ? ad.description_long_no || ad.description_long_en
+            : ad.description_long_en || ad.description_long_no
 
-    const shortDescription = tempShort ? tempShort.replace(/\\n/g, '<br>') : ''
-    const LongDescription = tempLong ? tempLong.replace(/\\n/g, '<br>') : ''
+        const shortDescription = tempShort ? tempShort.replace(/\\n/g, '<br>') : ''
+        const LongDescription = tempLong ? tempLong.replace(/\\n/g, '<br>') : ''
 
-    return (
-        <View style={{marginBottom: 10}}>
-            <Text style={{...AS.adInfoBold, color: theme.textColor}}>
-                Kort fortalt
-            </Text>
-            <Text style={{...T.paragraph, color: theme.textColor}}>
-                {shortDescription}
-            </Text>
-            <Space height={10} /> 
-            <Text style={{...AS.adInfoBold, color: theme.textColor}}>
-                {lang ? "Ferdigheter" : "Skills"}
-            </Text>
-            <Text style={{...T.paragraph, color: theme.textColor}}>
-                {skills}
-            </Text>
-            <Space height={10} /> 
-            <Text style={{...AS.adInfoBold, color: theme.textColor}}>
-                Om stillingen
-            </Text>
-            {LongDescription && <RenderHTML
-                baseStyle={{maxWidth: "100%",color: theme.textColor}}
-                contentWidth={0}
-                source={{html: LongDescription}}
-            />}
-        </View>
-    )
+        return (
+            <View style={{marginBottom: 10}}>
+                <Text style={{...AS.adInfoBold, color: theme.textColor}}>
+                    {lang ? "Kort fortalt" : 'In short'}
+                </Text>
+                <Text style={{...T.paragraph, color: theme.textColor}} selectable={true}>
+                    {shortDescription}
+                </Text>
+                <Space height={10} /> 
+                <Text style={{...AS.adInfoBold, color: theme.textColor}}>
+                    {lang ? "Ferdigheter" : "Skills"}
+                </Text>
+                <Text style={{...T.paragraph, color: theme.textColor}} selectable={true}>
+                    {skills}
+                </Text>
+                <Space height={10} /> 
+                <Text style={{...AS.adInfoBold, color: theme.textColor}}>
+                    {lang ? "Om stillingen" : 'About the position'}
+                </Text>
+                {LongDescription && <RenderHTML
+                    baseStyle={{maxWidth: "100%", color: theme.textColor}}
+                    contentWidth={0}
+                    source={{html: LongDescription}}
+                    defaultTextProps={{selectable: true}}
+                />}
+            </View>
+        )
+    }, [ad])
+
+    return content
 }
 
 /**

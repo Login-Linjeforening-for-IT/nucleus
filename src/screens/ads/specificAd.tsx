@@ -2,7 +2,7 @@ import { View, ScrollView, Dimensions } from "react-native"
 import Cluster from "@/components/shared/cluster"
 import AS from "@styles/adStyles"
 import { useDispatch, useSelector } from "react-redux"
-import React from "react"
+import React, { useState } from "react"
 import Swipe from "@components/nav/swipe"
 import AdInfo, { 
     AdBanner,
@@ -13,11 +13,14 @@ import AdInfo, {
 } from "@/components/ads/ad"
 import { setAd } from "@redux/ad"
 import { fetchAdDetails } from "@utils/fetch"
+import Refresh from "@components/event/refresh"
+import handleRefresh from "@utils/handleRefresh"
   
 export default function SpecificAdScreen(): JSX.Element {
 
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { ad } = useSelector((state: ReduxState) => state.ad )
+    const [refresh, setRefresh] = useState(false)
 
     const dispatch = useDispatch()
     const descriptionCheck = 'description_short_no' || 'description_short_en' || 'description_long_no' || 'description_long_en'
@@ -25,7 +28,10 @@ export default function SpecificAdScreen(): JSX.Element {
     async function getDetails() {
         const response = await fetchAdDetails(ad)
 
-        if (response) dispatch(setAd(response))
+        if (response) {
+            dispatch(setAd(response))
+            return true
+        }
     }
 
     if (!(descriptionCheck in ad)) {
@@ -41,8 +47,13 @@ export default function SpecificAdScreen(): JSX.Element {
                     paddingTop: Dimensions.get("window").height / 9.7,
                     paddingBottom: Dimensions.get("window").height / 3
                 }}>
-                    <ScrollView showsVerticalScrollIndicator={false}>
+                    <ScrollView 
+                        showsVerticalScrollIndicator={false} 
+                        onScroll={(event) => handleRefresh({event, setRefresh, getDetails})} 
+                        scrollEventThrottle={100}
+                    >
                         <Cluster marginHorizontal={12} marginVertical={12}>
+                            <Refresh display={refresh}/>
                             <AdBanner url={ad.banner_image} />
                             <AdTitle ad={ad} />
                             <AdInfo ad={ad} />
