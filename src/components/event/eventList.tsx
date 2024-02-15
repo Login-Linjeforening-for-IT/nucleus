@@ -22,8 +22,8 @@ export default function EventList ({notification}: EventListProps): JSX.Element 
     const { events, search, renderedEvents } = useSelector((state: ReduxState) => state.event)
 
     // Copies renderedEvents because it's read only
-    let eventList: EventProps[] = [...renderedEvents]
-    eventList.sort((a, b) => (Number(b.highlight) - Number(a.highlight)))
+    // let eventList: EventProps[] = [...renderedEvents]
+    // eventList.sort((a, b) => (Number(b.highlight) - Number(a.highlight)))
 
     function SeperatedEvents({item, index, usedIndexes}: SeperatedEventsProps) { 
         return (
@@ -48,7 +48,7 @@ export default function EventList ({notification}: EventListProps): JSX.Element 
                     ? <Space height={Dimensions.get("window").height / (Platform.OS === "ios" ? 8.2 : 7.8)} />
                     : <Space height={Dimensions.get("window").height / (Platform.OS === "ios" ? 3.85 : 3.1)} />
                 }
-                {eventList.map((event, index) => {
+                {renderedEvents.map((event, index) => {
                     return <SeperatedEvents item={event} index={index} key={index} usedIndexes={usedIndexes}/>
                 })}
             </ScrollView>
