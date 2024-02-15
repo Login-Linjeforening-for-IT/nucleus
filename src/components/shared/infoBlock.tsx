@@ -8,7 +8,7 @@ type InfoBlockProps = {
 }
 
 export default function InfoBlock({infoText}: InfoBlockProps){
-    const { event } = useSelector((state: ReduxState) => state.event)
+    const { event:{event} } = useSelector((state: ReduxState) => state.event)
     
     return (
         <View style={{

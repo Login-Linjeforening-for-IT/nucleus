@@ -16,11 +16,14 @@ export default function BasicInfo() {
     const textNO = { host: "Arrangør:   ", more: "Mer info"}
     const textEN = { host: "Organizer:   ", more: "More info"}
     const text = lang ? textNO : textEN
-    const info = lang ? event.informational_no : event.informational_en
+    const info = lang ? event.event.informational_no : event.event.informational_en
     const host = findOrgName()
 
     function findOrgName() {
-        switch (event.organization_name_short) {
+        if (!event.organizations[0]) {
+            return ""
+        }
+        switch (event.organizations[0].shortname) {
             case 'board': return lang ? 'Styret' : 'The Board'
             case 'tekkom': return 'TekKom'
             case 'bedkom': return 'BedKom'
@@ -30,9 +33,9 @@ export default function BasicInfo() {
             case 'ctfkom': return 'CTFkom'
             case 's2g': return 'S2G'
             case 'idi': return 'IDI'
-            default: return event.organization_name_short || lang 
-                ? event.category_name_no || event.category_name_en 
-                : event.category_name_en || event.category_name_no
+            default: return event.organizations[0].shortname || lang 
+                ? event.category.name_no || event.category.name_en 
+                : event.category.name_en || event.category.name_no
         }
     }
 
@@ -46,14 +49,14 @@ export default function BasicInfo() {
                 <Text style={{ ...T.specificEventInfo, color: theme.textColor }}>{text.host}</Text>
                 <Text style={{ ...T.specificEventInfoContent, color: theme.textColor }}>
                     {host}
-                    {event.link_stream && ' - '}
-                    {event.link_stream && <TextLink style={{fontSize: 20, color: "#fd8738", top: 3}} text="Stream" url={event.link_stream} />}
-                    {event.link_discord && ' - '}
-                    {event.link_discord && <TextLink style={{fontSize: 20, color: "#fd8738", top: 3}} text="Discord" url={event.link_discord} />}
-                    {event.link_facebook && ' - '}
-                    {event.link_facebook && <TextLink style={{fontSize: 20, color: "#fd8738", top: 3}} text="Facebook" url={event.link_facebook} />}
-                    {event.link_homepage && ' - '}
-                    {event.link_homepage && <TextLink style={{fontSize: 20, color: "#fd8738", top: 3}} text={text.more} url={event.link_homepage} />}
+                    {event.event.link_stream && ' - '}
+                    {event.event.link_stream && <TextLink style={{fontSize: 20, color: "#fd8738", top: 3}} text="Stream" url={event.event.link_stream} />}
+                    {event.event.link_discord && ' - '}
+                    {event.event.link_discord && <TextLink style={{fontSize: 20, color: "#fd8738", top: 3}} text="Discord" url={event.event.link_stream} />}
+                    {event.event.link_facebook && ' - '}
+                    {event.event.link_facebook && <TextLink style={{fontSize: 20, color: "#fd8738", top: 3}} text="Facebook" url={event.event.link_stream} />}
+                    {event.organizations[0]?.link_homepage && ' - '}
+                    {event.organizations[0]?.link_homepage && <TextLink style={{fontSize: 20, color: "#fd8738", top: 3}} text={text.more} url={event.event.link_stream} />}
                 </Text>
             </View>
             {info && <InfoBlock infoText={info} />}
@@ -62,7 +65,7 @@ export default function BasicInfo() {
 }
 
 function Start() {
-    const { event } = useSelector((state: ReduxState) => state.event)
+    const { event:{event} } = useSelector((state: ReduxState) => state.event)
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const start = lang ? "Starter:      " : "Starts:         "
@@ -81,7 +84,7 @@ function Start() {
 }
 
 function End() {
-    const { event } = useSelector((state: ReduxState) => state.event)
+    const { event:{event} } = useSelector((state: ReduxState) => state.event)
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const end = lang ? "Slutter:       " : "Ends:           "
@@ -99,12 +102,17 @@ function End() {
 function Location() {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { event } = useSelector((state: ReduxState) => state.event)
+    if (!event.location){
+        return <></>
+    }
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const text = lang ? "Lokasjon:   " : "Location:     "
+
+    
     // Uses best available location
     const location = lang 
-        ? event.location_no || event.location_en 
-        : event.location_en || event.location_no
+        ? event.location.name_no || event.location.name_en 
+        : event.location.name_en || event.location.name_no
 
     return (
         <View style={{flexDirection: "row"}}>

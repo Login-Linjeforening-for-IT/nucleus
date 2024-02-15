@@ -25,16 +25,82 @@ type EventProps = {
     category_name_en: string
 }
 
+type DetailedEventData = {
+    id: number
+    visible: boolean
+    name_no: string
+    name_en: string
+    description_no: string
+    description_en: string
+    informational_no: string
+    informational_en: string
+    time_type: 'default' | 'no_end' | 'whole_day' | 'tbd'
+    time_start: string
+    time_end: string
+    time_publish: string
+    time_signup_release: string
+    time_signup_deadline: string
+    canceled: boolean
+    digital: boolean
+    highlight: boolean
+    image_small: string
+    image_banner: string
+    link_facebook: string
+    link_discord: string
+    link_signup: string
+    link_stream: string
+    capacity: number | null
+    full: boolean
+    category: number
+    location: number | null,
+    parent: null,
+    rule: number | null,
+    updated_at: string
+    created_at: string
+    deleted_at: string
+}
+
 type DetailedEventResponse = {
-    event: DetailedEvent
+    event: DetailedEventData
     category: Category
-    location: Location | undefined
+    location: EventLocation | undefined
     rule: Rule | undefined
     organizations: Organization[]
     audiences: Audience[]
 }
 
-type Location = {
+type DetailedAd = {
+    id: number
+    visible: boolean
+    highlight: boolean
+    title_no: string
+    title_en: string
+    position_title_no: string
+    position_title_en: string
+    description_short_no: string
+    description_short_en: string
+    description_long_no: string
+    description_long_en: string
+    job_type: 'full' | 'part' | 'summer' | 'verv'
+    time_publish: string
+    time_expire: string
+    application_deadline: string
+    banner_image: string
+    organization: number
+    application_url: string
+    updated_at: string
+    created_at: string
+    deleted_at: string
+    skills: string[]
+    cities: string[]
+}
+
+type DetailedAdResponse = {
+    job: DetailedAd
+    organization: Organization
+}
+
+type EventLocation = {
     id: number
     name_no: string
     name_en: string
@@ -102,6 +168,25 @@ type Category = {
     created_at: string
 }
 
+type AdProps = {
+    id: number
+    highlight: boolean
+    title_no: string
+    title_en: string
+    position_title_no: string
+    position_title_en: string
+    job_type: string
+    time_publish: string
+    application_deadline: string
+    organization_shortname: string
+    organization_name_no: string
+    organization_name_en: string
+    organization_logo: string
+    skills: string[]
+    cities: string[]
+}
+
+
 type ReduxState = {
     theme: {
         value: number
@@ -121,7 +206,7 @@ type ReduxState = {
     profile: ProfileProps
     event: {
         events: EventProps[]
-        event: DetailedEvent
+        event: DetailedEventResponse
         clickedEvents: EventProps[]
         renderedEvents: EventProps[]
         lastFetch: string
@@ -156,37 +241,6 @@ type ReduxState = {
 
 type ProfileProps = any
 
-type DetailedAd = {
-    id: number
-    visible: boolean
-    highlight: boolean
-    title_no: string
-    title_en: string
-    position_title_no: string
-    position_title_en: string
-    description_short_no: string
-    description_short_en: string
-    description_long_no: string
-    description_long_en: string
-    job_type: 'full' | 'part' | 'summer' | 'verv'
-    time_publish: string
-    time_expire: string
-    application_deadline: string
-    banner_image: string
-    organization: number
-    application_url: string
-    updated_at: string
-    created_at: string
-    deleted_at: string
-    skills: string[]
-    cities: string[]
-}
-
-type DetailedAdResponse = {
-    job: DetailedAd
-    organization: Organization
-}
-
 type CategoryProps = 
     "tekkom"
     | "social"
@@ -204,41 +258,6 @@ type CategoryProps =
     | "BEDPRES"
     | "LOGIN"
     | "ANNET"
-
-type DetailedEventData = {
-    id: number
-    visible: boolean
-    name_no: string
-    name_en: string
-    description_no: string
-    description_en: string
-    informational_no: string
-    informational_en: string
-    time_type: 'default' | 'no_end' | 'whole_day' | 'tbd'
-    time_start: string
-    time_end: string
-    time_publish: string
-    time_signup_release: string
-    time_signup_deadline: string
-    canceled: boolean
-    digital: boolean
-    highlight: boolean
-    image_small: string
-    image_banner: string
-    link_facebook: string
-    link_discord: string
-    link_signup: string
-    link_stream: string
-    capacity: number | null
-    full: boolean
-    category: number
-    location: number | null,
-    parent: null,
-    rule: number | null,
-    updated_at: string
-    created_at: string
-    deleted_at: string
-}
 
 type Interval = NodeJS.Timeout | number
 

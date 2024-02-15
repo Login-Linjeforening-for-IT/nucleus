@@ -27,7 +27,7 @@ import {
 export function FilterUI(): JSX.Element {
     const { theme, isDark } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
-    const event = useSelector((state: ReduxState) => state.event)
+    const { search } = useSelector((state: ReduxState) => state.event)
     const ad = useSelector((state: ReduxState) => state.ad)
     const resetIcon = isDark 
         ? require("@assets/icons/reset.png") 
@@ -35,7 +35,7 @@ export function FilterUI(): JSX.Element {
     const dispatch = useDispatch()
     const textInputRef = useRef<TextInput | null>(null)
     const route = useRoute()
-    const isSearchingEvents = route.name === "EventScreen" && event.search
+    const isSearchingEvents = route.name === "EventScreen" && search
     const isSearchingAds = route.name === "AdScreen" && ad.search
     const isSearching = isSearchingEvents || isSearchingAds
     const top = (isSearchingAds && 35) || Platform.OS === 'ios' ? 40 : 35
@@ -72,11 +72,11 @@ export function FilterUI(): JSX.Element {
  */
 export function FilterButton(){
     const { isDark } = useSelector((state: ReduxState) => state.theme)
-    const event = useSelector((state: ReduxState) => state.event)
+    const { search } = useSelector((state: ReduxState) => state.event)
     const ad = useSelector((state: ReduxState) => state.ad)
     const dispatch = useDispatch()
     const route = useRoute()
-    const isSearching = route.name === "EventScreen" && event.search || route.name === "AdScreen" && ad.search
+    const isSearching = route.name === "EventScreen" && search || route.name === "AdScreen" && ad.search
 
     function handlePress() {
         route.name === "EventScreen" && dispatch(eventToggleSearch())

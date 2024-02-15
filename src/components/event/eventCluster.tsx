@@ -19,7 +19,7 @@ type EventClusterProps = {
 }
 
 type FullCategorySquareProps = {
-    item: EventProps | DetailedEvent
+    item: EventProps
     height?: number
 }
 

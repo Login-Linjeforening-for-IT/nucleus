@@ -7,7 +7,7 @@ import T from "@styles/text"
 export default function JoinButton() {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
-    const { event, clickedEvents } = useSelector((state: ReduxState) => state.event)
+    const { event:{event}, clickedEvents } = useSelector((state: ReduxState) => state.event)
     const dispatch = useDispatch()
     
     function updateStorage() {

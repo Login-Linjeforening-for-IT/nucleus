@@ -7,10 +7,11 @@ import { useDispatch } from "react-redux"
 import getTags from "@utils/getTags"
 
 type TagsProps = {
-    event: DetailedEvent
+    event: DetailedEventData
 }
 
 export default function Tags({event}: TagsProps) {
+    if (!event) return null
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const tags = getTags({event, lang})
 

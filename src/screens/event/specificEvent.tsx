@@ -22,7 +22,7 @@ import TagInfo from "@components/shared/tagInfo"
 export default function SpecificEventScreen(): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
-    const { event } = useSelector((state: ReduxState) => state.event)
+    const { event:{event} } = useSelector((state: ReduxState) => state.event)
 
     // if (deepLinkID) {
     //     const response = fetchEventDetails(deepLinkID)
@@ -41,7 +41,7 @@ export default function SpecificEventScreen(): JSX.Element {
         if (response) dispatch(setEvent(response))
     }
 
-    if (!(descriptionCheck in event)) {
+    if (!(descriptionCheck in Object.keys(event))) {
         getDetails()
     }
 
@@ -64,7 +64,7 @@ export default function SpecificEventScreen(): JSX.Element {
                         fontSize: 15, 
                         color: theme.oppositeTextColor,
                         marginVertical: 10
-                    }}>Event ID: {event.id}</Text>
+                    }}>Event ID: {event && event.id}</Text>
                     <Space height={Dimensions.get("window").height / (Platform.OS === 'ios' ? 3 : 2.75)} />
                 </ScrollView>
             </View>

@@ -5,7 +5,7 @@ import { SvgUri } from "react-native-svg"
 import { useSelector } from "react-redux"
 
 export default function SpecificEventImage() {
-    const { event } = useSelector((state: ReduxState) => state.event)
+    const { event:{event} } = useSelector((state: ReduxState) => state.event)
 
     if ((event.image_small).includes(".svg")) {
         return (
