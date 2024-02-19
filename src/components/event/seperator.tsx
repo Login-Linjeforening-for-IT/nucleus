@@ -36,8 +36,8 @@ export default function Seperator({item, usedIndexes}: SeperatorProps) {
 
     return (
         <View style={{justifyContent: "center", top: -5, left: 5}}>
-            <Text style={{color: 
-                theme.oppositeTextColor, 
+            <Text style={{
+                color: theme.oppositeTextColor, 
                 backgroundColor: theme.darker, 
                 alignSelf: "center", 
                 paddingHorizontal: 8, 

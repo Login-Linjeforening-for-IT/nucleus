@@ -171,6 +171,11 @@ export const ES = StyleSheet.create({
     },
     sesContent: {
         height: Dimensions.get("window").height + 200,
+    },
+    id: {
+        alignSelf: 'center', 
+        fontSize: 15, 
+        marginVertical: 10
     }
 })
 

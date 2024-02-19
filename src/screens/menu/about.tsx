@@ -16,12 +16,12 @@ import Person, {
 import {
     Text,
     View,
-    ScrollView,
     TouchableOpacity,
     Dimensions,
     StyleProp,
     ViewStyle,
 } from "react-native"
+import { ScrollView } from "react-native-gesture-handler"
 import Swipe from "@components/nav/swipe"
 import { SvgXml } from "react-native-svg"
 import prkomSVG from "@assets/committee/prkom/pr-icon.svg"
