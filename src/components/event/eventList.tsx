@@ -7,6 +7,8 @@ import EventCluster from "./eventCluster"
 import LastFetch, { fetchEvents } from "@utils/fetch"
 import { setEvents, setLastFetch } from "@redux/event"
 import { RefreshControl, ScrollView } from "react-native-gesture-handler"
+import getHeight from "@utils/getHeight"
+import getCategories from "@utils/getCategories"
 
 type EventListProps = {
     notification: NotificationProps
@@ -26,7 +28,8 @@ type ContentProps = {
  * Displays the event list
  */
 export default function EventList ({notification}: EventListProps): JSX.Element {
-    const { events, search, renderedEvents } = useSelector((state: ReduxState) => state.event)
+    const { events, search, renderedEvents, categories, clickedEvents } = useSelector((state: ReduxState) => state.event)
+    const { lang } = useSelector((state: ReduxState) => state.lang)
     const [refresh, setRefresh] = useState(false)
     const dispatch = useDispatch()
 
@@ -40,10 +43,6 @@ export default function EventList ({notification}: EventListProps): JSX.Element 
         }
     }
 
-    if (!renderedEvents.length && !search) {
-        return <ErrorMessage argument="wifi" />
-    }
-
     const onRefresh = useCallback(async () => {
         setRefresh(true);
         const details = await getDetails()
@@ -53,15 +52,17 @@ export default function EventList ({notification}: EventListProps): JSX.Element 
         }
     }, [refresh]);
     
+    const cat = getCategories({lang, categories})
+
     if (renderedEvents.length > 0) {
         const usedIndexes: number[] = []
 
         return (
             <>
-            <Space height={Dimensions.get("window").height / (search 
-                        ? (Platform.OS === "ios" ? 3.85 : 3.1)
-                        : (Platform.OS === "ios" ? 8.2 : 7.8) 
-                )} />
+                <Space height={search 
+                    ? (Dimensions.get("window").height / ((Platform.OS === "ios" ? 3.6 : 3)) - (100 - getHeight(cat.length + clickedEvents.length)))
+                    : Dimensions.get("window").height / (Platform.OS === "ios" ? 8.2 : 7.8 )
+                } />
                 <ScrollView 
                     showsVerticalScrollIndicator={false} 
                     scrollEventThrottle={100}

@@ -116,6 +116,7 @@ export const ES = StyleSheet.create({
     // Filter view
     clusterFilterView: {
         flexDirection: "row",
+        maxHeight: 100
     },
     // EventScreen filter text
     clusterFilterText: {

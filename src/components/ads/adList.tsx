@@ -7,15 +7,16 @@ import { useCallback, useState } from "react"
 import LastFetch, { fetchAdDetails, fetchAds } from "@utils/fetch"
 import { setAds, setLastFetch } from "@redux/ad"
 import { RefreshControl, ScrollView } from "react-native-gesture-handler"
+import getHeight from "@utils/getHeight"
 
 /**
  * Displays the ad list
  */
 export default function AdList (): JSX.Element {
-    const { ads, search, renderedAds } = useSelector((state: ReduxState) => state.ad)
+    const { ads, search, renderedAds, skills } = useSelector((state: ReduxState) => state.ad)
     const [refresh, setRefresh] = useState(false)
     const dispatch = useDispatch()
-    
+
     async function getDetails() {
         const ads = await fetchAds()
     
@@ -53,10 +54,10 @@ export default function AdList (): JSX.Element {
     if (renderedAds.length > 0) {
         return (
             <>
-                <Space height={Dimensions.get("window").height / (search 
-                        ? (Platform.OS === "ios" ? 3.85 : 3.1)
-                        : (Platform.OS === "ios" ? 8.2 : 7.8) 
-                )} />
+                <Space height={search
+                    ? (Dimensions.get("window").height / (Platform.OS === "ios" ? 3.6 : 3.01)) - (100 - getHeight(skills.length))
+                    : Dimensions.get("window").height / (Platform.OS === "ios" ? 8.2 : 7.8) 
+                } />
                 <ScrollView 
                     showsVerticalScrollIndicator={false} 
                     scrollEventThrottle={100}
