@@ -9,6 +9,7 @@ import T from "@styles/text"
 export default function DescriptionAndJoin() {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { event:{event} } = useSelector((state: ReduxState) => state.event)
+    if (!event) return null
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const name = lang ? event.name_no || event.name_en : event.name_en || event.name_no
 

@@ -11,11 +11,13 @@ import InfoBlock from "@components/shared/infoBlock"
 
 export default function BasicInfo() {
     const { event } = useSelector((state: ReduxState) => state.event)
+    if (!event.event) return null
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const textNO = { host: "Arrangør:   ", more: "Mer info"}
     const textEN = { host: "Organizer:   ", more: "More info"}
     const text = lang ? textNO : textEN
+    console.log(event.event)
     const info = lang ? event.event.informational_no : event.event.informational_en
     const host = findOrgName()
 

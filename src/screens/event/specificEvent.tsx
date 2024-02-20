@@ -1,5 +1,5 @@
 import Space from "@/components/shared/utils"
-import React from "react"
+import React, { useEffect } from "react"
 import { useSelector } from "react-redux"
 import ES from "@styles/eventStyles"
 import { Dimensions, Platform, ScrollView, View, Text } from "react-native"
@@ -41,9 +41,11 @@ export default function SpecificEventScreen(): JSX.Element {
         if (response) dispatch(setEvent(response))
     }
 
-    if (!(descriptionCheck in Object.keys(event))) {
-        getDetails()
-    }
+    useEffect(() => {
+        if (event?.id) {
+            getDetails()
+        }
+    })
 
     return (
         <Swipe left="EventScreen">
@@ -64,7 +66,7 @@ export default function SpecificEventScreen(): JSX.Element {
                         fontSize: 15, 
                         color: theme.oppositeTextColor,
                         marginVertical: 10
-                    }}>Event ID: {event && event.id}</Text>
+                    }}>Event ID: {event && event?.id}</Text>
                     <Space height={Dimensions.get("window").height / (Platform.OS === 'ios' ? 3 : 2.75)} />
                 </ScrollView>
             </View>

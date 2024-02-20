@@ -6,6 +6,7 @@ import { useSelector } from "react-redux"
 
 export default function SpecificEventImage() {
     const { event:{event} } = useSelector((state: ReduxState) => state.event)
+    if (!event) return null
 
     if ((event.image_small).includes(".svg")) {
         return (

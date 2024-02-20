@@ -7,6 +7,7 @@ import { useSelector } from "react-redux"
 
 export default function Countdown() {
     const { event } = useSelector((state: ReduxState) => state.event)
+    if (!event.event) return null
 
     const startDate = event.event.time_start ? new Date(event.event.time_start) : new Date()
     const endDate = event.event.time_type=="default" ? new Date(event.event.time_end) : undefined
