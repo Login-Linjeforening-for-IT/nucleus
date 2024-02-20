@@ -53,7 +53,7 @@ type DetailedEventData = {
     full: boolean
     category: number
     location: number | null,
-    parent: null,
+    parent: number | null,
     rule: number | null,
     updated_at: string
     created_at: string
