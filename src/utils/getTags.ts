@@ -27,7 +27,10 @@ export default function getTags({event, lang}: getTagsProps) {
 
     if (event.canceled && !Object.keys(tags).includes("Cancelled")) tags.push(storedTags.Cancelled)
     if (event.highlight) tags.push(storedTags.Highlighted)
-    if (event.name_no.toLowerCase().includes("ctf") && event.name_no.toLowerCase().includes("ctf")) tags.push(storedTags.BedCTF)
+    if (event.name_no.toLowerCase().includes("ctf") && (
+        event.name_no.toLowerCase().includes("with") ||
+        event.name_no.toLowerCase().includes("med")
+    ) && event.name_no.toLowerCase().includes("ctf")) tags.push(storedTags.BedCTF)
     if (event.name_no.toLowerCase().includes("cyberdag")) tags.push(storedTags.Cyberdays)
 
     return tags
