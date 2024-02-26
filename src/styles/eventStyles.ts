@@ -5,6 +5,7 @@ export const ES = StyleSheet.create({
     view2: {
         justifyContent: "center",
         marginLeft: 5,
+        top: 2,
         maxWidth: '70%',
         maxHeight: 55
     },
@@ -12,6 +13,7 @@ export const ES = StyleSheet.create({
     view3: {
         position: "absolute",
         right: 5,
+        top: -3,
         height: "100%",
     },
     // Card height and direction on eventscreen
@@ -51,6 +53,7 @@ export const ES = StyleSheet.create({
         width: Dimensions.get("window").width - 24,
         resizeMode: "stretch",
         height: 150,
+        marginTop: 8
     },
     //======================== EventComponentStyles ===================
     // Middle sized icons
@@ -113,6 +116,7 @@ export const ES = StyleSheet.create({
     // Filter view
     clusterFilterView: {
         flexDirection: "row",
+        maxHeight: 100
     },
     // EventScreen filter text
     clusterFilterText: {
@@ -168,6 +172,11 @@ export const ES = StyleSheet.create({
     },
     sesContent: {
         height: Dimensions.get("window").height + 200,
+    },
+    id: {
+        alignSelf: 'center', 
+        fontSize: 15, 
+        marginVertical: 10
     }
 })
 

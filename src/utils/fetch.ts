@@ -1,4 +1,4 @@
-const api = "http://10.212.174.46/api/"
+const api = "https://workerbee.login.no/api/"
 const testapi = "https://testapi.login.no/api/"
 
 /**
@@ -31,10 +31,10 @@ export default function LastFetch(param?: string) {
 export async function fetchEventDetails(id: number): 
 Promise<DetailedEvent> {
     // Fetches events
-    // const response = await fetch(`${api}events/${event.id}`)
+    const response = await fetch(`${api}events/${id}`)
 
     // Test API
-    const response = await fetch(`${testapi}events/${id}`)
+    // const response = await fetch(`${testapi}events/${id}`)
     const eventDetails = await response.json()
 
     let mazemap = null
@@ -51,6 +51,7 @@ Promise<DetailedEvent> {
     let organization_name_en = null
     let category_name_no = null
     let category_name_en = null
+    let color = null
 
     if ('category' in eventDetails) {
         if ('name_no' in eventDetails.category) {
@@ -58,6 +59,9 @@ Promise<DetailedEvent> {
         }
         if ('name_en' in eventDetails.category) {
             category_name_en = eventDetails.category.name_en
+        }
+        if ('color' in eventDetails.category) {
+            color = eventDetails.category.color
         }
     }
 
@@ -125,6 +129,7 @@ Promise<DetailedEvent> {
         organization_name_short,
         organization_name_en,
         link_homepage,
+        color
     }
 
     return {...eventDetails.event, ...details}
@@ -138,10 +143,10 @@ Promise<DetailedEvent> {
 export async function fetchEvents(): Promise<EventProps[]> {
     try {
         // Fetches events
-        // const response = await fetch(`${api}events`)
+        const response = await fetch(`${api}events`)
 
         // Test API
-        const response = await fetch(`${testapi}events`)
+        // const response = await fetch(`${testapi}events/`)
 
         // Dev
         // const response = await fetch("https://tekkom:rottejakt45@api.login.no:8443/events")
@@ -169,10 +174,10 @@ export async function fetchEvents(): Promise<EventProps[]> {
 export async function fetchAds(): Promise<AdProps[]> {
     try {
         // Prod
-        // const response = await fetch("https://api.login.no/ads")
+        const response = await fetch(`${api}jobs/`)
 
         // Dev
-        const response = await fetch("http://10.212.174.46/api/jobs/")
+        // const response = await fetch(`${testapi}jobs/`)
 
         // Checks if response is ok, otherwise throws error
         if (!response.ok) {
@@ -198,10 +203,10 @@ export async function fetchAds(): Promise<AdProps[]> {
 export async function fetchAdDetails(ad: AdProps): Promise<DetailedAd> {
 
     // Prod
-    // const response = await fetch(`https://api.login.no/ads/${ad.id}`)
+    const response = await fetch(`${api}jobs/${ad.id}`)
     
     // Dev
-    const response = await fetch(`http://10.212.174.46/api/jobs/${ad.id}`)
+    // const response = await fetch(`${testapi}jobs/${ad.id}`)
     const adDetails = await response.json()
 
     return {...ad, ...adDetails.job, ...adDetails.organization}

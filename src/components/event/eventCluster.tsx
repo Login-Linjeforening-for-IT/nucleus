@@ -13,7 +13,6 @@ import Space from "@components/shared/utils"
 import T from "@styles/text"
 
 type EventClusterProps = {
-    notification: NotificationProps
     item: EventProps
     index: number
     embed?:boolean
@@ -27,14 +26,14 @@ type FullCategorySquareProps = {
 /**
  * Displays one element of the event card array
  */
-export default function EventCluster ({notification, item, index}: EventClusterProps): 
+export default function EventCluster ({item, index}: EventClusterProps): 
 JSX.Element {
     const { search } = useSelector((state: ReduxState) => state.event)
     const navigation: Navigation = useNavigation()
     const dispatch = useDispatch()
 
     return (
-        <View style={item.highlight && {marginVertical: 2, top: -2}}>
+        <View style={item.highlight && {marginTop: 2, top: -2}}>
             <TouchableOpacity onPress={() => {
                 search && dispatch(toggleSearch())
                 dispatch(setEvent(item))
@@ -44,13 +43,13 @@ JSX.Element {
                   end={[1, 0.5]}
                   // The non highlited items get wraped in an transparrent container
                   colors={item.highlight ? ['#FF512F', '#F09819', '#FF512F'] : ['#000000cc', '#000000cc']}
-                  style={{borderRadius: 5, marginBottom: item.highlight ? 2 : 0
+                  style={{borderRadius: 5, marginVertical: item.highlight ? 2 : 0,
                 }}>
-                    <Cluster marginVertical={4} highlight={item.highlight}>
+                    <Cluster marginHorizontal={2} marginVertical={4} highlight={item.highlight}>
                         <View style={ES.eventBack}>
                             <FullCategorySquare item={item} />
                             <EventClusterTitle item={item} />
-                            <Bell item={item} notification={notification} />
+                            <Bell item={item} />
                         </View>
                     </Cluster>
                 </LinearGradient>
@@ -88,7 +87,7 @@ function FullCategorySquare({item, height}: FullCategorySquareProps): JSX.Elemen
     const endDate = item?.time_type=="default" ? new Date(item.time_end) : undefined
 
     return (
-        <View style={{width: 65, flexDirection: 'row'}}>
+        <View style={{flexDirection: 'row'}}>
             <CategorySquare color={item.category_color} height={height} startDate={startDate} endDate={endDate}/>
         </View>
     )

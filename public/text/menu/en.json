@@ -13,11 +13,6 @@
             "title": "Settings" 
         },
         {
-            "id": 3, 
-            "nav": "NotificationScreen",
-            "title": "Notifications"
-        },
-        {
             "id": 4, 
             "nav": "AboutScreen",     
             "title": "About Login"    
@@ -31,19 +26,24 @@
     "version": "Version ",
     "unusedScreens": [
         {
-            "id": 6, 
-            "nav": "ReportScreen",   
-            "title": "Report" 
+            "id": 3, 
+            "nav": "NotificationScreen",
+            "title": "Notifications"
         },
         {
-            "id": 7, 
+            "id": 6, 
             "nav": "LoginScreen",     
             "title": "Login"
         },
         {
-            "id": 8, 
+            "id": 7, 
             "nav": "InternalScreen",
             "title": "Intranet (verv)"
+        },
+        {
+            "id": 8, 
+            "nav": "ReportScreen",   
+            "title": "Report" 
         }
     ]
 }

@@ -43,6 +43,7 @@ export const GS = StyleSheet.create({
     // Right view of notificationScreen
     view2: {
         justifyContent: "center",
+        marginVertical: 2,
     },
     // Used anywhere there is a small image
     smallImage: {

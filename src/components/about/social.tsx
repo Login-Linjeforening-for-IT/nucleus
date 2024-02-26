@@ -145,10 +145,10 @@ export function Social() {
             justifyContent: "center", 
             marginTop: 10
         }}>
-            {Object.entries(media).map(([link], index) => (
+            {Object.values(media).map((item, index) => (
                 <MediaLogo 
-                    key={link} 
-                    link={link} 
+                    key={item.link} 
+                    link={item.link} 
                     logo={media[Object.keys(media)[index]].logo} 
                 />
         ))}
@@ -187,7 +187,7 @@ export function Styret() {
  * Function for displaying the contact info of Login - Linjeforeningen for IT as a text inside a view
  * @returns Contact info
  */
-export function Kontakt() {
+export function Contact() {
 
     const { lang  } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
@@ -203,11 +203,12 @@ export function Kontakt() {
 
     return (
         <View>
-            <Text style={{...T.centeredBold25, color: color}}>{info.contact}</Text>
+            <Text style={{...T.centeredBold20, color: color}}>{info.contact}</Text>
             <Text style={{...T.centered15, color: color}}>{info.name}</Text>
-            <Text style={{...T.centered15, color: color}}>{info.address}</Text>
             <Text style={{...T.centered15, color: color}}>{info.location}</Text>
+            <Text style={{...T.centered15, color: color}}>{info.address}</Text>
             <Text style={{...T.centered15, color: color}}>{info.post}</Text>
+
             <TextLink 
                 url="mailto:kontakt@login.no"
                 text="kontakt@login.no" 
@@ -228,8 +229,8 @@ export function Copyright() {
 
     return (
         <View>
-            <Text style={{...T.copyright, color: theme.textColor}}>
-                {`${lang ? "Copyright" : "Opphavsrett"} © 2022-${new Date().getFullYear()} Login - Linjeforeningen for IT, NO 811 940 372`}
+            <Text style={{...T.copyright, color: theme.oppositeTextColor}}>
+                {`${lang ? "Opphavsrett" : "Copyright"} © 2022-${new Date().getFullYear()} Login - Linjeforeningen for IT\nD-U-N-S 345 129 409\nNO 811 940 372`}
             </Text>
         </View>
     )
@@ -250,12 +251,12 @@ export function StaticImage({event}: {event: DetailedEvent}): JSX.Element {
         tekkom:  require(`../../../public/assets/committee/tekkom/tekkom.png`),
         ctf:     require(`../../../public/assets/committee/ctfkom/ctf.png`),
         bedpres: require(`../../../public/assets/committee/bedkom/bedkom.png`),
+        sosialt:  require(`../../../public/assets/categories/sosialt.png`),
         social:  require(`../../../public/assets/categories/sosialt.png`),
         login:   require(`../../../public/assets/categories/login.png`),
         annet:   require(`../../../public/assets/categories/annet.png`),
     }
-
-    const image = images[event.category_name_no.toUpperCase()] || images.annet;
+    const image = images[event.category_name_no.toLowerCase()] || images.annet;
 
     return <Image style={ES.specificEventImage} source={image} />
 }

@@ -30,10 +30,10 @@ export default function NotificationScreen({navigation, back}: NotificationScree
         })(), 10000)
     }, [list])
 
-    function List(): JSX.Element {
-        if (!list) return <></>
-        return list.map((item) => <Notification item={item} navigation={navigation} />)
-    }
+    // function List(): JSX.Element {
+    //     if (!list) return <></>
+    //     return list.map((item) => <Notification item={item} navigation={navigation} />)
+    // }
 
     return (
         <Swipe left="MenuScreen">
@@ -43,13 +43,13 @@ export default function NotificationScreen({navigation, back}: NotificationScree
                         backgroundColor: theme.darker
                 }}>
                     <Space height={Dimensions.get("window").height / 8.1} />
-                    {Array.isArray(list) 
+                    {/* {Array.isArray(list) 
                         ? <List /> 
                         : <Text style={{...NS.error, color: theme.oppositeTextColor}}>
                             {lang 
                                 ? "Du har ingen varslinger nå. Kom tilbake senere." 
                                 : "You have no notifications at this time. Check back later."}
-                        </Text>}
+                        </Text>} */}
                         <Space height={Dimensions.get("window").height / 3} />
                 </View>
                 <TopMenu 
@@ -83,10 +83,10 @@ function Notification({item, navigation}: NotificationInAppProps): JSX.Element {
             <Cluster marginVertical={12}>
                 <View style={NS.notificationBack}>
                     <View style={NS.notificationViewLeft}>
-                        <FullCategorySquare
+                        {/* <FullCategorySquare
                             item={item.data}
                             height={2*item.body.length}
-                        />
+                        /> */}
                     </View>
                     <View style={NS.notificationViewMid}>
                         <NotificationText title={item.title} body={item.body} />

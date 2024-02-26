@@ -13,11 +13,6 @@
             "title": "Innstillinger"
         },
         {
-            "id": 3, 
-            "nav": "NotificationScreen",
-            "title": "Varslinger"
-        },
-        {
             "id": 4, 
             "nav": "AboutScreen",
             "title": "Om oss"
@@ -31,19 +26,24 @@
     "version": "Versjon ",
     "unusedScreens": [
         {
-            "id": 6, 
-            "nav": "ReportScreen",   
-            "title": "Varsle"
+            "id": 3, 
+            "nav": "NotificationScreen",
+            "title": "Varslinger"
         },
         {
-            "id": 7, 
+            "id": 6, 
             "nav": "LoginScreen",
             "title": "Logg inn"
         },
         {
-            "id": 8, 
+            "id": 7, 
             "nav": "InternalScreen",
             "title": "Innsida (verv)"
+        },
+        {
+            "id": 8, 
+            "nav": "ReportScreen",   
+            "title": "Varsle"
         }
     ]
 }

@@ -10,15 +10,41 @@
 1. Complete local testing
 2. Increment the version numbers in app.json. For ios its "buildNumber" and for android its "versionCode" and version at the top. First digit for major overhauls. Second digit for larger updates and 3rd digit for small updates.
 3. Comment in all native code blocks (everything firebase / messaging related).
-4. Build for ios first using "eas build -p ios --local" (local) or "eas build -p ios --auto-submit" (cloud).
-5. Log into the Apple Developer Account.
-6. Download the app from Testflight.
-7. Test the application on a physical iPhone.
-8. Build the app for android using "eas build -p android".
-9. Go to the Expo Developer dashboard and verify that the build has succeeded.
-10. Download the finished build.
-11. Test the Android build on a physical Android device.
-12. Push the repository to remote with the firebase / messaging code commented out.
+
+-- -- -- -- Ios - Local -- -- -- --
+1. Build for ios first using "eas build -p ios --local" (local) or "eas build -p ios --auto-submit" (cloud).
+2. Log into the Apple Developer Account.
+3. Download the app from Testflight.
+4. Test the application on a physical iPhone.
+
+-- -- -- Android - Remote -- -- --
+1. Build the app for android using "eas build -p android".
+2. Go to the Expo Developer dashboard and verify that the build has succeeded.
+3. Download the finished build.
+4. Test the Android build on a physical Android device.
+5. Push the repository to remote with the firebase / messaging code commented out.
+
+-- -- -- Android - Local -- -- --
+
+-- -- -- Windows -- -- --
+1. Download android studio
+2. Run "npx expo prebuild"
+3. Get the keystore by runninng "eas credentials"
+4. Select "android"
+5. Select "production"
+6. Select "keystore"
+7. Select "download"
+8. Select "build credentials"
+9. Select yes
+10. Copy the keystore password, Key alias, Key password and Path to keystore
+11. Open android studio and select the generated android folder as the project
+12. Go to Build->Build signed packege
+13. Select apk
+14. Select the keystore from eas, and fill in the credentials for the keystore
+15. Build the apk. The output is in android/build/output/debug
+16. Install the Android build on a physical Android device.
+17. Push the repository to remote with the firebase / messaging code commented out.
+
 
 -- -- -- -- RELEASE -- -- -- --
 14. Submit it to Google Play for review and auto release.

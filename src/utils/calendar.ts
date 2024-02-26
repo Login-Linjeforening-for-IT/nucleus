@@ -1,7 +1,7 @@
-import { fetchEventDetails } from "@/utils/fetch"
+import { fetchAdDetails, fetchEventDetails } from "@/utils/fetch"
 import { setCalendarID } from "@redux/misc"
 import { Platform } from "react-native"
-import { AnyAction, Dispatch } from "redux"
+import { UnknownAction, Dispatch } from "redux"
 import {
     requestCalendarPermissionsAsync,
     getDefaultCalendarAsync,
@@ -13,31 +13,36 @@ import {
     getEventsAsync,
     EntityTypes,
 } from "expo-calendar"
+import capitalizeFirstLetter from "./capitalizeFirstLetter"
 
 type handleDownloadProps = {
-    clickedEvents: EventProps[]
+    items: EventProps[] | AdProps[]
     calendarID: string
-    dispatch: Dispatch<AnyAction>
+    dispatch: Dispatch<UnknownAction>
     lang: boolean
+    isEventScreen: boolean
 }
 
 type updateCalendarProps = {
-    events: EventProps[]
+    items: EventProps[] | AdProps[]
     calendarID: string
     lang: boolean
+    isEventScreen: boolean
 }
 
-type eventsToCalendarFormatProps = {
-    events: EventProps[]
+type itemsToCalendarFormatProps = {
+    items: EventProps[] | AdProps[]
     calendarID: string
     lang: boolean
+    isEventScreen: boolean
 }
 
 type executeDownloadProps = {
-    clickedEvents: EventProps[]
+    items: EventProps[] | AdProps[]
     calendarID: string
-    dispatch: Dispatch<AnyAction>
+    dispatch: Dispatch<UnknownAction>
     lang: boolean
+    isEventScreen: boolean
 }
 
 /**
@@ -46,17 +51,17 @@ type executeDownloadProps = {
  *
  * @see executeDownload Executes the download if permitted
  */
-export default async function handleDownload({clickedEvents, calendarID, 
-dispatch, lang}: handleDownloadProps) {
-    await executeDownload({clickedEvents, calendarID, dispatch, lang})
+export default async function handleDownload({items, calendarID, 
+dispatch, lang, isEventScreen}: handleDownloadProps) {
+    await executeDownload({items, calendarID, dispatch, lang, isEventScreen})
 }
 
 /**
- * Adds the passed events to the default calendar of the phone
- * @param events Events to add to calendar 
- * @param calendarID ID of the calendar to add the events to 
+ * Adds the passed items to the default calendar of the phone
+ * @param item Items to add to calendar 
+ * @param calendarID ID of the calendar to add the items to 
  */
-export async function updateCalendar({events, calendarID, lang}: updateCalendarProps) {
+export async function updateCalendar({items, calendarID, lang, isEventScreen}: updateCalendarProps) {
     const { status } = await requestCalendarPermissionsAsync()
 
     if (status !== "granted") return
@@ -69,7 +74,7 @@ export async function updateCalendar({events, calendarID, lang}: updateCalendarP
         new Date(Date.now() + 31536000000)
     )
 
-    const formattedEvents = await eventsToCalendarFormat({events, calendarID, lang})
+    const formattedEvents = await eventsToCalendarFormat({items, calendarID, lang, isEventScreen})
 
     for (const event of formattedEvents) {
         // Find the matching event in the formatted events array
@@ -112,9 +117,9 @@ async function calendarExists(calendarID: string) {
 /**
  * Creates a calendar in the default calendar app of the device
  *
- * @param {array} events Events to include in the calendar
+ * @param {array} items Items to include in the calendar
  */
-async function createCalendar(events: EventProps[], lang: boolean) {
+async function createCalendar(items: EventProps[] | AdProps[], lang: boolean, isEventScreen: boolean) {
     const { status } = await requestCalendarPermissionsAsync()
 
     if (status !== "granted") return
@@ -138,7 +143,7 @@ async function createCalendar(events: EventProps[], lang: boolean) {
             ownerAccount: "personal",
             accessLevel: CalendarAccessLevel.OWNER,
         })
-        await updateCalendar({events, calendarID, lang})
+        await updateCalendar({items, calendarID, lang, isEventScreen})
 
         return calendarID
     } catch (error) {
@@ -147,34 +152,59 @@ async function createCalendar(events: EventProps[], lang: boolean) {
 }
 
 /**
- * Function for formatting events to native calendar format
+ * Function for formatting items to native calendar format
  *
- * @param {array} events      Events to format
+ * @param {array} item      Items to format
  * @returns                   Native calendar objects
  */
-async function eventsToCalendarFormat({events, calendarID, lang}: 
-eventsToCalendarFormatProps) {
+async function eventsToCalendarFormat({items, calendarID, lang, isEventScreen}: 
+itemsToCalendarFormatProps) {
     let formattedEvents = []
     
-    for (const event of events) {
-        const APIevent = await fetchEventDetails(event.id)
-        let location = lang ? event.location_name_no : event.location_name_en
-        const title = lang ? APIevent.name_no : APIevent.name_en
-        const notes = lang ? APIevent.description_no : APIevent.description_en
+    for (const item of items) {
+        const detailedItem = isEventScreen ? await fetchEventDetails(item.id) : await fetchAdDetails(item as AdProps)
+        let location
+        let title
+        let notes
+        let startDate
+        let endDate
 
-        if (!location.length) location = `https://login.no/events/${event.id}`
-        
-        const time_start = new Date(APIevent.time_start)
-        const time_end = new Date(APIevent.time_end)
+        if (isEventScreen) {
+            const event = detailedItem as DetailedEvent
+            location = lang 
+                ? event.location_no || event.location_en || ''
+                : event.location_en || event.location_no || ''
+            title = lang ? event.name_no || event.name_en || '' : event.name_en || event.name_no || ''
+            const fixedDesc = lang ? event.description_no || event.description_en || '' : event.description_en || event.description_no || ''
+
+            notes = fixedDesc.replace(/\\n/g, '\n') || undefined
+            if (!location.length) location = `https://login.no/events/${item.id}`
+            startDate = new Date(event.time_start)
+            endDate = new Date(event.time_end)
+        } else {
+            const ad = detailedItem as DetailedAd
+            location = ad.cities.map(city => capitalizeFirstLetter(city)).join(", ")
+            title =  `${lang ? 'Frist for å søke jobb - ': 'Deadline to apply - '}${lang ? ad.title_no || ad.title_en : ad.title_en || ad.title_no}!`
+            const tempShort = lang 
+                ? ad.description_short_no || ad.description_short_en
+                : ad.description_short_en || ad.description_short_no
+            const tempLong = lang 
+                ? ad.description_long_no || ad.description_long_en
+                : ad.description_long_en || ad.description_long_no
+
+            const shortDescription = tempShort ? tempShort.replace(/\\n/g, '\n') : ''
+            const LongDescription = tempLong ? tempLong.replace(/\\n/g, '\n') : ''
+            notes = LongDescription || shortDescription || ''
+            if (!location.length) location = `https://login.no/career/${item.id}`
+            startDate = new Date(new Date(ad.application_deadline).getTime() - 14400000)
+            endDate = new Date(ad.application_deadline)
+        }
+
         const obj = {
             calendarId: calendarID,
             allDay: false,
-            id: `${APIevent.id}`,
-            title,
-            notes,
-            location,
-            startDate: time_start,
-            endDate: time_end,
+            id: `${isEventScreen ? 'e' : 'a'}${detailedItem.id}`,
+            title, notes, location, startDate, endDate,
             timeZone: "Europe/Oslo",
             status: "CONFIRMED",
             availability: "BUSY",
@@ -207,17 +237,17 @@ async function getDefaultCalendarSource() {
 /**
  * Executes the download itself, updates existing calendar or creates a new calendar if no calendar exists.
  *
- * @param clickedEvents Array of events the user has joined
+ * @param item Array of items the user wants to download
  *
  * @see calendarExists  Checks if the calendar storage is defined and if it still exists on the device
  * @see setCalendarID   Stores the ID of a new calendar in localstorage
- * @see updateCalendar  Updates the events for a calendar that is found
+ * @see updateCalendar  Updates the items for a calendar that is found
  * @see createCalendar  Creates a new calendar if no calendar is to be found
  */
-async function executeDownload({clickedEvents, calendarID, dispatch, lang}: executeDownloadProps) {
+async function executeDownload({items, calendarID, dispatch, lang, isEventScreen}: executeDownloadProps) {
     if (typeof await calendarExists(calendarID) != "undefined") {
-        await updateCalendar({events: clickedEvents, calendarID, lang})
+        await updateCalendar({items, calendarID, lang, isEventScreen})
     } else {
-        dispatch(setCalendarID(await createCalendar(clickedEvents, lang)))
+        dispatch(setCalendarID(await createCalendar(items, lang, isEventScreen)))
     }
 }

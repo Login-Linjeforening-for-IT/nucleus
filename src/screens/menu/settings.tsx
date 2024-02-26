@@ -1,11 +1,11 @@
-import { Text, View, ScrollView, Dimensions } from "react-native"
+import { Text, View, Dimensions } from "react-native"
+import { ScrollView } from "react-native-gesture-handler"
 import Notification from "@/components/settings/notification"
 import ThemeSwitch from "@/components/settings/themeSwitch"
 import Reminders from "@/components/settings/reminders"
 import Language from "@/components/settings/language"
 import Cluster from "@/components/shared/cluster"
 import Space from "@/components/shared/utils"
-
 import GS from "@styles/globalStyles"
 import { useSelector } from "react-redux"
 import en from "@text/menu/settings/en.json"

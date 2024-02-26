@@ -1,4 +1,3 @@
-
 import { useSelector } from "react-redux"
 import { View, Text } from "react-native"
 import ES from "@styles/eventStyles"
@@ -106,8 +105,7 @@ export function ErrorMessage({argument}: ErrorMessageProps): JSX.Element {
     }
 
     return (
-        <View style={{alignSelf: "center", maxWidth: "80%"}}>
-            <View style={{height : "45%"}}/>
+        <View style={{alignSelf: "center", justifyContent: "center", display: "flex", flex: 1}}>
             <Text style={{...T.centered20, color: theme.textColor}}>
                 {text[argument]}
             </Text>

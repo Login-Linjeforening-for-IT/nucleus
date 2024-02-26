@@ -20,7 +20,6 @@ import Header from "@components/nav/header"
 import Swipe from "@components/nav/swipe"
 import { FilterButton, FilterUI } from "@components/shared/filter"
 import DownloadButton from "@components/shared/downloadButton"
-
 const EventStack = createStackNavigator<EventStackParamList>()
 
 /**
@@ -61,7 +60,7 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
             (async() => {
                 const events = await fetchEvents()
 
-                if (events) {
+                if (events.length) {
                     dispatch(setEvents(events))
                     dispatch(setLastFetch(LastFetch()))
                 }
@@ -75,7 +74,7 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
         (async() => {
             const events = await fetchEvents()
 
-            if (events) {
+            if (events.length) {
                 dispatch(setEvents(events))
                 dispatch(setLastFetch(LastFetch()))
             }
@@ -84,41 +83,18 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
     // Renders when the screen is loaded
     }, [])
 
-    // --- FETCHES API AND UPDATES CACHE EVERY 10 SECONDS ---
-    useEffect(() => {
-        let interval: Interval = 0
-
-        // Only when filter is closed to prevent "no match" issue
-        if (!search) {
-            interval = setInterval(() => {
-                // Storing the current time
-                (async() => {
-                    const events = await fetchEvents()
-
-                    if (events) {
-                        dispatch(setEvents(events))
-                        dispatch(setLastFetch(LastFetch()))
-                    }
-                })()
-                // Runs every 10 seconds
-            }, 10000)
-            // Clears the interval when the filter is opened
-        } else clearInterval(interval)
-
-        // Clears interval when unmounted to prevent memory leaks
-        return () => clearInterval(interval)
-    }, [search])
-
     useEffect(() => {
         // --- SETUP CODE ONCE APP IS DOWNLOADED---
         // Displays when the API was last fetched successfully
         if (lastSave === "") {(async() => {dispatch(setLastSave(LastFetch()))})()
     }
     }, [lastSave])
+
     initializeNotifications({
         shouldRun: shouldSetupNotifications,
         setShouldSetupNotifications,
-        hasBeenSet: notification["SETUP"]
+        hasBeenSet: notification["SETUP"],
+        dispatch
     })
 
     // Displays the EventScreen
@@ -136,7 +112,7 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
                             headerComponents: {
                                 bottom: [<FilterUI />],
                                 left: [<LogoNavigation />],
-                                right: [<FilterButton />, <DownloadButton />]
+                                right: [<FilterButton />, <DownloadButton screen="event" />]
                             }} as Partial<BottomTabNavigationOptions>)   
                     }, [navigation])
 

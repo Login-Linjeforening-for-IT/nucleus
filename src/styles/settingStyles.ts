@@ -14,7 +14,7 @@ export const SS = StyleSheet.create({
     },
     // Report button on reportScreen
     button: {
-        borderRadius: 40,
+        borderRadius: 10,
         marginHorizontal: 108,
         marginVertical: 6,
     },

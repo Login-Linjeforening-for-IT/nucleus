@@ -1,8 +1,26 @@
 {
-    "P&P": "Prog & Pils is just like TekKom but with alcohol! This makes for a more fun and unpredictable environment, but can occasionally produce less optimal code. Nonetheless it makes programming a lot more exciting!",
-    "Cyberdays": "Cyberdays is Login's annual career day event, where you get to meet relevant companies. This is the prime opporunity for establishing connections and finding your future workplace. This is the event you don't want to miss!",
-    "BedCTF": "Company CTF, this is a CTF, but hosted by a company from the field. Here you will get to see the technical competence of a company, and maybe learn something new!",
-    "Canceled": "This event has been canceled. Contact the hosting committee for more information regarding why it has been canceled. Join the committee if you would like to help arrange this event in the future.",
-    "Workshop": "This event is a workshop, meaning there will be technical insights, and you will get hands on experience. Its like a bedpres, just that you get to experience what the work is actually like.",
-    "Highlighted": "This event is highligted. Highlights are a premium feature, which gives the event extra exposure. You should look for these companies, as they prove that they are willing to go the extra mile to hire you!"
+    "P&P": {
+        "title": "P&P",
+        "body": "Prog & Pils is just like TekKom but with alcohol! This makes for a more fun and unpredictable environment, but can occasionally produce less optimal code. Nonetheless it makes programming a lot more exciting!"
+    },
+    "Cyberdays": {
+        "title": "Cyberdays",
+        "body": "Cyberdays is Login's annual career day event, where you get to meet relevant companies. This is the prime opporunity for establishing connections and finding your future workplace. This is the event you don't want to miss!"
+    },
+    "BedCTF": {
+        "title": "BedCTF",
+        "body": "Company CTF, this is a CTF, but hosted by a company from the field. Here you will get to see the technical competence of a company, and maybe learn something new!"
+    },
+    "Cancelled": {
+        "title": "Cancelled",
+        "body": "This event has been canceled. Contact the hosting committee for more information regarding why it has been canceled. Join the committee if you would like to help arrange this event in the future."
+    },
+    "Workshop": {
+        "title": "Workshop",
+        "body": "This event is a workshop, meaning there will be technical insights, and you will get hands on experience. Its like a bedpres, just that you get to experience what the work is actually like."
+    },
+    "Highlighted": {
+        "title": "Highlighted",
+        "body": "This event is highligted. Highlights are a premium feature, which gives the event extra exposure. You should look for these companies, as they prove that they are willing to go the extra mile to hire you!"
+    }
 }

@@ -1,3 +1,6 @@
+import no from "@text/tag/no.json"
+import en from "@text/tag/en.json"
+
 type getTagsProps = {
     event: DetailedEvent
     lang: boolean
@@ -11,21 +14,21 @@ type getTagsProps = {
  */
 export default function getTags({event, lang}: getTagsProps) {
     const description = lang ? event.description_no : event.description_en
-    const tags: string[] = []
+    const storedTags = lang ? no : en
+    const tags: Tag[] = []
     
     if (description) {
-        if (description.toLowerCase().includes("prog & pils") && !tags.includes("P&P")) tags.push("P&P")
-        if (description.toLowerCase().includes("prog og pils") && !tags.includes("P&P")) tags.push("P&P")
-        if (description.toLowerCase().includes("prog og pils") && !tags.includes("P&P")) tags.push("P&P")
-        if (!event.canceled && description.includes("er avlyst") || description.includes("is cancel") && !tags.includes("Canceled")) tags.push("Canceled")
-        if (description.toLowerCase().includes("workshop")) tags.push("Workshop")
+        if (description.toLowerCase().includes("prog & pils") && !Object.keys(tags).includes("P&P")) tags.push(storedTags["P&P"])
+        if (description.toLowerCase().includes("prog og pils") && !Object.keys(tags).includes("P&P")) tags.push(storedTags["P&P"])
+        if (description.toLowerCase().includes("prog og pils") && !Object.keys(tags).includes("P&P")) tags.push(storedTags["P&P"])
+        if (!event.canceled && description.includes("er avlyst") || description.includes("is cancel") && !tags.includes(storedTags.Cancelled)) tags.push(storedTags.Cancelled)
+        if (description.toLowerCase().includes("workshop")) tags.push(storedTags.Workshop)
     }
 
-    if (event.canceled && !tags.includes("canceled")) tags.push("Canceled")
-    if (event.highlight) tags.push("Highlighted")
-    if (event.name_no.toLowerCase().includes("ctf") && event.name_no.toLowerCase().includes("ctf")) tags.push("BedCTF")
-    // if (event.name_no.toLowerCase().includes("bedpres")) tags.push("Bedpres")
-    if (event.name_no.toLowerCase().includes("cyberdag")) tags.push("Cyberdays")
+    if (event.canceled && !Object.keys(tags).includes("Cancelled")) tags.push(storedTags.Cancelled)
+    if (event.highlight) tags.push(storedTags.Highlighted)
+    if (event.name_no.toLowerCase().includes("ctf") && event.name_no.toLowerCase().includes("ctf")) tags.push(storedTags.BedCTF)
+    if (event.name_no.toLowerCase().includes("cyberdag")) tags.push(storedTags.Cyberdays)
 
     return tags
 }

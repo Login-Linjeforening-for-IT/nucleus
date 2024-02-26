@@ -11,6 +11,7 @@ import { Animated, Dimensions, Image, View } from "react-native"
 import MS from "@styles/menuStyles"
 import { StackCardInterpolatedStyle, StackCardInterpolationProps, StackCardStyleInterpolator, createStackNavigator } from "@react-navigation/stack"
 import TagInfo from "@components/shared/tagInfo"
+import { TransitionSpec } from "@react-navigation/stack/lib/typescript/src/types"
 
 // Declares Tab to equal CBTN function
 const Tab = createBottomTabNavigator()
@@ -49,37 +50,36 @@ function Tabs(){
 
     return (
         <Tab.Navigator
-                    // Set initialscreen at to not defaut to top of tab stack
-                    initialRouteName={screens[0].name}
-                    backBehavior="history"
-                    screenOptions={{headerShown: false}}
-                    // Sets the tab bar component
-                    tabBar={props => <Footer 
-                        state={props.state} 
-                        descriptors={props.descriptors} 
-                        navigation={props.navigation} 
-                        insets={props.insets} 
-                    />}
-                >
-                    {/* Maps over all screens, returning each of */}
-                    {screens.map((screen: StackProps) => (
-                        <Tab.Screen 
-                            key={screen.name} 
-                            options={({
-                                tabBarIcon: ({focused}) => (
-                                    <Image
-                                        style={MS.bMenuIcon} 
-                                        source={focused 
-                                            ? screen.focusedIcon
-                                            : screen.icon} 
-                                    />
-                                )
-                            })}
-                            name={screen.name+"Root"}
-                            component={screen.component}
-                        />
-                    ))}
-                </Tab.Navigator>
+            // Set initialscreen at to not defaut to top of tab stack
+            initialRouteName={screens[0].name}
+            backBehavior="history"
+            screenOptions={{headerShown: false}}
+            // Sets the tab bar component
+            tabBar={props => <Footer 
+                state={props.state} 
+                descriptors={props.descriptors} 
+                navigation={props.navigation} 
+                />}
+        >
+            {/* Maps over all screens, returning each of */}
+            {screens.map((screen: StackProps) => (
+                <Tab.Screen 
+                    key={screen.name} 
+                    options={({
+                        tabBarIcon: ({focused}) => (
+                            <Image
+                                style={MS.bMenuIcon} 
+                                source={focused 
+                                    ? screen.focusedIcon
+                                    : screen.icon} 
+                            />
+                        )
+                    })}
+                    name={screen.name+"Root"}
+                    component={screen.component}
+                />
+            ))}
+        </Tab.Navigator>
     )
 }
 
@@ -110,13 +110,20 @@ export default function Navigator(): JSX.Element {
             })
         }
     })
+
+    const config: TransitionSpec = {
+        animation: 'timing',
+        config:{
+            duration: 100,
+        }
+    }
     
 
     return (
         <NavigationContainer>
             <Root.Navigator screenOptions={{headerShown: false}}>
                 <Root.Screen name="Tabs" component={Tabs}/>
-                <Root.Screen name="InfoModal" options={{presentation: 'transparentModal', cardOverlayEnabled: true, cardStyleInterpolator: animate}} component={TagInfo}/>
+                <Root.Screen name="InfoModal" options={{presentation: 'transparentModal', cardOverlayEnabled: true, cardStyleInterpolator: animate, transitionSpec: {open: config, close: config}}} component={TagInfo}/>
             </Root.Navigator>
         </NavigationContainer>
     )

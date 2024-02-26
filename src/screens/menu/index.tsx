@@ -22,9 +22,9 @@ import ProfileScreen from "./profile"
 import ReportScreen from "./report"
 import SettingScreen from "./settings"
 import SmallProfile from "@components/profile/smallProfile"
+import Text from "@components/shared/text"
 import Header from "@components/nav/header"
 import {
-  Text,
   View,
   Image,
   TouchableOpacity,
@@ -48,12 +48,12 @@ const MenuStack = createStackNavigator<MenuStackParamList>()
 const screens: Record<string, React.FC<any>> = {
     "ProfileScreen": ProfileScreen,
     "SettingScreen": SettingScreen,
-    "NotificationScreen": NotificationScreen,
+    // "NotificationScreen": NotificationScreen,
     "AboutScreen": AboutScreen,
     "BusinessScreen": BusinessScreen,
-    // "ReportScreen": ReportScreen,
     // "LoginScreen": LoginScreen,
     // "InternalScreen": InternalScreen
+    // "ReportScreen": ReportScreen,
 }
 
 
@@ -97,7 +97,7 @@ export default function MenuScreen(): JSX.Element {
                                 ...GS.content, 
                                 backgroundColor: theme.darker
                             }}>
-                                <Space height={Dimensions.get("window").height / (Platform.OS === "ios" ? 8.4 : 8)} />
+                                <Space height={Dimensions.get("window").height / 8} />
                                 {/* <SmallProfile navigation={navigation} profile={profile} login={login} /> */}
                                 {text.setting.map((item, index) => {
                                     if (item.nav === "ProfileScreen") return null
@@ -138,6 +138,7 @@ toggleFeedback}: MenuItemProps) {
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const info = lang ? no : en
+    const version = `${info.version}${nativeApplicationVersion}`
 
     return (
         <View>
@@ -170,7 +171,7 @@ toggleFeedback}: MenuItemProps) {
             </View>
             {index === setting.length-1 
             ?   <Text style={{...T.contact, color: theme.oppositeTextColor}}>
-                    {info.version}{nativeApplicationVersion}
+                    {version}
                 </Text>
             : null}
         </View>

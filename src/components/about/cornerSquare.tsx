@@ -1,7 +1,7 @@
 import GS from "@styles/globalStyles"
 import React from "react"
 import { useSelector } from "react-redux"
-import { View } from "react-native"
+import { Platform, View } from "react-native"
 
 type CornerSquareProps = {
     corner: number
@@ -17,16 +17,19 @@ export default function CornerSquare({corner, type}: CornerSquareProps):
 JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const horizontal = corner === 0 || corner === 2
+    const left = corner === 3 ? "20.6%" : corner === 1 ? "0.4%" : undefined
+    const top = corner === 3 ? "-49.4%" : undefined
 
     return (
-        <View style={{position: "absolute", alignSelf: "center"}}>
-            <View style={type 
+        <View style={{height: "100%", width: "100%", position: "absolute", alignSelf: "center"}}>
+            <View style={type
                 ? {
+                    left, top,
                     transform: [{ rotate: `${90 * corner}deg` }],
-                    width: horizontal ? "100%" : undefined, 
+                    width: horizontal ? "100%" : undefined,
                     height: horizontal ? undefined : "180%", 
                     aspectRatio: horizontal ? 1.5 : 0.66,
-                    right: horizontal ? undefined : "40%",
+                    right: horizontal ? undefined : Platform.OS === 'ios' ? "45%" : "40%",
                     bottom: horizontal ? undefined : "30.3%",
                 }
                 : {...GS.personImage, transform: [{ rotate: `${90 * corner}deg` }]}

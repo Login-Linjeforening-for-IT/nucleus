@@ -5,9 +5,10 @@ import Paragraph from "@/components/business/paragraph"
 import React from "react"
 import Space, { Line } from "@/components/shared/utils"
 import GS from "@styles/globalStyles"
-import { Kontakt } from "@/components/about/social"
+import { Contact } from "@/components/about/social"
 import T from "@styles/text"
-import { Text, View, ScrollView, Dimensions } from "react-native"
+import { Text, View, Dimensions } from "react-native"
+import { ScrollView } from "react-native-gesture-handler"
 import { useSelector } from "react-redux"
 import Swipe from "@components/nav/swipe"
 import { TextWithLinks } from "@components/shared/link"
@@ -58,15 +59,13 @@ function Content(): JSX.Element {
 
     return (
         <Cluster>
-            <Text style={{...T.bold40, color: color}}>
-                {info.title}
-            </Text>
+            <Text style={{...T.bold40, color: color}}>{info.title}</Text>
             <Space height={15} /> 
             <Line width={5}>
                 <TextWithLinks 
                     style={{...T.boldWithLine, color: color, lineHeight: 18}} 
                     linkStyle={{...T.boldWithLine, color: orange}} 
-                    text={info.intro} 
+                    text={info.intro}
                 />
             </Line>
 
@@ -100,7 +99,7 @@ function Content(): JSX.Element {
 
             <Space height={10} /> 
 
-            <Kontakt/>
+            <Contact/>
         </Cluster>
     )
 }

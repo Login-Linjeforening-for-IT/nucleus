@@ -1,10 +1,11 @@
-import { View, TouchableOpacity } from "react-native"
+import { View, TouchableOpacity, Platform } from "react-native"
 import { useSelector } from "react-redux"
 import MS from "@styles/menuStyles"
 import { BlurView } from "expo-blur"
 import { openBrowserAsync } from 'expo-web-browser';
 import { SvgXml } from "react-native-svg"
 import USBicon from "@assets/menu/USB-temp-icon.svg"
+import { ReactNode } from "react";
 import { NavigationHelpers, ParamListBase, TabNavigationState } from "@react-navigation/native";
 import { BottomTabDescriptorMap, BottomTabNavigationEventMap } from "@react-navigation/bottom-tabs/lib/typescript/src/types";
 
@@ -14,11 +15,17 @@ export type FooterProps = {
     navigation: NavigationHelpers<ParamListBase, BottomTabNavigationEventMap>;
   };
 
-export default function Footer({ state, descriptors, navigation }: FooterProps) {
+export default function Footer({ state, descriptors, navigation }: FooterProps): JSX.Element {
+    return (
+        <Content state={state} descriptors={descriptors} navigation={navigation} />
+    )
+}
+
+function Content({ state, descriptors, navigation }: FooterProps) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     return (
         <>
-            <BlurView style={MS.bMenu} intensity={30}/>
+            <BlurView style={MS.bMenu} experimentalBlurMethod='dimezisBlurView' intensity={Platform.OS === 'ios' ? 30 : 20}/>
             <View style={{
                 ...MS.bMenu,
                 backgroundColor: theme.transparentAndroid

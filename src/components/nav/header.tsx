@@ -10,6 +10,8 @@ import { Image } from "react-native"
 import MS from '@styles/menuStyles'
 import { useDispatch } from 'react-redux'
 import { setTag } from '@redux/event'
+import getHeight from '@utils/getHeight'
+import getCategories from '@utils/getCategories'
 
 export default function Header({ options, route, navigation }: HeaderProps): ReactNode {
     const { theme } = useSelector((state: ReduxState) => state.theme)
@@ -27,30 +29,22 @@ export default function Header({ options, route, navigation }: HeaderProps): Rea
     if (!title && SES) title = lang ? event.name_no : event.name_en
     if (!title && SAS) title = lang ? ad.title_no : ad.title_en
     if (route.name === "ProfileScreen") return <></>
-    // if (tag && !SES) {
-    //     setTimeout(() => {
-    //         if (tag && !SES) dispatch(setTag(''))
-    //     }, 500);
-    // }
 
     const { isDark } = useSelector((state: ReduxState) => state.theme )
     const  [backIcon, setBackIcon] = useState(isDark 
         ? require('@assets/icons/goback777.png')
         : require('@assets/icons/goback111.png'))
-
+    
     return (
         <BlurWrapper>
-            <View style={{...GS.headerView, top: title.length > 40 ? 
-                Dimensions.get("window").height / 17 - 12
-                : Dimensions.get("window").height / 17
-            }}>
+            <View style={{...GS.headerView, top: Dimensions.get("window").height / 17}}>
                 <View style={GS.innerHeaderViewOne}>
                     {options.headerComponents?.left ? options.headerComponents?.left.map((node, index) => 
                         <View style={GS.logo} key={index}>{node}</View> 
                     ) : 
                     <TouchableOpacity onPress={() => {
                         setBackIcon(orangeIcon)
-                        if (tag) dispatch(setTag(''))
+                        if (tag.title) dispatch(setTag({ title: "", body: "" }))
                         navigation.goBack()
                     }}>
                         <Image style={{...MS.tMenuIcon, left: 5}} source={backIcon}></Image>
@@ -84,24 +78,38 @@ function BlurWrapper(props: PropsWithChildren) {
     const event = useSelector((state: ReduxState) => state.event)
     const ad = useSelector((state: ReduxState) => state.ad)
     const route = useRoute()
-    const defaultHeight = Dimensions.get('window').height * 8 / 100 + (StatusBar.currentHeight ? StatusBar.currentHeight - 7 : 0)
+    const defaultHeight = 
+    Dimensions.get('window').height * 8 // Base decrementor for both platforms
+    / (Platform.OS === 'ios' ? 85 // Base height of header on iOS
+    : 100 // Base height of header on Android
+    ) + (StatusBar.currentHeight ? StatusBar.currentHeight - 2 // Subtractor for Statusbar visible on Android
+     : 0 // Defaults to 0 if no statusbar is visible on Android
+    )
     const isSearchingEvents = event.search && route.name === "EventScreen"
+    const categories = getCategories({lang, categories: event.categories})
+    const item = isSearchingEvents ? categories : ad.skills
     const isSearchingAds = ad.search && route.name === "AdScreen"
-    const cat = lang ? event.categories.no : event.categories.en
-    const categories = cat.length || 0
-    const extraHeight = (isSearchingEvents && 6 * categories) || (isSearchingAds && 9.5 * ad.skills.length) || 0
-    const height = defaultHeight + extraHeight + (isSearchingEvents || isSearchingAds
-        ? Platform.OS === "ios" ? 120 : 110
-        : Platform.OS === "ios" ? 20 : 5)
+    const extraHeight = getHeight(item.length)
+
+    const height = defaultHeight + (isSearchingEvents || isSearchingAds
+        ? Platform.OS === "ios" 
+            ? 50 + extraHeight // Extraheight on iOS
+            : isSearchingEvents 
+                ? 35 + extraHeight // Extraheight during eventSearch on Android
+                : 25 + extraHeight // Extraheight during adSearch on Android
+        : Platform.OS === "ios" 
+            ? 20 // Extra base height for header on iOS while not searching
+            : 5  // Extra base height for header on Android while not searching
+        )
 
     return (
         <>
             <BlurView 
-                style={{height: height}} 
-                intensity={Platform.OS === "ios" ? 30 : 20}
+                style={{height}} 
+                experimentalBlurMethod='dimezisBlurView' 
+                intensity={Platform.OS === "ios" ? 30 : 20} 
             />
-            <View style={{...GS.blurBackgroundView,
-                height: height,
+            <View style={{...GS.blurBackgroundView, height,
                 backgroundColor: theme.transparentAndroid
             }}>{props.children}</View>
         </>
