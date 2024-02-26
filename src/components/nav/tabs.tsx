@@ -1,6 +1,6 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { StackProps } from "@interfaces"
-import { NavigationContainer } from "@react-navigation/native"
+import { NavigationContainer, DefaultTheme } from "@react-navigation/native"
 import Footer from "@nav/footer"
 import { useSelector } from "react-redux"
 import EventScreen from "@screens/event"
@@ -21,7 +21,7 @@ const Tab = createBottomTabNavigator()
  * @returns Application with navigation
  */
 export default function Navigator(): JSX.Element {
-    const { isDark } = useSelector((state: ReduxState) => state.theme )
+    const { isDark, theme } = useSelector((state: ReduxState) => state.theme )
 
     const screens = [
         {
@@ -50,8 +50,16 @@ export default function Navigator(): JSX.Element {
         }
     ]
 
+    const navTheme = {
+        ...DefaultTheme,
+        colors: {
+            ...DefaultTheme.colors,
+            background: theme.background
+        }
+    }
+
     return (
-        <NavigationContainer>
+        <NavigationContainer theme={navTheme}>
             <Tab.Navigator
                 // Set initialscreen at to not defaut to top of tab stack
                 initialRouteName={screens[0].name}

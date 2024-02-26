@@ -17,7 +17,6 @@ export default function BasicInfo() {
     const textNO = { host: "Arrangør:   ", more: "Mer info"}
     const textEN = { host: "Organizer:   ", more: "More info"}
     const text = lang ? textNO : textEN
-    console.log(event.event)
     const info = lang ? event.event.informational_no : event.event.informational_en
     const host = findOrgName()
 

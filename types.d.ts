@@ -469,7 +469,9 @@ type NotificationList = {
 
 type EventStackParamList = {
     EventScreen: undefined
-    SpecificEventScreen: undefined
+    SpecificEventScreen: {
+        eventID: number
+    }
 }
 
 type AdStackParamList = {

@@ -13,13 +13,15 @@ import { fetchEventDetails } from "@utils/fetch"
 import { setEvent } from "@redux/event"
 import Tag from "@components/shared/tag"
 import TagInfo from "@components/shared/tagInfo"
+import { StackScreenProps } from "@react-navigation/stack"
 
 /**
  *
  * @param param0
  * @returns
  */
-export default function SpecificEventScreen(): JSX.Element {
+export default function SpecificEventScreen({route:{params}}: StackScreenProps<EventStackParamList>): JSX.Element {
+    if (params==undefined) return <></>
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const { event:{event} } = useSelector((state: ReduxState) => state.event)
@@ -36,16 +38,17 @@ export default function SpecificEventScreen(): JSX.Element {
     const descriptionCheck = lang ? 'description_no' : 'description_en'
 
     async function getDetails() {
-        const response = await fetchEventDetails(event.id)
+        if (!params) return
+        const response = await fetchEventDetails(params.eventID)
 
         if (response) dispatch(setEvent(response))
     }
 
     useEffect(() => {
-        if (event?.id) {
-            getDetails()
-        }
-    })
+        getDetails()
+    }, [params])
+
+    if(!event) return <></>
 
     return (
         <Swipe left="EventScreen">

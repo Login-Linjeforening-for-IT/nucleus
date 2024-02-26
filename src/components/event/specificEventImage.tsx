@@ -5,10 +5,10 @@ import { SvgUri } from "react-native-svg"
 import { useSelector } from "react-redux"
 
 export default function SpecificEventImage() {
-    const { event:{event} } = useSelector((state: ReduxState) => state.event)
-    if (!event) return null
+    const { event } = useSelector((state: ReduxState) => state.event)
+    if (!event.event) return null
 
-    if ((event.image_small).includes(".svg")) {
+    if ((event.event.image_small).includes(".svg")) {
         return (
             <SvgUri
                 style={{alignSelf: "center", marginTop: 8}}
@@ -17,7 +17,7 @@ export default function SpecificEventImage() {
                 uri={`https://cdn.login.no/img/events/${event.image_small}`}
             />
         )
-    } else if (event.image_small.includes(".png")){
+    } else if (event.event.image_small.includes(".png")){
         return <Image
             style={ES.specificEventImage}
             source={{uri: `https://cdn.login.no/img/events/${event.image_small}`}}
