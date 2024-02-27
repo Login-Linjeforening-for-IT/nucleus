@@ -3,7 +3,7 @@ import Space from "@/components/shared/utils"
 import { useSelector } from "react-redux"
 import AS from "@styles/adStyles"
 import T from "@styles/text"
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useMemo, useState } from "react"
 import { SvgUri } from "react-native-svg"
 import capitalizeFirstLetter from "@utils/capitalizeFirstLetter"
 import RenderHTML from "react-native-render-html"
@@ -18,6 +18,7 @@ import {
     Text,
     ImageSourcePropType
 } from "react-native"
+import Embed from "@components/event/embed"
 
 type AdClusterLocationProps = {
     ad: AdProps
@@ -28,16 +29,25 @@ type SocialProps = {
     source: ImageSourcePropType
 }
 
+type InfoViewProps = {
+    titleNO: string
+    titleEN: string
+    text: string | undefined
+}
+
+type RenderDescriptionProps = {
+    description: string
+}
+
+const isIOS = Platform.OS === 'ios'
 /**
  * Function for drawing a small image on the left side of the ad cluster
  * @param props
  * @returns               Small banner image
  */
 export default function AdInfo({ad}: {ad: AdProps}) {
-    const { lang } = useSelector((state: ReduxState) => state.lang)
-    const { theme } = useSelector((state: ReduxState) => state.theme)
     const [deadline, setDeadline] = useState("")
-    const loc = ad.cities.map(city => capitalizeFirstLetter(city)).join(", ")
+    const loc = ad.cities?.map(city => capitalizeFirstLetter(city)).join(", ")
     const type = capitalizeFirstLetter(ad.job_type)
    
     useEffect(() => {
@@ -50,41 +60,9 @@ export default function AdInfo({ad}: {ad: AdProps}) {
 
     return (
         <View style={{marginBottom: 10}}>
-            <View style={AS.adInfoInsideView}>
-                <Text style={{
-                    ...AS.adInfoType, width: lang ? "40%" : "25%", 
-                    color: theme.oppositeTextColor
-                }}>
-                    {lang ? "Sted: " : "Location: "}
-                </Text>
-                <Text style={{...AS.adInfo, color: theme.textColor}}>
-                    {loc}
-                </Text>
-            </View>
-            <View style={AS.adInfoInsideView}>
-                <Text style={{
-                    ...AS.adInfoType, 
-                    width: lang ? "40%" : "25%",
-                    color: theme.oppositeTextColor
-                }}>
-                    {lang ? "Ansettelsesform: " : "Position: "}
-                </Text>
-                <Text style={{...AS.adInfo, color: theme.textColor}}>
-                    {type}
-                </Text>
-            </View>
-            <View style={AS.adInfoInsideView}>
-                <Text style={{
-                    ...AS.adInfoType, 
-                    width: lang ? "40%" : "25%", 
-                    color: theme.oppositeTextColor
-                }}>
-                    {lang ? "Frist: " : "Deadline: "}
-                </Text>
-                <Text style={{...AS.adInfo, color: theme.textColor}}>
-                    {deadline}
-                </Text>
-            </View>
+            <InfoView titleNO="Sted: " titleEN="Location: " text={loc} />
+            <InfoView titleNO="Ansettelsesform: " titleEN="Position: " text={type} />
+            <InfoView titleNO="Frist: " titleEN="Deadline: " text={deadline} />
         </View>
     )
 }
@@ -95,33 +73,25 @@ export default function AdInfo({ad}: {ad: AdProps}) {
  * @returns               Small banner image
  */
 export function AdBanner({url}: {url: string}) {
+    if (!url) return null
 
     if (url?.endsWith(".svg")) {
         return <SvgUri
             style={{alignSelf: "center", backgroundColor: "white"}}
             width={(Dimensions.get("window").width) / 1.2}
             height={Dimensions.get("window").width / 3}
-            uri={`https://cdn.login.no/img/organizations/${url}`}
+            uri={`https://cdn.login.no/img/ads/${url}`}
         />
     }
 
-    if ((url?.endsWith(".png") 
-        || url?.endsWith(".jpg") 
-        || url?.endsWith(".jpg") 
-        || url?.endsWith(".jpeg") 
-        || url?.endsWith(".gif")
-    ) && !url?.startsWith("http")) {
+    if (validFileType(url) && !url?.startsWith("http")) {
         return <Image 
             style={AS.adBanner}
-            source={{uri: `https://cdn.login.no/img/organizations/${url}`}}
+            source={{uri: `https://cdn.login.no/img/ads/${url}`}}
         />
     }
 
-    if ((url?.endsWith(".png") 
-        || url?.endsWith(".jpg") 
-        || url?.endsWith(".jpeg") 
-        || url?.endsWith(".gif")
-    ) && url?.includes("http")) {
+    if (validFileType(url) && url?.includes("http")) {
         return <Image style={AS.adBanner} source={{uri: url}} />
     }
 
@@ -141,19 +111,15 @@ export function AdClusterImage({url}: {url: string | undefined}) {
     // Handles svg icons
     if (url?.endsWith(".svg")) {
         return <SvgUri
-            style={{alignSelf: "center", backgroundColor: "white", borderRadius: 5}}
-            width={90}
-            height={60}
-            uri={`https://cdn.login.no/img/organizations/${url}`}
+        style={{alignSelf: "center", backgroundColor: "white", borderRadius: 5}}
+        width={90}
+        height={60}
+        uri={`https://cdn.login.no/img/organizations/${url}`}
         />
     }
-
+    
     // Handles png, jpg and gif icons from Login CDN
-    if ((url?.endsWith(".png") 
-        || url?.endsWith(".jpg") 
-        || url?.endsWith(".jpeg") 
-        || url?.endsWith(".gif")
-    ) && !url?.startsWith("http")) {
+    if (validFileType(url) && !url?.startsWith("http")) {
         return <Image 
             style={AS.adBannerSmall}
             source={{uri: `https://cdn.login.no/img/organizations/${url}`}}
@@ -161,15 +127,8 @@ export function AdClusterImage({url}: {url: string | undefined}) {
     }
 
     // Handles png, jpg and gif icons from extern location
-    if ((url?.endsWith(".png") 
-        || url?.endsWith(".jpg") 
-        || url?.endsWith(".jpeg") 
-        || url?.endsWith(".gif")
-    ) && url?.includes("http")) {
-        return <Image 
-            style={AS.adBannerSmall}
-            source={{uri: url}}
-        />
+    if (validFileType(url) && url?.includes("http")) {
+        return <Image style={AS.adBannerSmall} source={{uri: url}} />
     }
 
     // Handles missing asset (default png)
@@ -193,7 +152,7 @@ export function AdClusterLocation({ad}: AdClusterLocationProps) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const type = capitalizeFirstLetter(ad.job_type)
-    const location = ad.cities.map(city => capitalizeFirstLetter(city)).join(", ")
+    const location = ad.cities?.map(city => capitalizeFirstLetter(city)).join(", ")
     let name =  lang ? ad.title_no || ad.title_en : ad.title_en || ad.title_no
     let info = `${type}${location ? `. ${location}`:''}`
     let halfWidth = Platform.OS === "ios" 
@@ -240,44 +199,46 @@ export function AdClusterLocation({ad}: AdClusterLocationProps) {
 export function AdDescription({ad}: {ad: DetailedAd}) {
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    const skills = ad.skills ? ad.skills.join(", ") : []
+
+    const content = useMemo(() => {
+        const skills = ad.skills ? ad.skills.join(", ") : []
     
-    const tempShort = lang 
-        ? ad.description_short_no || ad.description_short_en
-        : ad.description_short_en || ad.description_short_no
-    const tempLong = lang 
-        ? ad.description_long_no || ad.description_long_en
-        : ad.description_long_en || ad.description_long_no
+        const tempShort = lang 
+            ? ad.description_short_no || ad.description_short_en
+            : ad.description_short_en || ad.description_short_no
+        const tempLong = lang 
+            ? ad.description_long_no || ad.description_long_en
+            : ad.description_long_en || ad.description_long_no
 
-    const shortDescription = tempShort ? tempShort.replace(/\\n/g, '<br>') : ''
-    const LongDescription = tempLong ? tempLong.replace(/\\n/g, '<br>') : ''
+        const shortDescription = tempShort ? tempShort.replace(/\\n/g, '<br>') : ''
+        const LongDescription = tempLong ? tempLong.replace(/\\n/g, '<br>') : ''
 
-    return (
-        <View style={{marginBottom: 10}}>
-            <Text style={{...AS.adInfoBold, color: theme.textColor}}>
-                Kort fortalt
-            </Text>
-            <Text style={{...T.paragraph, color: theme.textColor}}>
-                {shortDescription}
-            </Text>
-            <Space height={10} /> 
-            <Text style={{...AS.adInfoBold, color: theme.textColor}}>
-                {lang ? "Ferdigheter" : "Skills"}
-            </Text>
-            <Text style={{...T.paragraph, color: theme.textColor}}>
-                {skills}
-            </Text>
-            <Space height={10} /> 
-            <Text style={{...AS.adInfoBold, color: theme.textColor}}>
-                Om stillingen
-            </Text>
-            {LongDescription && <RenderHTML
-                baseStyle={{maxWidth: "100%",color: theme.textColor}}
-                contentWidth={0}
-                source={{html: LongDescription}}
-            />}
-        </View>
-    )
+        return (
+            <View style={{marginBottom: 10}}>
+                <Text style={{...AS.adInfoBold, color: theme.textColor}}>
+                    {lang ? "Kort fortalt" : 'In short'}
+                </Text>
+                <Text style={{...T.paragraph, color: theme.textColor}} selectable={isIOS}>
+                    {shortDescription}
+                </Text>
+                <Space height={10} /> 
+                <Text style={{...AS.adInfoBold, color: theme.textColor}}>
+                    {lang ? "Ferdigheter" : "Skills"}
+                </Text>
+                <Text style={{...T.paragraph, color: theme.textColor}} selectable={isIOS}>
+                    {skills}
+                </Text>
+                <Space height={10} /> 
+                <Text style={{...AS.adInfoBold, color: theme.textColor}}>
+                    {lang ? "Om stillingen" : 'About the position'}
+                </Text>
+                
+                {LongDescription && <RenderDescription description={LongDescription} />}
+            </View>
+        )
+    }, [ad])
+
+    return content
 }
 
 /**
@@ -289,12 +250,6 @@ export function AdMedia({ad}: {ad: DetailedAd}) {
     const { lang } = useSelector((state: ReduxState) => state.lang)
 
     const social = [
-        // {
-        //     url: ad.link_discord,
-        //     source: isDark 
-        //         ? require("@assets/social/discord-white.png")
-        //         : require("@assets/social/discord-black.png")
-        // },
         {
             url: ad.link_instagram,
             source: isDark
@@ -382,11 +337,7 @@ export function AdTitle({ad}: {ad: DetailedAd}) {
         }
 
         // Handles png, jpg and gif icons from Login CDN
-        if ((logo?.endsWith(".png") 
-            || logo?.endsWith(".jpg") 
-            || logo?.endsWith(".jpeg") 
-            || logo?.endsWith(".gif")
-        ) && !logo?.startsWith("http")) {
+        if (validFileType(logo) && !logo?.startsWith("http")) {
             return <Image 
                 style={AS.adBannerSmall}
                 source={{uri: `https://cdn.login.no/img/organizations/${logo}`}}
@@ -394,11 +345,7 @@ export function AdTitle({ad}: {ad: DetailedAd}) {
         }
 
         // Handles png, jpg and gif icons from extern location
-        if ((logo?.endsWith(".png") 
-            || logo?.endsWith(".jpg") 
-            || logo?.endsWith(".jpeg") 
-            || logo?.endsWith(".gif")
-        ) && logo?.includes("http")) {
+        if (validFileType(logo) && logo?.includes("http")) {
             return <Image style={AS.adBannerSmall} source={{uri: logo}} />
         }
 
@@ -449,12 +396,76 @@ export function AdUpdateInfo({ad}: {ad: DetailedAd}) {
             }}>
                 {text[0]} {updated}.
             </Text>}
-            <Text style={{...T.contact, fontSize: 12,color: theme.oppositeTextColor}}>
+            {!didUpdate && <Text style={{...T.contact, fontSize: 12, marginBottom: 5, color: theme.oppositeTextColor}}>
                 {text[1]} {created}.
-            </Text>
-            <Text style={{...T.contact, fontSize: 12, marginVertical: 5, color: theme.oppositeTextColor}}>
+            </Text>}
+            <Text style={{...T.contact, fontSize: 12, color: theme.oppositeTextColor}}>
                 Ad ID: {ad.id}
             </Text>
         </View>
     )
+}
+
+function InfoView({titleNO, titleEN, text}: InfoViewProps) {
+    const { lang } = useSelector((state: ReduxState) => state.lang)
+    const { theme } = useSelector((state: ReduxState) => state.theme)
+
+    if (!text) return null
+
+    return (
+        <View style={AS.adInfoInsideView}>
+            <Text style={{
+                ...AS.adInfoType, width: lang ? "40%" : "25%", 
+                color: theme.oppositeTextColor
+            }}>
+                {lang ? titleNO : titleEN}
+            </Text>
+            <Text style={{...AS.adInfo, color: theme.textColor}}>
+                {text}
+            </Text>
+        </View>
+    )
+}
+
+function validFileType(url: string | undefined) {
+    if (url?.endsWith(".png") 
+        || url?.endsWith(".jpg") 
+        || url?.endsWith(".jpg") 
+        || url?.endsWith(".jpeg") 
+        || url?.endsWith(".gif")
+    ) return true
+
+    return false
+}
+
+function RenderDescription({description}: RenderDescriptionProps) {
+    const { lang } = useSelector((state: ReduxState) => state.lang)
+    const { theme } = useSelector((state: ReduxState) => state.theme)
+
+    const content = useMemo(() => {
+        if (!description) return null
+
+        const embededEvent = /(\[:\w+\]\(\d+\))/
+        const findNumber = /\((\d+)\)/
+        const split = description.replace(/\\n/g, '<br>').split(embededEvent)
+
+        return split.map((content, index) => {
+            const match = content.match(findNumber)
+            const number = match ? Number(match[1]) : null
+
+            if (!content.includes('[:event]') && !content.includes('[:jobad]')) {
+                return <RenderHTML
+                    key={index}
+                    baseStyle={{color: theme.textColor}}
+                    contentWidth={10}
+                    source={{html: content}}
+                    defaultTextProps={{selectable: isIOS}}
+                />
+            }
+
+            return <Embed key={index} id={number} type={content.includes('[:event]') ? "event" : "ad"} />
+        })
+    }, [lang, description, theme.textColor])
+
+    return content
 }

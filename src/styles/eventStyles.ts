@@ -116,6 +116,7 @@ export const ES = StyleSheet.create({
     // Filter view
     clusterFilterView: {
         flexDirection: "row",
+        maxHeight: 100
     },
     // EventScreen filter text
     clusterFilterText: {
@@ -171,6 +172,11 @@ export const ES = StyleSheet.create({
     },
     sesContent: {
         height: Dimensions.get("window").height + 200,
+    },
+    id: {
+        alignSelf: 'center', 
+        fontSize: 15, 
+        marginVertical: 10
     }
 })
 

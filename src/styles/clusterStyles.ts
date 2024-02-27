@@ -33,8 +33,7 @@ export const CS = StyleSheet.create({
         transform: [{ rotate: "180deg" }],
     },
     arrowImage: {
-        left: -10,
-        height: 20,
+        height: 15,
         aspectRatio: 1 / 1,
         resizeMode: "contain",
     },

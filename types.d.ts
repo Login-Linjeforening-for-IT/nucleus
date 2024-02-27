@@ -133,7 +133,7 @@ type AdProps = {
     organization_name_en: string
     organization_logo: string
     skills: string[]
-    cities: string[]
+    cities: string[] | null
 }
 
 type ExtraAdProps = {
@@ -452,6 +452,10 @@ type NotificationList = {
 type EventStackParamList = {
     EventScreen: undefined
     SpecificEventScreen: undefined
+}
+
+type RoootStackParamList = {
+    InfoModal: undefined
 }
 
 type AdStackParamList = {

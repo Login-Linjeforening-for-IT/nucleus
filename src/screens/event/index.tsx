@@ -83,31 +83,6 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
     // Renders when the screen is loaded
     }, [])
 
-    // --- FETCHES API AND UPDATES CACHE EVERY 10 SECONDS ---
-    useEffect(() => {
-        let interval: Interval = 0
-
-        // Only when filter is closed to prevent "no match" issue
-        if (!search) {
-            interval = setInterval(() => {
-                // Storing the current time
-                (async() => {
-                    const events = await fetchEvents()
-
-                    if (events.length) {
-                        dispatch(setEvents(events))
-                        dispatch(setLastFetch(LastFetch()))
-                    }
-                })()
-                // Runs every 10 seconds
-            }, 10000)
-            // Clears the interval when the filter is opened
-        } else clearInterval(interval)
-
-        // Clears interval when unmounted to prevent memory leaks
-        return () => clearInterval(interval)
-    }, [search])
-
     useEffect(() => {
         // --- SETUP CODE ONCE APP IS DOWNLOADED---
         // Displays when the API was last fetched successfully

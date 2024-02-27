@@ -79,38 +79,6 @@ export default function AdScreen({ navigation }: ScreenProps): JSX.Element {
     // Renders when the screen is loaded
     }, [])
 
-    // Fetches API and updates cache every 10 seconds
-    useEffect(() => {
-        let interval: Interval = 0
-
-        // Only when filter is closed to prevent "no match" issue
-        if (!search) {
-            interval = setInterval(() => {
-                // Storing the current time
-                (async() => {
-                    const ads = await fetchAds()
-
-                    if (ads.length) {
-                        const detailedAdPromises = ads.map(async(ad) => {
-                            const details = await fetchAdDetails(ad)
-                            return details
-                        })
-
-                        const detailedAds = await Promise.all(detailedAdPromises)
-
-                        dispatch(setAds(detailedAds))
-                        dispatch(setLastFetch(LastFetch()))
-                    }
-                })()
-                // Runs every 10 seconds
-            }, 10000)
-            // Clears the interval when the filter is opened
-        } else clearInterval(interval)
-
-        // Clears interval when unmounted to prevent memory leaks
-        return () => clearInterval(interval)
-    }, [search])
-
     useEffect(() => {
         // --- SETUP CODE ONCE APP IS DOWNLOADED---
         // Displays when the API was last fetched successfully

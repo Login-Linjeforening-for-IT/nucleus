@@ -6,6 +6,7 @@ type HandleSwipeProps = {
     event: PanGestureHandlerGestureEvent
     screenLeft?: string
     screenRight?: string
+    id?: number
 }
 
 /**
@@ -17,7 +18,7 @@ type HandleSwipeProps = {
  * @param screenLeft The screen to the left of where you are (if any)
  * @param screenRight The screen to the right of where you are (if any)
  */
-export default function handleSwipe({navigation, event, screenLeft, screenRight}: 
+export default function handleSwipe({navigation, event, screenLeft, screenRight, id}: 
 HandleSwipeProps): void {
     const { velocityX, velocityY } = event.nativeEvent;
 
