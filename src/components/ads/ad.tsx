@@ -34,6 +34,7 @@ type InfoViewProps = {
     text: string | undefined
 }
 
+const isIOS = Platform.OS === 'ios'
 /**
  * Function for drawing a small image on the left side of the ad cluster
  * @param props
@@ -67,21 +68,21 @@ export default function AdInfo({ad}: {ad: AdProps}) {
  * @returns               Small banner image
  */
 export function AdBanner({url}: {url: string}) {
-    if (!url) return <></>
+    if (!url) return null
 
     if (url?.endsWith(".svg")) {
         return <SvgUri
             style={{alignSelf: "center", backgroundColor: "white"}}
             width={(Dimensions.get("window").width) / 1.2}
             height={Dimensions.get("window").width / 3}
-            uri={`https://cdn.login.no/img/organizations/${url}`}
+            uri={`https://cdn.login.no/img/ads/${url}`}
         />
     }
 
     if (validFileType(url) && !url?.startsWith("http")) {
         return <Image 
             style={AS.adBanner}
-            source={{uri: `https://cdn.login.no/img/organizations/${url}`}}
+            source={{uri: `https://cdn.login.no/img/ads/${url}`}}
         />
     }
 
@@ -105,13 +106,13 @@ export function AdClusterImage({url}: {url: string | undefined}) {
     // Handles svg icons
     if (url?.endsWith(".svg")) {
         return <SvgUri
-            style={{alignSelf: "center", backgroundColor: "white", borderRadius: 5}}
-            width={90}
-            height={60}
-            uri={`https://cdn.login.no/img/organizations/${url}`}
+        style={{alignSelf: "center", backgroundColor: "white", borderRadius: 5}}
+        width={90}
+        height={60}
+        uri={`https://cdn.login.no/img/organizations/${url}`}
         />
     }
-
+    
     // Handles png, jpg and gif icons from Login CDN
     if (validFileType(url) && !url?.startsWith("http")) {
         return <Image 
@@ -212,14 +213,14 @@ export function AdDescription({ad}: {ad: DetailedAd}) {
                 <Text style={{...AS.adInfoBold, color: theme.textColor}}>
                     {lang ? "Kort fortalt" : 'In short'}
                 </Text>
-                <Text style={{...T.paragraph, color: theme.textColor}} selectable={true}>
+                <Text style={{...T.paragraph, color: theme.textColor}} selectable={isIOS}>
                     {shortDescription}
                 </Text>
                 <Space height={10} /> 
                 <Text style={{...AS.adInfoBold, color: theme.textColor}}>
                     {lang ? "Ferdigheter" : "Skills"}
                 </Text>
-                <Text style={{...T.paragraph, color: theme.textColor}} selectable={true}>
+                <Text style={{...T.paragraph, color: theme.textColor}} selectable={isIOS}>
                     {skills}
                 </Text>
                 <Space height={10} /> 
@@ -230,7 +231,7 @@ export function AdDescription({ad}: {ad: DetailedAd}) {
                     baseStyle={{maxWidth: "100%", color: theme.textColor}}
                     contentWidth={0}
                     source={{html: LongDescription}}
-                    defaultTextProps={{selectable: true}}
+                    defaultTextProps={{selectable: isIOS}}
                 />}
             </View>
         )
@@ -394,10 +395,10 @@ export function AdUpdateInfo({ad}: {ad: DetailedAd}) {
             }}>
                 {text[0]} {updated}.
             </Text>}
-            <Text style={{...T.contact, fontSize: 12,color: theme.oppositeTextColor}}>
+            {!didUpdate && <Text style={{...T.contact, fontSize: 12, marginBottom: 5, color: theme.oppositeTextColor}}>
                 {text[1]} {created}.
-            </Text>
-            <Text style={{...T.contact, fontSize: 12, marginVertical: 5, color: theme.oppositeTextColor}}>
+            </Text>}
+            <Text style={{...T.contact, fontSize: 12, color: theme.oppositeTextColor}}>
                 Ad ID: {ad.id}
             </Text>
         </View>

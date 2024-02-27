@@ -26,8 +26,8 @@ export default function Header({ options, route, navigation }: HeaderProps): Rea
             ? require('@text/no.json').screens[route.name]
             : require('@text/en.json').screens[route.name])
     
-    if (!title && SES) title = lang ? event.name_no : event.name_en
-    if (!title && SAS) title = lang ? ad.title_no : ad.title_en
+    if (!title && SES) title = lang ? event.name_no || event.name_en : event.name_en || event.name_no
+    if (!title && SAS) title = lang ? ad.title_no || ad.title_en : ad.title_en || ad.title_no
     if (route.name === "ProfileScreen") return <></>
 
     const { isDark } = useSelector((state: ReduxState) => state.theme )
@@ -52,7 +52,7 @@ export default function Header({ options, route, navigation }: HeaderProps): Rea
                     }
                 </View>
                 <Text style={{...GS.headerTitle, color: theme.titleTextColor, 
-                            width: SES ? 300 : 150, textAlign: "center"}}>
+                            width: SES || SAS ? 300 : 150, textAlign: "center", top: title.length > 30 ? -8 : undefined}}>
                             {title}
                         </Text>
                     <View style={GS.innerHeaderViewTwo}>
