@@ -15,7 +15,7 @@ export default function InfoBlock({infoText}: InfoBlockProps){
             backgroundColor: event.canceled ? '#800000B3' : '#003946',
             minHeight: 50,
             width: '100%',
-            borderRadius: 5,
+            borderRadius: 10,
             overflow: 'hidden',
             flexDirection: 'row',
             alignItems: 'center',
