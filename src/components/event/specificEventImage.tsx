@@ -17,13 +17,13 @@ export default function SpecificEventImage() {
             />
         )
     } 
-
-    if (event.image_small.includes(".png")){
+    
+    if (event.image_small.includes(".png")) {
         return <Image
             style={ES.specificEventImage}
             source={{uri: `https://cdn.login.no/img/events/banner/${event.image_small}`}}
         />
-    }
+    } 
     
     return <StaticImage event={event} />
 }

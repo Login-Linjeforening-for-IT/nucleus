@@ -454,6 +454,10 @@ type EventStackParamList = {
     SpecificEventScreen: undefined
 }
 
+type RoootStackParamList = {
+    InfoModal: undefined
+}
+
 type AdStackParamList = {
     AdScreen: undefined
     SpecificAdScreen: undefined
