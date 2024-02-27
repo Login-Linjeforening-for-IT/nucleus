@@ -18,6 +18,7 @@ import {
     Text,
     ImageSourcePropType
 } from "react-native"
+import Embed from "@components/event/embed"
 
 type AdClusterLocationProps = {
     ad: AdProps
@@ -32,6 +33,10 @@ type InfoViewProps = {
     titleNO: string
     titleEN: string
     text: string | undefined
+}
+
+type RenderDescriptionProps = {
+    description: string
 }
 
 const isIOS = Platform.OS === 'ios'
@@ -227,12 +232,8 @@ export function AdDescription({ad}: {ad: DetailedAd}) {
                 <Text style={{...AS.adInfoBold, color: theme.textColor}}>
                     {lang ? "Om stillingen" : 'About the position'}
                 </Text>
-                {LongDescription && <RenderHTML
-                    baseStyle={{maxWidth: "100%", color: theme.textColor}}
-                    contentWidth={0}
-                    source={{html: LongDescription}}
-                    defaultTextProps={{selectable: isIOS}}
-                />}
+                
+                {LongDescription && <RenderDescription description={LongDescription} />}
             </View>
         )
     }, [ad])
@@ -435,4 +436,36 @@ function validFileType(url: string | undefined) {
     ) return true
 
     return false
+}
+
+function RenderDescription({description}: RenderDescriptionProps) {
+    const { lang } = useSelector((state: ReduxState) => state.lang)
+    const { theme } = useSelector((state: ReduxState) => state.theme)
+
+    const content = useMemo(() => {
+        if (!description) return null
+
+        const embededEvent = /(\[:\w+\]\(\d+\))/
+        const findNumber = /\((\d+)\)/
+        const split = description.replace(/\\n/g, '<br>').split(embededEvent)
+
+        return split.map((content, index) => {
+            const match = content.match(findNumber)
+            const number = match ? Number(match[1]) : null
+
+            if (!content.includes('[:event]') && !content.includes('[:jobad]')) {
+                return <RenderHTML
+                    key={index}
+                    baseStyle={{color: theme.textColor}}
+                    contentWidth={10}
+                    source={{html: content}}
+                    defaultTextProps={{selectable: isIOS}}
+                />
+            }
+
+            return <Embed key={index} id={number} type={content.includes('[:event]') ? "event" : "ad"} />
+        })
+    }, [lang, description, theme.textColor])
+
+    return content
 }
