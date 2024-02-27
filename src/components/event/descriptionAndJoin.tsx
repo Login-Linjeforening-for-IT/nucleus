@@ -16,7 +16,7 @@ export default function DescriptionAndJoin() {
         <Card>
             <View>
                 <Space height={5} />
-                <Text style={{...T.centered20, color: theme.textColor}}>
+                <Text style={{...T.text20, color: theme.textColor}}>
                     {name}
                 </Text>
             </View>
