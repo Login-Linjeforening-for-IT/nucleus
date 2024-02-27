@@ -62,7 +62,7 @@ export default function SpecificEventScreen(): JSX.Element {
             <View style={{...ES.sesContent, backgroundColor: theme.background}}>
                 <Space height={Platform.OS=="ios" 
                     ? Dimensions.get("window").height / 8.5
-                    : Dimensions.get("window").height / 6.15
+                    : Dimensions.get("window").height / 7.5
                 } />
                 <ScrollView 
                     showsVerticalScrollIndicator={false} 
