@@ -1,8 +1,10 @@
-import { Text, TouchableOpacity, View } from "react-native"
+import { Platform, Text, TouchableOpacity, View } from "react-native"
 import { useSelector } from "react-redux"
 import React from "react"
 
 import { useNavigation } from "@react-navigation/native"
+
+const isIOS = Platform.OS === 'ios'
 
 export default function TagInfo() {
     const { theme } = useSelector((state: ReduxState) => state.theme)
@@ -10,7 +12,7 @@ export default function TagInfo() {
     const navigation = useNavigation()
 
     return (
-        <TouchableOpacity style={{flex: 1, justifyContent: 'flex-end'}}
+        <TouchableOpacity style={{flex: 1, justifyContent: 'flex-end', marginBottom: isIOS ? 30 : undefined}}
             onPress={()=>navigation.goBack()}
             activeOpacity={1}>
             <View style={{backgroundColor: theme.dark, justifyContent: 'center', alignItems: 'center'}}>

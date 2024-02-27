@@ -123,7 +123,16 @@ export default function Navigator(): JSX.Element {
         <NavigationContainer>
             <Root.Navigator screenOptions={{headerShown: false}}>
                 <Root.Screen name="Tabs" component={Tabs}/>
-                <Root.Screen name="InfoModal" options={{presentation: 'transparentModal', cardOverlayEnabled: true, cardStyleInterpolator: animate, transitionSpec: {open: config, close: config}}} component={TagInfo}/>
+                <Root.Screen 
+                    name="InfoModal" 
+                    options={{
+                        presentation: 'transparentModal', 
+                        cardOverlayEnabled: true, 
+                        cardStyleInterpolator: animate, 
+                        transitionSpec: {open: config, close: config}
+                    }}
+                    component={TagInfo}
+                />
             </Root.Navigator>
         </NavigationContainer>
     )
