@@ -31,7 +31,7 @@ type SocialProps = {
 type InfoViewProps = {
     titleNO: string
     titleEN: string
-    text: string
+    text: string | undefined
 }
 
 /**
@@ -41,7 +41,7 @@ type InfoViewProps = {
  */
 export default function AdInfo({ad}: {ad: AdProps}) {
     const [deadline, setDeadline] = useState("")
-    const loc = ad.cities.map(city => capitalizeFirstLetter(city)).join(", ")
+    const loc = ad.cities?.map(city => capitalizeFirstLetter(city)).join(", ")
     const type = capitalizeFirstLetter(ad.job_type)
    
     useEffect(() => {
@@ -146,7 +146,7 @@ export function AdClusterLocation({ad}: AdClusterLocationProps) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const type = capitalizeFirstLetter(ad.job_type)
-    const location = ad.cities.map(city => capitalizeFirstLetter(city)).join(", ")
+    const location = ad.cities?.map(city => capitalizeFirstLetter(city)).join(", ")
     let name =  lang ? ad.title_no || ad.title_en : ad.title_en || ad.title_no
     let info = `${type}${location ? `. ${location}`:''}`
     let halfWidth = Platform.OS === "ios" 
@@ -407,6 +407,8 @@ export function AdUpdateInfo({ad}: {ad: DetailedAd}) {
 function InfoView({titleNO, titleEN, text}: InfoViewProps) {
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
+
+    if (!text) return null
 
     return (
         <View style={AS.adInfoInsideView}>
