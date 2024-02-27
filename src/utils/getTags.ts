@@ -14,6 +14,7 @@ type getTagsProps = {
  */
 export default function getTags({event, lang}: getTagsProps) {
     const description = lang ? event.description_no : event.description_en
+    const title = lang ? event.name_no || event.name_en : event.name_en || event.name_no
     const storedTags = lang ? no : en
     const tags: Tag[] = []
     
@@ -22,7 +23,7 @@ export default function getTags({event, lang}: getTagsProps) {
         if (description.toLowerCase().includes("prog og pils") && !Object.keys(tags).includes("P&P")) tags.push(storedTags["P&P"])
         if (description.toLowerCase().includes("prog og pils") && !Object.keys(tags).includes("P&P")) tags.push(storedTags["P&P"])
         if (!event.canceled && description.includes("er avlyst") || description.includes("is cancel") && !tags.includes(storedTags.Cancelled)) tags.push(storedTags.Cancelled)
-        if (description.toLowerCase().includes("workshop")) tags.push(storedTags.Workshop)
+        if (title.toLowerCase().includes("workshop")) tags.push(storedTags.Workshop)
     }
 
     if (event.canceled && !Object.keys(tags).includes("Cancelled")) tags.push(storedTags.Cancelled)
