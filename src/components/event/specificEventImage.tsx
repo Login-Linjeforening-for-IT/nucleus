@@ -14,13 +14,13 @@ export default function SpecificEventImage() {
                 style={{alignSelf: "center", marginTop: 8}}
                 width={(Dimensions.get("window").width)/1.2}
                 height={Dimensions.get("window").width/3}
-                uri={`https://cdn.login.no/img/events/${event.image_small}`}
+                uri={`https://cdn.login.no/img/events/${event.event.image_small}`}
             />
         )
     } else if (event.event.image_small.includes(".png")){
         return <Image
             style={ES.specificEventImage}
-            source={{uri: `https://cdn.login.no/img/events/${event.image_small}`}}
+            source={{uri: `https://cdn.login.no/img/events/${event.event.image_small}`}}
         />
     } else {
         return <StaticImage event={event} />

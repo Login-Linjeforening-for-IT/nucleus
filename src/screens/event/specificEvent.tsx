@@ -14,6 +14,7 @@ import { setEvent } from "@redux/event"
 import Tag from "@components/shared/tag"
 import TagInfo from "@components/shared/tagInfo"
 import { StackScreenProps } from "@react-navigation/stack"
+import Skeleton from "@components/shared/skelleton"
 
 /**
  *
@@ -21,10 +22,12 @@ import { StackScreenProps } from "@react-navigation/stack"
  * @returns
  */
 export default function SpecificEventScreen({route:{params}}: StackScreenProps<EventStackParamList>): JSX.Element {
-    if (params==undefined) return <></>
+    // if (params==undefined) return <></>
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const { event:{event} } = useSelector((state: ReduxState) => state.event)
+
+    const [loading, setLoading] = React.useState(true)
 
     // if (deepLinkID) {
     //     const response = fetchEventDetails(deepLinkID)
@@ -41,14 +44,17 @@ export default function SpecificEventScreen({route:{params}}: StackScreenProps<E
         if (!params) return
         const response = await fetchEventDetails(params.eventID)
 
-        if (response) dispatch(setEvent(response))
+        if (response) {
+            dispatch(setEvent(response))
+            // setLoading(false)
+        }
     }
 
     useEffect(() => {
         getDetails()
     }, [params])
 
-    if(!event) return <></>
+    // if(!event) return <></>
 
     return (
         <Swipe left="EventScreen">
@@ -59,11 +65,19 @@ export default function SpecificEventScreen({route:{params}}: StackScreenProps<E
                         : Dimensions.get("window").height / 6.15
                     } />
                     <Tag event={event} />
-                    <SpecificEventImage />
+                    <Skeleton loading={loading} height={160}>
+                        <SpecificEventImage />
+                    </Skeleton>
                     <Space height={10} />
-                    <Countdown />
-                    <BasicInfo />
-                    <DescriptionAndJoin />
+                    <Skeleton loading={loading} height={100}>
+                        <Countdown />
+                    </Skeleton>
+                    <Skeleton loading={loading} height={200}>
+                        <BasicInfo />
+                    </Skeleton>
+                    <Skeleton loading={loading} height={300}>
+                        <DescriptionAndJoin />
+                    </Skeleton>
                     <Text style={{
                         alignSelf: 'center', 
                         fontSize: 15, 
