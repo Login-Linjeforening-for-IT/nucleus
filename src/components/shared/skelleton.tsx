@@ -4,7 +4,7 @@ import { LinearGradient } from "expo-linear-gradient"
 import { useSelector } from 'react-redux'
 
 type SkeletonProps = {
-    children: ReactNode
+    children?: ReactNode
     height: number
     loading: boolean
     // style: StyleProp<any>

@@ -65,25 +65,17 @@ export default function SpecificEventScreen({route:{params}}: StackScreenProps<E
                         : Dimensions.get("window").height / 6.15
                     } />
                     <Tag event={event} />
-                    <Skeleton loading={loading} height={160}>
-                        <SpecificEventImage />
-                    </Skeleton>
+                    <SpecificEventImage />
                     <Space height={10} />
-                    <Skeleton loading={loading} height={100}>
-                        <Countdown />
-                    </Skeleton>
-                    <Skeleton loading={loading} height={200}>
-                        <BasicInfo />
-                    </Skeleton>
-                    <Skeleton loading={loading} height={300}>
-                        <DescriptionAndJoin />
-                    </Skeleton>
+                    <Countdown />
+                    <BasicInfo />
+                    <DescriptionAndJoin />
                     <Text style={{
                         alignSelf: 'center', 
                         fontSize: 15, 
                         color: theme.oppositeTextColor,
                         marginVertical: 10
-                    }}>Event ID: {event && event?.id}</Text>
+                    }}>Event ID: {event && event.id}</Text>
                     <Space height={Dimensions.get("window").height / (Platform.OS === 'ios' ? 3 : 2.75)} />
                 </ScrollView>
             </View>

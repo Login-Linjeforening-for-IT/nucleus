@@ -1,4 +1,5 @@
 import { StaticImage } from "@components/about/social"
+import Skeleton from "@components/shared/skelleton"
 import ES from "@styles/eventStyles"
 import { Dimensions, Image } from "react-native"
 import { SvgUri } from "react-native-svg"
@@ -6,7 +7,7 @@ import { useSelector } from "react-redux"
 
 export default function SpecificEventImage() {
     const { event } = useSelector((state: ReduxState) => state.event)
-    if (!event.event) return null
+    if (!event.event) return <Skeleton loading={true} height={160}></Skeleton>
 
     if ((event.event.image_small).includes(".svg")) {
         return (

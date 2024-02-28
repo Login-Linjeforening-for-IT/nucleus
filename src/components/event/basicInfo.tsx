@@ -8,18 +8,21 @@ import T from "@styles/text"
 import { useSelector } from "react-redux"
 import { TextLink } from "@components/shared/link"
 import InfoBlock from "@components/shared/infoBlock"
+import Skeleton from "@components/shared/skelleton"
 
 export default function BasicInfo() {
     const { event } = useSelector((state: ReduxState) => state.event)
-    if (!event.event) return null
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
-    const textNO = { host: "Arrangør:   ", more: "Mer info"}
-    const textEN = { host: "Organizer:   ", more: "More info"}
-    const text = lang ? textNO : textEN
-    const info = lang ? event.event.informational_no : event.event.informational_en
+    let text = {}, info = {}
+    if (event.event){
+        const textNO = { host: "Arrangør:   ", more: "Mer info"}
+        const textEN = { host: "Organizer:   ", more: "More info"}
+        text = lang ? textNO : textEN
+        info = lang ? event.event.informational_no : event.event.informational_en
+    }
     const host = findOrgName()
-
+    
     function findOrgName() {
         if (!event.organizations[0]) {
             return ""
@@ -42,25 +45,37 @@ export default function BasicInfo() {
 
     return (
         <Card>
-            <Start />
-            <End />
-            <Location />
-            <Category />
-            <View style={ES.specificEventInfoView}>
-                <Text style={{ ...T.specificEventInfo, color: theme.textColor }}>{text.host}</Text>
-                <Text style={{ ...T.specificEventInfoContent, color: theme.textColor }}>
-                    {host}
-                    {event.event.link_stream && ' - '}
-                    {event.event.link_stream && <TextLink style={{fontSize: 20, color: "#fd8738", top: 3}} text="Stream" url={event.event.link_stream} />}
-                    {event.event.link_discord && ' - '}
-                    {event.event.link_discord && <TextLink style={{fontSize: 20, color: "#fd8738", top: 3}} text="Discord" url={event.event.link_stream} />}
-                    {event.event.link_facebook && ' - '}
-                    {event.event.link_facebook && <TextLink style={{fontSize: 20, color: "#fd8738", top: 3}} text="Facebook" url={event.event.link_stream} />}
-                    {event.organizations[0]?.link_homepage && ' - '}
-                    {event.organizations[0]?.link_homepage && <TextLink style={{fontSize: 20, color: "#fd8738", top: 3}} text={text.more} url={event.event.link_stream} />}
-                </Text>
-            </View>
-            {info && <InfoBlock infoText={info} />}
+            <Skeleton height={20} loading={true}>
+                <Start />
+            </Skeleton>
+            <Skeleton height={20} loading={true}>
+                <End />
+            </Skeleton>
+            <Skeleton height={20} loading={true}>
+                <Location />
+            </Skeleton>
+            <Skeleton height={20} loading={true}>
+                <Category />
+            </Skeleton>
+            <Skeleton height={20} loading={true}>
+                <View style={ES.specificEventInfoView}>
+                    <Text style={{ ...T.specificEventInfo, color: theme.textColor }}>{text.host}</Text>
+                    <Text style={{ ...T.specificEventInfoContent, color: theme.textColor }}>
+                        {host}
+                        {event.event.link_stream && ' - '}
+                        {event.event.link_stream && <TextLink style={{fontSize: 20, color: "#fd8738", top: 3}} text="Stream" url={event.event.link_stream} />}
+                        {event.event.link_discord && ' - '}
+                        {event.event.link_discord && <TextLink style={{fontSize: 20, color: "#fd8738", top: 3}} text="Discord" url={event.event.link_stream} />}
+                        {event.event.link_facebook && ' - '}
+                        {event.event.link_facebook && <TextLink style={{fontSize: 20, color: "#fd8738", top: 3}} text="Facebook" url={event.event.link_stream} />}
+                        {event.organizations[0]?.link_homepage && ' - '}
+                        {event.organizations[0]?.link_homepage && <TextLink style={{fontSize: 20, color: "#fd8738", top: 3}} text={text.more} url={event.event.link_stream} />}
+                    </Text>
+                </View>
+            </Skeleton>
+            <Skeleton height={20} loading={true}>
+                {info && <InfoBlock infoText={info} />}
+            </Skeleton>
         </Card>
     )
 }
