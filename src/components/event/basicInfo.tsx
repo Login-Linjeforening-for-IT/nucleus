@@ -14,17 +14,20 @@ export default function BasicInfo() {
     const { event } = useSelector((state: ReduxState) => state.event)
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
-    let text = {}, info = {}
-    if (event.event){
+    
+    let text = {host: '', more: ''}, info = ''
+
+    if(event.event){
         const textNO = { host: "Arrangør:   ", more: "Mer info"}
         const textEN = { host: "Organizer:   ", more: "More info"}
         text = lang ? textNO : textEN
         info = lang ? event.event.informational_no : event.event.informational_en
     }
+    
     const host = findOrgName()
     
     function findOrgName() {
-        if (!event.organizations[0]) {
+        if (!event?.organizations[0]) {
             return ""
         }
         switch (event.organizations[0].shortname) {
@@ -45,19 +48,19 @@ export default function BasicInfo() {
 
     return (
         <Card>
-            <Skeleton height={20} loading={true}>
+            <Skeleton height={20} loading={true} callback={()=>(
                 <Start />
-            </Skeleton>
-            <Skeleton height={20} loading={true}>
-                <End />
-            </Skeleton>
-            <Skeleton height={20} loading={true}>
+            )}/>
+            <Skeleton height={20} loading={true} callback={()=>(
+            <End />
+            )}/>
+            <Skeleton height={20} loading={true} callback={()=>(
                 <Location />
-            </Skeleton>
-            <Skeleton height={20} loading={true}>
+            )}/>
+            <Skeleton height={20} loading={true} callback={()=>(
                 <Category />
-            </Skeleton>
-            <Skeleton height={20} loading={true}>
+            )}/>
+            <Skeleton height={20} loading={true} callback={()=>(
                 <View style={ES.specificEventInfoView}>
                     <Text style={{ ...T.specificEventInfo, color: theme.textColor }}>{text.host}</Text>
                     <Text style={{ ...T.specificEventInfoContent, color: theme.textColor }}>
@@ -72,10 +75,10 @@ export default function BasicInfo() {
                         {event.organizations[0]?.link_homepage && <TextLink style={{fontSize: 20, color: "#fd8738", top: 3}} text={text.more} url={event.event.link_stream} />}
                     </Text>
                 </View>
-            </Skeleton>
-            <Skeleton height={20} loading={true}>
-                {info && <InfoBlock infoText={info} />}
-            </Skeleton>
+            )}/>
+            <Skeleton height={20} loading={true} callback={()=>(
+                <>{info && <InfoBlock infoText={info} />}</>
+            )}/>
         </Card>
     )
 }

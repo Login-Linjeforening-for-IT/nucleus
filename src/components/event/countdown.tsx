@@ -17,16 +17,16 @@ export default function Countdown() {
 
     return (
         <CardSmaller>
-            <Skeleton loading={true} height={100}>
+            <Skeleton loading={true} height={100} callback={()=>{
                 <View style={ES.specificEventInfoView}>
                     <Card>
                         <View style={{}}>
-                            <CategorySquare color={event.category.color} startDate={startDate} endDate={endDate}/>
+                            <CategorySquare color={event.category?.color} startDate={startDate} endDate={endDate}/>
                         </View>
                     </Card>
                     <EventTime time_start={event.event.time_start} time_end={event.event.time_end} />
                 </View>
-            </Skeleton>
+            }}/>
         </CardSmaller>
     )
 }

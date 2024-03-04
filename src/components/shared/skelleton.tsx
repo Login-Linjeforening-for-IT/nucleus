@@ -7,16 +7,15 @@ type SkeletonProps = {
     children?: ReactNode
     height: number
     loading: boolean
+    callback: Function
     // style: StyleProp<any>
 }
 
 const width = Dimensions.get('window').width
 
-export default function Skeleton({ children, height, loading }: SkeletonProps) {
-    if (!loading) return (
-        children
-    )
-    console.log("das")
+export default function Skeleton({ children, height, loading, callback }: SkeletonProps) {
+    if (!loading) return callback()
+    
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const lineWidth = useRef(new Animated.Value(0)).current;
 
