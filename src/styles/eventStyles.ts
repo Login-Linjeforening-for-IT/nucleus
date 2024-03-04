@@ -6,15 +6,12 @@ export const ES = StyleSheet.create({
         justifyContent: "center",
         marginLeft: 5,
         top: 2,
-        maxWidth: '70%',
+        width: '80%',
         maxHeight: 55
     },
     // Right side card view
     view3: {
-        position: "absolute",
-        right: 5,
-        top: -3,
-        height: "100%",
+        justifyContent: 'center',
     },
     // Card height and direction on eventscreen
     eventBack: {
