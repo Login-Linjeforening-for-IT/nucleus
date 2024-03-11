@@ -14,10 +14,12 @@ export default function BasicInfo() {
     const { event } = useSelector((state: ReduxState) => state.event)
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
+
+    const loading = !Boolean(event&&Object.keys(event).length)
     
     let text = {host: '', more: ''}, info = ''
 
-    if(event.event){
+    if(event&&Object.keys(event).length){
         const textNO = { host: "Arrangør:   ", more: "Mer info"}
         const textEN = { host: "Organizer:   ", more: "More info"}
         text = lang ? textNO : textEN
@@ -27,10 +29,10 @@ export default function BasicInfo() {
     const host = findOrgName()
     
     function findOrgName() {
-        if (!event?.organizations[0]) {
+        if (!event?.organizations) {
             return ""
         }
-        switch (event.organizations[0].shortname) {
+        switch (event.organizations[0]?.shortname) {
             case 'board': return lang ? 'Styret' : 'The Board'
             case 'tekkom': return 'TekKom'
             case 'bedkom': return 'BedKom'
@@ -40,7 +42,7 @@ export default function BasicInfo() {
             case 'ctfkom': return 'CTFkom'
             case 's2g': return 'S2G'
             case 'idi': return 'IDI'
-            default: return event.organizations[0].shortname || lang 
+            default: return event.organizations[0]?.shortname || lang 
                 ? event.category.name_no || event.category.name_en 
                 : event.category.name_en || event.category.name_no
         }
@@ -48,43 +50,43 @@ export default function BasicInfo() {
 
     return (
         <Card>
-            <Skeleton height={20} loading={true} callback={()=>(
+            <Skeleton height={20} loading={loading}>
                 <Start />
-            )}/>
-            <Skeleton height={20} loading={true} callback={()=>(
+            </Skeleton>
+            <Skeleton height={20} loading={loading}>
             <End />
-            )}/>
-            <Skeleton height={20} loading={true} callback={()=>(
+            </Skeleton>
+            <Skeleton height={20} loading={loading}>
                 <Location />
-            )}/>
-            <Skeleton height={20} loading={true} callback={()=>(
+            </Skeleton>
+            <Skeleton height={20} loading={loading}>
                 <Category />
-            )}/>
-            <Skeleton height={20} loading={true} callback={()=>(
+            </Skeleton>
+            <Skeleton height={20} loading={loading}>
                 <View style={ES.specificEventInfoView}>
                     <Text style={{ ...T.specificEventInfo, color: theme.textColor }}>{text.host}</Text>
                     <Text style={{ ...T.specificEventInfoContent, color: theme.textColor }}>
                         {host}
-                        {event.event.link_stream && ' - '}
-                        {event.event.link_stream && <TextLink style={{fontSize: 20, color: "#fd8738", top: 3}} text="Stream" url={event.event.link_stream} />}
-                        {event.event.link_discord && ' - '}
-                        {event.event.link_discord && <TextLink style={{fontSize: 20, color: "#fd8738", top: 3}} text="Discord" url={event.event.link_stream} />}
-                        {event.event.link_facebook && ' - '}
-                        {event.event.link_facebook && <TextLink style={{fontSize: 20, color: "#fd8738", top: 3}} text="Facebook" url={event.event.link_stream} />}
-                        {event.organizations[0]?.link_homepage && ' - '}
-                        {event.organizations[0]?.link_homepage && <TextLink style={{fontSize: 20, color: "#fd8738", top: 3}} text={text.more} url={event.event.link_stream} />}
+                        {event?.event?.link_stream && ' - '}
+                        {event?.event?.link_stream && <TextLink style={{fontSize: 20, color: "#fd8738", top: 3}} text="Stream" url={event.event.link_stream} />}
+                        {event?.event?.link_discord && ' - '}
+                        {event?.event?.link_discord && <TextLink style={{fontSize: 20, color: "#fd8738", top: 3}} text="Discord" url={event.event.link_stream} />}
+                        {event?.event?.link_facebook && ' - '}
+                        {event?.event?.link_facebook && <TextLink style={{fontSize: 20, color: "#fd8738", top: 3}} text="Facebook" url={event.event.link_stream} />}
+                        {event?.organizations && event.organizations[0]?.link_homepage && ' - '}
+                        {event?.organizations && event.organizations[0]?.link_homepage && <TextLink style={{fontSize: 20, color: "#fd8738", top: 3}} text={text.more} url={event.event.link_stream} />}
                     </Text>
                 </View>
-            )}/>
-            <Skeleton height={20} loading={true} callback={()=>(
+            </Skeleton>
+            <Skeleton height={20} loading={loading}>
                 <>{info && <InfoBlock infoText={info} />}</>
-            )}/>
+            </Skeleton>
         </Card>
     )
 }
 
 function Start() {
-    const { event:{event} } = useSelector((state: ReduxState) => state.event)
+    const { event } = useSelector((state: ReduxState) => state.event)
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const start = lang ? "Starter:      " : "Starts:         "
@@ -95,15 +97,15 @@ function Start() {
                 {start}
             </Text>
             <Text style={{...T.specificEventInfo, color: theme.textColor}}>
-            {event.time_start[11]}{event.time_start[12]}:
-            {event.time_start[14]}{event.time_start[15]}
+            {event?.event.time_start[11]}{event?.event.time_start[12]}:
+            {event?.event.time_start[14]}{event?.event.time_start[15]}
             </Text>
         </View>
     )
 }
 
 function End() {
-    const { event:{event} } = useSelector((state: ReduxState) => state.event)
+    const { event } = useSelector((state: ReduxState) => state.event)
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const end = lang ? "Slutter:       " : "Ends:           "
@@ -113,7 +115,7 @@ function End() {
             <Text style={{...T.specificEventInfo, color: theme.textColor}}>
                 {end}
             </Text>
-            {"time_end" in event && <GetEndTime time_end={event.time_end} />}
+            {event?.event!=undefined && <GetEndTime time_end={event.event.time_end} />}
         </View>
     )
 }
@@ -121,10 +123,10 @@ function End() {
 function Location() {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { event } = useSelector((state: ReduxState) => state.event)
-    if (!event.location){
+    const { lang } = useSelector((state: ReduxState) => state.lang)
+    if (!event?.location){
         return <></>
     }
-    const { lang } = useSelector((state: ReduxState) => state.lang)
     const text = lang ? "Lokasjon:   " : "Location:     "
 
     

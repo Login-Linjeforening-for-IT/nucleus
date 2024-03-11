@@ -4,11 +4,11 @@ import Embed from "@components/event/embed"
 
 export default function Description() {
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    const { event:{event} } = useSelector((state: ReduxState) => state.event)
+    const { event } = useSelector((state: ReduxState) => state.event)
     const { lang } = useSelector((state: ReduxState) => state.lang)
-    const description = lang ? event.description_no || event.description_en : event.description_en || event.description_no
+    if (!(event&&Object.keys(event).length)) return null
+    const description = lang ? event?.event?.description_no || event?.event?.description_en : event?.event?.description_en || event?.event?.description_no
 
-    if (!description) return null
 
     const fixedDesc = description.replace(/\\n/g, '<br>')
     const embededEvent = /(\[:\w+\]\(\d+\))/

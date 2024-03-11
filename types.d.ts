@@ -67,7 +67,7 @@ type DetailedEventResponse = {
     rule: Rule | undefined
     organizations: Organization[]
     audiences: Audience[]
-}
+} | undefined
 
 type DetailedAd = {
     id: number

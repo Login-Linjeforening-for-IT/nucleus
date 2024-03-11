@@ -4,8 +4,8 @@ import T from "@styles/text"
 import React from "react"
 
 type EventTimeProps = {
-    time_start: string
-    time_end: string
+    time_start: string | undefined
+    time_end: string | undefined
 }
 
 type GetEndTimeProps = {
@@ -19,6 +19,7 @@ type GetEndTimeProps = {
  * @returns Event start time as a React component
  */
 export default function EventTime({time_start, time_end}: EventTimeProps): JSX.Element {
+    if (time_start==undefined||time_end==undefined) return <></>
     const { theme } = useSelector((state: ReduxState) => state.theme)
     let time = displayedEventTime(time_start, time_end)
 

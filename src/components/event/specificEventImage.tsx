@@ -7,7 +7,7 @@ import { useSelector } from "react-redux"
 
 export default function SpecificEventImage() {
     const { event } = useSelector((state: ReduxState) => state.event)
-    if (!event.event) return <Skeleton loading={true} height={160} callback={()=>{
+    if (event?.event) {
         if ((event.event.image_small).includes(".svg")) {
             return (
                 <SvgUri
@@ -25,6 +25,7 @@ export default function SpecificEventImage() {
         } else {
             return <StaticImage event={event} />
         }
-    }}/>
+    }
+    else return <Skeleton loading={!Boolean(event&&Object.keys(event).length)} height={Dimensions.get("window").width/3} />
 
 }

@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux"
 import getTags from "@utils/getTags"
 
 type TagsProps = {
-    event: DetailedEventData
+    event: DetailedEventData | undefined
 }
 
 export default function Tags({event}: TagsProps) {

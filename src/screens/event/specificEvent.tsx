@@ -21,13 +21,11 @@ import Skeleton from "@components/shared/skelleton"
  * @param param0
  * @returns
  */
-export default function SpecificEventScreen({route:{params}}: StackScreenProps<EventStackParamList>): JSX.Element {
+export default function SpecificEventScreen({navigation, route:{params}}: StackScreenProps<EventStackParamList>): JSX.Element {
     // if (params==undefined) return <></>
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    const { lang } = useSelector((state: ReduxState) => state.lang)
-    const { event:{event} } = useSelector((state: ReduxState) => state.event)
+    const { event } = useSelector((state: ReduxState) => state.event)
 
-    const [loading, setLoading] = React.useState(true)
 
     // if (deepLinkID) {
     //     const response = fetchEventDetails(deepLinkID)
@@ -38,7 +36,10 @@ export default function SpecificEventScreen({route:{params}}: StackScreenProps<E
     // }
 
     const dispatch = useDispatch()
-    const descriptionCheck = lang ? 'description_no' : 'description_en'
+
+    navigation.addListener('beforeRemove', (e) => {
+        dispatch(setEvent({}))
+    })
 
     async function getDetails() {
         if (!params) return
@@ -46,15 +47,14 @@ export default function SpecificEventScreen({route:{params}}: StackScreenProps<E
 
         if (response) {
             dispatch(setEvent(response))
-            // setLoading(false)
         }
     }
 
     useEffect(() => {
-        getDetails()
-    }, [params])
-
-    // if(!event) return <></>
+        if(event==undefined){
+            getDetails()
+        }
+    }, [])
 
     return (
         <Swipe left="EventScreen">
@@ -64,7 +64,7 @@ export default function SpecificEventScreen({route:{params}}: StackScreenProps<E
                         ? Dimensions.get("window").height / 8.5
                         : Dimensions.get("window").height / 6.15
                     } />
-                    <Tag event={event} />
+                    <Tag event={event?.event} />
                     <SpecificEventImage />
                     <Space height={10} />
                     <Countdown />
@@ -75,7 +75,7 @@ export default function SpecificEventScreen({route:{params}}: StackScreenProps<E
                         fontSize: 15, 
                         color: theme.oppositeTextColor,
                         marginVertical: 10
-                    }}>Event ID: {event && event.id}</Text>
+                    }}>Event ID: {event?.event?.id}</Text>
                     <Space height={Dimensions.get("window").height / (Platform.OS === 'ios' ? 3 : 2.75)} />
                 </ScrollView>
             </View>
