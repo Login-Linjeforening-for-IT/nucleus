@@ -26,6 +26,6 @@ export default function SpecificEventImage() {
             return <StaticImage event={event} />
         }
     }
-    else return <Skeleton loading={!Boolean(event&&Object.keys(event).length)} height={Dimensions.get("window").width/3} />
+    else return <Skeleton loading={!Boolean(event&&Object.keys(event).length)} height={150} />
 
 }

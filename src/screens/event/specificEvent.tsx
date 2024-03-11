@@ -38,7 +38,7 @@ export default function SpecificEventScreen({navigation, route:{params}}: StackS
     const dispatch = useDispatch()
 
     navigation.addListener('beforeRemove', (e) => {
-        dispatch(setEvent({}))
+        dispatch(setEvent(undefined))
     })
 
     async function getDetails() {
@@ -52,9 +52,10 @@ export default function SpecificEventScreen({navigation, route:{params}}: StackS
 
     useEffect(() => {
         if(event==undefined){
+            console.log("fetching event details")
             getDetails()
         }
-    }, [])
+    }, [params])
 
     return (
         <Swipe left="EventScreen">

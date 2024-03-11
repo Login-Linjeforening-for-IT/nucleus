@@ -14,7 +14,7 @@ import { setTag } from '@redux/event'
 export default function Header({ options, route, navigation }: HeaderProps): ReactNode {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang  } = useSelector((state: ReduxState) => state.lang)
-    const { event:{event}, tag } = useSelector((state: ReduxState) => state.event)
+    const { event, tag } = useSelector((state: ReduxState) => state.event)
     const { ad } = useSelector((state: ReduxState) => state.ad )
     const dispatch = useDispatch()
     const SES = route.name === "SpecificEventScreen"
@@ -24,8 +24,8 @@ export default function Header({ options, route, navigation }: HeaderProps): Rea
             ? require('@text/no.json').screens[route.name]
             : require('@text/en.json').screens[route.name])
     
-    if (!title && SES) title = event && (lang ? event.name_no : event.name_en)
-    if (!title && SAS) title = lang ? ad.title_no : ad.title_en
+    if (!title && SES) title = event?.event && (lang ? event.event.name_no : event.event.name_en)
+    if (!title && SAS) title = ad?.job && (lang ? ad.job.title_no : ad.job.title_en)
     if (route.name === "ProfileScreen") return <></>
 
     const { isDark } = useSelector((state: ReduxState) => state.theme )

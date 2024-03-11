@@ -91,14 +91,14 @@ type DetailedAd = {
     updated_at: string
     created_at: string
     deleted_at: string
-    skills: string[]
-    cities: string[]
+    skills: string[] | undefined
+    cities: string[] | undefined
 }
 
 type DetailedAdResponse = {
     job: DetailedAd
     organization: Organization
-}
+} | undefined
 
 type EventLocation = {
     id: number
@@ -182,8 +182,8 @@ type AdProps = {
     organization_name_no: string
     organization_name_en: string
     organization_logo: string
-    skills: string[]
-    cities: string[]
+    skills: string[] | undefined
+    cities: string[] | undefined
 }
 
 
@@ -226,7 +226,7 @@ type ReduxState = {
     }
     ad: {
         ads: AdProps[]
-        ad: DetailedAd
+        ad: DetailedAdResponse
         clickedAds: AdProps[]
         renderedAds: AdProps[]
         lastFetch: string
@@ -476,7 +476,9 @@ type EventStackParamList = {
 
 type AdStackParamList = {
     AdScreen: undefined
-    SpecificAdScreen: undefined
+    SpecificAdScreen: {
+        adID: number
+    }
 }
 
 type Setting = {

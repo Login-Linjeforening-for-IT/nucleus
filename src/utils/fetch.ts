@@ -101,20 +101,20 @@ export async function fetchAds(): Promise<AdProps[]> {
 /**
  * Fetches the specific ad page for additional details
  *
- * @param {object} ad    Ad to fetch details for
+ * @param {object} adID    Ad to fetch details for
  *
  * @returns                 All details for passed event
  */
-export async function fetchAdDetails(ad: AdProps): Promise<DetailedAd> {
+export async function fetchAdDetails(adID: number): Promise<DetailedAdResponse> {
 
     // Prod
-    const response = await fetch(`${api}jobs/${ad.id}`)
+    const response = await fetch(`${api}jobs/${adID}`)
     
     // Dev
     // const response = await fetch(`${testapi}jobs/${ad.id}`)
     const adDetails = await response.json()
 
-    return {...ad, ...adDetails.job, ...adDetails.organization}
+    return adDetails
 }
 
 /**

@@ -20,11 +20,11 @@ import {
 } from "react-native"
 
 type AdClusterLocationProps = {
-    ad: AdProps
+    ad: DetailedAd | undefined
 }
 
 type SocialProps = {
-    url: string
+    url: string | undefined
     source: ImageSourcePropType
 }
 
@@ -33,15 +33,15 @@ type SocialProps = {
  * @param props
  * @returns               Small banner image
  */
-export default function AdInfo({ad}: {ad: AdProps}) {
+export default function AdInfo({ad}: {ad: DetailedAd | undefined}) {
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const [deadline, setDeadline] = useState("")
-    const loc = ad.cities.map(city => capitalizeFirstLetter(city)).join(", ")
-    const type = capitalizeFirstLetter(ad.job_type)
+    const loc = ad?.cities?.map(city => capitalizeFirstLetter(city)).join(", ")
+    const type = capitalizeFirstLetter(ad?.job_type)
    
     useEffect(() => {
-        const fetch = LastFetch(ad.application_deadline)
+        const fetch = LastFetch(ad?.application_deadline)
 
         if (fetch) {
             setDeadline(fetch)
@@ -94,7 +94,7 @@ export default function AdInfo({ad}: {ad: AdProps}) {
  * @param {string} banner Link to the advertisement banner
  * @returns               Small banner image
  */
-export function AdBanner({url}: {url: string}) {
+export function AdBanner({url}: {url: string | undefined}) {
 
     if (url?.endsWith(".svg")) {
         return <SvgUri
@@ -192,9 +192,9 @@ export function AdClusterImage({url}: {url: string | undefined}) {
 export function AdClusterLocation({ad}: AdClusterLocationProps) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
-    const type = capitalizeFirstLetter(ad.job_type)
-    const location = ad.cities.map(city => capitalizeFirstLetter(city)).join(", ")
-    let name =  lang ? ad.title_no || ad.title_en : ad.title_en || ad.title_no
+    const type = capitalizeFirstLetter(ad?.job_type)
+    const location = ad?.cities?.map(city => capitalizeFirstLetter(city)).join(", ")
+    let name =  lang ? ad?.title_no || ad?.title_en : ad?.title_en || ad?.title_no
     let info = `${type}${location ? `. ${location}`:''}`
     let halfWidth = Platform.OS === "ios" 
         ? Dimensions.get("window").width / 9 
@@ -237,17 +237,17 @@ export function AdClusterLocation({ad}: AdClusterLocationProps) {
  * @param {AdProps} ad Ad object
  * @returns Ad description element
  */
-export function AdDescription({ad}: {ad: DetailedAd}) {
+export function AdDescription({ad}: {ad: DetailedAd | undefined}) {
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    const skills = ad.skills ? ad.skills.join(", ") : []
+    const skills = ad?.skills ? ad.skills.join(", ") : []
     
     const tempShort = lang 
-        ? ad.description_short_no || ad.description_short_en
-        : ad.description_short_en || ad.description_short_no
+        ? ad?.description_short_no || ad?.description_short_en
+        : ad?.description_short_en || ad?.description_short_no
     const tempLong = lang 
-        ? ad.description_long_no || ad.description_long_en
-        : ad.description_long_en || ad.description_long_no
+        ? ad?.description_long_no || ad?.description_long_en
+        : ad?.description_long_en || ad?.description_long_no
 
     const shortDescription = tempShort ? tempShort.replace(/\\n/g, '<br>') : ''
     const LongDescription = tempLong ? tempLong.replace(/\\n/g, '<br>') : ''
@@ -284,7 +284,7 @@ export function AdDescription({ad}: {ad: DetailedAd}) {
  * Function for displaying all of the social media you can reaxch Login on
  * @returns Social media icons
  */
-export function AdMedia({ad}: {ad: DetailedAd}) {
+export function AdMedia({ad}: {ad: DetailedAdResponse}) {
     const { theme, isDark } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
 
@@ -296,25 +296,25 @@ export function AdMedia({ad}: {ad: DetailedAd}) {
         //         : require("@assets/social/discord-black.png")
         // },
         {
-            url: ad.link_instagram,
+            url: ad?.organization?.link_instagram,
             source: isDark
                 ? require("@assets/social/instagram-white.png")
                 : require("@assets/social/instagram-black.png")
         },
         {
-            url: ad.link_homepage,
+            url: ad?.organization?.link_homepage,
             source: isDark
                 ? require("@assets/social/web-white.png")
                 : require("@assets/social/web-black.png")
         },
         {
-            url: ad.link_facebook,
+            url: ad?.organization?.link_facebook,
             source: isDark 
                 ? require("@assets/social/facebook-white.png") 
                 : require("@assets/social/facebook-black.png")
         },
         {
-            url: ad.link_linkedin,
+            url: ad?.organization?.link_linkedin,
             source: isDark
                 ? require("@assets/social/linkedin-white.png")
                 : require("@assets/social/linkedin-black.png")
@@ -338,9 +338,9 @@ export function AdMedia({ad}: {ad: DetailedAd}) {
                 })}
             </View>
             <View style={AS.socialView}>
-                {ad.application_url &&
+                {ad?.job?.application_url &&
                     <TouchableOpacity onPress={() => 
-                        Linking.openURL(ad.application_url)}>
+                        Linking.openURL(ad.job.application_url)}>
                         <View style={{
                             ...AS.adButton,
                             backgroundColor: theme.orange
@@ -364,11 +364,11 @@ export function AdMedia({ad}: {ad: DetailedAd}) {
  * @param {string} banner Link to the advertisement banner
  * @returns               Small banner image
  */
-export function AdTitle({ad}: {ad: DetailedAd}) {
+export function AdTitle({ad}: {ad: DetailedAdResponse}) {
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    const title = lang ? ad.title_no || ad.title_en : ad.title_en || ad.title_no
-    const logo = ad.logo
+    const title = lang ? ad?.job?.title_no || ad?.job?.title_en : ad?.job?.title_en || ad?.job?.title_no
+    const logo = ad?.organization?.logo
 
     function Logo() {
         // Handles svg icons
@@ -428,12 +428,12 @@ export function AdTitle({ad}: {ad: DetailedAd}) {
  * @param {string} banner Link to the advertisement banner
  * @returns               Small banner image
  */
-export function AdUpdateInfo({ad}: {ad: DetailedAd}) {
+export function AdUpdateInfo({ad}: {ad: DetailedAd | undefined}) {
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
 
-    const updated = LastFetch(ad.updated_at)
-    const created = LastFetch(ad.time_publish)
+    const updated = LastFetch(ad?.updated_at)
+    const created = LastFetch(ad?.time_publish)
     const didUpdate = created !== updated
     const textNO = ["Oppdatert kl:", "Opprettet kl:"]
     const textEN = ["Updated:", "Created:"]
@@ -453,7 +453,7 @@ export function AdUpdateInfo({ad}: {ad: DetailedAd}) {
                 {text[1]} {created}.
             </Text>
             <Text style={{...T.contact, fontSize: 12, marginVertical: 5, color: theme.oppositeTextColor}}>
-                Ad ID: {ad.id}
+                Ad ID: {ad?.id}
             </Text>
         </View>
     )

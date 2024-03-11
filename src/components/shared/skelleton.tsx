@@ -33,12 +33,11 @@ export default function Skeleton({ children, height, loading, callback }: Skelet
         }
 
         animateLine();
-        console.log('loading')
         return () => {lineWidth.stopAnimation()}
     }, [])
 
     return (                                                        // move to redux theme
-        <View style={{...styles.container, height, backgroundColor: theme.dark}}>
+        <View style={{...styles.container, height, backgroundColor: theme.dark, borderRadius: 10}}>
             <Animated.View style={[styles.line,
                     {
                         transform: [{

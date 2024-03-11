@@ -21,7 +21,7 @@ type GetEndTimeProps = {
 export default function EventTime({time_start, time_end}: EventTimeProps): JSX.Element {
     if (time_start==undefined||time_end==undefined) return <></>
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    let time = displayedEventTime(time_start, time_end)
+    const time = displayedEventTime(time_start, time_end)
 
     return (
         <View>
