@@ -32,7 +32,7 @@ export const AdSlice = createSlice({
     // Initial state of the slice
     initialState: {
         ads: [] as AdProps[],
-        ad: {} as AdProps,
+        ad: undefined as DetailedAdResponse,
         clickedAds: [] as AdProps[],
         renderedAds: [] as AdProps[],
         lastFetch: "",

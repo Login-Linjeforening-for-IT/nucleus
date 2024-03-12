@@ -32,7 +32,7 @@ export const EventSlice = createSlice({
     // Initial state of the slice
     initialState: {
         events: [] as EventProps[],
-        event: {} as EventProps,
+        event: undefined as DetailedEventResponse,
         clickedEvents: [] as EventProps[],
         renderedEvents: [] as EventProps[],
         lastFetch: "",

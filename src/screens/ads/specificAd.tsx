@@ -35,7 +35,6 @@ export default function SpecificAdScreen({navigation, route:{params}}: StackScre
 
     useEffect(() => {
         if(ad==undefined){
-            console.log("fetching event details")
             getDetails()
         }
     }, [params])

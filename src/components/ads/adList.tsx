@@ -15,7 +15,6 @@ export default function AdList (): JSX.Element {
     // Copies renderedEvents because it's read only
     let adList: AdProps[] = [...renderedAds]
     adList.sort((a, b)=>(Number(b.highlight)-Number(a.highlight)))
-
     if (!renderedAds.length && !search) {
         return <ErrorMessage argument="wifi" />
     } else if (renderedAds.length > 0) {

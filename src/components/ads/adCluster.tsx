@@ -5,13 +5,13 @@ import React from "react"
 import Space from "@/components/shared/utils"
 import T from "@styles/text"
 import { AdClusterLocation, AdClusterImage } from "@/components/ads/ad"
-import { setAd, setClickedAds, toggleSearch } from "@redux/ad"
+import { setClickedAds, toggleSearch } from "@redux/ad"
 import { useNavigation } from "@react-navigation/native"
 import { useSelector, useDispatch } from "react-redux"
 import { TouchableOpacity, Dimensions, Text, View } from "react-native"
-import { Navigation } from "@interfaces"
 import { LinearGradient } from "expo-linear-gradient"
 import TopicManager from "@utils/topicManager"
+import { StackNavigationProp } from "@react-navigation/stack"
 
 type Ad = {
     ad: AdProps
@@ -24,7 +24,7 @@ export default function AdCluster({ad, index, embed}: Ad): JSX.Element {
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const dispatch = useDispatch()
     const isOrange = clickedAds.some(ads => ads.id === ad.id) ? true : false
-    const navigation: Navigation = useNavigation()
+    const navigation = useNavigation<StackNavigationProp<AdStackParamList>>()
     const logo = ad.organization_logo ? ad.organization_logo : undefined
     const top = embed 
         ? ad.highlight ? -3 : 0
@@ -48,8 +48,7 @@ export default function AdCluster({ad, index, embed}: Ad): JSX.Element {
         <>
             <TouchableOpacity onPress={() => {
                 search && dispatch(toggleSearch())
-                dispatch(setAd(ad))
-                navigation.navigate("SpecificAdScreen")
+                navigation.navigate("SpecificAdScreen", {adID: ad.id})
             }}>
                 <LinearGradient start={[0, 0.5]}
                   end={[1, 0.5]}

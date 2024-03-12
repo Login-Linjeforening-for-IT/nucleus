@@ -20,7 +20,7 @@ import {
 } from "react-native"
 
 type AdClusterLocationProps = {
-    ad: DetailedAd | undefined
+    ad: DetailedAd | AdProps | undefined
 }
 
 type SocialProps = {
@@ -199,7 +199,10 @@ export function AdClusterLocation({ad}: AdClusterLocationProps) {
     let halfWidth = Platform.OS === "ios" 
         ? Dimensions.get("window").width / 9 
         : Dimensions.get("window").width / 8.7805
-    if (name.length > halfWidth / 1.7 
+    if (name==undefined){
+        name = ""
+    }
+    else if (name.length > halfWidth / 1.7 
     && (type + location).length > (halfWidth*1.25)) {
         name = name.length > halfWidth / 1.1 
         ? name.substring(0, halfWidth / 1.1) + "..." 

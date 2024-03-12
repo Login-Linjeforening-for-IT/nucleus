@@ -52,7 +52,6 @@ export default function SpecificEventScreen({navigation, route:{params}}: StackS
 
     useEffect(() => {
         if(event==undefined){
-            console.log("fetching event details")
             getDetails()
         }
     }, [params])
