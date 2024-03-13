@@ -37,37 +37,28 @@ export function ExpiredEvent(id: {id: number}) {
     const {theme} = useSelector((state: ReduxState) => state.theme)
     const content = lang ? "Utilgjengelig" : "This event has expired"
     const retry = lang ? "Klikk her for å prøve likevel" : "Click here to try anyways"
-
+    
     return (
         <View>
             <Cluster marginVertical={8}>
-                <View style={{...ES.eventBack, left: -5}}>
+                <View style={ES.eventBack}>
                     <View>
-                        <CategorySquare color="333" startDate={id.id} />
-                        <Text style={{...ES.eventClusterDayText, color: theme.textColor, top: 10}}>
-                        {id.id}
+                        <CategorySquare color="#333" startDate={id.id} />
+                    </View>
+                    <View style={ES.view2}>
+                        <Text style={{...ES.title, color: theme.textColor}}>
+                            {content}
                         </Text>
-                    </View>
-                    <View style={{...ES.view2, top: 0, width: "85%"}}>
-                        <View style={ES.view2}>
-                            <View style = {{...ES.title}}>
-                                <Text style={{...ES.title, color: theme.textColor}}>
-                                    {content}
-                                </Text>
-                            </View>
-                            <View style={{flexDirection: "row"}}>
-                                <TextLink 
-                                    style={{left: 10.5, top: -10, color: "#fd8738"}} 
-                                    text={retry} 
-                                    url={`https://login.no/events/${id}`} 
-                                />
-                            </View>
+                        <View style={{flexDirection: "row"}}>
+                            <TextLink 
+                                style={{color: "#fd8738"}} 
+                                text={retry} 
+                                url={`https://login.no/events/${id}`} 
+                            />
                         </View>
                     </View>
-                    <View style={{...ES.view3, right: 0}}>
-                        <View style={ES.bellPosition} >
-                            <BellIcon canceled={true} />
-                        </View>
+                    <View style={ES.view3}>
+                        <BellIcon canceled={true} />
                     </View>
                 </View>
             </Cluster>
