@@ -46,7 +46,6 @@ export default function SpecificEventScreen({navigation, route:{params}}: StackS
         const response = await fetchEventDetails(params.eventID)
 
         if (response) {
-            {
             dispatch(setEvent(response))
             return true
         }
