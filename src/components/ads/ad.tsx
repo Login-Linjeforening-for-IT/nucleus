@@ -8,6 +8,8 @@ import { SvgUri } from "react-native-svg"
 import capitalizeFirstLetter from "@utils/capitalizeFirstLetter"
 import RenderHTML from "react-native-render-html"
 import Link from "@components/shared/link"
+import Embed from "@components/event/embed"
+import Skeleton from "@components/shared/skeleton"
 import {
     TouchableOpacity,
     Dimensions,
@@ -18,8 +20,6 @@ import {
     Text,
     ImageSourcePropType
 } from "react-native"
-import Embed from "@components/event/embed"
-import Skeleton from "@components/shared/skeleton"
 
 type AdClusterLocationProps = {
     ad: DetailedAd | AdProps | undefined
@@ -61,7 +61,7 @@ export default function AdInfo({ad}: {ad: DetailedAd | undefined}) {
 
     return (
         <View style={{marginBottom: 10}}>
-            <Skeleton loading={!ad} height={20}>
+            <Skeleton loading={!ad} height={60}>
                 <InfoView titleNO="Sted: " titleEN="Location: " text={loc} />
                 <InfoView titleNO="Ansettelsesform: " titleEN="Position: " text={type} />
                 <InfoView titleNO="Frist: " titleEN="Deadline: " text={deadline} />
@@ -221,7 +221,7 @@ export function AdDescription({ad}: {ad: DetailedAd | undefined}) {
 
         return (
             <View style={{marginBottom: 10}}>
-                <Skeleton loading={!ad} height={20}>
+                <Skeleton loading={!ad} height={200}>
                     <Text style={{...AS.adInfoBold, color: theme.textColor}}>
                         {lang ? "Kort fortalt" : 'In short'}
                     </Text>
@@ -236,10 +236,12 @@ export function AdDescription({ad}: {ad: DetailedAd | undefined}) {
                         {skills}
                     </Text>
                     <Space height={10} /> 
+                    
+                </Skeleton>
+                <Skeleton loading={!ad} height={400}>
                     <Text style={{...AS.adInfoBold, color: theme.textColor}}>
                         {lang ? "Om stillingen" : 'About the position'}
                     </Text>
-                    
                     {LongDescription && <RenderDescription description={LongDescription} />}
                 </Skeleton>
             </View>
@@ -286,7 +288,7 @@ export function AdMedia({ad}: {ad: DetailedAdResponse}) {
 
     return (
         <View style={{marginBottom: 10}}>
-            <Skeleton loading={!ad} height={20}>
+            <Skeleton loading={!ad} height={70}>
                 <View style={AS.socialView}>
                     {social.map((platform: SocialProps) => {
                         if (platform.url?.length) return (
@@ -371,8 +373,8 @@ export function AdTitle({ad}: {ad: DetailedAdResponse}) {
     }
 
     return (
-        <View style={AS.adTitleView}>
-            <Skeleton loading={!ad} height={40}>
+        <View style={{flexDirection: !ad ? undefined : 'row', marginBottom: 10}}>
+            <Skeleton loading={!ad} height={60}>
                 <Logo />
                 <Text style={{...AS.specificAdTitle, color: theme.textColor}}>
                     {title}
@@ -400,7 +402,7 @@ export function AdUpdateInfo({ad}: {ad: DetailedAd | undefined}) {
 
     return (
         <View style={{marginBottom: 10}}>
-            <Skeleton loading={!ad} height={200}>
+            <Skeleton loading={!ad} height={15}>
                 {didUpdate && <Text style={{
                     ...T.contact,
                     fontSize: 12,
@@ -409,13 +411,13 @@ export function AdUpdateInfo({ad}: {ad: DetailedAd | undefined}) {
                 }}>
                     {text[0]} {updated}.
                 </Text>}
-                {!didUpdate && <Text style={{...T.contact, fontSize: 12, marginBottom: 5, color: theme.oppositeTextColor}}>
+                {!didUpdate && <Text style={{...T.contact, fontSize: 12, color: theme.oppositeTextColor}}>
                     {text[1]} {created}.
                 </Text>}
-                <Text style={{...T.contact, fontSize: 12, color: theme.oppositeTextColor}}>
-                    Ad ID: {ad?.id}
-                </Text>
             </Skeleton>
+            <Text style={{...T.contact, fontSize: 12, marginTop: 5, color: theme.oppositeTextColor}}>
+                Ad ID: {ad?.id}
+            </Text>
         </View>
     )
 }
