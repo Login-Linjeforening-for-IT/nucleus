@@ -17,15 +17,17 @@ export default function SpecificEventImage() {
                     uri={`https://cdn.login.no/img/events/${event.event.image_small}`}
                 />
             )
-        } else if (event.event.image_small.includes(".png")){
+        } 
+    
+    if (event.event.image_small.includes(".png")) {
             return <Image
                 style={ES.specificEventImage}
-                source={{uri: `https://cdn.login.no/img/events/${event.event.image_small}`}}
+                source={{uri: `https://cdn.login.no/img/events/banner/${event.event.image_small}`}}
             />
-        } else {
-            return <StaticImage event={event} />
+        } 
+    
+        return <StaticImage event={event} />
         }
-    }
     else return <Skeleton loading={!Boolean(event&&Object.keys(event).length)} height={150} />
 
 }

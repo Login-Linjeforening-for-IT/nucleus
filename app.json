@@ -4,7 +4,7 @@
         "owner": "loginapp",
         "name": "Login",
         "slug": "Login",
-        "version": "2.0.1",
+        "version": "2.1.0",
         "orientation": "portrait",
         "icon": "./public/assets/logo/icon.png",
         "userInterfaceStyle": "dark",
@@ -58,7 +58,7 @@
         "ios": {
             "supportsTablet": true,
             "bundleIdentifier": "com.eirikhanasand.Login",
-            "buildNumber": "85",
+            "buildNumber": "86",
             "googleServicesFile": "./GoogleService-Info.plist",
             "infoPlist": {
                 "UIBackgroundModes": [
@@ -74,7 +74,7 @@
             },
             "package": "com.login.Login",
             "googleServicesFile": "./google-services.json",
-            "versionCode": 59,
+            "versionCode": 60,
             "permissions": [
                 "NOTIFICATIONS",
                 "READ_CALENDAR",

@@ -9,10 +9,6 @@ import { ReactNode } from "react";
 import { NavigationHelpers, ParamListBase, TabNavigationState } from "@react-navigation/native";
 import { BottomTabDescriptorMap, BottomTabNavigationEventMap } from "@react-navigation/bottom-tabs/lib/typescript/src/types";
 
-type WrapperProps = {
-    children: ReactNode;
-};
-
 export type FooterProps = {
     state: TabNavigationState<ParamListBase>;
     descriptors: BottomTabDescriptorMap;
@@ -21,16 +17,8 @@ export type FooterProps = {
 
 export default function Footer({ state, descriptors, navigation }: FooterProps): JSX.Element {
     return (
-        <Wrapper>
-            <Content state={state} descriptors={descriptors} navigation={navigation} />
-        </Wrapper>
+        <Content state={state} descriptors={descriptors} navigation={navigation} />
     )
-}
-
-function Wrapper({children}: WrapperProps) {
-    const { tag } = useSelector((state: ReduxState) => state.event)
-    if (tag.title) return <View>{children}</View>
-    else return <>{children}</>
 }
 
 function Content({ state, descriptors, navigation }: FooterProps) {

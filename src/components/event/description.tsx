@@ -27,7 +27,7 @@ export default function Description() {
                     baseStyle={{color: theme.textColor}}
                     contentWidth={10}
                     source={{html: content}}
-                    defaultTextProps={{selectable: true}}
+                    // defaultTextProps={{selectable: true}}
                 />
             }
 
