@@ -10,6 +10,8 @@ import { Image } from "react-native"
 import MS from '@styles/menuStyles'
 import { useDispatch } from 'react-redux'
 import { setTag } from '@redux/event'
+import getHeight from '@utils/getHeight'
+import getCategories from '@utils/getCategories'
 
 export default function Header({ options, route, navigation }: HeaderProps): ReactNode {
     const { theme } = useSelector((state: ReduxState) => state.theme)
@@ -84,20 +86,17 @@ function BlurWrapper(props: PropsWithChildren) {
      : 0 // Defaults to 0 if no statusbar is visible on Android
     )
     const isSearchingEvents = event.search && route.name === "EventScreen"
+    const categories = getCategories({lang, categories: event.categories})
+    const item = isSearchingEvents ? categories : ad.skills
     const isSearchingAds = ad.search && route.name === "AdScreen"
-    const cat = lang ? event.categories.no : event.categories.en
-    const categories = cat.length || 0 // Defaults to 0 categories
-    const extraHeight = (isSearchingEvents && 6 // Base height for eventSearch on both platforms
-        * categories) || (isSearchingAds && 9.5 // Base height for adSearch on both platforms
-    * ad.skills.length) || 0 // Defaults to 0 skills
-    const height = defaultHeight + extraHeight + (isSearchingEvents || isSearchingAds
+    const extraHeight = getHeight(item.length)
+
+    const height = defaultHeight + (isSearchingEvents || isSearchingAds
         ? Platform.OS === "ios" 
-            ? isSearchingEvents 
-                ? 130 // Extraheight during eventSearch on iOS
-                :  70 // Extraheight for adSearch on iOS
+            ? 50 + extraHeight // Extraheight on iOS
             : isSearchingEvents 
-                ? 130 // Extraheight during eventSearch on Android
-                :  59.5 // Extraheight during adSearch on Android
+                ? 35 + extraHeight // Extraheight during eventSearch on Android
+                : 25 + extraHeight // Extraheight during adSearch on Android
         : Platform.OS === "ios" 
             ? 20 // Extra base height for header on iOS while not searching
             : 5  // Extra base height for header on Android while not searching

@@ -3,7 +3,12 @@ import MS from "@styles/menuStyles"
 import React, { useRef } from "react"
 import T from "@styles/text"
 import { CheckBox, CheckedBox } from "@components/event/check"
-import { reset as resetEvents, setClickedCategories, setInput as setEvents, toggleSearch as eventToggleSearch } from "@redux/event"
+import { 
+    reset as resetEvents, 
+    setClickedCategories, 
+    setInput as setEvents, 
+    toggleSearch as eventToggleSearch 
+} from "@redux/event"
 import { reset as resetAds, setInput as setAds } from "@redux/ad"
 import { toggleSearch as adToggleSearch } from "@redux/ad"
 import { setClickedSkills } from "@redux/ad"
@@ -16,9 +21,10 @@ import {
     View,
     Text,
     Dimensions,
-    ScrollView,
     Platform,
 } from "react-native"
+import { ScrollView } from "react-native-gesture-handler"
+import getHeight from "@utils/getHeight"
 
 /**
  * User interface for the filter
@@ -41,7 +47,7 @@ export function FilterUI(): JSX.Element {
     const top = (isSearchingAds && 35) || Platform.OS === 'ios' ? 40 : 35
 
     return (
-        <View style={isSearching ? {top: top} : { display: 'none' }}>
+        <View style={isSearching ? {top: top} : { display: 'none'}}>
             <View style={ES.absoluteView}>
                 <TextInput
                     ref={textInputRef}
@@ -132,20 +138,28 @@ function FilterCategoriesOrSkills() {
 
     // Clones cat because it is read only
     const categories = [...cat]
-    event.clickedEvents.length && categories.unshift(lang ? "Påmeldt" : "Enrolled")
-    const skills = ad.skills
+    const skills = [...ad.skills]
     const isFilteringOnEventScreen = event.search && route.name === "EventScreen"
     const item = isFilteringOnEventScreen ? categories : skills
-    
+    const height = getHeight(item.length)
+
     return (
-        <ScrollView style={ES.clusterFilterView} scrollEnabled={item.length > 9 ? true : false}>
+        <ScrollView 
+            style={{height}} 
+            scrollEnabled={item.length > 9 ? true : false}
+            showsVerticalScrollIndicator={false}
+        >
             {item.map((text, index) => {
+                if (text === "Påmeldt" || text === "Enrolled") {
+                    text = lang ? "Påmeldt" : "Enrolled"
+                }
+
                 if (index % 3 === 0) {
                     return (
                         <View key={index / 3} style={{ flexDirection: "row"}}>
-                            <FilterItem text={text} />
-                            <FilterItem text={item[index+1]} />
-                            <FilterItem text={item[index+2]} />
+                            <FilterItem text={text || ''} />
+                            <FilterItem text={item[index+1] || ''} />
+                            <FilterItem text={item[index+2] || ''} />
                         </View>
                     )
                 }
@@ -157,7 +171,6 @@ function FilterCategoriesOrSkills() {
 /**
  * Displays a small checkbox in the filter UI. 
  * @param text Text to display on the screen
- * @returns 
  */
 function FilterItem({text}: {text: string}) {
     if (!text) return null
@@ -171,7 +184,6 @@ function FilterItem({text}: {text: string}) {
     const cat = lang ? event.categories.no : event.categories.en
     // Clones cat because it is read only
     const categories = [...cat]
-    event.clickedEvents.length && categories.unshift(lang ? "Påmeldt" : "Enrolled")
     const isFilteringOnEventScreen = event.search && route.name === "EventScreen"
     const checked = event.search && event.clickedCategories.includes(text) ||
     ad.search && ad.clickedSkills.includes(text)

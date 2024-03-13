@@ -33,7 +33,7 @@ JSX.Element {
     const dispatch = useDispatch()
 
     return (
-        <View style={item.highlight && {marginVertical: 2, top: -2}}>
+        <View style={item.highlight && {marginTop: 2, top: -2}}>
             <TouchableOpacity onPress={() => {
                 search && dispatch(toggleSearch())
                 navigation.navigate("SpecificEventScreen", {eventID: item.id})
@@ -42,9 +42,9 @@ JSX.Element {
                   end={[1, 0.5]}
                   // The non highlited items get wraped in an transparrent container
                   colors={item.highlight ? ['#FF512F', '#F09819', '#FF512F'] : ['#000000cc', '#000000cc']}
-                  style={{borderRadius: 5, marginBottom: item.highlight ? 2 : 0
+                  style={{borderRadius: 5, marginVertical: item.highlight ? 2 : 0,
                 }}>
-                    <Cluster marginVertical={4} highlight={item.highlight}>
+                    <Cluster marginHorizontal={2} marginVertical={4} highlight={item.highlight}>
                         <View style={ES.eventBack}>
                             <FullCategorySquare item={item} />
                             <EventClusterTitle item={item} />
