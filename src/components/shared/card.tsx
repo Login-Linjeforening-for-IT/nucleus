@@ -26,11 +26,8 @@ export default function Card({ children }: React.PropsWithChildren<{}>) {
  * @returns             Card with the props inside
  */
 export function CardSmaller({ children }: React.PropsWithChildren<{}>) {
-
-    const { theme } = useSelector((state: ReduxState) => state.theme)
-
     return (
-        <View style={{...ES.cardSmaller, backgroundColor: theme.darker}}>
+        <View style={ES.cardSmaller}>
             <View>
                 { children }
             </View>

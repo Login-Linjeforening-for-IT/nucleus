@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, ReactNode } from 'react'
-import { View, Animated, StyleSheet, Easing, Dimensions, StyleProp } from 'react-native'
+import { View, Animated, StyleSheet, Easing, Dimensions } from 'react-native'
 import { LinearGradient } from "expo-linear-gradient"
 import { useSelector } from 'react-redux'
 
@@ -7,13 +7,12 @@ type SkeletonProps = {
     children?: ReactNode
     height: number
     loading: boolean
-    callback?: Function
-    // style: StyleProp<any>
+    noColor?: boolean
 }
 
 const width = Dimensions.get('window').width
 
-export default function Skeleton({ children, height, loading, callback }: SkeletonProps) {
+export default function Skeleton({ children, height, loading, noColor }: SkeletonProps) {
     if (!loading) return children
     
     const { theme } = useSelector((state: ReduxState) => state.theme)
@@ -36,8 +35,8 @@ export default function Skeleton({ children, height, loading, callback }: Skelet
         return () => {lineWidth.stopAnimation()}
     }, [])
 
-    return (                                                        // move to redux theme
-        <View style={{...styles.container, height, backgroundColor: theme.dark, borderRadius: 10}}>
+    return (
+        <View style={{...styles.container, height, backgroundColor: noColor ? undefined : theme.background, borderRadius: 10}}>
             <Animated.View style={[styles.line,
                     {
                         transform: [{
@@ -51,7 +50,7 @@ export default function Skeleton({ children, height, loading, callback }: Skelet
                 <LinearGradient
                     colors={[
                         'rgba(117, 117, 117, 0)',
-                        'rgba(117, 117, 117, 0.3)',
+                        'rgba(117, 117, 117, 0.2)',
                         'rgba(117, 117, 117, 0)',
                     ]}
                     start={{ x: 0, y: 0 }}

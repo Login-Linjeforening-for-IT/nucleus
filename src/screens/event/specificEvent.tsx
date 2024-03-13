@@ -14,7 +14,7 @@ import { fetchEventDetails } from "@utils/fetch"
 import { setEvent } from "@redux/event"
 import Tag from "@components/shared/tag"
 import { StackScreenProps } from "@react-navigation/stack"
-import Skeleton from "@components/shared/skelleton"
+import Skeleton from "@components/shared/skeleton"
 
 /**
  *

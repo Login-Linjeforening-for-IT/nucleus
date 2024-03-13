@@ -1,12 +1,14 @@
 import { StaticImage } from "@components/about/social"
-import Skeleton from "@components/shared/skelleton"
+import Skeleton from "@components/shared/skeleton"
 import ES from "@styles/eventStyles"
-import { Dimensions, Image } from "react-native"
+import { Dimensions, Image, View } from "react-native"
 import { SvgUri } from "react-native-svg"
 import { useSelector } from "react-redux"
 
 export default function SpecificEventImage() {
     const { event } = useSelector((state: ReduxState) => state.event)
+    const { theme } = useSelector((state: ReduxState) => state.theme)
+
     if (event?.event) {
         if ((event.event.image_small).includes(".svg")) {
             return (
@@ -19,7 +21,7 @@ export default function SpecificEventImage() {
             )
         } 
     
-    if (event.event.image_small.includes(".png")) {
+        if (event.event.image_small.includes(".png")) {
             return <Image
                 style={ES.specificEventImage}
                 source={{uri: `https://cdn.login.no/img/events/banner/${event.event.image_small}`}}
@@ -27,7 +29,12 @@ export default function SpecificEventImage() {
         } 
     
         return <StaticImage event={event} />
-        }
-    else return <Skeleton loading={!Boolean(event&&Object.keys(event).length)} height={150} />
+    }
+    
+    return (
+        <View style={{backgroundColor: theme.darker}}>
+            <Skeleton loading={true} height={150} noColor={true} />
+        </View>
+    )
 
 }

@@ -8,7 +8,7 @@ import T from "@styles/text"
 import { useSelector } from "react-redux"
 import { TextLink } from "@components/shared/link"
 import InfoBlock from "@components/shared/infoBlock"
-import Skeleton from "@components/shared/skelleton"
+import Skeleton from "@components/shared/skeleton"
 
 export default function BasicInfo() {
     const { event } = useSelector((state: ReduxState) => state.event)
@@ -50,19 +50,11 @@ export default function BasicInfo() {
 
     return (
         <Card>
-            <Skeleton height={20} loading={loading}>
+            <Skeleton height={140} loading={loading}>
                 <Start />
-            </Skeleton>
-            <Skeleton height={20} loading={loading}>
-            <End />
-            </Skeleton>
-            <Skeleton height={20} loading={loading}>
+                <End />
                 <Location />
-            </Skeleton>
-            <Skeleton height={20} loading={loading}>
                 <Category />
-            </Skeleton>
-            <Skeleton height={20} loading={loading}>
                 <View style={ES.specificEventInfoView}>
                     <Text style={{ ...T.specificEventInfo, color: theme.textColor }}>{text.host}</Text>
                     <Text style={{ ...T.specificEventInfoContent, color: theme.textColor }}>
@@ -77,8 +69,6 @@ export default function BasicInfo() {
                         {event?.organizations && event.organizations[0]?.link_homepage && <TextLink style={{fontSize: 20, color: "#fd8738", top: 3}} text={text.more} url={event.event.link_stream} />}
                     </Text>
                 </View>
-            </Skeleton>
-            <Skeleton height={20} loading={loading}>
                 <>{info && <InfoBlock infoText={info} />}</>
             </Skeleton>
         </Card>
@@ -97,8 +87,8 @@ function Start() {
                 {start}
             </Text>
             <Text style={{...T.specificEventInfo, color: theme.textColor}}>
-            {event?.event.time_start[11]}{event?.event.time_start[12]}:
-            {event?.event.time_start[14]}{event?.event.time_start[15]}
+                {event?.event.time_start[11]}{event?.event.time_start[12]}:
+                {event?.event.time_start[14]}{event?.event.time_start[15]}
             </Text>
         </View>
     )
