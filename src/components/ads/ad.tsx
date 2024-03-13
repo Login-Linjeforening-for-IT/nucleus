@@ -19,6 +19,7 @@ import {
     ImageSourcePropType
 } from "react-native"
 import Embed from "@components/event/embed"
+import Skeleton from "@components/shared/skeleton"
 
 type AdClusterLocationProps = {
     ad: DetailedAd | AdProps | undefined
@@ -60,9 +61,11 @@ export default function AdInfo({ad}: {ad: DetailedAd | undefined}) {
 
     return (
         <View style={{marginBottom: 10}}>
-            <InfoView titleNO="Sted: " titleEN="Location: " text={loc} />
-            <InfoView titleNO="Ansettelsesform: " titleEN="Position: " text={type} />
-            <InfoView titleNO="Frist: " titleEN="Deadline: " text={deadline} />
+            <Skeleton loading={!ad} height={20}>
+                <InfoView titleNO="Sted: " titleEN="Location: " text={loc} />
+                <InfoView titleNO="Ansettelsesform: " titleEN="Position: " text={type} />
+                <InfoView titleNO="Frist: " titleEN="Deadline: " text={deadline} />
+            </Skeleton>
         </View>
     )
 }
@@ -72,7 +75,7 @@ export default function AdInfo({ad}: {ad: DetailedAd | undefined}) {
  * @param {string} banner Link to the advertisement banner
  * @returns               Small banner image
  */
-export function AdBanner({url}: {url: string}) {
+export function AdBanner({url}: {url: string | undefined}) {
     if (!url) return null
 
     if (url?.endsWith(".svg")) {
@@ -218,25 +221,27 @@ export function AdDescription({ad}: {ad: DetailedAd | undefined}) {
 
         return (
             <View style={{marginBottom: 10}}>
-                <Text style={{...AS.adInfoBold, color: theme.textColor}}>
-                    {lang ? "Kort fortalt" : 'In short'}
-                </Text>
-                <Text style={{...T.paragraph, color: theme.textColor}} selectable={isIOS}>
-                    {shortDescription}
-                </Text>
-                <Space height={10} /> 
-                <Text style={{...AS.adInfoBold, color: theme.textColor}}>
-                    {lang ? "Ferdigheter" : "Skills"}
-                </Text>
-                <Text style={{...T.paragraph, color: theme.textColor}} selectable={isIOS}>
-                    {skills}
-                </Text>
-                <Space height={10} /> 
-                <Text style={{...AS.adInfoBold, color: theme.textColor}}>
-                    {lang ? "Om stillingen" : 'About the position'}
-                </Text>
-                
-                {LongDescription && <RenderDescription description={LongDescription} />}
+                <Skeleton loading={!ad} height={20}>
+                    <Text style={{...AS.adInfoBold, color: theme.textColor}}>
+                        {lang ? "Kort fortalt" : 'In short'}
+                    </Text>
+                    <Text style={{...T.paragraph, color: theme.textColor}} selectable={isIOS}>
+                        {shortDescription}
+                    </Text>
+                    <Space height={10} /> 
+                    <Text style={{...AS.adInfoBold, color: theme.textColor}}>
+                        {lang ? "Ferdigheter" : "Skills"}
+                    </Text>
+                    <Text style={{...T.paragraph, color: theme.textColor}} selectable={isIOS}>
+                        {skills}
+                    </Text>
+                    <Space height={10} /> 
+                    <Text style={{...AS.adInfoBold, color: theme.textColor}}>
+                        {lang ? "Om stillingen" : 'About the position'}
+                    </Text>
+                    
+                    {LongDescription && <RenderDescription description={LongDescription} />}
+                </Skeleton>
             </View>
         )
     }, [ad])
@@ -281,38 +286,40 @@ export function AdMedia({ad}: {ad: DetailedAdResponse}) {
 
     return (
         <View style={{marginBottom: 10}}>
-            <View style={AS.socialView}>
-                {social.map((platform: SocialProps) => {
-                    if (platform.url?.length) return (
-                        <View key={platform.url}>
-                            <Link url={platform.url}>
-                                <Image 
-                                    style={AS.socialMediaImage} 
-                                    source={platform.source}
-                                />
-                            </Link>
-                        </View>
-                    )
-                })}
-            </View>
-            <View style={AS.socialView}>
-                {ad?.job?.application_url &&
-                    <TouchableOpacity onPress={() => 
-                        Linking.openURL(ad.job.application_url)}>
-                        <View style={{
-                            ...AS.adButton,
-                            backgroundColor: theme.orange
-                        }}>
-                            <Text style={{
-                                ...AS.adButtonText,
-                                color: theme.textColor
+            <Skeleton loading={!ad} height={20}>
+                <View style={AS.socialView}>
+                    {social.map((platform: SocialProps) => {
+                        if (platform.url?.length) return (
+                            <View key={platform.url}>
+                                <Link url={platform.url}>
+                                    <Image 
+                                        style={AS.socialMediaImage} 
+                                        source={platform.source}
+                                    />
+                                </Link>
+                            </View>
+                        )
+                    })}
+                </View>
+                <View style={AS.socialView}>
+                    {ad?.job?.application_url &&
+                        <TouchableOpacity onPress={() => 
+                            Linking.openURL(ad.job.application_url)}>
+                            <View style={{
+                                ...AS.adButton,
+                                backgroundColor: theme.orange
                             }}>
-                                {lang ? "Søk nå":"Apply"}
-                            </Text>
-                        </View>
-                    </TouchableOpacity>
-                }
-            </View>
+                                <Text style={{
+                                    ...AS.adButtonText,
+                                    color: theme.textColor
+                                }}>
+                                    {lang ? "Søk nå":"Apply"}
+                                </Text>
+                            </View>
+                        </TouchableOpacity>
+                    }
+                </View>
+            </Skeleton>
         </View>
     )
 }
@@ -365,10 +372,12 @@ export function AdTitle({ad}: {ad: DetailedAdResponse}) {
 
     return (
         <View style={AS.adTitleView}>
-            <Logo />
-            <Text style={{...AS.specificAdTitle, color: theme.textColor}}>
-                {title}
-            </Text>
+            <Skeleton loading={!ad} height={40}>
+                <Logo />
+                <Text style={{...AS.specificAdTitle, color: theme.textColor}}>
+                    {title}
+                </Text>
+            </Skeleton>
         </View>
     )
 }
@@ -391,20 +400,22 @@ export function AdUpdateInfo({ad}: {ad: DetailedAd | undefined}) {
 
     return (
         <View style={{marginBottom: 10}}>
-            {didUpdate && <Text style={{
-                ...T.contact,
-                fontSize: 12,
-                marginBottom: 5,
-                color: theme.oppositeTextColor
-            }}>
-                {text[0]} {updated}.
-            </Text>}
-            {!didUpdate && <Text style={{...T.contact, fontSize: 12, marginBottom: 5, color: theme.oppositeTextColor}}>
-                {text[1]} {created}.
-            </Text>}
-            <Text style={{...T.contact, fontSize: 12, color: theme.oppositeTextColor}}>
-                Ad ID: {ad?.id}
-            </Text>
+            <Skeleton loading={!ad} height={200}>
+                {didUpdate && <Text style={{
+                    ...T.contact,
+                    fontSize: 12,
+                    marginBottom: 5,
+                    color: theme.oppositeTextColor
+                }}>
+                    {text[0]} {updated}.
+                </Text>}
+                {!didUpdate && <Text style={{...T.contact, fontSize: 12, marginBottom: 5, color: theme.oppositeTextColor}}>
+                    {text[1]} {created}.
+                </Text>}
+                <Text style={{...T.contact, fontSize: 12, color: theme.oppositeTextColor}}>
+                    Ad ID: {ad?.id}
+                </Text>
+            </Skeleton>
         </View>
     )
 }
