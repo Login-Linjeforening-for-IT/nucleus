@@ -70,9 +70,9 @@ export default function personInfo({person, lang}: personInfoProps) {
 
     const bedkom_leader = {
         title: title.bedkom,
-        name: "Ida Førland",
-        tag: "idaforland",
-        dclink: "https://discordapp.com/users/470279697465606159",
+        name: "Lavrans Åsen Felix",
+        tag: "james00728",
+        dclink: "https://discordapp.com/users/378257251908976640",
         img: `https://cdn.login.no/img/portraits/portrett_bedkom-leder.jpg`
     }
 
@@ -102,7 +102,7 @@ export default function personInfo({person, lang}: personInfoProps) {
 
     const pr_leader = {
         title: title.pr,
-        name: "Marius Eilertsen",
+        name: "Marius Nicolai Holte",
         tag: "iamk3v",
         dclink: "https://discordapp.com/users/164311829177171968",
         img: `https://cdn.login.no/img/portraits/portrett_pr-leder.jpg`
