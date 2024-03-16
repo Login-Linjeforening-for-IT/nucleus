@@ -38,33 +38,33 @@ export default function personInfo({person, lang}: personInfoProps) {
 
     const leader = {
         title: title.leader,
-        name: "Tormod Mork Müller",
-        tag: "backsiide",
-        dclink: "https://discordapp.com/users/210124409816612876",
-        img: `https://cdn.login.no/img%2Fportraits%2Fportrett_leder.jpg`
+        name: "Ida Førland",
+        tag: "idaforland",
+        dclink: "https://discordapp.com/users/470279697465606159",
+        img: `https://cdn.login.no/img/portraits/portrett_bedkom-leder.jpg`
     }
 
     const coleader = {
         title: title.coleader,
-        name: "Kristina Kataki",
-        tag: "Kataki#7254",
-        dclink: "https://discordapp.com/users/877108421772582962",
+        name: "Kristian Eriksen",
+        tag: "kissaer",
+        dclink: "https://discordapp.com/users/301619379001491457",
         img: `https://cdn.login.no/img%2Fportraits%2Fportrett_nestleder.jpg`,
     }
 
     const secretary = {
         title: title.secretary,
-        name: "Aleksander Aaboen",
-        tag: "aleksanderaa#2130",
-        dclink: "https://discordapp.com/users/610784035777544202",
+        name: "Sofia Serine Mikkelsen",
+        tag: "sofiaserine",
+        dclink: "https://discordapp.com/users/616878763010949121",
         img: `https://cdn.login.no/img%2Fportraits%2Fportrett_sekret%C3%A6r.jpg`,
     }
 
     const eventkom_leader = {
         title: title.evntkom,
-        name: "Sander Hauge",
-        tag: "sandiss",
-        dclink: "https://discordapp.com/users/171972901501796352",
+        name: "Sebastian Marterer",
+        tag: "coldfridge.",
+        dclink: "https://discordapp.com/users/486788989097869314",
         img: `https://cdn.login.no/img/portraits/portrett_eventkom-leder.jpg`,
     }
 
@@ -86,25 +86,25 @@ export default function personInfo({person, lang}: personInfoProps) {
 
     const ctfkom_leader = {
         title: title.ctf,
-        name: "Eskil Refsgaard",
-        tag: "rrefsgaard",
-        dclink: "https://discordapp.com/users/522483274933731331",
+        name: "Tormod Fjeld Lie",
+        tag: "tmod.",
+        dclink: "https://discordapp.com/users/841095548890251304",
         img: `https://cdn.login.no/img/portraits/portrett_ctfkom-leder.jpg`,
     }
 
     const satkom_leader = {
         title: title.satkom,
-        name: "Trygve Sollund",
-        tag: "spikeupine",
-        dclink: "https://discordapp.com/users/209395476288634881",
+        name: "Erik Hansen-Tangen Breien",
+        tag: "kireb",
+        dclink: "https://discordapp.com/users/165972992931790848",
         img: `https://cdn.login.no/img%2Fportraits%2Fportrett_%C3%B8konomi.jpg`
     }
 
     const pr_leader = {
         title: title.pr,
-        name: "Bjørn Kristian Strand",
-        tag: "bk_suup",
-        dclink: "https://discordapp.com/users/353992260507140097",
+        name: "Marius Eilertsen",
+        tag: "iamk3v",
+        dclink: "https://discordapp.com/users/164311829177171968",
         img: `https://cdn.login.no/img/portraits/portrett_pr-leder.jpg`
     }
 
