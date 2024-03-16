@@ -14,10 +14,7 @@ export default function Embed({id, type}: EmbedProps) {
     if (type === "event") {
         for (let i = 0; i < events.length; i++) {
             if (events[i].id === id) {
-                return <EventCluster
-                    item={events[i]}
-                    index={id}
-                />    
+                return <EventCluster item={events[i]} index={id} />    
             }
         }
     } else {
