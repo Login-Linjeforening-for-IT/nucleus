@@ -1,7 +1,7 @@
-import RenderHTML from "react-native-render-html"
 import { useSelector } from "react-redux"
 import Embed from "@components/event/embed"
 import { useMemo } from "react"
+import Markdown from "react-native-markdown-display"
 
 export default function Description() {
     const { theme } = useSelector((state: ReduxState) => state.theme)
@@ -20,20 +20,15 @@ export default function Description() {
         return split.map((content, index) => {
             const match = content.match(findNumber)
             const number = match ? Number(match[1]) : null
+            const markdown = content.replace(/<br>/g, '\n').replace(/###/g, '')
 
             if (!content.includes('[:event]') && !content.includes('[:jobad]')) {
-                return <RenderHTML
-                    key={index}
-                    baseStyle={{color: theme.textColor}}
-                    contentWidth={10}
-                    source={{html: content}}
-                    // defaultTextProps={{selectable: true}}
-                />
+                return <Markdown style={{text: {color: '#FFF'}}}>{markdown}</Markdown> 
             }
 
             return <Embed key={index} id={number} type={content.includes('[:event]') ? "event" : "ad"} />
         })
-    }, [lang, event.description_no, event.description_en, theme.textColor])
+    }, [lang, theme.textColor])
 
     return content
 }

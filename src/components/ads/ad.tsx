@@ -6,7 +6,6 @@ import T from "@styles/text"
 import React, { useEffect, useMemo, useState } from "react"
 import { SvgUri } from "react-native-svg"
 import capitalizeFirstLetter from "@utils/capitalizeFirstLetter"
-import RenderHTML from "react-native-render-html"
 import Link from "@components/shared/link"
 import Embed from "@components/event/embed"
 import Skeleton from "@components/shared/skeleton"
@@ -18,8 +17,9 @@ import {
     Image,
     View,
     Text,
-    ImageSourcePropType
+    ImageSourcePropType,
 } from "react-native"
+import Markdown from "react-native-markdown-display"
 
 type AdClusterLocationProps = {
     ad: DetailedAd | AdProps | undefined
@@ -468,15 +468,10 @@ function RenderDescription({description}: RenderDescriptionProps) {
         return split.map((content, index) => {
             const match = content.match(findNumber)
             const number = match ? Number(match[1]) : null
+            const markdown = content.replace(/<br>/g, '\n').replace(/###/g, '')
 
             if (!content.includes('[:event]') && !content.includes('[:jobad]')) {
-                return <RenderHTML
-                    key={index}
-                    baseStyle={{color: theme.textColor}}
-                    contentWidth={10}
-                    source={{html: content}}
-                    defaultTextProps={{selectable: isIOS}}
-                />
+                return <Markdown style={{text: {color: '#FFF'}}}>{markdown}</Markdown>
             }
 
             return <Embed key={index} id={number} type={content.includes('[:event]') ? "event" : "ad"} />
