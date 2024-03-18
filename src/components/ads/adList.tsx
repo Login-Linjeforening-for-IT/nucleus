@@ -22,7 +22,7 @@ export default function AdList (): JSX.Element {
     
         if (ads.length) {
             const detailedAdPromises = ads.map(async(ad) => {
-                const details = await fetchAdDetails(ad)
+                const details = await fetchAdDetails(ad.id)
                 return details
             })
     

@@ -122,8 +122,8 @@ function Location() {
     
     // Uses best available location
     const location = lang 
-        ? event.location.name_no || event.location.name_en 
-        : event.location.name_en || event.location.name_no
+        ? event?.location?.name_no || event?.location?.name_en 
+        : event?.location?.name_en || event?.location?.name_no
 
     return (
         <View style={{flexDirection: "row"}}>

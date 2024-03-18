@@ -14,20 +14,20 @@ export default function Map() {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const { event } = useSelector((state: ReduxState) => state.event)
-    if(!event.location || event.location.type != 'mazmap'){
+    if(!event?.event?.location || event?.event?.location?.type != 'mazemap'){
         return <></>
     }
 
-    const locationName = lang ? event.location.name_no : event.location.name_en
-    const organizer = event.organizations[0].shortname || event.organizations[0].name_en
+    const locationName = lang ? event?.event?.location?.name_no : event?.event?.location?.name_en
+    const organizer = event?.organizations[0]?.shortname || event?.organizations[0]?.name_en
 
     return (
         <TouchableOpacity 
             style={{minWidth: 70}} 
             onPress={() => {
                 if(!event.location) return
-                handleLink({mazemap_campus_id: event.location.mazemap_campus_id, 
-                            mazemap_poi_id: event.location.mazemap_poi_id, 
+                handleLink({mazemap_campus_id: event?.location?.mazemap_campus_id, 
+                            mazemap_poi_id: event?.location?.mazemap_poi_id, 
                             locationName, organizer})
         }}>
             <View style={ES.row}>

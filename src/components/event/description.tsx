@@ -23,7 +23,7 @@ export default function Description() {
             const markdown = content.replace(/<br>/g, '\n').replace(/###/g, '')
 
             if (!content.includes('[:event]') && !content.includes('[:jobad]')) {
-                return <Markdown style={{text: {color: '#FFF'}}}>{markdown}</Markdown> 
+                return <Markdown key={index} style={{text: {color: '#FFF'}}}>{markdown}</Markdown> 
             }
 
             return <Embed key={index} id={number} type={content.includes('[:event]') ? "event" : "ad"} />
