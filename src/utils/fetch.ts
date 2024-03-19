@@ -29,111 +29,15 @@ export default function LastFetch(param?: string) {
  * @returns All details for passed event
  */
 export async function fetchEventDetails(id: number): 
-Promise<DetailedEvent> {
+Promise<DetailedEventResponse> {
     // Fetches events
     const response = await fetch(`${api}events/${id}`)
 
     // Test API
     // const response = await fetch(`${testapi}events/${id}`)
-    const eventDetails = await response.json()
+    const eventDetails: DetailedEventResponse = await response.json()
 
-    // console.log(eventDetails)
-    let mazemap = null
-    let location_no = null
-    let location_en = null
-    let location_url = null
-    let rule_no = null
-    let rule_en = null
-    let rule_details_no = null
-    let rule_details_en = null
-    let organization_logo = null
-    let organization_name_short = null
-    let link_homepage = null
-    let organization_name_en = null
-    let category_name_no = null
-    let category_name_en = null
-    let color = null
-
-    if ('category' in eventDetails) {
-        if ('name_no' in eventDetails.category) {
-            category_name_no = eventDetails.category.name_no
-        }
-        if ('name_en' in eventDetails.category) {
-            category_name_en = eventDetails.category.name_en
-        }
-        if ('color' in eventDetails.category) {
-            color = eventDetails.category.color
-        }
-    }
-
-    if ('location' in eventDetails) {
-        if ('name_no' in eventDetails.location) {
-            location_no = eventDetails.location.name_no
-        }
-        if ('name_en' in eventDetails.location) {
-            location_en = eventDetails.location.name_en
-        }
-        if ('mazemap_poi_id' in eventDetails.location) {
-            mazemap = eventDetails.location.mazemap_poi_id
-        }
-        if ('url' in eventDetails.location) {
-            location_url = eventDetails.location.url
-        }
-    }
-
-    if ('rule' in eventDetails) {
-        if ('name_no' in eventDetails.rule) {
-            rule_no = eventDetails.rule.name_no
-        }
-        if ('name_en' in eventDetails.rule) {
-            rule_en = eventDetails.rule.name_en
-        }
-        if ('description_no' in eventDetails.rule) {
-            rule_details_no = eventDetails.rule.description_no
-        }
-        if ('description_en' in eventDetails.rule) {
-            rule_details_en = eventDetails.rule.description_en
-        }
-    }
-
-    if ('organizations' in eventDetails) {
-        if (eventDetails.organizations.length) {
-            if ('shortname' in eventDetails.organizations[0]) {
-                organization_name_short = eventDetails.organizations[0].shortname 
-            }
-            if ('logo' in eventDetails.organizations[0]) {
-                organization_logo = eventDetails.organizations[0].logo
-            }
-            if ('link_homepage' in eventDetails.organizations[0]) {
-                link_homepage = eventDetails.organizations[0].link_homepage
-            }
-            if ('organization_name_en' in eventDetails.organizations[0]) {
-                organization_name_en = eventDetails.organizations[0].name_en
-            }
-        }
-    }
-
-    const details = {
-        audiences: eventDetails.audiences,
-        category_id: eventDetails.category.id,
-        category_name_no,
-        category_name_en,
-        mazemap, 
-        location_no, 
-        location_en, 
-        location_url,
-        rule_no,
-        rule_en,
-        rule_details_no,
-        rule_details_en,
-        organization_logo,
-        organization_name_short,
-        organization_name_en,
-        link_homepage,
-        color
-    }
-
-    return {...eventDetails.event, ...details}
+    return eventDetails
 }
 
 /**
@@ -197,20 +101,20 @@ export async function fetchAds(): Promise<AdProps[]> {
 /**
  * Fetches the specific ad page for additional details
  *
- * @param {object} ad    Ad to fetch details for
+ * @param {object} adID    Ad to fetch details for
  *
  * @returns                 All details for passed event
  */
-export async function fetchAdDetails(ad: AdProps): Promise<DetailedAd> {
+export async function fetchAdDetails(adID: number): Promise<DetailedAdResponse> {
 
     // Prod
-    const response = await fetch(`${api}jobs/${ad.id}`)
+    const response = await fetch(`${api}jobs/${adID}`)
     
     // Dev
     // const response = await fetch(`${testapi}jobs/${ad.id}`)
     const adDetails = await response.json()
 
-    return {...ad, ...adDetails.job, ...adDetails.organization}
+    return adDetails
 }
 
 /**

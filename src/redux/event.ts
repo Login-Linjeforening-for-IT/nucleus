@@ -32,7 +32,7 @@ export const EventSlice = createSlice({
     // Initial state of the slice
     initialState: {
         events: [] as EventProps[],
-        event: {} as EventProps,
+        event: undefined as DetailedEventResponse,
         clickedEvents: [] as EventProps[],
         renderedEvents: [] as EventProps[],
         lastFetch: "",
@@ -45,15 +45,18 @@ export const EventSlice = createSlice({
         clickedCategories: [] as string[],
         input: "",
         downloadState: "",
-        tag: { title: "", body: "" }
+        tag: { title: "", body: "" },
     },
     // Declares reducers
     reducers: {
         // Sets the event array
         setEvents(state, action) {
             state.events = action.payload
-            state.renderedEvents = action.payload
-            state.categories = setCategories(state.events)
+            state.categories = setCategories(state.events, state.clickedEvents)
+            
+            if (!state.search) {
+                state.renderedEvents = action.payload
+            }
         },
         // Sets the event to be displayed on SES
         setEvent(state, action) {
@@ -62,7 +65,7 @@ export const EventSlice = createSlice({
         // Sets the clicked events
         setClickedEvents(state, action) {
             state.clickedEvents = action.payload
-            state.categories = setCategories(state.events)
+            state.categories = setCategories(state.events, state.clickedEvents)
         },
         // Sets the events to be displayed
         setRenderedEvents(state, action) {
@@ -111,7 +114,7 @@ export const EventSlice = createSlice({
         },
         setTag(state, action) {
             state.tag = action.payload
-        }
+        },
     }
 })
 
@@ -139,17 +142,35 @@ export default EventSlice.reducer
  * @param clickedEvents
  * @param events
  */
-function setCategories(events: EventProps[]) {
+function setCategories(events: EventProps[], clickedEvents: EventProps[]) {
+    // Adds enrolled (Påmeldt) filter option if relevant, since no ad has this attribute naturally
+    const NO: Set<string> = new Set(clickedEvents.length ? ["Påmeldt"] : [])
+    const EN: Set<string> = new Set(clickedEvents.length ? ["Enrolled"] : [])
+    let englishCategoryExists = false
+
+    events.forEach((event) => {
+        if (event.category_name_no) {
+            NO.add(event.category_name_no)
+        }
+
+        if (event.category_name_en) {
+            EN.add(event.category_name_en)
+            englishCategoryExists = true
+        }
+    })
 
     const categories = {
-        no: [] as string[],
-        en: [] as string[]
+        no: Array.from(NO),
+        en: englishCategoryExists ? Array.from(EN) : []
     }
 
-    events.forEach(event => {
-        if (!categories.no.includes(event.category_name_no)) categories.no.push(event.category_name_no)
-        if (!categories.en.includes(event.category_name_en)) categories.en.push(event.category_name_en)
-    })
+    if (categories.no[0] === undefined) {
+        categories.no = []
+    }
+
+    if (categories.en[0] === undefined) {
+        categories.en = []
+    }
 
     return categories
 }

@@ -32,7 +32,7 @@ export const AdSlice = createSlice({
     // Initial state of the slice
     initialState: {
         ads: [] as AdProps[],
-        ad: {} as AdProps,
+        ad: undefined as DetailedAdResponse,
         clickedAds: [] as AdProps[],
         renderedAds: [] as AdProps[],
         lastFetch: "",
@@ -48,8 +48,11 @@ export const AdSlice = createSlice({
         // Sets the ad array
         setAds(state, action) {
             state.ads = action.payload
-            state.renderedAds = action.payload
             state.skills = setSkills(state.ads, state.clickedAds)
+
+            if (!state.search) {
+                state.renderedAds = action.payload
+            }
         },
         // Sets the ad to be displayed on SES
         setAd(state, action) {

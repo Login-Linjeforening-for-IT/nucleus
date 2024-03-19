@@ -1,8 +1,9 @@
-import { View, ScrollView, Dimensions } from "react-native"
+import { View, Dimensions } from "react-native"
+import { RefreshControl, ScrollView } from "react-native-gesture-handler"
 import Cluster from "@/components/shared/cluster"
 import AS from "@styles/adStyles"
 import { useDispatch, useSelector } from "react-redux"
-import React from "react"
+import React, { useCallback, useState, useEffect } from "react"
 import Swipe from "@components/nav/swipe"
 import AdInfo, { 
     AdBanner,
@@ -13,24 +14,43 @@ import AdInfo, {
 } from "@/components/ads/ad"
 import { setAd } from "@redux/ad"
 import { fetchAdDetails } from "@utils/fetch"
+import { StackScreenProps } from "@react-navigation/stack"
   
-export default function SpecificAdScreen(): JSX.Element {
+export default function SpecificAdScreen({navigation, route:{params}}: StackScreenProps<AdStackParamList>): JSX.Element {
 
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { ad } = useSelector((state: ReduxState) => state.ad )
+    const [refresh, setRefresh] = useState(false)
 
     const dispatch = useDispatch()
-    const descriptionCheck = 'description_short_no' || 'description_short_en' || 'description_long_no' || 'description_long_en'
+
+    navigation.addListener('beforeRemove', (e) => {
+        dispatch(setAd(undefined))
+    })
 
     async function getDetails() {
-        const response = await fetchAdDetails(ad)
+        if (!params) return
+        const response = await fetchAdDetails(params.adID)
 
-        if (response) dispatch(setAd(response))
+        if (response){
+            dispatch(setAd(response))
+            return true
+        }
     }
+    const onRefresh = useCallback(async () => {
+        setRefresh(true);
+        const details = await getDetails()
 
-    if (!(descriptionCheck in ad)) {
-        getDetails()
-    }
+        if (details) {
+            setRefresh(false)
+        }
+    }, [refresh]);
+
+    useEffect(() => {
+        if(ad==undefined){
+            getDetails()
+        }
+    }, [params])
 
     return (
         <Swipe left="AdScreen">
@@ -41,14 +61,18 @@ export default function SpecificAdScreen(): JSX.Element {
                     paddingTop: Dimensions.get("window").height / 9.7,
                     paddingBottom: Dimensions.get("window").height / 3
                 }}>
-                    <ScrollView showsVerticalScrollIndicator={false}>
+                    <ScrollView 
+                        showsVerticalScrollIndicator={false} 
+                        scrollEventThrottle={100}
+                        refreshControl={<RefreshControl refreshing={refresh} onRefresh={onRefresh} />}
+                    >
                         <Cluster marginHorizontal={12} marginVertical={12}>
-                            <AdBanner url={ad.banner_image} />
+                            <AdBanner url={ad?.job?.banner_image} />
                             <AdTitle ad={ad} />
-                            <AdInfo ad={ad} />
-                            <AdDescription ad={ad} />
+                            <AdInfo ad={ad?.job} />
+                            <AdDescription ad={ad?.job} />
                             <AdMedia ad={ad} />
-                            <AdUpdateInfo ad={ad} />
+                            <AdUpdateInfo ad={ad?.job} />
                         </Cluster>
                     </ScrollView>
                 </View>

@@ -6,15 +6,12 @@ export const ES = StyleSheet.create({
         justifyContent: "center",
         marginLeft: 5,
         top: 2,
-        maxWidth: '70%',
+        width: '80%',
         maxHeight: 55
     },
     // Right side card view
     view3: {
-        position: "absolute",
-        right: 5,
-        top: -3,
-        height: "100%",
+        justifyContent: 'center',
     },
     // Card height and direction on eventscreen
     eventBack: {
@@ -116,6 +113,7 @@ export const ES = StyleSheet.create({
     // Filter view
     clusterFilterView: {
         flexDirection: "row",
+        maxHeight: 100
     },
     // EventScreen filter text
     clusterFilterText: {
@@ -171,6 +169,11 @@ export const ES = StyleSheet.create({
     },
     sesContent: {
         height: Dimensions.get("window").height + 200,
+    },
+    id: {
+        alignSelf: 'center', 
+        fontSize: 15, 
+        marginVertical: 10
     }
 })
 

@@ -91,14 +91,7 @@ export default function AdScreen({ navigation }: ScreenProps): JSX.Element {
                     const ads = await fetchAds()
 
                     if (ads.length) {
-                        const detailedAdPromises = ads.map(async(ad) => {
-                            const details = await fetchAdDetails(ad)
-                            return details
-                        })
-
-                        const detailedAds = await Promise.all(detailedAdPromises)
-
-                        dispatch(setAds(detailedAds))
+                        dispatch(setAds(ads))
                         dispatch(setLastFetch(LastFetch()))
                     }
                 })()

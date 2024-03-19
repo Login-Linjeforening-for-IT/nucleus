@@ -5,7 +5,7 @@ import T from "@styles/text"
 import { Month } from "./utils"
 
 type CategorySquareProps = {
-    color: string
+    color: string | undefined
     height?: number
     startDate: Date | number
     endDate?: Date | undefined

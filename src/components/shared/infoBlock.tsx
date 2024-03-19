@@ -8,14 +8,14 @@ type InfoBlockProps = {
 }
 
 export default function InfoBlock({infoText}: InfoBlockProps){
-    const { event } = useSelector((state: ReduxState) => state.event)
+    const { event:{event} } = useSelector((state: ReduxState) => state.event)
     
     return (
         <View style={{
             backgroundColor: event.canceled ? '#800000B3' : '#003946',
             minHeight: 50,
             width: '100%',
-            borderRadius: 5,
+            borderRadius: 10,
             overflow: 'hidden',
             flexDirection: 'row',
             alignItems: 'center',

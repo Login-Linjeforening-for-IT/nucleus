@@ -1,26 +1,26 @@
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import { CompositeScreenProps, NavigatorScreenParams } from "@react-navigation/native"
 import { StackScreenProps } from "@react-navigation/stack";
+declare global {
+    namespace ReactNavigation {
+      interface RootParamList extends TabBarParamList {}
+    }
+}
 
-export type TabBarProps<T extends keyof TabParamList> =
-  BottomTabScreenProps<TabParamList, T>;
+export type TabBarProps<T extends keyof TabBarParamList> =
+BottomTabScreenProps<TabBarParamList, T>;
 
 export type EventScreenProps<T extends keyof EventStackParamList> = 
     CompositeScreenProps<
         StackScreenProps<EventStackParamList, T>,
-        BottomTabScreenProps<TabParamList>
-    >
+        BottomTabScreenProps<TabBarParamList>
+        >
 
 export type EventStackParamList = {
     EventScreen: undefined
     SpecificEventScreen: {eventID: number}
 }
 
-declare global {
-    namespace ReactNavigation {
-      interface RootParamList extends TabParamList {}
-    }
-  }
 
 export type AdStackParamList = {
     AdScreen: undefined
@@ -28,7 +28,7 @@ export type AdStackParamList = {
 }
 
 export type MenuRoutes = 
-    "ProfileScreen"
+"ProfileScreen"
     | "SettingScreen"
     | "NotificationScreen"
     | "AboutScreen"
@@ -37,14 +37,14 @@ export type MenuRoutes =
     | "LoginScreen"
     | "InternalScreen" 
 
-export type ItemProps = {
+    export type ItemProps = {
     id: number
     nav: MenuRoutes
     title: string
 }
 
 export type MenuProps<T extends keyof MenuStackParamList> = 
-    StackScreenProps<MenuStackParamList, T>
+StackScreenProps<MenuStackParamList, T>
 
 export type MenuStackParamList = {
     ProfileScreen: undefined,
@@ -58,8 +58,13 @@ export type MenuStackParamList = {
     MenuScreen: undefined
 }
 
-export type TabParamList = {
+export type TabBarParamList = {
     EventNav: NavigatorScreenParams<EventStackParamList>
     AdNav: NavigatorScreenParams<AdStackParamList>
     MenuNav: NavigatorScreenParams<MenuStackParamList>
+}
+
+export type RootStackParamList = {
+    Tabs: NavigatorScreenParams<TabBarParamList>
+    InfoModal: undefined
 }

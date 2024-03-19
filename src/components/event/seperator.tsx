@@ -8,8 +8,6 @@ type SeperatorProps = {
 }
 
 export default function Seperator({item, usedIndexes}: SeperatorProps) {
-    if (item.highlight) return null
-    
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
     
@@ -38,8 +36,8 @@ export default function Seperator({item, usedIndexes}: SeperatorProps) {
 
     return (
         <View style={{justifyContent: "center", top: -5, left: 5}}>
-            <Text style={{color: 
-                theme.oppositeTextColor, 
+            <Text style={{
+                color: theme.oppositeTextColor, 
                 backgroundColor: theme.darker, 
                 alignSelf: "center", 
                 paddingHorizontal: 8, 
