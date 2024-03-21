@@ -1,9 +1,3 @@
-const { getDefaultConfig } = require('expo/metro-config')
+const { getDefaultConfig } = require('@react-native/metro-config');
 
-/** @type {import('expo/metro-config').MetroConfig} */
-const config = getDefaultConfig(__dirname, {
-    // Enable CSS support.
-    isCSSEnabled: true,
-})
-
-module.exports = config
+module.exports = getDefaultConfig(__dirname);
