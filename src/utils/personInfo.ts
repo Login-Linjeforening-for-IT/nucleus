@@ -41,7 +41,7 @@ export default function personInfo({person, lang}: personInfoProps) {
         name: "Ida Førland",
         tag: "idaforland",
         dclink: "https://discordapp.com/users/470279697465606159",
-        img: `https://cdn.login.no/img/portraits/portrett_bedkom-leder.jpg`
+        img: `https://cdn.login.no/img/portraits/portrett_leder.jpg`
     }
 
     const coleader = {
