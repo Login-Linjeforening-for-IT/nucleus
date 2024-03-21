@@ -26,8 +26,8 @@ export default function Header({ options, route, navigation }: HeaderProps): Rea
             ? require('@text/no.json').screens[route.name]
             : require('@text/en.json').screens[route.name])
     
-    if (!title && SES) title = (lang ? event?.event.name_no || event?.event.name_en : event?.event.name_en || event?.event.name_no) || ""
-    if (!title && SAS) title = (lang ? ad?.job.title_no || ad?.job.title_en : ad?.job.title_en || ad?.job.title_no) || ""
+    if (!title && SES) title = (lang ? event?.event?.name_no || event?.event?.name_en : event?.event?.name_en || event?.event?.name_no) || ""
+    if (!title && SAS) title = (lang ? ad?.job?.title_no || ad?.job?.title_en : ad?.job?.title_en || ad?.job?.title_no) || ""
     if (route.name === "ProfileScreen") return <></>
 
     const { isDark } = useSelector((state: ReduxState) => state.theme )

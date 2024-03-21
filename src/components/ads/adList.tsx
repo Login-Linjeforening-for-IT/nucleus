@@ -48,21 +48,23 @@ export default function AdList (): JSX.Element {
     adList.sort((a, b)=>(Number(b.highlight)-Number(a.highlight)))
     if (!renderedAds.length && !search) {
         return <ErrorMessage argument="wifi" />
-    } 
+    }
+
+    const offset = search
+        ? (Dimensions.get("window").height / (Platform.OS === "ios" ? 3.6 : 3.01)) - (100 - getHeight(skills.length))
+        : Dimensions.get("window").height / (Platform.OS === "ios" ? 8.2 : 7.8) 
     
     if (renderedAds.length > 0) {
         return (
             <>
-                <Space height={search
-                    ? (Dimensions.get("window").height / (Platform.OS === "ios" ? 3.6 : 3.01)) - (100 - getHeight(skills.length))
-                    : Dimensions.get("window").height / (Platform.OS === "ios" ? 8.2 : 7.8) 
-                } />
                 <ScrollView 
+                    style={{paddingTop: offset }}
                     showsVerticalScrollIndicator={false} 
                     scrollEventThrottle={100}
-                    refreshControl={<RefreshControl refreshing={refresh} onRefresh={onRefresh} />}
                 >
+                    <RefreshControl refreshing={refresh} onRefresh={onRefresh} />
                     {adList.map((ad, index) => <AdCluster index={index} ad={ad} key={index} />)}
+                    <Space height={offset} />
                 </ScrollView>
             </>
         )
