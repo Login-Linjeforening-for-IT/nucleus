@@ -74,7 +74,7 @@
             },
             "package": "com.login.Login",
             "googleServicesFile": "./google-services.json",
-            "versionCode": 63,
+            "versionCode": 64,
             "permissions": [
                 "NOTIFICATIONS",
                 "READ_CALENDAR",
