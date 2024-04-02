@@ -68,7 +68,7 @@ export default function MenuScreen({ navigation }: MenuProps<'MenuScreen'>): JSX
         },[navigation])
 
     return (
-        <Swipe left="AdScreenRoot">
+        <Swipe left="AdNav">
             <View style={{
                 ...GS.content, 
                 backgroundColor: theme.darker
