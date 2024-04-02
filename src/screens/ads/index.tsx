@@ -19,8 +19,6 @@ import { useDispatch, useSelector } from "react-redux"
 import { View } from "react-native"
 import { AdScreenProps, AdStackParamList } from "@utils/screenTypes"
 
-const AdStack = createStackNavigator<AdStackParamList>()
-
 /**
  * Parent AdScreen component
  *
@@ -111,45 +109,31 @@ export default function AdScreen({ navigation }: AdScreenProps<'AdScreen'>): JSX
     }
     }, [lastSave])
 
+    // Sets the component of the header
+    useEffect(()=>{
+        navigation.setOptions({
+            headerComponents: {
+                bottom: [<FilterUI />],
+                left: [<LogoNavigation />],
+                right: [<FilterButton />, <DownloadButton screen="ad" />]
+            }})   
+    },[navigation])
+
     // --- DISPLAYS THE EVENTSCREEN ---
     return (
-        <AdStack.Navigator screenOptions={{
-            animationEnabled: false,
-            headerTransparent: true,
-            header: props => <Header {...props} />
-        }}>
-            <AdStack.Screen name="AdScreen">
-                {({navigation}) => {
-                    // --- SET THE COMPONENTS OF THE HEADER ---
-                    useEffect(()=>{
-                        navigation.setOptions({
-                            headerComponents: {
-                                bottom: [<FilterUI />],
-                                left: [<LogoNavigation />],
-                                right: [<FilterButton />, <DownloadButton screen="ad" />]
-                            }} as Partial<BottomTabNavigationOptions>)   
-                    },[navigation])
-
-                    return (
-                        <Swipe left="EventScreenRoot" right="MenuScreenRoot">
-                            <View>
-                                <StatusBar style={isDark ? "light" : "dark"} />
-                                <View style={{
-                                    ...GS.content,
-                                    paddingHorizontal: 5,
-                                    backgroundColor: theme.darker
-                                }}>
-                                    {pushNotification && pushNotificationContent}
-                                    <AdList />
-                                </View>
-                            </View>
-                        </Swipe>
-                    )}}
-            </AdStack.Screen>
-            <AdStack.Screen 
-                name="SpecificAdScreen"
-                component={SpecificAdScreen}
-            />
-        </AdStack.Navigator>
+        <Swipe left="EventScreenRoot" right="MenuScreenRoot">
+            <View>
+                <StatusBar style={isDark ? "light" : "dark"} />
+                <View style={{
+                    ...GS.content,
+                    paddingHorizontal: 5,
+                    backgroundColor: theme.darker
+                }}>
+                    {pushNotification && pushNotificationContent}
+                    <AdList />
+                </View>
+            </View>
+        </Swipe>
     )
+            
 }

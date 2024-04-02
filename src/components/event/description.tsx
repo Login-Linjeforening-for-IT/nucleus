@@ -9,7 +9,6 @@ export default function Description() {
     const { lang } = useSelector((state: ReduxState) => state.lang)
 
     const content = useMemo(() => {
-        console.log(event?.event)
         if (!(event?.event&&Object.keys(event.event).length)) return null
         const description = lang ? event?.event?.description_no || event?.event?.description_en : event?.event?.description_en || event?.event?.description_no
 

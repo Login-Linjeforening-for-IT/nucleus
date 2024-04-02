@@ -103,7 +103,7 @@ export default function EventScreen({ navigation }: EventScreenProps<'EventScree
 
     // Displays the EventScreen
     return (
-        <Swipe right="AdScreenRoot">
+        <Swipe right="EventScreenRoot">
             <View>
                 <StatusBar style={isDark ? "light" : "dark"} />
                 <View style={{
