@@ -10,22 +10,27 @@ declare global {
 export type TabBarProps<T extends keyof TabBarParamList> =
 BottomTabScreenProps<TabBarParamList, T>;
 
+export type EventStackParamList = {
+    EventScreen: undefined
+    SpecificEventScreen: {eventID: number}
+}
+
 export type EventScreenProps<T extends keyof EventStackParamList> = 
     CompositeScreenProps<
         StackScreenProps<EventStackParamList, T>,
         BottomTabScreenProps<TabBarParamList>
         >
 
-export type EventStackParamList = {
-    EventScreen: undefined
-    SpecificEventScreen: {eventID: number}
-}
-
-
 export type AdStackParamList = {
     AdScreen: undefined
-    SpecificAdScreen: undefined
+    SpecificAdScreen: {adID: number}
 }
+
+export type AdScreenProps<T extends keyof AdStackParamList> =
+    CompositeScreenProps<
+        StackScreenProps<AdStackParamList, T>,
+        BottomTabScreenProps<TabBarParamList>
+        >
 
 export type MenuRoutes = 
 "ProfileScreen"

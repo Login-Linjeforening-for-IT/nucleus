@@ -9,15 +9,16 @@ import { TouchableOpacity } from 'react-native'
 import { Image } from "react-native"
 import MS from '@styles/menuStyles'
 import { useDispatch } from 'react-redux'
-import { setTag } from '@redux/event'
+import { setEvent, setHistory as setEventHistory, setTag } from '@redux/event'
 import getHeight from '@utils/getHeight'
 import getCategories from '@utils/getCategories'
+import { setAd, setHistory as setAdHistory } from '@redux/ad'
 
 export default function Header({ options, route, navigation }: HeaderProps): ReactNode {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang  } = useSelector((state: ReduxState) => state.lang)
-    const { event, tag } = useSelector((state: ReduxState) => state.event)
-    const { ad } = useSelector((state: ReduxState) => state.ad )
+    const { event, tag, history: eventHistory } = useSelector((state: ReduxState) => state.event)
+    const { ad, history: adHistory  } = useSelector((state: ReduxState) => state.ad )
     const dispatch = useDispatch()
     const SES = route.name === "SpecificEventScreen"
     const SAS = route.name === "SpecificAdScreen"
@@ -26,8 +27,8 @@ export default function Header({ options, route, navigation }: HeaderProps): Rea
             ? require('@text/no.json').screens[route.name]
             : require('@text/en.json').screens[route.name])
     
-    if (!title && SES) title = (lang ? event?.event.name_no || event?.event.name_en : event?.event.name_en || event?.event.name_no) || ""
-    if (!title && SAS) title = (lang ? ad?.job.title_no || ad?.job.title_en : ad?.job.title_en || ad?.job.title_no) || ""
+    if (!title && SES) title = event?.event&&Object.keys(event.event).length ? (lang ? event.event.name_no || event.event.name_en : event.event.name_en || event.event.name_no) : ""
+    if (!title && SAS) title = ad?.job&&Object.keys(ad.job).length ? (lang ? ad.job.title_no || ad.job.title_en : ad.job.title_en || ad.job.title_no) : ""
     if (route.name === "ProfileScreen") return <></>
 
     const { isDark } = useSelector((state: ReduxState) => state.theme )
@@ -45,7 +46,26 @@ export default function Header({ options, route, navigation }: HeaderProps): Rea
                     <TouchableOpacity onPress={() => {
                         setBackIcon(orangeIcon)
                         if (tag.title) dispatch(setTag({ title: "", body: "" }))
-                        navigation.goBack()
+                        if (SES){
+                            dispatch(setEvent(undefined))
+                            if (eventHistory.length > 1) {
+                                dispatch(setEventHistory(eventHistory.slice(0, eventHistory.length-1)))
+                            }
+                            else{
+                                dispatch(setEventHistory([]))
+                                navigation.goBack()
+                            }
+                        }
+                        else{
+                            dispatch(setAd(undefined))
+                            if (adHistory.length > 1) {
+                                dispatch(setAdHistory(adHistory.slice(0, adHistory.length-1)))
+                            }
+                            else{
+                                dispatch(setEventHistory([]))
+                                navigation.goBack()
+                            }
+                        }
                     }}>
                         <Image style={{...MS.tMenuIcon, left: 5}} source={backIcon}></Image>
                     </TouchableOpacity>

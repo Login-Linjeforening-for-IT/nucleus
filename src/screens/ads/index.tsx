@@ -12,12 +12,12 @@ import Swipe from "@components/nav/swipe"
 import { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs"
 import { createStackNavigator } from "@react-navigation/stack"
 import { FilterButton, FilterUI } from "@components/shared/filter"
-import { ScreenProps } from "@interfaces"
 import { StatusBar } from "expo-status-bar"
 import { setAds, setLastFetch, setLastSave } from "@redux/ad"
 import { useFocusEffect } from "@react-navigation/native"
 import { useDispatch, useSelector } from "react-redux"
 import { View } from "react-native"
+import { AdScreenProps, AdStackParamList } from "@utils/screenTypes"
 
 const AdStack = createStackNavigator<AdStackParamList>()
 
@@ -33,7 +33,7 @@ const AdStack = createStackNavigator<AdStackParamList>()
  * @param {navigation} Navigation Navigation route
  * @returns AdScreen
  */
-export default function AdScreen({ navigation }: ScreenProps): JSX.Element {
+export default function AdScreen({ navigation }: AdScreenProps<'AdScreen'>): JSX.Element {
     // Push notification
     const [pushNotification, setPushNotification] = useState(false)
     const [pushNotificationContent, setPushNotificationContent] = 

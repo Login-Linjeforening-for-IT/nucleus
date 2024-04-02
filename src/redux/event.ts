@@ -33,6 +33,7 @@ export const EventSlice = createSlice({
     initialState: {
         events: [] as EventProps[],
         event: undefined as DetailedEventResponse,
+        history: [] as number[],
         clickedEvents: [] as EventProps[],
         renderedEvents: [] as EventProps[],
         lastFetch: "",
@@ -61,6 +62,9 @@ export const EventSlice = createSlice({
         // Sets the event to be displayed on SES
         setEvent(state, action) {
             state.event = action.payload
+        },
+        setHistory(state, action) {
+            state.history = action.payload
         },
         // Sets the clicked events
         setClickedEvents(state, action) {
@@ -124,6 +128,7 @@ export const {
     setClickedCategories,
     setClickedEvents,
     setEvents,
+    setHistory,
     setEvent,
     setInput,
     setLastFetch,

@@ -33,6 +33,7 @@ export const AdSlice = createSlice({
     initialState: {
         ads: [] as AdProps[],
         ad: undefined as DetailedAdResponse,
+        history: [] as number[],
         clickedAds: [] as AdProps[],
         renderedAds: [] as AdProps[],
         lastFetch: "",
@@ -62,6 +63,9 @@ export const AdSlice = createSlice({
         setClickedAds(state, action) {
             state.clickedAds = action.payload
             state.skills = setSkills(state.ads, state.clickedAds)
+        },
+        setHistory(state, action) {
+            state.history = action.payload
         },
         // Sets the ads to be displayed
         setRenderedAds(state, action) {
@@ -118,6 +122,7 @@ export const {
     setClickedAds,
     setAds,
     setAd,
+    setHistory,
     setInput,
     setLastFetch,
     setLastSave,

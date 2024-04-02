@@ -2,7 +2,7 @@ import Space from "@/components/shared/utils"
 import React, { useCallback, useState, useEffect } from "react"
 import { useSelector } from "react-redux"
 import ES from "@styles/eventStyles"
-import { Dimensions, Platform, View, Text } from "react-native"
+import { Dimensions, Platform, View, Text, BackHandler } from "react-native"
 import { RefreshControl, ScrollView } from "react-native-gesture-handler"
 import Swipe from "@components/nav/swipe"
 import SpecificEventImage from "@components/event/specificEventImage"
@@ -11,9 +11,10 @@ import BasicInfo from "@components/event/basicInfo"
 import DescriptionAndJoin from "@components/event/descriptionAndJoin"
 import { useDispatch } from "react-redux"
 import { fetchEventDetails } from "@utils/fetch"
-import { setEvent } from "@redux/event"
+import { setHistory, setEvent } from "@redux/event"
 import Tag from "@components/shared/tag"
 import { EventScreenProps } from "@utils/screenTypes"
+import { useFocusEffect } from "@react-navigation/core"
 
 /**
  *
@@ -22,25 +23,43 @@ import { EventScreenProps } from "@utils/screenTypes"
  */
 export default function SpecificEventScreen({ navigation, route: {params: {eventID}} }: EventScreenProps<'SpecificEventScreen'>): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    const { event } = useSelector((state: ReduxState) => state.event)
+    const { event, history } = useSelector((state: ReduxState) => state.event)
     const [refresh, setRefresh] = useState(false)
-    // if (deepLinkID) {
-    //     const response = fetchEventDetails(deepLinkID)
-
-    //     if (response) {
-    //         dispatch(setEvent(response))
-    //     }
-    // }
-
+    
     const dispatch = useDispatch()
 
-    navigation.addListener('beforeRemove', (e) => {
-        dispatch(setEvent(undefined))
-    })
+    useFocusEffect(
+        React.useCallback(() => {
+            let localHistory = [...history]
+            localHistory.push(eventID)
+            dispatch(setHistory(localHistory))
+
+            const onBackPress = () => {
+                if (history.length > 1) {
+                    dispatch(setHistory(history.slice(0, history.length-1)))
+                }
+                else{
+                    dispatch(setHistory([]))
+                    navigation.goBack()
+                }
+                return true
+            };
+    
+            const subscription = BackHandler.addEventListener(
+                'hardwareBackPress',
+                onBackPress
+            );
+    
+            return () => subscription.remove();
+        }, [])
+    );
+
+    useEffect(() => {
+        getDetails()
+    }, [history])
 
     async function getDetails() {
-        if (!eventID) return
-        const response = await fetchEventDetails(eventID)
+        const response = await fetchEventDetails(history[history.length-1])
 
         if (response) {
             dispatch(setEvent(response))
@@ -56,12 +75,6 @@ export default function SpecificEventScreen({ navigation, route: {params: {event
             setRefresh(false)
         }
     }, [refresh]);
-
-    useEffect(() => {
-        if(event==undefined){
-            getDetails()
-        }
-    }, [eventID])
 
     return (
         <Swipe left="EventScreen">

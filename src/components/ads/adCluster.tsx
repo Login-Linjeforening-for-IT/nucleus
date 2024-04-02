@@ -12,6 +12,7 @@ import { TouchableOpacity, Dimensions, Text, View } from "react-native"
 import { LinearGradient } from "expo-linear-gradient"
 import TopicManager from "@utils/topicManager"
 import { StackNavigationProp } from "@react-navigation/stack"
+import { AdStackParamList } from "@utils/screenTypes"
 
 type Ad = {
     ad: AdProps

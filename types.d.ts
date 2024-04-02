@@ -207,6 +207,7 @@ type ReduxState = {
     event: {
         events: EventProps[]
         event: DetailedEventResponse
+        history: number[]
         clickedEvents: EventProps[]
         renderedEvents: EventProps[]
         lastFetch: string
@@ -227,6 +228,7 @@ type ReduxState = {
     ad: {
         ads: AdProps[]
         ad: DetailedAdResponse
+        history: number[]
         clickedAds: AdProps[]
         renderedAds: AdProps[]
         lastFetch: string

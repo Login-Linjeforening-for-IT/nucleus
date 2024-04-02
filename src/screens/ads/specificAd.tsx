@@ -1,4 +1,4 @@
-import { View, Dimensions } from "react-native"
+import { View, Dimensions, BackHandler } from "react-native"
 import { RefreshControl, ScrollView } from "react-native-gesture-handler"
 import Cluster from "@/components/shared/cluster"
 import AS from "@styles/adStyles"
@@ -12,31 +12,59 @@ import AdInfo, {
     AdTitle,
     AdUpdateInfo
 } from "@/components/ads/ad"
-import { setAd } from "@redux/ad"
+import { setAd, setHistory } from "@redux/ad"
 import { fetchAdDetails } from "@utils/fetch"
-import { StackScreenProps } from "@react-navigation/stack"
+import { AdScreenProps } from "@utils/screenTypes"
+import { useFocusEffect } from "@react-navigation/core"
   
-export default function SpecificAdScreen({navigation, route:{params}}: StackScreenProps<AdStackParamList>): JSX.Element {
-
+export default function SpecificAdScreen({navigation, route:{params: {adID}}}: AdScreenProps<'SpecificAdScreen'>): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    const { ad } = useSelector((state: ReduxState) => state.ad )
+    const { ad, history } = useSelector((state: ReduxState) => state.ad )
     const [refresh, setRefresh] = useState(false)
 
     const dispatch = useDispatch()
 
-    navigation.addListener('beforeRemove', (e) => {
-        dispatch(setAd(undefined))
-    })
+    useFocusEffect(
+        React.useCallback(() => {
+            let localHistory = [...history]
+            localHistory.push(adID)
+            dispatch(setHistory(localHistory))
+
+            const onBackPress = () => {
+                if (history.length > 1) {
+                    dispatch(setHistory(history.slice(0, history.length-1)))
+                }
+                else{
+                    dispatch(setHistory([]))
+                    navigation.goBack()
+                }
+                return true
+            };
+    
+            const subscription = BackHandler.addEventListener(
+                'hardwareBackPress',
+                onBackPress
+            );
+    
+            return () => subscription.remove();
+        }, [])
+    );
+
+    useEffect(() => {
+        getDetails()
+    }, [history])
+
 
     async function getDetails() {
-        if (!params) return
-        const response = await fetchAdDetails(params.adID)
+        const response = await fetchAdDetails(history[history.length-1])
 
         if (response){
             dispatch(setAd(response))
             return true
         }
     }
+
+    // Handels the refresh of the page
     const onRefresh = useCallback(async () => {
         setRefresh(true);
         const details = await getDetails()
@@ -45,12 +73,6 @@ export default function SpecificAdScreen({navigation, route:{params}}: StackScre
             setRefresh(false)
         }
     }, [refresh]);
-
-    useEffect(() => {
-        if(ad==undefined){
-            getDetails()
-        }
-    }, [params])
 
     return (
         <Swipe left="AdScreen">
