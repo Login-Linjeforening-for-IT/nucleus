@@ -5,7 +5,7 @@
         "name": "Login",
         "slug": "Login",
         "scheme": "login",
-        "version": "2.1.1",
+        "version": "2.1.2",
         "orientation": "portrait",
         "icon": "./public/assets/logo/icon.png",
         "userInterfaceStyle": "dark",
@@ -75,13 +75,27 @@
             },
             "package": "com.login.Login",
             "googleServicesFile": "./google-services.json",
-            "versionCode": 62,
+            "versionCode": 65,
             "permissions": [
                 "NOTIFICATIONS",
                 "READ_CALENDAR",
                 "WRITE_CALENDAR"
             ],
-            "softwareKeyboardLayoutMode":"pan"
+            "softwareKeyboardLayoutMode":"pan",
+            "intentFilters": [
+                {
+                  "action": "VIEW",
+                  "autoVerify": true,
+                  "data": [
+                    {
+                      "scheme": "https",
+                      "host": "login.no",
+                      "pathPrefix": "/records"
+                    }
+                  ],
+                  "category": ["BROWSABLE", "DEFAULT"]
+                }
+              ]
         },
         "web": {
             "favicon": "./public/assets/logo/favicon.ico"

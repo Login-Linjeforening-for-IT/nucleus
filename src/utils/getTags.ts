@@ -2,7 +2,7 @@ import no from "@text/tag/no.json"
 import en from "@text/tag/en.json"
 
 type getTagsProps = {
-    event: DetailedEvent
+    event: DetailedEventData
     lang: boolean
 }
 

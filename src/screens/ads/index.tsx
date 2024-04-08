@@ -116,7 +116,7 @@ export default function AdScreen({ navigation }: AdScreenProps<'AdScreen'>): JSX
                 bottom: [<FilterUI />],
                 left: [<LogoNavigation />],
                 right: [<FilterButton />, <DownloadButton screen="ad" />]
-            }})   
+            }} as any)   
     },[navigation])
 
     // --- DISPLAYS THE EVENTSCREEN ---

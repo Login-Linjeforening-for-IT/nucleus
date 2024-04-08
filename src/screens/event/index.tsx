@@ -91,7 +91,7 @@ export default function EventScreen({ navigation }: EventScreenProps<'EventScree
                 bottom: [<FilterUI />],
                 left: [<LogoNavigation />],
                 right: [<FilterButton />, <DownloadButton screen="event"/>]
-            }})   
+            }} as any)   
     }, [navigation])
 
     // initializeNotifications({

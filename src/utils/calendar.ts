@@ -162,48 +162,47 @@ itemsToCalendarFormatProps) {
     let formattedEvents = []
     
     for (const item of items) {
-        const detailedItem = isEventScreen ? await fetchEventDetails(item.id) : await fetchAdDetails(item as AdProps)
+        const event = await fetchEventDetails(item.id)
+        const ad = await fetchAdDetails(item.id)
         let location
         let title
         let notes
         let startDate
         let endDate
 
-        if (isEventScreen) {
-            const event = detailedItem as DetailedEvent
+        if (isEventScreen && event) {
             location = lang 
-                ? event.location_no || event.location_en || ''
-                : event.location_en || event.location_no || ''
-            title = lang ? event.name_no || event.name_en || '' : event.name_en || event.name_no || ''
-            const fixedDesc = lang ? event.description_no || event.description_en || '' : event.description_en || event.description_no || ''
+                ? event.location?.name_no || event.location?.name_no || ''
+                : event.location?.name_en || event.location?.name_en || ''
+            title = lang ? event.event.name_no || event.event.name_en || '' : event.event.name_en || event.event.name_no || ''
+            const fixedDesc = lang ? event.event.description_no || event.event.description_en || '' : event.event.description_en || event.event.description_no || ''
 
             notes = fixedDesc.replace(/\\n/g, '\n') || undefined
             if (!location.length) location = `https://login.no/events/${item.id}`
-            startDate = new Date(event.time_start)
-            endDate = new Date(event.time_end)
-        } else {
-            const ad = detailedItem as DetailedAd
-            location = ad.cities?.map(city => capitalizeFirstLetter(city)).join(", ") || ''
-            title =  `${lang ? 'Frist for å søke jobb - ': 'Deadline to apply - '}${lang ? ad.title_no || ad.title_en : ad.title_en || ad.title_no}!`
+            startDate = new Date(event.event.time_start)
+            endDate = new Date(event.event.time_end)
+        } else if (ad) {
+            location = ad?.job.cities?.map(city => capitalizeFirstLetter(city)).join(", ") || ''
+            title =  `${lang ? 'Frist for å søke jobb - ': 'Deadline to apply - '}${lang ? ad.job.title_no || ad.job.title_en : ad.job.title_en || ad.job.title_no}!`
             const tempShort = lang 
-                ? ad.description_short_no || ad.description_short_en
-                : ad.description_short_en || ad.description_short_no
+                ? ad.job.description_short_no || ad.job.description_short_en
+                : ad.job.description_short_en || ad.job.description_short_no
             const tempLong = lang 
-                ? ad.description_long_no || ad.description_long_en
-                : ad.description_long_en || ad.description_long_no
+                ? ad.job.description_long_no || ad.job.description_long_en
+                : ad.job.description_long_en || ad.job.description_long_no
 
             const shortDescription = tempShort ? tempShort.replace(/\\n/g, '\n') : ''
             const LongDescription = tempLong ? tempLong.replace(/\\n/g, '\n') : ''
             notes = LongDescription || shortDescription || ''
             if (!location.length) location = `https://login.no/career/${item.id}`
-            startDate = new Date(new Date(ad.application_deadline).getTime() - 14400000)
-            endDate = new Date(ad.application_deadline)
+            startDate = new Date(new Date(ad.job.application_deadline).getTime() - 14400000)
+            endDate = new Date(ad.job.application_deadline)
         }
 
         const obj = {
             calendarId: calendarID,
             allDay: false,
-            id: `${isEventScreen ? 'e' : 'a'}${detailedItem.id}`,
+            id: `${isEventScreen ? 'e' : 'a'}${item.id}`, 
             title, notes, location, startDate, endDate,
             timeZone: "Europe/Oslo",
             status: "CONFIRMED",

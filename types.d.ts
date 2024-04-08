@@ -104,7 +104,7 @@ type EventLocation = {
     id: number
     name_no: string
     name_en: string
-    type: 'mazmap' | 'coords' | 'address' | 'none'
+    type: 'mazemap' | 'coords' | 'address' | 'none'
     mazemap_campus_id: number | null
     mazemap_poi_id: number | null
     address_street: string 

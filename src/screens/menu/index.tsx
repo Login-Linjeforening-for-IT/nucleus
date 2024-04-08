@@ -64,7 +64,7 @@ export default function MenuScreen({ navigation }: MenuProps<'MenuScreen'>): JSX
         navigation.setOptions({
             headerComponents: {
                 left: [<LogoNavigation />],
-            }})   
+            }} as any)   
         },[navigation])
 
     return (
