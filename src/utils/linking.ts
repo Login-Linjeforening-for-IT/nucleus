@@ -1,40 +1,45 @@
 import { LinkingOptions } from "@react-navigation/native";
 import * as Linking from "expo-linking"
-import { TabParamList } from "./screenTypes";
+import { RootStackParamList } from "./screenTypes";
 
 
 const prefix = Linking.createURL('/');
 
-const linking: LinkingOptions<TabParamList> = {
+const linking: LinkingOptions<RootStackParamList> = {
     prefixes: [prefix, 'https://login.no'],
     config: {
         screens: {
-            EventScreen: {
-                path: '',
-                screens: {
-                    SpecificEventScreen: {
-                        path: 'events/:eventID',
-                        parse: {
-                            eventID: Number
-                        }
-                    }
-                }
-            },
-            AdScreen: {
-                path: 'jobs',
-                screens: {
-                    SpecificAdScreen: {
-                        path: ':adID',
-                        parse: {
-                            adID: (adID) => Number(adID)
-                        }
-                    }
-                }
-            },
-            MenuScreen: {
+            Tabs: {
+                initialRouteName: 'EventNav',
                 screens:{
-                    AboutScreen: 'about',
-                    BusinessScreen: 'companies'
+                    EventNav: {
+                        path: '',
+                        screens: {
+                            SpecificEventScreen: {
+                                path: 'events/:eventID',
+                                parse: {
+                                    eventID: Number
+                                }
+                            }
+                        }
+                    },
+                    AdNav: {
+                        path: 'jobs',
+                        screens: {
+                            SpecificAdScreen: {
+                                path: ':adID',
+                                parse: {
+                                    adID: Number
+                                }
+                            }
+                        }
+                    },
+                    MenuNav: {
+                        screens:{
+                            AboutScreen: 'about',
+                            BusinessScreen: 'companies'
+                        }
+                    }
                 }
             }
         }
