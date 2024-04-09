@@ -5,6 +5,7 @@ import { Provider } from "react-redux"
 import Navigator from "@nav/tabs"
 import store from "@redux/store"
 import React from "react"
+import ForceUpdate from "@components/menu/forceUpdate"
 
 let persistor = persistStore(store)
 
@@ -28,6 +29,7 @@ export default function App(): JSX.Element {
     return (
         <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}>
+                {/* <ForceUpdate /> */}
                 <Navigator />
             </PersistGate>
         </Provider>

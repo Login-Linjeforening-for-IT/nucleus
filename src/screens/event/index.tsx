@@ -16,6 +16,7 @@ import Swipe from "@components/nav/swipe"
 import { FilterButton, FilterUI } from "@components/shared/filter"
 import DownloadButton from "@components/shared/downloadButton"
 import { EventScreenProps } from "@utils/screenTypes"
+
 /**
  * Parent EventScreen component
  *
