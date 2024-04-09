@@ -66,6 +66,11 @@
                     "fetch",
                     "remote-notification"
                 ]
+            },
+            "entitlements": {
+                "com.apple.developer.associated-domains": [
+                    "applinks:login.no"
+                ]
             }
         },
         "android": {
@@ -75,7 +80,7 @@
             },
             "package": "com.login.Login",
             "googleServicesFile": "./google-services.json",
-            "versionCode": 65,
+            "versionCode": 66,
             "permissions": [
                 "NOTIFICATIONS",
                 "READ_CALENDAR",
@@ -90,7 +95,7 @@
                     {
                       "scheme": "https",
                       "host": "login.no",
-                      "pathPrefix": "/records"
+                      "pathAdvancedPattern": "/events/[0-9]+"
                     }
                   ],
                   "category": ["BROWSABLE", "DEFAULT"]
