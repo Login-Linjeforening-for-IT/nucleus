@@ -195,7 +195,7 @@ export default function Navigator(): JSX.Element {
     
 
     return (
-        <NavigationContainer>
+        <NavigationContainer linking={linking}>
             <Root.Navigator screenOptions={{headerShown: false}}>
                 <Root.Screen name="Tabs" component={Tabs}/>
                 <Root.Screen 
