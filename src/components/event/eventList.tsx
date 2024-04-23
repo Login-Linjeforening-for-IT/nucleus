@@ -1,6 +1,6 @@
 import Space, { ErrorMessage } from "@components/shared/utils"
 import { useState, useCallback } from "react"
-import { Dimensions, Platform } from "react-native"
+import { Dimensions, Platform, View } from "react-native"
 import { useDispatch, useSelector } from "react-redux"
 import Seperator from "./seperator"
 import EventCluster from "./eventCluster"
@@ -78,9 +78,9 @@ function Content({usedIndexes}: ContentProps) {
     const {renderedEvents } = useSelector((state: ReduxState) => state.event)
 
     return renderedEvents.map((event, index) => (
-        <>
-            <Seperator item={event} usedIndexes={usedIndexes} />
-            <EventCluster item={event} index={index} key={index} />
-        </>
+        <View key={`View${index}`}>
+            <Seperator key={`Seperator${index}`} item={event} usedIndexes={usedIndexes} />
+            <EventCluster key={index} item={event} index={index} />
+        </View>
     ))
 }
