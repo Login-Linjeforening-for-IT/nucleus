@@ -10,6 +10,16 @@ import NS from "@styles/notificationStyles"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import NotificationText from "@/components/notification/notificationText"
 import Swipe from "@components/nav/swipe"
+import { useNavigation } from "@react-navigation/native"
+import { ScrollView } from "react-native-gesture-handler"
+
+type NotificationInAppProps = {
+    item: NotificationListProps
+}
+
+type NotificationList = {
+    list: NotificationListProps[]
+}
 
 export default function NotificationScreen({navigation, back}: NotificationScreenProps): JSX.Element {
     const [list, setList] = useState(undefined)
@@ -30,26 +40,18 @@ export default function NotificationScreen({navigation, back}: NotificationScree
         })(), 10000)
     }, [list])
 
-    // function List(): JSX.Element {
-    //     if (!list) return <></>
-    //     return list.map((item) => <Notification item={item} navigation={navigation} />)
-    // }
-
     return (
         <Swipe left="MenuScreen">
             <View>
-                <View style={{
-                        ...GS.content, 
-                        backgroundColor: theme.darker
-                }}>
+                <View style={{...GS.content, backgroundColor: theme.darker}}>
                     <Space height={Dimensions.get("window").height / 8.1} />
-                    {/* {Array.isArray(list) 
-                        ? <List /> 
+                    {Array.isArray(list)
+                        ? <List list={list} /> 
                         : <Text style={{...NS.error, color: theme.oppositeTextColor}}>
                             {lang 
                                 ? "Du har ingen varslinger nå. Kom tilbake senere." 
                                 : "You have no notifications at this time. Check back later."}
-                        </Text>} */}
+                        </Text>}
                         <Space height={Dimensions.get("window").height / 3} />
                 </View>
                 <TopMenu 
@@ -63,13 +65,10 @@ export default function NotificationScreen({navigation, back}: NotificationScree
     )
 }
 
-type NotificationInAppProps = {
-    item: NotificationList
-    navigation: Navigation
-}
-
-function Notification({item, navigation}: NotificationInAppProps): JSX.Element {
+function Notification({item}: NotificationInAppProps): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
+    const navigation: Navigation = useNavigation()
+    const time = displayTime(item.time)
 
     function navigateIfPossible() {
         // Checks if the object has any properties, and if so navigates to SES
@@ -82,17 +81,11 @@ function Notification({item, navigation}: NotificationInAppProps): JSX.Element {
         <TouchableOpacity onPress={navigateIfPossible}>
             <Cluster marginVertical={12}>
                 <View style={NS.notificationBack}>
-                    <View style={NS.notificationViewLeft}>
-                        {/* <FullCategorySquare
-                            item={item.data}
-                            height={2*item.body.length}
-                        /> */}
-                    </View>
-                    <View style={NS.notificationViewMid}>
+                    <View style={NS.notificationView}>
                         <NotificationText title={item.title} body={item.body} />
                     </View>
-                    <Text style={{...NS.time, right: 35, color: theme.titleTextColor}}>
-                        {displayTime(item.time)}
+                    <Text style={{...NS.time, right: 32, color: theme.titleTextColor}}>
+                        {time}
                     </Text>
                 </View>
             </Cluster>
@@ -119,4 +112,18 @@ function displayTime(time: string): string {
         const month = (date.getMonth() + 1).toString().padStart(2, '0')
         return `${day}.${month}`
     }
+}
+
+function List({list}: NotificationList): JSX.Element {
+    if (!list) return <></>
+
+    return (
+        <ScrollView 
+            showsVerticalScrollIndicator={false} 
+            scrollEventThrottle={100}
+            style={{minHeight: "100%"}}
+        >
+            {list.map((item, index) => <Notification key={index} item={item} />)}
+        </ScrollView>
+    )
 }

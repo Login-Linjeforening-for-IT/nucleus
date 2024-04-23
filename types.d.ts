@@ -460,7 +460,7 @@ type ObjectifiedNotificationProps = {
   }
 
   
-type NotificationList = {
+type NotificationListProps = {
     title: string
     body: string
     data: DetailedEvent
