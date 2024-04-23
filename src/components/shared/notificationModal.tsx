@@ -1,0 +1,68 @@
+import React from "react"
+import GS from "@styles/globalStyles"
+import { BlurView } from "expo-blur"
+import { Navigation } from "@interfaces"
+import { View, Text, Platform, TouchableOpacity } from "react-native"
+import { useNavigation } from "@react-navigation/native"
+import { useSelector } from "react-redux"
+import { StackScreenProps } from "@react-navigation/stack"
+
+export default function NotificationModal({route: { params }}: StackScreenProps<NotificationStackParamList>): JSX.Element {
+    const { theme } = useSelector((state: ReduxState) => state.theme)
+    const navigation: Navigation = useNavigation()
+    // Makes a deep clone since params is read only
+    const item = JSON.parse(JSON.stringify(params))
+
+    if (!('title' in item)) {
+        item.title = ""
+    }
+
+    if (!('body' in item)) {
+        item.body = ""
+    }
+
+    if (!('data' in item)) {
+        item.data = {}
+    }
+
+    const title = item.title.length > 35 ? `${item.title.slice(0,35)}...` : item.title
+    const body = item.body.length > 70 ? `${item.body.slice(0,70)}...` : item.body
+
+    return (
+        <TouchableOpacity 
+            style={{flex: 1, justifyContent: 'flex-end'}}
+            onPress={()=>navigation.goBack()}
+            activeOpacity={1}
+        >
+            {Platform.OS === "ios"
+                    ? <BlurView style={GS.notificationDropdownBlur} intensity={50}/>
+                    : <View style={{
+                        ...GS.notificationDropdown,
+                        backgroundColor: theme.transparentAndroid
+                    }}
+                />}
+            <TouchableOpacity style={GS.notificationDropdownTouchable} onPress={() => {
+                if (Object.keys(item.data).length) {
+                    navigation.navigate("SpecificEventScreen", {item: item.data})
+                } else {
+                    navigation.navigate("NotificationScreen")
+                }
+            }}>
+                <View style={GS.notificationDropdown}>
+                    <Text style={{
+                        ...GS.notificationDropdownTitle,
+                        color: theme.textColor,
+                    }}>
+                        {title}
+                    </Text>
+                    <Text style={{
+                        ...GS.notificationDropdownBody,
+                        color: theme.textColor,
+                    }}>
+                        {body}
+                    </Text>
+                </View>
+            </TouchableOpacity>
+        </TouchableOpacity>
+    )
+}

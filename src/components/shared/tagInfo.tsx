@@ -18,7 +18,7 @@ export default function TagInfo() {
                 <Text style={{fontSize: 20, color: theme.textColor, marginTop: 5}}>{tag.title}</Text>
                 <Text style={{fontSize: 18, color: theme.textColor, margin: 5, marginHorizontal: 12}}>{tag.body}</Text>
             </View>
-            <View style={{height: 20, backgroundColor: theme.dark}}/>
+            <View style={{height: 20, backgroundColor: theme.dark}} />
         </TouchableOpacity>
     )
 }

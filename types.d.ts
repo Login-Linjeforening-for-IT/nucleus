@@ -223,6 +223,7 @@ type ReduxState = {
             title: string
             body: string
         }
+        notification: NotificationModal
     }
     ad: {
         ads: AdProps[]
@@ -474,6 +475,12 @@ type EventStackParamList = {
     }
 }
 
+type NotificationStackParamList = {
+    NotificationModal: {
+        params: any
+    }
+}
+
 type RoootStackParamList = {
     InfoModal: undefined
 }
@@ -555,4 +562,10 @@ type TopicManagerResult = {
 type Tag = {
     title: string
     body: string
+}
+
+type NotificationModal = {
+    title: string
+    body: string
+    data: any
 }

@@ -146,7 +146,7 @@ export const GS = StyleSheet.create({
         overflow: "hidden"
     }, 
     notificationDropdownTouchable: {
-        top: 100,
+        top: 50,
         position: "absolute",
         marginHorizontal: 16,
         width: "92%",
@@ -155,12 +155,12 @@ export const GS = StyleSheet.create({
         height: 70,
     }, 
     notificationDropdownBlur: {
-        top: 100,
+        top: 45,
         position: "absolute",
         marginHorizontal: 16,
         width: "92%",
         zIndex: 1,
-        borderRadius: 20,
+        borderRadius: 10,
         height: 70,
         overflow: "hidden"
     }, 

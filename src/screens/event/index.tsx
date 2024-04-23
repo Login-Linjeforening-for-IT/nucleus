@@ -10,7 +10,6 @@ import initializeNotifications
 from "@/utils/notificationSetup"
 import LastFetch, { fetchEvents } from "@/utils/fetch"
 import { View, StatusBar as StatusBarReact } from "react-native"
-import { ScreenProps } from "@interfaces"
 import { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs"
 import LogoNavigation from "@/components/shared/logoNavigation"
 import { createStackNavigator } from "@react-navigation/stack"
@@ -20,6 +19,7 @@ import Header from "@components/nav/header"
 import Swipe from "@components/nav/swipe"
 import { FilterButton, FilterUI } from "@components/shared/filter"
 import DownloadButton from "@components/shared/downloadButton"
+
 const EventStack = createStackNavigator<EventStackParamList>()
 
 /**
@@ -34,23 +34,19 @@ const EventStack = createStackNavigator<EventStackParamList>()
  * @param {navigation} Navigation Navigation route
  * @returns EventScreen
  */
-export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
-    // Push notification
-    const [pushNotification, setPushNotification] = useState(false)
-    const [pushNotificationContent, setPushNotificationContent] = 
-        useState<JSX.Element | undefined>(undefined)
+export default function EventScreen(): JSX.Element {
+
     // Notification state
     const [shouldSetupNotifications, setShouldSetupNotifications] = useState(true)
 
     // Redux states
     const notification = useSelector((state: ReduxState) => state.notification)
-    const { search, lastSave } = useSelector((state: ReduxState) => state.event)
+    const { lastSave } = useSelector((state: ReduxState) => state.event)
     const { theme, isDark } = useSelector((state: ReduxState) => state.theme)
     const dispatch = useDispatch()
 
     // Navigates if the app is opened by a push notification
-    NavigateFromPushNotification({navigation, theme,
-        setPushNotification, setPushNotificationContent})
+    NavigateFromPushNotification()
 
     // Fetches events when screen is focused
     useFocusEffect(
@@ -113,7 +109,7 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
                                 bottom: [<FilterUI />],
                                 left: [<LogoNavigation />],
                                 right: [<FilterButton />, <DownloadButton screen="event" />]
-                            }} as Partial<BottomTabNavigationOptions>)   
+                        }} as Partial<BottomTabNavigationOptions>)   
                     }, [navigation])
 
                     return (
@@ -125,7 +121,6 @@ export default function EventScreen({ navigation }: ScreenProps): JSX.Element {
                                     paddingHorizontal: 5,
                                     backgroundColor: theme.darker
                                 }}>
-                                    {pushNotification && pushNotificationContent}
                                     <EventList />
                                 </View>
                             </View>

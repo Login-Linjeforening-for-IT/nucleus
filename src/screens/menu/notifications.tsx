@@ -13,7 +13,7 @@ import Swipe from "@components/nav/swipe"
 import { useNavigation } from "@react-navigation/native"
 import { ScrollView } from "react-native-gesture-handler"
 
-type NotificationInAppProps = {
+type NotificationModalProps = {
     item: NotificationListProps
 }
 
@@ -25,7 +25,7 @@ export default function NotificationScreen({navigation, back}: NotificationScree
     const [list, setList] = useState(undefined)
     const { lang  } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
-
+    
     useEffect(() => {
         (async() => {
             const temp = await AsyncStorage.getItem("notificationList")
@@ -65,7 +65,7 @@ export default function NotificationScreen({navigation, back}: NotificationScree
     )
 }
 
-function Notification({item}: NotificationInAppProps): JSX.Element {
+function Notification({item}: NotificationModalProps): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const navigation: Navigation = useNavigation()
     const time = displayTime(item.time)

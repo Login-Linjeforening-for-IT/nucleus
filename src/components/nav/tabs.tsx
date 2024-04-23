@@ -1,17 +1,19 @@
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
-import { StackProps } from "@interfaces"
-import { NavigationContainer, DefaultTheme } from "@react-navigation/native"
-import Footer from "@nav/footer"
-import { useSelector } from "react-redux"
-import EventScreen from "@screens/event"
-import MenuScreen from "@screens/menu"
 import AdScreen from "@screens/ads"
-import React from "react"
-import { Animated, Dimensions, Image, View } from "react-native"
+import EventScreen from "@screens/event"
+import Footer from "@nav/footer"
+import MenuScreen from "@screens/menu"
 import MS from "@styles/menuStyles"
-import { StackCardInterpolatedStyle, StackCardInterpolationProps, StackCardStyleInterpolator, createStackNavigator } from "@react-navigation/stack"
+import React from "react"
 import TagInfo from "@components/shared/tagInfo"
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
+import { Image } from "react-native"
+import { NavigationContainer } from "@react-navigation/native"
+import { StackCardInterpolatedStyle, StackCardInterpolationProps, createStackNavigator } from "@react-navigation/stack"
+import { StackProps } from "@interfaces"
 import { TransitionSpec } from "@react-navigation/stack/lib/typescript/src/types"
+import { useSelector } from "react-redux"
+import NotificationModal from "@components/shared/notificationModal"
+import NotificationScreen from "@screens/menu/notifications"
 
 // Declares Tab to equal CBTN function
 const Tab = createBottomTabNavigator()
@@ -19,7 +21,7 @@ const Root = createStackNavigator()
 
 
 function Tabs(){
-    const { isDark, theme } = useSelector((state: ReduxState) => state.theme )
+    const { isDark } = useSelector((state: ReduxState) => state.theme )
 
     const screens = [
         {
@@ -47,14 +49,6 @@ function Tabs(){
                 : require("@assets/menu/menu-black.png")
         }
     ]
-
-    const navTheme = {
-        ...DefaultTheme,
-        colors: {
-            ...DefaultTheme.colors,
-            background: theme.background
-        }
-    }
 
     return (
         <Tab.Navigator
@@ -99,14 +93,53 @@ function Tabs(){
  * @returns Application with navigation
  */
 export default function Navigator(): JSX.Element {
-    const animate = ({current}: StackCardInterpolationProps): StackCardInterpolatedStyle=>({
+
+    const config: TransitionSpec = {
+        animation: 'timing',
+        config:{
+            duration: 100,
+        }
+    }
+    
+    return (
+        <NavigationContainer>
+            <Root.Navigator screenOptions={{headerShown: false}}>
+                <Root.Screen name="Tabs" component={Tabs}/>
+                <Root.Screen name="NotificationScreen" component={NotificationScreen as any} />
+                <Root.Screen 
+                    name="InfoModal" 
+                    options={{
+                        presentation: 'transparentModal', 
+                        cardOverlayEnabled: true, 
+                        cardStyleInterpolator: animateFromBottom, 
+                        transitionSpec: {open: config, close: config}
+                    }}
+                    component={TagInfo}
+                />
+                <Root.Screen
+                    name="NotificationModal" 
+                    options={{
+                        presentation: 'transparentModal',
+                        cardStyleInterpolator: animateFromTop, 
+                        transitionSpec: {open: config, close: config},
+                    }}
+                    component={NotificationModal}
+                />
+            </Root.Navigator>
+        </NavigationContainer>
+    )
+}
+
+function animateFromBottom({ current }: StackCardInterpolationProps): StackCardInterpolatedStyle {
+    return ({
         cardStyle: {
-            transform: [{translateY: current.progress.interpolate({
+            transform: [{
+                translateY: current.progress.interpolate({
                     inputRange: [0, 1],
                     outputRange: [200, 0],
                     extrapolate: 'clamp',
                 })
-                },
+            },
             ],
         },
         overlayStyle: {
@@ -118,30 +151,26 @@ export default function Navigator(): JSX.Element {
             })
         }
     })
+}
 
-    const config: TransitionSpec = {
-        animation: 'timing',
-        config:{
-            duration: 100,
+function animateFromTop({ current }: StackCardInterpolationProps): StackCardInterpolatedStyle {
+    return ({
+        cardStyle: {
+            transform: [{
+                translateY: current.progress.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [-200, 0],
+                    extrapolate: 'clamp',
+                })
+            }],
+        },
+        overlayStyle: {
+            backgroundColor: 'black',
+            opacity: current.progress.interpolate({
+                inputRange: [0, 1],
+                outputRange: [0, 0.4],
+                extrapolate: 'clamp',
+            })
         }
-    }
-    
-
-    return (
-        <NavigationContainer>
-            <Root.Navigator screenOptions={{headerShown: false}}>
-                <Root.Screen name="Tabs" component={Tabs}/>
-                <Root.Screen 
-                    name="InfoModal" 
-                    options={{
-                        presentation: 'transparentModal', 
-                        cardOverlayEnabled: true, 
-                        cardStyleInterpolator: animate, 
-                        transitionSpec: {open: config, close: config}
-                    }}
-                    component={TagInfo}
-                />
-            </Root.Navigator>
-        </NavigationContainer>
-    )
+    })
 }

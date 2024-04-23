@@ -3,15 +3,9 @@ import messaging, { FirebaseMessagingTypes } from "@react-native-firebase/messag
 // COMMENT OUT THIS BOX WHILE TESTING IN EXPO 6/6
 
 import { useEffect, useState } from "react"
-import NotificationInApp from "@/components/shared/notificationInApp"
 import AsyncStorage from "@react-native-async-storage/async-storage"
-
-interface PushNotificationProps {
-    navigation: any
-    theme: Theme
-    setPushNotification: React.Dispatch<React.SetStateAction<boolean>>
-    setPushNotificationContent: React.Dispatch<React.SetStateAction<JSX.Element | undefined>>
-}
+import { useNavigation } from "@react-navigation/native"
+import { Navigation } from "@interfaces"
 
 type StoreNotificationProps = {
     title: string
@@ -38,12 +32,12 @@ type StoreNotificationProps = {
  * 
  * @param {Navigation} navigation Navigation from BottomTabNavigation
  */
-export default function NavigateFromPushNotification({ navigation, theme, 
-setPushNotification, setPushNotificationContent }: PushNotificationProps) {
+export default function NavigateFromPushNotification() {
     // COMMENT IN THIS BOX WHILE TESTING IN EXPO 6/6
     // return null
     // COMMENT IN THIS BOX WHILE TESTING IN EXPO 6/6
 
+    const navigation: Navigation = useNavigation()
     const [event, setEvent] = useState<{ [key: string]: any } 
     | undefined>(undefined)
 
@@ -59,7 +53,13 @@ setPushNotification, setPushNotificationContent }: PushNotificationProps) {
                         const data = remoteMessage.data
         
                         StoreNotification({title, body, data})
-                        setEvent(remoteMessage.data)
+
+                        // Opens a more specific screen if possible
+                        if (Object.keys(remoteMessage.data || {}).length) {
+                            setEvent(remoteMessage.data)
+                        } else {
+                            navigation.navigate("NotificationScreen")
+                        }
                 }
         })
 
@@ -72,9 +72,15 @@ setPushNotification, setPushNotificationContent }: PushNotificationProps) {
                         const title = remoteMessage.notification.title
                         const body = remoteMessage.notification.body
                         const data = remoteMessage.data
-        
+
                         StoreNotification({title, body, data})
-                        setEvent(remoteMessage.data)
+
+                        // Opens a more specific screen if possible
+                        if (Object.keys(remoteMessage.data || {}).length) {
+                            setEvent(remoteMessage.data)
+                        } else {
+                            navigation.navigate("NotificationScreen")
+                        }
                 }
         })
 
@@ -88,17 +94,12 @@ setPushNotification, setPushNotificationContent }: PushNotificationProps) {
             if (remoteMessage && remoteMessage.notification 
             && remoteMessage.notification.title 
             && remoteMessage.notification.body) {
-                const title = remoteMessage.notification.title
-                const body = remoteMessage.notification.body
-                const data = remoteMessage.data
+                const title = remoteMessage.notification.title || remoteMessage.notification.body.slice(0, 15) + '...' || 'untitled'
+                const body = remoteMessage.notification.body || ""
+                const data = remoteMessage.data || {}
 
                 StoreNotification({title, body, data})
-                setPushNotification(true)
-
-                const notificationElement = (
-                    () => NotificationInApp({title, body, data, theme})
-                )
-                setPushNotificationContent(notificationElement)
+                navigation.navigate("NotificationModal", {title, body, data})
             }
         })
 

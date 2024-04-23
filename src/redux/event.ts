@@ -114,7 +114,7 @@ export const EventSlice = createSlice({
         },
         setTag(state, action) {
             state.tag = action.payload
-        },
+        }
     }
 })
 
@@ -131,7 +131,7 @@ export const {
     setRenderedEvents,
     toggleSearch,
     setDownloadState,
-    setTag
+    setTag,
 } = EventSlice.actions
 
 // Exports the Event slice itself
