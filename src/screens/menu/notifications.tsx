@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react"
 import { Navigation, NotificationScreenProps } from "@interfaces"
 import { useSelector } from "react-redux"
 import TopMenu from "@/components/shared/topMenu"
-import { View, Text, Dimensions, TouchableOpacity } from "react-native"
+import { View, Text, Dimensions, TouchableOpacity, Platform } from "react-native"
 import NS from "@styles/notificationStyles"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import NotificationText from "@/components/notification/notificationText"
@@ -117,6 +117,8 @@ function displayTime(time: string): string {
 function List({list}: NotificationList): JSX.Element {
     if (!list) return <></>
 
+    const offset = Dimensions.get("window").height / (Platform.OS === "ios" ? 3.8 : 3.8 )
+
     return (
         <ScrollView 
             showsVerticalScrollIndicator={false} 
@@ -124,6 +126,7 @@ function List({list}: NotificationList): JSX.Element {
             style={{minHeight: "100%"}}
         >
             {list.map((item, index) => <Notification key={index} item={item} />)}
+            <Space height={offset} />
         </ScrollView>
     )
 }
