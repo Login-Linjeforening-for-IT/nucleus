@@ -7,6 +7,7 @@ type EmbedProps = {
     id: number | null
     type: "event" | "ad"
 }
+
 export default function Embed({id, type}: EmbedProps) {
     const { events } = useSelector((state: ReduxState) => state.event)
     const { ads } = useSelector((state: ReduxState) => state.ad)
