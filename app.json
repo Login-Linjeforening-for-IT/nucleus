@@ -4,7 +4,6 @@
         "owner": "loginapp",
         "name": "Login",
         "slug": "Login",
-        "scheme": "login",
         "version": "2.1.2",
         "orientation": "portrait",
         "icon": "./public/assets/logo/icon.png",
@@ -96,6 +95,11 @@
                       "scheme": "https",
                       "host": "login.no",
                       "pathAdvancedPattern": "/events/[0-9]+"
+                    },
+                    {
+                        "scheme": "https",
+                        "host": "login.no",
+                        "pathAdvancedPattern": "/jobs/vents/[0-9]+"
                     }
                   ],
                   "category": ["BROWSABLE", "DEFAULT"]
