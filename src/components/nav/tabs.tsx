@@ -105,7 +105,7 @@ export default function Navigator(): JSX.Element {
         <NavigationContainer>
             <Root.Navigator screenOptions={{headerShown: false}}>
                 <Root.Screen name="Tabs" component={Tabs}/>
-                <Root.Screen name="NotificationScreen" component={NotificationScreen as any} />
+                {/* <Root.Screen name="NotificationScreen" component={NotificationScreen as any} /> */}
                 <Root.Screen 
                     name="InfoModal" 
                     options={{

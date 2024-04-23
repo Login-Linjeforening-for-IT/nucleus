@@ -54,12 +54,6 @@ export default function NotificationScreen({navigation, back}: NotificationScree
                         </Text>}
                         <Space height={Dimensions.get("window").height / 3} />
                 </View>
-                <TopMenu 
-                    navigation={navigation}
-                    screen="notifications"
-                    title={lang ? "Varslinger" : "Notifications"}
-                    back={back} 
-                />
             </View>
         </Swipe>
     )
