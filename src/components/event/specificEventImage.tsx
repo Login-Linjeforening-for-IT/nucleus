@@ -16,7 +16,7 @@ export default function SpecificEventImage() {
                     style={{alignSelf: "center", marginTop: 8}}
                     width={(Dimensions.get("window").width)/1.2}
                     height={Dimensions.get("window").width/3}
-                    uri={`https://cdn.login.no/img/events/${event.event.image_small}`}
+                    uri={`https://cdn.login.no/img/events/banner/${event.event.image_small}`}
                 />
             )
         } 
