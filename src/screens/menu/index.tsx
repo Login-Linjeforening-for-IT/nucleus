@@ -48,12 +48,12 @@ const MenuStack = createStackNavigator<MenuStackParamList>()
 const screens: Record<string, React.FC<any>> = {
     "ProfileScreen": ProfileScreen,
     "SettingScreen": SettingScreen,
-    // "NotificationScreen": NotificationScreen,
+    "NotificationScreen": NotificationScreen,
     "AboutScreen": AboutScreen,
     "BusinessScreen": BusinessScreen,
-    // "LoginScreen": LoginScreen,
-    // "InternalScreen": InternalScreen
-    // "ReportScreen": ReportScreen,
+    "LoginScreen": LoginScreen,
+    "InternalScreen": InternalScreen,
+    "ReportScreen": ReportScreen,
 }
 
 

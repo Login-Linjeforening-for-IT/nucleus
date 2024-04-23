@@ -13,6 +13,11 @@
             "title": "Innstillinger"
         },
         {
+            "id": 3, 
+            "nav": "NotificationScreen",
+            "title": "Varslinger"
+        },
+        {
             "id": 4, 
             "nav": "AboutScreen",
             "title": "Om oss"
@@ -21,14 +26,6 @@
             "id": 5, 
             "nav": "BusinessScreen",
             "title": "For bedrifter"
-        }
-    ],
-    "version": "Versjon ",
-    "unusedScreens": [
-        {
-            "id": 3, 
-            "nav": "NotificationScreen",
-            "title": "Varslinger"
         },
         {
             "id": 6, 
@@ -45,5 +42,8 @@
             "nav": "ReportScreen",   
             "title": "Varsle"
         }
+    ],
+    "version": "Versjon ",
+    "unusedScreens": [
     ]
 }
