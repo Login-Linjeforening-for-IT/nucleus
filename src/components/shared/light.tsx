@@ -4,7 +4,7 @@ import { View } from "react-native"
 import React from "react"
 
 /**
- * NOTE: SHOULD BE COMBINDED WITH REDLIGHT INTO LIGHT AND TAKE COLOR AS PARAMETER
+ * NOTE: SHOULD BE REMOVED AND REPLACED WITH VIEW WITH BORDERRADIUS
  * Function for drawing a green light
  * @returns Green Light svg
  */
@@ -26,7 +26,7 @@ export default function GreenLight() {
 }
 
 /**
- * NOTE: SHOULD BE COMBINDED WITH GREENLIGHT
+ * NOTE: SHOULD BE REMOVED AND REPLACED WITH VIEW WITH BORDERRADIUS
  * Function for drawing a red colored light svg
  * @returns Red colored light svg
  */

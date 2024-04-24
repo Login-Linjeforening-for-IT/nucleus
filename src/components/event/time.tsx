@@ -1,7 +1,7 @@
 import { View, Text } from "react-native"
 import { useSelector } from "react-redux"
 import T from "@styles/text"
-import React from "react"
+import React, { useEffect } from "react"
 
 type EventTimeProps = {
     time_start: string | undefined
@@ -21,7 +21,11 @@ type GetEndTimeProps = {
 export default function EventTime({time_start, time_end}: EventTimeProps): JSX.Element {
     if (time_start==undefined||time_end==undefined) return <></>
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    const time = displayedEventTime(time_start, time_end)
+    let time = displayedEventTime(time_start, time_end)
+
+    useEffect(() => {
+        
+    }, [])
 
     return (
         <View>

@@ -192,6 +192,7 @@ function Notification({item, list, id, setList, hideOld, setHideOld, readIndex}:
             <Swipeable
                 renderRightActions={renderRightActions}
                 ref={swipeableRef}
+                // Red background when deleting item
                 containerStyle={{backgroundColor: "red"}}
                 // Indents corners as soon as they start dragging
                 onSwipeableWillOpen={() => {

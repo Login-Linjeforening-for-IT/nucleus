@@ -31,6 +31,8 @@ export default function NotificationIcon({position}: NotificationIconProps) {
             getNotifications()
         // Runs every 5 seconds
         }, 5000)
+
+        return () => clearInterval(interval)
     }, [])
 
     if (!display) return <></>

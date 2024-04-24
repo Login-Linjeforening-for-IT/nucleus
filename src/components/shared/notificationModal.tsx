@@ -31,16 +31,13 @@ export default function NotificationModal({route: { params }}: StackScreenProps<
 
     return (
         <TouchableOpacity 
-            style={{flex: 1, justifyContent: 'flex-end'}}
+            style={{flex: 1}}
             onPress={() => navigation.goBack()}
             activeOpacity={1}
         >
             {Platform.OS === "ios"
                     ? <BlurView style={GS.notificationDropdownBlur} intensity={50}/>
-                    : <View style={{
-                        ...GS.notificationDropdown,
-                        backgroundColor: theme.transparentAndroid
-                    }}
+                    : <View style={{backgroundColor: theme.transparentAndroid}}
                 />}
             <TouchableOpacity style={GS.notificationDropdownTouchable} onPress={() => {
                 if (Object.keys(item.data).length) {
@@ -49,7 +46,7 @@ export default function NotificationModal({route: { params }}: StackScreenProps<
                     navigation.navigate("NotificationScreen")
                 }
             }}>
-                <View style={GS.notificationDropdown}>
+                <View>
                     <Text style={{
                         ...GS.notificationDropdownTitle,
                         color: theme.textColor,
