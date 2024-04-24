@@ -120,22 +120,20 @@ export default function NavigateFromPushNotification() {
  * @param body Body of the notification
  * @param data Event data sent with the notification
  */
-function StoreNotification({ title, body, data }: StoreNotificationProps) {
-    (async() => {
-        // Get the stored notification list from AsyncStorage
-        const storedString = await AsyncStorage.getItem("notificationList")
-        let storedArray = []
+async function StoreNotification({ title, body, data }: StoreNotificationProps) {
+    // Get the stored notification list from AsyncStorage
+    const storedString = await AsyncStorage.getItem("notificationList")
+    let storedArray = []
+    
+    // Check if the list contained anything, and if so set it as the stored array
+    if (storedString) {
+        storedArray = JSON.parse(storedString)
+    }
+    
+    // Adds the new notification to the start of the list
+    const newItem = { title, body, data, time: new Date() }
+    storedArray.unshift(newItem)
 
-        // Check if the list contained anything, and if so set it as the stored array
-        if (storedString) {
-            storedArray = JSON.parse(storedString)
-        }
-
-        // Adds the new notification to the start of the list
-        const newItem = { title, body, data, time: new Date() }
-        storedArray.unshift(newItem)
-        
-        // Store the updated array back to AsyncStorage
-        await AsyncStorage.setItem("notificationList", JSON.stringify(storedArray))
-    })()
+    // Store the updated array back to AsyncStorage
+    await AsyncStorage.setItem("notificationList", JSON.stringify(storedArray))
 }

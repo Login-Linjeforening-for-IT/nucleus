@@ -7,6 +7,10 @@ type SeperatorProps = {
     usedIndexes: number[]
 }
 
+type NotificationSeperatorProps = {
+    text: string
+}
+
 export default function Seperator({item, usedIndexes}: SeperatorProps) {
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
@@ -55,4 +59,30 @@ export default function Seperator({item, usedIndexes}: SeperatorProps) {
             </View>
         </View>
     )
-}   
+}
+
+export function NotificationSeperator({text}: NotificationSeperatorProps) {
+    const { theme } = useSelector((state: ReduxState) => state.theme)
+
+    return (
+        <View style={{justifyContent: "center", top: -5}}>
+            <Text style={{
+                color: theme.oppositeTextColor, 
+                backgroundColor: theme.darker, 
+                alignSelf: "center", 
+                paddingHorizontal: 8, 
+                top: 3, 
+                zIndex: 1
+            }}>
+                {text}
+            </Text>
+            <View style={{top: -5, alignSelf: "center"}}>
+                <Line 
+                    width={Dimensions.get("window").width * 0.945} 
+                    height={1} 
+                    fill={theme.oppositeTextColor}
+                />
+            </View>
+        </View>
+    )
+}

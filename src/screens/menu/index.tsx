@@ -32,6 +32,7 @@ import {
   Platform,
 } from "react-native"
 import Swipe from "@components/nav/swipe"
+import NotificationIcon from "@components/notification/notificationIcon"
 
 type MenuItemProps = {
     index: number
@@ -147,6 +148,7 @@ toggleFeedback}: MenuItemProps) {
                 <Cluster>
                     <View style={{...CS.clusterBack}}>
                         <View style={CS.twinLeft}>
+                            {item.nav === "NotificationScreen" && <NotificationIcon position="left" />}
                             <Text style={{...T.text20, color: theme.textColor}}>
                                 {item.title}
                             </Text>

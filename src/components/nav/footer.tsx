@@ -5,9 +5,9 @@ import { BlurView } from "expo-blur"
 import { openBrowserAsync } from 'expo-web-browser';
 import { SvgXml } from "react-native-svg"
 import USBicon from "@assets/menu/USB-temp-icon.svg"
-import { ReactNode } from "react";
-import { NavigationHelpers, ParamListBase, TabNavigationState } from "@react-navigation/native";
+import { NavigationHelpers, ParamListBase, TabNavigationState, useRoute } from "@react-navigation/native";
 import { BottomTabDescriptorMap, BottomTabNavigationEventMap } from "@react-navigation/bottom-tabs/lib/typescript/src/types";
+import NotificationIcon from "@components/notification/notificationIcon";
 
 export type FooterProps = {
     state: TabNavigationState<ParamListBase>;
@@ -23,6 +23,7 @@ export default function Footer({ state, descriptors, navigation }: FooterProps):
 
 function Content({ state, descriptors, navigation }: FooterProps) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
+
     return (
         <>
             <BlurView style={MS.bMenu} experimentalBlurMethod='dimezisBlurView' intensity={Platform.OS === 'ios' ? 30 : 20}/>
@@ -38,6 +39,7 @@ function Content({ state, descriptors, navigation }: FooterProps) {
                     const { options } = descriptors[route.key]
 
                     const isFocused = state.index === index
+
                     // Emitt the normal tab events
                     function onPress() {
                         const event = navigation.emit({
@@ -68,6 +70,7 @@ function Content({ state, descriptors, navigation }: FooterProps) {
                             onPress={onPress}
                             onLongPress={onLongPress}
                         >
+                            {!isFocused && route.name === "MenuScreenRoot" && <NotificationIcon position="bottom" />}
                             {options.tabBarIcon?options.tabBarIcon({focused: isFocused, color: '', size: 0}):null}
                         </TouchableOpacity>
                     )

@@ -467,6 +467,7 @@ type NotificationListProps = {
     data: DetailedEvent
     time: string
     id: number
+    read?: boolean
 }
 
 type EventStackParamList = {
