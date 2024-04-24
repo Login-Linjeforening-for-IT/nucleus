@@ -132,7 +132,7 @@ function displayedEventTime(time_start: string, time_end: string, lang: boolean)
     if (months) return `${lookup.month} ${text[9]}`
     if (days > 1) return `${lookup.type} ${days} ${text[10]}`
     if (days) return lookup.day
-    if (hours) return `${lookup.type} ${hours > 0 ? `${hours}${text[11]} ` : ''}${minutes > 0 ? `${minutes}${text[12]} ` : ''}${lookup.end}`
+    if (hours) return `${lookup.type} ${hours > 0 ? `${hours}${text[11]} ` : ''}${minutes > 0 ? `${minutes + 1}${text[12]} ` : ''}${lookup.end}`
     
     return `${lookup.type} ${hours > 0 ? `${hours}${text[11]} ` : ''}${minutes > 0 ? `${minutes}${text[12]} ` : ''}${seconds > 0 ? `${seconds}${text[13]} ` : ''}${lookup.end}`
 }
