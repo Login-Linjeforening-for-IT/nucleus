@@ -11,11 +11,11 @@ import React from "react"
  * @returns             Card with the props inside
  */
 export default function Cluster ({ noColor, marginVertical, marginHorizontal, 
-children, highlight }: ClusterProps) {
+children, highlight, style }: ClusterProps) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
 
     return (
-        <View style={{backgroundColor: !noColor ? theme.darker : "", margin: highlight ? 4 : 0, paddingHorizontal: !highlight?6:4, ...ES.clusterWraper,}}>
+        <View style={{backgroundColor: !noColor ? theme.darker : "", margin: highlight ? 4 : 0, paddingHorizontal: !highlight?6:4, ...ES.clusterWraper, ...style as any}}>
             <View style={{...ES.clusterContent, marginVertical, marginHorizontal}}>
                 { children }
             </View>

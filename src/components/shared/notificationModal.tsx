@@ -10,6 +10,7 @@ import { StackScreenProps } from "@react-navigation/stack"
 export default function NotificationModal({route: { params }}: StackScreenProps<NotificationStackParamList>): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const navigation: Navigation = useNavigation()
+
     // Makes a deep clone since params is read only
     const item = JSON.parse(JSON.stringify(params))
 
@@ -31,7 +32,7 @@ export default function NotificationModal({route: { params }}: StackScreenProps<
     return (
         <TouchableOpacity 
             style={{flex: 1, justifyContent: 'flex-end'}}
-            onPress={()=>navigation.goBack()}
+            onPress={() => navigation.goBack()}
             activeOpacity={1}
         >
             {Platform.OS === "ios"

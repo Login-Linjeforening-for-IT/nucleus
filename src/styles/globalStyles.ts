@@ -142,8 +142,8 @@ export const GS = StyleSheet.create({
         zIndex: 2,
         borderRadius: 20,
         paddingLeft: 14,
-        paddingTop: 2,
-        overflow: "hidden"
+        overflow: "hidden",
+        top: -5
     }, 
     notificationDropdownTouchable: {
         top: 50,
@@ -223,6 +223,10 @@ export const GS = StyleSheet.create({
         width: "100%", 
         borderRadius: 20,
     },
+    trashCan: {
+        height: 50,
+        width: 50
+    }
 })
 
 export default GS

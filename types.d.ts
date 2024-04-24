@@ -466,6 +466,7 @@ type NotificationListProps = {
     body: string
     data: DetailedEvent
     time: string
+    id: number
 }
 
 type EventStackParamList = {
