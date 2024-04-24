@@ -13,7 +13,6 @@ import { useNavigation } from "@react-navigation/native"
 import { RefreshControl, ScrollView } from "react-native-gesture-handler"
 import { Swipeable } from 'react-native-gesture-handler'
 import TrashCan from "@components/menu/navigation"
-import handleSwipe from "@utils/handleSwipe"
 
 type NotificationModalProps = {
     item: NotificationListProps
@@ -80,9 +79,12 @@ function Notification({item, list, id, setList}: NotificationModalProps): JSX.El
     }
 
     function renderRightActions(_: any, dragX: any) {
+        // Checks if the user is swiping to the right (without the intent of closing a notification delete indent) by checking speed and position change
         if (dragX._parent._a?._animation?._lastVelocity > 1500 || dragX._parent._a?._animation?._lastPosition > 150) {
             navigation.navigate("MenuScreen")
         }
+
+        // Checks if the user is trying to delete a notification, and if so deletes the notification
         if (dragX._parent._a?._animation?._lastPosition < -Dimensions.get("window").width / 2) {
             deleteNotification()
             dragX._parent._a._animation._lastPosition = 0
