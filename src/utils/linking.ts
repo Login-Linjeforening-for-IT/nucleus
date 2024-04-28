@@ -23,7 +23,7 @@ const linking: LinkingOptions<RootStackParamList> = {
                         }
                     },
                     AdNav: {
-                        path: 'jobs',
+                        path: 'career',
                         screens: {
                             SpecificAdScreen: {
                                 path: ':adID',

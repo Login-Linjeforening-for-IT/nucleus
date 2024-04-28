@@ -99,7 +99,17 @@
                     {
                         "scheme": "https",
                         "host": "login.no",
-                        "pathAdvancedPattern": "/jobs/vents/[0-9]+"
+                        "pathAdvancedPattern": "/career/[0-9]+"
+                    },
+                    {
+                        "scheme": "https",
+                        "host": "login.no",
+                        "pathAdvancedPattern": "/about"
+                    },
+                    {
+                        "scheme": "https",
+                        "host": "login.no",
+                        "pathAdvancedPattern": "/companies"
                     }
                   ],
                   "category": ["BROWSABLE", "DEFAULT"]
