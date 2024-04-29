@@ -13,9 +13,10 @@ const linking: LinkingOptions<RootStackParamList> = {
                 initialRouteName: 'EventNav',
                 screens:{
                     EventNav: {
+                        path: 'events',
                         screens: {
                             SpecificEventScreen: {
-                                path: 'events/:eventID',
+                                path: ':eventID',
                                 parse: {
                                     eventID: Number
                                 }

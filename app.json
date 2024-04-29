@@ -94,12 +94,12 @@
                     {
                       "scheme": "https",
                       "host": "login.no",
-                      "pathAdvancedPattern": "/events/[0-9]+"
+                      "pathAdvancedPattern": "/events/[0-9]*"
                     },
                     {
                         "scheme": "https",
                         "host": "login.no",
-                        "pathAdvancedPattern": "/career/[0-9]+"
+                        "pathAdvancedPattern": "/career/[0-9]*"
                     },
                     {
                         "scheme": "https",
