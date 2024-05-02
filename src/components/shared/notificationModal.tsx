@@ -30,7 +30,6 @@ export default function NotificationModal({route: { params }}: StackScreenProps<
     const title = item.title.length > 35 ? `${item.title.slice(0,35)}...` : item.title
     const body = item.body.length > 70 ? `${item.body.slice(0,70)}...` : item.body
 
-    console.log(theme.transparentAndroid)
     return (
         <TouchableOpacity 
             style={{flex: 1}}
