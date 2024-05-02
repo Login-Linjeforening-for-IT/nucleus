@@ -10,6 +10,7 @@ import { StackScreenProps } from "@react-navigation/stack"
 export default function NotificationModal({route: { params }}: StackScreenProps<NotificationStackParamList>): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const navigation: Navigation = useNavigation()
+    const isIOS = Platform.OS === "ios"
 
     // Makes a deep clone since params is read only
     const item = JSON.parse(JSON.stringify(params))
@@ -29,27 +30,34 @@ export default function NotificationModal({route: { params }}: StackScreenProps<
     const title = item.title.length > 35 ? `${item.title.slice(0,35)}...` : item.title
     const body = item.body.length > 70 ? `${item.body.slice(0,70)}...` : item.body
 
+    console.log(theme.transparentAndroid)
     return (
         <TouchableOpacity 
             style={{flex: 1}}
             onPress={() => navigation.goBack()}
             activeOpacity={1}
         >
-            {Platform.OS === "ios"
-                    ? <BlurView style={GS.notificationDropdownBlur} intensity={50}/>
-                    : <View style={{backgroundColor: theme.transparentAndroid}}
-                />}
-            <TouchableOpacity style={GS.notificationDropdownTouchable} onPress={() => {
-                if (Object.keys(item.data).length) {
-                    navigation.navigate("SpecificEventScreen", {item: item.data})
-                } else {
-                    navigation.navigate("NotificationScreen")
-                }
-            }}>
+            {isIOS
+                ? <BlurView style={GS.notificationDropdownBlur} intensity={50}/>
+                : <View style={{backgroundColor: theme.transparentAndroid}}
+            />}
+            <TouchableOpacity 
+                style={{
+                    ...GS.notificationDropdownTouchable, 
+                    backgroundColor: isIOS ? undefined : theme.transparent
+                }} 
+                onPress={() => {
+                    if (Object.keys(item.data).length) {
+                        navigation.navigate("SpecificEventScreen", {item: item.data})
+                    } else {
+                        navigation.navigate("NotificationScreen")
+                    }
+                }}
+            >
                 <View>
                     <Text style={{
                         ...GS.notificationDropdownTitle,
-                        color: theme.textColor,
+                        color: theme.textColor
                     }}>
                         {title}
                     </Text>
