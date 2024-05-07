@@ -65,11 +65,6 @@
                     "fetch",
                     "remote-notification"
                 ]
-            },
-            "entitlements": {
-                "com.apple.developer.associated-domains": [
-                    "applinks:login.no"
-                ]
             }
         },
         "android": {
@@ -85,36 +80,7 @@
                 "READ_CALENDAR",
                 "WRITE_CALENDAR"
             ],
-            "softwareKeyboardLayoutMode":"pan",
-            "intentFilters": [
-                {
-                  "action": "VIEW",
-                  "autoVerify": true,
-                  "data": [
-                    {
-                      "scheme": "https",
-                      "host": "login.no",
-                      "pathAdvancedPattern": "/events/[0-9]*"
-                    },
-                    {
-                        "scheme": "https",
-                        "host": "login.no",
-                        "pathAdvancedPattern": "/career/[0-9]*"
-                    },
-                    {
-                        "scheme": "https",
-                        "host": "login.no",
-                        "pathAdvancedPattern": "/about"
-                    },
-                    {
-                        "scheme": "https",
-                        "host": "login.no",
-                        "pathAdvancedPattern": "/companies"
-                    }
-                  ],
-                  "category": ["BROWSABLE", "DEFAULT"]
-                }
-              ]
+            "softwareKeyboardLayoutMode":"pan"
         },
         "web": {
             "favicon": "./public/assets/logo/favicon.ico"
