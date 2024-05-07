@@ -24,7 +24,7 @@ type ContentProps = {
  * Displays the event list
  */
 export default function EventList (): JSX.Element {
-    const { events, search, renderedEvents, categories, clickedEvents } = useSelector((state: ReduxState) => state.event)
+    const { events, renderedEvents, search, categories, clickedEvents } = useSelector((state: ReduxState) => state.event)
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const [refresh, setRefresh] = useState(false)
     const dispatch = useDispatch()
@@ -71,7 +71,7 @@ export default function EventList (): JSX.Element {
         )
     }
 
-    return <ErrorMessage argument={!events.length ? "wifi" : "nomatch"} />
+    return <ErrorMessage argument={!events ? "wifi" : "nomatch"} screen="event" />
 }
 
 function Content({usedIndexes}: ContentProps) {

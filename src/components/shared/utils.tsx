@@ -35,6 +35,7 @@ type SpaceProps = {
 
 type ErrorMessageProps = {
     argument: "wifi" | "nomatch"
+    screen: "event" | "ad"
 }
 
 /**
@@ -93,15 +94,18 @@ export function random({min, max}: randomProps): number {
  *
  * @returns {JSX.Element} Error message
  */
-export function ErrorMessage({argument}: ErrorMessageProps): JSX.Element {
+export function ErrorMessage({argument, screen}: ErrorMessageProps): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
+    const eventScreen = ["Ingen arrangementer", "No events"]
+    const adsScreen = ["Ingen jobbannonser", "No matching jobs"]
+    const error = screen === "event" ? eventScreen : adsScreen
 
     const text = {
         "wifi": lang 
         ? "Sjekk nettverkstilkoblingen din og prøv igjen. Kontakt TEKKOM dersom problemet vedvarer." 
         : "Check your wifi connection and try again. Contact TEKKOM if the issue persists.",
-        "nomatch": lang ? "Ingen treff" : "No matching events"
+        "nomatch": lang ? error[0] : error[1]
     }
 
     return (
