@@ -5,15 +5,10 @@ export const NS = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
     },
-    notificationViewLeft: {
-        alignItems: "center",
-        width: "15%",
-    },
-    notificationViewMid: {
+    notificationView: {
         justifyContent: "center",
-        paddingHorizontal: 6,
         bottom: 4,
-        width: "85%",
+        width: "100%",
     },
     title: {
         maxHeight: Platform.OS === "ios" ? 20 * 3 : 17 * 2.5,
@@ -23,12 +18,12 @@ export const NS = StyleSheet.create({
         fontSize: Platform.OS === "ios" ? 15 : 13,
     },
     time: {
-        top: -30,
+        top: -25,
         fontSize: 12
     },
     error: {
         textAlign: "center",
-        top: "30%",
+        top: "100%"
     }
 })
 

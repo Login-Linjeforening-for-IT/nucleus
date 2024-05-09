@@ -1,7 +1,7 @@
 import { View, Text } from "react-native"
 import { useSelector } from "react-redux"
 import T from "@styles/text"
-import React from "react"
+import React, { useEffect, useState } from "react"
 
 type EventTimeProps = {
     time_start: string | undefined
@@ -21,7 +21,21 @@ type GetEndTimeProps = {
 export default function EventTime({time_start, time_end}: EventTimeProps): JSX.Element {
     if (time_start==undefined||time_end==undefined) return <></>
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    const time = displayedEventTime(time_start, time_end)
+    const { lang } = useSelector((state: ReduxState) => state.lang)
+    const [time, setTime] = useState<string>(displayedEventTime(time_start, time_end, lang))
+
+    useEffect(() => {
+        let interval: Interval = 0
+
+        interval = setInterval(() => {
+            let newTime = displayedEventTime(time_start, time_end, lang)
+            setTime(newTime)
+            // Runs every second
+        }, 1000)
+
+        // Clears interval when unmounted to prevent memory leaks
+        return () => clearInterval(interval)
+    }, [])
 
     return (
         <View>
@@ -63,9 +77,7 @@ export function GetEndTime({time_end}: GetEndTimeProps) {
  * @param time_end End time of the event
  * @returns The event time that should be displayed
  */
-function displayedEventTime(time_start: string, time_end: string) {
-
-    const { lang } = useSelector((state: ReduxState) => state.lang)
+function displayedEventTime(time_start: string, time_end: string, lang: boolean) {
     const textEN = ["Starts in", "Tomorrow", "Next", "Ends in", "Ends tomorrow", "Ended", "Yesterday", "Last", " ago", "month", "days", "h", "min", "s"]
     const textNO = ["Starter om", "I morgen", "Neste", "Slutter om", "Slutter i morgen", "Sluttet for", "I går", "Sist", " siden", "måned", "dager", "t", "min", "s"]
     const text = lang ? textNO : textEN
@@ -120,6 +132,7 @@ function displayedEventTime(time_start: string, time_end: string) {
     if (months) return `${lookup.month} ${text[9]}`
     if (days > 1) return `${lookup.type} ${days} ${text[10]}`
     if (days) return lookup.day
+    if (hours) return `${lookup.type} ${hours > 0 ? `${hours}${text[11]} ` : ''}${minutes > 0 ? `${minutes + 1}${text[12]} ` : ''}${lookup.end}`
     
     return `${lookup.type} ${hours > 0 ? `${hours}${text[11]} ` : ''}${minutes > 0 ? `${minutes}${text[12]} ` : ''}${seconds > 0 ? `${seconds}${text[13]} ` : ''}${lookup.end}`
 }

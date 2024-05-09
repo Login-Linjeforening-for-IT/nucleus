@@ -13,6 +13,11 @@
             "title": "Settings" 
         },
         {
+            "id": 3, 
+            "nav": "NotificationScreen",
+            "title": "Notifications"
+        },
+        {
             "id": 4, 
             "nav": "AboutScreen",     
             "title": "About Login"    
@@ -21,14 +26,6 @@
             "id": 5, 
             "nav": "BusinessScreen",  
             "title": "For companies" 
-        }
-    ],
-    "version": "Version ",
-    "unusedScreens": [
-        {
-            "id": 3, 
-            "nav": "NotificationScreen",
-            "title": "Notifications"
         },
         {
             "id": 6, 
@@ -45,5 +42,8 @@
             "nav": "ReportScreen",   
             "title": "Report" 
         }
+    ],
+    "version": "Version ",
+    "unusedScreens": [
     ]
 }

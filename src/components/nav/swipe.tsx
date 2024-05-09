@@ -10,7 +10,7 @@ import {
 } from "react-native-gesture-handler"
 
 type SwipeProps = {
-    children: ReactNode
+    children?: ReactNode
     left?: string
     right?: string
 }

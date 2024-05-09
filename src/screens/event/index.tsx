@@ -39,13 +39,12 @@ export default function EventScreen({ navigation }: EventScreenProps<'EventScree
 
     // Redux states
     const notification = useSelector((state: ReduxState) => state.notification)
-    const { search, lastSave } = useSelector((state: ReduxState) => state.event)
+    const { lastSave } = useSelector((state: ReduxState) => state.event)
     const { theme, isDark } = useSelector((state: ReduxState) => state.theme)
     const dispatch = useDispatch()
 
     // Navigates if the app is opened by a push notification
-    NavigateFromPushNotification({navigation, theme,
-        setPushNotification, setPushNotificationContent})
+    NavigateFromPushNotification()
 
     // Fetches events when screen is focused
     useFocusEffect(
@@ -95,12 +94,12 @@ export default function EventScreen({ navigation }: EventScreenProps<'EventScree
             }} as any)   
     }, [navigation])
 
-    // initializeNotifications({
-    //     shouldRun: shouldSetupNotifications,
-    //     hasBeenSet: notification["SETUP"],
-    //     setShouldSetupNotifications: setShouldSetupNotifications,
-    //     dispatch: dispatch
-    // })
+    initializeNotifications({
+        shouldRun: shouldSetupNotifications,
+        hasBeenSet: notification["SETUP"],
+        setShouldSetupNotifications: setShouldSetupNotifications,
+        dispatch: dispatch
+    })
 
     // Displays the EventScreen
     return (

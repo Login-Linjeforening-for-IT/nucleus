@@ -1,6 +1,6 @@
 import { ParamListBase } from "@react-navigation/native"
 import type { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs'
-import { DimensionValue, ImageSourcePropType } from "react-native"
+import { DimensionValue, ImageSourcePropType, StyleProp, ViewStyle } from "react-native"
 import { ReactNode } from "react"
 import type { StackHeaderProps, StackNavigationOptions } from "@react-navigation/stack"
 import { 
@@ -37,6 +37,7 @@ export interface ClusterProps extends React.PropsWithChildren<{}> {
     marginVertical?: DimensionValue
     marginHorizontal?: DimensionValue
     highlight?: boolean
+    style?: StyleProp<ViewStyle>
 }
 
 export type NotificationScreenProps = {

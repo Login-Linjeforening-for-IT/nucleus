@@ -10,26 +10,17 @@ import en from "@text/menu/en.json"
 import no from "@text/menu/no.json"
 import T from "@styles/text"
 import LogoNavigation from "@/components/shared/logoNavigation"
-import AboutScreen from "./about"
-import BusinessScreen from "./business"
-import NotificationScreen from "./notifications"
-import InternalScreen from "./internal"
-import LoginScreen from "./login"
-import ProfileScreen from "./profile"
-import SettingScreen from "./settings"
-import SmallProfile from "@components/profile/smallProfile"
 import Text from "@components/shared/text"
-import Header from "@components/nav/header"
 import {
   View,
   Image,
   TouchableOpacity,
   Dimensions,
-  Platform,
 } from "react-native"
 import Swipe from "@components/nav/swipe"
-import { ItemProps, MenuProps, MenuRoutes, MenuStackParamList } from "@utils/screenTypes"
+import { ItemProps, MenuProps, MenuStackParamList } from "@utils/screenTypes"
 import { NavigationProp } from "@react-navigation/native"
+import NotificationIcon from "@components/notification/notificationIcon"
 
 type MenuItemProps = {
     index: number
@@ -112,6 +103,7 @@ toggleFeedback}: MenuItemProps) {
                 <Cluster>
                     <View style={{...CS.clusterBack}}>
                         <View style={CS.twinLeft}>
+                            {item.nav === "NotificationScreen" && <NotificationIcon position="left" />}
                             <Text style={{...T.text20, color: theme.textColor}}>
                                 {item.title}
                             </Text>

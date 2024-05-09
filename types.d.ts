@@ -224,6 +224,7 @@ type ReduxState = {
             title: string
             body: string
         }
+        notification: NotificationModal
     }
     ad: {
         ads: AdProps[]
@@ -462,11 +463,13 @@ type ObjectifiedNotificationProps = {
   }
 
   
-type NotificationList = {
+type NotificationListProps = {
     title: string
     body: string
     data: DetailedEvent
     time: string
+    id: number
+    read?: boolean
 }
 
 type Setting = {
@@ -515,4 +518,10 @@ type TopicManagerResult = {
 type Tag = {
     title: string
     body: string
+}
+
+type NotificationModal = {
+    title: string
+    body: string
+    data: any
 }

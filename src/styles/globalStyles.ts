@@ -135,38 +135,28 @@ export const GS = StyleSheet.create({
         width: "15%",
         alignItems: "center",
     },
-    notificationDropdown: {
-        position: "absolute",
-        width: "100%",
-        height: 70,
-        zIndex: 2,
-        borderRadius: 20,
-        paddingLeft: 14,
-        paddingTop: 2,
-        overflow: "hidden"
-    }, 
     notificationDropdownTouchable: {
-        top: 100,
-        position: "absolute",
-        marginHorizontal: 16,
-        width: "92%",
+        top: 50,
+        marginHorizontal: 12,
         zIndex: 3,
         borderRadius: 20,
         height: 70,
+        alignItems: "flex-start",
+        paddingHorizontal: 14
     }, 
     notificationDropdownBlur: {
-        top: 100,
+        top: 50,
         position: "absolute",
-        marginHorizontal: 16,
-        width: "92%",
+        marginHorizontal: 12,
+        width: "94%",
         zIndex: 1,
-        borderRadius: 20,
+        borderRadius: 10,
         height: 70,
         overflow: "hidden"
     }, 
     notificationDropdownTitle: {
         fontWeight: "500",
-        fontSize: 20
+        fontSize: 20,
     }, 
     notificationDropdownBody: {
         fontSize: 18
@@ -223,6 +213,10 @@ export const GS = StyleSheet.create({
         width: "100%", 
         borderRadius: 20,
     },
+    trashCan: {
+        height: 50,
+        width: 50
+    }
 })
 
 export default GS

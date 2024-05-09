@@ -72,4 +72,9 @@ export type TabBarParamList = {
 export type RootStackParamList = {
     Tabs: NavigatorScreenParams<TabBarParamList>
     InfoModal: undefined
+    NotificationModal: {title: string, body: string, data: any}
 }
+
+export type RootStackProps<T extends keyof RootStackParamList> =
+    CompositeScreenProps<StackScreenProps<RootStackParamList, T>,
+    BottomTabScreenProps<TabBarParamList>>
