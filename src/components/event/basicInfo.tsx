@@ -23,7 +23,7 @@ export default function BasicInfo() {
         const textNO = { host: "Arrangør:   ", more: "Mer info"}
         const textEN = { host: "Organizer:   ", more: "More info"}
         text = lang ? textNO : textEN
-        info = lang ? event.event.informational_no : event.event.informational_en
+        info = lang ? event?.event?.informational_no : event?.event?.informational_en
     }
     
     const host = findOrgName()
@@ -80,15 +80,15 @@ function Start() {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const start = lang ? "Starter:      " : "Starts:         "
-
+    
     return (
         <View style={ES.specificEventInfoView}>
             <Text style={{...T.specificEventInfo, color: theme.textColor}}>
                 {start}
             </Text>
             <Text style={{...T.specificEventInfo, color: theme.textColor}}>
-                {event?.event.time_start[11]}{event?.event.time_start[12]}:
-                {event?.event.time_start[14]}{event?.event.time_start[15]}
+                {event?.event?.time_start[11]}{event?.event?.time_start[12]}:
+                {event?.event?.time_start[14]}{event?.event?.time_start[15]}
             </Text>
         </View>
     )

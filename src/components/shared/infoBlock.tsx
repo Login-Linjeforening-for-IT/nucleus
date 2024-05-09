@@ -8,11 +8,13 @@ type InfoBlockProps = {
 }
 
 export default function InfoBlock({infoText}: InfoBlockProps){
-    const { event:{event} } = useSelector((state: ReduxState) => state.event)
+    const { event } = useSelector((state: ReduxState) => state.event)
     
+    if (!event?.event) return null
+
     return (
         <View style={{
-            backgroundColor: event.canceled ? '#800000B3' : '#003946',
+            backgroundColor: event.event.canceled ? '#800000B3' : '#003946',
             minHeight: 50,
             width: '100%',
             borderRadius: 10,
@@ -25,7 +27,7 @@ export default function InfoBlock({infoText}: InfoBlockProps){
                 justifyContent: 'center',
                 alignItems: 'center',
             }}>
-                <SvgXml xml={infoSvg} color={event.canceled ? "#ff4040" : "#62c4d7"}></SvgXml>
+                <SvgXml xml={infoSvg} color={event.event.canceled ? "#ff4040" : "#62c4d7"}></SvgXml>
             </View>
             <Text style={{color: "#ffffff", fontSize: 20, paddingVertical: 10, width: '80%'}}>
                 {infoText}

@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux"
 import getTags from "@utils/getTags"
 import { useNavigation } from "@react-navigation/native"
 import { StackNavigationProp } from "@react-navigation/stack"
+import { RootStackParamList } from "@utils/screenTypes"
 
 type TagsProps = {
     event: DetailedEventData | undefined
@@ -25,7 +26,7 @@ export default function Tags({event}: TagsProps) {
 }
 
 function Tag({tag}: {tag: Tag}) {
-    const navigation = useNavigation<StackNavigationProp<RoootStackParamList>>()
+    const navigation = useNavigation<StackNavigationProp<RootStackParamList>>()
     const dispatch = useDispatch()
 
     return (

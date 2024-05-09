@@ -1,5 +1,4 @@
 import { nativeApplicationVersion } from "expo-application"
-import { Navigation } from "@interfaces"
 import Feedback from "@/components/menu/feedback"
 import Cluster from "@/components/shared/cluster"
 import Space from "@/components/shared/utils"
@@ -11,15 +10,12 @@ import en from "@text/menu/en.json"
 import no from "@text/menu/no.json"
 import T from "@styles/text"
 import LogoNavigation from "@/components/shared/logoNavigation"
-import { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs"
-import { createStackNavigator } from "@react-navigation/stack"
 import AboutScreen from "./about"
 import BusinessScreen from "./business"
 import NotificationScreen from "./notifications"
 import InternalScreen from "./internal"
 import LoginScreen from "./login"
 import ProfileScreen from "./profile"
-import ReportScreen from "./report"
 import SettingScreen from "./settings"
 import SmallProfile from "@components/profile/smallProfile"
 import Text from "@components/shared/text"
@@ -32,36 +28,25 @@ import {
   Platform,
 } from "react-native"
 import Swipe from "@components/nav/swipe"
+import { ItemProps, MenuProps, MenuRoutes, MenuStackParamList } from "@utils/screenTypes"
+import { NavigationProp } from "@react-navigation/native"
 
 type MenuItemProps = {
     index: number
     item: ItemProps
-    navigation: Navigation
+    navigation: NavigationProp<MenuStackParamList,'MenuScreen'>
     setting: SettingProps[]
     feedback: boolean
     toggleFeedback: () => void
     login: boolean
 }
 
-const MenuStack = createStackNavigator<MenuStackParamList>()
 
-const screens: Record<string, React.FC<any>> = {
-    "ProfileScreen": ProfileScreen,
-    "SettingScreen": SettingScreen,
-    // "NotificationScreen": NotificationScreen,
-    "AboutScreen": AboutScreen,
-    "BusinessScreen": BusinessScreen,
-    // "LoginScreen": LoginScreen,
-    // "InternalScreen": InternalScreen
-    // "ReportScreen": ReportScreen,
-}
-
-
-export default function MenuScreen(): JSX.Element {
+export default function MenuScreen({ navigation }: MenuProps<'MenuScreen'>): JSX.Element {
 
     const { lang  } = useSelector((state: ReduxState) => state.lang  )
     const { login } = useSelector((state: ReduxState) => state.login )
-    const { theme, isDark } = useSelector((state: ReduxState) => state.theme )
+    const { theme } = useSelector((state: ReduxState) => state.theme )
     const { id, name, image } = useSelector((state: ReduxState) => 
     state.profile )
     const profile = { id, name, image}
@@ -75,61 +60,41 @@ export default function MenuScreen(): JSX.Element {
         setFeedback(prevFeedback => !prevFeedback)
     }
 
+    useEffect(()=>{
+        navigation.setOptions({
+            headerComponents: {
+                left: [<LogoNavigation />],
+            }} as any)   
+        },[navigation])
+
     return (
-        <MenuStack.Navigator
-            screenOptions={{
-                animationEnabled: false,
-                headerTransparent: true,
-                header: props => <Header {...props} />
+        <Swipe left="AdNav">
+            <View style={{
+                ...GS.content, 
+                backgroundColor: theme.darker
             }}>
-            <MenuStack.Screen name="MenuScreen">
-                {({navigation})=> {
-                    // --- SET THE COMPONENTS OF THE HEADER ---
-                    useEffect(()=>{
-                        navigation.setOptions({
-                            headerComponents: {
-                                left: [<LogoNavigation />],
-                            }} as Partial<BottomTabNavigationOptions>)   
-                        },[navigation])
-                    return(
-                        <Swipe left="AdScreenRoot">
-                            <View style={{
-                                ...GS.content, 
-                                backgroundColor: theme.darker
-                            }}>
-                                <Space height={Dimensions.get("window").height / 8} />
-                                {/* <SmallProfile navigation={navigation} profile={profile} login={login} /> */}
-                                {text.setting.map((item, index) => {
-                                    if (item.nav === "ProfileScreen") return null
-                                    if (item.nav === "LoginScreen" && login) return null
-                                    if (item.nav === "InternalScreen" && !login) return null
-                                    return (
-                                        <MenuItem 
-                                            index={index}
-                                            item={item}
-                                            navigation={navigation}
-                                            setting={text.setting}
-                                            feedback={feedback}
-                                            toggleFeedback={toggleFeedback}
-                                            login={login}
-                                            key={index}
-                                        />
-                                    )
-                                })}
-                                <Space height={Dimensions.get("window").height / 10} /> 
-                            </View>
-                        </Swipe>
+                <Space height={Dimensions.get("window").height / 8} />
+                {/* <SmallProfile navigation={navigation} profile={profile} login={login} /> */}
+                {text.setting.map((item, index) => {
+                    if (item.nav === "ProfileScreen") return null
+                    if (item.nav === "LoginScreen" && login) return null
+                    if (item.nav === "InternalScreen" && !login) return null
+                    return (
+                        <MenuItem 
+                            index={index}
+                            item={item}
+                            navigation={navigation}
+                            setting={text.setting}
+                            feedback={feedback}
+                            toggleFeedback={toggleFeedback}
+                            login={login}
+                            key={index}
+                        />
                     )
-                }}
-            </MenuStack.Screen>
-            {text.setting.map(item => (
-                <MenuStack.Screen 
-                    name={item.nav as MenuRoutes}
-                    component={screens[item.nav]}
-                    key={item.id}
-                />  
-            ))}
-        </MenuStack.Navigator>
+                })}
+                <Space height={Dimensions.get("window").height / 10} /> 
+            </View>
+        </Swipe>
     )
 }
 
@@ -142,7 +107,7 @@ toggleFeedback}: MenuItemProps) {
 
     return (
         <View>
-            <TouchableOpacity onPress={() => navigation.navigate(item.nav, item)}
+            <TouchableOpacity onPress={() => navigation.navigate(item.nav)}
             >
                 <Cluster>
                     <View style={{...CS.clusterBack}}>

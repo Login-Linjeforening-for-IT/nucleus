@@ -1,5 +1,4 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
-import { StackProps } from "@interfaces"
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native"
 import Footer from "@nav/footer"
 import { useSelector } from "react-redux"
@@ -12,41 +11,152 @@ import MS from "@styles/menuStyles"
 import { StackCardInterpolatedStyle, StackCardInterpolationProps, StackCardStyleInterpolator, createStackNavigator } from "@react-navigation/stack"
 import TagInfo from "@components/shared/tagInfo"
 import { TransitionSpec } from "@react-navigation/stack/lib/typescript/src/types"
+import linking from "@utils/linking"
+import { AdStackParamList, EventStackParamList, MenuStackParamList, RootStackParamList, TabBarParamList } from "@utils/screenTypes"
+import ProfileScreen from "@screens/menu/profile"
+import SettingScreen from "@screens/menu/settings"
+import NotificationScreen from "@screens/menu/notifications"
+import AboutScreen from "@screens/menu/about"
+import BusinessScreen from "@screens/menu/business"
+import LoginScreen from "@screens/menu/login"
+import InternalScreen from "@screens/menu/internal"
+import ReportScreen from "@screens/menu/report"
+import SpecificEventScreen from "@screens/event/specificEvent"
+import SpecificAdScreen from "@screens/ads/specificAd"
+import Header from "./header"
+
 
 // Declares Tab to equal CBTN function
-const Tab = createBottomTabNavigator()
-const Root = createStackNavigator()
+const Root = createStackNavigator<RootStackParamList>()
+const Tab = createBottomTabNavigator<TabBarParamList>()
+const EventStack = createStackNavigator<EventStackParamList>()
+const AdStack = createStackNavigator<AdStackParamList>()
+const MenuStack = createStackNavigator<MenuStackParamList>()
 
+function Events() {
+    return (
+        <EventStack.Navigator screenOptions={{
+            animationEnabled: false,
+            headerTransparent: true,
+            header: props => <Header {...props}/>}}>
+            <EventStack.Screen name="EventScreen" component={EventScreen}/>
+            <EventStack.Screen name="SpecificEventScreen" component={SpecificEventScreen}/>
+        </EventStack.Navigator>
+    )
+}
 
-function Tabs(){
-    const { isDark, theme } = useSelector((state: ReduxState) => state.theme )
+function Ads() {
+    return (
+        <AdStack.Navigator screenOptions={{
+            animationEnabled: false,
+            headerTransparent: true,
+            header: props => <Header {...props}/>}}>
+            <AdStack.Screen name="AdScreen" component={AdScreen}/>
+            <AdStack.Screen name="SpecificAdScreen" component={SpecificAdScreen}/>
+        </AdStack.Navigator>
+    )
+}
 
-    const screens = [
-        {
-            name: "EventScreen",
-            component: EventScreen,
-            focusedIcon: require("@assets/menu/calendar-orange.png"),
-            icon: isDark
-                ? require("@assets/menu/calendar777.png")
-                : require("@assets/menu/calendar-black.png")
-        },
-        {
-            name: "AdScreen",
-            component: AdScreen,
-            focusedIcon: require("@assets/menu/business-orange.png"),
-            icon: isDark
-                ? require("@assets/menu/business.png")
-                : require("@assets/menu/business-black.png")
-        },
-        {
-            name: "MenuScreen",
-            component: MenuScreen,
-            focusedIcon: require("@assets/menu/menu-orange.png"),
-            icon: isDark
-                ? require("@assets/menu/menu.png")
-                : require("@assets/menu/menu-black.png")
-        }
-    ]
+function Menu() {
+    return (
+        <MenuStack.Navigator screenOptions={{
+            animationEnabled: false,
+            headerTransparent: true,
+            header: props => <Header {...props}/>}}>
+            <MenuStack.Screen name="MenuScreen" component={MenuScreen}/>
+            <MenuStack.Screen name="ProfileScreen" component={ProfileScreen}/>
+            <MenuStack.Screen name="SettingScreen" component={SettingScreen}/>
+            <MenuStack.Screen name="NotificationScreen" component={NotificationScreen}/>
+            <MenuStack.Screen name="AboutScreen" component={AboutScreen}/>
+            <MenuStack.Screen name="BusinessScreen" component={BusinessScreen}/>
+            <MenuStack.Screen name="LoginScreen" component={LoginScreen}/>
+            <MenuStack.Screen name="InternalScreen" component={InternalScreen}/>
+            <MenuStack.Screen name="ReportScreen" component={ReportScreen}/>
+        </MenuStack.Navigator>
+    )
+}
+
+/**
+ * Declares the tab navigator, and declares the eventstack, adstack and menustack.
+ * 
+ * @returns Application with navigation
+ */
+function Tabs(): JSX.Element {
+    const { isDark } = useSelector((state: ReduxState) => state.theme)
+
+    return (
+        <Tab.Navigator
+            // Set initialscreen at to not defaut to top of tab stack
+            initialRouteName={"EventNav"}
+            backBehavior="history"
+            screenOptions={{headerShown: false}}
+            // Sets the tab bar component
+            tabBar={props => <Footer 
+                state={props.state} 
+                descriptors={props.descriptors} 
+                navigation={props.navigation} 
+            />}
+        >
+            <Tab.Screen 
+                name="EventNav" 
+                component={Events} 
+                options={({
+                    tabBarIcon: ({focused}) => (
+                        <Image
+                            style={MS.bMenuIcon} 
+                            source={focused 
+                                ? require("@assets/menu/calendar-orange.png")
+                                : isDark
+                                    ? require("@assets/menu/calendar777.png")
+                                    : require("@assets/menu/calendar-black.png")} 
+                        />
+                    )
+                })}
+            />
+            <Tab.Screen 
+                name="AdNav" 
+                component={Ads} 
+                options={({
+                    tabBarIcon: ({focused}) => (
+                        <Image
+                            style={MS.bMenuIcon} 
+                            source={focused 
+                                ? require("@assets/menu/business-orange.png")
+                                : isDark
+                                    ? require("@assets/menu/business.png")
+                                    : require("@assets/menu/business-black.png")}
+                        />
+                    )
+                })}
+            />
+            <Tab.Screen 
+                name="MenuNav" 
+                component={Menu}
+                options={({
+                    tabBarIcon: ({focused}) => (
+                        <Image
+                            style={MS.bMenuIcon} 
+                            source={focused 
+                                ? require("@assets/menu/calendar-orange.png")
+                                : isDark
+                                    ? require("@assets/menu/menu.png")
+                                    : require("@assets/menu/menu-black.png")}
+                        />
+                    )
+            })}
+            />
+        </Tab.Navigator>
+    )
+}
+
+/**
+ * Declares navigator of the app, wraps the navigator in the container, and
+ * declares the InfoModal and the tab navigation.
+ * 
+ * @returns Application with navigation
+ */
+export default function Navigator(): JSX.Element {
+    const { theme } = useSelector((state: ReduxState) => state.theme)
 
     const navTheme = {
         ...DefaultTheme,
@@ -56,49 +166,6 @@ function Tabs(){
         }
     }
 
-    return (
-        <Tab.Navigator
-            // Set initialscreen at to not defaut to top of tab stack
-            initialRouteName={screens[0].name}
-            backBehavior="history"
-            screenOptions={{headerShown: false}}
-            // Sets the tab bar component
-            tabBar={props => <Footer 
-                state={props.state} 
-                descriptors={props.descriptors} 
-                navigation={props.navigation} 
-                />}
-        >
-            {/* Maps over all screens, returning each of */}
-            {screens.map((screen: StackProps) => (
-                <Tab.Screen 
-                    key={screen.name} 
-                    options={({
-                        tabBarIcon: ({focused}) => (
-                            <Image
-                                style={MS.bMenuIcon} 
-                                source={focused 
-                                    ? screen.focusedIcon
-                                    : screen.icon} 
-                            />
-                        )
-                    })}
-                    name={screen.name+"Root"}
-                    component={screen.component}
-                />
-            ))}
-        </Tab.Navigator>
-    )
-}
-
-// Declares Navigator, wraps in container and declares all navigation routes
-/**
- * Declares navigator of the app, wraps the navigator in the container, and
- * declares all navigation routes available.
- * 
- * @returns Application with navigation
- */
-export default function Navigator(): JSX.Element {
     const animate = ({current}: StackCardInterpolationProps): StackCardInterpolatedStyle=>({
         cardStyle: {
             transform: [{translateY: current.progress.interpolate({

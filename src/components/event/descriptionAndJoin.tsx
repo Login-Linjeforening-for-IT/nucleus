@@ -14,7 +14,8 @@ export default function DescriptionAndJoin() {
     const loading = !Boolean(event&&Object.keys(event).length)
     let name = ''
 
-    if(event&&Object.keys(event).length){
+    
+    if(event?.event&&Object.keys(event.event).length){
         name = lang 
             ? event.event.name_no || event.event.name_en 
             : event.event.name_en || event.event.name_no

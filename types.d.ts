@@ -104,7 +104,7 @@ type EventLocation = {
     id: number
     name_no: string
     name_en: string
-    type: 'mazmap' | 'coords' | 'address' | 'none'
+    type: 'mazemap' | 'coords' | 'address' | 'none'
     mazemap_campus_id: number | null
     mazemap_poi_id: number | null
     address_street: string 
@@ -207,6 +207,7 @@ type ReduxState = {
     event: {
         events: EventProps[]
         event: DetailedEventResponse
+        history: number[]
         clickedEvents: EventProps[]
         renderedEvents: EventProps[]
         lastFetch: string
@@ -227,6 +228,7 @@ type ReduxState = {
     ad: {
         ads: AdProps[]
         ad: DetailedAdResponse
+        history: number[]
         clickedAds: AdProps[]
         renderedAds: AdProps[]
         lastFetch: string
@@ -467,28 +469,6 @@ type NotificationList = {
     time: string
 }
 
-type EventStackParamList = {
-    EventScreen: undefined
-    SpecificEventScreen: {
-        eventID: number
-    }
-}
-
-type RoootStackParamList = {
-    InfoModal: undefined
-}
-
-type RoootStackParamList = {
-    InfoModal: undefined
-}
-
-type AdStackParamList = {
-    AdScreen: undefined
-    SpecificAdScreen: {
-        adID: number
-    }
-}
-
 type Setting = {
     screen: string;
     nav: string;
@@ -499,26 +479,6 @@ type Setting = {
             title: string
         }[]
 }
-
-type MenuRoutes = 
-    "ProfileScreen"
-    | "SettingScreen"
-    | "NotificationScreen"
-    | "AboutScreen"
-    | "BusinessScreen"
-    | "ReportScreen"
-    | "LoginScreen"
-    | "InternalScreen" 
-
-type ItemProps = {
-    id: number
-    nav: MenuRoutes
-    title: string
-}
-
-type MenuStackParamList = {
-    [k in MenuRoutes]+?: ItemProps;
-} & {MenuScreen: undefined}
 
 type ListFooterProps = {
     index: number

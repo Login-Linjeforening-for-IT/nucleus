@@ -1,7 +1,6 @@
 import Cluster from "@components/shared/cluster"
-import { Navigation } from "@interfaces"
 import { useNavigation } from "@react-navigation/native"
-import { setEvent, toggleSearch } from "@redux/event"
+import { toggleSearch } from "@redux/event"
 import { LinearGradient } from "expo-linear-gradient"
 import { Dimensions, Text, TouchableOpacity, View } from "react-native"
 import { useDispatch, useSelector } from "react-redux"
@@ -11,6 +10,8 @@ import ES from "@styles/eventStyles"
 import CategorySquare from "@components/shared/category"
 import Space from "@components/shared/utils"
 import T from "@styles/text"
+import { EventStackParamList } from "@utils/screenTypes"
+import { StackNavigationProp } from "@react-navigation/stack"
 
 type EventClusterProps = {
     item: EventProps
@@ -29,7 +30,7 @@ type FullCategorySquareProps = {
 export default function EventCluster ({item, index}: EventClusterProps): 
 JSX.Element {
     const { search } = useSelector((state: ReduxState) => state.event)
-    const navigation: Navigation = useNavigation()
+    const navigation = useNavigation<StackNavigationProp<EventStackParamList>>()
     const dispatch = useDispatch()
 
     return (
