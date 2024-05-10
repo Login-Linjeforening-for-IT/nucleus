@@ -19,16 +19,16 @@ export default function SpecificEventImage() {
                     uri={`https://cdn.login.no/img/events/banner/${event.event.image_small}`}
                 />
             )
-        } 
+        }
     
         if (event.event.image_small?.includes(".png")) {
             return <Image
                 style={ES.specificEventImage}
                 source={{uri: `https://cdn.login.no/img/events/banner/${event.event.image_small}`}}
             />
-        } 
+        }
     
-        return <StaticImage event={event} />
+        return <StaticImage category={event.category.name_no} />
     }
     
     return (

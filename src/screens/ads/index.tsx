@@ -1,21 +1,17 @@
 import AdList from "@components/ads/adList"
 import DownloadButton from "@components/shared/downloadButton"
 import GS from "@styles/globalStyles"
-import Header from "@components/nav/header"
 import LastFetch, { fetchAds } from "@/utils/fetch"
 import LogoNavigation from "@/components/shared/logoNavigation"
 import React, { useEffect, useState } from "react"
-import SpecificAdScreen from "./specificAd"
 import Swipe from "@components/nav/swipe"
-import { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs"
-import { createStackNavigator } from "@react-navigation/stack"
 import { FilterButton, FilterUI } from "@components/shared/filter"
 import { StatusBar } from "expo-status-bar"
 import { setAds, setLastFetch, setLastSave } from "@redux/ad"
 import { useFocusEffect } from "@react-navigation/native"
 import { useDispatch, useSelector } from "react-redux"
 import { View } from "react-native"
-import { AdScreenProps, AdStackParamList } from "@utils/screenTypes"
+import { AdScreenProps } from "@utils/screenTypes"
 
 /**
  * Parent AdScreen component
@@ -38,6 +34,7 @@ export default function AdScreen({ navigation }: AdScreenProps<'AdScreen'>): JSX
     // Redux states
     const { search, lastSave } = useSelector((state: ReduxState) => state.ad)
     const { theme, isDark } = useSelector((state: ReduxState) => state.theme)
+    const ads = useSelector((state: ReduxState) => state.ad.ads)
     const dispatch = useDispatch()
 
     // Fetches ads when screen is focused
@@ -105,11 +102,12 @@ export default function AdScreen({ navigation }: AdScreenProps<'AdScreen'>): JSX
 
     // Sets the component of the header
     useEffect(()=>{
+        const right = ads.length ? [<FilterButton />, <DownloadButton screen="ad" />] : []
         navigation.setOptions({
             headerComponents: {
                 bottom: [<FilterUI />],
                 left: [<LogoNavigation />],
-                right: [<FilterButton />, <DownloadButton screen="ad" />]
+                right
             }} as any)   
     },[navigation])
 

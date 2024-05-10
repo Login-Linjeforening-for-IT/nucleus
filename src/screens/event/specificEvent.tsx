@@ -25,18 +25,20 @@ export default function SpecificEventScreen({ navigation, route: {params: {event
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { event, history } = useSelector((state: ReduxState) => state.event)
     const [refresh, setRefresh] = useState(false)
-    
     const dispatch = useDispatch()
 
     useFocusEffect(
         React.useCallback(() => {
-            let localHistory = [...history]
+            // History can possibly be undefined if the user already has a 
+            // stored state without this property
+            const currentHistory = history || []
+            const localHistory = [...currentHistory]
             localHistory.push(eventID)
             dispatch(setHistory(localHistory))
 
             const onBackPress = () => {
                 if (history.length > 1) {
-                    dispatch(setHistory(history.slice(0, history.length-1)))
+                    dispatch(setHistory(history.slice(0, history.length - 1)))
                 }
                 else{
                     dispatch(setHistory([]))
@@ -59,7 +61,7 @@ export default function SpecificEventScreen({ navigation, route: {params: {event
     }, [history])
 
     async function getDetails() {
-        const response = await fetchEventDetails(history[history.length-1])
+        const response = await fetchEventDetails(history[history.length - 1])
 
         if (response) {
             dispatch(setEvent(response))
@@ -68,7 +70,7 @@ export default function SpecificEventScreen({ navigation, route: {params: {event
     }
     
     const onRefresh = useCallback(async () => {
-        setRefresh(true);
+        setRefresh(true)
         const details = await getDetails()
 
         if (details) {

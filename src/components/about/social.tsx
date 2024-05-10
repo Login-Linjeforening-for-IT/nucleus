@@ -32,6 +32,10 @@ type MediaProps = {
     }
 }
 
+type StaticImageProps = {
+    category: string
+}
+
 /**
  * **Person object**
  *
@@ -246,7 +250,7 @@ function MediaLogo({link, logo}: MediaLogoProps) {
     )
 }
 
-export function StaticImage({event:{category}}: {event: DetailedEventResponse}): JSX.Element {
+export function StaticImage({category}: StaticImageProps): JSX.Element {
     const images: Record<string, ImageSourcePropType> = {
         tekkom:  require(`../../../public/assets/committee/tekkom/tekkom.png`),
         ctf:     require(`../../../public/assets/committee/ctfkom/ctf.png`),
@@ -256,7 +260,7 @@ export function StaticImage({event:{category}}: {event: DetailedEventResponse}):
         login:   require(`../../../public/assets/categories/login.png`),
         annet:   require(`../../../public/assets/categories/annet.png`),
     }
-    const image = images[category.name_no.toLowerCase()] || images.annet;
+    const image = images[category.toLowerCase()] || images.annet;
 
     return <Image style={ES.specificEventImage} source={image} />
 }
