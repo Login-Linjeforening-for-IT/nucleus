@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { combineReducers, configureStore } from "@reduxjs/toolkit"
 import NotificationReducer from "@redux/notifications"
-import { persistReducer } from "redux-persist"
+import { persistReducer, createMigrate } from "redux-persist"
 import LoginReducer from "@redux/loginStatus"
 import ProfileReducer from "@redux/profile"
 import ThemeReducer from "@redux/theme"
@@ -31,8 +31,19 @@ const reducers = combineReducers({
     ad: AdReducer
 })
 
-  // Function to localstore redux state
+// Types does not work in this version of the library
+// Gjermund is trying to fix it
+const migrations = {
+    1: (state: any) => {
+        console.log(state)
+        return {
+        }
+    }
+}
+
+// Function to localstore redux state
 const saveState = {
+    version: 1,
     // Key property: root
     key: "root",
     // Declares which storage to use, AsyncStorage has most active community
@@ -47,7 +58,9 @@ const saveState = {
         "notification",
         "profile",
         "theme"
-    ]
+    ],
+    debug: true,
+    migrations: createMigrate(migrations as any, {debug: true})
 }
 
 // Persistor to remember the state
