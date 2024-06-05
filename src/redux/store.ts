@@ -35,8 +35,12 @@ const reducers = combineReducers({
 // Gjermund is trying to fix it
 const migrations = {
     1: (state: any) => {
-        console.log(state)
         return {
+            ...state,
+            event: {
+                ...state.event,
+                search: true
+            }
         }
     }
 }
@@ -60,7 +64,7 @@ const saveState = {
         "theme"
     ],
     debug: true,
-    migrations: createMigrate(migrations as any, {debug: true})
+    migrate: createMigrate(migrations as any, {debug: true})
 }
 
 // Persistor to remember the state
