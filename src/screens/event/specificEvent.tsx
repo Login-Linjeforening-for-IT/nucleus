@@ -36,7 +36,7 @@ export default function SpecificEventScreen({ navigation, route: {params: {event
             localHistory.push(eventID)
             dispatch(setHistory(localHistory))
 
-            const onBackPress = () => {
+            function onBackPress() {
                 if (history.length > 1) {
                     dispatch(setHistory(history.slice(0, history.length - 1)))
                 }
@@ -45,16 +45,16 @@ export default function SpecificEventScreen({ navigation, route: {params: {event
                     navigation.goBack()
                 }
                 return true
-            };
-    
+            }
+
             const subscription = BackHandler.addEventListener(
                 'hardwareBackPress',
                 onBackPress
-            );
+            )
     
-            return () => subscription.remove();
+            return () => subscription.remove()
         }, [])
-    );
+    )
 
     useEffect(() => {
         getDetails()
@@ -76,7 +76,7 @@ export default function SpecificEventScreen({ navigation, route: {params: {event
         if (details) {
             setRefresh(false)
         }
-    }, [refresh]);
+    }, [refresh])
 
     return (
         <Swipe left="EventScreen">

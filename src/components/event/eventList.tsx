@@ -40,13 +40,13 @@ export default function EventList (): JSX.Element {
     }
 
     const onRefresh = useCallback(async () => {
-        setRefresh(true);
+        setRefresh(true)
         const details = await getDetails()
 
         if (details) {
             setRefresh(false)
         }
-    }, [refresh]);
+    }, [refresh])
     
     const cat = getCategories({lang, categories})
     const offset = search 

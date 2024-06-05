@@ -30,7 +30,7 @@ export default function SpecificAdScreen({navigation, route:{params: {adID}}}: A
             localHistory.push(adID)
             dispatch(setHistory(localHistory))
 
-            const onBackPress = () => {
+            function onBackPress() {
                 if (history.length > 1) {
                     dispatch(setHistory(history.slice(0, history.length-1)))
                 }
@@ -39,16 +39,16 @@ export default function SpecificAdScreen({navigation, route:{params: {adID}}}: A
                     navigation.goBack()
                 }
                 return true
-            };
+            }
     
             const subscription = BackHandler.addEventListener(
                 'hardwareBackPress',
                 onBackPress
-            );
+            )
     
-            return () => subscription.remove();
+            return () => subscription.remove()
         }, [])
-    );
+    )
 
     useEffect(() => {
         getDetails()
@@ -66,13 +66,13 @@ export default function SpecificAdScreen({navigation, route:{params: {adID}}}: A
 
     // Handels the refresh of the page
     const onRefresh = useCallback(async () => {
-        setRefresh(true);
+        setRefresh(true)
         const details = await getDetails()
 
         if (details) {
             setRefresh(false)
         }
-    }, [refresh]);
+    }, [refresh])
 
     return (
         <Swipe left="AdScreen">

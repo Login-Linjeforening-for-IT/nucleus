@@ -1,7 +1,7 @@
 // Configured in this file to be globally accessable.
 declare module '*.svg' {
-    const content: string;
-    export default content;
+    const content: string
+    export default content
 }
 
 // Types globally used in the app
@@ -473,12 +473,12 @@ type NotificationListProps = {
 }
 
 type Setting = {
-    screen: string;
-    nav: string;
+    screen: string
+    nav: string
     setting: 
         {
-            id: number;
-            nav: MenuRoutes;
+            id: number
+            nav: MenuRoutes
             title: string
         }[]
 }

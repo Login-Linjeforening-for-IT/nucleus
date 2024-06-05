@@ -1,6 +1,6 @@
-import { LinkingOptions } from "@react-navigation/native";
+import { LinkingOptions } from "@react-navigation/native"
 import * as Linking from "expo-linking"
-import { RootStackParamList } from "./screenTypes";
+import { RootStackParamList } from "./screenTypes"
 
 // APP.js config
 // "intentFilters": [
@@ -38,7 +38,7 @@ import { RootStackParamList } from "./screenTypes";
 //     ]
 // }
 
-const prefix = Linking.createURL('/');
+const prefix = Linking.createURL('/')
 
 const linking: LinkingOptions<RootStackParamList> = {
     prefixes: [prefix, 'https://login.no'],

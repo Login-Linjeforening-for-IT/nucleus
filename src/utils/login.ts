@@ -1,4 +1,4 @@
-import valid from "./valid";
+import valid from "./valid"
 
 type LoginProps = {
     username: string

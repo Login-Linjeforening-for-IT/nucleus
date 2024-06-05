@@ -1,6 +1,7 @@
-import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
+import { BottomTabScreenProps } from "@react-navigation/bottom-tabs"
 import { CompositeScreenProps, NavigatorScreenParams } from "@react-navigation/native"
-import { StackScreenProps } from "@react-navigation/stack";
+import { StackScreenProps } from "@react-navigation/stack"
+
 declare global {
     namespace ReactNavigation {
       interface RootParamList extends TabBarParamList {}
@@ -8,7 +9,7 @@ declare global {
 }
 
 export type TabBarProps<T extends keyof TabBarParamList> =
-BottomTabScreenProps<TabBarParamList, T>;
+BottomTabScreenProps<TabBarParamList, T>
 
 export type EventStackParamList = {
     EventScreen: undefined

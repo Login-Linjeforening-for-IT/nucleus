@@ -50,5 +50,5 @@ export interface HeaderProps extends Omit<StackHeaderProps, 'options'> {
 }
 
 export interface StackRouteOptions extends Omit<StackNavigationOptions, 'header'> {
-    header?: (props: HeaderProps) => React.ReactNode;
+    header?: (props: HeaderProps) => React.ReactNode
 }

@@ -20,7 +20,7 @@ type HandleSwipeProps = {
  */
 export default function handleSwipe({navigation, event, screenLeft, screenRight, id}: 
 HandleSwipeProps): void {
-    const { velocityX, velocityY } = event.nativeEvent;
+    const { velocityX, velocityY } = event.nativeEvent
 
     if (Math.abs(velocityX) > Math.abs(velocityY)) {
         if (velocityX > 600 && screenLeft) {
