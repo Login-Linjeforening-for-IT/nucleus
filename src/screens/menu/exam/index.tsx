@@ -4,26 +4,13 @@ import CS from "@styles/clusterStyles"
 import GS from "@styles/globalStyles"
 import { useSelector } from "react-redux"
 import T from "@styles/text"
-import LogoNavigation from "@/components/shared/logoNavigation"
 import Swipe from "@components/nav/swipe"
 import { ExamProps } from "@type/screenTypes"
 import { RefreshControl, ScrollView } from "react-native-gesture-handler"
 import CourseError from "@components/exam/courseError"
 import { getCourses } from "@utils/exam"
-    import React, { 
-        Dispatch, 
-        SetStateAction, 
-        useCallback, 
-        useEffect, 
-        useState 
-    } from "react"
-import {
-    View,
-    Image,
-    TouchableOpacity,
-    Dimensions,
-    Text
-} from "react-native"
+import { Dispatch, SetStateAction, useCallback, useState } from "react"
+import { View, Image, TouchableOpacity, Dimensions, Text } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { Navigation } from "@/interfaces"
 

@@ -35,7 +35,7 @@ export default function Header({ options, route, navigation }: HeaderProps): Rea
     const  [backIcon, setBackIcon] = useState(isDark 
         ? require('@assets/icons/goback777.png')
         : require('@assets/icons/goback111.png'))
-    
+
     return (
         <BlurWrapper>
             <View style={{...GS.headerView, top: Dimensions.get("window").height / 17}}>
