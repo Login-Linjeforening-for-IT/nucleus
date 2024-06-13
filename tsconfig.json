@@ -42,5 +42,5 @@
       "jest.config.js"
     ],
     "exclude": ["node_modules"],
-    "extends": "@react-native/typescript-config/tsconfig.json"
+    "extends": "expo/tsconfig.base",
 }

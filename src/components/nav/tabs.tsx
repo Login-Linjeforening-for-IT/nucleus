@@ -1,5 +1,5 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
-import { NavigationContainer, DefaultTheme } from "@react-navigation/native"
+import { NavigationContainer } from "@react-navigation/native"
 import Footer from "@nav/footer"
 import { useSelector } from "react-redux"
 import AdScreen from "@screens/ads"
