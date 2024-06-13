@@ -1,5 +1,5 @@
 import GS from '@styles/globalStyles'
-import React, { PropsWithChildren, ReactNode, useState } from 'react'
+import { PropsWithChildren, ReactNode, useState } from 'react'
 import { BlurView } from 'expo-blur'
 import { Dimensions, Platform, View, Text, StatusBar } from 'react-native'
 import { HeaderProps} from '@/interfaces'

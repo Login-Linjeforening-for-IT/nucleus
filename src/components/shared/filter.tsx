@@ -1,6 +1,6 @@
 import ES from "@styles/eventStyles"
 import MS from "@styles/menuStyles"
-import React, { useRef } from "react"
+import { useRef } from "react"
 import T from "@styles/text"
 import { CheckBox, CheckedBox } from "@components/event/check"
 import { 

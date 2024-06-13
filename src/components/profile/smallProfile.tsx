@@ -3,7 +3,6 @@ import PS from "@styles/profileStyles"
 import CS from "@styles/clusterStyles"
 import { Navigation } from "@/interfaces"
 import T from "@styles/text"
-import React from "react"
 import { useSelector } from "react-redux"
 
 type SmallProfileProps = {

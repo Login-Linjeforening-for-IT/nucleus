@@ -1,4 +1,3 @@
-import React from "react"
 import GS from "@styles/globalStyles"
 import { BlurView } from "expo-blur"
 import { Navigation } from "@/interfaces"

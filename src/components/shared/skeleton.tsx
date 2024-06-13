@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, ReactNode } from 'react'
+import { useRef, useEffect, ReactNode } from 'react'
 import { View, Animated, StyleSheet, Easing, Dimensions } from 'react-native'
 import { LinearGradient } from "expo-linear-gradient"
 import { useSelector } from 'react-redux'

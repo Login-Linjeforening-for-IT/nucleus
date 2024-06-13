@@ -4,7 +4,6 @@ import { AppRegistry } from "react-native"
 import { Provider } from "react-redux"
 import Navigator from "@nav/tabs"
 import store from "@redux/store"
-import React from "react"
 import ForceUpdate from "@components/menu/forceUpdate"
 
 let persistor = persistStore(store)

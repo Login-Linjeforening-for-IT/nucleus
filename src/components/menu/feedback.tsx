@@ -1,7 +1,6 @@
 import { View, Text, TouchableOpacity } from "react-native"
 import ES from "@styles/eventStyles"
 import T from "@styles/text"
-import React from "react"
 import { useSelector } from "react-redux"
 import { TextLink } from "@components/shared/link"
 import { MAILTO_URL } from "@/constants"

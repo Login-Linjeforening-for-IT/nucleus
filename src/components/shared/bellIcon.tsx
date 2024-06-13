@@ -1,6 +1,5 @@
 import { Image, Text } from "react-native"
 import ES from "@styles/eventStyles"
-import React from "react"
 import { useSelector } from "react-redux"
 
 type BellIconProps = {

@@ -1,7 +1,6 @@
 import AS from "@styles/adStyles"
 import BellIcon from "@components/shared/bellIcon"
 import Cluster from "@components/shared/cluster"
-import React from "react"
 import Space from "@components/shared/utils"
 import T from "@styles/text"
 import { AdClusterLocation, AdClusterImage } from "@components/ads/adContent"

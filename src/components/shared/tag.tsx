@@ -1,7 +1,6 @@
 import { Image, Platform, Text, TouchableOpacity, View } from "react-native"
 import GS from "@styles/globalStyles"
 import { useSelector } from "react-redux"
-import React from "react"
 import { setTag } from "@redux/event"
 import { useDispatch } from "react-redux"
 import getTags from "@utils/getTags"

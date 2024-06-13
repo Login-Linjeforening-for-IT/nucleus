@@ -1,6 +1,5 @@
 import BellIcon from "@components/shared/bellIcon"
 import ES from "@styles/eventStyles"
-import React from "react"
 import { TouchableOpacity, View } from "react-native"
 import { useSelector, useDispatch } from "react-redux"
 import { setClickedEvents } from "@redux/event"

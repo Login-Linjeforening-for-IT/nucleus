@@ -5,7 +5,7 @@ import GS from "@styles/globalStyles"
 import { useSelector } from "react-redux"
 import en from "@text/menu/about/en.json"
 import no from "@text/menu/about/no.json"
-import React, {useState} from "react"
+import React, { useState } from "react"
 import T from "@styles/text"
 import Person, { 
     AllComitees, 
