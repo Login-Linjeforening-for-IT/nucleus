@@ -6,14 +6,14 @@ import 'react-native'
 import App from '../src/App'
 
 // Note: import explicitly to use the types shipped with jest.
-import { it, expect } from '@jest/globals';
+import { it, expect } from '@jest/globals'
 
 // Note: test renderer must be required after react-native.
-import renderer from 'react-test-renderer';
+import renderer from 'react-test-renderer'
 
 it('Initial path renders correctly', () => {
     const render = renderer.create(<App />)
-    const testInstance = render.root;
+    const testInstance = render.root
     const rootComponent = testInstance.findByProps({ testID: 'eventScreen' })
     expect(rootComponent).toBeTruthy()
 })

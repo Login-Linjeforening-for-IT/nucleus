@@ -5,35 +5,43 @@ import GS from "@styles/globalStyles"
 import { useSelector } from "react-redux"
 import T from "@styles/text"
 import Swipe from "@components/nav/swipe"
-import { ExamProps } from "@type/screenTypes"
 import { RefreshControl, ScrollView } from "react-native-gesture-handler"
-import CourseError from "@components/exam/courseError"
-import { getCourses } from "@utils/exam"
-import { Dispatch, SetStateAction, useCallback, useState } from "react"
+import CourseError from "@components/course/courseError"
+import { getCourses } from "@utils/course"
+import { useCallback, useEffect, useState } from "react"
 import { View, Image, TouchableOpacity, Dimensions, Text } from "react-native"
-import { useNavigation } from "@react-navigation/native"
-import { Navigation } from "@/interfaces"
+import { MenuProps, MenuStackParamList } from "@type/screenTypes"
+import { StackNavigationProp } from "@react-navigation/stack"
 
 type CourseListProps = {
     course: CourseAsList
-    setParentCourseID: Dispatch<SetStateAction<string>>
+    navigation: StackNavigationProp<MenuStackParamList, "CourseScreen">
 }
 
-export default function ExamScreen({ navigation }: ExamProps<'ExamScreen'>): JSX.Element {
+export default function CourseScreen({ navigation }: MenuProps<'CourseScreen'>): JSX.Element {
     const [courses, setCourses] = useState<string | CourseAsList[]>([])
     const { theme } = useSelector((state: ReduxState) => state.theme )
-    const [activeCourse, setActiveCourse] = useState<Course | string>("")
-    const [activeCourseID, setActiveCourseID] = useState<string>("")
     const [refresh, setRefresh] = useState(false)
 
     const onRefresh = useCallback(async () => {
-        setRefresh(true);
+        setRefresh(true)
         const courses = await getCourses()
         
         if (courses) {
+            setCourses(courses)
             setRefresh(false)
         }
     }, [refresh])
+
+    useEffect(() => {
+        (async () => {
+            const courses = await getCourses()
+            
+            if (courses) {
+                setCourses(courses)
+            }
+        })()
+    }, [])
 
     return (
         <Swipe left="MenuScreen">
@@ -49,24 +57,20 @@ export default function ExamScreen({ navigation }: ExamProps<'ExamScreen'>): JSX
                         <CourseList 
                             key={course.id} 
                             course={course} 
-                            setParentCourseID={setActiveCourseID}
+                            navigation={navigation} 
                         />
                     )}
-                    {typeof activeCourse !== 'string' && <Course course={activeCourse} />}
                 </ScrollView>
             </View>
         </Swipe>
     )
 }
 
-
-function CourseList({ course, setParentCourseID }: CourseListProps): JSX.Element {
+function CourseList({ course, navigation }: CourseListProps): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    const navigation: Navigation = useNavigation()
 
     function handlePress() {
-        navigation.navigate("SpecificEventScreen", {courseID: course.id})
-        setParentCourseID(course.id)
+        navigation.navigate("SpecificCourseScreen", { courseID: course.id })
     }
 
     return (
@@ -87,43 +91,5 @@ function CourseList({ course, setParentCourseID }: CourseListProps): JSX.Element
                 </View>
             </Cluster>
         </TouchableOpacity>
-    )
-}
-
-function Course({course}: {course: Course}) {
-    const { theme } = useSelector((state: ReduxState) => state.theme)
-    const [refresh, setRefresh] = useState(false)
-
-    const onRefresh = useCallback(async () => {
-        setRefresh(true);
-        const courses = await getCourses()
-        
-        if (courses) {
-            setRefresh(false)
-        }
-    }, [refresh]);
-
-    return (
-        <Swipe left="ExamScreen">
-            <View style={{top: 0, position: 'absolute', flex: 1, zIndex: 100, backgroundColor: 'red'}}>
-                <Space height={Dimensions.get("window").height / 8} />
-                <ScrollView
-                    showsVerticalScrollIndicator={false} 
-                    scrollEventThrottle={100}
-                >
-                    {typeof course === 'string' && <CourseError text={course} />}
-                    <RefreshControl refreshing={refresh} onRefresh={onRefresh} />
-                    {typeof course !== 'string' && <CourseContent />}
-                </ScrollView>
-            </View>
-        </Swipe>
-    )
-}
-
-function CourseContent() {
-    return (
-        <View style={{backgroundColor: 'white'}}>
-            <Text>Course content</Text>
-        </View>
     )
 }

@@ -18,7 +18,7 @@ import AboutScreen from "@screens/menu/about"
 import BusinessScreen from "@screens/menu/business"
 import LoginScreen from "@screens/menu/login"
 import InternalScreen from "@screens/menu/internal"
-import ExamScreen from "@screens/menu/exam/index"
+import CourseScreen from "@screens/menu/course/index"
 import SpecificEventScreen from "@screens/event/specificEvent"
 import SpecificAdScreen from "@screens/ads/specificAd"
 import Header from "./header"
@@ -34,6 +34,7 @@ import {
     StackCardInterpolationProps, 
     createStackNavigator
 } from "@react-navigation/stack"
+import SpecificCourseScreen from "@screens/menu/course/specificCourse"
 
 
 // Declares Tab to equal CBTN function
@@ -81,7 +82,8 @@ function Menu() {
             <MenuStack.Screen name="BusinessScreen" component={BusinessScreen}/>
             <MenuStack.Screen name="LoginScreen" component={LoginScreen}/>
             <MenuStack.Screen name="InternalScreen" component={InternalScreen}/>
-            <MenuStack.Screen name="ExamScreen" component={ExamScreen}/>
+            <MenuStack.Screen name="CourseScreen" component={CourseScreen}/>
+            <MenuStack.Screen name="SpecificCourseScreen" component={SpecificCourseScreen}/>
         </MenuStack.Navigator>
     )
 }

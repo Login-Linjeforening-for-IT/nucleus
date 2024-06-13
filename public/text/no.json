@@ -7,9 +7,9 @@
         "NotificationScreen": "Notifikasjoner",
         "AboutScreen": "Om oss",
         "BusinessScreen": "For bedrifter",
-        "ExamScreen": "Eksamen",
+        "CourseScreen": "Emner",
         "LoginScreen": "Login",
-        "InternalScreen": "Innsida",
+        "InternalScreen": "Vedlikehold",
         "ProfileScreen": "Profil"
     }
 }

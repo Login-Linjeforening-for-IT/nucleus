@@ -6,7 +6,6 @@ type HandleSwipeProps = {
     event: PanGestureHandlerGestureEvent
     screenLeft?: string
     screenRight?: string
-    id?: number
 }
 
 /**
@@ -18,9 +17,9 @@ type HandleSwipeProps = {
  * @param screenLeft The screen to the left of where you are (if any)
  * @param screenRight The screen to the right of where you are (if any)
  */
-export default function handleSwipe({navigation, event, screenLeft, screenRight, id}: 
+export default function handleSwipe({ navigation, event, screenLeft, screenRight }: 
 HandleSwipeProps): void {
-    const { velocityX, velocityY } = event.nativeEvent;
+    const { velocityX, velocityY } = event.nativeEvent
 
     if (Math.abs(velocityX) > Math.abs(velocityY)) {
         if (velocityX > 600 && screenLeft) {

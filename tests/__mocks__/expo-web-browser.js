@@ -1,1 +1,1 @@
-export const openBrowserAsync = jest.fn();
+export const openBrowserAsync = jest.fn()

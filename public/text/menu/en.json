@@ -39,8 +39,8 @@
         },
         {
             "id": 8, 
-            "nav": "ExamScreen",   
-            "title": "Exam" 
+            "nav": "CourseScreen",   
+            "title": "Courses" 
         }
     ],
     "version": "Version ",

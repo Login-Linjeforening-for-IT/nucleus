@@ -32,20 +32,14 @@ export type AdScreenProps<T extends keyof AdStackParamList> =
         BottomTabScreenProps<TabBarParamList>
     >
 
-
-export type ExamScreenProps<T extends keyof CourseStackParamList> =
-    CompositeScreenProps<
-        StackScreenProps<CourseStackParamList, T>,
-        BottomTabScreenProps<TabBarParamList>
-    >
-
 export type MenuRoutes = 
     "ProfileScreen"
     | "SettingScreen"
     | "NotificationScreen"
     | "AboutScreen"
     | "BusinessScreen"
-    | "ExamScreen"
+    | "CourseScreen"
+    | "SpecificCourseScreen"
     | "LoginScreen"
     | "InternalScreen" 
 
@@ -64,17 +58,10 @@ export type MenuStackParamList = {
     NotificationScreen: undefined,
     AboutScreen: undefined,
     BusinessScreen: undefined,
-    ExamScreen: undefined,
     LoginScreen: undefined,
     InternalScreen: undefined,
     MenuScreen: undefined
-}
-
-export type ExamProps<T extends keyof CourseStackParamList> = 
-StackScreenProps<CourseStackParamList, T>
-
-export type CourseStackParamList = {
-    ExamScreen: undefined
+    CourseScreen: undefined
     SpecificCourseScreen: {courseID: string}
 }
 

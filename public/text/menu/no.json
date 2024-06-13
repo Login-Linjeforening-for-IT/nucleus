@@ -35,12 +35,12 @@
         {
             "id": 7, 
             "nav": "InternalScreen",
-            "title": "Innsida (verv)"
+            "title": "Vedlikehold"
         },
         {
             "id": 8, 
-            "nav": "ExamScreen",   
-            "title": "Eksamen"
+            "nav": "CourseScreen",   
+            "title": "Emner"
         }
     ],
     "version": "Versjon ",

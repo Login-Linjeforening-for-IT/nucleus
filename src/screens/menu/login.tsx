@@ -100,7 +100,7 @@ export default function LoginScreen({ navigation }: MenuProps<'LoginScreen'>): J
                     <View>
                         <Space height={80} /> 
                         <Text style={{...T.centered50, color: theme.textColor}}>
-                            {lang ? "Innsida" : "Intranet"}
+                            {lang ? "Vedlikehold" : "Maintenance"}
                         </Text>
                         
                         <Space height={20} /> 

@@ -69,13 +69,13 @@ export default function NotificationScreen(): JSX.Element {
     }, [])
 
     const onRefresh = useCallback(async () => {
-        setRefresh(true);
+        setRefresh(true)
         const temp = await getList()
 
         if (temp) {
             setRefresh(false)
         }
-    }, [refresh]);
+    }, [refresh])
 
     return (
         <Swipe left="MenuScreen">
@@ -103,17 +103,17 @@ export default function NotificationScreen(): JSX.Element {
 }
 
 function Notification({item, list, id, setList, hideOld, setHideOld, readIndex}: NotificationModalProps): JSX.Element {
-    const { theme } = useSelector((state: ReduxState) => state.theme);
-    const { lang } = useSelector((state: ReduxState) => state.lang);
+    const { theme } = useSelector((state: ReduxState) => state.theme)
+    const { lang } = useSelector((state: ReduxState) => state.lang)
     const [isSwiping, setIsSwiping] = useState<boolean>(false)
-    const navigation: Navigation = useNavigation();
-    const time = displayTime(item.time);
-    const swipeableRef = useRef<Swipeable | null>(null);
+    const navigation: Navigation = useNavigation()
+    const time = displayTime(item.time)
+    const swipeableRef = useRef<Swipeable | null>(null)
 
     function navigateIfPossible() {
         // Checks if the object has any properties, and if so navigates to SES
         if (Object.keys(item.data).length) {
-            navigation.navigate("SpecificEventScreen", {item: item.data});
+            navigation.navigate("SpecificEventScreen", {item: item.data})
         }
     }
 
@@ -139,7 +139,7 @@ function Notification({item, list, id, setList, hideOld, setHideOld, readIndex}:
             inputRange: [-100, 0],
             outputRange: [1, 0],
             extrapolate: 'clamp',
-        });
+        })
 
         // Note that this return statement is only for the trash icon, not for the notification itself
         return (
@@ -158,14 +158,14 @@ function Notification({item, list, id, setList, hideOld, setHideOld, readIndex}:
                     </Animated.View>
                 </View>
             </TouchableOpacity>
-        );
-    };
+        )
+    }
 
     async function deleteNotification() {
         // Copies the list to ensure that React detects the change since splice mutates the list undetectably.
-        const newList: NotificationListProps[] = [...list];
-        newList.splice(id, 1);
-        setList(newList);
+        const newList: NotificationListProps[] = [...list]
+        newList.splice(id, 1)
+        setList(newList)
         await AsyncStorage.setItem("notificationList", JSON.stringify(newList))
         swipeableRef.current?.close()
     }
@@ -230,7 +230,7 @@ function Notification({item, list, id, setList, hideOld, setHideOld, readIndex}:
                 </TouchableHighlight>
             </Swipeable>
         </>
-    );
+    )
 }
 
 function displayTime(time: string): string {
@@ -293,7 +293,7 @@ function markListAsRead({list}: ListProps) {
 
 function removeOlderThanOneMonth({list}: ListProps) {
     if (list) {
-        const newList: NotificationListProps[] = [...list];
+        const newList: NotificationListProps[] = [...list]
         const now = new Date().getTime()
         const oneMonth = 2592000
         
@@ -301,7 +301,7 @@ function removeOlderThanOneMonth({list}: ListProps) {
             const isMoreThanAMonthAway = now - new Date(list[i].time).getTime() > oneMonth
 
             if (isMoreThanAMonthAway) {
-                newList.splice(i, 1);
+                newList.splice(i, 1)
             }
         }
         

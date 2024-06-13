@@ -30,7 +30,7 @@ export default function DownloadButton({screen}: DownloadButtonProps){
         setIcon(orange)
         setTimeout(() => {
             setIcon(isDark ? dark : light)
-        }, 500);
+        }, 500)
     }
 
     return (

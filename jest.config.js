@@ -3,12 +3,12 @@ module.exports = {
     testEnvironment: 'node',
     setupFiles: ["<rootDir>/jest.setup.js"],
     transform: {
-      '^.+\\.(ts|tsx)?$': 'ts-jest',
-      '^.+\\.(js|jsx)$': 'babel-jest',
-      '\\.(png|jpg|jpeg|gif|svg)$': 'jest-transform-stub',
+        '^.+\\.(ts|tsx)?$': 'ts-jest',
+        '^.+\\.(js|jsx)$': 'babel-jest',
+        '\\.(png|jpg|jpeg|gif|svg)$': 'jest-transform-stub',
     },
     transformIgnorePatterns: [
-      'node_modules/(?!(jest-)?react-native|@react-navigation|@react-native-firebase|@react-native|react-native|expo-calendar|expo-modules-core|expo-status-bar|expo-application|react-native-reanimated|@expo/vector-icons)',
+        'node_modules/(?!(jest-)?react-native|@react-navigation|@react-native-firebase|@react-native|react-native|expo-calendar|expo-modules-core|expo-status-bar|expo-application|react-native-reanimated|@expo/vector-icons)',
     ],
     moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node', 'ios.js', 'android.js'],
     moduleNameMapper: {
@@ -35,4 +35,4 @@ module.exports = {
         '^@/(.*)$': '<rootDir>/$1',
     },
     testPathIgnorePatterns: ['/node_modules/', '/__mocks__/'],
-  };
+}

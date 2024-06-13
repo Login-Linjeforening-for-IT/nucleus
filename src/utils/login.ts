@@ -1,5 +1,5 @@
-import { LDAP_API_URL } from "@/constants";
-import valid from "./valid";
+import { LDAP_API_URL } from "@/constants"
+import valid from "./valid"
 
 type LoginProps = {
     username: string
