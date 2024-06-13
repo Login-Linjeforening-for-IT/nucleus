@@ -1,3 +1,4 @@
+import { LDAP_API_URL } from "@/constants";
 import valid from "./valid";
 
 type LoginProps = {
@@ -5,11 +6,9 @@ type LoginProps = {
     password: string
 }
 
-const auth_api = "https://ldap-api.login.no/auth"
-
 export default async function login({username, password}: LoginProps) {
 
-    const response = await fetch(auth_api, {
+    const response = await fetch(LDAP_API_URL, {
         method: "POST",
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({user: username, pass: password})

@@ -13,7 +13,7 @@ import { useDispatch } from "react-redux"
 import { fetchEventDetails } from "@utils/fetch"
 import { setHistory, setEvent } from "@redux/event"
 import Tag from "@components/shared/tag"
-import { EventScreenProps } from "@utils/screenTypes"
+import { EventScreenProps } from "@type/screenTypes"
 import { useFocusEffect } from "@react-navigation/core"
 
 /**

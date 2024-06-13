@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux"
 import getTags from "@utils/getTags"
 import { useNavigation } from "@react-navigation/native"
 import { StackNavigationProp } from "@react-navigation/stack"
-import { RootStackParamList } from "@utils/screenTypes"
+import { RootStackParamList } from "@type/screenTypes"
 
 type TagsProps = {
     event: DetailedEventData | undefined

@@ -2,7 +2,7 @@ import { useSelector } from "react-redux"
 import MS from "@styles/menuStyles"
 import { BlurView } from "expo-blur"
 import React from "react"
-import { Navigation } from "@interfaces"
+import { Navigation } from "@/interfaces"
 import { 
     View, 
     Image, 

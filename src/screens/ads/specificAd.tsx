@@ -14,7 +14,7 @@ import AdInfo, {
 } from "@/components/ads/ad"
 import { setAd, setHistory } from "@redux/ad"
 import { fetchAdDetails } from "@utils/fetch"
-import { AdScreenProps } from "@utils/screenTypes"
+import { AdScreenProps } from "@type/screenTypes"
 import { useFocusEffect } from "@react-navigation/core"
   
 export default function SpecificAdScreen({navigation, route:{params: {adID}}}: AdScreenProps<'SpecificAdScreen'>): JSX.Element {

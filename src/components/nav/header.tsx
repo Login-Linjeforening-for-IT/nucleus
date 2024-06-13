@@ -2,7 +2,7 @@ import GS from '@styles/globalStyles'
 import React, { PropsWithChildren, ReactNode, useState } from 'react'
 import { BlurView } from 'expo-blur'
 import { Dimensions, Platform, View, Text, StatusBar } from 'react-native'
-import { HeaderProps} from '@interfaces'
+import { HeaderProps} from '@/interfaces'
 import { useSelector } from 'react-redux'
 import { useRoute } from '@react-navigation/native'
 import { TouchableOpacity } from 'react-native'
@@ -58,8 +58,8 @@ export default function Header({ options, route, navigation }: HeaderProps): Rea
                         }
                         else{
                             dispatch(setAd(undefined))
-                            if (adHistory.length > 1) {
-                                dispatch(setAdHistory(adHistory.slice(0, adHistory.length-1)))
+                            if (adHistory?.length > 1) {
+                                dispatch(setAdHistory(adHistory.slice(0, adHistory.length - 1)))
                             }
                             else{
                                 dispatch(setEventHistory([]))

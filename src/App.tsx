@@ -22,7 +22,7 @@ let persistor = persistStore(store)
  *
  * @returns Entire application
  */
-export default function App(): JSX.Element {
+export default function App() {
 
     AppRegistry.registerComponent("app", () => App)
 

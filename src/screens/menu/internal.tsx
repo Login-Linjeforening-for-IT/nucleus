@@ -13,7 +13,7 @@ import ManageTopics from "@components/notification/manageTopics"
 import TopicManager from "@utils/topicManager"
 import { changeLoginStatus } from "@redux/loginStatus"
 import { useNavigation } from "@react-navigation/native"
-import { Navigation } from "@interfaces"
+import { Navigation } from "@/interfaces"
 
 export default function InternalScreen(): JSX.Element {
 

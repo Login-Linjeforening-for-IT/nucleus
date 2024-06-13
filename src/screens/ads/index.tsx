@@ -11,7 +11,7 @@ import { setAds, setLastFetch, setLastSave } from "@redux/ad"
 import { useFocusEffect } from "@react-navigation/native"
 import { useDispatch, useSelector } from "react-redux"
 import { View } from "react-native"
-import { AdScreenProps } from "@utils/screenTypes"
+import { AdScreenProps } from "@type/screenTypes"
 
 /**
  * Parent AdScreen component

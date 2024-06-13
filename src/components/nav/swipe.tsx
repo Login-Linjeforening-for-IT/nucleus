@@ -1,4 +1,4 @@
-import { Navigation } from "@interfaces"
+import { Navigation } from "@/interfaces"
 import { useNavigation } from "@react-navigation/native"
 import handleSwipe from "@utils/handleSwipe"
 import { ReactNode } from "react"

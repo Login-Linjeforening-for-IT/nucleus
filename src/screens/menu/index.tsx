@@ -18,7 +18,7 @@ import {
   Dimensions,
 } from "react-native"
 import Swipe from "@components/nav/swipe"
-import { ItemProps, MenuProps, MenuStackParamList } from "@utils/screenTypes"
+import { ItemProps, MenuProps, MenuStackParamList } from "@type/screenTypes"
 import { NavigationProp } from "@react-navigation/native"
 import NotificationIcon from "@components/notification/notificationIcon"
 

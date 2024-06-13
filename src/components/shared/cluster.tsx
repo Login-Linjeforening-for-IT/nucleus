@@ -1,5 +1,5 @@
 import { View } from "react-native"
-import { ClusterProps } from "@interfaces"
+import { ClusterProps } from "@/interfaces"
 import { useSelector } from "react-redux"
 import ES from "@styles/eventStyles"
 import React from "react"

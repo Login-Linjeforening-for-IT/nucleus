@@ -15,6 +15,17 @@ import {
     TouchableOpacity,
     View,
 } from "react-native"
+import { 
+    CDN, 
+    DISCORD_URL, 
+    FACEBOOK_URL, 
+    GITLAB_URL, 
+    INSTAGRAM_URL, 
+    LINKEDIN_URL, 
+    MAILTO_URL, 
+    MAIL_URL, 
+    WIKI_URL 
+} from "@/constants"
 
 type PersonProps = {
     person: string
@@ -106,37 +117,37 @@ export function Social() {
 
     const media: MediaProps = {
         discord: {
-            link: "https://discord.com/invite/login-ntnu",
+            link: DISCORD_URL,
             logo: isDark 
                 ? require("@assets/social/discord-white.png") 
                 : require("@assets/social/discord-black.png")
         },
         instagram: {
-            link: "https://www.instagram.com/login_linjeforening/",
+            link: INSTAGRAM_URL,
             logo: isDark 
                 ? require("@assets/social/instagram-white.png")
                 : require("@assets/social/instagram-black.png")
         },
         facebook: {
-            link: "https://facebook.com/LogNTNU",
+            link: FACEBOOK_URL,
             logo: isDark 
                 ? require("@assets/social/facebook-white.png")
                 : require("@assets/social/facebook-black.png")
         },
         linkedin: {
-            link: "https://linkedin.com/company/linjeforeningen-@about",
+            link: LINKEDIN_URL,
             logo: isDark 
                 ? require("@assets/social/linkedin-white.png")
                 : require("@assets/social/linkedin-black.png")
         },
         gitlab: {
-            link: "https://git.logntnu.no",
+            link: GITLAB_URL,
             logo: isDark 
                 ? require("@assets/social/gitlab-white.png")
                 : require("@assets/social/gitlab-black.png")
         },
         wiki: {
-            link: "https://wiki.login.no",
+            link: WIKI_URL,
             logo: isDark 
                 ? require("@assets/social/wiki-white.png")
                 : require("@assets/social/wiki-black.png")
@@ -180,7 +191,7 @@ export function Styret() {
         <View>
             <Image 
                 style={{...GS.aboutImage}} 
-                source={{uri: "https://cdn.login.no/img/styret2.jpg"}}
+                source={{uri: `${CDN}styret2.jpg`}}
             />
             <CornerSquare corner={corner} type={true} />
         </View>
@@ -214,8 +225,8 @@ export function Contact() {
             <Text style={{...T.centered15, color: color}}>{info.post}</Text>
 
             <TextLink 
-                url="mailto:kontakt@login.no"
-                text="kontakt@login.no" 
+                url={MAILTO_URL}
+                text={MAIL_URL}
                 style={{...T.orange15, top: 3.2, alignSelf: "center", marginBottom: 20}}
             />
         </View>

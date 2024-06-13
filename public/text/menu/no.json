@@ -39,8 +39,8 @@
         },
         {
             "id": 8, 
-            "nav": "ReportScreen",   
-            "title": "Varsle"
+            "nav": "ExamScreen",   
+            "title": "Eksamen"
         }
     ],
     "version": "Versjon ",

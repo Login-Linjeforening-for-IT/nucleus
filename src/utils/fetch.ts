@@ -1,5 +1,4 @@
-const api = "https://workerbee.login.no/api/"
-const testapi = "https://testapi.login.no/api/"
+import { API } from "@/constants"
 
 /**
  * Function for checking when the API was last fetched successfully.
@@ -31,7 +30,7 @@ export default function LastFetch(param?: string) {
 export async function fetchEventDetails(id: number): 
 Promise<DetailedEventResponse> {
     // Fetches events
-    const response = await fetch(`${api}events/${id}`)
+    const response = await fetch(`${API}events/${id}`)
 
     // Test API
     // const response = await fetch(`${testapi}events/${id}`)
@@ -48,14 +47,7 @@ Promise<DetailedEventResponse> {
 export async function fetchEvents(): Promise<EventProps[]> {
     try {
         // Fetches events
-        const response = await fetch(`${api}events`)
-
-        // Test API
-        // const response = await fetch(`${testapi}events/`)
-
-        // Dev
-        // const response = await fetch("https://tekkom:rottejakt45@api.login.no:8443/events")
-        
+        const response = await fetch(`${API}events`)
 
         // Checks if response is ok, otherwise throws error
         if (!response.ok) {
@@ -78,11 +70,8 @@ export async function fetchEvents(): Promise<EventProps[]> {
  */
 export async function fetchAds(): Promise<AdProps[]> {
     try {
-        // Prod
-        const response = await fetch(`${api}jobs/`)
-
-        // Dev
-        // const response = await fetch(`${testapi}jobs/`)
+        // Fetches ads
+        const response = await fetch(`${API}jobs/`)
 
         // Checks if response is ok, otherwise throws error
         if (!response.ok) {
@@ -108,7 +97,7 @@ export async function fetchAds(): Promise<AdProps[]> {
 export async function fetchAdDetails(adID: number): Promise<DetailedAdResponse> {
 
     // Prod
-    const response = await fetch(`${api}jobs/${adID}`)
+    const response = await fetch(`${API}jobs/${adID}`)
     
     // Dev
     // const response = await fetch(`${testapi}jobs/${ad.id}`)

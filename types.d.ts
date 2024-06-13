@@ -525,3 +525,46 @@ type NotificationModal = {
     body: string
     data: any
 }
+
+type Editing = {
+    cards: Card[]
+    texts: string[]
+}
+
+type Card = {
+    question: string
+    alternatives: string[]
+    source: string
+    correct: number[]
+    help?: string
+    theme?: string
+    rating: number
+    votes: Vote[]
+}
+
+type User = {
+    name: string
+    username: string
+    time: number
+    score: number
+    solved: UserSolved[]
+}
+
+type Vote = {
+    username: string
+    vote: boolean
+}
+
+type CourseAsList = {
+    id: string
+    cards: Card[]
+    count: number
+}
+
+type Course = {
+    id: string
+    cards: Card[]
+    unreviewed: Card[]
+    textUnreviewed: string[]
+    mark?: boolean
+}

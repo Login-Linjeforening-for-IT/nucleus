@@ -1,5 +1,4 @@
 import registerRootComponent from 'expo/build/launch/registerRootComponent'
-
 import App from './src/App'
 
 // registerRootComponent calls AppRegistry.registerComponent("main", () => App)
@@ -7,3 +6,13 @@ import App from './src/App'
 // the environment is set up appropriately
 
 registerRootComponent(App)
+
+/**
+ * @format
+ */
+
+import {AppRegistry} from 'react-native';
+import {name as appName} from './app.json';
+
+AppRegistry.registerComponent(appName, () => App);
+// AppRegistry.registerComponent("app", () => App)

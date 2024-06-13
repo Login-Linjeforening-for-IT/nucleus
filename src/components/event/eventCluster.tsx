@@ -10,7 +10,7 @@ import ES from "@styles/eventStyles"
 import CategorySquare from "@components/shared/category"
 import Space from "@components/shared/utils"
 import T from "@styles/text"
-import { EventStackParamList } from "@utils/screenTypes"
+import { EventStackParamList } from "@type/screenTypes"
 import { StackNavigationProp } from "@react-navigation/stack"
 
 type EventClusterProps = {

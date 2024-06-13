@@ -8,7 +8,7 @@ import Space from "@/components/shared/utils"
 import SS from "@styles/settingStyles"
 import GS from "@styles/globalStyles"
 import React, { useState } from "react"
-import { ScreenProps } from "@interfaces"
+import { ScreenProps } from "@/interfaces"
 import T from "@styles/text"
 import Swipe from "@components/nav/swipe"
 import login from "@utils/login"
@@ -21,7 +21,7 @@ import {
     TextInput,
     Alert,
 } from "react-native"
-import { MenuProps } from "@utils/screenTypes"
+import { MenuProps } from "@type/screenTypes"
 
 type UsernameUIProps = {
     data: DataProps

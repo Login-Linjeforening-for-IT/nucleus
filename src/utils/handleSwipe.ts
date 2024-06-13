@@ -1,4 +1,4 @@
-import { Navigation } from "@interfaces"
+import { Navigation } from "@/interfaces"
 import { PanGestureHandlerGestureEvent } from "react-native-gesture-handler"
 
 type HandleSwipeProps = {

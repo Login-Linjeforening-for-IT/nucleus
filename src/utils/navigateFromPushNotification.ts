@@ -5,7 +5,7 @@ import messaging, { FirebaseMessagingTypes } from "@react-native-firebase/messag
 import { useEffect, useState } from "react"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { useNavigation } from "@react-navigation/native"
-import { Navigation } from "@interfaces"
+import { Navigation } from "@/interfaces"
 
 type StoreNotificationProps = {
     title: string
