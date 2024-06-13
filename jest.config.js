@@ -1,7 +1,7 @@
 module.exports = {
     preset: 'react-native',
     testEnvironment: 'node',
-    setupFiles: ["<rootDir>/jest.setup.js"],
+    setupFiles: ["<rootDir>/src/tests/jest.setup.js"],
     transform: {
         '^.+\\.(ts|tsx)?$': 'ts-jest',
         '^.+\\.(js|jsx)$': 'babel-jest',
@@ -14,10 +14,10 @@ module.exports = {
     moduleNameMapper: {
         '^react-native$': 'react-native',
         '^react-native/(.*)': 'react-native/$1',
-        '^@react-native-firebase/messaging$': '<rootDir>/tests/__mocks__/messaging.js',
-        '^react-native-gesture-handler$': '<rootDir>/tests/__mocks__/react-native-gesture-handler.js',
-        '^expo-modules-core$': '<rootDir>/tests/__mocks__/expo-modules-core.js',
-        '^react-native-reanimated$': '<rootDir>/__mocks__/react-native-reanimated.js',
+        '^@react-native-firebase/messaging$': '<rootDir>/src/tests/__mocks__/messaging.js',
+        '^react-native-gesture-handler$': '<rootDir>/src/tests/__mocks__/react-native-gesture-handler.js',
+        '^expo-modules-core$': '<rootDir>/src/tests/__mocks__/expo-modules-core.js',
+        '^react-native-reanimated$': '<rootDir>/src/__mocks__/react-native-reanimated.js',
         '@components/(.*)': '<rootDir>/src/components/$1',
         '@themes/(.*)': '<rootDir>/src/styles/themes/$1',
         '@assets/(.*)': '<rootDir>/public/assets/$1',

@@ -3,7 +3,7 @@
  */
 
 import 'react-native'
-import App from '../src/App'
+import App from '../App'
 
 // Note: import explicitly to use the types shipped with jest.
 import { it, expect } from '@jest/globals'

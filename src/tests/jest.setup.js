@@ -78,3 +78,11 @@ jest.mock('react-native-svg', () => ({
     SvgXml: 'SvgXml',
     SvgUri: 'SvgUri',
 }))
+
+jest.mock('@react-native-clipboard/clipboard', () => {
+    return {
+        setString: jest.fn(),
+        getString: jest.fn().mockResolvedValue(''),
+        hasString: jest.fn().mockResolvedValue(false),
+    }
+})
