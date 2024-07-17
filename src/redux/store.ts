@@ -33,21 +33,17 @@ const reducers = combineReducers({
 
 // Types does not work in this version of the library
 // Gjermund is trying to fix it
+
+// It is hard to test this, I had to make an apk and then change the version number and update the app to test it
 const migrations = {
-    1: (state: any) => {
-        return {
-            ...state,
-            event: {
-                ...state.event,
-                search: true
-            }
-        }
+    0: (state: any) => {
+        return {}
     }
 }
 
 // Function to localstore redux state
 const saveState = {
-    version: 1,
+    version: 0,
     // Key property: root
     key: "root",
     // Declares which storage to use, AsyncStorage has most active community
@@ -63,8 +59,7 @@ const saveState = {
         "profile",
         "theme"
     ],
-    debug: true,
-    migrate: createMigrate(migrations as any, {debug: true})
+    migrate: createMigrate(migrations as any)
 }
 
 // Persistor to remember the state
