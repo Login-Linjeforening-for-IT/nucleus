@@ -1,25 +1,9 @@
 import { MenuProps } from "@type/screenTypes"
 import { useDispatch, useSelector } from "react-redux"
 import Parent from "@components/shared/parent"
-import ThumbsUp from "@components/course/thumbsUp"
-import ThumbsDown from "@components/course/thumbsDown"
 import { setLocalTitle } from "@redux/misc"
-import { 
-    Dispatch, 
-    SetStateAction, 
-    useCallback, 
-    useEffect, 
-    useState 
-} from "react"
-import { 
-    Dimensions, 
-    RefreshControl, 
-    ScrollView, 
-    Text, 
-    TouchableOpacity, 
-    View 
-} from "react-native"
-
+import { useEffect, useState } from "react"
+import { ScrollView, Text, TouchableOpacity, View } from "react-native"
 import { 
     getQuestions, 
     getNeverHaveIEver, 
@@ -27,26 +11,14 @@ import {
 } from "@utils/game"
 import Swiper from "@components/games/swiper"
 
-type GameContentProps = {
-    game: Question[] | NeverHaveIEver[] | OkRedFlagDealBreaker[], 
-    clicked: number[]
-    setClicked: Dispatch<SetStateAction<number[]>>
-}
-
-type CardProps = {
-    card: Question | NeverHaveIEver | OkRedFlagDealBreaker, 
-    shuffledAlternatives: string[], 
-    indexMapping: number[], 
-    handlePress: (index: number) => void, 
+type GameProps = {
+    game: Question[] | NeverHaveIEver[] | OkRedFlagDealBreaker[]
 }
 
 export default function SpecificGameScreen({ route }: MenuProps<"SpecificGameScreen">): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    const { lang } = useSelector((state: ReduxState) => state.lang)
     const { localTitle } = useSelector((state: ReduxState) => state.misc)
-    const [refresh, setRefresh] = useState(false)
     const [game, setGame] = useState<Question[] | NeverHaveIEver[] | OkRedFlagDealBreaker[] | string>("")
-    const [clicked, setClicked] = useState<number[]>([])
     const dispatch = useDispatch()
     
     if (localTitle?.screen !== "SpecificGameScreen") {
@@ -76,28 +48,79 @@ export default function SpecificGameScreen({ route }: MenuProps<"SpecificGameScr
         })()
     }, [])
 
-    const onRefresh = useCallback(async () => {
-        setRefresh(true)
-        const game = await fetchGame()
-        
-        if (game) {
-            setClicked([])
-            setRefresh(false)
-        }
-    }, [refresh])
-
     return (
         <Parent left="GameScreen" noPadding={true} colors={[theme.orange, 'red', theme.orange]}>
             <ScrollView
                 showsVerticalScrollIndicator={false} 
                 scrollEventThrottle={100}
             >
-            <RefreshControl refreshing={refresh} onRefresh={onRefresh} />
             {typeof game === 'string' 
                 ? <Text style={{ fontSize: 18, color: theme.textColor }}>{game}</Text> 
-                : <Swiper game={game} />
+                : <Game game={game} />
             }
             </ScrollView>
         </Parent>
+    )
+}
+
+function Game({game}: GameProps) {
+    const { theme } = useSelector((state: ReduxState) => state.theme)
+    const { lang } = useSelector((state: ReduxState) => state.lang)
+    const [selected, setSelected] = useState(0)
+
+    function handlePress(index: number) {
+        setSelected(index)
+    }
+
+    return (
+        <View style={{ width: '100%', height: '100%', alignItems: 'center'}}>
+            <Swiper game={game} mode={selected} />
+            <View style={{
+                flexDirection: 'row', 
+                width: '100%', 
+                justifyContent: 'space-evenly', 
+                maxWidth: '80%', 
+                position: 'absolute', 
+                borderWidth: 2, 
+                borderRadius: 4, 
+                top: '15%',
+                borderColor: theme.contrast,
+                overflow: 'hidden',
+            }}>
+                <TouchableOpacity 
+                    style={{
+                        backgroundColor: selected == 0 ? theme.contrast : undefined, 
+                        paddingHorizontal: 15, 
+                        paddingVertical: 2,
+                    }} 
+                    onPress={() => handlePress(0)}>
+                    <Text style={{color: theme.textColor, fontSize: 20}}>
+                        {lang ? 'Snill' : 'Nice'}
+                    </Text>
+                </TouchableOpacity>
+                <TouchableOpacity 
+                    style={{
+                        backgroundColor: selected == 1 ? theme.contrast : undefined, 
+                        paddingHorizontal: 15, 
+                        paddingVertical: 2 
+                    }} 
+                    onPress={() => handlePress(1)}>
+                    <Text style={{color: theme.textColor, fontSize: 20}}>
+                        {lang ? 'Blandet' : 'Mix'}
+                    </Text>
+                </TouchableOpacity>
+                <TouchableOpacity 
+                    style={{
+                        backgroundColor: selected == 2 ? theme.contrast : undefined, 
+                        paddingHorizontal: 15, 
+                        paddingVertical: 2 
+                    }} 
+                    onPress={() => handlePress(2)}>
+                    <Text style={{color: theme.textColor, fontSize: 20}}>
+                        {lang ? 'Dristig' : 'Bold'}
+                    </Text>
+                </TouchableOpacity>
+            </View>
+        </View>
     )
 }

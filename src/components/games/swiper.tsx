@@ -13,6 +13,7 @@ import { useSelector } from 'react-redux'
 
 type GameListContentProps = {
     game: Question[] | NeverHaveIEver[] | OkRedFlagDealBreaker[]
+    mode: number
 }
 
 type GameContentProps = {
@@ -27,7 +28,7 @@ const { width: SCREEN_WIDTH } = Dimensions.get('window')
 const { height: SCREEN_HEIGHT } = Dimensions.get('window')
 const SWIPE_THRESHOLD = SCREEN_WIDTH * 0.25
 
-export default function Swiper({ game }: GameListContentProps) {
+export default function Swiper({ game, mode }: GameListContentProps) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const [currentIndex, setCurrentIndex] = useState(0)
     const translateX = useSharedValue(0)
@@ -35,12 +36,22 @@ export default function Swiper({ game }: GameListContentProps) {
   
     function onSwipeRight() {
         if (currentIndex < game.length - 1) {
+            // 0 is nice, skip questions with 'Wild' category
+            // 1 is mix, show all questions
+            // 2 is wild, skip questions without 'Wild' category
+
+            // also need section for 'School' and 'NTNU' categories, below or above card?
             setCurrentIndex(currentIndex + 1)
         }
     }
 
     function onSwipeLeft() {
         if (currentIndex > 0) {
+            // 0 is nice, skip questions with 'Wild' category
+            // 1 is mix, show all questions
+            // 2 is wild, skip questions without 'Wild' category
+
+            // also need section for 'School' and 'NTNU' categories, below or above card?
             setCurrentIndex(currentIndex - 1)
         }
     }
