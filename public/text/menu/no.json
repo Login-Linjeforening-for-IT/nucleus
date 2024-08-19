@@ -41,6 +41,11 @@
             "id": 8, 
             "nav": "CourseScreen",   
             "title": "Emner"
+        },
+        {
+            "id": 9, 
+            "nav": "GameScreen",
+            "title": "Spill"
         }
     ],
     "version": "Versjon ",

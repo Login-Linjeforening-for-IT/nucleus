@@ -12,32 +12,35 @@ import { useCallback, useEffect, useState } from "react"
 import { View, Image, TouchableOpacity, Dimensions, Text } from "react-native"
 import { MenuProps, MenuStackParamList } from "@type/screenTypes"
 import { StackNavigationProp } from "@react-navigation/stack"
+import { getGames } from "@utils/game"
 
-type CourseListProps = {
-    course: CourseAsList
-    navigation: StackNavigationProp<MenuStackParamList, "CourseScreen">
+type GameListProps = {
+    game: Game
+    navigation: StackNavigationProp<MenuStackParamList, "GameScreen">
 }
 
-export default function CourseScreen({ navigation }: MenuProps<'CourseScreen'>): JSX.Element {
-    const [courses, setCourses] = useState<string | CourseAsList[]>([])
+export default function GameScreen({ navigation }: MenuProps<'GameScreen'>): JSX.Element {
+    const [games, setGames] = useState<string | Game[]>([])
+    const [neverHaveIEver, setNeverHaveIEver] = useState<string | NeverHaveIEver[]>([])
+    const [okRedFlagDealBreaker, setOkRedFlagDealBreaker] = useState<string | OkRedFlagDealBreaker[]>([])
     const { theme } = useSelector((state: ReduxState) => state.theme )
     const [refresh, setRefresh] = useState(false)
 
     const onRefresh = useCallback(async () => {
         setRefresh(true)
-        const courses = await getCourses()
+        const courses = await getGames()
         if (courses) {
-            setCourses(courses)
+            setGames(games)
             setRefresh(false)
         }
     }, [refresh])
 
     useEffect(() => {
         (async () => {
-            const courses = await getCourses()
+            const games = await getGames()
             
-            if (courses) {
-                setCourses(courses)
+            if (games) {
+                setGames(games)
             }
         })()
     }, [])
@@ -50,12 +53,12 @@ export default function CourseScreen({ navigation }: MenuProps<'CourseScreen'>):
                     showsVerticalScrollIndicator={false} 
                     scrollEventThrottle={100}
                 >
-                    {typeof courses === 'string' && <CourseError text={courses} />}
+                    {typeof games === 'string' && <CourseError text={games} />}
                     <RefreshControl refreshing={refresh} onRefresh={onRefresh} />
-                    {typeof courses !== 'string' && courses.map((course: CourseAsList) => 
-                        <CourseList 
-                            key={course.id} 
-                            course={course} 
+                    {typeof games !== 'string' && games.map((game: Game) => 
+                        <GameList 
+                            key={game.id} 
+                            game={game} 
                             navigation={navigation} 
                         />
                     )}
@@ -65,11 +68,11 @@ export default function CourseScreen({ navigation }: MenuProps<'CourseScreen'>):
     )
 }
 
-function CourseList({ course, navigation }: CourseListProps): JSX.Element {
+function GameList({ game, navigation }: GameListProps): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
 
     function handlePress() {
-        navigation.navigate("SpecificCourseScreen", { courseID: course.id })
+        navigation.navigate("SpecificGameScreen", { gameID: game.id, gameName: game.name })
     }
 
     return (
@@ -78,7 +81,7 @@ function CourseList({ course, navigation }: CourseListProps): JSX.Element {
                 <View style={{...CS.clusterBack}}>
                     <View style={CS.twinLeft}>
                         <Text style={{...T.text20, color: theme.textColor}}>
-                            {course.id}
+                            {game.name}
                         </Text>
                     </View>
                     <View style={CS.twinRight}>

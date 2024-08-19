@@ -17,9 +17,12 @@ import AboutScreen from "@screens/menu/about"
 import BusinessScreen from "@screens/menu/business"
 import LoginScreen from "@screens/menu/login"
 import InternalScreen from "@screens/menu/internal"
+import GameScreen from "@screens/menu/games/index"
 import CourseScreen from "@screens/menu/course/index"
 import SpecificEventScreen from "@screens/event/specificEvent"
 import SpecificAdScreen from "@screens/ads/specificAd"
+import SpecificCourseScreen from "@screens/menu/course/specificCourse"
+import SpecificGameScreen from "@screens/menu/games/specificGame"
 import Header from "./header"
 import { 
     AdStackParamList, 
@@ -33,7 +36,6 @@ import {
     StackCardInterpolationProps, 
     createStackNavigator
 } from "@react-navigation/stack"
-import SpecificCourseScreen from "@screens/menu/course/specificCourse"
 
 
 // Declares Tab to equal CBTN function
@@ -73,16 +75,18 @@ function Menu() {
             animationEnabled: false,
             headerTransparent: true,
             header: props => <Header {...props}/>}}>
-            <MenuStack.Screen name="MenuScreen" component={MenuScreen}/>
-            <MenuStack.Screen name="ProfileScreen" component={ProfileScreen}/>
-            <MenuStack.Screen name="SettingScreen" component={SettingScreen}/>
-            <MenuStack.Screen name="NotificationScreen" component={NotificationScreen}/>
-            <MenuStack.Screen name="AboutScreen" component={AboutScreen}/>
-            <MenuStack.Screen name="BusinessScreen" component={BusinessScreen}/>
-            <MenuStack.Screen name="LoginScreen" component={LoginScreen}/>
-            <MenuStack.Screen name="InternalScreen" component={InternalScreen}/>
-            <MenuStack.Screen name="CourseScreen" component={CourseScreen}/>
-            <MenuStack.Screen name="SpecificCourseScreen" component={SpecificCourseScreen}/>
+            <MenuStack.Screen name="MenuScreen" component={MenuScreen} />
+            <MenuStack.Screen name="ProfileScreen" component={ProfileScreen} />
+            <MenuStack.Screen name="SettingScreen" component={SettingScreen} />
+            <MenuStack.Screen name="NotificationScreen" component={NotificationScreen} />
+            <MenuStack.Screen name="AboutScreen" component={AboutScreen} />
+            <MenuStack.Screen name="BusinessScreen" component={BusinessScreen} />
+            <MenuStack.Screen name="LoginScreen" component={LoginScreen} />
+            <MenuStack.Screen name="InternalScreen" component={InternalScreen} />
+            <MenuStack.Screen name="CourseScreen" component={CourseScreen} />
+            <MenuStack.Screen name="SpecificCourseScreen" component={SpecificCourseScreen} />
+            <MenuStack.Screen name="GameScreen" component={GameScreen} />
+            <MenuStack.Screen name="SpecificGameScreen" component={SpecificGameScreen} />
         </MenuStack.Navigator>
     )
 }

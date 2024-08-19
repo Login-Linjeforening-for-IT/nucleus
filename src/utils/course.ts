@@ -47,7 +47,7 @@ export async function getCourses(): Promise<CourseAsList[] | string> {
     
         if (!response.ok) {
             const data = await response.json()
-    
+            console.log("error")
             throw Error(data.error)
         }
     

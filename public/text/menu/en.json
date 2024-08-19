@@ -41,6 +41,11 @@
             "id": 8, 
             "nav": "CourseScreen",   
             "title": "Courses" 
+        },
+        {
+            "id": 9, 
+            "nav": "GameScreen",
+            "title": "Games"
         }
     ],
     "version": "Version ",

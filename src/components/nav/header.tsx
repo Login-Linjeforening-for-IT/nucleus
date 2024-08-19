@@ -24,6 +24,7 @@ export default function Header({ options, route, navigation }: HeaderProps): Rea
     const SES = route.name === "SpecificEventScreen"
     const SAS = route.name === "SpecificAdScreen"
     const SCS = route.name === "SpecificCourseScreen"
+    const SGS = route.name === "SpecificGameScreen"
     const orangeIcon = require('@assets/icons/goback-orange.png')
 
     const [title, setTitle] = useState<string>(route.name && (lang
@@ -46,7 +47,7 @@ export default function Header({ options, route, navigation }: HeaderProps): Rea
         : lang ? "Jobbannonse" : "Job ad")
     }
 
-    if (route.name === localTitle.screen && localTitle.title !== title) {
+    if (route.name === localTitle?.screen && localTitle.title !== title) {
         setTitle(localTitle.title)
     }
 

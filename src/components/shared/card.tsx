@@ -12,7 +12,7 @@ export default function Card({ children }: React.PropsWithChildren<{}>) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
 
     return (
-        <View style={{...ES.card, backgroundColor: theme.darker}}>
+        <View style={{...ES.card, backgroundColor: theme.contrast}}>
             <View style={ES.cardContent}>
                 { children }
             </View>

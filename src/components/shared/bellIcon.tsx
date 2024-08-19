@@ -13,7 +13,7 @@ type BellIconProps = {
  * @returns Bell icon
  */
 export default function BellIcon({orange, canceled}: BellIconProps): JSX.Element {
-    if (canceled) return <Text style={{fontSize: 20, left: -2}}>❌</Text>
+    if (canceled) return <Text style={{fontSize: 20, left: 2}}>❌</Text>
 
     let icon = require("@assets/icons/bell.png")
     const { isDark } = useSelector((state: ReduxState) => state.theme)

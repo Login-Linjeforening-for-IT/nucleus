@@ -61,7 +61,7 @@ export default function SpecificEventScreen({ navigation, route: {params: {event
     }, [history])
 
     async function getDetails() {
-        const response = await fetchEventDetails(history[history.length - 1])
+        const response = await fetchEventDetails(history[history?.length - 1])
 
         if (response) {
             dispatch(setEvent(response))

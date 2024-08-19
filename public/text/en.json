@@ -10,6 +10,7 @@
         "CourseScreen": "Courses",
         "LoginScreen": "Login",
         "InternalScreen": "Internal",
-        "ProfileScreen": "Profile"
+        "ProfileScreen": "Profile",
+        "GameScreen": "Games"
     }
 }

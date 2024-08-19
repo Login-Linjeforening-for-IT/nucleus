@@ -20,6 +20,11 @@ export default function Bell({item, embed}: BellProps): JSX.Element {
     const dispatch = useDispatch()
     const prefix = lang ? 'n' : 'e'
     const topic = `${prefix}${item.id}`
+    const start = new Date(item.time_start)
+    const end = item.time_end ? new Date(item.time_end) : start
+    const multiday = start.getDate() !== end.getDate() ||
+                                  start.getMonth() !== end.getMonth() ||
+                                  start.getFullYear() !== end.getFullYear()
 
     function isClicked() {
         for (const event of clickedEvents) {
@@ -53,7 +58,7 @@ export default function Bell({item, embed}: BellProps): JSX.Element {
     
     return (
         <View style={{...ES.view3, right: embed ? 0 : 5}}>
-            <TouchableOpacity style={{paddingBottom: 30}} onPress={handleClick}>
+            <TouchableOpacity style={{paddingBottom: 30, left: multiday ? -22 : 0}} onPress={handleClick}>
                 <View style={ES.bellPosition} >
                     <BellIcon orange={isOrange} canceled={item.canceled} />
                 </View>

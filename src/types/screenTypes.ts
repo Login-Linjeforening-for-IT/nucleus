@@ -42,6 +42,8 @@ export type MenuRoutes =
     | "SpecificCourseScreen"
     | "LoginScreen"
     | "InternalScreen" 
+    | "GameScreen"
+    | "SpecificGameScreen"
 
     export type ItemProps = {
     id: number
@@ -53,16 +55,18 @@ export type MenuProps<T extends keyof MenuStackParamList> =
 StackScreenProps<MenuStackParamList, T>
 
 export type MenuStackParamList = {
-    ProfileScreen: undefined,
-    SettingScreen: undefined,
-    NotificationScreen: undefined,
-    AboutScreen: undefined,
-    BusinessScreen: undefined,
-    LoginScreen: undefined,
-    InternalScreen: undefined,
+    ProfileScreen: undefined
+    SettingScreen: undefined
+    NotificationScreen: undefined
+    AboutScreen: undefined
+    BusinessScreen: undefined
+    LoginScreen: undefined
+    InternalScreen: undefined
     MenuScreen: undefined
     CourseScreen: undefined
-    SpecificCourseScreen: {courseID: string}
+    SpecificCourseScreen: { courseID: string }
+    GameScreen: undefined
+    SpecificGameScreen: { gameID: number, gameName: string }
 }
 
 export type TabBarParamList = {

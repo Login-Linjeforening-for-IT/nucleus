@@ -10,6 +10,7 @@
         "CourseScreen": "Emner",
         "LoginScreen": "Login",
         "InternalScreen": "Vedlikehold",
-        "ProfileScreen": "Profil"
+        "ProfileScreen": "Profil",
+        "GameScreen": "Spill"
     }
 }
