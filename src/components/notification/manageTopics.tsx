@@ -1,10 +1,10 @@
-import { useRef, useState } from "react";
-import { Image, TextInput, TouchableOpacity, View } from "react-native";
-import { useSelector } from "react-redux";
-import TopicManager from "@utils/topicManager";
-import Text from "@components/shared/text";
-import T from "@styles/text";
-import IS from "@styles/internalStyles";
+import { useRef, useState } from "react"
+import { Image, TextInput, TouchableOpacity, View } from "react-native"
+import { useSelector } from "react-redux"
+import TopicManager from "@utils/topicManager"
+import Text from "@components/shared/text"
+import T from "@styles/text"
+import IS from "@styles/internalStyles"
 
 export default function ManageTopics() {
     // Sub / unsub mode, true for sub, false for unsub
@@ -34,7 +34,7 @@ export default function ManageTopics() {
 
             setTimeout(() => {
                 setDisplay(false)
-            }, topic.result ? 3000 : 10000);
+            }, topic.result ? 3000 : 10000)
 
         }
     }

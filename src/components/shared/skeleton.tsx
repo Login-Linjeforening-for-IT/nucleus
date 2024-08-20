@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, ReactNode } from 'react'
+import { useRef, useEffect, ReactNode } from 'react'
 import { View, Animated, StyleSheet, Easing, Dimensions } from 'react-native'
 import { LinearGradient } from "expo-linear-gradient"
 import { useSelector } from 'react-redux'
@@ -16,7 +16,7 @@ export default function Skeleton({ children, height, loading, noColor }: Skeleto
     if (!loading) return children
     
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    const lineWidth = useRef(new Animated.Value(0)).current;
+    const lineWidth = useRef(new Animated.Value(0)).current
 
     useEffect(() => {
 
@@ -31,7 +31,7 @@ export default function Skeleton({ children, height, loading, noColor }: Skeleto
             ).start()
         }
 
-        animateLine();
+        animateLine()
         return () => {lineWidth.stopAnimation()}
     }, [])
 

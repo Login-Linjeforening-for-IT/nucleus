@@ -3,11 +3,9 @@ import Space from "@/components/shared/utils"
 import { useSelector } from "react-redux"
 import AS from "@styles/adStyles"
 import T from "@styles/text"
-import React, { useEffect, useMemo, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { SvgUri } from "react-native-svg"
-import capitalizeFirstLetter from "@utils/capitalizeFirstLetter"
 import Link from "@components/shared/link"
-import Embed from "@components/event/embed"
 import Skeleton from "@components/shared/skeleton"
 import {
     TouchableOpacity,
@@ -19,11 +17,10 @@ import {
     Text,
     ImageSourcePropType,
 } from "react-native"
-import Markdown from "react-native-markdown-display"
-
-type AdClusterLocationProps = {
-    ad: DetailedAd | AdProps | undefined
-}
+import RenderDescription from "./adDescription"
+import capitalizeFirstLetter from "@utils/capitalizeFirstLetter"
+import validFileType from "@utils/validFileType"
+import { CDN } from "@/constants"
 
 type SocialProps = {
     url: string | undefined
@@ -36,15 +33,11 @@ type InfoViewProps = {
     text: string | undefined
 }
 
-type RenderDescriptionProps = {
-    description: string
-}
-
 const isIOS = Platform.OS === 'ios'
 /**
  * Function for drawing a small image on the left side of the ad cluster
- * @param props
- * @returns               Small banner image
+ * @param ad Ad object to display the info for
+ * @returns Small banner image
  */
 export default function AdInfo({ad}: {ad: DetailedAd | undefined}) {
     const [deadline, setDeadline] = useState("")
@@ -83,14 +76,14 @@ export function AdBanner({url}: {url: string | undefined}) {
             style={{alignSelf: "center", backgroundColor: "white"}}
             width={(Dimensions.get("window").width) / 1.2}
             height={Dimensions.get("window").width / 3}
-            uri={`https://cdn.login.no/img/ads/${url}`}
+            uri={`${CDN}ads/${url}`}
         />
     }
 
     if (validFileType(url) && !url?.startsWith("http")) {
         return <Image 
             style={AS.adBanner}
-            source={{uri: `https://cdn.login.no/img/ads/${url}`}}
+            source={{uri: `${CDN}ads/${url}`}}
         />
     }
 
@@ -100,101 +93,8 @@ export function AdBanner({url}: {url: string | undefined}) {
 
     return <Image
         style={AS.adBanner}
-        source={{uri: "https://cdn.login.no/img/ads/adbanner.png"}} 
+        source={{uri: `${CDN}ads/adbanner.png`}} 
     />
-}
-
-/**
- * Function for drawing a small image on the left side of the ad cluster
- * @param {string} banner Link to the advertisement banner
- * @returns               Small banner image
- */
-export function AdClusterImage({url}: {url: string | undefined}) {
-
-    // Handles svg icons
-    if (url?.endsWith(".svg")) {
-        return <SvgUri
-        style={{alignSelf: "center", backgroundColor: "white", borderRadius: 5}}
-        width={90}
-        height={60}
-        uri={`https://cdn.login.no/img/organizations/${url}`}
-        />
-    }
-    
-    // Handles png, jpg and gif icons from Login CDN
-    if (validFileType(url) && !url?.startsWith("http")) {
-        return <Image 
-            style={AS.adBannerSmall}
-            source={{uri: `https://cdn.login.no/img/organizations/${url}`}}
-        />
-    }
-
-    // Handles png, jpg and gif icons from extern location
-    if (validFileType(url) && url?.includes("http")) {
-        return <Image style={AS.adBannerSmall} source={{uri: url}} />
-    }
-
-    // Handles missing asset (default png)
-    return (
-        <View style={AS.adClusterImage}>
-            <Image
-                style={AS.adBannerSmall}
-                source={{uri: "https://cdn.login.no/img/organizations/adcompany.png"}} 
-            />
-        </View>
-    )
-}
-
-/**
- * Visual representation of the location on the Ad Cluster
- *
- * @param {AdProps} ad  Ad object
- * @returns
- */
-export function AdClusterLocation({ad}: AdClusterLocationProps) {
-    const { theme } = useSelector((state: ReduxState) => state.theme)
-    const { lang } = useSelector((state: ReduxState) => state.lang)
-    const type = capitalizeFirstLetter(ad?.job_type)
-    const location = ad?.cities?.map(city => capitalizeFirstLetter(city)).join(", ")
-    let name =  lang ? ad?.title_no || ad?.title_en : ad?.title_en || ad?.title_no
-    let info = `${type}${location ? `. ${location}`:''}`
-    let halfWidth = Platform.OS === "ios" 
-        ? Dimensions.get("window").width / 9 
-        : Dimensions.get("window").width / 8.7805
-    if (name==undefined){
-        name = ""
-    }
-    else if (name.length > halfWidth / 1.7 
-    && (type + location).length > (halfWidth*1.25)) {
-        name = name.length > halfWidth / 1.1 
-        ? name.substring(0, halfWidth / 1.1) + "..." 
-        : name
-        info = info.substring(0, halfWidth / 1.3) + "..."
-    } else if (name.length > halfWidth) {
-        name = name.substring(0, halfWidth) + "..."
-    } else if (info.length > (Platform.OS === "ios" 
-        ? halfWidth * 1.45 
-        : halfWidth * 1.5)) 
-    {
-        info = info.substring(0, Platform.OS === "ios" 
-            ? halfWidth * 1.45 
-            : halfWidth * 1.5) + "..."
-    }
-
-    return (
-        <View style={AS.locationView}>
-            <View style = {{...AS.title}}>
-                <Text style={{...AS.title, color: theme.textColor}}>
-                    {name}
-                </Text>
-            </View>
-            <View style={{flexDirection: "row"}}>
-                <Text style={{...AS.loc,color: theme.oppositeTextColor}}>
-                    {info}
-                </Text>
-            </View>
-        </View>
-    )
 }
 
 /**
@@ -344,7 +244,7 @@ export function AdTitle({ad}: {ad: DetailedAdResponse}) {
                 style={{alignSelf: "center", backgroundColor: "white", marginTop: 12}}
                 width={90}
                 height={60}
-                uri={`https://cdn.login.no/img/organizations/${logo}`}
+                uri={`${CDN}organizations/${logo}`}
             />
         }
 
@@ -352,7 +252,7 @@ export function AdTitle({ad}: {ad: DetailedAdResponse}) {
         if (validFileType(logo) && !logo?.startsWith("http")) {
             return <Image 
                 style={AS.adBannerSmall}
-                source={{uri: `https://cdn.login.no/img/organizations/${logo}`}}
+                source={{uri: `${CDN}organizations/${logo}`}}
             />
         }
 
@@ -366,7 +266,7 @@ export function AdTitle({ad}: {ad: DetailedAdResponse}) {
             <View style={AS.adClusterImage}>
                 <Image
                     style={AS.adBannerSmall}
-                    source={{uri: "https://cdn.login.no/img/ads/adcompany.png"}} 
+                    source={{uri: `${CDN}ads/adcompany.png`}} 
                 />
             </View>
         )
@@ -443,40 +343,3 @@ function InfoView({titleNO, titleEN, text}: InfoViewProps) {
     )
 }
 
-function validFileType(url: string | undefined) {
-    if (url?.endsWith(".png") 
-        || url?.endsWith(".jpg") 
-        || url?.endsWith(".jpg") 
-        || url?.endsWith(".jpeg") 
-        || url?.endsWith(".gif")
-    ) return true
-
-    return false
-}
-
-function RenderDescription({description}: RenderDescriptionProps) {
-    const { lang } = useSelector((state: ReduxState) => state.lang)
-    const { theme } = useSelector((state: ReduxState) => state.theme)
-
-    const content = useMemo(() => {
-        if (!description) return null
-
-        const embededEvent = /(\[:\w+\]\(\d+\))/
-        const findNumber = /\((\d+)\)/
-        const split = description.replace(/\\n/g, '<br>').split(embededEvent)
-
-        return split.map((content, index) => {
-            const match = content.match(findNumber)
-            const number = match ? Number(match[1]) : null
-            const markdown = content.replace(/<br>/g, '\n').replace(/###/g, '')
-
-            if (!content.includes('[:event]') && !content.includes('[:jobad]')) {
-                return <Markdown key={index} style={{text: {color: '#FFF'}}}>{markdown}</Markdown>
-            }
-
-            return <Embed key={index} id={number} type={content.includes('[:event]') ? "event" : "ad"} />
-        })
-    }, [lang, description, theme.textColor])
-
-    return content
-}

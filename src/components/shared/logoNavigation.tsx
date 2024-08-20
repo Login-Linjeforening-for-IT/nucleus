@@ -1,4 +1,4 @@
-import { Navigation } from "@interfaces"
+import { Navigation } from "@/interfaces"
 import { useNavigation } from "@react-navigation/native"
 import MS from "@styles/menuStyles"
 import { Image } from "react-native"

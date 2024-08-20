@@ -11,7 +11,6 @@ import { useSelector } from "react-redux"
 import en from "@text/menu/settings/en.json"
 import no from "@text/menu/settings/no.json"
 import T from "@styles/text"
-import React from "react"
 import Swipe from "@components/nav/swipe"
 
 type ClusterWithSwitchProps = {

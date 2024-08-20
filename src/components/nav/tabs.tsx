@@ -1,31 +1,42 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
-import { NavigationContainer, DefaultTheme } from "@react-navigation/native"
+import { NavigationContainer } from "@react-navigation/native"
 import Footer from "@nav/footer"
 import { useSelector } from "react-redux"
 import AdScreen from "@screens/ads"
 import EventScreen from "@screens/event"
 import MenuScreen from "@screens/menu"
 import MS from "@styles/menuStyles"
-import React from "react"
 import TagInfo from "@components/shared/tagInfo"
 import { Image } from "react-native"
-import { StackCardInterpolatedStyle, StackCardInterpolationProps, createStackNavigator } from "@react-navigation/stack"
-import { StackProps } from "@interfaces"
 import { TransitionSpec } from "@react-navigation/stack/lib/typescript/src/types"
 import NotificationModal from "@components/shared/notificationModal"
 import NotificationScreen from "@screens/menu/notifications"
-import linking from "@utils/linking"
-import { AdStackParamList, EventStackParamList, MenuStackParamList, RootStackParamList, TabBarParamList } from "@utils/screenTypes"
 import ProfileScreen from "@screens/menu/profile"
 import SettingScreen from "@screens/menu/settings"
 import AboutScreen from "@screens/menu/about"
 import BusinessScreen from "@screens/menu/business"
 import LoginScreen from "@screens/menu/login"
 import InternalScreen from "@screens/menu/internal"
-import ReportScreen from "@screens/menu/report"
+import GameScreen from "@screens/menu/games/index"
+import CourseScreen from "@screens/menu/course/index"
 import SpecificEventScreen from "@screens/event/specificEvent"
 import SpecificAdScreen from "@screens/ads/specificAd"
+import SpecificCourseScreen from "@screens/menu/course/specificCourse"
+import SpecificGameScreen from "@screens/menu/games/specificGame"
+import TerningScreen from "@screens/menu/games/terning"
 import Header from "./header"
+import { 
+    AdStackParamList, 
+    EventStackParamList, 
+    MenuStackParamList, 
+    RootStackParamList, 
+    TabBarParamList 
+} from "@type/screenTypes"
+import { 
+    StackCardInterpolatedStyle, 
+    StackCardInterpolationProps, 
+    createStackNavigator
+} from "@react-navigation/stack"
 
 
 // Declares Tab to equal CBTN function
@@ -65,15 +76,19 @@ function Menu() {
             animationEnabled: false,
             headerTransparent: true,
             header: props => <Header {...props}/>}}>
-            <MenuStack.Screen name="MenuScreen" component={MenuScreen}/>
-            <MenuStack.Screen name="ProfileScreen" component={ProfileScreen}/>
-            <MenuStack.Screen name="SettingScreen" component={SettingScreen}/>
-            <MenuStack.Screen name="NotificationScreen" component={NotificationScreen}/>
-            <MenuStack.Screen name="AboutScreen" component={AboutScreen}/>
-            <MenuStack.Screen name="BusinessScreen" component={BusinessScreen}/>
-            <MenuStack.Screen name="LoginScreen" component={LoginScreen}/>
-            <MenuStack.Screen name="InternalScreen" component={InternalScreen}/>
-            <MenuStack.Screen name="ReportScreen" component={ReportScreen}/>
+            <MenuStack.Screen name="MenuScreen" component={MenuScreen} />
+            <MenuStack.Screen name="ProfileScreen" component={ProfileScreen} />
+            <MenuStack.Screen name="SettingScreen" component={SettingScreen} />
+            <MenuStack.Screen name="NotificationScreen" component={NotificationScreen} />
+            <MenuStack.Screen name="AboutScreen" component={AboutScreen} />
+            <MenuStack.Screen name="BusinessScreen" component={BusinessScreen} />
+            <MenuStack.Screen name="LoginScreen" component={LoginScreen} />
+            <MenuStack.Screen name="InternalScreen" component={InternalScreen} />
+            <MenuStack.Screen name="CourseScreen" component={CourseScreen} />
+            <MenuStack.Screen name="SpecificCourseScreen" component={SpecificCourseScreen} />
+            <MenuStack.Screen name="GameScreen" component={GameScreen} />
+            <MenuStack.Screen name="SpecificGameScreen" component={SpecificGameScreen} />
+            <MenuStack.Screen name="TerningScreen" component={TerningScreen} />
         </MenuStack.Navigator>
     )
 }
@@ -158,16 +173,6 @@ function Tabs(): JSX.Element {
  * @returns Application with navigation
  */
 export default function Navigator(): JSX.Element {
-
-    const { theme } = useSelector((state: ReduxState) => state.theme)
-
-    const navTheme = {
-        ...DefaultTheme,
-        colors: {
-            ...DefaultTheme.colors,
-            background: theme.background
-        }
-    }
 
     const config: TransitionSpec = {
         animation: 'timing',

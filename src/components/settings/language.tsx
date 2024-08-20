@@ -3,7 +3,6 @@ import topic from "@/utils/topic"
 import { useSelector, useDispatch } from "react-redux"
 import SS from "@styles/settingStyles"
 import { changeLang } from "@redux/lang"
-import React from "react"
 
 /**
  * Choosing language of the application

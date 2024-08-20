@@ -2,7 +2,7 @@ import { useSelector } from "react-redux"
 import { View, Text } from "react-native"
 import ES from "@styles/eventStyles"
 import T from "@styles/text"
-import React, { ReactNode } from "react"
+import { ReactNode } from "react"
 
 
 // Ony children or height can be defined at the same time. Both cant be arguments at the same time

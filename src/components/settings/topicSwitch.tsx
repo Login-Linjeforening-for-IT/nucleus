@@ -3,7 +3,6 @@ import Cluster from "@/components/shared/cluster"
 import GS from "@styles/globalStyles"
 import { View, Text } from "react-native"
 import { useSelector } from "react-redux"
-import React from "react"
 
 type TopicSwitchListProps = {
     category: string

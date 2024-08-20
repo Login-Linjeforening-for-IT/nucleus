@@ -5,27 +5,22 @@ import Space from "@/components/shared/utils"
 import CS from "@styles/clusterStyles"
 import GS from "@styles/globalStyles"
 import { useSelector } from "react-redux"
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import en from "@text/menu/en.json"
 import no from "@text/menu/no.json"
 import T from "@styles/text"
 import LogoNavigation from "@/components/shared/logoNavigation"
 import Text from "@components/shared/text"
-import {
-  View,
-  Image,
-  TouchableOpacity,
-  Dimensions,
-} from "react-native"
-import Swipe from "@components/nav/swipe"
-import { ItemProps, MenuProps, MenuStackParamList } from "@utils/screenTypes"
+import { View, Image, TouchableOpacity, Dimensions } from "react-native"
+import { ItemProps, MenuProps, MenuStackParamList } from "@type/screenTypes"
 import { NavigationProp } from "@react-navigation/native"
 import NotificationIcon from "@components/notification/notificationIcon"
+import Swipe from "@components/nav/swipe"
 
 type MenuItemProps = {
     index: number
     item: ItemProps
-    navigation: NavigationProp<MenuStackParamList,'MenuScreen'>
+    navigation: NavigationProp<MenuStackParamList, 'MenuScreen'>
     setting: SettingProps[]
     feedback: boolean
     toggleFeedback: () => void
@@ -40,7 +35,7 @@ export default function MenuScreen({ navigation }: MenuProps<'MenuScreen'>): JSX
     const { theme } = useSelector((state: ReduxState) => state.theme )
     const { id, name, image } = useSelector((state: ReduxState) => 
     state.profile )
-    const profile = { id, name, image}
+    const profile = { id, name, image }
     const text: Setting = lang ? no as Setting : en as Setting
 
     // Feedback options visibility boolean
@@ -51,7 +46,7 @@ export default function MenuScreen({ navigation }: MenuProps<'MenuScreen'>): JSX
         setFeedback(prevFeedback => !prevFeedback)
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         navigation.setOptions({
             headerComponents: {
                 left: [<LogoNavigation />],
@@ -98,8 +93,7 @@ toggleFeedback}: MenuItemProps) {
 
     return (
         <View>
-            <TouchableOpacity onPress={() => navigation.navigate(item.nav)}
-            >
+            <TouchableOpacity onPress={() => navigation.navigate(item.nav as any)}>
                 <Cluster>
                     <View style={{...CS.clusterBack}}>
                         <View style={CS.twinLeft}>

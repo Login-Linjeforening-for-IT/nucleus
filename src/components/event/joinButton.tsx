@@ -9,6 +9,7 @@ export default function JoinButton() {
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const { event, clickedEvents } = useSelector((state: ReduxState) => state.event)
     const dispatch = useDispatch()
+    const text = lang ? "Meld meg på" : "Join event"
     
     function updateStorage() {
         if (!clickedEvents.some(clicked => clicked.id === event?.event?.id)) {
@@ -23,8 +24,8 @@ export default function JoinButton() {
                 Linking.openURL(event.event.link_signup)
             }}>
                 <View style={{...ES.eventButton, backgroundColor: theme.orange}}>
-                    <Text style={{...T.centered20, color: theme.textColor}}>
-                        {lang ? "Meld meg på":"Join event"}
+                    <Text style={{...T.centered20, color: theme.textColor, paddingTop: 2}}>
+                        {text}
                     </Text>
                 </View>
             </TouchableOpacity>

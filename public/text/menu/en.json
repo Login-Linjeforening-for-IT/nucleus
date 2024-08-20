@@ -39,8 +39,13 @@
         },
         {
             "id": 8, 
-            "nav": "ReportScreen",   
-            "title": "Report" 
+            "nav": "CourseScreen",   
+            "title": "Courses" 
+        },
+        {
+            "id": 9, 
+            "nav": "GameScreen",
+            "title": "Games"
         }
     ],
     "version": "Version ",

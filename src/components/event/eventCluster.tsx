@@ -10,7 +10,7 @@ import ES from "@styles/eventStyles"
 import CategorySquare from "@components/shared/category"
 import Space from "@components/shared/utils"
 import T from "@styles/text"
-import { EventStackParamList } from "@utils/screenTypes"
+import { EventStackParamList } from "@type/screenTypes"
 import { StackNavigationProp } from "@react-navigation/stack"
 
 type EventClusterProps = {
@@ -39,12 +39,13 @@ JSX.Element {
                 search && dispatch(toggleSearch())
                 navigation.navigate("SpecificEventScreen", {eventID: item.id})
             }}>
-                <LinearGradient start={[0, 0.5]}
-                  end={[1, 0.5]}
-                  // The non highlited items get wraped in an transparrent container
-                  colors={item.highlight ? ['#FF512F', '#F09819', '#FF512F'] : ['#000000cc', '#000000cc']}
-                  style={{borderRadius: 5, marginVertical: item.highlight ? 2 : 0,
-                }}>
+                <LinearGradient
+                    start={[0, 0.5]}
+                    end={[1, 0.5]}
+                    // The non highlited items get wraped in an transparrent container
+                    colors={item.highlight ? ['#FF512F', '#F09819', '#FF512F'] : ['#000000cc', '#000000cc']}
+                    style={{borderRadius: 5, marginVertical: item.highlight ? 2 : 0}}
+                >
                     <Cluster marginHorizontal={2} marginVertical={4} highlight={item.highlight}>
                         <View style={ES.eventBack}>
                             <FullCategorySquare item={item} />
@@ -88,7 +89,12 @@ function FullCategorySquare({item, height}: FullCategorySquareProps): JSX.Elemen
 
     return (
         <View style={{flexDirection: 'row'}}>
-            <CategorySquare color={item.category_color} height={height} startDate={startDate} endDate={endDate}/>
+            <CategorySquare 
+                color={item.category_color} 
+                height={height} 
+                startDate={startDate} 
+                endDate={endDate}
+            />
         </View>
     )
 }

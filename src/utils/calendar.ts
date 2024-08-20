@@ -14,6 +14,7 @@ import {
     EntityTypes,
 } from "expo-calendar"
 import capitalizeFirstLetter from "./capitalizeFirstLetter"
+import { LOGIN_URL } from "@/constants"
 
 type handleDownloadProps = {
     items: EventProps[] | AdProps[]
@@ -178,7 +179,7 @@ itemsToCalendarFormatProps) {
             const fixedDesc = lang ? event.event.description_no || event.event.description_en || '' : event.event.description_en || event.event.description_no || ''
 
             notes = fixedDesc.replace(/\\n/g, '\n') || undefined
-            if (!location.length) location = `https://login.no/events/${item.id}`
+            if (!location.length) location = `${LOGIN_URL}/events/${item.id}`
             startDate = new Date(event.event.time_start)
             endDate = new Date(event.event.time_end)
         } else if (ad) {
@@ -194,7 +195,7 @@ itemsToCalendarFormatProps) {
             const shortDescription = tempShort ? tempShort.replace(/\\n/g, '\n') : ''
             const LongDescription = tempLong ? tempLong.replace(/\\n/g, '\n') : ''
             notes = LongDescription || shortDescription || ''
-            if (!location.length) location = `https://login.no/career/${item.id}`
+            if (!location.length) location = `${LOGIN_URL}/career/${item.id}`
             startDate = new Date(new Date(ad.job.application_deadline).getTime() - 14400000)
             endDate = new Date(ad.job.application_deadline)
         }

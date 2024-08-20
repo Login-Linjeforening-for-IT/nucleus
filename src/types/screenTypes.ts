@@ -1,6 +1,6 @@
-import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
+import { BottomTabScreenProps } from "@react-navigation/bottom-tabs"
 import { CompositeScreenProps, NavigatorScreenParams } from "@react-navigation/native"
-import { StackScreenProps } from "@react-navigation/stack";
+import { StackScreenProps } from "@react-navigation/stack"
 declare global {
     namespace ReactNavigation {
       interface RootParamList extends TabBarParamList {}
@@ -8,7 +8,7 @@ declare global {
 }
 
 export type TabBarProps<T extends keyof TabBarParamList> =
-BottomTabScreenProps<TabBarParamList, T>;
+BottomTabScreenProps<TabBarParamList, T>
 
 export type EventStackParamList = {
     EventScreen: undefined
@@ -19,7 +19,7 @@ export type EventScreenProps<T extends keyof EventStackParamList> =
     CompositeScreenProps<
         StackScreenProps<EventStackParamList, T>,
         BottomTabScreenProps<TabBarParamList>
-        >
+    >
 
 export type AdStackParamList = {
     AdScreen: undefined
@@ -30,17 +30,20 @@ export type AdScreenProps<T extends keyof AdStackParamList> =
     CompositeScreenProps<
         StackScreenProps<AdStackParamList, T>,
         BottomTabScreenProps<TabBarParamList>
-        >
+    >
 
 export type MenuRoutes = 
-"ProfileScreen"
+    "ProfileScreen"
     | "SettingScreen"
     | "NotificationScreen"
     | "AboutScreen"
     | "BusinessScreen"
-    | "ReportScreen"
+    | "CourseScreen"
+    | "SpecificCourseScreen"
     | "LoginScreen"
     | "InternalScreen" 
+    | "GameScreen"
+    | "SpecificGameScreen"
 
     export type ItemProps = {
     id: number
@@ -52,15 +55,19 @@ export type MenuProps<T extends keyof MenuStackParamList> =
 StackScreenProps<MenuStackParamList, T>
 
 export type MenuStackParamList = {
-    ProfileScreen: undefined,
-    SettingScreen: undefined,
-    NotificationScreen: undefined,
-    AboutScreen: undefined,
-    BusinessScreen: undefined,
-    ReportScreen: undefined,
-    LoginScreen: undefined,
-    InternalScreen: undefined,
+    ProfileScreen: undefined
+    SettingScreen: undefined
+    NotificationScreen: undefined
+    AboutScreen: undefined
+    BusinessScreen: undefined
+    LoginScreen: undefined
+    InternalScreen: undefined
     MenuScreen: undefined
+    CourseScreen: undefined
+    SpecificCourseScreen: { courseID: string }
+    GameScreen: undefined
+    SpecificGameScreen: { gameID: number, gameName: string }
+    TerningScreen: undefined
 }
 
 export type TabBarParamList = {

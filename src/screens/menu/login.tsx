@@ -7,8 +7,7 @@ import Button from "@/components/shared/button"
 import Space from "@/components/shared/utils"
 import SS from "@styles/settingStyles"
 import GS from "@styles/globalStyles"
-import React, { useState } from "react"
-import { ScreenProps } from "@interfaces"
+import { useState } from "react"
 import T from "@styles/text"
 import Swipe from "@components/nav/swipe"
 import login from "@utils/login"
@@ -21,7 +20,7 @@ import {
     TextInput,
     Alert,
 } from "react-native"
-import { MenuProps } from "@utils/screenTypes"
+import { MenuProps } from "@type/screenTypes"
 
 type UsernameUIProps = {
     data: DataProps
@@ -100,7 +99,7 @@ export default function LoginScreen({ navigation }: MenuProps<'LoginScreen'>): J
                     <View>
                         <Space height={80} /> 
                         <Text style={{...T.centered50, color: theme.textColor}}>
-                            {lang ? "Innsida" : "Intranet"}
+                            {lang ? "Vedlikehold" : "Maintenance"}
                         </Text>
                         
                         <Space height={20} /> 

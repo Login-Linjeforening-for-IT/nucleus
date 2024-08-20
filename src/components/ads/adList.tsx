@@ -35,13 +35,13 @@ export default function AdList (): JSX.Element {
     }
     
     const onRefresh = useCallback(async () => {
-        setRefresh(true);
+        setRefresh(true)
         const details = await getDetails()
         
         if (details) {
             setRefresh(false)
         }
-    }, [refresh]);
+    }, [refresh])
     
     // Copies renderedEvents because it's read only
     let adList: AdProps[] = [...renderedAds]

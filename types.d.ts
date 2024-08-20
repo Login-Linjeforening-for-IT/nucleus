@@ -1,7 +1,7 @@
 // Configured in this file to be globally accessable.
 declare module '*.svg' {
-    const content: string;
-    export default content;
+    const content: string
+    export default content
 }
 
 // Types globally used in the app
@@ -200,6 +200,10 @@ type ReduxState = {
         lang: boolean
     }
     misc: {
+        localTitle: { 
+            title: string
+            screen: string 
+        }
         calendarID: string
     }
     notification: NotificationProps
@@ -473,12 +477,12 @@ type NotificationListProps = {
 }
 
 type Setting = {
-    screen: string;
-    nav: string;
+    screen: string
+    nav: string
     setting: 
         {
-            id: number;
-            nav: MenuRoutes;
+            id: number
+            nav: MenuRoutes
             title: string
         }[]
 }
@@ -524,4 +528,75 @@ type NotificationModal = {
     title: string
     body: string
     data: any
+}
+
+type Editing = {
+    cards: Card[]
+    texts: string[]
+}
+
+type Card = {
+    question: string
+    alternatives: string[]
+    source: string
+    correct: number[]
+    help?: string
+    theme?: string
+    rating: number
+    votes: Vote[]
+}
+
+type User = {
+    name: string
+    username: string
+    time: number
+    score: number
+    solved: UserSolved[]
+}
+
+type Vote = {
+    username: string
+    vote: boolean
+}
+
+type CourseAsList = {
+    id: string
+    cards: Card[]
+    count: number
+}
+
+type Course = {
+    id: string
+    cards: Card[]
+    unreviewed: Card[]
+    textUnreviewed: string[]
+    mark?: boolean
+}
+
+type Game = {
+    id: number
+    name: string
+    endpoint: string
+    description_no: string
+    description_en: string
+}
+
+type Question = {
+    id: number
+    title_no: string
+    title_en: string
+    categories: string[]
+}
+
+type NeverHaveIEver = {
+    id: number
+    title_no: string
+    title_en: string
+    categories: string[]
+}
+
+type OkRedFlagDealBreaker = {
+    id: number
+    title_no: string
+    title_en: string
 }

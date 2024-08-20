@@ -5,6 +5,7 @@ import { TextLink } from "@components/shared/link"
 import { useSelector } from "react-redux"
 import CategorySquare from "@components/shared/category"
 import BellIcon from "@components/shared/bellIcon"
+import { LOGIN_URL } from "@/constants"
 
 type ExpiredProps = {
     id: number | null
@@ -53,7 +54,7 @@ export function ExpiredEvent(id: {id: number}) {
                             <TextLink 
                                 style={{color: "#fd8738"}} 
                                 text={retry} 
-                                url={`https://login.no/events/${id}`} 
+                                url={`${LOGIN_URL}/events/${id}`} 
                             />
                         </View>
                     </View>

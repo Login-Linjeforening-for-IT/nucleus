@@ -15,7 +15,7 @@ import { setEvents, setLastFetch, setLastSave } from "@redux/event"
 import Swipe from "@components/nav/swipe"
 import { FilterButton, FilterUI } from "@components/shared/filter"
 import DownloadButton from "@components/shared/downloadButton"
-import { EventScreenProps } from "@utils/screenTypes"
+import { EventScreenProps } from "@type/screenTypes"
 
 /**
  * Parent EventScreen component
@@ -103,14 +103,17 @@ export default function EventScreen({ navigation }: EventScreenProps<'EventScree
 
     // Displays the EventScreen
     return (
-        <Swipe right="EventNav">
+        <Swipe right="AdNav">
             <View>
                 <StatusBar style={isDark ? "light" : "dark"} />
-                <View style={{
-                    ...GS.content,
-                    paddingHorizontal: 5,
-                    backgroundColor: theme.darker
-                }}>
+                <View 
+                    style={{
+                        ...GS.content,
+                        paddingHorizontal: 5,
+                        backgroundColor: theme.darker
+                    }}
+                    testID="eventScreen"
+                >
                     {pushNotification && pushNotificationContent}
                     <EventList />
                 </View>

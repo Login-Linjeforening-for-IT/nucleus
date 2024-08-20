@@ -1,5 +1,4 @@
 import { View, Text, Platform} from "react-native"
-import React from "react"
 import { useSelector } from "react-redux"
 import T from "@styles/text"
 import { Month } from "./utils"
