@@ -49,7 +49,7 @@ export default function SpecificGameScreen({ route }: MenuProps<"SpecificGameScr
     }, [])
 
     return (
-        <Parent left="GameScreen" noPadding={true} colors={[theme.orange, 'red', theme.orange]}>
+        <Parent left="GameScreen" paddingHorizontal={-1} colors={[theme.orange, 'red', theme.orange]}>
             <ScrollView
                 showsVerticalScrollIndicator={false} 
                 scrollEventThrottle={100}

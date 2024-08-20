@@ -5,6 +5,7 @@ import { getCourse } from "@utils/course"
 import ThumbsUp from "@components/course/thumbsUp"
 import ThumbsDown from "@components/course/thumbsDown"
 import { setLocalTitle } from "@redux/misc"
+import Markdown from 'react-native-markdown-renderer'
 import { 
     Dispatch, 
     SetStateAction, 
@@ -18,8 +19,10 @@ import {
     ScrollView, 
     Text, 
     TouchableOpacity, 
-    View 
+    View,
+    Image
 } from "react-native"
+import { getUniqueID } from "react-native-markdown-display"
 
 type CourseContentProps = {
     course: Course, 
@@ -33,6 +36,7 @@ type CardProps = {
     indexMapping: number[], 
     handlePress: (index: number) => void, 
     getBackground: (index: number) => string
+    cardID: number
 }
 
 type CardFooterProps = {
@@ -47,7 +51,6 @@ type CardFooterProps = {
 
 export default function SpecificCourseScreen({ route }: MenuProps<"SpecificCourseScreen">): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    const { lang } = useSelector((state: ReduxState) => state.lang)
     const { localTitle } = useSelector((state: ReduxState) => state.misc)
     const [refresh, setRefresh] = useState(false)
     const [course, setCourse] = useState<Course | string>("")
@@ -84,7 +87,7 @@ export default function SpecificCourseScreen({ route }: MenuProps<"SpecificCours
     }, [refresh])
 
     return (
-        <Parent left="CourseScreen">
+        <Parent left="CourseScreen" paddingHorizontal={6}>
             <ScrollView
                 showsVerticalScrollIndicator={false} 
                 scrollEventThrottle={100}
@@ -106,7 +109,6 @@ export default function SpecificCourseScreen({ route }: MenuProps<"SpecificCours
 function CourseContent({course, clicked, setClicked}: CourseContentProps) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const height = Dimensions.get("window").height
-    const width = Dimensions.get("window").width
     const [cardID, setCardID] = useState<number>(0)
     const [shuffledAlternatives, setShuffledAlternatives] = useState<string[]>([])
     const [indexMapping, setIndexMapping] = useState<number[]>([])
@@ -166,7 +168,8 @@ function CourseContent({course, clicked, setClicked}: CourseContentProps) {
                 style={{maxHeight: height * 0.69 }}
             >
                 <Card 
-                    card={card} 
+                    card={card}
+                    cardID={cardID}
                     shuffledAlternatives={shuffledAlternatives} 
                     indexMapping={indexMapping} 
                     handlePress={handlePress} 
@@ -186,7 +189,7 @@ function CourseContent({course, clicked, setClicked}: CourseContentProps) {
     )
 }
 
-function Card({card, shuffledAlternatives, indexMapping, handlePress, getBackground}: CardProps) {
+function Card({card, cardID, shuffledAlternatives, indexMapping, handlePress, getBackground}: CardProps) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
 
     return (
@@ -198,14 +201,14 @@ function Card({card, shuffledAlternatives, indexMapping, handlePress, getBackgro
                         marginBottom: 4, 
                         color: theme.oppositeTextColor
                     }}>
-                        Multiple choice
+                        {cardID + 1} - Multiple choice
                     </Text>}
-                    {card.theme && <Text style={{
+                    {<Text style={{
                         fontSize: 18, 
                         marginBottom: 4, 
                         color: theme.oppositeTextColor
                     }}>
-                        {card.theme}
+                        {!(card.correct.length > 1) && cardID + 1}{card.theme && ' - '}{card.theme}
                     </Text>}
                 </View>
                 <View style={{position: 'absolute', right: 0}}>
@@ -218,9 +221,67 @@ function Card({card, shuffledAlternatives, indexMapping, handlePress, getBackgro
                     </Text>
                 </View>
             </View>
-            <Text style={{color: theme.textColor, fontSize: 20}}>
+            {/* @ts-expect-error */}
+            <Markdown rules={rules} style={{
+                codeInline: {
+                    backgroundColor: theme.contrast,
+                    padding: 10,
+                    borderRadius: 8,
+                    overflow: 'hidden',
+                    fontFamily: 'Courier',
+                    marginVertical: 8,
+                    color: theme.textColor,
+                },
+                codeBlock: {
+                    backgroundColor: theme.contrast,
+                    padding: 10,
+                    borderRadius: 8,
+                    overflow: 'hidden',
+                    fontFamily: 'Courier',
+                    marginVertical: 8,
+                    color: theme.textColor,
+                },
+                image: {
+                    width: 300,
+                    height: 200,
+                    resizeMode: 'contain',
+                    marginVertical: 10,
+                },
+                link: {
+                    color: '#3b82f6',
+                    textDecorationLine: 'underline',
+                },
+                heading1: {
+                    fontSize: 32,
+                    color: theme.textColor,
+                },
+                heading2: {
+                    fontSize: 24,
+                    color: theme.textColor,
+                },
+                heading3: {
+                    fontSize: 18,
+                    color: theme.textColor,
+                },
+                heading4: {
+                    fontSize: 16,
+                    color: theme.textColor,
+                },
+                heading5: {
+                    fontSize: 13,
+                    color: theme.textColor,
+                },
+                heading6: {
+                    fontSize: 11,
+                    color: theme.textColor,
+                },
+                text: {
+                    fontSize: 16,
+                    color: theme.textColor,
+                }
+            }}>
                 {card.question}
-            </Text>
+            </Markdown>
             {shuffledAlternatives.map((answer, index) => {
                 const originalIndex = indexMapping[index]
 
@@ -233,7 +294,8 @@ function Card({card, shuffledAlternatives, indexMapping, handlePress, getBackgro
                             marginTop: 8, 
                             padding: 4, 
                             borderRadius: 8, 
-                            paddingVertical: 8
+                            paddingVertical: 8,
+                            paddingRight: 30
                         }}
                         onPress={() => handlePress(originalIndex)}
                     >
@@ -295,7 +357,7 @@ function CardFooter({votes, cardID, setCardID, length, clicked, setClicked, corr
             justifyContent: 'space-between', 
             height: 30, 
             width: width * 0.86, 
-            marginHorizontal: 16
+            marginHorizontal: 14
         }}>
             <View style={{flexDirection: 'row'}}>
                 <Text style={{
@@ -316,12 +378,15 @@ function CardFooter({votes, cardID, setCardID, length, clicked, setClicked, corr
                 />
             </View>
             <TouchableOpacity 
-                style={{width: 30, justifyContent: 'center', alignItems: 'center'}} 
+                style={{
+                    width: 25, 
+                    justifyContent: 'center', 
+                    alignItems: 'center',
+                }} 
                 onPress={() => handlePrevious()}
             >
                 <Text style={{
                     fontSize: 22, 
-                    marginLeft: 2, 
                     color: theme.oppositeTextColor
                 }}>
                     ◀
@@ -330,7 +395,6 @@ function CardFooter({votes, cardID, setCardID, length, clicked, setClicked, corr
             <TouchableOpacity onPress={() => handleSkip()}>
                 <Text style={{
                     fontSize: 18, 
-                    marginLeft: 2, 
                     color: theme.oppositeTextColor, 
                     top: 2
                 }}>
@@ -339,7 +403,7 @@ function CardFooter({votes, cardID, setCardID, length, clicked, setClicked, corr
             </TouchableOpacity>
             <TouchableOpacity 
                 style={{
-                    width: 30, 
+                    width: 25, 
                     justifyContent: 'center', 
                     alignItems: 'center'
                 }} 
@@ -347,7 +411,6 @@ function CardFooter({votes, cardID, setCardID, length, clicked, setClicked, corr
             >
                 <Text style={{
                     fontSize: 22, 
-                    marginLeft: 2, 
                     color: theme.oppositeTextColor
                 }}>
                     ▶
@@ -356,9 +419,9 @@ function CardFooter({votes, cardID, setCardID, length, clicked, setClicked, corr
             <TouchableOpacity onPress={handleReveal}>
                 <Text style={{
                     fontSize: 18, 
-                    marginLeft: 2, 
                     color: theme.oppositeTextColor, 
-                    top: 2
+                    top: 2,
+                    right: 20
                 }}>
                     {revealText}
                 </Text>
@@ -366,3 +429,17 @@ function CardFooter({votes, cardID, setCardID, length, clicked, setClicked, corr
         </View>
     )
 }
+
+const rules = {
+    // @ts-expect-error
+    image: (node, _, _a, styles) => {
+        const { src } = node.attributes
+        return (
+            <Image
+                key={getUniqueID()}
+                source={{ uri: src }}
+                style={styles.image}
+            />
+        );
+    },
+};

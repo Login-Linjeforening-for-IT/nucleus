@@ -23,6 +23,7 @@ import SpecificEventScreen from "@screens/event/specificEvent"
 import SpecificAdScreen from "@screens/ads/specificAd"
 import SpecificCourseScreen from "@screens/menu/course/specificCourse"
 import SpecificGameScreen from "@screens/menu/games/specificGame"
+import TerningScreen from "@screens/menu/games/terning"
 import Header from "./header"
 import { 
     AdStackParamList, 
@@ -87,6 +88,7 @@ function Menu() {
             <MenuStack.Screen name="SpecificCourseScreen" component={SpecificCourseScreen} />
             <MenuStack.Screen name="GameScreen" component={GameScreen} />
             <MenuStack.Screen name="SpecificGameScreen" component={SpecificGameScreen} />
+            <MenuStack.Screen name="TerningScreen" component={TerningScreen} />
         </MenuStack.Navigator>
     )
 }

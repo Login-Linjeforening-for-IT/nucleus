@@ -7,7 +7,6 @@ import T from "@styles/text"
 import Swipe from "@components/nav/swipe"
 import { RefreshControl, ScrollView } from "react-native-gesture-handler"
 import CourseError from "@components/course/courseError"
-import { getCourses } from "@utils/course"
 import { useCallback, useEffect, useState } from "react"
 import { View, Image, TouchableOpacity, Dimensions, Text } from "react-native"
 import { MenuProps, MenuStackParamList } from "@type/screenTypes"
@@ -19,10 +18,13 @@ type GameListProps = {
     navigation: StackNavigationProp<MenuStackParamList, "GameScreen">
 }
 
+type HardCodedGameProps = {
+    name: string
+    navigation: StackNavigationProp<MenuStackParamList, "GameScreen">
+}
+
 export default function GameScreen({ navigation }: MenuProps<'GameScreen'>): JSX.Element {
     const [games, setGames] = useState<string | Game[]>([])
-    const [neverHaveIEver, setNeverHaveIEver] = useState<string | NeverHaveIEver[]>([])
-    const [okRedFlagDealBreaker, setOkRedFlagDealBreaker] = useState<string | OkRedFlagDealBreaker[]>([])
     const { theme } = useSelector((state: ReduxState) => state.theme )
     const [refresh, setRefresh] = useState(false)
 
@@ -55,6 +57,7 @@ export default function GameScreen({ navigation }: MenuProps<'GameScreen'>): JSX
                 >
                     {typeof games === 'string' && <CourseError text={games} />}
                     <RefreshControl refreshing={refresh} onRefresh={onRefresh} />
+                    <HardCodedGame name='Terning' navigation={navigation} />
                     {typeof games !== 'string' && games.map((game: Game) => 
                         <GameList 
                             key={game.id} 
@@ -82,6 +85,33 @@ function GameList({ game, navigation }: GameListProps): JSX.Element {
                     <View style={CS.twinLeft}>
                         <Text style={{...T.text20, color: theme.textColor}}>
                             {game.name}
+                        </Text>
+                    </View>
+                    <View style={CS.twinRight}>
+                        <Image
+                            style={CS.arrowImage}
+                            source={require("@assets/icons/dropdownBase.png")}
+                        />
+                    </View>
+                </View>
+            </Cluster>
+        </TouchableOpacity>
+    )
+}
+
+function HardCodedGame({name, navigation}: HardCodedGameProps): JSX.Element {
+    const { theme } = useSelector((state: ReduxState) => state.theme)
+    function handlePress() {
+        navigation.navigate("TerningScreen")
+    }
+
+    return (
+        <TouchableOpacity style={{ marginBottom: 6 }} onPress={handlePress}>
+            <Cluster>
+                <View style={{...CS.clusterBack}}>
+                    <View style={CS.twinLeft}>
+                        <Text style={{...T.text20, color: theme.textColor}}>
+                            {name}
                         </Text>
                     </View>
                     <View style={CS.twinRight}>
