@@ -32,11 +32,11 @@ export const MS = StyleSheet.create ({
     bMenu: {
         position: "absolute",
         top: Platform.OS === "ios" ? "90%" : null,
-        bottom: Platform.OS === "ios" ? null : 0,
+        bottom: Platform.OS === "ios" ? null : -30,
         width: "100%",
-        height: "10%",
+        height: "12.5%",
         flexDirection: "row",
-        justifyContent: "center"
+        justifyContent: "space-evenly",
     },
     // Bottom menu icon TouchableOpacity
     bMenuIconTouchableOpacity: {
