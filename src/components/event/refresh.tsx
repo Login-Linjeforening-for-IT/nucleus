@@ -1,4 +1,4 @@
-import { Image, Platform, View } from "react-native";
+import { Image, Platform, View } from "react-native"
 
 type RefreshProps = {
     display: boolean

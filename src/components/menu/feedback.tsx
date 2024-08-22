@@ -1,9 +1,9 @@
 import { View, Text, TouchableOpacity } from "react-native"
 import ES from "@styles/eventStyles"
 import T from "@styles/text"
-import React from "react"
 import { useSelector } from "react-redux"
 import { TextLink } from "@components/shared/link"
+import { MAILTO_URL } from "@/constants"
 
 type FeedbackProps = {
     index: number
@@ -47,7 +47,7 @@ toggleFeedback}: FeedbackProps) {
                     }}
                 />
                 <TextLink 
-                    url="mailto:kontakt@login.no" 
+                    url={MAILTO_URL}
                     text="Mail" 
                     style={{
                         ...T.contact,

@@ -3,7 +3,7 @@ import ChangeInfoCard from "@/components/profile/changeInfoCard"
 import Cluster from "@/components/shared/cluster"
 import CS from "@styles/clusterStyles"
 import PS from "@styles/profileStyles"
-import React, { useState } from "react"
+import { useState } from "react"
 import T from "@styles/text"
 import { useSelector } from "react-redux"
 

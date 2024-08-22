@@ -1,5 +1,5 @@
 import { View } from "react-native"
-import { ClusterProps } from "@interfaces"
+import { ClusterProps } from "@/interfaces"
 import { useSelector } from "react-redux"
 import ES from "@styles/eventStyles"
 import React from "react"
@@ -15,7 +15,13 @@ children, highlight, style }: ClusterProps) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
 
     return (
-        <View style={{backgroundColor: !noColor ? theme.darker : "", margin: highlight ? 4 : 0, paddingHorizontal: !highlight?6:4, ...ES.clusterWraper, ...style as any}}>
+        <View style={{
+            backgroundColor: !noColor ? theme.darker : "", 
+            margin: highlight ? 4 : 0, 
+            paddingHorizontal: !highlight ? 6 : 4, 
+            ...ES.clusterWraper, 
+            ...style as any
+        }}>
             <View style={{...ES.clusterContent, marginVertical, marginHorizontal}}>
                 { children }
             </View>

@@ -167,8 +167,8 @@ topicParams) {
     }
 
     if (notification && !isLangChange && dispatch) {
-        const keys = Object.keys(notification);
-        const values = Object.values(notification);
+        const keys = Object.keys(notification)
+        const values = Object.values(notification)
         const prefix = lang ? 'n' : 'e'
 
         for (let i = 0; i < keys.length; i++) {
@@ -176,15 +176,15 @@ topicParams) {
                 const topic = `${prefix}${keys[i]}`
 
                 try {
-                    const response = await TopicManager({ topic, unsub: !values[i][0] });
+                    const response = await TopicManager({ topic, unsub: !values[i][0] })
     
                     // Check if the result is successful
                     if (response.result) {
                         // Updates Redux if the topic was updated successfully
-                        dispatch(setNotificationDidUpdateOnFirebase({ category: keys[i] }));
+                        dispatch(setNotificationDidUpdateOnFirebase({ category: keys[i] }))
                     }
                 } catch (error) {
-                    console.error('Error processing topic:', error);
+                    console.error('Error processing topic:', error)
                 }
             }
         }

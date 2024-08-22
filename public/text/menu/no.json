@@ -35,12 +35,17 @@
         {
             "id": 7, 
             "nav": "InternalScreen",
-            "title": "Innsida (verv)"
+            "title": "Vedlikehold"
         },
         {
             "id": 8, 
-            "nav": "ReportScreen",   
-            "title": "Varsle"
+            "nav": "CourseScreen",   
+            "title": "Emner"
+        },
+        {
+            "id": 9, 
+            "nav": "GameScreen",
+            "title": "Spill"
         }
     ],
     "version": "Versjon ",

@@ -1,7 +1,6 @@
 import Svg, { Circle } from "react-native-svg"
 import { DimensionValue } from "react-native"
 import { View } from "react-native"
-import React from "react"
 
 type DynamicCircleProps = {
     height: DimensionValue

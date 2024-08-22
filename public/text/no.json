@@ -7,9 +7,10 @@
         "NotificationScreen": "Notifikasjoner",
         "AboutScreen": "Om oss",
         "BusinessScreen": "For bedrifter",
-        "ReportScreen": "Rapporter",
+        "CourseScreen": "Emner",
         "LoginScreen": "Login",
-        "InternalScreen": "Innsida",
-        "ProfileScreen": "Profil"
+        "InternalScreen": "Vedlikehold",
+        "ProfileScreen": "Profil",
+        "GameScreen": "Spill"
     }
 }

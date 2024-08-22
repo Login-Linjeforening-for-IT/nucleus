@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import * as ImagePicker from "expo-image-picker"
 import PS from "@styles/profileStyles"
 import { setImage } from "@redux/profile"
-import React, { useState } from "react"
+import { useState } from "react"
 import T from "@styles/text"
 
 import {

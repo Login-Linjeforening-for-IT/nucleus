@@ -13,7 +13,7 @@ import { useDispatch } from "react-redux"
 import { fetchEventDetails } from "@utils/fetch"
 import { setHistory, setEvent } from "@redux/event"
 import Tag from "@components/shared/tag"
-import { EventScreenProps } from "@utils/screenTypes"
+import { EventScreenProps } from "@type/screenTypes"
 import { useFocusEffect } from "@react-navigation/core"
 
 /**
@@ -45,23 +45,23 @@ export default function SpecificEventScreen({ navigation, route: {params: {event
                     navigation.goBack()
                 }
                 return true
-            };
+            }
     
             const subscription = BackHandler.addEventListener(
                 'hardwareBackPress',
                 onBackPress
-            );
+            )
     
-            return () => subscription.remove();
+            return () => subscription.remove()
         }, [])
-    );
+    )
 
     useEffect(() => {
         getDetails()
     }, [history])
 
     async function getDetails() {
-        const response = await fetchEventDetails(history[history.length - 1])
+        const response = await fetchEventDetails(history[history?.length - 1])
 
         if (response) {
             dispatch(setEvent(response))
@@ -76,7 +76,7 @@ export default function SpecificEventScreen({ navigation, route: {params: {event
         if (details) {
             setRefresh(false)
         }
-    }, [refresh]);
+    }, [refresh])
 
     return (
         <Swipe left="EventScreen">

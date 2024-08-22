@@ -1,5 +1,5 @@
 import GS from "@styles/globalStyles"
-import React, { useState } from "react"
+import { useState } from "react"
 import T from "@styles/text"
 import Link from "@components/shared/link"
 import { useSelector } from "react-redux"

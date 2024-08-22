@@ -1,9 +1,9 @@
 import en from "@text/shared/link/en.json"
 import no from "@text/shared/link/no.json"
-import { useSelector } from "react-redux";
-import T from "@styles/text";
-import { ReactNode } from "react";
-import AS from "@styles/adStyles";
+import { useSelector } from "react-redux"
+import T from "@styles/text"
+import { ReactNode } from "react"
+import AS from "@styles/adStyles"
 import { 
     Alert,
     Linking,
@@ -12,7 +12,7 @@ import {
     TextStyle,
     TouchableOpacity,
     View
- } from "react-native";
+ } from "react-native"
 
 type LinkProps = {
     url: string
@@ -157,5 +157,5 @@ export function TextWithLinks({ text, style, linkStyle }: MarkdownLinkProps) {
         <Text style={style}>
             {markdown}
         </Text>
-    );
+    )
 }

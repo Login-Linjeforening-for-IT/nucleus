@@ -3,7 +3,7 @@ import Space from "@/components/shared/utils"
 import GS from "@styles/globalStyles"
 import { useDispatch, useSelector } from "react-redux"
 import T from "@styles/text"
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import Swipe from "@components/nav/swipe"
 import { View, TouchableOpacity, Dimensions } from "react-native"
 import { ScrollView } from "react-native-gesture-handler"
@@ -13,7 +13,7 @@ import ManageTopics from "@components/notification/manageTopics"
 import TopicManager from "@utils/topicManager"
 import { changeLoginStatus } from "@redux/loginStatus"
 import { useNavigation } from "@react-navigation/native"
-import { Navigation } from "@interfaces"
+import { Navigation } from "@/interfaces"
 
 export default function InternalScreen(): JSX.Element {
 

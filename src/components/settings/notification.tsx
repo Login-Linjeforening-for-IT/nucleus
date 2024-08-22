@@ -2,7 +2,6 @@ import { changeNotificationState } from "@redux/notifications"
 import topic from "@/utils/topic"
 import { useSelector, useDispatch } from "react-redux"
 import { View, Switch } from "react-native"
-import React from "react"
 
 type NotificationProps = {
     category: string

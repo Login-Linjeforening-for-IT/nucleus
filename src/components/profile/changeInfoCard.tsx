@@ -2,7 +2,7 @@ import { GestureHandlerRootView, PanGestureHandler } from "react-native-gesture-
 import { useDispatch, useSelector } from "react-redux"
 import PS from "@styles/profileStyles"
 import { Line } from "@/components/shared/utils"
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import T from "@styles/text"
 
 import {

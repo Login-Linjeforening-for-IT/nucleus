@@ -1,5 +1,6 @@
 import { StaticImage } from "@components/about/social"
 import Skeleton from "@components/shared/skeleton"
+import { CDN } from "@/constants"
 import ES from "@styles/eventStyles"
 import { Dimensions, Image, View } from "react-native"
 import { SvgUri } from "react-native-svg"
@@ -16,7 +17,7 @@ export default function SpecificEventImage() {
                     style={{alignSelf: "center", marginTop: 8}}
                     width={(Dimensions.get("window").width)/1.2}
                     height={Dimensions.get("window").width/3}
-                    uri={`https://cdn.login.no/img/events/banner/${event.event.image_small}`}
+                    uri={`${CDN}events/banner/${event.event.image_small}`}
                 />
             )
         }
@@ -24,7 +25,7 @@ export default function SpecificEventImage() {
         if (event.event.image_small?.includes(".png")) {
             return <Image
                 style={ES.specificEventImage}
-                source={{uri: `https://cdn.login.no/img/events/banner/${event.event.image_small}`}}
+                source={{uri: `${CDN}events/banner/${event.event.image_small}`}}
             />
         }
     

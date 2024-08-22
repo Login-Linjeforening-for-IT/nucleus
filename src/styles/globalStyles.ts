@@ -6,14 +6,6 @@ export const GS = StyleSheet.create({
         height: Dimensions.get("window").height+30,
         paddingHorizontal: 12
     },
-    // ReportScreen description text
-    reportInputContentText: {
-        alignSelf: "center",
-        alignItems: "center",
-        width: "80%",
-        height: "90%",
-        borderRadius: 40,
-    },
     // Horizontal card views on setting notifications
     notificationBack: {
         flexDirection: "row",

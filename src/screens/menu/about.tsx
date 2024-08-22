@@ -5,7 +5,7 @@ import GS from "@styles/globalStyles"
 import { useSelector } from "react-redux"
 import en from "@text/menu/about/en.json"
 import no from "@text/menu/about/no.json"
-import React, {useState} from "react"
+import React, { useState } from "react"
 import T from "@styles/text"
 import Person, { 
     AllComitees, 
@@ -32,6 +32,7 @@ import bedkomSVG from "@assets/committee/bedkom/bedkom-icon.svg"
 import tekkomSVG from "@assets/committee/tekkom/tekkom-icon.svg"
 import styretSVG from "@assets/committee/styret/styret-icon.svg"
 import { TextLink } from "@components/shared/link"
+import { WIKI_URL } from "@/constants"
 
 type getCommitteeImageProps = {
     style?: StyleProp<ViewStyle>
@@ -171,7 +172,7 @@ export default function AboutScreen(): JSX.Element {
                                 }}>
                                     {text.publicDocs.body}
                                     <TextLink 
-                                        url="https://wiki.login.no" 
+                                        url={WIKI_URL}
                                         text={text.publicDocs.wiki} 
                                     />.
                                 </Text>

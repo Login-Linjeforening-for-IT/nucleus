@@ -1,11 +1,10 @@
-import React from "react"
 import GS from "@styles/globalStyles"
 import { BlurView } from "expo-blur"
-import { Navigation } from "@interfaces"
+import { Navigation } from "@/interfaces"
 import { View, Text, Platform, TouchableOpacity } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useSelector } from "react-redux"
-import { RootStackProps } from "@utils/screenTypes"
+import { RootStackProps } from "@type/screenTypes"
 
 export default function NotificationModal({route: { params }}: RootStackProps<'NotificationModal'>): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
@@ -53,7 +52,7 @@ export default function NotificationModal({route: { params }}: RootStackProps<'N
                     }
                 }}
             >
-                <View>
+                <View testID="NotificationModal">
                     <Text style={{
                         ...GS.notificationDropdownTitle,
                         color: theme.textColor
