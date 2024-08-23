@@ -5,7 +5,7 @@ import { getCourse } from "@utils/course"
 import ThumbsUp from "@components/course/thumbsUp"
 import ThumbsDown from "@components/course/thumbsDown"
 import { setLocalTitle } from "@redux/misc"
-import Markdown from 'react-native-markdown-renderer'
+import Markdown from "@components/course/markdown"
 import { 
     Dispatch, 
     SetStateAction, 
@@ -20,9 +20,8 @@ import {
     Text, 
     TouchableOpacity, 
     View,
-    Image
 } from "react-native"
-import { getUniqueID } from "react-native-markdown-display"
+import ReadOnly from "@components/course/readonly"
 
 type CourseContentProps = {
     course: Course, 
@@ -47,6 +46,10 @@ type CardFooterProps = {
     clicked: number[],
     setClicked: Dispatch<SetStateAction<number[]>>
     correct: number[]
+}
+
+type DisplayAsTextProps = {
+    course: Course
 }
 
 export default function SpecificCourseScreen({ route }: MenuProps<"SpecificCourseScreen">): JSX.Element {
@@ -107,6 +110,8 @@ export default function SpecificCourseScreen({ route }: MenuProps<"SpecificCours
 }
 
 function CourseContent({course, clicked, setClicked}: CourseContentProps) {
+    if (course.mark) return <ReadOnly text={course.textUnreviewed.join('\n')} />
+
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const height = Dimensions.get("window").height
     const [cardID, setCardID] = useState<number>(0)
@@ -122,16 +127,16 @@ function CourseContent({course, clicked, setClicked}: CourseContentProps) {
 
     function getBackground(index: number) {
 
-        if (card.correct.length > 1) {
-            if (card.correct.every((correct) => clicked.includes(correct))) {
-                return card.correct.includes(index) ? 'green' : clicked.includes(index) ? 'red' : theme.contrast
+        if (card?.correct.length > 1) {
+            if (card?.correct.every((correct) => clicked.includes(correct))) {
+                return card?.correct.includes(index) ? 'green' : clicked.includes(index) ? 'red' : theme.contrast
             } else {
                 return clicked.includes(index) ? theme.darker : theme.contrast
             }
         }
 
         return clicked.includes(index) 
-            ? card.correct.includes(index) ? 'green' : 'red' 
+            ? card?.correct.includes(index) ? 'green' : 'red' 
             : theme.contrast
     }
 
@@ -177,13 +182,13 @@ function CourseContent({course, clicked, setClicked}: CourseContentProps) {
                 />
             </ScrollView>
             <CardFooter 
-                votes={card.votes.length} 
+                votes={card?.votes.length} 
                 cardID={cardID} 
                 setCardID={setCardID} 
                 length={course.cards.length}
                 clicked={clicked}
                 setClicked={setClicked}
-                correct={card.correct}
+                correct={card?.correct}
             />
         </View>
     )
@@ -196,7 +201,7 @@ function Card({card, cardID, shuffledAlternatives, indexMapping, handlePress, ge
         <>
             <View>
                 <View>
-                    {card.correct.length > 1 && <Text style={{
+                    {card?.correct.length > 1 && <Text style={{
                         fontSize: 18, 
                         marginBottom: 4, 
                         color: theme.oppositeTextColor
@@ -208,7 +213,7 @@ function Card({card, cardID, shuffledAlternatives, indexMapping, handlePress, ge
                         marginBottom: 4, 
                         color: theme.oppositeTextColor
                     }}>
-                        {!(card.correct.length > 1) && cardID + 1}{card.theme && ' - '}{card.theme}
+                        {!(card?.correct.length > 1) && cardID + 1}{card?.theme && ' - '}{card?.theme}
                     </Text>}
                 </View>
                 <View style={{position: 'absolute', right: 0}}>
@@ -217,71 +222,11 @@ function Card({card, cardID, shuffledAlternatives, indexMapping, handlePress, ge
                         marginBottom: 4, 
                         color: theme.oppositeTextColor
                     }}>
-                        {card.source}
+                        {card?.source}
                     </Text>
                 </View>
             </View>
-            {/* @ts-expect-error */}
-            <Markdown rules={rules} style={{
-                codeInline: {
-                    backgroundColor: theme.contrast,
-                    padding: 10,
-                    borderRadius: 8,
-                    overflow: 'hidden',
-                    fontFamily: 'Courier',
-                    marginVertical: 8,
-                    color: theme.textColor,
-                },
-                codeBlock: {
-                    backgroundColor: theme.contrast,
-                    padding: 10,
-                    borderRadius: 8,
-                    overflow: 'hidden',
-                    fontFamily: 'Courier',
-                    marginVertical: 8,
-                    color: theme.textColor,
-                },
-                image: {
-                    width: 300,
-                    height: 200,
-                    resizeMode: 'contain',
-                    marginVertical: 10,
-                },
-                link: {
-                    color: '#3b82f6',
-                    textDecorationLine: 'underline',
-                },
-                heading1: {
-                    fontSize: 32,
-                    color: theme.textColor,
-                },
-                heading2: {
-                    fontSize: 24,
-                    color: theme.textColor,
-                },
-                heading3: {
-                    fontSize: 18,
-                    color: theme.textColor,
-                },
-                heading4: {
-                    fontSize: 16,
-                    color: theme.textColor,
-                },
-                heading5: {
-                    fontSize: 13,
-                    color: theme.textColor,
-                },
-                heading6: {
-                    fontSize: 11,
-                    color: theme.textColor,
-                },
-                text: {
-                    fontSize: 16,
-                    color: theme.textColor,
-                }
-            }}>
-                {card.question}
-            </Markdown>
+            <Markdown text={card.question}/>
             {shuffledAlternatives.map((answer, index) => {
                 const originalIndex = indexMapping[index]
 
@@ -324,7 +269,7 @@ function CardFooter({votes, cardID, setCardID, length, clicked, setClicked, corr
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const next = cardID + 1
     const previous = cardID - 1
-    const solved = correct.every((current) => clicked.includes(current))
+    const solved = correct?.every((current) => clicked.includes(current)) || 0
     const revealText = solved 
         ? lang ? 'Skjul svar' : 'Hide answer'
         : lang ? 'Vis svar' : 'Show answer'
@@ -428,17 +373,3 @@ function CardFooter({votes, cardID, setCardID, length, clicked, setClicked, corr
         </View>
     )
 }
-
-const rules = {
-    // @ts-expect-error
-    image: (node, _, _a, styles) => {
-        const { src } = node.attributes
-        return (
-            <Image
-                key={getUniqueID()}
-                source={{ uri: src }}
-                style={styles.image}
-            />
-        );
-    },
-};

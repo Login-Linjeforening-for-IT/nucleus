@@ -69,7 +69,7 @@ export default function BasicInfo() {
                         {event?.organizations && event.organizations[0]?.link_homepage && <TextLink style={{fontSize: 20, color: "#fd8738", top: 3}} text={text.more} url={event.event.link_stream} />}
                     </Text>
                 </View>
-                <>{info && <InfoBlock infoText={info} />}</>
+                <>{info && <InfoBlock text={info} />}</>
             </Skeleton>
         </Card>
     )
