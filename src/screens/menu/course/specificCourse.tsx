@@ -420,8 +420,7 @@ function CardFooter({votes, cardID, setCardID, length, clicked, setClicked, corr
                 <Text style={{
                     fontSize: 18, 
                     color: theme.oppositeTextColor, 
-                    top: 2,
-                    right: 20
+                    top: 2
                 }}>
                     {revealText}
                 </Text>

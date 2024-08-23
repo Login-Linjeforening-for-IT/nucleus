@@ -26,6 +26,7 @@ type HardCodedGameProps = {
 export default function GameScreen({ navigation }: MenuProps<'GameScreen'>): JSX.Element {
     const [games, setGames] = useState<string | Game[]>([])
     const { theme } = useSelector((state: ReduxState) => state.theme )
+    const { lang } = useSelector((state: ReduxState) => state.lang )
     const [refresh, setRefresh] = useState(false)
 
     const onRefresh = useCallback(async () => {
@@ -57,7 +58,7 @@ export default function GameScreen({ navigation }: MenuProps<'GameScreen'>): JSX
                 >
                     {typeof games === 'string' && <CourseError text={games} />}
                     <RefreshControl refreshing={refresh} onRefresh={onRefresh} />
-                    <HardCodedGame name='Terning' navigation={navigation} />
+                    <HardCodedGame name={lang ? 'Terning' : 'Dice'} navigation={navigation} />
                     {typeof games !== 'string' && games.map((game: Game) => 
                         <GameList 
                             key={game.id} 
@@ -102,7 +103,7 @@ function GameList({ game, navigation }: GameListProps): JSX.Element {
 function HardCodedGame({name, navigation}: HardCodedGameProps): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     function handlePress() {
-        navigation.navigate("TerningScreen")
+        navigation.navigate("DiceScreen")
     }
 
     return (

@@ -67,7 +67,7 @@ export type MenuStackParamList = {
     SpecificCourseScreen: { courseID: string }
     GameScreen: undefined
     SpecificGameScreen: { gameID: number, gameName: string }
-    TerningScreen: undefined
+    DiceScreen: undefined
 }
 
 export type TabBarParamList = {
