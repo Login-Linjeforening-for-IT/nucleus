@@ -23,6 +23,7 @@ type CardProps = {
     handlePress: (index: number) => void, 
     getBackground: (index: number) => string
     cardID: number
+    length: number
 }
 
 type CardFooterProps = {
@@ -40,6 +41,7 @@ export default function CourseContent({course, clicked, setClicked, cardID, setC
     const [shuffledAlternatives, setShuffledAlternatives] = useState<string[]>([])
     const [indexMapping, setIndexMapping] = useState<number[]>([])
     const card = course.cards[cardID]
+    const length = course.cards.length
 
     function handlePress(index: number) {
         if (!clicked.includes(index)) {
@@ -93,6 +95,7 @@ export default function CourseContent({course, clicked, setClicked, cardID, setC
                     cardID={cardID}
                     shuffledAlternatives={shuffledAlternatives} 
                     indexMapping={indexMapping} 
+                    length={length}
                     handlePress={handlePress} 
                     getBackground={getBackground}
                 />
@@ -107,7 +110,7 @@ export default function CourseContent({course, clicked, setClicked, cardID, setC
     )
 }
 
-function Card({card, cardID, shuffledAlternatives, indexMapping, handlePress, getBackground}: CardProps) {
+function Card({card, cardID, shuffledAlternatives, indexMapping, length, handlePress, getBackground}: CardProps) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
 
     return (
@@ -119,14 +122,14 @@ function Card({card, cardID, shuffledAlternatives, indexMapping, handlePress, ge
                         marginBottom: 4, 
                         color: theme.oppositeTextColor
                     }}>
-                        {cardID + 1} - Multiple choice
+                        {cardID + 1} {cardID >= (length - 5) ? `/ ${length} ` : ''}- Multiple choice
                     </Text>}
                     {<Text style={{
                         fontSize: 18, 
                         marginBottom: 4, 
                         color: theme.oppositeTextColor
                     }}>
-                        {!(card?.correct.length > 1) && cardID + 1}{card?.theme && ' - '}{card?.theme}
+                        {!(card?.correct.length > 1) && cardID + 1}{cardID >= (length - 5) ? ` / ${length} ` : ''}{card?.theme && ' - '}{card?.theme}
                     </Text>}
                 </View>
                 <View style={{position: 'absolute', right: 0}}>
