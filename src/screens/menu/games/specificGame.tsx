@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import Parent from "@components/shared/parent"
 import { setLocalTitle } from "@redux/misc"
 import { useEffect, useState } from "react"
-import { Text, View } from "react-native"
+import { Dimensions, Text, View } from "react-native"
 import { 
     getQuestions, 
     getNeverHaveIEver, 
@@ -69,8 +69,6 @@ export default function SpecificGameScreen({ route }: MenuProps<"SpecificGameScr
 }
 
 function Game({game}: GameProps) {
-    const { theme } = useSelector((state: ReduxState) => state.theme)
-    const { lang } = useSelector((state: ReduxState) => state.lang)
     const [mode, setMode] = useState(0)
     const [school, setSchool] = useState(true)
     const [ntnu, setNTNU] = useState(true)
@@ -88,17 +86,16 @@ function Game({game}: GameProps) {
     shuffleArray(game)
 
     return (
-        <View style={{ width: '100%', height: '100%', alignItems: 'center'}}>
+        <View style={{ alignItems: 'center', paddingBottom: Dimensions.get('window').height * 0.5}}>
             <Swiper game={game} mode={mode} school={school} ntnu={ntnu} />
-            {game[0].hasOwnProperty('categories') && null}
-            <Filters 
+            {game[0].hasOwnProperty('categories') && <Filters 
                 mode={mode} 
                 school={school} 
                 ntnu={ntnu} 
                 setMode={setMode} 
                 setSchool={setSchool} 
                 setNTNU={setNTNU} 
-            />
+            />}
         </View>
     )
 }

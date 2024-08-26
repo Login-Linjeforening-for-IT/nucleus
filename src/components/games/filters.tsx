@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react"
-import { Image, Text, TouchableOpacity, View } from "react-native"
+import { Image, Platform, Text, TouchableOpacity, View } from "react-native"
 import { useSelector } from "react-redux"
 
 type FiltersProps = {
@@ -14,7 +14,9 @@ type FiltersProps = {
 export default function Filters({mode, school, ntnu, setMode, setSchool, setNTNU}: FiltersProps) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
-    const paddingHorizontal = lang ? 15 : 25
+    const paddingHorizontal = lang ? 
+        Platform.OS === 'ios' ? 15 : 30 : 
+        Platform.OS === 'ios' ? 25 : 40
 
     function handleModeChange(index: number) {
         setMode(index)
@@ -103,26 +105,26 @@ export default function Filters({mode, school, ntnu, setMode, setSchool, setNTNU
                     }} 
                     onPress={handleNTNUChange}>
                     <Image
-                        style={{width: 50, height: 50, top: -10}} 
+                        style={{width: 50, height: 50, top: Platform.OS === 'ios' ? -10 : -2.5}} 
                         source={require('@assets/icons/NTNU-black.png')} 
                     />
                 </TouchableOpacity>
                 {!school && <View style={{
                     position: 'absolute',
                     backgroundColor: 'red', 
-                    width: 45, 
+                    width: Platform.OS === 'ios' ? 45 : 50, 
                     height: 2,
-                    top: 17,
-                    marginLeft: 4,
+                    top: Platform.OS === 'ios' ? 17 : 23,
+                    marginLeft: Platform.OS === 'ios' ? 4 : 5,
                     transform: [{rotate: '45deg'}],
                 }} />}
                 {!ntnu && <View style={{
                     position: 'absolute',
                     backgroundColor: 'red', 
-                    width: 45, 
+                    width: Platform.OS === 'ios' ? 45 : 50, 
                     height: 2,
-                    top: 17,
-                    right: 55,
+                    top: Platform.OS === 'ios' ? 17 : 25,
+                    right: Platform.OS === 'ios' ? 55 : 81,
                     transform: [{rotate: '45deg'}],
                 }} />}
             </View>

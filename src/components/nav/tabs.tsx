@@ -154,7 +154,7 @@ function Tabs(): JSX.Element {
                         <Image
                             style={MS.bMenuIcon} 
                             source={focused 
-                                ? require("@assets/menu/calendar-orange.png")
+                                ? require("@assets/menu/menu-orange.png")
                                 : isDark
                                     ? require("@assets/menu/menu.png")
                                     : require("@assets/menu/menu-black.png")}

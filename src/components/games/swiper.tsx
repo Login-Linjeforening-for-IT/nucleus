@@ -94,6 +94,9 @@ export default function Swiper({ game, mode, school, ntnu }: GameListContentProp
             // Skip questions based on mode and category
             if (mode === 0) {
                 for (let i = currentIndex - 1; i >= 0; i--) {
+                    if (i < 0) {
+                        return 0
+                    }
                     // @ts-expect-error
                     if (!game[i].categories.includes('Wild')) {
                         return i
@@ -103,6 +106,9 @@ export default function Swiper({ game, mode, school, ntnu }: GameListContentProp
 
             if (mode === 2) {
                 for (let i = currentIndex - 1; i < game.length; i--) {
+                    if (i < 0) {
+                        return 0
+                    }
                     // @ts-expect-error
                     if (game[i].categories.includes('Wild')) {
                         return i
@@ -112,6 +118,9 @@ export default function Swiper({ game, mode, school, ntnu }: GameListContentProp
 
             if (!school) {
                 for (let i = currentIndex - 1; i < game.length; i--) {
+                    if (i < 0) {
+                        return 0
+                    }
                     // @ts-expect-error
                     if (!game[i].categories.includes('School')) {
                         return i
@@ -121,6 +130,9 @@ export default function Swiper({ game, mode, school, ntnu }: GameListContentProp
 
             if (!ntnu) {
                 for (let i = currentIndex - 1; i < game.length; i--) {
+                    if (i < 0) {
+                        return 0
+                    }
                     // @ts-expect-error
                     if (!game[i].categories.includes('NTNU')) {
                         return i
@@ -206,6 +218,7 @@ export default function Swiper({ game, mode, school, ntnu }: GameListContentProp
         const rotate = `${(translateX.value / SCREEN_WIDTH) * 15}deg`
   
         return {
+            top: SCREEN_HEIGHT * 0.16,
             width: SCREEN_WIDTH * 0.85,
             transform: [
                 { translateX: translateX.value },
@@ -429,7 +442,7 @@ export default function Swiper({ game, mode, school, ntnu }: GameListContentProp
                     shadowRadius: 10,
                     elevation: 10,
                     padding: 16,
-                    height: Platform.OS === 'ios' ? SCREEN_HEIGHT * 0.45 : SCREEN_HEIGHT * 0.4,
+                    height: SCREEN_HEIGHT * 0.45,
                     top: SCREEN_HEIGHT * 0.16,
                 }, animatedStyle]}>
                     <Text style={{
