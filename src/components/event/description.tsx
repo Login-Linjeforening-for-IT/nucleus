@@ -1,11 +1,12 @@
 import { useSelector } from "react-redux"
 import Embed from "@components/event/embed"
-import { useMemo } from "react"
+import { useContext, useMemo } from "react"
 import Markdown from "react-native-markdown-display"
+import { EventContext } from "@utils/contextProvider"
 
 export default function Description() {
+    const event = useContext(EventContext)
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    const { event } = useSelector((state: ReduxState) => state.event)
     const { lang } = useSelector((state: ReduxState) => state.lang)
 
     const content = useMemo(() => {

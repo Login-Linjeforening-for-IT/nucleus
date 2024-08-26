@@ -5,9 +5,11 @@ import ES from "@styles/eventStyles"
 import { Dimensions, Image, View } from "react-native"
 import { SvgUri } from "react-native-svg"
 import { useSelector } from "react-redux"
+import { useContext } from "react"
+import { EventContext } from "@utils/contextProvider"
 
 export default function SpecificEventImage() {
-    const { event } = useSelector((state: ReduxState) => state.event)
+    const event = useContext(EventContext)
     const { theme } = useSelector((state: ReduxState) => state.theme)
 
     if (event?.event) {

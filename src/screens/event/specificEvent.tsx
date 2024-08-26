@@ -11,10 +11,11 @@ import BasicInfo from "@components/event/basicInfo"
 import DescriptionAndJoin from "@components/event/descriptionAndJoin"
 import { useDispatch } from "react-redux"
 import { fetchEventDetails } from "@utils/fetch"
-import { setHistory, setEvent } from "@redux/event"
+// import { setHistory, setEvent } from "@redux/event"
 import Tag from "@components/shared/tag"
 import { EventScreenProps } from "@type/screenTypes"
 import { useFocusEffect } from "@react-navigation/core"
+import { EventContext } from "@utils/contextProvider"
 
 /**
  *
@@ -23,27 +24,15 @@ import { useFocusEffect } from "@react-navigation/core"
  */
 export default function SpecificEventScreen({ navigation, route: {params: {eventID}} }: EventScreenProps<'SpecificEventScreen'>): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    const { event, history } = useSelector((state: ReduxState) => state.event)
     const [refresh, setRefresh] = useState(false)
+    const [event, setEvent] = useState({} as DetailedEventResponse)
     const dispatch = useDispatch()
 
     useFocusEffect(
         React.useCallback(() => {
-            // History can possibly be undefined if the user already has a 
-            // stored state without this property
-            const currentHistory = history || []
-            const localHistory = [...currentHistory]
-            localHistory.push(eventID)
-            dispatch(setHistory(localHistory))
 
             const onBackPress = () => {
-                if (history.length > 1) {
-                    dispatch(setHistory(history.slice(0, history.length - 1)))
-                }
-                else{
-                    dispatch(setHistory([]))
-                    navigation.goBack()
-                }
+                navigation.goBack()
                 return true
             }
     
@@ -58,15 +47,16 @@ export default function SpecificEventScreen({ navigation, route: {params: {event
 
     useEffect(() => {
         getDetails()
-    }, [history])
+    }, [eventID])
 
     async function getDetails() {
-        const response = await fetchEventDetails(history[history?.length - 1])
+        const response = await fetchEventDetails(eventID)
 
         if (response) {
-            dispatch(setEvent(response))
+            setEvent(response)
             return true
         }
+        else return false
     }
     
     const onRefresh = useCallback(async () => {
@@ -79,27 +69,29 @@ export default function SpecificEventScreen({ navigation, route: {params: {event
     }, [refresh])
 
     return (
-        <Swipe left="EventScreen">
-            <View style={{...ES.sesContent, backgroundColor: theme.background}}>
-                <Space height={Platform.OS=="ios" 
-                    ? Dimensions.get("window").height / 8.5
-                    : Dimensions.get("window").height / 7.5
-                } />
-                <ScrollView 
-                    showsVerticalScrollIndicator={false} 
-                    scrollEventThrottle={100}
-                    refreshControl={<RefreshControl refreshing={refresh} onRefresh={onRefresh} />}
-                >
-                    <Tag event={event?.event} />
-                    <SpecificEventImage />
-                    <Space height={10} />
-                    <Countdown />
-                    <BasicInfo />
-                    <DescriptionAndJoin />
-                    <Text style={{...ES.id, color: theme.oppositeTextColor}}>Event ID: {event?.event?.id}</Text>
-                    <Space height={Dimensions.get("window").height / (Platform.OS === 'ios' ? 3 : 2.75)} />
-                </ScrollView>
-            </View>
-        </Swipe>
+        <EventContext.Provider value={event}>
+            <Swipe left="EventScreen">
+                <View style={{...ES.sesContent, backgroundColor: theme.background}}>
+                    <Space height={Platform.OS=="ios" 
+                        ? Dimensions.get("window").height / 8.5
+                        : Dimensions.get("window").height / 7.5
+                    } />
+                    <ScrollView 
+                        showsVerticalScrollIndicator={false} 
+                        scrollEventThrottle={100}
+                        refreshControl={<RefreshControl refreshing={refresh} onRefresh={onRefresh} />}
+                    >
+                        <Tag event={event?.event} />
+                        <SpecificEventImage />
+                        <Space height={10} />
+                        <Countdown />
+                        <BasicInfo />
+                        <DescriptionAndJoin />
+                        <Text style={{...ES.id, color: theme.oppositeTextColor}}>Event ID: {event?.event?.id}</Text>
+                        <Space height={Dimensions.get("window").height / (Platform.OS === 'ios' ? 3 : 2.75)} />
+                    </ScrollView>
+                </View>
+            </Swipe>
+        </EventContext.Provider>
     )
 }

@@ -37,7 +37,7 @@ JSX.Element {
         <View style={item.highlight && {marginTop: 2, top: -2}}>
             <TouchableOpacity onPress={() => {
                 search && dispatch(toggleSearch())
-                navigation.navigate("SpecificEventScreen", {eventID: item.id})
+                navigation.push("SpecificEventScreen", {eventID: item.id})
             }}>
                 <LinearGradient
                     start={[0, 0.5]}

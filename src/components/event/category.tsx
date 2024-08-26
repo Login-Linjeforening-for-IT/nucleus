@@ -3,11 +3,13 @@ import ES from "@styles/eventStyles"
 import { Text, View } from "react-native"
 import { useSelector } from "react-redux"
 import T from "@styles/text"
+import { EventContext } from "@utils/contextProvider"
+import { useContext } from "react"
 
 export default function Category() {
+    const event = useContext(EventContext)
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
-    const { event } = useSelector((state: ReduxState) => state.event)
     const categoryName = lang 
         ? event?.category?.name_en || event?.category?.name_no  
         : event?.category?.name_no || event?.category?.name_en

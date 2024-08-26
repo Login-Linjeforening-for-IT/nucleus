@@ -3,6 +3,8 @@ import { useSelector } from "react-redux"
 import ES from "@styles/eventStyles"
 import T from "@styles/text"
 import { SUPPORT_MAIL } from "@/constants"
+import { EventContext } from "@utils/contextProvider"
+import { useContext } from "react"
 
 type handleLinkProps = {
     mazemap_campus_id: number | null
@@ -12,9 +14,9 @@ type handleLinkProps = {
 }
 
 export default function Map() {
+    const event = useContext(EventContext)
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
-    const { event } = useSelector((state: ReduxState) => state.event)
     if(!event?.location || event?.location?.type != 'mazemap'){
         return <></>
     }
