@@ -81,8 +81,16 @@ export function AdBanner({url}: {url: string | undefined}) {
     }
 
     if (validFileType(url) && !url?.startsWith("http")) {
-        return <Image 
-            style={AS.adBanner}
+        const [width, setWidth] = useState(1)
+        const [height, setHeight] = useState(1)
+        useEffect(() => {
+            Image.getSize(`${CDN}ads/${url}`, (width, height) => {
+                setWidth(width)
+                setHeight(height)
+            })
+        }), [url]
+        return <Image
+            style={{...AS.adBanner, aspectRatio: width / height}}
             source={{uri: `${CDN}ads/${url}`}}
         />
     }

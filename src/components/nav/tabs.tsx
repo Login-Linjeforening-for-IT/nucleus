@@ -173,7 +173,6 @@ function Tabs(): JSX.Element {
  * @returns Application with navigation
  */
 export default function Navigator(): JSX.Element {
-    console.log(SystemUI)
     SystemUI.setBackgroundColorAsync("black");
 
     const config: TransitionSpec = {
