@@ -1,7 +1,8 @@
-import { Dimensions, ScrollView, Text, TouchableOpacity, View } from "react-native"
+import { Dimensions, Text, TouchableOpacity, View } from "react-native"
 import ReadOnly from "./readonly"
 import { useSelector } from "react-redux"
 import { Dispatch, SetStateAction, useEffect, useState } from "react"
+import { ScrollView } from "react-native-gesture-handler"
 import Markdown from "./markdown"
 import ThumbsUp from "./thumbsUp"
 import ThumbsDown from "./thumbsDown"
@@ -88,7 +89,7 @@ export default function CourseContent({course, clicked, setClicked, cardID, setC
             <ScrollView
                 showsVerticalScrollIndicator={false} 
                 scrollEventThrottle={100}
-                style={{maxHeight: height * 0.7 }}
+                style={{maxHeight: height * 0.7}}
             >
                 <Card 
                     card={card}
@@ -182,7 +183,6 @@ function Card({card, cardID, shuffledAlternatives, indexMapping, length, handleP
 }
 
 function CardFooter({votes, clicked, setClicked, correct}: CardFooterProps) {
-    const width = Dimensions.get("window").width
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const solved = correct?.every((current) => clicked.includes(current)) || 0

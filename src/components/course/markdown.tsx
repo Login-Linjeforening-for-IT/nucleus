@@ -10,7 +10,7 @@ export default function Markdown({text}: {text: string}) {
             rules={rules} 
             style={{
                 fence: {
-                    backgroundColor: theme.contrast,
+                    backgroundColor: theme.dark,
                     padding: 10,
                     borderRadius: 8,
                     overflow: 'hidden',

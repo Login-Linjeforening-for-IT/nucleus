@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Text, View, Dimensions } from 'react-native'
+import { Text, View, Dimensions, Platform } from 'react-native'
 import { PanGestureHandler } from 'react-native-gesture-handler'
 import Animated, {
     useAnimatedGestureHandler,
@@ -144,15 +144,15 @@ export default function Swiper({ game, mode, school, ntnu }: GameListContentProp
 
     function resetTranslateX() {
         setTimeout(() => {
-            translateX.value = 0;
-        }, 400);
-    };
+            translateX.value = 0
+        }, 400)
+    }
 
     function resetTranslateX200ms() {
         setTimeout(() => {
-            translateX.value = 0;
-        }, 200);
-    };
+            translateX.value = 0
+        }, 200)
+    }
 
     const gestureHandler = useAnimatedGestureHandler({
         onStart: (_, context) => {
@@ -169,12 +169,12 @@ export default function Swiper({ game, mode, school, ntnu }: GameListContentProp
                 translateX.value = withSpring(SCREEN_WIDTH * 1.1, {}, () => {
                     // Resets the position after the card is swiped
                 })
-                runOnJS(resetTranslateX)();
+                runOnJS(resetTranslateX)()
             } else if (event.translationX < -SWIPE_THRESHOLD) {
                 translateX.value = withSpring(-SCREEN_WIDTH - 10, {}, () => {
                     runOnJS(onSwipeLeft)()
                 })
-                runOnJS(resetTranslateX200ms)();
+                runOnJS(resetTranslateX200ms)()
             } else {
                 // No significant swipe, reset position
                 translateX.value = withSpring(0)
@@ -429,7 +429,7 @@ export default function Swiper({ game, mode, school, ntnu }: GameListContentProp
                     shadowRadius: 10,
                     elevation: 10,
                     padding: 16,
-                    height: SCREEN_HEIGHT * 0.45,
+                    height: Platform.OS === 'ios' ? SCREEN_HEIGHT * 0.45 : SCREEN_HEIGHT * 0.4,
                     top: SCREEN_HEIGHT * 0.16,
                 }, animatedStyle]}>
                     <Text style={{
@@ -474,9 +474,7 @@ export default function Swiper({ game, mode, school, ntnu }: GameListContentProp
                     {getPreviousIndex(currentIndex + 1)}
                 </Text>
                 <GameContent game={
-                    game[getPreviousIndex(currentIndex)] != undefined 
-                        ? game[getPreviousIndex(currentIndex)] 
-                        : game[getPreviousIndex(currentIndex + 1)]
+                    game[getPreviousIndex(currentIndex + 1)]
                 } />
             </Animated.View>
         </View>
@@ -490,7 +488,7 @@ function GameContent({ game }: GameContentProps) {
     return (
         <View>
             <Text style={{color: theme.textColor, fontSize: 20, margin: 8}}>
-                {lang ? game.title_no : game.title_en}
+                {lang ? game?.title_no : game?.title_en}
             </Text>
         </View>
     )

@@ -4,8 +4,9 @@ import Parent from "@components/shared/parent"
 import { setLocalTitle } from "@redux/misc"
 import { getCourse } from "@utils/course"
 import { useCallback, useEffect, useState } from "react"
-import { RefreshControl, ScrollView, Text } from "react-native"
+import { RefreshControl, Text } from "react-native"
 import Swipeable from "@components/course/swipeable"
+import { ScrollView } from "react-native-gesture-handler"
 
 export default function SpecificCourseScreen({ route }: MenuProps<"SpecificCourseScreen">): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
@@ -15,7 +16,7 @@ export default function SpecificCourseScreen({ route }: MenuProps<"SpecificCours
     const [clicked, setClicked] = useState<number[]>([])
     const dispatch = useDispatch()
 
-    if (route.params.courseID !== localTitle.title) {
+    if (route.params.courseID !== localTitle?.title) {
         dispatch(setLocalTitle({title: route.params.courseID, screen: "SpecificCourseScreen"}))
     }
 
@@ -50,6 +51,7 @@ export default function SpecificCourseScreen({ route }: MenuProps<"SpecificCours
             <ScrollView
                 showsVerticalScrollIndicator={false} 
                 scrollEventThrottle={100}
+                style={{paddingVertical: 10, bottom: 10}}
             >
             <RefreshControl refreshing={refresh} onRefresh={onRefresh} />
             {typeof course === 'string' 

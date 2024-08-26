@@ -243,7 +243,7 @@ export default function Swiper({ course, clicked, setClicked }: CourseContentPro
     })
 
     const animatedHiddenCardStyle = useAnimatedStyle(() => {
-        if (translateX.value > 0 || cardID === 0) {
+        if (translateX.value > 0) {
             return {}
         }
 
@@ -267,7 +267,7 @@ export default function Swiper({ course, clicked, setClicked }: CourseContentPro
     })
   
     return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', height: '100%', marginBottom: 10, paddingBottom: 10 }}>
             {/* Fifth card */}
             <Animated.View style={[{
                 position: 'absolute',
@@ -367,7 +367,7 @@ export default function Swiper({ course, clicked, setClicked }: CourseContentPro
             </PanGestureHandler>
 
             {/* Previous (hidden) card */}
-            <Animated.View style={[{
+            {cardID !== 0 && <Animated.View style={[{
                 position: 'absolute',
                 justifyContent: 'center',
                 alignItems: 'center',
@@ -390,7 +390,7 @@ export default function Swiper({ course, clicked, setClicked }: CourseContentPro
                     previous={previous}
                     next={next}
                 />
-            </Animated.View>
+            </Animated.View>}
         </View>
     )
 }
