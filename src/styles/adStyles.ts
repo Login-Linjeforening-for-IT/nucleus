@@ -87,8 +87,6 @@ export const AS = StyleSheet.create({
     },
     adBanner: {
         width: "100%",
-        aspectRatio: 10 / 4,
-        resizeMode: "stretch",
         marginBottom: 12
     },
     adClusterImage: {

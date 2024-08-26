@@ -88,7 +88,7 @@ export default function SpecificAdScreen({navigation, route:{params: {adID}}}: A
                         scrollEventThrottle={100}
                         refreshControl={<RefreshControl refreshing={refresh} onRefresh={onRefresh} />}
                     >
-                        <Cluster marginHorizontal={12} marginVertical={12}>
+                        <Cluster marginHorizontal={12} marginVertical={22}>
                             <AdBanner url={ad?.job?.banner_image} />
                             <AdTitle ad={ad} />
                             <AdInfo ad={ad?.job} />

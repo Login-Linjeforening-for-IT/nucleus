@@ -25,6 +25,7 @@ import SpecificCourseScreen from "@screens/menu/course/specificCourse"
 import SpecificGameScreen from "@screens/menu/games/specificGame"
 import DiceScreen from "@screens/menu/games/dice"
 import Header from "./header"
+import * as SystemUI from 'expo-system-ui';
 import { 
     AdStackParamList, 
     EventStackParamList, 
@@ -37,7 +38,6 @@ import {
     StackCardInterpolationProps, 
     createStackNavigator
 } from "@react-navigation/stack"
-
 
 // Declares Tab to equal CBTN function
 const Root = createStackNavigator<RootStackParamList>()
@@ -173,6 +173,7 @@ function Tabs(): JSX.Element {
  * @returns Application with navigation
  */
 export default function Navigator(): JSX.Element {
+    SystemUI.setBackgroundColorAsync("black");
 
     const config: TransitionSpec = {
         animation: 'timing',
