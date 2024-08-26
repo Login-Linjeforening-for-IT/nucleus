@@ -35,8 +35,6 @@ type CardFooterProps = {
 }
 
 export default function CourseContent({course, clicked, setClicked, cardID, setCardID, previous, next}: CourseContentProps) {
-    if (course.mark) return <ReadOnly text={course.textUnreviewed.join('\n')} />
-
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const height = Dimensions.get("window").height
     const [shuffledAlternatives, setShuffledAlternatives] = useState<string[]>([])

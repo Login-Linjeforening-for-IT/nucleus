@@ -11,6 +11,7 @@ import Animated, {
 } from 'react-native-reanimated'
 import { useSelector } from 'react-redux'
 import CourseContent from './content'
+import ReadOnly from './readonly'
 
 type CourseContentProps = {
     course: Course, 
@@ -23,6 +24,8 @@ const { height: SCREEN_HEIGHT } = Dimensions.get('window')
 const SWIPE_THRESHOLD = SCREEN_WIDTH * 0.25
 
 export default function Swiper({ course, clicked, setClicked }: CourseContentProps) {
+    if (course.mark) return <ReadOnly text={course.textUnreviewed.join('\n')} />
+
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const [currentIndex, setCurrentIndex] = useState(0)
     const translateX = useSharedValue(0)  
