@@ -16,28 +16,19 @@ import { setAd, setHistory } from "@redux/ad"
 import { fetchAdDetails } from "@utils/fetch"
 import { AdScreenProps } from "@type/screenTypes"
 import { useFocusEffect } from "@react-navigation/core"
+import { AdContext } from "@utils/contextProvider"
   
 export default function SpecificAdScreen({navigation, route:{params: {adID}}}: AdScreenProps<'SpecificAdScreen'>): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    const { ad, history } = useSelector((state: ReduxState) => state.ad )
+    const [ad, setAd] = useState({} as DetailedAdResponse)
     const [refresh, setRefresh] = useState(false)
 
     const dispatch = useDispatch()
 
     useFocusEffect(
         React.useCallback(() => {
-            let localHistory = [...history]
-            localHistory.push(adID)
-            dispatch(setHistory(localHistory))
-
             const onBackPress = () => {
-                if (history.length > 1) {
-                    dispatch(setHistory(history.slice(0, history.length-1)))
-                }
-                else{
-                    dispatch(setHistory([]))
-                    navigation.goBack()
-                }
+                navigation.goBack()
                 return true
             }
     
@@ -52,14 +43,14 @@ export default function SpecificAdScreen({navigation, route:{params: {adID}}}: A
 
     useEffect(() => {
         getDetails()
-    }, [history])
+    }, [adID])
 
 
     async function getDetails() {
-        const response = await fetchAdDetails(history[history.length-1])
+        const response = await fetchAdDetails(adID)
 
         if (response){
-            dispatch(setAd(response))
+            setAd(response)
             return true
         }
     }
@@ -75,30 +66,32 @@ export default function SpecificAdScreen({navigation, route:{params: {adID}}}: A
     }, [refresh])
 
     return (
-        <Swipe left="AdScreen">
-            <View>
-                <View style={{
-                    ...AS.content,
-                    backgroundColor: theme.darker,
-                    paddingTop: Dimensions.get("window").height / 9.7,
-                    paddingBottom: Dimensions.get("window").height / 3
-                }}>
-                    <ScrollView 
-                        showsVerticalScrollIndicator={false} 
-                        scrollEventThrottle={100}
-                        refreshControl={<RefreshControl refreshing={refresh} onRefresh={onRefresh} />}
-                    >
-                        <Cluster marginHorizontal={12} marginVertical={22}>
-                            <AdBanner url={ad?.job?.banner_image} />
-                            <AdTitle ad={ad} />
-                            <AdInfo ad={ad?.job} />
-                            <AdDescription ad={ad?.job} />
-                            <AdMedia ad={ad} />
-                            <AdUpdateInfo ad={ad?.job} />
-                        </Cluster>
-                    </ScrollView>
+        <AdContext.Provider value={ad}>
+            <Swipe left="AdScreen">
+                <View>
+                    <View style={{
+                        ...AS.content,
+                        backgroundColor: theme.darker,
+                        paddingTop: Dimensions.get("window").height / 9.7,
+                        paddingBottom: Dimensions.get("window").height / 3
+                    }}>
+                        <ScrollView 
+                            showsVerticalScrollIndicator={false} 
+                            scrollEventThrottle={100}
+                            refreshControl={<RefreshControl refreshing={refresh} onRefresh={onRefresh} />}
+                        >
+                            <Cluster marginHorizontal={12} marginVertical={22}>
+                                <AdBanner url={ad?.job?.banner_image} />
+                                <AdTitle ad={ad} />
+                                <AdInfo ad={ad?.job} />
+                                <AdDescription ad={ad?.job} />
+                                <AdMedia ad={ad} />
+                                <AdUpdateInfo ad={ad?.job} />
+                            </Cluster>
+                        </ScrollView>
+                    </View>
                 </View>
-            </View>
-        </Swipe>
+            </Swipe>
+        </AdContext.Provider>
     )
 }
