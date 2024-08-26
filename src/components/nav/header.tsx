@@ -76,7 +76,7 @@ export default function Header({ options, route, navigation }: HeaderProps): Rea
                 dispatch(setEventHistory([]))
                 navigation.goBack()
             }
-        } else {
+        } else if (SAS) {
             dispatch(setAd(undefined))
 
             if (adHistory?.length > 1) {
@@ -85,6 +85,9 @@ export default function Header({ options, route, navigation }: HeaderProps): Rea
                 dispatch(setEventHistory([]))
                 navigation.goBack()
             }
+        }
+        else {
+            navigation.goBack()
         }
     }
     
