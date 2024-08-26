@@ -91,7 +91,6 @@ export default function Swiper({ course, clicked, setClicked }: CourseContentPro
         },
         onEnd: (event) => {
             if (event.translationX > SWIPE_THRESHOLD) {
-                translateX.value = 0
                 runOnJS(onSwipeRight)()
                 translateX.value = withSpring(SCREEN_WIDTH * 1.1, {}, () => {
                     // Resets the position after the card is swiped
