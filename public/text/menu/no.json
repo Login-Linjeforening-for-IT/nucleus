@@ -29,6 +29,19 @@
         },
         {
             "id": 6, 
+            "nav": "CourseScreen",   
+            "title": "Emner"
+        },
+        {
+            "id": 7, 
+            "nav": "GameScreen",
+            "title": "Spill"
+        }
+    ],
+    "version": "Versjon ",
+    "unusedScreens": [
+        {
+            "id": 6, 
             "nav": "LoginScreen",
             "title": "Logg inn"
         },
@@ -36,19 +49,6 @@
             "id": 7, 
             "nav": "InternalScreen",
             "title": "Vedlikehold"
-        },
-        {
-            "id": 8, 
-            "nav": "CourseScreen",   
-            "title": "Emner"
-        },
-        {
-            "id": 9, 
-            "nav": "GameScreen",
-            "title": "Spill"
         }
-    ],
-    "version": "Versjon ",
-    "unusedScreens": [
     ]
 }
