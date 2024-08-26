@@ -1,27 +1,10 @@
 import { MenuProps } from "@type/screenTypes"
 import { useDispatch, useSelector } from "react-redux"
 import Parent from "@components/shared/parent"
-import { getCourse } from "@utils/course"
-import ThumbsUp from "@components/course/thumbsUp"
-import ThumbsDown from "@components/course/thumbsDown"
 import { setLocalTitle } from "@redux/misc"
-import Markdown from "@components/course/markdown"
-import { 
-    Dispatch, 
-    SetStateAction, 
-    useCallback, 
-    useEffect, 
-    useState 
-} from "react"
-import { 
-    Dimensions, 
-    RefreshControl, 
-    ScrollView, 
-    Text, 
-    TouchableOpacity, 
-    View,
-} from "react-native"
-import ReadOnly from "@components/course/readonly"
+import { getCourse } from "@utils/course"
+import { useCallback, useEffect, useState } from "react"
+import { RefreshControl, ScrollView, Text } from "react-native"
 import Swipeable from "@components/course/swipeable"
 
 export default function SpecificCourseScreen({ route }: MenuProps<"SpecificCourseScreen">): JSX.Element {
@@ -31,7 +14,7 @@ export default function SpecificCourseScreen({ route }: MenuProps<"SpecificCours
     const [course, setCourse] = useState<Course | string>("")
     const [clicked, setClicked] = useState<number[]>([])
     const dispatch = useDispatch()
-    
+
     if (route.params.courseID !== localTitle.title) {
         dispatch(setLocalTitle({title: route.params.courseID, screen: "SpecificCourseScreen"}))
     }
@@ -61,8 +44,9 @@ export default function SpecificCourseScreen({ route }: MenuProps<"SpecificCours
         }
     }, [refresh])
 
+
     return (
-        <Parent left="CourseScreen" paddingHorizontal={6}>
+        <Parent paddingHorizontal={-1}>
             <ScrollView
                 showsVerticalScrollIndicator={false} 
                 scrollEventThrottle={100}
