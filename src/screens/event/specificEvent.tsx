@@ -24,9 +24,14 @@ import { EventContext } from "@utils/contextProvider"
  */
 export default function SpecificEventScreen({ navigation, route: {params: {eventID}} }: EventScreenProps<'SpecificEventScreen'>): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
+    const { lang } = useSelector((state: ReduxState) => state.lang)
     const [refresh, setRefresh] = useState(false)
     const [event, setEvent] = useState({} as DetailedEventResponse)
-    const dispatch = useDispatch()
+
+    useEffect(()=>{
+        navigation.setOptions({title: lang ? event?.event?.name_no || event?.event?.name_en 
+                                           : event?.event?.name_en || event?.event?.name_no})
+    }, [navigation, event])
 
     useFocusEffect(
         React.useCallback(() => {

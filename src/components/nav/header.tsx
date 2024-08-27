@@ -1,25 +1,24 @@
 import GS from '@styles/globalStyles'
-import { PropsWithChildren, ReactNode, useState } from 'react'
+import { PropsWithChildren, ReactNode, useEffect, useState } from 'react'
 import { BlurView } from 'expo-blur'
 import { Dimensions, Platform, View, Text, StatusBar } from 'react-native'
 import { HeaderProps} from '@/interfaces'
 import { useSelector } from 'react-redux'
-import { useRoute } from '@react-navigation/native'
+import { useNavigationState, useRoute } from '@react-navigation/native'
 import { TouchableOpacity } from 'react-native'
 import { Image } from "react-native"
 import MS from '@styles/menuStyles'
 import { useDispatch } from 'react-redux'
-import { setEvent, setHistory as setEventHistory, setTag } from '@redux/event'
+import { setTag } from '@redux/event'
 import getHeight from '@utils/getHeight'
 import getCategories from '@utils/getCategories'
 import { setAd, setHistory as setAdHistory } from '@redux/ad'
 
 export default function Header({ options, route, navigation }: HeaderProps): ReactNode {
-    const { theme } = useSelector((state: ReduxState) => state.theme)
+    const { theme, isDark } = useSelector((state: ReduxState) => state.theme)
     const { lang  } = useSelector((state: ReduxState) => state.lang)
     const { localTitle } = useSelector((state: ReduxState) => state.misc)
-    const { event, tag, history: eventHistory } = useSelector((state: ReduxState) => state.event)
-    const { ad, history: adHistory  } = useSelector((state: ReduxState) => state.ad )
+    const { tag } = useSelector((state: ReduxState) => state.event)
     const dispatch = useDispatch()
     const SES = route.name === "SpecificEventScreen"
     const SAS = route.name === "SpecificAdScreen"
@@ -31,21 +30,14 @@ export default function Header({ options, route, navigation }: HeaderProps): Rea
         ? require('@text/no.json').screens[route.name]
         : require('@text/en.json').screens[route.name]))
     
-    if (!title && SES) {
-        setTitle(event?.event&&Object.keys(event.event).length 
-        ? (lang 
-            ? event.event.name_no || event.event.name_en 
-            : event.event.name_en || event.event.name_no) 
-        : lang ? "Arrangement" : "Event")
-    }
-
-    if (!title && SAS) {
-        setTitle(ad?.job&&Object.keys(ad.job).length 
-        ? (lang 
-            ? ad.job.title_no || ad.job.title_en 
-            : ad.job.title_en || ad.job.title_no) 
-        : lang ? "Jobbannonse" : "Job ad")
-    }
+    useEffect(()=>{
+        if (!title){
+            if (SES) {
+                setTitle(options.title || lang ? "Arrangement" : "Event") 
+            }
+            else if (SAS) {
+                setTitle(options.title || lang ? "Jobbanonse" : "Job ad")
+    }}}, [options])
 
     if (route.name === localTitle?.screen && localTitle.title !== title) {
         setTitle(localTitle.title)
@@ -55,7 +47,6 @@ export default function Header({ options, route, navigation }: HeaderProps): Rea
         return <></>
     }
 
-    const { isDark } = useSelector((state: ReduxState) => state.theme )
     const  [backIcon, setBackIcon] = useState(isDark 
         ? require('@assets/icons/goback777.png')
         : require('@assets/icons/goback111.png'))
@@ -67,25 +58,7 @@ export default function Header({ options, route, navigation }: HeaderProps): Rea
             dispatch(setTag({ title: "", body: "" }))
         }
 
-        if (SES){
-            dispatch(setEvent(undefined))
-
-            if (eventHistory.length > 1) {
-                dispatch(setEventHistory(eventHistory.slice(0, eventHistory.length-1)))
-            } else {
-                dispatch(setEventHistory([]))
-                navigation.goBack()
-            }
-        } else {
-            dispatch(setAd(undefined))
-
-            if (adHistory?.length > 1) {
-                dispatch(setAdHistory(adHistory.slice(0, adHistory.length - 1)))
-            } else {
-                dispatch(setEventHistory([]))
-                navigation.goBack()
-            }
-        }
+        navigation.goBack()
     }
     
     return (

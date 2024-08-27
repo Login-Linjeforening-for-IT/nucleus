@@ -20,10 +20,12 @@ import { AdContext } from "@utils/contextProvider"
   
 export default function SpecificAdScreen({navigation, route:{params: {adID}}}: AdScreenProps<'SpecificAdScreen'>): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
+    const { lang } = useSelector((state: ReduxState) => state.lang)
     const [ad, setAd] = useState({} as DetailedAdResponse)
     const [refresh, setRefresh] = useState(false)
 
-    const dispatch = useDispatch()
+    navigation.setOptions({title: lang ? ad?.job?.title_no || ad?.job?.title_en 
+        : ad?.job?.title_en || ad?.job?.title_no})
 
     useFocusEffect(
         React.useCallback(() => {
