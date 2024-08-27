@@ -5,7 +5,9 @@ GoogleService-Info.plist
 
 # vscode
 .vscode
-android
+# android 
+android/app/google-services.json
+
 ios
 *.aab
 *.ipa
