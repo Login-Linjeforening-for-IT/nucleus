@@ -49,7 +49,16 @@ export const NotificationSlice = createSlice({
      */
     initialState: {
         // Boolean for whether notifications has been allowed
-        allowed:            false,
+        ALLOWED:            false,
+        IMPORTANT:          false,
+        TEKKOM:             false,
+        CTF:                false,
+        SOCIAL:             false,
+        BEDPRES:            false,
+        KARRIEREDAG:        false,
+        FADDERUKA:          false,
+        LOGIN:              false,
+        ANNET:              false,
         
         // Category - (10m, 30m, 1h, 2h, 3h, 6h, 1d, 2d, 1w)
         tekkom:             [false],
