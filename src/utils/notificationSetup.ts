@@ -8,7 +8,7 @@ import { PermissionsAndroid } from "react-native"
 
 type initializeNotificationsProps = {
     shouldRun: boolean
-    hasBeenSet: boolean[]
+    hasBeenSet: boolean
     setShouldSetupNotifications: React.Dispatch<React.SetStateAction<boolean>>
     dispatch: Dispatch<UnknownAction>
 }
@@ -21,7 +21,7 @@ type initializeNotificationsProps = {
  */
 export default function initializeNotifications ({shouldRun, hasBeenSet, 
 setShouldSetupNotifications, dispatch }: initializeNotificationsProps) {
-    if (shouldRun && !hasBeenSet[1]) {
+    if (shouldRun && !hasBeenSet) {
         dispatch(resetTheme())
         notificationSetup()
         setShouldSetupNotifications(false) 
