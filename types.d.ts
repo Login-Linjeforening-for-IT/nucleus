@@ -282,6 +282,15 @@ type NotificationProps = {
 
     // Boolean for whether notifications has been setup
     SETUP:              boolean
+    IMPORTANT:          boolean
+    TEKKOM:             boolean
+    CTF:                boolean
+    SOCIAL:             boolean
+    BEDPRES:            boolean
+    KARRIEREDAG:        boolean
+    FADDERUKA:          boolean
+    LOGIN:              boolean
+    ANNET:              boolean
     
     // Category - (10m, 30m, 1h, 2h, 3h, 6h, 1d, 2d, 1w)
     tekkom:             boolean[]
