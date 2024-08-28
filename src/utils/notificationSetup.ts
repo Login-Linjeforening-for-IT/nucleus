@@ -4,6 +4,7 @@ import messaging from "@react-native-firebase/messaging"
 import subscribeToTopic from "@utils/subscribeToTopic"
 import { Dispatch, UnknownAction } from "redux"
 import { resetTheme } from "@redux/theme"
+import { PermissionsAndroid } from "react-native"
 
 type initializeNotificationsProps = {
     shouldRun: boolean
@@ -46,5 +47,11 @@ export async function notificationSetup() {
 }
 
 export async function requestNotificationPermission() {
-    await messaging().requestPermission()
+    if(await messaging().requestPermission()){
+        const status = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS)
+        if (status === PermissionsAndroid.RESULTS.GRANTED) {
+            return true
+        }
+        // TODO: Handle denied permission and request to never prompt again
+    }
 }
