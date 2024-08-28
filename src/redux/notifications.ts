@@ -43,112 +43,24 @@ type NotificationCategory =
 export const NotificationSlice = createSlice({
     // Slice name
     name: "notification",
-    // Initial states, the user will recieve notifications for truthy values.
+    /**
+     * Notification categories.
+     * Initial states, the user will recieve notifications for truthy values.
+     */
     initialState: {
-
-        /**
-         * Notification categories.
-         */
-
-        SETUP:             [false, true],
-        IMPORTANT:          [true, true],
-        TEKKOM:             [true, true],
-        CTF:                [true, true],
-        SOCIAL:             [true, true],
-        BEDPRES:            [true, true],
-        KARRIEREDAG:        [true, true],
-        FADDERUKA:          [true, true],
-        LOGIN:              [true, true],
-        ANNET:              [true, true],
-
-        // Notification preferences - for automatic notifications
-
-        // TekKom
-        tekkom10m:          [false, true],
-        tekkom30m:          [false, true],
-        tekkom1h:           [false, true],
-        tekkom2h:           [false, true],
-        tekkom3h:           [false, true],
-        tekkom6h:           [false, true],
-        tekkom1d:           [false, true],
-        tekkom2d:           [false, true],
-
-        // Ctf
-        ctf10m:             [false, true],
-        ctf30m:             [false, true],
-        ctf1h:              [false, true],
-        ctf2h:              [false, true],
-        ctf3h:              [false, true],
-        ctf6h:              [false, true],
-        ctf1d:              [false, true],
-        ctf2d:              [false, true],
-
-        // Social
-        social10m:          [false, true],
-        social30m:          [false, true],
-        social1h:           [false, true],
-        social2h:           [false, true],
-        social3h:           [false, true],
-        social6h:           [false, true],
-        social1d:           [false, true],
-        social2d:           [false, true],
-        social1w:           [false, true],
-
-        // Karrieredag
-        karrieredag10m:     [false, true],
-        karrieredag30m:     [false, true],
-        karrieredag1h:      [false, true],
-        karrieredag2h:      [false, true],
-        karrieredag3h:      [false, true],
-        karrieredag6h:      [false, true],
-        karrieredag1d:      [false, true],
-        karrieredag2d:      [false, true],
-        karrieredag1w:      [false, true],
-
-        // Fadderuka
-        fadderuka10m:       [false, true],
-        fadderuka30m:       [false, true],
-        fadderuka1h:        [false, true],
-        fadderuka2h:        [false, true],
-        fadderuka3h:        [false, true],
-        fadderuka6h:        [false, true],
-        fadderuka1d:        [false, true],
-        fadderuka2d:        [false, true],
-        fadderuka1w:        [false, true],
-
-        // Bedpres
-        bedpres10m:         [false, true],
-        bedpres30m:         [false, true],
-        bedpres1h:          [false, true],
-        bedpres2h:          [false, true],
-        bedpres3h:          [false, true],
-        bedpres6h:          [false, true],
-        bedpres1d:          [false, true],
-        bedpres2d:          [false, true],
-        bedpres1w:          [false, true],
-
-        // Login
-        login10m:           [false, true],
-        login30m:           [false, true],
-        login1h:            [false, true],
-        login2h:            [false, true],
-        login3h:            [false, true],
-        login6h:            [false, true],
-        login1d:            [false, true],
-        login2d:            [false, true],
-        login1w:            [false, true],
-
-        // Annet
-        annet10m:           [false, true],
-        annet30m:           [false, true],
-        annet1h:            [false, true],
-        annet2h:            [false, true],
-        annet3h:            [false, true],
-        annet6h:            [false, true],
-        annet1d:            [false, true],
-        annet2d:            [false, true],
-        annet1w:            [false, true],
-    },
+        // Boolean for whether notifications has been allowed
+        allowed:            false,
+        
+        // Category - (10m, 30m, 1h, 2h, 3h, 6h, 1d, 2d, 1w)
+        tekkom:             [false],
+        ctf:                [false],
+        social:             [false],
+        karrieredag:        [false],
+        fadderuka:          [false],
+        bedpres:            [false],
+        login:              [false],
+        annet:              [false]
+    } as NotificationProps,
 
     // Declares slice reducer
     reducers: {

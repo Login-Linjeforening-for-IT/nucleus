@@ -280,8 +280,8 @@ type CTX = {
 
 type NotificationProps = {
 
-    // Boolean for whether notifications has been setup
-    SETUP:              boolean
+    // Boolean for whether notifications has been allowed
+    allowed:              boolean
     
     // Category - (10m, 30m, 1h, 2h, 3h, 6h, 1d, 2d, 1w)
     tekkom:             boolean[]
