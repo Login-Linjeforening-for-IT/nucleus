@@ -86,11 +86,7 @@ function Content({ state, descriptors, navigation }: FooterProps) {
                 <TouchableOpacity
                     accessibilityRole="button"
                     style={{...MS.bMenuIconTouchableOpacity, paddingLeft: 20}}
-                    onPress={async()=>{
-                        openBrowserAsync(KIOSK_URL).catch((error)=>{
-                            console.log(error)
-                        })
-                    }}
+                    onPress={() => openBrowserAsync(KIOSK_URL)}
                 >
                     <SvgXml
                         width={MS.bMenuIconTouchableOpacity.width - 55}

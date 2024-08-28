@@ -119,9 +119,11 @@ toggleFeedback}: MenuItemProps) {
                 />
             </View>
             {index === setting.length-1 
-            ?   <Text style={{...T.contact, color: theme.oppositeTextColor}}>
-                    {version}
-                </Text>
+            ?   <TouchableOpacity onPress={() => navigation.navigate('InternalScreen')}>
+                    <Text style={{...T.contact, color: theme.oppositeTextColor}}>
+                        {version}
+                    </Text>
+                </TouchableOpacity>
             : null}
         </View>
     )

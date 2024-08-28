@@ -75,7 +75,7 @@ export default function Profile({profile} : ProfileElementprops) {
             </TouchableOpacity>
 
             {show && <ChangeProfileCard
-                    hide={() => {console.log("hidden"); setShow(false)}}
+                    hide={() => setShow(false)}
                     trigger={true}
                 />
             }
