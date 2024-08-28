@@ -41,12 +41,7 @@
     "version": "Versjon ",
     "unusedScreens": [
         {
-            "id": 6, 
-            "nav": "LoginScreen",
-            "title": "Logg inn"
-        },
-        {
-            "id": 7, 
+            "id": 8, 
             "nav": "InternalScreen",
             "title": "Vedlikehold"
         }

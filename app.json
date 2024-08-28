@@ -18,17 +18,6 @@
             "url": "https://u.expo.dev/952a1914-0c53-43e7-b64e-8daab0b3a435"
         },
         "plugins": [
-            [
-                "expo-notifications",
-                {
-                    "icon": "./public/assets/logo/loginText.png",
-                    "color": "#000000",
-                    "sounds": [
-                        "./public/assets/sounds/notificationlogin.wav",
-                        "./public/assets/sounds/notificationsound.wav"
-                    ]
-                }
-            ],
             ["@react-native-firebase/app"],
             [
                 "expo-calendar",
@@ -74,13 +63,20 @@
             },
             "package": "com.login.Login",
             "googleServicesFile": "./google-services.json",
-            "versionCode": 67,
+            "versionCode": 68,
             "permissions": [
                 "NOTIFICATIONS",
                 "READ_CALENDAR",
                 "WRITE_CALENDAR"
             ],
-            "softwareKeyboardLayoutMode":"pan"
+            "softwareKeyboardLayoutMode":"pan",
+            "notification": {
+                "color": "#000000",
+                "sounds": [
+                    "./public/assets/sounds/notificationlogin.wav",
+                    "./public/assets/sounds/notificationsound.wav"
+                ]
+            }
         },
         "web": {
             "favicon": "./public/assets/logo/favicon.ico"

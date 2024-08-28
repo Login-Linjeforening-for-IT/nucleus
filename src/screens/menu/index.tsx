@@ -63,8 +63,6 @@ export default function MenuScreen({ navigation }: MenuProps<'MenuScreen'>): JSX
                 {/* <SmallProfile navigation={navigation} profile={profile} login={login} /> */}
                 {text.setting.map((item, index) => {
                     if (item.nav === "ProfileScreen") return null
-                    if (item.nav === "LoginScreen" && login) return null
-                    if (item.nav === "InternalScreen" && !login) return null
                     return (
                         <MenuItem 
                             index={index}

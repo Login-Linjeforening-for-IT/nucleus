@@ -41,12 +41,7 @@
     "version": "Version ",
     "unusedScreens": [
         {
-            "id": 6, 
-            "nav": "LoginScreen",     
-            "title": "Login"
-        },
-        {
-            "id": 7, 
+            "id": 8, 
             "nav": "InternalScreen",
             "title": "Intranet (verv)"
         }
