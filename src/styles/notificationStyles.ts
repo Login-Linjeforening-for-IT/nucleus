@@ -23,7 +23,8 @@ export const NS = StyleSheet.create({
     },
     error: {
         textAlign: "center",
-        top: "100%"
+        top: "60%",
+        height: 200
     }
 })
 
