@@ -10,6 +10,8 @@ import LangReducer from "@redux/lang"
 import MiscReducer from "@redux/misc"
 import AdReducer from "@redux/ad"
 import { thunk } from "redux-thunk"
+import createMigrate from "redux-persist/es/createMigrate"
+import { version } from "react"
 
 // Combines all reducers
 const reducers = combineReducers({
@@ -31,10 +33,20 @@ const reducers = combineReducers({
     ad: AdReducer
 })
 
+const migrations = createMigrate({
+    // Version 0
+    0: (state) => {
+        // Returns the state
+        return state
+    }
+})
+
   // Function to localstore redux state
 const saveState = {
     // Key property: root
     key: "root",
+    //Version that neeeds to be updated every time the state is changed
+    version: 0,
     // Declares which storage to use, AsyncStorage has most active community
     storage: AsyncStorage,
     // Whitelists the names of the states to save
@@ -47,7 +59,8 @@ const saveState = {
         "notification",
         "profile",
         "theme"
-    ]
+    ],
+    migration: migrations
 }
 
 // Persistor to remember the state
