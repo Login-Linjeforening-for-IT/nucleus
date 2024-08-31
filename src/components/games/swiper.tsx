@@ -88,6 +88,10 @@ export default function Swiper({ game, mode, school, ntnu }: GameListContentProp
     // Function to calculate previous index in a circular manner
     function getPreviousIndex(currentIndex: number) {
         if (!game[0].hasOwnProperty('categories')) {
+            if (currentIndex <= 0) {
+                return currentIndex
+            }
+
             return currentIndex - 1
         }
     
@@ -460,7 +464,7 @@ export default function Swiper({ game, mode, school, ntnu }: GameListContentProp
             </PanGestureHandler>
 
             {/* Previous (hidden) card */}
-            <Animated.View style={[{
+            {currentIndex > 0 && <Animated.View style={[{
                 position: 'absolute',
                 justifyContent: 'center',
                 alignItems: 'center',
@@ -489,7 +493,7 @@ export default function Swiper({ game, mode, school, ntnu }: GameListContentProp
                 <GameContent game={
                     game[getPreviousIndex(currentIndex + 1)]
                 } />
-            </Animated.View>
+            </Animated.View>}
         </View>
     )
 }
