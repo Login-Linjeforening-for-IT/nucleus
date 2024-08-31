@@ -1,4 +1,4 @@
-import { Text, View, Dimensions } from "react-native"
+import { Text, View, Dimensions, Platform } from "react-native"
 import { ScrollView } from "react-native-gesture-handler"
 import Notification from "@/components/settings/notification"
 import ThemeSwitch from "@/components/settings/themeSwitch"
@@ -43,10 +43,11 @@ function Content(): JSX.Element {
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const info = lang ? no.info : en.info
     const height = Dimensions.get("window").height
+    const extraHeight = Platform.OS === 'ios' ? 0 : height > 800 && height < 900 ? 20 : 10
 
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
-            <Space height={Dimensions.get("window").height / 8.1 + 10 + (height > 800 && height < 900 ? 10 : 0)} /> 
+            <Space height={Dimensions.get("window").height / 8.1 + extraHeight} /> 
             <Cluster marginHorizontal={0}>
                 <View style={GS.notificationBack}>
                     <View style={GS.view}>
@@ -110,7 +111,7 @@ function Content(): JSX.Element {
             </Text>
             <Space height={10} />
             <Reminders/>
-            <Space height={Dimensions.get("window").height / 7} />
+            <Space height={Dimensions.get("window").height / (Platform.OS === 'ios' ? 6 : 7)} />
         </ScrollView>
     )
 }

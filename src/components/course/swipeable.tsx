@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, useState } from 'react'
-import { View, Dimensions } from 'react-native'
+import { View, Dimensions, Platform } from 'react-native'
 import { PanGestureHandler } from 'react-native-gesture-handler'
 import Animated, {
     useAnimatedGestureHandler,
@@ -176,7 +176,8 @@ export default function Swiper({ course, clicked, setClicked }: CourseContentPro
 
         return {
             width,
-            height: SCREEN_HEIGHT * (SCREEN_HEIGHT === 592 ? 0.72 
+            height: Platform.OS === 'ios' ? SCREEN_HEIGHT * 0.75 
+                : SCREEN_HEIGHT * (SCREEN_HEIGHT === 592 ? 0.72 
                 : SCREEN_HEIGHT >= 592 && SCREEN_HEIGHT < 700 ? 0.76 
                 : SCREEN_HEIGHT > 800 && SCREEN_HEIGHT <= 900 ? 0.8 
                 : SCREEN_HEIGHT > 900 ? 0.77 : 0.75),
@@ -219,7 +220,8 @@ export default function Swiper({ course, clicked, setClicked }: CourseContentPro
 
         return {
             width,
-            height: SCREEN_HEIGHT * (SCREEN_HEIGHT === 592 ? 0.72 
+            height: Platform.OS === 'ios' ? SCREEN_HEIGHT * 0.75 
+                : SCREEN_HEIGHT * (SCREEN_HEIGHT === 592 ? 0.72 
                 : SCREEN_HEIGHT >= 592 && SCREEN_HEIGHT < 700 ? 0.76 
                 : SCREEN_HEIGHT > 800 && SCREEN_HEIGHT <= 900 ? 0.8 
                 : SCREEN_HEIGHT > 900 ? 0.77 : 0.75),
@@ -243,7 +245,8 @@ export default function Swiper({ course, clicked, setClicked }: CourseContentPro
 
         return {
             width,
-            height: SCREEN_HEIGHT * (SCREEN_HEIGHT === 592 ? 0.72 
+            height: Platform.OS === 'ios' ? SCREEN_HEIGHT * 0.75 
+                : SCREEN_HEIGHT * (SCREEN_HEIGHT === 592 ? 0.72 
                 : SCREEN_HEIGHT >= 592 && SCREEN_HEIGHT < 700 ? 0.76 
                 : SCREEN_HEIGHT > 800 && SCREEN_HEIGHT <= 900 ? 0.8 
                 : SCREEN_HEIGHT > 900 ? 0.77 : 0.75),
@@ -276,12 +279,20 @@ export default function Swiper({ course, clicked, setClicked }: CourseContentPro
     })
   
     return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', height: '100%', marginBottom: 10, paddingBottom: 10 }}>
+        <View style={{ 
+            flex: 1, 
+            justifyContent: 'center', 
+            alignItems: 'center', 
+            height: '100%', 
+            marginBottom: 10, 
+            paddingBottom: 10 
+        }}>
             {/* Fifth card */}
             <Animated.View style={[{
                 position: 'absolute',
                 width: SCREEN_WIDTH * 0.75,
-                height: SCREEN_HEIGHT * (SCREEN_HEIGHT === 592 ? 0.72 
+                height: Platform.OS === 'ios' ? SCREEN_HEIGHT * 0.75 
+                    : SCREEN_HEIGHT * (SCREEN_HEIGHT === 592 ? 0.72 
                     : SCREEN_HEIGHT >= 592 && SCREEN_HEIGHT < 700 ? 0.76 
                     : SCREEN_HEIGHT > 800 && SCREEN_HEIGHT <= 900 ? 0.8 
                     : SCREEN_HEIGHT > 900 ? 0.77 : 0.75),
@@ -364,7 +375,8 @@ export default function Swiper({ course, clicked, setClicked }: CourseContentPro
                     shadowOpacity: 0.3,
                     shadowRadius: 10,
                     elevation: 10,
-                    height: SCREEN_HEIGHT * (SCREEN_HEIGHT === 592 ? 0.72 
+                    height: Platform.OS === 'ios' ? SCREEN_HEIGHT * 0.75 
+                        : SCREEN_HEIGHT * (SCREEN_HEIGHT === 592 ? 0.72 
                         : SCREEN_HEIGHT >= 592 && SCREEN_HEIGHT < 700 ? 0.76 
                         : SCREEN_HEIGHT > 800 && SCREEN_HEIGHT <= 900 ? 0.8 
                         : SCREEN_HEIGHT > 900 ? 0.77 : 0.75),
@@ -393,7 +405,8 @@ export default function Swiper({ course, clicked, setClicked }: CourseContentPro
                 shadowOffset: { width: 0, height: 10 },
                 shadowOpacity: 0.3,
                 shadowRadius: 10,
-                height: SCREEN_HEIGHT * (SCREEN_HEIGHT === 592 ? 0.72 
+                height: Platform.OS === 'ios' ? SCREEN_HEIGHT * 0.75 
+                    : SCREEN_HEIGHT * (SCREEN_HEIGHT === 592 ? 0.72 
                     : SCREEN_HEIGHT >= 592 && SCREEN_HEIGHT < 700 ? 0.76 
                     : SCREEN_HEIGHT > 800 && SCREEN_HEIGHT <= 900 ? 0.8 
                     : SCREEN_HEIGHT > 900 ? 0.77 : 0.75),

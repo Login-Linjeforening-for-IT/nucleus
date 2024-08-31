@@ -113,8 +113,11 @@ export default function Header({ options, route, navigation }: HeaderProps): Rea
                 <View style={GS.innerHeaderViewTwo}>
                 {options.headerComponents?.right?.map((node, index) => (
                     <View style={index === 1
-                        ? {...GS.customMenuIcon, width: Platform.OS === "ios" ? 28 : 5} 
-                        : GS.customMenuIcon} key={index}>{node}
+                        ? {
+                            ...GS.customMenuIcon, 
+                            width: Platform.OS === "ios" ? 28 : 5, 
+                            left: Platform.OS === 'ios' ? 34 : 40
+                        } : {...GS.customMenuIcon, left: 24}} key={index}>{node}
                     </View>
                 ))}
                 </View>

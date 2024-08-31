@@ -6,7 +6,7 @@ import Space, { Line } from "@/components/shared/utils"
 import GS from "@styles/globalStyles"
 import { Contact } from "@/components/about/social"
 import T from "@styles/text"
-import { Text, View, Dimensions } from "react-native"
+import { Text, View, Dimensions, Platform } from "react-native"
 import { ScrollView } from "react-native-gesture-handler"
 import { useSelector } from "react-redux"
 import Swipe from "@components/nav/swipe"
@@ -16,13 +16,14 @@ export default function BusinessScreen(): JSX.Element {
 
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const height = Dimensions.get("window").height
+    const extraHeight = Platform.OS === 'ios' ? 0 : height > 800 && height < 900 ? 20 : 10
 
     return (
         <Swipe left="MenuScreen">
             <View>
                 <View style={{...GS.content, backgroundColor: theme.darker}}>
                     <ScrollView showsVerticalScrollIndicator={false}>
-                        <Space height={Dimensions.get("window").height / 8.1 + 10 + (height > 800 && height < 900 ? 10 : 0)} /> 
+                        <Space height={Dimensions.get("window").height / 8.1 + extraHeight} /> 
                         <Content />
                         <Space height={Dimensions.get("window").height / 7} /> 
                         </ScrollView>

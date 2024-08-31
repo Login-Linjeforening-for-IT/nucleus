@@ -20,6 +20,7 @@ import {
     Dimensions,
     StyleProp,
     ViewStyle,
+    Platform,
 } from "react-native"
 import { ScrollView } from "react-native-gesture-handler"
 import Swipe from "@components/nav/swipe"
@@ -78,8 +79,13 @@ export default function AboutScreen(): JSX.Element {
     const text = lang ? no : en
     const info = text.committeeSection.info
     const height = Dimensions.get("window").height
+    const extraHeight = Platform.OS === 'ios' ? 0 : height > 800 && height < 900 ? 10 : 0
 
     function getOffset() {
+        if (Platform.OS === 'ios') {
+            return 6
+        }
+
         if (height <= 700) {
             return 5
         }
@@ -100,7 +106,7 @@ export default function AboutScreen(): JSX.Element {
             <View>
                 <View style={{...GS.content, backgroundColor: theme.darker}}>
                     <ScrollView showsVerticalScrollIndicator={false}>
-                        <Space height={Dimensions.get("window").height / 8.1 + (height > 800 && height < 900 ? 10 : 0)} /> 
+                        <Space height={Dimensions.get("window").height / 8.1 + extraHeight} /> 
                         <Cluster>
                             <Text style={{...T.bold40, color: theme.textColor}}>
                                 {text.title}

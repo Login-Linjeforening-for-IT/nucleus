@@ -4,7 +4,7 @@ import Parent from "@components/shared/parent"
 import { setLocalTitle } from "@redux/misc"
 import { getCourse } from "@utils/course"
 import { useCallback, useEffect, useState } from "react"
-import { Dimensions, RefreshControl, Text } from "react-native"
+import { Dimensions, Platform, RefreshControl, Text } from "react-native"
 import Swipeable from "@components/course/swipeable"
 import { ScrollView } from "react-native-gesture-handler"
 import T from "@styles/text"
@@ -72,7 +72,7 @@ export default function SpecificCourseScreen({ route }: MenuProps<"SpecificCours
             <ScrollView
                 showsVerticalScrollIndicator={false} 
                 scrollEventThrottle={100}
-                style={{paddingVertical: 10, bottom: 10, paddingTop: paddingtop()}}
+                style={{paddingVertical: 10, bottom: 10, paddingTop: Platform.OS === 'ios' ? undefined : paddingtop()}}
             >
             <RefreshControl refreshing={refresh} onRefresh={onRefresh} />
             {typeof course === 'string' 

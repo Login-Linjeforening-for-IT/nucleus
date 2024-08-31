@@ -9,7 +9,7 @@ import { RefreshControl, ScrollView } from "react-native-gesture-handler"
 import CourseError from "@components/course/courseError"
 import { getCourses } from "@utils/course"
 import { useCallback, useEffect, useState } from "react"
-import { View, Image, TouchableOpacity, Dimensions, Text } from "react-native"
+import { View, Image, TouchableOpacity, Dimensions, Text, Platform } from "react-native"
 import { MenuProps, MenuStackParamList } from "@type/screenTypes"
 import { StackNavigationProp } from "@react-navigation/stack"
 
@@ -43,10 +43,12 @@ export default function CourseScreen({ navigation }: MenuProps<'CourseScreen'>):
         })()
     }, [])
 
+    const extraHeight = Platform.OS === "ios" ? 0 : height > 800 && height < 900 ? 20 : 10
+
     return (
         <Swipe left="MenuScreen">
             <View style={{...GS.content, backgroundColor: theme.darker}}>
-                <Space height={Dimensions.get("window").height / 8.1 + 10 + (height > 800 && height < 900 ? 10 : 0)} /> 
+                <Space height={Dimensions.get("window").height / 8.1 + extraHeight} /> 
                 <ScrollView
                     showsVerticalScrollIndicator={false} 
                     scrollEventThrottle={100}
