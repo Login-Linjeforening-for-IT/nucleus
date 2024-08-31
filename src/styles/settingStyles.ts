@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native"
+import T from "./text"
 
 export const SS = StyleSheet.create({
     // lightSwitchImage in notificationScreen
@@ -10,7 +11,7 @@ export const SS = StyleSheet.create({
     // langSwitch text style in notificationScreen
     langSwitch: {
         left: 12.5,
-        fontSize: 20,
+        ...T.text20,
     },
     // Report button on reportScreen
     button: {

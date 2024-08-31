@@ -1,3 +1,4 @@
+import T from "@styles/text"
 import { Dispatch, SetStateAction } from "react"
 import { Image, Platform, Text, TouchableOpacity, View } from "react-native"
 import { useSelector } from "react-redux"
@@ -51,7 +52,7 @@ export default function Filters({mode, school, ntnu, setMode, setSchool, setNTNU
                         paddingVertical: 2,
                     }} 
                     onPress={() => handleModeChange(0)}>
-                    <Text style={{color: theme.textColor, fontSize: 20}}>
+                    <Text style={{color: theme.textColor, ...T.text20}}>
                         {lang ? 'Snill' : 'Kind'}
                     </Text>
                 </TouchableOpacity>
@@ -62,7 +63,7 @@ export default function Filters({mode, school, ntnu, setMode, setSchool, setNTNU
                         paddingVertical: 2 
                     }} 
                     onPress={() => handleModeChange(1)}>
-                    <Text style={{color: theme.textColor, fontSize: 20}}>
+                    <Text style={{color: theme.textColor, ...T.text20}}>
                         {lang ? 'Blandet' : 'Mix'}
                     </Text>
                 </TouchableOpacity>
@@ -73,7 +74,7 @@ export default function Filters({mode, school, ntnu, setMode, setSchool, setNTNU
                         paddingVertical: 2 
                     }} 
                     onPress={() => handleModeChange(2)}>
-                    <Text style={{color: theme.textColor, fontSize: 20}}>
+                    <Text style={{color: theme.textColor, ...T.text20}}>
                         {lang ? 'Dristig' : 'Bold'}
                     </Text>
                 </TouchableOpacity>
@@ -94,7 +95,7 @@ export default function Filters({mode, school, ntnu, setMode, setSchool, setNTNU
                         paddingVertical: 2 
                     }} 
                     onPress={handleSchoolChange}>
-                    <Text style={{color: theme.textColor, fontSize: 30}}>
+                    <Text style={{color: theme.textColor, ...T.text30}}>
                         🎓
                     </Text>
                 </TouchableOpacity>

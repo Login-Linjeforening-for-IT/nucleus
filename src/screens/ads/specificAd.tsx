@@ -21,8 +21,8 @@ export default function SpecificAdScreen({navigation, route:{params: {adID}}}: A
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { ad, history } = useSelector((state: ReduxState) => state.ad )
     const [refresh, setRefresh] = useState(false)
-
     const dispatch = useDispatch()
+    const height = Dimensions.get("window").height
 
     useFocusEffect(
         React.useCallback(() => {
@@ -80,7 +80,7 @@ export default function SpecificAdScreen({navigation, route:{params: {adID}}}: A
                 <View style={{
                     ...AS.content,
                     backgroundColor: theme.darker,
-                    paddingTop: Dimensions.get("window").height / 9.7,
+                    paddingTop: Dimensions.get("window").height / 9.7 + (height > 800 && height < 900 ? 15 : 0),
                     paddingBottom: Dimensions.get("window").height / 3
                 }}>
                     <ScrollView 

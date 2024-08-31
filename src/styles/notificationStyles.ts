@@ -1,4 +1,5 @@
 import { StyleSheet, Platform } from "react-native"
+import T from "./text"
 
 export const NS = StyleSheet.create({
     notificationBack: {
@@ -12,18 +13,19 @@ export const NS = StyleSheet.create({
     },
     title: {
         maxHeight: Platform.OS === "ios" ? 20 * 3 : 17 * 2.5,
-        fontSize: Platform.OS === "ios" ? 20 : 17,
+        ...T.text20,
     },
     loc: {
-        fontSize: Platform.OS === "ios" ? 15 : 13,
+        ...T.text15,
     },
     time: {
         top: -25,
-        fontSize: 12
+        ...T.text12,
     },
     error: {
         textAlign: "center",
-        top: "100%"
+        top: "60%",
+        height: 200
     }
 })
 

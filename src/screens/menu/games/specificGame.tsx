@@ -12,6 +12,7 @@ import {
 import Swiper from "@components/games/swiper"
 import Filters from "@components/games/filters"
 import { ScrollView } from "react-native-gesture-handler"
+import T from "@styles/text"
 
 type GameProps = {
     game: Question[] | NeverHaveIEver[] | OkRedFlagDealBreaker[]
@@ -22,12 +23,13 @@ export default function SpecificGameScreen({ route }: MenuProps<"SpecificGameScr
     const { localTitle } = useSelector((state: ReduxState) => state.misc)
     const [game, setGame] = useState<Question[] | NeverHaveIEver[] | OkRedFlagDealBreaker[] | string>("")
     const dispatch = useDispatch()
+    const height = Dimensions.get("window").height
 
     useEffect(() => {
-        if (localTitle.screen !== route.params.gameName) {
-            dispatch(setLocalTitle({ title: route.params.gameName, screen: "SpecificGameScreen" }));
+        if (localTitle?.screen !== route.params?.gameName) {
+            dispatch(setLocalTitle({ title: route.params?.gameName, screen: "SpecificGameScreen" }));
         }
-    }, [localTitle.screen, route.params.gameName, dispatch]);
+    }, [localTitle?.screen, route.params?.gameName, dispatch]);
 
     async function fetchGame() {
         const game = await determineGame()
@@ -52,15 +54,36 @@ export default function SpecificGameScreen({ route }: MenuProps<"SpecificGameScr
         })()
     }, [])
 
+    function paddingtop() {
+        if (height <= 592) {
+            return 20
+        }
+
+        if (height > 592 && height < 700) {
+            return 20
+        }
+
+        if (height > 700 && height < 800) {
+            return 17.5
+        }
+        
+        if (height > 800 && height < 900) {
+            return 40
+        }
+        
+        return undefined
+    }
+
     return (
         <Parent paddingHorizontal={-1} colors={[theme.orange, 'red', theme.orange]}>
             <ScrollView
                 showsVerticalScrollIndicator={false} 
                 scrollEventThrottle={100}
                 scrollEnabled={false}
+                style={{ paddingTop: paddingtop() }}
             >
             {typeof game === 'string' 
-                ? <Text style={{ fontSize: 18, color: theme.textColor }}>{game}</Text> 
+                ? <Text style={{ ...T.text18, color: theme.textColor }}>{game}</Text> 
                 : <Game game={game} />
             }
             </ScrollView>

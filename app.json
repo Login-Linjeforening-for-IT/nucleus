@@ -4,7 +4,7 @@
         "owner": "loginapp",
         "name": "Login",
         "slug": "Login",
-        "version": "2.1.4",
+        "version": "2.1.7",
         "orientation": "portrait",
         "icon": "./public/assets/logo/icon.png",
         "userInterfaceStyle": "dark",
@@ -47,7 +47,7 @@
         "ios": {
             "supportsTablet": true,
             "bundleIdentifier": "com.eirikhanasand.Login",
-            "buildNumber": "91",
+            "buildNumber": "95",
             "googleServicesFile": "./GoogleService-Info.plist",
             "infoPlist": {
                 "UIBackgroundModes": [
@@ -63,20 +63,15 @@
             },
             "package": "com.login.Login",
             "googleServicesFile": "./google-services.json",
-            "versionCode": 69,
+            "versionCode": 73,
             "permissions": [
+                "INTERNET",
                 "NOTIFICATIONS",
+                "PUSH_NOTIFICATIONS",
                 "READ_CALENDAR",
                 "WRITE_CALENDAR"
             ],
-            "softwareKeyboardLayoutMode":"pan",
-            "notification": {
-                "color": "#000000",
-                "sounds": [
-                    "./public/assets/sounds/notificationlogin.wav",
-                    "./public/assets/sounds/notificationsound.wav"
-                ]
-            }
+            "softwareKeyboardLayoutMode":"pan"
         },
         "web": {
             "favicon": "./public/assets/logo/favicon.ico"

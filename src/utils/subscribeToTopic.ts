@@ -6,7 +6,7 @@ import messaging from "@react-native-firebase/messaging"
  */
 export default async function subscribeToTopic(topic: string) {
     try {
-        await messaging().subscribeToTopic(topic)
+        await messaging().subscribeToTopic(topic);
         return { result: true, feedback: `Subscribed to ${topic}`}
     } catch (e: any) {
         if (e.message.includes('TOO_MANY_SUBSCRIBERS')) {
