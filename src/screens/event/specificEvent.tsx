@@ -26,6 +26,7 @@ export default function SpecificEventScreen({ navigation, route: {params: {event
     const { event, history } = useSelector((state: ReduxState) => state.event)
     const [refresh, setRefresh] = useState(false)
     const dispatch = useDispatch()
+    const height = Dimensions.get("window").height
 
     useFocusEffect(
         React.useCallback(() => {
@@ -83,7 +84,7 @@ export default function SpecificEventScreen({ navigation, route: {params: {event
             <View style={{...ES.sesContent, backgroundColor: theme.background}}>
                 <Space height={Platform.OS=="ios" 
                     ? Dimensions.get("window").height / 8.5
-                    : Dimensions.get("window").height / 7.5
+                    : Dimensions.get("window").height / 7.5 + (height > 800 && height < 900 ? 15 : 0)
                 } />
                 <ScrollView 
                     showsVerticalScrollIndicator={false} 

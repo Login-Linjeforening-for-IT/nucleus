@@ -1,4 +1,6 @@
-import { StyleSheet, Platform } from "react-native"
+import { StyleSheet, Platform, Dimensions } from "react-native"
+import T from "./text"
+const height = Dimensions.get("window").height
 
 export const MS = StyleSheet.create ({
     // Small headertitle (for multiline)
@@ -8,7 +10,7 @@ export const MS = StyleSheet.create ({
         right: 60,
         justifyContent: "center",
         textAlign: "center",
-        fontSize: 20,
+        ...T.text20,
     },
     // Top menu background view
     topMenu: {
@@ -32,7 +34,10 @@ export const MS = StyleSheet.create ({
     bMenu: {
         position: "absolute",
         top: Platform.OS === "ios" ? "90%" : null,
-        bottom: Platform.OS === "ios" ? null : -30,
+        bottom: Platform.OS === "ios" ? null : 
+            height < 600 ? -15 : 
+            height >= 600 && height < 700 ? -20 : 
+            height >= 700 && height < 800 ? -30 : -50,
         width: "100%",
         height: "12.5%",
         flexDirection: "row",

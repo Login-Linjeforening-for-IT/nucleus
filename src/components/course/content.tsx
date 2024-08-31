@@ -1,11 +1,11 @@
 import { Dimensions, Text, TouchableOpacity, View } from "react-native"
-import ReadOnly from "./readonly"
 import { useSelector } from "react-redux"
 import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { ScrollView } from "react-native-gesture-handler"
 import Markdown from "./markdown"
 import ThumbsUp from "./thumbsUp"
 import ThumbsDown from "./thumbsDown"
+import T from "@styles/text"
 
 type CourseContentProps = {
     course: Course, 
@@ -117,14 +117,14 @@ function Card({card, cardID, shuffledAlternatives, indexMapping, length, handleP
             <View>
                 <View>
                     {card?.correct.length > 1 && <Text style={{
-                        fontSize: 18, 
+                        ...T.text18, 
                         marginBottom: 4, 
                         color: theme.oppositeTextColor
                     }}>
                         {cardID + 1} {cardID >= (length - 5) ? `/ ${length} ` : ''}- Multiple choice
                     </Text>}
                     {<Text style={{
-                        fontSize: 18, 
+                        ...T.text18, 
                         marginBottom: 4, 
                         color: theme.oppositeTextColor
                     }}>
@@ -133,7 +133,7 @@ function Card({card, cardID, shuffledAlternatives, indexMapping, length, handleP
                 </View>
                 <View style={{position: 'absolute', right: 0}}>
                     <Text style={{
-                        fontSize: 18, 
+                        ...T.text18, 
                         marginBottom: 4, 
                         color: theme.oppositeTextColor
                     }}>
@@ -164,12 +164,12 @@ function Card({card, cardID, shuffledAlternatives, indexMapping, length, handleP
                                 color: theme.oppositeTextColor, 
                                 marginLeft: 2, 
                                 marginRight: 4, 
-                                fontSize: 18, 
+                                ...T.text18, 
                                 width: 20
                             }}>
                                 {index + 1}
                             </Text>
-                            <Text style={{color: theme.textColor, fontSize: 18}}>
+                            <Text style={{color: theme.textColor, ...T.text18}}>
                                 {answer}
                             </Text>
                         </TouchableOpacity>
@@ -207,7 +207,7 @@ function CardFooter({votes, clicked, setClicked, correct}: CardFooterProps) {
         }}>
             <View style={{flexDirection: 'row'}}>
                 <Text style={{
-                    fontSize: 18, 
+                    ...T.text18, 
                     color: theme.oppositeTextColor, 
                     top: 2, 
                     marginRight: 2,
@@ -226,7 +226,7 @@ function CardFooter({votes, clicked, setClicked, correct}: CardFooterProps) {
             </View>
             <TouchableOpacity onPress={handleReveal}>
                 <Text style={{
-                    fontSize: 18, 
+                    ...T.text18, 
                     color: theme.oppositeTextColor, 
                     top: 2,
                     marginRight: 5,

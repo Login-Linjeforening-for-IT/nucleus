@@ -1,4 +1,5 @@
 import { StyleSheet, Dimensions, Platform } from "react-native"
+import T from "./text"
 
 export const ES = StyleSheet.create({
     // Middle card view
@@ -19,22 +20,22 @@ export const ES = StyleSheet.create({
     },
     // Eventmonth text on specificEventScreen
     monthText: {
-        fontSize: Platform.OS === "ios" ? 16 : 18,
+        ...T.text16,
     },
     // Eventday text on eventScreen
     eventClusterDayText: {
-        fontSize: Platform.OS === "ios" ? 20 : 22,
+        ...T.text20,
     },
     // Event name text on eventScreen
     title: {
         maxHeight: 48,
-        fontSize: 18,
+        ...T.text18,
         lineHeight: 24
     },
     // Eventlocation text on eventScreen
     loc: {
         top: 3,
-        fontSize: 15,
+        ...T.text15,
         maxHeight: 19
     },
     //======================== SpecificEventScreen ===================
@@ -172,7 +173,7 @@ export const ES = StyleSheet.create({
     },
     id: {
         alignSelf: 'center', 
-        fontSize: 15, 
+        ...T.text15,
         marginVertical: 10
     }
 })

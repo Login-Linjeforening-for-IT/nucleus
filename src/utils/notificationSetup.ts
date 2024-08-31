@@ -47,7 +47,6 @@ export async function notificationSetup() {
 }
 
 export async function requestNotificationPermission() {
-    console.log(Platform.Version)
     try {
         // Check if we're on Android, as POST_NOTIFICATIONS is Android-specific
         if (Platform.OS === 'android' && Platform.Version >= 33) {
@@ -58,8 +57,7 @@ export async function requestNotificationPermission() {
                 const status = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS);
                 
                 if (status === PermissionsAndroid.RESULTS.GRANTED) {
-                    console.log('Notification permission granted.');
-                    return true;
+                    return true
                 } else if (status === PermissionsAndroid.RESULTS.DENIED) {
                     Alert.alert(
                         'Notification Permission Denied',
@@ -76,7 +74,6 @@ export async function requestNotificationPermission() {
                     return false
                 }
             } else {
-                console.log('Notification permission already granted.')
                 return true
             }
         } else {
@@ -87,8 +84,7 @@ export async function requestNotificationPermission() {
             authStatus === messaging.AuthorizationStatus.PROVISIONAL
     
             if (enabled) {
-                console.log('Notification permission granted.');
-                return true;
+                return true
             } else {
                 Alert.alert(
                     'Notification Permission Denied',
@@ -99,7 +95,6 @@ export async function requestNotificationPermission() {
             }
         }
     } catch (error) {
-        console.error('Failed to request notification permission', error);
         Alert.alert(
             'Error',
             'An error occurred while requesting notification permission. Please try again later.',

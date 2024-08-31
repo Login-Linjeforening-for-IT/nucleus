@@ -22,6 +22,7 @@ export default function CourseScreen({ navigation }: MenuProps<'CourseScreen'>):
     const [courses, setCourses] = useState<string | CourseAsList[]>([])
     const { theme } = useSelector((state: ReduxState) => state.theme )
     const [refresh, setRefresh] = useState(false)
+    const height = Dimensions.get("window").height
 
     const onRefresh = useCallback(async () => {
         setRefresh(true)
@@ -45,7 +46,7 @@ export default function CourseScreen({ navigation }: MenuProps<'CourseScreen'>):
     return (
         <Swipe left="MenuScreen">
             <View style={{...GS.content, backgroundColor: theme.darker}}>
-                <Space height={Dimensions.get("window").height / 8} />
+                <Space height={Dimensions.get("window").height / 8.1 + 10 + (height > 800 && height < 900 ? 10 : 0)} /> 
                 <ScrollView
                     showsVerticalScrollIndicator={false} 
                     scrollEventThrottle={100}

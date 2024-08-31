@@ -23,8 +23,6 @@ export default function Header({ options, route, navigation }: HeaderProps): Rea
     const dispatch = useDispatch()
     const SES = route.name === "SpecificEventScreen"
     const SAS = route.name === "SpecificAdScreen"
-    const SCS = route.name === "SpecificCourseScreen"
-    const SGS = route.name === "SpecificGameScreen"
     const orangeIcon = require('@assets/icons/goback-orange.png')
 
     const [title, setTitle] = useState<string>(route.name && (lang
@@ -103,17 +101,22 @@ export default function Header({ options, route, navigation }: HeaderProps): Rea
                     </TouchableOpacity>
                     }
                 </View>
-                <Text style={{...GS.headerTitle, color: theme.titleTextColor, 
-                            width: SES || SAS ? 300 : 150, textAlign: "center", top: title?.length > 30 ? -8 : undefined}}>
-                            {title}
-                        </Text>
-                    <View style={GS.innerHeaderViewTwo}>
-                    {options.headerComponents?.right?.map((node, index) => (
-                        <View style={index === 1
-                            ? {...GS.customMenuIcon, width: Platform.OS === "ios" ? 28 : 5} 
-                            : GS.customMenuIcon} key={index}>{node}
-                        </View>
-                    ))}
+                <Text style={{
+                    ...GS.headerTitle, 
+                    color: theme.titleTextColor, 
+                    width: 300, 
+                    textAlign: "center", 
+                    top: title?.length > 30 ? -8 : undefined
+                }}>
+                    {title}
+                </Text>
+                <View style={GS.innerHeaderViewTwo}>
+                {options.headerComponents?.right?.map((node, index) => (
+                    <View style={index === 1
+                        ? {...GS.customMenuIcon, width: Platform.OS === "ios" ? 28 : 5} 
+                        : GS.customMenuIcon} key={index}>{node}
+                    </View>
+                ))}
                 </View>
             </View>
             {options.headerComponents?.bottom?.map((node, index) => 

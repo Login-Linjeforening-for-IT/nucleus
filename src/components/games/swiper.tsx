@@ -1,5 +1,6 @@
+import T from '@styles/text'
 import { useState } from 'react'
-import { Text, View, Dimensions, Platform } from 'react-native'
+import { Text, View, Dimensions } from 'react-native'
 import { PanGestureHandler } from 'react-native-gesture-handler'
 import Animated, {
     useAnimatedGestureHandler,
@@ -419,7 +420,7 @@ export default function Swiper({ game, mode, school, ntnu }: GameListContentProp
                     position: 'absolute', 
                     bottom: 15, 
                     left: 15, 
-                    fontSize: 20, 
+                    ...T.text20, 
                     color: theme.orange, 
                     fontWeight: '600'
                 }}>
@@ -448,7 +449,7 @@ export default function Swiper({ game, mode, school, ntnu }: GameListContentProp
                         position: 'absolute', 
                         bottom: 15, 
                         left: 15, 
-                        fontSize: 20, 
+                        ...T.text20, 
                         color: theme.orange, 
                         fontWeight: '600'
                     }}>
@@ -479,7 +480,7 @@ export default function Swiper({ game, mode, school, ntnu }: GameListContentProp
                     position: 'absolute', 
                     bottom: 15, 
                     left: 15, 
-                    fontSize: 20, 
+                    ...T.text20, 
                     color: theme.orange, 
                     fontWeight: '600'
                 }}>
@@ -499,7 +500,7 @@ function GameContent({ game }: GameContentProps) {
 
     return (
         <View>
-            <Text style={{color: theme.textColor, fontSize: 20, margin: 8}}>
+            <Text style={{color: theme.textColor, ...T.text20, margin: 8}}>
                 {lang ? game?.title_no : game?.title_en}
             </Text>
         </View>

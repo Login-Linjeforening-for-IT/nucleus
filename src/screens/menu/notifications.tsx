@@ -22,6 +22,7 @@ import { RefreshControl, ScrollView } from "react-native-gesture-handler"
 import { Swipeable } from 'react-native-gesture-handler'
 import TrashCan from "@components/menu/navigation"
 import { NotificationSeperator } from "@components/event/seperator"
+import T from "@styles/text"
 
 type NotificationModalProps = {
     item: NotificationListProps
@@ -274,7 +275,7 @@ function List({list, setList, hideOld, setHideOld, readIndex}: NotificationList)
         <>
             {readIndex > 0 && <NotificationSeperator text={lang ? "Nye" : "New"} />}
             {list.map((item, index) => <Notification key={index} list={list} item={item} id={index} setList={setList} hideOld={hideOld} setHideOld={setHideOld} readIndex={readIndex} />)}
-            <Text style={{alignSelf: 'center', fontSize: 12, marginVertical: 10, color: theme.oppositeTextColor}}>{text}</Text>
+            <Text style={{alignSelf: 'center', ...T.text12, marginVertical: 10, color: theme.oppositeTextColor}}>{text}</Text>
             <Space height={offset} />
         </>
     )

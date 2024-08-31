@@ -33,7 +33,7 @@ export default function CategorySquare({color, startDate, endDate}: CategorySqua
             justifyContent: 'center',
             alignItems: 'center',
         }}>
-            <Text style={{fontSize: Platform.OS === "ios" ? 20 : 22, color: theme.textColor}}>
+            <Text style={{...T.text20, color: theme.textColor}}>
                 {startDay}
                 {multiday && "-" + endDay}
             </Text>

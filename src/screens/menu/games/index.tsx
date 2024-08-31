@@ -28,6 +28,7 @@ export default function GameScreen({ navigation }: MenuProps<'GameScreen'>): JSX
     const { theme } = useSelector((state: ReduxState) => state.theme )
     const { lang } = useSelector((state: ReduxState) => state.lang )
     const [refresh, setRefresh] = useState(false)
+    const height = Dimensions.get("window").height
 
     const onRefresh = useCallback(async () => {
         setRefresh(true)
@@ -51,7 +52,7 @@ export default function GameScreen({ navigation }: MenuProps<'GameScreen'>): JSX
     return (
         <Swipe left="MenuScreen">
             <View style={{...GS.content, backgroundColor: theme.darker}}>
-                <Space height={Dimensions.get("window").height / 8} />
+                <Space height={Dimensions.get("window").height / 8.1 + 10 + (height > 800 && height < 900 ? 10 : 0)} /> 
                 <ScrollView
                     showsVerticalScrollIndicator={false} 
                     scrollEventThrottle={100}

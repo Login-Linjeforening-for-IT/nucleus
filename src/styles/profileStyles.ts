@@ -1,4 +1,5 @@
 import { StyleSheet, Dimensions } from "react-native"
+import T from "./text"
 
 export const PS = StyleSheet.create({
     content: {
@@ -78,7 +79,7 @@ export const PS = StyleSheet.create({
         height: 35,
         borderRadius: 20,
         top: 25,
-        fontSize: 20,
+        ...T.text20
     },
     animatedView: {
         top: -Dimensions.get("window").height / 4,

@@ -11,7 +11,7 @@ import no from "@text/menu/no.json"
 import T from "@styles/text"
 import LogoNavigation from "@/components/shared/logoNavigation"
 import Text from "@components/shared/text"
-import { View, Image, TouchableOpacity, Dimensions } from "react-native"
+import { View, Image, TouchableOpacity, Dimensions, Platform } from "react-native"
 import { ItemProps, MenuProps, MenuStackParamList } from "@type/screenTypes"
 import { NavigationProp } from "@react-navigation/native"
 import NotificationIcon from "@components/notification/notificationIcon"
@@ -37,6 +37,7 @@ export default function MenuScreen({ navigation }: MenuProps<'MenuScreen'>): JSX
     state.profile )
     const profile = { id, name, image }
     const text: Setting = lang ? no as Setting : en as Setting
+    const height = Dimensions.get("window").height
 
     // Feedback options visibility boolean
     const [feedback, setFeedback] = useState(false)
@@ -59,7 +60,7 @@ export default function MenuScreen({ navigation }: MenuProps<'MenuScreen'>): JSX
                 ...GS.content, 
                 backgroundColor: theme.darker
             }}>
-                <Space height={Dimensions.get("window").height / 8} />
+                <Space height={height / (Platform.OS === 'ios' ? 8 : height > 800 && height < 900 ? 6.5 : 8)} />
                 {/* <SmallProfile navigation={navigation} profile={profile} login={login} /> */}
                 {text.setting.map((item, index) => {
                     if (item.nav === "ProfileScreen") return null
@@ -76,7 +77,7 @@ export default function MenuScreen({ navigation }: MenuProps<'MenuScreen'>): JSX
                         />
                     )
                 })}
-                <Space height={Dimensions.get("window").height / 10} /> 
+                <Space height={height / 10} /> 
             </View>
         </Swipe>
     )

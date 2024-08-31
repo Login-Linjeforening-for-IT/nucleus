@@ -42,11 +42,11 @@ function Content(): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const info = lang ? no.info : en.info
+    const height = Dimensions.get("window").height
 
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
-            <Space height={10} /> 
-            <Space height={Dimensions.get("window").height / 8.1} /> 
+            <Space height={Dimensions.get("window").height / 8.1 + 10 + (height > 800 && height < 900 ? 10 : 0)} /> 
             <Cluster marginHorizontal={0}>
                 <View style={GS.notificationBack}>
                     <View style={GS.view}>

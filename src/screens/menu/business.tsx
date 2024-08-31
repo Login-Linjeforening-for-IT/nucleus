@@ -15,13 +15,14 @@ import { TextWithLinks } from "@components/shared/link"
 export default function BusinessScreen(): JSX.Element {
 
     const { theme } = useSelector((state: ReduxState) => state.theme)
+    const height = Dimensions.get("window").height
 
     return (
         <Swipe left="MenuScreen">
             <View>
                 <View style={{...GS.content, backgroundColor: theme.darker}}>
                     <ScrollView showsVerticalScrollIndicator={false}>
-                        <Space height={Dimensions.get("window").height / 8.1 + 10} /> 
+                        <Space height={Dimensions.get("window").height / 8.1 + 10 + (height > 800 && height < 900 ? 10 : 0)} /> 
                         <Content />
                         <Space height={Dimensions.get("window").height / 7} /> 
                         </ScrollView>
@@ -34,6 +35,7 @@ export default function BusinessScreen(): JSX.Element {
 function Content(): JSX.Element {
     const { theme, isDark } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
+    const height = Dimensions.get("window").height
     const info = lang ? no.companies : en.companies
     const color = theme.textColor
     const orange = theme.orange
@@ -97,8 +99,8 @@ function Content(): JSX.Element {
             />
 
             <Space height={10} /> 
-
             <Contact/>
+            <Space height={height <= 700 ? 30 : 10} />
         </Cluster>
     )
 }

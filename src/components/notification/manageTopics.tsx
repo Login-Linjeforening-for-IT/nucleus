@@ -30,9 +30,8 @@ export default function ManageTopics() {
             return
         }
         
-        console.log('handleAction bf', text, mode, result, 'nu')
         const topic = await TopicManager({topic: text, unsub: !mode})
-        console.log('topic: ', topic)
+
         if (topic) {
             setResult(topic)
             setDisplay(true)

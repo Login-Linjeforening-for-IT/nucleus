@@ -95,9 +95,7 @@ export default function Swiper({ course, clicked, setClicked }: CourseContentPro
         onEnd: (event) => {
             if (event.translationX > SWIPE_THRESHOLD) {
                 runOnJS(onSwipeRight)()
-                translateX.value = withSpring(SCREEN_WIDTH * 1.1, {}, () => {
-                    // Resets the position after the card is swiped
-                })
+                translateX.value = withSpring(SCREEN_WIDTH * 1.2)
                 runOnJS(resetTranslateX)();
             } else if (event.translationX < -SWIPE_THRESHOLD) {
                 translateX.value = withSpring(-SCREEN_WIDTH - 10, {}, () => {
@@ -178,7 +176,10 @@ export default function Swiper({ course, clicked, setClicked }: CourseContentPro
 
         return {
             width,
-            height: SCREEN_HEIGHT * 0.75,
+            height: SCREEN_HEIGHT * (SCREEN_HEIGHT === 592 ? 0.72 
+                : SCREEN_HEIGHT >= 592 && SCREEN_HEIGHT < 700 ? 0.76 
+                : SCREEN_HEIGHT > 800 && SCREEN_HEIGHT <= 900 ? 0.8 
+                : SCREEN_HEIGHT > 900 ? 0.77 : 0.75),
             transform: [{ translateY }],
         }
     })
@@ -218,7 +219,10 @@ export default function Swiper({ course, clicked, setClicked }: CourseContentPro
 
         return {
             width,
-            height: SCREEN_HEIGHT * 0.75,
+            height: SCREEN_HEIGHT * (SCREEN_HEIGHT === 592 ? 0.72 
+                : SCREEN_HEIGHT >= 592 && SCREEN_HEIGHT < 700 ? 0.76 
+                : SCREEN_HEIGHT > 800 && SCREEN_HEIGHT <= 900 ? 0.8 
+                : SCREEN_HEIGHT > 900 ? 0.77 : 0.75),
             transform: [{ translateY }],
         }
     })
@@ -239,7 +243,10 @@ export default function Swiper({ course, clicked, setClicked }: CourseContentPro
 
         return {
             width,
-            height: SCREEN_HEIGHT * 0.75,
+            height: SCREEN_HEIGHT * (SCREEN_HEIGHT === 592 ? 0.72 
+                : SCREEN_HEIGHT >= 592 && SCREEN_HEIGHT < 700 ? 0.76 
+                : SCREEN_HEIGHT > 800 && SCREEN_HEIGHT <= 900 ? 0.8 
+                : SCREEN_HEIGHT > 900 ? 0.77 : 0.75),
             transform: [{ translateY }],
         }
     })
@@ -274,7 +281,10 @@ export default function Swiper({ course, clicked, setClicked }: CourseContentPro
             <Animated.View style={[{
                 position: 'absolute',
                 width: SCREEN_WIDTH * 0.75,
-                height: SCREEN_HEIGHT * 0.75,
+                height: SCREEN_HEIGHT * (SCREEN_HEIGHT === 592 ? 0.72 
+                    : SCREEN_HEIGHT >= 592 && SCREEN_HEIGHT < 700 ? 0.76 
+                    : SCREEN_HEIGHT > 800 && SCREEN_HEIGHT <= 900 ? 0.8 
+                    : SCREEN_HEIGHT > 900 ? 0.77 : 0.75),
                 top: 16,
                 justifyContent: 'center',
                 alignItems: 'center',
@@ -354,7 +364,10 @@ export default function Swiper({ course, clicked, setClicked }: CourseContentPro
                     shadowOpacity: 0.3,
                     shadowRadius: 10,
                     elevation: 10,
-                    height: SCREEN_HEIGHT * 0.75,
+                    height: SCREEN_HEIGHT * (SCREEN_HEIGHT === 592 ? 0.72 
+                        : SCREEN_HEIGHT >= 592 && SCREEN_HEIGHT < 700 ? 0.76 
+                        : SCREEN_HEIGHT > 800 && SCREEN_HEIGHT <= 900 ? 0.8 
+                        : SCREEN_HEIGHT > 900 ? 0.77 : 0.75),
                 }, animatedStyle]}>
                     <CourseContent
                         course={course}
@@ -380,7 +393,10 @@ export default function Swiper({ course, clicked, setClicked }: CourseContentPro
                 shadowOffset: { width: 0, height: 10 },
                 shadowOpacity: 0.3,
                 shadowRadius: 10,
-                height: SCREEN_HEIGHT * 0.75,
+                height: SCREEN_HEIGHT * (SCREEN_HEIGHT === 592 ? 0.72 
+                    : SCREEN_HEIGHT >= 592 && SCREEN_HEIGHT < 700 ? 0.76 
+                    : SCREEN_HEIGHT > 800 && SCREEN_HEIGHT <= 900 ? 0.8 
+                    : SCREEN_HEIGHT > 900 ? 0.77 : 0.75),
                 width: SCREEN_WIDTH * 0.95,
             }, animatedHiddenCardStyle]} >
                 <CourseContent

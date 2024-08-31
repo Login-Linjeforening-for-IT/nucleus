@@ -77,13 +77,30 @@ export default function AboutScreen(): JSX.Element {
     const [committee, setCommittee] = useState(0)
     const text = lang ? no : en
     const info = text.committeeSection.info
+    const height = Dimensions.get("window").height
+
+    function getOffset() {
+        if (height <= 700) {
+            return 5
+        }
+
+        if (height > 700 && height <= 800) {
+            return 6
+        }
+
+        if (height > 800 && height < 900) {
+            return 12
+        }
+        
+        return 7
+    }
 
     return (
         <Swipe left="MenuScreen">
             <View>
                 <View style={{...GS.content, backgroundColor: theme.darker}}>
                     <ScrollView showsVerticalScrollIndicator={false}>
-                        <Space height={Dimensions.get("window").height / 8.1} /> 
+                        <Space height={Dimensions.get("window").height / 8.1 + (height > 800 && height < 900 ? 10 : 0)} /> 
                         <Cluster>
                             <Text style={{...T.bold40, color: theme.textColor}}>
                                 {text.title}
@@ -180,7 +197,7 @@ export default function AboutScreen(): JSX.Element {
                             <Social />
                             <Copyright />
                         </Cluster>
-                        <Space height={Dimensions.get("window").height / 7} /> 
+                        <Space height={Dimensions.get("window").height / getOffset()} /> 
                     </ScrollView>
                 </View>
             </View>
