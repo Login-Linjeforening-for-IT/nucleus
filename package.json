@@ -58,6 +58,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
+    "@react-native/metro-config": "^0.75.2",
     "@types/react": "~18.2.14",
     "@types/react-native-base64": "^0.2.2",
     "@types/react-test-renderer": "^18.3.0",
