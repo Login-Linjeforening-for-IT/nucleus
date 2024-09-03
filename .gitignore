@@ -100,6 +100,8 @@ yarn-error.log
 # testing
 /coverage
 
+.direnv
+
 # Direnv
 .envrc
 .direnv
