@@ -99,3 +99,8 @@ yarn-error.log
 
 # testing
 /coverage
+
+.direnv
+.envrc
+flake.lock
+flake.nix
