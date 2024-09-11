@@ -32,7 +32,7 @@ const reducers = combineReducers({
 })
 
 // Types does not work in this version of the library
-// Gjermund is trying to fix it
+
 
 // It is hard to test this, I had to make an apk and then change the version number and update the app to test it
 const migrations = {
