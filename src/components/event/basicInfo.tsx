@@ -62,13 +62,13 @@ export default function BasicInfo() {
                     <Text style={{ ...T.specificEventInfoContent, color: theme.textColor }}>
                         {host}
                         {event?.event?.link_stream && ' - '}
-                        {event?.event?.link_stream && <TextLink style={{fontSize: 20, color: "#fd8738", top: 3}} text="Stream" url={event.event.link_stream} />}
+                        {event?.event?.link_stream && <TextLink style={{...T.text20, color: "#fd8738", top: 3}} text="Stream" url={event.event.link_stream} />}
                         {event?.event?.link_discord && ' - '}
-                        {event?.event?.link_discord && <TextLink style={{fontSize: 20, color: "#fd8738", top: 3}} text="Discord" url={event.event.link_stream} />}
+                        {event?.event?.link_discord && <TextLink style={{...T.text20, color: "#fd8738", top: 3}} text="Discord" url={event.event.link_stream} />}
                         {event?.event?.link_facebook && ' - '}
-                        {event?.event?.link_facebook && <TextLink style={{fontSize: 20, color: "#fd8738", top: 3}} text="Facebook" url={event.event.link_stream} />}
+                        {event?.event?.link_facebook && <TextLink style={{...T.text20, color: "#fd8738", top: 3}} text="Facebook" url={event.event.link_stream} />}
                         {event?.organizations && event.organizations[0]?.link_homepage && ' - '}
-                        {event?.organizations && event.organizations[0]?.link_homepage && <TextLink style={{fontSize: 20, color: "#fd8738", top: 3}} text={text.more} url={event.event.link_stream} />}
+                        {event?.organizations && event.organizations[0]?.link_homepage && <TextLink style={{...T.text20, color: "#fd8738", top: 3}} text={text.more} url={event.event.link_stream} />}
                     </Text>
                 </View>
                 <>{info && <InfoBlock text={info} />}</>

@@ -1,7 +1,8 @@
 -- -- -- -- EXPO -- -- -- --
 Trying to access native module?
 Likely some firebase / messaging code has not been properly commented out.
-Comment out all 6 native dependecy locations when testing in Expo, and try again.
+Comment out all native dependencies when testing in Expo, and try again.
+Note that these are no longer marked in the code after version 2.2.0.
 
 App crashes in Expo without any feedback?
 Likely there is a type issue, for example you have given a number where you need

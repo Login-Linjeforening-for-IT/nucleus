@@ -2,18 +2,17 @@ import { useDispatch, useSelector } from "react-redux"
 import AdCluster from "./adCluster"
 import { ErrorMessage } from "@components/shared/utils"
 import Space from "@/components/shared/utils"
-import { Dimensions, Platform } from "react-native"
 import { useCallback, useState } from "react"
 import LastFetch, { fetchAdDetails, fetchAds } from "@utils/fetch"
 import { setAds, setLastFetch } from "@redux/ad"
 import { RefreshControl, ScrollView } from "react-native-gesture-handler"
-import getHeight from "@utils/getHeight"
+import getListOffset from "@utils/getListOffset"
 
 /**
  * Displays the ad list
  */
 export default function AdList (): JSX.Element {
-    const { ads, search, renderedAds, skills } = useSelector((state: ReduxState) => state.ad)
+    const { ads, search, renderedAds, skills, clickedAds } = useSelector((state: ReduxState) => state.ad)
     const [refresh, setRefresh] = useState(false)
     const dispatch = useDispatch()
     
@@ -45,14 +44,12 @@ export default function AdList (): JSX.Element {
     
     // Copies renderedEvents because it's read only
     let adList: AdProps[] = [...renderedAds]
-    adList.sort((a, b)=>(Number(b.highlight)-Number(a.highlight)))
+    adList.sort((a, b) => (Number(b.highlight) - Number(a.highlight)))
     if (!renderedAds.length && !search) {
         return <ErrorMessage argument={!ads ? "wifi" : "nomatch"} screen="ad" /> 
     }
 
-    const offset = search
-        ? (Dimensions.get("window").height / (Platform.OS === "ios" ? 3.6 : 3.01)) - (100 - getHeight(skills.length))
-        : Dimensions.get("window").height / (Platform.OS === "ios" ? 8.2 : 7.8) 
+    const offset = getListOffset({search, categories: skills, clickedEvents: clickedAds, ad: true})
 
     if (renderedAds.length > 0) {
         return (

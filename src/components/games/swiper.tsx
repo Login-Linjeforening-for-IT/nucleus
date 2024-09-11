@@ -1,3 +1,4 @@
+import T from '@styles/text'
 import { useState } from 'react'
 import { Text, View, Dimensions } from 'react-native'
 import { PanGestureHandler } from 'react-native-gesture-handler'
@@ -87,6 +88,10 @@ export default function Swiper({ game, mode, school, ntnu }: GameListContentProp
     // Function to calculate previous index in a circular manner
     function getPreviousIndex(currentIndex: number) {
         if (!game[0].hasOwnProperty('categories')) {
+            if (currentIndex <= 0) {
+                return currentIndex
+            }
+
             return currentIndex - 1
         }
     
@@ -94,6 +99,9 @@ export default function Swiper({ game, mode, school, ntnu }: GameListContentProp
             // Skip questions based on mode and category
             if (mode === 0) {
                 for (let i = currentIndex - 1; i >= 0; i--) {
+                    if (i < 0) {
+                        return 0
+                    }
                     // @ts-expect-error
                     if (!game[i].categories.includes('Wild')) {
                         return i
@@ -103,6 +111,9 @@ export default function Swiper({ game, mode, school, ntnu }: GameListContentProp
 
             if (mode === 2) {
                 for (let i = currentIndex - 1; i < game.length; i--) {
+                    if (i < 0) {
+                        return 0
+                    }
                     // @ts-expect-error
                     if (game[i].categories.includes('Wild')) {
                         return i
@@ -112,6 +123,9 @@ export default function Swiper({ game, mode, school, ntnu }: GameListContentProp
 
             if (!school) {
                 for (let i = currentIndex - 1; i < game.length; i--) {
+                    if (i < 0) {
+                        return 0
+                    }
                     // @ts-expect-error
                     if (!game[i].categories.includes('School')) {
                         return i
@@ -121,6 +135,9 @@ export default function Swiper({ game, mode, school, ntnu }: GameListContentProp
 
             if (!ntnu) {
                 for (let i = currentIndex - 1; i < game.length; i--) {
+                    if (i < 0) {
+                        return 0
+                    }
                     // @ts-expect-error
                     if (!game[i].categories.includes('NTNU')) {
                         return i
@@ -144,15 +161,15 @@ export default function Swiper({ game, mode, school, ntnu }: GameListContentProp
 
     function resetTranslateX() {
         setTimeout(() => {
-            translateX.value = 0;
-        }, 400);
-    };
+            translateX.value = 0
+        }, 400)
+    }
 
     function resetTranslateX200ms() {
         setTimeout(() => {
-            translateX.value = 0;
-        }, 200);
-    };
+            translateX.value = 0
+        }, 200)
+    }
 
     const gestureHandler = useAnimatedGestureHandler({
         onStart: (_, context) => {
@@ -164,17 +181,16 @@ export default function Swiper({ game, mode, school, ntnu }: GameListContentProp
         },
         onEnd: (event) => {
             if (event.translationX > SWIPE_THRESHOLD) {
-                translateX.value = 0
                 runOnJS(onSwipeRight)()
                 translateX.value = withSpring(SCREEN_WIDTH * 1.1, {}, () => {
                     // Resets the position after the card is swiped
                 })
-                runOnJS(resetTranslateX)();
+                runOnJS(resetTranslateX)()
             } else if (event.translationX < -SWIPE_THRESHOLD) {
                 translateX.value = withSpring(-SCREEN_WIDTH - 10, {}, () => {
                     runOnJS(onSwipeLeft)()
                 })
-                runOnJS(resetTranslateX200ms)();
+                runOnJS(resetTranslateX200ms)()
             } else {
                 // No significant swipe, reset position
                 translateX.value = withSpring(0)
@@ -206,6 +222,7 @@ export default function Swiper({ game, mode, school, ntnu }: GameListContentProp
         const rotate = `${(translateX.value / SCREEN_WIDTH) * 15}deg`
   
         return {
+            top: SCREEN_HEIGHT * 0.16,
             width: SCREEN_WIDTH * 0.85,
             transform: [
                 { translateX: translateX.value },
@@ -407,7 +424,7 @@ export default function Swiper({ game, mode, school, ntnu }: GameListContentProp
                     position: 'absolute', 
                     bottom: 15, 
                     left: 15, 
-                    fontSize: 20, 
+                    ...T.text20, 
                     color: theme.orange, 
                     fontWeight: '600'
                 }}>
@@ -436,7 +453,7 @@ export default function Swiper({ game, mode, school, ntnu }: GameListContentProp
                         position: 'absolute', 
                         bottom: 15, 
                         left: 15, 
-                        fontSize: 20, 
+                        ...T.text20, 
                         color: theme.orange, 
                         fontWeight: '600'
                     }}>
@@ -447,7 +464,7 @@ export default function Swiper({ game, mode, school, ntnu }: GameListContentProp
             </PanGestureHandler>
 
             {/* Previous (hidden) card */}
-            <Animated.View style={[{
+            {currentIndex > 0 && <Animated.View style={[{
                 position: 'absolute',
                 justifyContent: 'center',
                 alignItems: 'center',
@@ -467,18 +484,16 @@ export default function Swiper({ game, mode, school, ntnu }: GameListContentProp
                     position: 'absolute', 
                     bottom: 15, 
                     left: 15, 
-                    fontSize: 20, 
+                    ...T.text20, 
                     color: theme.orange, 
                     fontWeight: '600'
                 }}>
                     {getPreviousIndex(currentIndex + 1)}
                 </Text>
                 <GameContent game={
-                    game[getPreviousIndex(currentIndex)] != undefined 
-                        ? game[getPreviousIndex(currentIndex)] 
-                        : game[getPreviousIndex(currentIndex + 1)]
+                    game[getPreviousIndex(currentIndex + 1)]
                 } />
-            </Animated.View>
+            </Animated.View>}
         </View>
     )
 }
@@ -489,8 +504,8 @@ function GameContent({ game }: GameContentProps) {
 
     return (
         <View>
-            <Text style={{color: theme.textColor, fontSize: 20, margin: 8}}>
-                {lang ? game.title_no : game.title_en}
+            <Text style={{color: theme.textColor, ...T.text20, margin: 8}}>
+                {lang ? game?.title_no : game?.title_en}
             </Text>
         </View>
     )

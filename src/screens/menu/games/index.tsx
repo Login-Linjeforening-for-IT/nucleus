@@ -8,7 +8,7 @@ import Swipe from "@components/nav/swipe"
 import { RefreshControl, ScrollView } from "react-native-gesture-handler"
 import CourseError from "@components/course/courseError"
 import { useCallback, useEffect, useState } from "react"
-import { View, Image, TouchableOpacity, Dimensions, Text } from "react-native"
+import { View, Image, TouchableOpacity, Dimensions, Text, Platform } from "react-native"
 import { MenuProps, MenuStackParamList } from "@type/screenTypes"
 import { StackNavigationProp } from "@react-navigation/stack"
 import { getGames } from "@utils/game"
@@ -28,6 +28,8 @@ export default function GameScreen({ navigation }: MenuProps<'GameScreen'>): JSX
     const { theme } = useSelector((state: ReduxState) => state.theme )
     const { lang } = useSelector((state: ReduxState) => state.lang )
     const [refresh, setRefresh] = useState(false)
+    const height = Dimensions.get("window").height
+    const extraHeight = Platform.OS === 'ios' ? 0 : height > 800 && height < 900 ? 20 : 10
 
     const onRefresh = useCallback(async () => {
         setRefresh(true)
@@ -51,7 +53,7 @@ export default function GameScreen({ navigation }: MenuProps<'GameScreen'>): JSX
     return (
         <Swipe left="MenuScreen">
             <View style={{...GS.content, backgroundColor: theme.darker}}>
-                <Space height={Dimensions.get("window").height / 8} />
+                <Space height={Dimensions.get("window").height / 8.1 + extraHeight} /> 
                 <ScrollView
                     showsVerticalScrollIndicator={false} 
                     scrollEventThrottle={100}

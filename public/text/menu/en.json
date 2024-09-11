@@ -29,26 +29,21 @@
         },
         {
             "id": 6, 
-            "nav": "LoginScreen",     
-            "title": "Login"
-        },
-        {
-            "id": 7, 
-            "nav": "InternalScreen",
-            "title": "Intranet (verv)"
-        },
-        {
-            "id": 8, 
             "nav": "CourseScreen",   
             "title": "Courses" 
         },
         {
-            "id": 9, 
+            "id": 7, 
             "nav": "GameScreen",
             "title": "Games"
         }
     ],
     "version": "Version ",
     "unusedScreens": [
+        {
+            "id": 8, 
+            "nav": "InternalScreen",
+            "title": "Intranet (verv)"
+        }
     ]
 }

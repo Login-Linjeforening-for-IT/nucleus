@@ -1,4 +1,5 @@
 import { Dimensions, StyleSheet } from "react-native"
+import T from "./text"
 
 export const IS = StyleSheet.create ({
     inputText: {
@@ -6,7 +7,7 @@ export const IS = StyleSheet.create ({
         height: 35,
         borderRadius: 20,
         top: 25,
-        fontSize: 15, 
+        ...T.text15,
         marginBottom: 25
     },
     dropImage: {

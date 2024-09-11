@@ -2,6 +2,7 @@ import { Text, View } from "react-native"
 import { SvgXml } from "react-native-svg"
 import { useSelector } from "react-redux"
 import infoSvg from "@assets/icons/info.svg"
+import T from "@styles/text"
 import { EventContext } from "@utils/contextProvider"
 import { useContext } from "react"
 
@@ -34,7 +35,7 @@ export default function InfoBlock({text, eventRelated}: InfoBlockProps){
             }}>
                 <SvgXml xml={infoSvg} color="#62c4d7" />
             </View>
-            <Text style={{color: "#ffffff", fontSize: 16, paddingVertical: 10, width: '80%'}}>
+            <Text style={{color: "#ffffff", ...T.text16, paddingVertical: 10, width: '80%'}}>
                 {text}
             </Text>
         </View>
@@ -68,7 +69,7 @@ function Info({text}: InfoProps) {
             </View>
             <Text style={{
                 color: "#ffffff", 
-                fontSize: 20, 
+                ...T.text20, 
                 paddingVertical: 10, 
                 width: '80%'
             }}>

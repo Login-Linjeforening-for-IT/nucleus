@@ -23,6 +23,8 @@ export default function SpecificAdScreen({navigation, route:{params: {adID}}}: A
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const [ad, setAd] = useState({} as DetailedAdResponse)
     const [refresh, setRefresh] = useState(false)
+    const dispatch = useDispatch()
+    const height = Dimensions.get("window").height
 
     navigation.setOptions({title: lang ? ad?.job?.title_no || ad?.job?.title_en 
         : ad?.job?.title_en || ad?.job?.title_no})
@@ -74,7 +76,7 @@ export default function SpecificAdScreen({navigation, route:{params: {adID}}}: A
                     <View style={{
                         ...AS.content,
                         backgroundColor: theme.darker,
-                        paddingTop: Dimensions.get("window").height / 9.7,
+                        paddingTop: Dimensions.get("window").height / 9.7 + (height > 800 && height < 900 ? 15 : 0),
                         paddingBottom: Dimensions.get("window").height / 3
                     }}>
                         <ScrollView 

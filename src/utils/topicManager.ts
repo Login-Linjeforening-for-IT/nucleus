@@ -1,7 +1,5 @@
-// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 3/6
 import messaging from "@react-native-firebase/messaging"
 import subscribeToTopic from "@utils/subscribeToTopic"
-// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 3/6
 
 type TopicManagerProps = {
     topic: string
@@ -18,17 +16,13 @@ type TopicManagerProps = {
  * @param status  true/false Subscribe or unsubscribe from given topic.
  */
 export default async function TopicManager({topic, unsub}: TopicManagerProps) {
-    // COMMENT IN THIS BOX WHILE TESTING IN EXPO 4/6
-    // return null
-    // COMMENT IN THIS BOX WHILE TESTING IN EXPO 4/6
     try {
         const granted = await messaging().requestPermission()
-    
+        
         if (!granted) {
-            console.log("You must enable notifications for this feature.")
             return { result: false, feedback: 'You must enable notifications for this feature.'}
         }
-
+        
         if (unsub) {
             if (topic.includes(',')) {
                 const topics = topic.split(',')
@@ -38,11 +32,12 @@ export default async function TopicManager({topic, unsub}: TopicManagerProps) {
             } else {
                 await messaging().unsubscribeFromTopic(topic)
             }
-
+            
             return { result: true, feedback: `Unsubscribed from ${topic}`}
         } 
         
-        return await subscribeToTopic(topic)
+        const result = await subscribeToTopic(topic)
+        return result
     } catch (error: unknown) {
         if (typeof error === 'string') return { result: false, feedback: error}
         if (typeof error === 'object' && error != null) return { result: false, feedback: error.toString()}

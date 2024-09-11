@@ -11,7 +11,9 @@ export default function Description() {
 
     const content = useMemo(() => {
         if (!(event?.event&&Object.keys(event.event).length)) return null
-        const description = lang ? event?.event?.description_no || event?.event?.description_en : event?.event?.description_en || event?.event?.description_no
+        const description = lang 
+            ? event?.event?.description_no || event?.event?.description_en 
+            : event?.event?.description_en || event?.event?.description_no
 
 
         const embededEvent = /(\[:\w+\]\(\d+\))/
@@ -19,15 +21,16 @@ export default function Description() {
         const split = description.replace(/\\n/g, '<br>').split(embededEvent)
 
         return split.map((content, index) => {
-            const match = content.match(findNumber)
+            const sliced = content.slice(0, 50000)
+            const match = sliced.match(findNumber)
             const number = match ? Number(match[1]) : null
-            const markdown = content.replace(/<br>/g, '\n').replace(/###/g, '')
+            const markdown = sliced.replace(/<br>/g, '\n').replace(/###/g, '')
 
-            if (!content.includes('[:event]') && !content.includes('[:jobad]')) {
+            if (!sliced.includes('[:event]') && !sliced.includes('[:jobad]')) {
                 return <Markdown key={index} style={{text: {color: '#FFF'}}}>{markdown}</Markdown> 
             }
 
-            return <Embed key={index} id={number} type={content.includes('[:event]') ? "event" : "ad"} />
+            return <Embed key={index} id={number} type={sliced.includes('[:event]') ? "event" : "ad"} />
         })
     }, [lang, theme.textColor])
 

@@ -4,7 +4,7 @@ import { BlurView } from 'expo-blur'
 import { Dimensions, Platform, View, Text, StatusBar } from 'react-native'
 import { HeaderProps} from '@/interfaces'
 import { useSelector } from 'react-redux'
-import { useNavigationState, useRoute } from '@react-navigation/native'
+import { useRoute } from '@react-navigation/native'
 import { TouchableOpacity } from 'react-native'
 import { Image } from "react-native"
 import MS from '@styles/menuStyles'
@@ -12,18 +12,16 @@ import { useDispatch } from 'react-redux'
 import { setTag } from '@redux/event'
 import getHeight from '@utils/getHeight'
 import getCategories from '@utils/getCategories'
-import { setAd, setHistory as setAdHistory } from '@redux/ad'
 
 export default function Header({ options, route, navigation }: HeaderProps): ReactNode {
     const { theme, isDark } = useSelector((state: ReduxState) => state.theme)
     const { lang  } = useSelector((state: ReduxState) => state.lang)
     const { localTitle } = useSelector((state: ReduxState) => state.misc)
-    const { tag } = useSelector((state: ReduxState) => state.event)
+    const { tag, eventName } = useSelector((state: ReduxState) => state.event)
+    const { adName } = useSelector((state: ReduxState) => state.ad)
     const dispatch = useDispatch()
     const SES = route.name === "SpecificEventScreen"
     const SAS = route.name === "SpecificAdScreen"
-    const SCS = route.name === "SpecificCourseScreen"
-    const SGS = route.name === "SpecificGameScreen"
     const orangeIcon = require('@assets/icons/goback-orange.png')
 
     const [title, setTitle] = useState<string>(route.name && (lang
@@ -33,10 +31,10 @@ export default function Header({ options, route, navigation }: HeaderProps): Rea
     useEffect(()=>{
         if (!title){
             if (SES) {
-                setTitle(options.title || lang ? "Arrangement" : "Event") 
+                setTitle(options.title || eventName || lang ? "Arrangement" : "Event") 
             }
             else if (SAS) {
-                setTitle(options.title || lang ? "Jobbanonse" : "Job ad")
+                setTitle(options.title || adName || lang ? "Jobbanonse" : "Job ad")
     }}}, [options])
 
     if (route.name === localTitle?.screen && localTitle.title !== title) {
@@ -73,17 +71,25 @@ export default function Header({ options, route, navigation }: HeaderProps): Rea
                     </TouchableOpacity>
                     }
                 </View>
-                <Text style={{...GS.headerTitle, color: theme.titleTextColor, 
-                            width: SES || SAS ? 300 : 150, textAlign: "center", top: title?.length > 30 ? -8 : undefined}}>
-                            {title}
-                        </Text>
-                    <View style={GS.innerHeaderViewTwo}>
-                    {options.headerComponents?.right?.map((node, index) => (
-                        <View style={index === 1
-                            ? {...GS.customMenuIcon, width: Platform.OS === "ios" ? 28 : 5} 
-                            : GS.customMenuIcon} key={index}>{node}
-                        </View>
-                    ))}
+                <Text style={{
+                    ...GS.headerTitle, 
+                    color: theme.titleTextColor, 
+                    width: 300, 
+                    textAlign: "center", 
+                    top: title?.length > 30 ? -8 : undefined
+                }}>
+                    {title}
+                </Text>
+                <View style={GS.innerHeaderViewTwo}>
+                {options.headerComponents?.right?.map((node, index) => (
+                    <View style={index === 1
+                        ? {
+                            ...GS.customMenuIcon, 
+                            width: Platform.OS === "ios" ? 28 : 5, 
+                            left: Platform.OS === 'ios' ? 34 : 40
+                        } : {...GS.customMenuIcon, left: 24}} key={index}>{node}
+                    </View>
+                ))}
                 </View>
             </View>
             {options.headerComponents?.bottom?.map((node, index) => 

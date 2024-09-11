@@ -210,7 +210,7 @@ type ReduxState = {
     profile: ProfileProps
     event: {
         events: EventProps[]
-        event: DetailedEventResponse
+        eventName: string
         clickedEvents: EventProps[]
         renderedEvents: EventProps[]
         lastFetch: string
@@ -231,7 +231,7 @@ type ReduxState = {
     }
     ad: {
         ads: AdProps[]
-        ad: DetailedAdResponse
+        adName: string
         history: number[]
         clickedAds: AdProps[]
         renderedAds: AdProps[]
@@ -380,91 +380,6 @@ type NotificationProps = {
     // Key used for indexing
     [key: string]:      boolean[]
 }
-
-type ObjectifiedNotificationProps = {
-    annet: {
-      annet10m: boolean[],
-      annet1d: boolean[],
-      annet1h: boolean[],
-      annet1w: boolean[],
-      annet2d: boolean[],
-      annet2h: boolean[],
-      annet30m: boolean[],
-      annet3h: boolean[],
-      annet6h: boolean[]
-    },
-    bedpres: {
-      bedpres10m: boolean[],
-      bedpres1d: boolean[],
-      bedpres1h: boolean[],
-      bedpres1w: boolean[],
-      bedpres2d: boolean[],
-      bedpres2h: boolean[],
-      bedpres30m: boolean[],
-      bedpres3h: boolean[],
-      bedpres6h: boolean[]
-    },
-    ctf: {
-      ctf10m: boolean[],
-      ctf1d: boolean[],
-      ctf1h: boolean[],
-      ctf2d: boolean[],
-      ctf2h: boolean[],
-      ctf30m: boolean[],
-      ctf3h: boolean[],
-      ctf6h: boolean[]
-    },
-    fadderuka: {
-      fadderuka10m: boolean[],
-      fadderuka1d: boolean[],
-      fadderuka1h: boolean[],
-      fadderuka1w: boolean[],
-      fadderuka2d: boolean[],
-      fadderuka2h: boolean[],
-      fadderuka30m: boolean[],
-      fadderuka3h: boolean[],
-      fadderuka6h: boolean[]
-    },
-    important: {},
-    karrieredag: {
-      karrieredag10m: boolean[],
-      karrieredag1d: boolean[],
-      karrieredag1h: boolean[],
-      karrieredag1w: boolean[],
-      karrieredag2d: boolean[],
-      karrieredag2h: boolean[],
-      karrieredag30m: boolean[],
-      karrieredag3h: boolean[],
-      karrieredag6h: boolean[]
-    },
-    login: {
-      login10m: boolean[],
-      login1d: boolean[],
-      login1h: boolean[],
-      login1w: boolean[],
-      login2d: boolean[],
-      login2h: boolean[],
-      login30m: boolean[],
-      login3h: boolean[],
-      login6h: boolean[]
-    },
-    setup: {},
-    social: {
-      social10m: boolean[],
-      social1d: boolean[],
-      social1h: boolean[],
-      social1w: boolean[],
-      social2d: boolean[],
-      social2h: boolean[],
-      social30m: boolean[],
-      social3h: boolean[],
-      social6h: boolean[]
-    }
-    
-     // Key used for indexing
-    [key: string]: any
-  }
-
   
 type NotificationListProps = {
     title: string
