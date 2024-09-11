@@ -21,8 +21,8 @@ export default function SpecificAdScreen({navigation, route:{params: {adID}}}: A
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { ad, history } = useSelector((state: ReduxState) => state.ad )
     const [refresh, setRefresh] = useState(false)
-
     const dispatch = useDispatch()
+    const height = Dimensions.get("window").height
 
     useFocusEffect(
         React.useCallback(() => {
@@ -30,7 +30,7 @@ export default function SpecificAdScreen({navigation, route:{params: {adID}}}: A
             localHistory.push(adID)
             dispatch(setHistory(localHistory))
 
-            const onBackPress = () => {
+            function onBackPress() {
                 if (history.length > 1) {
                     dispatch(setHistory(history.slice(0, history.length-1)))
                 }
@@ -80,7 +80,7 @@ export default function SpecificAdScreen({navigation, route:{params: {adID}}}: A
                 <View style={{
                     ...AS.content,
                     backgroundColor: theme.darker,
-                    paddingTop: Dimensions.get("window").height / 9.7,
+                    paddingTop: Dimensions.get("window").height / 9.7 + (height > 800 && height < 900 ? 15 : 0),
                     paddingBottom: Dimensions.get("window").height / 3
                 }}>
                     <ScrollView 
@@ -88,7 +88,7 @@ export default function SpecificAdScreen({navigation, route:{params: {adID}}}: A
                         scrollEventThrottle={100}
                         refreshControl={<RefreshControl refreshing={refresh} onRefresh={onRefresh} />}
                     >
-                        <Cluster marginHorizontal={12} marginVertical={12}>
+                        <Cluster marginHorizontal={12} marginVertical={22}>
                             <AdBanner url={ad?.job?.banner_image} />
                             <AdTitle ad={ad} />
                             <AdInfo ad={ad?.job} />

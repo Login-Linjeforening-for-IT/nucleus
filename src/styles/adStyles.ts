@@ -1,4 +1,5 @@
 import { StyleSheet, Dimensions, Platform } from "react-native"
+import T from "./text"
 
 export const AS = StyleSheet.create({
     content: {
@@ -24,7 +25,7 @@ export const AS = StyleSheet.create({
     },
     title: {
         maxHeight: Platform.OS === "ios" ? 20 * 3 : 17 * 2.5,
-        fontSize: 18
+        ...T.text18
     },
     specificAdTitle: {
         maxWidth: "72.5%",
@@ -32,18 +33,18 @@ export const AS = StyleSheet.create({
         alignSelf: "center",
         // Limits to 3 lines (same as image height)
         // maxHeight: Platform.OS === "ios" ? 24 * 3 : 17 * 2.5,
-        fontSize: Platform.OS === "ios" ? 20 : 17,
+        ...T.text20
     },
     adInfoType: {
-        fontSize: Platform.OS === "ios" ? 16 : 14,
+        ...T.text16
     },
     adInfo: {
         // maxWidth: "90%",
-        fontSize: Platform.OS === "ios" ? 16 : 14,
+        ...T.text16
     },
     adInfoBold: {
         fontWeight: "bold",
-        fontSize: Platform.OS === "ios" ? 17.5 : 14,
+        ...T.text175
     },
     socialMediaImage: {
         height: 30,
@@ -60,7 +61,7 @@ export const AS = StyleSheet.create({
         textAlign: "center",
         top: Platform.OS === "ios" ? 2 : 0,
         fontWeight: "600",
-        fontSize: 20,
+        ...T.text20
     },
     socialView: {
         flexDirection: "row",
@@ -70,7 +71,7 @@ export const AS = StyleSheet.create({
     },
     loc: {
         top: 3,
-        fontSize: Platform.OS === "ios" ? 15 : 13,
+        ...T.text15
     },
     adTitleView: {
         flexDirection: "row",
@@ -87,8 +88,6 @@ export const AS = StyleSheet.create({
     },
     adBanner: {
         width: "100%",
-        aspectRatio: 10 / 4,
-        resizeMode: "stretch",
         marginBottom: 12
     },
     adClusterImage: {

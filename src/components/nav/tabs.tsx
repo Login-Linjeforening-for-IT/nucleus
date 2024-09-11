@@ -15,7 +15,6 @@ import ProfileScreen from "@screens/menu/profile"
 import SettingScreen from "@screens/menu/settings"
 import AboutScreen from "@screens/menu/about"
 import BusinessScreen from "@screens/menu/business"
-import LoginScreen from "@screens/menu/login"
 import InternalScreen from "@screens/menu/internal"
 import GameScreen from "@screens/menu/games/index"
 import CourseScreen from "@screens/menu/course/index"
@@ -25,6 +24,7 @@ import SpecificCourseScreen from "@screens/menu/course/specificCourse"
 import SpecificGameScreen from "@screens/menu/games/specificGame"
 import DiceScreen from "@screens/menu/games/dice"
 import Header from "./header"
+import * as SystemUI from 'expo-system-ui';
 import { 
     AdStackParamList, 
     EventStackParamList, 
@@ -37,7 +37,6 @@ import {
     StackCardInterpolationProps, 
     createStackNavigator
 } from "@react-navigation/stack"
-
 
 // Declares Tab to equal CBTN function
 const Root = createStackNavigator<RootStackParamList>()
@@ -75,14 +74,14 @@ function Menu() {
         <MenuStack.Navigator screenOptions={{
             animationEnabled: false,
             headerTransparent: true,
-            header: props => <Header {...props}/>}}>
+            header: props => <Header {...props}/>
+        }}>
             <MenuStack.Screen name="MenuScreen" component={MenuScreen} />
             <MenuStack.Screen name="ProfileScreen" component={ProfileScreen} />
             <MenuStack.Screen name="SettingScreen" component={SettingScreen} />
             <MenuStack.Screen name="NotificationScreen" component={NotificationScreen} />
             <MenuStack.Screen name="AboutScreen" component={AboutScreen} />
             <MenuStack.Screen name="BusinessScreen" component={BusinessScreen} />
-            <MenuStack.Screen name="LoginScreen" component={LoginScreen} />
             <MenuStack.Screen name="InternalScreen" component={InternalScreen} />
             <MenuStack.Screen name="CourseScreen" component={CourseScreen} />
             <MenuStack.Screen name="SpecificCourseScreen" component={SpecificCourseScreen} />
@@ -154,7 +153,7 @@ function Tabs(): JSX.Element {
                         <Image
                             style={MS.bMenuIcon} 
                             source={focused 
-                                ? require("@assets/menu/calendar-orange.png")
+                                ? require("@assets/menu/menu-orange.png")
                                 : isDark
                                     ? require("@assets/menu/menu.png")
                                     : require("@assets/menu/menu-black.png")}
@@ -173,6 +172,7 @@ function Tabs(): JSX.Element {
  * @returns Application with navigation
  */
 export default function Navigator(): JSX.Element {
+    SystemUI.setBackgroundColorAsync("black");
 
     const config: TransitionSpec = {
         animation: 'timing',

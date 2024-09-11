@@ -1,28 +1,13 @@
 import { MenuProps } from "@type/screenTypes"
 import { useDispatch, useSelector } from "react-redux"
 import Parent from "@components/shared/parent"
-import { getCourse } from "@utils/course"
-import ThumbsUp from "@components/course/thumbsUp"
-import ThumbsDown from "@components/course/thumbsDown"
 import { setLocalTitle } from "@redux/misc"
-import Markdown from "@components/course/markdown"
-import { 
-    Dispatch, 
-    SetStateAction, 
-    useCallback, 
-    useEffect, 
-    useState 
-} from "react"
-import { 
-    Dimensions, 
-    RefreshControl, 
-    ScrollView, 
-    Text, 
-    TouchableOpacity, 
-    View,
-} from "react-native"
-import ReadOnly from "@components/course/readonly"
+import { getCourse } from "@utils/course"
+import { useCallback, useEffect, useState } from "react"
+import { Dimensions, Platform, RefreshControl, Text } from "react-native"
 import Swipeable from "@components/course/swipeable"
+import { ScrollView } from "react-native-gesture-handler"
+import T from "@styles/text"
 
 export default function SpecificCourseScreen({ route }: MenuProps<"SpecificCourseScreen">): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
@@ -31,8 +16,9 @@ export default function SpecificCourseScreen({ route }: MenuProps<"SpecificCours
     const [course, setCourse] = useState<Course | string>("")
     const [clicked, setClicked] = useState<number[]>([])
     const dispatch = useDispatch()
-    
-    if (route.params.courseID !== localTitle.title) {
+    const height = Dimensions.get("window").height
+
+    if (route.params.courseID !== localTitle?.title) {
         dispatch(setLocalTitle({title: route.params.courseID, screen: "SpecificCourseScreen"}))
     }
 
@@ -61,15 +47,36 @@ export default function SpecificCourseScreen({ route }: MenuProps<"SpecificCours
         }
     }, [refresh])
 
+    function paddingtop() {
+        if (height <= 592) {
+            return 20
+        }
+
+        if (height > 592 && height < 700) {
+            return 20
+        }
+
+        if (height > 700 && height < 800) {
+            return 17.5
+        }
+        
+        if (height > 800 && height < 900) {
+            return 40
+        }
+        
+        return undefined
+    }
+        
     return (
-        <Parent left="CourseScreen" paddingHorizontal={6}>
+        <Parent paddingHorizontal={-1}>
             <ScrollView
                 showsVerticalScrollIndicator={false} 
                 scrollEventThrottle={100}
+                style={{paddingVertical: 10, bottom: 10, paddingTop: Platform.OS === 'ios' ? undefined : paddingtop()}}
             >
             <RefreshControl refreshing={refresh} onRefresh={onRefresh} />
             {typeof course === 'string' 
-                ? <Text style={{ fontSize: 18, color: theme.textColor }}>{course}</Text> 
+                ? <Text style={{ ...T.text18, color: theme.textColor }}>{course}</Text> 
                 : <Swipeable
                     course={course} 
                     clicked={clicked} 

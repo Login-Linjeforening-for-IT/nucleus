@@ -3,13 +3,16 @@ import { useDispatch, useSelector } from "react-redux"
 import Parent from "@components/shared/parent"
 import { setLocalTitle } from "@redux/misc"
 import { useEffect, useState } from "react"
-import { ScrollView, Text, TouchableOpacity, View } from "react-native"
+import { Dimensions, Text, View } from "react-native"
 import { 
     getQuestions, 
     getNeverHaveIEver, 
     getOkRedFlagDealbreaker 
 } from "@utils/game"
 import Swiper from "@components/games/swiper"
+import Filters from "@components/games/filters"
+import { ScrollView } from "react-native-gesture-handler"
+import T from "@styles/text"
 
 type GameProps = {
     game: Question[] | NeverHaveIEver[] | OkRedFlagDealBreaker[]
@@ -20,10 +23,13 @@ export default function SpecificGameScreen({ route }: MenuProps<"SpecificGameScr
     const { localTitle } = useSelector((state: ReduxState) => state.misc)
     const [game, setGame] = useState<Question[] | NeverHaveIEver[] | OkRedFlagDealBreaker[] | string>("")
     const dispatch = useDispatch()
-    
-    if (localTitle?.screen !== "SpecificGameScreen") {
-        dispatch(setLocalTitle({title: route.params.gameName, screen: "SpecificGameScreen"}))
-    }
+    const height = Dimensions.get("window").height
+
+    useEffect(() => {
+        if (localTitle?.screen !== route.params?.gameName) {
+            dispatch(setLocalTitle({ title: route.params?.gameName, screen: "SpecificGameScreen" }));
+        }
+    }, [localTitle?.screen, route.params?.gameName, dispatch]);
 
     async function fetchGame() {
         const game = await determineGame()
@@ -48,14 +54,36 @@ export default function SpecificGameScreen({ route }: MenuProps<"SpecificGameScr
         })()
     }, [])
 
+    function paddingtop() {
+        if (height <= 592) {
+            return 20
+        }
+
+        if (height > 592 && height < 700) {
+            return 20
+        }
+
+        if (height > 700 && height < 800) {
+            return 17.5
+        }
+        
+        if (height > 800 && height < 900) {
+            return 40
+        }
+        
+        return undefined
+    }
+
     return (
-        <Parent left="GameScreen" paddingHorizontal={-1} colors={[theme.orange, 'red', theme.orange]}>
+        <Parent paddingHorizontal={-1} colors={[theme.orange, 'red', theme.orange]}>
             <ScrollView
                 showsVerticalScrollIndicator={false} 
                 scrollEventThrottle={100}
+                scrollEnabled={false}
+                style={{ paddingTop: paddingtop() }}
             >
             {typeof game === 'string' 
-                ? <Text style={{ fontSize: 18, color: theme.textColor }}>{game}</Text> 
+                ? <Text style={{ ...T.text18, color: theme.textColor }}>{game}</Text> 
                 : <Game game={game} />
             }
             </ScrollView>
@@ -64,63 +92,33 @@ export default function SpecificGameScreen({ route }: MenuProps<"SpecificGameScr
 }
 
 function Game({game}: GameProps) {
-    const { theme } = useSelector((state: ReduxState) => state.theme)
-    const { lang } = useSelector((state: ReduxState) => state.lang)
-    const [selected, setSelected] = useState(0)
+    const [mode, setMode] = useState(0)
+    const [school, setSchool] = useState(true)
+    const [ntnu, setNTNU] = useState(true)
 
-    function handlePress(index: number) {
-        setSelected(index)
+    // function to randomize the order of the questions
+    function shuffleArray(array: any[]) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1))
+            const temp = array[i]
+            array[i] = array[j]
+            array[j] = temp
+        }
     }
 
+    shuffleArray(game)
+
     return (
-        <View style={{ width: '100%', height: '100%', alignItems: 'center'}}>
-            <Swiper game={game} mode={selected} />
-            <View style={{
-                flexDirection: 'row', 
-                width: '100%', 
-                justifyContent: 'space-evenly', 
-                maxWidth: '80%', 
-                position: 'absolute', 
-                borderWidth: 2, 
-                borderRadius: 4, 
-                top: '15%',
-                borderColor: theme.contrast,
-                overflow: 'hidden',
-            }}>
-                <TouchableOpacity 
-                    style={{
-                        backgroundColor: selected == 0 ? theme.contrast : undefined, 
-                        paddingHorizontal: 15, 
-                        paddingVertical: 2,
-                    }} 
-                    onPress={() => handlePress(0)}>
-                    <Text style={{color: theme.textColor, fontSize: 20}}>
-                        {lang ? 'Snill' : 'Nice'}
-                    </Text>
-                </TouchableOpacity>
-                <TouchableOpacity 
-                    style={{
-                        backgroundColor: selected == 1 ? theme.contrast : undefined, 
-                        paddingHorizontal: 15, 
-                        paddingVertical: 2 
-                    }} 
-                    onPress={() => handlePress(1)}>
-                    <Text style={{color: theme.textColor, fontSize: 20}}>
-                        {lang ? 'Blandet' : 'Mix'}
-                    </Text>
-                </TouchableOpacity>
-                <TouchableOpacity 
-                    style={{
-                        backgroundColor: selected == 2 ? theme.contrast : undefined, 
-                        paddingHorizontal: 15, 
-                        paddingVertical: 2 
-                    }} 
-                    onPress={() => handlePress(2)}>
-                    <Text style={{color: theme.textColor, fontSize: 20}}>
-                        {lang ? 'Dristig' : 'Bold'}
-                    </Text>
-                </TouchableOpacity>
-            </View>
+        <View style={{ alignItems: 'center', paddingBottom: Dimensions.get('window').height * 0.5}}>
+            <Swiper game={game} mode={mode} school={school} ntnu={ntnu} />
+            {game[0].hasOwnProperty('categories') && <Filters 
+                mode={mode} 
+                school={school} 
+                ntnu={ntnu} 
+                setMode={setMode} 
+                setSchool={setSchool} 
+                setNTNU={setNTNU} 
+            />}
         </View>
     )
 }

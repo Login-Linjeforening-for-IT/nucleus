@@ -1,7 +1,4 @@
-// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 6/6
 import messaging, { FirebaseMessagingTypes } from "@react-native-firebase/messaging"
-// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 6/6
-
 import { useEffect, useState } from "react"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { useNavigation } from "@react-navigation/native"
@@ -33,10 +30,6 @@ type StoreNotificationProps = {
  * @param {Navigation} navigation Navigation from BottomTabNavigation
  */
 export default function NavigateFromPushNotification() {
-    // COMMENT IN THIS BOX WHILE TESTING IN EXPO 6/6
-    return null
-    // COMMENT IN THIS BOX WHILE TESTING IN EXPO 6/6
-
     const navigation: Navigation = useNavigation()
     const [event, setEvent] = useState<{ [key: string]: any } 
     | undefined>(undefined)

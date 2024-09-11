@@ -21,6 +21,15 @@ export default function ManageTopics() {
     }
 
     async function handleAction() {
+        if (!text) {
+            setResult({result: false, feedback: 'Please enter a topic'})
+            setDisplay(true)
+            setTimeout(() => {
+                setDisplay(false)
+            }, 3000)
+            return
+        }
+        
         const topic = await TopicManager({topic: text, unsub: !mode})
 
         if (topic) {

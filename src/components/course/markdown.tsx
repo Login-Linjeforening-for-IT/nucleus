@@ -1,3 +1,4 @@
+import T from "@styles/text"
 import { Dimensions, Image } from "react-native"
 import MarkdownDisplay, { getUniqueID } from "react-native-markdown-display"
 import { useSelector } from "react-redux"
@@ -10,7 +11,7 @@ export default function Markdown({text}: {text: string}) {
             rules={rules} 
             style={{
                 fence: {
-                    backgroundColor: theme.contrast,
+                    backgroundColor: theme.dark,
                     padding: 10,
                     borderRadius: 8,
                     overflow: 'hidden',
@@ -49,31 +50,31 @@ export default function Markdown({text}: {text: string}) {
                     textDecorationLine: 'underline',
                 },
                 heading1: {
-                    fontSize: 32,
+                    ...T.text32,
                     color: theme.textColor,
                 },
                 heading2: {
-                    fontSize: 24,
+                    ...T.text24,
                     color: theme.textColor,
                 },
                 heading3: {
-                    fontSize: 18,
+                    ...T.text18,
                     color: theme.textColor,
                 },
                 heading4: {
-                    fontSize: 16,
+                    ...T.text16,
                     color: theme.textColor,
                 },
                 heading5: {
-                    fontSize: 13,
+                    ...T.text12,
                     color: theme.textColor,
                 },
                 heading6: {
-                    fontSize: 11,
+                    ...T.text10,
                     color: theme.textColor,
                 },
                 text: {
-                    fontSize: 16,
+                    ...T.text16,
                     color: theme.textColor,
                 }
         }}>

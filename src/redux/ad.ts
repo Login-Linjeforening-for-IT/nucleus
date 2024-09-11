@@ -55,7 +55,7 @@ export const AdSlice = createSlice({
                 state.renderedAds = action.payload
             }
         },
-        // Sets the ad to be displayed on SES
+        // Sets the ad to be displayed on SAS
         setAd(state, action) {
             state.ad = action.payload
         },

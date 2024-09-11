@@ -81,8 +81,16 @@ export function AdBanner({url}: {url: string | undefined}) {
     }
 
     if (validFileType(url) && !url?.startsWith("http")) {
-        return <Image 
-            style={AS.adBanner}
+        const [width, setWidth] = useState(1)
+        const [height, setHeight] = useState(1)
+        useEffect(() => {
+            Image.getSize(`${CDN}ads/${url}`, (width, height) => {
+                setWidth(width)
+                setHeight(height)
+            })
+        }), [url]
+        return <Image
+            style={{...AS.adBanner, aspectRatio: width / height}}
             source={{uri: `${CDN}ads/${url}`}}
         />
     }
@@ -305,17 +313,17 @@ export function AdUpdateInfo({ad}: {ad: DetailedAd | undefined}) {
             <Skeleton loading={!ad} height={15}>
                 {didUpdate && <Text style={{
                     ...T.contact,
-                    fontSize: 12,
+                    ...T.text12,
                     marginBottom: 5,
                     color: theme.oppositeTextColor
                 }}>
                     {text[0]} {updated}.
                 </Text>}
-                {!didUpdate && <Text style={{...T.contact, fontSize: 12, color: theme.oppositeTextColor}}>
+                {!didUpdate && <Text style={{...T.contact, ...T.text12, color: theme.oppositeTextColor}}>
                     {text[1]} {created}.
                 </Text>}
             </Skeleton>
-            <Text style={{...T.contact, fontSize: 12, marginTop: 5, color: theme.oppositeTextColor}}>
+            <Text style={{...T.contact, ...T.text12, marginTop: 5, color: theme.oppositeTextColor}}>
                 Ad ID: {ad?.id}
             </Text>
         </View>
