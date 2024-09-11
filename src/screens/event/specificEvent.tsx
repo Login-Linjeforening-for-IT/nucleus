@@ -16,10 +16,12 @@ import Tag from "@components/shared/tag"
 import { EventScreenProps } from "@type/screenTypes"
 import { useFocusEffect } from "@react-navigation/core"
 import { EventContext } from "@utils/contextProvider"
+import { setEventName } from "@redux/event"
 
 /**
  *
- * @param param0
+ * @param navigation - Navigation object used to navigate between the screens
+ * @param eventID - The ID of the event to be displayed
  * @returns
  */
 export default function SpecificEventScreen({ navigation, route: {params: {eventID}} }: EventScreenProps<'SpecificEventScreen'>): JSX.Element {
@@ -30,10 +32,9 @@ export default function SpecificEventScreen({ navigation, route: {params: {event
     const height = Dimensions.get("window").height
     const [event, setEvent] = useState({} as DetailedEventResponse)
 
-    useEffect(()=>{
-        navigation.setOptions({title: lang ? event?.event?.name_no || event?.event?.name_en 
-                                           : event?.event?.name_en || event?.event?.name_no})
-    }, [navigation, event])
+    const eventName =  lang ? event?.event?.name_no || event?.event?.name_en 
+                            : event?.event?.name_en || event?.event?.name_no
+    dispatch(setEventName(eventName))
 
     useFocusEffect(
         React.useCallback(() => {

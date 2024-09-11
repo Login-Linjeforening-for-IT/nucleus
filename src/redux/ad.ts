@@ -32,7 +32,7 @@ export const AdSlice = createSlice({
     // Initial state of the slice
     initialState: {
         ads: [] as AdProps[],
-        ad: undefined as DetailedAdResponse,
+        adName: "",
         history: [] as number[],
         clickedAds: [] as AdProps[],
         renderedAds: [] as AdProps[],
@@ -56,8 +56,8 @@ export const AdSlice = createSlice({
             }
         },
         // Sets the ad to be displayed on SAS
-        setAd(state, action) {
-            state.ad = action.payload
+        setAdName(state, action) {
+            state.adName = action.payload
         },
         // Sets the clicked ads
         setClickedAds(state, action) {
@@ -121,7 +121,7 @@ export const {
     setClickedSkills,
     setClickedAds,
     setAds,
-    setAd,
+    setAdName,
     setHistory,
     setInput,
     setLastFetch,
