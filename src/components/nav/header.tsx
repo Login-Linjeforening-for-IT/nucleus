@@ -1,8 +1,8 @@
 import GS from '@styles/globalStyles'
-import React, { PropsWithChildren, ReactNode, useState } from 'react'
+import { PropsWithChildren, ReactNode, useState } from 'react'
 import { BlurView } from 'expo-blur'
 import { Dimensions, Platform, View, Text, StatusBar } from 'react-native'
-import { HeaderProps} from '@interfaces'
+import { HeaderProps} from '@/interfaces'
 import { useSelector } from 'react-redux'
 import { useRoute } from '@react-navigation/native'
 import { TouchableOpacity } from 'react-native'
@@ -17,24 +17,77 @@ import { setAd, setHistory as setAdHistory } from '@redux/ad'
 export default function Header({ options, route, navigation }: HeaderProps): ReactNode {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang  } = useSelector((state: ReduxState) => state.lang)
+    const { localTitle } = useSelector((state: ReduxState) => state.misc)
     const { event, tag, history: eventHistory } = useSelector((state: ReduxState) => state.event)
     const { ad, history: adHistory  } = useSelector((state: ReduxState) => state.ad )
     const dispatch = useDispatch()
     const SES = route.name === "SpecificEventScreen"
     const SAS = route.name === "SpecificAdScreen"
     const orangeIcon = require('@assets/icons/goback-orange.png')
-    let title = route.name && (lang
-            ? require('@text/no.json').screens[route.name]
-            : require('@text/en.json').screens[route.name])
+
+    const [title, setTitle] = useState<string>(route.name && (lang
+        ? require('@text/no.json').screens[route.name]
+        : require('@text/en.json').screens[route.name]))
     
-    if (!title && SES) title = event?.event&&Object.keys(event.event).length ? (lang ? event.event.name_no || event.event.name_en : event.event.name_en || event.event.name_no) : ""
-    if (!title && SAS) title = ad?.job&&Object.keys(ad.job).length ? (lang ? ad.job.title_no || ad.job.title_en : ad.job.title_en || ad.job.title_no) : ""
-    if (route.name === "ProfileScreen") return <></>
+    if (!title && SES) {
+        setTitle(event?.event&&Object.keys(event.event).length 
+        ? (lang 
+            ? event.event.name_no || event.event.name_en 
+            : event.event.name_en || event.event.name_no) 
+        : lang ? "Arrangement" : "Event")
+    }
+
+    if (!title && SAS) {
+        setTitle(ad?.job&&Object.keys(ad.job).length 
+        ? (lang 
+            ? ad.job.title_no || ad.job.title_en 
+            : ad.job.title_en || ad.job.title_no) 
+        : lang ? "Jobbannonse" : "Job ad")
+    }
+
+    if (route.name === localTitle?.screen && localTitle.title !== title) {
+        setTitle(localTitle.title)
+    }
+
+    if (route.name === "ProfileScreen") {
+        return <></>
+    }
 
     const { isDark } = useSelector((state: ReduxState) => state.theme )
     const  [backIcon, setBackIcon] = useState(isDark 
         ? require('@assets/icons/goback777.png')
         : require('@assets/icons/goback111.png'))
+
+    function handlePress() {
+        setBackIcon(orangeIcon)
+
+        if (tag?.title) {
+            dispatch(setTag({ title: "", body: "" }))
+        }
+
+        if (SES){
+            dispatch(setEvent(undefined))
+
+            if (eventHistory.length > 1) {
+                dispatch(setEventHistory(eventHistory.slice(0, eventHistory.length-1)))
+            } else {
+                dispatch(setEventHistory([]))
+                navigation.goBack()
+            }
+        } else if (SAS) {
+            dispatch(setAd(undefined))
+
+            if (adHistory?.length > 1) {
+                dispatch(setAdHistory(adHistory.slice(0, adHistory.length - 1)))
+            } else {
+                dispatch(setEventHistory([]))
+                navigation.goBack()
+            }
+        }
+        else {
+            navigation.goBack()
+        }
+    }
     
     return (
         <BlurWrapper>
@@ -43,45 +96,30 @@ export default function Header({ options, route, navigation }: HeaderProps): Rea
                     {options.headerComponents?.left ? options.headerComponents?.left.map((node, index) => 
                         <View style={GS.logo} key={index}>{node}</View> 
                     ) : 
-                    <TouchableOpacity onPress={() => {
-                        setBackIcon(orangeIcon)
-                        if (tag.title) dispatch(setTag({ title: "", body: "" }))
-                        if (SES){
-                            dispatch(setEvent(undefined))
-                            if (eventHistory.length > 1) {
-                                dispatch(setEventHistory(eventHistory.slice(0, eventHistory.length-1)))
-                            }
-                            else{
-                                dispatch(setEventHistory([]))
-                                navigation.goBack()
-                            }
-                        }
-                        else{
-                            dispatch(setAd(undefined))
-                            if (adHistory.length > 1) {
-                                dispatch(setAdHistory(adHistory.slice(0, adHistory.length-1)))
-                            }
-                            else{
-                                dispatch(setEventHistory([]))
-                                navigation.goBack()
-                            }
-                        }
-                    }}>
+                    <TouchableOpacity onPress={handlePress}>
                         <Image style={{...MS.tMenuIcon, left: 5}} source={backIcon}></Image>
                     </TouchableOpacity>
                     }
                 </View>
-                <Text style={{...GS.headerTitle, color: theme.titleTextColor, 
-                            width: SES || SAS ? 300 : 150, textAlign: "center", top: title.length > 30 ? -8 : undefined}}>
-                            {title}
-                        </Text>
-                    <View style={GS.innerHeaderViewTwo}>
-                    {options.headerComponents?.right?.map((node, index) => (
-                        <View style={index === 1
-                            ? {...GS.customMenuIcon, width: Platform.OS === "ios" ? 28 : 5} 
-                            : GS.customMenuIcon} key={index}>{node}
-                        </View>
-                    ))}
+                <Text style={{
+                    ...GS.headerTitle, 
+                    color: theme.titleTextColor, 
+                    width: 300, 
+                    textAlign: "center", 
+                    top: title?.length > 30 ? -8 : undefined
+                }}>
+                    {title}
+                </Text>
+                <View style={GS.innerHeaderViewTwo}>
+                {options.headerComponents?.right?.map((node, index) => (
+                    <View style={index === 1
+                        ? {
+                            ...GS.customMenuIcon, 
+                            width: Platform.OS === "ios" ? 28 : 5, 
+                            left: Platform.OS === 'ios' ? 34 : 40
+                        } : {...GS.customMenuIcon, left: 24}} key={index}>{node}
+                    </View>
+                ))}
                 </View>
             </View>
             {options.headerComponents?.bottom?.map((node, index) => 
@@ -129,9 +167,13 @@ function BlurWrapper(props: PropsWithChildren) {
                 experimentalBlurMethod='dimezisBlurView' 
                 intensity={Platform.OS === "ios" ? 30 : 20} 
             />
-            <View style={{...GS.blurBackgroundView, height,
+            <View style={{
+                ...GS.blurBackgroundView, 
+                height,
                 backgroundColor: theme.transparentAndroid
-            }}>{props.children}</View>
+            }}>
+                {props.children}
+            </View>
         </>
     )
 }

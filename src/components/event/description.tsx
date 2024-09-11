@@ -10,7 +10,9 @@ export default function Description() {
 
     const content = useMemo(() => {
         if (!(event?.event&&Object.keys(event.event).length)) return null
-        const description = lang ? event?.event?.description_no || event?.event?.description_en : event?.event?.description_en || event?.event?.description_no
+        const description = lang 
+            ? event?.event?.description_no || event?.event?.description_en 
+            : event?.event?.description_en || event?.event?.description_no
 
 
         const embededEvent = /(\[:\w+\]\(\d+\))/

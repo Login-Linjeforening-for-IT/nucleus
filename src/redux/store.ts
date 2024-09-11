@@ -69,7 +69,7 @@ const persistedReducer = persistReducer(saveState, reducers)
 const Store = configureStore({
     // The combinded reducer
     reducer: persistedReducer,
-    // Middleware to interact with AsyncStorage (must be of any type to do underlying API type error)
+    // Middleware to interact with AsyncStorage (must be of any type due to underlying API type error)
     middleware: () => [thunk] as any
 })
 

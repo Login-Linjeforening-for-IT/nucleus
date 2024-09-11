@@ -1,18 +1,11 @@
 import { StyleSheet, Dimensions, Platform } from "react-native"
+import T from "./text"
 
 export const GS = StyleSheet.create({
     // Main view of every screen
     content: {
-        height: Dimensions.get("window").height+30,
+        height: Dimensions.get("window").height + 60,
         paddingHorizontal: 12
-    },
-    // ReportScreen description text
-    reportInputContentText: {
-        alignSelf: "center",
-        alignItems: "center",
-        width: "80%",
-        height: "90%",
-        borderRadius: 40,
     },
     // Horizontal card views on setting notifications
     notificationBack: {
@@ -21,11 +14,11 @@ export const GS = StyleSheet.create({
     },
     // Notification card text
     notificationText: {
-        fontSize: 20,
+        ...T.text20,
     },
     // Notification card text
     notificationTip: {
-        fontSize: 15,
+        ...T.text15,
     },
     // ReportScreen name and notifier text
     inputText: {
@@ -156,10 +149,10 @@ export const GS = StyleSheet.create({
     }, 
     notificationDropdownTitle: {
         fontWeight: "500",
-        fontSize: 20,
+        ...T.text20,
     }, 
     notificationDropdownBody: {
-        fontSize: 18
+        ...T.text18,
     },
     headerView: {
         position: "absolute",
@@ -182,7 +175,7 @@ export const GS = StyleSheet.create({
     },
     headerTitle: {
         alignSelf: 'center', 
-        fontSize: 20,
+        ...T.text20,
     },
     blurBackgroundView: {
         position: "absolute",

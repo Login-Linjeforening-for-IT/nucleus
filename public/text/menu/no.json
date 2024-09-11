@@ -29,21 +29,21 @@
         },
         {
             "id": 6, 
-            "nav": "LoginScreen",
-            "title": "Logg inn"
+            "nav": "CourseScreen",   
+            "title": "Emner"
         },
         {
             "id": 7, 
-            "nav": "InternalScreen",
-            "title": "Innsida (verv)"
-        },
-        {
-            "id": 8, 
-            "nav": "ReportScreen",   
-            "title": "Varsle"
+            "nav": "GameScreen",
+            "title": "Spill"
         }
     ],
     "version": "Versjon ",
     "unusedScreens": [
+        {
+            "id": 8, 
+            "nav": "InternalScreen",
+            "title": "Vedlikehold"
+        }
     ]
 }

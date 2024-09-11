@@ -2,7 +2,7 @@ import { Image, View, Text, TouchableOpacity } from "react-native"
 import ChangeProfileCard from "@/components/profile/changeProfileCard"
 import Space from "@/components/shared/utils"
 import PS from "@styles/profileStyles"
-import React, { useState } from "react"
+import { useState } from "react"
 import T from "@styles/text"
 import { useSelector } from "react-redux"
 
@@ -75,7 +75,7 @@ export default function Profile({profile} : ProfileElementprops) {
             </TouchableOpacity>
 
             {show && <ChangeProfileCard
-                    hide={() => {console.log("hidden"); setShow(false)}}
+                    hide={() => setShow(false)}
                     trigger={true}
                 />
             }

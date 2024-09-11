@@ -3,12 +3,11 @@ module.exports = function(api) {
 
     return {
         presets: ['babel-preset-expo'],
-        "plugins": [
+        plugins: [
             'react-native-reanimated/plugin',
             ["module-resolver", {
                 "alias": {
                     "@components": "./src/components",
-                    "@interfaces": "./interfaces.ts",
                     "@themes": "./src/styles/themes",
                     "@assets": "./public/assets",
                     "@text": "./public/text",

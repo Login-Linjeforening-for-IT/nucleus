@@ -4,8 +4,8 @@ import { AppRegistry } from "react-native"
 import { Provider } from "react-redux"
 import Navigator from "@nav/tabs"
 import store from "@redux/store"
-import React from "react"
 import ForceUpdate from "@components/menu/forceUpdate"
+import { requestNotificationPermission } from "@utils/notificationSetup"
 
 let persistor = persistStore(store)
 
@@ -22,9 +22,13 @@ let persistor = persistStore(store)
  *
  * @returns Entire application
  */
-export default function App(): JSX.Element {
+export default function App() {
 
+    // Registers the root component
     AppRegistry.registerComponent("app", () => App)
+
+    // Asks for permission to send notifications
+    requestNotificationPermission()
 
     return (
         <Provider store={store}>

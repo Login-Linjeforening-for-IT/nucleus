@@ -11,7 +11,7 @@ import { setAds, setLastFetch, setLastSave } from "@redux/ad"
 import { useFocusEffect } from "@react-navigation/native"
 import { useDispatch, useSelector } from "react-redux"
 import { View } from "react-native"
-import { AdScreenProps } from "@utils/screenTypes"
+import { AdScreenProps } from "@type/screenTypes"
 
 /**
  * Parent AdScreen component
@@ -32,7 +32,7 @@ export default function AdScreen({ navigation }: AdScreenProps<'AdScreen'>): JSX
         useState<JSX.Element | undefined>(undefined)
     
     // Redux states
-    const { search, lastSave } = useSelector((state: ReduxState) => state.ad)
+    const { search, lastSave, skills } = useSelector((state: ReduxState) => state.ad)
     const { theme, isDark } = useSelector((state: ReduxState) => state.theme)
     const ads = useSelector((state: ReduxState) => state.ad.ads)
     const dispatch = useDispatch()
@@ -102,7 +102,7 @@ export default function AdScreen({ navigation }: AdScreenProps<'AdScreen'>): JSX
 
     // Sets the component of the header
     useEffect(()=>{
-        const right = ads.length ? [<FilterButton />, <DownloadButton screen="ad" />] : []
+        const right = ads.length ? [skills.length ? <FilterButton /> : null, <DownloadButton screen="ad" />] : []
         navigation.setOptions({
             headerComponents: {
                 bottom: [<FilterUI />],

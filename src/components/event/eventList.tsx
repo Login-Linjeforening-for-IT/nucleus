@@ -1,20 +1,14 @@
-import Space, { ErrorMessage } from "@components/shared/utils"
-import { useState, useCallback } from "react"
-import { Dimensions, Platform, View } from "react-native"
-import { useDispatch, useSelector } from "react-redux"
-import Seperator from "./seperator"
 import EventCluster from "./eventCluster"
+import getCategories from "@utils/getCategories"
+import getListOffset from "@utils/getListOffset"
 import LastFetch, { fetchEvents } from "@utils/fetch"
+import Seperator from "./seperator"
+import Space, { ErrorMessage } from "@components/shared/utils"
 import { setEvents, setLastFetch } from "@redux/event"
 import { RefreshControl, ScrollView } from "react-native-gesture-handler"
-import getHeight from "@utils/getHeight"
-import getCategories from "@utils/getCategories"
-
-type SeperatedEventsProps = {
-    item: EventProps
-    index: number
-    usedIndexes: number[]
-}
+import { useState, useCallback } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { View } from "react-native"
 
 type ContentProps = {
     usedIndexes: number[]
@@ -49,9 +43,6 @@ export default function EventList (): JSX.Element {
     }, [refresh])
     
     const cat = getCategories({lang, categories})
-    const offset = search 
-    ? (Dimensions.get("window").height / ((Platform.OS === "ios" ? 3.6 : 3)) - (100 - getHeight(cat.length + clickedEvents.length)))
-    : Dimensions.get("window").height / (Platform.OS === "ios" ? 8.2 : 7.8 )
 
     if (renderedEvents.length > 0) {
         const usedIndexes: number[] = []
@@ -59,13 +50,13 @@ export default function EventList (): JSX.Element {
         return (
             <>
                 <ScrollView 
-                    style={{paddingTop: offset }}
+                    style={{paddingTop: getListOffset({search, categories: cat, clickedEvents}) }}
                     showsVerticalScrollIndicator={false} 
                     scrollEventThrottle={100}
                 >
                     <RefreshControl refreshing={refresh} onRefresh={onRefresh} />
                     <Content usedIndexes={usedIndexes}/>
-                    <Space height={offset} />
+                    <Space height={getListOffset({search, categories: cat, clickedEvents, bottom: true})} />
                 </ScrollView>
             </>
         )

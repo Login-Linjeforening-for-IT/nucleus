@@ -2,7 +2,7 @@ import TopicSwitchList from "@/components/settings/topicSwitch"
 import { TouchableOpacity, Image, View, Text } from "react-native"
 import GS from "@styles/globalStyles"
 import { useSelector } from "react-redux"
-import React, {useState } from "react"
+import {useState } from "react"
 import T from "@styles/text"
 
 /**

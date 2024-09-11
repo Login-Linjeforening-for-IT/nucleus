@@ -2,9 +2,17 @@ import Cluster from "@/components/shared/cluster"
 import Space from "@/components/shared/utils"
 import GS from "@styles/globalStyles"
 import React, { useCallback, useEffect, useRef, useState } from "react"
-import { Navigation } from "@interfaces"
+import { Navigation } from "@/interfaces"
 import { useSelector } from "react-redux"
-import { View, Text, Dimensions, TouchableOpacity, Platform, Animated, TouchableHighlight } from "react-native"
+import { 
+    View, 
+    Text, 
+    Dimensions, 
+    TouchableOpacity, 
+    Platform, 
+    Animated, 
+    TouchableHighlight
+} from "react-native"
 import NS from "@styles/notificationStyles"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import NotificationText from "@/components/notification/notificationText"
@@ -14,6 +22,7 @@ import { RefreshControl, ScrollView } from "react-native-gesture-handler"
 import { Swipeable } from 'react-native-gesture-handler'
 import TrashCan from "@components/menu/navigation"
 import { NotificationSeperator } from "@components/event/seperator"
+import T from "@styles/text"
 
 type NotificationModalProps = {
     item: NotificationListProps
@@ -92,7 +101,7 @@ export default function NotificationScreen(): JSX.Element {
                         ? <List list={list} getList={getList} setList={setList} hideOld={hideOld} setHideOld={setHideOld} readIndex={readIndex} /> 
                         : <Text style={{...NS.error, color: theme.oppositeTextColor}}>
                             {lang 
-                                ? "Du har ingen varslinger nå. Kom tilbake senere." 
+                                ? "Ingen varslinger. Kom tilbake senere." 
                                 : "You have no notifications at this time. Check back later."}
                         </Text>}
                     </ScrollView>
@@ -266,7 +275,7 @@ function List({list, setList, hideOld, setHideOld, readIndex}: NotificationList)
         <>
             {readIndex > 0 && <NotificationSeperator text={lang ? "Nye" : "New"} />}
             {list.map((item, index) => <Notification key={index} list={list} item={item} id={index} setList={setList} hideOld={hideOld} setHideOld={setHideOld} readIndex={readIndex} />)}
-            <Text style={{alignSelf: 'center', fontSize: 12, marginVertical: 10, color: theme.oppositeTextColor}}>{text}</Text>
+            <Text style={{alignSelf: 'center', ...T.text12, marginVertical: 10, color: theme.oppositeTextColor}}>{text}</Text>
             <Space height={offset} />
         </>
     )

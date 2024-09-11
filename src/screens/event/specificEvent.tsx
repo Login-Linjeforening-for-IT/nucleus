@@ -13,7 +13,7 @@ import { useDispatch } from "react-redux"
 import { fetchEventDetails } from "@utils/fetch"
 import { setHistory, setEvent } from "@redux/event"
 import Tag from "@components/shared/tag"
-import { EventScreenProps } from "@utils/screenTypes"
+import { EventScreenProps } from "@type/screenTypes"
 import { useFocusEffect } from "@react-navigation/core"
 
 /**
@@ -26,6 +26,7 @@ export default function SpecificEventScreen({ navigation, route: {params: {event
     const { event, history } = useSelector((state: ReduxState) => state.event)
     const [refresh, setRefresh] = useState(false)
     const dispatch = useDispatch()
+    const height = Dimensions.get("window").height
 
     useFocusEffect(
         React.useCallback(() => {
@@ -46,7 +47,7 @@ export default function SpecificEventScreen({ navigation, route: {params: {event
                 }
                 return true
             }
-
+    
             const subscription = BackHandler.addEventListener(
                 'hardwareBackPress',
                 onBackPress
@@ -61,7 +62,7 @@ export default function SpecificEventScreen({ navigation, route: {params: {event
     }, [history])
 
     async function getDetails() {
-        const response = await fetchEventDetails(history[history.length - 1])
+        const response = await fetchEventDetails(history[history?.length - 1])
 
         if (response) {
             dispatch(setEvent(response))
@@ -83,7 +84,7 @@ export default function SpecificEventScreen({ navigation, route: {params: {event
             <View style={{...ES.sesContent, backgroundColor: theme.background}}>
                 <Space height={Platform.OS=="ios" 
                     ? Dimensions.get("window").height / 8.5
-                    : Dimensions.get("window").height / 7.5
+                    : Dimensions.get("window").height / 7.5 + (height > 800 && height < 900 ? 15 : 0)
                 } />
                 <ScrollView 
                     showsVerticalScrollIndicator={false} 

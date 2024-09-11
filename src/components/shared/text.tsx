@@ -1,6 +1,11 @@
-import React from 'react'
-import { Text as RNText, TouchableOpacity, TextStyle, StyleProp, Alert } from 'react-native'
-// import Clipboard from '@react-native-clipboard/clipboard'
+import Clipboard from '@react-native-clipboard/clipboard'
+import { 
+    Text as RNText, 
+    TouchableOpacity, 
+    TextStyle, 
+    StyleProp, 
+    Alert 
+} from 'react-native'
 
 type TextProps = {
     children: string | number | object
@@ -34,7 +39,7 @@ export default function Text ({ children, style, copyable, warning }: TextProps)
 
     // Copies the text to clipboard
     function handleCopy(selectedText: string) {
-        // Clipboard.setString(selectedText)
+        Clipboard.setString(selectedText)
 
         if (warning) {
             Alert.alert(warning[0], warning[1])

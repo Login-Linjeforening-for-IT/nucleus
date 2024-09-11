@@ -1,19 +1,15 @@
 import ES from "@styles/eventStyles"
+import getHeight from "@utils/getHeight"
 import MS from "@styles/menuStyles"
-import React, { useRef } from "react"
 import T from "@styles/text"
 import { CheckBox, CheckedBox } from "@components/event/check"
-import { 
-    reset as resetEvents, 
-    setClickedCategories, 
-    setInput as setEvents, 
-    toggleSearch as eventToggleSearch 
-} from "@redux/event"
 import { reset as resetAds, setInput as setAds } from "@redux/ad"
 import { toggleSearch as adToggleSearch } from "@redux/ad"
+import { ScrollView } from "react-native-gesture-handler"
 import { setClickedSkills } from "@redux/ad"
-import { useSelector, useDispatch } from "react-redux"
+import { useRef } from "react"
 import { useRoute } from "@react-navigation/native"
+import { useSelector, useDispatch } from "react-redux"
 import {
     TouchableOpacity,
     TextInput,
@@ -23,8 +19,12 @@ import {
     Dimensions,
     Platform,
 } from "react-native"
-import { ScrollView } from "react-native-gesture-handler"
-import getHeight from "@utils/getHeight"
+import { 
+    reset as resetEvents, 
+    setClickedCategories, 
+    setInput as setEvents, 
+    toggleSearch as eventToggleSearch 
+} from "@redux/event"
 
 /**
  * User interface for the filter
@@ -134,7 +134,6 @@ function FilterCategoriesOrSkills() {
             }
         }
     }
-
 
     // Clones cat because it is read only
     const categories = [...cat]

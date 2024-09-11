@@ -5,15 +5,23 @@ import { BlurView } from "expo-blur"
 import { openBrowserAsync } from 'expo-web-browser'
 import { SvgXml } from "react-native-svg"
 import USBicon from "@assets/menu/USB-temp-icon.svg"
-import { NavigationHelpers, ParamListBase, TabNavigationState } from "@react-navigation/native"
-import { BottomTabDescriptorMap, BottomTabNavigationEventMap } from "@react-navigation/bottom-tabs/lib/typescript/src/types"
 import NotificationIcon from "@components/notification/notificationIcon"
+import { KIOSK_URL } from "@/constants"
+import { 
+    NavigationHelpers, 
+    ParamListBase, 
+    TabNavigationState 
+} from "@react-navigation/native"
+import { 
+    BottomTabDescriptorMap, 
+    BottomTabNavigationEventMap 
+} from "@react-navigation/bottom-tabs/lib/typescript/src/types"
 
 export type FooterProps = {
     state: TabNavigationState<ParamListBase>
     descriptors: BottomTabDescriptorMap
     navigation: NavigationHelpers<ParamListBase, BottomTabNavigationEventMap>
-  }
+}
 
 export default function Footer({ state, descriptors, navigation }: FooterProps): JSX.Element {
     return (
@@ -78,11 +86,7 @@ function Content({ state, descriptors, navigation }: FooterProps) {
                 <TouchableOpacity
                     accessibilityRole="button"
                     style={{...MS.bMenuIconTouchableOpacity, paddingLeft: 20}}
-                    onPress={async()=>{
-                        openBrowserAsync("https://usb.login.no/").catch((error)=>{
-                            console.log(error)
-                        })
-                    }}
+                    onPress={() => openBrowserAsync(KIOSK_URL)}
                 >
                     <SvgXml
                         width={MS.bMenuIconTouchableOpacity.width - 55}

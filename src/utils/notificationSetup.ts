@@ -1,12 +1,10 @@
 import { setNotificationStateTrue } from "@redux/notifications"
 import { useDispatch } from "react-redux"
-
-// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 1/6
 import messaging from "@react-native-firebase/messaging"
 import subscribeToTopic from "@utils/subscribeToTopic"
 import { Dispatch, UnknownAction } from "redux"
 import { resetTheme } from "@redux/theme"
-// COMMENT OUT THIS BOX WHILE TESTING IN EXPO 1/6
+import { Alert, PermissionsAndroid, Platform } from "react-native"
 
 type initializeNotificationsProps = {
     shouldRun: boolean
@@ -34,9 +32,6 @@ setShouldSetupNotifications, dispatch }: initializeNotificationsProps) {
  * Runs when the app is first opened to setup initial notifications
  */
 export async function notificationSetup() {
-    // COMMENT IN THIS BOX WHILE TESTING IN EXPO 2/6
-    // return null // For testing in Expo
-    // COMMENT IN THIS BOX WHILE TESTING IN EXPO 2/6
     const dispatch = useDispatch()
     const granted = await messaging().requestPermission()
 
@@ -49,4 +44,62 @@ export async function notificationSetup() {
     }
 
     dispatch(setNotificationStateTrue({category: "SETUP"}))
+}
+
+export async function requestNotificationPermission() {
+    try {
+        // Check if we're on Android, as POST_NOTIFICATIONS is Android-specific
+        if (Platform.OS === 'android' && Platform.Version >= 33) {
+            const notificationPermission = await PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS);
+    
+            if (!notificationPermission) {
+                // If permission not already granted, request it
+                const status = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS);
+                
+                if (status === PermissionsAndroid.RESULTS.GRANTED) {
+                    return true
+                } else if (status === PermissionsAndroid.RESULTS.DENIED) {
+                    Alert.alert(
+                        'Notification Permission Denied',
+                        'Notification permission was denied. Please allow it to receive notifications.',
+                        [{ text: 'OK', onPress: () => {} }]
+                    );
+                    return false;
+                } else if (status === PermissionsAndroid.RESULTS.NEVER_ASK_AGAIN) {
+                    Alert.alert(
+                        'Notification Permission Disabled',
+                        'You have disabled notification permissions. To enable notifications, go to Settings > Apps > Login > Notifications.',
+                        [{ text: 'OK', onPress: () => {} }]
+                    )
+                    return false
+                }
+            } else {
+                return true
+            }
+        } else {
+            // For iOS, use Firebase's requestPermission API
+            const authStatus = await messaging().requestPermission()
+            const enabled =
+            authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+            authStatus === messaging.AuthorizationStatus.PROVISIONAL
+    
+            if (enabled) {
+                return true
+            } else {
+                Alert.alert(
+                    'Notification Permission Denied',
+                    'Notification permission was denied. Please allow it to receive notifications.',
+                    [{ text: 'OK', onPress: () => {} }]
+                );
+                return false;
+            }
+        }
+    } catch (error) {
+        Alert.alert(
+            'Error',
+            'An error occurred while requesting notification permission. Please try again later.',
+            [{ text: 'OK', onPress: () => {} }]
+        );
+        return false;
+    }
 }

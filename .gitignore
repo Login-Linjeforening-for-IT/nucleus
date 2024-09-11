@@ -1,11 +1,12 @@
 # Secrets
-config.json
+# config.json
 google-services.json
 GoogleService-Info.plist
 
 # vscode
 .vscode
 android
+
 ios
 *.aab
 *.ipa
@@ -98,3 +99,8 @@ yarn-error.log
 
 # testing
 /coverage
+
+.direnv
+.envrc
+flake.lock
+flake.nix

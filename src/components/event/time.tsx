@@ -1,7 +1,7 @@
 import { View, Text } from "react-native"
 import { useSelector } from "react-redux"
 import T from "@styles/text"
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 
 type EventTimeProps = {
     time_start: string | undefined
@@ -72,7 +72,7 @@ export function GetEndTime({time_end}: GetEndTimeProps) {
 }
 
 /**
- * Displays the event time, How long till it starts, how long its been ongoing, or how long since it ended
+ * Displays the event time, how long till it starts, how long its been ongoing, or how long since it ended
  * @param time_start Start time of the event
  * @param time_end End time of the event
  * @returns The event time that should be displayed

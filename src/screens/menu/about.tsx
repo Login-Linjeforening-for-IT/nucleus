@@ -5,7 +5,7 @@ import GS from "@styles/globalStyles"
 import { useSelector } from "react-redux"
 import en from "@text/menu/about/en.json"
 import no from "@text/menu/about/no.json"
-import React, {useState} from "react"
+import React, { useState } from "react"
 import T from "@styles/text"
 import Person, { 
     AllComitees, 
@@ -20,6 +20,7 @@ import {
     Dimensions,
     StyleProp,
     ViewStyle,
+    Platform,
 } from "react-native"
 import { ScrollView } from "react-native-gesture-handler"
 import Swipe from "@components/nav/swipe"
@@ -32,6 +33,7 @@ import bedkomSVG from "@assets/committee/bedkom/bedkom-icon.svg"
 import tekkomSVG from "@assets/committee/tekkom/tekkom-icon.svg"
 import styretSVG from "@assets/committee/styret/styret-icon.svg"
 import { TextLink } from "@components/shared/link"
+import { WIKI_URL } from "@/constants"
 
 type getCommitteeImageProps = {
     style?: StyleProp<ViewStyle>
@@ -76,13 +78,35 @@ export default function AboutScreen(): JSX.Element {
     const [committee, setCommittee] = useState(0)
     const text = lang ? no : en
     const info = text.committeeSection.info
+    const height = Dimensions.get("window").height
+    const extraHeight = Platform.OS === 'ios' ? 0 : height > 800 && height < 900 ? 10 : 0
+
+    function getOffset() {
+        if (Platform.OS === 'ios') {
+            return 6
+        }
+
+        if (height <= 700) {
+            return 5
+        }
+
+        if (height > 700 && height <= 800) {
+            return 6
+        }
+
+        if (height > 800 && height < 900) {
+            return 12
+        }
+        
+        return 7
+    }
 
     return (
         <Swipe left="MenuScreen">
             <View>
                 <View style={{...GS.content, backgroundColor: theme.darker}}>
                     <ScrollView showsVerticalScrollIndicator={false}>
-                        <Space height={Dimensions.get("window").height / 8.1} /> 
+                        <Space height={Dimensions.get("window").height / 8.1 + extraHeight} /> 
                         <Cluster>
                             <Text style={{...T.bold40, color: theme.textColor}}>
                                 {text.title}
@@ -171,7 +195,7 @@ export default function AboutScreen(): JSX.Element {
                                 }}>
                                     {text.publicDocs.body}
                                     <TextLink 
-                                        url="https://wiki.login.no" 
+                                        url={WIKI_URL}
                                         text={text.publicDocs.wiki} 
                                     />.
                                 </Text>
@@ -179,7 +203,7 @@ export default function AboutScreen(): JSX.Element {
                             <Social />
                             <Copyright />
                         </Cluster>
-                        <Space height={Dimensions.get("window").height / 7} /> 
+                        <Space height={Dimensions.get("window").height / getOffset()} /> 
                     </ScrollView>
                 </View>
             </View>

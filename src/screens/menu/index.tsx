@@ -5,27 +5,22 @@ import Space from "@/components/shared/utils"
 import CS from "@styles/clusterStyles"
 import GS from "@styles/globalStyles"
 import { useSelector } from "react-redux"
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import en from "@text/menu/en.json"
 import no from "@text/menu/no.json"
 import T from "@styles/text"
 import LogoNavigation from "@/components/shared/logoNavigation"
 import Text from "@components/shared/text"
-import {
-  View,
-  Image,
-  TouchableOpacity,
-  Dimensions,
-} from "react-native"
-import Swipe from "@components/nav/swipe"
-import { ItemProps, MenuProps, MenuStackParamList } from "@utils/screenTypes"
+import { View, Image, TouchableOpacity, Dimensions, Platform } from "react-native"
+import { ItemProps, MenuProps, MenuStackParamList } from "@type/screenTypes"
 import { NavigationProp } from "@react-navigation/native"
 import NotificationIcon from "@components/notification/notificationIcon"
+import Swipe from "@components/nav/swipe"
 
 type MenuItemProps = {
     index: number
     item: ItemProps
-    navigation: NavigationProp<MenuStackParamList,'MenuScreen'>
+    navigation: NavigationProp<MenuStackParamList, 'MenuScreen'>
     setting: SettingProps[]
     feedback: boolean
     toggleFeedback: () => void
@@ -40,8 +35,9 @@ export default function MenuScreen({ navigation }: MenuProps<'MenuScreen'>): JSX
     const { theme } = useSelector((state: ReduxState) => state.theme )
     const { id, name, image } = useSelector((state: ReduxState) => 
     state.profile )
-    const profile = { id, name, image}
+    const profile = { id, name, image }
     const text: Setting = lang ? no as Setting : en as Setting
+    const height = Dimensions.get("window").height
 
     // Feedback options visibility boolean
     const [feedback, setFeedback] = useState(false)
@@ -51,7 +47,7 @@ export default function MenuScreen({ navigation }: MenuProps<'MenuScreen'>): JSX
         setFeedback(prevFeedback => !prevFeedback)
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         navigation.setOptions({
             headerComponents: {
                 left: [<LogoNavigation />],
@@ -64,12 +60,10 @@ export default function MenuScreen({ navigation }: MenuProps<'MenuScreen'>): JSX
                 ...GS.content, 
                 backgroundColor: theme.darker
             }}>
-                <Space height={Dimensions.get("window").height / 8} />
+                <Space height={height / (Platform.OS === 'ios' ? 8 : height > 800 && height < 900 ? 6.5 : 8)} />
                 {/* <SmallProfile navigation={navigation} profile={profile} login={login} /> */}
                 {text.setting.map((item, index) => {
                     if (item.nav === "ProfileScreen") return null
-                    if (item.nav === "LoginScreen" && login) return null
-                    if (item.nav === "InternalScreen" && !login) return null
                     return (
                         <MenuItem 
                             index={index}
@@ -83,7 +77,7 @@ export default function MenuScreen({ navigation }: MenuProps<'MenuScreen'>): JSX
                         />
                     )
                 })}
-                <Space height={Dimensions.get("window").height / 10} /> 
+                <Space height={height / 10} /> 
             </View>
         </Swipe>
     )
@@ -98,8 +92,7 @@ toggleFeedback}: MenuItemProps) {
 
     return (
         <View>
-            <TouchableOpacity onPress={() => navigation.navigate(item.nav)}
-            >
+            <TouchableOpacity onPress={() => navigation.navigate(item.nav as any)}>
                 <Cluster>
                     <View style={{...CS.clusterBack}}>
                         <View style={CS.twinLeft}>
@@ -127,9 +120,11 @@ toggleFeedback}: MenuItemProps) {
                 />
             </View>
             {index === setting.length-1 
-            ?   <Text style={{...T.contact, color: theme.oppositeTextColor}}>
-                    {version}
-                </Text>
+            ?   <TouchableOpacity onPress={() => navigation.navigate('InternalScreen')}>
+                    <Text style={{...T.contact, color: theme.oppositeTextColor}}>
+                        {version}
+                    </Text>
+                </TouchableOpacity>
             : null}
         </View>
     )

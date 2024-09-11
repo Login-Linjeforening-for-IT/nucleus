@@ -6,7 +6,7 @@ import Profile from "@/components/profile/profile"
 import Space from "@/components/shared/utils"
 import PS from "@styles/profileStyles"
 import { useSelector } from "react-redux"
-import React, { useState } from "react"
+import { useState } from "react"
 import Swipe from "@components/nav/swipe"
 
 type ScrollProps = {

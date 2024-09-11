@@ -1,7 +1,6 @@
 import Svg, { Circle } from "react-native-svg"
 import ES from "@styles/eventStyles"
 import { View } from "react-native"
-import React from "react"
 
 /**
  * NOTE: SHOULD BE REMOVED AND REPLACED WITH VIEW WITH BORDERRADIUS

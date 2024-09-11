@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from "react"
-import { useFocusEffect } from "@react-navigation/native"
 import EventList from "@components/event/eventList"
-import { useDispatch, useSelector } from "react-redux"
-import { StatusBar } from "expo-status-bar"
 import GS from "@styles/globalStyles"
 import NavigateFromPushNotification 
 from "@/utils/navigateFromPushNotification"
 import initializeNotifications 
 from "@/utils/notificationSetup"
 import LastFetch, { fetchEvents } from "@/utils/fetch"
-import { View } from "react-native"
 import LogoNavigation from "@/components/shared/logoNavigation"
-import { setEvents, setLastFetch, setLastSave } from "@redux/event"
 import Swipe from "@components/nav/swipe"
-import { FilterButton, FilterUI } from "@components/shared/filter"
 import DownloadButton from "@components/shared/downloadButton"
-import { EventScreenProps } from "@utils/screenTypes"
+import { useFocusEffect } from "@react-navigation/native"
+import { useDispatch, useSelector } from "react-redux"
+import { StatusBar } from "expo-status-bar"
+import { setEvents, setLastFetch, setLastSave } from "@redux/event"
+import { View } from "react-native"
+import { FilterButton, FilterUI } from "@components/shared/filter"
+import { EventScreenProps } from "@type/screenTypes"
 
 /**
  * Parent EventScreen component
@@ -97,20 +97,23 @@ export default function EventScreen({ navigation }: EventScreenProps<'EventScree
     initializeNotifications({
         shouldRun: shouldSetupNotifications,
         hasBeenSet: notification["SETUP"],
-        setShouldSetupNotifications: setShouldSetupNotifications,
-        dispatch: dispatch
+        setShouldSetupNotifications,
+        dispatch
     })
 
     // Displays the EventScreen
     return (
-        <Swipe right="EventNav">
+        <Swipe right="AdNav">
             <View>
                 <StatusBar style={isDark ? "light" : "dark"} />
-                <View style={{
-                    ...GS.content,
-                    paddingHorizontal: 5,
-                    backgroundColor: theme.darker
-                }}>
+                <View 
+                    style={{
+                        ...GS.content,
+                        paddingHorizontal: 5,
+                        backgroundColor: theme.darker
+                    }}
+                    testID="eventScreen"
+                >
                     {pushNotification && pushNotificationContent}
                     <EventList />
                 </View>

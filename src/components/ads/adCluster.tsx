@@ -1,10 +1,9 @@
 import AS from "@styles/adStyles"
 import BellIcon from "@components/shared/bellIcon"
-import Cluster from "@/components/shared/cluster"
-import React from "react"
-import Space from "@/components/shared/utils"
+import Cluster from "@components/shared/cluster"
+import Space from "@components/shared/utils"
 import T from "@styles/text"
-import { AdClusterLocation, AdClusterImage } from "@/components/ads/ad"
+import { AdClusterLocation, AdClusterImage } from "@components/ads/adContent"
 import { setClickedAds, toggleSearch } from "@redux/ad"
 import { useNavigation } from "@react-navigation/native"
 import { useSelector, useDispatch } from "react-redux"
@@ -12,7 +11,7 @@ import { TouchableOpacity, Dimensions, Text, View } from "react-native"
 import { LinearGradient } from "expo-linear-gradient"
 import TopicManager from "@utils/topicManager"
 import { StackNavigationProp } from "@react-navigation/stack"
-import { AdStackParamList } from "@utils/screenTypes"
+import { AdStackParamList } from "@type/screenTypes"
 
 type Ad = {
     ad: AdProps
@@ -85,7 +84,7 @@ export default function AdCluster({ad, index, embed}: Ad): JSX.Element {
 export function ListFooter ({index}: ListFooterProps): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
-    const { lastFetch, renderedAds, skills } = useSelector((state: ReduxState) => state.ad)
+    const { lastFetch, renderedAds } = useSelector((state: ReduxState) => state.ad)
 
     return (
         <>
@@ -95,7 +94,6 @@ export function ListFooter ({index}: ListFooterProps): JSX.Element {
                 </Text>}
             {index === renderedAds.length - 1 && 
                 <Space height={Dimensions.get("window").height / 7}/>}
-            
         </>
     )
 }
