@@ -1,13 +1,13 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { NavigationContainer } from "@react-navigation/native"
-import Footer from "@nav/footer"
+import USBicon from "@assets/menu/USB-temp-icon.svg"
 import { useSelector } from "react-redux"
 import AdScreen from "@screens/ads"
 import EventScreen from "@screens/event"
 import MenuScreen from "@screens/menu"
 import MS from "@styles/menuStyles"
 import TagInfo from "@components/shared/tagInfo"
-import { Image } from "react-native"
+import { Image, Platform } from "react-native"
 import { TransitionSpec } from "@react-navigation/stack/lib/typescript/src/types"
 import NotificationModal from "@components/shared/notificationModal"
 import NotificationScreen from "@screens/menu/notifications"
@@ -37,6 +37,9 @@ import {
     StackCardInterpolationProps, 
     createStackNavigator
 } from "@react-navigation/stack"
+import { BlurView } from "expo-blur"
+import USBLink from "@screens/usb"
+import { SvgXml } from "react-native-svg"
 
 // Declares Tab to equal CBTN function
 const Root = createStackNavigator<RootStackParamList>()
@@ -105,13 +108,17 @@ function Tabs(): JSX.Element {
             // Set initialscreen at to not defaut to top of tab stack
             initialRouteName={"EventNav"}
             backBehavior="history"
-            screenOptions={{headerShown: false}}
-            // Sets the tab bar component
-            tabBar={props => <Footer 
-                state={props.state} 
-                descriptors={props.descriptors} 
-                navigation={props.navigation} 
-            />}
+            screenOptions={{headerShown: false, 
+                            tabBarShowLabel: false,
+                            tabBarStyle: {
+                                position: 'absolute',
+                                borderTopWidth: 0,
+                                height: Platform.OS === 'ios' ? 90 : 60,
+                            },
+                            tabBarBackground() {
+                                return <BlurView experimentalBlurMethod="dimezisBlurView" tint="systemChromeMaterialDark" style={MS.bMenu} intensity={100}/>
+                            },
+            }}
         >
             <Tab.Screen 
                 name="EventNav" 
@@ -124,7 +131,7 @@ function Tabs(): JSX.Element {
                                 ? require("@assets/menu/calendar-orange.png")
                                 : isDark
                                     ? require("@assets/menu/calendar777.png")
-                                    : require("@assets/menu/calendar-black.png")} 
+                                    : require("@assets/menu/calendar-black.png")}
                         />
                     )
                 })}
@@ -160,6 +167,19 @@ function Tabs(): JSX.Element {
                         />
                     )
             })}
+            />
+            <Tab.Screen
+                name="USBLink"
+                component={USBLink} 
+                options={{
+                    tabBarIcon: ({focused}) => (
+                        <SvgXml
+                        width={MS.bMenuIconTouchableOpacity.width - 55}
+                        height={MS.bMenuIconTouchableOpacity.height}
+                        xml={USBicon}
+                    />
+                    )
+                }}
             />
         </Tab.Navigator>
     )

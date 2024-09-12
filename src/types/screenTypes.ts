@@ -7,9 +7,6 @@ declare global {
     }
 }
 
-export type TabBarProps<T extends keyof TabBarParamList> =
-BottomTabScreenProps<TabBarParamList, T>
-
 export type EventStackParamList = {
     EventScreen: undefined
     SpecificEventScreen: {eventID: number}
@@ -44,15 +41,12 @@ export type MenuRoutes =
     | "InternalScreen" 
     | "GameScreen"
     | "SpecificGameScreen"
-
-    export type ItemProps = {
+    
+export type ItemProps = {
     id: number
     nav: MenuRoutes
     title: string
 }
-
-export type MenuProps<T extends keyof MenuStackParamList> = 
-StackScreenProps<MenuStackParamList, T>
 
 export type MenuStackParamList = {
     ProfileScreen: undefined
@@ -70,11 +64,18 @@ export type MenuStackParamList = {
     DiceScreen: undefined
 }
 
+export type MenuProps<T extends keyof MenuStackParamList> = 
+StackScreenProps<MenuStackParamList, T>
+
 export type TabBarParamList = {
     EventNav: NavigatorScreenParams<EventStackParamList>
     AdNav: NavigatorScreenParams<AdStackParamList>
     MenuNav: NavigatorScreenParams<MenuStackParamList>
+    USBLink: NavigatorScreenParams<{}>
 }
+
+export type TabBarProps<T extends keyof TabBarParamList> =
+BottomTabScreenProps<TabBarParamList, T>
 
 export type RootStackParamList = {
     Tabs: NavigatorScreenParams<TabBarParamList>

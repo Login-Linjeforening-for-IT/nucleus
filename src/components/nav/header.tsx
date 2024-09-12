@@ -165,7 +165,8 @@ function BlurWrapper(props: PropsWithChildren) {
             <BlurView 
                 style={{height}} 
                 experimentalBlurMethod='dimezisBlurView' 
-                intensity={Platform.OS === "ios" ? 30 : 20} 
+                intensity={30}
+                blurReductionFactor={1.5}
             />
             <View style={{
                 ...GS.blurBackgroundView, 
