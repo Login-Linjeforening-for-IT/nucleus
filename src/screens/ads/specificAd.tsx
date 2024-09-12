@@ -1,9 +1,9 @@
-import { View, Dimensions, BackHandler } from "react-native"
+import { View, Dimensions } from "react-native"
 import { RefreshControl, ScrollView } from "react-native-gesture-handler"
 import Cluster from "@/components/shared/cluster"
 import AS from "@styles/adStyles"
 import { useDispatch, useSelector } from "react-redux"
-import React, { useCallback, useState, useEffect } from "react"
+import { useCallback, useState, useEffect } from "react"
 import Swipe from "@components/nav/swipe"
 import AdInfo, { 
     AdBanner,
@@ -12,10 +12,9 @@ import AdInfo, {
     AdTitle,
     AdUpdateInfo
 } from "@/components/ads/ad"
-import { setAd, setHistory } from "@redux/ad"
+import { setAdName } from "@redux/ad"
 import { fetchAdDetails } from "@utils/fetch"
 import { AdScreenProps } from "@type/screenTypes"
-import { useFocusEffect } from "@react-navigation/core"
 import { AdContext } from "@utils/contextProvider"
   
 export default function SpecificAdScreen({navigation, route:{params: {adID}}}: AdScreenProps<'SpecificAdScreen'>): JSX.Element {
@@ -26,24 +25,12 @@ export default function SpecificAdScreen({navigation, route:{params: {adID}}}: A
     const dispatch = useDispatch()
     const height = Dimensions.get("window").height
 
-    navigation.setOptions({title: lang ? ad?.job?.title_no || ad?.job?.title_en 
-        : ad?.job?.title_en || ad?.job?.title_no})
+    useEffect(() => {
+        const adName = lang ? ad?.job?.title_no || ad?.job?.title_en 
+                            : ad?.job?.title_en || ad?.job?.title_no
+        dispatch(setAdName(adName))
+    }, [ad])
 
-    useFocusEffect(
-        React.useCallback(() => {
-            const onBackPress = () => {
-                navigation.goBack()
-                return true
-            }
-    
-            const subscription = BackHandler.addEventListener(
-                'hardwareBackPress',
-                onBackPress
-            )
-    
-            return () => subscription.remove()
-        }, [])
-    )
 
     useEffect(() => {
         getDetails()

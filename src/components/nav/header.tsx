@@ -29,13 +29,12 @@ export default function Header({ options, route, navigation }: HeaderProps): Rea
         : require('@text/en.json').screens[route.name]))
     
     useEffect(()=>{
-        if (!title){
-            if (SES) {
-                setTitle(options.title || eventName || lang ? "Arrangement" : "Event") 
-            }
-            else if (SAS) {
-                setTitle(options.title || adName || lang ? "Jobbanonse" : "Job ad")
-    }}}, [options])
+        if (SES) {
+            setTitle(options.title || eventName || (lang ? "Arrangement" : "Event")) 
+        }
+        else if (SAS) {
+            setTitle(options.title || adName || (lang ? "Jobbanonse" : "Job ad"))
+    }}, [eventName, adName])
 
     if (route.name === localTitle?.screen && localTitle.title !== title) {
         setTitle(localTitle.title)
