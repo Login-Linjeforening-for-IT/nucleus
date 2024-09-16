@@ -3,6 +3,8 @@ import { SvgXml } from "react-native-svg"
 import { useSelector } from "react-redux"
 import infoSvg from "@assets/icons/info.svg"
 import T from "@styles/text"
+import { EventContext } from "@utils/contextProvider"
+import { useContext } from "react"
 
 type InfoBlockProps = {
     text: string
@@ -41,7 +43,7 @@ export default function InfoBlock({text, eventRelated}: InfoBlockProps){
 }
 
 function Info({text}: InfoProps) {
-    const { event } = useSelector((state: ReduxState) => state.event)
+    const event = useContext(EventContext)
     
     if (!event?.event) return null
 

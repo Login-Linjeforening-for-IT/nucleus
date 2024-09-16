@@ -1,9 +1,9 @@
-import { View, Dimensions, BackHandler } from "react-native"
+import { View, Dimensions } from "react-native"
 import { RefreshControl, ScrollView } from "react-native-gesture-handler"
 import Cluster from "@/components/shared/cluster"
 import AS from "@styles/adStyles"
 import { useDispatch, useSelector } from "react-redux"
-import React, { useCallback, useState, useEffect } from "react"
+import { useCallback, useState, useEffect } from "react"
 import Swipe from "@components/nav/swipe"
 import AdInfo, { 
     AdBanner,
@@ -12,54 +12,36 @@ import AdInfo, {
     AdTitle,
     AdUpdateInfo
 } from "@/components/ads/ad"
-import { setAd, setHistory } from "@redux/ad"
+import { setAdName } from "@redux/ad"
 import { fetchAdDetails } from "@utils/fetch"
 import { AdScreenProps } from "@type/screenTypes"
-import { useFocusEffect } from "@react-navigation/core"
+import { AdContext } from "@utils/contextProvider"
   
 export default function SpecificAdScreen({navigation, route:{params: {adID}}}: AdScreenProps<'SpecificAdScreen'>): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    const { ad, history } = useSelector((state: ReduxState) => state.ad )
+    const { lang } = useSelector((state: ReduxState) => state.lang)
+    const [ad, setAd] = useState({} as DetailedAdResponse)
     const [refresh, setRefresh] = useState(false)
     const dispatch = useDispatch()
     const height = Dimensions.get("window").height
 
-    useFocusEffect(
-        React.useCallback(() => {
-            let localHistory = [...history]
-            localHistory.push(adID)
-            dispatch(setHistory(localHistory))
+    useEffect(() => {
+        const adName = lang ? ad?.job?.title_no || ad?.job?.title_en 
+                            : ad?.job?.title_en || ad?.job?.title_no
+        dispatch(setAdName(adName))
+    }, [ad])
 
-            function onBackPress() {
-                if (history.length > 1) {
-                    dispatch(setHistory(history.slice(0, history.length-1)))
-                }
-                else{
-                    dispatch(setHistory([]))
-                    navigation.goBack()
-                }
-                return true
-            }
-    
-            const subscription = BackHandler.addEventListener(
-                'hardwareBackPress',
-                onBackPress
-            )
-    
-            return () => subscription.remove()
-        }, [])
-    )
 
     useEffect(() => {
         getDetails()
-    }, [history])
+    }, [adID])
 
 
     async function getDetails() {
-        const response = await fetchAdDetails(history[history.length-1])
+        const response = await fetchAdDetails(adID)
 
         if (response){
-            dispatch(setAd(response))
+            setAd(response)
             return true
         }
     }
@@ -75,30 +57,32 @@ export default function SpecificAdScreen({navigation, route:{params: {adID}}}: A
     }, [refresh])
 
     return (
-        <Swipe left="AdScreen">
-            <View>
-                <View style={{
-                    ...AS.content,
-                    backgroundColor: theme.darker,
-                    paddingTop: Dimensions.get("window").height / 9.7 + (height > 800 && height < 900 ? 15 : 0),
-                    paddingBottom: Dimensions.get("window").height / 3
-                }}>
-                    <ScrollView 
-                        showsVerticalScrollIndicator={false} 
-                        scrollEventThrottle={100}
-                        refreshControl={<RefreshControl refreshing={refresh} onRefresh={onRefresh} />}
-                    >
-                        <Cluster marginHorizontal={12} marginVertical={22}>
-                            <AdBanner url={ad?.job?.banner_image} />
-                            <AdTitle ad={ad} />
-                            <AdInfo ad={ad?.job} />
-                            <AdDescription ad={ad?.job} />
-                            <AdMedia ad={ad} />
-                            <AdUpdateInfo ad={ad?.job} />
-                        </Cluster>
-                    </ScrollView>
+        <AdContext.Provider value={ad}>
+            <Swipe left="AdScreen">
+                <View>
+                    <View style={{
+                        ...AS.content,
+                        backgroundColor: theme.darker,
+                        paddingTop: Dimensions.get("window").height / 9.7 + (height > 800 && height < 900 ? 15 : 0),
+                        paddingBottom: Dimensions.get("window").height / 3
+                    }}>
+                        <ScrollView 
+                            showsVerticalScrollIndicator={false} 
+                            scrollEventThrottle={100}
+                            refreshControl={<RefreshControl refreshing={refresh} onRefresh={onRefresh} />}
+                        >
+                            <Cluster marginHorizontal={12} marginVertical={22}>
+                                <AdBanner url={ad?.job?.banner_image} />
+                                <AdTitle ad={ad} />
+                                <AdInfo ad={ad?.job} />
+                                <AdDescription ad={ad?.job} />
+                                <AdMedia ad={ad} />
+                                <AdUpdateInfo ad={ad?.job} />
+                            </Cluster>
+                        </ScrollView>
+                    </View>
                 </View>
-            </View>
-        </Swipe>
+            </Swipe>
+        </AdContext.Provider>
     )
 }

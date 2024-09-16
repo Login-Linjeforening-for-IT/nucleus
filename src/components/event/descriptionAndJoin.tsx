@@ -6,10 +6,12 @@ import JoinButton from "./joinButton"
 import { useSelector } from "react-redux"
 import T from "@styles/text"
 import Skeleton from "@components/shared/skeleton"
+import { EventContext } from "@utils/contextProvider"
+import { useContext } from "react"
 
 export default function DescriptionAndJoin() {
+    const event = useContext(EventContext)
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    const { event } = useSelector((state: ReduxState) => state.event)
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const loading = !Boolean(event&&Object.keys(event).length)
     let name = ''

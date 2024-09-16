@@ -210,8 +210,7 @@ type ReduxState = {
     profile: ProfileProps
     event: {
         events: EventProps[]
-        event: DetailedEventResponse
-        history: number[]
+        eventName: string
         clickedEvents: EventProps[]
         renderedEvents: EventProps[]
         lastFetch: string
@@ -232,7 +231,7 @@ type ReduxState = {
     }
     ad: {
         ads: AdProps[]
-        ad: DetailedAdResponse
+        adName: string
         history: number[]
         clickedAds: AdProps[]
         renderedAds: AdProps[]

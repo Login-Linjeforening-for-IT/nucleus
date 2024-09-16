@@ -9,9 +9,11 @@ import { useSelector } from "react-redux"
 import { TextLink } from "@components/shared/link"
 import InfoBlock from "@components/shared/infoBlock"
 import Skeleton from "@components/shared/skeleton"
+import { EventContext } from "@utils/contextProvider"
+import { useContext } from "react"
 
 export default function BasicInfo() {
-    const { event } = useSelector((state: ReduxState) => state.event)
+    const event = useContext(EventContext)
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
 
@@ -76,7 +78,7 @@ export default function BasicInfo() {
 }
 
 function Start() {
-    const { event } = useSelector((state: ReduxState) => state.event)
+    const event = useContext(EventContext)
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const start = lang ? "Starter:      " : "Starts:         "
@@ -95,7 +97,7 @@ function Start() {
 }
 
 function End() {
-    const { event } = useSelector((state: ReduxState) => state.event)
+    const event = useContext(EventContext)
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const end = lang ? "Slutter:       " : "Ends:           "
@@ -111,8 +113,8 @@ function End() {
 }
 
 function Location() {
+    const event = useContext(EventContext)
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    const { event } = useSelector((state: ReduxState) => state.event)
     const { lang } = useSelector((state: ReduxState) => state.lang)
     if (!event?.location){
         return <></>

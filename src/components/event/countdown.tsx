@@ -5,9 +5,11 @@ import { View } from "react-native"
 import EventTime from "./time"
 import { useSelector } from "react-redux"
 import Skeleton from "@components/shared/skeleton"
+import { useContext } from "react"
+import { EventContext } from "@utils/contextProvider"
 
 export default function Countdown() {
-    const { event } = useSelector((state: ReduxState) => state.event)
+    const event = useContext(EventContext)
     
     const startDate = event?.event?.time_start ? new Date(event.event.time_start) : new Date()
     const endDate = event?.event?.time_type=="default" ? new Date(event.event.time_end) : undefined

@@ -14,5 +14,5 @@ config.resolver.sourceExts.push('css')
 // Exports the merged configuration
 module.exports = {
     ...getDefaultConfig(__dirname),
-    ...config,
+    ...config
 }
