@@ -2,6 +2,8 @@
 # config.json
 google-services.json
 GoogleService-Info.plist
+google-services-dev.json
+GoogleService-Info-dev.plist
 
 # vscode
 .vscode
