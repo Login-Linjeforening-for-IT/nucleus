@@ -4,7 +4,6 @@
   "private": true,
   "main": "index.ts",
   "scripts": {
-    "eas-build-pre-install": "./decodeSecrets.sh",
     "start": "react-native start",
     "cstart": "npx react-native start --reset-cache",
     "estart": "expo start --dev-client",

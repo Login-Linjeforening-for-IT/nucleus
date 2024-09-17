@@ -1,18 +1,19 @@
 {
     "build": {
-        "development": {
-            "developmentClient": true,
-            "distribution": "internal",
-            "ios": {
-                "resourceClass": "m-medium"
+        "preview": {
+            "android": {
+                "buildType": "apk"
+            },
+            "env": {
+                "ENVIORNMENT": "preview"
             }
         },
-        "preview": {
-            "distribution": "internal"
-        },
         "production": {
-            "ios": {
-                "resourceClass": "m-medium"
+            "android": {
+                "buildType": "app-bundle"
+            },
+            "env": {
+                "ENVIORNMENT": "production"
             }
         }
     }
