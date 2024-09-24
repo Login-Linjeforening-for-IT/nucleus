@@ -219,8 +219,7 @@ function animateFromBottom({ current }: StackCardInterpolationProps): StackCardI
                     outputRange: [200, 0],
                     extrapolate: 'clamp',
                 })
-            },
-            ],
+            }],
         },
         overlayStyle: {
             backgroundcolor: 'black',
