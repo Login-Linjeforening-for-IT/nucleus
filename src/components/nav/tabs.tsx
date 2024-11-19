@@ -8,7 +8,6 @@ import MenuScreen from "@screens/menu"
 import MS from "@styles/menuStyles"
 import TagInfo from "@components/shared/tagInfo"
 import { Image } from "react-native"
-import { TransitionSpec } from "@react-navigation/stack/lib/typescript/src/types"
 import NotificationModal from "@components/shared/notificationModal"
 import NotificationScreen from "@screens/menu/notifications"
 import ProfileScreen from "@screens/menu/profile"
@@ -37,6 +36,7 @@ import {
     StackCardInterpolationProps, 
     createStackNavigator
 } from "@react-navigation/stack"
+import { TransitionSpec } from "@react-navigation/bottom-tabs/lib/typescript/commonjs/src/types"
 
 // Declares Tab to equal CBTN function
 const Root = createStackNavigator<RootStackParamList>()
@@ -48,7 +48,7 @@ const MenuStack = createStackNavigator<MenuStackParamList>()
 function Events() {
     return (
         <EventStack.Navigator screenOptions={{
-            animationEnabled: false,
+            animation: 'none',
             headerTransparent: true,
             header: props => <Header {...props}/>}}>
             <EventStack.Screen name="EventScreen" component={EventScreen}/>
@@ -60,7 +60,7 @@ function Events() {
 function Ads() {
     return (
         <AdStack.Navigator screenOptions={{
-            animationEnabled: false,
+            animation: 'none',
             headerTransparent: true,
             header: props => <Header {...props}/>}}>
             <AdStack.Screen name="AdScreen" component={AdScreen}/>
@@ -72,7 +72,7 @@ function Ads() {
 function Menu() {
     return (
         <MenuStack.Navigator screenOptions={{
-            animationEnabled: false,
+            animation: 'none',
             headerTransparent: true,
             header: props => <Header {...props}/>
         }}>
@@ -158,7 +158,7 @@ function Tabs(): JSX.Element {
                                     ? require("@assets/menu/menu.png")
                                     : require("@assets/menu/menu-black.png")}
                         />
-                    )
+                    ),
             })}
             />
         </Tab.Navigator>
@@ -174,13 +174,13 @@ function Tabs(): JSX.Element {
 export default function Navigator(): JSX.Element {
     SystemUI.setBackgroundColorAsync("black");
 
-    const config: TransitionSpec = {
+    const config = {
         animation: 'timing',
         config:{
             duration: 100,
         }
-    }
-    
+    } as TransitionSpec
+
     return (
         <NavigationContainer>
             <Root.Navigator screenOptions={{headerShown: false}}>
@@ -192,7 +192,7 @@ export default function Navigator(): JSX.Element {
                         presentation: 'transparentModal', 
                         cardOverlayEnabled: true, 
                         cardStyleInterpolator: animateFromBottom, 
-                        transitionSpec: {open: config, close: config}
+                        transitionSpec: {open: config, close: config},
                     }}
                     component={TagInfo}
                 />
@@ -222,7 +222,7 @@ function animateFromBottom({ current }: StackCardInterpolationProps): StackCardI
             }],
         },
         overlayStyle: {
-            backgroundcolor: 'black',
+            backgroundColor: 'black',
             opacity: current.progress.interpolate({
                 inputRange: [0, 1],
                 outputRange: [0, 0.4],
