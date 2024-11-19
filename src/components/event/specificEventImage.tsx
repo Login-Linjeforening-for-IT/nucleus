@@ -5,32 +5,46 @@ import ES from "@styles/eventStyles"
 import { Dimensions, Image, View } from "react-native"
 import { SvgUri } from "react-native-svg"
 import { useSelector } from "react-redux"
-import { useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 import { EventContext } from "@utils/contextProvider"
+import imageExists from "@utils/imageExists"
 
 export default function SpecificEventImage() {
     const event = useContext(EventContext)
     const { theme } = useSelector((state: ReduxState) => state.theme)
+    const [url, setUrl] = useState(event?.event?.image_banner || '')
+    
+    useEffect(() => {
+        setUrl(event?.event?.image_banner || '');
+
+        (async() => {
+            const urlExists = await imageExists(url)
+
+            if (!urlExists) {
+                setUrl(event?.event.image_small || '')
+            }
+        })()
+    }, [event?.event])
 
     if (event?.event) {
-        if ((event.event.image_small)?.includes(".svg")) {
+        if (url.includes(".svg")) {
             return (
                 <SvgUri
                     style={{alignSelf: "center", marginTop: 8}}
-                    width={(Dimensions.get("window").width)/1.2}
-                    height={Dimensions.get("window").width/3}
-                    uri={`${CDN}events/banner/${event.event.image_small}`}
+                    width={(Dimensions.get("window").width) / 1.2}
+                    height={Dimensions.get("window").width / 3}
+                    uri={`${CDN}events/banner/${url}`}
                 />
             )
         }
-    
-        if (event.event.image_small?.includes(".png")) {
+        
+        if (url.includes(".png")) {
             return <Image
                 style={ES.specificEventImage}
-                source={{uri: `${CDN}events/banner/${event.event.image_small}`}}
+                source={{uri: `${CDN}events/banner/${url}`}}
             />
         }
-    
+
         return <StaticImage category={event.category.name_no} />
     }
     

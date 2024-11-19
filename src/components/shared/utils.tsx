@@ -118,8 +118,8 @@ export function ErrorMessage({argument, screen}: ErrorMessageProps): JSX.Element
 }
 
 /**
- * @param {string} month    Month of the event
- * @param {hex} color       Hex color for the text based on theme
+ * @param month    Month of the event
+ * @param color    Hex color for the text based on theme
  * @returns
  */
 export function Month({month, color}: MonthProps): JSX.Element {

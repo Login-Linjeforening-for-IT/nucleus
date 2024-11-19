@@ -17,12 +17,13 @@ type CategorySquareProps = {
  * @returns Small square with rounded corners of the passed color
  */
 export default function CategorySquare({color, startDate, endDate}: CategorySquareProps): JSX.Element {
+    
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const startDay = typeof startDate === "number" ? startDate : startDate.getDate()
-    const startMonth = typeof startDate === "number" ? '' : startDate.getMonth()
+    const startMonth = typeof startDate === "number" ? 0 : startDate.getMonth()
     const endDay = endDate?.getDate()
     const multiday = endDay && startDay != endDay ? true : false
- 
+
     return (
         <View style={{
             width: multiday ? 62 : 38,
@@ -37,7 +38,7 @@ export default function CategorySquare({color, startDate, endDate}: CategorySqua
                 {startDay}
                 {multiday && "-" + endDay}
             </Text>
-            {startMonth && <Month month={startMonth} color={theme.textColor} />}
+            {startMonth !== null && <Month month={startMonth} color={theme.textColor} />}
         </View>)
 }
 

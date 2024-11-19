@@ -128,7 +128,13 @@ function Location() {
         : event?.location?.name_en || event?.location?.name_no
 
     return (
-        <View style={{flexDirection: "row"}}>
+        <View style={{
+            flexDirection: "row", 
+            maxWidth: '100%', 
+            overflow: 'hidden',
+            flexWrap: 'wrap',
+            paddingBottom: 5
+        }}>
             <Text style={{...T.specificEventInfo, color: theme.textColor}}>
                 {text}
             </Text>

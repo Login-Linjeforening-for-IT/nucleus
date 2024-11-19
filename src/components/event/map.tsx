@@ -26,7 +26,7 @@ export default function Map() {
 
     return (
         <TouchableOpacity 
-            style={{minWidth: 70}} 
+            style={{minWidth: 70, bottom: 5}} 
             onPress={() => {
                 if(!event.location) return
                 handleLink({mazemap_campus_id: event?.location?.mazemap_campus_id, 
