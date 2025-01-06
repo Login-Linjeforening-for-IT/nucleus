@@ -4,7 +4,7 @@ build-job:
   stage: build
   script:
     - npm install
-    - npx -y eas build --local \
+    - eas build --local \
       --non-interactive \
       --output-path ./build \
       --platform ios \
