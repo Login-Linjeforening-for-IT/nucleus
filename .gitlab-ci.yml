@@ -6,6 +6,6 @@ build-job:
     - npm install
     - eas build --local \
       --non-interactive \
-      --output-path ./build \
+      --output ./build \
       --platform ios \
-      --profile development \
+      --profile development
