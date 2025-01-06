@@ -6,5 +6,7 @@ build-job:
     SECURE_FILES_DOWNLOAD_PATH: '.'
   script:
     - curl --silent "https://gitlab.com/gitlab-org/incubation-engineering/mobile-devops/download-secure-files/-/raw/main/installer" | bash
+    - echo $PATH
+    - echo $SHELL
     - npm install
     - eas build --local --non-interactive --output=./build --platform=ios
