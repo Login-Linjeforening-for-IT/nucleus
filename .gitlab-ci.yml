@@ -4,4 +4,4 @@ build-job:
   stage: build
   script:
     - npm install
-    - eas build --local --non-interactive --output=./build --platform=all
+    - eas build --local --non-interactive --output=./build --platform=ios
