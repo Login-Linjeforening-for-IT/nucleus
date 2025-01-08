@@ -3,6 +3,7 @@ build-job:
     - macos
   stage: build
   artifacts:
+    untracked: true
     paths:
       - build/*
   rules:
