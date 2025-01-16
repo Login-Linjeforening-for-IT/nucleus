@@ -15,4 +15,4 @@ build-job:
     - pwd
     - npm install
     - eas build --local --non-interactive --output=./build.ipa --platform=ios
-    - "bundle exec fastlane pilot upload --api_key \"{\\\"filepath\\\": \\\"${$APPLE_CONNECT_API}\\\",\\\"key_id\\\": \\\"QY2LUY88VG\\\", \\\"issuer_id\\\": \\\"2eed683b-cb8d-4ea8-94df-4f8d5642ea51\\\"}\""
+    - "bundle exec fastlane pilot upload --api_key \"{\\\"filepath\\\": \\\"${APPLE_CONNECT_API}\\\",\\\"key_id\\\": \\\"QY2LUY88VG\\\", \\\"issuer_id\\\": \\\"2eed683b-cb8d-4ea8-94df-4f8d5642ea51\\\"}\""
