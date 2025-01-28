@@ -1,4 +1,10 @@
-build-job:
+install-dep:
+  stage: .pre
+  script:
+    - curl --silent "https://gitlab.com/gitlab-org/incubation-engineering/mobile-devops/download-secure-files/-/raw/main/installer" | bash
+    - npm install
+
+build-ios:
   tags:
     - macos
   stage: build
@@ -10,9 +16,19 @@ build-job:
   variables:
     SECURE_FILES_DOWNLOAD_PATH: '.'
   script:
-    - curl --silent "https://gitlab.com/gitlab-org/incubation-engineering/mobile-devops/download-secure-files/-/raw/main/installer" | bash
-    - echo $PATH
-    - pwd
-    - npm install
     - eas build --local --non-interactive --output=./build.ipa --platform=ios
-    - "fastlane pilot upload --api_key \"{\\\"filepath\\\": \\\"${APPLE_CONNECT_API}\\\",\\\"key_id\\\": \\\"QY2LUY88VG\\\", \\\"issuer_id\\\": \\\"2eed683b-cb8d-4ea8-94df-4f8d5642ea51\\\"}\""
+    # - "fastlane pilot upload --api_key \"{\\\"filepath\\\": \\\"${APPLE_CONNECT_API}\\\",\\\"key_id\\\": \\\"QY2LUY88VG\\\", \\\"issuer_id\\\": \\\"2eed683b-cb8d-4ea8-94df-4f8d5642ea51\\\"}\""
+
+build-android:
+  tags:
+    - macos
+  stage: build
+  artifacts:
+    paths:
+      - build.apk
+  rules:
+    - if: $CI_COMMIT_TAG
+  variables:
+    SECURE_FILES_DOWNLOAD_PATH: '.'
+  script:
+    - eas build --local --non-interactive --output=./build.apk --platform=android
