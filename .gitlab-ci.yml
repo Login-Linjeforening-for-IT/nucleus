@@ -2,7 +2,6 @@ build-ios:
   tags:
     - macos
   stage: build
-  extends: .install-dep
   artifacts:
     paths:
       - build.ipa
@@ -20,7 +19,6 @@ build-android:
   tags:
     - macos
   stage: build
-  extends: .install-dep
   artifacts:
     paths:
       - build.apk
