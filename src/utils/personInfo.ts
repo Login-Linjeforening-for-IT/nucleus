@@ -40,74 +40,74 @@ export default function personInfo({person, lang}: personInfoProps) {
 
     const leader = {
         title: title.leader,
-        name: "Ida Førland",
-        tag: "idaforland",
-        dclink: "https://discordapp.com/users/470279697465606159",
-        img: `${CDN}portraits/portrett_leder.jpg`
+        name: "Johan Wilvang",
+        tag: "johan_w",
+        dclink: "https://discordapp.com/users/382587377022926848",
+        img: `${CDN}board/portraits/leder.png`
     }
 
     const coleader = {
         title: title.coleader,
-        name: "Kristian Eriksen",
-        tag: "kissaer",
-        dclink: "https://discordapp.com/users/301619379001491457",
-        img: `${CDN}portraits/portrett_nestleder.jpg`,
+        name: "Sebastian Marterer",
+        tag: "coldfridge.",
+        dclink: "https://discordapp.com/users/486788989097869314",
+        img: `${CDN}board/portraits/nestleder.png`,
     }
 
     const secretary = {
         title: title.secretary,
-        name: "Sofia Serine Mikkelsen",
-        tag: "sofiaserine",
-        dclink: "https://discordapp.com/users/616878763010949121",
-        img: `${CDN}Fportraits/portrett_sekret%C3%A6r.jpg`,
+        name: "Amanda Nyseth",
+        tag: "amandavn05",
+        dclink: "https://discordapp.com/users/1273571773463658552",
+        img: `${CDN}board/portraits/sekret%C3%A6r.png`,
     }
 
     const eventkom_leader = {
         title: title.evntkom,
-        name: "Sebastian Marterer",
-        tag: "coldfridge.",
-        dclink: "https://discordapp.com/users/486788989097869314",
-        img: `${CDN}portraits/portrett_eventkom-leder.jpg`,
+        name: "Peder Gintal",
+        tag: "pergintal",
+        dclink: "https://discordapp.com/users/249630146678620172",
+        img: `${CDN}board/portraits/evntkom_leder.png`,
     }
 
     const bedkom_leader = {
         title: title.bedkom,
-        name: "Lavrans Åsen Felix",
-        tag: "james00728",
-        dclink: "https://discordapp.com/users/378257251908976640",
-        img: `${CDN}portraits/portrett_bedkom-leder.jpg`
+        name: "Daoud Chauhry",
+        tag: "dahood081784",
+        dclink: "https://discordapp.com/users/428285256467087383",
+        img: `${CDN}board/portraits/bedkom_leder.png`
     }
 
     const tekkom_leader = {
         title: title.tekkom,
-        name: "Eirik Hanasand",
-        tag: "eirikhanasand",
-        dclink: "https://discordapp.com/users/376827396764073997",
-        img: `${CDN}portraits/portrett_tekkom-leder.jpg`,
+        name: "Gjermund H. Pedersen",
+        tag: "turtleman02",
+        dclink: "https://discordapp.com/users/260370482757500938",
+        img: `${CDN}board/portraits/tekkom_leder.png`,
     }
 
     const ctfkom_leader = {
         title: title.ctf,
-        name: "Tormod Fjeld Lie",
-        tag: "tmod.",
-        dclink: "https://discordapp.com/users/841095548890251304",
-        img: `${CDN}portraits/portrett_ctfkom-leder.jpg`,
+        name: "Maja Melby",
+        tag: "majam_",
+        dclink: "https://discordapp.com/users/1011661501536407552",
+        img: `${CDN}board/portraits/ctfkom_leder.png`,
     }
 
     const satkom_leader = {
         title: title.satkom,
-        name: "Erik Hansen-Tangen Breien",
-        tag: "kireb",
-        dclink: "https://discordapp.com/users/165972992931790848",
-        img: `${CDN}portraits/portrett_%C3%B8konomi.jpg`
+        name: "Sivert Hovemoen",
+        tag: "sivsiv01",
+        dclink: "https://discordapp.com/users/208903111975239681",
+        img: `${CDN}board/portraits/satkom_leder.png`
     }
 
     const pr_leader = {
         title: title.pr,
-        name: "Marius Nicolai Holte Aga",
-        tag: "iamk3v",
-        dclink: "https://discordapp.com/users/164311829177171968",
-        img: `${CDN}portraits/portrett_pr-leder.jpg`
+        name: "Halvard Holen",
+        tag: "cosinus8455",
+        dclink: "https://discordapp.com/users/184282867579224064",
+        img: `${CDN}board/portraits/pr_leder.png`
     }
 
     switch (person.toLowerCase()) {
