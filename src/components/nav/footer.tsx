@@ -83,17 +83,6 @@ function Content({ state, descriptors, navigation }: FooterProps) {
                         </TouchableOpacity>
                     )
                 })}
-                <TouchableOpacity
-                    accessibilityRole="button"
-                    style={{...MS.bMenuIconTouchableOpacity, paddingLeft: 20}}
-                    onPress={() => openBrowserAsync(KIOSK_URL)}
-                >
-                    <SvgXml
-                        width={MS.bMenuIconTouchableOpacity.width - 55}
-                        height={MS.bMenuIconTouchableOpacity.height}
-                        xml={USBicon}
-                    />
-                </TouchableOpacity>
             </View>
         </>
     )
