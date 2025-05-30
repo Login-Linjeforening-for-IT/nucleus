@@ -1,4 +1,7 @@
 {
+    "cli": {
+        "appVersionSource": "local"
+    },
     "build": {
         "development": {
             "developmentClient": true,
@@ -13,7 +16,8 @@
         "production": {
             "ios": {
                 "resourceClass": "m-medium"
-            }
+            },
+            "autoIncrement": true
         }
     }
 }
