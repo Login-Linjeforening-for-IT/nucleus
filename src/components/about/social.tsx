@@ -190,7 +190,7 @@ export function Styret() {
         <View>
             <Image 
                 style={{...GS.aboutImage}} 
-                source={{uri: `${CDN}styret2.jpg`}}
+                source={{uri: `${CDN}board/gruppebilde.JPG`}}
             />
             <CornerSquare corner={corner} type={true} />
         </View>
