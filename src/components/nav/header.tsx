@@ -1,3 +1,10 @@
+/**
+ * The header is a custom component created to integrate search and filtering.
+ * It does this by defining a custom option for the screen that contains the search.
+ * 
+ * In 7.X of react navigation search was added to the header, 
+ * so it might be worth rewriting this component/checking if the default header can be used
+ */
 import GS from '@styles/globalStyles'
 import { PropsWithChildren, ReactNode, useEffect, useState } from 'react'
 import { BlurView } from 'expo-blur'

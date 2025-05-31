@@ -1,3 +1,30 @@
+/* 
+ * This file ddefines the navigation for the application.
+ * The navigation is designed in a tree structure, where the leaf nodes are react nodes.
+ * Root
+ * ├── Tabs
+ * |   ├── EventStack
+ * |   |   ├── EventScreen
+ * |   |   └── SpecificEventScreen
+ * |   ├── AdStack
+ * |   |   ├── AdScreen
+ * |   |   └── SpecificAdScreen
+ * |   └── MenuStack
+ * |       ├── MenuScreen
+ * |       ├── ProfileScreen
+ * |       ├── SettingScreen
+ * |       ├── NotificationScreen
+ * |       ├── AboutScreen
+ * |       ├── BusinessScreen
+ * |       ├── InternalScreen
+ * |       ├── CourseScreen
+ * |       ├── SpecificCourseScreen
+ * |       ├── GameScreen
+ * |       ├── SpecificGameScreen
+ * |       └── DiceScreen
+ * ├── InfoModal
+ * └── NotificationModal
+ */
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { NavigationContainer } from "@react-navigation/native"
 import Footer from "@nav/footer"
@@ -38,13 +65,14 @@ import {
 } from "@react-navigation/stack"
 import { TransitionSpec } from "@react-navigation/bottom-tabs/lib/typescript/commonjs/src/types"
 
-// Declares Tab to equal CBTN function
+// Defines the navigators
 const Root = createStackNavigator<RootStackParamList>()
 const Tab = createBottomTabNavigator<TabBarParamList>()
 const EventStack = createStackNavigator<EventStackParamList>()
 const AdStack = createStackNavigator<AdStackParamList>()
 const MenuStack = createStackNavigator<MenuStackParamList>()
 
+// Defines the components in the eventStck
 function Events() {
     return (
         <EventStack.Navigator screenOptions={{
@@ -57,6 +85,7 @@ function Events() {
     )
 }
 
+// Defines the components in the adStack
 function Ads() {
     return (
         <AdStack.Navigator screenOptions={{
@@ -69,6 +98,7 @@ function Ads() {
     )
 }
 
+// Defines the components in the menuStack
 function Menu() {
     return (
         <MenuStack.Navigator screenOptions={{
@@ -210,6 +240,7 @@ export default function Navigator(): JSX.Element {
     )
 }
 
+// Animation used for the InfoModal
 function animateFromBottom({ current }: StackCardInterpolationProps): StackCardInterpolatedStyle {
     return ({
         cardStyle: {
@@ -232,6 +263,7 @@ function animateFromBottom({ current }: StackCardInterpolationProps): StackCardI
     })
 }
 
+// Animation used for the NotificationModal
 function animateFromTop({ current }: StackCardInterpolationProps): StackCardInterpolatedStyle {
     return ({
         cardStyle: {
