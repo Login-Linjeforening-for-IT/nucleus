@@ -5,7 +5,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     owner: "loginapp",
     name: "Login",
     slug: "Login",
-    version: "2.1.10",
+    version: "2.2.0",
     orientation: "portrait",
     icon: "./public/assets/logo/icon.png",
     userInterfaceStyle: "dark",
@@ -85,4 +85,4 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     runtimeVersion: {
         policy: "sdkVersion"
     }
-});
+})
