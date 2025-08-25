@@ -113,6 +113,7 @@ function BlurWrapper(props: PropsWithChildren) {
     const event = useSelector((state: ReduxState) => state.event)
     const ad = useSelector((state: ReduxState) => state.ad)
     const route = useRoute()
+
     const defaultHeight =
         Dimensions.get('window').height * 8 // Base decrementor for both platforms
         / (Platform.OS === 'ios' ? 85 // Base height of header on iOS
