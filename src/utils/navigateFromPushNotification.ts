@@ -31,50 +31,50 @@ type StoreNotificationProps = {
  */
 export default function NavigateFromPushNotification() {
     const navigation: Navigation = useNavigation()
-    const [event, setEvent] = useState<{ [key: string]: any } 
-    | undefined>(undefined)
+    const [event, setEvent] = useState<{ [key: string]: any }
+        | undefined>(undefined)
 
     useEffect(() => {
         // Check whether the app was opened from a tapped notification
         const unsubscribeOnOpen = messaging().onNotificationOpenedApp(
             (remoteMessage: FirebaseMessagingTypes.RemoteMessage) => {
-                if (remoteMessage && remoteMessage.notification 
-                    && remoteMessage.notification.title 
+                if (remoteMessage && remoteMessage.notification
+                    && remoteMessage.notification.title
                     && remoteMessage.notification.body) {
-                        const title = remoteMessage.notification.title
-                        const body = remoteMessage.notification.body
-                        const data = remoteMessage.data
-        
-                        StoreNotification({title, body, data})
+                    const title = remoteMessage.notification.title
+                    const body = remoteMessage.notification.body
+                    const data = remoteMessage.data
 
-                        // Opens a more specific screen if possible
-                        if (Object.keys(remoteMessage.data || {}).length) {
-                            setEvent(remoteMessage.data)
-                        } else {
-                            navigation.navigate("NotificationScreen")
-                        }
+                    StoreNotification({ title, body, data })
+
+                    // Opens a more specific screen if possible
+                    if (Object.keys(remoteMessage.data || {}).length) {
+                        setEvent(remoteMessage.data)
+                    } else {
+                        navigation.navigate("NotificationScreen")
+                    }
                 }
-        })
+            })
 
         // Check if the app was opened by a notification when it was terminated
-        messaging().getInitialNotification().then((remoteMessage: 
+        messaging().getInitialNotification().then((remoteMessage:
             FirebaseMessagingTypes.RemoteMessage | null) => {
-                if (remoteMessage && remoteMessage.notification 
-                    && remoteMessage.notification.title 
-                    && remoteMessage.notification.body) {
-                        const title = remoteMessage.notification.title
-                        const body = remoteMessage.notification.body
-                        const data = remoteMessage.data
+            if (remoteMessage && remoteMessage.notification
+                && remoteMessage.notification.title
+                && remoteMessage.notification.body) {
+                const title = remoteMessage.notification.title
+                const body = remoteMessage.notification.body
+                const data = remoteMessage.data
 
-                        StoreNotification({title, body, data})
+                StoreNotification({ title, body, data })
 
-                        // Opens a more specific screen if possible
-                        if (Object.keys(remoteMessage.data || {}).length) {
-                            setEvent(remoteMessage.data)
-                        } else {
-                            navigation.navigate("NotificationScreen")
-                        }
+                // Opens a more specific screen if possible
+                if (Object.keys(remoteMessage.data || {}).length) {
+                    setEvent(remoteMessage.data)
+                } else {
+                    navigation.navigate("NotificationScreen")
                 }
+            }
         })
 
         return unsubscribeOnOpen
@@ -82,17 +82,17 @@ export default function NavigateFromPushNotification() {
 
     // Handles foreground, should display a custom push notification in-app
     useEffect(() => {
-        const unsubscribe = messaging().onMessage((remoteMessage: 
+        const unsubscribe = messaging().onMessage((remoteMessage:
             FirebaseMessagingTypes.RemoteMessage) => {
-            if (remoteMessage && remoteMessage.notification 
-            && remoteMessage.notification.title 
-            && remoteMessage.notification.body) {
+            if (remoteMessage && remoteMessage.notification
+                && remoteMessage.notification.title
+                && remoteMessage.notification.body) {
                 const title = remoteMessage.notification.title || remoteMessage.notification.body.slice(0, 15) + '...' || 'untitled'
                 const body = remoteMessage.notification.body || ""
                 const data = remoteMessage.data || {}
 
-                StoreNotification({title, body, data})
-                navigation.navigate("NotificationModal", {title, body, data})
+                StoreNotification({ title, body, data })
+                navigation.navigate("NotificationModal", { title, body, data })
             }
         })
 
@@ -102,7 +102,7 @@ export default function NavigateFromPushNotification() {
     if (event) {
         const temp = event
         setEvent(undefined)
-        navigation.navigate("SpecificEventScreen", {item: temp})
+        navigation.navigate("SpecificEventScreen", { item: temp })
     }
 }
 
@@ -117,12 +117,12 @@ async function StoreNotification({ title, body, data }: StoreNotificationProps) 
     // Get the stored notification list from AsyncStorage
     const storedString = await AsyncStorage.getItem("notificationList")
     let storedArray = []
-    
+
     // Check if the list contained anything, and if so set it as the stored array
     if (storedString) {
         storedArray = JSON.parse(storedString)
     }
-    
+
     // Adds the new notification to the start of the list
     const newItem = { title, body, data, time: new Date() }
     storedArray.unshift(newItem)

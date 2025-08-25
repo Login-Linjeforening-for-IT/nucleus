@@ -6,11 +6,11 @@ type handleRefreshProps = {
     getDetails: () => Promise<true | undefined>
 }
 
-export default function handleRefresh({event, setRefresh, getDetails}: handleRefreshProps) {
+export default function handleRefresh({ event, setRefresh, getDetails }: handleRefreshProps) {
     const currentScrollOffset = event.nativeEvent.contentOffset.y
 
     if (currentScrollOffset < -70) {
-        (async() => {
+        (async () => {
             setRefresh(true)
             let working = true
 

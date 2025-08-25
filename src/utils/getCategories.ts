@@ -6,7 +6,7 @@ type getCategoriesProps = {
     }
 }
 
-export default function getCategories ({lang, categories}: getCategoriesProps) {
+export default function getCategories({ lang, categories }: getCategoriesProps) {
 
     if (lang && categories.no.length) {
         return categories.no

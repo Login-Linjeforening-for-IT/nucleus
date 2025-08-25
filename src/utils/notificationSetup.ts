@@ -19,13 +19,13 @@ type initializeNotificationsProps = {
  * @param hasBeenSet Specifies if the notifications have already been initialized, in which case it will not run. Used between rerenders before hasBeenSet has updated
  * @param setShouldSetupNotifications Setter function for the shouldRun variable
  */
-export default function initializeNotifications ({shouldRun, hasBeenSet, 
-setShouldSetupNotifications, dispatch }: initializeNotificationsProps) {
+export default function initializeNotifications({ shouldRun, hasBeenSet,
+    setShouldSetupNotifications, dispatch }: initializeNotificationsProps) {
     if (shouldRun && !hasBeenSet[1]) {
         dispatch(resetTheme())
         notificationSetup()
-        setShouldSetupNotifications(false) 
-    } 
+        setShouldSetupNotifications(false)
+    }
 }
 
 /**
@@ -43,7 +43,7 @@ export async function notificationSetup() {
         }
     }
 
-    dispatch(setNotificationStateTrue({category: "SETUP"}))
+    dispatch(setNotificationStateTrue({ category: "SETUP" }))
 }
 
 export async function requestNotificationPermission() {
@@ -51,25 +51,25 @@ export async function requestNotificationPermission() {
         // Check if we're on Android, as POST_NOTIFICATIONS is Android-specific
         if (Platform.OS === 'android' && Platform.Version >= 33) {
             const notificationPermission = await PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS);
-    
+
             if (!notificationPermission) {
                 // If permission not already granted, request it
                 const status = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS);
-                
+
                 if (status === PermissionsAndroid.RESULTS.GRANTED) {
                     return true
                 } else if (status === PermissionsAndroid.RESULTS.DENIED) {
                     Alert.alert(
                         'Notification Permission Denied',
                         'Notification permission was denied. Please allow it to receive notifications.',
-                        [{ text: 'OK', onPress: () => {} }]
+                        [{ text: 'OK', onPress: () => { } }]
                     );
                     return false;
                 } else if (status === PermissionsAndroid.RESULTS.NEVER_ASK_AGAIN) {
                     Alert.alert(
                         'Notification Permission Disabled',
                         'You have disabled notification permissions. To enable notifications, go to Settings > Apps > Login > Notifications.',
-                        [{ text: 'OK', onPress: () => {} }]
+                        [{ text: 'OK', onPress: () => { } }]
                     )
                     return false
                 }
@@ -80,16 +80,16 @@ export async function requestNotificationPermission() {
             // For iOS, use Firebase's requestPermission API
             const authStatus = await messaging().requestPermission()
             const enabled =
-            authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
-            authStatus === messaging.AuthorizationStatus.PROVISIONAL
-    
+                authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+                authStatus === messaging.AuthorizationStatus.PROVISIONAL
+
             if (enabled) {
                 return true
             } else {
                 Alert.alert(
                     'Notification Permission Denied',
                     'Notification permission was denied. Please allow it to receive notifications.',
-                    [{ text: 'OK', onPress: () => {} }]
+                    [{ text: 'OK', onPress: () => { } }]
                 );
                 return false;
             }
@@ -98,7 +98,7 @@ export async function requestNotificationPermission() {
         Alert.alert(
             'Error',
             'An error occurred while requesting notification permission. Please try again later.',
-            [{ text: 'OK', onPress: () => {} }]
+            [{ text: 'OK', onPress: () => { } }]
         );
         return false;
     }

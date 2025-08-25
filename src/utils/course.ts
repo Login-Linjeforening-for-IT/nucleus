@@ -20,13 +20,13 @@ export async function getScoreBoard() {
                 'Content-Type': 'application/json',
             },
         })
-    
+
         if (!response.ok) {
             const data = await response.json()
-    
+
             throw Error(data.error)
         }
-    
+
         return await response.json()
     } catch (error: unknown) {
         const err = error as Error
@@ -44,12 +44,12 @@ export async function getCourses(): Promise<CourseAsList[] | string> {
                 'Content-Type': 'application/json',
             },
         })
-    
+
         if (!response.ok) {
             const data = await response.json()
             throw Error(data.error)
         }
-    
+
         const courses = await response.json()
         return courses
     } catch (error) {
@@ -70,13 +70,13 @@ export async function getCourse(id: string): Promise<Course | string> {
                 'Content-Type': 'application/json',
             },
         })
-    
+
         if (!response.ok) {
             const data = await response.json()
-    
+
             throw Error(data.error)
         }
-    
+
         const course = await response.json()
         return course
     } catch (error) {
@@ -86,7 +86,7 @@ export async function getCourse(id: string): Promise<Course | string> {
 }
 
 // Updates the passed course
-export async function updateCourse({courseID, accepted, editing}: UpdateCourseProps) {
+export async function updateCourse({ courseID, accepted, editing }: UpdateCourseProps) {
     const user = { username: 'hei' } // getItem('user') as User | undefined
     const token = 'disabled' // getItem('token')
 
@@ -107,13 +107,13 @@ export async function updateCourse({courseID, accepted, editing}: UpdateCoursePr
                 editing
             })
         })
-    
+
         if (!response.ok) {
             const data = await response.json()
-    
+
             throw Error(data.error)
         }
-    
+
         const result = await response.json()
         return result
     } catch (error: unknown) {
@@ -123,7 +123,7 @@ export async function updateCourse({courseID, accepted, editing}: UpdateCoursePr
 }
 
 // Updates the user's time spent on the page
-export async function updateUserTime({time}: {time: number}) {
+export async function updateUserTime({ time }: { time: number }) {
     const token = 'disabled' // getItem('token')
     const user = { username: 'hei' } // getItem('user') as User | undefined
 
@@ -143,13 +143,13 @@ export async function updateUserTime({time}: {time: number}) {
                 time
             })
         })
-    
+
         if (!response.ok) {
             const data = await response.json()
-    
+
             throw Error(data.error)
         }
-    
+
         const result = await response.json()
         return result
     } catch (error: unknown) {
@@ -166,13 +166,13 @@ export async function getFile(courseID: string, name: string) {
                 'Content-Type': 'application/json',
             },
         })
-    
+
         if (!response.ok) {
             const data = await response.json()
-    
+
             throw Error(data.error)
         }
-    
+
         return await response.json()
     } catch (error: unknown) {
         const err = error as Error
@@ -188,13 +188,13 @@ export async function getFiles(courseID: string) {
                 'Content-Type': 'application/json',
             },
         })
-    
+
         if (!response.ok) {
             const data = await response.json()
-    
+
             throw Error(data.error)
         }
-    
+
         return await response.json()
     } catch (error: unknown) {
         const err = error as Error
@@ -215,12 +215,12 @@ export async function getUser(id: string): Promise<User | string> {
             const data = await response.json()
             throw new Error(data.error)
         }
-    
+
         const user: User = await response.json()
         return user
     } catch (error: unknown) {
         const err = error as Error
-        return err.message   
+        return err.message
     }
 }
 
@@ -242,13 +242,13 @@ export async function addCourse(course: Course): Promise<void | string> {
                     course
                 }),
             })
-        
+
             if (!response.ok) {
                 const data = await response.json()
-        
+
                 throw Error(data.error)
             }
-    
+
             const result = response.json()
             return result
         }
@@ -278,13 +278,13 @@ export async function addCard(courseID: string, card: Card): Promise<void | stri
                 card
             }),
         })
-    
+
         if (!response.ok) {
             const data = await response.json()
-    
+
             throw Error(data.error)
         }
-    
+
         return await response.json()
     }
 
@@ -309,20 +309,20 @@ export async function sendText(courseID: string, text: string[]): Promise<void |
                 text
             }),
         })
-    
+
         if (!response.ok) {
             const data = await response.json()
-    
+
             throw Error(data.error)
         }
-    
+
         return await response.json()
     }
 
     return 'Please log in to add input'
 }
 
-export async function sendMark({courseID, mark}: MarkProps) {
+export async function sendMark({ courseID, mark }: MarkProps) {
     const user = { username: 'hei' } // getItem('user') as User | undefined
 
     if (!user) {

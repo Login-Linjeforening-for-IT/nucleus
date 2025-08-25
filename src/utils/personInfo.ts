@@ -11,7 +11,7 @@ type personInfoProps = {
  * @param {string} verv
  * @returns cdn link as string
  */
-export default function personInfo({person, lang}: personInfoProps) {
+export default function personInfo({ person, lang }: personInfoProps) {
     const titleNO = {
         leader: "Leader",
         coleader: "Deputy chairwoman",
@@ -111,14 +111,14 @@ export default function personInfo({person, lang}: personInfoProps) {
     }
 
     switch (person.toLowerCase()) {
-        case "leader":      return leader
-        case "coleader":    return coleader
-        case "secretary":   return secretary
-        case "evntkom":     return eventkom_leader
-        case "pr":          return pr_leader
-        case "ctf":         return ctfkom_leader
-        case "eco":         return satkom_leader
-        case "bedkom":      return bedkom_leader
-        default:            return tekkom_leader
+        case "leader": return leader
+        case "coleader": return coleader
+        case "secretary": return secretary
+        case "evntkom": return eventkom_leader
+        case "pr": return pr_leader
+        case "ctf": return ctfkom_leader
+        case "eco": return satkom_leader
+        case "bedkom": return bedkom_leader
+        default: return tekkom_leader
     }
 }

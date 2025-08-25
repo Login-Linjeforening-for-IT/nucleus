@@ -13,7 +13,7 @@ export default function LastFetch(param?: string) {
     const day = time.getDate().toString().padStart(2, '0')
     const month = (time.getMonth() + 1).toString().padStart(2, '0')
     const year = time.getFullYear()
-    
+
     const hour = time.getHours().toString().padStart(2, '0')
     const minute = time.getMinutes().toString().padStart(2, '0')
 
@@ -27,8 +27,8 @@ export default function LastFetch(param?: string) {
  *
  * @returns All details for passed event
  */
-export async function fetchEventDetails(id: number): 
-Promise<DetailedEventResponse> {
+export async function fetchEventDetails(id: number):
+    Promise<DetailedEventResponse> {
     // Fetches events
     const response = await fetch(`${API}events/${id}`)
 
@@ -56,7 +56,7 @@ export async function fetchEvents(): Promise<EventProps[]> {
 
         return response.json()
 
-    // Catches and logs errors. Errors are handled by Redux.
+        // Catches and logs errors. Errors are handled by Redux.
     } catch (error) {
         console.log(error)
         return []
@@ -80,7 +80,7 @@ export async function fetchAds(): Promise<AdProps[]> {
 
         return response.json()
 
-    // Catches and logs errors. Errors are handled by Redux.
+        // Catches and logs errors. Errors are handled by Redux.
     } catch (error) {
         console.log(error)
         return []
@@ -98,7 +98,7 @@ export async function fetchAdDetails(adID: number): Promise<DetailedAdResponse> 
 
     // Prod
     const response = await fetch(`${API}jobs/${adID}`)
-    
+
     // Dev
     // const response = await fetch(`${testapi}jobs/${ad.id}`)
     const adDetails = await response.json()

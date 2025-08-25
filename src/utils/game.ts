@@ -9,13 +9,13 @@ export async function getGames() {
                 'Content-Type': 'application/json',
             },
         })
-        
+
         if (!response.ok) {
             const data = await response.json()
-            
+
             throw Error(data.error)
         }
-        
+
         return await response.json()
     } catch (error: unknown) {
         const err = error as Error
@@ -32,13 +32,13 @@ export async function getQuestions() {
                 'Content-Type': 'application/json',
             },
         })
-    
+
         if (!response.ok) {
             const data = await response.json()
-    
+
             throw Error(data.error)
         }
-    
+
         return await response.json()
     } catch (error: unknown) {
         const err = error as Error
@@ -55,13 +55,13 @@ export async function getNeverHaveIEver() {
                 'Content-Type': 'application/json',
             },
         })
-    
+
         if (!response.ok) {
             const data = await response.json()
-    
+
             throw Error(data.error)
         }
-    
+
         return await response.json()
     } catch (error: unknown) {
         const err = error as Error
@@ -78,13 +78,13 @@ export async function getOkRedFlagDealbreaker() {
                 'Content-Type': 'application/json',
             },
         })
-    
+
         if (!response.ok) {
             const data = await response.json()
-    
+
             throw Error(data.error)
         }
-    
+
         return await response.json()
     } catch (error: unknown) {
         const err = error as Error

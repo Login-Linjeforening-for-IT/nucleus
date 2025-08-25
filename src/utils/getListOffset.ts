@@ -21,7 +21,7 @@ type GetListOffsetProps = {
  * 
  * @returns EventList top offset
  */
-export default function getListOffset({search, categories: cat, clickedEvents, bottom, ad}: GetListOffsetProps): number {
+export default function getListOffset({ search, categories: cat, clickedEvents, bottom, ad }: GetListOffsetProps): number {
     const windowHeight = Dimensions.get("window").height
     const contentOffset = (100 - getHeight(cat.length + clickedEvents.length))
     let baseOffset = Dimensions.get("window").height / 3

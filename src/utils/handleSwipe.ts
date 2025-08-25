@@ -17,8 +17,8 @@ type HandleSwipeProps = {
  * @param screenLeft The screen to the left of where you are (if any)
  * @param screenRight The screen to the right of where you are (if any)
  */
-export default function handleSwipe({ navigation, event, screenLeft, screenRight }: 
-HandleSwipeProps): void {
+export default function handleSwipe({ navigation, event, screenLeft, screenRight }:
+    HandleSwipeProps): void {
     const { velocityX, velocityY } = event.nativeEvent
 
     if (Math.abs(velocityX) > Math.abs(velocityY)) {
