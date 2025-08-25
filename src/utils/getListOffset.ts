@@ -52,8 +52,12 @@ export default function getListOffset({search, categories: cat, clickedEvents, b
                 baseOffset = Dimensions.get("window").height / (bottom ? 3.91 : 3.6)
             }
 
-            if (windowHeight > 900 && windowHeight < 936) {
+            if (windowHeight > 900 && windowHeight <= 915) {
                 baseOffset = Dimensions.get("window").height / (bottom ? 3.91 : 3.5)
+            }
+
+            if (windowHeight > 915 && windowHeight < 936) {
+                baseOffset = Dimensions.get("window").height / (bottom ? 3.91 : 3.7)
             }
 
             if (windowHeight === 936) {
@@ -63,7 +67,7 @@ export default function getListOffset({search, categories: cat, clickedEvents, b
             return baseOffset - contentOffset
         }
     }
-    
+
     if (Platform.OS === "ios") {
         return Dimensions.get("window").height / (bottom ? 6 : 8.2)
     } else {

@@ -125,18 +125,21 @@ function BlurWrapper(props: PropsWithChildren) {
     const item = isSearchingEvents ? categories : ad.skills
     const isSearchingAds = ad.search && route.name === "AdScreen"
     const extraHeight = getHeight(item.length)
-
+    const windowHeight = Dimensions.get("window").height
+    const largeDeviceReduction = windowHeight > 915 ? -15 : 0
     const height = defaultHeight + (isSearchingEvents || isSearchingAds
         ? Platform.OS === "ios"
             ? 50 + extraHeight // Extraheight on iOS
             : isSearchingEvents
-                ? 35 + extraHeight // Extraheight during eventSearch on Android
-                : 25 + extraHeight // Extraheight during adSearch on Android
+                ? 35 + extraHeight + largeDeviceReduction // Extraheight during eventSearch on Android
+                : 25 + extraHeight + largeDeviceReduction // Extraheight during adSearch on Android
         : Platform.OS === "ios"
             ? 20 // Extra base height for header on iOS while not searching
             : defaultHeight <= 100
                 ? 5 // Extra base height for header on Android while not searching
-                : -defaultHeight / 5 // Except if its a very tall device
+                : windowHeight > 915 // Except if its a very tall device
+                    ? -defaultHeight / 3.8
+                    : -defaultHeight / 5
     )
 
     return (
