@@ -49,7 +49,11 @@ export default function getListOffset({search, categories: cat, clickedEvents, b
             }
 
             if (windowHeight > 800 && windowHeight <= 900) {
-                baseOffset = Dimensions.get("window").height / (bottom ? 3.91 : 3.3)
+                baseOffset = Dimensions.get("window").height / (bottom ? 3.91 : 3.6)
+            }
+
+            if (windowHeight > 900 && windowHeight < 936) {
+                baseOffset = Dimensions.get("window").height / (bottom ? 3.91 : 3.5)
             }
 
             if (windowHeight === 936) {
@@ -84,7 +88,7 @@ export default function getListOffset({search, categories: cat, clickedEvents, b
                 return Dimensions.get("window").height / (bottom ? 10.5 : 6.5)
             }
 
-            return Dimensions.get("window").height / (bottom ? 10.5 : 7)
+            return Dimensions.get("window").height / (bottom ? 10.5 : 8.2)
         }
 
         if (windowHeight > 900) {
