@@ -107,12 +107,6 @@ function rules(theme: Theme) {
             )
         },
         // @ts-expect-error
-        bullet_list: (_, children, __, ___) => {
-            return (
-                <>{children}</>
-            );
-        },
-        // @ts-expect-error
         list_item: (_, children, __, ___) => {
             return (
                 <Text key={getUniqueID()} style={{ marginVertical: 4 }}>
