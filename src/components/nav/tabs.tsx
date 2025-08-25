@@ -34,7 +34,7 @@ import EventScreen from "@screens/event"
 import MenuScreen from "@screens/menu"
 import MS from "@styles/menuStyles"
 import TagInfo from "@components/shared/tagInfo"
-import { Image } from "react-native"
+import { Image, Platform } from "react-native"
 import NotificationModal from "@components/shared/notificationModal"
 import NotificationScreen from "@screens/menu/notifications"
 import ProfileScreen from "@screens/menu/profile"
@@ -50,7 +50,8 @@ import SpecificCourseScreen from "@screens/menu/course/specificCourse"
 import SpecificGameScreen from "@screens/menu/games/specificGame"
 import DiceScreen from "@screens/menu/games/dice"
 import Header from "./header"
-import * as SystemUI from 'expo-system-ui';
+import * as SystemUI from 'expo-system-ui'
+import * as NavigationBar from "expo-navigation-bar"
 import { 
     AdStackParamList, 
     EventStackParamList, 
@@ -64,6 +65,7 @@ import {
     createStackNavigator
 } from "@react-navigation/stack"
 import { TransitionSpec } from "@react-navigation/bottom-tabs/lib/typescript/commonjs/src/types"
+import { useEffect } from "react"
 
 // Defines the navigators
 const Root = createStackNavigator<RootStackParamList>()
@@ -129,6 +131,14 @@ function Menu() {
  */
 function Tabs(): JSX.Element {
     const { isDark } = useSelector((state: ReduxState) => state.theme)
+
+    useEffect(() => {
+        if (Platform.OS !== "ios") {
+            // On-screen Android bottom navigation bar color
+            NavigationBar.setBackgroundColorAsync("#0D0D0D")
+            NavigationBar.setButtonStyleAsync("light")
+        }
+    }, [])
 
     return (
         <Tab.Navigator

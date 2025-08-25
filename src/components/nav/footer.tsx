@@ -2,20 +2,17 @@ import { View, TouchableOpacity, Platform } from "react-native"
 import { useSelector } from "react-redux"
 import MS from "@styles/menuStyles"
 import { BlurView } from "expo-blur"
-import { openBrowserAsync } from 'expo-web-browser'
-import { SvgXml } from "react-native-svg"
-import USBicon from "@assets/menu/USB-temp-icon.svg"
 import NotificationIcon from "@components/notification/notificationIcon"
-import { KIOSK_URL } from "@/constants"
-import { 
-    NavigationHelpers, 
-    ParamListBase, 
-    TabNavigationState 
+import {
+    NavigationHelpers,
+    ParamListBase,
+    TabNavigationState
 } from "@react-navigation/native"
-import { 
-    BottomTabDescriptorMap, 
-    BottomTabNavigationEventMap 
-} from "@react-navigation/bottom-tabs/lib/typescript/src/types"
+import {
+    BottomTabDescriptorMap,
+    BottomTabNavigationEventMap
+} from "@react-navigation/bottom-tabs/lib/typescript/commonjs/src/types"
+import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 export type FooterProps = {
     state: TabNavigationState<ParamListBase>
@@ -31,18 +28,24 @@ export default function Footer({ state, descriptors, navigation }: FooterProps):
 
 function Content({ state, descriptors, navigation }: FooterProps) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
-
+    const navBar = useSafeAreaInsets().bottom
+    const offset = navBar > 35 ? 10 : 0
+    const bottom = !!offset ? offset : MS.bMenu.bottom
+    console.log(navBar)
     return (
         <>
-            <BlurView style={MS.bMenu} experimentalBlurMethod='dimezisBlurView' intensity={Platform.OS === 'ios' ? 30 : 20}/>
+            <BlurView
+                style={{ ...MS.bMenu, bottom }}
+                experimentalBlurMethod='dimezisBlurView'
+                intensity={Platform.OS === 'ios' ? 30 : 20}
+            />
             <View style={{
-                ...MS.bMenu,
-                backgroundColor: theme.transparentAndroid
+                ...MS.bMenu, bottom, backgroundColor: theme.transparentAndroid
             }} />
             {/* Transparent container for the icons */}
-            <View style={MS.bMenu}>
+            <View style={{...MS.bMenu, bottom }}>
                 {/* Create the icons based on options passed from stack.js */}
-                {state.routes.map((route, 
+                {state.routes.map((route,
                     index: number) => {
                     const { options } = descriptors[route.key]
 
@@ -59,12 +62,12 @@ function Content({ state, descriptors, navigation }: FooterProps) {
                         if (!isFocused && !event.defaultPrevented) {
                             // The `merge: true` option makes sure that the
                             // params inside the tab screen are preserved
-                            navigation.navigate(route.name, {merge: true})
+                            navigation.navigate(route.name, { merge: true })
                         }
                     }
 
                     function onLongPress() {
-                        navigation.emit({type: "tabLongPress", target: route.key})
+                        navigation.emit({ type: "tabLongPress", target: route.key })
                     }
 
                     return (
@@ -79,7 +82,7 @@ function Content({ state, descriptors, navigation }: FooterProps) {
                             onLongPress={onLongPress}
                         >
                             {!isFocused && route.name === "MenuScreenRoot" && <NotificationIcon position="bottom" />}
-                            {options.tabBarIcon?options.tabBarIcon({focused: isFocused, color: '', size: 0}):null}
+                            {options.tabBarIcon ? options.tabBarIcon({ focused: isFocused, color: '', size: 0 }) : null}
                         </TouchableOpacity>
                     )
                 })}
