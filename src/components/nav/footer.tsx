@@ -29,7 +29,7 @@ export default function Footer({ state, descriptors, navigation }: FooterProps):
 function Content({ state, descriptors, navigation }: FooterProps) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const navBar = useSafeAreaInsets().bottom
-    const offset = navBar > 35 ? 10 : 0
+    const offset = navBar > 35 ? 0.1 : 0
     const bottom = !!offset ? offset : MS.bMenu.bottom
 
     return (

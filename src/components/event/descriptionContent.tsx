@@ -26,7 +26,7 @@ export default function Description() {
             const markdown = sliced.replace(/<br>/g, '\n').replace(/###/g, '')
 
             if (!sliced.includes('[:event]') && !sliced.includes('[:jobad]')) {
-                return <Markdown key={index} style={{ text: { color: '#FFF' } }}>{markdown}</Markdown>
+                return <Markdown key={index} style={{ text: { color: theme.textColor } }}>{markdown}</Markdown>
             }
 
             return <Embed key={index} id={number} type={sliced.includes('[:event]') ? "event" : "ad"} />
