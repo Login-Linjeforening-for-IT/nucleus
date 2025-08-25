@@ -19,11 +19,11 @@ import {
     Dimensions,
     Platform,
 } from "react-native"
-import { 
-    reset as resetEvents, 
-    setClickedCategories, 
-    setInput as setEvents, 
-    toggleSearch as eventToggleSearch 
+import {
+    reset as resetEvents,
+    setClickedCategories,
+    setInput as setEvents,
+    toggleSearch as eventToggleSearch
 } from "@redux/event"
 
 /**
@@ -35,8 +35,8 @@ export function FilterUI(): JSX.Element {
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const { search } = useSelector((state: ReduxState) => state.event)
     const ad = useSelector((state: ReduxState) => state.ad)
-    const resetIcon = isDark 
-        ? require("@assets/icons/reset.png") 
+    const resetIcon = isDark
+        ? require("@assets/icons/reset.png")
         : require("@assets/icons/reset-black.png")
     const dispatch = useDispatch()
     const textInputRef = useRef<TextInput | null>(null)
@@ -47,11 +47,11 @@ export function FilterUI(): JSX.Element {
     const top = (isSearchingAds && 35) || Platform.OS === 'ios' ? 40 : 35
 
     return (
-        <View style={isSearching ? {top: top} : { display: 'none'}}>
+        <View style={isSearching ? { top } : { display: 'none' }}>
             <View style={ES.absoluteView}>
                 <TextInput
                     ref={textInputRef}
-                    style={{...ES.clusterFilterText}}
+                    style={{ ...ES.clusterFilterText }}
                     maxLength={40}
                     placeholder={lang ? "Søk.." : "Search.."}
                     placeholderTextColor={theme.titleTextColor}
@@ -76,13 +76,16 @@ export function FilterUI(): JSX.Element {
  * Displays the filter button
  * @returns Filter button
  */
-export function FilterButton(){
+export function FilterButton() {
     const { isDark } = useSelector((state: ReduxState) => state.theme)
-    const { search } = useSelector((state: ReduxState) => state.event)
+    const { search, clickedCategories, input } = useSelector((state: ReduxState) => state.event)
     const ad = useSelector((state: ReduxState) => state.ad)
     const dispatch = useDispatch()
     const route = useRoute()
     const isSearching = route.name === "EventScreen" && search || route.name === "AdScreen" && ad.search
+    const filtered = clickedCategories.length || ad.clickedSkills.length || input.length || ad.input.length
+    const hasFilterEnabled = (route.name === "EventScreen" || route.name === "AdScreen")
+        && filtered
 
     function handlePress() {
         route.name === "EventScreen" && dispatch(eventToggleSearch())
@@ -92,17 +95,27 @@ export function FilterButton(){
     return (
         <TouchableOpacity onPress={handlePress}>
             {isSearching
-                ? <Image 
-                    style={MS.multiIcon} 
+                ? <Image
+                    style={MS.multiIcon}
                     source={require("@assets/icons/filter-orange.png")}
                 />
-                : <Image 
-                    style={MS.multiIcon} 
-                    source={isDark
-                        ? require("@assets/icons/filter.png") 
-                        : require("@assets/icons/filter-black.png")
-                    }
-                />
+                :
+                hasFilterEnabled
+                    ?
+                    <Image
+                        style={MS.multiIcon}
+                        source={isDark
+                            ? require("@assets/icons/filter-active.png")
+                            : require("@assets/icons/filter-black-active.png")}
+                    />
+                    :
+                    <Image
+                        style={MS.multiIcon}
+                        source={isDark
+                            ? require("@assets/icons/filter.png")
+                            : require("@assets/icons/filter-black.png")
+                        }
+                    />
             }
         </TouchableOpacity>
     )
@@ -143,8 +156,8 @@ function FilterCategoriesOrSkills() {
     const height = getHeight(item.length)
 
     return (
-        <ScrollView 
-            style={{height}} 
+        <ScrollView
+            style={{ height }}
             scrollEnabled={item.length > 9 ? true : false}
             showsVerticalScrollIndicator={false}
         >
@@ -155,10 +168,10 @@ function FilterCategoriesOrSkills() {
 
                 if (index % 3 === 0) {
                     return (
-                        <View key={index / 3} style={{ flexDirection: "row"}}>
+                        <View key={index / 3} style={{ flexDirection: "row" }}>
                             <FilterItem text={text || ''} />
-                            <FilterItem text={item[index+1] || ''} />
-                            <FilterItem text={item[index+2] || ''} />
+                            <FilterItem text={item[index + 1] || ''} />
+                            <FilterItem text={item[index + 2] || ''} />
                         </View>
                     )
                 }
@@ -171,7 +184,7 @@ function FilterCategoriesOrSkills() {
  * Displays a small checkbox in the filter UI. 
  * @param text Text to display on the screen
  */
-function FilterItem({text}: {text: string}) {
+function FilterItem({ text }: { text: string }) {
     if (!text) return null
 
     const { theme } = useSelector((state: ReduxState) => state.theme)
@@ -185,7 +198,7 @@ function FilterItem({text}: {text: string}) {
     const categories = [...cat]
     const isFilteringOnEventScreen = event.search && route.name === "EventScreen"
     const checked = event.search && event.clickedCategories.includes(text) ||
-    ad.search && ad.clickedSkills.includes(text)
+        ad.search && ad.clickedSkills.includes(text)
 
     function handleUnchecked(item: string) {
         if (isFilteringOnEventScreen) {
@@ -206,7 +219,7 @@ function FilterItem({text}: {text: string}) {
     return (
         <View style={ES.clusterCategoryView}>
             <TouchableOpacity onPress={() => checked ? handleUnchecked(text) : handleChecked(text)}>
-                <View style={{flexDirection: "row", maxHeight: 50, minHeight: 30, alignItems: "center", width: Dimensions.get("window").width / 4}}>
+                <View style={{ flexDirection: "row", maxHeight: 50, minHeight: 30, alignItems: "center", width: Dimensions.get("window").width / 4 }}>
                     {checked ? <CheckedBox /> : <CheckBox />}
                     <Text style={{
                         ...T.filterCategoryText,
