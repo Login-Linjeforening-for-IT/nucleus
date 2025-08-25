@@ -31,7 +31,7 @@ function Content({ state, descriptors, navigation }: FooterProps) {
     const navBar = useSafeAreaInsets().bottom
     const offset = navBar > 35 ? 10 : 0
     const bottom = !!offset ? offset : MS.bMenu.bottom
-    console.log(navBar)
+
     return (
         <>
             <BlurView
