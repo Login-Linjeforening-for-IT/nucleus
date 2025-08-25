@@ -152,8 +152,8 @@ export const ES = StyleSheet.create({
         width: 40,
     },
     eventButton: {
-        height: 30,
-        width: Dimensions.get("window").width / 2.75,
+        height: 40,
+        width: Dimensions.get("window").width * 0.95,
         alignSelf: "center",
         borderRadius: 10,
     },

@@ -182,7 +182,7 @@ export const T = StyleSheet.create({
     },
     // DpecificEventInfo text (+10px from left)
     specificEventInfo: {
-        fontSize: adjustForAspectRatio(20),
+        fontSize: adjustForAspectRatio(18),
     },
     specificEventInfoContent: {
         fontSize: adjustForAspectRatio(20),
@@ -196,7 +196,7 @@ export const T = StyleSheet.create({
     // Mazemap text on SES
     mazemap: {
         textDecorationLine: "underline",
-        fontSize: adjustForAspectRatio(20),
+        fontSize: adjustForAspectRatio(18),
     },
 })
 

@@ -8,13 +8,15 @@ import Swipe from "@components/nav/swipe"
 import SpecificEventImage from "@components/event/specificEventImage"
 import Countdown from "@components/event/countdown"
 import BasicInfo from "@components/event/basicInfo"
-import DescriptionAndJoin from "@components/event/descriptionAndJoin"
+import Description from "@components/event/description"
 import { useDispatch } from "react-redux"
 import { fetchEventDetails } from "@utils/fetch"
 import Tag from "@components/shared/tag"
 import { EventScreenProps } from "@type/screenTypes"
 import { EventContext } from "@utils/contextProvider"
 import { setEventName } from "@redux/event"
+import JoinButton from "@components/event/joinButton"
+import Rules from "@components/event/rules"
 
 /**
  * @param eventID - The ID of the event to be displayed
@@ -79,7 +81,10 @@ export default function SpecificEventScreen({ route: {params: {eventID}} }: Even
                         <Space height={10} />
                         <Countdown />
                         <BasicInfo />
-                        <DescriptionAndJoin />
+                        <Description />
+                        <Rules />
+                        <Space height={10} />
+                        <JoinButton />
                         <Text style={{...ES.id, color: theme.oppositeTextColor}}>Event ID: {event?.event?.id}</Text>
                         <Space height={Dimensions.get("window").height / (Platform.OS === 'ios' ? 3 : 2.75)} />
                     </ScrollView>

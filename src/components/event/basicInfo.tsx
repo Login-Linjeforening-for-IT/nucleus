@@ -17,23 +17,22 @@ export default function BasicInfo() {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
 
-    const loading = !Boolean(event&&Object.keys(event).length)
-    
-    let text = {host: '', more: ''}, info = ''
+    const loading = !Boolean(event && Object.keys(event).length)
+    let text = { host: '', more: '' }, info = ''
 
-    if(event&&Object.keys(event).length){
-        const textNO = { host: "Arrangør:   ", more: "Mer info"}
-        const textEN = { host: "Organizer:   ", more: "More info"}
+    if (event && Object.keys(event).length) {
+        const textNO = { host: "Arrangør:   ", more: "Mer info" }
+        const textEN = { host: "Organizer:   ", more: "More info" }
         text = lang ? textNO : textEN
         info = lang ? event?.event?.informational_no : event?.event?.informational_en
     }
-    
+
     const host = findOrgName()
-    
     function findOrgName() {
         if (!event?.organizations) {
             return ""
         }
+
         switch (event.organizations[0]?.shortname) {
             case 'board': return lang ? 'Styret' : 'The Board'
             case 'tekkom': return 'TekKom'
@@ -44,8 +43,8 @@ export default function BasicInfo() {
             case 'ctfkom': return 'CTFkom'
             case 's2g': return 'S2G'
             case 'idi': return 'IDI'
-            default: return event.organizations[0]?.shortname || lang 
-                ? event.category.name_no || event.category.name_en 
+            default: return event.organizations[0]?.shortname || lang
+                ? event.category.name_no || event.category.name_en
                 : event.category.name_en || event.category.name_no
         }
     }
@@ -62,13 +61,13 @@ export default function BasicInfo() {
                     <Text style={{ ...T.specificEventInfoContent, color: theme.textColor }}>
                         {host}
                         {event?.event?.link_stream && ' - '}
-                        {event?.event?.link_stream && <TextLink style={{...T.text20, color: "#fd8738", top: 3}} text="Stream" url={event.event.link_stream} />}
+                        {event?.event?.link_stream && <TextLink style={{ ...T.text20, color: "#fd8738", top: 3 }} text="Stream" url={event.event.link_stream} />}
                         {event?.event?.link_discord && ' - '}
-                        {event?.event?.link_discord && <TextLink style={{...T.text20, color: "#fd8738", top: 3}} text="Discord" url={event.event.link_stream} />}
+                        {event?.event?.link_discord && <TextLink style={{ ...T.text20, color: "#fd8738", top: 3 }} text="Discord" url={event.event.link_stream} />}
                         {event?.event?.link_facebook && ' - '}
-                        {event?.event?.link_facebook && <TextLink style={{...T.text20, color: "#fd8738", top: 3}} text="Facebook" url={event.event.link_stream} />}
+                        {event?.event?.link_facebook && <TextLink style={{ ...T.text20, color: "#fd8738", top: 3 }} text="Facebook" url={event.event.link_stream} />}
                         {event?.organizations && event.organizations[0]?.link_homepage && ' - '}
-                        {event?.organizations && event.organizations[0]?.link_homepage && <TextLink style={{...T.text20, color: "#fd8738", top: 3}} text={text.more} url={event.event.link_stream} />}
+                        {event?.organizations && event.organizations[0]?.link_homepage && <TextLink style={{ ...T.text20, color: "#fd8738", top: 3 }} text={text.more} url={event.event.link_stream} />}
                     </Text>
                 </View>
                 <>{info && <InfoBlock text={info} />}</>
@@ -82,13 +81,13 @@ function Start() {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const start = lang ? "Starter:      " : "Starts:         "
-    
+
     return (
         <View style={ES.specificEventInfoView}>
-            <Text style={{...T.specificEventInfo, color: theme.textColor}}>
+            <Text style={{ ...T.specificEventInfo, color: theme.textColor }}>
                 {start}
             </Text>
-            <Text style={{...T.specificEventInfo, color: theme.textColor}}>
+            <Text style={{ ...T.specificEventInfo, color: theme.textColor }}>
                 {event?.event?.time_start[11]}{event?.event?.time_start[12]}:
                 {event?.event?.time_start[14]}{event?.event?.time_start[15]}
             </Text>
@@ -104,10 +103,10 @@ function End() {
 
     return (
         <View style={ES.specificEventInfoView}>
-            <Text style={{...T.specificEventInfo, color: theme.textColor}}>
+            <Text style={{ ...T.specificEventInfo, color: theme.textColor }}>
                 {end}
             </Text>
-            {event?.event!=undefined && <GetEndTime time_end={event.event.time_end} />}
+            {event?.event != undefined && <GetEndTime time_end={event.event.time_end} />}
         </View>
     )
 }
@@ -116,32 +115,30 @@ function Location() {
     const event = useContext(EventContext)
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
-    if (!event?.location){
+
+    if (!event?.location) {
         return <></>
     }
+
     const text = lang ? "Lokasjon:   " : "Location:     "
 
-    
     // Uses best available location
-    const location = lang 
-        ? event?.location?.name_no || event?.location?.name_en 
+    const location = lang
+        ? event?.location?.name_no || event?.location?.name_en
         : event?.location?.name_en || event?.location?.name_no
 
     return (
         <View style={{
-            flexDirection: "row", 
-            maxWidth: '100%', 
+            flexDirection: "row",
+            maxWidth: '100%',
             overflow: 'hidden',
             flexWrap: 'wrap',
-            paddingBottom: 5
+            top: -5
         }}>
-            <Text style={{...T.specificEventInfo, color: theme.textColor}}>
-                {text}
+            <Text style={{ ...T.specificEventInfo, color: theme.textColor }}>
+                {text}{location || 'TBA!'}
+                <Map />
             </Text>
-            <Text style={{...T.specificEventInfo, color: theme.textColor}}>
-                {location || 'TBA!'}
-            </Text>
-            <Map />
         </View>
     )
 }

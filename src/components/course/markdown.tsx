@@ -1,14 +1,19 @@
 import T from "@styles/text"
-import { Dimensions, Image } from "react-native"
+import { Dimensions, Image, Text } from "react-native"
 import MarkdownDisplay, { getUniqueID } from "react-native-markdown-display"
 import { useSelector } from "react-redux"
 
-export default function Markdown({text}: {text: string}) {
+type MarkdownProps = {
+    text: string
+    fontSize?: number
+}
+
+export default function Markdown({text, fontSize}: MarkdownProps) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
 
     return (
         <MarkdownDisplay
-            rules={rules} 
+            rules={rules(theme)} 
             style={{
                 fence: {
                     backgroundColor: theme.dark,
@@ -75,28 +80,45 @@ export default function Markdown({text}: {text: string}) {
                 },
                 text: {
                     ...T.text16,
+                    fontSize: fontSize || T.text16.fontSize,
                     color: theme.textColor,
-                }
+                },
         }}>
             {text}
         </MarkdownDisplay>
     )
 }
 
-const rules = {
-    // @ts-expect-error
-    image: (node, _, _a, styles) => {
-        const { src } = node.attributes
+function rules(theme: Theme) {
+    return {
+        // @ts-expect-error
+        image: (node, _, _a, styles) => {
+            const { src } = node.attributes
 
-        return (
-            <Image
-                key={getUniqueID()}
-                source={{ uri: src }}
-                style={[styles.image, { 
-                    minWidth: Dimensions.get('window').width * 0.8, 
-                    minHeight: 100 
-                }]}
-            />
-        )
-    },
+            return (
+                <Image
+                    key={getUniqueID()}
+                    source={{ uri: src }}
+                    style={[styles.image, { 
+                        minWidth: Dimensions.get('window').width * 0.8, 
+                        minHeight: 100 
+                    }]}
+                />
+            )
+        },
+        // @ts-expect-error
+        bullet_list: (_, children, __, ___) => {
+            return (
+                <>{children}</>
+            );
+        },
+        // @ts-expect-error
+        list_item: (_, children, __, ___) => {
+            return (
+                <Text key={getUniqueID()} style={{ marginVertical: 4 }}>
+                    <Text style={{color: theme.orange, fontWeight: 900}}>•</Text> {children}
+                </Text>
+            )
+        },
+    }
 }
