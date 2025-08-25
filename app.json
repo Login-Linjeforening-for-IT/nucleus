@@ -65,7 +65,7 @@
       },
       "package": "com.login.Login",
       "googleServicesFile": "./google-services.json",
-      "versionCode": 86,
+      "versionCode": 87,
       "permissions": [
         "INTERNET",
         "NOTIFICATIONS",
