@@ -1,12 +1,11 @@
 {
   "name": "login",
-  "version": "2.3.2",
+  "version": "2.4.0",
   "private": true,
   "main": "index.ts",
   "scripts": {
     "eas-build-pre-install": "./decodeSecrets.sh",
-    "start": "react-native start",
-    "cstart": "npx react-native start --reset-cache",
+    "start": "expo start",
     "estart": "expo start --dev-client",
     "prebuild": "expo prebuild",
     "ios": "expo run:ios",
@@ -35,6 +34,7 @@
     "expo-blur": "~15.0.7",
     "expo-build-properties": "~1.0.9",
     "expo-calendar": "~15.0.7",
+    "expo-dev-client": "~6.0.17",
     "expo-device": "~8.0.9",
     "expo-image-picker": "~17.0.8",
     "expo-linear-gradient": "~15.0.7",
