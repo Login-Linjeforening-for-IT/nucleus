@@ -30,7 +30,7 @@ export default function LastFetch(param?: string) {
 export async function fetchEventDetails(id: number):
     Promise<GetEventProps> {
     // Fetches events
-    const response = await fetch(`${config.api}events/${id}`)
+    const response = await fetch(`${config.api}/events/${id}`)
 
     // Test API
     // const response = await fetch(`${testapi}events/${id}`)
@@ -47,7 +47,7 @@ export async function fetchEventDetails(id: number):
 export async function fetchEvents(): Promise<GetEventProps[]> {
     try {
         // Fetches events
-        const response = await fetch(`${config.api}events`)
+        const response = await fetch(`${config.api}/events`)
 
         // Checks if response is ok, otherwise throws error
         if (!response.ok) {
@@ -71,7 +71,7 @@ export async function fetchEvents(): Promise<GetEventProps[]> {
 export async function fetchAds(): Promise<GetJobProps[]> {
     try {
         // Fetches ads
-        const response = await fetch(`${config.api}jobs/`)
+        const response = await fetch(`${config.api}/jobs/`)
 
         // Checks if response is ok, otherwise throws error
         if (!response.ok) {
@@ -97,7 +97,7 @@ export async function fetchAds(): Promise<GetJobProps[]> {
 export async function fetchAdDetails(adID: number): Promise<GetJobProps> {
 
     // Prod
-    const response = await fetch(`${config.api}jobs/${adID}`)
+    const response = await fetch(`${config.api}/jobs/${adID}`)
 
     // Dev
     // const response = await fetch(`${testapi}jobs/${ad.id}`)

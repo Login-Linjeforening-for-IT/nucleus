@@ -13,7 +13,7 @@ const config = {
     mailto_url: "mailto:kontakt@login.no",
     login_url: "https://login.no",
     support_mail: "tekkom@login.no",
-    api: "https://workerbee.login.no/api/",
+    api: "https://workerbee-v2.login.no/api/v2",
     test_api: "https://testapi.login.no/v1/",
     app_api_url: "https://app.login.no/api"
 }

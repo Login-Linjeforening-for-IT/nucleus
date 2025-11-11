@@ -10,8 +10,6 @@
     "prebuild": "expo prebuild",
     "ios": "expo run:ios",
     "android": "expo run:android",
-    "bios": "npx expo run:ios",
-    "bandroid": "npx expo run:android",
     "build": "eas build -p all --auto-submit",
     "buildi": "eas build -p ios --local",
     "builda": "eas build -p android --local",

@@ -8,15 +8,13 @@ import {
     ParamListBase,
     TabNavigationState
 } from "@react-navigation/native"
-import {
-    BottomTabDescriptorMap,
-    BottomTabNavigationEventMap
-} from "@react-navigation/bottom-tabs/lib/typescript/commonjs/src/types"
+import { BottomTabNavigationEventMap } from '@react-navigation/bottom-tabs'
 import { useSafeAreaInsets } from "react-native-safe-area-context"
+import { JSX } from 'react'
 
 export type FooterProps = {
     state: TabNavigationState<ParamListBase>
-    descriptors: BottomTabDescriptorMap
+    descriptors: any
     navigation: NavigationHelpers<ParamListBase, BottomTabNavigationEventMap>
 }
 
@@ -39,11 +37,9 @@ function Content({ state, descriptors, navigation }: FooterProps) {
                 experimentalBlurMethod='dimezisBlurView'
                 intensity={Platform.OS === 'ios' ? 30 : 20}
             />
-            <View style={{
-                ...MS.bMenu, bottom, backgroundColor: theme.transparentAndroid
-            }} />
+            <View style={{ ...MS.bMenu, bottom, backgroundColor: theme.transparentAndroid }} />
             {/* Transparent container for the icons */}
-            <View style={{...MS.bMenu, bottom }}>
+            <View style={{ ...MS.bMenu, bottom }}>
                 {/* Create the icons based on options passed from stack.js */}
                 {state.routes.map((route,
                     index: number) => {
