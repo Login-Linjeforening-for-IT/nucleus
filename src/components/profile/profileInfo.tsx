@@ -24,15 +24,14 @@ type ProfileInfoContentProps = {
  * @param {string} category    Category of the event, Format: "CATEGORY"
  * @returns                     Small circle of the categories color
  */
-export default function ProfileInfo({profile}: ProfileInfoProps) {
+export default function ProfileInfo({ profile }: ProfileInfoProps) {
     const [selectedIndex, setSelectedIndex] = useState(-1)
-    const [previousIndex, setPreviousIndex] = useState(-1)
     const [profileInfo] = useState(profile)
     const profileInfoKeys = Object.keys(profileInfo)
     const { lang } = useSelector((state: ReduxState) => state.lang)
 
-    const typeNO = [ "Studieretning", "Studieår", "Epost", "Preferanser", "Allergier" ]
-    const typeEN = ["Degree", "Study year", "Mail", "Preferences", "Allergies" ]
+    const typeNO = ["Studieretning", "Studieår", "Epost", "Preferanser", "Allergier"]
+    const typeEN = ["Degree", "Study year", "Mail", "Preferences", "Allergies"]
     const type = lang ? typeNO : typeEN
 
     /**
@@ -59,7 +58,7 @@ export default function ProfileInfo({profile}: ProfileInfoProps) {
             {profileInfoKeys.map((key, index) => (
                 <View key={key}>
                     <TouchableOpacity onPress={() => handleClick(index)}>
-                        <ProfileInfoContent 
+                        <ProfileInfoContent
                             type={type}
                             index={index}
                             profile={profile}
@@ -74,7 +73,6 @@ export default function ProfileInfo({profile}: ProfileInfoProps) {
                     value={selectedIndex}
                     hide={() => {
                         setSelectedIndex(-1)
-                        setPreviousIndex(-1)
                     }}
                     trigger={true}
                 />
@@ -83,22 +81,22 @@ export default function ProfileInfo({profile}: ProfileInfoProps) {
     )
 }
 
-function ProfileInfoContent ({type, index, profile, selectedIndex}: 
-ProfileInfoContentProps) {
+function ProfileInfoContent({ type, index, profile, selectedIndex }:
+    ProfileInfoContentProps) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
 
     return (
         <Cluster noColor={true} marginHorizontal={12}>
-            <View style={{...CS.clusterBack}}>
+            <View style={{ ...CS.clusterBack }}>
                 <View style={CS.evenTwinLeft}>
-                    <Text style={{...T.text20, color: theme.textColor}}>
+                    <Text style={{ ...T.text20, color: theme.textColor }}>
                         {type[index]}
                     </Text>
                 </View>
                 <View style={CS.evenTwinRight}>
-                    <View style={{...CS.twinLeft, top: 6.75, left: -20}}>
+                    <View style={{ ...CS.twinLeft, top: 6.75, left: -20 }}>
                         <Text style={{
-                            ...T.text15, 
+                            ...T.text15,
                             textAlign: "right",
                             color: theme.oppositeTextColor
                         }}>
@@ -111,7 +109,7 @@ ProfileInfoContentProps) {
                             source={selectedIndex === index
                                 ? require("@assets/icons/pencil-orange.png")
                                 : require("@assets/icons/pencil777.png")}
-                            />
+                        />
                     </View>
                 </View>
             </View>

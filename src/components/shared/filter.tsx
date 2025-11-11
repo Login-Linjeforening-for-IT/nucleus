@@ -7,7 +7,7 @@ import { reset as resetAds, setInput as setAds } from "@redux/ad"
 import { toggleSearch as adToggleSearch } from "@redux/ad"
 import { ScrollView } from "react-native-gesture-handler"
 import { setClickedSkills } from "@redux/ad"
-import { useRef } from "react"
+import { JSX, useRef } from "react"
 import { useRoute } from "@react-navigation/native"
 import { useSelector, useDispatch } from "react-redux"
 import {

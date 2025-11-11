@@ -15,26 +15,26 @@ type NotificationProps = {
  * @param {string} topicID Topic the user interacted with
  * @returns Notification switch component
  */
-export default function Notification ({category, skip}: NotificationProps) {
-     // Fetches states
+export default function Notification({ category, skip }: NotificationProps) {
+    // Fetches states
     const notification = useSelector((state: ReduxState) => state.notification)
-    const { lang  } = useSelector((state: ReduxState) => state.lang)
+    const { lang } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const dispatch = useDispatch()
 
-    if (!skip) topic({lang, notification, dispatch})
+    if (!skip) topic({ lang, notification, dispatch })
 
     return (
         <View>
             <Switch
-                trackColor={{ true: theme.trackColor}}
+                trackColor={{ true: theme.trackColor }}
                 thumbColor={notification[category][0]
                     ? theme.switchOffState
                     : theme.switchOnState
                 }
                 ios_backgroundColor={theme.trackBackgroundColor}
                 onValueChange={(value) => {
-                    dispatch(changeNotificationState({value, category}))
+                    dispatch(changeNotificationState({ value, category }))
                 }}
                 value={notification[category][0]}
             />

@@ -3,19 +3,19 @@ import { CompositeScreenProps, NavigatorScreenParams } from "@react-navigation/n
 import { StackScreenProps } from "@react-navigation/stack"
 declare global {
     namespace ReactNavigation {
-      interface RootParamList extends TabBarParamList {}
+        interface RootParamList extends TabBarParamList { }
     }
 }
 
 export type TabBarProps<T extends keyof TabBarParamList> =
-BottomTabScreenProps<TabBarParamList, T>
+    BottomTabScreenProps<TabBarParamList, T>
 
 export type EventStackParamList = {
     EventScreen: undefined
-    SpecificEventScreen: {eventID: number}
+    SpecificEventScreen: { eventID: number }
 }
 
-export type EventScreenProps<T extends keyof EventStackParamList> = 
+export type EventScreenProps<T extends keyof EventStackParamList> =
     CompositeScreenProps<
         StackScreenProps<EventStackParamList, T>,
         BottomTabScreenProps<TabBarParamList>
@@ -23,7 +23,7 @@ export type EventScreenProps<T extends keyof EventStackParamList> =
 
 export type AdStackParamList = {
     AdScreen: undefined
-    SpecificAdScreen: {adID: number}
+    SpecificAdScreen: { adID: number }
 }
 
 export type AdScreenProps<T extends keyof AdStackParamList> =
@@ -32,7 +32,7 @@ export type AdScreenProps<T extends keyof AdStackParamList> =
         BottomTabScreenProps<TabBarParamList>
     >
 
-export type MenuRoutes = 
+export type MenuRoutes =
     "ProfileScreen"
     | "SettingScreen"
     | "NotificationScreen"
@@ -41,18 +41,18 @@ export type MenuRoutes =
     | "CourseScreen"
     | "SpecificCourseScreen"
     | "LoginScreen"
-    | "InternalScreen" 
+    | "InternalScreen"
     | "GameScreen"
     | "SpecificGameScreen"
 
-    export type ItemProps = {
+export type ItemProps = {
     id: number
     nav: MenuRoutes
     title: string
 }
 
-export type MenuProps<T extends keyof MenuStackParamList> = 
-StackScreenProps<MenuStackParamList, T>
+export type MenuProps<T extends keyof MenuStackParamList> =
+    StackScreenProps<MenuStackParamList, T>
 
 export type MenuStackParamList = {
     ProfileScreen: undefined
@@ -79,9 +79,9 @@ export type TabBarParamList = {
 export type RootStackParamList = {
     Tabs: NavigatorScreenParams<TabBarParamList>
     InfoModal: undefined
-    NotificationModal: {title: string, body: string, data: any}
+    NotificationModal: { title: string, body: string, data: any }
 }
 
 export type RootStackProps<T extends keyof RootStackParamList> =
     CompositeScreenProps<StackScreenProps<RootStackParamList, T>,
-    BottomTabScreenProps<TabBarParamList>>
+        BottomTabScreenProps<TabBarParamList>>

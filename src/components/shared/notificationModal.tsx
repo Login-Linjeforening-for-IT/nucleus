@@ -5,8 +5,9 @@ import { View, Text, Platform, TouchableOpacity } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useSelector } from "react-redux"
 import { RootStackProps } from "@type/screenTypes"
+import { JSX } from 'react'
 
-export default function NotificationModal({route: { params }}: RootStackProps<'NotificationModal'>): JSX.Element {
+export default function NotificationModal({ route: { params } }: RootStackProps<'NotificationModal'>): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const navigation: Navigation = useNavigation()
     const isIOS = Platform.OS === "ios"
@@ -26,27 +27,27 @@ export default function NotificationModal({route: { params }}: RootStackProps<'N
         item.data = {}
     }
 
-    const title = item.title.length > 35 ? `${item.title.slice(0,35)}...` : item.title
-    const body = item.body.length > 70 ? `${item.body.slice(0,70)}...` : item.body
+    const title = item.title.length > 35 ? `${item.title.slice(0, 35)}...` : item.title
+    const body = item.body.length > 70 ? `${item.body.slice(0, 70)}...` : item.body
 
     return (
-        <TouchableOpacity 
-            style={{flex: 1}}
+        <TouchableOpacity
+            style={{ flex: 1 }}
             onPress={() => navigation.goBack()}
             activeOpacity={1}
         >
             {isIOS
-                ? <BlurView style={GS.notificationDropdownBlur} intensity={50}/>
-                : <View style={{backgroundColor: theme.transparentAndroid}}
-            />}
-            <TouchableOpacity 
+                ? <BlurView style={GS.notificationDropdownBlur} intensity={50} />
+                : <View style={{ backgroundColor: theme.transparentAndroid }}
+                />}
+            <TouchableOpacity
                 style={{
-                    ...GS.notificationDropdownTouchable, 
+                    ...GS.notificationDropdownTouchable,
                     backgroundColor: isIOS ? undefined : theme.transparent
-                }} 
+                }}
                 onPress={() => {
                     if (Object.keys(item.data).length) {
-                        navigation.navigate("SpecificEventScreen", {item: item.data})
+                        navigation.navigate("SpecificEventScreen", { item: item.data })
                     } else {
                         navigation.navigate("NotificationScreen")
                     }

@@ -2,7 +2,7 @@ import { useSelector } from "react-redux"
 import { View, Text } from "react-native"
 import ES from "@styles/eventStyles"
 import T from "@styles/text"
-import { ReactNode } from "react"
+import { JSX, ReactNode } from "react"
 
 
 // Ony children or height can be defined at the same time. Both cant be arguments at the same time
@@ -45,8 +45,8 @@ type ErrorMessageProps = {
  * @param {float} height How big the space should be
  * @returns Empty view of the given height
  */
-export default function Space({height}: SpaceProps): JSX.Element {
-    return <View style={{height: height}}/>
+export default function Space({ height }: SpaceProps): JSX.Element {
+    return <View style={{ height: height }} />
 }
 
 /**
@@ -59,7 +59,7 @@ export default function Space({height}: SpaceProps): JSX.Element {
  * @param children The content that should have a line to the right
  * @returns View of the given size based on theme
  */
-export function Line({width, fill, children, height}: LineProps): JSX.Element {
+export function Line({ width, fill, children, height }: LineProps): JSX.Element {
 
     const { theme } = useSelector((state: ReduxState) => state.theme)
 
@@ -81,8 +81,8 @@ export function Line({width, fill, children, height}: LineProps): JSX.Element {
  * @param {number} max Highest acceptable integer
  * @returns
  */
-export function random({min, max}: randomProps): number {
-    return Math.floor(Math.random() * (max - min) ) + min
+export function random({ min, max }: randomProps): number {
+    return Math.floor(Math.random() * (max - min)) + min
 }
 
 /**
@@ -94,7 +94,7 @@ export function random({min, max}: randomProps): number {
  *
  * @returns {JSX.Element} Error message
  */
-export function ErrorMessage({argument, screen}: ErrorMessageProps): JSX.Element {
+export function ErrorMessage({ argument, screen }: ErrorMessageProps): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const eventScreen = ["Ingen arrangementer", "No events"]
@@ -102,15 +102,15 @@ export function ErrorMessage({argument, screen}: ErrorMessageProps): JSX.Element
     const error = screen === "event" ? eventScreen : adsScreen
 
     const text = {
-        "wifi": lang 
-        ? "Sjekk nettverkstilkoblingen din og prøv igjen. Kontakt TEKKOM dersom problemet vedvarer." 
-        : "Check your wifi connection and try again. Contact TEKKOM if the issue persists.",
+        "wifi": lang
+            ? "Sjekk nettverkstilkoblingen din og prøv igjen. Kontakt TEKKOM dersom problemet vedvarer."
+            : "Check your wifi connection and try again. Contact TEKKOM if the issue persists.",
         "nomatch": lang ? error[0] : error[1]
     }
 
     return (
-        <View style={{alignSelf: "center", justifyContent: "center", display: "flex", flex: 1}}>
-            <Text style={{...T.centered20, color: theme.textColor}}>
+        <View style={{ alignSelf: "center", justifyContent: "center", display: "flex", flex: 1 }}>
+            <Text style={{ ...T.centered20, color: theme.textColor }}>
                 {text[argument]}
             </Text>
         </View>
@@ -122,15 +122,15 @@ export function ErrorMessage({argument, screen}: ErrorMessageProps): JSX.Element
  * @param color    Hex color for the text based on theme
  * @returns
  */
-export function Month({month, color}: MonthProps): JSX.Element {
+export function Month({ month, color }: MonthProps): JSX.Element {
     const { lang } = useSelector((state: ReduxState) => state.lang)
 
-    const monthsEN = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", 
+    const monthsEN = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
         "Jul", "Aug", "Sep", "Oct", "Nov", "Des"]
-    const monthsNO = ["Jan", "Feb", "Mar", "Apr", "Mai", "Jun", 
+    const monthsNO = ["Jan", "Feb", "Mar", "Apr", "Mai", "Jun",
         "Jul", "Aug", "Sep", "Okt", "Nov", "Des"]
 
-    return <Text style={{...ES.monthText, color: color}}>
-        {lang ? monthsNO[month]: monthsEN[month]}
+    return <Text style={{ ...ES.monthText, color: color }}>
+        {lang ? monthsNO[month] : monthsEN[month]}
     </Text>
 }

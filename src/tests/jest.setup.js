@@ -9,7 +9,7 @@ console.error = (...args) => {
     //       at Component (.../node_modules/react-native/jest/mockComponent.js:30:18)
     //       at Header (.../src/components/nav/header.tsx:17:41)
     if (
-        args[0] + ' ' +  args[1] + ' ' + args[2] === 'Warning: Failed %s type: %s%s prop Invalid prop `source` supplied to `Image`, expected one of type [number].'
+        args[0] + ' ' + args[1] + ' ' + args[2] === 'Warning: Failed %s type: %s%s prop Invalid prop `source` supplied to `Image`, expected one of type [number].'
         && args[3].includes('at Header') && args[3].includes('src/components/nav/header.tsx')
     ) {
         return
@@ -24,7 +24,7 @@ jest.mock('@react-native-async-storage/async-storage', () => {
         default: mockAsyncStorage,
     }
 })
-  
+
 const mockAsyncStorage = {
     getItem: jest.fn((key) => {
         return new Promise((resolve) => {

@@ -3,9 +3,9 @@ import { RefreshControl, ScrollView } from "react-native-gesture-handler"
 import Cluster from "@/components/shared/cluster"
 import AS from "@styles/adStyles"
 import { useDispatch, useSelector } from "react-redux"
-import { useCallback, useState, useEffect } from "react"
+import { useCallback, useState, useEffect, JSX } from "react"
 import Swipe from "@components/nav/swipe"
-import AdInfo, { 
+import AdInfo, {
     AdBanner,
     AdDescription,
     AdMedia,
@@ -16,18 +16,18 @@ import { setAdName } from "@redux/ad"
 import { fetchAdDetails } from "@utils/fetch"
 import { AdScreenProps } from "@type/screenTypes"
 import { AdContext } from "@utils/contextProvider"
-  
-export default function SpecificAdScreen({navigation, route:{params: {adID}}}: AdScreenProps<'SpecificAdScreen'>): JSX.Element {
+
+export default function SpecificAdScreen({ route: { params: { adID } } }: AdScreenProps<'SpecificAdScreen'>): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
-    const [ad, setAd] = useState({} as DetailedAdResponse)
+    const [ad, setAd] = useState({} as GetJobProps)
     const [refresh, setRefresh] = useState(false)
     const dispatch = useDispatch()
     const height = Dimensions.get("window").height
 
     useEffect(() => {
-        const adName = lang ? ad?.job?.title_no || ad?.job?.title_en 
-                            : ad?.job?.title_en || ad?.job?.title_no
+        const adName = lang ? ad.title_no || ad.title_en
+            : ad.title_en || ad.title_no
         dispatch(setAdName(adName))
     }, [ad])
 
@@ -40,7 +40,7 @@ export default function SpecificAdScreen({navigation, route:{params: {adID}}}: A
     async function getDetails() {
         const response = await fetchAdDetails(adID)
 
-        if (response){
+        if (response) {
             setAd(response)
             return true
         }
@@ -66,18 +66,18 @@ export default function SpecificAdScreen({navigation, route:{params: {adID}}}: A
                         paddingTop: Dimensions.get("window").height / 9.7 + (height > 800 && height < 900 ? 15 : 0),
                         paddingBottom: Dimensions.get("window").height / 3
                     }}>
-                        <ScrollView 
-                            showsVerticalScrollIndicator={false} 
+                        <ScrollView
+                            showsVerticalScrollIndicator={false}
                             scrollEventThrottle={100}
                             refreshControl={<RefreshControl refreshing={refresh} onRefresh={onRefresh} />}
                         >
                             <Cluster marginHorizontal={12} marginVertical={22}>
-                                <AdBanner url={ad?.job?.banner_image} />
+                                <AdBanner url={ad.banner_image} />
                                 <AdTitle ad={ad} />
-                                <AdInfo ad={ad?.job} />
-                                <AdDescription ad={ad?.job} />
+                                <AdInfo ad={ad} />
+                                <AdDescription ad={ad} />
                                 <AdMedia ad={ad} />
-                                <AdUpdateInfo ad={ad?.job} />
+                                <AdUpdateInfo ad={ad} />
                             </Cluster>
                         </ScrollView>
                     </View>

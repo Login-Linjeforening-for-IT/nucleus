@@ -4,7 +4,7 @@ import { useSelector } from "react-redux"
 import T from "@styles/text"
 import { ReactNode } from "react"
 import AS from "@styles/adStyles"
-import { 
+import {
     Alert,
     Linking,
     StyleProp,
@@ -12,7 +12,7 @@ import {
     TextStyle,
     TouchableOpacity,
     View
- } from "react-native"
+} from "react-native"
 
 type LinkProps = {
     url: string
@@ -49,17 +49,17 @@ type MarkdownLinkProps = {
 export default function Link({ url, children, errorMessage }: LinkProps) {
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const text = lang ? no : en
-    const errorTitle = url.includes('mailto:') 
-        ? text.mailErrorTitle 
+    const errorTitle = url.includes('mailto:')
+        ? text.mailErrorTitle
         : text.linkErrorTitle
-    const errorBody = url.includes('mailto:') 
-        ? text.mailErrorBody 
-        : errorMessage 
-            ? errorMessage 
+    const errorBody = url.includes('mailto:')
+        ? text.mailErrorBody
+        : errorMessage
+            ? errorMessage
             : text.linkErrorBody + url
 
     return (
-        <TouchableOpacity onPress={() => Linking.openURL(url).catch(() => 
+        <TouchableOpacity onPress={() => Linking.openURL(url).catch(() =>
             Alert.alert(errorTitle, errorBody))}>
             {children}
         </TouchableOpacity>
@@ -79,19 +79,19 @@ export default function Link({ url, children, errorMessage }: LinkProps) {
 export function TextLink({ text, url, style, errorMessage }: TextLinkProps) {
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const errorText = lang ? no : en
-    const errorTitle = url.includes('mailto:') 
-        ? errorText.mailErrorTitle 
+    const errorTitle = url.includes('mailto:')
+        ? errorText.mailErrorTitle
         : errorText.linkErrorTitle
-    const errorBody = url.includes('mailto:') 
-        ? errorText.mailErrorBody 
-        : errorMessage 
-            ? errorMessage 
+    const errorBody = url.includes('mailto:')
+        ? errorText.mailErrorBody
+        : errorMessage
+            ? errorMessage
             : errorText.linkErrorBody + url
 
     return (
-        <TouchableOpacity onPress={() => Linking.openURL(url).catch(() => 
+        <TouchableOpacity onPress={() => Linking.openURL(url).catch(() =>
             Alert.alert(errorTitle, errorBody))}>
-            <Text style={style ? style : {...T.orange15, top: 3.6}}>
+            <Text style={style ? style : { ...T.orange15, top: 3.6 }}>
                 {text}
             </Text>
         </TouchableOpacity>
@@ -109,17 +109,16 @@ export function TextLink({ text, url, style, errorMessage }: TextLinkProps) {
  * @returns Link wrapper
  */
 export function LinkButton({ url, text }: LinkButtonProps) {
-
     const { theme } = useSelector((state: ReduxState) => state.theme)
 
     return (
-        <TouchableOpacity onPress={() => 
+        <TouchableOpacity onPress={() =>
             Linking.openURL(url)}>
             <View style={{
                 ...AS.adButton,
                 backgroundColor: theme.orange
             }}>
-                <Text style={{...AS.adButtonText, color: theme.textColor}}>
+                <Text style={{ ...AS.adButtonText, color: theme.textColor }}>
                     {text}
                 </Text>
             </View>
@@ -136,19 +135,19 @@ export function TextWithLinks({ text, style, linkStyle }: MarkdownLinkProps) {
             return <Text key={index}>{part}</Text>
         } else if (index % 3 === 1) {
             if (typeof linkStyle !== 'object') {
-                return <TextLink 
-                    style={linkStyle} 
-                    key={index} 
-                    url={parts[index + 1]} 
-                    text={part} 
+                return <TextLink
+                    style={linkStyle}
+                    key={index}
+                    url={parts[index + 1]}
+                    text={part}
                 />
             }
 
-            return <TextLink 
-                style={{...linkStyle, top: 3, left: 0}} 
-                key={index} 
-                url={parts[index + 1]} 
-                text={part} 
+            return <TextLink
+                style={{ ...linkStyle, top: 3, left: 0 }}
+                key={index}
+                url={parts[index + 1]}
+                text={part}
             />
         }
     })

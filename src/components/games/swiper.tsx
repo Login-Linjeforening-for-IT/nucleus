@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { Text, View, Dimensions } from 'react-native'
 import { PanGestureHandler } from 'react-native-gesture-handler'
 import Animated, {
+    // @ts-expect-error Doesnt exist anymore, but still works
     useAnimatedGestureHandler,
     useAnimatedStyle,
     useSharedValue,
@@ -30,9 +31,9 @@ const SWIPE_THRESHOLD = SCREEN_WIDTH * 0.25
 export default function Swiper({ game, mode, school, ntnu }: GameListContentProps) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const [currentIndex, setCurrentIndex] = useState(0)
-    const translateX = useSharedValue(0)  
+    const translateX = useSharedValue(0)
     const totalCards = game.length
-    
+
     // Function to calculate next index in a circular manner
     function getNextIndex(currentIndex: number) {
         if (!game[0].hasOwnProperty('categories')) {
@@ -76,7 +77,7 @@ export default function Swiper({ game, mode, school, ntnu }: GameListContentProp
                     }
                 }
             }
-            
+
             if (mode === 1) {
                 return currentIndex + 1
             }
@@ -84,7 +85,7 @@ export default function Swiper({ game, mode, school, ntnu }: GameListContentProp
 
         return currentIndex
     }
-    
+
     // Function to calculate previous index in a circular manner
     function getPreviousIndex(currentIndex: number) {
         if (!game[0].hasOwnProperty('categories')) {
@@ -94,7 +95,7 @@ export default function Swiper({ game, mode, school, ntnu }: GameListContentProp
 
             return currentIndex - 1
         }
-    
+
         if (currentIndex > 0) {
             // Skip questions based on mode and category
             if (mode === 0) {
@@ -144,13 +145,13 @@ export default function Swiper({ game, mode, school, ntnu }: GameListContentProp
                     }
                 }
             }
-            
+
             return currentIndex - 1
         }
 
         return 0
     }
-    
+
     function onSwipeRight() {
         setCurrentIndex(getNextIndex(currentIndex))
     }
@@ -172,13 +173,15 @@ export default function Swiper({ game, mode, school, ntnu }: GameListContentProp
     }
 
     const gestureHandler = useAnimatedGestureHandler({
+        // @ts-expect-error Doesnt exist anymore, but stil works
         onStart: (_, context) => {
             context.startX = translateX.value
         },
+        // @ts-expect-error Doesnt exist anymore, but stil works
         onActive: (event, context) => {
-            // @ts-expect-error
             translateX.value = context.startX + event.translationX
         },
+        // @ts-expect-error Doesnt exist anymore, but stil works
         onEnd: (event) => {
             if (event.translationX > SWIPE_THRESHOLD) {
                 runOnJS(onSwipeRight)()
@@ -197,7 +200,7 @@ export default function Swiper({ game, mode, school, ntnu }: GameListContentProp
             }
         },
     })
-  
+
     // Animated styles for the top card (current card)
     const animatedStyle = useAnimatedStyle(() => {
         if (translateX.value < 0) {
@@ -220,7 +223,7 @@ export default function Swiper({ game, mode, school, ntnu }: GameListContentProp
         }
 
         const rotate = `${(translateX.value / SCREEN_WIDTH) * 15}deg`
-  
+
         return {
             top: SCREEN_HEIGHT * 0.16,
             width: SCREEN_WIDTH * 0.85,
@@ -230,7 +233,7 @@ export default function Swiper({ game, mode, school, ntnu }: GameListContentProp
             ],
         }
     })
-  
+
     // Animated styles for the second card in the stack
     const animatedSecondCardStyle = useAnimatedStyle(() => {
         if (translateX.value < 0) {
@@ -355,7 +358,7 @@ export default function Swiper({ game, mode, school, ntnu }: GameListContentProp
             transform: [{ rotate: `${rotation + 0.5}deg` }],
         }
     })
-  
+
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             {/* Fifth card */}
@@ -374,7 +377,7 @@ export default function Swiper({ game, mode, school, ntnu }: GameListContentProp
                 shadowOpacity: 0.3,
                 shadowRadius: 10,
             }]} />
-            
+
             {/* Forth card */}
             <Animated.View style={[{
                 position: 'absolute',
@@ -421,11 +424,11 @@ export default function Swiper({ game, mode, school, ntnu }: GameListContentProp
                 padding: 16,
             }, animatedSecondCardStyle]}>
                 <Text style={{
-                    position: 'absolute', 
-                    bottom: 15, 
-                    left: 15, 
-                    ...T.text20, 
-                    color: theme.orange, 
+                    position: 'absolute',
+                    bottom: 15,
+                    left: 15,
+                    ...T.text20,
+                    color: theme.orange,
                     fontWeight: '600'
                 }}>
                     {(currentIndex + 1) % totalCards}
@@ -450,11 +453,11 @@ export default function Swiper({ game, mode, school, ntnu }: GameListContentProp
                     top: SCREEN_HEIGHT * 0.16,
                 }, animatedStyle]}>
                     <Text style={{
-                        position: 'absolute', 
-                        bottom: 15, 
-                        left: 15, 
-                        ...T.text20, 
-                        color: theme.orange, 
+                        position: 'absolute',
+                        bottom: 15,
+                        left: 15,
+                        ...T.text20,
+                        color: theme.orange,
                         fontWeight: '600'
                     }}>
                         {currentIndex + 1}
@@ -481,11 +484,11 @@ export default function Swiper({ game, mode, school, ntnu }: GameListContentProp
                 width: SCREEN_WIDTH * 0.85,
             }, animatedHiddenCardStyle]} >
                 <Text style={{
-                    position: 'absolute', 
-                    bottom: 15, 
-                    left: 15, 
-                    ...T.text20, 
-                    color: theme.orange, 
+                    position: 'absolute',
+                    bottom: 15,
+                    left: 15,
+                    ...T.text20,
+                    color: theme.orange,
                     fontWeight: '600'
                 }}>
                     {getPreviousIndex(currentIndex + 1)}
@@ -504,7 +507,7 @@ function GameContent({ game }: GameContentProps) {
 
     return (
         <View>
-            <Text style={{color: theme.textColor, ...T.text20, margin: 8}}>
+            <Text style={{ color: theme.textColor, ...T.text20, margin: 8 }}>
                 {lang ? game?.title_no : game?.title_en}
             </Text>
         </View>

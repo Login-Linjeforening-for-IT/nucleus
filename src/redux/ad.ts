@@ -2,26 +2,26 @@ import { createSlice } from "@reduxjs/toolkit"
 
 type FilterProps = {
     input: string
-    ads: AdProps[]
-    clickedAds: AdProps[]
+    ads: GetJobProps[]
+    clickedAds: GetJobProps[]
     clickedSkills: string[]
 }
 
 type FilterTextProps = {
-    ads: AdProps[]
+    ads: GetJobProps[]
     input: string
 }
 
 type FilterCategoriesProps = {
-    ads: AdProps[]
-    clickedAds: AdProps[]
+    ads: GetJobProps[]
+    clickedAds: GetJobProps[]
     clickedSkills: string[]
 }
 
 type filterBothProps = {
     clickedSkills: string[]
-    clickedAds: AdProps[]
-    ads: AdProps[]
+    clickedAds: GetJobProps[]
+    ads: GetJobProps[]
     input: string
 }
 
@@ -31,11 +31,11 @@ export const AdSlice = createSlice({
     name: "ad",
     // Initial state of the slice
     initialState: {
-        ads: [] as AdProps[],
+        ads: [] as GetJobProps[],
         adName: "",
         history: [] as number[],
-        clickedAds: [] as AdProps[],
-        renderedAds: [] as AdProps[],
+        clickedAds: [] as GetJobProps[],
+        renderedAds: [] as GetJobProps[],
         lastFetch: "",
         lastSave: "",
         search: false,
@@ -88,8 +88,8 @@ export const AdSlice = createSlice({
             state.clickedSkills = action.payload
             state.renderedAds = Filter({
                 input: state.input,
-                ads: state.ads, 
-                clickedAds: state.clickedAds, 
+                ads: state.ads,
+                clickedAds: state.clickedAds,
                 clickedSkills: state.clickedSkills
             })
         },
@@ -104,8 +104,8 @@ export const AdSlice = createSlice({
             state.input = action.payload
             state.renderedAds = Filter({
                 input: state.input,
-                ads: state.ads, 
-                clickedAds: state.clickedAds, 
+                ads: state.ads,
+                clickedAds: state.clickedAds,
                 clickedSkills: state.clickedSkills
             })
         },
@@ -116,7 +116,7 @@ export const AdSlice = createSlice({
 })
 
 // Exports functions
-export const { 
+export const {
     reset,
     setClickedSkills,
     setClickedAds,
@@ -139,7 +139,7 @@ export default AdSlice.reducer
  * @param clickedAds
  * @param ads
  */
-function setSkills(ads: AdProps[], clickedAds: AdProps[]) {
+function setSkills(ads: GetJobProps[], clickedAds: GetJobProps[]) {
     // Adds enrolled (Påmeldt) filter option if relevant, since no ad has this attribute naturally
     const skills: Set<string> = new Set(clickedAds.length ? ["Påmeldt"] : [])
 
@@ -155,16 +155,16 @@ function setSkills(ads: AdProps[], clickedAds: AdProps[]) {
 }
 
 // --- PARENT FILTER FUNCTION ---
-function Filter ({input, ads, clickedAds, clickedSkills}: FilterProps) {
+function Filter({ input, ads, clickedAds, clickedSkills }: FilterProps) {
     // Filters both on input and clicked skills if both are provided
     if (input.length && clickedSkills.length) {
-        return filterBoth({clickedSkills, clickedAds, ads, input})
-    // Filters on text if only text is provided
+        return filterBoth({ clickedSkills, clickedAds, ads, input })
+        // Filters on text if only text is provided
     } else if (input.length) {
-        return filterText({ads, input})
-    // Filters on categories if only categories are provided
+        return filterText({ ads, input })
+        // Filters on categories if only categories are provided
     } else if (clickedSkills.length) {
-        return filterSkills({ads, clickedAds, clickedSkills})
+        return filterSkills({ ads, clickedAds, clickedSkills })
     }
 
     // Returns ads if there is nothing to be filtered
@@ -178,9 +178,9 @@ function Filter ({input, ads, clickedAds, clickedSkills}: FilterProps) {
  * @param input Text to filter based on
  * @returns Filtered ads
  */
-function filterText ({ads, input}: FilterTextProps) {
-    const textFiltered = ads.filter(ad => 
-        ad.title_no.toLowerCase().includes(input.toLowerCase()) 
+function filterText({ ads, input }: FilterTextProps) {
+    const textFiltered = ads.filter(ad =>
+        ad.title_no.toLowerCase().includes(input.toLowerCase())
         || ad.title_en.toLowerCase().includes(input.toLowerCase())
     )
 
@@ -194,11 +194,11 @@ function filterText ({ads, input}: FilterTextProps) {
  * @param clickedSkills Skills clicked by the user
  * @returns Ads filtered by skills
  */
-function filterSkills ({ads, clickedAds, clickedSkills}: FilterCategoriesProps) {
+function filterSkills({ ads, clickedAds, clickedSkills }: FilterCategoriesProps) {
 
     // Checks if user is filtering by enrolled (PÅMELDT)
     const clickedFound = clickedSkills.find((skill: string) => skill === "Påmeldt")
-    
+
     // Filters based on category
     const skillFiltered = ads.filter(ad => clickedSkills.some((skill: string) => ad.skills?.includes(skill)))
 
@@ -224,9 +224,9 @@ function filterSkills ({ads, clickedAds, clickedSkills}: FilterCategoriesProps) 
  * @param input
  * @returns Ads filtered by both skills and text
  */
-function filterBoth ({clickedSkills, clickedAds, ads, input}: filterBothProps) {
-    const categoryFiltered = filterSkills ({ads, clickedAds, clickedSkills})
-    const textFiltered = filterText ({ads: categoryFiltered, input})
+function filterBoth({ clickedSkills, clickedAds, ads, input }: filterBothProps) {
+    const categoryFiltered = filterSkills({ ads, clickedAds, clickedSkills })
+    const textFiltered = filterText({ ads: categoryFiltered, input })
     return removeDuplicatesAndOld(ads, textFiltered)
 }
 
@@ -237,11 +237,11 @@ function filterBoth ({clickedSkills, clickedAds, ads, input}: filterBothProps) {
 * @param ads Ads to filter
 * @returns Filtered ads
 */
-export function removeDuplicatesAndOld (APIads: AdProps[], ads: 
-    AdProps[]): AdProps[] {
-    
+export function removeDuplicatesAndOld(APIads: GetJobProps[], ads:
+    GetJobProps[]): GetJobProps[] {
+
     // Removes old ads and preserves newer version of all ads
-    const realAds = APIads.filter(APIad => 
+    const realAds = APIads.filter(APIad =>
         ads.some(ad => APIad.id === ad.id))
 
     // Removes duplicates

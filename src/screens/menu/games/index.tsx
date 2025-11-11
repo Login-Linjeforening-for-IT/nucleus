@@ -25,8 +25,8 @@ type HardCodedGameProps = {
 
 export default function GameScreen({ navigation }: MenuProps<'GameScreen'>): JSX.Element {
     const [games, setGames] = useState<string | Game[]>([])
-    const { theme } = useSelector((state: ReduxState) => state.theme )
-    const { lang } = useSelector((state: ReduxState) => state.lang )
+    const { theme } = useSelector((state: ReduxState) => state.theme)
+    const { lang } = useSelector((state: ReduxState) => state.lang)
     const [refresh, setRefresh] = useState(false)
     const height = Dimensions.get("window").height
     const extraHeight = Platform.OS === 'ios' ? 0 : height > 800 && height < 900 ? 20 : 10
@@ -43,7 +43,7 @@ export default function GameScreen({ navigation }: MenuProps<'GameScreen'>): JSX
     useEffect(() => {
         (async () => {
             const games = await getGames()
-            
+
             if (games) {
                 setGames(games)
             }
@@ -52,20 +52,20 @@ export default function GameScreen({ navigation }: MenuProps<'GameScreen'>): JSX
 
     return (
         <Swipe left="MenuScreen">
-            <View style={{...GS.content, backgroundColor: theme.darker}}>
-                <Space height={Dimensions.get("window").height / 8.1 + extraHeight} /> 
+            <View style={{ ...GS.content, backgroundColor: theme.darker }}>
+                <Space height={Dimensions.get("window").height / 8.1 + extraHeight} />
                 <ScrollView
-                    showsVerticalScrollIndicator={false} 
+                    showsVerticalScrollIndicator={false}
                     scrollEventThrottle={100}
                 >
                     {typeof games === 'string' && <CourseError text={games} />}
                     <RefreshControl refreshing={refresh} onRefresh={onRefresh} />
                     <HardCodedGame name={lang ? 'Terning' : 'Dice'} navigation={navigation} />
-                    {typeof games !== 'string' && games.map((game: Game) => 
-                        <GameList 
-                            key={game.id} 
-                            game={game} 
-                            navigation={navigation} 
+                    {typeof games !== 'string' && games.map((game: Game) =>
+                        <GameList
+                            key={game.id}
+                            game={game}
+                            navigation={navigation}
                         />
                     )}
                 </ScrollView>
@@ -84,9 +84,9 @@ function GameList({ game, navigation }: GameListProps): JSX.Element {
     return (
         <TouchableOpacity style={{ marginBottom: 6 }} onPress={handlePress}>
             <Cluster>
-                <View style={{...CS.clusterBack}}>
+                <View style={{ ...CS.clusterBack }}>
                     <View style={CS.twinLeft}>
-                        <Text style={{...T.text20, color: theme.textColor}}>
+                        <Text style={{ ...T.text20, color: theme.textColor }}>
                             {game.name}
                         </Text>
                     </View>
@@ -102,7 +102,7 @@ function GameList({ game, navigation }: GameListProps): JSX.Element {
     )
 }
 
-function HardCodedGame({name, navigation}: HardCodedGameProps): JSX.Element {
+function HardCodedGame({ name, navigation }: HardCodedGameProps): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     function handlePress() {
         navigation.navigate("DiceScreen")
@@ -111,9 +111,9 @@ function HardCodedGame({name, navigation}: HardCodedGameProps): JSX.Element {
     return (
         <TouchableOpacity style={{ marginBottom: 6 }} onPress={handlePress}>
             <Cluster>
-                <View style={{...CS.clusterBack}}>
+                <View style={{ ...CS.clusterBack }}>
                     <View style={CS.twinLeft}>
-                        <Text style={{...T.text20, color: theme.textColor}}>
+                        <Text style={{ ...T.text20, color: theme.textColor }}>
                             {name}
                         </Text>
                     </View>

@@ -15,6 +15,7 @@ import {
 } from "react-native"
 
 import Animated, {
+    // @ts-expect-error Doesnt exist but still works
     useAnimatedGestureHandler,
     useAnimatedStyle,
     useSharedValue,
@@ -90,13 +91,16 @@ ChangeInfoCardProps) {
 
     // Starts increasing value when swiping starts
     const gestureHandler = useAnimatedGestureHandler({
+        // @ts-expect-error Doesnt exist but still works
         onStart: (_, ctx: CTX) => {
             ctx.startY = translateY.value
         },
         // Changes height according to swiping
+        // @ts-expect-error Doesnt exist but still works
         onActive: (event, ctx) => {
             translateY.value = ctx.startY + event.translationY
         },
+        // @ts-expect-error Doesnt exist but still works
         // Sets the component to hidden when its not visible
         onEnd: (event) => {
             if (event.velocityY > height/2) {

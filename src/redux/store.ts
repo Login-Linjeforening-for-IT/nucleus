@@ -51,7 +51,7 @@ const saveState = {
     // Whitelists the names of the states to save
     whitelist: [
         "ad",
-        "event", 
+        "event",
         "lang",
         "login",
         "misc",

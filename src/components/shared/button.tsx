@@ -12,8 +12,7 @@ type ButtonProps = {
  * @param {*} props
  * @returns Button with the content displayed inside
  */
-export default function Button(props: ButtonProps) { // Button, Login colored
-
+export default function Button(props: ButtonProps) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
 
     return (

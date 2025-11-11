@@ -316,11 +316,11 @@ export async function sendText(courseID: string, text: string[]): Promise<void |
 export async function sendMark({ courseID, mark }: MarkProps) {
     try {
         const user = { username: 'hei' } // getItem('user') as User | undefined
-    
+
         if (!user) {
             throw Error('You must be logged in to mark')
         }
-    
+
         const response = await fetch(`${config.exam_api_url}/mark`, {
             method: 'PUT',
             headers: {
@@ -330,12 +330,12 @@ export async function sendMark({ courseID, mark }: MarkProps) {
                 courseID, mark
             })
         })
-    
+
         if (!response.ok) {
-                const data = await response.text()
-                throw new Error(data)   
+            const data = await response.text()
+            throw new Error(data)
         }
-    
+
         const data = await response.json()
         return data
     } catch (error) {

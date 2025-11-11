@@ -12,10 +12,9 @@ type Positions = {
 
 export default function DiceScreen() {
     const width = Dimensions.get('window').width * 0.6;
+    const rotateAnimation = useRef(new Animated.Value(0)).current
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const [isAnimating, setIsAnimating] = useState(false)
-    const rotateAnimation = useRef(new Animated.Value(0)).current
-
     const [diceValue, setDiceValue] = useState(4)
     const [direction, setDirection] = useState(1)
     const [duration, setDuration] = useState(75)
@@ -43,23 +42,23 @@ export default function DiceScreen() {
                     easing: Easing.linear,
                     useNativeDriver: true,
                 })
-            );
+            )
 
             // Start the animations and update the dice value
             Animated.sequence(animations).start(() => {
                 setIsAnimating(false); // Stop the animation
                 rotateAnimation.setValue(0); // Reset the rotation to 0
                 setDiceValue(Math.floor(Math.random() * 6) + 1) // Final value
-            });
+            })
 
             // Change the dice value at each step
             const valueChangeInterval = setInterval(() => {
-                const newValue = Math.floor(Math.random() * 6) + 1 
+                const newValue = Math.floor(Math.random() * 6) + 1
                 setDiceValue(newValue)
-            }, duration);
+            }, duration)
 
             // Clear the interval after the animation is done
-            setTimeout(() => clearInterval(valueChangeInterval), steps * duration);
+            setTimeout(() => clearInterval(valueChangeInterval), steps * duration)
         }
     }, [isAnimating, rotateAnimation]);
 
@@ -78,7 +77,7 @@ export default function DiceScreen() {
                 alignItems: 'center',
             }}>
                 <Animated.View style={[{ transform: [{ rotate: spin }] }]}>
-                    <View style={{ 
+                    <View style={{
                         backgroundColor: theme.textColor,
                         width: width,
                         height: width,
@@ -103,20 +102,20 @@ function DiceDots({ amount }: DotsProps) {
             { top: '20%', left: '25%' }, { top: '80%', left: '75%' }
         ],
         3: [
-            { top: '20%', left: '25%' }, { top: '50%', left: '50%' }, 
+            { top: '20%', left: '25%' }, { top: '50%', left: '50%' },
             { top: '80%', left: '75%' }
         ],
         4: [
-            { top: '20%', left: '25%' }, { top: '20%', left: '75%' }, 
+            { top: '20%', left: '25%' }, { top: '20%', left: '75%' },
             { top: '80%', left: '25%' }, { top: '80%', left: '75%' }
         ],
         5: [
-            { top: '20%', left: '25%' }, { top: '20%', left: '75%' }, 
-            { top: '50%', left: '50%' }, { top: '80%', left: '25%' }, 
+            { top: '20%', left: '25%' }, { top: '20%', left: '75%' },
+            { top: '50%', left: '50%' }, { top: '80%', left: '25%' },
             { top: '80%', left: '75%' }
         ],
         6: [
-            { top: '20%', left: '25%' }, { top: '50%', left: '25%' }, 
+            { top: '20%', left: '25%' }, { top: '50%', left: '25%' },
             { top: '80%', left: '25%' }, { top: '20%', left: '75%' },
             { top: '50%', left: '75%' }, { top: '80%', left: '75%' }
         ],

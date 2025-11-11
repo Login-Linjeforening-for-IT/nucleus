@@ -1,5 +1,5 @@
 import Space from "@/components/shared/utils"
-import { useCallback, useState, useEffect } from "react"
+import { useCallback, useState, useEffect, JSX } from "react"
 import { useSelector } from "react-redux"
 import ES from "@styles/eventStyles"
 import { Dimensions, Platform, View, Text } from "react-native"
@@ -23,20 +23,20 @@ import Rules from "@components/event/rules"
  * 
  * @returns
  */
-export default function SpecificEventScreen({ route: {params: {eventID}} }: EventScreenProps<'SpecificEventScreen'>): JSX.Element {
+export default function SpecificEventScreen({ route: { params: { eventID } } }: EventScreenProps<'SpecificEventScreen'>): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const [refresh, setRefresh] = useState(false)
     const dispatch = useDispatch()
     const height = Dimensions.get("window").height
-    const [event, setEvent] = useState({} as DetailedEventResponse)
+    const [event, setEvent] = useState({} as GetEventProps)
 
     /**
      * Sets the title of the screen in the header
      */
     useEffect(() => {
-        const eventName =  lang ? event?.event?.name_no || event?.event?.name_en 
-                                : event?.event?.name_en || event?.event?.name_no
+        const eventName = lang ? event.name_no || event.name_en
+            : event.name_en || event.name_no
         dispatch(setEventName(eventName))
     }, [event])
 
@@ -50,10 +50,11 @@ export default function SpecificEventScreen({ route: {params: {eventID}} }: Even
         if (response) {
             setEvent(response)
             return true
+        } else {
+            return false
         }
-        else return false
     }
-    
+
     const onRefresh = useCallback(async () => {
         setRefresh(true)
         const details = await getDetails()
@@ -66,17 +67,17 @@ export default function SpecificEventScreen({ route: {params: {eventID}} }: Even
     return (
         <EventContext.Provider value={event}>
             <Swipe left="EventScreen">
-                <View style={{...ES.sesContent, backgroundColor: theme.background}}>
-                    <Space height={Platform.OS=="ios" 
+                <View style={{ ...ES.sesContent, backgroundColor: theme.background }}>
+                    <Space height={Platform.OS == "ios"
                         ? Dimensions.get("window").height / 8.5
                         : Dimensions.get("window").height / 7.5 + (height > 800 && height < 900 ? 15 : 0)
                     } />
-                    <ScrollView 
-                        showsVerticalScrollIndicator={false} 
+                    <ScrollView
+                        showsVerticalScrollIndicator={false}
                         scrollEventThrottle={100}
                         refreshControl={<RefreshControl refreshing={refresh} onRefresh={onRefresh} />}
                     >
-                        <Tag event={event?.event} />
+                        <Tag event={event} />
                         <SpecificEventImage />
                         <Space height={10} />
                         <Countdown />
@@ -85,7 +86,7 @@ export default function SpecificEventScreen({ route: {params: {eventID}} }: Even
                         <Rules />
                         <Space height={10} />
                         <JoinButton />
-                        <Text style={{...ES.id, color: theme.oppositeTextColor}}>Event ID: {event?.event?.id}</Text>
+                        <Text style={{ ...ES.id, color: theme.oppositeTextColor }}>Event ID: {event.id}</Text>
                         <Space height={Dimensions.get("window").height / (Platform.OS === 'ios' ? 3 : 2.75)} />
                     </ScrollView>
                 </View>

@@ -15,10 +15,10 @@ export default function Description() {
     const loading = !Boolean(event && Object.keys(event).length)
     let name = ''
 
-    if (event?.event && Object.keys(event.event).length) {
+    if (event && Object.keys(event).length) {
         name = lang
-            ? event.event.name_no || event.event.name_en
-            : event.event.name_en || event.event.name_no
+            ? event.name_no || event.name_en
+            : event.name_en || event.name_no
     }
 
     return (

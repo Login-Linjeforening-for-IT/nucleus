@@ -7,7 +7,7 @@ export const MiscSlice = createSlice({
     // Initial state
     initialState: {
         // Title of the screen
-        localTitle: {} as {title: string, screen: string},
+        localTitle: {} as { title: string, screen: string },
         // Empty till the user makes a calendar
         calendarID: "",
     },

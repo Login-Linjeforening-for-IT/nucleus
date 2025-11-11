@@ -12,21 +12,21 @@ import imageExists from "@utils/imageExists"
 export default function SpecificEventImage() {
     const event = useContext(EventContext)
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    const [url, setUrl] = useState(event?.event?.image_banner || '')
+    const [url, setUrl] = useState(event.image_banner || '')
 
     useEffect(() => {
-        setUrl(event?.event?.image_banner || '');
+        setUrl(event.image_banner || '');
 
         (async () => {
             const urlExists = await imageExists(url)
 
             if (!urlExists) {
-                setUrl(event?.event.image_small || '')
+                setUrl(event.image_small || '')
             }
         })()
-    }, [event?.event])
+    }, [event])
 
-    if (event?.event) {
+    if (event) {
         if (url.includes(".svg")) {
             return (
                 <SvgUri
@@ -53,5 +53,4 @@ export default function SpecificEventImage() {
             <Skeleton loading={true} height={150} noColor={true} />
         </View>
     )
-
 }

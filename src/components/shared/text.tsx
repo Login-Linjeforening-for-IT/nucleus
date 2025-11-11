@@ -1,10 +1,10 @@
 import Clipboard from '@react-native-clipboard/clipboard'
-import { 
-    Text as RNText, 
-    TouchableOpacity, 
-    TextStyle, 
-    StyleProp, 
-    Alert 
+import {
+    Text as RNText,
+    TouchableOpacity,
+    TextStyle,
+    StyleProp,
+    Alert
 } from 'react-native'
 
 type TextProps = {
@@ -22,13 +22,21 @@ type TextProps = {
  * @param copyable Whether the text should be copyable 
  * @returns 
  */
-export default function Text ({ children, style, copyable, warning }: TextProps) {
+export default function Text({ children, style, copyable, warning }: TextProps) {
     let text = ''
 
     if (typeof children != 'string') {
-        if (typeof children == 'object') text = JSON.stringify(children)
-        if (typeof children == 'number') text = children.toString()
-        if (Array.isArray(children)) text = children.join()
+        if (typeof children == 'object') {
+            text = JSON.stringify(children)
+        }
+
+        if (typeof children == 'number') {
+            text = children.toString()
+        }
+
+        if (Array.isArray(children)) {
+            text = children.join()
+        }
     } else {
         text = children
     }

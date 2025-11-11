@@ -136,7 +136,7 @@ export const GS = StyleSheet.create({
         height: 70,
         alignItems: "flex-start",
         paddingHorizontal: 14
-    }, 
+    },
     notificationDropdownBlur: {
         top: 50,
         position: "absolute",
@@ -146,35 +146,35 @@ export const GS = StyleSheet.create({
         borderRadius: 10,
         height: 70,
         overflow: "hidden"
-    }, 
+    },
     notificationDropdownTitle: {
         fontWeight: "500",
         ...T.text20,
-    }, 
+    },
     notificationDropdownBody: {
         ...T.text18,
     },
     headerView: {
         position: "absolute",
         zIndex: 1,
-        display: 'flex', 
-        flexDirection: 'row', 
+        display: 'flex',
+        flexDirection: 'row',
     },
     innerHeaderViewOne: {
-        flex: 1, 
-        display: 'flex', 
-        flexDirection: 'row', 
+        flex: 1,
+        display: 'flex',
+        flexDirection: 'row',
         alignItems: 'center'
     },
     innerHeaderViewTwo: {
-        flex: 1, 
-        display: 'flex', 
-        flexDirection: 'row-reverse', 
-        alignItems: 'center', 
+        flex: 1,
+        display: 'flex',
+        flexDirection: 'row-reverse',
+        alignItems: 'center',
         justifyContent: 'space-evenly'
     },
     headerTitle: {
-        alignSelf: 'center', 
+        alignSelf: 'center',
         ...T.text20,
     },
     blurBackgroundView: {
@@ -183,8 +183,8 @@ export const GS = StyleSheet.create({
         justifyContent: "center",
     },
     customMenuIcon: {
-        right: Platform.OS === "ios" 
-            ? Dimensions.get("window").width / 50 
+        right: Platform.OS === "ios"
+            ? Dimensions.get("window").width / 50
             : Dimensions.get("window").width / 30
     },
     logo: {
@@ -202,8 +202,8 @@ export const GS = StyleSheet.create({
         position: "absolute",
         zIndex: 2,
         bottom: 0,
-        height: Platform.OS=="ios" ? Dimensions.get("window").height / 1.48 : Dimensions.get("window").height / 1.40,
-        width: "100%", 
+        height: Platform.OS == "ios" ? Dimensions.get("window").height / 1.48 : Dimensions.get("window").height / 1.40,
+        width: "100%",
         borderRadius: 20,
     },
     trashCan: {

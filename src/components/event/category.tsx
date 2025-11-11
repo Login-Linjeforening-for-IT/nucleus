@@ -10,17 +10,17 @@ export default function Category() {
     const event = useContext(EventContext)
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
-    const categoryName = lang 
-        ? event?.category?.name_en || event?.category?.name_no  
-        : event?.category?.name_no || event?.category?.name_en
+    const categoryName = lang
+        ? event.category.name_en || event.category.name_no
+        : event.category.name_no || event.category.name_en
 
     return (
-        <View style={{...ES.specificEventInfoView, top: 2.5}}>
+        <View style={{ ...ES.specificEventInfoView, top: 2.5 }}>
             <Title />
-            <CategoryCircle color={event?.category?.color||""} />
+            <CategoryCircle color={event.category.color || ""} />
             <Text style={{
-                ...T.specificEventInfo, 
-                maxWidth: '60%', 
+                ...T.specificEventInfo,
+                maxWidth: '60%',
                 color: theme.textColor
             }}>
                 {categoryName}

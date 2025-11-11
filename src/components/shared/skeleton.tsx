@@ -14,7 +14,7 @@ const width = Dimensions.get('window').width
 
 export default function Skeleton({ children, height, loading, noColor }: SkeletonProps) {
     if (!loading) return children
-    
+
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const lineWidth = useRef(new Animated.Value(0)).current
 
@@ -32,20 +32,20 @@ export default function Skeleton({ children, height, loading, noColor }: Skeleto
         }
 
         animateLine()
-        return () => {lineWidth.stopAnimation()}
+        return () => { lineWidth.stopAnimation() }
     }, [])
 
     return (
-        <View style={{...styles.container, height, backgroundColor: noColor ? undefined : theme.background, borderRadius: 10}}>
+        <View style={{ ...styles.container, height, backgroundColor: noColor ? undefined : theme.background, borderRadius: 10 }}>
             <Animated.View style={[styles.line,
-                    {
-                        transform: [{
-                            translateX: lineWidth.interpolate({
-                                inputRange: [0, 1],
-                                outputRange: [-width, width],
-                            })
-                        }]
-                    }
+            {
+                transform: [{
+                    translateX: lineWidth.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [-width, width],
+                    })
+                }]
+            }
             ]}>
                 <LinearGradient
                     colors={[

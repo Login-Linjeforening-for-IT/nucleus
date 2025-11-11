@@ -11,7 +11,7 @@ export default function Rules() {
     const event = useContext(EventContext)
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    const rule = lang ? event?.rule?.description_no : event?.rule?.description_en
+    const rule = lang ? event.rule.description_no : event.rule.description_en
 
     if (!rule) {
         return <></>

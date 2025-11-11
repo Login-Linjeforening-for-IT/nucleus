@@ -6,7 +6,7 @@ import Profile from "@/components/profile/profile"
 import Space from "@/components/shared/utils"
 import PS from "@styles/profileStyles"
 import { useSelector } from "react-redux"
-import { useState } from "react"
+import { JSX, useState } from "react"
 import Swipe from "@components/nav/swipe"
 
 type ScrollProps = {
@@ -20,10 +20,10 @@ type ScrollProps = {
 export default function ProfileScreen(): JSX.Element {
     const { theme, value } = useSelector((state: ReduxState) => state.theme)
 
-    const { ban, name, allergies, preferences, mail, schoolyear, degree, image} 
-    = useSelector((state: ReduxState) => state.profile )
+    const { ban, name, allergies, preferences, mail, schoolyear, degree, image }
+        = useSelector((state: ReduxState) => state.profile)
 
-    const profile = { 
+    const profile = {
         allergies,
         ban,
         degree,
@@ -47,37 +47,37 @@ export default function ProfileScreen(): JSX.Element {
     return (
         <Swipe left="MenuScreen">
             <View>
-                <View style={{...PS.content, backgroundColor: theme.darker}}>
+                <View style={{ ...PS.content, backgroundColor: theme.darker }}>
                     <View style={{
                         ...PS.profileView,
-                        backgroundColor: theme.orange, 
+                        backgroundColor: theme.orange,
                         height: scrollPosition
                     }} />
-                    <ScrollView 
-                        scrollEventThrottle={100} 
-                        onScroll={handleScroll} 
+                    <ScrollView
+                        scrollEventThrottle={100}
+                        onScroll={handleScroll}
                         showsVerticalScrollIndicator={false}
                     >
                         <Svg style={PS.profileGradientBackground}>
-                            <LinearGradient 
-                                id="gradient" 
-                                x1="0%" 
-                                y1="0%" 
-                                x2="0%" 
+                            <LinearGradient
+                                id="gradient"
+                                x1="0%"
+                                y1="0%"
+                                x2="0%"
                                 y2={0.55}
                             >
                                 <Stop offset="40%" stopColor={theme.orange} />
-                                <Stop 
-                                    offset={value === 1 ? "86%" : "100%"} 
+                                <Stop
+                                    offset={value === 1 ? "86%" : "100%"}
                                     stopColor={theme.darker}
                                 />
                             </LinearGradient>
-                            <Rect 
-                                x="0" 
-                                y={value === 1 ? 65 : 0} 
-                                width="100%" 
-                                height="100%" 
-                                fill="url(#gradient)" 
+                            <Rect
+                                x="0"
+                                y={value === 1 ? 65 : 0}
+                                width="100%"
+                                height="100%"
+                                fill="url(#gradient)"
                             />
                         </Svg>
                         <Space height={Dimensions.get("window").height / 8} />

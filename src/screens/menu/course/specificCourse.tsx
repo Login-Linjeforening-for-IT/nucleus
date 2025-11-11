@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import Parent from "@components/shared/parent"
 import { setLocalTitle } from "@redux/misc"
 import { getCourse } from "@utils/course"
-import { useCallback, useEffect, useState } from "react"
+import { JSX, useCallback, useEffect, useState } from "react"
 import { Dimensions, Platform, RefreshControl, Text, View } from "react-native"
 import Swipeable from "@components/course/swipeable"
 import { ScrollView } from "react-native-gesture-handler"
@@ -98,7 +98,7 @@ function Study({ course }: { course: Course }) {
     }
 
     const initialText = formatText(course.textUnreviewed.join('\n'))
-    const text = initialText.length ? initialText : lang 
+    const text = initialText.length ? initialText : lang
         ? 'Dette emnet er ikke flervalg, men det finnes ingen notater enda. Dette emnet må studeres på egenhånd. Kanskje du kan hjelpe andre med å legge inn notatene dine på nettsiden så de blir tilgjengelige her?'
         : 'This course is not multiple choice, and no study notes exist yet. This course must be studied by reviewing the available course material. Maybe you can help others by adding your notes on the website so they become available here?'
 

@@ -10,7 +10,7 @@ import { changeLang } from "@redux/lang"
  */
 export default function Language() {
     const notification = useSelector((state: ReduxState) => state.notification)
-    const { lang  } = useSelector((state: ReduxState) => state.lang)
+    const { lang } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const dispatch = useDispatch()
 
@@ -18,13 +18,13 @@ export default function Language() {
         dispatch(changeLang())
 
         // Sets up notifications to follow language
-        topic({topicID: "langChange", lang, notification})
+        topic({ topicID: "langChange", lang, notification })
     }
 
     return (
         <View>
-            <TouchableOpacity onPress={() =>  handleLangChange() }>
-                <Text style={{...SS.langSwitch, color: theme.textColor}}>
+            <TouchableOpacity onPress={() => handleLangChange()}>
+                <Text style={{ ...SS.langSwitch, color: theme.textColor }}>
                     {lang ? "EN" : "NO"}
                 </Text>
             </TouchableOpacity>

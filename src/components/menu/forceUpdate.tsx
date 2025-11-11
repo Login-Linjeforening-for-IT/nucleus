@@ -8,13 +8,11 @@ export default function ForceUpdate() {
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const [updateRequired, setUpdateRequired] = useState(false)
-
+    const apiUrl = `${config.app_api_url}/version?version=${nativeApplicationVersion}&lang=${lang}`
     const appUrls = {
         ios: config.apple_app_store_url,
         android: config.android_play_store_url,
     }
-
-    const apiUrl = `${config.app_api_url}/version?version=${nativeApplicationVersion}&lang=${lang}`
 
     function openStore() {
         const url = Platform.OS === 'ios' ? appUrls.ios : appUrls.android
@@ -27,7 +25,7 @@ export default function ForceUpdate() {
         try {
             const response = await fetch(apiUrl)
             if (!response.ok) {
-                console.log('Failed to fetch API.')
+                console.log('Failed to fetch version endpoint.')
                 return
             }
 

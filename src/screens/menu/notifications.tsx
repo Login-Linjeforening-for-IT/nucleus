@@ -1,16 +1,16 @@
 import Cluster from "@/components/shared/cluster"
 import Space from "@/components/shared/utils"
 import GS from "@styles/globalStyles"
-import React, { useCallback, useEffect, useRef, useState } from "react"
+import React, { JSX, useCallback, useEffect, useRef, useState } from "react"
 import { Navigation } from "@/interfaces"
 import { useSelector } from "react-redux"
-import { 
-    View, 
-    Text, 
-    Dimensions, 
-    TouchableOpacity, 
-    Platform, 
-    Animated, 
+import {
+    View,
+    Text,
+    Dimensions,
+    TouchableOpacity,
+    Platform,
+    Animated,
     TouchableHighlight
 } from "react-native"
 import NS from "@styles/notificationStyles"
@@ -55,7 +55,7 @@ type ReadListProps = {
 export default function NotificationScreen(): JSX.Element {
     const [list, setList] = useState<NotificationListProps[]>([])
     const [refresh, setRefresh] = useState(false)
-    const { lang  } = useSelector((state: ReduxState) => state.lang)
+    const { lang } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const [hideOld, setHideOld] = useState<boolean>(false)
     const [readIndex, setReadIndex] = useState<number>(-1)
@@ -66,9 +66,9 @@ export default function NotificationScreen(): JSX.Element {
         if (temp) {
             const list = JSON.parse(temp)
             setList(list)
-            findIndexOfFirstReadIfAny({list, setReadIndex})
-            markListAsRead({list})
-            removeOlderThanOneMonth({list})
+            findIndexOfFirstReadIfAny({ list, setReadIndex })
+            markListAsRead({ list })
+            removeOlderThanOneMonth({ list })
             return true
         }
     }
@@ -89,21 +89,21 @@ export default function NotificationScreen(): JSX.Element {
     return (
         <Swipe left="MenuScreen">
             <View>
-                <View style={{...GS.content, backgroundColor: theme.darker, paddingHorizontal: 0}}>
+                <View style={{ ...GS.content, backgroundColor: theme.darker, paddingHorizontal: 0 }}>
                     <Space height={Dimensions.get("window").height / 8.1} />
-                    <ScrollView 
-                        showsVerticalScrollIndicator={false} 
+                    <ScrollView
+                        showsVerticalScrollIndicator={false}
                         scrollEventThrottle={100}
-                        style={{minHeight: "100%", top: -5}}
+                        style={{ minHeight: "100%", top: -5 }}
                     >
-                    <RefreshControl refreshing={refresh} onRefresh={onRefresh} />
-                    {Array.isArray(list) && list.length
-                        ? <List list={list} getList={getList} setList={setList} hideOld={hideOld} setHideOld={setHideOld} readIndex={readIndex} /> 
-                        : <Text style={{...NS.error, color: theme.oppositeTextColor}}>
-                            {lang 
-                                ? "Ingen varslinger. Kom tilbake senere." 
-                                : "You have no notifications at this time. Check back later."}
-                        </Text>}
+                        <RefreshControl refreshing={refresh} onRefresh={onRefresh} />
+                        {Array.isArray(list) && list.length
+                            ? <List list={list} getList={getList} setList={setList} hideOld={hideOld} setHideOld={setHideOld} readIndex={readIndex} />
+                            : <Text style={{ ...NS.error, color: theme.oppositeTextColor }}>
+                                {lang
+                                    ? "Ingen varslinger. Kom tilbake senere."
+                                    : "You have no notifications at this time. Check back later."}
+                            </Text>}
                     </ScrollView>
                 </View>
             </View>
@@ -111,7 +111,7 @@ export default function NotificationScreen(): JSX.Element {
     )
 }
 
-function Notification({item, list, id, setList, hideOld, setHideOld, readIndex}: NotificationModalProps): JSX.Element {
+function Notification({ item, list, id, setList, hideOld, setHideOld, readIndex }: NotificationModalProps): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const [isSwiping, setIsSwiping] = useState<boolean>(false)
@@ -122,7 +122,7 @@ function Notification({item, list, id, setList, hideOld, setHideOld, readIndex}:
     function navigateIfPossible() {
         // Checks if the object has any properties, and if so navigates to SES
         if (Object.keys(item.data).length) {
-            navigation.navigate("SpecificEventScreen", {item: item.data})
+            navigation.navigate("SpecificEventScreen", { item: item.data })
         }
     }
 
@@ -153,12 +153,12 @@ function Notification({item, list, id, setList, hideOld, setHideOld, readIndex}:
         // Note that this return statement is only for the trash icon, not for the notification itself
         return (
             <TouchableOpacity onPress={() => deleteNotification()}>
-                <View style={{ 
+                <View style={{
                     minWidth: 70,
-                    backgroundColor: 'red', 
+                    backgroundColor: 'red',
                     padding: 10,
                     flexDirection: 'row',
-                    alignItems: 'center', 
+                    alignItems: 'center',
                     justifyContent: 'flex-end',
                     height: "100%"
                 }}>
@@ -202,7 +202,7 @@ function Notification({item, list, id, setList, hideOld, setHideOld, readIndex}:
                 renderRightActions={renderRightActions}
                 ref={swipeableRef}
                 // Red background when deleting item
-                containerStyle={{backgroundColor: "red"}}
+                containerStyle={{ backgroundColor: "red" }}
                 // Indents corners as soon as they start dragging
                 onSwipeableWillOpen={() => {
                     setIsSwiping(true)
@@ -211,18 +211,18 @@ function Notification({item, list, id, setList, hideOld, setHideOld, readIndex}:
                 onSwipeableWillClose={() => {
                     setIsSwiping(false)
                 }}
-                >
+            >
                 {/*
                     Using TouchableHighlight since we want feedback on touch, 
                     but not opacity change, since the background is red because 
                     of the delete functionality. Therefore we "highlight" the 
                     click using a different foreground color instead. 
                 */}
-                <TouchableHighlight 
-                    activeOpacity={1} 
-                    onPress={navigateIfPossible} 
+                <TouchableHighlight
+                    activeOpacity={1}
+                    onPress={navigateIfPossible}
                     underlayColor={theme.background}
-                    style={{backgroundColor: theme.darker, borderTopRightRadius: isSwiping ? 8 : 0, borderBottomRightRadius: isSwiping ? 8 : 0}}
+                    style={{ backgroundColor: theme.darker, borderTopRightRadius: isSwiping ? 8 : 0, borderBottomRightRadius: isSwiping ? 8 : 0 }}
                 >
                     <Animated.View>
                         <Cluster marginVertical={12} noColor={true}>
@@ -230,7 +230,7 @@ function Notification({item, list, id, setList, hideOld, setHideOld, readIndex}:
                                 <View style={NS.notificationView}>
                                     <NotificationText title={item.title} body={item.body} />
                                 </View>
-                                <Text style={{...NS.time, right: 32, color: theme.titleTextColor}}>
+                                <Text style={{ ...NS.time, right: 32, color: theme.titleTextColor }}>
                                     {time}
                                 </Text>
                             </View>
@@ -245,10 +245,10 @@ function Notification({item, list, id, setList, hideOld, setHideOld, readIndex}:
 function displayTime(time: string): string {
     const date = new Date(time)
     const currentTime = new Date()
-  
+
     // Calculate the time difference in milliseconds
     const timeDifference = currentTime.getTime() - date.getTime()
-  
+
     // Check if the time is within the last 24 hours
     if (timeDifference <= 24 * 60 * 60 * 1000) {
         // If within 24 hours, display the time
@@ -263,10 +263,10 @@ function displayTime(time: string): string {
     }
 }
 
-function List({list, setList, hideOld, setHideOld, readIndex}: NotificationList): JSX.Element {
+function List({ list, setList, hideOld, setHideOld, readIndex }: NotificationList): JSX.Element {
     if (!list) return <></>
 
-    const offset = Dimensions.get("window").height / (Platform.OS === "ios" ? 3.8 : 3.8 )
+    const offset = Dimensions.get("window").height / (Platform.OS === "ios" ? 3.8 : 3.8)
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const text = lang ? "Varslinger slettes automatisk etter 30 dager" : "Notifications are automatically deleted after 30 days"
@@ -275,13 +275,13 @@ function List({list, setList, hideOld, setHideOld, readIndex}: NotificationList)
         <>
             {readIndex > 0 && <NotificationSeperator text={lang ? "Nye" : "New"} />}
             {list.map((item, index) => <Notification key={index} list={list} item={item} id={index} setList={setList} hideOld={hideOld} setHideOld={setHideOld} readIndex={readIndex} />)}
-            <Text style={{alignSelf: 'center', ...T.text12, marginVertical: 10, color: theme.oppositeTextColor}}>{text}</Text>
+            <Text style={{ alignSelf: 'center', ...T.text12, marginVertical: 10, color: theme.oppositeTextColor }}>{text}</Text>
             <Space height={offset} />
         </>
     )
 }
 
-function findIndexOfFirstReadIfAny({list, setReadIndex}: ReadListProps): void {
+function findIndexOfFirstReadIfAny({ list, setReadIndex }: ReadListProps): void {
     for (let i = 0; i < list.length; i++) {
         if (list[i].read == true) {
             setReadIndex(i)
@@ -290,7 +290,7 @@ function findIndexOfFirstReadIfAny({list, setReadIndex}: ReadListProps): void {
     }
 }
 
-function markListAsRead({list}: ListProps) {
+function markListAsRead({ list }: ListProps) {
     if (list) {
         for (let i = 0; i < list.length; i++) {
             list[i].read = true
@@ -300,12 +300,12 @@ function markListAsRead({list}: ListProps) {
     }
 }
 
-function removeOlderThanOneMonth({list}: ListProps) {
+function removeOlderThanOneMonth({ list }: ListProps) {
     if (list) {
         const newList: NotificationListProps[] = [...list]
         const now = new Date().getTime()
         const oneMonth = 2592000
-        
+
         for (let i = 0; i < list.length; i++) {
             const isMoreThanAMonthAway = now - new Date(list[i].time).getTime() > oneMonth
 
@@ -313,7 +313,7 @@ function removeOlderThanOneMonth({list}: ListProps) {
                 newList.splice(i, 1)
             }
         }
-        
+
         AsyncStorage.setItem('notificationList', JSON.stringify(newList))
     }
 }

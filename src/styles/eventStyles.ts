@@ -101,7 +101,7 @@ export const ES = StyleSheet.create({
         borderRadius: 20,
     },
     clusterWraper: {
-        borderRadius: 5, 
+        borderRadius: 5,
     },
     // Card content styling
     clusterContent: {
@@ -172,7 +172,7 @@ export const ES = StyleSheet.create({
         height: Dimensions.get("window").height + 200,
     },
     id: {
-        alignSelf: 'center', 
+        alignSelf: 'center',
         ...T.text15,
         marginVertical: 10
     }

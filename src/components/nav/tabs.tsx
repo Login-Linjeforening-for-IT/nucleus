@@ -52,20 +52,19 @@ import DiceScreen from "@screens/menu/games/dice"
 import Header from "./header"
 import * as SystemUI from 'expo-system-ui'
 import * as NavigationBar from "expo-navigation-bar"
-import { 
-    AdStackParamList, 
-    EventStackParamList, 
-    MenuStackParamList, 
-    RootStackParamList, 
-    TabBarParamList 
+import {
+    AdStackParamList,
+    EventStackParamList,
+    MenuStackParamList,
+    RootStackParamList,
+    TabBarParamList
 } from "@type/screenTypes"
-import { 
-    StackCardInterpolatedStyle, 
-    StackCardInterpolationProps, 
+import {
+    StackCardInterpolatedStyle,
+    StackCardInterpolationProps,
     createStackNavigator
 } from "@react-navigation/stack"
-import { TransitionSpec } from "@react-navigation/bottom-tabs/lib/typescript/commonjs/src/types"
-import { useEffect } from "react"
+import { JSX, useEffect } from "react"
 
 // Defines the navigators
 const Root = createStackNavigator<RootStackParamList>()
@@ -80,9 +79,10 @@ function Events() {
         <EventStack.Navigator screenOptions={{
             animation: 'none',
             headerTransparent: true,
-            header: props => <Header {...props}/>}}>
-            <EventStack.Screen name="EventScreen" component={EventScreen}/>
-            <EventStack.Screen name="SpecificEventScreen" component={SpecificEventScreen}/>
+            header: props => <Header {...props} />
+        }}>
+            <EventStack.Screen name="EventScreen" component={EventScreen} />
+            <EventStack.Screen name="SpecificEventScreen" component={SpecificEventScreen} />
         </EventStack.Navigator>
     )
 }
@@ -93,9 +93,10 @@ function Ads() {
         <AdStack.Navigator screenOptions={{
             animation: 'none',
             headerTransparent: true,
-            header: props => <Header {...props}/>}}>
-            <AdStack.Screen name="AdScreen" component={AdScreen}/>
-            <AdStack.Screen name="SpecificAdScreen" component={SpecificAdScreen}/>
+            header: props => <Header {...props} />
+        }}>
+            <AdStack.Screen name="AdScreen" component={AdScreen} />
+            <AdStack.Screen name="SpecificAdScreen" component={SpecificAdScreen} />
         </AdStack.Navigator>
     )
 }
@@ -106,7 +107,7 @@ function Menu() {
         <MenuStack.Navigator screenOptions={{
             animation: 'none',
             headerTransparent: true,
-            header: props => <Header {...props}/>
+            header: props => <Header {...props} />
         }}>
             <MenuStack.Screen name="MenuScreen" component={MenuScreen} />
             <MenuStack.Screen name="ProfileScreen" component={ProfileScreen} />
@@ -130,7 +131,7 @@ function Menu() {
  * @returns Application with navigation
  */
 function Tabs(): JSX.Element {
-    const { isDark, value, theme } = useSelector((state: ReduxState) => state.theme)
+    const { isDark, value } = useSelector((state: ReduxState) => state.theme)
 
     useEffect(() => {
         if (Platform.OS !== "ios") {
@@ -153,38 +154,38 @@ function Tabs(): JSX.Element {
             // Set initialscreen at to not defaut to top of tab stack
             initialRouteName={"EventNav"}
             backBehavior="history"
-            screenOptions={{headerShown: false}}
+            screenOptions={{ headerShown: false }}
             // Sets the tab bar component
-            tabBar={props => <Footer 
-                state={props.state} 
-                descriptors={props.descriptors} 
-                navigation={props.navigation} 
+            tabBar={props => <Footer
+                state={props.state}
+                descriptors={props.descriptors}
+                navigation={props.navigation}
             />}
         >
-            <Tab.Screen 
-                name="EventNav" 
-                component={Events} 
+            <Tab.Screen
+                name="EventNav"
+                component={Events}
                 options={({
-                    tabBarIcon: ({focused}) => (
+                    tabBarIcon: ({ focused }) => (
                         <Image
-                            style={MS.bMenuIcon} 
-                            source={focused 
+                            style={MS.bMenuIcon}
+                            source={focused
                                 ? require("@assets/menu/calendar-orange.png")
                                 : isDark
                                     ? require("@assets/menu/calendar777.png")
-                                    : require("@assets/menu/calendar-black.png")} 
+                                    : require("@assets/menu/calendar-black.png")}
                         />
                     )
                 })}
             />
-            <Tab.Screen 
-                name="AdNav" 
-                component={Ads} 
+            <Tab.Screen
+                name="AdNav"
+                component={Ads}
                 options={({
-                    tabBarIcon: ({focused}) => (
+                    tabBarIcon: ({ focused }) => (
                         <Image
-                            style={MS.bMenuIcon} 
-                            source={focused 
+                            style={MS.bMenuIcon}
+                            source={focused
                                 ? require("@assets/menu/business-orange.png")
                                 : isDark
                                     ? require("@assets/menu/business.png")
@@ -193,21 +194,21 @@ function Tabs(): JSX.Element {
                     )
                 })}
             />
-            <Tab.Screen 
-                name="MenuNav" 
+            <Tab.Screen
+                name="MenuNav"
                 component={Menu}
                 options={({
-                    tabBarIcon: ({focused}) => (
+                    tabBarIcon: ({ focused }) => (
                         <Image
-                            style={MS.bMenuIcon} 
-                            source={focused 
+                            style={MS.bMenuIcon}
+                            source={focused
                                 ? require("@assets/menu/menu-orange.png")
                                 : isDark
                                     ? require("@assets/menu/menu.png")
                                     : require("@assets/menu/menu-black.png")}
                         />
                     ),
-            })}
+                })}
             />
         </Tab.Navigator>
     )
@@ -224,32 +225,32 @@ export default function Navigator(): JSX.Element {
 
     const config = {
         animation: 'timing',
-        config:{
+        config: {
             duration: 100,
         }
-    } as TransitionSpec
+    } as any
 
     return (
         <NavigationContainer>
-            <Root.Navigator screenOptions={{headerShown: false}}>
-                <Root.Screen name="Tabs" component={Tabs}/>
+            <Root.Navigator screenOptions={{ headerShown: false }}>
+                <Root.Screen name="Tabs" component={Tabs} />
                 {/* <Root.Screen name="NotificationScreen" component={NotificationScreen as any} /> */}
-                <Root.Screen 
-                    name="InfoModal" 
+                <Root.Screen
+                    name="InfoModal"
                     options={{
-                        presentation: 'transparentModal', 
-                        cardOverlayEnabled: true, 
-                        cardStyleInterpolator: animateFromBottom, 
-                        transitionSpec: {open: config, close: config},
+                        presentation: 'transparentModal',
+                        cardOverlayEnabled: true,
+                        cardStyleInterpolator: animateFromBottom,
+                        transitionSpec: { open: config, close: config },
                     }}
                     component={TagInfo}
                 />
                 <Root.Screen
-                    name="NotificationModal" 
+                    name="NotificationModal"
                     options={{
                         presentation: 'transparentModal',
-                        cardStyleInterpolator: animateFromTop, 
-                        transitionSpec: {open: config, close: config},
+                        cardStyleInterpolator: animateFromTop,
+                        transitionSpec: { open: config, close: config },
                     }}
                     component={NotificationModal}
                 />

@@ -6,6 +6,9 @@
  * so it might be worth rewriting this component/checking if the default header can be used
  */
 import GS from '@styles/globalStyles'
+import MS from '@styles/menuStyles'
+import getHeight from '@utils/getHeight'
+import getCategories from '@utils/getCategories'
 import { PropsWithChildren, ReactNode, useEffect, useState } from 'react'
 import { BlurView } from 'expo-blur'
 import { Dimensions, Platform, View, Text, StatusBar } from 'react-native'
@@ -14,11 +17,8 @@ import { useSelector } from 'react-redux'
 import { useRoute } from '@react-navigation/native'
 import { TouchableOpacity } from 'react-native'
 import { Image } from "react-native"
-import MS from '@styles/menuStyles'
 import { useDispatch } from 'react-redux'
 import { setTag } from '@redux/event'
-import getHeight from '@utils/getHeight'
-import getCategories from '@utils/getCategories'
 
 export default function Header({ options, route, navigation }: HeaderProps): ReactNode {
     const { theme, isDark } = useSelector((state: ReduxState) => state.theme)

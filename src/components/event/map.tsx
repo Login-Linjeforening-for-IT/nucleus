@@ -18,12 +18,12 @@ export default function Map() {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
 
-    if (!event?.location || event?.location?.type != 'mazemap') {
+    if (!event.location || event.location?.type != 'mazemap') {
         return <></>
     }
 
-    const locationName = lang ? event?.location?.name_no : event?.location?.name_en
-    const organizer = event?.organizations[0]?.shortname || event?.organizations[0]?.name_en
+    const locationName = lang ? event.location?.name_no : event.location?.name_en
+    const organizer = event.organization?.shortname || event.organization?.name_en
 
     return (
         <TouchableOpacity
@@ -31,9 +31,10 @@ export default function Map() {
             onPress={() => {
                 if (!event.location) return
                 handleLink({
-                    mazemap_campus_id: event?.location?.mazemap_campus_id,
-                    mazemap_poi_id: event?.location?.mazemap_poi_id,
-                    locationName, organizer
+                    mazemap_campus_id: event.location.mazemap_campus_id,
+                    mazemap_poi_id: event.location.mazemap_poi_id,
+                    locationName,
+                    organizer: organizer || ''
                 })
             }}>
             <View style={ES.row}>
@@ -56,6 +57,7 @@ function handleLink({ mazemap_campus_id, mazemap_poi_id, locationName, organizer
     if (!locationName && (mazemap_campus_id === null || mazemap_poi_id === null)) {
         return
     }
+
     function open(url: string, errorTitle: string, errorBody: string) {
         Linking.openURL(url).catch(() => { Alert.alert(errorTitle, errorBody) })
     }
@@ -68,5 +70,6 @@ function handleLink({ mazemap_campus_id, mazemap_poi_id, locationName, organizer
     if (organizer === "HUSET") {
         open("https://link.mazemap.com/O1OdhRU4", "Mazemap kunne ikke åpnes.", `Send en mail til ${config.support_mail} dersom problemet vedvarer. Feilkode: MGfrIBrd`)
     }
+
     open(`https://use.mazemap.com/#v=1&campusid=${mazemap_campus_id}&sharepoitype=poi&sharepoi=${mazemap_poi_id}`, "Mazemap kunne ikke åpnes", `Send en mail til ${config.support_mail} dersom problemet vedvarer. Feilkode: M${mazemap_campus_id},${mazemap_poi_id}`)
 }

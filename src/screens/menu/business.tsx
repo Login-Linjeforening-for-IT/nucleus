@@ -22,12 +22,12 @@ export default function BusinessScreen(): JSX.Element {
     return (
         <Swipe left="MenuScreen">
             <View>
-                <View style={{...GS.content, backgroundColor: theme.darker}}>
+                <View style={{ ...GS.content, backgroundColor: theme.darker }}>
                     <ScrollView showsVerticalScrollIndicator={false}>
-                        <Space height={Dimensions.get("window").height / 8.1 + extraHeight} /> 
+                        <Space height={Dimensions.get("window").height / 8.1 + extraHeight} />
                         <Content />
-                        <Space height={Dimensions.get("window").height / 7} /> 
-                        </ScrollView>
+                        <Space height={Dimensions.get("window").height / 7} />
+                    </ScrollView>
                 </View>
             </View>
         </Swipe>
@@ -62,24 +62,24 @@ function Content(): JSX.Element {
 
     return (
         <Cluster>
-            <Text style={{...T.bold40, color: color}}>{info.title}</Text>
-            <Space height={15} /> 
+            <Text style={{ ...T.bold40, color: color }}>{info.title}</Text>
+            <Space height={15} />
             <Line width={5}>
-                <TextWithLinks 
-                    style={{...T.boldWithLine, color: color, lineHeight: 18}} 
-                    linkStyle={{...T.boldWithLine, color: orange}} 
+                <TextWithLinks
+                    style={{ ...T.boldWithLine, color: color, lineHeight: 18 }}
+                    linkStyle={{ ...T.boldWithLine, color: orange }}
                     text={info.intro}
                 />
             </Line>
 
-            <Space height={10} /> 
-            
-            <Paragraph 
+            <Space height={10} />
+
+            <Paragraph
                 logo={logo.bedpres}
                 title={info.bedpres.title}
                 body={info.bedpres.body}
             />
-            <Paragraph 
+            <Paragraph
                 logo={logo.pr}
                 title={info.cyberdays.title}
                 body={info.cyberdays.body}
@@ -89,19 +89,19 @@ function Content(): JSX.Element {
                 title={info.ctf.title}
                 body={info.ctf.body}
             />
-            <Paragraph 
+            <Paragraph
                 logo={logo.workshop}
                 title={info.workshop.title}
                 body={info.workshop.body}
             />
-            <Paragraph 
+            <Paragraph
                 logo={logo.profiling}
                 title={info.profiling.title}
                 body={info.profiling.body}
             />
 
-            <Space height={10} /> 
-            <Contact/>
+            <Space height={10} />
+            <Contact />
             <Space height={height <= 700 ? 30 : 10} />
         </Cluster>
     )

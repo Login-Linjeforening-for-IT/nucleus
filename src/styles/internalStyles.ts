@@ -1,7 +1,7 @@
 import { Dimensions, StyleSheet } from "react-native"
 import T from "./text"
 
-export const IS = StyleSheet.create ({
+export const IS = StyleSheet.create({
     inputText: {
         minWidth: "80%",
         height: 35,
@@ -18,15 +18,15 @@ export const IS = StyleSheet.create ({
         left: 0.8
     },
     touch: {
-        height: 40, 
-        width: 40, 
-        right: Dimensions.get('window').width / 8, 
+        height: 40,
+        width: 40,
+        right: Dimensions.get('window').width / 8,
         top: 35,
         borderRadius: 10
     },
     feedback: {
-        alignSelf: 'center', 
-        top: 20, 
+        alignSelf: 'center',
+        top: 20,
     }
 })
 

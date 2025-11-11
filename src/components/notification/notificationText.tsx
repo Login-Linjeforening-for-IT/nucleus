@@ -12,18 +12,18 @@ type NotificationTextProps = {
  *
  * @returns JSX Element containing the text displayed for each notification
  */
-export default function NotificationText({title, body}: NotificationTextProps) {
+export default function NotificationText({ title, body }: NotificationTextProps) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    
+
     return (
         <View>
             <View>
-                <Text style={{...NS.title, color: theme.textColor}}>
+                <Text style={{ ...NS.title, color: theme.textColor }}>
                     {title}
                 </Text>
             </View>
-            <View style={{flexDirection: "row"}}>
-                <Text style={{...NS.loc, color: theme.oppositeTextColor}}>
+            <View style={{ flexDirection: "row" }}>
+                <Text style={{ ...NS.loc, color: theme.oppositeTextColor }}>
                     {body}
                 </Text>
             </View>

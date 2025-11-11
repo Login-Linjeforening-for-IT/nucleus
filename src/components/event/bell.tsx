@@ -11,11 +11,10 @@ type BellProps = {
     embed?: boolean
 }
 
-
 /**
  * Displays the bell to the right of every event in the eventlist
  */
-export default function Bell({item, embed}: BellProps): JSX.Element {
+export default function Bell({ item, embed }: BellProps): JSX.Element {
     const { clickedEvents } = useSelector((state: ReduxState) => state.event)
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const dispatch = useDispatch()
@@ -24,8 +23,8 @@ export default function Bell({item, embed}: BellProps): JSX.Element {
     const start = new Date(item.time_start)
     const end = item.time_end ? new Date(item.time_end) : start
     const multiday = start.getDate() !== end.getDate() ||
-                                  start.getMonth() !== end.getMonth() ||
-                                  start.getFullYear() !== end.getFullYear()
+        start.getMonth() !== end.getMonth() ||
+        start.getFullYear() !== end.getFullYear()
 
     function isClicked() {
         for (const event of clickedEvents) {
@@ -34,10 +33,10 @@ export default function Bell({item, embed}: BellProps): JSX.Element {
         return false
     }
     // Checks if the bell should be orange instead of gray
-    const isOrange = clickedEvents.some(event => event.id === item.id) 
-        ? true 
+    const isOrange = clickedEvents.some(event => event.id === item.id)
+        ? true
         : false
-    
+
     // Prevents X from being clickable
     if (item.canceled) return (
         <View style={ES.view3}>
@@ -47,19 +46,19 @@ export default function Bell({item, embed}: BellProps): JSX.Element {
         </View>
     )
 
-    
+
     function handleClick() {
         dispatch(setClickedEvents(
             clickedEvents.some(event => event.id === item.id)
-            ? clickedEvents.filter((x) => x.id !== item.id)
-            : [...clickedEvents, item]
-            ))
-        TopicManager({topic, unsub: isClicked() ? true : false})
+                ? clickedEvents.filter((x) => x.id !== item.id)
+                : [...clickedEvents, item]
+        ))
+        TopicManager({ topic, unsub: isClicked() ? true : false })
     }
-    
+
     return (
-        <View style={{...ES.view3, right: embed ? 0 : 5}}>
-            <TouchableOpacity style={{paddingBottom: 30, left: multiday ? -22 : 0}} onPress={handleClick}>
+        <View style={{ ...ES.view3, right: embed ? 0 : 5 }}>
+            <TouchableOpacity style={{ paddingBottom: 30, left: multiday ? -22 : 0 }} onPress={handleClick}>
                 <View style={ES.bellPosition} >
                     <BellIcon orange={isOrange} canceled={item.canceled} />
                 </View>

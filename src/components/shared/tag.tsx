@@ -9,33 +9,33 @@ import { StackNavigationProp } from "@react-navigation/stack"
 import { RootStackParamList } from "@type/screenTypes"
 
 type TagsProps = {
-    event: DetailedEventData | undefined
+    event: GetEventProps | undefined
 }
 
-export default function Tags({event}: TagsProps) {
+export default function Tags({ event }: TagsProps) {
     if (!event) return null
     const { lang } = useSelector((state: ReduxState) => state.lang)
-    const tags = getTags({event, lang})
+    const tags = getTags({ event, lang })
 
     return (
-        <View style={{flexDirection: "row"}}>
+        <View style={{ flexDirection: "row" }}>
             {tags.map((tag) => <Tag tag={tag} key={tag.title} />)}
         </View>
     )
 }
 
-function Tag({tag}: {tag: Tag}) {
+function Tag({ tag }: { tag: Tag }) {
     const navigation = useNavigation<StackNavigationProp<RootStackParamList>>()
     const dispatch = useDispatch()
 
     return (
-        <View style={{left: 12, marginRight: 5, top: Platform.OS === 'ios' ? 4 : 3}}>
+        <View style={{ left: 12, marginRight: 5, top: Platform.OS === 'ios' ? 4 : 3 }}>
             <TouchableOpacity onPress={() => {
                 navigation.navigate("InfoModal")
                 dispatch(setTag(tag))
             }}>
-                <View style={{backgroundColor: "#d3b65450", flexDirection: "row", alignSelf: "baseline", padding: 3, borderRadius: 5, paddingHorizontal: 5}}>
-                    <Text style={{color: "#d3b654", marginRight: 5}}>{tag.title}</Text>
+                <View style={{ backgroundColor: "#d3b65450", flexDirection: "row", alignSelf: "baseline", padding: 3, borderRadius: 5, paddingHorizontal: 5 }}>
+                    <Text style={{ color: "#d3b654", marginRight: 5 }}>{tag.title}</Text>
                     <Image style={GS.tag} source={require("@assets/icons/tag.png")} />
                 </View>
             </TouchableOpacity>

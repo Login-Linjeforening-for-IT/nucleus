@@ -129,8 +129,8 @@ let notificationStateQueue: topicParams | null
  * @param lang Language, 1 for norwegian, 0 for english
  * @param status  true/false Subscribe or unsubscribe from given topic.
  */
-export default async function topic({topicID, lang, notification, dispatch}:
-topicParams) {
+export default async function topic({ topicID, lang, notification, dispatch }:
+    topicParams) {
     const isLangChange = topicID === "langChange"
     // Drops excessive language changes
     if (isLangChange && throttled[0]) {
@@ -160,8 +160,8 @@ topicParams) {
         const unsub = lang ? 'n' : 'e'
         for (let i = 0; i < keys.length; i++) {
             if (values[i][0]) {
-                await TopicManager({topic: `${unsub}${keys[i]}`, unsub: true})
-                await TopicManager({topic: `${sub}${keys[i]}`})
+                await TopicManager({ topic: `${unsub}${keys[i]}`, unsub: true })
+                await TopicManager({ topic: `${sub}${keys[i]}` })
             }
         }
     }
@@ -177,7 +177,7 @@ topicParams) {
 
                 try {
                     const response = await TopicManager({ topic, unsub: !values[i][0] })
-    
+
                     // Check if the result is successful
                     if (response.result) {
                         // Updates Redux if the topic was updated successfully

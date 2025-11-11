@@ -190,7 +190,7 @@ async function eventsToCalendarFormat({ items, calendarID, lang, isEventScreen }
             startDate = new Date(event.time_start)
             endDate = new Date(event.time_end)
         } else if (ad) {
-            location = ad?.cities?.map(city => capitalizeFirstLetter(city)).join(", ") || ''
+            location = ad.cities?.map(city => capitalizeFirstLetter(city)).join(", ") || ''
             title = `${lang ? 'Frist for å søke jobb - ' : 'Deadline to apply - '}${lang ? ad.title_no || ad.title_en : ad.title_en || ad.title_no}!`
             const tempShort = lang
                 ? ad.description_short_no || ad.description_short_en

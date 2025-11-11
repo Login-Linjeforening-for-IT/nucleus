@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction, useState } from 'react'
 import { View, Dimensions, Platform } from 'react-native'
 import { PanGestureHandler } from 'react-native-gesture-handler'
 import Animated, {
+    // @ts-expect-error Removed but still works
     useAnimatedGestureHandler,
     useAnimatedStyle,
     useSharedValue,
@@ -14,7 +15,7 @@ import CourseContent from './content'
 import ReadOnly from './readonly'
 
 type CourseContentProps = {
-    course: Course, 
+    course: Course,
     clicked: number[],
     setClicked: Dispatch<SetStateAction<number[]>>
 }
@@ -28,11 +29,11 @@ export default function Swiper({ course, clicked, setClicked }: CourseContentPro
 
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const [currentIndex, setCurrentIndex] = useState(0)
-    const translateX = useSharedValue(0)  
+    const translateX = useSharedValue(0)
     const [cardID, setCardID] = useState<number>(0)
     const next = cardID + 1
     const previous = cardID - 1
-    
+
     function handlePrevious() {
         setClicked([])
         setCardID(previous >= 0 ? previous : cardID)
@@ -52,7 +53,7 @@ export default function Swiper({ course, clicked, setClicked }: CourseContentPro
 
         return currentIndex
     }
-    
+
     // Function to calculate previous index in a circular manner
     function getPreviousIndex(currentIndex: number) {
         if (currentIndex > 0) {
@@ -61,7 +62,7 @@ export default function Swiper({ course, clicked, setClicked }: CourseContentPro
 
         return 0
     }
-    
+
     function onSwipeRight() {
         setCurrentIndex(getNextIndex(currentIndex))
         handleNext()
@@ -85,14 +86,13 @@ export default function Swiper({ course, clicked, setClicked }: CourseContentPro
     };
 
     const gestureHandler = useAnimatedGestureHandler({
-        onStart: (_, context) => {
+        onStart: (_: any, context: any) => {
             context.startX = translateX.value
         },
-        onActive: (event, context) => {
-            // @ts-expect-error
+        onActive: (event: any, context: any) => {
             translateX.value = context.startX + event.translationX
         },
-        onEnd: (event) => {
+        onEnd: (event: any) => {
             if (event.translationX > SWIPE_THRESHOLD) {
                 runOnJS(onSwipeRight)()
                 translateX.value = withSpring(SCREEN_WIDTH * 1.2)
@@ -108,7 +108,7 @@ export default function Swiper({ course, clicked, setClicked }: CourseContentPro
             }
         },
     })
-  
+
     // Animated styles for the top card (current card)
     const animatedStyle = useAnimatedStyle(() => {
         if (translateX.value < 0) {
@@ -129,9 +129,9 @@ export default function Swiper({ course, clicked, setClicked }: CourseContentPro
                 transform: [{ translateY }],
             }
         }
-        
+
         const rotate = `${(translateX.value / SCREEN_WIDTH) * 15}deg`
-  
+
         return {
             width: SCREEN_WIDTH * 0.95,
             transform: [
@@ -140,7 +140,7 @@ export default function Swiper({ course, clicked, setClicked }: CourseContentPro
             ],
         }
     })
-  
+
     // Animated styles for the second card in the stack
     const animatedSecondCardStyle = useAnimatedStyle(() => {
         if (translateX.value < 0) {
@@ -176,11 +176,11 @@ export default function Swiper({ course, clicked, setClicked }: CourseContentPro
 
         return {
             width,
-            height: Platform.OS === 'ios' ? SCREEN_HEIGHT * 0.75 
-                : SCREEN_HEIGHT * (SCREEN_HEIGHT === 592 ? 0.72 
-                : SCREEN_HEIGHT >= 592 && SCREEN_HEIGHT < 700 ? 0.76 
-                : SCREEN_HEIGHT > 800 && SCREEN_HEIGHT <= 900 ? 0.8 
-                : SCREEN_HEIGHT > 900 ? 0.77 : 0.75),
+            height: Platform.OS === 'ios' ? SCREEN_HEIGHT * 0.75
+                : SCREEN_HEIGHT * (SCREEN_HEIGHT === 592 ? 0.72
+                    : SCREEN_HEIGHT >= 592 && SCREEN_HEIGHT < 700 ? 0.76
+                        : SCREEN_HEIGHT > 800 && SCREEN_HEIGHT <= 900 ? 0.8
+                            : SCREEN_HEIGHT > 900 ? 0.77 : 0.75),
             transform: [{ translateY }],
         }
     })
@@ -220,11 +220,11 @@ export default function Swiper({ course, clicked, setClicked }: CourseContentPro
 
         return {
             width,
-            height: Platform.OS === 'ios' ? SCREEN_HEIGHT * 0.75 
-                : SCREEN_HEIGHT * (SCREEN_HEIGHT === 592 ? 0.72 
-                : SCREEN_HEIGHT >= 592 && SCREEN_HEIGHT < 700 ? 0.76 
-                : SCREEN_HEIGHT > 800 && SCREEN_HEIGHT <= 900 ? 0.8 
-                : SCREEN_HEIGHT > 900 ? 0.77 : 0.75),
+            height: Platform.OS === 'ios' ? SCREEN_HEIGHT * 0.75
+                : SCREEN_HEIGHT * (SCREEN_HEIGHT === 592 ? 0.72
+                    : SCREEN_HEIGHT >= 592 && SCREEN_HEIGHT < 700 ? 0.76
+                        : SCREEN_HEIGHT > 800 && SCREEN_HEIGHT <= 900 ? 0.8
+                            : SCREEN_HEIGHT > 900 ? 0.77 : 0.75),
             transform: [{ translateY }],
         }
     })
@@ -245,11 +245,11 @@ export default function Swiper({ course, clicked, setClicked }: CourseContentPro
 
         return {
             width,
-            height: Platform.OS === 'ios' ? SCREEN_HEIGHT * 0.75 
-                : SCREEN_HEIGHT * (SCREEN_HEIGHT === 592 ? 0.72 
-                : SCREEN_HEIGHT >= 592 && SCREEN_HEIGHT < 700 ? 0.76 
-                : SCREEN_HEIGHT > 800 && SCREEN_HEIGHT <= 900 ? 0.8 
-                : SCREEN_HEIGHT > 900 ? 0.77 : 0.75),
+            height: Platform.OS === 'ios' ? SCREEN_HEIGHT * 0.75
+                : SCREEN_HEIGHT * (SCREEN_HEIGHT === 592 ? 0.72
+                    : SCREEN_HEIGHT >= 592 && SCREEN_HEIGHT < 700 ? 0.76
+                        : SCREEN_HEIGHT > 800 && SCREEN_HEIGHT <= 900 ? 0.8
+                            : SCREEN_HEIGHT > 900 ? 0.77 : 0.75),
             transform: [{ translateY }],
         }
     })
@@ -277,25 +277,25 @@ export default function Swiper({ course, clicked, setClicked }: CourseContentPro
             transform: [{ rotate: `${rotation + 0.5}deg` }],
         }
     })
-  
+
     return (
-        <View style={{ 
-            flex: 1, 
-            justifyContent: 'center', 
-            alignItems: 'center', 
-            height: '100%', 
-            marginBottom: 10, 
-            paddingBottom: 10 
+        <View style={{
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '100%',
+            marginBottom: 10,
+            paddingBottom: 10
         }}>
             {/* Fifth card */}
             <Animated.View style={[{
                 position: 'absolute',
                 width: SCREEN_WIDTH * 0.75,
-                height: Platform.OS === 'ios' ? SCREEN_HEIGHT * 0.75 
-                    : SCREEN_HEIGHT * (SCREEN_HEIGHT === 592 ? 0.72 
-                    : SCREEN_HEIGHT >= 592 && SCREEN_HEIGHT < 700 ? 0.76 
-                    : SCREEN_HEIGHT > 800 && SCREEN_HEIGHT <= 900 ? 0.8 
-                    : SCREEN_HEIGHT > 900 ? 0.77 : 0.75),
+                height: Platform.OS === 'ios' ? SCREEN_HEIGHT * 0.75
+                    : SCREEN_HEIGHT * (SCREEN_HEIGHT === 592 ? 0.72
+                        : SCREEN_HEIGHT >= 592 && SCREEN_HEIGHT < 700 ? 0.76
+                            : SCREEN_HEIGHT > 800 && SCREEN_HEIGHT <= 900 ? 0.8
+                                : SCREEN_HEIGHT > 900 ? 0.77 : 0.75),
                 top: 16,
                 justifyContent: 'center',
                 alignItems: 'center',
@@ -307,7 +307,7 @@ export default function Swiper({ course, clicked, setClicked }: CourseContentPro
                 shadowOpacity: 0.3,
                 shadowRadius: 10,
             }]} />
-            
+
             {/* Forth card */}
             <Animated.View style={[{
                 position: 'absolute',
@@ -375,11 +375,11 @@ export default function Swiper({ course, clicked, setClicked }: CourseContentPro
                     shadowOpacity: 0.3,
                     shadowRadius: 10,
                     elevation: 10,
-                    height: Platform.OS === 'ios' ? SCREEN_HEIGHT * 0.75 
-                        : SCREEN_HEIGHT * (SCREEN_HEIGHT === 592 ? 0.72 
-                        : SCREEN_HEIGHT >= 592 && SCREEN_HEIGHT < 700 ? 0.76 
-                        : SCREEN_HEIGHT > 800 && SCREEN_HEIGHT <= 900 ? 0.8 
-                        : SCREEN_HEIGHT > 900 ? 0.77 : 0.75),
+                    height: Platform.OS === 'ios' ? SCREEN_HEIGHT * 0.75
+                        : SCREEN_HEIGHT * (SCREEN_HEIGHT === 592 ? 0.72
+                            : SCREEN_HEIGHT >= 592 && SCREEN_HEIGHT < 700 ? 0.76
+                                : SCREEN_HEIGHT > 800 && SCREEN_HEIGHT <= 900 ? 0.8
+                                    : SCREEN_HEIGHT > 900 ? 0.77 : 0.75),
                 }, animatedStyle]}>
                     <CourseContent
                         course={course}
@@ -405,11 +405,11 @@ export default function Swiper({ course, clicked, setClicked }: CourseContentPro
                 shadowOffset: { width: 0, height: 10 },
                 shadowOpacity: 0.3,
                 shadowRadius: 10,
-                height: Platform.OS === 'ios' ? SCREEN_HEIGHT * 0.75 
-                    : SCREEN_HEIGHT * (SCREEN_HEIGHT === 592 ? 0.72 
-                    : SCREEN_HEIGHT >= 592 && SCREEN_HEIGHT < 700 ? 0.76 
-                    : SCREEN_HEIGHT > 800 && SCREEN_HEIGHT <= 900 ? 0.8 
-                    : SCREEN_HEIGHT > 900 ? 0.77 : 0.75),
+                height: Platform.OS === 'ios' ? SCREEN_HEIGHT * 0.75
+                    : SCREEN_HEIGHT * (SCREEN_HEIGHT === 592 ? 0.72
+                        : SCREEN_HEIGHT >= 592 && SCREEN_HEIGHT < 700 ? 0.76
+                            : SCREEN_HEIGHT > 800 && SCREEN_HEIGHT <= 900 ? 0.8
+                                : SCREEN_HEIGHT > 900 ? 0.77 : 0.75),
                 width: SCREEN_WIDTH * 0.95,
             }, animatedHiddenCardStyle]} >
                 <CourseContent

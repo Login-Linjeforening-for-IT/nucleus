@@ -8,11 +8,11 @@ type NotificationIconProps = {
 }
 
 // Displays the notification icon if there are unread notifications
-export default function NotificationIcon({position}: NotificationIconProps) {
+export default function NotificationIcon({ position }: NotificationIconProps) {
     const [display, setDisplay] = useState<boolean>(false)
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    
+
     // Fetches notifications from localstorage
     async function getNotifications() {
         let unread = await unreadNotifications()
@@ -29,7 +29,7 @@ export default function NotificationIcon({position}: NotificationIconProps) {
 
         interval = setInterval(() => {
             getNotifications()
-        // Runs every 5 seconds
+            // Runs every 5 seconds
         }, 5000)
 
         return () => clearInterval(interval)
@@ -38,16 +38,16 @@ export default function NotificationIcon({position}: NotificationIconProps) {
     if (!display) return <></>
 
     return <View style={{
-        backgroundColor: theme.orange, 
+        backgroundColor: theme.orange,
         height: 6,
-        width: 6, 
+        width: 6,
         position: "absolute",
         borderRadius: 100,
         right: position === 'bottom' ? 30 : undefined,
         left: position === 'left' ? lang ? 88 : 108 : undefined,
         top: position === 'bottom' ? 21 : 2,
         zIndex: 10
-    }} /> 
+    }} />
 }
 
 // Checks for unread notifications
@@ -63,6 +63,6 @@ async function unreadNotifications(): Promise<boolean> {
             }
         }
     }
-    
+
     return false
 }

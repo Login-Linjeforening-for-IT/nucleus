@@ -18,14 +18,14 @@ export default function InternalScreen(): JSX.Element {
         <ScrollView>
             <Swipe left="MenuScreen">
                 <View>
-                    <View style={{...GS.content, backgroundColor: theme.darker}}>
-                        <Space height={Dimensions.get("window").height / 8}/>
+                    <View style={{ ...GS.content, backgroundColor: theme.darker }}>
+                        <Space height={Dimensions.get("window").height / 8} />
                         <ManageTopics />
-                        <Space height={Dimensions.get("window").height / 8}/>
-                        <Space height={50}/>
-                        <TouchableOpacity onPress={() => TopicManager({topic: 'maintenance'})}>
+                        <Space height={Dimensions.get("window").height / 8} />
+                        <Space height={50} />
+                        <TouchableOpacity onPress={() => TopicManager({ topic: 'maintenance' })}>
                             <Cluster>
-                                <Text style={{...T.centered20, color: theme.textColor}}>
+                                <Text style={{ ...T.centered20, color: theme.textColor }}>
                                     Subscribe to maintenance
                                 </Text>
                             </Cluster>

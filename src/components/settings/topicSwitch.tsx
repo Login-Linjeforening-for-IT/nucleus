@@ -1,6 +1,7 @@
 import Notification from "@/components/settings/notification"
 import Cluster from "@/components/shared/cluster"
 import GS from "@styles/globalStyles"
+import { JSX } from 'react'
 import { View, Text } from "react-native"
 import { useSelector } from "react-redux"
 
@@ -23,7 +24,7 @@ type TopicSwitchProps = {
 * @param length Whether to include week option or not
 * @returns Visual list of switches
 */
-export default function TopicSwitchList ({category, showLast}: TopicSwitchListProps): JSX.Element {
+export default function TopicSwitchList({ category, showLast }: TopicSwitchListProps): JSX.Element {
     return (
         <View>
             <TopicSwitch topic={category + "10m"} textNo="10 min før" textEn="10 min before" />
@@ -45,20 +46,22 @@ export default function TopicSwitchList ({category, showLast}: TopicSwitchListPr
  * @topic Topic user should be subscribed to, or unsubscribed from
  * @returns Visual representation of switch as a cluster
  */
-function TopicSwitch ({topic, textNo, textEn}: TopicSwitchProps): JSX.Element {
-    const { lang  } = useSelector((state: ReduxState) => state.lang)
+function TopicSwitch({ topic, textNo, textEn }: TopicSwitchProps): JSX.Element {
+    const { lang } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
 
     return (
         <Cluster>
             <View style={GS.notificationBack}>
                 <View style={GS.view}>
-                    <Text style={{...GS.notificationText, color:
-                        theme.oppositeTextColor}}>
+                    <Text style={{
+                        ...GS.notificationText, color:
+                            theme.oppositeTextColor
+                    }}>
                         {lang ? textNo : textEn}
                     </Text>
                 </View>
-                <View style={GS.view2}>{Notification({category: topic, skip: true})}</View>
+                <View style={GS.view2}>{Notification({ category: topic, skip: true })}</View>
             </View>
         </Cluster>
     )

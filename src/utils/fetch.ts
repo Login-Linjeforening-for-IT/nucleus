@@ -8,12 +8,9 @@ import config from "@/constants"
 export default function LastFetch(param?: string) {
     const utc = param ? param : new Date().toISOString()
     const time = new Date(utc)
-
-    // Checking and fixing missing 0
     const day = time.getDate().toString().padStart(2, '0')
     const month = (time.getMonth() + 1).toString().padStart(2, '0')
     const year = time.getFullYear()
-
     const hour = time.getHours().toString().padStart(2, '0')
     const minute = time.getMinutes().toString().padStart(2, '0')
 
@@ -27,15 +24,13 @@ export default function LastFetch(param?: string) {
  *
  * @returns All details for passed event
  */
-export async function fetchEventDetails(id: number):
-    Promise<GetEventProps> {
+export async function fetchEventDetails(id: number): Promise<GetEventProps> {
     // Fetches events
     const response = await fetch(`${config.api}/events/${id}`)
 
     // Test API
     // const response = await fetch(`${testapi}events/${id}`)
     const eventDetails: GetEventProps = await response.json()
-
     return eventDetails
 }
 
@@ -47,16 +42,13 @@ export async function fetchEventDetails(id: number):
 export async function fetchEvents(): Promise<GetEventProps[]> {
     try {
         // Fetches events
-        const response = await fetch(`${config.api}/events`)
-
-        // Checks if response is ok, otherwise throws error
+        const response = await fetch(`${config.api}/events?historical=true`)
         if (!response.ok) {
             throw new Error('Failed to fetch events from API')
         }
 
-        return response.json()
-
-        // Catches and logs errors. Errors are handled by Redux.
+        const data = await response.json()
+        return data
     } catch (error) {
         console.log(error)
         return []
@@ -70,17 +62,13 @@ export async function fetchEvents(): Promise<GetEventProps[]> {
  */
 export async function fetchAds(): Promise<GetJobProps[]> {
     try {
-        // Fetches ads
         const response = await fetch(`${config.api}/jobs/`)
-
-        // Checks if response is ok, otherwise throws error
         if (!response.ok) {
             throw new Error('Failed to fetch ads from API')
         }
 
-        return response.json()
-
-        // Catches and logs errors. Errors are handled by Redux.
+        const data = await response.json()
+        return data
     } catch (error) {
         console.log(error)
         return []
@@ -94,16 +82,18 @@ export async function fetchAds(): Promise<GetJobProps[]> {
  *
  * @returns All details for passed event
  */
-export async function fetchAdDetails(adID: number): Promise<GetJobProps> {
+export async function fetchAdDetails(adID: number): Promise<GetJobProps | null> {
+    try {
+        const response = await fetch(`${config.api}/jobs/${adID}`)
 
-    // Prod
-    const response = await fetch(`${config.api}/jobs/${adID}`)
-
-    // Dev
-    // const response = await fetch(`${testapi}jobs/${ad.id}`)
-    const adDetails = await response.json()
-
-    return adDetails
+        // Dev
+        // const response = await fetch(`${testapi}jobs/${ad.id}`)
+        const adDetails = await response.json()
+        return adDetails
+    } catch (error) {
+        console.log(error)
+        return null
+    }
 }
 
 /**

@@ -11,7 +11,7 @@ type DownloadButtonProps = {
     screen: 'event' | 'ad'
 }
 
-export default function DownloadButton({screen}: DownloadButtonProps){
+export default function DownloadButton({ screen }: DownloadButtonProps) {
     const { isDark } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const { calendarID } = useSelector((state: ReduxState) => state.misc)
@@ -25,7 +25,7 @@ export default function DownloadButton({screen}: DownloadButtonProps){
     const isEventScreen = screen === 'event'
     const clickedItems = isEventScreen ? event.clickedEvents : ad.clickedAds
     const downloadState = isEventScreen ? event.downloadState : ad.downloadState
-    
+
     function flashOrange() {
         setIcon(orange)
         setTimeout(() => {
@@ -37,14 +37,16 @@ export default function DownloadButton({screen}: DownloadButtonProps){
         <>
             {clickedItems.length > 0 &&
                 <TouchableOpacity
-                    onPress={async() => {
+                    onPress={async () => {
                         if (timeSince(downloadState || 1000) >= 1000) {
                             flashOrange()
                             dispatch(setDownloadState())
-                            await handleDownload({items: clickedItems, 
-                                calendarID, dispatch, lang, isEventScreen})
+                            await handleDownload({
+                                items: clickedItems,
+                                calendarID, dispatch, lang, isEventScreen
+                            })
                         }
-                        }}>
+                    }}>
                     <Image style={MS.multiIcon} source={icon} />
                 </TouchableOpacity>
             }

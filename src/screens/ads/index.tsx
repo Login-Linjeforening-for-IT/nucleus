@@ -3,7 +3,7 @@ import DownloadButton from "@components/shared/downloadButton"
 import GS from "@styles/globalStyles"
 import LastFetch, { fetchAds } from "@/utils/fetch"
 import LogoNavigation from "@/components/shared/logoNavigation"
-import React, { useEffect, useState } from "react"
+import React, { JSX, useEffect, useState } from "react"
 import Swipe from "@components/nav/swipe"
 import { FilterButton, FilterUI } from "@components/shared/filter"
 import { StatusBar } from "expo-status-bar"
@@ -28,9 +28,9 @@ import { AdScreenProps } from "@type/screenTypes"
 export default function AdScreen({ navigation }: AdScreenProps<'AdScreen'>): JSX.Element {
     // Push notification
     const [pushNotification, setPushNotification] = useState(false)
-    const [pushNotificationContent, setPushNotificationContent] = 
+    const [pushNotificationContent, setPushNotificationContent] =
         useState<JSX.Element | undefined>(undefined)
-    
+
     // Redux states
     const { search, lastSave, skills } = useSelector((state: ReduxState) => state.ad)
     const { theme, isDark } = useSelector((state: ReduxState) => state.theme)
@@ -42,7 +42,7 @@ export default function AdScreen({ navigation }: AdScreenProps<'AdScreen'>): JSX
         // Callback to avoid too many rerenders
         React.useCallback(() => {
             // Function to fetch clicked ads
-            (async() => {
+            (async () => {
                 const ads = await fetchAds()
 
                 if (ads.length) {
@@ -56,7 +56,7 @@ export default function AdScreen({ navigation }: AdScreenProps<'AdScreen'>): JSX
     // Loads initial data
     useEffect(() => {
         // IIFE to fetch API
-        (async() => {
+        (async () => {
             const ads = await fetchAds()
 
             if (ads.length) {
@@ -64,8 +64,6 @@ export default function AdScreen({ navigation }: AdScreenProps<'AdScreen'>): JSX
                 dispatch(setLastFetch(LastFetch()))
             }
         })()
-
-    // Renders when the screen is loaded
     }, [])
 
     // Fetches API and updates cache every 10 seconds
@@ -75,8 +73,7 @@ export default function AdScreen({ navigation }: AdScreenProps<'AdScreen'>): JSX
         // Only when filter is closed to prevent "no match" issue
         if (!search) {
             interval = setInterval(() => {
-                // Storing the current time
-                (async() => {
+                (async () => {
                     const ads = await fetchAds()
 
                     if (ads.length) {
@@ -84,34 +81,32 @@ export default function AdScreen({ navigation }: AdScreenProps<'AdScreen'>): JSX
                         dispatch(setLastFetch(LastFetch()))
                     }
                 })()
-                // Runs every 10 seconds
             }, 10000)
-            // Clears the interval when the filter is opened
-        } else clearInterval(interval)
+        } else {
+            clearInterval(interval)
+        }
 
-        // Clears interval when unmounted to prevent memory leaks
         return () => clearInterval(interval)
     }, [search])
 
     useEffect(() => {
-        // --- SETUP CODE ONCE APP IS DOWNLOADED---
-        // Displays when the API was last fetched successfully
-        if (lastSave === "") {(async() => {dispatch(setLastSave(LastFetch()))})()
-    }
+        if (lastSave === "") {
+            (async () => { dispatch(setLastSave(LastFetch())) })()
+        }
     }, [lastSave])
 
     // Sets the component of the header
-    useEffect(()=>{
+    useEffect(() => {
         const right = ads.length ? [skills.length ? <FilterButton /> : null, <DownloadButton screen="ad" />] : []
         navigation.setOptions({
             headerComponents: {
                 bottom: [<FilterUI />],
                 left: [<LogoNavigation />],
                 right
-            }} as any)   
-    },[navigation])
+            }
+        } as any)
+    }, [navigation])
 
-    // --- DISPLAYS THE EVENTSCREEN ---
     return (
         <Swipe left="EventNav" right="MenuNav">
             <View>
@@ -127,5 +122,4 @@ export default function AdScreen({ navigation }: AdScreenProps<'AdScreen'>): JSX
             </View>
         </Swipe>
     )
-            
 }

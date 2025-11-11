@@ -19,9 +19,7 @@ export type FooterProps = {
 }
 
 export default function Footer({ state, descriptors, navigation }: FooterProps): JSX.Element {
-    return (
-        <Content state={state} descriptors={descriptors} navigation={navigation} />
-    )
+    return <Content state={state} descriptors={descriptors} navigation={navigation} />
 }
 
 function Content({ state, descriptors, navigation }: FooterProps) {

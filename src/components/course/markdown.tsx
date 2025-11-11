@@ -8,12 +8,12 @@ type MarkdownProps = {
     fontSize?: number
 }
 
-export default function Markdown({text, fontSize}: MarkdownProps) {
+export default function Markdown({ text, fontSize }: MarkdownProps) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
 
     return (
         <MarkdownDisplay
-            rules={rules(theme)} 
+            rules={rules(theme)}
             style={{
                 fence: {
                     backgroundColor: theme.dark,
@@ -83,7 +83,7 @@ export default function Markdown({text, fontSize}: MarkdownProps) {
                     fontSize: fontSize || T.text16.fontSize,
                     color: theme.textColor,
                 },
-        }}>
+            }}>
             {text}
         </MarkdownDisplay>
     )
@@ -99,9 +99,9 @@ function rules(theme: Theme) {
                 <Image
                     key={getUniqueID()}
                     source={{ uri: src }}
-                    style={[styles.image, { 
-                        minWidth: Dimensions.get('window').width * 0.8, 
-                        minHeight: 100 
+                    style={[styles.image, {
+                        minWidth: Dimensions.get('window').width * 0.8,
+                        minHeight: 100
                     }]}
                 />
             )
@@ -110,7 +110,7 @@ function rules(theme: Theme) {
         list_item: (_, children, __, ___) => {
             return (
                 <Text key={getUniqueID()} style={{ marginVertical: 4 }}>
-                    <Text style={{color: theme.orange, fontWeight: 900}}>•</Text> {children}
+                    <Text style={{ color: theme.orange, fontWeight: 900 }}>•</Text> {children}
                 </Text>
             )
         },

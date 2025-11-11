@@ -3,7 +3,7 @@ import { useSelector } from "react-redux"
 import InfoBlock from "@components/shared/infoBlock"
 import Space from "@components/shared/utils"
 
-export default function ReadOnly({text}: {text: string}) {
+export default function ReadOnly({ text }: { text: string }) {
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const textNO = "Dette emnet har ikke flervalgseksamen, og inneholder derfor kun notater. Disse kan foreløpig ikke redigeres på telefon."
     const textEN = "This course exam does not contain multiple choice questions. Therefore, it only has notes. Notes are currently not editable on mobile."

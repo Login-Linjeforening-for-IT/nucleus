@@ -17,7 +17,7 @@ type ContentProps = {
 /**
  * Displays the event list
  */
-export default function EventList (): JSX.Element {
+export default function EventList(): JSX.Element {
     const { events, renderedEvents, search, categories, clickedEvents } = useSelector((state: ReduxState) => state.event)
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const [refresh, setRefresh] = useState(false)
@@ -25,7 +25,7 @@ export default function EventList (): JSX.Element {
 
     async function getDetails() {
         const events = await fetchEvents()
-    
+
         if (events.length) {
             dispatch(setEvents(events))
             dispatch(setLastFetch(LastFetch()))
@@ -41,22 +41,22 @@ export default function EventList (): JSX.Element {
             setRefresh(false)
         }
     }, [refresh])
-    
-    const cat = getCategories({lang, categories})
+
+    const cat = getCategories({ lang, categories })
 
     if (renderedEvents.length > 0) {
         const usedIndexes: number[] = []
 
         return (
             <>
-                <ScrollView 
-                    style={{paddingTop: getListOffset({search, categories: cat, clickedEvents}) }}
-                    showsVerticalScrollIndicator={false} 
+                <ScrollView
+                    style={{ paddingTop: getListOffset({ search, categories: cat, clickedEvents }) }}
+                    showsVerticalScrollIndicator={false}
                     scrollEventThrottle={100}
                 >
                     <RefreshControl refreshing={refresh} onRefresh={onRefresh} />
-                    <Content usedIndexes={usedIndexes}/>
-                    <Space height={getListOffset({search, categories: cat, clickedEvents, bottom: true})} />
+                    <Content usedIndexes={usedIndexes} />
+                    <Space height={getListOffset({ search, categories: cat, clickedEvents, bottom: true })} />
                 </ScrollView>
             </>
         )
@@ -65,8 +65,8 @@ export default function EventList (): JSX.Element {
     return <ErrorMessage argument={!events ? "wifi" : "nomatch"} screen="event" />
 }
 
-function Content({usedIndexes}: ContentProps) {
-    const {renderedEvents } = useSelector((state: ReduxState) => state.event)
+function Content({ usedIndexes }: ContentProps) {
+    const { renderedEvents } = useSelector((state: ReduxState) => state.event)
 
     return renderedEvents.map((event, index) => (
         <View key={`View${index}`}>

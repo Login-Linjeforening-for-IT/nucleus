@@ -68,7 +68,7 @@ export default function AdInfo({ ad }: { ad: GetJobProps | undefined }) {
  * @param {string} banner Link to the advertisement banner
  * @returns               Small banner image
  */
-export function AdBanner({ url }: { url: string | undefined }) {
+export function AdBanner({ url }: { url: string | null }) {
     if (!url) return null
 
     if (url?.endsWith(".svg")) {
@@ -169,25 +169,25 @@ export function AdMedia({ ad }: { ad: GetJobProps }) {
 
     const social = [
         {
-            url: ad?.organization?.link_instagram,
+            url: ad.organization?.link_instagram,
             source: isDark
                 ? require("@assets/social/instagram-white.png")
                 : require("@assets/social/instagram-black.png")
         },
         {
-            url: ad?.organization?.link_homepage,
+            url: ad.organization?.link_homepage,
             source: isDark
                 ? require("@assets/social/web-white.png")
                 : require("@assets/social/web-black.png")
         },
         {
-            url: ad?.organization?.link_facebook,
+            url: ad.organization?.link_facebook,
             source: isDark
                 ? require("@assets/social/facebook-white.png")
                 : require("@assets/social/facebook-black.png")
         },
         {
-            url: ad?.organization?.link_linkedin,
+            url: ad.organization?.link_linkedin,
             source: isDark
                 ? require("@assets/social/linkedin-white.png")
                 : require("@assets/social/linkedin-black.png")
@@ -247,8 +247,8 @@ export function AdMedia({ ad }: { ad: GetJobProps }) {
 export function AdTitle({ ad }: { ad: GetJobProps }) {
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    const title = lang ? ad?.title_no || ad?.title_en : ad?.title_en || ad?.title_no
-    const logo = ad?.organization?.logo
+    const title = lang ? ad.title_no || ad.title_en : ad.title_en || ad.title_no
+    const logo = ad.organization?.logo
 
     function Logo() {
         // Handles svg icons
@@ -300,7 +300,7 @@ export function AdTitle({ ad }: { ad: GetJobProps }) {
 /**
  * Function for drawing a small image on the left side of the ad cluster
  * @param {string} banner Link to the advertisement banner
- * @returns               Small banner image
+ * @returns Small banner image
  */
 export function AdUpdateInfo({ ad }: { ad: GetJobProps | undefined }) {
     const { lang } = useSelector((state: ReduxState) => state.lang)

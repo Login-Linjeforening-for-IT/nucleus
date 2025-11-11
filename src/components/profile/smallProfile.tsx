@@ -4,6 +4,7 @@ import CS from "@styles/clusterStyles"
 import { Navigation } from "@/interfaces"
 import T from "@styles/text"
 import { useSelector } from "react-redux"
+import { JSX } from 'react'
 
 type SmallProfileProps = {
     navigation: Navigation
@@ -17,8 +18,8 @@ type SmallProfileProps = {
  * @param {string} category    Category of the event, Format: "CATEGORY"
  * @returns                     Small circle of the categories color
  */
-export default function SmallProfile({navigation, profile, login}:
-SmallProfileProps): JSX.Element {  // SVG showing the color of the category
+export default function SmallProfile({ navigation, profile, login }:
+    SmallProfileProps): JSX.Element {  // SVG showing the color of the category
 
     const { theme, isDark } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
@@ -36,7 +37,7 @@ SmallProfileProps): JSX.Element {  // SVG showing the color of the category
                         <Image
                             style={PS.smallProfileImage}
                             source={profile.image
-                                ? {uri: profile.image}
+                                ? { uri: profile.image }
                                 : isDark
                                     ? require("@assets/icons/loginperson-white.png")
                                     : require("@assets/icons/loginperson-black.png")}
@@ -46,7 +47,7 @@ SmallProfileProps): JSX.Element {  // SVG showing the color of the category
                 <View style={PS.smallProfileMiddleTriplet}>
                     {typeof profile.id === "number" ?
                         <>
-                            <Text style={{...T.text20, color: theme.textColor}}>
+                            <Text style={{ ...T.text20, color: theme.textColor }}>
                                 {profile.name}
                             </Text>
                             <Text style={{
@@ -56,8 +57,8 @@ SmallProfileProps): JSX.Element {  // SVG showing the color of the category
                                 {lang ? "Vis profil" : "Show profile"}
                             </Text>
                         </>
-                    :
-                        <Text style={{...T.text25, color: theme.textColor}}>
+                        :
+                        <Text style={{ ...T.text25, color: theme.textColor }}>
                             Login
                         </Text>
                     }
@@ -70,5 +71,5 @@ SmallProfileProps): JSX.Element {  // SVG showing the color of the category
                 </View>
             </View>
         </TouchableOpacity>
-        )
+    )
 }
