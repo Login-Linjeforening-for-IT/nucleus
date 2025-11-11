@@ -5,12 +5,12 @@ import GS from "@styles/globalStyles"
 import { useSelector } from "react-redux"
 import en from "@text/menu/about/en.json"
 import no from "@text/menu/about/no.json"
-import React, { useState } from "react"
+import React, { JSX, useState } from "react"
 import T from "@styles/text"
-import Person, { 
-    AllComitees, 
-    Social, 
-    Styret, 
+import Person, {
+    AllComitees,
+    Social,
+    Styret,
     Copyright
 } from "@/components/about/social"
 import {
@@ -33,7 +33,7 @@ import bedkomSVG from "@assets/committee/bedkom/bedkom-icon.svg"
 import tekkomSVG from "@assets/committee/tekkom/tekkom-icon.svg"
 import styretSVG from "@assets/committee/styret/styret-icon.svg"
 import { TextLink } from "@components/shared/link"
-import { WIKI_URL } from "@/constants"
+import config from "@/constants"
 
 type getCommitteeImageProps = {
     style?: StyleProp<ViewStyle>
@@ -73,7 +73,7 @@ const committeeImages = [
 ]
 
 export default function AboutScreen(): JSX.Element {
-    const { lang  } = useSelector((state: ReduxState) => state.lang)
+    const { lang } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const [committee, setCommittee] = useState(0)
     const text = lang ? no : en
@@ -97,27 +97,27 @@ export default function AboutScreen(): JSX.Element {
         if (height > 800 && height < 900) {
             return 12
         }
-        
+
         return 7
     }
 
     return (
         <Swipe left="MenuScreen">
             <View>
-                <View style={{...GS.content, backgroundColor: theme.darker}}>
+                <View style={{ ...GS.content, backgroundColor: theme.darker }}>
                     <ScrollView showsVerticalScrollIndicator={false}>
-                        <Space height={Dimensions.get("window").height / 8.1 + extraHeight} /> 
+                        <Space height={Dimensions.get("window").height / 8.1 + extraHeight} />
                         <Cluster>
-                            <Text style={{...T.bold40, color: theme.textColor}}>
+                            <Text style={{ ...T.bold40, color: theme.textColor }}>
                                 {text.title}
                             </Text>
                             <Space height={5} />
                             <Line width={5}>
                                 <Text style={{
-                                        ...T.boldWithLine, 
-                                        color: theme.textColor
-                                    }}>
-                                        {text.intro}
+                                    ...T.boldWithLine,
+                                    color: theme.textColor
+                                }}>
+                                    {text.intro}
                                 </Text>
                             </Line>
                             <Dropdown />
@@ -131,27 +131,28 @@ export default function AboutScreen(): JSX.Element {
                             </Text>
                             <Line width={5}>
                                 <Text style={{
-                                        ...T.boldWithLine, 
-                                        color: theme.textColor
-                                    }}>
-                                        {text.about.intro}
+                                    ...T.boldWithLine,
+                                    color: theme.textColor
+                                }}>
+                                    {text.about.intro}
                                 </Text>
                             </Line>
                             <Text style={{
                                 ...T.paragraph,
                                 marginTop: 10,
-                                color: theme.textColor}}>
+                                color: theme.textColor
+                            }}>
                                 {text.about.body.p1}
                             </Text>
                             <Text style={{
-                                ...T.paragraph, 
+                                ...T.paragraph,
                                 marginTop: 10,
                                 color: theme.textColor
                             }}>
                                 {text.about.body.p2}
                             </Text>
                             <Text style={{
-                                ...T.bold25, 
+                                ...T.bold25,
                                 marginTop: 15,
                                 color: theme.textColor
                             }}>
@@ -190,20 +191,20 @@ export default function AboutScreen(): JSX.Element {
                             </Text>
                             <View>
                                 <Text style={{
-                                    ...T.paragraph, 
+                                    ...T.paragraph,
                                     color: theme.textColor
                                 }}>
                                     {text.publicDocs.body}
-                                    <TextLink 
-                                        url={WIKI_URL}
-                                        text={text.publicDocs.wiki} 
+                                    <TextLink
+                                        url={config.wiki_url}
+                                        text={text.publicDocs.wiki}
                                     />.
                                 </Text>
                             </View>
                             <Social />
                             <Copyright />
                         </Cluster>
-                        <Space height={Dimensions.get("window").height / getOffset()} /> 
+                        <Space height={Dimensions.get("window").height / getOffset()} />
                     </ScrollView>
                 </View>
             </View>
@@ -211,7 +212,7 @@ export default function AboutScreen(): JSX.Element {
     )
 }
 
-function CommitteeImage({id, theme, style}: getCommitteeImageProps){
+function CommitteeImage({ id, theme, style }: getCommitteeImageProps) {
     const colors: { [key: string]: string } = {
         dark: '#ffffff',
         gray: '#555555',
@@ -221,20 +222,20 @@ function CommitteeImage({id, theme, style}: getCommitteeImageProps){
     return <SvgXml xml={committeeImages[id]} color={colors[theme] || '#fd8738'} style={style} />
 }
 
-function CommitteePerson({committee}: CommitteePersonProps) {
+function CommitteePerson({ committee }: CommitteePersonProps) {
     const committees = ["evntkom", "tekkom", "pr", "ctf", "eco"]
 
     if (committees[committee - 1]) {
-        return Person({person: committees[committee - 1]})
+        return Person({ person: committees[committee - 1] })
     }
 
     return AllComitees()
 }
 
-function CommitteeView({setCommittee, committee}: CommitteeViewProps) {
+function CommitteeView({ setCommittee, committee }: CommitteeViewProps) {
     const numRows = 1
-    const numCols = Math.ceil(committeeImages.length/numRows)
-    
+    const numCols = Math.ceil(committeeImages.length / numRows)
+
     const { theme, isDark } = useSelector((state: ReduxState) => state.theme)
 
     let rows: string[][] = []
@@ -244,66 +245,66 @@ function CommitteeView({setCommittee, committee}: CommitteeViewProps) {
 
 
     return (
-        <View style={{display: "flex", aspectRatio: numCols / numRows, justifyContent: 'space-between'}}>
+        <View style={{ display: "flex", aspectRatio: numCols / numRows, justifyContent: 'space-between' }}>
             {rows.map((row, rowIndex) => (
-                <View key={rowIndex} style={{display: 'flex', width: '100%', flexDirection: 'row', justifyContent: 'space-between'}}>
+                <View key={rowIndex} style={{ display: 'flex', width: '100%', flexDirection: 'row', justifyContent: 'space-between' }}>
                     {row.map((xml, index) => (
-                        <TouchableOpacity key={index} 
+                        <TouchableOpacity key={index}
                             onPress={() => {
                                 setCommittee(rowIndex * numCols + index)
                             }}
                             style={{
-                                ...GS.committee, 
-                                backgroundColor: theme.contrast, 
+                                ...GS.committee,
+                                backgroundColor: theme.contrast,
                                 width: Dimensions.get('window').width / numCols - Dimensions.get('window').width / numCols * 15 / 100,
-                                aspectRatio: 1,  
+                                aspectRatio: 1,
                                 justifyContent: 'space-between',
                                 marginLeft: 'auto',
                                 marginRight: 'auto'
                             }}>
-                            <CommitteeImage 
-                                id={rowIndex*numCols+index} 
+                            <CommitteeImage
+                                id={rowIndex * numCols + index}
                                 theme={committee == rowIndex * numCols + index ? "" : isDark ? "dark" : "gray"}
-                                style={{alignSelf: 'center', marginTop: 'auto', marginBottom: 'auto', width: '80%', aspectRatio: 1}}
+                                style={{ alignSelf: 'center', marginTop: 'auto', marginBottom: 'auto', width: '80%', aspectRatio: 1 }}
                             />
                         </TouchableOpacity>
-                        ))}
+                    ))}
                 </View>
             ))}
         </View>
     )
 }
 
-function CommitteeContent({index, relevantCommittee}: 
-CommitteeContentProps) {
+function CommitteeContent({ index, relevantCommittee }:
+    CommitteeContentProps) {
     const { theme, isDark } = useSelector((state: ReduxState) => state.theme)
-    
+
     return (
         <View key={index}>
-            <Text style={{...T.text30, color: theme.textColor}}>
-                <CommitteeImage id={relevantCommittee.id} style={GS.small} theme={isDark?"dark":"gray"}/>
+            <Text style={{ ...T.text30, color: theme.textColor }}>
+                <CommitteeImage id={relevantCommittee.id} style={GS.small} theme={isDark ? "dark" : "gray"} />
                 {relevantCommittee.title}
             </Text>
 
             {relevantCommittee.quote.length > 0 &&
                 <>
-                    <Space height={10} /> 
-                        <Line width={5}>
-                            <Text style={{
-                                ...T.boldWithLine, 
-                                color: theme.textColor
-                            }}>
-                                {relevantCommittee.quote}
-                            </Text>
-                        </Line>
-                    <Space height={10} /> 
+                    <Space height={10} />
+                    <Line width={5}>
+                        <Text style={{
+                            ...T.boldWithLine,
+                            color: theme.textColor
+                        }}>
+                            {relevantCommittee.quote}
+                        </Text>
+                    </Line>
+                    <Space height={10} />
                 </>
             }
 
-            <Text style={{...T.paragraph, color: theme.textColor}}>
+            <Text style={{ ...T.paragraph, color: theme.textColor }}>
                 {relevantCommittee.description}
             </Text>
-            <Space height={15} /> 
+            <Space height={15} />
         </View>
     )
 }

@@ -1,31 +1,83 @@
-import { useEffect } from "react"
-import { View, Alert } from "react-native"
+import { View, Alert, Linking, Platform } from "react-native"
+import { nativeApplicationVersion } from "expo-application"
 import { useSelector } from "react-redux"
+import { useEffect, useState } from "react"
+import config from "@/constants"
 
 export default function ForceUpdate() {
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    
-    const updateNo = {
-        title: "Oppdatering tilgjengelig!", 
-        body: "Gode nyheter! En ny oppdatering er tilgjengelig 😃"
+    const [updateRequired, setUpdateRequired] = useState(false)
+
+    const appUrls = {
+        ios: config.apple_app_store_url,
+        android: config.android_play_store_url,
     }
 
-    const updateEn = {
-        title: "New update available!", 
-        body: "Good news! A new update is available 😃"
+    const apiUrl = `${config.app_api_url}/version?version=${nativeApplicationVersion}&lang=${lang}`
+
+    function openStore() {
+        const url = Platform.OS === 'ios' ? appUrls.ios : appUrls.android
+        Linking.openURL(url).catch(() => {
+            Alert.alert("Error", "Could not open the store")
+        })
     }
 
-    const update = lang ? updateNo : updateEn
+    async function checkVersion() {
+        try {
+            const response = await fetch(apiUrl)
+            if (!response.ok) {
+                console.log('Failed to fetch API.')
+                return
+            }
 
-    function alert() {
-        Alert.alert(update.title, update.body)
+            const data = await response.json()
+            if (!data?.update) {
+                return
+            }
+
+            const { updateRequired, update, buttons } = data
+            setUpdateRequired(!!updateRequired)
+
+            const alertButtons = buttons.map((btn: { text: string; action: string }) => {
+                if (btn.action === 'update') {
+                    return { text: btn.text, onPress: openStore }
+                }
+
+                return { text: btn.text, style: 'cancel' }
+            })
+
+            Alert.alert(
+                update.title,
+                update.body,
+                alertButtons,
+                { cancelable: !updateRequired }
+            )
+        } catch (err) {
+            console.log('Version check failed:', err)
+        }
     }
 
     useEffect(() => {
-        alert()
-    }, [])
+        checkVersion()
+    }, [lang])
 
+    if (!updateRequired) {
+        return null
+    }
 
-    return <View style={{backgroundColor: 'black', height: "100%", width: "100%"}} />
+    return (
+        <View
+            style={{
+                backgroundColor: theme?.dark || 'black',
+                opacity: 0.8,
+                height: '100%',
+                width: '100%',
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                zIndex: 9999,
+            }}
+        />
+    )
 }

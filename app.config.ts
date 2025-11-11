@@ -19,7 +19,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
         url: "https://u.expo.dev/952a1914-0c53-43e7-b64e-8daab0b3a435"
     },
     plugins: [
-        ["@react-native-firebase/app"],
+        "expo-notifications",
         [
             "expo-calendar",
             {
@@ -52,7 +52,6 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
         supportsTablet: true,
         bundleIdentifier: "com.eirikhanasand.Login",
         buildNumber: config.ios?.buildNumber,
-        googleServicesFile: process.env.GOOGLE_SERVICES_INFO_PLIST || "./GoogleService-Info.plist",
         infoPlist: {
             UIBackgroundModes: [
                 "fetch",
@@ -66,7 +65,6 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
             backgroundColor: "#000000"
         },
         package: "com.login.Login",
-        googleServicesFile: process.env.GOOGLE_SERVICES_JSON || "./google-services.json",
         versionCode: config.android?.versionCode,
         permissions: [
             "INTERNET",

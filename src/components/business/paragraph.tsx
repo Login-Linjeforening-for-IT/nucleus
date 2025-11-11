@@ -4,6 +4,7 @@ import Space from "@/components/shared/utils"
 import GS from "@styles/globalStyles"
 import { useSelector } from "react-redux"
 import T from "@styles/text"
+import { JSX } from 'react'
 
 type ParagraphProps = {
     logo: ImageSourcePropType

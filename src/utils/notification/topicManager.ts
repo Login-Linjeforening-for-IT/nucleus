@@ -1,5 +1,5 @@
-import messaging from "@react-native-firebase/messaging"
-import subscribeToTopic from "@utils/subscribeToTopic"
+import { requestNotificationPermission } from './notificationSetup'
+import { subscribeToTopic, unsubscribeFromTopic } from './subscribeToTopic'
 
 type TopicManagerProps = {
     topic: string
@@ -17,8 +17,7 @@ type TopicManagerProps = {
  */
 export default async function TopicManager({ topic, unsub }: TopicManagerProps) {
     try {
-        const granted = await messaging().requestPermission()
-
+        const granted = await requestNotificationPermission()
         if (!granted) {
             return { result: false, feedback: 'You must enable notifications for this feature.' }
         }
@@ -27,10 +26,10 @@ export default async function TopicManager({ topic, unsub }: TopicManagerProps) 
             if (topic.includes(',')) {
                 const topics = topic.split(',')
                 for (const topic of topics) {
-                    await messaging().unsubscribeFromTopic(topic)
+                    await unsubscribeFromTopic(topic)
                 }
             } else {
-                await messaging().unsubscribeFromTopic(topic)
+                await unsubscribeFromTopic(topic)
             }
 
             return { result: true, feedback: `Unsubscribed from ${topic}` }
@@ -39,10 +38,19 @@ export default async function TopicManager({ topic, unsub }: TopicManagerProps) 
         const result = await subscribeToTopic(topic)
         return result
     } catch (error: unknown) {
-        if (typeof error === 'string') return { result: false, feedback: error }
-        if (typeof error === 'object' && error != null) return { result: false, feedback: error.toString() }
-        if (Array.isArray(error)) return { result: false, feedback: error.join() }
+        if (typeof error === 'string') {
+            return { result: false, feedback: error }
+        }
 
-        return { result: false, feedback: 'Result was an error, but the error was too dangerous to be displayed.' }
+        if (typeof error === 'object' && error != null) {
+            return { result: false, feedback: error.toString() }
+        }
+
+        if (Array.isArray(error)) {
+            return { result: false, feedback: error.join() }
+        }
+
+        console.log(error)
+        return { result: false, feedback: 'Unknown error. Please try again later.' }
     }
 }

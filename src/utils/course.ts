@@ -1,4 +1,4 @@
-import { EXAM_API_URL } from "../constants"
+import config from "../constants"
 
 type UpdateCourseProps = {
     courseID: string
@@ -14,7 +14,7 @@ type MarkProps = {
 // Fetches the scoreboard from the server
 export async function getScoreBoard() {
     try {
-        const response = await fetch(`${EXAM_API_URL}/scoreboard`, {
+        const response = await fetch(`${config.exam_api_url}/scoreboard`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -22,9 +22,8 @@ export async function getScoreBoard() {
         })
 
         if (!response.ok) {
-            const data = await response.json()
-
-            throw Error(data.error)
+            const data = await response.text()
+            throw new Error(data)
         }
 
         return await response.json()
@@ -38,7 +37,7 @@ export async function getScoreBoard() {
 // location parameter to ensure all requests are successful
 export async function getCourses(): Promise<CourseAsList[] | string> {
     try {
-        const response = await fetch(`${EXAM_API_URL}/courses`, {
+        const response = await fetch(`${config.exam_api_url}/courses`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -46,8 +45,8 @@ export async function getCourses(): Promise<CourseAsList[] | string> {
         })
 
         if (!response.ok) {
-            const data = await response.json()
-            throw Error(data.error)
+            const data = await response.text()
+            throw new Error(data)
         }
 
         const courses = await response.json()
@@ -64,7 +63,7 @@ export async function getCourses(): Promise<CourseAsList[] | string> {
 export async function getCourse(id: string): Promise<Course | string> {
 
     try {
-        const response = await fetch(`${EXAM_API_URL}/course/${id.toUpperCase()}`, {
+        const response = await fetch(`${config.exam_api_url}/course/${id.toUpperCase()}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -72,9 +71,8 @@ export async function getCourse(id: string): Promise<Course | string> {
         })
 
         if (!response.ok) {
-            const data = await response.json()
-
-            throw Error(data.error)
+            const data = await response.text()
+            throw new Error(data)
         }
 
         const course = await response.json()
@@ -95,7 +93,7 @@ export async function updateCourse({ courseID, accepted, editing }: UpdateCourse
             throw Error('User not logged in')
         }
 
-        const response = await fetch(`${EXAM_API_URL}/course/${courseID}`, {
+        const response = await fetch(`${config.exam_api_url}/course/${courseID}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -109,9 +107,8 @@ export async function updateCourse({ courseID, accepted, editing }: UpdateCourse
         })
 
         if (!response.ok) {
-            const data = await response.json()
-
-            throw Error(data.error)
+            const data = await response.text()
+            throw new Error(data)
         }
 
         const result = await response.json()
@@ -132,7 +129,7 @@ export async function updateUserTime({ time }: { time: number }) {
             throw Error('Please log in to log your efforts.')
         }
 
-        const response = await fetch(`${EXAM_API_URL}/time`, {
+        const response = await fetch(`${config.exam_api_url}/time`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -145,9 +142,8 @@ export async function updateUserTime({ time }: { time: number }) {
         })
 
         if (!response.ok) {
-            const data = await response.json()
-
-            throw Error(data.error)
+            const data = await response.text()
+            throw new Error(data)
         }
 
         const result = await response.json()
@@ -160,7 +156,7 @@ export async function updateUserTime({ time }: { time: number }) {
 
 export async function getFile(courseID: string, name: string) {
     try {
-        const response = await fetch(`${EXAM_API_URL}/file/${courseID}/${name}`, {
+        const response = await fetch(`${config.exam_api_url}/file/${courseID}/${name}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -168,9 +164,8 @@ export async function getFile(courseID: string, name: string) {
         })
 
         if (!response.ok) {
-            const data = await response.json()
-
-            throw Error(data.error)
+            const data = await response.text()
+            throw new Error(data)
         }
 
         return await response.json()
@@ -182,7 +177,7 @@ export async function getFile(courseID: string, name: string) {
 
 export async function getFiles(courseID: string) {
     try {
-        const response = await fetch(`${EXAM_API_URL}/files/${courseID}`, {
+        const response = await fetch(`${config.exam_api_url}/files/${courseID}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -190,9 +185,8 @@ export async function getFiles(courseID: string) {
         })
 
         if (!response.ok) {
-            const data = await response.json()
-
-            throw Error(data.error)
+            const data = await response.text()
+            throw new Error(data)
         }
 
         return await response.json()
@@ -204,7 +198,7 @@ export async function getFiles(courseID: string) {
 
 export async function getUser(id: string): Promise<User | string> {
     try {
-        const response = await fetch(`${EXAM_API_URL}/user/${id}`, {
+        const response = await fetch(`${config.exam_api_url}/user/${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -212,8 +206,8 @@ export async function getUser(id: string): Promise<User | string> {
         })
 
         if (!response.ok) {
-            const data = await response.json()
-            throw new Error(data.error)
+            const data = await response.text()
+            throw new Error(data)
         }
 
         const user: User = await response.json()
@@ -231,7 +225,7 @@ export async function addCourse(course: Course): Promise<void | string> {
 
     try {
         if (user) {
-            const response = await fetch(`${EXAM_API_URL}/upload_course`, {
+            const response = await fetch(`${config.exam_api_url}/upload_course`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -244,9 +238,8 @@ export async function addCourse(course: Course): Promise<void | string> {
             })
 
             if (!response.ok) {
-                const data = await response.json()
-
-                throw Error(data.error)
+                const data = await response.text()
+                throw new Error(data)
             }
 
             const result = response.json()
@@ -266,7 +259,7 @@ export async function addCard(courseID: string, card: Card): Promise<void | stri
     const token = 'disabled' // getItem('token')
 
     if (user) {
-        const response = await fetch(`${EXAM_API_URL}/upload_card`, {
+        const response = await fetch(`${config.exam_api_url}/upload_card`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -280,9 +273,8 @@ export async function addCard(courseID: string, card: Card): Promise<void | stri
         })
 
         if (!response.ok) {
-            const data = await response.json()
-
-            throw Error(data.error)
+            const data = await response.text()
+            throw new Error(data)
         }
 
         return await response.json()
@@ -297,7 +289,7 @@ export async function sendText(courseID: string, text: string[]): Promise<void |
     const token = 'disabled' // getItem('token')
 
     if (user) {
-        const response = await fetch(`${EXAM_API_URL}/text`, {
+        const response = await fetch(`${config.exam_api_url}/text`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -311,9 +303,8 @@ export async function sendText(courseID: string, text: string[]): Promise<void |
         })
 
         if (!response.ok) {
-            const data = await response.json()
-
-            throw Error(data.error)
+            const data = await response.text()
+            throw new Error(data)
         }
 
         return await response.json()
@@ -323,27 +314,32 @@ export async function sendText(courseID: string, text: string[]): Promise<void |
 }
 
 export async function sendMark({ courseID, mark }: MarkProps) {
-    const user = { username: 'hei' } // getItem('user') as User | undefined
-
-    if (!user) {
-        throw Error('You must be logged in to mark')
-    }
-
-    const response = await fetch(`${EXAM_API_URL}/mark`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            courseID, mark
+    try {
+        const user = { username: 'hei' } // getItem('user') as User | undefined
+    
+        if (!user) {
+            throw Error('You must be logged in to mark')
+        }
+    
+        const response = await fetch(`${config.exam_api_url}/mark`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                courseID, mark
+            })
         })
-    })
-
-    if (!response.ok) {
+    
+        if (!response.ok) {
+                const data = await response.text()
+                throw new Error(data)   
+        }
+    
         const data = await response.json()
-
-        throw Error(data.error)
+        return data
+    } catch (error) {
+        console.log(error)
+        return null
     }
-
-    return await response.json()
 }

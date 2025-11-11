@@ -1,14 +1,11 @@
-import { ParamListBase } from "@react-navigation/native"
+import type { DimensionValue, ImageSourcePropType, StyleProp, ViewStyle } from "react-native"
+import type { ParamListBase } from "@react-navigation/native"
+import type { JSX, ReactNode } from "react"
 import type { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs'
-import { DimensionValue, ImageSourcePropType, StyleProp, ViewStyle } from "react-native"
-import { ReactNode } from "react"
 import type { StackHeaderProps, StackNavigationOptions } from "@react-navigation/stack"
-import { 
-    BottomTabHeaderProps,
-    BottomTabNavigationProp
-} from "@react-navigation/bottom-tabs/lib/typescript/src/types"
+import type { BottomTabHeaderProps, BottomTabNavigationProp } from "@react-navigation/bottom-tabs"
 
-export interface ExtendedBottomTabHeaderProps 
+export interface ExtendedBottomTabHeaderProps
     extends Omit<BottomTabHeaderProps, 'options'> {
     options: ExtendedRouteOptions
 }
@@ -17,7 +14,7 @@ export interface ExtendedRouteOptions extends Omit<BottomTabNavigationOptions, '
     focusedIcon: ImageSourcePropType
     icon: ImageSourcePropType
     themeIcon?: ImageSourcePropType
-    
+
     header?: (props: ExtendedBottomTabHeaderProps) => ReactNode
 }
 
@@ -46,7 +43,7 @@ export type NotificationScreenProps = {
 }
 
 export interface HeaderProps extends Omit<StackHeaderProps, 'options'> {
-    options: StackRouteOptions & {headerComponents?: {bottom?: JSX.Element[], right?: JSX.Element[], left?: JSX.Element[]}}
+    options: StackRouteOptions & { headerComponents?: { bottom?: JSX.Element[], right?: JSX.Element[], left?: JSX.Element[] } }
 }
 
 export interface StackRouteOptions extends Omit<StackNavigationOptions, 'header'> {

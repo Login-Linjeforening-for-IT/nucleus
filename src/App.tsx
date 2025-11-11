@@ -5,7 +5,7 @@ import { Provider } from "react-redux"
 import Navigator from "@nav/tabs"
 import store from "@redux/store"
 import ForceUpdate from "@components/menu/forceUpdate"
-import { requestNotificationPermission } from "@utils/notificationSetup"
+import { requestNotificationPermission } from "@utils/notification/notificationSetup"
 
 let persistor = persistStore(store)
 
@@ -23,17 +23,13 @@ let persistor = persistStore(store)
  * @returns Entire application
  */
 export default function App() {
-
-    // Registers the root component
     AppRegistry.registerComponent("app", () => App)
-
-    // Asks for permission to send notifications
     requestNotificationPermission()
 
     return (
         <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}>
-                {/* <ForceUpdate /> */}
+                <ForceUpdate />
                 <Navigator />
             </PersistGate>
         </Provider>

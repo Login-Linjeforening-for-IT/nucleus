@@ -8,7 +8,8 @@ import { View, TouchableOpacity, Dimensions } from "react-native"
 import { ScrollView } from "react-native-gesture-handler"
 import Text from "@components/shared/text"
 import ManageTopics from "@components/notification/manageTopics"
-import TopicManager from "@utils/topicManager"
+import TopicManager from "@utils/notification/topicManager"
+import { JSX } from 'react'
 
 export default function InternalScreen(): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)

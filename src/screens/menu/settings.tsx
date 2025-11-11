@@ -12,6 +12,7 @@ import en from "@text/menu/settings/en.json"
 import no from "@text/menu/settings/no.json"
 import T from "@styles/text"
 import Swipe from "@components/nav/swipe"
+import { JSX } from 'react'
 
 type ClusterWithSwitchProps = {
     obj: infoProps

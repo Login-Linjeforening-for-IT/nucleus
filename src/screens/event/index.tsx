@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react"
+import React, { JSX, useEffect, useState } from "react"
 import EventList from "@components/event/eventList"
 import GS from "@styles/globalStyles"
-import NavigateFromPushNotification 
-from "@/utils/navigateFromPushNotification"
-import initializeNotifications 
-from "@/utils/notificationSetup"
+import NavigateFromPushNotification
+    from "@utils/notification/navigateFromPushNotification"
+import initializeNotifications
+    from "@utils/notification/notificationSetup"
 import LastFetch, { fetchEvents } from "@/utils/fetch"
 import LogoNavigation from "@/components/shared/logoNavigation"
 import Swipe from "@components/nav/swipe"
@@ -32,7 +32,7 @@ import { EventScreenProps } from "@type/screenTypes"
 export default function EventScreen({ navigation }: EventScreenProps<'EventScreen'>): JSX.Element {
     // Push notification
     const [pushNotification, setPushNotification] = useState(false)
-    const [pushNotificationContent, setPushNotificationContent] = 
+    const [pushNotificationContent, setPushNotificationContent] =
         useState<JSX.Element | undefined>(undefined)
     // Notification state
     const [shouldSetupNotifications, setShouldSetupNotifications] = useState(true)
@@ -51,7 +51,7 @@ export default function EventScreen({ navigation }: EventScreenProps<'EventScree
         // Callback to avoid too many rerenders
         React.useCallback(() => {
             // IIFE to fetch clicked events
-            (async() => {
+            (async () => {
                 const events = await fetchEvents()
 
                 if (events.length) {
@@ -65,7 +65,7 @@ export default function EventScreen({ navigation }: EventScreenProps<'EventScree
     // Loads initial data
     useEffect(() => {
         // IIFE to fetch API
-        (async() => {
+        (async () => {
             const events = await fetchEvents()
 
             if (events.length) {
@@ -74,24 +74,25 @@ export default function EventScreen({ navigation }: EventScreenProps<'EventScree
             }
         })()
 
-    // Renders when the screen is loaded
+        // Renders when the screen is loaded
     }, [])
 
     useEffect(() => {
-        // --- SETUP CODE ONCE APP IS DOWNLOADED---
         // Displays when the API was last fetched successfully
-        if (lastSave === "") {(async() => {dispatch(setLastSave(LastFetch()))})()
-    }
+        if (lastSave === "") {
+            (async () => { dispatch(setLastSave(LastFetch())) })()
+        }
     }, [lastSave])
 
     // Sets the component of the header
-    useEffect(()=>{
+    useEffect(() => {
         navigation.setOptions({
             headerComponents: {
                 bottom: [<FilterUI />],
                 left: [<LogoNavigation />],
-                right: [<FilterButton />, <DownloadButton screen="event"/>]
-            }} as any)   
+                right: [<FilterButton />, <DownloadButton screen="event" />]
+            }
+        } as any)
     }, [navigation])
 
     initializeNotifications({
@@ -106,7 +107,7 @@ export default function EventScreen({ navigation }: EventScreenProps<'EventScree
         <Swipe right="AdNav">
             <View>
                 <StatusBar style={isDark ? "light" : "dark"} />
-                <View 
+                <View
                     style={{
                         ...GS.content,
                         paddingHorizontal: 5,

@@ -2,7 +2,7 @@ import { MenuProps } from "@type/screenTypes"
 import { useDispatch, useSelector } from "react-redux"
 import Parent from "@components/shared/parent"
 import { setLocalTitle } from "@redux/misc"
-import { useEffect, useState } from "react"
+import { JSX, useEffect, useState } from "react"
 import { Dimensions, Text, View } from "react-native"
 import { 
     getQuestions, 

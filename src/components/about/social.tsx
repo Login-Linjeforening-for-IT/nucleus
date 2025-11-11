@@ -3,6 +3,7 @@ import ES from "@styles/eventStyles"
 import GS from "@styles/globalStyles"
 import Link, { TextLink } from "@components/shared/link"
 import T from "@styles/text"
+import { JSX } from 'react'
 import { useSelector } from "react-redux"
 import { random } from "@/components/shared/utils"
 import personInfo from "@utils/personInfo"
@@ -14,17 +15,7 @@ import {
     TouchableOpacity,
     View,
 } from "react-native"
-import { 
-    CDN, 
-    DISCORD_URL, 
-    FACEBOOK_URL, 
-    GITLAB_URL, 
-    INSTAGRAM_URL, 
-    LINKEDIN_URL, 
-    MAILTO_URL, 
-    MAIL_URL, 
-    WIKI_URL 
-} from "@/constants"
+import config from "@/constants"
 
 type PersonProps = {
     person: string
@@ -36,9 +27,9 @@ type MediaLogoProps = {
 }
 
 type MediaProps = {
-    [key: string]: { 
-        link: string 
-        logo: ImageSourcePropType 
+    [key: string]: {
+        link: string
+        logo: ImageSourcePropType
     }
 }
 
@@ -59,25 +50,25 @@ type StaticImageProps = {
  * @param {string} person
  * @returns Full object packed in a view component
  */
-export default function Person({person}: PersonProps): JSX.Element {
+export default function Person({ person }: PersonProps): JSX.Element {
 
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
-    let obj = personInfo({person, lang})
-    let corner = random({min: 0, max: 4})
+    let obj = personInfo({ person, lang })
+    let corner = random({ min: 0, max: 4 })
 
     return (
-        <View style={{marginBottom: 20}}>
-            <Image style={{...GS.personImage}} source={{uri: obj.img}} />
+        <View style={{ marginBottom: 20 }}>
+            <Image style={{ ...GS.personImage }} source={{ uri: obj.img }} />
             <CornerSquare corner={corner} />
             <Text style={T.leaderTitle}>{obj.title}</Text>
-            <Text style={{...T.leaderName, color: theme.textColor}}>
+            <Text style={{ ...T.leaderName, color: theme.textColor }}>
                 {obj.name}
             </Text>
             <Link url={obj.dclink}>
-                <Text style={{...T.discord, color: theme.discord}}>
-                    <Image 
-                        style={GS.tiny} 
+                <Text style={{ ...T.discord, color: theme.discord }}>
+                    <Image
+                        style={GS.tiny}
                         source={require("@assets/social/discord-colored.png")}
                     />
                     {obj.tag}
@@ -116,38 +107,38 @@ export function Social() {
 
     const media: MediaProps = {
         discord: {
-            link: DISCORD_URL,
-            logo: isDark 
-                ? require("@assets/social/discord-white.png") 
+            link: config.discord_url,
+            logo: isDark
+                ? require("@assets/social/discord-white.png")
                 : require("@assets/social/discord-black.png")
         },
         instagram: {
-            link: INSTAGRAM_URL,
-            logo: isDark 
+            link: config.instagram_url,
+            logo: isDark
                 ? require("@assets/social/instagram-white.png")
                 : require("@assets/social/instagram-black.png")
         },
         facebook: {
-            link: FACEBOOK_URL,
-            logo: isDark 
+            link: config.facebook_url,
+            logo: isDark
                 ? require("@assets/social/facebook-white.png")
                 : require("@assets/social/facebook-black.png")
         },
         linkedin: {
-            link: LINKEDIN_URL,
-            logo: isDark 
+            link: config.linkedin_url,
+            logo: isDark
                 ? require("@assets/social/linkedin-white.png")
                 : require("@assets/social/linkedin-black.png")
         },
         gitlab: {
-            link: GITLAB_URL,
-            logo: isDark 
+            link: config.gitlab_url,
+            logo: isDark
                 ? require("@assets/social/gitlab-white.png")
                 : require("@assets/social/gitlab-black.png")
         },
         wiki: {
-            link: WIKI_URL,
-            logo: isDark 
+            link: config.wiki_url,
+            logo: isDark
                 ? require("@assets/social/wiki-white.png")
                 : require("@assets/social/wiki-black.png")
         }
@@ -155,17 +146,17 @@ export function Social() {
 
     return (
         <View style={{
-            flexDirection: "row", 
-            justifyContent: "center", 
+            flexDirection: "row",
+            justifyContent: "center",
             marginTop: 10
         }}>
             {Object.values(media).map((item, index) => (
-                <MediaLogo 
-                    key={item.link} 
-                    link={item.link} 
-                    logo={media[Object.keys(media)[index]].logo} 
+                <MediaLogo
+                    key={item.link}
+                    link={item.link}
+                    logo={media[Object.keys(media)[index]].logo}
                 />
-        ))}
+            ))}
         </View>
     )
 }
@@ -184,13 +175,13 @@ export function Social() {
  * @returns Full object packed in a view component
  */
 export function Styret() {
-    let corner = random({min: 0, max: 4})
+    let corner = random({ min: 0, max: 4 })
 
     return (
         <View>
-            <Image 
-                style={{...GS.aboutImage}} 
-                source={{uri: `${CDN}board/gruppebilde.JPG`}}
+            <Image
+                style={{ ...GS.aboutImage }}
+                source={{ uri: `${config.cdn}/board/gruppebilde.JPG` }}
             />
             <CornerSquare corner={corner} type={true} />
         </View>
@@ -203,7 +194,7 @@ export function Styret() {
  */
 export function Contact() {
 
-    const { lang  } = useSelector((state: ReduxState) => state.lang)
+    const { lang } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const color = theme.textColor
 
@@ -217,16 +208,16 @@ export function Contact() {
 
     return (
         <View>
-            <Text style={{...T.centeredBold20, color: color}}>{info.contact}</Text>
-            <Text style={{...T.centered15, color: color}}>{info.name}</Text>
-            <Text style={{...T.centered15, color: color}}>{info.location}</Text>
-            <Text style={{...T.centered15, color: color}}>{info.address}</Text>
-            <Text style={{...T.centered15, color: color}}>{info.post}</Text>
+            <Text style={{ ...T.centeredBold20, color: color }}>{info.contact}</Text>
+            <Text style={{ ...T.centered15, color: color }}>{info.name}</Text>
+            <Text style={{ ...T.centered15, color: color }}>{info.location}</Text>
+            <Text style={{ ...T.centered15, color: color }}>{info.address}</Text>
+            <Text style={{ ...T.centered15, color: color }}>{info.post}</Text>
 
-            <TextLink 
-                url={MAILTO_URL}
-                text={MAIL_URL}
-                style={{...T.orange15, top: 3.2, alignSelf: "center", marginBottom: 20}}
+            <TextLink
+                url={config.mailto_url}
+                text={config.mail_url}
+                style={{ ...T.orange15, top: 3.2, alignSelf: "center", marginBottom: 20 }}
             />
         </View>
     )
@@ -238,19 +229,19 @@ export function Contact() {
  */
 export function Copyright() {
 
-    const { lang  } = useSelector((state: ReduxState) => state.lang)
+    const { lang } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
 
     return (
         <View>
-            <Text style={{...T.copyright, color: theme.oppositeTextColor}}>
+            <Text style={{ ...T.copyright, color: theme.oppositeTextColor }}>
                 {`${lang ? "Opphavsrett" : "Copyright"} © 2022-${new Date().getFullYear()} Login - Linjeforeningen for IT\nD-U-N-S 345 129 409\nNO 811 940 372`}
             </Text>
         </View>
     )
 }
 
-function MediaLogo({link, logo}: MediaLogoProps) {
+function MediaLogo({ link, logo }: MediaLogoProps) {
     return (
         <View style={GS.socialPartView}>
             <TouchableOpacity onPress={() => Linking.openURL(link)}>
@@ -260,15 +251,15 @@ function MediaLogo({link, logo}: MediaLogoProps) {
     )
 }
 
-export function StaticImage({category}: StaticImageProps): JSX.Element {
+export function StaticImage({ category }: StaticImageProps): JSX.Element {
     const images: Record<string, ImageSourcePropType> = {
-        tekkom:  require(`../../../public/assets/committee/tekkom/tekkom.png`),
-        ctf:     require(`../../../public/assets/committee/ctfkom/ctf.png`),
+        tekkom: require(`../../../public/assets/committee/tekkom/tekkom.png`),
+        ctf: require(`../../../public/assets/committee/ctfkom/ctf.png`),
         bedpres: require(`../../../public/assets/committee/bedkom/bedkom.png`),
-        sosialt:  require(`../../../public/assets/categories/sosialt.png`),
-        social:  require(`../../../public/assets/categories/sosialt.png`),
-        login:   require(`../../../public/assets/categories/login.png`),
-        annet:   require(`../../../public/assets/categories/annet.png`),
+        sosialt: require(`../../../public/assets/categories/sosialt.png`),
+        social: require(`../../../public/assets/categories/sosialt.png`),
+        login: require(`../../../public/assets/categories/login.png`),
+        annet: require(`../../../public/assets/categories/annet.png`),
     }
     const image = images[category.toLowerCase()] || images.annet
 

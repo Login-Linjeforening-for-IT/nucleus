@@ -16,10 +16,10 @@ import {
     EventStatus,
 } from "expo-calendar"
 import capitalizeFirstLetter from "./capitalizeFirstLetter"
-import { LOGIN_URL } from "@/constants"
+import config from "@/constants"
 
 type handleDownloadProps = {
-    items: EventProps[] | AdProps[]
+    items: GetEventProps[] | GetJobProps[]
     calendarID: string
     dispatch: Dispatch<UnknownAction>
     lang: boolean
@@ -27,21 +27,21 @@ type handleDownloadProps = {
 }
 
 type updateCalendarProps = {
-    items: EventProps[] | AdProps[]
+    items: GetEventProps[] | GetJobProps[]
     calendarID: string
     lang: boolean
     isEventScreen: boolean
 }
 
 type itemsToCalendarFormatProps = {
-    items: EventProps[] | AdProps[]
+    items: GetEventProps[] | GetJobProps[]
     calendarID: string
     lang: boolean
     isEventScreen: boolean
 }
 
 type executeDownloadProps = {
-    items: EventProps[] | AdProps[]
+    items: GetEventProps[] | GetJobProps[]
     calendarID: string
     dispatch: Dispatch<UnknownAction>
     lang: boolean
@@ -126,7 +126,7 @@ async function calendarExists(calendarID: string) {
  *
  * @param {array} items Items to include in the calendar
  */
-async function createCalendar(items: EventProps[] | AdProps[], lang: boolean, isEventScreen: boolean) {
+async function createCalendar(items: GetEventProps[] | GetJobProps[], lang: boolean, isEventScreen: boolean) {
     const { status } = await requestCalendarPermissionsAsync()
 
     if (status !== "granted") return
@@ -150,6 +150,7 @@ async function createCalendar(items: EventProps[] | AdProps[], lang: boolean, is
             ownerAccount: "personal",
             accessLevel: CalendarAccessLevel.OWNER,
         })
+
         await updateCalendar({ items, calendarID, lang, isEventScreen })
 
         return calendarID
@@ -181,29 +182,29 @@ async function eventsToCalendarFormat({ items, calendarID, lang, isEventScreen }
             location = lang
                 ? event.location?.name_no || event.location?.name_no || ''
                 : event.location?.name_en || event.location?.name_en || ''
-            title = lang ? event.event.name_no || event.event.name_en || '' : event.event.name_en || event.event.name_no || ''
-            const fixedDesc = lang ? event.event.description_no || event.event.description_en || '' : event.event.description_en || event.event.description_no || ''
+            title = lang ? event.name_no || event.name_en || '' : event.name_en || event.name_no || ''
+            const fixedDesc = lang ? event.description_no || event.description_en || '' : event.description_en || event.description_no || ''
 
             notes = fixedDesc.replace(/\\n/g, '\n') || undefined
-            if (!location.length) location = `${LOGIN_URL}/events/${item.id}`
-            startDate = new Date(event.event.time_start)
-            endDate = new Date(event.event.time_end)
+            if (!location.length) location = `${config.login_url}/events/${item.id}`
+            startDate = new Date(event.time_start)
+            endDate = new Date(event.time_end)
         } else if (ad) {
-            location = ad?.job.cities?.map(city => capitalizeFirstLetter(city)).join(", ") || ''
-            title = `${lang ? 'Frist for å søke jobb - ' : 'Deadline to apply - '}${lang ? ad.job.title_no || ad.job.title_en : ad.job.title_en || ad.job.title_no}!`
+            location = ad?.cities?.map(city => capitalizeFirstLetter(city)).join(", ") || ''
+            title = `${lang ? 'Frist for å søke jobb - ' : 'Deadline to apply - '}${lang ? ad.title_no || ad.title_en : ad.title_en || ad.title_no}!`
             const tempShort = lang
-                ? ad.job.description_short_no || ad.job.description_short_en
-                : ad.job.description_short_en || ad.job.description_short_no
+                ? ad.description_short_no || ad.description_short_en
+                : ad.description_short_en || ad.description_short_no
             const tempLong = lang
-                ? ad.job.description_long_no || ad.job.description_long_en
-                : ad.job.description_long_en || ad.job.description_long_no
+                ? ad.description_long_no || ad.description_long_en
+                : ad.description_long_en || ad.description_long_no
 
             const shortDescription = tempShort ? tempShort.replace(/\\n/g, '\n') : ''
             const LongDescription = tempLong ? tempLong.replace(/\\n/g, '\n') : ''
             notes = LongDescription || shortDescription || ''
-            if (!location.length) location = `${LOGIN_URL}/career/${item.id}`
-            startDate = new Date(new Date(ad.job.application_deadline).getTime() - 14400000)
-            endDate = new Date(ad.job.application_deadline)
+            if (!location.length) location = `${config.login_url}/career/${item.id}`
+            startDate = new Date(new Date(ad.time_expire).getTime() - 14400000)
+            endDate = new Date(ad.time_expire)
         }
 
         const obj = {

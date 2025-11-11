@@ -1,4 +1,4 @@
-import { API } from "@/constants"
+import config from "@/constants"
 
 /**
  * Function for checking when the API was last fetched successfully.
@@ -28,13 +28,13 @@ export default function LastFetch(param?: string) {
  * @returns All details for passed event
  */
 export async function fetchEventDetails(id: number):
-    Promise<DetailedEventResponse> {
+    Promise<GetEventProps> {
     // Fetches events
-    const response = await fetch(`${API}events/${id}`)
+    const response = await fetch(`${config.api}events/${id}`)
 
     // Test API
     // const response = await fetch(`${testapi}events/${id}`)
-    const eventDetails: DetailedEventResponse = await response.json()
+    const eventDetails: GetEventProps = await response.json()
 
     return eventDetails
 }
@@ -44,10 +44,10 @@ export async function fetchEventDetails(id: number):
  * events on the screen, catches any errors and fetches localstorage, and 
  * handles errors.
  */
-export async function fetchEvents(): Promise<EventProps[]> {
+export async function fetchEvents(): Promise<GetEventProps[]> {
     try {
         // Fetches events
-        const response = await fetch(`${API}events`)
+        const response = await fetch(`${config.api}events`)
 
         // Checks if response is ok, otherwise throws error
         if (!response.ok) {
@@ -68,10 +68,10 @@ export async function fetchEvents(): Promise<EventProps[]> {
  * events on the screen, catches any errors and fetches localstorage, and 
  * handles errors.
  */
-export async function fetchAds(): Promise<AdProps[]> {
+export async function fetchAds(): Promise<GetJobProps[]> {
     try {
         // Fetches ads
-        const response = await fetch(`${API}jobs/`)
+        const response = await fetch(`${config.api}jobs/`)
 
         // Checks if response is ok, otherwise throws error
         if (!response.ok) {
@@ -90,14 +90,14 @@ export async function fetchAds(): Promise<AdProps[]> {
 /**
  * Fetches the specific ad page for additional details
  *
- * @param {object} adID    Ad to fetch details for
+ * @param {object} adID Ad to fetch details for
  *
- * @returns                 All details for passed event
+ * @returns All details for passed event
  */
-export async function fetchAdDetails(adID: number): Promise<DetailedAdResponse> {
+export async function fetchAdDetails(adID: number): Promise<GetJobProps> {
 
     // Prod
-    const response = await fetch(`${API}jobs/${adID}`)
+    const response = await fetch(`${config.api}jobs/${adID}`)
 
     // Dev
     // const response = await fetch(`${testapi}jobs/${ad.id}`)

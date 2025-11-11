@@ -2,26 +2,26 @@ import { createSlice } from "@reduxjs/toolkit"
 
 type FilterProps = {
     input: string
-    events: EventProps[]
-    clickedEvents: EventProps[]
+    events: GetEventProps[]
+    clickedEvents: GetEventProps[]
     clickedCategories: string[]
 }
 
 type FilterTextProps = {
-    events: EventProps[]
+    events: GetEventProps[]
     input: string
 }
 
 type FilterCategoriesProps = {
-    events: EventProps[]
-    clickedEvents: EventProps[]
+    events: GetEventProps[]
+    clickedEvents: GetEventProps[]
     clickedCategories: string[]
 }
 
 type filterBothProps = {
     clickedCategories: string[]
-    clickedEvents: EventProps[]
-    events: EventProps[]
+    clickedEvents: GetEventProps[]
+    events: GetEventProps[]
     input: string
 }
 
@@ -31,10 +31,10 @@ export const EventSlice = createSlice({
     name: "event",
     // Initial state of the slice
     initialState: {
-        events: [] as EventProps[],
+        events: [] as GetEventProps[],
         eventName: "",
-        clickedEvents: [] as EventProps[],
-        renderedEvents: [] as EventProps[],
+        clickedEvents: [] as GetEventProps[],
+        renderedEvents: [] as GetEventProps[],
         lastFetch: "",
         lastSave: "",
         search: false,
@@ -53,7 +53,7 @@ export const EventSlice = createSlice({
         setEvents(state, action) {
             state.events = action.payload
             state.categories = setCategories(state.events, state.clickedEvents)
-            
+
             if (!state.search) {
                 state.renderedEvents = action.payload
             }
@@ -88,8 +88,8 @@ export const EventSlice = createSlice({
             state.clickedCategories = action.payload
             state.renderedEvents = Filter({
                 input: state.input,
-                events: state.events, 
-                clickedEvents: state.clickedEvents, 
+                events: state.events,
+                clickedEvents: state.clickedEvents,
                 clickedCategories: state.clickedCategories
             })
         },
@@ -104,8 +104,8 @@ export const EventSlice = createSlice({
             state.input = action.payload
             state.renderedEvents = Filter({
                 input: state.input,
-                events: state.events, 
-                clickedEvents: state.clickedEvents, 
+                events: state.events,
+                clickedEvents: state.clickedEvents,
                 clickedCategories: state.clickedCategories
             })
         },
@@ -119,7 +119,7 @@ export const EventSlice = createSlice({
 })
 
 // Exports functions
-export const { 
+export const {
     reset,
     setClickedCategories,
     setClickedEvents,
@@ -142,19 +142,19 @@ export default EventSlice.reducer
  * @param clickedEvents
  * @param events
  */
-function setCategories(events: EventProps[], clickedEvents: EventProps[]) {
+function setCategories(events: GetEventProps[], clickedEvents: GetEventProps[]) {
     // Adds enrolled (Påmeldt) filter option if relevant, since no ad has this attribute naturally
     const NO: Set<string> = new Set(clickedEvents.length ? ["Påmeldt"] : [])
     const EN: Set<string> = new Set(clickedEvents.length ? ["Enrolled"] : [])
     let englishCategoryExists = false
 
     events.forEach((event) => {
-        if (event.category_name_no) {
-            NO.add(event.category_name_no)
+        if (event.category.name_no) {
+            NO.add(event.category.name_no)
         }
 
-        if (event.category_name_en) {
-            EN.add(event.category_name_en)
+        if (event.category.name_en) {
+            EN.add(event.category.name_en)
             englishCategoryExists = true
         }
     })
@@ -176,16 +176,16 @@ function setCategories(events: EventProps[], clickedEvents: EventProps[]) {
 }
 
 // --- PARENT FILTER FUNCTION ---
-function Filter ({input, events, clickedEvents, clickedCategories}: FilterProps) {
+function Filter({ input, events, clickedEvents, clickedCategories }: FilterProps) {
     // Filters both on input and clicked categories if both are provided
     if (input.length && clickedCategories.length) {
-        return filterBoth({clickedCategories, clickedEvents, events, input})
-    // Filters on text if only text is provided
+        return filterBoth({ clickedCategories, clickedEvents, events, input })
+        // Filters on text if only text is provided
     } else if (input.length) {
-        return filterText({events, input})
-    // Filters on categories if only categories are provided
+        return filterText({ events, input })
+        // Filters on categories if only categories are provided
     } else if (clickedCategories.length) {
-        return filterCategories({events, clickedEvents, clickedCategories})
+        return filterCategories({ events, clickedEvents, clickedCategories })
     }
 
     // Returns events if there is nothing to be filtered
@@ -198,9 +198,9 @@ function Filter ({input, events, clickedEvents, clickedCategories}: FilterProps)
  * @param input Text to filter based on
  * @returns Filtered events
  */
-function filterText ({events, input}: FilterTextProps) {
-    const textFiltered = events.filter(event => 
-        event.name_no.toLowerCase().includes(input.toLowerCase()) 
+function filterText({ events, input }: FilterTextProps) {
+    const textFiltered = events.filter(event =>
+        event.name_no.toLowerCase().includes(input.toLowerCase())
         || event.name_en.toLowerCase().includes(input.toLowerCase())
     )
 
@@ -214,16 +214,16 @@ function filterText ({events, input}: FilterTextProps) {
  * @param clickedCategories Categories clicked by the user
  * @returns Events filtered by category
  */
-function filterCategories ({events, clickedEvents, clickedCategories}: FilterCategoriesProps) {
+function filterCategories({ events, clickedEvents, clickedCategories }: FilterCategoriesProps) {
     // Checks if user is filtering by enrolled (PÅMELDT)
     const clickedFound = clickedCategories.find((category: string) => category === "Påmeldt")
-    
+
     // Filters based on category
-    const categoryFiltered = events.filter(event => 
-        clickedCategories.some((category: string) => 
-        category === event.category_name_no 
-        || category === event.category_name_en
-    ))
+    const categoryFiltered = events.filter(event =>
+        clickedCategories.some((category: string) =>
+            category === event.category.name_no
+            || category === event.category.name_en
+        ))
 
     // Returns if the user is not enrolled to any events
     if (!clickedFound) {
@@ -247,9 +247,9 @@ function filterCategories ({events, clickedEvents, clickedCategories}: FilterCat
  * @param input
  * @returns Events filtered by both category and text
  */
-function filterBoth ({clickedCategories, clickedEvents, events, input}: filterBothProps) {
-    const categoryFiltered = filterCategories ({events, clickedEvents, clickedCategories})
-    const textFiltered = filterText ({events: categoryFiltered, input})
+function filterBoth({ clickedCategories, clickedEvents, events, input }: filterBothProps) {
+    const categoryFiltered = filterCategories({ events, clickedEvents, clickedCategories })
+    const textFiltered = filterText({ events: categoryFiltered, input })
     return removeDuplicatesAndOld(events, textFiltered)
 }
 
@@ -260,11 +260,11 @@ function filterBoth ({clickedCategories, clickedEvents, events, input}: filterBo
 * @param events Events to filter
 * @returns Filtered events
 */
-export function removeDuplicatesAndOld (APIevents: EventProps[], events: 
-    EventProps[]): EventProps[] {
-    
+export function removeDuplicatesAndOld(APIevents: GetEventProps[], events:
+    GetEventProps[]): GetEventProps[] {
+
     // Removes old events and preserves newer version of all events
-    const realEvents = APIevents.filter(APIevent => 
+    const realEvents = APIevents.filter(APIevent =>
         events.some(event => APIevent.id === event.id))
 
     // Removes duplicates

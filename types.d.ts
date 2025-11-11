@@ -4,29 +4,8 @@ declare module '*.svg' {
     export default content
 }
 
-// Types globally used in the app
-
+// Events
 type EventProps = {
-    id: number
-    name_no: string
-    name_en: string
-    highlight: boolean
-    canceled: boolean
-    full: boolean
-    time_type: string
-    time_start: string
-    time_end: string
-    time_publish: string
-    image_small: string
-    location_name_no: string
-    location_name_en: string
-    category_color: string
-    category_name_no: string
-    category_name_en: string
-}
-
-type DetailedEventData = {
-    id: number
     visible: boolean
     name_no: string
     name_en: string
@@ -34,88 +13,108 @@ type DetailedEventData = {
     description_en: string
     informational_no: string
     informational_en: string
-    time_type: 'default' | 'no_end' | 'whole_day' | 'tbd'
+    time_type: time_type
     time_start: string
     time_end: string
     time_publish: string
-    time_signup_release: string
-    time_signup_deadline: string
+    time_signup_release: string | null
+    time_signup_deadline: string | null
     canceled: boolean
     digital: boolean
     highlight: boolean
-    image_small: string
-    image_banner: string
-    link_facebook: string
-    link_discord: string
-    link_signup: string
-    link_stream: string
+    image_small: string | null
+    image_banner: string | null
+    link_facebook: string | null
+    link_discord: string | null
+    link_signup: string | null
+    link_stream: string | null
     capacity: number | null
-    full: boolean
-    category: number
-    location: number | null,
-    parent: number | null,
-    rule: number | null,
-    updated_at: string
-    created_at: string
-    deleted_at: string
+    is_full: boolean
 }
 
-type DetailedEventResponse = {
-    event: DetailedEventData
-    category: Category
-    location: EventLocation | undefined
-    rule: Rule | undefined
-    organizations: Organization[]
-    audiences: Audience[]
-} | undefined
-
-type DetailedAd = {
+type GetEventProps = EventProps & {
     id: number
+    category: GetCategoryProps
+    location: GetLocationProps | null
+    parent_id: number | null
+    rule: GetRuleProps | null
+    audience: GetAudienceProps | null
+    organization: GetOrganizationProps | null
+    updated_at: string
+    created_at: string
+}
+
+type GetCategoryProps = {
+    id: number
+    name_no: string
+    name_en: string
+    color: string
+    created_at: string
+    updated_at: string
+}
+
+type GetLocationProps = LocationProps & {
+    id: number
+    created_at: string
+    updated_at: string
+}
+
+type GetEventsProps = {
+    events: GetEventProps[]
+    total_count: number
+}
+
+// Jobs
+type Job = {
     visible: boolean
     highlight: boolean
     title_no: string
     title_en: string
+    cities: string[] | null
+    skills: string[] | null
     position_title_no: string
     position_title_en: string
     description_short_no: string
     description_short_en: string
     description_long_no: string
     description_long_en: string
-    job_type: 'full' | 'part' | 'summer' | 'verv'
+    job_type: GetJobTypeProps
     time_publish: string
     time_expire: string
-    application_deadline: string
-    banner_image: string
-    organization: number
-    application_url: string
-    updated_at: string
-    created_at: string
-    deleted_at: string
-    skills: string[] | undefined
-    cities: string[] | undefined
+    banner_image: string | null
+    application_url: string | null
 }
 
-type DetailedAdResponse = {
-    job: DetailedAd
-    organization: Organization
-} | undefined
-
-type EventLocation = {
+type GetJobProps = Job & {
     id: number
+    organization: GetOrganizationProps
+    created_at: string
+    updated_at: string
+}
+
+type GetOrganizationProps = Organization & {
+    id: number
+    created_at: string
+    updated_at: string
+}
+
+type GetJobsProps = {
+    jobs: GetJobProps[]
+    total_count: number
+}
+
+type LocationProps = {
     name_no: string
     name_en: string
-    type: 'mazemap' | 'coords' | 'address' | 'none'
+    type: string
     mazemap_campus_id: number | null
     mazemap_poi_id: number | null
-    address_street: string 
+    address_street: string | null
     address_postcode: number | null
-    city_name: string
+    city_name: string | null
     coordinate_lat: number | null
-    coordinate_lang: number | null
-    url: string
-    updated_at: string
-    created_at: string
-    deleted_at: string
+    coordinate_lon: number | null
+    url: string | null
 }
 
 type Rule = {
@@ -168,24 +167,32 @@ type Category = {
     created_at: string
 }
 
-type AdProps = {
-    id: number
+type Job = {
+    visible: boolean
     highlight: boolean
     title_no: string
     title_en: string
+    cities: string[] | null
+    skills: string[] | null
     position_title_no: string
     position_title_en: string
-    job_type: string
+    description_short_no: string
+    description_short_en: string
+    description_long_no: string
+    description_long_en: string
+    job_type: GetJobTypeProps
     time_publish: string
-    application_deadline: string
-    organization_shortname: string
-    organization_name_no: string
-    organization_name_en: string
-    organization_logo: string
-    skills: string[] | undefined
-    cities: string[] | undefined
+    time_expire: string
+    banner_image: string | null
+    application_url: string | null
 }
 
+type GetJobProps = Job & {
+    id: number
+    organization: GetOrganizationProps
+    created_at: string
+    updated_at: string
+}
 
 type ReduxState = {
     theme: {
@@ -209,10 +216,10 @@ type ReduxState = {
     notification: NotificationProps
     profile: ProfileProps
     event: {
-        events: EventProps[]
+        events: GetEventProps[]
         eventName: string
-        clickedEvents: EventProps[]
-        renderedEvents: EventProps[]
+        clickedEvents: GetEventProps[]
+        renderedEvents: GetEventProps[]
         lastFetch: string
         lastSave: string
         search: boolean

@@ -9,24 +9,25 @@ import { useNavigation } from "@react-navigation/native"
 import { useSelector, useDispatch } from "react-redux"
 import { TouchableOpacity, Dimensions, Text, View } from "react-native"
 import { LinearGradient } from "expo-linear-gradient"
-import TopicManager from "@utils/topicManager"
+import TopicManager from "@utils/notification/topicManager"
 import { StackNavigationProp } from "@react-navigation/stack"
 import { AdStackParamList } from "@type/screenTypes"
+import { JSX } from 'react'
 
 type Ad = {
-    ad: AdProps
+    ad: GetJobProps
     index: number
     embed?: boolean
 }
 
-export default function AdCluster({ad, index, embed}: Ad): JSX.Element {
+export default function AdCluster({ ad, index, embed }: Ad): JSX.Element {
     const { search, clickedAds } = useSelector((state: ReduxState) => state.ad)
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const dispatch = useDispatch()
     const isOrange = clickedAds.some(ads => ads.id === ad.id) ? true : false
     const navigation = useNavigation<StackNavigationProp<AdStackParamList>>()
-    const logo = ad.organization_logo ? ad.organization_logo : undefined
-    const top = embed 
+    const logo = ad.organization ? ad.organization.logo : undefined
+    const top = embed
         ? ad.highlight ? -3 : 0
         : ad.highlight ? 0 : -5
 
@@ -34,41 +35,42 @@ export default function AdCluster({ad, index, embed}: Ad): JSX.Element {
         for (const clickedAd of clickedAds) {
             if (ad.id === clickedAd.id) return true
         }
+
         return false
     }
 
     function handleClick() {
         dispatch(setClickedAds(clickedAds.some(ads => ads.id === ad.id)
-        ? clickedAds.filter((x) => x.id !== ad.id)
-        : [...clickedAds, ad]))
-        TopicManager({topic: `${lang ? 'n' : 'e'}a${ad.id}`, unsub: isClicked() ? true : false})
+            ? clickedAds.filter((x) => x.id !== ad.id)
+            : [...clickedAds, ad]))
+        TopicManager({ topic: `${lang ? 'n' : 'e'}a${ad.id}`, unsub: isClicked() ? true : false })
     }
 
     return (
         <>
             <TouchableOpacity onPress={() => {
                 search && dispatch(toggleSearch())
-                navigation.navigate("SpecificAdScreen", {adID: ad.id})
+                navigation.navigate("SpecificAdScreen", { adID: ad.id })
             }}>
                 <LinearGradient start={[0, 0.5]}
-                  end={[1, 0.5]}
-                  colors={ad.highlight?['#FF512F', '#F09819', '#FF512F']:['#000000cc', '#000000cc']}
-                  style={{borderRadius: 5, marginBottom: ad.highlight ? 4 : 0}}>
-                <Cluster marginVertical={4} highlight={ad.highlight}>
-                <View style={{...AS.adBack, top}}>
-                        <View style={AS.adViewLeft}>
-                            <AdClusterImage url={logo} />
-                        </View>
-                        <View style={AS.adViewMid}>
-                            <AdClusterLocation ad={ad} />
-                        </View>
-                        <TouchableOpacity onPress={handleClick}>
-                            <View style = {{left: -5, top: 3}}>
-                                <BellIcon orange={isOrange} />
+                    end={[1, 0.5]}
+                    colors={ad.highlight ? ['#FF512F', '#F09819', '#FF512F'] : ['#000000cc', '#000000cc']}
+                    style={{ borderRadius: 5, marginBottom: ad.highlight ? 4 : 0 }}>
+                    <Cluster marginVertical={4} highlight={ad.highlight}>
+                        <View style={{ ...AS.adBack, top }}>
+                            <View style={AS.adViewLeft}>
+                                <AdClusterImage url={logo} />
                             </View>
-                        </TouchableOpacity>
-                    </View>
-                </Cluster>
+                            <View style={AS.adViewMid}>
+                                <AdClusterLocation ad={ad} />
+                            </View>
+                            <TouchableOpacity onPress={handleClick}>
+                                <View style={{ left: -5, top: 3 }}>
+                                    <BellIcon orange={isOrange} />
+                                </View>
+                            </TouchableOpacity>
+                        </View>
+                    </Cluster>
                 </LinearGradient>
             </TouchableOpacity>
             <ListFooter index={index} />
@@ -81,19 +83,21 @@ export default function AdCluster({ad, index, embed}: Ad): JSX.Element {
  * @param index Index of each element, will only render for the last item of the
  * list
  */
-export function ListFooter ({index}: ListFooterProps): JSX.Element {
+export function ListFooter({ index }: ListFooterProps) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const { lastFetch, renderedAds } = useSelector((state: ReduxState) => state.ad)
 
     return (
         <>
-            {index === renderedAds.length - 1 && <Text style={{...T.contact, 
-                color: theme.oppositeTextColor}}>
-                    {lang ? "Oppdatert kl:":"Updated:"} {lastFetch}.
-                </Text>}
-            {index === renderedAds.length - 1 && 
-                <Space height={Dimensions.get("window").height / 7}/>}
+            {index === renderedAds.length - 1 && <Text style={{
+                ...T.contact,
+                color: theme.oppositeTextColor
+            }}>
+                {lang ? "Oppdatert kl:" : "Updated:"} {lastFetch}.
+            </Text>}
+            {index === renderedAds.length - 1 &&
+                <Space height={Dimensions.get("window").height / 7} />}
         </>
     )
 }

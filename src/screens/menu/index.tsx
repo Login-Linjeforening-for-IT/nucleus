@@ -5,7 +5,7 @@ import Space from "@/components/shared/utils"
 import CS from "@styles/clusterStyles"
 import GS from "@styles/globalStyles"
 import { useSelector } from "react-redux"
-import { useEffect, useState } from "react"
+import { JSX, useEffect, useState } from "react"
 import en from "@text/menu/en.json"
 import no from "@text/menu/no.json"
 import T from "@styles/text"
@@ -30,11 +30,11 @@ type MenuItemProps = {
 
 export default function MenuScreen({ navigation }: MenuProps<'MenuScreen'>): JSX.Element {
 
-    const { lang  } = useSelector((state: ReduxState) => state.lang  )
-    const { login } = useSelector((state: ReduxState) => state.login )
-    const { theme } = useSelector((state: ReduxState) => state.theme )
-    const { id, name, image } = useSelector((state: ReduxState) => 
-    state.profile )
+    const { lang } = useSelector((state: ReduxState) => state.lang)
+    const { login } = useSelector((state: ReduxState) => state.login)
+    const { theme } = useSelector((state: ReduxState) => state.theme)
+    const { id, name, image } = useSelector((state: ReduxState) =>
+        state.profile)
     const profile = { id, name, image }
     const text: Setting = lang ? no as Setting : en as Setting
     const height = Dimensions.get("window").height
@@ -51,21 +51,25 @@ export default function MenuScreen({ navigation }: MenuProps<'MenuScreen'>): JSX
         navigation.setOptions({
             headerComponents: {
                 left: [<LogoNavigation />],
-            }} as any)   
-        },[navigation])
+            }
+        } as any)
+    }, [navigation])
 
     return (
         <Swipe left="AdNav">
             <View style={{
-                ...GS.content, 
+                ...GS.content,
                 backgroundColor: theme.darker
             }}>
                 <Space height={height / (Platform.OS === 'ios' ? 8 : height > 800 && height < 900 ? 6.5 : 8)} />
                 {/* <SmallProfile navigation={navigation} profile={profile} login={login} /> */}
                 {text.setting.map((item, index) => {
-                    if (item.nav === "ProfileScreen") return null
+                    if (item.nav === "ProfileScreen") {
+                        return null
+                    }
+
                     return (
-                        <MenuItem 
+                        <MenuItem
                             index={index}
                             item={item}
                             navigation={navigation}
@@ -77,14 +81,13 @@ export default function MenuScreen({ navigation }: MenuProps<'MenuScreen'>): JSX
                         />
                     )
                 })}
-                <Space height={height / 10} /> 
+                <Space height={height / 10} />
             </View>
         </Swipe>
     )
 }
 
-function MenuItem({index, item, navigation, setting, feedback, 
-toggleFeedback}: MenuItemProps) {
+function MenuItem({ index, item, navigation, setting, feedback, toggleFeedback }: MenuItemProps) {
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const info = lang ? no : en
@@ -94,15 +97,15 @@ toggleFeedback}: MenuItemProps) {
         <View>
             <TouchableOpacity onPress={() => navigation.navigate(item.nav as any)}>
                 <Cluster>
-                    <View style={{...CS.clusterBack}}>
+                    <View style={{ ...CS.clusterBack }}>
                         <View style={CS.twinLeft}>
                             {item.nav === "NotificationScreen" && <NotificationIcon position="left" />}
-                            <Text style={{...T.text20, color: theme.textColor}}>
+                            <Text style={{ ...T.text20, color: theme.textColor }}>
                                 {item.title}
                             </Text>
                         </View>
                         <View style={CS.twinRight}>
-                            <Image 
+                            <Image
                                 style={CS.arrowImage}
                                 source={require("@assets/icons/dropdownBase.png")}
                             />
@@ -111,7 +114,7 @@ toggleFeedback}: MenuItemProps) {
                 </Cluster>
             </TouchableOpacity>
             <View>
-                <Space height={10} /> 
+                <Space height={10} />
                 <Feedback
                     index={index}
                     setting={setting}
@@ -119,13 +122,13 @@ toggleFeedback}: MenuItemProps) {
                     toggleFeedback={toggleFeedback}
                 />
             </View>
-            {index === setting.length-1 
-            ?   <TouchableOpacity onPress={() => navigation.navigate('InternalScreen')}>
-                    <Text style={{...T.contact, color: theme.oppositeTextColor}}>
+            {index === setting.length - 1
+                ? <TouchableOpacity onPress={() => navigation.navigate('InternalScreen')}>
+                    <Text style={{ ...T.contact, color: theme.oppositeTextColor }}>
                         {version}
                     </Text>
                 </TouchableOpacity>
-            : null}
+                : null}
         </View>
     )
 }

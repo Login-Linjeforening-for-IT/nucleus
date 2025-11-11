@@ -105,7 +105,7 @@
  */
 
 import { Dispatch, UnknownAction } from "redux"
-import TopicManager from "./topicManager"
+import TopicManager from "./notification/topicManager"
 import { setNotificationDidUpdateOnFirebase } from "@redux/notifications"
 
 type topicParams = {

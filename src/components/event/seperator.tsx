@@ -3,7 +3,7 @@ import { View, Text, Dimensions } from "react-native"
 import { useSelector } from "react-redux"
 
 type SeperatorProps = {
-    item: EventProps
+    item: GetEventProps
     usedIndexes: number[]
 }
 

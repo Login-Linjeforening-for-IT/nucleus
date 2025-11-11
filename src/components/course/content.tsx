@@ -8,7 +8,7 @@ import ThumbsDown from "./thumbsDown"
 import T from "@styles/text"
 
 type CourseContentProps = {
-    course: Course, 
+    course: Course,
     clicked: number[]
     setClicked: Dispatch<SetStateAction<number[]>>
     cardID: number
@@ -18,23 +18,23 @@ type CourseContentProps = {
 }
 
 type CardProps = {
-    card: Card, 
-    shuffledAlternatives: string[], 
-    indexMapping: number[], 
-    handlePress: (index: number) => void, 
+    card: Card,
+    shuffledAlternatives: string[],
+    indexMapping: number[],
+    handlePress: (index: number) => void,
     getBackground: (index: number) => string
     cardID: number
     length: number
 }
 
 type CardFooterProps = {
-    votes: number, 
+    votes: number,
     clicked: number[],
     setClicked: Dispatch<SetStateAction<number[]>>
     correct: number[]
 }
 
-export default function CourseContent({course, clicked, setClicked, cardID, setCardID, previous, next}: CourseContentProps) {
+export default function CourseContent({ course, clicked, setClicked, cardID, setCardID, previous, next }: CourseContentProps) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const height = Dimensions.get("window").height
     const [shuffledAlternatives, setShuffledAlternatives] = useState<string[]>([])
@@ -58,8 +58,8 @@ export default function CourseContent({course, clicked, setClicked, cardID, setC
             }
         }
 
-        return clicked.includes(index) 
-            ? card?.correct.includes(index) ? 'green' : 'red' 
+        return clicked.includes(index)
+            ? card?.correct.includes(index) ? 'green' : 'red'
             : theme.background
     }
 
@@ -71,13 +71,13 @@ export default function CourseContent({course, clicked, setClicked, cardID, setC
         // Shuffles alternatives and creates map
         const shuffled = [...card.alternatives]
         const mapping = shuffled.map((_, index) => index)
-        
+
         for (let i = shuffled.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1))
-            ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
-            ;[mapping[i], mapping[j]] = [mapping[j], mapping[i]]
+                ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
+                ;[mapping[i], mapping[j]] = [mapping[j], mapping[i]]
         }
-        
+
         setShuffledAlternatives(shuffled)
         setIndexMapping(mapping)
     }, [card?.alternatives])
@@ -85,22 +85,22 @@ export default function CourseContent({course, clicked, setClicked, cardID, setC
     return (
         <View style={{ padding: 12 }}>
             <ScrollView
-                showsVerticalScrollIndicator={false} 
+                showsVerticalScrollIndicator={false}
                 scrollEventThrottle={100}
-                style={{maxHeight: height * 0.7}}
+                style={{ maxHeight: height * 0.7 }}
             >
-                <Card 
+                <Card
                     card={card}
                     cardID={cardID}
-                    shuffledAlternatives={shuffledAlternatives} 
-                    indexMapping={indexMapping} 
+                    shuffledAlternatives={shuffledAlternatives}
+                    indexMapping={indexMapping}
                     length={length}
-                    handlePress={handlePress} 
+                    handlePress={handlePress}
                     getBackground={getBackground}
                 />
             </ScrollView>
-            <CardFooter 
-                votes={card?.votes.length} 
+            <CardFooter
+                votes={card?.votes.length}
                 clicked={clicked}
                 setClicked={setClicked}
                 correct={card?.correct}
@@ -109,7 +109,7 @@ export default function CourseContent({course, clicked, setClicked, cardID, setC
     )
 }
 
-function Card({card, cardID, shuffledAlternatives, indexMapping, length, handlePress, getBackground}: CardProps) {
+function Card({ card, cardID, shuffledAlternatives, indexMapping, length, handlePress, getBackground }: CardProps) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
 
     return (
@@ -117,59 +117,59 @@ function Card({card, cardID, shuffledAlternatives, indexMapping, length, handleP
             <View>
                 <View>
                     {card?.correct.length > 1 && <Text style={{
-                        ...T.text18, 
-                        marginBottom: 4, 
+                        ...T.text18,
+                        marginBottom: 4,
                         color: theme.oppositeTextColor
                     }}>
                         {cardID + 1} {cardID >= (length - 5) ? `/ ${length} ` : ''}- Multiple choice
                     </Text>}
                     {<Text style={{
-                        ...T.text18, 
-                        marginBottom: 4, 
+                        ...T.text18,
+                        marginBottom: 4,
                         color: theme.oppositeTextColor
                     }}>
                         {!(card?.correct.length > 1) && cardID + 1}{cardID >= (length - 5) ? ` / ${length} ` : ''}{card?.theme && ' - '}{card?.theme}
                     </Text>}
                 </View>
-                <View style={{position: 'absolute', right: 0}}>
+                <View style={{ position: 'absolute', right: 0 }}>
                     <Text style={{
-                        ...T.text18, 
-                        marginBottom: 4, 
+                        ...T.text18,
+                        marginBottom: 4,
                         color: theme.oppositeTextColor
                     }}>
                         {card?.source}
                     </Text>
                 </View>
             </View>
-            <Markdown text={card.question}/>
-            <View style={{marginBottom: 30}}>
+            <Markdown text={card.question} />
+            <View style={{ marginBottom: 30 }}>
                 {shuffledAlternatives.map((answer, index) => {
                     const originalIndex = indexMapping[index]
 
                     return (
                         <TouchableOpacity
-                            key={index} 
+                            key={index}
                             style={{
-                                flexDirection: 'row', 
-                                backgroundColor: getBackground(originalIndex), 
-                                marginTop: 8, 
-                                padding: 4, 
-                                borderRadius: 8, 
+                                flexDirection: 'row',
+                                backgroundColor: getBackground(originalIndex),
+                                marginTop: 8,
+                                padding: 4,
+                                borderRadius: 8,
                                 paddingVertical: 8,
                                 paddingRight: 30,
                             }}
                             onPress={() => handlePress(originalIndex)}
                         >
                             <Text style={{
-                                color: theme.oppositeTextColor, 
-                                marginLeft: 2, 
-                                marginRight: 4, 
-                                ...T.text18, 
+                                color: theme.oppositeTextColor,
+                                marginLeft: 2,
+                                marginRight: 4,
+                                ...T.text18,
                                 width: 20
                             }}>
                                 {index + 1}
                             </Text>
-                            <Text style={{color: theme.textColor, ...T.text18}}>
+                            <Text style={{ color: theme.textColor, ...T.text18 }}>
                                 {answer}
                             </Text>
                         </TouchableOpacity>
@@ -180,11 +180,11 @@ function Card({card, cardID, shuffledAlternatives, indexMapping, length, handleP
     )
 }
 
-function CardFooter({votes, clicked, setClicked, correct}: CardFooterProps) {
+function CardFooter({ votes, clicked, setClicked, correct }: CardFooterProps) {
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const solved = correct?.every((current) => clicked.includes(current)) || 0
-    const revealText = solved 
+    const revealText = solved
         ? lang ? 'Skjul svar' : 'Hide answer'
         : lang ? 'Vis svar' : 'Show answer'
 
@@ -194,40 +194,40 @@ function CardFooter({votes, clicked, setClicked, correct}: CardFooterProps) {
 
     return (
         <View style={{
-            flexDirection: 'row', 
-            bottom: 0, 
-            position: 'absolute', 
-            justifyContent: 'space-between', 
+            flexDirection: 'row',
+            bottom: 0,
+            position: 'absolute',
+            justifyContent: 'space-between',
             alignSelf: 'center',
-            height: 40, 
-            width: '100%', 
+            height: 40,
+            width: '100%',
             paddingTop: 10,
             paddingBottom: 5,
             backgroundColor: theme.contrast,
         }}>
-            <View style={{flexDirection: 'row'}}>
+            <View style={{ flexDirection: 'row' }}>
                 <Text style={{
-                    ...T.text18, 
-                    color: theme.oppositeTextColor, 
-                    top: 2, 
+                    ...T.text18,
+                    color: theme.oppositeTextColor,
+                    top: 2,
                     marginRight: 2,
                     marginLeft: 5
                 }}>
                     {votes}
                 </Text>
                 <ThumbsUp
-                    style={{width: 22, marginLeft: 4}} 
-                    color={theme.oppositeTextColor} 
+                    style={{ width: 22, marginLeft: 4 }}
+                    color={theme.oppositeTextColor}
                 />
                 <ThumbsDown
-                    style={{width: 22, marginLeft: 2}} 
-                    color={theme.oppositeTextColor} 
+                    style={{ width: 22, marginLeft: 2 }}
+                    color={theme.oppositeTextColor}
                 />
             </View>
             <TouchableOpacity onPress={handleReveal}>
                 <Text style={{
-                    ...T.text18, 
-                    color: theme.oppositeTextColor, 
+                    ...T.text18,
+                    color: theme.oppositeTextColor,
                     top: 2,
                     marginRight: 5,
                 }}>

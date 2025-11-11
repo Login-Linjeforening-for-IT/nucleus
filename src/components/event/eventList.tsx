@@ -6,7 +6,7 @@ import Seperator from "./seperator"
 import Space, { ErrorMessage } from "@components/shared/utils"
 import { setEvents, setLastFetch } from "@redux/event"
 import { RefreshControl, ScrollView } from "react-native-gesture-handler"
-import { useState, useCallback } from "react"
+import { useState, useCallback, JSX } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { View } from "react-native"
 

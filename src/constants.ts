@@ -1,15 +1,21 @@
-export const EXAM_API_URL = "https://exam-api.login.no/api"
-export const WIKI_URL = "https://wiki.login.no"
-export const GITLAB_URL = "https://git.logntnu.no"
-export const LINKEDIN_URL = "https://linkedin.com/company/linjeforeningen-@about"
-export const FACEBOOK_URL = "https://facebook.com/LogNTNU"
-export const INSTAGRAM_URL = "https://www.instagram.com/login_linjeforening/"
-export const DISCORD_URL = "https://discord.com/invite/login-ntnu"
-export const CDN = "https://cdn.login.no/img/"
-export const MAIL_URL = "kontakt@login.no" 
-export const MAILTO_URL = "mailto:kontakt@login.no"
-export const LOGIN_URL = "https://login.no"
-export const SUPPORT_MAIL = "tekkom@login.no"
-export const API = "https://workerbee.login.no/api/"
-export const TEST_API = "https://testapi.login.no/v1/"
-export const APP_API_URL = "https://app.login.no"
+const config = {
+    apple_app_store_url: "https://apps.apple.com/app/id1660125165",
+    android_play_store_url: "https://play.google.com/store/apps/details?id=com.login.Login",
+    exam_api_url: "https://api.exam.login.no/api",
+    wiki_url: "https://wiki.login.no",
+    gitlab_url: "https://git.logntnu.no",
+    linkedin_url: "https://linkedin.com/company/linjeforeningen-@about",
+    facebook_url: "https://facebook.com/LogNTNU",
+    instagram_url: "https://www.instagram.com/login_linjeforening/",
+    discord_url: "https://discord.com/invite/login-ntnu",
+    cdn: "https://cdn.login.no/img",
+    mail_url: "kontakt@login.no",
+    mailto_url: "mailto:kontakt@login.no",
+    login_url: "https://login.no",
+    support_mail: "tekkom@login.no",
+    api: "https://workerbee.login.no/api/",
+    test_api: "https://testapi.login.no/v1/",
+    app_api_url: "https://app.login.no/api"
+}
+
+export default config

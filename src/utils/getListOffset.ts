@@ -4,7 +4,7 @@ import getHeight from "./getHeight"
 type GetListOffsetProps = {
     search: boolean
     categories: string[]
-    clickedEvents: EventProps[] | AdProps[]
+    clickedEvents: GetEventProps[] | GetJobProps[]
     bottom?: boolean
     ad?: boolean
 }

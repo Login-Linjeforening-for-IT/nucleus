@@ -2,7 +2,7 @@ import { TouchableOpacity, View, Text, Image, Linking, Alert } from "react-nativ
 import { useSelector } from "react-redux"
 import ES from "@styles/eventStyles"
 import T from "@styles/text"
-import { SUPPORT_MAIL } from "@/constants"
+import config from "@/constants"
 import { EventContext } from "@utils/contextProvider"
 import { useContext } from "react"
 
@@ -62,11 +62,11 @@ function handleLink({ mazemap_campus_id, mazemap_poi_id, locationName, organizer
 
 
     if (locationName === "Orgkollektivet") {
-        open("https://link.mazemap.com/tBlfH1oY", "Mazemap kunne ikke åpnes", `Send en mail til ${SUPPORT_MAIL} dersom problemet vedvarer. Feilkode: wZDe8byp`)
+        open("https://link.mazemap.com/tBlfH1oY", "Mazemap kunne ikke åpnes", `Send en mail til ${config.support_mail} dersom problemet vedvarer. Feilkode: wZDe8byp`)
     }
 
     if (organizer === "HUSET") {
-        open("https://link.mazemap.com/O1OdhRU4", "Mazemap kunne ikke åpnes.", `Send en mail til ${SUPPORT_MAIL} dersom problemet vedvarer. Feilkode: MGfrIBrd`)
+        open("https://link.mazemap.com/O1OdhRU4", "Mazemap kunne ikke åpnes.", `Send en mail til ${config.support_mail} dersom problemet vedvarer. Feilkode: MGfrIBrd`)
     }
-    open(`https://use.mazemap.com/#v=1&campusid=${mazemap_campus_id}&sharepoitype=poi&sharepoi=${mazemap_poi_id}`, "Mazemap kunne ikke åpnes", `Send en mail til ${SUPPORT_MAIL} dersom problemet vedvarer. Feilkode: M${mazemap_campus_id},${mazemap_poi_id}`)
+    open(`https://use.mazemap.com/#v=1&campusid=${mazemap_campus_id}&sharepoitype=poi&sharepoi=${mazemap_poi_id}`, "Mazemap kunne ikke åpnes", `Send en mail til ${config.support_mail} dersom problemet vedvarer. Feilkode: M${mazemap_campus_id},${mazemap_poi_id}`)
 }

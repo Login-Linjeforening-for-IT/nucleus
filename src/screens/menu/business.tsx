@@ -11,6 +11,7 @@ import { ScrollView } from "react-native-gesture-handler"
 import { useSelector } from "react-redux"
 import Swipe from "@components/nav/swipe"
 import { TextWithLinks } from "@components/shared/link"
+import { JSX } from 'react'
 
 export default function BusinessScreen(): JSX.Element {
 

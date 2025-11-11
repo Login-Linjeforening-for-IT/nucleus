@@ -12,8 +12,7 @@ type CornerSquareProps = {
  * @param {string} category Category of the event, Format: "CATEGORY"
  * @returns Small circle of the categories color
  */
-export default function CornerSquare({corner, type}: CornerSquareProps):
-JSX.Element {
+export default function CornerSquare({corner, type}: CornerSquareProps) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const horizontal = corner === 0 || corner === 2
     const left = corner === 3 ? "20.6%" : corner === 1 ? "0.4%" : undefined
