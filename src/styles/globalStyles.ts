@@ -175,7 +175,7 @@ export const GS = StyleSheet.create({
     },
     headerTitle: {
         alignSelf: 'center',
-        ...T.text20,
+        ...T.text18,
     },
     blurBackgroundView: {
         position: "absolute",

@@ -13,9 +13,13 @@ type TagsProps = {
 }
 
 export default function Tags({ event }: TagsProps) {
-    if (!event) return null
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const tags = getTags({ event, lang })
+
+    if (!event || !Object.keys(event).length) {
+        return null
+    }
+
 
     return (
         <View style={{ flexDirection: "row" }}>

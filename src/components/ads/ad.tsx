@@ -40,9 +40,10 @@ const isIOS = Platform.OS === 'ios'
  * @returns Small banner image
  */
 export default function AdInfo({ ad }: { ad: GetJobProps | undefined }) {
+    const { lang } = useSelector((state: ReduxState) => state.lang)
     const [deadline, setDeadline] = useState("")
     const loc = ad?.cities?.map(city => capitalizeFirstLetter(city)).join(", ")
-    const type = capitalizeFirstLetter(ad?.job_type)
+    const type = capitalizeFirstLetter(lang ? ad?.job_type?.name_no : ad?.job_type?.name_en)
 
     useEffect(() => {
         const fetch = LastFetch(ad?.time_expire)
@@ -76,22 +77,24 @@ export function AdBanner({ url }: { url: string | null }) {
             style={{ alignSelf: "center", backgroundColor: "white" }}
             width={(Dimensions.get("window").width) / 1.2}
             height={Dimensions.get("window").width / 3}
-            uri={`${config.cdn}/ads/${url}`}
+            uri={`${config.cdn}/jobs/${url}`}
         />
     }
 
     if (validFileType(url) && !url?.startsWith("http")) {
         const [width, setWidth] = useState(1)
         const [height, setHeight] = useState(1)
+
         useEffect(() => {
-            Image.getSize(`${config.cdn}/ads/${url}`, (width, height) => {
+            Image.getSize(`${config.cdn}/jobs/${url}`, (width, height) => {
                 setWidth(width)
                 setHeight(height)
             })
         }), [url]
+
         return <Image
             style={{ ...AS.adBanner, aspectRatio: width / height }}
-            source={{ uri: `${config.cdn}/ads/${url}` }}
+            source={{ uri: `${config.cdn}/jobs/${url}` }}
         />
     }
 
@@ -101,7 +104,7 @@ export function AdBanner({ url }: { url: string | null }) {
 
     return <Image
         style={AS.adBanner}
-        source={{ uri: `${config.cdn}/ads/adbanner.png` }}
+        source={{ uri: `${config.cdn}/jobs/adbanner.png` }}
     />
 }
 

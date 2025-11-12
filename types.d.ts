@@ -44,6 +44,12 @@ type GetEventProps = EventProps & {
     created_at: string
 }
 
+type GetRuleProps = Rule & {
+    id: number
+    created_at: string
+    updated_at: string
+}
+
 type GetCategoryProps = {
     id: number
     name_no: string
@@ -83,6 +89,14 @@ type Job = {
     time_expire: string
     banner_image: string | null
     application_url: string | null
+}
+
+type GetJobTypeProps = {
+    id: number
+    name_no: string
+    name_en: string
+    updated_at: string
+    created_at: string
 }
 
 type GetJobProps = Job & {

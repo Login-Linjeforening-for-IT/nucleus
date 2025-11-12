@@ -35,9 +35,11 @@ export default function SpecificEventScreen({ route: { params: { eventID } } }: 
      * Sets the title of the screen in the header
      */
     useEffect(() => {
-        const eventName = lang ? event.name_no || event.name_en
-            : event.name_en || event.name_no
-        dispatch(setEventName(eventName))
+        if (event) {
+            const eventName = lang ? event.name_no || event.name_en
+                : event.name_en || event.name_no
+            dispatch(setEventName(eventName))
+        }
     }, [event])
 
     useEffect(() => {
@@ -46,7 +48,6 @@ export default function SpecificEventScreen({ route: { params: { eventID } } }: 
 
     async function getDetails() {
         const response = await fetchEventDetails(eventID)
-
         if (response) {
             setEvent(response)
             return true

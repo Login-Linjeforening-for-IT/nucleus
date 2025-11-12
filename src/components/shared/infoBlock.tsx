@@ -44,7 +44,7 @@ export default function InfoBlock({ text, eventRelated }: InfoBlockProps) {
 function Info({ text }: InfoProps) {
     const event = useContext(EventContext)
 
-    if (!event) {
+    if (!event || !Object.keys(event).length) {
         return null
     }
 

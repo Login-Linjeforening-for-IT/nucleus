@@ -2,7 +2,7 @@ import no from "@text/tag/no.json"
 import en from "@text/tag/en.json"
 
 type getTagsProps = {
-    event: GetEventProps
+    event?: GetEventProps
     lang: boolean
 }
 
@@ -13,12 +13,15 @@ type getTagsProps = {
  * @returns string array
  */
 export default function getTags({ event, lang }: getTagsProps) {
+    if (!event || !Object.keys(event).length) {
+        return []
+    }
+
     const description = lang ? event.description_no : event.description_en
     const title = lang ? event.name_no || event.name_en : event.name_en || event.name_no
     const storedTags = lang ? no : en
     const tags: Tag[] = []
 
-    if (!Object.keys(event).length) return tags
 
     if (description) {
         if (description.toLowerCase().includes("prog & pils") && !Object.keys(tags).includes("P&P")) tags.push(storedTags["P&P"])

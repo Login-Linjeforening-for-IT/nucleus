@@ -4,5 +4,5 @@
  */
 import { createContext } from "react"
 
-export const EventContext = createContext({} as GetEventProps)
-export const AdContext = createContext({} as GetJobProps)
+export const EventContext = createContext<GetEventProps | null>(null)
+export const AdContext = createContext<GetJobProps | null>(null)

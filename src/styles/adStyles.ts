@@ -18,28 +18,28 @@ export const AS = StyleSheet.create({
         left: Platform.OS === "ios" ? 7.5 : 10,
         paddingHorizontal: 6,
         marginRight: 'auto',
-        width: '55%'
+        width: '50%'
     },
     locationView: {
         justifyContent: "center",
     },
     title: {
         maxHeight: Platform.OS === "ios" ? 20 * 3 : 17 * 2.5,
-        ...T.text18
+        ...T.text12
     },
     specificAdTitle: {
-        maxWidth: "72.5%",
+        maxWidth: "60%",
         left: 10,
         alignSelf: "center",
         // Limits to 3 lines (same as image height)
         // maxHeight: Platform.OS === "ios" ? 24 * 3 : 17 * 2.5,
-        ...T.text20
+        ...T.text16
     },
     adInfoType: {
         ...T.text16
     },
     adInfo: {
-        // maxWidth: "90%",
+        maxWidth: "90%",
         ...T.text16
     },
     adInfoBold: {
@@ -83,7 +83,7 @@ export const AS = StyleSheet.create({
     adBannerSmall: {
         top: 1.7,
         height: 60,
-        aspectRatio: 3 / 2,
+        aspectRatio: 5 / 2,
         resizeMode: "stretch",
     },
     adBanner: {
@@ -91,7 +91,7 @@ export const AS = StyleSheet.create({
         marginBottom: 12
     },
     adClusterImage: {
-        aspectRatio: 3 / 2,
+        aspectRatio: 5 / 2,
     },
 })
 

@@ -19,24 +19,24 @@ type GetEndTimeProps = {
  * @returns Event start time as a React component
  */
 export default function EventTime({ time_start, time_end }: EventTimeProps): JSX.Element {
-    if (time_start == undefined || time_end == undefined) {
-        return <></>
-    }
-
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
-    const [time, setTime] = useState<string>(displayedEventTime(time_start, time_end, lang))
+    const [time, setTime] = useState<string>(displayedEventTime(lang, time_start, time_end))
 
     useEffect(() => {
         let interval: Interval = 0
 
         interval = setInterval(() => {
-            let newTime = displayedEventTime(time_start, time_end, lang)
+            let newTime = displayedEventTime(lang, time_start, time_end)
             setTime(newTime)
         }, 1000)
 
         return () => clearInterval(interval)
     }, [])
+
+    if (!time_start || !time_end) {
+        return <></>
+    }
 
     return (
         <View>
@@ -75,11 +75,15 @@ export function GetEndTime({ time_end }: GetEndTimeProps) {
  * @param time_end End time of the event
  * @returns The event time that should be displayed
  */
-function displayedEventTime(time_start: string, time_end: string, lang: boolean) {
+function displayedEventTime(lang: boolean, time_start?: string, time_end?: string) {
     const textEN = ["Starts in", "Tomorrow", "Next", "Ends in", "Ends tomorrow", "Ended", "Yesterday", "Last", " ago", "month", "days", "h", "min", "s"]
     const textNO = ["Starter om", "I morgen", "Neste", "Slutter om", "Slutter i morgen", "Sluttet for", "I går", "Sist", " siden", "måned", "dager", "t", "min", "s"]
     const text = lang ? textNO : textEN
     let lookup
+
+    if (!time_start || !time_end) {
+        return ''
+    }
 
     if (new Date(time_end) < new Date()) {
         lookup = {

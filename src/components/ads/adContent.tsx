@@ -60,7 +60,7 @@ export function AdClusterImage({ url }: { url: string | undefined }) {
 export function AdClusterLocation({ ad }: AdClusterLocationProps) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
-    const type = capitalizeFirstLetter(ad?.job_type)
+    const type = capitalizeFirstLetter(lang ? ad?.job_type.name_no : ad?.job_type.name_en)
     const location = ad?.cities?.map(city => capitalizeFirstLetter(city)).join(", ")
     let name = lang ? ad?.title_no || ad?.title_en : ad?.title_en || ad?.title_no
     let info = `${type}${location ? `. ${location}` : ''}`
@@ -69,8 +69,7 @@ export function AdClusterLocation({ ad }: AdClusterLocationProps) {
         : Dimensions.get("window").width / 8.7805
     if (name == undefined) {
         name = ""
-    }
-    else if (name.length > halfWidth / 1.7
+    } else if (name.length > halfWidth / 1.7
         && (type + location).length > (halfWidth * 1.25)) {
         name = name.length > halfWidth / 1.1
             ? name.substring(0, halfWidth / 1.1) + "..."

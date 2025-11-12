@@ -1,5 +1,9 @@
 // Checks if a resource exists in our CDN
 export default async function imageExists(url: string) {
+    if (!url.startsWith('http')) {
+        return 404
+    }
+
     try {
         const response = await fetch(url)
 

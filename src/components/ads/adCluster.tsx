@@ -55,7 +55,8 @@ export default function AdCluster({ ad, index, embed }: Ad): JSX.Element {
                 <LinearGradient start={[0, 0.5]}
                     end={[1, 0.5]}
                     colors={ad.highlight ? ['#FF512F', '#F09819', '#FF512F'] : ['#000000cc', '#000000cc']}
-                    style={{ borderRadius: 5, marginBottom: ad.highlight ? 4 : 0 }}>
+                    style={{ borderRadius: 5, marginBottom: ad.highlight ? 4 : 0 }}
+                >
                     <Cluster marginVertical={4} highlight={ad.highlight}>
                         <View style={{ ...AS.adBack, top }}>
                             <View style={AS.adViewLeft}>

@@ -83,7 +83,7 @@ export default function Header({ options, route, navigation }: HeaderProps): Rea
                     color: theme.titleTextColor,
                     width: 300,
                     textAlign: "center",
-                    top: title?.length > 30 ? -8 : undefined
+                    top: title?.length > 30 ? Platform.OS === 'ios' ? 4 : -6 : undefined
                 }}>
                     {title}
                 </Text>

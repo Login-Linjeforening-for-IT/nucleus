@@ -9,20 +9,18 @@ import { EventContext } from "@utils/contextProvider"
 
 export default function Countdown() {
     const event = useContext(EventContext)
-    
-    const startDate = event.time_start ? new Date(event.time_start) : new Date()
-    const endDate = event.time_type=="default" ? new Date(event.time_end) : undefined
-    const loading = !Boolean(event&&Object.keys(event).length)
-
+    const startDate = event ? new Date(event.time_start) : new Date()
+    const endDate = event && event.time_type=="default" ? new Date(event.time_end) : undefined
+    const loading = !event || !Object.keys(event).length
 
     return (
         <Card>
             <Skeleton height={70} loading={loading}>
                 <View style={ES.specificEventInfoView}>
                     <View style={{marginRight: 10}}>
-                        <CategorySquare color={event.category.color} startDate={startDate} endDate={endDate}/>
+                        <CategorySquare color={event?.category?.color} startDate={startDate} endDate={endDate}/>
                     </View>
-                    <EventTime time_start={event.time_start} time_end={event.time_end} />
+                    <EventTime time_start={event?.time_start} time_end={event?.time_end} />
                 </View>
             </Skeleton>
         </Card>

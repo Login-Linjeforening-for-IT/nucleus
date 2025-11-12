@@ -25,7 +25,6 @@ export default function EventList(): JSX.Element {
 
     async function getDetails() {
         const events = await fetchEvents()
-
         if (events.length) {
             dispatch(setEvents(events))
             dispatch(setLastFetch(LastFetch()))
@@ -36,7 +35,6 @@ export default function EventList(): JSX.Element {
     const onRefresh = useCallback(async () => {
         setRefresh(true)
         const details = await getDetails()
-
         if (details) {
             setRefresh(false)
         }

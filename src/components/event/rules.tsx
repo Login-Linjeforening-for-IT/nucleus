@@ -1,6 +1,5 @@
 import Markdown from "@components/course/markdown"
 import Card from "@components/shared/card"
-import Skeleton from "@components/shared/skeleton"
 import { EventContext } from "@utils/contextProvider"
 import { useContext } from "react"
 import { useSelector } from "react-redux"
@@ -11,7 +10,9 @@ export default function Rules() {
     const event = useContext(EventContext)
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    const rule = lang ? event.rule.description_no : event.rule.description_en
+    const rule = event && event.rule ? 
+        lang ? event.rule.description_no : event.rule.description_en
+        : undefined
 
     if (!rule) {
         return <></>

@@ -109,9 +109,11 @@ export const EventSlice = createSlice({
                 clickedCategories: state.clickedCategories
             })
         },
+        // Gets the download date
         setDownloadState(state) {
             state.downloadState = new Date().toString()
         },
+        // Sets the event tag
         setTag(state, action) {
             state.tag = action.payload
         }

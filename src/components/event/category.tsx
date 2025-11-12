@@ -10,6 +10,11 @@ export default function Category() {
     const event = useContext(EventContext)
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
+
+     if (!event || !Object.keys(event).length) {
+        return null
+    }
+
     const categoryName = lang
         ? event.category.name_en || event.category.name_no
         : event.category.name_no || event.category.name_en

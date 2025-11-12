@@ -42,13 +42,13 @@ export async function fetchEventDetails(id: number): Promise<GetEventProps> {
 export async function fetchEvents(): Promise<GetEventProps[]> {
     try {
         // Fetches events
-        const response = await fetch(`${config.api}/events?historical=true`)
+        const response = await fetch(`${config.api}/events`)
         if (!response.ok) {
             throw new Error('Failed to fetch events from API')
         }
 
         const data = await response.json()
-        return data
+        return data.events
     } catch (error) {
         console.log(error)
         return []
@@ -62,13 +62,13 @@ export async function fetchEvents(): Promise<GetEventProps[]> {
  */
 export async function fetchAds(): Promise<GetJobProps[]> {
     try {
-        const response = await fetch(`${config.api}/jobs/`)
+        const response = await fetch(`${config.api}/jobs`)
         if (!response.ok) {
             throw new Error('Failed to fetch ads from API')
         }
 
         const data = await response.json()
-        return data
+        return data.jobs
     } catch (error) {
         console.log(error)
         return []
@@ -91,7 +91,6 @@ export async function fetchAdDetails(adID: number): Promise<GetJobProps | null> 
         const adDetails = await response.json()
         return adDetails
     } catch (error) {
-        console.log(error)
         return null
     }
 }

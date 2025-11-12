@@ -12,20 +12,19 @@ import imageExists from "@utils/imageExists"
 export default function SpecificEventImage() {
     const event = useContext(EventContext)
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    const [url, setUrl] = useState(event.image_banner || '')
+    const [url, setUrl] = useState(event?.image_banner || '')
 
     useEffect(() => {
-        setUrl(event.image_banner || '');
+        setUrl(event?.image_banner || '');
 
         (async () => {
             const urlExists = await imageExists(url)
-
             if (!urlExists) {
-                setUrl(event.image_small || '')
+                setUrl(event?.image_small || '')
             }
         })()
     }, [event])
-
+    
     if (event) {
         if (url.includes(".svg")) {
             return (
@@ -33,19 +32,17 @@ export default function SpecificEventImage() {
                     style={{ alignSelf: "center", marginTop: 8 }}
                     width={(Dimensions.get("window").width) / 1.2}
                     height={Dimensions.get("window").width / 3}
-                    uri={`${config.cdn}/events/banner/${url}`}
+                    uri={`${config.cdn}/events/${url}`}
                 />
             )
-        }
-
-        if (url.includes(".png")) {
+        } else if (url.includes(".png")) {
             return <Image
                 style={ES.specificEventImage}
-                source={{ uri: `${config.cdn}/events/banner/${url}` }}
+                source={{ uri: `${config.cdn}/events/${url}` }}
             />
+        } else {
+            return <StaticImage category={event.category?.name_no} />
         }
-
-        return <StaticImage category={event.category.name_no} />
     }
 
     return (
