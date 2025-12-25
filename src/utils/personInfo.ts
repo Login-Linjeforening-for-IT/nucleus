@@ -14,7 +14,7 @@ type personInfoProps = {
 export default function personInfo({ person, lang }: personInfoProps) {
     const titleNO = {
         leader: "Leader",
-        coleader: "Deputy chairwoman",
+        coleader: "Deputy chairman",
         secretary: "Secretary",
         evntkom: "EvntKom leader",
         bedkom: "BedKom leder",
