@@ -23,15 +23,15 @@ export default function Map() {
     }
 
     const locationName = lang ? event.location.name_no : event.location?.name_en
-    const organizer = event.organization.shortname || event.organization?.name_en
+    const organizer = event.organization?.shortname || event.organization?.name_en
 
     return (
         <TouchableOpacity
             style={{ minWidth: 70 }}
             onPress={() => {
                 handleLink({
-                    mazemap_campus_id: event.location!.mazemap_campus_id,
-                    mazemap_poi_id: event.location!.mazemap_poi_id,
+                    mazemap_campus_id: event.location?.mazemap_campus_id || 0,
+                    mazemap_poi_id: event.location?.mazemap_poi_id || 0,
                     locationName,
                     organizer: organizer || ''
                 })

@@ -149,7 +149,7 @@ type Organization = {
     description_no: string
     description_en: string
     type: string
-    link_homepage: string
+    link_homepage?: string
     link_linkedin: string
     link_facebook: string
     link_instagram: string
@@ -496,6 +496,7 @@ type Vote = {
 
 type CourseAsList = {
     id: string
+    code: string
     cards: Card[]
     count: number
 }

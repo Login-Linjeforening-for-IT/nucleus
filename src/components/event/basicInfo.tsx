@@ -43,7 +43,7 @@ export default function BasicInfo() {
             case 'ctfkom': return 'CTFkom'
             case 's2g': return 'S2G'
             case 'idi': return 'IDI'
-            default: return event.organization!.shortname || lang
+            default: return event.organization?.shortname || lang
                 ? event.category.name_no || event.category.name_en
                 : event.category.name_en || event.category.name_no
         }
@@ -66,8 +66,8 @@ export default function BasicInfo() {
                         {event && 'link_discord' in event && <TextLink style={{ ...T.text20, color: "#fd8738", top: 3 }} text="Discord" url={event.link_discord!} />}
                         {event && 'link_facebook' in event && ' - '}
                         {event && 'link_facebook' in event && <TextLink style={{ ...T.text20, color: "#fd8738", top: 3 }} text="Facebook" url={event.link_facebook!} />}
-                        {event && 'organization' in event && event.organization!.link_homepage && ' - '}
-                        {event && 'organization' in event && event.organization!.link_homepage && <TextLink style={{ ...T.text20, color: "#fd8738", top: 3 }} text={text.more} url={event.organization!.link_homepage} />}
+                        {event && 'organization' in event && event.organization?.link_homepage && ' - '}
+                        {event && 'organization' in event && event.organization?.link_homepage && <TextLink style={{ ...T.text20, color: "#fd8738", top: 3 }} text={text.more} url={event.organization?.link_homepage} />}
                     </Text>
                 </View>
                 <>{info && <InfoBlock text={info} />}</>
@@ -128,8 +128,8 @@ function Location() {
 
     // Uses best available location
     const location = lang
-        ? event.location!.name_no || event.location!.name_en
-        : event.location!.name_en || event.location!.name_no
+        ? event.location?.name_no || event.location?.name_en
+        : event.location?.name_en || event.location?.name_no
 
     return (
         <View style={{

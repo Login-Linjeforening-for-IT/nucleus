@@ -81,7 +81,7 @@ function CourseList({ course, navigation }: CourseListProps): JSX.Element {
                 <View style={{...CS.clusterBack}}>
                     <View style={CS.twinLeft}>
                         <Text style={{...T.text20, color: theme.textColor}}>
-                            {course.id}
+                            {course.code}
                         </Text>
                     </View>
                     <View style={CS.twinRight}>

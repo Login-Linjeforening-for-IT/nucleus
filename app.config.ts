@@ -53,10 +53,11 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
         bundleIdentifier: "com.eirikhanasand.Login",
         buildNumber: config.ios?.buildNumber,
         infoPlist: {
+            ITSAppUsesNonExemptEncryption: false,
             UIBackgroundModes: [
                 "fetch",
                 "remote-notification"
-            ]
+            ],
         }
     },
     android: {

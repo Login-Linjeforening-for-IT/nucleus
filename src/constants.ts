@@ -1,7 +1,7 @@
 const config = {
     apple_app_store_url: "https://apps.apple.com/app/id1660125165",
     android_play_store_url: "https://play.google.com/store/apps/details?id=com.login.Login",
-    exam_api_url: "https://api.exam.login.no/api",
+    studentbee_api_url: "https://studentbee-api.login.no/api",
     wiki_url: "https://wiki.login.no",
     gitlab_url: "https://git.logntnu.no",
     linkedin_url: "https://linkedin.com/company/linjeforeningen-@about",
