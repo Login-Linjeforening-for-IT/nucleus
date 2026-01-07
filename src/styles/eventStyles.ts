@@ -120,7 +120,7 @@ export const ES = StyleSheet.create({
     clusterFilterText: {
         alignSelf: "center",
         alignItems: "center",
-        height: 30,
+        height: 40,
         color: "white", // White text color (should be moved to depend on theme)
         display: 'flex',
         flexGrow: 1

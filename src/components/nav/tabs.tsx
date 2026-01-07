@@ -135,17 +135,7 @@ function Tabs(): JSX.Element {
 
     useEffect(() => {
         if (Platform.OS !== "ios") {
-            let color = '#0D0D0D'
-            switch (value) {
-                case 1: color = '#c0bebeff'; break
-                case 2: color = '#080c1aff'; break
-                case 3: color = '#160305ff'; break
-                case 4: color = '#901818ff'; break
-                default: color = '#0D0D0D'
-            }
-            // On-screen Android bottom navigation bar color
-            NavigationBar.setBackgroundColorAsync(color)
-            NavigationBar.setButtonStyleAsync(value === 4 ? 'light' : 'dark')
+            NavigationBar.setStyle(isDark ? "dark" : "light")
         }
     }, [value])
 
