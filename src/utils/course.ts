@@ -28,9 +28,8 @@ export async function getCourses(): Promise<CourseAsList[] | string> {
 // ID - Course ID
 // location - Whether the request is coming from SSR or CSR
 export async function getCourse(id: string): Promise<Course | string> {
-
     try {
-        const response = await fetch(`${config.studentbee_api_url}/course/${id.toUpperCase()}`, {
+        const response = await fetch(`${config.studentbee_api_url}/course/${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

@@ -97,7 +97,7 @@ function Study({ course }: { course: Course }) {
         return text.replaceAll('<br></br>', '\n').replaceAll('<br>', '\n')
     }
 
-    const initialText = formatText(course.textUnreviewed.join('\n'))
+    const initialText = formatText(course.notes)
     const text = initialText.length ? initialText : lang
         ? 'Dette emnet er ikke flervalg, men det finnes ingen notater enda. Dette emnet må studeres på egenhånd. Kanskje du kan hjelpe andre med å legge inn notatene dine på nettsiden så de blir tilgjengelige her?'
         : 'This course is not multiple choice, and no study notes exist yet. This course must be studied by reviewing the available course material. Maybe you can help others by adding your notes on the website so they become available here?'

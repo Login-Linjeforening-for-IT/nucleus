@@ -505,7 +505,7 @@ type Course = {
     id: string
     cards: Card[]
     unreviewed: Card[]
-    textUnreviewed: string[]
+    notes: string
     mark?: boolean
 }
 
